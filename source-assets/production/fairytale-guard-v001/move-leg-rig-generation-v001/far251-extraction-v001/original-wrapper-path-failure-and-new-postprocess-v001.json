@@ -1,0 +1,115 @@
+{
+  "schema": "Far251-processing-wrapper-path-error-preserved-v001",
+  "original_script": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/far251-extraction-v001/extract-far251-standard-v001.py",
+    "bytes": 10416,
+    "sha256": "2ca38ba1029d7b17bb8b905623b278ccb2bf5319a8a10b19b3a063ee244c48d1"
+  },
+  "original_session_exit_code": 1,
+  "failure": "After five successful standard commands, final curated-equality verifier pointed to nonexistent frames/right/move_near_kit/frame-0.png. No image/QA failure inferred.",
+  "actual_existing_commands": [
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\far251-extraction-v001\\shared-HD-fit-existing-exact.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\far251-extraction-v001\\run-far251-threeparts-shared-HD-v001",
+        "--min-used-pixels",
+        "512"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/far251-extraction-v001/logs/extract.log",
+        "bytes": 3059,
+        "sha256": "2385280f2ad01872085e4a54669268e2e9812521609ff4f98c9670c8be89a454"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\inspect_sprite_run.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\far251-extraction-v001\\run-far251-threeparts-shared-HD-v001",
+        "--states",
+        "right_idle,right_move_far_kit",
+        "--report",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\far251-extraction-v001\\run-far251-threeparts-shared-HD-v001\\inspect-report.json"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/far251-extraction-v001/logs/inspect.log",
+        "bytes": 445,
+        "sha256": "db8c66b4843e9ce81ed46fd3b93ed9f70e4e722b086f0fda590a4e62c83d23ad"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\compose_sprite_atlas.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\far251-extraction-v001\\run-far251-threeparts-shared-HD-v001",
+        "--min-used-pixels",
+        "512"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/far251-extraction-v001/logs/compose.log",
+        "bytes": 393,
+        "sha256": "7751640db73f50d45185648a107a8e9dc631e17ac11971bd5581a0bc9922df3a"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\export_curated_pngs.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\far251-extraction-v001\\run-far251-threeparts-shared-HD-v001",
+        "--state",
+        "right_move_far_kit",
+        "--selected-only"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/far251-extraction-v001/logs/export-curated.log",
+        "bytes": 878,
+        "sha256": "045a58db5127589b8031a1b32d596c339f761ab626aaf683996270de9322927b"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\preview_animation.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\far251-extraction-v001\\run-far251-threeparts-shared-HD-v001"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/far251-extraction-v001/logs/preview.log",
+        "bytes": 495,
+        "sha256": "2e67999cabe5aedd57d0f2b50d6172f57c0d1e6da5d730ce2c8090597651969f"
+      }
+    }
+  ],
+  "correction": "NEW postprocess-only v002 reads actual Far frames, preserves original script/failure and all native reports; no standard commands rerun or pixels overwritten.",
+  "new_script": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/far251-extraction-v001/postprocess-Far251-five-completed-steps-v002.py",
+    "bytes": 8981,
+    "sha256": "2f658aca96049a9ec51586b82e86f4b8ed02ff8a01f4bc1633756ee3ec1e4a43"
+  },
+  "source_or_QA_report_edited": false
+}

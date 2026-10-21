@@ -1,0 +1,171 @@
+{
+  "schema": "Guard223-actual-source-edge-rejection-observed-v001",
+  "source": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-six-alternating-legs-correction-generation-ready-v001/run-guard-move-alternating-correction6-v001/raw/right/move.png",
+    "bytes": 1742588,
+    "sha256": "16d69b6a03e37a5e79c107926209ba6c4332cb343e00458ccf98efc2bec3b25e"
+  },
+  "raw_size": [
+    2172,
+    724
+  ],
+  "source_keyed_bbox": [
+    4,
+    187,
+    2172,
+    553
+  ],
+  "edge_pixel_checks": {
+    "left": {
+      "nonzero_alpha_pixels": 0,
+      "core128_pixels": 0,
+      "max_alpha": 0,
+      "edge_range_y_or_x": null,
+      "first_12_RGBA_samples": []
+    },
+    "right": {
+      "nonzero_alpha_pixels": 20,
+      "core128_pixels": 17,
+      "max_alpha": 255,
+      "edge_range_y_or_x": [
+        384,
+        403
+      ],
+      "first_12_RGBA_samples": [
+        {
+          "edge_index": 384,
+          "RGBA": [
+            218,
+            139,
+            61,
+            102
+          ]
+        },
+        {
+          "edge_index": 385,
+          "RGBA": [
+            197,
+            126,
+            56,
+            123
+          ]
+        },
+        {
+          "edge_index": 386,
+          "RGBA": [
+            161,
+            114,
+            67,
+            255
+          ]
+        },
+        {
+          "edge_index": 387,
+          "RGBA": [
+            92,
+            70,
+            47,
+            198
+          ]
+        },
+        {
+          "edge_index": 388,
+          "RGBA": [
+            59,
+            23,
+            44,
+            255
+          ]
+        },
+        {
+          "edge_index": 389,
+          "RGBA": [
+            30,
+            18,
+            23,
+            255
+          ]
+        },
+        {
+          "edge_index": 390,
+          "RGBA": [
+            29,
+            20,
+            19,
+            255
+          ]
+        },
+        {
+          "edge_index": 391,
+          "RGBA": [
+            28,
+            20,
+            18,
+            255
+          ]
+        },
+        {
+          "edge_index": 392,
+          "RGBA": [
+            27,
+            20,
+            18,
+            255
+          ]
+        },
+        {
+          "edge_index": 393,
+          "RGBA": [
+            25,
+            19,
+            16,
+            255
+          ]
+        },
+        {
+          "edge_index": 394,
+          "RGBA": [
+            25,
+            18,
+            15,
+            255
+          ]
+        },
+        {
+          "edge_index": 395,
+          "RGBA": [
+            24,
+            18,
+            16,
+            255
+          ]
+        }
+      ]
+    },
+    "top": {
+      "nonzero_alpha_pixels": 0,
+      "core128_pixels": 0,
+      "max_alpha": 0,
+      "edge_range_y_or_x": null,
+      "first_12_RGBA_samples": []
+    },
+    "bottom": {
+      "nonzero_alpha_pixels": 0,
+      "core128_pixels": 0,
+      "max_alpha": 0,
+      "edge_range_y_or_x": null,
+      "first_12_RGBA_samples": []
+    }
+  },
+  "original_extract_script": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/extract-curate-move223-v001.py",
+    "bytes": 7864,
+    "sha256": "060184c9560bfe377ca58f582dd70725127a75f0175084e8c117cc8e4e8bf4fd"
+  },
+  "original_extract_session_exit_code": 1,
+  "failure_location": "line38 extra raw-edge assertion AFTER all5 standard SG commands and transparent exports completed.",
+  "failure_message": "AssertionError: Actual native edge foreground: reject crop rather than hide in curation.",
+  "standard_SG_QA_pass_does_not_override_source_edge_rejection": true,
+  "actual_raw_View": "Worker actual whole raw after Root E393 retention permission: final axe head touches full source right edge. Raw also appears to repeat same physical leading-leg sequence; curated actual trace pending E.",
+  "decision": "Reject source completeness for runtime admission; preserve transparent outputs as diagnostics only. No edge-erasure, slot crop, paint, local mirror or perframe scale may repair absent source pixels."
+}

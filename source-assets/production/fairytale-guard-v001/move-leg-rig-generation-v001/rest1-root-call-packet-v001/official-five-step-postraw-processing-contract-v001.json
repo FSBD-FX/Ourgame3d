@@ -1,0 +1,99 @@
+{
+  "status": "PENDING_RAW_ROOT_RETENTION; these commands have NOT run",
+  "prepared_run": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/rest1-root-call-packet-v001/run-guard-move-rest1-component-source-v001",
+  "processing_run": "NEW processing copy after actual raw/E gate; do not write this prepared freeze",
+  "raw_source_pin": null,
+  "native_source_id": null,
+  "expected_generated_state": "right_move_bodyrest",
+  "expected_component_roles": [
+    "bodyrest_fixedaxe"
+  ],
+  "requested_components": 1,
+  "runtime_animation_frames": 0,
+  "canvas": [
+    512,
+    512
+  ],
+  "safe_margin": [
+    48,
+    48
+  ],
+  "min_used_pixels": 512,
+  "min_gate_changed": false,
+  "HD_shared_fit_bridge": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/stomp224-active2-extraction-v001/shared-HD-fit-existing-exact.py",
+    "bytes": 8843,
+    "sha256": "61085b282e1f18d0195cad5f65355b67eda287a98e54a19f27c8d662f9d079f4"
+  },
+  "commands_after_input_copy": [
+    {
+      "step": "extract",
+      "script": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/stomp224-active2-extraction-v001/shared-HD-fit-existing-exact.py",
+      "arguments": [
+        "--run-dir",
+        "PROCESS_RUN",
+        "--min-used-pixels",
+        "512"
+      ],
+      "note": "Existing approved HD shared-row adapter wraps official chroma/components/extraction; no per-part/per-pose normalization"
+    },
+    {
+      "step": "inspect",
+      "script": "C:/Users/22499/.codex/skills/sprite-gen/scripts/inspect_sprite_run.py",
+      "arguments": [
+        "--run-dir",
+        "PROCESS_RUN",
+        "--states",
+        "right_idle,right_move_bodyrest",
+        "--report",
+        "PROCESS_RUN/inspect-report.json"
+      ]
+    },
+    {
+      "step": "compose",
+      "script": "C:/Users/22499/.codex/skills/sprite-gen/scripts/compose_sprite_atlas.py",
+      "arguments": [
+        "--run-dir",
+        "PROCESS_RUN",
+        "--min-used-pixels",
+        "512"
+      ]
+    },
+    {
+      "step": "curate/export",
+      "script": "C:/Users/22499/.codex/skills/sprite-gen/scripts/export_curated_pngs.py",
+      "arguments": [
+        "--run-dir",
+        "PROCESS_RUN",
+        "--state",
+        "right_move_bodyrest",
+        "--selected-only"
+      ],
+      "note": "Stamp only selected[0], no transform. Check outputRGBA exact to extracted frame."
+    },
+    {
+      "step": "preview",
+      "script": "C:/Users/22499/.codex/skills/sprite-gen/scripts/preview_animation.py",
+      "arguments": [
+        "--run-dir",
+        "PROCESS_RUN"
+      ],
+      "note": "Static source preview only; fps1 is not Move animation timing"
+    }
+  ],
+  "actual_exit_codes": null,
+  "QA": null,
+  "curated_source_pin": null,
+  "source_checks": [
+    "One complete connected legless upperbody+pelvishem+same fixedaxe; both closed hands nearbutt/farhead unchanged.",
+    "No residual legs, shoes, thigh stubs, thirdboots, disconnected spare parts, visible guide stroke, sourceedge crop.",
+    "Verify moss/stone/amber colors survive keying; preserve original reports and rejection.",
+    "Ready209 carried4 re-extractedRGBA must equal accepted4; do not generate them.",
+    "Publish sourceindex/QA/Fdated originals+presentation; Root E and actualView before measurements or source acceptance."
+  ],
+  "component_bottom_is_ground_floor": false,
+  "body_standing_extent": null,
+  "component_display_density": null,
+  "authorRoot": null,
+  "authority": "The legless component has no shoe floor or full standing-height measurement. Future hip sockets are authored2D markers, not recovered bones."
+}

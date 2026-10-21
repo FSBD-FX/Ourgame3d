@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fixed-heavyaxe-armed-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedArmedReady209 four existing right_idle frames. This is the existing equipmentdirectionanchor row; do NOT generate it or spend a newcall. Source raw andcuratedreferences are copied exact from frozenReady209. New nativecalls target only the namedaction row.",
+      "durations_ms": [
+        250,
+        250,
+        250,
+        250
+      ]
+    },
+    "right_axe_windup": {
+      "frames": 6,
+      "fps": 6,
+      "loop": false,
+      "action": "Fullbody plus SAME fixed208heavyaxe in each complete connected pose. Identity solelyacceptedArmedReady0; do not attach206base/207emptybody/standalone208again as competingidentity. Same shallow elevatedthreequarter side view facingright. Thickink, broadwarmgreystoneplanes, smallambereyes, sparseolivemoss; reducechips/speckles. Bothfists fullyclosed aroundONEstraightcontinuousshaft; samegriporder, axeheadshape/length/haftwidth atallframes, nofourhands, weaponstretch or localposepatch. No text/guide/grid/scenery/shadow/dust/sparks/arcs/blur. Puremagenta background. Artistposes sampleactualkerneltime, not gameplayretiming. Sixdistinct fullbodyposes, lefttoright. Frame0 sample0ms: Begin from acceptedArmedReady0, plantedfeet, quiet lowtwohandgrip. Allwindupframes are anticipation, no weaponcontact or impactFX. Frame1 sample167ms: Gather heavyaxe across torso and load weight backward; nearhand stays lower onshaft, farhand higher. Frame2 sample333ms: Bothclosedhands lift together, elbow/shoulderturn opens broad readable windup; do not stretchshaft or changeheadsize. Frame3 sample500ms: At500ms aimlock: fixedrightfacing, broadhighaxesilhouette, plantedsupport. No head/weapon retarget afterthissample. Frame4 sample667ms: Hold raisedlockedaxe and deepen smalltorso coil, samecontinuousshaftpassesbothfists, no forwardtranslation. Frame5 sample833ms: Maximum heavy anticipation justbeforeactive: highestloadpose with clearaxehead and eye window, no earlysweep ordamagecue. Keep all6 complete body+axe silhouettes separate inside their invisiblecells, feet at commonsolebaseline. Pose compression is real motion, not rescaledbody. Never allow horizontalaxeextent to shrink thebody versusanchor; use coherentpose/camera withcompleteweapon visible. No stepping/roottranslation duringthisrow.",
+      "durations_ms": [
+        167,
+        166,
+        167,
+        167,
+        166,
+        167
+      ]
+    }
+  },
+  "style": "Match attached acceptedArmedReady209 identity exactly: the SAME broad squat slabhelmet/stonebody, small recessedambereyes, sparseolivepauldronmoss, thickirregularink and SAME fixed singleheadedheavyaxe/straightwoodshaft/stonebuttcap. Body and axe identity belong only to this accepted equippedanchor. Broad warmgrey/tan stoneplanes, reduce tinyspots, no photorealgrain/pixelgrid/vectorgloss.",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

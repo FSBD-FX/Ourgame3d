@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fixed-heavyaxe-armed-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedReady209existing4 exactraw; do NOT generate or charge."
+    },
+    "right_move_contact_pair": {
+      "frames": 2,
+      "fps": 2,
+      "loop": false,
+      "action": "Generate ONLY TWO large-clearance opposite CONTACT KEYPOSES, not a six-frame walk strip and not a playable two-frame walk. Attached accepted ArmedReady209 is the ONLY Guard body/camera/fixedaxe identity. Same shallow elevated three-quarter side view facing SCREEN RIGHT, same broad squat slabhelmet/smallamber eyes/sparseolive NEAR moss shoulder/coarseink/warm broad stoneplates. SAME singleheaded heavyaxe, continuous straight woodshaft and stonebuttcap, fixed body/axe ratio. Both fists fully closed on the SAME shaft: moss NEAR arm always BUTTward, FAR arm always HEADward. Axe quiet low infront, headRIGHT; no arm counterswing or grip exchange.\nCRITICAL TWO DISTINCT HIP-LEG CHAINS: physical NEAR leg originates at the LEFT/foreground side of pelvis below the moss-side torso. Physical FAR leg originates at the RIGHT/recessed side of pelvis. The production diagram has TWO SEPARATE hip anchors: RED=N/physical NEAR LEFT foreground hip; BLUE=F/physical FAR RIGHT recessed hip. Never relabel whichever right-front boot as NEAR. Follow the continuous thigh→knee→shin→ankle→boot belonging to each of the TWO fixed hip sides.\nKEYPOSE0 NEAR CONTACT: RED/NEAR chain from LEFT foreground hip crosses diagonally toward the leading RIGHT-FRONT boot, planted heel/full sole on floor. BLUE/FAR chain from RIGHT recessed hip trails BACK-LEFT to its rear toe pushing off. At the thigh/shin crossing the NEAR red chain is in the foreground and visibly occludes the far blue chain; keep natural stone-plate continuity so the real Guard leg ownership is unambiguous. This must not show the RIGHT-hip far leg leading as in a neutral stance.\nKEYPOSE1 FAR CONTACT: BLUE/FAR chain from RIGHT recessed hip now extends toward the leading RIGHT-FRONT boot, planted heel/full sole. RED/NEAR chain from LEFT foreground hip trails BACK-LEFT to rear pushing toe. Same torso facing/camera and SAME physical hip ownership; only actual lower-body leg phases exchange front/back. This must visibly be the OPPOSITE physical-leg contact to KEYPOSE0, not the same pose with slight knee changes. Do not mirror/turn the whole character or swap hip identities to fake the change.\nThe production guide shows role/connection/occlusion only, not measured bones or stick-figure body proportions. Final stone Guard stays its accepted identity; no colored legs, N/F labels, arrows, guides, gray stick arms or text. Keep both leg chains readable; do not fuse into one boot or hide both hips behind a new prop.\nLARGER NATIVE WHITESPACE: two equal invisible horizontal cells. The COMPLETE Guard including the entire axe head and buttcap must occupy at most60 percent of EACH cell WIDTH and75 percent of EACH cell HEIGHT. Leave at least20 percent clear solid-magenta width on the left AND right of every silhouette; therefore leave a very broad clear-magenta gutter between the two figures and large blank outer borders. Use the extra guide INNER BLUE rectangle as the generous production footprint, not the canvas edge. Do not enlarge either figure to fill unused horizontal space or let the right axe touch/cross a source edge. Keep same figure density/height across both keyposes, not per-pose scaling. Entire crown, planted sole, rear toe, both hands and WHOLE axe head/haft/buttcap must be visible with clear magenta beyond.\nShort heavy grounded walk contacts, upright stocky torso, modest leg spread, no run/charge/jump/simultaneously airborne feet. No shadow, scene, dust, blur, arcs, extra figures, loose debris, photoreal grain or pixel dots. Solid #FF00FF magenta background. These two keyposes are production motion references ONLY after actual acceptance; final Move6 remains unaccepted until a later genuine six-phase row is generated from accepted contacts and actual path128world mapping is reviewed."
+    }
+  },
+  "style": "Only acceptedArmedReady209 wholeGuard+fixedaxe identity, same shallow elevated3/4camera and lowdetail broadstone/ink. Two opposite physical-leg CONTACT keyposes only; generous magenta blank canvas, no copiedbad221/223 poses.",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fixed-heavyaxe-armed-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedArmedReady209existing4poses, exactrawcopy, doNOTgenerateorcharge."
+    },
+    "right_stomp_recovery": {
+      "frames": 4,
+      "fps": 3,
+      "loop": false,
+      "action": "FOUR distinct QUIET RECOVERY fullbody+fixedaxe poses after ONE FAR-foot stomp. First attached accepted ArmedReady209 is the ONLY body/stone/camera/axe identity. Same shallow elevated three-quarter side view facing RIGHT, same squat slabhelmet/smallamber eyes/sparseoliveforegroundmoss/coarseink/broadwarmstone planes. Same singleheaded stoneaxe, continuous straightwoodshaft and stonebuttcap, fixed length/body ratio. Both fists fully closed: moss NEAR foreground shoulder arm stays BUTTward grip, FAR arm stays HEADward grip. Axe remains quiet and low in front, headRIGHT, bothhands andaxe move coherently; no regrip/exchange/openhand/extra swing or shortening.\nSecond attached actual StompActive224 FRAME1 is MOTION CONTINUITY ONLY: the real preceding low full-weight compression at ActiveEnd with BOTH feet already landed. Continue that actual compressed torso/heldaxe/leg ownership at recoveryframe0. It is not a competing body identity. No raised Windup reference is attached. Do NOT replay an airborne FAR foot, another anticipation or another stomp in recovery.\nPhysical NEAR leg is attached to LEFT foreground hip below moss shoulder; it is the planted support. Physical FAR leg is attached to RIGHT recessed hip and has ALREADY completed its one stomp contact. Bothfeet remain grounded through all4 recoveryposes, no actorXY/Z translation, jump or lunge. Keep the actual preceding support-foot relation and leg chains readable; do not switch the feet merely to imitate the identity anchor stance.\nFrame0 at actualActiveEnd: continue the attached actual Active2241 deep/low full-weight posture and quiet heldaxe, BOTH feet planted, shock/damage window closed. Frame1 at375ms: first small heavy knee/chest rise, arms still tired/axequiet, no threatening windup. Frame2 at750ms: slowly regain upright torso and retrieve heldaxe toward low belly Ready relation; no residual shock, new contact or haste. Frame3 at1125ms: approach accepted ArmedReady209 upper-body/axe stance, stable bothfoot grounding, hold until original1500ms RecoveryEnd. Do not move actor early or override nativeIdleReady/cooldown.\nFour unique progressive poses, not copies. Body/axe density fixed across the row; natural first compression remains, no perframe height normalization. Full complete connected Guard+axe silhouettes within each invisible standardcell with48px equivalent safe padding; no edge clipping, labels, grid, scene, shadow, motionblur, arcs, dust, flyingstones or extra figures. Solid magenta #FF00FF background. Low-detail broad planes, no photorealgrain or pixeldots. Actual kernelRecovery1500ms has4equal375ms samples; SG3fps preview is separate and must not change kernel deadlines."
+    }
+  },
+  "style": "OnlyattachedacceptedArmedReady209owns thewholeGuard+fixedheavyaxeidentity, same shallow elevatedthreequarter view facingRIGHT. Squatstonehelmet/smallambereyes/sparseoliveforegroundshouldermoss/coarseink/broadwarmgreystoneplanes, SAME singleheadedstoneaxe/straightwoodshaft/stonebuttcap dimensionsandratio. Bothlivingfists FULLYCLOSED onONEcontinuousshaft throughout: mossNEARshoulder→foregroundneararm→LOWBUTTwardgrip, FARarm→HIGHHEADwardgrip. No handexchange/regrip/drop/shorteningaxe or changingheadshape. Axe heldquiet lowinfront, headRIGHT clearfeet/eyes; bothhands/axe movecoherently asoneheavyheldobject, no armcounterswing. No206/207neutral/standalone208/bad211references. Keepbody/axeconstantdensity, fullconnectedcompleteposeswith48safearea; no text/grid/scenery/dust/impactarcs/blur/shadows/loosechips. Stoneplatesnotrubber, lowdetailnotgrains/pixeldots/vectorgloss. ",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

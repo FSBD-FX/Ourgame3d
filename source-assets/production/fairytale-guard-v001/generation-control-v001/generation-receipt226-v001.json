@@ -1,0 +1,70 @@
+{
+  "request_number": 226,
+  "asset": "fairytale-guard003-right",
+  "status": "generated_retained_pending_review",
+  "source_event": "EV-048",
+  "authorization_events": [
+    "EV-040",
+    "EV-041"
+  ],
+  "window_number": 10,
+  "requested_utc": "2026-10-18T03:36:33.229916+00:00",
+  "prompt_path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-contact-pair-generation-ready-v001/run-guard-move-contact-pair-v001/prompts/right/move_contact_pair.txt",
+  "prompt": "Create a single horizontal sprite strip for the game character `ENM-STN-003-fixed-heavyaxe-armed-v001` in the state `right_move_contact_pair`.\n\nIf this is a pre-idle/simple run, the attached base image may be used as the canonical character design. In direction-anchor mode, do not use base images for final action rows; accepted idle/direction anchors own row identity. Use the attached accepted idle/direction anchor as the canonical character design for this row. If a state anchor is attached for a non-locomotion state, treat it as approved state vocabulary only. Use the attached layout guide image only for frame count, slot spacing, centering, and safe padding. If an additional generated row strip is attached, use it only as a motion reference, never as a replacement identity source. Do not simply copy the still reference pose. Generate distinct animation poses that create a readable cycle or action.\n\nCharacter: ENM-STN-003-fixed-heavyaxe-armed-v001.\nStyle contract: Only acceptedArmedReady209 wholeGuard+fixedaxe identity, same shallow elevated3/4camera and lowdetail broadstone/ink. Two opposite physical-leg CONTACT keyposes only; generous magenta blank canvas, no copiedbad221/223 poses..\n\nUse this prompt as an authoritative sprite-production spec. Do not expand it into a polished illustration, painterly character image, anime key art, 3D render, vector mascot, glossy app icon, realistic portrait, or marketing artwork.\n\nAnimation action: Generate ONLY TWO large-clearance opposite CONTACT KEYPOSES, not a six-frame walk strip and not a playable two-frame walk. Attached accepted ArmedReady209 is the ONLY Guard body/camera/fixedaxe identity. Same shallow elevated three-quarter side view facing SCREEN RIGHT, same broad squat slabhelmet/smallamber eyes/sparseolive NEAR moss shoulder/coarseink/warm broad stoneplates. SAME singleheaded heavyaxe, continuous straight woodshaft and stonebuttcap, fixed body/axe ratio. Both fists fully closed on the SAME shaft: moss NEAR arm always BUTTward, FAR arm always HEADward. Axe quiet low infront, headRIGHT; no arm counterswing or grip exchange.\nCRITICAL TWO DISTINCT HIP-LEG CHAINS: physical NEAR leg originates at the LEFT/foreground side of pelvis below the moss-side torso. Physical FAR leg originates at the RIGHT/recessed side of pelvis. The production diagram has TWO SEPARATE hip anchors: RED=N/physical NEAR LEFT foreground hip; BLUE=F/physical FAR RIGHT recessed hip. Never relabel whichever right-front boot as NEAR. Follow the continuous thigh→knee→shin→ankle→boot belonging to each of the TWO fixed hip sides.\nKEYPOSE0 NEAR CONTACT: RED/NEAR chain from LEFT foreground hip crosses diagonally toward the leading RIGHT-FRONT boot, planted heel/full sole on floor. BLUE/FAR chain from RIGHT recessed hip trails BACK-LEFT to its rear toe pushing off. At the thigh/shin crossing the NEAR red chain is in the foreground and visibly occludes the far blue chain; keep natural stone-plate continuity so the real Guard leg ownership is unambiguous. This must not show the RIGHT-hip far leg leading as in a neutral stance.\nKEYPOSE1 FAR CONTACT: BLUE/FAR chain from RIGHT recessed hip now extends toward the leading RIGHT-FRONT boot, planted heel/full sole. RED/NEAR chain from LEFT foreground hip trails BACK-LEFT to rear pushing toe. Same torso facing/camera and SAME physical hip ownership; only actual lower-body leg phases exchange front/back. This must visibly be the OPPOSITE physical-leg contact to KEYPOSE0, not the same pose with slight knee changes. Do not mirror/turn the whole character or swap hip identities to fake the change.\nThe production guide shows role/connection/occlusion only, not measured bones or stick-figure body proportions. Final stone Guard stays its accepted identity; no colored legs, N/F labels, arrows, guides, gray stick arms or text. Keep both leg chains readable; do not fuse into one boot or hide both hips behind a new prop.\nLARGER NATIVE WHITESPACE: two equal invisible horizontal cells. The COMPLETE Guard including the entire axe head and buttcap must occupy at most60 percent of EACH cell WIDTH and75 percent of EACH cell HEIGHT. Leave at least20 percent clear solid-magenta width on the left AND right of every silhouette; therefore leave a very broad clear-magenta gutter between the two figures and large blank outer borders. Use the extra guide INNER BLUE rectangle as the generous production footprint, not the canvas edge. Do not enlarge either figure to fill unused horizontal space or let the right axe touch/cross a source edge. Keep same figure density/height across both keyposes, not per-pose scaling. Entire crown, planted sole, rear toe, both hands and WHOLE axe head/haft/buttcap must be visible with clear magenta beyond.\nShort heavy grounded walk contacts, upright stocky torso, modest leg spread, no run/charge/jump/simultaneously airborne feet. No shadow, scene, dust, blur, arcs, extra figures, loose debris, photoreal grain or pixel dots. Solid #FF00FF magenta background. These two keyposes are production motion references ONLY after actual acceptance; final Move6 remains unaccepted until a later genuine six-phase row is generated from accepted contacts and actual path128world mapping is reviewed..\n\nAnchor lock:\n- Accepted idle/direction anchors own character identity, outfit details, colors, face design, asymmetric markings, and side-specific accessories for final action rows.\n- Base character images and original character sheets are pre-idle sources only. Do not reinterpret or reintroduce base-character details inside a direction-anchor action row.\n- This row owns motion only. Spend the variation budget on limb contacts, arm counter-swing, body height, torso lean, head bob, hair bounce, and loop continuity.\n- Do not redesign or reinterpret identity details while animating. Keep face, hair shape, markings, palette, outline weight, body proportions, outfit, props, and silhouette copied from the approved anchors.\n- Preserve side-specific features exactly as the approved anchors show them. Do not solve hairpin side, earring side, logos, handed props, scars, one-sided markings, asymmetric clothing, or lighting cues from scratch inside the row.\n- When generating a paired left/right row, use the paired row reference only for timing, scale, and animation intensity. Rotate the body, feet, shoulders, face angle, and gaze to the target facing, but keep identity details attached according to the accepted target-direction anchor.\n- For cyclic locomotion, do not let a single running/walking pose anchor determine every frame's leg phase. Use multi-pose motion references and the layout phase guide for foot contacts.\n- Prefer a subtler animation over any change that mutates the character identity.\n\n\nState-specific requirements:\n- Lock the whole row to same shallow elevated three-quarter side view as accepted ArmedReady209, facing screen-right; not pure90-degree profile. Do not average it into a different facing.\n- Derive identity from the attached accepted direction anchor for this facing, not from any base character image.\n\n\nTransparency and artifact rules:\n- Prefer pose, expression, and silhouette changes over decorative effects.\n- Effects are allowed only when state-relevant, opaque, hard-edged, sprite-like, fully inside the same frame slot, and physically touching or overlapping the character silhouette.\n- Do not draw detached effects: floating stars, loose sparkles, floating punctuation, floating icons, separated smoke clouds, loose dust, disconnected outline bits, or stray pixels.\n- Do not draw wave marks, motion arcs, speed lines, action streaks, afterimages, blur, smears, halos, glows, auras, floor patches, cast shadows, contact shadows, drop shadows, oval floor shadows, landing marks, or impact bursts.\n- Do not include text, labels, frame numbers, visible grids, guide marks, speech bubbles, thought bubbles, UI panels, code snippets, scenery, checkerboard transparency, white backgrounds, or black backgrounds.\n- Reject any pose that is cropped, overlaps another pose, crosses into a neighboring frame slot, or creates a separate disconnected component that is not attached to the character.\n\nLayout requirements:\n- Exactly 2 full-body frames, left to right, in one horizontal row.\n- The attached layout guide shows the 2 frame boxes, inner safe area, and optional motion phase hints for this row. Follow its slot count, spacing, centering, padding, and phase timing.\n- Do not reproduce the layout guide itself: no visible boxes, guide lines, center marks, labels, stick figures, guide colors, or guide background may appear in the output.\n- Treat the image as 2 equal-width invisible 512x512 frame slots. Fill every slot: each requested slot must contain exactly one complete full-body pose.\n- Spread the 2 poses evenly across the whole image width. Do not leave any requested slot blank or create large empty gaps between poses.\n- Center one complete pose in each slot. No pose may cross into the neighboring slot.\n- Use a perfectly flat pure magenta #FF00FF chroma-key background across the whole image.\n- Do not use #FF00FF, pure magenta, or chroma-adjacent colors in the character, highlights, props, shadows, or effects.\n- Keep the rendering faithful to the attached reference sprite: same outline weight, same palette, same detail level — do not restyle it.\n- Keep every frame self-contained with at least 48 px horizontal and 48 px vertical safe padding. No character body part should be clipped by the frame slot.\n- Avoid motion blur. Use clear pose changes readable at 512x512.\n- Preserve the same silhouette, face, proportions, palette, material, and props across every frame.\n\nOutput only the sprite strip image.\n",
+  "prompt_file_sha256": "ee2a7f4e6e4ff3c32570dc286f0ea9254242ef35fec315ca18889b5170976ea3",
+  "reference_images": [
+    {
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-contact-pair-generation-ready-v001/run-guard-move-contact-pair-v001/references/accepted-ArmedReady209-curated-frame0.png",
+        "bytes": 229229,
+        "sha256": "54df5fe718a98e1568513193dbde479aff6fd393d623755feb77813cacb4e804"
+      },
+      "role": "ONLY canonical acceptedReady209 wholeGuard+fixedaxe/camera identity. No bad221/223/211 or206/207/independent208 imagery attached.",
+      "already_retained": true
+    },
+    {
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-contact-pair-generation-ready-v001/run-guard-move-contact-pair-v001/references/layout-guides/right/move_contact_pair.png",
+        "bytes": 2854,
+        "sha256": "80664da0333b6e4b774b6023e5347dc4c4378e033d0f15e9dbdf228da122d92c"
+      },
+      "role": "Standard TWO-cell component-row count/spacing layout only.",
+      "already_retained": true
+    },
+    {
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-contact-pair-generation-ready-v001/run-guard-move-contact-pair-v001/references/layout-guides/right/two-contact-dual-hip-occlusion-PRODUCTION-GUIDE.png",
+        "bytes": 58621,
+        "sha256": "7f85c4520d5b33717d883d08768dd6624606fd7aa9ee1988c56a6cda72173d2c"
+      },
+      "role": "NEW GENERIC two-separate-hip leg-chain and occlusion guide. RED/NEAR attachesLEFT foreground hip, BLUE/FAR attachesRIGHT recessed hip; pose0REDfront/BLUEback, pose1BLUEfront/REDback. Physicalhips never swap; near foreground at crossing. Innerblue generous native footprint/fullaxe padding. Ignore gray diagram anatomy, no finalcolorlabels.",
+      "already_retained": true
+    }
+  ],
+  "transparent_background": false,
+  "backend": "image_gen.imagegen",
+  "external_api_calls": 0,
+  "host_fee_usd": null,
+  "raw_destination_planned": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-contact-pair-generation-ready-v001/run-guard-move-contact-pair-v001/raw/right/move_contact_pair.png",
+  "scope": "Guard003 new identity/component candidate; Base Lock and standard row preparation remain separate gates",
+  "formal_complete_units": 0,
+  "generated_utc": "2026-10-18T03:48:14.887818+00:00",
+  "actual_native_original": {
+    "path": "C:/Users/22499/.codex/generated_images/01a0f834-7bb4-7eb1-a91b-b0d45a166798/exec-357dc389-d95f-460c-a903-6fd5890d8e32.png",
+    "bytes": 1610492,
+    "sha256": "18c36f256112be9c46e54b1a33b7147e748ce1925fd58563571a066520c9cefc"
+  },
+  "canonical_raw": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-contact-pair-generation-ready-v001/run-guard-move-contact-pair-v001/raw/right/move_contact_pair.png",
+    "bytes": 1610492,
+    "sha256": "18c36f256112be9c46e54b1a33b7147e748ce1925fd58563571a066520c9cefc"
+  },
+  "raw_size": [
+    1774,
+    887
+  ],
+  "raw_mode": "RGB",
+  "source_pixels_modified": false,
+  "runtime_imported": false,
+  "complete_enemy": false
+}

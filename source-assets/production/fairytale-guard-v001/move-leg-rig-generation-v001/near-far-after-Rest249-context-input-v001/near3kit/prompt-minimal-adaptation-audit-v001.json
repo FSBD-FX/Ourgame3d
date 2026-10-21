@@ -1,0 +1,25 @@
+{
+  "source_E416_prompt": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-leg-rig-static-prompts-corrected-v002/near3kit/native-fullprompt-static-components-v002.txt",
+    "bytes": 10977,
+    "sha256": "e9b131933046b312f85cdccdd554e74873d3685a66acf4bfaa3555d15587c8b9"
+  },
+  "adapted_prompt": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/near-far-after-Rest249-context-input-v001/near3kit/Root-native-fullprompt-Rest249-context-v001.txt",
+    "bytes": 12145,
+    "sha256": "d4441a775a3de60560c25f39a7b26e6bc50c36ce9eaae9533277afc8d9c834cf"
+  },
+  "changes": [
+    {
+      "kind": "prepend",
+      "text": "Reference ownership/order for this static kit: image 1 is accepted ArmedReady209 frame0, the ONLY character/fixedaxe/camera identity and the full-body leg-proportion reference. Image 2 is the actual extracted legless Rest249 component, used ONLY as same-identity pelvis/overlap-construction and approximate part-proportion context. Image 3 is the official three-slot layout. Image 4 is the generic part-role guide. Do not copy the Rest image as a full-body/leg pose or redefine the identity from it. The PNG canvas sizes and alpha-box heights are fitting artifacts, not a common physical scale: do not shorten the legs because Rest is legless, and do not enlarge parts to match image2 canvas bounds. Exact socket pivots, fixed lengths and cross-kit art-unit conversions will be authored from actual reviewed component sources later; no measured anatomy is supplied. Generate only the three expressly named separated limb components below, with one consistent illustration density inside this kit.\n\n"
+    },
+    {
+      "before": "The other attached images are production layout/part-role guides ONLY, not character/style or measured anatomy references.",
+      "after": "The additional extracted Rest249 image is only pelvis/upperbody construction and approximate part-proportion context for the SAME acceptedReady209 identity; it is not a new identity, measured anatomy, motion pose or ground/standing-height reference. The two guide images are layout/role only.",
+      "count": 1
+    }
+  ],
+  "all_other_E416_prompt_text_preserved": true,
+  "request_numbers_and_gates_unchanged": true
+}

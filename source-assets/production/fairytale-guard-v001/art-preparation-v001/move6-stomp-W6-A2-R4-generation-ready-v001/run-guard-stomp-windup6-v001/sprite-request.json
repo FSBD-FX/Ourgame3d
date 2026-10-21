@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fixed-heavyaxe-armed-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedArmedReady209existing4poses, exactrawcopy, doNOTgenerateorcharge.",
+      "durations_ms": [
+        250,
+        250,
+        250,
+        250
+      ]
+    },
+    "right_stomp_windup": {
+      "frames": 6,
+      "fps": 7,
+      "loop": false,
+      "action": "OnlyattachedacceptedArmedReady209owns thewholeGuard+fixedheavyaxeidentity, same shallow elevatedthreequarter view facingRIGHT. Squatstonehelmet/smallambereyes/sparseoliveforegroundshouldermoss/coarseink/broadwarmgreystoneplanes, SAME singleheadedstoneaxe/straightwoodshaft/stonebuttcap dimensionsandratio. Bothlivingfists FULLYCLOSED onONEcontinuousshaft throughout: mossNEARshoulder→foregroundneararm→LOWBUTTwardgrip, FARarm→HIGHHEADwardgrip. No handexchange/regrip/drop/shorteningaxe or changingheadshape. Axe heldquiet lowinfront, headRIGHT clearfeet/eyes; bothhands/axe movecoherently asoneheavyheldobject, no armcounterswing. No206/207neutral/standalone208/bad211references. Keepbody/axeconstantdensity, fullconnectedcompleteposeswith48safearea; no text/grid/scenery/dust/impactarcs/blur/shadows/loosechips. Stoneplatesnotrubber, lowdetailnotgrains/pixeldots/vectorgloss. SIX distinct STOMP WINDUP poses beforeONEnear-footstomp. Exactnativewarning900ms, sample0/150/300/450/600/750ms; ownXYaimcenterlocks450ms. Bothgripsclosedandaxequietlowright throughout, noaxesweep/highweaponwindup. ACTOR ROOT XY/ZdoesNOTjump/advance; onlyraisedNEARfoot/legdrawnlocally, FARsupportfoot staysplanted atsamegroundreference. Frame0 acceptedarmedreadybothfeetdown. Frame1 shiftheavyloadontoFARsupportleg, slightknees/shouldercompression. Frame2 NEARfootbeginsliftingoffground, farfootplanted, axeheldquiet. Frame3 exact450msown-centerlock, nearfootclearlyraised andkneebent, no targetchase. Frame4 nearfootraisedhigher/heavybodyloadheld, farsolefixed, noairbornebody. Frame5 maximumnearfootliftjustbeforeONEstomp, torsoheavy/fixedfacing/closedgrips; noearlygroundimpact, dust, shock, hit or damage. All6anticipationONLYbefore900ms; footnotreleaseduntilactive. Samebody/axescale, legnotstretched.",
+      "durations_ms": [
+        150,
+        150,
+        150,
+        150,
+        150,
+        150
+      ]
+    }
+  },
+  "style": "OnlyattachedacceptedArmedReady209owns thewholeGuard+fixedheavyaxeidentity, same shallow elevatedthreequarter view facingRIGHT. Squatstonehelmet/smallambereyes/sparseoliveforegroundshouldermoss/coarseink/broadwarmgreystoneplanes, SAME singleheadedstoneaxe/straightwoodshaft/stonebuttcap dimensionsandratio. Bothlivingfists FULLYCLOSED onONEcontinuousshaft throughout: mossNEARshoulder→foregroundneararm→LOWBUTTwardgrip, FARarm→HIGHHEADwardgrip. No handexchange/regrip/drop/shorteningaxe or changingheadshape. Axe heldquiet lowinfront, headRIGHT clearfeet/eyes; bothhands/axe movecoherently asoneheavyheldobject, no armcounterswing. No206/207neutral/standalone208/bad211references. Keepbody/axeconstantdensity, fullconnectedcompleteposeswith48safearea; no text/grid/scenery/dust/impactarcs/blur/shadows/loosechips. Stoneplatesnotrubber, lowdetailnotgrains/pixeldots/vectorgloss. ",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

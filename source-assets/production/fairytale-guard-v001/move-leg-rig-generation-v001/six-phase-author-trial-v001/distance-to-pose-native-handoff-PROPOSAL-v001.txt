@@ -1,0 +1,9 @@
+Future native formula (proposal only)
+
+Use D from actual collision-resolved acceptedMovement path, never speed*time, heldinput, drawcount or animationclock. P=positive_mod(D,128); h=(P>=64); u=(P-64*h)/64. Nearstances in h0, Farstances in h1. LocalmidsoleX=20.8-41.6*u forstance, -20.8+41.6*u forswing. Lift=0 forstance; 4*sin(pi*u)^2 forswing. Use frozenfootrotation/core-soleoffsets, unchangedhipplacement and fixedtwo-surface-axis lengths/branch=-1. Reject unreachablegeometry; do not stretch, clampreach, moveactorXY or rescaleparts to fit. BodyRest1/Near3.36/Far3.36 plusglobal100.8/455 stayconstant. Mirror completedwholehierarchy once fromactualFacing; never swapNear/Far sourceidentity.
+
+These offline D values are authoredsamplelabels, not actualMovement receipts. Formula's stanceworldX relation assumesstraightX andnominalprojection.65. Current fullselector already requirespositiveacceptedMovement atactualcompletedboundary andusesDmod128; unchangedblocked/Ready/statepriority needsrealnativevalidation. Turning anddiagonalworldYneedexplicitRootpolicy andactualgroundprojection, not reinterpretationoftheseimages.
+
+Smallestnextintegration choice remainsRoot-owned aftervisualreview: bake6exact512derivedrigframes with explicitprovenance/basis/pivots, or draw7existingparts fromformula. ExistingFull gates requirepositiveNativeSourceId and6wholeframes, so do not assign249/250/251 as a fabricatedAIwholebodyMove6 or weakenrejected221/223checks. This packet changes noSource/profile/Content/import/snapshot and approvesneitherchoice.
+
+Limits: rigidupperbody/fixedbootpitch, swingvelocity discontinuities, Farrearreachmargin~.915px, Farfoldedshin mayreadwrong; localjointcoverage doesnotclosefullseams. Six100msGIF is uniformofflinepreview only, not a600msgamecycle. No native/fullMove/footlock/Finalacceptance.

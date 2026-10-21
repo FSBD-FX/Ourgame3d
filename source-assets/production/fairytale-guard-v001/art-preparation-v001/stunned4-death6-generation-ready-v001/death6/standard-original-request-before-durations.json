@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fixed-heavyaxe-armed-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED existingacceptedArmedReady209fourframes; rawcopiedexact, doNOTgenerate orcharge thisrow."
+    },
+    "right_death": {
+      "frames": 6,
+      "fps": 6,
+      "loop": false,
+      "action": "The attached acceptedArmedReady209 is the ONLY wholebody+fixedaxe identity and shallow elevatedthreequarter rightfacing authority. SAME squat slabhelmet, smallrecessedambereyes, warmgreystoneplanes/sparseolivemoss/coarseink, SAME singleheadedstoneaxe/continuousstraightwoodshaft/stonebuttcap proportions. No206base/207neutral/independent208/bad211 references. Broadlowdetail planes, fewlargechips, no photorealgrain/pixelgrid/vectorgloss. Fullcomplete connectedbody+axe perframe; no text/grid/scenery/shadow/arcs/blur/detacheddust. SIX distinct DEATH poses only AFTER confirmednativeDied. DEATH EXCEPTION: hands may relax/open and RELEASE theaxe afteractualdeath; doNOTenforce livingclosedgrip/canonicalready-silhouette rules oncollapsedframes. This is a visual1secondcollapseproposal, not newgameplaydeathdelay: groundbody/rewardeligibility removedimmediately atDied, no extraattackwindow. Sample0,100,200,350,550,750ms withholds100,100,150,200,200,250ms thenfinalstaticdeadpile. Samecamera/rightfacingand localgroundfootprint, no actorXYtravel/jump. Frame0 lethalconfirmed, smallamberwindows switchOFF, upperbodyyields, sameaxe stillheldorjustloosening. Frame1 kneesdropunderstoneweight, bothhandsmayloosenthegrips; axeheadbeginslowering togroundRIGHT, no swing/contactattack. Frame2 originalbodycollapseslowlocally, legs/torso/helmetstoneplanesfoldtopple intoONECONNECTED groundpile; axetouchesbody/rubble ashandsrelease. Frame3 heavysettle, samehelmetandlargeslabs recognizable, fixedaxe liesagainst/overlappinggroundrubble, notflying. Frame4 nearfinalconnectedstonepile, eyesOFF, sameaxe restingagainstpileandground. Frame5 finalquiet connectedgroundpileforindefinitehold, originalhelmet/majorstoneplatesandaxeidentityreadable. ALLBODYRUBBLE AND AXE musttouch/overlapintoONEconnectedposecomponent inEVERYframe. No detached/floating stones, no airbornaxe, no disconnected limbs/head, no scatteredbodyparts; flyingchipsbelongtoindependentharmlessFX andmustNOTappear inthisrow. Keepallpartswithinframeandsafemargins; no weaponstretch/stoneidentityredesign. Footsole/worldgroundbaseline staysconsistent while silhouetteheightnaturallycollapses; neverperframeheightnormalize. No loot/rewardicons/blood/explosion/smoke/dust."
+    }
+  },
+  "style": "The attached acceptedArmedReady209 is the ONLY wholebody+fixedaxe identity and shallow elevatedthreequarter rightfacing authority. SAME squat slabhelmet, smallrecessedambereyes, warmgreystoneplanes/sparseolivemoss/coarseink, SAME singleheadedstoneaxe/continuousstraightwoodshaft/stonebuttcap proportions. No206base/207neutral/independent208/bad211 references. Broadlowdetail planes, fewlargechips, no photorealgrain/pixelgrid/vectorgloss. Fullcomplete connectedbody+axe perframe; no text/grid/scenery/shadow/arcs/blur/detacheddust. ",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

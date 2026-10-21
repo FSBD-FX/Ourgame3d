@@ -1,0 +1,36 @@
+{
+  "schema": "Guard-six-author-distance-trajectory-fixed-v001",
+  "source_markers_and_parameters": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/two-contact-pilot-v001/surface-markers-and-fixed-conversions-v001.json",
+    "bytes": 14593,
+    "sha256": "e792e35cb6aca3aaed8850a5667c77f65fda77a680f530ff33f3134580b3fe09"
+  },
+  "cycle_distance_world": 128.0,
+  "samples": [
+    0.0,
+    21.333333333333332,
+    42.666666666666664,
+    64.0,
+    85.33333333333333,
+    106.66666666666667
+  ],
+  "half_phase": "h=floor((d mod128)/64),u=((d mod128)-64*h)/64",
+  "stance": "NEAR if h==0; FAR if h==1. Other chain swings.",
+  "stance_foot_midsole_x_display": "20.8-41.6*u",
+  "swing_foot_midsole_x_display": "-20.8+41.6*u",
+  "swing_lift_display": "4*sin(pi*u)^2",
+  "stance_lift_display": 0.0,
+  "ankle": "Sourcefoot fixed heel/toe rotation and actualcore sole offsets from frozen markers; translate foot sole up by lift, solve fixed two-axis chain with unchanged branch=-1.",
+  "source_conversions": {
+    "Rest": 1.0,
+    "Near_all3": 0.36,
+    "Far_all3": 0.36
+  },
+  "display_scale": 0.22153846153846155,
+  "bodyroot_and_hips": "Same frozen Rest-ground placement in ALL6; no bob, warp or perpose normalization.",
+  "authority": "Authored offline straight-X samples only, not actual acceptedMovement receipts. Input d is a sample label here. Future native must accumulate actual collision-resolved path; blocked distance cannot advance.",
+  "contact_continuity": "Positions continuous at0/64/128. Stance worldX is constant under nominal.65 straight-X projection; swing velocity starts/stops abruptly, not C1 smooth motion.",
+  "immutable_before_render": true,
+  "TrialAllowed": false,
+  "FinalAccepted": false
+}

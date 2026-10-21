@@ -1,0 +1,137 @@
+{
+  "schema": "Guard-Rest252-standard-five-step-proof-v001",
+  "official_prepare": {
+    "argv": [
+      "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\prepare_sprite_run.py",
+      "--out-dir",
+      "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\rest252-extraction-v001\\run-rest252-shared-HD-v001",
+      "--character-id",
+      "ENM-STN-003-Move-LegRig-shorter-Rest1-candidate-v001",
+      "--base-image",
+      "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\shorter-upperbody-Rest-call-packet-v001\\run-guard-shorter-upperbody-rest1-v001\\base-source.png",
+      "--chroma-key",
+      "#FF00FF",
+      "--request",
+      "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\shorter-upperbody-Rest-call-packet-v001\\official-request-input-v001.json"
+    ],
+    "actual_exit_code": 0,
+    "log": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/rest252-extraction-v001/logs/prepare.log",
+      "bytes": 267,
+      "sha256": "607ed05eb6656df19dba649608dbb4c8fc942d498a2ab4bdab42b39c2e2330c6"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\rest252-extraction-v001\\shared-HD-fit-existing-exact.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\rest252-extraction-v001\\run-rest252-shared-HD-v001",
+        "--min-used-pixels",
+        "512"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/rest252-extraction-v001/logs/extract.log",
+        "bytes": 2552,
+        "sha256": "7f4dfb14996b8e755d079dc0cfbf35ac327765597984d0b79bc0f4b9a7e51da4"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\inspect_sprite_run.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\rest252-extraction-v001\\run-rest252-shared-HD-v001",
+        "--states",
+        "right_idle,right_move_bodyrest",
+        "--report",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\rest252-extraction-v001\\run-rest252-shared-HD-v001\\inspect-report.json"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/rest252-extraction-v001/logs/inspect.log",
+        "bytes": 512,
+        "sha256": "e69599b994b23083ec3abc7bd5e6ab273d40d2961b5b514c337ff772386cba46"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\compose_sprite_atlas.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\rest252-extraction-v001\\run-rest252-shared-HD-v001",
+        "--min-used-pixels",
+        "512"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/rest252-extraction-v001/logs/compose.log",
+        "bytes": 375,
+        "sha256": "1a4613c3194a197da03a8da28eabc3f08c22076fe03e762dafe5a061bfad6de9"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\export_curated_pngs.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\rest252-extraction-v001\\run-rest252-shared-HD-v001",
+        "--state",
+        "right_move_bodyrest",
+        "--selected-only"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/rest252-extraction-v001/logs/export-curated.log",
+        "bytes": 496,
+        "sha256": "013c71b650ee6fb6eabcb3aa85a27dc4a39f07435dcfd9852a4b3b77b888b334"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\preview_animation.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\rest252-extraction-v001\\run-rest252-shared-HD-v001"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/rest252-extraction-v001/logs/preview.log",
+        "bytes": 487,
+        "sha256": "453eabf77ee1698aa63e4d5e393519f520348da5829a870027a5477406a4a2c5"
+      }
+    }
+  ],
+  "source_index": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/rest252-extraction-v001/Rest252-single-curated-source-index-v001.json",
+    "bytes": 8468,
+    "sha256": "8203436b2e15d9b20845abbae261cb3acdb9b73e2a541a298e5c255437933fa4"
+  },
+  "native_calls": 0,
+  "source_raw_unchanged": true,
+  "prepared_request_unchanged": true,
+  "prepared_freeze_unchanged": true,
+  "Source_Content_tools_ledger_modified": false,
+  "new_images_viewed": false
+}

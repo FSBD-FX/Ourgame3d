@@ -1,0 +1,32 @@
+{
+  "schema": "Guard-known44-production-extension-host-only-boundary-check-v004",
+  "host_only": true,
+  "UE_started": false,
+  "actual_Hurt_import_receipt": null,
+  "actual1286_extension_pass_tested": false,
+  "source_check_other_text_exactly_preserved": true,
+  "original_v003_checker_unchanged": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-full-known44-observer-tooling-candidate-v003/tooling/verify-known44-axecycle-v002.py",
+    "bytes": 35560,
+    "sha256": "df5a0213242cd0187682a7cc9ab781b70ae06750a01cc80d40560f8c3eedbf72"
+  },
+  "cases": [
+    {
+      "case": "Actual unchanged old1254, no extension",
+      "result": "PASS",
+      "actual_old1254_twoSHA_checked": true
+    },
+    {
+      "case": "Unapproved extra package name in compiled set",
+      "result": "REJECTED",
+      "reason": "Production extras require explicit Root-approved extension pin",
+      "actual_file_created": false
+    },
+    {
+      "case": "Pending non-approved template with null actual Hurt receipts",
+      "result": "REJECTED",
+      "reason": "Root actual production extension approval absent"
+    }
+  ],
+  "FinalAccepted": false
+}

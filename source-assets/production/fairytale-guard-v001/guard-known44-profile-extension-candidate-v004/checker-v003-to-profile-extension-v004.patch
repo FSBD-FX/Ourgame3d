@@ -1,0 +1,23 @@
+--- F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-full-known44-observer-tooling-candidate-v003/tooling/verify-known44-axecycle-v002.py
++++ F:/Ourgame/source-assets/production/fairytale-guard-v001/guard-known44-profile-extension-candidate-v004/verify-known44-profile-extension-v004.py
+@@ -1,7 +1,7 @@
+ """Independent exact-input and native Known44 AxeCycle proof. No UE launch."""
+ from pathlib import Path
+ import argparse,hashlib,json,math,re,subprocess,sys
+-HERE=Path(__file__).resolve().parent;CANDIDATE=HERE.parent;WORKSPACE=CANDIDATE.parents[3]
++HERE=Path(__file__).resolve().parent;WORKSPACE=Path('F:/Ourgame').resolve();CANDIDATE=WORKSPACE/'source-assets/production/fairytale-guard-v001/presentation-full-known44-observer-tooling-candidate-v003'
+ V003=CANDIDATE.parent/'presentation-full-candidate-v003'
+ def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
+ def need(v,why):
+@@ -97,7 +97,10 @@
+   for key,want in [('compression_settings','TC_EDITOR_ICON'),('mip_gen_settings','TMGS_NO_MIPMAPS'),('lod_group','TEXTUREGROUP_UI'),('filter','TF_BILINEAR')]:need(want in settings[key],'Actual native texture setting differs: '+key)
+   need(settings['never_stream']=='True' and settings['srgb']=='True','Actual native stream/sRGB setting differs')
+   need(a['actual_class']=='Texture2D' and a['actual_dimensions']==[512,512] and len(a['actual_import_filenames'])==1 and Path(a['actual_import_filenames'][0]).resolve()==resolve(f['source']['path']).resolve() and a['source']['sha256']==f['source']['sha256'],'Actual native class/dimensions/source provenance differs');pin(resolve(a['saved']['path']),a['saved']);saved.add(resolve(a['saved']['path']).relative_to(WORKSPACE).as_posix())
+- need({resolve(x['path']).relative_to(WORKSPACE).as_posix() for x in old}|saved=={n for n in files if n.startswith('UnrealGame/Content/Production/')},'Old Production+28 native saved packages is not exact compiled set')
++ import runpy
++ extension_validator=HERE/'validate-production-extension-v004.py'
++ need(sha(extension_validator)=='b157fba56e7ba46ed1f22e857207e98e0b417a7136b536928aae617d67625124','Pinned production extension validator differs')
++ runpy.run_path(str(extension_validator))['validate_production_set']({resolve(x['path']).relative_to(WORKSPACE).as_posix() for x in old}|saved,files,p,WORKSPACE,__file__)
+  qp=p['independent_import_two_pass_receipt_pin'];pin(resolve(qp['path']),qp);proof=read(resolve(qp['path']));need(proof['success'] is True and proof['verification_passes']==2 and proof['receipt']==ip and proof['actual_total']==len(old)+28,'Independent old/new two-SHA verification absent/different import')
+  return m,facts,protocol
+ 

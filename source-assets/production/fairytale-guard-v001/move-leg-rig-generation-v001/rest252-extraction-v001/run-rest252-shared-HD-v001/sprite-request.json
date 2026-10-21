@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-Move-LegRig-shorter-Rest1-candidate-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedReady209existing4 exactraw only; do NOT generate or charge."
+    },
+    "right_move_bodyrest": {
+      "frames": 1,
+      "fps": 1,
+      "loop": false,
+      "action": "Create ONE redesigned legless upperbody component, with its complete held fixed axe, on flat pure #FF00FF. This is source art for a later 2D leg rig, not a full walking character or animation sheet.\n\nReference 1 is the accepted Rest249 component and the construction/edit target. Reference 2, accepted ArmedReady209, is the sole character, camera, helmet, armor and axe identity; its full-body stance is NOT a pose template. Reference 3 is only the official one-cell layout guide. Do not paint its lines or labels.\n\nSHORTEN ONLY THE CHEST–ABDOMEN–PELVIS DESIGN: raise the pelvis hem and the two underside thigh attachment surfaces closer to the helmet. At matching helmet and shoulder width, the visible crown-to-hip-attachment distance should be approximately 80% of reference 1, giving future legs more of the full character's height. Make the abdomen visibly shorter through newly designed compact stone plates, rather than shrinking the whole character or vertically squashing the reference. Keep the broad helmet/head size, shoulder width, tiny amber eye window, sparse foreground moss, coarse ink and large low-detail warm stone planes. Preserve the same shallow elevated three-quarter side view facing screen right. Do not redraw a taller chest or wide-legged Ready stance.\n\nKeep both closed fists naturally gripping the SAME continuous straight shaft: foreground moss arm at the buttward lower grip, far arm at the headward upper grip. Preserve the complete single stone axe head, shaft length, buttcap, and their proportions relative to the helmet; do not compress or enlarge the axe. Adjust arm placement naturally only as needed for the shorter torso. Keep two distinct opaque underside pelvis overlap surfaces, with simple hideable seams for the unchanged Near/Far thigh kit.\n\nOMIT all thighs, knees, shins and shoes. No limb stubs, fake black leg silhouettes, spare parts, extra hands, shadows or ground line. Empty space below the pelvis is magenta. One complete connected component, generous clear surround on every edge, entire axe uncropped. Do not fill the cell by enlarging the torso. No numeric labels, colored markers or guide strokes. This is a new authored torso design; exact pixel preservation is not assumed.\n"
+    }
+  },
+  "style": "AcceptedArmedReady209 remains sole identity/camera. Authorized compact chest-abdomen-pelvis redesign relative to accepted Rest249 only; helmet/shoulder width and fixed axe identity preserved. Static legless component, not a standing body or Move phase.",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

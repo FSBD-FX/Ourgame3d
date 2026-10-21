@@ -1,0 +1,80 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\move-leg-rig-generation-v001\\near250-extraction-v001\\run-near250-threeparts-shared-HD-v001",
+  "states": [
+    "right_idle",
+    "right_move_near_kit"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "right_idle",
+      "source": "frames",
+      "expected_frames": 4,
+      "found_frames": 4,
+      "natural_pose_count": 4,
+      "frame_files": [
+        "frames/right/idle/frame-0.png",
+        "frames/right/idle/frame-1.png",
+        "frames/right/idle/frame-2.png",
+        "frames/right/idle/frame-3.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.9754386127921805,
+          "mean": 0.9821599883416154
+        },
+        "dhash_similarity": {
+          "min": 0.921875,
+          "mean": 0.953125
+        },
+        "motion_presence": 0.053607297411151965,
+        "centroid_sigma": {
+          "x": 2.2095872752145036,
+          "y": 4.467112307696949
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "state": "right_move_near_kit",
+      "source": "frames",
+      "expected_frames": 3,
+      "found_frames": 3,
+      "natural_pose_count": 3,
+      "frame_files": [
+        "frames/right/move_near_kit/frame-0.png",
+        "frames/right/move_near_kit/frame-1.png",
+        "frames/right/move_near_kit/frame-2.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.8045914626747545,
+          "mean": 0.8198152037076287
+        },
+        "dhash_similarity": {
+          "min": 0.734375,
+          "mean": 0.7708333333333334
+        },
+        "motion_presence": 0.12417028090533089,
+        "centroid_sigma": {
+          "x": 6.9494206144192825,
+          "y": 55.015733055299755
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": []
+    }
+  ],
+  "errors": [],
+  "warnings": []
+}

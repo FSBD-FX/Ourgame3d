@@ -1,0 +1,7 @@
+# Shorter upperbody Rest1 — prepared only
+
+One new source component; no native call or source acceptance. Root may use the existing reserve helper with `Root-shorter-Rest1-single-native-call-handoff-v001.json` after retaining this complete F batch. The helper schema is unchanged; prompt/ref pins were checked, output does not exist. Save uses the Root-assigned request number, never a preassigned ID.
+
+References in order: Rest249 construction target, accepted Ready209 identity, identical official single-cell guide. Native call uses the short custom prompt; the official generated prompt remains archival. Ready4 raw is carried byte-exact, not regenerated. The new component is authorized to shorten chest/abdomen/pelvis, not globally squash the helmet or axe. Old core-crown→artist hips 295/291 sourcepx become a design goal of 236/232.8 old-Rest-equivalent units at matching helmet/shoulder width. These are visible authored surfaces, not bones. A 339px alpha box containing axe is not standing height.
+
+New raw/QA/curated/Rest4 markers, cross-kit density, final uniform scale and total standing height remain null. Near250/Far251 six images are unchanged; old Rest four markers are not inherited. Final height 100.8, distance cycle 128 and step distance 64 remain future design constraints, not certified motion. Source review must precede a new limited rig trial. Old E557/E558 media, rejected parameter proposals, old Rest and all freezes are preserved.

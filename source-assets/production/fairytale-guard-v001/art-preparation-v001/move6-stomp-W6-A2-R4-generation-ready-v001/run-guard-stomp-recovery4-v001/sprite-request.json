@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fixed-heavyaxe-armed-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedArmedReady209existing4poses, exactrawcopy, doNOTgenerateorcharge.",
+      "durations_ms": [
+        250,
+        250,
+        250,
+        250
+      ]
+    },
+    "right_stomp_recovery": {
+      "frames": 4,
+      "fps": 3,
+      "loop": false,
+      "action": "OnlyattachedacceptedArmedReady209owns thewholeGuard+fixedheavyaxeidentity, same shallow elevatedthreequarter view facingRIGHT. Squatstonehelmet/smallambereyes/sparseoliveforegroundshouldermoss/coarseink/broadwarmgreystoneplanes, SAME singleheadedstoneaxe/straightwoodshaft/stonebuttcap dimensionsandratio. Bothlivingfists FULLYCLOSED onONEcontinuousshaft throughout: mossNEARshoulder→foregroundneararm→LOWBUTTwardgrip, FARarm→HIGHHEADwardgrip. No handexchange/regrip/drop/shorteningaxe or changingheadshape. Axe heldquiet lowinfront, headRIGHT clearfeet/eyes; bothhands/axe movecoherently asoneheavyheldobject, no armcounterswing. No206/207neutral/standalone208/bad211references. Keepbody/axeconstantdensity, fullconnectedcompleteposeswith48safearea; no text/grid/scenery/dust/impactarcs/blur/shadows/loosechips. Stoneplatesnotrubber, lowdetailnotgrains/pixeldots/vectorgloss. FOUR distinct STOMP RECOVERY poses afterexact150msActiveEnd, totalnative1500ms, samples0/350/700/1100ms andholds350/350/400/400ms. Frame0 quietfullweightLOWPLANTED compression continuesStompActive1afterimpactwindowCLOSED, no residualshock/damage. Frame1 slowlyregainstance, nearandfarfeetstayontheirgroundcontacts, axequietheldlowright. Frame2 chest/shouldersriseunderstoneweight, bothgripsfixed, no weaponthreat/preparatoryswing. Frame3 regainnearacceptedArmedReady209frame0 andholduntiloriginalRecoveryEnd1500ms. Nochase/step/newattackbeforeoriginalownedintervalends; actualextra300msIdleReady/cooldownsremainseparate. NormalRecoveryonly; InterruptedRecoveryhasitsownsafe4row afterStunnedpriority. Nojumps/secondstomp/Rootmove/dust/rings/blur/impactmarks. Fullbodyandweaponfixeddensity, naturalcrouchchangesnotrescaled.",
+      "durations_ms": [
+        350,
+        350,
+        400,
+        400
+      ]
+    }
+  },
+  "style": "OnlyattachedacceptedArmedReady209owns thewholeGuard+fixedheavyaxeidentity, same shallow elevatedthreequarter view facingRIGHT. Squatstonehelmet/smallambereyes/sparseoliveforegroundshouldermoss/coarseink/broadwarmgreystoneplanes, SAME singleheadedstoneaxe/straightwoodshaft/stonebuttcap dimensionsandratio. Bothlivingfists FULLYCLOSED onONEcontinuousshaft throughout: mossNEARshoulder→foregroundneararm→LOWBUTTwardgrip, FARarm→HIGHHEADwardgrip. No handexchange/regrip/drop/shorteningaxe or changingheadshape. Axe heldquiet lowinfront, headRIGHT clearfeet/eyes; bothhands/axe movecoherently asoneheavyheldobject, no armcounterswing. No206/207neutral/standalone208/bad211references. Keepbody/axeconstantdensity, fullconnectedcompleteposeswith48safearea; no text/grid/scenery/dust/impactarcs/blur/shadows/loosechips. Stoneplatesnotrubber, lowdetailnotgrains/pixeldots/vectorgloss. ",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "Guard-Rest252-ownhip-C128-bob4-lift2-one-fixed-trial-v001",
+  "samples": [
+    0.0,
+    21.333333333333332,
+    42.666666666666664,
+    64.0,
+    85.33333333333333,
+    106.66666666666667
+  ],
+  "cycle_distance_world": 128,
+  "step_distance_world": 64,
+  "phase": "P=positive_mod(d,128); h=(P>=64); u=(P-64*h)/64",
+  "stance": "NEAR in half0, FAR in half1; opposite chain swings.",
+  "stance_midsole_x": "own_hip.X + (20.8-41.6*u) displaypx",
+  "swing_midsole_x": "own_hip.X + (-20.8+41.6*u) displaypx",
+  "stance_core_sole_y": 0,
+  "swing_lift_display": "2*sin(pi*u)^2",
+  "body_and_hips_up_display": "4*sin(2*pi*d/128)^2; contacts0/64 no bob; passing32/96 up4",
+  "fixed_knee_branches": {
+    "near": -1,
+    "far": 1
+  },
+  "ground_plane_y": 0,
+  "scale": 0.2244988864142539,
+  "standing_baseline": 100.8,
+  "sampled_crown_height_range": [
+    100.8,
+    103.8
+  ],
+  "continuous_crown_height_range": [
+    100.8,
+    104.8
+  ],
+  "continuous_stance_dx_dd": -0.65,
+  "movement_authority": "Offline d values are authored sample labels, not movement receipts. Future runtime input must be actual accepted path; straight-X nominal .65 projection only. No native accepted-distance or footlock claim.",
+  "boot_pitch": "Each original heel/toe line gives one fixed perboot angle; core sole alpha>=128 sets its lowest art point on author ground.",
+  "no_parameter_search": true,
+  "immutable_before_solver": true,
+  "TrialAllowed": false,
+  "FinalAccepted": false
+}
