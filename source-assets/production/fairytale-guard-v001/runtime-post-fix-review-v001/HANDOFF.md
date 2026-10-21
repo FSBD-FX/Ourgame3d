@@ -1,0 +1,11 @@
+# v130 partial post-fix: independent Source/metadata review
+
+PASS仅限只读Source/metadata核对。实际Source223每文件及冻结副本精确匹配v130 snapshot，1892 entries/Production1226，DLLpin一致；实际Driver normalized等v007重建。Root专项114859 1GREEN、115254 strict181GREEN每组0error/0warning。旧v002全16冻结文件（包含capture/verifier脚本）与Root快照均无字节变化，Rootprereg、两session输入绑定精确。
+
+原件报告PID55528侧−1 / PID53660侧+1是两个fresh PID/Run。原native passed/flow_complete、原独立checker passed；本review重新算mask均Wake63/Ready15/AxeWindup63。Wake每相各5draw、各只有一个原始WakeStart/Complete及完整1s；native clock逐观察等真实sim、DrawID新且唯一，Guard185/0receipts。所有16Texture实际objectpath/SourceSHA、wholebodyincludesaxe单层、ONErow body scale/sourcepivot、left mirror512−Px和screenfloor公式核对通过；缺AxeFollow/StompWindup/StompFollow仍明确procedural gap。native async receipt序列/源copyCRC/FIFO时间字段和close/flush全部一致；没有Guard rejected/handled ensure/fatal日志匹配。
+
+严格边界：两侧靠近和Ready/AxeWindup的±朝向已录；Dormant/Wake两次实际都Facing+1，不写Wake双向覆盖。本review没有读取、解码或View任何PNG/MP4/Zip，也未运行UE/UBT/import；源像素相等是原冻结独立checker报告结果和本轮receipt绑定核对，不能称本review重新decode验像素。MP4/VFR/Zip/E留档及视觉比例/动作衔接/音色另由Root继续，当前silent/audio_recorded=false/visual_reviewed=false/formal_complete_units0。Knight/Bat是明确public-damage诊断，Guard才是正式slot2计划出生；不是normal J全战、full57或完整enemy最终接受。
+
+最初本review把native Id()的decimal-string PID当JSON integer比较，造成review脚本前提误判；旧脚本/失败诊断已保留，按实际Source序列化契约改为canonical decimal-string精确匹配、session index整数精确匹配，再同原报告重核通过。未改任何原报告或旧工具，也未以此改生产断言。
+
+可审计脚本review_metadata_source_v001.py及最终JSON均只读原始输入并拒绝覆盖输出。JSON给每份metadata/source输入pin、每frame首覆盖witness、朝向计数、Wake间距、writer状态和明确风险。所有Root docs/Source/tools/Content/ledger及原media不由worker改写。该review只支持本轮已复现区间拒绝路径的修复；不声称全IEEE域/任意未来系统卡顿都已消除。

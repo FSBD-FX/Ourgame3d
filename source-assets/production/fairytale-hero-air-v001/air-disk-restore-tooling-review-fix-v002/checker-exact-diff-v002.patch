@@ -1,0 +1,42 @@
+--- frozen-v001/verify-air-disk-restore-native-v001.py
++++ NEW-review-fix-v002/verify-air-disk-restore-native-v001.py
+@@ -25,10 +25,19 @@
+     loaded,air,oldC=landing.dependencies()
+     return d,paths,landing,loaded,air,oldC
+ 
++def frozen_member(row):
++    # Metadata closures retain intentional empty negative fixtures. Actual
++    # native evidence always continues through C.resolve_pin (>0 bytes).
++    need(isinstance(row,dict) and type(row.get('bytes')) is int and row['bytes']>=0
++         and isinstance(row.get('path'),str) and row['path']
++         and isinstance(row.get('sha256'),str) and C.re.fullmatch('[0-9a-f]{64}',row['sha256']),'Complete nonnegative frozen member bytes/SHA/path required')
++    p=Path(row['path']);p=(p if p.is_absolute() else ROOT/p).resolve();value=C.pin(p)
++    need((value['bytes'],value['sha256'])==(row['bytes'],row['sha256']),'Frozen member bytes/SHA differ: '+str(p));return p
++
+ def freeze(row):
+     f=C.read(C.resolve_pin(row));members=f.get('members',f.get('files'))
+     need(isinstance(members,list) and members and len({x['path'] for x in members})==len(members),'Exact nonempty frozen member closure required')
+-    for m in members:C.resolve_pin(m)
++    for m in members:frozen_member(m)
+     return f
+ 
+ def relative(row):
+@@ -99,8 +108,8 @@
+     need(all(Path(p[k]).is_absolute() and ROOT.resolve() in archives[i].parents for i,k in enumerate(('source_archive','target_archive'))) and archives[0]!=archives[1] and not any(a.is_relative_to(b) for a,b in (archives,archives[::-1])),'Two distinct absolute nonnested native archives inside project required')
+     need(p['target_audio_policy']=='existing-native-capture-complete-silence-allowed-without-signal-acceptance' and C.same_pin(p['target_audio_policy_addendum_pin'],d['pins']['audio_policy_addendum']) and C.same_pin(p['target_audio_audit_evidence_pin'],d['pins']['audio_gap_source_audit']),'Exact new target native silent capture policy/evidence required')
+     C.resolve_pin(p['target_audio_policy_addendum_pin']);C.resolve_pin(p['target_audio_audit_evidence_pin'])
+-    cf=freeze(p['checker_freeze_pin']);need(any(C.resolve_pin(r)==Path(__file__).resolve() for r in cf['members']),'Current checker absent from selected actual freeze')
+-    sf=freeze(p['source_candidate_freeze_pin']);need(any(C.resolve_pin(r)==C.resolve_pin(p['protocol_pin']) for r in sf['members']),'Actual protocol absent from candidate source freeze')
++    cf=freeze(p['checker_freeze_pin']);need(any(frozen_member(r)==Path(__file__).resolve() for r in cf['members']),'Current checker absent from selected actual freeze')
++    sf=freeze(p['source_candidate_freeze_pin']);need(any(frozen_member(r)==C.resolve_pin(p['protocol_pin']) for r in sf['members']),'Actual protocol absent from candidate source freeze')
+     cm,lineage=actual_lineage(p,protocol,oldC)
+     # Deliberately no requirement that a Profile is still absent here: post-native
+     # verification runs after publication. Root source launch records that fact.
+@@ -131,6 +140,7 @@
+             counts['pristine_noPawn']+=1;need(o['new_air_draw']['drawn'] is False and o['rendered_player_stack']==[],'Pristine cannot draw a player');continue
+         nd=o['new_air_draw'];frame=o['physical_visual_key'];old=o['old_draw'];stack=o['rendered_player_stack']
+         if frame>=0 and (r['role']=='target' or i>=ready_index):
++            need(isinstance(nd.get('draw_id'),str) and C.uint(nd['draw_id'])==C.uint(old['draw_id']),'Actual Air draw ID must be positive and match the same completed callback draw ID')
+             paths_for={a['component']:a['object_path'] for a in am['assets'] if a['frame']==frame};paths_for['IndependentSword']=L.SWORD
+             slots[i]=L.quad_geometry(o,ap['Frames'][frame],paths_for,True,air_paths);counts['Air9']+=1;continue
+         need(nd['drawn'] is False and nd['slot_count']==0 and nd['actual_stack']==[],'Unsupported actual state cannot retain stale Air parts')

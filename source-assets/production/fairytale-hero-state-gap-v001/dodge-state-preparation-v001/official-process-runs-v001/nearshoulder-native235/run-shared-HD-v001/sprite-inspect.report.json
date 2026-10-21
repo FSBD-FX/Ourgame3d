@@ -1,0 +1,53 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\dodge-state-preparation-v001\\official-process-runs-v001\\nearshoulder-native235\\run-shared-HD-v001",
+  "states": [
+    "leather_nearshoulder_hero_dodge"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "leather_nearshoulder_hero_dodge",
+      "source": "frames",
+      "expected_frames": 4,
+      "found_frames": 4,
+      "natural_pose_count": 4,
+      "frame_files": [
+        "frames/leather_nearshoulder_hero_dodge/frame-0.png",
+        "frames/leather_nearshoulder_hero_dodge/frame-1.png",
+        "frames/leather_nearshoulder_hero_dodge/frame-2.png",
+        "frames/leather_nearshoulder_hero_dodge/frame-3.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.9296514151883781,
+          "mean": 0.9602425656324223
+        },
+        "dhash_similarity": {
+          "min": 1.0,
+          "mean": 1.0
+        },
+        "motion_presence": 0.00039676840788398693,
+        "centroid_sigma": {
+          "x": 0.2895526762256028,
+          "y": 0.7078827305980937
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "leather_nearshoulder_hero_dodge: motion presence is too low (0.0004 < 0.0100)"
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "leather_nearshoulder_hero_dodge: motion presence is too low (0.0004 < 0.0100)"
+  ]
+}

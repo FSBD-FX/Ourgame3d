@@ -1,0 +1,15 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonGuardArtDeathProbeV005.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonGuardArtDeathProbeV005.cpp
+@@ -384,9 +384,9 @@
+     if(!Need(O&&O->Kind==EDungeonRunRewardKind::Coin&&O->ResolvedAmount==9&&!O->Retired,TEXT("Actual Guard original9 coin object missing")))return;
+     if(!CoinObjectId)CoinObjectId=O->ObjectId;if(!Need(CoinObjectId==O->ObjectId,TEXT("Guard coin identity changed")))return;
+     if(!O->Consumed){MoveTo(O->Position);return;}
+-    const auto* C=Rewards.Collections.FindByPredicate([this](const auto& X){return X.Request.ObjectId==CoinObjectId;});
+-    if(!Need(C&&C->Request.SourceId==O->SourceId&&C->AfterCoins==C->Request.BeforeCoins+9,TEXT("Coin lacks automatic original collection receipt")))return;
+-    if(!CoinCollected){CoinCollected=true;CoinOperationId=C->Request.OperationId;CollectedAt=C->Request.AtTime;CollectedBefore=C->Request.BeforeCoins;CollectedAfter=C->AfterCoins;}
++    const auto* Collection=Rewards.Collections.FindByPredicate([this](const auto& X){return X.Request.ObjectId==CoinObjectId;});
++    if(!Need(Collection&&Collection->Request.SourceId==O->SourceId&&Collection->AfterCoins==Collection->Request.BeforeCoins+9,TEXT("Coin lacks automatic original collection receipt")))return;
++    if(!CoinCollected){CoinCollected=true;CoinOperationId=Collection->Request.OperationId;CollectedAt=Collection->Request.AtTime;CollectedBefore=Collection->Request.BeforeCoins;CollectedAfter=Collection->AfterCoins;}
+     if(S.Time>=CollectedAt+.2){MoveStop();Complete=true;Next(9);FinishOnFrame=true;}return;
+    }
+    if(!FollowRoute(E))return;const bool At=ReachNormalStrikePoint(E);if(!At)return;

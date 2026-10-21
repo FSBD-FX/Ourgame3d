@@ -1,0 +1,10 @@
+--- actual/DungeonFairytaleSwordPresentation.cpp
++++ candidate/DungeonFairytaleSwordPresentation.cpp
+@@ -119,6 +119,7 @@
+     if(bUseFairytaleSwordDodgePreview && !F->bDead && F->JumpHeight==0.f && F->GetVerticalVelocity()==0.f
+         && F->AnimationName==TEXT("dodge") && F->GetDodgeState().Phase==DungeonDodge::EPhase::Dodging
+         && DrawFairytaleSwordDodgeBody(F))return true;
++    if(bUseFairytaleSwordAirPreview && DrawFairytaleSwordAirBody(F))return true;
+     using namespace DungeonFairytaleSwordBodyV001;
+     const uint64 PreviousDrawId=FairytaleSwordDraw.DrawId;
+     FairytaleSwordDraw=FDungeonFairytaleSwordDraw();

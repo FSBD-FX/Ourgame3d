@@ -1,0 +1,73 @@
+--- frozen-v001/test-landing-priority-v001.py
++++ review-fix-v002/test-landing-priority-v001.py
+@@ -33,7 +33,7 @@
+     rest=[ready,*air,land,*acts,obs(2.8,V.f32(.12),'sword_ready_idle',0),obs(2.82,V.f32(.12),'sword_ready_idle',0)]
+     for o in rest:o['equipment_action']=dict(eq,active=False);o['next_operation_id']='2'
+     einput=dict(identity,key='E',down=True,sim=.2,wall_offset_s=.2,selected_source_id='7',context_sampled_before_InputKey=True,before_equipment_action=dict(active=False,action_id='0'))
+-    return dict(light_source_id='7',equipment_started_callback_index=0,equipment_commit_callback_index=1,equipment_input_index=0,equipment_start=.3,equipment_deadline=.8,schema='hero-landing-priority-native-observer-v001',requested_action=action,requested_facing=1,initial_hp=100.,ready_callback_index=2,landing_callback_index=7,priority_input_index=2,first_action_callback_index=8,action_start=2.025,action_end=2.625 if action=='J' else 2.425,action_start_landing_age=.045,normal_inputs=[einput,space,q],observations=[equip,committed,*rest],air_mask=15,primary_mask=63 if action=='J' else 0,dodge_mask=15 if action=='Shift' else 0,ready_join_frames=2)
++    return dict({k:v for k,v in identity.items() if k not in ('player_entity','facing')},light_source_id='7',equipment_started_callback_index=0,equipment_commit_callback_index=1,equipment_input_index=0,equipment_start=.3,equipment_deadline=.8,schema='hero-landing-priority-native-observer-v001',requested_action=action,requested_facing=1,initial_hp=100.,ready_callback_index=2,landing_callback_index=7,priority_input_index=2,first_action_callback_index=8,action_start=2.025,action_end=2.625 if action=='J' else 2.425,action_start_landing_age=.045,normal_inputs=[einput,space,q],observations=[equip,committed,*rest],air_mask=15,primary_mask=63 if action=='J' else 0,dodge_mask=15 if action=='Shift' else 0,ready_join_frames=2)
+ 
+ class Causal(unittest.TestCase):
+     def reject(self,mutation,action='J'):
+@@ -84,6 +84,61 @@
+     def test_preexisting_equipment_action_is_rejected(self):self.reject(lambda r:r['normal_inputs'][0]['before_equipment_action'].update(active=True))
+     def test_borrowed_equipment_action_id_is_rejected(self):self.reject(lambda r:r['normal_inputs'][0]['before_equipment_action'].update(action_id='1'))
+     def test_false_completed_Dodge_is_rejected(self):self.reject(lambda r:r['observations'][-1]['action'].update(finish=2),'Shift')
++    def test_top_Run_only_mutation_rejected(self):self.reject(lambda r:r.update(run='b'*32))
++    def test_each_actual_top_identity_field_is_bound(self):
++        for field in ('owner','current_room','epoch','weapon_instance','weapon_version','armor_instance','armor_version'):
++            with self.subTest(field=field):self.reject(lambda r:r.update({field:'999'}))
++    def test_optional_top_player_entity_cannot_override_owner(self):self.reject(lambda r:r.update(player_entity='999'))
++    def test_result_identity_comes_from_verified_Ready(self):
++        r=fixture();self.assertEqual(V.verify_causal(r)['verified_identity'],{k:r['observations'][r['ready_callback_index']][k] for k in V.IDENTITY})
++    def test_skipped_first_Land4_still_under_06_rejected(self):
++        def change(r):
++            i=r['landing_callback_index'];earlier=copy.deepcopy(r['observations'][i]);earlier.update(sim=1.995,wall_offset_s=1.995,landing_visual_age=.015);earlier['old_draw'].update(sim=1.995,draw_id='1995')
++            r['observations'].insert(i,earlier);r['landing_callback_index']+=1;r['first_action_callback_index']+=1
++        self.reject(change)
++
++class EveryTypedCallback(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        loaded,F,C=V.dependencies();_,cls.AM,cls.AP,*_=C.source_only()
++        cls.DM=V.read(loaded['import-Dodge32-v001.json']);cls.DP=V.read(loaded['Dodge-runtime-profile-data-v001.json'])
++        origins=V.read(p.parent/'geometry-fixture-origins-v002.json');cls.rows=[];cls.unit_rows=[]
++        for row in origins['members']:
++            if row['side']!='right':continue
++            report=V.read(V.resolve_pin(row));key='new_air_draw' if row['kind']=='Air' else 'dodge_draw'
++            choices=[o for o in report['observations'] if o[key]['drawn'] and o[key]['frame']==(0 if row['kind']=='Air' else 3) and (row['kind']!='Air' or o[key]['slot_count']==9)][:3]
++            assert len(choices)==3
++            for original in choices:
++                o=copy.deepcopy(original)
++                if row['kind']=='Air':o['action']={'active':False};o['dodge_draw']={'drawn':False,'slot_count':0,'actual_stack':[]}
++                else:o=cls.adapt_dodge(o)
++                cls.rows.append(o)
++            if row['kind']=='Dodge':
++                for frame in (1,2):cls.unit_rows.append(cls.adapt_dodge(copy.deepcopy(next(o for o in report['observations'] if o[key]['drawn'] and o[key]['frame']==frame))))
++        cls.report=dict(requested_action='Shift',observations=cls.rows)
++    @staticmethod
++    def adapt_dodge(o):
++        d=o['dodge_draw'];d['slot_count']=len(d['slots']);d['resident_count']=len(d['resident_textures']);o['owner']=d['owner'];o['jump_height']=d['jump_height'];o['rendered_player_stack']=o['rendered_stack'];o['old_draw']={'clip':'sword_dodge','actual_stack':d['actual_stack']};o['action']={'active':True};o['new_air_draw']={'drawn':False,'slot_count':0,'actual_stack':[]};o['new_air_query_ok']=False;o['physical_visual_key']=-1;return o
++    def check(self,r):return V.verify_typed_callbacks(r,self.AM,self.AP,self.DM,self.DP)
++    def reject(self,kind,mutation):
++        r=copy.deepcopy(self.report);o=r['observations'][0 if kind=='Air' else 3];key='new_air_draw' if kind=='Air' else 'dodge_draw';mutation(o,key)
++        with self.assertRaises(ValueError):self.check(r)
++    def test_actual_historical_Air_and_Dodge_quads_accept(self):self.assertTrue(self.check(self.report)['passed'])
++    def test_all_six_callbacks_really_checked(self):self.assertEqual(self.check(self.report)['counts'],{'Air':3,'Dodge':3})
++    def test_actual_Dodge_frame1_and_2_unit_axes_accept(self):self.assertTrue(self.check(dict(requested_action='Shift',observations=self.unit_rows))['passed'])
++    def test_Dodge_raw_axis_cannot_replace_actual_unit(self):
++        r=dict(requested_action='Shift',observations=copy.deepcopy(self.unit_rows));r['observations'][0]['dodge_draw']['axis_artist']=self.DP['frames'][1]['Axis_artist_raw_xy']
++        with self.assertRaises(ValueError):self.check(r)
++    def test_Air_Land4_raw_axis_cannot_be_normalized(self):
++        origins=V.read(p.parent/'geometry-fixture-origins-v002.json');origin=next(x for x in origins['members'] if x['kind']=='Air' and x['side']=='right');r=V.read(V.resolve_pin(origin));o=copy.deepcopy(next(o for o in r['observations'] if o['new_air_draw']['drawn'] and o['new_air_draw']['slot_count']==9 and o['physical_visual_key']==4));o['dodge_draw']={'drawn':False,'slot_count':0,'actual_stack':[]};o['action']={'active':False};a=o['new_air_draw']['axis_artist'];length=V.math.hypot(*a);o['new_air_draw']['axis_artist']=[x/length for x in a]
++        with self.assertRaises(ValueError):self.check(dict(requested_action='J',observations=[o]))
++    def test_non_midpoint_Air_wrong_equal_stacks_rejected(self):self.reject('Air',self.wrong_stacks)
++    def test_non_midpoint_Dodge_wrong_equal_stacks_rejected(self):self.reject('Dodge',self.wrong_stacks)
++    @staticmethod
++    def wrong_stacks(o,key):
++        bad=['substituted-non-midpoint']*9;o[key]['actual_stack']=bad;o['old_draw']['actual_stack']=bad;o['rendered_player_stack']=bad
++    def test_non_midpoint_Air_missing_resident_rejected(self):self.reject('Air',lambda o,k:o[k]['resident_textures'].pop())
++    def test_non_midpoint_Dodge_missing_resident_rejected(self):self.reject('Dodge',lambda o,k:o[k]['resident_textures'].pop())
+ 
+ class SourceOverlay(unittest.TestCase):
+     @classmethod

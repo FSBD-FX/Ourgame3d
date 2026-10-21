@@ -1,0 +1,35 @@
+{
+  "schema": "Air-relative-freeze-source-chain-fix-inputs-v002",
+  "refs": {
+    "old_checker_freeze": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/production-observer-candidate-v001/tooling/Air-production-proof-checker-freeze-v001.json",
+      "bytes": 7824,
+      "sha256": "0883605a2d612fc979d3adb68e3df8191969d288e196db3dd2424efe061a34b6"
+    },
+    "old_13_PASS": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/production-observer-candidate-v001/tooling/validation-runs/h170133089542/host-tests-result.json",
+      "bytes": 1009,
+      "sha256": "99d01e6a2c6e2d1a659960994e3592c721b22cb002df314bd1266af3c48e034d"
+    },
+    "actual_full42": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/production-candidate-v001/full-production-v001/HeroAir-full-production-candidate-freeze-v001.json",
+      "bytes": 8860,
+      "sha256": "7197705254448e380d643edbef4b31fe3adf4f95a7b3c9d389ad574adea532e6"
+    },
+    "actual_absolute14": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/production-observer-candidate-v001/HeroAir-production-observer-source-freeze-v001.json",
+      "bytes": 5611,
+      "sha256": "e7b9f44fe53fa2c827d962b359494badf2efbf1ffb8d2e2face8dd2449fa6140"
+    }
+  },
+  "old_relative_path_failure_reproduced": true,
+  "fixes": [
+    "freeze member relative paths use own freeze parent",
+    "admission after bytes can match only existing-source/new-source or explicit source_files"
+  ],
+  "other_function_AST_unchanged": true,
+  "main_checker_bytes_unchanged": true,
+  "regenerated_GPU_fixture_bytes": 0,
+  "UE_calls": 0,
+  "FinalAccepted": false
+}

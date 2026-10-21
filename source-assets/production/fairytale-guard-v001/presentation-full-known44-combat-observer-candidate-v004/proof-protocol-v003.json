@@ -1,0 +1,41 @@
+{
+  "schema": "guard-known44-combat-proof-protocol-v003",
+  "runtime_report_schema": "guard-art-known44-combat-observer-v003",
+  "session_schema": "guard-art-known44-combat-session-v003",
+  "Root_prereg_schema": "guard-known44-combat-Root-prereg-v003",
+  "scenario": "StunIR",
+  "supported_scenarios": [
+    "StunIR"
+  ],
+  "Death_implemented": false,
+  "AxeCycle_uses_unchanged_old_actor": true,
+  "source_interface": "DungeonFairytaleGuardFullV003",
+  "known_unique_sources": 44,
+  "selector_logical_contract": 57,
+  "mask_requirements": {
+    "Stunned": 15,
+    "InterruptedRecovery": 15
+  },
+  "normal_startup_restart_serial": "1",
+  "normal_waypoint_tolerance": 6,
+  "coverage_signed_dx": [
+    110,
+    155
+  ],
+  "coverage_abs_dy_max": 20,
+  "Stun_duration": 0.4,
+  "IR_min_observable_positive_duration": 0.4,
+  "IR_clock": "actual positive original [StunUntil,OccupiedUntil), normalized4 phases; SourceEventId0 is legal",
+  "phase8_timeout_wall_s": 28,
+  "capture_timeout_wall_s": 42,
+  "public_Guard_damage_allowed": false,
+  "player_damage_preserved": true,
+  "scope": "One actual normal-J nonlethal85 PoiseBroken/AttackInterrupted, original Stunned4/IR4 only. Diagnostic predecessor clears; no Death/all57/final art/audio acceptance.",
+  "source_candidate_version": "v004",
+  "normal_staging_abs_dx": 140,
+  "normal_J_actual_strike_dx": [
+    110,
+    132
+  ],
+  "normal_J_facing_requires_actual_inward_AD_input": true
+}

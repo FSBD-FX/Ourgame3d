@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-clock-hero-nonattack-Air6-v001",
+    "description": "The exact currently accepted body-only SwordReady v002 frame0 identity, fixed native right three-quarter view; common bare grey/charcoal cloth body and original brown gloves/boots",
+    "base_image": null
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual_measured_against_current_opaque_anchor"
+  },
+  "states": {
+    "jump_nonattack": {
+      "frames": 6,
+      "fps": 10,
+      "loop": false,
+      "action": "The exact attached accepted native-RIGHT three-quarter bell/clock-helmet hero, body only in charcoal cloth shirt/trousers and original brown gloves/boots. This is ONE continuous nonattack jump-to-land action, six genuinely articulated poses, not6 different identities. Same rigid squat helmet volume, original crooked top knob, two contained amber eyes, same head/torso/limb anatomical scale and heavy hand-inked contours as the identity anchor. Preserve416-source-pixel standing-equivalent anatomical scale on512 cells: naturally tucked poses are shorter, NEVER zoom or independently fit them. Keep the torso/pelvis spatial reference consistent across the strip; actual world vertical translation comes from the game, do not draw a row of higher/lower world positions. Do not force a boot baseline for airborne poses. No armor/chest/shoulder plates, no sword/handle/shield/staff/rod, no ground/shadow/dust/FX. Future armor and sword are separate modules. Both near and far hands must be real connected wrist/thumb/fingers and arms; no detached gloves, painted socket dots or copied frozen hands. Near hand maintains a natural compact later one-hand grip, but author grip/axis is unknown until actual pixels exist. Body owner is only the accepted frame0; no old canonical/alternate art. Exact left-to-right progression: 0 EARLY RISE: legs push away and begin a genuine knee tuck, connected arms draw in, torso subtly extends; not standing Ready. 1 LATE RISE: both knees tuck more, boots and hips visibly articulate, near/far elbows and wrists naturally adjust. 2 APEX: compact readable floating suspension, knees tucked with distinct boot angles, rigid helmet settles without stretching. 3 DESCENT: legs reopen downward to prepare contact, ankles and shoulders brace, distinct from rise/apex; torso anatomical scale unchanged. 4 LANDING IMPACT: authentic knee/hip compression under weight, boots receive support and connected arms counterbalance; no impact effect and no whole-sprite rotation. 5 LANDING SETTLE: knees/torso reopen toward the actual accepted Ready anatomy, hands remain naturally connected; no exact paste of the idle. In game frames0..3 sample actual H/V, frames4..5 use the already existing .12s landing age. The standard10fps preview is only an author preview, not the gameplay clock."
+    }
+  },
+  "style": "EXACT accepted current SwordReady v002 hand-inked grotesque dark-fairytale squat clock/bell-helmet identity; body-only no weapons/armor, not pixel art, no style redesign",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": false,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

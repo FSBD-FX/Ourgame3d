@@ -1,0 +1,348 @@
+{
+  "schema": "Root-Air253-LGT-three-inputs-v001",
+  "rows": [
+    {
+      "component": "Chest",
+      "native_identity": 184,
+      "state": "leather_chest_hero_air6",
+      "run": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/chest/run-LGT-chest-Air6-v001",
+      "source_identity": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-integer-assembly-v001/armor-layers/Chest/frame-0.png",
+        "bytes": 16703,
+        "sha256": "eaa8550fbc3889fe710ced97229578ea62911415fbe92c668d53a090418177dd"
+      },
+      "source_identity_E": {
+        "path": "E:/OurGame/Knight/过程图稿与视频/2026-10-17-OurgameUE-leather-integer-fit-v278/F盘原批次副本/2026-10-17_软皮轻甲四帧整数试装_v001/原件/armor-layers/Chest/frame-0.png",
+        "bytes": 16703,
+        "sha256": "eaa8550fbc3889fe710ced97229578ea62911415fbe92c668d53a090418177dd"
+      },
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/chest/Root-native-fullprompt-v001.txt",
+        "bytes": 8100,
+        "sha256": "55f0209bd137b31617d38da3887af712c15866b5c3175e2f101238ef20f6a59a"
+      },
+      "reference_plan": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/chest/references-pending-E-v001.json",
+        "bytes": 1345,
+        "sha256": "0fede5794beca2aeab10cf162d8759c6e5820f5137baef8e9ef055ff83724a6e"
+      },
+      "request": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/chest/run-LGT-chest-Air6-v001/sprite-request.json",
+        "bytes": 3050,
+        "sha256": "cef8dc9c85feac91f5756b8cb53694554f22a1d16232117e83439d87a6c1b719"
+      },
+      "guide": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/chest/run-LGT-chest-Air6-v001/references/layout-guides/leather_chest_hero_air6.png",
+        "bytes": 6132,
+        "sha256": "5e9e1a3f7c66c1e149cb862705f92c3b0b61fcaac2a445566b51fb39f439d5c4"
+      },
+      "window": [
+        128,
+        100
+      ],
+      "min_used_pixels": 512,
+      "preview_fps_not_gameplay_clock": true,
+      "shared_scale": true,
+      "adapter_changes": [
+        {
+          "before": "Create a single horizontal sprite strip for the game character",
+          "after": "Create a single horizontal ISOLATED ARMOR COMPONENT strip for the game character",
+          "count": 1
+        },
+        {
+          "before": "Do not simply copy the still reference pose. Generate distinct animation poses that create a readable cycle or action.",
+          "after": "Use actualAir253 forsixmatchingperspectivesofonlythisarmorcomponent; nofullcharacter animation.",
+          "count": 1
+        },
+        {
+          "before": "Animation action:",
+          "after": "Armor component action:",
+          "count": 1
+        },
+        {
+          "before": "This row owns motion only. Spend the variation budget on limb contacts, arm counter-swing, body height, torso lean, head bob, hair bounce, and loop continuity.",
+          "after": "This row owns ONLY the specified component sixmatchingAirperspectives. No body,limbs,head,weapon orwholeoutfit generation.",
+          "count": 1
+        },
+        {
+          "before": "Exactly 6 full-body frames, left to right, in one horizontal row.",
+          "after": "Exactly6 isolated complete views ofthe SAME specifiedarmorcomponent, lefttoright; nofullbodyframes.",
+          "count": 1
+        },
+        {
+          "before": "each requested slot must contain exactly one complete full-body pose.",
+          "after": "eachrequestedslot mustcontainexactlyonecomplete specifiedarmorcomponent.",
+          "count": 1
+        },
+        {
+          "before": "- Prefer pose, expression, and silhouette changes over decorative effects.",
+          "after": "- Prefer requiredcomponentforeshortening only; nofacialexpression/wholebody ordecorativeeffects.",
+          "count": 1
+        },
+        {
+          "before": "- Effects are allowed only when state-relevant, opaque, hard-edged, sprite-like, fully inside the same frame slot, and physically touching or overlapping the character silhouette.",
+          "after": "- No effects orcharacter silhouette arepartof thisisolatedarmorrow.",
+          "count": 1
+        },
+        {
+          "before": "- Reject any pose that is cropped, overlaps another pose, crosses into a neighboring frame slot, or creates a separate disconnected component that is not attached to the character.",
+          "after": "- Rejectcroppedarmor, unwantedloosefragments orneighbor-slotcrossing. Eachspecifiedisolatedarmorcomponentisintentionallyindependent ofthe character.",
+          "count": 1
+        },
+        {
+          "before": "Preserve the same silhouette, face, proportions, palette, material, and props across every frame.",
+          "after": "Preserve the SAME acceptedarmor construction,palette,material,physicalsideandreadabledetail; itsboundschangeonlywithactualAirperspective,notperframefitnormalization.",
+          "count": 1
+        }
+      ],
+      "output": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-generation-v001/chest/raw/leather_chest_hero_air6.png",
+      "accepted": false
+    },
+    {
+      "component": "ShoulderNear",
+      "native_identity": 186,
+      "state": "leather_nearshoulder_hero_air6",
+      "run": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/nearshoulder/run-LGT-nearshoulder-Air6-v001",
+      "source_identity": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-integer-assembly-v001/armor-layers/NearShoulder/frame-0.png",
+        "bytes": 6597,
+        "sha256": "6a8163a32439cc5a9bf4c60e78ac441a7dea795b225d8220208153f0198093f8"
+      },
+      "source_identity_E": {
+        "path": "E:/OurGame/Knight/过程图稿与视频/2026-10-17-OurgameUE-leather-integer-fit-v278/F盘原批次副本/2026-10-17_软皮轻甲四帧整数试装_v001/原件/armor-layers/NearShoulder/frame-0.png",
+        "bytes": 6597,
+        "sha256": "6a8163a32439cc5a9bf4c60e78ac441a7dea795b225d8220208153f0198093f8"
+      },
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/nearshoulder/Root-native-fullprompt-v001.txt",
+        "bytes": 7646,
+        "sha256": "d921521a2e77fcbd9f01ef82df8cead6b5dd3306bd4fe321a27591eb4c66b6dd"
+      },
+      "reference_plan": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/nearshoulder/references-pending-E-v001.json",
+        "bytes": 1372,
+        "sha256": "9eef198059f7f20003ca3adfe7d4e230b047ee44ff79f9f9d99bac173535cbf9"
+      },
+      "request": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/nearshoulder/run-LGT-nearshoulder-Air6-v001/sprite-request.json",
+        "bytes": 2830,
+        "sha256": "efca897262094b360b6b55afc3c12be84ee5b13c2992036230000673c4634549"
+      },
+      "guide": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/nearshoulder/run-LGT-nearshoulder-Air6-v001/references/layout-guides/leather_nearshoulder_hero_air6.png",
+        "bytes": 6109,
+        "sha256": "6b1505400deb2339b1cab5d3c151b91b46af71140d7fcf50f926436f3f87d626"
+      },
+      "window": [
+        60,
+        44
+      ],
+      "min_used_pixels": 512,
+      "preview_fps_not_gameplay_clock": true,
+      "shared_scale": true,
+      "adapter_changes": [
+        {
+          "before": "Create a single horizontal sprite strip for the game character",
+          "after": "Create a single horizontal ISOLATED ARMOR COMPONENT strip for the game character",
+          "count": 1
+        },
+        {
+          "before": "Do not simply copy the still reference pose. Generate distinct animation poses that create a readable cycle or action.",
+          "after": "Use actualAir253 forsixmatchingperspectivesofonlythisarmorcomponent; nofullcharacter animation.",
+          "count": 1
+        },
+        {
+          "before": "Animation action:",
+          "after": "Armor component action:",
+          "count": 1
+        },
+        {
+          "before": "This row owns motion only. Spend the variation budget on limb contacts, arm counter-swing, body height, torso lean, head bob, hair bounce, and loop continuity.",
+          "after": "This row owns ONLY the specified component sixmatchingAirperspectives. No body,limbs,head,weapon orwholeoutfit generation.",
+          "count": 1
+        },
+        {
+          "before": "Exactly 6 full-body frames, left to right, in one horizontal row.",
+          "after": "Exactly6 isolated complete views ofthe SAME specifiedarmorcomponent, lefttoright; nofullbodyframes.",
+          "count": 1
+        },
+        {
+          "before": "each requested slot must contain exactly one complete full-body pose.",
+          "after": "eachrequestedslot mustcontainexactlyonecomplete specifiedarmorcomponent.",
+          "count": 1
+        },
+        {
+          "before": "- Prefer pose, expression, and silhouette changes over decorative effects.",
+          "after": "- Prefer requiredcomponentforeshortening only; nofacialexpression/wholebody ordecorativeeffects.",
+          "count": 1
+        },
+        {
+          "before": "- Effects are allowed only when state-relevant, opaque, hard-edged, sprite-like, fully inside the same frame slot, and physically touching or overlapping the character silhouette.",
+          "after": "- No effects orcharacter silhouette arepartof thisisolatedarmorrow.",
+          "count": 1
+        },
+        {
+          "before": "- Reject any pose that is cropped, overlaps another pose, crosses into a neighboring frame slot, or creates a separate disconnected component that is not attached to the character.",
+          "after": "- Rejectcroppedarmor, unwantedloosefragments orneighbor-slotcrossing. Eachspecifiedisolatedarmorcomponentisintentionallyindependent ofthe character.",
+          "count": 1
+        },
+        {
+          "before": "Preserve the same silhouette, face, proportions, palette, material, and props across every frame.",
+          "after": "Preserve the SAME acceptedarmor construction,palette,material,physicalsideandreadabledetail; itsboundschangeonlywithactualAirperspective,notperframefitnormalization.",
+          "count": 1
+        }
+      ],
+      "output": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-generation-v001/nearshoulder/raw/leather_nearshoulder_hero_air6.png",
+      "accepted": false
+    },
+    {
+      "component": "ShoulderFar",
+      "native_identity": 187,
+      "state": "leather_farshoulder_hero_air6",
+      "run": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/farshoulder/run-LGT-farshoulder-Air6-v001",
+      "source_identity": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-integer-assembly-v001/armor-layers/FarShoulder/frame-0.png",
+        "bytes": 2594,
+        "sha256": "869cdbb676af81474372457988d78deebbc28d0ab02507f403251e29410a20f9"
+      },
+      "source_identity_E": {
+        "path": "E:/OurGame/Knight/过程图稿与视频/2026-10-17-OurgameUE-leather-integer-fit-v278/F盘原批次副本/2026-10-17_软皮轻甲四帧整数试装_v001/原件/armor-layers/FarShoulder/frame-0.png",
+        "bytes": 2594,
+        "sha256": "869cdbb676af81474372457988d78deebbc28d0ab02507f403251e29410a20f9"
+      },
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/farshoulder/Root-native-fullprompt-v001.txt",
+        "bytes": 7758,
+        "sha256": "6496bfed2770e99e8a801c15b34cd7af648c8a38a6a4c36f38033bfc9ac338a4"
+      },
+      "reference_plan": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/farshoulder/references-pending-E-v001.json",
+        "bytes": 1368,
+        "sha256": "52bd589aa187dc5bb1a0ca4d195c05c731bb05f320781a9551fdb33f0d1d9bc4"
+      },
+      "request": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/farshoulder/run-LGT-farshoulder-Air6-v001/sprite-request.json",
+        "bytes": 2885,
+        "sha256": "dfe451da78feda6f60a53e3ec8babaa29f631678048f3dec7cf978de2147bc4c"
+      },
+      "guide": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/farshoulder/run-LGT-farshoulder-Air6-v001/references/layout-guides/leather_farshoulder_hero_air6.png",
+        "bytes": 6109,
+        "sha256": "5ca82fa5c9328eaa9bf85953bd44461e352744e3d586fb6b64a234408fbb5a54"
+      },
+      "window": [
+        32,
+        30
+      ],
+      "min_used_pixels": 256,
+      "preview_fps_not_gameplay_clock": true,
+      "shared_scale": true,
+      "adapter_changes": [
+        {
+          "before": "Create a single horizontal sprite strip for the game character",
+          "after": "Create a single horizontal ISOLATED ARMOR COMPONENT strip for the game character",
+          "count": 1
+        },
+        {
+          "before": "Do not simply copy the still reference pose. Generate distinct animation poses that create a readable cycle or action.",
+          "after": "Use actualAir253 forsixmatchingperspectivesofonlythisarmorcomponent; nofullcharacter animation.",
+          "count": 1
+        },
+        {
+          "before": "Animation action:",
+          "after": "Armor component action:",
+          "count": 1
+        },
+        {
+          "before": "This row owns motion only. Spend the variation budget on limb contacts, arm counter-swing, body height, torso lean, head bob, hair bounce, and loop continuity.",
+          "after": "This row owns ONLY the specified component sixmatchingAirperspectives. No body,limbs,head,weapon orwholeoutfit generation.",
+          "count": 1
+        },
+        {
+          "before": "Exactly 6 full-body frames, left to right, in one horizontal row.",
+          "after": "Exactly6 isolated complete views ofthe SAME specifiedarmorcomponent, lefttoright; nofullbodyframes.",
+          "count": 1
+        },
+        {
+          "before": "each requested slot must contain exactly one complete full-body pose.",
+          "after": "eachrequestedslot mustcontainexactlyonecomplete specifiedarmorcomponent.",
+          "count": 1
+        },
+        {
+          "before": "- Prefer pose, expression, and silhouette changes over decorative effects.",
+          "after": "- Prefer requiredcomponentforeshortening only; nofacialexpression/wholebody ordecorativeeffects.",
+          "count": 1
+        },
+        {
+          "before": "- Effects are allowed only when state-relevant, opaque, hard-edged, sprite-like, fully inside the same frame slot, and physically touching or overlapping the character silhouette.",
+          "after": "- No effects orcharacter silhouette arepartof thisisolatedarmorrow.",
+          "count": 1
+        },
+        {
+          "before": "- Reject any pose that is cropped, overlaps another pose, crosses into a neighboring frame slot, or creates a separate disconnected component that is not attached to the character.",
+          "after": "- Rejectcroppedarmor, unwantedloosefragments orneighbor-slotcrossing. Eachspecifiedisolatedarmorcomponentisintentionallyindependent ofthe character.",
+          "count": 1
+        },
+        {
+          "before": "Preserve the same silhouette, face, proportions, palette, material, and props across every frame.",
+          "after": "Preserve the SAME acceptedarmor construction,palette,material,physicalsideandreadabledetail; itsboundschangeonlywithactualAirperspective,notperframefitnormalization.",
+          "count": 1
+        }
+      ],
+      "output": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-generation-v001/farshoulder/raw/leather_farshoulder_hero_air6.png",
+      "accepted": false
+    }
+  ],
+  "source_body": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/extraction-v001/run-Air6-shared-HD-v001/frames/jump_nonattack/frame-0.png",
+      "bytes": 127788,
+      "sha256": "1e12ff63f366db63d88446f46ff8a0b1e2530d7b593cb268d6697a69e9140150"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/extraction-v001/run-Air6-shared-HD-v001/frames/jump_nonattack/frame-1.png",
+      "bytes": 113443,
+      "sha256": "941fc4bbf26502e41f9a552f6c485345b4777d59b45f677c6bda0d1ad7f5e4b3"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/extraction-v001/run-Air6-shared-HD-v001/frames/jump_nonattack/frame-2.png",
+      "bytes": 102785,
+      "sha256": "a36c25470bb356e42979ca795dcc6932791f1f7fe87e958734440c31d3a9f0cf"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/extraction-v001/run-Air6-shared-HD-v001/frames/jump_nonattack/frame-3.png",
+      "bytes": 122304,
+      "sha256": "2ed009c6f57f9affe7d24bf9aaba4642836800a5a5748e342ba2e8e4c8449cd9"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/extraction-v001/run-Air6-shared-HD-v001/frames/jump_nonattack/frame-4.png",
+      "bytes": 120375,
+      "sha256": "a0eceb807cf7f18c7b81161b53737f9a3bb694809d225f839f4ec30a99d7330f"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/extraction-v001/run-Air6-shared-HD-v001/frames/jump_nonattack/frame-5.png",
+      "bytes": 133736,
+      "sha256": "b85e0dc988000d4f7fdf0586d0b920218db69f7e5859608708aaa7d5e1ae94a6"
+    }
+  ],
+  "motion_reference": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/armor-standard-input-v001/references/Air253-six-EXACT-RGBA-motion-only.png",
+    "bytes": 722227,
+    "sha256": "f833b980cf7c9a687941839037983d4a96705df8da9c2dcee47cb8cf1e917f52"
+  },
+  "exact_RGBA_concatenation": true,
+  "appearance_manifest": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-import-v001/import-leather-ready-v001.json",
+    "bytes": 9267,
+    "sha256": "f6c8a947158c1f957cc77ad5412362a2c1cadb0acc18685e85278033936d6b36"
+  },
+  "identity_E_index": {
+    "path": "E:/OurGame/Knight/过程图稿与视频/2026-10-17-OurgameUE-leather-integer-fit-v278/source-size-SHA256.json",
+    "bytes": 27492,
+    "sha256": "579a635d195aa46855354464631659b7aa1c7e460b946ec700bde242537c4d3b"
+  },
+  "generated": false,
+  "fit_metadata": null,
+  "native_imported": false,
+  "viewed": false
+}

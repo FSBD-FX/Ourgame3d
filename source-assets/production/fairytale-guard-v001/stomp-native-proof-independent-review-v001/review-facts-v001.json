@@ -1,0 +1,39 @@
+{
+  "schema": "guard-Stomp50-probe-independent-source-review-v001",
+  "scope": "Read-only candidate Source narrow review; no UE, build, import or media View",
+  "candidate_freeze_pin": {
+    "path": "source-assets/production/fairytale-guard-v001/stomp-native-proof-candidate-v001/Stomp-native-source-freeze-v001.json",
+    "bytes": 3136,
+    "sha256": "621729befcb020e38185f84df8e6ee29b776220c80e768780f715595b359b710"
+  },
+  "candidate_members_checked": 14,
+  "candidate_pin_differences": 0,
+  "actual_stage0_seven_inputs_checked": 7,
+  "actual_stage0_seven_pin_differences": 0,
+  "actual_Source_count_at_review": 260,
+  "patch_git_apply_check_exit": 0,
+  "compile_or_native_success_claimed": false,
+  "clear_CPP_or_current_route_blocker_found": false,
+  "source_optics_implemented_or_run_claimed": false,
+  "findings": [
+    {
+      "id": "P2-first-Ready-return-scope",
+      "file": "new-source/DungeonGuardStompProbeV001.cpp",
+      "line": 143,
+      "classification": "scope predicate strengthening; not demonstrated current-input false PASS",
+      "facts": "AfterReady tests previous StompRecovery3 and current Ready time>=first RecoveryEnd, but omits explicit previous/current same Aid2 and first idle-window upper bound. StompConfirmedHits==1 provides a separate practical barrier under current stationary route; do not rely on it as the event identity oracle.",
+      "author_response": "Author independently confirms checker already binds prior R3 to firstAid2; will explicitly bind Ready too. NEW source-boundary-fix-v002 planned; original621729 freeze retained.",
+      "required_next_review": "Read exact new v002 diff/pins, ensure Ready->StompWU0 preceding Ready may correctly carry old AxeAid1, while R3->Ready must carry StompAid2."
+    }
+  ],
+  "reviewed_boundaries": {
+    "natural_Aid2": "Original Axe IdleReady=Start+2.9, cooldown=Start+3.1; native driver reevaluates at exact IdleReady. Within Stomp ellipse, Axe temporarily ineligible => ChooseAttack fallback Stomp. No geometry/time change needed.",
+    "fixed_cycle": "PinCycle first actual Issued Stomp AttackStarted, Aid2 only, WU0 first150ms; no later cycle selection. WU/A/R masks remain63/3/15 and fail at original half-open boundaries.",
+    "normal_route": "Public original Enter/E/WASD only. Knight/Bat ApplyCombatHit explicitly scoped; Guard no injected damage/state/clock/actor assignment. LegalPoint/SegmentLegal include real hero half extent+8 and Guard body, normal140-side route. Actor path/native reachability remains untested.",
+    "real_hit": "Original Guard feedback positive HP-loss linked to actual Issued Hit and same native HitReceipt; sums all Guard HP losses from pre_guard_HP, requires alive hero, exactly one StompConfirmedHit. Original Stomp window/lock/clock must also be checked by independent oracle.",
+    "DTO": "Patch records exactly the float Top/Width/UV/Tint/Scale/Rotation/Pivot variables passed into the same DrawTexture call, then marks QuadSubmitted. Selected row complete Texture2D/resource/dimension/pending-init facts are read-only.",
+    "old44": "NewRoot flag/profile chooses overlay. Peer3patches append readback and add only guarded new observer startup before existing else-if chain; no existing44 probe/assert/checker/Plan modified.",
+    "sourceOptics": "Actual float quad/UV/UIScale/whiteTint/row resident/source SHA/RGBA paths provide required inputs. Tooling wholefreeze and fixed-source projection/PNG optical checks are not part of Source freeze, so this review does not certify optical implementation or results.",
+    "Ready": "Uses actual selector frame, not Ready0/four-phase assumption. First .3 idle return should be explicitly bounded and sameAid2; seeP2."
+  }
+}

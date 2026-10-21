@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fixed-heavyaxe-armed-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedArmedReady209existing4poses, exactrawcopy, doNOTgenerateorcharge.",
+      "durations_ms": [
+        250,
+        250,
+        250,
+        250
+      ]
+    },
+    "right_stomp_active": {
+      "frames": 2,
+      "fps": 13,
+      "loop": false,
+      "action": "Locally edit this exact TWO-pose sheet; do not rebuild the character or change the pose composition.\n\nEach pose must have ONLY TWO contiguous physical leg chains: one foreground NEAR hip→knee→ankle→ground shoe, and one recessed FAR hip→knee→ankle→ground shoe. Both existing ground shoes remain planted in their current positions. Remove the extra suspended boot protruding rightward across the NEAR shin, together with its duplicate third-leg branch. It is a leftover raised foot, not a knee plate: no third toe, sole or ankle may remain between the two correct legs. Reconnect the lower stone plates into exactly two readable legs. Knee plates belong above ankles; they must not look like floating boots.\n\nPreserve the upperbody, helmet/eye position, moss shoulder, closed hands, fixed axe, body density, and compact NEAR support below the hip. Do not move the NEAR shoe behind-left or thrust the torso forward. Keep pose0 as first FAR contact and pose1 as slight vertical weight compression of that same contact. No relift, extra step, swing or regrip.\n\nRemove the full-height black central separator completely and restore continuous solid magenta background. No guide lines, borders, labels, shadows, FX or scenery. Retain two complete connected uncropped silhouettes and clear padding.\n",
+      "durations_ms": [
+        75,
+        75
+      ]
+    }
+  },
+  "style": "Existing acceptedGuard/WU2225 inherited identity, fixedheavyaxe and coarsegrotesquestoneink unchanged. Only localtwoleg topology and straydivider correction; no newbase, no Readystance reconstruction.",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

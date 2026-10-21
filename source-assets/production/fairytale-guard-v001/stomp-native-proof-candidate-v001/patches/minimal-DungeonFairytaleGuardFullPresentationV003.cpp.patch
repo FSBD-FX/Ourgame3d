@@ -1,0 +1,17 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardFullPresentationV003.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardFullPresentationV003.cpp
+@@ -71,4 +71,5 @@
+  {
+   UTexture2D* T=Frames.FindRef(Candidate.TexturePath);
++  FDungeonFairytaleGuardRowResidentV001 RR;RR.TexturePath=T?T->GetPathName():Candidate.TexturePath;RR.ClassName=T?T->GetClass()->GetName():FString();RR.Width=T?T->GetSizeX():0;RR.Height=T?T->GetSizeY():0;RR.ResourceReady=T&&T->GetResource();RR.PendingInitialization=T&&T->HasPendingRenderResourceInitialization();R.RowResidents.Add(MoveTemp(RR));
+   if(!T||!T->GetResource()||T->GetSizeX()!=Row->CanvasWidth||T->GetSizeY()!=Row->CanvasHeight)
+    return Reject(FString::Printf(TEXT("Complete row not resident / dimensions differ: %s"),*Candidate.TexturePath));
+@@ -106,6 +107,6 @@
+  const FLinearColor Tint=R.Selection.MaterialHit?FLinearColor(1.45f,.85f,.62f,1.f):FLinearColor::White;
+  // Plan has one wholebody layer; no independent axe/grip submission exists.
+- DrawTexture(Texture,float(R.TopScreen.X),float(R.TopScreen.Y),Width,Width,
+-  R.Selection.Facing<0?1.f:0.f,0.f,R.Selection.Facing<0?-1.f:1.f,1.f,Tint);
++ R.UIScale=double(UIScale);R.QuadTop={float(R.TopScreen.X),float(R.TopScreen.Y)};R.QuadSize={Width,Width};R.QuadUV={R.Selection.Facing<0?1.f:0.f,0.f};R.QuadUVSize={R.Selection.Facing<0?-1.f:1.f,1.f};R.QuadTint=Tint;R.QuadRotationDegrees=0.;R.QuadRotationPivot=FVector2D::ZeroVector;R.QuadDrawScale=1.;R.QuadScalePosition=false;
++ DrawTexture(Texture,float(R.QuadTop.X),float(R.QuadTop.Y),float(R.QuadSize.X),float(R.QuadSize.Y),float(R.QuadUV.X),float(R.QuadUV.Y),float(R.QuadUVSize.X),float(R.QuadUVSize.Y),R.QuadTint,BLEND_Translucent,float(R.QuadDrawScale),R.QuadScalePosition,float(R.QuadRotationDegrees),R.QuadRotationPivot);R.QuadSubmitted=true;
+  FActorQuad Quad;Quad.Owner=F;Quad.Texture=Texture;Quad.Top=R.TopScreen;Quad.Size=Width;Quad.Tint=Tint;
+  ActorQuads.Add(Quad);RenderedActorSpriteSizes.Add(F,float(R.CanvasSize));

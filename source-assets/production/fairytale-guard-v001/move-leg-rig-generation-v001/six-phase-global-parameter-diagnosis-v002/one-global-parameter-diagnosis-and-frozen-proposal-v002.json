@@ -1,0 +1,198 @@
+{
+  "schema": "Guard-sixphase-one-global-parameter-diagnosis-PROPOSAL-v002",
+  "source_markers_frozen": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/two-contact-pilot-v001/surface-markers-and-fixed-conversions-v001.json",
+    "bytes": 14593,
+    "sha256": "e792e35cb6aca3aaed8850a5667c77f65fda77a680f530ff33f3134580b3fe09"
+  },
+  "rejected_sixphase_proof": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/six-phase-author-trial-v001/six-phase-authored-poses-and-proof-v001.json",
+    "bytes": 35954,
+    "sha256": "768235f5c148a13309a6782a9d9b8e287677cc833eae68e9fc8d8b1c27fa97a4"
+  },
+  "Root_visual_fact": "Root actualE558 sixphaseView:1/2/4/5 knee/shin crowding and halfcrouch shuffle; not admitted asMove6.",
+  "geometry_facts": {
+    "near": {
+      "source_surface_axis_vectors_thigh_shin": [
+        [
+          -66.0,
+          263.0
+        ],
+        [
+          -8.0,
+          216.0
+        ]
+      ],
+      "source_surface_axis_angles_degrees": [
+        104.08749191536235,
+        92.12109639666146
+      ],
+      "source_neutral_relative_surface_axis_angle_degrees": -11.966395518700892,
+      "axis_authority": "Original authored opaque-cap points define surface axes, not recovered anatomical bone axes.",
+      "axis_lengths_display": [
+        21.625649150020056,
+        17.238642104707704
+      ],
+      "sum_axis_lengths_display": 38.86429125472775,
+      "hip_height_display": 35.44615384615385,
+      "ankle_height_from_actual_foot_core_display": 13.478399999999999,
+      "net_vertical_hip_to_ankle_display": 21.967753846153848,
+      "straight_chain_hip_height_required_at_zero_horizontal_offset": 52.34269125472776,
+      "shortfall_for_straight_vertical_chain_display": 16.896537408573916,
+      "exact_maximum_global_hip_raise_at_frozen128_extreme_contact_display": 7.832755325541669
+    },
+    "far": {
+      "source_surface_axis_vectors_thigh_shin": [
+        [
+          -35.0,
+          265.0
+        ],
+        [
+          30.0,
+          214.0
+        ]
+      ],
+      "source_surface_axis_angles_degrees": [
+        97.52382043863864,
+        82.01988625483148
+      ],
+      "source_neutral_relative_surface_axis_angle_degrees": -15.50393418380716,
+      "axis_authority": "Original authored opaque-cap points define surface axes, not recovered anatomical bone axes.",
+      "axis_lengths_display": [
+        21.31830899740586,
+        17.234213802514148
+      ],
+      "sum_axis_lengths_display": 38.552522799920006,
+      "hip_height_display": 36.332307692307694,
+      "ankle_height_from_actual_foot_core_display": 16.105324766394627,
+      "net_vertical_hip_to_ankle_display": 20.226982925913067,
+      "straight_chain_hip_height_required_at_zero_horizontal_offset": 54.65784756631463,
+      "shortfall_for_straight_vertical_chain_display": 18.32553987400694,
+      "exact_maximum_global_hip_raise_at_frozen128_extreme_contact_display": 1.6554513210973396
+    }
+  },
+  "baseline128_raise0_lift4_both_IK_branches_1001samples": {
+    "near": {
+      "minimum_upper_reach_margin_display": 5.623578312836643,
+      "minimum_lower_reach_margin_display": 13.794303055591824,
+      "unreachable_samples": 0,
+      "branch_plus_bend_degrees_range": [
+        -125.62384403978557,
+        -62.8607918577652
+      ],
+      "branch_minus_bend_degrees_range": [
+        62.860791857765236,
+        125.62384403978557
+      ],
+      "branch_plus_vertical_order_failures": 178,
+      "branch_minus_vertical_order_failures": 0
+    },
+    "far": {
+      "minimum_upper_reach_margin_display": 0.9149494994427733,
+      "minimum_lower_reach_margin_display": 13.598041231795868,
+      "unreachable_samples": 0,
+      "branch_plus_bend_degrees_range": [
+        -126.66989527620156,
+        -25.158982216805086
+      ],
+      "branch_minus_bend_degrees_range": [
+        25.158982216805075,
+        126.66989527620156
+      ],
+      "branch_plus_vertical_order_failures": 0,
+      "branch_minus_vertical_order_failures": 419
+    }
+  },
+  "cause": "Hip-to-ankle available height is onlyabout52-57% of the fixed two-axis total length, compounded by high ankle point in the largeboot and4px swinglift. Fixedbranch-1 chooses FARfold that often putsankleabovekneepivot. Oppositebranch changesbenddirection butNOT its absoluteangle or geometriccompression.",
+  "source_axis_interpretation": "Both source-neutral relative surface angles are negative(-11.97/-15.50degrees); oldIKbranch-1 producespositive62-126degree bend. These separatelygeneratedstaticparts are not proof of anatomical hingeorientation. FAR+1 restoresnegativebend andordinaryYorder, but stillrequiresverylargeflexion with originalhipheight.",
+  "only_new_global_proposal": {
+    "proposal_id": "GuardMoveRigAuthorGlobal-v002-C96-up7-lift2-Nminus-Fplus",
+    "immutable_parameter_set": true,
+    "cycle_distance_world": 96,
+    "half_contact_distance_world": 48,
+    "contact_half_amplitude_display": 15.6,
+    "swing_lift_display": 2,
+    "whole_upperbody_and_hips_raise_display": 7,
+    "fixed_branches": {
+      "near": -1,
+      "far": 1
+    },
+    "unchanged": {
+      "source7_RGBA": true,
+      "surface18_points": true,
+      "Rest_conversion": 1,
+      "Near_all3_conversion": 0.36,
+      "Far_all3_conversion": 0.36,
+      "global_display_scale": 0.22153846153846155,
+      "layer_order": [
+        "far_foot",
+        "far_shin",
+        "far_thigh",
+        "near_foot",
+        "near_shin",
+        "near_thigh",
+        "bodyrest_fixedaxe"
+      ],
+      "source_lengths": true,
+      "foot_pitch": true,
+      "actor_XY_and_gameplay_speed": true
+    },
+    "detailed_math_1001samples_both_branches": {
+      "near": {
+        "minimum_upper_reach_margin_display": 3.8060159016622372,
+        "minimum_lower_reach_margin_display": 22.745887082954624,
+        "unreachable_samples": 0,
+        "branch_plus_bend_degrees_range": [
+          -92.20183276004315,
+          -51.49015787539801
+        ],
+        "branch_minus_bend_degrees_range": [
+          51.49015787539801,
+          92.20183276004315
+        ],
+        "branch_plus_vertical_order_failures": 0,
+        "branch_minus_vertical_order_failures": 0
+      },
+      "far": {
+        "minimum_upper_reach_margin_display": 0.5301081198109996,
+        "minimum_lower_reach_margin_display": 22.25570471103498,
+        "unreachable_samples": 0,
+        "branch_plus_bend_degrees_range": [
+          -94.50398484551282,
+          -19.133567083399562
+        ],
+        "branch_minus_bend_degrees_range": [
+          19.133567083399573,
+          94.50398484551282
+        ],
+        "branch_plus_vertical_order_failures": 0,
+        "branch_minus_vertical_order_failures": 0
+      }
+    },
+    "native_formula": "P=actualAcceptedPath mod96,h=(P>=48),u=(P-48h)/48. NEARstanceh0/FARstanceh1; stanceLocalX=15.6-31.2u, swingLocalX=-15.6+31.2u, swinglift=2sin²(piu). Keepbothhips+body7pxaboveoldplacement, sourceaxislengthsandconversionsunchanged; NEARbranch-1/FARbranch+1forALLposes.",
+    "stance_speed_identity": "d(localFootX)/d(acceptedDistance)=-31.2/48=-.65; nominalstraightXactorprojection+.65cancelsto0worldstancevelocity. This isanalgebraic authorconstraint,not a measurednativefootlock.",
+    "mismatched128_phase_would_slide": "If amplitude15.6 isusedwithold128cycle, derivative=-31.2/64=-.4875, leaving+.1625displayperworld (25%actorprojection) stancefoot drift; cannotcall planted.",
+    "visible_height_and_cadence_cost": {
+      "crown_to_ground_display": 107.8,
+      "old_crown_to_ground_display": 100.8,
+      "height_increase_percent": 6.944444444444445,
+      "cycle_frequency_ratio_at_same_actual_path_rate": 1.3333333333333333,
+      "footfall_distance_world_new": 48,
+      "footfall_distance_world_old": 64,
+      "old64world_audio_would_not_match_each_contact": true
+    },
+    "remaining_art_risk": "Maximumbend remainsNear92.20/Far94.50degrees. Farrear reachmarginonly.530px. Theproposalimprovesfolding/Yorder butisNOTuprightwalking or guaranteedlegsilhouettefit; stepfrequency+33%canreinforceashuffle/heavywalkgoalconflict.",
+    "not_approved": "This pureparameterproposalcreatesNOmediaandisNOTaRootregistration/source/runtimeapproval. Crown107.8contradictsold100.8bodytargetwithoutanexplicitnewRoottrialdecision."
+  },
+  "decision": "Do not admit the rejectedv001 or thisunviewedv002 asMove6. Withfrozen18points/.36kits/fixedupperbody100.8/128cycle, uprightheavywalkcannotbeachievedbybranchswitch; frozenFar-extremecontactpermitsonlyabout1.66pxglobalhipraise. v002isoneexplicittradeoff,notamaskedsolution. If107.8height/48worldcontactcadenceandstill~94degreeflexionareunacceptable, stopglobalparameteriteration: a laterexplicitlyauthorizedpivot/partproportion/interface-orupperbodydesignchangeisrequired, notperphasebone/texturestretch.",
+  "scope": {
+    "new_media": 0,
+    "source_pixel_changes": 0,
+    "UE_API_Source_Content_tools_E_ledger_changes": 0,
+    "parameter_search": false,
+    "one_new_global_proposal_only": true,
+    "TrialAllowed": false,
+    "FinalAccepted": false,
+    "physical_bones_or_native_footlock_measured": false
+  }
+}

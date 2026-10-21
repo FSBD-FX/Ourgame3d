@@ -1,0 +1,67 @@
+--- v001/tooling/verify-known44-axecycle-v001.py
++++ v002/tooling/verify-known44-axecycle-v002.py
+@@ -10,6 +10,18 @@
+ def resolve(p):p=Path(p);return p if p.is_absolute() else WORKSPACE/p
+ def pin(p,r):need(p.is_file() and p.stat().st_size==r['bytes'] and sha(p)==r['sha256'],'Exact pin differs: '+str(p))
+ def near(a,b,tol=1.e-8):return math.isfinite(a) and math.isfinite(b) and abs(a-b)<=tol
++REQUIRED_NATIVE_GUARD_TESTS=(
++ 'CodexDungeon.Content.FairytaleGuardPresentation.NativeClockMaterialAndDeath',
++ 'CodexDungeon.Content.FairytaleGuardPresentation.Accepted128DistanceAndBlocked',
++ 'CodexDungeon.Content.FairytaleGuardPresentation.InterruptedDeadlineAndPartialRows',
++ 'CodexDungeon.Content.FairytaleGuardFullV003.NativeAxe4Recovery4AndStomp6_2_4',
++ 'CodexDungeon.Content.FairytaleGuardFullV003.AcceptedPath128AndOriginalInterruptedInterval',
++ 'CodexDungeon.Content.FairytaleGuardFullV003.RealTerminalClockAndVersionedProfileIsolation',
++)
++def require_native_guard_tests(suite):
++ for name in REQUIRED_NATIVE_GUARD_TESTS:
++  tests=[t for t in suite['tests'] if t['fullTestPath']==name]
++  need(len(tests)==1 and tests[0]['state']=='Success' and type(tests[0]['errors']) is int and tests[0]['errors']==0 and type(tests[0]['warnings']) is int and tests[0]['warnings']==0,'Exact required native Guard test absent/duplicate/non-strict: '+name)
+ def unique_rows(rows,label):
+  need(type(rows) is list and all(type(x) is dict and type(x.get('clip')) is str for x in rows),label+' must be typed clip rows')
+  result={x['clip']:x for x in rows};need(len(result)==len(rows),label+' repeats a clip');return result
+@@ -28,7 +40,7 @@
+   if clip in facts:need(facts[clip]==row,'Root gap facts differ between tables: '+clip)
+  return {clip:facts[clip] for clip in known}
+ def source_check(snapshot,prereg_path):
+- protocol=read(CANDIDATE/'proof-protocol-v001.json');freeze=CANDIDATE/'known44-AxeCycle-freeze-v001.json';need(freeze.is_file(),'Immutable whole candidate freeze required')
++ protocol=read(CANDIDATE/'proof-protocol-v001.json');freeze=CANDIDATE/'known44-AxeCycle-tooling-freeze-v002.json';need(freeze.is_file(),'Immutable whole candidate freeze required')
+  for row in read(freeze)['files']:pin(CANDIDATE/row['path'],row)
+  for dep in read(CANDIDATE/'immutable-input-pins-v001.json')['files']:pin(resolve(dep['path']),dep)
+  for row in read(V003/'presentation-full-freeze-v003.json')['files']:pin(V003/row['path'],row)
+@@ -40,8 +52,8 @@
+  for k in ['full_suite','current_build']:pin(WORKSPACE/m[k]['path'],m[k])
+  suite=read(WORKSPACE/m['full_suite']['path']);build=read(WORKSPACE/m['current_build']['path'])
+  need(build['ExitCode']==0 and suite['succeeded']==m['strict_registered_tests']>=184 and all(suite[k]==0 for k in ['failed','succeededWithWarnings','notRun','inProcess']),'Actual full strict registry/build not GREEN')
+- for prefix in ['CodexDungeon.Content.FairytaleGuardFullV003.','CodexDungeon.Content.FairytaleGuardPresentation.']:
+-  tests=[t for t in suite['tests'] if t['fullTestPath'].startswith(prefix)];need(len(tests)==3 and all(t['state']=='Success' for t in tests),'Exact full/legacy three native tests absent: '+prefix)
++ need(len(suite['tests'])==len({t['fullTestPath'] for t in suite['tests']})==m['strict_registered_tests'] and all(t['state']=='Success' and t['errors']==t['warnings']==0 for t in suite['tests']),'Full native registry is not unique/every-test strict GREEN')
++ require_native_guard_tests(suite)
+  p=read(prereg_path);need(p['schema']==protocol['Root_prereg_schema'] and p['scenario']==protocol['scenario'] and p['pre_registered_before_capture'] is True and not p.get('is_template',False),'Actual typed Root prereg required')
+  need(p['compiled_manifest_sha256']==sha(snapshot/'compiled-source-manifest.json'),'Root prereg binds another compiled snapshot')
+  counts={'strict_registered_tests':m['strict_registered_tests'],'source_files':sum(n.startswith('UnrealGame/Source/') for n in files),'production_files':sum(n.startswith('UnrealGame/Content/Production/') for n in files)}
+@@ -138,7 +150,7 @@
+ 
+ def verify(archive,facts,snapshot,prereg_path,protocol):
+  original=archive/'原件';r=read(original/'runtime-report.json');index=read(archive/'index.json')
+- need(index['schema']==protocol['session_schema'] and index['candidate_freeze_sha256']==sha(CANDIDATE/'known44-AxeCycle-freeze-v001.json') and index['snapshot_manifest_sha256']==sha(snapshot/'compiled-source-manifest.json') and index['root_prereg_sha256']==sha(prereg_path),'Session does not bind exact prereg/compiled inputs/tooling')
++ need(index['schema']==protocol['session_schema'] and index['candidate_freeze_sha256']==sha(CANDIDATE/'known44-AxeCycle-tooling-freeze-v002.json') and index['snapshot_manifest_sha256']==sha(snapshot/'compiled-source-manifest.json') and index['root_prereg_sha256']==sha(prereg_path),'Session does not bind exact prereg/compiled inputs/tooling')
+  need(r['schema']==protocol['runtime_report_schema'] and r['scenario']=='AxeCycle' and r['passed'] is True and r['flow_complete'] is True and r['cycle_pinned'] is True,'Actual independent AxeCycle is RED/wrong schema')
+  need(str(index['process_id'])==r['process_id'] and r['restart_serial']==protocol['normal_startup_restart_serial'] and re.fullmatch('[0-9A-Fa-f]{32}',r['run']) and int(r['owner'])>0,'Actual fresh normal-start PID/run/restart scope differs')
+  need(r['normal_J_full_clear'] is False and r['diagnostic_public_damage_used'] is True and r['guard_public_damage_used'] is False and r['guard_spawned_by_probe'] is False and r['game_tick_called_manually'] is False,'Explicit diagnostic/no Guard mutation scope differs')
+@@ -228,7 +240,7 @@
+     for x in coverage:
+      if x['clip']==clip and x['observation']<=oi:earned|=1<<x['frame']
+     need(earned==mask,'Original window passed before true complete phase coverage')
+- pixel=subprocess.run([sys.executable,'-B','-X','utf8',str(HERE/'verify-known44-native-pixels-v001.py'),'--archive',str(archive)],capture_output=True,text=True,encoding='utf-8');need(pixel.returncode==0,'Actual original CRC/FIFO proof failed: '+pixel.stderr);px=json.loads(pixel.stdout);need(px['passed'] and px['native_async_writer_verified'],'Actual native CRC/FIFO not verified')
++ pixel=subprocess.run([sys.executable,'-B','-X','utf8',str(HERE/'verify-known44-native-pixels-v002.py'),'--archive',str(archive)],capture_output=True,text=True,encoding='utf-8');need(pixel.returncode==0,'Actual original CRC/FIFO proof failed: '+pixel.stderr);px=json.loads(pixel.stdout);need(px['passed'] and px['native_async_writer_verified'],'Actual native CRC/FIFO not verified')
+  return {'passed':True,'scope':protocol['scope'],'cycle_attack_id':str(cid),'masks':masks,'native_frames':len(obs),'DormantSeen':dormant,'covered_required_texture_paths':sorted({x['object'] for x in coverage}),'observed_drawn_texture_paths':sorted({d['TexturePath'] for o in obs for d in o['guard_draws'] if int(d['EntityId'])==gid and d['Drawn']}),'startup_known_unique_count':44,'coverage_witnesses':coverage,'native_damage_window':win,'spatial_route_proof':route,'pixel_proof':px,'visual_reviewed':False,'formal_complete_units':0}
+ 
+ def main():
+@@ -236,6 +248,6 @@
+  if args.source_only:print(json.dumps({'compiled_inputs_verified':True,'strict_registry':m['strict_registered_tests'],'profile_facts':facts,'known_unique':44,'UE_started':False},ensure_ascii=False));return
+  need(args.archive is not None,'Actual fresh archive required');archive=Path(args.archive).resolve();result=verify(archive,facts,snapshot,prereg,protocol)
+  if args.write_receipt:
+-  dest=archive/'原件/independent-known44-AxeCycle-v001.json';need(not dest.exists(),'Never overwrite receipt');dest.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++  dest=archive/'原件/independent-known44-AxeCycle-v002.json';need(not dest.exists(),'Never overwrite receipt');dest.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+  print(json.dumps(result,ensure_ascii=False))
+ if __name__=='__main__':main()

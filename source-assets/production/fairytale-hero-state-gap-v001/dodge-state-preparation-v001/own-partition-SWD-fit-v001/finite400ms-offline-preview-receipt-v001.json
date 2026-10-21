@@ -1,0 +1,56 @@
+{
+  "GIF": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/dodge-state-preparation-v001/own-partition-SWD-fit-v001/presentation/Dodge4-finite400ms-NO-LOOP-offline.gif",
+    "bytes": 59910,
+    "sha256": "2fbddb2d26095845185062f1f2a9d54df11f2162fc244e73998104605d0329e3"
+  },
+  "actual_GIF_frames": 4,
+  "actual_durations_ms": [
+    100,
+    100,
+    100,
+    100
+  ],
+  "loop_extension_present": false,
+  "MP4": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/dodge-state-preparation-v001/own-partition-SWD-fit-v001/presentation/Dodge4-finite400ms-offline.mp4",
+    "bytes": 19890,
+    "sha256": "d3b606f68bbcf31e1c551aeca889cea53e127836ddde4bdc6d63d096731acc3b"
+  },
+  "encode_command": [
+    "F:\\Ourgame\\tools\\runtime\\asset-gen\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+    "-hide_banner",
+    "-loglevel",
+    "info",
+    "-framerate",
+    "10",
+    "-i",
+    "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\dodge-state-preparation-v001\\own-partition-SWD-fit-v001\\preview-frames\\frame-%03d.png",
+    "-frames:v",
+    "4",
+    "-c:v",
+    "libx264",
+    "-crf",
+    "18",
+    "-pix_fmt",
+    "yuv420p",
+    "-movflags",
+    "+faststart",
+    "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\dodge-state-preparation-v001\\own-partition-SWD-fit-v001\\presentation\\Dodge4-finite400ms-offline.mp4"
+  ],
+  "decode_command": [
+    "F:\\Ourgame\\tools\\runtime\\asset-gen\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+    "-hide_banner",
+    "-i",
+    "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\dodge-state-preparation-v001\\own-partition-SWD-fit-v001\\presentation\\Dodge4-finite400ms-offline.mp4",
+    "-map",
+    "0:v:0",
+    "-f",
+    "null",
+    "-"
+  ],
+  "actual_decoded_frames": 4,
+  "actual_container_duration_ms": 400,
+  "native_or_accepted_distance_receipt": null,
+  "not_native": "Fixed offline sample ground, four source poses; no actor/world travel, dodge event, invulnerability or equipment proof."
+}

@@ -1,0 +1,55 @@
+{
+  "GIF": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/dodge-state-preparation-v001/LGT234-236-own-source-integer-fit-v001/presentation/Dodge4-LGT-SWD-finite400ms-NO-LOOP.gif",
+    "bytes": 58702,
+    "sha256": "0e9fdd115474413d5688b0dc5e815006ca35703e141bc145cc5f9d3bebf9bbfe"
+  },
+  "actual_frames": 4,
+  "actual_ms": [
+    100,
+    100,
+    100,
+    100
+  ],
+  "loop": false,
+  "MP4": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/dodge-state-preparation-v001/LGT234-236-own-source-integer-fit-v001/presentation/Dodge4-LGT-SWD-finite400ms-offline.mp4",
+    "bytes": 19403,
+    "sha256": "1e25c5ce0f792b0d8d6f5820acbb3fefa40d9850b530959f1a5107ba539e5330"
+  },
+  "actual_encode_command": [
+    "F:\\Ourgame\\tools\\runtime\\asset-gen\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+    "-hide_banner",
+    "-loglevel",
+    "info",
+    "-framerate",
+    "10",
+    "-i",
+    "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\dodge-state-preparation-v001\\LGT234-236-own-source-integer-fit-v001\\preview-frames\\frame-%03d.png",
+    "-frames:v",
+    "4",
+    "-c:v",
+    "libx264",
+    "-crf",
+    "18",
+    "-pix_fmt",
+    "yuv420p",
+    "-movflags",
+    "+faststart",
+    "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\dodge-state-preparation-v001\\LGT234-236-own-source-integer-fit-v001\\presentation\\Dodge4-LGT-SWD-finite400ms-offline.mp4"
+  ],
+  "actual_decode_command": [
+    "F:\\Ourgame\\tools\\runtime\\asset-gen\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+    "-hide_banner",
+    "-i",
+    "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\dodge-state-preparation-v001\\LGT234-236-own-source-integer-fit-v001\\presentation\\Dodge4-LGT-SWD-finite400ms-offline.mp4",
+    "-map",
+    "0:v:0",
+    "-f",
+    "null",
+    "-"
+  ],
+  "actual_decoded_frames": 4,
+  "actual_duration_ms": 400,
+  "native_action_actor_distance_receipts": null
+}

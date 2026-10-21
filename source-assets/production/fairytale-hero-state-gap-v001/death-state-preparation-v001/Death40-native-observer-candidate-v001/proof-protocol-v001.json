@@ -1,0 +1,88 @@
+{
+  "runtime_report_schema": "hero-SWD-LGT-Death5-native-observer-v001",
+  "scenario": "NaturalGuardAttacksToHeroDeath5",
+  "Root_prereg_schema": "hero-Death5-Root-prereg-v001",
+  "session_schema": "hero-Death5-native-session-v001",
+  "selector_age_authority": "Actual QueryDeathPresentation.Elapsed == real Fighter AnimationTime; SimulationTime is frozen after firstdead actual callback, not used to derive terminalage.",
+  "source_phase_intervals_s": [
+    [
+      0,
+      0.2
+    ],
+    [
+      0.2,
+      0.4
+    ],
+    [
+      0.4,
+      0.6
+    ],
+    [
+      0.6,
+      0.8
+    ],
+    [
+      0.8,
+      null
+    ]
+  ],
+  "coverage": {
+    "DeathMask": 31,
+    "terminal_age_min": 1.2,
+    "lastframe_held_callbacks_min": 2,
+    "actual_hold_age_span_min": 0.35,
+    "observed_dead_transitions": 1,
+    "observed_game_over_transitions": 1
+  },
+  "required_sources": {
+    "body": 25,
+    "armor": 15,
+    "reused_Sword": 1,
+    "startup_and_actual_dead_draw_resident": 41,
+    "declared_and_nonempty_slots_all5": 9
+  },
+  "stack0": [
+    "BodyRest",
+    "ShoulderFar",
+    "Chest",
+    "NearArmWithoutHand",
+    "ShoulderNear",
+    "HelmetForeground",
+    "FarHandForeground",
+    "IndependentSword",
+    "NearHand"
+  ],
+  "stack1to4": [
+    "IndependentSword",
+    "BodyRest",
+    "ShoulderFar",
+    "Chest",
+    "NearArmWithoutHand",
+    "ShoulderNear",
+    "HelmetForeground",
+    "FarHandForeground",
+    "NearHand"
+  ],
+  "normal_keys": [
+    "Enter",
+    "E",
+    "W",
+    "A",
+    "S",
+    "D"
+  ],
+  "predecessors": "Exactlytwo explicit diagnostic publichits Knight/Bat only; actualroom normal warning/spawn. No Hero or Guard publicdamage, no J, no state/clock/HP/poise/facing/position writes.",
+  "actual_guard_hits": "Continuous normalGuard AI may naturally choose Axe orStomp; eachactual issuedHit/lockedAction/originalHitReceipt/ConfirmHit actualHPloss must independently explain completeHPchain, finalHP0 only.",
+  "terminal_invariants": [
+    "actualHP0/GameOver/queryDeathReported stays true",
+    "actualAnimationTime grows through frame4/hold",
+    "actualSimulationTime+GuardDriverTime+playerCombat/Weapon/Dodge time frozen atfirstdead callback",
+    "committedinventory and world equipment sources unchanged afterE; pickupidentity unchanged fromactualroutearrival",
+    "actualwhiteTint and completedynamic9slotQuadtrace",
+    "defaultcombat_range_debugfalse actualsubmittedrangeLines0"
+  ],
+  "optical": "Reuse frozenHurt fixed-sourceRGBA projection and same gates across5frames; actualsubmittedquads+CRC/FIFO/stop-flush; no alignmentsearch/gatecalibration/syntheticframe.",
+  "visual_contact_or_floor_or_hidden_socket_measured": false,
+  "audio_recorded": false,
+  "FinalAccepted": false
+}

@@ -1,0 +1,342 @@
+{
+  "schema": "request258-native-observation-review-fix-freeze-v002",
+  "created_utc": "2026-10-18T21:11:46.157043+00:00",
+  "status": "CANDIDATE_ONLY_NOT_ADMITTED_NOT_UE_COMPILED_NOT_RUN",
+  "projected_source": {
+    "relative_path": "projected/DungeonHeroLandingPriorityProbeV001.cpp",
+    "bytes": 76025,
+    "sha256": "30b1db6503f8641bcac0165cfc134ae7e841b96f3f23b8d68b912a90696a2205"
+  },
+  "before_source": {
+    "relative_path": "before/DungeonHeroLandingPriorityProbeV001.cpp",
+    "bytes": 65654,
+    "sha256": "e73bb9df5e3b95d1dcf16152e945f0efeb90ffc4c522a89b3c6a2d06cc71a422"
+  },
+  "dependencies": [
+    {
+      "role": "immutable_v001_observer_freeze",
+      "relative_path": "before/observer-candidate-freeze-v001.json",
+      "bytes": 8072,
+      "sha256": "0fcc6eb38e6675c48a6fa66811b371c3443e2570ce19ef6d7ddefaaf5b81c35e"
+    },
+    {
+      "role": "frozen_renderer_after_source",
+      "relative_path": "before/renderer-candidate-after.cpp",
+      "bytes": 25397,
+      "sha256": "be8afcfce07e2c02a01481a86a819d6ea516002ccce925a74873871f2a748794"
+    },
+    {
+      "role": "immutable_binding_candidate_freeze",
+      "relative_path": "before/binding-candidate-freeze-v001.json",
+      "bytes": 23968,
+      "sha256": "eaa11e20169bb6b53687671800100aa1eea1e703a29ec48ecb36ab55cbb0c6b9"
+    },
+    {
+      "role": "fresh_review_important1",
+      "relative_path": "before/art258-native-observer-review-v001.md",
+      "bytes": 3859,
+      "sha256": "302e6298c138cbf309f0bd61b503230757753d8f3ad5b706f4968bd0b6655a39"
+    }
+  ],
+  "full_exact_seams": "exact-seams.json",
+  "scoped_delta_exact_seams": "v001-to-v002-exact-delta.json",
+  "preload_host_checks": 11,
+  "preload_host_failures": 0,
+  "preload_red_expected_failures": 4,
+  "retained_body_host_checks": 34,
+  "retained_body_host_failures": 0,
+  "host_uses_UE_shim": true,
+  "actual_writes": 0,
+  "UE_runs": 0,
+  "images_generated_or_viewed": 0,
+  "files": [
+    {
+      "relative_path": "before/art258-native-observer-review-v001.md",
+      "bytes": 3859,
+      "sha256": "302e6298c138cbf309f0bd61b503230757753d8f3ad5b706f4968bd0b6655a39"
+    },
+    {
+      "relative_path": "before/binding-candidate-freeze-v001.json",
+      "bytes": 23968,
+      "sha256": "eaa11e20169bb6b53687671800100aa1eea1e703a29ec48ecb36ab55cbb0c6b9"
+    },
+    {
+      "relative_path": "before/DungeonFairytaleSwordDrawState.h",
+      "bytes": 1931,
+      "sha256": "e1607cde75c98cdfd8cfbbfe5f95b29f07ef680a7aa0083b673503d2a0a34a5f"
+    },
+    {
+      "relative_path": "before/DungeonHeroLandingPriorityProbeV001.cpp",
+      "bytes": 65654,
+      "sha256": "e73bb9df5e3b95d1dcf16152e945f0efeb90ffc4c522a89b3c6a2d06cc71a422"
+    },
+    {
+      "relative_path": "before/DungeonHUD.cpp",
+      "bytes": 123680,
+      "sha256": "a68a9df57826a3761f2bfbf8511858b139c193589f285c0cc7bbb29ad950e16f"
+    },
+    {
+      "relative_path": "before/expected-two-frame-draws-v001.json",
+      "bytes": 4630,
+      "sha256": "f85284dc25d0a5f0be5bf09aa7b9f7dbdf2a62bccbb61e4ca0c5ce0ef1238f6e"
+    },
+    {
+      "relative_path": "before/import-manifest-v001.json",
+      "bytes": 15435,
+      "sha256": "3c61a6f73cb24fdc9352c66ca0aafb54b2ff8f8304b2c7f672cc0ef3f3abd834"
+    },
+    {
+      "relative_path": "before/observer-candidate-freeze-v001.json",
+      "bytes": 8072,
+      "sha256": "0fcc6eb38e6675c48a6fa66811b371c3443e2570ce19ef6d7ddefaaf5b81c35e"
+    },
+    {
+      "relative_path": "before/renderer-candidate-after.cpp",
+      "bytes": 25397,
+      "sha256": "be8afcfce07e2c02a01481a86a819d6ea516002ccce925a74873871f2a748794"
+    },
+    {
+      "relative_path": "before/v001-exact-seams.json",
+      "bytes": 11279,
+      "sha256": "51affdc4202c5c31a94d9a5241b7998d26ecb29751ff03a463624b43769ed421"
+    },
+    {
+      "relative_path": "before/v001-projected-DungeonHeroLandingPriorityProbeV001.cpp",
+      "bytes": 74754,
+      "sha256": "a4782db14de4f94979681d8f909f26dd46e33ebd94ea86db2beed558ea1a41d7"
+    },
+    {
+      "relative_path": "check-candidate.py",
+      "bytes": 3505,
+      "sha256": "15adacf3c93030d7da78d68655caeade644e1f191048e15c5071c00fdad7c61f"
+    },
+    {
+      "relative_path": "exact-seams.json",
+      "bytes": 13169,
+      "sha256": "b10c867404f99d3c4b458db0cd9fb793b8e6f258e6cc8ef200f0cc21c853b5b0"
+    },
+    {
+      "relative_path": "fragments/brown-branch.inc",
+      "bytes": 1105,
+      "sha256": "70e5ee9b0f8c5653259444d7c30a10a71dfcf50f7a6249bf9be7fbb123c17507"
+    },
+    {
+      "relative_path": "fragments/helper.inc",
+      "bytes": 6927,
+      "sha256": "d222efcd150d5356d6d03aa0734ac441ef347108e17306636ee54bd89777abb5"
+    },
+    {
+      "relative_path": "fragments/legacy-preload.inc",
+      "bytes": 1219,
+      "sha256": "2fc9538444551902c9d2380177a75b13886cde9631f8f16a62c408e6dc3f3eb2"
+    },
+    {
+      "relative_path": "fragments/readback.inc",
+      "bytes": 213,
+      "sha256": "b562b9f973dec5a80840e18a9fec6e3ca9c10a6726a27e2cd50b0cc66306afc9"
+    },
+    {
+      "relative_path": "fragments/report-metadata.inc",
+      "bytes": 828,
+      "sha256": "045e137d4b2101be8e8a63ca82cede5b0da37d538d15e8f1ce53f54281f5c9b9"
+    },
+    {
+      "relative_path": "freeze-candidate.py",
+      "bytes": 1979,
+      "sha256": "20ee5b6e7afbe00b4aac94d3806556bec518310cb8869618a96c44e0d9947c8a"
+    },
+    {
+      "relative_path": "HANDOFF-v002.md",
+      "bytes": 2857,
+      "sha256": "a47aed9669b5fd79f89e3be8b0b82c5479bdc0befab57c754971de4438cae7ed"
+    },
+    {
+      "relative_path": "native-observation.patch",
+      "bytes": 16751,
+      "sha256": "7317604572740e95d03560a6898fe95a71383ae3a32202300d30c43c6191ab56"
+    },
+    {
+      "relative_path": "prepare-candidate.py",
+      "bytes": 3014,
+      "sha256": "dc3a753e00f5c7ca3c9c758907e2b697be7db5d5e0cbcfcc15bc79a4830d9cc2"
+    },
+    {
+      "relative_path": "prepare-preload-test.py",
+      "bytes": 2040,
+      "sha256": "ed12e2e9c1c521d0f0e893d623f52d8464b68646c6751907f1c451a5ee4e692f"
+    },
+    {
+      "relative_path": "projected/DungeonHeroLandingPriorityProbeV001.cpp",
+      "bytes": 76025,
+      "sha256": "30b1db6503f8641bcac0165cfc134ae7e841b96f3f23b8d68b912a90696a2205"
+    },
+    {
+      "relative_path": "reports/final-structural-check.log",
+      "bytes": 314,
+      "sha256": "173ac272fc246a610b95dcf69065df2fb7f618f8a6debfcdc70a946abe0610c2"
+    },
+    {
+      "relative_path": "reports/host-fixture-pins.json",
+      "bytes": 382,
+      "sha256": "261c354e27e5f5dc843ebaf0aa2967c13822e01779a213c155e7c18a3d0138af"
+    },
+    {
+      "relative_path": "reports/host-GREEN-20261019-051039-049/compile.log",
+      "bytes": 24,
+      "sha256": "5fb2c67e93a0b147bad788d6314b6185449828ea32212fcfd48dee77dc131d7f"
+    },
+    {
+      "relative_path": "reports/host-GREEN-20261019-051039-049/receipt.txt",
+      "bytes": 243,
+      "sha256": "3b5cdaa5c0952c19a360af1fdcd09661a2e50bc661a22374636c696b2b25413c"
+    },
+    {
+      "relative_path": "reports/host-GREEN-20261019-051039-049/results.log",
+      "bytes": 55,
+      "sha256": "84e7e1ffd0b4490bb14ba0a5167631ac5c88ef4302ba06638a1b344abba97f8f"
+    },
+    {
+      "relative_path": "reports/host-GREEN-20261019-051039-049/tests.exe",
+      "bytes": 331776,
+      "sha256": "c772740d69d7dcffb5cf11aa0e673e2db2daeba4a1af72b4da3c2f4a45a160b9"
+    },
+    {
+      "relative_path": "reports/host-GREEN-20261019-051039-049/tests.obj",
+      "bytes": 601783,
+      "sha256": "29ad8f5a5902e47f3216e66986d59030276a622006c1e1a628c8ec0f93163e37"
+    },
+    {
+      "relative_path": "reports/preload-GREEN-20261019-051036-629/compile.log",
+      "bytes": 24,
+      "sha256": "3cee37a3cb2011b8297b8aee1907f59ce09903f0b9d30cd61c2fbb05e4672f00"
+    },
+    {
+      "relative_path": "reports/preload-GREEN-20261019-051036-629/receipt.txt",
+      "bytes": 246,
+      "sha256": "73e872b2ed1179b2b4ff060105689d17e0a2ffee6b2964771fb8ddee4e2ec896"
+    },
+    {
+      "relative_path": "reports/preload-GREEN-20261019-051036-629/results.log",
+      "bytes": 87,
+      "sha256": "7530face5703d126c1c79a2095c960833ba73b5fbf0668d96c0b5983f6722e28"
+    },
+    {
+      "relative_path": "reports/preload-GREEN-20261019-051036-629/tests.exe",
+      "bytes": 329728,
+      "sha256": "7545eb71f2783012e9ea4bcfdf86614a553096badffe5b03142f5890a28d4369"
+    },
+    {
+      "relative_path": "reports/preload-GREEN-20261019-051036-629/tests.obj",
+      "bytes": 957783,
+      "sha256": "187a9123521d59af16d79b395dc7a172d651e4751f3e77305c81d4f237f750d2"
+    },
+    {
+      "relative_path": "reports/preload-RED-20261019-050949-971/compile.log",
+      "bytes": 471,
+      "sha256": "cc19d05f8bc217d8ae396716216a9c1f6a910a0c56cf024718360d402040aa0f"
+    },
+    {
+      "relative_path": "reports/preload-RED-20261019-051001-027/compile.log",
+      "bytes": 24,
+      "sha256": "3cee37a3cb2011b8297b8aee1907f59ce09903f0b9d30cd61c2fbb05e4672f00"
+    },
+    {
+      "relative_path": "reports/preload-RED-20261019-051001-027/receipt.txt",
+      "bytes": 242,
+      "sha256": "0467bb95838de41c64602fa8efdebf187123f0af297ddf6f4c43a840a33a7afa"
+    },
+    {
+      "relative_path": "reports/preload-RED-20261019-051001-027/results.log",
+      "bytes": 301,
+      "sha256": "4b0fec8fccc21faca9e19a2a5889e6e3d1a197fe3f669a6c37831822cbca148b"
+    },
+    {
+      "relative_path": "reports/preload-RED-20261019-051001-027/tests.exe",
+      "bytes": 323584,
+      "sha256": "b4b184e73fe0337c55d0b63e0d60d69ca53f84e879892a0275c034110eae3a32"
+    },
+    {
+      "relative_path": "reports/preload-RED-20261019-051001-027/tests.obj",
+      "bytes": 898078,
+      "sha256": "7c7ad89442cc68a658ed22de4c8811985a3ec5a8d1136840a13ec1ec5257cb09"
+    },
+    {
+      "relative_path": "reports/RED-missing-legacy-preload.inc",
+      "bytes": 42,
+      "sha256": "1211ca188af7fbda06b7cb05fd1ae380d11c407bf2fca11ee99cef3b6f12fb15"
+    },
+    {
+      "relative_path": "tests/actual-hud-primary1-loop.inc",
+      "bytes": 364,
+      "sha256": "b3bde10e6543eaefc7fe3c2cd4c328ab87ad60f9181c80178a9995dd99d8265a"
+    },
+    {
+      "relative_path": "tests/actual-old-primary1-readback-loop.inc",
+      "bytes": 823,
+      "sha256": "c834f12662024b520ee041c65070fddb881b33e4307d6e47e004f20fe232a74f"
+    },
+    {
+      "relative_path": "tests/actual-preload-set.cpp",
+      "bytes": 2800,
+      "sha256": "ee43845dded1e37340994084488ec75c8394984453704d40d5d37203fd2d77bb"
+    },
+    {
+      "relative_path": "tests/actual-primary1-resolver.inc",
+      "bytes": 1656,
+      "sha256": "f1ba19da934f7b30e9a7afd8c17eff3087b7d14eb7b440236030226d88648f97"
+    },
+    {
+      "relative_path": "tests/brown-and-readback.cpp",
+      "bytes": 4229,
+      "sha256": "98d8c4b3898b75df2f09e5856e58a99b9aba5f940c3c9fd460749cd5f7de1781"
+    },
+    {
+      "relative_path": "tests/brown-under-test.inc",
+      "bytes": 2060,
+      "sha256": "4823240717352a634cb907649203154191d2167a2f43ca1e40bfa5f41f7436be"
+    },
+    {
+      "relative_path": "tests/legacy-preload-under-test.inc",
+      "bytes": 1233,
+      "sha256": "5a50960e37bbda356a4ac149679af7d7dbdfb5d8a09b0efca608ae487d775923"
+    },
+    {
+      "relative_path": "tests/preload-shim.h",
+      "bytes": 2360,
+      "sha256": "a336b2126e9398c51b14e266305ab79f7e849179d5788e01ec309d3a98e599ea"
+    },
+    {
+      "relative_path": "tests/readback-under-test.inc",
+      "bytes": 218,
+      "sha256": "37a1523ab57586a2893ca969b77702d99d6e45d65e0257312ffe306113b76d64"
+    },
+    {
+      "relative_path": "tests/run-host.ps1",
+      "bytes": 1383,
+      "sha256": "9394797339fa525b5b1419ef69a03c06201f0d80c55f10d29d7eada486fba1bb"
+    },
+    {
+      "relative_path": "tests/run-preload-host.ps1",
+      "bytes": 1406,
+      "sha256": "cbbd1efb84bf3c8e2db2e269b603980656c6ac03c38e7a7cb62c0e9f0db1aaa6"
+    },
+    {
+      "relative_path": "tests/ue-small-shim.h",
+      "bytes": 2204,
+      "sha256": "1684c6521df9c4d9ae85d5f10c3f36cb9241bad5271886e7c3d87b99b334147e"
+    },
+    {
+      "relative_path": "v001-to-v002-exact-delta.json",
+      "bytes": 2290,
+      "sha256": "fb50b1c82abb8a5ca521c5285211a1de2f3fbbb1fa535cf2f17edf7f92ab3854"
+    },
+    {
+      "relative_path": "v001-to-v002.patch",
+      "bytes": 2390,
+      "sha256": "40b9ccf82605ac0434f4bc39e6f24ee428d9b4c8af4bc1a752fbf426308707f1"
+    }
+  ],
+  "file_count": 57,
+  "member_total_bytes": 3958894,
+  "excluded": "This freeze file only; all members local relative snapshots"
+}

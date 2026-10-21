@@ -1,0 +1,42 @@
+{
+  "schema": "known44-media-static-contract-validation-v001",
+  "passed": true,
+  "python_AST_parsed": true,
+  "v011_timing_pipeline_byte_equal_except_output_filenames": true,
+  "static_oracle_cases": [
+    {
+      "case": "in-memory24 qualified keys; Ready/Wake event0/aid0 are legal",
+      "result": "accepted_static_oracle_only"
+    },
+    {
+      "case": "missing required Active frame",
+      "result": "rejected"
+    },
+    {
+      "case": "later Axe AttackId transplanted",
+      "result": "rejected"
+    },
+    {
+      "case": "unqualified source observation",
+      "result": "rejected"
+    },
+    {
+      "case": "coverage witness changed source object",
+      "result": "rejected"
+    },
+    {
+      "case": "coverage witness changed clock",
+      "result": "rejected"
+    },
+    {
+      "case": "extra axe draw layer",
+      "result": "rejected"
+    }
+  ],
+  "fixture_scope": "Synthetic metadata in memory only; no fake native JSON/PNG/archive/acceptance written.",
+  "UE_started": false,
+  "ffmpeg_started": false,
+  "media_written": false,
+  "View_used": false,
+  "formal_complete_units": 0
+}

@@ -1,0 +1,87 @@
+{
+  "schema": "hero-landing-priority-Root-source-admit-index-v001",
+  "predecessor_compiled_manifest_pin": {
+    "path": "F:\\Ourgame\\source-assets\\production\\backups\\v142-HeroAir6-Observer296-CallbackReady-203GREEN-v002\\compiled-source-manifest.json",
+    "bytes": 581327,
+    "sha256": "52f906018a042d006db3470ec2fa7b4603a6b54e2489ab33d2bdff0bf309cd62"
+  },
+  "new_source": [
+    {
+      "candidate_pin": {
+        "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-air-v001\\landing-priority-observer-candidate-v001\\new-source\\DungeonHeroLandingPriorityProbeV001.h",
+        "bytes": 1105,
+        "sha256": "0b6cd34668ed34d395b18ed0ad1f907a58e8e6e11564f904002d69ceaaf9fa21"
+      },
+      "target": "UnrealGame/Source/CodexDungeon/DungeonHeroLandingPriorityProbeV001.h",
+      "require_target_absent": true
+    },
+    {
+      "candidate_pin": {
+        "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-air-v001\\landing-priority-observer-candidate-v001\\new-source\\DungeonHeroLandingPriorityProbeV001.cpp",
+        "bytes": 54642,
+        "sha256": "2a7094068fe3cf8d22e57baaa15ddbd361157ec14c1b8311f6aad3cba55f4393"
+      },
+      "target": "UnrealGame/Source/CodexDungeon/DungeonHeroLandingPriorityProbeV001.cpp",
+      "require_target_absent": true
+    }
+  ],
+  "existing_source_edits": [
+    {
+      "target": "UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "before_pin": {
+        "path": "UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+        "bytes": 151572,
+        "sha256": "55066ff73a6dd594db4c0631f76656d8166f43a3b4d3512b53df01021038cc6c"
+      },
+      "after_bytes": 151783,
+      "after_sha256": "de8dfa9fb95e213a73d5141f05637d7eb95b0aa061c61f92268237ff294570cb",
+      "edits": [
+        {
+          "needle": "#include \"DungeonGameMode.h\"\r\n",
+          "replacement": "#include \"DungeonGameMode.h\"\r\n#include \"DungeonHeroLandingPriorityProbeV001.h\"\r\n",
+          "expected_occurrences": 1
+        },
+        {
+          "needle": "    Super::StartPlay();\r\n",
+          "replacement": "    Super::StartPlay();\r\n    if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonHeroLandingPriorityProofV001\")))\r\n        GetWorld()->SpawnActor<ADungeonHeroLandingPriorityProbeV001>();\r\n",
+          "expected_occurrences": 1
+        }
+      ],
+      "patch_pin": {
+        "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-air-v001\\landing-priority-observer-candidate-v001\\integration\\DungeonGameMode.cpp.patch",
+        "bytes": 762,
+        "sha256": "8065f404ae2dc7fa53c266a31c45c2949b118721c46f6905a83ea147fa557eda"
+      }
+    },
+    {
+      "target": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "before_pin": {
+        "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+        "bytes": 123483,
+        "sha256": "02b33839be77835a21566e5062f7db7c7faf5fd81c3e843a67c94154428e4204"
+      },
+      "after_bytes": 123582,
+      "after_sha256": "2ac1fd6393eec81245a04653f21bc6ce26bde2ce14f50ce34d847fa2f9f07b5d",
+      "edits": [
+        {
+          "needle": "    if (FParse::Param(FCommandLine::Get(),TEXT(\"DungeonContentProof\")))\r\n    {\r\n        InstallFastLosslessProofScreenshots();\r\n",
+          "replacement": "    if (FParse::Param(FCommandLine::Get(),TEXT(\"DungeonContentProof\")))\r\n    {\r\n        InstallFastLosslessProofScreenshots();\r\n        if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonHeroLandingPriorityProofV001\")))return;\r\n",
+          "expected_occurrences": 1
+        }
+      ],
+      "patch_pin": {
+        "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-air-v001\\landing-priority-observer-candidate-v001\\integration\\DungeonHUD.cpp.patch",
+        "bytes": 603,
+        "sha256": "107703b10dc21b9f0cf8fd1be155774738bc3044da16416b93e965615c09086a"
+      }
+    }
+  ],
+  "expected_new_source_delta": 2,
+  "derive_actual_source_count_after": true,
+  "tests_must_remain_byte_exact": true,
+  "RootApproved": false,
+  "actual_admitted": false,
+  "UE_compiled": false,
+  "native_pass": false,
+  "FinalAccepted": false
+}

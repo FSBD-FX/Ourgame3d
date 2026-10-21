@@ -1,0 +1,13 @@
+--- UnrealGame/Source/CodexDungeon/DungeonHUD.h
++++ UnrealGame/Source/CodexDungeon/DungeonHUD.h
+@@ -155,7 +155,9 @@
+     bool DrawFairytaleSwordHurtBody(ADungeonFighter* Fighter);
+     bool bUseFairytaleSwordDeathPreview=false;
+     FDungeonFairytaleSwordDeathDraw FairytaleSwordDeathDraw;
+-    FDungeonFairytaleSwordDodgeDraw FairytaleSwordDodgeDraw; // Stage0 DTO only; no draw/preload routing.
++    bool bUseFairytaleSwordDodgePreview=false;
++    FDungeonFairytaleSwordDodgeDraw FairytaleSwordDodgeDraw;
++    bool DrawFairytaleSwordDodgeBody(ADungeonFighter* Fighter);
+     bool DrawFairytaleSwordDeathBody(ADungeonFighter* Fighter);
+     UTexture2D* GetFairytaleSwordTexture(const FString& Clip,int32 Index);
+     bool DrawFairytaleSwordBody(ADungeonFighter* Fighter);

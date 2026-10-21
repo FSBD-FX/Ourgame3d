@@ -1,0 +1,145 @@
+{
+  "schema": "Chest240-original-owner-explicit-builder-adapter-v001",
+  "source_builder": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/dodge-state-preparation-v001/build-Dodge218-LGT234-236-SWD-limited-fit-v001.py",
+    "bytes": 24435,
+    "sha256": "523e08257db1a8f8a3e32be9d4410e3cad2838a1bf22b41dceb5e810e1f99037"
+  },
+  "explicit_changes": [
+    {
+      "before": "OUT=HERE/'LGT234-236-own-source-integer-fit-v001'",
+      "after": "OUT=HERE/'LGT240-235-236-original-owner-integer-fit-v001'",
+      "count": 1
+    },
+    {
+      "before": "MEDIA=ROOT/'过程图稿与视频/2026-10-18_钟盔Dodge218棕皮三层军剑有限试拼_v001'",
+      "after": "MEDIA=ROOT/'过程图稿与视频/2026-10-18_钟盔Dodge218胸衣240原分区四相军剑试拼_v001'",
+      "count": 1
+    },
+    {
+      "before": "ARMOR={'Chest':('chest',234,477),'ShoulderNear':('nearshoulder',235,478),'ShoulderFar':('farshoulder',236,480)}",
+      "after": "ARMOR={'Chest':('chest',240,501),'ShoulderNear':('nearshoulder',235,478),'ShoulderFar':('farshoulder',236,480)}",
+      "count": 1
+    },
+    {
+      "before": "CHEST_A=[[265,286],[262,289],[261,287],[266,285]]",
+      "after": "CHEST_A=[[267,282],[264,284],[267,283],[267,282]]",
+      "count": 1
+    },
+    {
+      "before": "collar=poly_mask(COLLARS[i])&alive",
+      "after": "collar=np.zeros((512,512),bool) # original helmet-only owner; no added gray torso/collar overlay",
+      "count": 1
+    },
+    {
+      "before": "if owner=='HelmetForeground':m|=collar",
+      "after": "if owner=='HelmetForeground':pass # intentionally no gray collar/torso union",
+      "count": 1
+    },
+    {
+      "before": "hole=holes(original_ch[:,:,3]>=128);hy,hx=np.where(hole)",
+      "after": "hole,neck_hole,hole_records=select_separate_actual_arm_and_neck_holes(holes(original_ch[:,:,3]>=128));hy,hx=np.where(hole)",
+      "count": 1
+    },
+    {
+      "before": "'actual_true_hole_pixels':int(hole.sum()),",
+      "after": "'actual_true_armhole_pixels':int(hole.sum()),'actual_true_neckhole_pixels':int(neck_hole.sum()),'separate_closed_hole_records':hole_records,'all_holes_centroid_averaged':False,'neck_aperture_exterior_connected':False,",
+      "count": 1
+    },
+    {
+      "before": "'opaque_neck_prompt_deviation_preserved':True",
+      "after": "'neck_and_arm_true_transparent_apertures_actual':True,'dark_neck_ROI_includes_original_outline_not_opaque_backing':True",
+      "count": 1
+    },
+    {
+      "before": "'HelmetForeground_includes_actual_visible_gray_collar_only'",
+      "after": "'HelmetForeground_original_helmet_only_no_added_gray_torso'",
+      "count": 1
+    },
+    {
+      "before": "'artist_polygon':COLLARS[i]",
+      "after": "'additional_gray_collar_polygon':None",
+      "count": 1
+    },
+    {
+      "before": "'source_neck_prompt_failure'",
+      "after": "'source_aperture_status'",
+      "count": 1
+    },
+    {
+      "before": "'Chest234 still has opaque black neck interior. Original request and source failure preserved; proposed original gray collar/helmet foreground MAY legally cover it, subject to actual full/closeup review. This is not declaring original negative-aperture spec passed.'",
+      "after": "'Chest240 has separate true transparent arm/neck holes and no234 opaque backing. Neck is a closed negative-space loop rather than an exterior-connected U-cut; preserve this construction fact. Original234 rejection remains. No added gray torso/collar foreground is used; actual pose geometry still requires review.'",
+      "count": 1
+    },
+    {
+      "before": "'Dodge218-LGT234-236-own-source-integer-fit-candidate-v001'",
+      "after": "'Dodge218-LGT240-235-236-original-owner-integer-fit-candidate-v001'",
+      "count": 1
+    },
+    {
+      "before": "'Dodge218-LGT234-236-own-five-layers-SWD050-integer-fit-candidate-v001.json'",
+      "after": "'Dodge218-Chest240-Near235-Far236-original-owner-SWD050-integer-fit-candidate-v001.json'",
+      "count": 1
+    },
+    {
+      "before": "'Dodge-LGT-SWD-limited-sourcefit-freeze-v001.json'",
+      "after": "'Dodge-LGT240-original-owner-sourcefit-freeze-v001.json'",
+      "count": 1
+    },
+    {
+      "before": "torso=Image.new('RGB',(1600,650)",
+      "after": "torso=Image.new('RGB',(2560,488)",
+      "count": 1
+    },
+    {
+      "before": ".resize((400,600),Image.Resampling.NEAREST);torso.paste(torso_crop,(400*i,40),torso_crop);dt.text((400*i+8,8)",
+      "after": ".resize((640,440),Image.Resampling.NEAREST);torso.paste(torso_crop,(640*i,40),torso_crop);dt.text((640*i+8,8)",
+      "count": 1
+    },
+    {
+      "before": "f'Dodge{i}: own collar partition'",
+      "after": "f'Dodge{i}: original helmet-only partition'",
+      "count": 1
+    },
+    {
+      "before": "'presentation/Dodge4-own-collar-five-partitions.png'",
+      "after": "'presentation/Dodge4-original-helmet-only-five-partitions.png'",
+      "count": 1
+    },
+    {
+      "before": "'newmedia_View':False},ensure_ascii=False,indent=2))",
+      "after": "'newmedia_View':False,'four_armhole_to_belt_actual_vectors':[r['armor_integer_fits']['Chest']['actual_armhole_to_buckle_vector_xy'] for r in rows],'four_finite_best_integer_max_errors':[r['armor_integer_fits']['Chest']['finite_grid_best_max_residual_source_px'] for r in rows]},ensure_ascii=False,indent=2))",
+      "count": 1
+    },
+    {
+      "before": "audit=read(AUDIT);old_rows=",
+      "after": "\ndef select_separate_actual_arm_and_neck_holes(closed):\n from collections import deque\n remain=closed.copy();parts=[]\n while remain.any():\n  sy,sx=np.argwhere(remain)[0];q=deque([(int(sy),int(sx))]);remain[sy,sx]=False;coords=[]\n  while q:\n   y,x=q.popleft();coords.append((x,y))\n   for ny,nx in [(y-1,x),(y+1,x),(y,x-1),(y,x+1)]:\n    if 0<=ny<512 and 0<=nx<512 and remain[ny,nx]:remain[ny,nx]=False;q.append((ny,nx))\n  points=np.array(coords);mask=np.zeros((512,512),bool);mask[points[:,1],points[:,0]]=True\n  parts.append({'area':len(points),'bbox':bbox(mask),'centroid':points.mean(axis=0).tolist(),'mask':mask})\n significant=sorted([r for r in parts if r['area']>=32],key=lambda r:-r['area'])\n assert len(significant)==2\n arm,neck=significant;assert arm['centroid'][0]<neck['centroid'][0]\n records=[]\n for label,r in [('actual_near_arm_aperture',arm),('actual_neck_aperture',neck)]:records.append({'role':label,'area':r['area'],'bbox':r['bbox'],'centroid_xy':r['centroid'],'authority':'Actual E501-viewed hole contour; separate connected closed background component, no averaged twohole centroid/ROI filling.'})\n for r in parts:\n  if r['area']<32:records.append({'role':'small_closed_interstice_not_arm_or_neck','area':r['area'],'bbox':r['bbox'],'centroid_xy':r['centroid']})\n return arm['mask'],neck['mask'],records\n\naudit=read(AUDIT);old_rows=",
+      "count": 1
+    },
+    {
+      "before": " fits['ShoulderFar']['core_pixels_outside_original_body']=int(np.count_nonzero(far_core&~(a[:,:,3]>=128)))",
+      "after": "\n actual_vector=np.array(CHEST_A[i],float)-np.array(center)\n target_vector=np.array(CHEST_B[i],float)-np.array(VISIBLE_ARM_JUNCTION_B[i],float)\n d_belt=np.array([dx,dy],float);d_hole=np.array(VISIBLE_ARM_JUNCTION_B[i],float)-center\n fxx,fyy=np.meshgrid(np.arange(-80,1),np.arange(0,101));ds=np.column_stack([fxx.ravel(),fyy.ravel()])\n be=np.linalg.norm(ds-d_belt,axis=1);he=np.linalg.norm(ds-d_hole,axis=1);obj=np.maximum(be,he);best_index=int(np.argmin(obj));best_delta=ds[best_index].tolist()\n fits['Chest'].update({'actual_armhole_to_buckle_vector_xy':actual_vector.tolist(),'target_visible_junction_to_buckle_vector_xy':target_vector.tolist(),'two_target_translation_invariant_discrepancy_xy':(target_vector-actual_vector).tolist(),'any_translation_minimax_lower_bound_source_px':float(np.linalg.norm(target_vector-actual_vector)/2),'finite_grid_domain':{'dx':[-80,0],'dy':[0,100],'integer_count':len(ds)},'finite_grid_best_integer_delta_xy':best_delta,'finite_grid_best_max_residual_source_px':float(obj[best_index]),'finite_grid_best_belt_residual_xy':(np.array(CHEST_A[i])+best_delta-CHEST_B[i]).tolist(),'finite_grid_best_junction_residual_xy':(np.array(center)+best_delta-VISIBLE_ARM_JUNCTION_B[i]).tolist()})\n\n fits['ShoulderFar']['core_pixels_outside_original_body']=int(np.count_nonzero(far_core&~(a[:,:,3]>=128)))",
+      "count": 1
+    },
+    {
+      "before": " swd_whole=Image.new('RGBA',(512,512))",
+      "after": "\n if i in [1,2]:\n  alt=Image.new('RGBA',(512,512));best_ch=translate(original_ch,best_delta[0],best_delta[1])\n  for name,value in stack:alt=Image.alpha_composite(alt,Image.fromarray(best_ch if name=='Chest' else value))\n  altp=save(f'finite-controls/phase-{i}-actual-best-integer-original-owner.png',alt)\n  fits['Chest']['finite_grid_best_whole_control']=pin(altp)\n\n swd_whole=Image.new('RGBA',(512,512))",
+      "count": 1
+    },
+    {
+      "before": "jc=Image.new('RGBA',(1280,640)",
+      "after": "\ncontrols=Image.new('RGB',(1280,488),(45,48,54));cd=ImageDraw.Draw(controls)\nfor col,i in enumerate([1,2]):\n im=Image.open(OUT/f'finite-controls/phase-{i}-actual-best-integer-original-owner.png').convert('RGBA');y0=255 if i==1 else 200;crop=im.crop((100,y0,420,y0+220)).resize((640,440),Image.Resampling.NEAREST);controls.paste(crop,(640*col,40),crop);fr=rows[i]['armor_integer_fits']['Chest'];cd.text((640*col+8,9),f'Dodge{i} actualbest{fr[\"finite_grid_best_integer_delta_xy\"]} / uniform2x',font=font(20),fill='white')\nsave('presentation/Dodge1-2-Chest240-best-integer-original-owner-controls-UNIFORM2x.png',controls)\n\njc=Image.new('RGBA',(1280,640)",
+      "count": 1
+    },
+    {
+      "before": "freeze=write('Dodge-LGT240-original-owner-sourcefit-freeze-v001.json'",
+      "after": "\nwrite('Chest240-original-owner-adapter-provenance-v001.json',ADAPTER_PROVENANCE)\n\nfreeze=write('Dodge-LGT240-original-owner-sourcefit-freeze-v001.json'",
+      "count": 1
+    }
+  ],
+  "old_builder_and_frozen_candidates_modified": false,
+  "source_body_pixels_redrawn": false,
+  "gray_collar_union_disabled_all4": true,
+  "arm_neck_holes_separate_connected_components": true,
+  "metadata_and_uniform_presentation_corrections_explicit": true
+}

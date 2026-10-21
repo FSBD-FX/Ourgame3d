@@ -1,0 +1,106 @@
+{
+  "schema": "guard-known44-action-observer-design-only-v004",
+  "implemented": false,
+  "UE_run": false,
+  "new_actor_proposal": "ADungeonGuardArtKnown44Probe",
+  "new_flag_proposal": "DungeonGuardArtKnown44Proof",
+  "required_render_flag": "DungeonFairytaleGuardFullPreview",
+  "do_not_use_legacy_partial_actor_or_v010_capture_checker_as_full_proof": true,
+  "protocol_proposal": {
+    "runtime_report_schema": "guard-art-known44-native-observer-v004",
+    "session_schema": "guard-art-known44-native-session-v004",
+    "main_checker_expected_native_schema": "guard-art-known44-native-observer-v004",
+    "pixel_helper_expected_native_schema": "guard-art-known44-native-observer-v004",
+    "required_regression": "One explicit native schema constant shared or mechanically checked across C++/main/pixel helper; wrong-version negative gate before media decode."
+  },
+  "spawn_scope": "Formal FirstBatchGuardRoom URL, normal Enter/E; explicitly diagnostic public predecessor Knight/Bat clears may be retained and labeled. Guard only formal slot2 plan. No Guard spawn/teleport/state or clock write/invulnerability/manual Tick.",
+  "Guard_damage_policy": "Only real normal J-driven accepted player actions and real hit receipts in this design. Public Guard damage API is not authorized by this draft; any future diagnostic variant requires separate Root scope and cannot be called normal combat.",
+  "startup_gate": "Before normal Enter, every known44 full-row trial record present, Source/Content/DLL/registry/Root prereg exact, complete known44 preload/FlushResource and Texture2D resources resident. Gaps remain runtimeSource0/empty texture rows.",
+  "readback_interface": "ADungeonHUD::GetFairytaleGuardFullDraws() / FDungeonFairytaleGuardFullDrawV003; serialize every field, actual native state/issued event IDs and controller input, SourceRGBASHA metadata separately from actual import proof.",
+  "native_capture": "Reuse existing actual async BGRA8 CRC/FIFO/frame reservations/unchanged original wall offsets; no pacing changes or synthetic frames. Fresh PID per scenario. Stop/flush original frames; E preservation before View.",
+  "scenarios": [
+    {
+      "scenario": "AxeBothSides",
+      "controls": "Reuse actual v009 body-aware three-leg normal WASD route; approach point signedDx120..180/radius180/absDy12; only original native lock permits Y evade.",
+      "rows": [
+        "Dormant",
+        "Wake",
+        "Ready",
+        "AxeWindup",
+        "AxeActive",
+        "AxeRecovery"
+      ],
+      "masks": {
+        "Dormant": 1,
+        "Wake": 63,
+        "Ready": 15,
+        "AxeWindup": 63,
+        "AxeActive": 15,
+        "AxeRecovery": 15
+      },
+      "intervals": "Axe Active4x50ms / Recovery4x350ms read original Action times; never lengthen200ms to collect4 frames.",
+      "limits": "Wake63 once-only failfast; per-AttackId phase masks for same native epoch; natural later attack may be separately observed, never splice same-row phases across different action epochs without labeling separate coverage."
+    },
+    {
+      "scenario": "StompWindupKnownOnly",
+      "controls": "Normal WASD close approach must be physics-authoritative at actual distance<=70, body-separated; body sum halfX58 means fixed8-clearance route cannot simply target55. Final close leg needs separate controller predicate, never write actor. Normal Y evade after original .45 lock.",
+      "rows": [
+        "StompWindup"
+      ],
+      "masks": {
+        "StompWindup": 63
+      },
+      "expected_procedural_gaps": [
+        "StompActive",
+        "StompRecovery"
+      ],
+      "intervals": "Original W900ms / A150ms / R1500ms; A/R are observed native phases with explicit no-art gap, never Ready substitute.",
+      "risk": "Close control/evade route unimplemented; no claim safe native run or WU-to-Active art join."
+    },
+    {
+      "scenario": "StunAndInterruptedRecovery",
+      "controls": "Real J/player combat receipts only; measure actual accumulated poise until unique85 break during live action early enough that original OccupiedUntil>StunUntil. Do not force damage/poise/clock.",
+      "rows": [
+        "Stunned",
+        "InterruptedRecovery"
+      ],
+      "masks": {
+        "Stunned": 15,
+        "InterruptedRecovery": 15
+      },
+      "intervals": "Stun original.4s has priority; IR only positive[StunUntil,OccupiedUntil), normalize four phases to actual remaining interval.",
+      "identity_gate": "Per-PoiseBroken event and original AttackId; no credit across different stun/interruption epochs; no new Active after cancellation.",
+      "risk": "Actual J recipe/spacing and survivability not established by this draft; observe missing coverage as failure, do not claim85 caused by chosen keypress alone."
+    },
+    {
+      "scenario": "Death",
+      "controls": "Real J receipts cause unique native Died; actual HP/collision/damage/reward shutdown at Died; normal native game continues. If actual player dies, only existing central terminal presentation clock may advance art while kernel history freezes.",
+      "rows": [
+        "Death"
+      ],
+      "masks": {
+        "Death": 63
+      },
+      "intervals": "1000ms row/100ms initial afterglow/zero gameplay delay/final frame hold; original Died eventId retained.",
+      "root_scope": "Artist standing-root propagation frame1..5, not occluded-foot measurement. Root must visually review collapse root and joins before final acceptance."
+    }
+  ],
+  "render_invariants": [
+    "Exactly one actual Texture2D wholebody/fixed-axe draw per known row; no independent axe/grips",
+    "ONE row scale with per-frame source floor metadata; left floor pivot=512-rightpivot",
+    "Real actor ground used; no rendered-screen offset repair of actor motion",
+    "Material tint only actual Damaged receipt; ordinary damage never Stunned row",
+    "Move/StompA/StompR remain zero sprite layers and explicit procedural gap",
+    "Full known-source frame masks do not imply all57 logical source entries accepted"
+  ],
+  "capture_cost_estimate": {
+    "at_1280x720_BGRA8_PNG_zlib0_bytes_per_frame_approx": 3686400,
+    "at_30fps_bytes_per_second_approx": 110592000,
+    "scope": "Storage planning estimate, excludes ZIP/copies/audio; stop each scenario as soon as true coverage/failure is decided, no45s pointless retries.",
+    "five_25s_fresh_process_captures_original_bytes_approx": 13824000000,
+    "fresh_process_count_assumption": "Two Axe sides plus StompWU, Stun/IR and Death = five process captures."
+  },
+  "formal_complete_units": 0,
+  "audio_acceptance": false,
+  "visual_acceptance": false
+}

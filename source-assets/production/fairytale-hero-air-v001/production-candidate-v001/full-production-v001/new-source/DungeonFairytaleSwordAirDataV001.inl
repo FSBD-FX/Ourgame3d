@@ -1,0 +1,98 @@
+// Generated NEW candidate from exact E599 ZIP bytes and author profile; no native/GPU acceptance.
+// Include inside DungeonFairytaleSwordAirV001 anonymous namespace; no extra namespace.
+FProfile BuildProfileData()
+{
+ FProfile P;
+ P.ProfileId=TEXT("EV048-v020-HeroLeatherAir6-v001");
+ P.SourceClosureSHA256=TEXT("5df0479bd1689b8adeb525255e748db13288839bbc1b8523f7ec012f404bdaec");
+ P.SourceClosureVerified=true; // Exact source preparation only.
+ P.CanvasSource=512;P.StandingExtent=416.;P.StandingDisplay=72.;P.HeightProjection=.70;P.WeaponScale=.5;
+ P.ComponentGrip={99.,256.};
+ P.SwordTexturePath=TEXT("/Game/Production/FirstBatch/v002/CandidateComponents/T_military_sword_v002.T_military_sword_v002");
+ P.SwordSourceSHA256=TEXT("2efb5519fb3c7ed5a63e58d00c84e39aa02355274af36b43c1775570badded5a");
+ {
+  auto& F=P.Frames[0];F.Frame=0;F.Pose=EPose::RiseEarly;
+  F.Root={259,457};F.Grip={151,269};F.AxisArtist={0.90630778703664994,0.42261826174069944};
+  F.ExpectedNonemptyDrawCount=9;
+  F.Layers[0]={EComponent::BodyRest,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_BodyRest_000_v001.T_Fairytale_Air_BodyRest_000_v001"),TEXT("984294abf88ca32d4c1f2e856fcce982a24e71d5d74bcb9715cc202ba31ee720"),TEXT("03c3be653acea3965e81a2a2234efa7e2ae9259dbf9434dea144a8375b460b9a"),25580u,false};
+  F.Layers[1]={EComponent::ShoulderFar,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_ShoulderFar_000_v001.T_Fairytale_Air_ShoulderFar_000_v001"),TEXT("25e3f179ad7ea60ebdeaf974f8a8b32f1cb1538f914e426e1cef3c22318c3e04"),TEXT("0188cebdacd82aa2cd66b2e043b16037d60c08b25e7ae0b056ed396ad3807433"),391u,false};
+  F.Layers[2]={EComponent::Chest,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_Chest_000_v001.T_Fairytale_Air_Chest_000_v001"),TEXT("d39e40df18ff371f90f3ad235edc9cbe51e4b52635409b96a8a5d0fbfe3a42d7"),TEXT("9c7263f07412fba0e93f9dba5f714988699db7f987f5419a4d4b0d384cd608b8"),6842u,false};
+  F.Layers[3]={EComponent::NearArmWithoutHand,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_NearArmWithoutHand_000_v001.T_Fairytale_Air_NearArmWithoutHand_000_v001"),TEXT("531dc885a9ef747b1b130a4e2a66d0e6de29f0d53f8f97150d7d64be3c6c16a2"),TEXT("d608fe3c2d5769ceb243e30b8e31ff17b24b845d3c927ee35109d901b1e00b6b"),1947u,false};
+  F.Layers[4]={EComponent::ShoulderNear,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_ShoulderNear_000_v001.T_Fairytale_Air_ShoulderNear_000_v001"),TEXT("04246a6784e21daff5bfb190ecd19fc4d5dda38913216815544f3b596466b32a"),TEXT("1168fd01e864c5644db0b3bff6751fd9182397836847299a44c212bea81ba1f5"),1649u,false};
+  F.Layers[5]={EComponent::HelmetForeground,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_HelmetForeground_000_v001.T_Fairytale_Air_HelmetForeground_000_v001"),TEXT("83399ad0a36537f68412bd53af9b8fea6465d441e1b0dd369c79f28661f6e7e4"),TEXT("32cba3a845ae6bd0e9a9642302b9d3ef20d2f8171f7b8155b5079dd5aec23734"),20709u,false};
+  F.Layers[6]={EComponent::FarHandForeground,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_FarHandForeground_000_v001.T_Fairytale_Air_FarHandForeground_000_v001"),TEXT("e07732583ed1c92b2914ef334a653f706c0006dc9f58f526c95639e04249a193"),TEXT("07199983c0919dcc2b4a6c2457adc88b72463e84a5bac23acade0b58711b6f41"),2635u,false};
+  F.Layers[7]={EComponent::NearHand,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_NearHand_000_v001.T_Fairytale_Air_NearHand_000_v001"),TEXT("1920047340508fd33b17d0af06da0dfdc6c82a1fd480a5771d6c0dc7daf9a9ee"),TEXT("951e9d43e83d33b7b5b0b2b6bb4086b04ec8cd54e55802e567cfa42158fef7af"),3273u,false};
+  F.SlotOrder={EComponent::BodyRest,EComponent::ShoulderFar,EComponent::Chest,EComponent::NearArmWithoutHand,EComponent::ShoulderNear,EComponent::HelmetForeground,EComponent::IndependentSword,EComponent::FarHandForeground,EComponent::NearHand};
+ }
+ {
+  auto& F=P.Frames[1];F.Frame=1;F.Pose=EPose::RiseLate;
+  F.Root={245,500};F.Grip={168,318};F.AxisArtist={0.90630778703664994,0.42261826174069944};
+  F.ExpectedNonemptyDrawCount=9;
+  F.Layers[0]={EComponent::BodyRest,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_BodyRest_001_v001.T_Fairytale_Air_BodyRest_001_v001"),TEXT("9573a53d9363c73137f48edad8c7c521296c502d4d654453a34257f8014b0548"),TEXT("dba3a9c79d1f6277dfe13cf4204eba13042e3de040d62d72756bb7758d7d22e1"),21056u,false};
+  F.Layers[1]={EComponent::ShoulderFar,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_ShoulderFar_001_v001.T_Fairytale_Air_ShoulderFar_001_v001"),TEXT("1fdaec2fdb8cb504731bbc8db36a96b85139085ab80869e70c9982901a604e82"),TEXT("75fa85519b9b5a7687e8a2d326713b99c479468fb448b38a4fa5463dd0ee26c3"),376u,false};
+  F.Layers[2]={EComponent::Chest,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_Chest_001_v001.T_Fairytale_Air_Chest_001_v001"),TEXT("7df6ebffcf5744d880ca16238690f398b76b8d9e5a205d1f5d3ca622a6bdfe08"),TEXT("a5fd098190e8ff6889bb27e2a377fe48f5ca94bd29949af38ac2d0c5077c7d84"),6352u,false};
+  F.Layers[3]={EComponent::NearArmWithoutHand,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_NearArmWithoutHand_001_v001.T_Fairytale_Air_NearArmWithoutHand_001_v001"),TEXT("7d2e0a23a563d210d391f51dc52fb39f81b6ba46912368279b813502532c76e1"),TEXT("01f430921c5bc9e738d386e126a302f3c79f1bfbacc390b18c6ce74258b76685"),1504u,false};
+  F.Layers[4]={EComponent::ShoulderNear,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_ShoulderNear_001_v001.T_Fairytale_Air_ShoulderNear_001_v001"),TEXT("8ddd1823529a994691bb74d09bbf6028e319641eed2df70d2772f14eac68d129"),TEXT("4294533f3d426155239aa3de926d534c2eba6bc526234a702eb8c72c5981bc5e"),1639u,false};
+  F.Layers[5]={EComponent::HelmetForeground,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_HelmetForeground_001_v001.T_Fairytale_Air_HelmetForeground_001_v001"),TEXT("02b6f18d8c8178eddc2c34d858932e3ceef83937c81da61753c54e7c2e77650d"),TEXT("c03eb1d68968c6dc1584709d20d49e415ba97ab954e91c07fed70a20bf265761"),20271u,false};
+  F.Layers[6]={EComponent::FarHandForeground,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_FarHandForeground_001_v001.T_Fairytale_Air_FarHandForeground_001_v001"),TEXT("fc91952e6d36c85085fea1aa9c6d554a72bdc804f1f31a9faa7fe6c937548cc2"),TEXT("c62bc855fc6a472f896110856990acb072a2e3a8f38d8473ba8e89ec563f721c"),2380u,false};
+  F.Layers[7]={EComponent::NearHand,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_NearHand_001_v001.T_Fairytale_Air_NearHand_001_v001"),TEXT("fa065152d19104cdff7aa3898d3ff6d498f8db7ef27e75acbe965f7a4c8879d9"),TEXT("4966b4d152e0a094dd15ad4aeb474d0fc070bff2ebd423c19fa4b93e7da7b40c"),2737u,false};
+  F.SlotOrder={EComponent::BodyRest,EComponent::ShoulderFar,EComponent::Chest,EComponent::NearArmWithoutHand,EComponent::ShoulderNear,EComponent::HelmetForeground,EComponent::IndependentSword,EComponent::FarHandForeground,EComponent::NearHand};
+ }
+ {
+  auto& F=P.Frames[2];F.Frame=2;F.Pose=EPose::Apex;
+  F.Root={244,530};F.Grip={167,351};F.AxisArtist={0.90630778703664994,0.42261826174069944};
+  F.ExpectedNonemptyDrawCount=9;
+  F.Layers[0]={EComponent::BodyRest,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_BodyRest_002_v001.T_Fairytale_Air_BodyRest_002_v001"),TEXT("ce8771dab441f43a4c550a7289e810f73abc1e836f5cd0f7ef7e0c701aaffcc8"),TEXT("474c19e61e2ad17168d466fccb5396c926274d30ced36b8e4b18280b11403285"),17629u,false};
+  F.Layers[1]={EComponent::ShoulderFar,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_ShoulderFar_002_v001.T_Fairytale_Air_ShoulderFar_002_v001"),TEXT("067fc5111be4401ef353c0b50bc78cb6b2ac375934c7bbb876174dca176b0f04"),TEXT("42a365895ac4740de0a74900bcb4816bf2a25df8f102eb63ce97e79b0285f15c"),294u,false};
+  F.Layers[2]={EComponent::Chest,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_Chest_002_v001.T_Fairytale_Air_Chest_002_v001"),TEXT("86b3be336a2c9acf9eec963206b52b31cb21576954a4dab79fe32381ec3d3543"),TEXT("28aca00bbba4a2205b6e64435a7c5074ca10761b7db714a57eccd9333c78ec31"),5648u,false};
+  F.Layers[3]={EComponent::NearArmWithoutHand,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_NearArmWithoutHand_002_v001.T_Fairytale_Air_NearArmWithoutHand_002_v001"),TEXT("ac673def8c82d9cf508e45a586393399e46d1e37e7be806439fea33477d5492d"),TEXT("1c6b62dff975d6a24bbda734c3ca4448d14111d538c6e83d4491196823c55797"),1347u,false};
+  F.Layers[4]={EComponent::ShoulderNear,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_ShoulderNear_002_v001.T_Fairytale_Air_ShoulderNear_002_v001"),TEXT("77779d9cf01e3e31c87f925f6e7bd539416325f9665a9ae4137b3c23279f8635"),TEXT("3a9d5c47053af7382ae69d8d632bfee3b46249da6ddffe07bc96d20c67127bb0"),1579u,false};
+  F.Layers[5]={EComponent::HelmetForeground,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_HelmetForeground_002_v001.T_Fairytale_Air_HelmetForeground_002_v001"),TEXT("b9f11d3e5a9aadf9f3a612bcd75013046e7d0d7a4c1e94a05f80a1293055494e"),TEXT("5bf7279bbaa97b7e6907e8a44df387780516e1c7436cd47b18b5b0431234e35d"),19845u,false};
+  F.Layers[6]={EComponent::FarHandForeground,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_FarHandForeground_002_v001.T_Fairytale_Air_FarHandForeground_002_v001"),TEXT("2b23ece8435f13457d4c2dc0d28024fb2ec5fd0dfd722e6974d5e976614c155b"),TEXT("507e2629dbaa0f5686c08c341a5ec159f4204e032e69a6446246bf4a806b9442"),2324u,false};
+  F.Layers[7]={EComponent::NearHand,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_NearHand_002_v001.T_Fairytale_Air_NearHand_002_v001"),TEXT("b372a5c582f9f9ab218188a72710674fa872924387f8db4af9aac078b6eb06f3"),TEXT("1b8ce6d71ce24fa3ef567319bf075cbcedf1e08781bd49b062e49c1cbbd8f3ff"),2524u,false};
+  F.SlotOrder={EComponent::BodyRest,EComponent::ShoulderFar,EComponent::Chest,EComponent::NearArmWithoutHand,EComponent::ShoulderNear,EComponent::HelmetForeground,EComponent::IndependentSword,EComponent::FarHandForeground,EComponent::NearHand};
+ }
+ {
+  auto& F=P.Frames[3];F.Frame=3;F.Pose=EPose::Fall;
+  F.Root={247,449};F.Grip={140,278};F.AxisArtist={0.90630778703664994,0.42261826174069944};
+  F.ExpectedNonemptyDrawCount=9;
+  F.Layers[0]={EComponent::BodyRest,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_BodyRest_003_v001.T_Fairytale_Air_BodyRest_003_v001"),TEXT("ede54b8ad422343a8eb67e0ccbcf30baeedbdcbad9dcb06a9b6ba8de662f0f77"),TEXT("08136c2c751f48189b92eb53ad37dda2a243b9cf5f95b162c0c473aaabcf4d93"),22330u,false};
+  F.Layers[1]={EComponent::ShoulderFar,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_ShoulderFar_003_v001.T_Fairytale_Air_ShoulderFar_003_v001"),TEXT("9120209f62f9da6d2fadd50a14ab132990190f571253f3fcb9a828efa0697a6e"),TEXT("9703be714817896802e9c914862d47b5ee1a3d222eef8401c0f29d043e796c96"),387u,false};
+  F.Layers[2]={EComponent::Chest,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_Chest_003_v001.T_Fairytale_Air_Chest_003_v001"),TEXT("196a7ec2686bd3b6652c9f9065119215b46b9f66bbac1c928a5389198a7a365c"),TEXT("ab6ca730cbf1d60e66493a3a7089132d64388a55bb71474711669b23882c175e"),6505u,false};
+  F.Layers[3]={EComponent::NearArmWithoutHand,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_NearArmWithoutHand_003_v001.T_Fairytale_Air_NearArmWithoutHand_003_v001"),TEXT("923c7968f21823c51f70a2d28b7f915ef1f3b0616cbc67d5668ccd42118185c1"),TEXT("bfce731fa9a244e6154f236a1bbded15ed84a743125e8e8732df7c2e4635d559"),1934u,false};
+  F.Layers[4]={EComponent::ShoulderNear,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_ShoulderNear_003_v001.T_Fairytale_Air_ShoulderNear_003_v001"),TEXT("d96a7ce0d067897cafb639533e7fb0340b89cf92695a32248bb59bd8a70625e9"),TEXT("fff7db2f812f120d910b45f99b6e772080333852f2d6fbda8decd37d579dbe3a"),1593u,false};
+  F.Layers[5]={EComponent::HelmetForeground,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_HelmetForeground_003_v001.T_Fairytale_Air_HelmetForeground_003_v001"),TEXT("6a2f4d550047954cb49fb6356e6ceff3894bab2e728f54b7a77e620058f6e609"),TEXT("f2b7cff86fb42e9cc484488c03d5db938239e9fa1fa2b6a7f3db377b34a7e337"),20565u,false};
+  F.Layers[6]={EComponent::FarHandForeground,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_FarHandForeground_003_v001.T_Fairytale_Air_FarHandForeground_003_v001"),TEXT("5702f38081edbebf1ba9d8302cb512179c7b553852edd2a29d4b914498efdeb4"),TEXT("38d230196a625c9f2cbd9536ace9b3820efe34b3d5c5a77e5838b2baa80a1f28"),2876u,false};
+  F.Layers[7]={EComponent::NearHand,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_NearHand_003_v001.T_Fairytale_Air_NearHand_003_v001"),TEXT("725cf82855d0f77074f312566287356fb9fc5a66ca1e2691eb975016b2db9422"),TEXT("e58e444de588ada808b35dae7cbb032b562f96f684f36924f707e14293e3cfd2"),3292u,false};
+  F.SlotOrder={EComponent::BodyRest,EComponent::ShoulderFar,EComponent::Chest,EComponent::NearArmWithoutHand,EComponent::ShoulderNear,EComponent::HelmetForeground,EComponent::IndependentSword,EComponent::FarHandForeground,EComponent::NearHand};
+ }
+ {
+  auto& F=P.Frames[4];F.Frame=4;F.Pose=EPose::LandingImpact;
+  F.Root={256,464};F.Grip={143,351};F.AxisArtist={1,0.20000000000000001};
+  F.ExpectedNonemptyDrawCount=9;
+  F.Layers[0]={EComponent::BodyRest,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_BodyRest_004_v001.T_Fairytale_Air_BodyRest_004_v001"),TEXT("7bc126b1ccba2df19c32d41e3da7bba12aba1317fb7bd40137fd28f886665380"),TEXT("1a22981ef8785d026f023dde3c432359cf8ac761031add0deac11a008b6d513c"),22502u,false};
+  F.Layers[1]={EComponent::ShoulderFar,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_ShoulderFar_004_v001.T_Fairytale_Air_ShoulderFar_004_v001"),TEXT("e668a1b36aecbc33a0e888807b95cb2cec25dede5bf7d90536f3981c33afcb6c"),TEXT("eac8f614f1f239524c90b70cb26b6fcece766eab2c400f3a04147a5cddd6c69d"),354u,false};
+  F.Layers[2]={EComponent::Chest,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_Chest_004_v001.T_Fairytale_Air_Chest_004_v001"),TEXT("7077d1a0ea631f55f106bbde96ecc6d761f9ca42a9515034e403503670c61213"),TEXT("0fcc45e89f8e052429bce80b0a018dab03da04887e2236a3ec6066c9609fc1bd"),6373u,false};
+  F.Layers[3]={EComponent::NearArmWithoutHand,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_NearArmWithoutHand_004_v001.T_Fairytale_Air_NearArmWithoutHand_004_v001"),TEXT("08b7946feb0614c8955db5b459ecf2865092804b72d7aecc58aff231450e32df"),TEXT("073ac5db8fc3d5d45457ed83c42c97d431bd638a677a4dd6523b28a084019d6f"),1844u,false};
+  F.Layers[4]={EComponent::ShoulderNear,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_ShoulderNear_004_v001.T_Fairytale_Air_ShoulderNear_004_v001"),TEXT("9ebefe2565edf2c333223a7f4395262246aed9ec067c46850445a185c5f4f592"),TEXT("d97665549d98df67ddf9a50c2deef64facebf960f84fc49fd79b8c326a16c320"),1691u,false};
+  F.Layers[5]={EComponent::HelmetForeground,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_HelmetForeground_004_v001.T_Fairytale_Air_HelmetForeground_004_v001"),TEXT("2dbfcf78d69ce1ed261d942ce30fdf5b10a391f016e128bb83da08708155c464"),TEXT("75ab89e7e8a2ee75ad5ddb44d54abd418bdef4a4caf214682ff35d5aa8e99ff9"),21084u,false};
+  F.Layers[6]={EComponent::FarHandForeground,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_FarHandForeground_004_v001.T_Fairytale_Air_FarHandForeground_004_v001"),TEXT("0c01a04b33197a743c1bdcc4f5d0759be9aa839c98b69ca61b9b32506c6c2564"),TEXT("0470d220faa99c9d15894e9db13bd42a21188e76ffac65f3accd1b58645b480c"),2481u,false};
+  F.Layers[7]={EComponent::NearHand,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_NearHand_004_v001.T_Fairytale_Air_NearHand_004_v001"),TEXT("610710ae87e7059ceca060ffb8a10169054b46e257b0ed740a6d040eb2db7ede"),TEXT("eb3f2ca7ef6c520924724d49ca64e4874b6399d2b6326148b06a8f81b79aaed8"),3172u,false};
+  F.SlotOrder={EComponent::BodyRest,EComponent::ShoulderFar,EComponent::Chest,EComponent::NearArmWithoutHand,EComponent::ShoulderNear,EComponent::HelmetForeground,EComponent::IndependentSword,EComponent::FarHandForeground,EComponent::NearHand};
+ }
+ {
+  auto& F=P.Frames[5];F.Frame=5;F.Pose=EPose::LandingSettle;
+  F.Root={256,464};F.Grip={209,311};F.AxisArtist={0.93999999999999995,-0.34100000000000003};
+  F.ExpectedNonemptyDrawCount=9;
+  F.Layers[0]={EComponent::BodyRest,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_BodyRest_005_v001.T_Fairytale_Air_BodyRest_005_v001"),TEXT("16cf17feb41d2345fab5ddd47f8b09b3ca7535e46bd48e356fbdb580fc6074e1"),TEXT("740285a7f0fa3634c443dd41d251e7805811d1c21d20adcd81954b4e7c06a5bd"),29734u,false};
+  F.Layers[1]={EComponent::ShoulderFar,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_ShoulderFar_005_v001.T_Fairytale_Air_ShoulderFar_005_v001"),TEXT("0e638a6779cb629e1045133812ae0b2de2b2e829efabdd60fe71cbb4c09f6cc1"),TEXT("49f17686ffe61edb4ea36fcab4096ed4556e61b46ffadeeeab9c5139b97052c2"),383u,false};
+  F.Layers[2]={EComponent::Chest,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_Chest_005_v001.T_Fairytale_Air_Chest_005_v001"),TEXT("161cc70f3cf78d2caae59c6b1e085be1f3d2c1727bb77a58b9623f8487f96db4"),TEXT("97958f3e2bb67ab48d4938e5645d50deb7561151a4419f04ae63a403ab605a35"),6815u,false};
+  F.Layers[3]={EComponent::NearArmWithoutHand,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_NearArmWithoutHand_005_v001.T_Fairytale_Air_NearArmWithoutHand_005_v001"),TEXT("220d4572293b277b4af8136543f00e7324d2b454e16888c01ad9c6c43e316fac"),TEXT("6af1da82e6b9a68aaba70a84ebf8171532581d4390a3de79695e57735a34d8cc"),2444u,false};
+  F.Layers[4]={EComponent::ShoulderNear,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_ShoulderNear_005_v001.T_Fairytale_Air_ShoulderNear_005_v001"),TEXT("e3c325dc328f61fb28ab54facdcc00a5fd0b626e6b89121e8ebb1c854fbc098d"),TEXT("36953894df7e613b68779582fc12c0050d4fa5db9d9ea13ff12ed7ad9ad292ed"),1635u,false};
+  F.Layers[5]={EComponent::HelmetForeground,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_HelmetForeground_005_v001.T_Fairytale_Air_HelmetForeground_005_v001"),TEXT("75d625bbc91eb32a0f57d1bb67e622589525d6cb1f2b09a667c4b0a4c211c001"),TEXT("2c245767472450e74e6bcc2aef423fa60508151a162021f49531ea01ad55c923"),21155u,false};
+  F.Layers[6]={EComponent::FarHandForeground,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_FarHandForeground_005_v001.T_Fairytale_Air_FarHandForeground_005_v001"),TEXT("2278abf28bdb2822ceba48aa19897f349a1e8c21d966182432301452cae20870"),TEXT("e4e7c6f447d87cba7b8faa200b3e2952665a2bf08282441961a71b6eb303c2b0"),1614u,false};
+  F.Layers[7]={EComponent::NearHand,TEXT("/Game/Production/ArtTrials/EV048/v020/HeroLeatherAir6/T_Fairytale_Air_NearHand_005_v001.T_Fairytale_Air_NearHand_005_v001"),TEXT("e23ca8d654baa34a312c7c5640b20f299a113de810c2a8d666cfc531387604a8"),TEXT("69bc20b89cef85020f3d4ce9f64ee29065b03c4148fcaaa3baeae4f625c636d5"),3202u,false};
+  F.SlotOrder={EComponent::BodyRest,EComponent::ShoulderFar,EComponent::Chest,EComponent::NearArmWithoutHand,EComponent::ShoulderNear,EComponent::HelmetForeground,EComponent::IndependentSword,EComponent::FarHandForeground,EComponent::NearHand};
+ }
+ return P;
+}

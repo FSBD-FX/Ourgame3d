@@ -1,0 +1,19 @@
+--- UnrealGame/Source/CodexDungeon/DungeonFighter.h
++++ UnrealGame/Source/CodexDungeon/DungeonFighter.h
+@@ -16,6 +16,7 @@
+ #include "DungeonCompletedGroundMotion.h"
+ #include "DungeonHurtPresentation.h"
+ #include "DungeonDeathPresentation.h"
++#include "DungeonDodgePresentation.h"
+ #include "DungeonFighter.generated.h"
+ 
+ class ADungeonGameMode;
+@@ -42,6 +43,8 @@
+     bool QueryHurtPresentation(FDungeonHurtPresentationSample& Out) const;
+     // Read-only actual terminal display age, including paused/continued dead owners.
+     bool QueryDeathPresentation(FDungeonDeathPresentationSample& Out) const;
++    // Actual same-owner/action Dodge clock; read-only and atomic, including paused published owners.
++    bool QueryDodgePresentation(FDungeonDodgePresentationSample& Out) const;
+ 
+     UPROPERTY(BlueprintReadOnly, Category="Dungeon") float Health = 100.f;
+     UPROPERTY(BlueprintReadOnly, Category="Dungeon") float MaxHealth = 100.f;

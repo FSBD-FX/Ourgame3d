@@ -1,0 +1,10 @@
+--- DungeonHUD.cpp
++++ DungeonHUD.cpp candidate overlay
+@@ -296,6 +296,7 @@
+     if (FParse::Param(FCommandLine::Get(),TEXT("DungeonContentProof")))
+     {
+         InstallFastLosslessProofScreenshots();
++        if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroAirDiskRestoreProofV001")))return;
+         if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroLandingPriorityProofV001")))return;
+         const bool AirProduction=FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroAirProductionProofV001"));
+         const bool AirBaseline=FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroAirProofV001"));

@@ -1,0 +1,31 @@
+{
+  "schema": "guard-full-v003-local-candidate-audit-v1",
+  "scope": "Source metadata/PNG/RGBA hashes and standalone pure kernel only. No media View, UE compile/run/import or final art acceptance.",
+  "rows": 13,
+  "logical": 57,
+  "max_unique": 56,
+  "known_source_logical": 45,
+  "known_unique": 44,
+  "source_and_registration_gaps": 12,
+  "all_full_trial_allowed": false,
+  "old_partial_freezes": [
+    {
+      "freeze": "presentation-freeze-v001.json",
+      "files": 23,
+      "mismatches": 0
+    },
+    {
+      "freeze": "observer-freeze-v002.json",
+      "files": 16,
+      "mismatches": 0
+    }
+  ],
+  "legacy_source_modified": false,
+  "HUD_patch_check": "git -C UnrealGame apply --check exit0",
+  "preserved_wrong_cwd_patch_check": "Initial root-dir git apply reported Source/... absent; corrected working directory UnrealGame. No actual file changed.",
+  "pure_after_222_stage0_compile": 0,
+  "pure_after_222_stage0_run": 1,
+  "pure_after_222_production_compile": 0,
+  "pure_after_222_production_run": 0,
+  "UE_compile_run": false
+}

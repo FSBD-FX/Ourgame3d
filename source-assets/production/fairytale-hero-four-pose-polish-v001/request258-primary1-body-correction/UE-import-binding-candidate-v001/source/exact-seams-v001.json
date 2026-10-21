@@ -1,0 +1,34 @@
+{
+  "schema": "request258-exact-one-cpp-seams-v001",
+  "target": {
+    "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+    "bytes": 23904,
+    "sha256": "3df9a140d5fce3c2348d5a21c2bf12c4e19633aa51716df0d91209aff898d49d"
+  },
+  "candidate_after": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/UE-import-binding-candidate-v001/source/after-DungeonFairytaleSwordPresentation.cpp",
+    "bytes": 25397,
+    "sha256": "be8afcfce07e2c02a01481a86a819d6ea516002ccce925a74873871f2a748794"
+  },
+  "new_source_files": [],
+  "new_headers": [],
+  "new_registered_tests": 0,
+  "flag": "DungeonFairytalePrimary1Bridge258Preview",
+  "required_existing_flag": "DungeonFairytaleLeatherPrimary1Preview",
+  "seams": [
+    {
+      "id": "Primary1_texture_resolver_14_new_paths",
+      "before_text": "UTexture2D* ADungeonHUD::GetFairytaleSwordArmorPrimary1Texture(const FString& Component,int32 Frame)\r\n{\r\n    if(Frame<0 || Frame>=6)return nullptr;\r\n    const bool LeatherPrimary1=bUseFairytaleSwordEquipmentBoundPreview\r\n        &&FParse::Param(FCommandLine::Get(),TEXT(\"DungeonFairytaleLeatherPrimary1Preview\"))\r\n        &&(Component==TEXT(\"Chest\")||Component==TEXT(\"ShoulderFar\")||Component==TEXT(\"ShoulderNear\"));\r\n    const FString Name=LeatherPrimary1\r\n        ?FString::Printf(TEXT(\"T_Fairytale_LeatherPrimary1%s_%03d_v001\"),*Component,Frame)\r\n        :FString::Printf(TEXT(\"T_Fairytale_SwordPrimary1%s_%03d_v001\"),*Component,Frame);\r\n    if(const auto Found=Frames.Find(Name))return Found->Get();\r\n    const FString Package=FString(LeatherPrimary1?TEXT(\"/Game/Production/ArtTrials/EV048/v013/HeroLeatherPrimary1/\")\r\n        :TEXT(\"/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/\"))+Name;\r\n    UTexture2D* Texture=FPackageName::DoesPackageExist(Package)\r\n        ?LoadObject<UTexture2D>(nullptr,*(Package+TEXT(\".\")+Name)):nullptr;\r\n    Frames.Add(Name,Texture);\r\n    return Texture;\r\n}\r\n",
+      "after_text": "UTexture2D* ADungeonHUD::GetFairytaleSwordArmorPrimary1Texture(const FString& Component,int32 Frame)\r\n{\r\n    if(Frame<0 || Frame>=6)return nullptr;\r\n    // Request258 two-frame trial; actual draw still requires committed LightArmor.\r\n    const bool Bridge258=Frame<2 && bUseFairytaleSwordEquipmentBoundPreview\r\n        &&FParse::Param(FCommandLine::Get(),TEXT(\"DungeonFairytaleLeatherPrimary1Preview\"))\r\n        &&FParse::Param(FCommandLine::Get(),TEXT(\"DungeonFairytalePrimary1Bridge258Preview\"));\r\n    const bool LeatherPrimary1=bUseFairytaleSwordEquipmentBoundPreview\r\n        &&FParse::Param(FCommandLine::Get(),TEXT(\"DungeonFairytaleLeatherPrimary1Preview\"))\r\n        &&(Component==TEXT(\"Chest\")||Component==TEXT(\"ShoulderFar\")||Component==TEXT(\"ShoulderNear\"));\r\n    const FString Name=Bridge258\r\n        ?FString::Printf(TEXT(\"T_Fairytale_Bridge258_%s_%03d_v001\"),*Component,Frame)\r\n        :LeatherPrimary1\r\n        ?FString::Printf(TEXT(\"T_Fairytale_LeatherPrimary1%s_%03d_v001\"),*Component,Frame)\r\n        :FString::Printf(TEXT(\"T_Fairytale_SwordPrimary1%s_%03d_v001\"),*Component,Frame);\r\n    if(const auto Found=Frames.Find(Name))return Found->Get();\r\n    const FString Package=FString(Bridge258?TEXT(\"/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/\")\r\n        :LeatherPrimary1?TEXT(\"/Game/Production/ArtTrials/EV048/v013/HeroLeatherPrimary1/\")\r\n        :TEXT(\"/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/\"))+Name;\r\n    UTexture2D* Texture=FPackageName::DoesPackageExist(Package)\r\n        ?LoadObject<UTexture2D>(nullptr,*(Package+TEXT(\".\")+Name)):nullptr;\r\n    Frames.Add(Name,Texture);\r\n    return Texture;\r\n}\r\n",
+      "expected_occurrences": 1
+    },
+    {
+      "id": "Primary1_two_provisional_markers",
+      "before_text": "    UTexture2D* Body=GetFairytaleSwordTexture(Record.Clip,Record.Frame);",
+      "after_text": "    // Provisional Request258 source-pixel markers. No new action clock or timing.\r\n    // The old full Body below remains legacy metadata/readiness only in this\r\n    // seven-layer LightArmor branch; DrawStack records every actual new layer.\r\n    FMarker Bridge258Marker{};\r\n    if(Marker && Primary1 && BoundLightArmor && Record.Frame>=0 && Record.Frame<2\r\n        &&FParse::Param(FCommandLine::Get(),TEXT(\"DungeonFairytaleLeatherPrimary1Preview\"))\r\n        &&FParse::Param(FCommandLine::Get(),TEXT(\"DungeonFairytalePrimary1Bridge258Preview\")))\r\n    {\r\n        Bridge258Marker=*Marker;\r\n        Bridge258Marker.Root=FVector2D(256.,464.);\r\n        Bridge258Marker.Grip=Record.Frame==0?FVector2D(211.,343.):FVector2D(159.,213.);\r\n        Bridge258Marker.Axis=Record.Frame==0?FVector2D(.94,-.341):FVector2D(-.2,-.98);\r\n        Bridge258Marker.FistPolygon.Reset(); // NearHand texture owns visible fist.\r\n        Marker=&Bridge258Marker;\r\n    }\r\n    UTexture2D* Body=GetFairytaleSwordTexture(Record.Clip,Record.Frame);",
+      "expected_occurrences": 1
+    }
+  ],
+  "legacy_full_body_metadata_is_not_actual_new_pixels": true,
+  "FinalAccepted": false
+}

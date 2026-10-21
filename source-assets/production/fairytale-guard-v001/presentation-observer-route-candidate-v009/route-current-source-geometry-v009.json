@@ -1,0 +1,95 @@
+{
+  "schema": "guard-route-v009-source-geometry-facts",
+  "source_pins": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonRoomLayout.h",
+      "bytes": 1026,
+      "sha256": "ee588bb4944224b57027da359e4f6c4bd884baa97eba9bdf9c6badcbcdbdf29c"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 121495,
+      "sha256": "c31ae4c10a52707ba555864012a1ef920c855328e83a6d8d478a8ba3fd36cebb"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonStoneGuard.h",
+      "bytes": 5894,
+      "sha256": "6c71de106f3d728aec593d1528331714442e6756878cf49af3d04f48e68eb9de"
+    }
+  ],
+  "read_source_player_body_half": [
+    18,
+    16
+  ],
+  "read_source_guard_body_half": [
+    40,
+    28
+  ],
+  "planning_clearance_world": 8,
+  "expanded_guard_relative_half": [
+    66,
+    52
+  ],
+  "wake_ellipse_radii": [
+    235,
+    110
+  ],
+  "outside_lane_offset": 140,
+  "plans": [
+    {
+      "side": -1,
+      "actual_initial_player": [
+        -1180,
+        0
+      ],
+      "actual_initial_guard": [
+        -800,
+        -160
+      ],
+      "candidate_waypoints": [
+        [
+          -1180,
+          -20
+        ],
+        [
+          -950,
+          -20
+        ],
+        [
+          -950,
+          -160
+        ]
+      ],
+      "axis_aligned_bounds_and_body_clear": true,
+      "not_native_movement_run": true
+    },
+    {
+      "side": 1,
+      "actual_initial_player": [
+        -1180,
+        0
+      ],
+      "actual_initial_guard": [
+        -800,
+        -160
+      ],
+      "candidate_waypoints": [
+        [
+          -1180,
+          -20
+        ],
+        [
+          -650,
+          -20
+        ],
+        [
+          -650,
+          -160
+        ]
+      ],
+      "axis_aligned_bounds_and_body_clear": true,
+      "not_native_movement_run": true
+    }
+  ],
+  "scope": "Read-only current source geometry and original native start positions; not UE route execution or general pathfinding guarantee."
+}

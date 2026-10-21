@@ -1,0 +1,62 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp
+@@ -98,6 +98,47 @@
+         double Next=At;for(const auto& I:B.DirectInvulnerabilityIntervals)
+             if(At>=I.Start&&At<I.EndExclusive)Next=FMath::Max(Next,I.EndExclusive);
+         if(Next==At)return At<=End;At=Next;if(At>End)return false;
++    }
++    return false;
++}
++// Solve against the actual absolute position/time formula used by InputAt. A
++// rounded analytic root may still be outside; repeatedly partitioning at that
++// root can round Next back to Cursor and reject a perfectly legal frame.
++bool FirstRepresentableWakeEntry(const FDungeonKnightBody& B,const FDungeonKnightFrame& F,
++    Guard::FPoint Center,double Begin,double End,double& At)
++{
++    if(!(End>Begin))return false;
++    const auto Inside=[&](double Time)
++    {
++        const auto P=PositionAt(B,F,Time);
++        const double X=(P.X-Center.X)/235.,Y=(P.Y-Center.Y)/110.;
++        return X*X+Y*Y<=1.; // Exactly the native NearWake geometry; no epsilon.
++    };
++    if(Inside(Begin))return false; // Already observed by the real cursor Pump.
++    double Entry=0.,Exit=1.;
++    if(!EllipseContact(PositionAt(B,F,Begin)-XY(Center),PositionAt(B,F,End)-XY(Center),
++        235.,110.,Entry,Exit))return false;
++    double InsideTime=Begin+(End-Begin)*Entry;
++    if(!Inside(InsideTime))
++    {
++        // The analytic interval only supplies a bracket. Every accepted time
++        // must satisfy the real absolute-coordinate query, including tangency.
++        InsideTime=Begin+(End-Begin)*(Entry+(Exit-Entry)*.5);
++        if(!Inside(InsideTime))
++        {
++            InsideTime=End;
++            if(!Inside(InsideTime))return false; // No representable legal entry.
++        }
++    }
++    double OutsideTime=Begin;
++    constexpr int MaxRefinements=std::numeric_limits<double>::max_exponent
++        -std::numeric_limits<double>::min_exponent+std::numeric_limits<double>::digits+4;
++    for(int I=0;I<MaxRefinements;++I)
++    {
++        const double Mid=OutsideTime+(InsideTime-OutsideTime)*.5;
++        if(Mid==OutsideTime||Mid==InsideTime)
++        {At=InsideTime;return At>Begin&&At<=End&&Inside(At);}
++        if(Inside(Mid))InsideTime=Mid;else OutsideTime=Mid;
+     }
+     return false;
+ }
+@@ -287,9 +328,8 @@
+         double Next=NextBoundary(Candidate.State(),Frame,Now);if(Index<Hits.size())Next=FMath::Min(Next,Hits[Index].AtTime);
+         if(Candidate.State().Phase==Guard::EPhase::Dormant)if(const auto B=TargetBody(Frame))
+         {
+-            double Entry=0.,Exit=1.;if(EllipseContact(PositionAt(*B,Frame,Cursor)-XY(Candidate.State().Position),
+-                PositionAt(*B,Frame,Next)-XY(Candidate.State().Position),235.,110.,Entry,Exit)&&Entry>0.)
+-                Next=Cursor+(Next-Cursor)*Entry;
++            double EntryTime=0.;
++            if(FirstRepresentableWakeEntry(*B,Frame,Candidate.State().Position,Cursor,Next,EntryTime))Next=EntryTime;
+         }
+         // Preview is a value copy: no Actor location, HP, sound or reward effects.
+         auto Preview=Candidate;TArray<FDungeonMotionSegment> Motion;

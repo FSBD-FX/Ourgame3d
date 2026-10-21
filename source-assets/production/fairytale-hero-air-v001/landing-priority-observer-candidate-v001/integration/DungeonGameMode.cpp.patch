@@ -1,0 +1,17 @@
+--- UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp
++++ UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp
+@@ -1,4 +1,5 @@
+ #include "DungeonGameMode.h"
++#include "DungeonHeroLandingPriorityProbeV001.h"
+ #include "DungeonCombatRules.h"
+ #include "DungeonFighter.h"
+ #include "DungeonRoomLayout.h"
+@@ -1160,6 +1161,8 @@
+ void ADungeonGameMode::StartPlay()
+ {
+     Super::StartPlay();
++    if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroLandingPriorityProofV001")))
++        GetWorld()->SpawnActor<ADungeonHeroLandingPriorityProbeV001>();
+     // Native Actor BeginPlay still runs. This opt-in origin never constructs a
+     // starter Run, including a failed/contaminated startup or a repeated call.
+     if(bPristineContinueOrigin)return;

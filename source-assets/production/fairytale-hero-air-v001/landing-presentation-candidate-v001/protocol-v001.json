@@ -1,0 +1,92 @@
+{
+  "schema": "landing-priority-presentation-protocol-v001",
+  "runtime_schema": "hero-landing-priority-native-observer-v001",
+  "native_result_schema": "hero-landing-priority-independent-native-v001",
+  "aggregate_schema": "hero-landing-priority-independent-four-v001",
+  "cases": [
+    {
+      "action": "J",
+      "facing": -1
+    },
+    {
+      "action": "J",
+      "facing": 1
+    },
+    {
+      "action": "Shift",
+      "facing": -1
+    },
+    {
+      "action": "Shift",
+      "facing": 1
+    }
+  ],
+  "CLI_required": [
+    "--archive",
+    "--prereg",
+    "--independent",
+    "--checker",
+    "--checkerfreeze",
+    "--output"
+  ],
+  "native_validation": {
+    "entry": "explicit final frozen checker --archive ARCHIVE --prereg PREREG",
+    "freeze_pin": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/landing-priority-observer-candidate-v001/tooling-review-fix-v002/HeroLandingPriority-Task2-tooling-freeze-v002.json",
+      "bytes": 10585,
+      "sha256": "c785c6ce607c4cb8daeebc7a5c29170161c5ed2f7453f1713708223e709f0786"
+    },
+    "checker_pin": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/landing-priority-observer-candidate-v001/tooling-review-fix-v002/verify-landing-priority-native-v001.py",
+      "bytes": 47567,
+      "sha256": "16681b647f2e55876a92816377c63beb5b79202cf4b0f8a0326086e935662b6a"
+    },
+    "fresh_official_result_exact_typed_dict_equal_retained": true,
+    "aggregate_branch": "unique matching actual prereg; other three not rerun by each media call",
+    "old296_preflight_or_three_jump_flow_called": false
+  },
+  "presentation": {
+    "every_actual_native_PNG": true,
+    "timeline": "actual completed-callback wall offset relative to audio monotonic origin; microsecond VFR",
+    "native_full_PCM_retained_unchanged": true,
+    "AAC_complete_lossy_copy": true,
+    "full_EOF_AV_and_all_frame_PTS_decoded": true,
+    "trim": false,
+    "retime": false,
+    "synthetic_frames": false,
+    "labels_outside_game_rectangles": true,
+    "source_stack": "observations.rendered_player_stack == old_draw.actual_stack; new Air/Dodge actual stack cross-check",
+    "legacy_body_texture_used": false,
+    "counts": {
+      "J_actual_legacy_layers": 8,
+      "Shift_actual_layers": 9,
+      "Shift_residents": 33,
+      "Air_actual_layers": 9,
+      "Ready_actual_layers": 7
+    }
+  },
+  "boundaries": {
+    "first_action": "actual previous callback to first action, regardless actual previous Land4/Land5/other pose",
+    "causal_Land4_token": "separate token-to-first-action endpoint pair with actual intervening indices/count/wall/simulation interval",
+    "last_action_to_first_Ready": "true endpoints, adjacent flag derived exactly; if gap, also show last-action-to-next and previous-to-Ready adjacent boundaries",
+    "no_extra_Land4_adjacency_gate": true,
+    "all_endpoints_original_frames": true
+  },
+  "archive_policy": {
+    "full_originals_referenced_not_duplicated": true,
+    "selected_full_PNG_and_required_metadata_exact_copies": true,
+    "source_archive_readonly": true,
+    "new_output_leaf_only": true,
+    "failures_preserved": true,
+    "E_retention_owned_by_Root": true,
+    "E_before_View_required": true
+  },
+  "RootApproved": false,
+  "actual_case_verified": false,
+  "UE_started": false,
+  "full_media_encoded": false,
+  "View": false,
+  "visual_reviewed": false,
+  "audio_listened": false,
+  "FinalAccepted": false
+}

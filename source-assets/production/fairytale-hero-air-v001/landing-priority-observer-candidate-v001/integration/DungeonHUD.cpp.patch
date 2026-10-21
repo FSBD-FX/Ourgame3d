@@ -1,0 +1,10 @@
+--- UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
++++ UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+@@ -296,6 +296,7 @@
+     if (FParse::Param(FCommandLine::Get(),TEXT("DungeonContentProof")))
+     {
+         InstallFastLosslessProofScreenshots();
++        if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroLandingPriorityProofV001")))return;
+         const bool AirProduction=FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroAirProductionProofV001"));
+         const bool AirBaseline=FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroAirProofV001"));
+         if(AirProduction&&AirBaseline)

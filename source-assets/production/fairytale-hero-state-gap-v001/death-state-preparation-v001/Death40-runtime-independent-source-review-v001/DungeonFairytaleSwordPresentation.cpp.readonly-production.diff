@@ -1,0 +1,16 @@
+--- frozen-stage0/DungeonFairytaleSwordPresentation.cpp
++++ production/DungeonFairytaleSwordPresentation.cpp
+@@ -97,6 +97,13 @@
+ bool ADungeonHUD::DrawFairytaleSwordBody(ADungeonFighter* F)
+ {
+     if(!F || F->bEnemy)return false;
++    const uint64 PreviousDeathDrawId=FairytaleSwordDeathDraw.DrawId;
++    FairytaleSwordDeathDraw=FDungeonFairytaleSwordDeathDraw();
++    FairytaleSwordDeathDraw.DrawId=PreviousDeathDrawId;
++    FairytaleSwordDeathDraw.OptIn=bUseFairytaleSwordDeathPreview;
++    // Unsupported gear continues this same clock-helmet presenter; a supported
++    // Death draw owns its complete/closed branch ahead of living Hurt and Ready.
++    if(bUseFairytaleSwordDeathPreview && F->bDead && DrawFairytaleSwordDeathBody(F))return true;
+     const uint64 PreviousHurtDrawId=FairytaleSwordHurtDraw.DrawId;
+     FairytaleSwordHurtDraw=FDungeonFairytaleSwordHurtDraw();
+     FairytaleSwordHurtDraw.DrawId=PreviousHurtDrawId;

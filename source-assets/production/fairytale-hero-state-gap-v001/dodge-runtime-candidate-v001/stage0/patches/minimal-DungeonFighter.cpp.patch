@@ -1,0 +1,15 @@
+--- UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -1322,6 +1322,12 @@
+     }
+ }
+ 
++bool ADungeonFighter::QueryDodgePresentation(FDungeonDodgePresentationSample&) const
++{
++    // Stage0 semantic unsupported; no state/clock writes and no partial output.
++    return false;
++}
++
+ bool ADungeonFighter::QueryDeathPresentation(FDungeonDeathPresentationSample& Out) const
+ {
+     // Published terminal facts remain readable while Continue is closed. This

@@ -1,0 +1,18 @@
+--- UnrealGame/Source/CodexDungeon/DungeonHUD.h
++++ UnrealGame/Source/CodexDungeon/DungeonHUD.h
+@@ -86,6 +86,7 @@
+     const FDungeonFairytaleSwordDeathDraw& GetFairytaleSwordDeathDraw() const { return FairytaleSwordDeathDraw; }
+     const TArray<FDungeonFairytaleGuardDraw>& GetFairytaleGuardDraws() const { return FairytaleGuardDraws; }
+     const TArray<FDungeonFairytaleGuardFullDrawV003>& GetFairytaleGuardFullDraws() const { return FairytaleGuardFullDraws; }
++    bool IsFairytaleGuardStompPreviewEnabled() const { return bUseFairytaleGuardStompPreview; }
+ private:
+     UPROPERTY() TObjectPtr<UFont> ChineseFont;
+     UPROPERTY() TMap<FString,TObjectPtr<UTexture2D>> Frames;
+@@ -127,6 +128,7 @@
+     uint64 ActionAudioCursor = 0;
+     uint64 RestoredRunPresentationEpoch=0;
+     bool bUseFairytaleGuardFullPreview=false;
++    bool bUseFairytaleGuardStompPreview=false;
+     uint64 FairytaleGuardFullDrawSerial=0;
+     TArray<FDungeonFairytaleGuardFullDrawV003> FairytaleGuardFullDraws;
+     void LoadFairytaleGuardFullTrial();

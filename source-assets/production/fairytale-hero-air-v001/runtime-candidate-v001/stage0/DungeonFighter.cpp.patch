@@ -1,0 +1,15 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -1322,6 +1322,12 @@
+     }
+ }
+ 
++bool ADungeonFighter::QueryHeroNonAttackAir(FDungeonHeroAirSample&) const
++{
++    // Stage0 semantic RED seam: leave Out untouched; do not infer from idle/Ready.
++    return false;
++}
++
+ bool ADungeonFighter::QueryCompletedGuardMove(FDungeonGuardMoveSample& Out) const
+ {
+     // This is a completed native-owner read. No AI step, sweep, clock, cache,

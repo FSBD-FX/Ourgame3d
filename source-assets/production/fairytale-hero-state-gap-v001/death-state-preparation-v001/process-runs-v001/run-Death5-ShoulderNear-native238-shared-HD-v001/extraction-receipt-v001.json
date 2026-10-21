@@ -1,0 +1,365 @@
+{
+  "schema": "Death5-official-shared-component-processing-receipt-v001",
+  "native_id": 238,
+  "component": "ShoulderNear",
+  "state": "leather_shouldernear_hero_death5",
+  "actual_admission": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/actual-raw-admissions-v001/actual-Root-E-238-ShoulderNear-raw-admission-v001.json",
+    "bytes": 1503,
+    "sha256": "657aed4cdd076abb0b293e10a419443fd638012de02509c35897cb50019e206c"
+  },
+  "F_raw": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/Root-native-armor-Death5-v001/raw/leather_shouldernear_hero_death5.png",
+    "bytes": 1297535,
+    "sha256": "aa3569ea635c01830d75d8d985ed8b061173b1e428b156d56a4bcdb87f1d2503"
+  },
+  "E_raw": {
+    "path": "E:/OurGame/Knight/过程图稿与视频/2026-10-18-OurgameUE-DeathNear238-native-v484/F盘原批次副本/2026-10-18_钟盔Death近肩238原件_v001/原件/001-leather_shouldernear_hero_death5.png",
+    "bytes": 1297535,
+    "sha256": "aa3569ea635c01830d75d8d985ed8b061173b1e428b156d56a4bcdb87f1d2503"
+  },
+  "raw_dimensions": [
+    2172,
+    724
+  ],
+  "Root_E_authorized": true,
+  "source_raw_actually_Viewed": true,
+  "prepared_source": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/run-leather_shouldernear_hero_death5-v001/sprite-request.json",
+    "bytes": 4601,
+    "sha256": "151b2d679a35393d087dfc9c086d00695d637524638e6edb1317c551a1c985b1"
+  },
+  "request_copy_byte_exact": true,
+  "whole_component": true,
+  "shared_row_scale": true,
+  "per_frame_normalization": false,
+  "extract_compose_min_used_pixels": 512,
+  "commands": [
+    {
+      "stage": "extract-whole-components-shared",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\lgt-hurt4-process-runs-v001\\process-inputs-v001\\shared-HD-fit-explicit-component-min-UNCHANGED.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\death-state-preparation-v001\\process-runs-v001\\run-Death5-ShoulderNear-native238-shared-HD-v001",
+        "--min-used-pixels",
+        "512"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/process-runs-v001/run-Death5-ShoulderNear-native238-shared-HD-v001/pipeline-logs/extract-whole-components-shared-v001.log",
+        "bytes": 2268,
+        "sha256": "253844eb9d32c763454838c81c35785eaec74c0019d8257bea94bb9a11e55e04"
+      }
+    },
+    {
+      "stage": "compose-official",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\compose_sprite_atlas.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\death-state-preparation-v001\\process-runs-v001\\run-Death5-ShoulderNear-native238-shared-HD-v001",
+        "--min-used-pixels",
+        "512"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/process-runs-v001/run-Death5-ShoulderNear-native238-shared-HD-v001/pipeline-logs/compose-official-v001.log",
+        "bytes": 430,
+        "sha256": "b11e3febe684e1f5f3ea1817f3328f0d2062bf5576d8c48e89bc3977a6df148c"
+      }
+    },
+    {
+      "stage": "curated-official",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\export_curated_pngs.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\death-state-preparation-v001\\process-runs-v001\\run-Death5-ShoulderNear-native238-shared-HD-v001",
+        "--state",
+        "leather_shouldernear_hero_death5"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/process-runs-v001/run-Death5-ShoulderNear-native238-shared-HD-v001/pipeline-logs/curated-official-v001.log",
+        "bytes": 1352,
+        "sha256": "d35bbcfc4c0553599b5e24f9abad42bf67097ff69f7dfea9ab279b37cefdfd90"
+      }
+    },
+    {
+      "stage": "preview-official",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\preview_animation.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\death-state-preparation-v001\\process-runs-v001\\run-Death5-ShoulderNear-native238-shared-HD-v001"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/process-runs-v001/run-Death5-ShoulderNear-native238-shared-HD-v001/pipeline-logs/preview-official-v001.log",
+        "bytes": 399,
+        "sha256": "e2636538e008b148b91d2d671eca772a2ff714509d538119b5602583cb9c5481"
+      }
+    },
+    {
+      "stage": "inspect-official",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\inspect_sprite_run.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\death-state-preparation-v001\\process-runs-v001\\run-Death5-ShoulderNear-native238-shared-HD-v001"
+      ],
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/process-runs-v001/run-Death5-ShoulderNear-native238-shared-HD-v001/pipeline-logs/inspect-official-v001.log",
+        "bytes": 563,
+        "sha256": "65ad985c877fb2dbd7b39d44b483c18b0b4fa5f06040300b6f4712310cdbb78b"
+      }
+    }
+  ],
+  "new_curated_Viewed": false,
+  "Source_Content_tools_ledger_UE_modified": false,
+  "TrialAllowed": false,
+  "shared_row_fit": {
+    "policy": "one_raw_component_max_extent_scale_for_entire_row",
+    "scale": 0.25,
+    "source_max_extent": [
+      288,
+      218
+    ],
+    "horizontal_registration": "bbox_center",
+    "per_frame_scale_normalization": false,
+    "frame_records": [
+      {
+        "frame": 0,
+        "source_component_size": [
+          243,
+          218
+        ],
+        "shared_scale": 0.25,
+        "resampled_size": [
+          61,
+          54
+        ],
+        "placement_xy": [
+          225,
+          238
+        ],
+        "alpha_bbox_px": [
+          225,
+          238,
+          286,
+          292
+        ]
+      },
+      {
+        "frame": 1,
+        "source_component_size": [
+          235,
+          214
+        ],
+        "shared_scale": 0.25,
+        "resampled_size": [
+          59,
+          54
+        ],
+        "placement_xy": [
+          226,
+          238
+        ],
+        "alpha_bbox_px": [
+          226,
+          238,
+          285,
+          292
+        ]
+      },
+      {
+        "frame": 2,
+        "source_component_size": [
+          253,
+          182
+        ],
+        "shared_scale": 0.25,
+        "resampled_size": [
+          63,
+          46
+        ],
+        "placement_xy": [
+          224,
+          246
+        ],
+        "alpha_bbox_px": [
+          224,
+          246,
+          287,
+          292
+        ]
+      },
+      {
+        "frame": 3,
+        "source_component_size": [
+          272,
+          151
+        ],
+        "shared_scale": 0.25,
+        "resampled_size": [
+          68,
+          38
+        ],
+        "placement_xy": [
+          222,
+          254
+        ],
+        "alpha_bbox_px": [
+          222,
+          254,
+          290,
+          292
+        ]
+      },
+      {
+        "frame": 4,
+        "source_component_size": [
+          288,
+          131
+        ],
+        "shared_scale": 0.25,
+        "resampled_size": [
+          72,
+          33
+        ],
+        "placement_xy": [
+          220,
+          259
+        ],
+        "alpha_bbox_px": [
+          220,
+          259,
+          292,
+          292
+        ]
+      }
+    ],
+    "raw_component_RGBA_sha256": [
+      "64cf3b532ba81e19305c7147f5c30d4e3659cd9140dd01467cf56d3f2e73d455",
+      "fe3ea5743f6414344b7f186dc50f7a1d9b1586955e6ff42c83a4b65dada1340b",
+      "745d39a6f6b937bb697e4dfef8649bd7ccd8661c7d3db80fef865a56e65eeb47",
+      "2bbafb6e84d99b117be721ea7ac44d4ad6062a0da7f8412778666abed92e4dd1",
+      "a6c8b4dff23dda605e0e2cb99678865e15d9ff18dceaf96edb95d846bfe83b39"
+    ]
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/process-runs-v001/run-Death5-ShoulderNear-native238-shared-HD-v001/curated/frame-0.png",
+        "bytes": 8454,
+        "sha256": "c6b93daf9d614354361f0a3d850a143e5d6a0c59d8ef6c639c073aaab462a86d"
+      },
+      "RGBA_sha256": "6e767da900e3137e7475f96ea62f776303e03543ee5aa1dc2b3f02218a108cd9",
+      "alpha_nonzero": 2196,
+      "alpha128": 1956,
+      "bbox": [
+        225,
+        238,
+        286,
+        292
+      ]
+    },
+    {
+      "frame": 1,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/process-runs-v001/run-Death5-ShoulderNear-native238-shared-HD-v001/curated/frame-1.png",
+        "bytes": 8004,
+        "sha256": "cbb8015b44ad7eb7e3e5eff6649615627a04a9a6ec0bcf1f8e95433d638e3fa9"
+      },
+      "RGBA_sha256": "e2354e00d3910351c27863e97941a5255df460beecb51083bb334ef5af86a94d",
+      "alpha_nonzero": 2049,
+      "alpha128": 1814,
+      "bbox": [
+        226,
+        238,
+        285,
+        292
+      ]
+    },
+    {
+      "frame": 2,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/process-runs-v001/run-Death5-ShoulderNear-native238-shared-HD-v001/curated/frame-2.png",
+        "bytes": 7731,
+        "sha256": "198b30e353e70a25994abd02b6036ddf48c53ca216425676a2e25a71ef561f02"
+      },
+      "RGBA_sha256": "f61b64bfa0dfa0d4f24963b7d8a52b68124b1857c12f0220fbed36189a8aaca7",
+      "alpha_nonzero": 1934,
+      "alpha128": 1711,
+      "bbox": [
+        224,
+        246,
+        287,
+        292
+      ]
+    },
+    {
+      "frame": 3,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/process-runs-v001/run-Death5-ShoulderNear-native238-shared-HD-v001/curated/frame-3.png",
+        "bytes": 7052,
+        "sha256": "51b60c169239a72a34da3539e0dc21a474a58c7b9bde6950f1450fe5b01ebaf7"
+      },
+      "RGBA_sha256": "ae3ea42e29a083a010cfa749f27d60b1a20962601b1e10c16fd22c974fcc7a8d",
+      "alpha_nonzero": 1765,
+      "alpha128": 1547,
+      "bbox": [
+        222,
+        254,
+        290,
+        292
+      ]
+    },
+    {
+      "frame": 4,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/process-runs-v001/run-Death5-ShoulderNear-native238-shared-HD-v001/curated/frame-4.png",
+        "bytes": 7019,
+        "sha256": "2693e14fbb35947cd453f9b4f091ee110ac9b295888787fd79e639e4f2f77ce1"
+      },
+      "RGBA_sha256": "d2dae869ee7ae00b35f1a95069002218c8f557955355e2568d82aff22d4d7b8b",
+      "alpha_nonzero": 1819,
+      "alpha128": 1620,
+      "bbox": [
+        220,
+        259,
+        292,
+        292
+      ]
+    }
+  ],
+  "official_inspect": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/process-runs-v001/run-Death5-ShoulderNear-native238-shared-HD-v001/sprite-inspect.report.json",
+    "bytes": 1678,
+    "sha256": "af3318f4ce4ad31f2bc43d0bb262330aff1b4989c9c0849f9514334755389177"
+  },
+  "inspect_errors": [],
+  "inspect_warnings": [
+    "leather_shouldernear_hero_death5: motion presence is too low (0.0012 < 0.0100)"
+  ],
+  "source_pose_or_density_accepted": false,
+  "status": "FIVE_OFFICIAL_STAGES_EXIT0_ORIGINAL_WARNING_RETAINED_SOURCE_REVIEW_PENDING"
+}

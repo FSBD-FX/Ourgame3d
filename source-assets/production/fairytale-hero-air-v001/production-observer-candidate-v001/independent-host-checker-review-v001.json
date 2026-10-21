@@ -1,0 +1,101 @@
+{
+  "schema": "HeroAir-production-observer-independent-host-review-v001",
+  "created_utc": "2026-10-18T17:09:44.149643+00:00",
+  "source_probe_freeze_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/production-observer-candidate-v001/HeroAir-production-observer-source-freeze-v001.json",
+    "bytes": 5611,
+    "sha256": "e7b9f44fe53fa2c827d962b359494badf2efbf1ffb8d2e2face8dd2449fa6140"
+  },
+  "old_checker_freeze_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/production-observer-candidate-v001/tooling/Air-production-proof-checker-freeze-v001.json",
+    "bytes": 7824,
+    "sha256": "0883605a2d612fc979d3adb68e3df8191969d288e196db3dd2424efe061a34b6"
+  },
+  "current_checker_freeze_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/production-observer-candidate-v001/tooling-freeze-relative-v002/Air-production-proof-checker-freeze-v002.json",
+    "bytes": 6641,
+    "sha256": "66f1dd8e0978ea05b89356bb99953a99c282af53bd150fbf7ee6c8bbc8483bfb"
+  },
+  "current_protocol_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/production-observer-candidate-v001/host-checker-protocol-v002.json",
+    "bytes": 6559,
+    "sha256": "2554e4b2c76e6aa8413a400925fb4200f6736c0d80858192facf64f444ab83f2"
+  },
+  "unchanged_v001_behavior_13_PASS": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/production-observer-candidate-v001/tooling/validation-runs/h170133089542/host-tests-result.json",
+    "bytes": 1009,
+    "sha256": "99d01e6a2c6e2d1a659960994e3592c721b22cb002df314bd1266af3c48e034d"
+  },
+  "current_v002_relative_and_source_chain_10_PASS": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/production-observer-candidate-v001/tooling-freeze-relative-v002/validation-runs/r170623896004/relative-freeze-tests-result.json",
+    "bytes": 1924,
+    "sha256": "f07f60715626012dee6027b4a11225f92300e29ed1dda45c4c226753c6225d97"
+  },
+  "main_native_checker_and_other_algorithm_AST_unchanged": true,
+  "source_and_both_checker_execution_closures_two_SHA_mismatches": 0,
+  "bulk_synthetic_fixture_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/production-observer-candidate-v001/tooling/synthetic-fixture-provenance-v001.json",
+    "bytes": 145904,
+    "sha256": "77464c08aa68db36de99be1858a6ea9f0a2ddf09c6647ccba01433e7261b91f8"
+  },
+  "bulk_synthetic_fixture_files": 480,
+  "bulk_synthetic_fixture_bytes": 415472188,
+  "bulk_synthetic_fixture_two_SHA_mismatches": 0,
+  "originals_not_copied_or_deleted": true,
+  "old_baseline_actual_source_pins_unchanged": true,
+  "independent_read_paths": [
+    "preflight",
+    "actual49_BGRA_to_RGBA",
+    "float_quad_single_reflection",
+    "3jump_None6_LGT9_landing_rejump",
+    "PNG_CRC_FIFO_StopFlush",
+    "fixed_Dodge_optics",
+    "main_submix_PCM_duration",
+    "fresh_PID_pair"
+  ],
+  "old_v001_blocker": {
+    "function": "air_production_contract_v001.frozen",
+    "actual_reproduced_exception": "FileNotFoundError: F:/Ourgame/before-source/DungeonFairytaleSwordAirV001.cpp",
+    "reason": "Production 42-member freeze uses paths relative to its own folder; v001 used F:/Ourgame",
+    "old_frozen_bytes_preserved": true
+  },
+  "source_chain_old_before_not_an_after": "Production fallback must select existing-source/new-source, never before-source; six current production rows plus three observer rows are legal",
+  "actual_observer_link_failure_read_only_pin": {
+    "path": "F:/Ourgame/UnrealGame/Saved/Bootstrap/build-editor-20261019-010618.log",
+    "bytes": 10855,
+    "sha256": "9ff620344fa184794a8ee24698288f139f72adb0525c015012b0812ed417a387"
+  },
+  "actual_link_failure": "Three LNK2019 RHI imports and LNK1120; C++/UHT compilation is not DLL-link success. Root owns NEW explicit RHI Build.cs repair and current CM binding; do not alter frozen observer to hide this failure.",
+  "unchanged_source_probe_three_files": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/production-observer-candidate-v001/new-source/DungeonHeroAirProductionProbeV001.cpp",
+      "bytes": 42942,
+      "sha256": "dce5897a70c8f612cd5b7bc3a5c5dee718d13e40683a0a0fb7291bdeee2903d4"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/production-observer-candidate-v001/new-source/DungeonHeroAirProductionProbeV001.h",
+      "bytes": 1060,
+      "sha256": "c9a5e0e261c1688e87d1e80605fcff408fcd9dff019184ff06f010c60a9102c9"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/production-observer-candidate-v001/new-source/DungeonHUD.cpp",
+      "bytes": 123483,
+      "sha256": "02b33839be77835a21566e5062f7db7c7faf5fd81c3e843a67c94154428e4204"
+    }
+  ],
+  "fixed_thresholds": {
+    "body_min": 150,
+    "body_median_max": 40,
+    "body_error_limit": 55,
+    "body_fraction_min": 0.6,
+    "blade_min": 8,
+    "blade_median_max": 50,
+    "blade_error_limit": 65,
+    "blade_fraction_min": 0.6
+  },
+  "actual_UE_started": false,
+  "actual_Source_Content_E_ledger_writes": 0,
+  "actual_native_GPU_audio_listening_proved": false,
+  "final_visual_acceptance": false,
+  "FinalAccepted": false
+}

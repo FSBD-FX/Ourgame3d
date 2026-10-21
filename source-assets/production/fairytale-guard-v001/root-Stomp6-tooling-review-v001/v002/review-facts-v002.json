@@ -1,0 +1,51 @@
+{
+  "schema": "Root-Stomp6-v002-authority-independent-static-review-v001",
+  "initial_invalid_prepare": {
+    "source_pin": {
+      "path": "source-assets/production/fairytale-guard-v001/root-Stomp6-tooling-review-v001/v002/read-only-source-copies/prepare-guard-stomp6-from-rows-v002.py",
+      "bytes": 6770,
+      "sha256": "27d97a0cea055fce5b8672111b2e9553808870619ffb90987f64953b7ac108a0"
+    },
+    "line": 62,
+    "message": "f-string: single '}' is not allowed",
+    "script_executed_by_reviewer": false
+  },
+  "corrected_read_only_actual_tool_pins": [
+    {
+      "path": "tools/scripts/make-guard-stomp6-root-rows-v002.py",
+      "bytes": 4169,
+      "sha256": "289f71ce7afeac759875f13dc09c953898a6272b671ce597759cf3ab3c6f527e"
+    },
+    {
+      "path": "tools/scripts/prepare-guard-stomp6-from-rows-v002.py",
+      "bytes": 6771,
+      "sha256": "f82a01dd9233f9d967db2b9d71b080bc3ce8fe41a0c99e79ec6c0428fd650080"
+    }
+  ],
+  "exact_executable_delta_limited_to_perframe_authority": true,
+  "old_v001_freeze_6members_unchanged": true,
+  "Root_registration_SHA_and_perframe_root_equalities_retained": true,
+  "two_override_blocks_old11_inherited": true,
+  "RGBA_E_old1326_six_source_gates_byte_unchanged": true,
+  "actual_enum_numeric_authorities": {
+    "ArtistStandingRootPropagation": 2,
+    "ArtistNearSupportDeltaPropagation": 3
+  },
+  "isolated_scalar_frame_format_checks": [
+    {
+      "authority": "ArtistNearSupportDeltaPropagation",
+      "frozen_manual_frame_regex_matches": true,
+      "isolated_text": "R.Frames.Add({TEXT(\"HOST_SYNTHETIC_ONLY\"),TEXT(\"0000000000000000000000000000000000000000000000000000000000000000\"),TEXT(\"1111111111111111111111111111111111111111111111111111111111111111\"),FVector2D(238.0,464.0),EPivotAuthority::ArtistNearSupportDeltaPropagation});"
+    },
+    {
+      "authority": "ArtistStandingRootPropagation",
+      "frozen_manual_frame_regex_matches": true,
+      "isolated_text": "R.Frames.Add({TEXT(\"HOST_SYNTHETIC_ONLY\"),TEXT(\"0000000000000000000000000000000000000000000000000000000000000000\"),TEXT(\"1111111111111111111111111111111111111111111111111111111111111111\"),FVector2D(238.0,464.0),EPivotAuthority::ArtistStandingRootPropagation});"
+    }
+  ],
+  "corrected_two_Python_AST_parsed": true,
+  "reviewed_tools_executed": false,
+  "UE_UBT_import_or_media_View": false,
+  "clear_current_corrected_valid_flow_blocker_found": false,
+  "footlock_or_join_or_runtime_success_claimed": false
+}

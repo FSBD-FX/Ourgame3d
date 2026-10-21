@@ -1,0 +1,24 @@
+{
+  "schema": "Hero-Air6-actual-physics-presentation-proposal-v001",
+  "air": "H>0 OR V>0",
+  "frames": [
+    "RiseEarly V>315",
+    "RiseLate 90<V<=315",
+    "Apex abs(V)<=90",
+    "Fall V<-90",
+    "LandingImpact H=V=0 age in[0,.06)",
+    "LandingSettle H=V=0 age in[.06,.12)"
+  ],
+  "physics_unchanged": {
+    "initialV": 630,
+    "gravity": 1800,
+    "landingAgeCap": ".12f",
+    "projection": 0.7,
+    "standing_scale": "72/416"
+  },
+  "source_points": null,
+  "source_accepted": false,
+  "runtime_imported": false,
+  "preview_fps_is_not_runtime_clock": true,
+  "whole_rig_or_per_pose_fit_forbidden": true
+}

@@ -1,0 +1,1 @@
+原218自身helmet-only五分区、Near235/Far236和Sword.50严格复用240原owner候选已保全源，排他RGBA重构逐像素相等。仅241Chest在512curated后做整数平移，无灰band/局部擦色/补内衬/整图缩放。4相为扣锚定；1/2额外best整数对照，不是可选修图。真实72展示全四以416→72常量及原pairedshoe作者Root定位，非native/足锁。原241保护0/3失败、扣与neck漂移、motionwarning与旧失败均保留。未准入，RootE后实际View可判可见接合，不能凭两点残差减小称成功。

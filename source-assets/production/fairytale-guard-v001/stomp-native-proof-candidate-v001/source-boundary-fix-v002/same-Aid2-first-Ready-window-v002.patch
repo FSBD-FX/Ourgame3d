@@ -1,0 +1,16 @@
+--- a/DungeonGuardStompProbeV001.cpp
++++ b/DungeonGuardStompProbeV001.cpp
+@@ -141,5 +141,5 @@
+     if(Q.Clip==Full::EClip::StompRecovery){if(!Need(Q.SampleTime>=CycleAction.ActiveEnd&&Q.SampleTime<CycleAction.RecoveryEnd,TEXT("Recovery source outside original half-open window")))return O;RecoveryMask|=1u<<Q.Frame;if(Q.Frame==0&&PreviousDraw&&PreviousDraw->GetObjectField(TEXT("Selection"))->GetStringField(TEXT("Clip"))==TEXT("StompActive")&&PreviousDraw->GetObjectField(TEXT("Selection"))->GetNumberField(TEXT("Frame"))==1){ActiveRecoveryJoin=true;Join(TEXT("StompActive1-to-Recovery0"),X);}}
+    }
+-   if(CyclePinned&&AtSide(E)&&Q.Clip==Full::EClip::Ready&&Q.SampleTime>=CycleAction.RecoveryEnd&&PreviousDraw&&PreviousDraw->GetObjectField(TEXT("Selection"))->GetStringField(TEXT("Clip"))==TEXT("StompRecovery")&&PreviousDraw->GetObjectField(TEXT("Selection"))->GetNumberField(TEXT("Frame"))==3){AfterReady=true;Join(TEXT("StompRecovery3-to-actual-Ready"),X);}
++   if(CyclePinned&&AtSide(E)&&Q.Clip==Full::EClip::Ready&&Q.AttackId==CycleAttackId&&S.Phase==DungeonStoneGuard::EPhase::Idle&&S.Action.CompletedAt==CycleAction.RecoveryEnd&&Q.SampleTime>=CycleAction.RecoveryEnd&&Q.SampleTime<CycleAction.RecoveryEnd+.3&&PreviousDraw&&PreviousDraw->GetObjectField(TEXT("Selection"))->GetStringField(TEXT("AttackId"))==FString::Printf(TEXT("%llu"),CycleAttackId)&&PreviousDraw->GetObjectField(TEXT("Selection"))->GetStringField(TEXT("Clip"))==TEXT("StompRecovery")&&PreviousDraw->GetObjectField(TEXT("Selection"))->GetNumberField(TEXT("Frame"))==3){AfterReady=true;Join(TEXT("StompRecovery3-to-actual-Ready"),X);}
+   }
+   O->SetArrayField(TEXT("guard_draws"),Draws);PreviousDraw=Current;return O;
+@@ -151,5 +151,5 @@
+   if(!Need(!HUD->GetInterfaceVisible()&&HUD->GetRenderedTextDrawCalls()==0&&!HUD->IsCombatRangeDebugEnabled()&&HUD->GetCombatRangeDebugLineCount()==0,TEXT("Hidden interface/default-off combat range required")))return;
+   if(CyclePinned)if(auto E=Enemy(GuardId))
+-  {const double N=E->GetStoneGuardDriver()->State().Time;if(N>=CycleAction.ActiveAt&&(!BeforeReady||WindupMask!=63)){Finish(TEXT("Original WU900ms ended without6/sourceReady join"));return;}if(N>=CycleAction.ActiveEnd&&(!WUActiveJoin||ActiveMask!=3)){Finish(TEXT("Original Active150ms ended without2x75ms/sameAid/join"));return;}if(N>=CycleAction.RecoveryEnd&&(!ActiveRecoveryJoin||RecoveryMask!=15)){Finish(TEXT("Original Recovery1500ms ended without4x375ms/sameAid/join"));return;}}
++  {const double N=E->GetStoneGuardDriver()->State().Time;if(N>=CycleAction.ActiveAt&&(!BeforeReady||WindupMask!=63)){Finish(TEXT("Original WU900ms ended without6/sourceReady join"));return;}if(N>=CycleAction.ActiveEnd&&(!WUActiveJoin||ActiveMask!=3)){Finish(TEXT("Original Active150ms ended without2x75ms/sameAid/join"));return;}if(N>=CycleAction.RecoveryEnd&&(!ActiveRecoveryJoin||RecoveryMask!=15)){Finish(TEXT("Original Recovery1500ms ended without4x375ms/sameAid/join"));return;}if(N>=CycleAction.RecoveryEnd+.3&&!AfterReady){Finish(TEXT("First original300ms idle return ended without sameAid2 adjacent Ready; no later cycle retry"));return;}}
+   if(CyclePinned&&WindupMask==63&&ActiveMask==3&&RecoveryMask==15&&BeforeReady&&WUActiveJoin&&ActiveRecoveryJoin&&AfterReady&&StompConfirmedHits==1){Complete=true;Next(9);Finish();}
+  }

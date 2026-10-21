@@ -1,0 +1,25 @@
+# Death40 runtime production v001
+
+实际Source现已完成实现并停止写入，供Root窄合并独立DeathProbe2/startup后一次构建。此冻结是生产源码交接，**没有新GREEN、native或最终美术验收声明**。Root已真实准入的Stage0三semantic RED及源/报告冻结原样保留。
+
+9个new-source（相对v137）：DungeonDeathPresentation.h；DungeonFairytaleSwordDeathProfile.h/.cpp；DungeonFairytaleSwordDeathPlan.h/.cpp；DungeonFairytaleSwordDeathDrawState.h；DungeonFairytaleSwordDeathPresentation.cpp；DungeonFairytaleSwordDeathTextures.inl；Tests/DungeonFairytaleSwordDeathV001Tests.cpp。其中Stage0已有7，只新增renderer/texture loader2。existing修改5：DungeonFighter.h/.cpp、DungeonHUD.h/.cpp、DungeonFairytaleSwordPresentation.cpp。相对actual Stage0仅Fighter.cpp的query、DeathPlan.cpp、HUD.cpp的flag/preload、SwordPresentation.cpp的dispatch四文件改变；其余249 Stage0 Source字节相同。当前Source255，Root后续Probe2和最终startup修改后的实际数量/pins以新compiled snapshot为准。
+
+测试必须保持实际RED版：19178B SHA482ce13178025bc7b4aafd628a088b14cb425b45f543f418b6ccf492eae5299d。精确三名：
+
+- CodexDungeon.Content.FairytaleSwordDeathV001.ActualFatalTerminalFivePhasesAndExclusions
+- CodexDungeon.Content.FairytaleSwordDeathV001.RealBindingSource40MirrorAndAtomicRejection
+- CodexDungeon.Content.FairytaleSwordDeathV001.RealCodecPauseContinueKeepsTerminalAgeAndEquipment
+
+Query只读取真实dead/HP0/death标签/原float AnimationTime，失败Out不变；不依赖HurtTime/落地/新可攻击资格，能读已发布的暂停dead owner。BuildDrawPlan先核实际World主角与committed SWD/LGT，再消费Query及同一个完整40源Profile，失败Plan原子不变。真实Elapsed>=.8先选择4，之后才在小范围floor(age/.2)；最后帧保持，不新增timer/epsilon/deadline或sim-DiedAt年龄。五相body72/416密度不变，一次镜像，作者Root242/464和release-v002的Sword anchor183/311、296/430、480/442按source metadata，不冒实测隐藏接触。
+
+新增opt-in `-DungeonFairytaleSwordDeathPreview`，还需原 `-DungeonFairytaleSwordEquipmentBoundPreview`。默认传统HUD隐藏/旧art flags不改；Root将手动总入口在新1326 checkpoint后再接入。命中合法SWD/LGT Death时先于Hurt/Ready分发，缺任何资源保持closed，不借旧Ready0遮缺口。真实unsupported装备仍继续**同一个钟盔Sword presenter**的既有可识别fallback，不穿透旧人类body、不借LGT源。旧Hurt实现所有文件均字节未改，非dead各旧路径不改。
+
+启动preload只在configured BeginPlay：全部40精确objectpath＋复用旧Sword41进入Frames cache/现有editor FinishCompilation和现有FlushRenderingCommands之前。Draw与observer不LoadObject、不导入、不改像素。每次Dead draw先核全41 exactpath/Texture2D/512/resource ready/无pending initialization，再提交任何quad；当前帧9slots按Profile.SlotOrder，phase0 Sword在NearHand前，phase1–4在最底。全用Plan.Tint=White，原HitFlash即使terminal后保持>0也不写/不计时/不永久染红。只有visual quad，没有库存Drop、Operation/SourceId/Pickups/collision/伤害/音频动作。
+
+唯一observer seam：`HUD::GetFairytaleSwordDeathDraw() -> const FDungeonFairytaleSwordDeathDraw&`。四header保持Stage0原字节。Trace含实际DrawId/PlayerEntityId/frozen SimulationTime、OptIn/Drawn/AtomicPreflightReady/MissingReason、Context、SAME消费Plan(Death原Elapsed/Health/Dead/DeathReported/AnimationName、Binding、Frame、作者Root/Anchor/Axis、双精度quadgeometry/镜像/动态9SlotOrder/白Tint)、实际float Slots9和ActualRenderedStack。ResidentTextures每deadDraw记录完整41实际TexturePath/ClassName/Width/Height/ResourceReady；Drawn只在Canvas实际提交后增加DrawId与逐slot标记。没有Canvas只记缺口，不冒运行绘制成功。
+
+独立observer源码/启动patch由walk_runtime_review所有，未由本包写入actual；Root已收其Source2 freeze2d444f97205bb29f848723905fcbbf75b2c31ae0b7dc955c4069ad18bf9c558a。当前HUD原post-preload Flush及`if(DungeonHeroHurtProofV001)`锚都保留，可由Root在Hurt前窄插DeathProof并改Hurt为else-if；本冻结中的HUD.cpp是**该独立startup合并前**的生产字节，最终Root源码以新compiled snapshot精确绑定，不拿本包旧HUD字节冒合并后的字节。
+
+来源唯一native-ready-author-freeze-v002 SHA5f6506b609440d8cfda40b493b7ce9b23131b0f83aa09add333f8d8e74ef788c，v019/HeroLeatherDeath40＋原Sword，不重导剑。Root已实际导入1326是外部现有事实，本包没有执行import/UBT/UE。Profile.SourceClosureVerified只指已冻结source closure，不等于最终接触/脚锁/松手落点/画风接受；FinalAccepted仍false。Stage0三tests只验证真实actor/terminal/Binding/Plan/Codec语义，原生41resident/9quads/像素/双向/末帧及视觉验收留给Root实际运行，不能据此提前报GREEN。
+
+文件说明：new-source9与changed-source5为当前actual的字节副本；before-stage04来自Root已冻结RED快照。production-from-stage0.patch只供review（actual已实施，不要再重复apply）。static-handoff-verification-v001.json记录静态范围与actual3RED/test pin；Death40-production-freeze-v001.json分别列当前admitted source pins与候选副本pins。

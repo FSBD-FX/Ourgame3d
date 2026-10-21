@@ -1,0 +1,39 @@
+--- UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardFullProfileV003.h
++++ UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardFullProfileV003.h
+@@ -17,8 +17,10 @@
+  double Scale() const{return StandingExtent>0.?TargetBodyHeight/StandingExtent:0.;}
+ };
+ inline const TArray<FRow>& ProfileFull();
++inline const FRow* FindRowFullInProfile(EClip C,const TArray<FRow>& Rows)
++{for(const auto& R:Rows)if(R.Clip==C)return &R;return nullptr;}
+ inline const FRow* FindRowFull(EClip C)
+-{for(const auto& R:ProfileFull())if(R.Clip==C)return &R;return nullptr;}
++{return FindRowFullInProfile(C,ProfileFull());}
+ inline FString TrialGateFull(const FRow& R)
+ {
+  if(R.NativeSourceId==211||R.NativeSourceId==221||R.NativeSourceId==223)return TEXT("Rejected native source row211/221/223: grip exchange or missing opposite-foot phases");
+@@ -43,19 +45,21 @@
+  TArray<FString> WholebodyLayers;FVector2D SourcePivot=FVector2D::ZeroVector;double DisplayPivotX=0.;
+  EPivotAuthority PivotAuthority=EPivotAuthority::Unconfigured;
+ };
+-inline FBodyPlan PlanFull(const FSelection& S)
++inline FBodyPlan PlanFullInProfile(const FSelection& S,const TArray<FRow>& Rows)
+ {
+  FBodyPlan P;P.RequestedClip=P.AssetClip=S.Clip;P.Frame=S.Frame;
+  if(!S.Valid){P.MissingReason=TEXT("Native full-state selection invalid");return P;}
+- P.RequestedRow=FindRowFull(S.Clip);if(!P.RequestedRow){P.MissingReason=TEXT("Full-state row not declared");return P;}
++ P.RequestedRow=FindRowFullInProfile(S.Clip,Rows);if(!P.RequestedRow){P.MissingReason=TEXT("Full-state row not declared");return P;}
+  P.Row=P.RequestedRow;FString AliasGate;
+  if(P.Row->IsAlias())
+- {AliasGate=TrialGateFull(*P.Row);P.AssetClip=P.Row->AliasTarget;P.Frame=P.Row->AliasFrame;P.Row=FindRowFull(P.AssetClip);if(!P.Row||P.Row->IsAlias()){P.MissingReason=TEXT("Alias target missing or recursive");return P;}}
++ {AliasGate=TrialGateFull(*P.Row);P.AssetClip=P.Row->AliasTarget;P.Frame=P.Row->AliasFrame;P.Row=FindRowFullInProfile(P.AssetClip,Rows);if(!P.Row||P.Row->IsAlias()){P.MissingReason=TEXT("Alias target missing or recursive");return P;}}
+  if(!P.Row->Frames.IsValidIndex(P.Frame)){P.MissingReason=TrialGateFull(*P.Row);if(P.MissingReason.IsEmpty())P.MissingReason=TEXT("Requested full native frame absent");return P;}
+  const auto& F=P.Row->Frames[P.Frame];P.SourcePivot=F.FloorPivot;P.PivotAuthority=F.PivotAuthority;
+  P.DisplayPivotX=S.Facing<0?P.Row->CanvasWidth-F.FloorPivot.X:F.FloorPivot.X;P.WholebodyLayers.Add(F.TexturePath);
+  P.MissingReason=AliasGate.IsEmpty()?TrialGateFull(*P.Row):AliasGate;P.Valid=P.MissingReason.IsEmpty();return P;
+ }
++inline FBodyPlan PlanFull(const FSelection& S)
++{return PlanFullInProfile(S,ProfileFull());}
+ inline int AvailableUniqueBindingsFull(){int N=0;for(const auto& R:ProfileFull())N+=R.Frames.Num();return N;}
+ }
+ #include "DungeonFairytaleGuardFullDataV003.inl"

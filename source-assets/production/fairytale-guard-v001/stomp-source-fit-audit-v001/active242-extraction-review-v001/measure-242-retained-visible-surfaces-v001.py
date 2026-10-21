@@ -1,0 +1,25 @@
+"""Actual post-E519 source surface measurements, not inferred bones/rig anchors."""
+from pathlib import Path
+import json,hashlib
+import numpy as np
+from PIL import Image
+R=Path('F:/Ourgame');O=Path(__file__).resolve().parent;A=R/'source-assets/production/fairytale-guard-v001/art-preparation-v001'
+def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
+def pin(p):
+ b=p.read_bytes();return dict(path=p.as_posix(),bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
+idx=read(O/'stomp242-active2-curated-source-index-v001.json');rows=[]
+for i,f in enumerate(idx['frames']):
+ p=Path(f['file']['path']);assert pin(p)==f['file'];im=Image.open(p);a=np.array(im);assert hashlib.sha256(a.tobytes()).hexdigest()==f['RGBA_sha256']
+ feet=[]
+ for role,rect in [('NEAR physical foreground/moss-side support',[60,410,230,470]),('FAR recessed/right landing shoe',[240,410,430,470])]:
+  x0,y0,x1,y1=rect;ys,xs=np.where(a[y0:y1,x0:x1,3]>=128);by=int(ys.max()+y0);band=a[by-3:by+1,x0:x1,3].astype(float);cx=float((band*np.arange(x0,x1)[None,:]).sum()/band.sum());feet.append(dict(role=role,artist_visible_ROI=rect,actual_core_bottom_y=by,bottom4row_alpha_weighted_centroid_x=cx))
+ roi=[190,80,360,290];q=a[80:290,190:360].astype(np.int32);rr,gg,bb,al=q[:,:,0],q[:,:,1],q[:,:,2],q[:,:,3];ys,xs=np.where((rr>220)&(gg>110)&(gg<250)&(bb<60)&(rr-bb>140)&(gg-bb>70)&(al>=128));amber_count=int(len(xs));eye=[float(xs.mean()+190),float(ys.mean()+80)];eb=[int(xs.min()+190),int(ys.min()+80),int(xs.max()+191),int(ys.max()+81)]
+ cr=[180,40 if i==0 else 80,350,160];x0,y0,x1,y1=cr;ys,xs=np.where(a[y0:y1,x0:x1,3]>=128);crown=int(ys.min()+y0);floor=feet[0]['actual_core_bottom_y']+1
+ rows.append(dict(frame=i,source=pin(p),RGBA_sha256=f['RGBA_sha256'],feet=feet,visible_amber=dict(artist_ROI=roi,actual_pixel_count=amber_count,centroid_xy=eye,bbox_xyxy=eb,color_filter='R>220,110<G<250,B<60,R-B>140,G-B>70,A>=128 inside authored ROI'),artist_body_crown_ROI=cr,visible_crown_core_y=crown,NEAR_floor_y=floor,body_crown_to_floor_extent=floor-crown,near_to_eye_dx_source=eye[0]-feet[0]['bottom4row_alpha_weighted_centroid_x'],actual_View='Root+worker individual2 transparent after Root E519 twoSHA0; NEAR leg remains back-left relative body, FAR front-right; both feet down, hands/shaft stable.'))
+d=100.8/rows[0]['body_crown_to_floor_extent'];offset=20.847726401606838;wu=14.081581183438933
+for row in rows:
+ row['ONE_row_density']=d;row['near_to_eye_display_dx']=row['near_to_eye_dx_source']*d;row['WU2225_relative_vector_mismatch_display_dx']=row['near_to_eye_display_dx']-wu
+ near=row['feet'][0]['bottom4row_alpha_weighted_centroid_x'];eye=row['visible_amber']['centroid_xy'];root=[near+offset/d,row['NEAR_floor_y']];row['unrounded_NEAR_support_propagated_artistRoot']=root;row['eye_from_artistRoot_display']=[(eye[0]-root[0])*d,(eye[1]-root[1])*d]
+old=read(A/'stomp225-recovery4-registration-and-join-risk-v001/Stomp225-one-row-NEAR-support-registration-and-A-Rec-Ready-join-risks-v001.json');r0=old['rows'][0]['visible_eye_relative_unrounded_root_display_xy'];a1=rows[1]['eye_from_artistRoot_display']
+report=dict(schema='Guard242-post-E519-visible-support-upperbody-join-review-v001',raw_source_pin=idx['native_raw'],source_index=pin(O/'stomp242-active2-curated-source-index-v001.json'),extract_inspect_QA0E0W=True,source_pose_semantics_pass=False,TrialAllowed=False,rows=rows,standing_equivalent_basis_frame=0,standing_body_extent416=d==100.8/416,ONE_row_canvas_display_side=512*d,body_height_samples=[row['body_crown_to_floor_extent']*d for row in rows],measurement_limit='Foot bottom-surface alpha centroid and visible amber pixels are finite artist surface measurements, not skeleton joints, hidden shafts or centers of mass. Crown0 loadedpose is an artist standing-equivalent density basis; no perframe normalization.',WU2225_near_to_eye_display_dx=wu,older224_mismatch_about29point7px_preserved=True,current242_mismatch_improved_but_not_passed=True,Root_current_rejection='Root actual E519 View confirms16.2/19.2px near-eye difference plus back-left NEAR stance; Root requires243 directWU5 EDIT, not source admission.',A2421_to_old2250=dict(old225_registration_pin=pin(A/'stomp225-recovery4-registration-and-join-risk-v001/Stomp225-one-row-NEAR-support-registration-and-A-Rec-Ready-join-risks-v001.json'),A1_eye_from_artistRoot=a1,oldR0_eye_from_artistRoot=r0,delta_R0_minus_A1=[r0[k]-a1[k] for k in range(2)],conclusion='OldRecovery0 introduces another horizontal/vertical eye change under stationaryNEAR registration. Do not preaccept reuse; compare243actualA1 after return.',oldRecovery_accepted_for_newA1=False),original_RGBA_and_raw_unchanged=True,Source_Content_tools_ledger_E_modified=False,native_or_UE_called=False,FinalAccepted=False)
+p=O/'post-E519-visible-support-and-join-review-v001.json';assert not p.exists();p.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');print(json.dumps(dict(report=pin(p),near_eye_display=[x['near_to_eye_display_dx'] for x in rows],mismatch=[x['WU2225_relative_vector_mismatch_display_dx'] for x in rows],old225_join=report['A2421_to_old2250']['delta_R0_minus_A1']),ensure_ascii=False))

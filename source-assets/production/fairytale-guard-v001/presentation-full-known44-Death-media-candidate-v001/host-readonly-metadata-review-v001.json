@@ -1,0 +1,132 @@
+{
+  "schema": "Death-media-readonly-host-metadata-review-v001",
+  "archive": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫正常军剑死亡与自动金币试样_native_left_v001",
+  "inputs": {
+    "native_report": {
+      "path": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫正常军剑死亡与自动金币试样_native_left_v001/原件/runtime-report.json",
+      "bytes": 4492524,
+      "sha256": "4f77d1dee980d053311204cb2083fbeb77efdfe3774eb221a1c373c3d6b90b94"
+    },
+    "independent": {
+      "path": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫正常军剑死亡与自动金币试样_native_left_v001/原件/independent-Death-v005.json",
+      "bytes": 15996,
+      "sha256": "2316e6e4ad8f7c79693e44f33d127dacb3fa6360c08b6875f6d1c01985f9120d"
+    },
+    "native_index": {
+      "path": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫正常军剑死亡与自动金币试样_native_left_v001/index.json",
+      "bytes": 886,
+      "sha256": "1a04e4df5b6f1ff9244a9485ab1653760cc48d781adf123e7dd773a5543c4830"
+    }
+  },
+  "native_schema": "guard-art-known44-death-observer-v005",
+  "session_schema": "guard-art-known44-death-session-v005",
+  "PID": "9836",
+  "native_passed": true,
+  "independent_passed": true,
+  "DeathMask": 63,
+  "DeathEvent": "33",
+  "death_at": 18.040050299912693,
+  "native_frames": 586,
+  "phase_qualified_sample_counts": {
+    "0": 3,
+    "1": 3,
+    "2": 4,
+    "3": 6,
+    "4": 6,
+    "5": 8
+  },
+  "phase_join_indices": [
+    {
+      "from_phase": 0,
+      "to_phase": 1,
+      "before": 544,
+      "after": 545
+    },
+    {
+      "from_phase": 1,
+      "to_phase": 2,
+      "before": 547,
+      "after": 548
+    },
+    {
+      "from_phase": 2,
+      "to_phase": 3,
+      "before": 551,
+      "after": 552
+    },
+    {
+      "from_phase": 3,
+      "to_phase": 4,
+      "before": 557,
+      "after": 558
+    },
+    {
+      "from_phase": 4,
+      "to_phase": 5,
+      "before": 563,
+      "after": 564
+    }
+  ],
+  "coin_state_indices": [
+    [
+      "before-pickup",
+      578
+    ],
+    [
+      "first-auto-collected",
+      579
+    ],
+    [
+      "final-state",
+      585
+    ]
+  ],
+  "coin_amount": 9,
+  "guard_coin_before": 24,
+  "guard_coin_after": 33,
+  "actual_before_callback_wallet": 20,
+  "actual_after_callback_wallet": 33,
+  "actual_intervening_collection_chain": [
+    {
+      "collection": {
+        "OperationId": "1",
+        "ObjectId": "2",
+        "SourceId": "2",
+        "OwnerId": "1",
+        "Room": "1",
+        "AtTime": 19.295074602216477,
+        "BeforeCoins": 20,
+        "AfterCoins": 24
+      },
+      "amount": 4,
+      "is_Guard_coin": false
+    },
+    {
+      "collection": {
+        "OperationId": "2",
+        "ObjectId": "3",
+        "SourceId": "3",
+        "OwnerId": "1",
+        "Room": "1",
+        "AtTime": 19.295074602216477,
+        "BeforeCoins": 24,
+        "AfterCoins": 33
+      },
+      "amount": 9,
+      "is_Guard_coin": true
+    }
+  ],
+  "final_wallet": 33,
+  "negative_in_memory_metadata_cases": [
+    "wrong_callback_wallet_chain_rejected",
+    "wrong_guard_coin_amount_rejected",
+    "missing_intermediate_collection_rejected"
+  ],
+  "metadata_only": true,
+  "PNG_pixels_not_read": true,
+  "archive_written": false,
+  "UE_started": false,
+  "ffmpeg_started": false,
+  "View_used": false,
+  "formal_complete_units": 0
+}

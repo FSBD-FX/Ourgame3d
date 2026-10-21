@@ -1,0 +1,38 @@
+--- UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -1322,10 +1322,31 @@
+     }
+ }
+ 
+-bool ADungeonFighter::QueryDodgePresentation(FDungeonDodgePresentationSample&) const
+-{
+-    // Stage0 semantic unsupported; no state/clock writes and no partial output.
+-    return false;
++bool ADungeonFighter::QueryDodgePresentation(FDungeonDodgePresentationSample& Out) const
++{
++    // Published actual owner/action facts stay readable while Continue is closed.
++    // This query never advances a clock, admits input, or grants gear authority.
++    if (bEnemy || StoneKnight || StoneBat || StoneGuard || bDead || !FMath::IsFinite(Health) || Health<=0.f
++        || !FMath::IsFinite(HurtTime) || HurtTime>0.f || JumpHeight!=0.f || JumpVelocity!=0.f
++        || AnimationName!=TEXT("dodge")) return false;
++    const auto& S=Dodge.State();
++    if (S.Phase!=DungeonDodge::EPhase::Dodging || S.Records.empty() || !S.OwnerId
++        || S.OwnerId!=GetRuntimeEntityId()) return false;
++    const auto& R=S.Records.back();
++    for (double T:{S.Time,R.Start,R.End,R.ReadyAt,R.Travelled,R.Direction.X,R.Direction.Y})
++        if (!FMath::IsFinite(T)) return false;
++    if (!R.ActionId || !R.StartEventId || R.Finish!=DungeonDodge::EFinish::None
++        || R.Start<0. || R.End!=R.Start+DungeonDodge::Duration || R.ReadyAt!=R.Start+DungeonDodge::Cooldown
++        || S.Time<R.Start || S.Time>=R.End || R.Travelled<0. || R.Travelled>DungeonDodge::Distance
++        || uint32(R.Block)>uint32(DungeonDodge::EBlock::Body)
++        || !FMath::IsNearlyEqual(R.Direction.X*R.Direction.X+R.Direction.Y*R.Direction.Y,1.,1.e-12)) return false;
++    FDungeonDodgePresentationSample Candidate;
++    Candidate.Active=true;Candidate.OwnerId=S.OwnerId;Candidate.ActionId=R.ActionId;Candidate.StartEventId=R.StartEventId;
++    Candidate.SampleTime=S.Time;Candidate.Start=R.Start;Candidate.End=R.End;Candidate.ReadyAt=R.ReadyAt;
++    Candidate.Elapsed=S.Time-R.Start;Candidate.Remaining=R.End-S.Time;Candidate.Travelled=R.Travelled;
++    Candidate.Direction={R.Direction.X,R.Direction.Y};Candidate.Block=R.Block;Candidate.Finish=R.Finish;
++    Candidate.Invulnerable=IsDodgeInvulnerableAt(S.Time);
++    Out=MoveTemp(Candidate);return true;
+ }
+ 
+ bool ADungeonFighter::QueryDeathPresentation(FDungeonDeathPresentationSample& Out) const

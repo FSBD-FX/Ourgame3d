@@ -1,0 +1,42 @@
+{
+  "schema": "native-main-submix-helper-independent-static-review-v001",
+  "reviewer": "/root/guard_move_media_v141/review_capture_cpp",
+  "reviewed_source": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/audio-capture-helper-candidate-v001/new-source/DungeonNativeMainSubmixCaptureV001.h",
+      "bytes": 3210,
+      "sha256": "78fa8fe2affddfcfb540b7b8112e24d5d68c096930d7cac058dcf7ab46d38557"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/audio-capture-helper-candidate-v001/new-source/DungeonNativeMainSubmixCaptureV001.cpp",
+      "bytes": 22991,
+      "sha256": "887b9ea4a6cb61319941cc7861f7dfcbc6a17ba2f4dd49c0c0a5092001e9dd2f"
+    }
+  ],
+  "two_source_SHA_passes_reported": true,
+  "initial_draft_findings": [
+    "Queued Start vs synchronous same-frame Abort Stop ordering",
+    "CVar numerical restore did not preserve SetBy priority",
+    "Immediate PrimaryVolume check after CVar change could reject valid background mixer",
+    "Mixer change failure could drain/restore foreign main submix"
+  ],
+  "final_corrections": [
+    "FAudioCommandFence retires queued Start before normal Stop or failure drain; active failure poisons same-process retry",
+    "Save original SetBy; SetWithCurrentPriority; Stop+restore require unchanged priority; foreign owner not forced",
+    "Arming/Poll waits actual positive PrimaryVolume before start timestamp;5s pre-recording deadline",
+    "SameNativeMixer checks native DeviceID+main asset in Poll/Stop/drain/restore; changed device skipped and failed"
+  ],
+  "final_static_conclusion": "No remaining deterministic UE API/UHT/lifetime interface issue found; not a compiled or native-run claim",
+  "limits": [
+    "Owner must strongly retain helper until terminal export",
+    "Engine async original WAV writer has no no-replace flag; atomic NEW private directory plus pre-export path guard is the declared boundary",
+    "Audio fence is ordering, not measured sample onset/latency",
+    "Submix restore is queued, not effective-value acknowledgement",
+    "Only isolated single recorder process; unknown external recorder cannot be proved absent via this helper"
+  ],
+  "compiled": false,
+  "UE_started": false,
+  "native_recorded": false,
+  "auditioned": false,
+  "FinalAccepted": false
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "Death5-retained-source-author-review-v001",
+  "actual_Views": {
+    "E394_body_source5": true,
+    "E469_original_owner_and_Sword_previews": true,
+    "E489_Chest237_curated5": true,
+    "E490_Near238_curated5": true,
+    "E492_Far239_curated5": true,
+    "E494_owner_v003_Helmet5_and_hand3_4": true,
+    "new_v004_owner_and_LGT_sourcefit": false
+  },
+  "facts": [
+    "Death220 is articulated collapse with persistent clock-helmet/amber-eyes/gray-cloth/brown-gloves/shoes; no body redraw or static Ready substitute is used.",
+    "Chest237 neckline/arm apertures are visibly transparent, original pouch remains image-left; projected garment flattens over five source poses.",
+    "Near238 cap and Far239 thin tab change their projection; small centered cells retain their original official motion warnings.",
+    "Fixed standing-equivalent scale72/416 preserves decreasing corpse silhouette height; no per-frame alpha-height enlargement.",
+    "v003 Helmet0..2 visibly contain copper helmet/eye material without a gray torso block; late3/4 still retain a visible orange finger-back crescent.",
+    "IndependentSword oldsource.50 is visually near first relaxed hand, then below and detached; later lies near body. This does not measure true initial hilt contact or floor physics."
+  ],
+  "inferences": [
+    "Whole Chest source perspective may fail collapsed torso/waist/near-arm fit under integer translation; the new five-phase composite exposes this rather than erasing original gray cloth.",
+    "Far shoulder attachment in3/4 is hidden; author preview placement can be tested behind originalHelmet, but actual anatomical socket cannot be derived from visibility."
+  ],
+  "risks_and_limits": [
+    "Numerical exact RGBA reconstruction proves no loss/repaint and no double ownership; it does not prove semantic depth masks.",
+    "v003 remains unaccepted for semantic owner3/4; v004 only addresses visible near-hand upper contour and requires its own retained actual View.",
+    "The original motion warning is not waived or converted to QA0 by distinctRGBA/union statistics. Sourcefit must show meaningful component pose, identity, coverage and unobstructed original hands/helmet.",
+    "Display root[242,464], releasedSword trajectory and late ground contact are author registrations only; hiddenbone/Grip/Axis/physicalRoot remain null.",
+    "All sourcefit artifacts are offline author candidates: no UE import, Canvas submission, native optical pass or Trial acceptance."
+  ],
+  "evidence": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/actual-raw-admissions-v001/curated15-E489-E490-E492-before-View-two-pass-v001.json",
+      "bytes": 16510,
+      "sha256": "1f6d965a5a1cee25699180d1266c0e7939b6207af8c40c1fb60d09d1be5badb9"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/actual-raw-admissions-v001/body-owner-v003-E494-before-View-v001.json",
+      "bytes": 8022,
+      "sha256": "5fe37a9330a400fa9f5d2fe7b645b6023ab0423970e24a79ded3d16265ae08f3"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/post-processing-actual-pins-review-v001.json",
+      "bytes": 1375,
+      "sha256": "00d26b4e6ce35ecde14630e940f9f974323adc4b2d72055a215ce4fe7519499b"
+    }
+  ],
+  "next": "Root E gate newv004 and full5sourcefit, actual View semantic masks+all5armor coverage+Sword release; retain finite failure before any NEW fix.",
+  "TrialAllowed": false,
+  "FinalAccepted": false
+}

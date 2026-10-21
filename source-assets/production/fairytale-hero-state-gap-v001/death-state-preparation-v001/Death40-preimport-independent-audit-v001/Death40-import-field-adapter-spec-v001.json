@@ -1,0 +1,50 @@
+{
+  "schema": "Death40-author-to-scoped-import-field-map-audit-v001",
+  "author_manifest": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/Death40-native-ready-author-candidate-v002/Death40-source-manifest-author-candidate-v002.json",
+    "bytes": 109838,
+    "sha256": "0889b31d32a7485c482f565d857526eac422bee8dfd086166df43f862c159df8"
+  },
+  "source_count": 40,
+  "direct_Hurt32_importer_compatible": false,
+  "reason": "Hurt importer hardcodes32/v017/4frames/3knownempty and expects texture_settings/canvas_px/source_closure_digest. Death author manifest intentionally uses texture_properties and5frames, so Root must construct a new scoped40 config/adapter. Do not run unchanged Hurt importer or overwrite original author manifest.",
+  "explicit_mapping": {
+    "namespace": "copy exact /Game/Production/ArtTrials/EV048/v019/HeroLeatherDeath",
+    "asset_count": 40,
+    "assets": "Copy exact40 retained rows without changing source SHA/RGBA/path/name/package/object/class. Source_filename can be Path(source).name; verify actual Unreal import filenames equal resolvedsource.",
+    "canvas_px": [
+      512,
+      512
+    ],
+    "texture_settings": {
+      "compression_settings": "TC_EDITOR_ICON",
+      "mip_gen_settings": "TMGS_NO_MIPMAPS",
+      "lod_group": "TEXTUREGROUP_UI",
+      "never_stream": true,
+      "srgb": true
+    },
+    "filter": "TF_BILINEAR if following proven Guard/Hurt native UI policy; absent from author manifest so Root must explicitly set+verify rather than claim field exists.",
+    "replace_existing": false,
+    "expected_optional_empty_assets": 0,
+    "expected_before_Production": 1286,
+    "expected_added_unique_packages": 40,
+    "expected_after_Production_if_only_this_import": 1326,
+    "old_baseline": "Exactly pinned1286 existingfiles unchanged twice, no arbitraryextras."
+  },
+  "source_fields_author": "source,source_bytes,source_sha256,source_RGBA_sha256,source_mode,source_canvas,source_alpha_nonzero_pixels,source_alpha128_pixels,source_alpha_bbox,known_optional_empty,empty_reason,name,package_path,object_path,expected_object_class,actual_E_retained_member",
+  "author_receipt_status": {
+    "Root_actual_import_receipt": null,
+    "TrialAllowed": false,
+    "FinalAccepted": false
+  },
+  "native_validation_pending": [
+    "Texture2D actualclass,size512×512",
+    "Actual import filename=exactresolvedsource",
+    "Actual UI typedsettings inclfilter",
+    "Eachnew saved.uasset size/SHA twice",
+    "Exact1286 old+40 new union1326, onlynamespace targets",
+    "GPU FinishCompilation/Flush/residency separate from import receipt"
+  ],
+  "Root_owns_execution": true,
+  "actual_import_performed_by_audit": false
+}

@@ -1,0 +1,99 @@
+{
+  "schema": "HeroAirDiskRestore-Root-admit-index-v001",
+  "source_freeze_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/air-disk-restore-candidate-v001/HeroAirDiskRestore-source-freeze-v001.json",
+    "bytes": 7258,
+    "sha256": "9df684be66301d86ede42996e46809829a6e3a1844139732f287b87a1c8cc8c6"
+  },
+  "before_compiled_manifest_pin": {
+    "path": "F:/Ourgame/source-assets/production/backups/v143-HeroLandingPriority298-203GREEN-v001/compiled-source-manifest.json",
+    "bytes": 581202,
+    "sha256": "5ddd83f5a16919c084870a29705ee1c0da3fbd13dec7f480330d8e61a4ac95ee"
+  },
+  "before_source_pins": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/air-disk-restore-candidate-v001/before-source-pins-v001.json",
+    "bytes": 61123,
+    "sha256": "7519109e6cda0677025df8ad2aa552dc58884da460302c2902ef61db77e98be5"
+  },
+  "integration_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/air-disk-restore-candidate-v001/integration/Root-integration-index-v001.json",
+    "bytes": 3125,
+    "sha256": "78e0cb9fa0effb280c049f1b159a1c388602ac77b985599360692332fb949e6d"
+  },
+  "protocol_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/air-disk-restore-candidate-v001/protocol-v001.json",
+    "bytes": 14433,
+    "sha256": "b5cd2c3b652e5a34b3612fb31fa1e11eab1a86468191475f2bc6f38a5fe55277"
+  },
+  "new_source_mappings": [
+    {
+      "candidate": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/air-disk-restore-candidate-v001/new-source/DungeonHeroAirDiskRestoreProbeV001.h",
+      "destination": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHeroAirDiskRestoreProbeV001.h",
+      "candidate_pin": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/air-disk-restore-candidate-v001/new-source/DungeonHeroAirDiskRestoreProbeV001.h",
+        "bytes": 1207,
+        "sha256": "194446f5ce662705a5f51580648c38f1d687f2556089e6015456530f477e30dd"
+      },
+      "must_be_absent_before_Root_admission": true
+    },
+    {
+      "candidate": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/air-disk-restore-candidate-v001/new-source/DungeonHeroAirDiskRestoreProbeV001.cpp",
+      "destination": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHeroAirDiskRestoreProbeV001.cpp",
+      "candidate_pin": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/air-disk-restore-candidate-v001/new-source/DungeonHeroAirDiskRestoreProbeV001.cpp",
+        "bytes": 79257,
+        "sha256": "aedd3aaee19e07cd6a10d2d59db028c3f18f8b47c88f8ea38076f8b6f8a7c86a"
+      },
+      "must_be_absent_before_Root_admission": true
+    }
+  ],
+  "existing_source_overlay": [
+    {
+      "destination": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "before": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+        "bytes": 151783,
+        "sha256": "de8dfa9fb95e213a73d5141f05637d7eb95b0aa061c61f92268237ff294570cb"
+      },
+      "edits": [
+        {
+          "needle": "#include \"DungeonHeroLandingPriorityProbeV001.h\"",
+          "replacement": "#include \"DungeonHeroLandingPriorityProbeV001.h\"\r\n#include \"DungeonHeroAirDiskRestoreProbeV001.h\"",
+          "expected_occurrences": 1
+        },
+        {
+          "needle": "    if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonHeroLandingPriorityProofV001\")))",
+          "replacement": "    if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonHeroAirDiskRestoreProofV001\")))\r\n        GetWorld()->SpawnActor<ADungeonHeroAirDiskRestoreProbeV001>();\r\n    else if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonHeroLandingPriorityProofV001\")))",
+          "expected_occurrences": 1
+        }
+      ],
+      "after_bytes": 151996,
+      "after_sha256": "a8668ce98c42c3217e19198e6dfa18c0bd9feb8a3beae4aef8a5c8d0d8ac32b3"
+    },
+    {
+      "destination": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "before": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+        "bytes": 123582,
+        "sha256": "2ac1fd6393eec81245a04653f21bc6ce26bde2ce14f50ce34d847fa2f9f07b5d"
+      },
+      "edits": [
+        {
+          "needle": "        if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonHeroLandingPriorityProofV001\")))return;",
+          "replacement": "        if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonHeroAirDiskRestoreProofV001\")))return;\r\n        if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonHeroLandingPriorityProofV001\")))return;",
+          "expected_occurrences": 1
+        }
+      ],
+      "after_bytes": 123680,
+      "after_sha256": "a68a9df57826a3761f2bfbf8511858b139c193589f285c0cc7bbb29ad950e16f"
+    }
+  ],
+  "before_Source_count": 298,
+  "derived_Source_count": 300,
+  "Production_count": 1419,
+  "actual_count_confirmation_required": true,
+  "old203_tests_unchanged": true,
+  "Root_alone_applies": true,
+  "RootApproved": false,
+  "FinalAccepted": false
+}

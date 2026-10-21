@@ -1,0 +1,45 @@
+{
+  "schema": "guard-known44-death-Root-prereg-v005",
+  "is_template": false,
+  "pre_registered_before_capture": true,
+  "scenario": "Death",
+  "compiled_manifest_sha256": "ce68f8d113a3bd8fdced06f4f7056dc7f9041f89c7687d075dd718f68dd0bba4",
+  "source_profile_prereg_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/root-full-registration-v001/v135-known44-source-profile-prereg-v003.json",
+    "bytes": 101951,
+    "sha256": "2e0d6472bb220421394ad5621378f16528096d5eb81d8ebeea50c91046f087f1"
+  },
+  "known44_profile_source_scope": "Read-only source preflight reuse of unchanged AxeCycle tooling-v003 profile checker, with a fresh Root Axe-compatible source prereg bound to this same new compiled snapshot. This never claims an AxeCycle native run.",
+  "Death_implemented": true,
+  "formal_complete_units": 0,
+  "fill_instructions": [
+    "Root integrates only newH/newCPP+minimalHUDpatch; actual Source/DLL/full184 snapshot is new after build; no Content change required.",
+    "Copy prior actual AxeCycle tooling-v003 source prereg to a NEW actual source-profile prereg, updating compiled_manifest_sha256/counts/admitted_source_files from fresh snapshot. Keep actual row10/all13/import/gaps and tooling-v003 freeze intact. It is used only for strict shared profile/source preflight.",
+    "Fill source_profile_prereg_pin with that actual NEW file; compiled_manifest_sha256 and admitted_death_source_files from same fresh snapshot; death_candidate_freeze_pin with this whole freeze.",
+    "Then set is_template=false/pre_registered_before_capture=true in NEW Root file before capture. No template approves itself.",
+    "Root must merge Death branch with actual StunIR startup branch; preserve AxeCycle/partial flags and source unchanged. No new Content required."
+  ],
+  "death_candidate_freeze_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-full-known44-combat-death-candidate-v006/Death-candidate-freeze-v006.json",
+    "bytes": 3176,
+    "sha256": "0b8db789657b07945dd4abd8777218f0ec29a21b9a1da41186550b9d8056701b"
+  },
+  "admitted_death_source_files": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonGuardArtDeathProbeV005.h",
+      "bytes": 859,
+      "sha256": "eadce70e48ab104f6451012729ceebcba37b36aa8cc9a137b43bbfdfccc794cd"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonGuardArtDeathProbeV005.cpp",
+      "bytes": 48477,
+      "sha256": "973e2b58510db8e855d28bfa8c3d663f3725cf08f3a18a4e32e02422b29d4839"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": 117819,
+      "sha256": "7f609ab3e54f59f07f615a69f86eb002610aefde0f8d87e1ac15915fc65348ab"
+    }
+  ],
+  "registered_at_utc": "2026-10-18T07:54:13.071873+00:00"
+}

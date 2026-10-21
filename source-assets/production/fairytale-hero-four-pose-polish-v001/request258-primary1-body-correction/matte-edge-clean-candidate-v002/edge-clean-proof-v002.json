@@ -1,0 +1,558 @@
+{
+  "schema": "request258-fixed-alpha-edge-decontamination-v002",
+  "utc": "2026-10-18T20:30:06.846988+00:00",
+  "algorithm": {
+    "proven_function": "sprite_gen.frames.extract.despill_color",
+    "function_module": {
+      "path": "C:/Users/22499/.codex/skills/sprite-gen/sprite_gen/frames/extract.py",
+      "bytes": 174274,
+      "sha256": "f2a7902f01069668340d14217bd05c777f5c01853284102e211aba1013a45539"
+    },
+    "nominal_key": [
+      255,
+      0,
+      255
+    ],
+    "inverse_model": "C=aF+(1-a)B; F=clamp(round((C-(1-a)B)/a))",
+    "fixed_coverage": "Use frozen alpha/255; native function key_tint255 and tint255-alpha; discard returned coverage, preserve alpha byte-exact.",
+    "selection": "0<alpha<255 AND min(R,B)-G>=48 AND Chebyshev distance1..4 from alpha0.",
+    "no_interior_or_opaque_spill_pass": true,
+    "actual_background_median": "Measured249,4,250, whereas inverse uses requested nominal255,0,255. Coverage/key assumptions may leave dark/colored fringes; Root comparison required.",
+    "not_full_native_remove_chroma_background": "That function also changes alpha and performs wider spill cleanup; deliberately not run."
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "input": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/extraction-candidate-v001/transparent-cells/frame-0-RGBA-footline464-candidate.png",
+        "bytes": 256872,
+        "sha256": "a681810e7c3e37c1b9e946b1b1155a0daf0072a924e2cce1245f6b10c95e9465"
+      },
+      "cleaned": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/cleaned-body/frame-0-RGBA-fixed-alpha-candidate.png",
+        "bytes": 257274,
+        "sha256": "4d6efdb43cc50e87a23c3cfb1d1bde4a049bb93a05a798ff75ea8a5340464bff"
+      },
+      "changed_pixel_mask": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/change-masks/frame-0-RGB-changed-only.png",
+        "bytes": 2455,
+        "sha256": "68958f08236d1835d2c3f87c3db5bcc1cc35cd3dbf76ef0d5e280dac79330e79"
+      },
+      "changed_pixels": 1116,
+      "selected_pixels": 1116,
+      "all_partial_pixels": 1117,
+      "untouched_partial_deeper_than4": 1,
+      "changed_alpha_minmax": [
+        36,
+        175
+      ],
+      "changed_distance_to_alpha0_histogram": {
+        "1": 1106,
+        "2": 7,
+        "3": 2,
+        "4": 1
+      },
+      "changed_RGB_delta_min": [
+        -206,
+        0,
+        -210
+      ],
+      "changed_RGB_delta_max": [
+        0,
+        194,
+        0
+      ],
+      "changed_RGB_mean_abs_delta": [
+        127.26702508960574,
+        30.13888888888889,
+        114.37096774193549
+      ],
+      "before_changed_minRB_minusG_minmax": [
+        80,
+        219
+      ],
+      "after_changed_minRB_minusG_minmax": [
+        0,
+        0
+      ],
+      "unclamped_inverse_RGB_channels_below0": 2,
+      "unclamped_inverse_RGB_channels_above255": 0,
+      "source_keyed_background_RGB_median": [
+        249.0,
+        4.0,
+        250.0
+      ],
+      "alpha_all_bytes_equal": true,
+      "alpha_minmax": [
+        0,
+        255
+      ],
+      "alpha_bbox_before_after": [
+        143,
+        100,
+        372,
+        464
+      ],
+      "opaque_RGB_all_bytes_equal": true,
+      "alpha0_RGB_all_bytes_equal": true,
+      "source_positions_changed": false,
+      "cleaned_RGBA_sha256": "4720f202ebc71c9a86376d88f4ab42f486d7eebdf7062c6c616572e5840b7471",
+      "recovered_RGBA_sha256": "4720f202ebc71c9a86376d88f4ab42f486d7eebdf7062c6c616572e5840b7471",
+      "reconstruction_target": "CLEANED_RGBA, not original generated RGB",
+      "all_owner_coordinates_unique_and_exhaustive": true,
+      "owner_reconstruction_exact": true,
+      "premultiplied_composite_exact": true,
+      "unchanged_owner_masks": [
+        {
+          "owner": "BodyRest",
+          "source_mask": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/BodyRest/frame-0.png",
+            "bytes": 1877,
+            "sha256": "bfe58a65e8cb4e443b9fdb8a9bcaa22976ce7e9ac2fbeec00c3128a5bfba9a2a"
+          }
+        },
+        {
+          "owner": "HelmetForeground",
+          "source_mask": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/HelmetForeground/frame-0.png",
+            "bytes": 956,
+            "sha256": "c8dd8f660a026f92a99215cadde0726608c1c748f77c06eafee876f6c2c43014"
+          }
+        },
+        {
+          "owner": "NearArmWithoutHand",
+          "source_mask": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/NearArmWithoutHand/frame-0.png",
+            "bytes": 661,
+            "sha256": "99d559cc8bb99f6d94a4e3f608f5e11b8bb892cf21b1b1c212865b72a2951128"
+          }
+        },
+        {
+          "owner": "NearHand",
+          "source_mask": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/NearHand/frame-0.png",
+            "bytes": 693,
+            "sha256": "b8d74f7b93d7280a853ee61fc2398a11566bd36b0bdc187c0a7d2e660352ab01"
+          }
+        }
+      ],
+      "cleaned_body_layers": {
+        "BodyRest": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/BodyRest/frame-0.png",
+          "bytes": 187738,
+          "sha256": "6bb844ea18ace3a17ad86e744ebfbf5b1143b1cafb8d7a3436ac96f4500010a8"
+        },
+        "HelmetForeground": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/HelmetForeground/frame-0.png",
+          "bytes": 64363,
+          "sha256": "3daebe6bd7d59cd59b8dde96bc020cbc717d54b9ec76dd5b37ee8d7117562ce5"
+        },
+        "NearArmWithoutHand": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/NearArmWithoutHand/frame-0.png",
+          "bytes": 6059,
+          "sha256": "f45a082a6bf3e33eb6308d5da6528d462bced57ab5a27fbf102b996274efa7b8"
+        },
+        "NearHand": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/NearHand/frame-0.png",
+          "bytes": 10182,
+          "sha256": "bd6e6a18c91cc0ecea7d2a999251f7f752904df49ab0e679a575152faf86d938"
+        },
+        "Chest": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/Chest/frame-0.png",
+          "bytes": 18191,
+          "sha256": "c6e93fa5efa376d4c0425f097cba4d699a156861bce8222710ea3b6223f44732"
+        },
+        "NearShoulder": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/NearShoulder/frame-0.png",
+          "bytes": 6405,
+          "sha256": "9978b306fe5b564a4f1f5b39ad341df773b5dc42cd2bc00846d48a655f3f1ea4"
+        },
+        "FarShoulder": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/FarShoulder/frame-0.png",
+          "bytes": 2947,
+          "sha256": "75a095689770e42697306a4308642f12f86293668e875865313a2e74dc107e94"
+        }
+      },
+      "unchanged_sword_QC_transform": {
+        "source": {
+          "path": "F:/Ourgame/source-assets/production/first-unit-animation-v002/components/military-sword-clean-v001.png",
+          "bytes": 31902,
+          "sha256": "2efb5519fb3c7ed5a63e58d00c84e39aa02355274af36b43c1775570badded5a"
+        },
+        "component_grip": [
+          99,
+          256
+        ],
+        "weapon_scale": 0.5,
+        "artist_axis": [
+          0.94,
+          -0.341
+        ],
+        "source_to_canvas_rotation_degrees": -19.939047916809514,
+        "inverse_affine": [
+          1.8801118699844952,
+          -0.6820405826220349,
+          -63.7636847273705,
+          0.6820405826220349,
+          1.8801118699844952,
+          -532.7889343379312
+        ],
+        "resample": "BICUBIC premultiplied RGBa; QC only, independent source not changed"
+      },
+      "semantic_accepted": false
+    },
+    {
+      "frame": 1,
+      "input": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/extraction-candidate-v001/transparent-cells/frame-1-RGBA-footline464-candidate.png",
+        "bytes": 260588,
+        "sha256": "249681d9e0e373cf6199e3e6de988293b6c2ceab73ffd952663519f1dddb4c3a"
+      },
+      "cleaned": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/cleaned-body/frame-1-RGBA-fixed-alpha-candidate.png",
+        "bytes": 260407,
+        "sha256": "43454c2982daf19d577497dd61a792b02ed3fb9aaafd543614fca591a1db60e2"
+      },
+      "changed_pixel_mask": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/change-masks/frame-1-RGB-changed-only.png",
+        "bytes": 2729,
+        "sha256": "c57370b47e94bfff072cd4afd540d767f2457f1ad2c1a053372dcbb50828f702"
+      },
+      "changed_pixels": 1327,
+      "selected_pixels": 1327,
+      "all_partial_pixels": 1327,
+      "untouched_partial_deeper_than4": 0,
+      "changed_alpha_minmax": [
+        36,
+        181
+      ],
+      "changed_distance_to_alpha0_histogram": {
+        "1": 1316,
+        "2": 11,
+        "3": 0,
+        "4": 0
+      },
+      "changed_RGB_delta_min": [
+        -211,
+        0,
+        -213
+      ],
+      "changed_RGB_delta_max": [
+        -27,
+        182,
+        0
+      ],
+      "changed_RGB_mean_abs_delta": [
+        131.18010550113036,
+        26.495101733232858,
+        116.93669932177845
+      ],
+      "before_changed_minRB_minusG_minmax": [
+        74,
+        219
+      ],
+      "after_changed_minRB_minusG_minmax": [
+        0,
+        0
+      ],
+      "unclamped_inverse_RGB_channels_below0": 3,
+      "unclamped_inverse_RGB_channels_above255": 0,
+      "source_keyed_background_RGB_median": [
+        249.0,
+        4.0,
+        250.0
+      ],
+      "alpha_all_bytes_equal": true,
+      "alpha_minmax": [
+        0,
+        255
+      ],
+      "alpha_bbox_before_after": [
+        132,
+        85,
+        373,
+        464
+      ],
+      "opaque_RGB_all_bytes_equal": true,
+      "alpha0_RGB_all_bytes_equal": true,
+      "source_positions_changed": false,
+      "cleaned_RGBA_sha256": "636f55557b5a247135bce12eba801eb74f80136aaeecde8a25f915b1ca8413c1",
+      "recovered_RGBA_sha256": "636f55557b5a247135bce12eba801eb74f80136aaeecde8a25f915b1ca8413c1",
+      "reconstruction_target": "CLEANED_RGBA, not original generated RGB",
+      "all_owner_coordinates_unique_and_exhaustive": true,
+      "owner_reconstruction_exact": true,
+      "premultiplied_composite_exact": true,
+      "unchanged_owner_masks": [
+        {
+          "owner": "BodyRest",
+          "source_mask": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/BodyRest/frame-1.png",
+            "bytes": 1727,
+            "sha256": "719a8b406399e73c99cb6d475a0437887e0badd2a51493cc739bb28237a8d3f8"
+          }
+        },
+        {
+          "owner": "HelmetForeground",
+          "source_mask": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/HelmetForeground/frame-1.png",
+            "bytes": 920,
+            "sha256": "9941d58c4e9bd8b3020b792d3c9e29eb1685d68be21fcd59524d2d06d326e5ae"
+          }
+        },
+        {
+          "owner": "NearArmWithoutHand",
+          "source_mask": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/NearArmWithoutHand/frame-1.png",
+            "bytes": 595,
+            "sha256": "cfd3caf5ec5e79803613badc36b8550ea2941d45d2064b43e5d4f643114807d5"
+          }
+        },
+        {
+          "owner": "NearHand",
+          "source_mask": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/NearHand/frame-1.png",
+            "bytes": 610,
+            "sha256": "ed40636f65ee798afc0e49e6f56a63d35b89c24da40791ea3537b4991b1ca443"
+          }
+        }
+      ],
+      "cleaned_body_layers": {
+        "BodyRest": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/BodyRest/frame-1.png",
+          "bytes": 197214,
+          "sha256": "1653e5f403e457270b4537433526390c1a5a7420970ba97f77789ef4f8819766"
+        },
+        "HelmetForeground": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/HelmetForeground/frame-1.png",
+          "bytes": 56945,
+          "sha256": "621f27b84218ce75402c86e4e61f39184e1cc5385f34967510d793ee2e8996c9"
+        },
+        "NearArmWithoutHand": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/NearArmWithoutHand/frame-1.png",
+          "bytes": 6425,
+          "sha256": "fdd0dd4fda28d0877eae70d636733daa4227a36c1ea34d70f22500479fde575c"
+        },
+        "NearHand": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/NearHand/frame-1.png",
+          "bytes": 10387,
+          "sha256": "e55f4a43ec7fc795561e63a19e8ee7f46d2fff0354371f66e566684a2cc7ea7a"
+        },
+        "Chest": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/Chest/frame-1.png",
+          "bytes": 17913,
+          "sha256": "04dfebd2c8b66015b4067a2eb1f6b8684507e3d0df5ccaca734e8807dd790575"
+        },
+        "NearShoulder": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/NearShoulder/frame-1.png",
+          "bytes": 6925,
+          "sha256": "6100c5f1af39f77693a8e9ef258cd5a909596c9fff7c506d37d795669f745e6c"
+        },
+        "FarShoulder": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/FarShoulder/frame-1.png",
+          "bytes": 3080,
+          "sha256": "db8ca9de168204a5bf7f13d4ae86de4838eead663206cba5204698368991c3db"
+        }
+      },
+      "unchanged_sword_QC_transform": {
+        "source": {
+          "path": "F:/Ourgame/source-assets/production/first-unit-animation-v002/components/military-sword-clean-v001.png",
+          "bytes": 31902,
+          "sha256": "2efb5519fb3c7ed5a63e58d00c84e39aa02355274af36b43c1775570badded5a"
+        },
+        "component_grip": [
+          99,
+          256
+        ],
+        "weapon_scale": 0.5,
+        "artist_axis": [
+          -0.2,
+          -0.98
+        ],
+        "source_to_canvas_rotation_degrees": -101.53462065364472,
+        "inverse_affine": [
+          -0.3999200239920027,
+          -1.9596081175608138,
+          579.9838128551818,
+          1.9596081175608138,
+          -0.3999200239920027,
+          29.60527441812721
+        ],
+        "resample": "BICUBIC premultiplied RGBa; QC only, independent source not changed"
+      },
+      "semantic_accepted": false
+    }
+  ],
+  "dependency_pins": [
+    {
+      "path": "C:/Users/22499/.codex/skills/sprite-gen/sprite_gen/frames/extract.py",
+      "bytes": 174274,
+      "sha256": "f2a7902f01069668340d14217bd05c777f5c01853284102e211aba1013a45539"
+    },
+    {
+      "path": "C:/Users/22499/.codex/skills/generate2dsprite/SKILL.md",
+      "bytes": 29102,
+      "sha256": "4e04edbcc96a182e9e5496329bfb2c2b353c72d2efec2afdb8bb7fc1da984288"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/build-two-body-owner-fit-v001.py",
+      "bytes": 19029,
+      "sha256": "fbdb10d623db7160065e5fc5fba38143b4b4a4bb240a0e195725f81949d5377d"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/body-partition-fit-freeze-v001.json",
+      "bytes": 24610,
+      "sha256": "aee3ae97b08fe0f7cc1382531176a8f3d00b8ea7e50dc93d606ab0242dc45c0b"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/six-frame-candidate-map-v001.json",
+      "bytes": 36416,
+      "sha256": "6ed5d7fca4a1488d62d7a45134d63052efd45c213743ea33194fdeaf9d0ba8f9"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/body-owner-fit-proof-v001.json",
+      "bytes": 34190,
+      "sha256": "b7fac2e8165b5f26f500a7096411a97790fdc97db3f1ec17b959eb6345208892"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/extraction-candidate-v001/source-closure-v001.json",
+      "bytes": 23690,
+      "sha256": "419f3fd809f6deccb43ab40f7aec32a4daaeaee7a8f8eeda54337831181ee45c"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/first-unit-animation-v002/components/military-sword-clean-v001.png",
+      "bytes": 31902,
+      "sha256": "2efb5519fb3c7ed5a63e58d00c84e39aa02355274af36b43c1775570badded5a"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/extraction-candidate-v001/transparent-cells/frame-0-RGBA-footline464-candidate.png",
+      "bytes": 256872,
+      "sha256": "a681810e7c3e37c1b9e946b1b1155a0daf0072a924e2cce1245f6b10c95e9465"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/BodyRest/frame-0.png",
+      "bytes": 1877,
+      "sha256": "bfe58a65e8cb4e443b9fdb8a9bcaa22976ce7e9ac2fbeec00c3128a5bfba9a2a"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/HelmetForeground/frame-0.png",
+      "bytes": 956,
+      "sha256": "c8dd8f660a026f92a99215cadde0726608c1c748f77c06eafee876f6c2c43014"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/NearArmWithoutHand/frame-0.png",
+      "bytes": 661,
+      "sha256": "99d559cc8bb99f6d94a4e3f608f5e11b8bb892cf21b1b1c212865b72a2951128"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/NearHand/frame-0.png",
+      "bytes": 693,
+      "sha256": "b8d74f7b93d7280a853ee61fc2398a11566bd36b0bdc187c0a7d2e660352ab01"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/Chest/frame-0.png",
+      "bytes": 18191,
+      "sha256": "c6e93fa5efa376d4c0425f097cba4d699a156861bce8222710ea3b6223f44732"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/NearShoulder/frame-0.png",
+      "bytes": 6405,
+      "sha256": "9978b306fe5b564a4f1f5b39ad341df773b5dc42cd2bc00846d48a655f3f1ea4"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/FarShoulder/frame-0.png",
+      "bytes": 2947,
+      "sha256": "75a095689770e42697306a4308642f12f86293668e875865313a2e74dc107e94"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/body-layers/BodyRest/frame-0.png",
+      "bytes": 187646,
+      "sha256": "216f3045428bb7cb1cae8193fb48c53370e14ce80f590d6aeb4365247c80c6d4"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/body-layers/HelmetForeground/frame-0.png",
+      "bytes": 64248,
+      "sha256": "d515243d08ecc49eb26a7fcce379848a6aedacd70134a61cc9826c7d668f2f81"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/body-layers/NearArmWithoutHand/frame-0.png",
+      "bytes": 6057,
+      "sha256": "7e4ec25ab2215531d8266694df56424861dc488e0efa945b8138e4eaaee77b63"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/body-layers/NearHand/frame-0.png",
+      "bytes": 10188,
+      "sha256": "e1fa216cddc89e3bf020b8d7058175e9ad7aeb6b21049b17697589ff252e80b9"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/extraction-candidate-v001/transparent-cells/frame-1-RGBA-footline464-candidate.png",
+      "bytes": 260588,
+      "sha256": "249681d9e0e373cf6199e3e6de988293b6c2ceab73ffd952663519f1dddb4c3a"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/BodyRest/frame-1.png",
+      "bytes": 1727,
+      "sha256": "719a8b406399e73c99cb6d475a0437887e0badd2a51493cc739bb28237a8d3f8"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/HelmetForeground/frame-1.png",
+      "bytes": 920,
+      "sha256": "9941d58c4e9bd8b3020b792d3c9e29eb1685d68be21fcd59524d2d06d326e5ae"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/NearArmWithoutHand/frame-1.png",
+      "bytes": 595,
+      "sha256": "cfd3caf5ec5e79803613badc36b8550ea2941d45d2064b43e5d4f643114807d5"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/owner-masks/NearHand/frame-1.png",
+      "bytes": 610,
+      "sha256": "ed40636f65ee798afc0e49e6f56a63d35b89c24da40791ea3537b4991b1ca443"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/Chest/frame-1.png",
+      "bytes": 17913,
+      "sha256": "04dfebd2c8b66015b4067a2eb1f6b8684507e3d0df5ccaca734e8807dd790575"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/NearShoulder/frame-1.png",
+      "bytes": 6925,
+      "sha256": "6100c5f1af39f77693a8e9ef258cd5a909596c9fff7c506d37d795669f745e6c"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/FarShoulder/frame-1.png",
+      "bytes": 3080,
+      "sha256": "db8ca9de168204a5bf7f13d4ae86de4838eead663206cba5204698368991c3db"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/body-layers/BodyRest/frame-1.png",
+      "bytes": 197336,
+      "sha256": "e08e54a8e01329b3a06fb621d3c8edcef8f4862b2d87c6077f5d960a015ffa1b"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/body-layers/HelmetForeground/frame-1.png",
+      "bytes": 56853,
+      "sha256": "fb5bdb3492c14236dab55df51e87b53b154bb2da84bfc76b39a2656e500d6d27"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/body-layers/NearArmWithoutHand/frame-1.png",
+      "bytes": 6458,
+      "sha256": "fcbee5d12c0c52923ed61d0fbb9b825e431b142fd5e87442a59dcb419f01935e"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/body-layers/NearHand/frame-1.png",
+      "bytes": 10367,
+      "sha256": "1f67b8edb30385779eb56337a2e5a1c471b758789a4df0f06c12255cc792bba7"
+    }
+  ],
+  "new_clean_body_count": 2,
+  "new_owner_layer_count": 8,
+  "reused_armor_layers": 6,
+  "independent_sword_unchanged": true,
+  "Root_Grip_Axis_unchanged": true,
+  "old_candidates_or_raw_modified": false,
+  "new_derivatives_viewed": false,
+  "E_retention": "PENDING_ROOT",
+  "native_accepted": false,
+  "final_art_accepted": false,
+  "FinalAccepted": false
+}

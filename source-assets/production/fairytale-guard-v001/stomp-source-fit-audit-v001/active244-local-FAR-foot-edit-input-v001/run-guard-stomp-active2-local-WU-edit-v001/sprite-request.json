@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fixed-heavyaxe-armed-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedArmedReady209existing4poses, exactrawcopy, doNOTgenerateorcharge.",
+      "durations_ms": [
+        250,
+        250,
+        250,
+        250
+      ]
+    },
+    "right_stomp_active": {
+      "frames": 2,
+      "fps": 13,
+      "loop": false,
+      "action": "Locally edit reference1, the approved StompWindup222 frame5. Produce two successive landed poses in the two invisible cells indicated by reference2. This is an action edit of that exact pose, not a rebuilt Ready stance.\n\nPreserve the original composition, body/axe density, head/eye horizontal position, upperbody contour, closed hands, fixed axe, and foreground NEAR leg and shoe. The NEAR shoe stays below the same bent knee/hip, planted at the same point. Do not stretch it behind-left or push the torso forward.\n\nLower only the raised FAR leg/shoe from the recessed right hip onto the ground to the right of the NEAR shoe, about one NEAR-shoe width between centers. Frame0 is first contact, both soles grounded. Frame1 loads that same contact: knees bend slightly and the upperbody settles vertically downward, head/eyes moving at most15pixels at the original512reference scale. No horizontal shift, extra step, relift, second stomp, swing, regrip or altered proportions.\n\nKeep the source's shallow elevated three-quarter right-facing view and grotesque stone/moss/ink identity. Two complete connected silhouettes with the same fixed axe, ample padding, solid magenta background. No labels, arrows, FX, shadows or scenery.\n",
+      "durations_ms": [
+        75,
+        75
+      ]
+    }
+  },
+  "style": "Existing acceptedGuard identity inherited from exactWU2225/ArmedReady209. This is only a local action edit, never a newbase or rebuiltReady stance. Same fixedaxe, stoneplates, moss and thick cartoonink; keep the existing upperbody and NEAR support geometry.",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

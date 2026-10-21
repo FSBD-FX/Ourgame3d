@@ -1,0 +1,114 @@
+{
+  "schema": "readonly-actual-Dodge-kernel-runtime-boundary-v001",
+  "source_files": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonDodge.h",
+      "bytes": 14663,
+      "sha256": "375ee1aa3d83612a3c686f0b1a6a6d322c97e247ea957c3d7380dcd431fd9ec2"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.h",
+      "bytes": 12443,
+      "sha256": "cf84e3781b269e090d9b17544fe85e91726e465f35b7324b561ab98a23f9dbac"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 122242,
+      "sha256": "818c2c06f4b11d04511f65776a678eaad5f1a2d244ff05b6e6d5bfa1fa1c5a38"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+      "bytes": 22622,
+      "sha256": "092954a95ff43429f5df4306890e725f32532feb96301a59c3b12f18e5b38ad4"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": 119659,
+      "sha256": "88ddf5c24bca2259921aa2b9fe6e36aabc665438784e153178d73c751c233f3b"
+    }
+  ],
+  "not_compiled_snapshot_or_future_Source_admission": true,
+  "facts": [
+    {
+      "file": "DungeonDodge.h",
+      "lines": [
+        12,
+        17
+      ],
+      "fact": "Duration.40 Distance185 Speed462.5 iframes[.06,.20) Cooldown1.20. Presentation cannot adjust."
+    },
+    {
+      "file": "DungeonDodge.h",
+      "lines": [
+        149,
+        166
+      ],
+      "fact": "StepTo accepted motion uses real sweep; block stops travel, timeline still completes at R.End. At End sets finishCompleted and phaseIdle."
+    },
+    {
+      "file": "DungeonDodge.h",
+      "lines": [
+        168,
+        183
+      ],
+      "fact": "Real PoiseBreak/Death interruption only at S.Time; protected poisebreak rejected. No CD refund; death becomesDead."
+    },
+    {
+      "file": "DungeonFighter.h",
+      "lines": [
+        101,
+        103
+      ],
+      "fact": "Actual public GetDodgeState const gives same owner kernel, not a synthetic display clock."
+    },
+    {
+      "file": "DungeonFighter.cpp",
+      "lines": [
+        766,
+        803
+      ],
+      "fact": "TryBeginDodge accepted owner action gate; SyncDodgeAction sets actor from kernel S.Position and AnimationTime=float(S.Time-R.Start), no Facing write."
+    },
+    {
+      "file": "DungeonFighter.cpp",
+      "lines": [
+        1531,
+        1541
+      ],
+      "fact": "Real broken/dead hit interrupts Dodge before hurt/death clip. No artificialHurt or phase clock."
+    },
+    {
+      "file": "DungeonFighter.cpp",
+      "lines": [
+        1709,
+        1712
+      ],
+      "fact": "Input updates Facing only when not Dodging and HurtTime<=0; do not inferFacing from dodge direction."
+    },
+    {
+      "file": "DungeonFighter.cpp",
+      "lines": [
+        1889,
+        1930
+      ],
+      "fact": "Dead returns; activeDodge Sync precedes weaponaction/ordinaryidle-walk. Profile must relinquish on realDodge exit."
+    },
+    {
+      "file": "DungeonFairytaleSwordPresentation.cpp",
+      "lines": [
+        99,
+        105
+      ],
+      "fact": "Current committed Hurt opt-in routes hurt separately. NewDodge consumer must use same binding owner and validDodge state, not stale AnimationName alone."
+    },
+    {
+      "file": "DungeonHUD.cpp",
+      "lines": [
+        138,
+        150
+      ],
+      "fact": "Current Hurt preload all32+Sword then FinishCompilation before existingflush is correct reusable atomic residency method."
+    }
+  ],
+  "proposed_gate": "Actualplayer/alive/SWD+committedLGT/samebinding owner; D.Phase=Dodging, records nonempty, lastFinish=None, age=D.Time-R.Start finite >=0 and <.4, realactionid. Death and realHurt/poisebreak transitions closeDodge immediately. Do not assign game state or infer supported pose from an old dodge label."
+}

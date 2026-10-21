@@ -1,0 +1,55 @@
+{
+  "schema": "v144-tooling-reviewed-blocker-delta-v002",
+  "parent_tooling_freeze_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/air-disk-restore-tooling-candidate-v001/HeroAirDiskRestore-tooling-freeze-v001.json",
+    "bytes": 211136,
+    "sha256": "2537a9a46d743d1f32e4c7eb64f0ba232f24a28068fe09f4cf16925f3a36f5c8"
+  },
+  "checker_before_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/air-disk-restore-tooling-candidate-v001/verify-air-disk-restore-native-v001.py",
+    "bytes": 37032,
+    "sha256": "17cb2f82d51d83fa8cff6270860bef9ed0dd2250e3927793bf0a4f0226569184"
+  },
+  "checker_after_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/air-disk-restore-tooling-review-fix-v002/verify-air-disk-restore-native-v001.py",
+    "bytes": 37904,
+    "sha256": "313f3130d7a069db88acc5aca3bb9826f0b4b4efd02f556b9d24d762ec3d2318"
+  },
+  "existing_functions_AST_changed": [
+    "freeze",
+    "preflight",
+    "inspect_draws"
+  ],
+  "added_functions": [
+    "frozen_member"
+  ],
+  "all_other_existing_functions_AST_exact_equal": true,
+  "core_bytes_and_AST_unchanged": true,
+  "original29_test_body_bytes_exact_equal": true,
+  "dependencies_bytes_exact_equal": true,
+  "source_binding_bytes_exact_equal": true,
+  "fixes": [
+    "frozen metadata members require nonnegative exact size+SHA; actual evidence still strict positive",
+    "every related Air draw_id positive and equal same callback old_draw.draw_id"
+  ],
+  "regression_RED_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/air-disk-restore-tooling-review-fix-v002/review-fix-host-20261019-035916-537662.json",
+    "bytes": 1867,
+    "sha256": "4ff25fc48df210e9cd9eedf2c57efe4a2fe9a319beadbf92e046af0408d3fbde"
+  },
+  "regression_GREEN_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/air-disk-restore-tooling-review-fix-v002/review-fix-host-20261019-035932-884770.json",
+    "bytes": 1866,
+    "sha256": "40226ec288166bb33f570d89804e991e5cdb197bf93ba0fdc2b85f600a1b5072"
+  },
+  "original29_GREEN_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/air-disk-restore-tooling-review-fix-v002/host-tests-20261019-035933-140146.json",
+    "bytes": 1780,
+    "sha256": "319cc64cab6b8c0fce99e347ffcc17711f4f5335a3ac0cccbc62c718cb61bb30"
+  },
+  "actual_preflight_run": false,
+  "new_native_run": false,
+  "UE_started": false,
+  "RootApproved": false,
+  "FinalAccepted": false
+}

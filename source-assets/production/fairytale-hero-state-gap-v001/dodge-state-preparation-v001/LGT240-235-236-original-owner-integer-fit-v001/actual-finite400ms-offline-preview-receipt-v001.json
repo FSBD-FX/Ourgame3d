@@ -1,0 +1,55 @@
+{
+  "GIF": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/dodge-state-preparation-v001/LGT240-235-236-original-owner-integer-fit-v001/presentation/Dodge4-LGT-SWD-finite400ms-NO-LOOP.gif",
+    "bytes": 58647,
+    "sha256": "07c51a1e7d82f027c4c53578ca0328034160ecd5adb371fda5064207f130cd51"
+  },
+  "actual_frames": 4,
+  "actual_ms": [
+    100,
+    100,
+    100,
+    100
+  ],
+  "loop": false,
+  "MP4": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/dodge-state-preparation-v001/LGT240-235-236-original-owner-integer-fit-v001/presentation/Dodge4-LGT-SWD-finite400ms-offline.mp4",
+    "bytes": 19406,
+    "sha256": "cd4699162c17a7ef4cf134bfc554c5e55803a23df05e7c5c58dbba6eb5757dce"
+  },
+  "actual_encode_command": [
+    "F:\\Ourgame\\tools\\runtime\\asset-gen\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+    "-hide_banner",
+    "-loglevel",
+    "info",
+    "-framerate",
+    "10",
+    "-i",
+    "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\dodge-state-preparation-v001\\LGT240-235-236-original-owner-integer-fit-v001\\preview-frames\\frame-%03d.png",
+    "-frames:v",
+    "4",
+    "-c:v",
+    "libx264",
+    "-crf",
+    "18",
+    "-pix_fmt",
+    "yuv420p",
+    "-movflags",
+    "+faststart",
+    "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\dodge-state-preparation-v001\\LGT240-235-236-original-owner-integer-fit-v001\\presentation\\Dodge4-LGT-SWD-finite400ms-offline.mp4"
+  ],
+  "actual_decode_command": [
+    "F:\\Ourgame\\tools\\runtime\\asset-gen\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+    "-hide_banner",
+    "-i",
+    "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\dodge-state-preparation-v001\\LGT240-235-236-original-owner-integer-fit-v001\\presentation\\Dodge4-LGT-SWD-finite400ms-offline.mp4",
+    "-map",
+    "0:v:0",
+    "-f",
+    "null",
+    "-"
+  ],
+  "actual_decoded_frames": 4,
+  "actual_duration_ms": 400,
+  "native_action_actor_distance_receipts": null
+}

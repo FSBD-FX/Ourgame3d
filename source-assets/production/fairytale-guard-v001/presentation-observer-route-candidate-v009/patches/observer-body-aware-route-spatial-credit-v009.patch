@@ -1,0 +1,153 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonGuardArtPartialProbe.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonGuardArtPartialProbe.cpp
+@@ -54,7 +54,9 @@
+  TMap<FKey,bool> Keys;FKey PulseKey;double ReleaseAt=0.,NeutralUntil=0.,Warm=0.,Start=0.,Stop=0.,PhaseWall=0.;int32 Phase=0,RequestedSide=0,ApproachSide=0;
+  FGuid Run;uint64 Owner=0,Restart=0,Light=0,GuardId=0,LastGuardDraw=0;
+  uint32 WakeMask=0,ReadyMask=0,WindupMask=0;int32 DormantSeen=0,GuardDrawCount=0;bool GapSeen=false,GuardWasAlreadyWaking=false;
+- JO Report=MakeShared<FJsonObject>();TArray<TSharedPtr<FJsonValue>> Inputs,Steps,Observations,Offsets,DiagnosticHits;
++ bool RoutePlanned=false,RouteReached=false;int32 RouteStage=0;double RouteLaneY=0.,RouteStartedWall=0.,FirstReachedSim=-1.;
++ FVector2D RouteStartPlayer=FVector2D::ZeroVector,RouteStartGuard=FVector2D::ZeroVector,FirstReachedPlayer=FVector2D::ZeroVector,FirstReachedGuard=FVector2D::ZeroVector;
++ JO Report=MakeShared<FJsonObject>();TArray<TSharedPtr<FJsonValue>> Inputs,Steps,Observations,Offsets,DiagnosticHits,RouteWitnesses;
+  void Key(FKey K,bool Down)
+  {
+   if(Keys.FindRef(K)==Down)return;if(auto C=Controller.Get())
+@@ -68,16 +70,79 @@
+  void Next(int32 P)
+  {Phase=P;PhaseWall=FPlatformTime::Seconds();auto O=MakeShared<FJsonObject>();O->SetStringField(TEXT("phase"),PhaseName(P));O->SetNumberField(TEXT("wall_offset_s"),PhaseWall-Start);O->SetNumberField(TEXT("sim"),Game->GetSimulationTime());Steps.Add(MakeShared<FJsonValueObject>(O));}
+  ADungeonFighter* Enemy(uint64 Id)const{if(auto G=Game.Get())for(auto E:G->Enemies)if(IsValid(E)&&E->GetRuntimeEntityId()==Id)return E.Get();return nullptr;}
++ bool AtStrictApproach()const
++ {
++  auto G=Game.Get();auto E=Enemy(GuardId);if(!G||!G->PlayerFighter||!E||!ApproachSide)return false;
++  const auto D=G->PlayerFighter->GetGroundPosition()-E->GetGroundPosition();const double SignedX=D.X*ApproachSide;
++  return SignedX>=120.&&SignedX<=180.&&D.Size()<=180.&&FMath::Abs(D.Y)<=12.;
++ }
++ bool SpatialCredit(const DungeonFairytaleGuard::FSelection& Selection)const
++ {
++  using C=DungeonFairytaleGuard::EClip;
++  if(Selection.Clip==C::Wake||Selection.Clip==C::Dormant)return true;
++  if(!RouteReached||Phase!=8||Selection.Facing!=ApproachSide)return false;
++  if(Selection.Clip==C::Ready)return AtStrictApproach();
++  if(Selection.Clip!=C::AxeWindup)return false;
++  if(AtStrictApproach())return true;
++  if(Selection.Frame<3)return false;
++  const auto E=Enemy(GuardId);if(!E||!E->GetStoneGuardDriver()||!Game.IsValid()||!Game->PlayerFighter)return false;
++  const auto& S=E->GetStoneGuardDriver()->State();const auto D=Game->PlayerFighter->GetGroundPosition()-E->GetGroundPosition();
++  return S.Phase==DungeonStoneGuard::EPhase::Windup&&S.Action.Kind==DungeonStoneGuard::EAttack::AxeSweep
++   &&S.Action.Locked&&Selection.AttackId==S.Action.AttackId&&Selection.SampleTime>=S.Action.LockAt
++   &&D.X*ApproachSide>=120.&&D.X*ApproachSide<=180.; // Real post-lock Y evade, never wrong-side credit.
++ }
++ JO SpatialFacts()const
++ {
++  auto O=MakeShared<FJsonObject>();O->SetNumberField(TEXT("requested_side"),RequestedSide);O->SetNumberField(TEXT("selected_side"),ApproachSide);
++  O->SetBoolField(TEXT("route_planned"),RoutePlanned);O->SetBoolField(TEXT("route_reached"),RouteReached);O->SetNumberField(TEXT("route_stage"),RouteStage);
++  O->SetNumberField(TEXT("lane_y"),RouteLaneY);O->SetNumberField(TEXT("first_reached_sim"),FirstReachedSim);
++  O->SetArrayField(TEXT("route_start_player"),XY(RouteStartPlayer));O->SetArrayField(TEXT("route_start_guard"),XY(RouteStartGuard));
++  O->SetArrayField(TEXT("first_reached_player"),XY(FirstReachedPlayer));O->SetArrayField(TEXT("first_reached_guard"),XY(FirstReachedGuard));
++  if(auto G=Game.Get())if(G->PlayerFighter)if(auto E=Enemy(GuardId))
++  {
++   const auto P=G->PlayerFighter->GetGroundPosition(),V=E->GetGroundPosition(),D=P-V;
++   O->SetArrayField(TEXT("player"),XY(P));O->SetArrayField(TEXT("guard"),XY(V));O->SetNumberField(TEXT("dx"),D.X);O->SetNumberField(TEXT("dy"),D.Y);
++   O->SetNumberField(TEXT("signed_dx"),D.X*ApproachSide);O->SetNumberField(TEXT("distance"),D.Size());O->SetBoolField(TEXT("strict_point"),AtStrictApproach());O->SetNumberField(TEXT("player_HP"),G->PlayerFighter->Health);
++  }
++  return O;
++ }
++ bool PrepareRoute(ADungeonFighter* E)
++ {
++  const auto P=Game->PlayerFighter->GetGroundPosition(),V=E->GetGroundPosition();
++  for(double Sign:{1.,-1.})
++  {
++   const double Lane=V.Y+Sign*140.;const FVector2D A(P.X,Lane),B(V.X+ApproachSide*150.,Lane),C(V.X+ApproachSide*150.,V.Y);
++   if(!SegmentLegal(P,A)||!SegmentLegal(A,B)||!SegmentLegal(B,C))continue;
++   RouteLaneY=Lane;RoutePlanned=true;RouteStage=0;RouteStartedWall=FPlatformTime::Seconds();RouteStartPlayer=P;RouteStartGuard=V;
++   auto O=MakeShared<FJsonObject>();O->SetStringField(TEXT("event"),TEXT("normal_route_planned"));O->SetNumberField(TEXT("sim"),Game->GetSimulationTime());
++   O->SetArrayField(TEXT("player"),XY(P));O->SetArrayField(TEXT("guard"),XY(V));O->SetArrayField(TEXT("outside_lane"),XY(A));O->SetArrayField(TEXT("side_lane"),XY(B));O->SetArrayField(TEXT("approach_point"),XY(C));RouteWitnesses.Add(MakeShared<FJsonValueObject>(O));return true;
++  }
++  return Need(false,TEXT("No legal body-aware outside140 route to requested side; never teleport"));
++ }
++ bool FollowRoute(ADungeonFighter* E)
++ {
++  if(RouteReached)return true;if(!RoutePlanned&&!PrepareRoute(E))return false;
++  if(!Need(FPlatformTime::Seconds()-RouteStartedWall<8.,TEXT("Normal body-aware approach route timed out before actual side point")))return false;
++  const auto P=Game->PlayerFighter->GetGroundPosition(),V=E->GetGroundPosition();
++  FVector2D Target=RouteStage==0?FVector2D(P.X,RouteLaneY):RouteStage==1?FVector2D(V.X+ApproachSide*150.,RouteLaneY):FVector2D(V.X+ApproachSide*150.,V.Y);
++  if(!MoveTo(Target))return false;
++  auto O=MakeShared<FJsonObject>();O->SetStringField(TEXT("event"),TEXT("normal_route_waypoint_reached"));O->SetNumberField(TEXT("stage"),RouteStage);O->SetNumberField(TEXT("sim"),Game->GetSimulationTime());O->SetArrayField(TEXT("actual_player"),XY(P));O->SetArrayField(TEXT("actual_guard"),XY(V));RouteWitnesses.Add(MakeShared<FJsonValueObject>(O));
++  if(++RouteStage<3)return false;
++  if(!Need(AtStrictApproach(),TEXT("WASD route ended without actual signed120..180 / radius180 / dy12 approach point")))return false;
++  RouteReached=true;FirstReachedSim=Game->GetSimulationTime();FirstReachedPlayer=P;FirstReachedGuard=V;MoveStop();return true;
++ }
++
+  bool Need(bool V,const FString& Why){if(!V)Finish(Why);return V;}
+  void Finish(const FString& Why=FString())
+  {
+   if(Stopped)return;Stopped=true;Stop=FPlatformTime::Seconds();GIsDumpingMovie=0;
+   TArray<FKey> Held;Keys.GetKeys(Held);for(FKey K:Held)Key(K,false);const bool Flushed=FlushFastLosslessProofScreenshots();
+   const bool Passed=Why.IsEmpty()&&Complete&&Flushed&&!Observations.IsEmpty();
+-  Report->SetStringField(TEXT("schema"),TEXT("guard-art-partial-native-observer-v002"));Report->SetBoolField(TEXT("passed"),Passed);Report->SetBoolField(TEXT("flow_complete"),Complete);Report->SetStringField(TEXT("failure"),Why);
++  Report->SetStringField(TEXT("schema"),TEXT("guard-art-partial-native-observer-v009"));Report->SetBoolField(TEXT("passed"),Passed);Report->SetBoolField(TEXT("flow_complete"),Complete);Report->SetStringField(TEXT("failure"),Why);
+   Report->SetStringField(TEXT("scope"),TEXT("Formal FirstBatchGuardRoom URL and normal Enter/E/direction input. Knight/Bat are explicitly diagnostic public ApplyCombatHit clears, not normal full combat. Guard is born only by formal slot2 plan; no Guard spawn, damage API, teleport, manual Tick/StepTo/SetState or clock override. Actual opt-in partial wholebody209/210/212; missing rows remain explicit procedural gaps. Observed native flow is not final visual/art acceptance. Silent viewport, no captured audio."));
+   Id(Report,TEXT("process_id"),FPlatformProcess::GetCurrentProcessId());Report->SetStringField(TEXT("run"),Run.ToString(EGuidFormats::Digits));Id(Report,TEXT("owner"),Owner);Id(Report,TEXT("guard_entity"),GuardId);Id(Report,TEXT("light_instance"),Light);Id(Report,TEXT("restart_serial"),Restart);
+-  Report->SetNumberField(TEXT("requested_approach_side"),RequestedSide);Report->SetNumberField(TEXT("actual_approach_side"),ApproachSide);
++  Report->SetNumberField(TEXT("requested_approach_side"),RequestedSide);Report->SetNumberField(TEXT("actual_approach_side"),ApproachSide);Report->SetObjectField(TEXT("spatial_approach"),SpatialFacts());Report->SetArrayField(TEXT("route_witnesses"),RouteWitnesses);
++  Report->SetStringField(TEXT("coverage_spatial_rule"),TEXT("Ready and AxeWindup0..2 require actual signedDx120..180/radius180/absDy12 after reached route; AxeWindup3..5 may evade in Y only after native lock while signedDx120..180; Wake/Dormant retain actual native facing."));
+   Report->SetBoolField(TEXT("normal_J_full_clear"),false);Report->SetBoolField(TEXT("diagnostic_public_damage_used"),!DiagnosticHits.IsEmpty());Report->SetBoolField(TEXT("guard_public_damage_used"),false);Report->SetBoolField(TEXT("guard_spawned_by_probe"),false);
+   Report->SetBoolField(TEXT("game_tick_called_manually"),false);Report->SetBoolField(TEXT("silent_video"),true);Report->SetBoolField(TEXT("audio_recorded"),false);Report->SetBoolField(TEXT("visual_reviewed"),false);Report->SetNumberField(TEXT("formal_complete_units"),0);
+   Report->SetNumberField(TEXT("WakeMask"),WakeMask);Report->SetNumberField(TEXT("ReadyMask"),ReadyMask);Report->SetNumberField(TEXT("WindupMask"),WindupMask);Report->SetNumberField(TEXT("DormantSeen"),DormantSeen);Report->SetBoolField(TEXT("DormantUnobserved"),DormantSeen==0);Report->SetBoolField(TEXT("guard_already_waking_at_birth_observation"),GuardWasAlreadyWaking);Report->SetBoolField(TEXT("procedural_gap_seen"),GapSeen);
+@@ -108,7 +173,16 @@
+   const auto Barrier=DungeonRoomLayout::ExplorationPreview().Barrier;
+   const auto Half=Game->PlayerFighter->GetCombatBodyHalfExtent()+FVector2D(8.,8.);
+   const FBox2D Expanded(Barrier.Min-Half,Barrier.Max+Half);
+-  return LegalPoint(A)&&LegalPoint(B)&&!Expanded.Intersect(FBox2D(FVector2D(FMath::Min(A.X,B.X),FMath::Min(A.Y,B.Y)),FVector2D(FMath::Max(A.X,B.X),FMath::Max(A.Y,B.Y))));
++  const FBox2D SegmentBox(FVector2D(FMath::Min(A.X,B.X),FMath::Min(A.Y,B.Y)),FVector2D(FMath::Max(A.X,B.X),FMath::Max(A.Y,B.Y)));
++  if(!LegalPoint(A)||!LegalPoint(B)||Expanded.Intersect(SegmentBox))return false;
++  // Planning uses the same real live body footprints plus8 clearance. Native
++  // collision remains authoritative; this only prevents choosing a blocked Y-first leg.
++  if(auto E=Enemy(GuardId))if(!E->bDead)
++  {
++   const auto V=E->GetGroundPosition();const auto Body=Game->PlayerFighter->GetCombatBodyHalfExtent()+E->GetCombatBodyHalfExtent()+FVector2D(8.,8.);
++   if(FBox2D(V-Body,V+Body).Intersect(SegmentBox))return false;
++  }
++  return true;
+  }
+  bool MoveTo(FVector2D Target)
+  {
+@@ -156,16 +230,16 @@
+   FDungeonFirstBatchGuardRoomView Plan;TArray<TSharedPtr<FJsonValue>> Slots;
+   if(G->QueryFirstBatchGuardRoom(Plan))for(const auto& V:Plan.Slots)
+   {auto X=MakeShared<FJsonObject>();X->SetStringField(TEXT("slot"),V.SlotId);X->SetStringField(TEXT("content"),V.ContentId);Id(X,TEXT("stage"),uint64(V.Stage));Id(X,TEXT("entity"),V.EntityId);X->SetNumberField(TEXT("warning_at"),V.WarningAt);X->SetNumberField(TEXT("materialized_at"),V.MaterializedAt);X->SetNumberField(TEXT("dead_at"),V.DeadAt);X->SetArrayField(TEXT("spawn"),XY(V.SpawnPosition));X->SetNumberField(TEXT("visibility"),H->GetCurrentVisibilityAt(V.SpawnPosition));Slots.Add(MakeShared<FJsonValueObject>(X));}
+-  O->SetArrayField(TEXT("slots"),Slots);O->SetArrayField(TEXT("rendered_warning_slots"),Strings(H->GetRenderedGuardRoomWarningSlots()));
++  O->SetArrayField(TEXT("slots"),Slots);O->SetArrayField(TEXT("rendered_warning_slots"),Strings(H->GetRenderedGuardRoomWarningSlots()));O->SetObjectField(TEXT("approach_spatial"),SpatialFacts());
+   if(auto E=Enemy(GuardId))if(auto Driver=E->GetStoneGuardDriver())
+   {
+-   const auto& S=Driver->State();const auto& A=S.Action;auto N=MakeShared<FJsonObject>();Id(N,TEXT("entity"),S.EntityId);N->SetNumberField(TEXT("time"),S.Time);N->SetNumberField(TEXT("initial_time"),S.InitialTime);N->SetNumberField(TEXT("phase"),int32(S.Phase));N->SetNumberField(TEXT("HP"),S.HP);N->SetNumberField(TEXT("incoming_receipts"),S.ReceivedHits.size());N->SetNumberField(TEXT("wake_start"),S.WakeStartedAt);N->SetNumberField(TEXT("wake_end"),S.WakeEnd);N->SetArrayField(TEXT("ground"),XY(E->GetGroundPosition()));N->SetBoolField(TEXT("dead"),E->bDead);Id(N,TEXT("attack_id"),A.AttackId);N->SetNumberField(TEXT("attack_kind"),int32(A.Kind));N->SetNumberField(TEXT("facing"),S.Facing);N->SetBoolField(TEXT("in_progress"),A.InProgress);N->SetBoolField(TEXT("interrupted"),A.Interrupted);
++   const auto& S=Driver->State();const auto& A=S.Action;auto N=MakeShared<FJsonObject>();Id(N,TEXT("entity"),S.EntityId);N->SetNumberField(TEXT("time"),S.Time);N->SetNumberField(TEXT("initial_time"),S.InitialTime);N->SetNumberField(TEXT("phase"),int32(S.Phase));N->SetNumberField(TEXT("HP"),S.HP);N->SetNumberField(TEXT("incoming_receipts"),S.ReceivedHits.size());N->SetNumberField(TEXT("wake_start"),S.WakeStartedAt);N->SetNumberField(TEXT("wake_end"),S.WakeEnd);N->SetArrayField(TEXT("ground"),XY(E->GetGroundPosition()));N->SetBoolField(TEXT("dead"),E->bDead);Id(N,TEXT("attack_id"),A.AttackId);N->SetNumberField(TEXT("attack_kind"),int32(A.Kind));N->SetNumberField(TEXT("facing"),S.Facing);N->SetBoolField(TEXT("in_progress"),A.InProgress);N->SetBoolField(TEXT("locked"),A.Locked);N->SetBoolField(TEXT("interrupted"),A.Interrupted);
+    N->SetNumberField(TEXT("start"),A.Start);N->SetNumberField(TEXT("lock_at"),A.LockAt);N->SetNumberField(TEXT("active_at"),A.ActiveAt);N->SetNumberField(TEXT("active_end"),A.ActiveEnd);N->SetNumberField(TEXT("recovery_end"),A.RecoveryEnd);N->SetNumberField(TEXT("cooldown_end"),A.CooldownEnd);N->SetNumberField(TEXT("occupied_until"),S.OccupiedUntil);N->SetNumberField(TEXT("stun_until"),S.StunUntil);N->SetNumberField(TEXT("window_count"),S.Windows.size());O->SetObjectField(TEXT("guard_native"),N);
+   }
+   TArray<TSharedPtr<FJsonValue>> Draws;
+   for(const auto& D:H->GetFairytaleGuardDraws())
+   {
+-   Draws.Add(MakeShared<FJsonValueObject>(SerializeDraw(D)));if(D.EntityId!=GuardId||D.DrawId<=LastGuardDraw)continue;
++   auto Draw=SerializeDraw(D);Draw->SetBoolField(TEXT("SpatialCoverageEligible"),SpatialCredit(D.Selection));Draws.Add(MakeShared<FJsonValueObject>(Draw));if(D.EntityId!=GuardId||D.DrawId<=LastGuardDraw)continue;
+    LastGuardDraw=D.DrawId;++GuardDrawCount;const auto& S=D.Selection;
+    if(!Need(S.Valid&&S.EntityId==GuardId&&D.OptIn,TEXT("Actual Guard draw lacks native valid identity / partial opt-in")))break;
+    const bool Known=S.Clip==DungeonFairytaleGuard::EClip::Dormant||S.Clip==DungeonFairytaleGuard::EClip::Wake||S.Clip==DungeonFairytaleGuard::EClip::Ready||S.Clip==DungeonFairytaleGuard::EClip::AxeWindup;
+@@ -177,8 +251,8 @@
+    {
+     if(S.Clip==DungeonFairytaleGuard::EClip::Dormant)++DormantSeen;
+     if(S.Clip==DungeonFairytaleGuard::EClip::Wake)WakeMask|=1u<<S.Frame;
+-    if(S.Clip==DungeonFairytaleGuard::EClip::Ready&&S.Facing==ApproachSide)ReadyMask|=1u<<S.Frame;
+-    if(S.Clip==DungeonFairytaleGuard::EClip::AxeWindup&&S.Facing==ApproachSide)WindupMask|=1u<<S.Frame;
++    if(S.Clip==DungeonFairytaleGuard::EClip::Ready&&SpatialCredit(S))ReadyMask|=1u<<S.Frame;
++    if(S.Clip==DungeonFairytaleGuard::EClip::AxeWindup&&SpatialCredit(S))WindupMask|=1u<<S.Frame;
+    }
+   }
+   O->SetArrayField(TEXT("guard_draws"),Draws);return O;
+@@ -254,6 +328,8 @@
+    auto E=Enemy(GuardId);if(!Need(E&&E->GetStoneGuardDriver(),TEXT("Formal Guard disappeared")))return;
+    const auto& S=E->GetStoneGuardDriver()->State();const auto& A=S.Action;
+    if(!Need(S.HP==185.&&S.ReceivedHits.empty()&&!E->bDead,TEXT("Guard art observer must never damage or replace Guard")))return;
++   if(!FollowRoute(E))return;
++   if(!Need(P->Health==100.,TEXT("Actual player damage during safe side trial; preserve HP and failure, never heal or add invulnerability")))return;
+    if(WakeMask==63&&ReadyMask==15&&WindupMask==63&&GapSeen)
+    {MoveStop();Complete=true;Next(9);FinishOnFrame=true;return;}
+    const FVector2D V=E->GetGroundPosition();const FVector2D AttackPoint=V+FVector2D(ApproachSide*150.,0.);

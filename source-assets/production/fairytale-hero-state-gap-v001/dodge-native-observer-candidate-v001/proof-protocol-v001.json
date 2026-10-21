@@ -1,0 +1,59 @@
+{
+  "runtime_report_schema": "hero-SWD-LGT-Dodge4-native-observer-v001",
+  "scenario": "NormalShiftOutwardUnblockedDodge4",
+  "Root_prereg_schema": "hero-Dodge4-Root-prereg-v001",
+  "session_schema": "hero-Dodge4-native-session-v001",
+  "original_Dodge_sample_intervals_ms": [
+    [
+      0,
+      100
+    ],
+    [
+      100,
+      200
+    ],
+    [
+      200,
+      300
+    ],
+    [
+      300,
+      400
+    ]
+  ],
+  "last_frame_policy": "Original absolute Start+.1/.2/.3 thresholds; actual query excludes original End, no float-tail extension.",
+  "coverage": {
+    "DodgeMask": 15,
+    "Ready_callbacks_min": 2,
+    "Walk_callbacks_min": 4,
+    "Walk_actual_accepted_distance_min": 24
+  },
+  "required_sources": {
+    "Texture2D512": 32,
+    "reused_sword": 1,
+    "declared_Dodge_slots": 9,
+    "nonempty_Dodge_draws": [
+      9,
+      9,
+      9,
+      9
+    ],
+    "ordinary_Ready_stack": 7,
+    "ordinary_Walk_stack": 8
+  },
+  "normal_keys": [
+    "Enter",
+    "E",
+    "W",
+    "A",
+    "S",
+    "D",
+    "LeftShift"
+  ],
+  "predecessor_scope": "Two public diagnostic hits limited to ENM-STN-001 / ENM-STN-002; Guard must remain living185/no received hits; no player/Guard public damage or health/poise/clock/Facing/actor writes.",
+  "registration": "416source\u219272display, Sword.50; original artist Root/Grip/axes; one full mirror.",
+  "native_scope": "One outward unblocked185 natural Shift per fresh side. Backwards/blocked/interrupted native scenarios not covered by this capture.",
+  "native_pixels": "Unchanged native lossless BGRA8 CRC/FIFO/stop-flush; predeclared source RGBA optical probes, no alignment search.",
+  "audio_recorded": false,
+  "FinalAccepted": false
+}

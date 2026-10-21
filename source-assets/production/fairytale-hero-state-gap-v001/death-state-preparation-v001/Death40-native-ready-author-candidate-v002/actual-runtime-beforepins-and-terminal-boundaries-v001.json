@@ -1,0 +1,44 @@
+{
+  "schema": "Death5-actual-readonly-runtime-boundaries-v001",
+  "files": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 122242,
+      "sha256": "818c2c06f4b11d04511f65776a678eaad5f1a2d244ff05b6e6d5bfa1fa1c5a38"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "bytes": 151572,
+      "sha256": "55066ff73a6dd594db4c0631f76656d8166f43a3b4d3512b53df01021038cc6c"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": 119659,
+      "sha256": "88ddf5c24bca2259921aa2b9fe6e36aabc665438784e153178d73c751c233f3b"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordHurtPlan.h",
+      "bytes": 2324,
+      "sha256": "8a561418012af34dfcdd028978a30f734306593de7d71d35b000a83ca10cf4d2"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordHurtPresentation.cpp",
+      "bytes": 6921,
+      "sha256": "cf9e181e487d7c869c58d1e5dfed6d5006ab573f95ea9b72cb1770abc494ac67"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordHurtProfile.cpp",
+      "bytes": 12698,
+      "sha256": "3c690e59cb912c1746e29e9e6a4714434a0050d304ab83064d51d5b7547995b3"
+    }
+  ],
+  "evidence": {
+    "lethal_hit": "DungeonFighter.cpp1529..1554 resets age0, labeldeath, bDead and OnFighterDied",
+    "terminal_advance": "DungeonFighter.cpp1812..1818 increments realAnimationTime and lowersJumpHeight only",
+    "HitFlash": "Set.22 on hit at1516; SimulateMotion1829 decrements; terminalhelper does not. NewDeath must not inherit unconditionalHitFlash tint.",
+    "Hurt_exclusion": "DungeonFighter QueryHurtPresentation1325..1335 rejects dead and any label other thanhurt",
+    "kernel_body_disable": "GameMode livebody view sets bAlive=!Fighter.bDead",
+    "gameover": "GameMode terminal branch calls AdvanceTerminalPresentation then returns, no simulation/input/driver tick"
+  },
+  "source_version_note": "Read-only actual baseline for interface facts, not a Sourcepatch or runtime acceptance. Root must re-pin currentSource before implementation."
+}

@@ -1,0 +1,114 @@
+--- frozen-e7b9/DungeonHeroAirProductionProbeV001.cpp
++++ NEW-callback-ready-v002/DungeonHeroAirProductionProbeV001.cpp
+@@ -106,6 +106,12 @@
+  FKey PulseKey;TMap<FKey,bool> Keys;uint32 NoArmorMask=0,LightFirstMask=0,LightSecondMask=0;uint64 LastNewDraw=0;
+  TWeakObjectPtr<ADungeonGameMode> Game;TWeakObjectPtr<APlayerController> Controller;TWeakObjectPtr<ADungeonHUD> HUD;
+  FGuid Run;uint64 Owner=0,Room=0,Epoch=0,Restart=0,LightSource=0,Light=0,Sword=0,SwordVersion=0,LightVersion=0;
++ // This token is created only by an actual completed screenshot callback.
++ bool LightReadyCallbackObserved=false,LightReadyCallbackConsumed=false;
++ int32 LightReadyObservationIndex=INDEX_NONE;
++ uint64 LightReadyDrawId=0;
++ double LightReadyCallbackSim=-1.,LightReadyCallbackWall=-1.;
++ JO LightReadyCallback;
+  TArray<JV> Inputs,Steps,Observations,Offsets,DiagnosticHits,StartupTextures;
+ 
+  void Next(int32 P){Phase=P;PhaseAt=FPlatformTime::Seconds();auto O=MakeShared<FJsonObject>();O->SetNumberField(TEXT("phase"),P);O->SetNumberField(TEXT("wall_offset_s"),PhaseAt-Start);O->SetNumberField(TEXT("sim"),Game.IsValid()?Game->GetSimulationTime():0.);Steps.Add(MakeShared<FJsonValueObject>(O));}
+@@ -114,6 +120,20 @@
+  {
+   if(!Controller.IsValid()||Keys.FindRef(K)==Down)return;
+   auto P=Game.IsValid()?Game->PlayerFighter.Get():nullptr;auto O=MakeShared<FJsonObject>();
++  if(Game.IsValid())
++  {
++   const auto& InputView=Game->GetEquipmentView();
++   O->SetBoolField(TEXT("context_sampled_before_InputKey"),true);
++   O->SetStringField(TEXT("run"),InputView.RunGuid.ToString(EGuidFormats::Digits));Id(O,TEXT("owner"),InputView.OwnerId);
++   Id(O,TEXT("current_room"),InputView.RoomInstanceId);Id(O,TEXT("epoch"),Game->GetRunPresentationEpoch());
++   Id(O,TEXT("player_entity"),P?P->GetRuntimeEntityId():0);
++   if(InputView.ActiveSlot>=0&&InputView.ActiveSlot<3)
++   {Id(O,TEXT("weapon_instance"),InputView.Slots[InputView.ActiveSlot].InstanceId);Id(O,TEXT("weapon_version"),InputView.Slots[InputView.ActiveSlot].Version);}
++   Id(O,TEXT("armor_instance"),InputView.Slots[2].InstanceId);Id(O,TEXT("armor_version"),InputView.Slots[2].Version);
++   O->SetNumberField(TEXT("observed_air_transition_ordinal_before"),AirTransitions);
++   O->SetNumberField(TEXT("space_enqueue_observer_ordinal"),Down&&K==EKeys::SpaceBar?JumpInputs+1:0);
++   O->SetBoolField(TEXT("space_enqueue_ordinal_is_gameplay_jump_id"),false);
++  }
+   if(P){O->SetNumberField(TEXT("before_H"),P->JumpHeight);O->SetNumberField(TEXT("before_V"),P->GetVerticalVelocity());O->SetNumberField(TEXT("before_landing_age"),P->GetLandingVisualAge());}
+   O->SetNumberField(TEXT("wall_offset_s"),FPlatformTime::Seconds()-Start);O->SetNumberField(TEXT("sim"),Game.IsValid()?Game->GetSimulationTime():0.);
+   Controller->InputKey(FInputKeyParams(K,Down?IE_Pressed:IE_Released,Down?1.:0.));Keys.Add(K,Down);
+@@ -220,6 +240,38 @@
+    ||!Need(!H->GetInterfaceVisible()&&H->GetRenderedTextDrawCalls()==0&&!H->IsCombatRangeDebugEnabled()&&H->GetCombatRangeDebugLineCount()==0,TEXT("Traditional HUD/range must remain hidden"))
+    ||!Need(P->Health==InitialHP&&!P->bDead&&!G->bGameOver,TEXT("Baseline player took damage or died; no state repair allowed"))){BeginStop(Actor);return;}
+   if(GearPinned&&!PinGear(P)){BeginStop(Actor);return;}
++  // HUD.Tick prerequisites do not wait for DrawHUD. Wait for its real completed
++  // callback instead of reading the prior equipment-change placeholder in Tick.
++  if(Phase==5&&!LightReadyCallbackObserved&&GearPinned&&!V.Action.Active&&V.Slots[2].InstanceId==Light)
++  {
++   const auto& ReadyBinding=B.EquipmentBinding;
++   const bool CompletedReady=B.Active&&B.Supported&&B.ArmorDrawn&&SwordDrawn(B)&&P->Facing==float(Side)
++    &&B.ActionPoseSupported&&B.TextureReady&&!B.GearPlaceholder&&B.Clip==TEXT("sword_ready_idle")
++    &&B.SimulationTime==G->GetSimulationTime()&&B.DrawId>LastNewDraw&&B.Facing==Side&&!A.Drawn
++    &&P->JumpHeight==0.f&&P->GetVerticalVelocity()==0.f&&P->GetLandingVisualAge()==.12f
++    &&B.DrawStack.Num()>0&&B.DrawStack==H->GetRenderedPlayerDrawStack()
++    &&B.EquipmentBoundMode&&B.EquipmentBindingValid&&ReadyBinding.RunGuid==Run&&ReadyBinding.OwnerId==Owner
++    &&ReadyBinding.WeaponInstanceId==Sword&&ReadyBinding.WeaponVersion==SwordVersion
++    &&ReadyBinding.Armor==DungeonFairytaleSwordEquipmentBinding::EArmor::LightArmor
++    &&ReadyBinding.ArmorInstanceId==Light&&ReadyBinding.ArmorVersion==LightVersion
++    &&ReadyBinding.WeaponContentId==TEXT("WPN-SWD-001")&&ReadyBinding.ArmorContentId==TEXT("ARM-LGT-001");
++   if(CompletedReady)
++   {
++    LightReadyCallbackObserved=true;LightReadyObservationIndex=Observations.Num()-1;
++    LightReadyDrawId=B.DrawId;LightReadyCallbackSim=G->GetSimulationTime();LightReadyCallbackWall=Offset;
++    LightReadyCallback=MakeShared<FJsonObject>();auto& ReadyReceipt=LightReadyCallback;
++    ReadyReceipt->SetBoolField(TEXT("completed_native_screenshot_callback"),true);
++    ReadyReceipt->SetNumberField(TEXT("observation_index"),LightReadyObservationIndex);
++    Id(ReadyReceipt,TEXT("draw_id"),B.DrawId);ReadyReceipt->SetNumberField(TEXT("draw_sim"),B.SimulationTime);
++    ReadyReceipt->SetNumberField(TEXT("callback_sim"),LightReadyCallbackSim);ReadyReceipt->SetNumberField(TEXT("wall_offset_s"),Offset);
++    ReadyReceipt->SetStringField(TEXT("run"),ReadyBinding.RunGuid.ToString(EGuidFormats::Digits));Id(ReadyReceipt,TEXT("owner"),ReadyBinding.OwnerId);
++    Id(ReadyReceipt,TEXT("room"),V.RoomInstanceId);Id(ReadyReceipt,TEXT("epoch"),G->GetRunPresentationEpoch());
++    Id(ReadyReceipt,TEXT("weapon_instance"),ReadyBinding.WeaponInstanceId);Id(ReadyReceipt,TEXT("weapon_version"),ReadyBinding.WeaponVersion);
++    Id(ReadyReceipt,TEXT("armor_instance"),ReadyBinding.ArmorInstanceId);Id(ReadyReceipt,TEXT("armor_version"),ReadyBinding.ArmorVersion);
++    ReadyReceipt->SetNumberField(TEXT("facing"),B.Facing);ReadyReceipt->SetObjectField(TEXT("old_draw"),OldDraw(B));
++    ReadyReceipt->SetArrayField(TEXT("actual_stack"),Strings(H->GetRenderedPlayerDrawStack()));
++   }
++  }
+   if(Pose>=0)
+   {
+    const bool LightNow=AirTransitions>=2;const int32 ExpectedCount=LightNow?9:6;
+@@ -250,7 +302,7 @@
+   if(Phase==9&&ThirdLandingObserved&&!bAir&&P->GetLandingVisualAge()==.12f)
+   {
+    if(B.Active&&B.Supported&&B.TextureReady&&B.Clip==TEXT("sword_ready_idle")&&B.ArmorDrawn&&SwordDrawn(B)&&!A.Drawn)++ReadyJoinFrames;
+-   if(ReadyJoinFrames>=2){FlowComplete=Need(JumpInputs==3&&AirTransitions==3&&LandingTransitions==3&&NoArmorMask==63&&LightFirstMask==63&&LightSecondMask==63&&RejumpIssuedInsideLanding&&NoArmorFrames>=6&&LightFrames>=12,TEXT("Three real jumps lack starterNone6/LGT9/rejump and six-pose/Ready coverage"));CaptureFinalHP=P->Health;Next(10);BeginStop(Actor);}
++   if(ReadyJoinFrames>=2){FlowComplete=Need(LightReadyCallbackObserved&&LightReadyCallbackConsumed&&JumpInputs==3&&AirTransitions==3&&LandingTransitions==3&&NoArmorMask==63&&LightFirstMask==63&&LightSecondMask==63&&RejumpIssuedInsideLanding&&NoArmorFrames>=6&&LightFrames>=12,TEXT("Three real jumps lack starterNone6/LGT9/rejump and six-pose/Ready coverage"));CaptureFinalHP=P->Health;Next(10);BeginStop(Actor);}
+   }
+  }
+  void Finalize(ADungeonHeroAirProductionProbeV001& Actor)
+@@ -262,6 +314,9 @@
+   R->SetStringField(TEXT("profile_id"),Air::Profile().ProfileId);R->SetStringField(TEXT("profile_closure"),Air::Profile().SourceClosureSHA256);R->SetStringField(TEXT("native_ready_freeze_SHA256"),TEXT("e3786b74ac2292479780368531a99ebc097ec8df3c70629d8168a39ff75dfea7"));R->SetBoolField(TEXT("NoArmor_is_formal20_pair"),false);R->SetBoolField(TEXT("transition_ordinals_are_gameplay_jump_ids"),false);R->SetBoolField(TEXT("native_async_capture_writes_flushed"),Flushed);R->SetBoolField(TEXT("player_Guard_HP_position_AI_time_writes"),false);
+   Id(R,TEXT("process_id"),FPlatformProcess::GetCurrentProcessId());R->SetNumberField(TEXT("requested_facing"),Side);R->SetStringField(TEXT("run"),Run.ToString(EGuidFormats::Digits));Id(R,TEXT("owner"),Owner);Id(R,TEXT("current_room"),Room);Id(R,TEXT("epoch"),Epoch);Id(R,TEXT("restart_serial"),Restart);Id(R,TEXT("weapon_instance"),Sword);Id(R,TEXT("weapon_version"),SwordVersion);Id(R,TEXT("armor_instance"),Light);Id(R,TEXT("armor_version"),LightVersion);
+   R->SetNumberField(TEXT("normal_space_inputs"),JumpInputs);R->SetNumberField(TEXT("air_transitions"),AirTransitions);R->SetNumberField(TEXT("landing_transitions"),LandingTransitions);R->SetNumberField(TEXT("starter_NoArmor_mask"),NoArmorMask);R->SetNumberField(TEXT("light_first_mask"),LightFirstMask);R->SetNumberField(TEXT("light_second_mask"),LightSecondMask);R->SetNumberField(TEXT("starter_NoArmor_frames"),NoArmorFrames);R->SetNumberField(TEXT("light_frames"),LightFrames);R->SetNumberField(TEXT("landing_frames"),LandingFrames);R->SetNumberField(TEXT("Ready_join_frames"),ReadyJoinFrames);R->SetNumberField(TEXT("initial_hp"),InitialHP);R->SetNumberField(TEXT("capture_final_hp"),CaptureFinalHP);R->SetBoolField(TEXT("normal_rejump_issued_inside_original_landing"),RejumpIssuedInsideLanding);R->SetNumberField(TEXT("rejump_input_landing_age"),RejumpInputLandingAge);
++  R->SetBoolField(TEXT("LGT_completed_Ready_callback_observed"),LightReadyCallbackObserved);
++  R->SetBoolField(TEXT("LGT_completed_Ready_callback_consumed_once"),LightReadyCallbackConsumed);
++  if(LightReadyCallback.IsValid())R->SetObjectField(TEXT("LGT_completed_Ready_callback"),LightReadyCallback);
+   R->SetArrayField(TEXT("normal_inputs"),Inputs);R->SetArrayField(TEXT("steps"),Steps);R->SetArrayField(TEXT("observations"),Observations);R->SetArrayField(TEXT("diagnostic_knight_hits"),DiagnosticHits);R->SetArrayField(TEXT("startup_actual_GPU_source_textures49"),StartupTextures);R->SetBoolField(TEXT("startup_readback_complete"),StartupReadbackComplete);R->SetNumberField(TEXT("startup_readback_stop_monotonic_s"),StartupReadbackStop);
+   auto Open=MakeShared<FJsonObject>();Open->SetStringField(TEXT("normal_landing_J_priority"),TEXT("OPEN_not_run"));Open->SetStringField(TEXT("normal_landing_Shift_priority"),TEXT("OPEN_not_run"));Open->SetStringField(TEXT("real_save_restore"),TEXT("OPEN_not_run"));R->SetObjectField(TEXT("additional_scenarios"),Open);
+   auto Timing=MakeShared<FJsonObject>();Timing->SetBoolField(TEXT("use_fixed_time_step"),FApp::UseFixedTimeStep());Timing->SetNumberField(TEXT("capture_start_monotonic_s"),Start);Timing->SetNumberField(TEXT("capture_stop_monotonic_s"),Stop);Timing->SetArrayField(TEXT("frame_wall_offsets_s"),Offsets);R->SetObjectField(TEXT("capture_timing"),Timing);
+@@ -308,8 +363,17 @@
+    case 3:if(FirstLandingObserved&&NoArmorMask==63&&P->JumpHeight==0.f&&P->GetVerticalVelocity()==0.f&&P->GetLandingVisualAge()==.12f&&CanPulse())
+     {DungeonEquipmentInventory::FItem I;I.ContentId="ARM-LGT-001";const auto R=G->RegisterEquipmentSource(TEXT("display.hero.air.production.light.v001"),I,P->GetGroundPosition()+FVector2D(24,0),true);if(!Need(R.Ok()&&!R.Replayed,TEXT("Actual display LGT registration failed")))return;LightSource=R.SourceId;Light=R.InstanceId;Next(4);}break;
+    case 4:if(CanPulse()&&G->GetEquipmentView().SelectedSourceId==LightSource&&Pulse(EKeys::E))Next(5);break;
+-   case 5:if(!G->GetEquipmentView().Action.Active&&G->GetEquipmentView().Slots[2].InstanceId==Light&&CanPulse()&&PinGear(P))
+-    {const auto& D=H->GetFairytaleSwordDraw();if(!Need(D.Active&&D.Supported&&D.ArmorDrawn&&SwordDrawn(D)&&P->Facing==float(Side),TEXT("Real committed LGT/sword/facing not visible before normal Space")))return;if(Pulse(EKeys::SpaceBar)){++JumpInputs;Next(6);}}break;
++   case 5:if(!G->GetEquipmentView().Action.Active&&G->GetEquipmentView().Slots[2].InstanceId==Light&&CanPulse()&&PinGear(P)&&LightReadyCallbackObserved)
++    {
++     const auto& CurrentView=G->GetEquipmentView();const auto& D=H->GetFairytaleSwordDraw();
++     if(!Need(!LightReadyCallbackConsumed&&LightReadyCallback.IsValid()&&LightReadyObservationIndex>=0&&LightReadyDrawId>LastNewDraw
++       &&LightReadyCallbackSim>=0.&&LightReadyCallbackSim<=G->GetSimulationTime()&&Now-Start>LightReadyCallbackWall
++       &&CurrentView.RunGuid==Run&&CurrentView.OwnerId==Owner&&CurrentView.RoomInstanceId==Room
++       &&G->GetRunPresentationEpoch()==Epoch&&G->GetRunRestartSerial()==Restart&&P->GetRuntimeEntityId()==Owner,
++       TEXT("Completed LGT Ready callback handoff lost its actual owner/clock or was reused")))return;
++     if(!Need(D.Active&&D.Supported&&D.ArmorDrawn&&SwordDrawn(D)&&P->Facing==float(Side),TEXT("Real committed LGT/sword/facing not visible before normal Space")))return;
++     if(Pulse(EKeys::SpaceBar)){LightReadyCallbackConsumed=true;++JumpInputs;Next(6);}
++    }break;
+    case 6:if(SecondLandingObserved&&LightFirstMask==63&&CanPulse())
+     {const double Before=P->GetLandingVisualAge();if(!Need(P->JumpHeight==0.f&&P->GetVerticalVelocity()==0.f&&Before>=.06f&&Before<.12f,TEXT("Normal re-jump missed original half-open .12 landing window after real Land5 callback")))return;if(Pulse(EKeys::SpaceBar)){RejumpInputLandingAge=Before;RejumpIssuedInsideLanding=true;++JumpInputs;Next(7);}}break;
+    case 7:if(AirTransitions==3)Next(8);break;

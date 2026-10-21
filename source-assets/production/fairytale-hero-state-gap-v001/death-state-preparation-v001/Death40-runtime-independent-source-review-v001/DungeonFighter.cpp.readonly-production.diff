@@ -1,0 +1,22 @@
+--- frozen-stage0/DungeonFighter.cpp
++++ production/DungeonFighter.cpp
+@@ -1322,9 +1322,16 @@
+     }
+ }
+ 
+-bool ADungeonFighter::QueryDeathPresentation(FDungeonDeathPresentationSample&) const
+-{
+-    return false; // Stage0 semantic witness: no invented terminal sample.
++bool ADungeonFighter::QueryDeathPresentation(FDungeonDeathPresentationSample& Out) const
++{
++    // Published terminal facts remain readable while Continue is closed. This
++    // query never advances the master/terminal clock or grants equipment authority.
++    if (bEnemy || StoneKnight || StoneBat || StoneGuard || !bDead || Health!=0.f
++        || AnimationName!=TEXT("death") || !FMath::IsFinite(AnimationTime) || AnimationTime<0.f) return false;
++    FDungeonDeathPresentationSample Candidate;
++    Candidate.Active=true;Candidate.Dead=bDead;Candidate.DeathReported=bDeathReported;
++    Candidate.Health=Health;Candidate.Elapsed=AnimationTime;Candidate.AnimationName=AnimationName;
++    Out=MoveTemp(Candidate);return true;
+ }
+ 
+ bool ADungeonFighter::QueryHurtPresentation(FDungeonHurtPresentationSample& Out) const

@@ -1,0 +1,31 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonHeroLandingPriorityProbeV001.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonHeroLandingPriorityProbeV001.cpp
+@@ -9,6 +9,7 @@
+ #include "DungeonProofScreenshots.h"
+ #include "DungeonRoomLayout.h"
+ #include "Engine/Engine.h"
++#include "UObject/StrongObjectPtr.h"
+ #include "Engine/Texture2D.h"
+ #include "TextureResource.h"
+ #include "RenderingThread.h"
+@@ -331,6 +332,20 @@
+   const auto& Profile=Air::Profile();
+   if(!Need(Profile.SourceClosureVerified&&Profile.SourceClosureSHA256==ExpectedClosure&&Profile.CanvasSource==512&&Profile.StandingExtent==416.&&Profile.StandingDisplay==72.&&Profile.HeightProjection==.70&&Profile.WeaponScale==.5,TEXT("Exact retained Air49 profile is not admitted")))return false;
+   if(!Need(!Capturing&&!AudioRequested&&GIsDumpingMovie==0,TEXT("Texture GPU/source readback must precede audio/movie/input")))return false;
++  // The new renderer selects Bridge258 J0/J1, so explicitly retain the old
++  // fourteen layers still required by the unchanged old115 readback contract.
++  TArray<TStrongObjectPtr<UTexture2D>> Bridge258LegacyReadbackRefs;
++  if(Bridge258ObservationEnabled()&&Action==TEXT("J"))
++  {
++   for(int32 Frame=0;Frame<2;++Frame)for(const TCHAR* Component:{TEXT("BodyRest"),TEXT("ShoulderFar"),TEXT("Chest"),TEXT("NearArmWithoutHand"),TEXT("ShoulderNear"),TEXT("HelmetForeground"),TEXT("NearHand")})
++   {
++    const bool Armor=FString(Component)==TEXT("ShoulderFar")||FString(Component)==TEXT("Chest")||FString(Component)==TEXT("ShoulderNear");
++    const FString Name=Armor?FString::Printf(TEXT("T_Fairytale_LeatherPrimary1%s_%03d_v001"),Component,Frame):FString::Printf(TEXT("T_Fairytale_SwordPrimary1%s_%03d_v001"),Component,Frame);
++    const FString Path=FString(Armor?TEXT("/Game/Production/ArtTrials/EV048/v013/HeroLeatherPrimary1/"):TEXT("/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/"))+Name+TEXT(".")+Name;
++    Bridge258LegacyReadbackRefs.Emplace(LoadObject<UTexture2D>(nullptr,*Path));
++   }
++   FlushRenderingCommands(); // Before the original strict FindObject/RHI/pending checks, before audio/input.
++  }
+   IFileManager::Get().MakeDirectory(*(Directory/TEXT("texture-readback")),false);
+   TSet<FString> Unique;
+   const auto Capture=[&](const FString& Path,const FString& PNGSHA,const FString& RGBASHA,int32 Frame,int32 Component)

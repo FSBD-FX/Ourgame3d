@@ -1,0 +1,379 @@
+{
+  "schema": "request264-readonly-layout-pixel-QC-v001",
+  "utc": "2026-10-20T12:25:30.201306+00:00",
+  "source": {
+    "path": "G:/Ourgame/source-assets/production/fairytale-hero-air-primary-v001/requests/request264-v001/raw/AirJ6-body-raw.png",
+    "bytes": 1529726,
+    "sha256": "02fe80d591b92272c487c5116a99e32ae9d2c88642a1ff6f79b1ee41da207026"
+  },
+  "preserved_original": {
+    "path": "G:/OurGameArchive/2026-10-20_军剑空中斩制作_v001/原件/request264-AirJ6-body-raw.png",
+    "bytes": 1529726,
+    "sha256": "02fe80d591b92272c487c5116a99e32ae9d2c88642a1ff6f79b1ee41da207026"
+  },
+  "actual_format": "PNG RGB1024x1536",
+  "layout": {
+    "columns": 2,
+    "rows": 3,
+    "cell": [
+      512,
+      512
+    ],
+    "order": "row-major AJ0,AJ1 / AJ2,AJ3 / AJ4,AJ5"
+  },
+  "method": {
+    "background_estimate": "Per-cell median RGB over the four8x8 corner blocks,256 samples total.",
+    "foreground_mask": "Chebyshev RGB distance max(abs(pixel-background_median)) >48, with raw8-bit RGB and no alpha extraction.",
+    "background_mask": "Complement: distance <=48.",
+    "bbox": "Cell-local [left,top,right,bottom],right/bottom exclusive; margins and edge-touch arrays are left/top/right/bottom.",
+    "connectivity": "8-connected binary foreground, scipy.ndimage.label with3x3 ones. No morphology, cleanup, cropping or resampling.",
+    "sensitivity": "BBox-only thresholds >32 and >64 are reported without choosing a different pass threshold."
+  },
+  "cells": [
+    {
+      "pose": "AJ0",
+      "cell_rect": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "background_corner_median_RGB": [
+        251.0,
+        3.0,
+        250.0
+      ],
+      "background_pixel_count_le48": 207284,
+      "foreground_pixel_count_gt48": 54860,
+      "foreground_bbox": [
+        118,
+        90,
+        391,
+        472
+      ],
+      "bbox_size": [
+        273,
+        382
+      ],
+      "margins_LTRB": [
+        118,
+        90,
+        121,
+        40
+      ],
+      "edge_touch_LTRB": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "foreground_components_8_connected": 1,
+      "components_ge16px": 1,
+      "largest_component_pixels": 54860,
+      "sensitivity_bbox_gt32": [
+        118,
+        89,
+        391,
+        472
+      ],
+      "sensitivity_bbox_gt64": [
+        118,
+        90,
+        391,
+        472
+      ]
+    },
+    {
+      "pose": "AJ1",
+      "cell_rect": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "background_corner_median_RGB": [
+        252.0,
+        3.0,
+        250.0
+      ],
+      "background_pixel_count_le48": 208676,
+      "foreground_pixel_count_gt48": 53468,
+      "foreground_bbox": [
+        137,
+        81,
+        400,
+        479
+      ],
+      "bbox_size": [
+        263,
+        398
+      ],
+      "margins_LTRB": [
+        137,
+        81,
+        112,
+        33
+      ],
+      "edge_touch_LTRB": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "foreground_components_8_connected": 1,
+      "components_ge16px": 1,
+      "largest_component_pixels": 53468,
+      "sensitivity_bbox_gt32": [
+        137,
+        80,
+        400,
+        479
+      ],
+      "sensitivity_bbox_gt64": [
+        137,
+        81,
+        399,
+        479
+      ]
+    },
+    {
+      "pose": "AJ2",
+      "cell_rect": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "background_corner_median_RGB": [
+        251.0,
+        3.0,
+        250.0
+      ],
+      "background_pixel_count_le48": 202398,
+      "foreground_pixel_count_gt48": 59746,
+      "foreground_bbox": [
+        110,
+        52,
+        509,
+        449
+      ],
+      "bbox_size": [
+        399,
+        397
+      ],
+      "margins_LTRB": [
+        110,
+        52,
+        3,
+        63
+      ],
+      "edge_touch_LTRB": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "foreground_components_8_connected": 1,
+      "components_ge16px": 1,
+      "largest_component_pixels": 59746,
+      "sensitivity_bbox_gt32": [
+        110,
+        52,
+        510,
+        449
+      ],
+      "sensitivity_bbox_gt64": [
+        110,
+        52,
+        509,
+        449
+      ]
+    },
+    {
+      "pose": "AJ3",
+      "cell_rect": [
+        512,
+        512,
+        1024,
+        1024
+      ],
+      "background_corner_median_RGB": [
+        252.0,
+        3.0,
+        250.0
+      ],
+      "background_pixel_count_le48": 205006,
+      "foreground_pixel_count_gt48": 57138,
+      "foreground_bbox": [
+        91,
+        103,
+        420,
+        435
+      ],
+      "bbox_size": [
+        329,
+        332
+      ],
+      "margins_LTRB": [
+        91,
+        103,
+        92,
+        77
+      ],
+      "edge_touch_LTRB": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "foreground_components_8_connected": 1,
+      "components_ge16px": 1,
+      "largest_component_pixels": 57138,
+      "sensitivity_bbox_gt32": [
+        91,
+        103,
+        420,
+        435
+      ],
+      "sensitivity_bbox_gt64": [
+        91,
+        103,
+        420,
+        435
+      ]
+    },
+    {
+      "pose": "AJ4",
+      "cell_rect": [
+        0,
+        1024,
+        512,
+        1536
+      ],
+      "background_corner_median_RGB": [
+        251.5,
+        3.0,
+        250.0
+      ],
+      "background_pixel_count_le48": 210892,
+      "foreground_pixel_count_gt48": 51252,
+      "foreground_bbox": [
+        101,
+        19,
+        381,
+        402
+      ],
+      "bbox_size": [
+        280,
+        383
+      ],
+      "margins_LTRB": [
+        101,
+        19,
+        131,
+        110
+      ],
+      "edge_touch_LTRB": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "foreground_components_8_connected": 1,
+      "components_ge16px": 1,
+      "largest_component_pixels": 51252,
+      "sensitivity_bbox_gt32": [
+        101,
+        19,
+        381,
+        402
+      ],
+      "sensitivity_bbox_gt64": [
+        101,
+        19,
+        381,
+        402
+      ]
+    },
+    {
+      "pose": "AJ5",
+      "cell_rect": [
+        512,
+        1024,
+        1024,
+        1536
+      ],
+      "background_corner_median_RGB": [
+        252.0,
+        3.0,
+        250.0
+      ],
+      "background_pixel_count_le48": 211333,
+      "foreground_pixel_count_gt48": 50811,
+      "foreground_bbox": [
+        98,
+        33,
+        365,
+        401
+      ],
+      "bbox_size": [
+        267,
+        368
+      ],
+      "margins_LTRB": [
+        98,
+        33,
+        147,
+        111
+      ],
+      "edge_touch_LTRB": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "foreground_components_8_connected": 1,
+      "components_ge16px": 1,
+      "largest_component_pixels": 50811,
+      "sensitivity_bbox_gt32": [
+        98,
+        33,
+        365,
+        401
+      ],
+      "sensitivity_bbox_gt64": [
+        98,
+        33,
+        365,
+        401
+      ]
+    }
+  ],
+  "conclusion": {
+    "all_six_primary_masks_one_connected_component": true,
+    "all_six_primary_masks_no_edge_touch": true,
+    "AJ2_right_margin_primary_px": 3,
+    "AJ2_right_margin_sensitivity32_px": 2,
+    "crop_status": "No measured primary-mask pixel touches the cell edge. AJ2 is only2-3px from the right edge; this does not certify that generation preserved the complete intended fist/contour.",
+    "natural_pose_bbox_is_scale_certification": false
+  },
+  "open": [
+    "Near/far hand ownership and anatomical continuity are not certified by foreground connectedness.",
+    "Grip/Axis/Root,416-source standing-equivalent/72px scale, modular armor/sword fit and action seams remain uncalibrated.",
+    "Different natural pose heights are raw bbox facts, not evidence for or against body-scale drift.",
+    "No source admission/import/runtime/visual acceptance is granted by this color-mask QC."
+  ],
+  "operations": {
+    "PNG_edited": false,
+    "PNGs_extracted": false,
+    "previews_generated": false,
+    "media_viewed_by_this_worker": false,
+    "UE_launched": false,
+    "Source_Content_modified": false,
+    "only_written_JSON_outputs": [
+      "G:/Ourgame/source-assets/production/fairytale-hero-air-primary-v001/request264-qc-v001/layout-pixel-QC-v001.json",
+      "G:/OurGameArchive/2026-10-20_军剑空中斩制作_v001/原件/request264-layout-QC-v001.json"
+    ]
+  },
+  "FinalAccepted": false
+}

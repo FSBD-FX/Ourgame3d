@@ -1,0 +1,73 @@
+{
+  "schema": "hero-landing-priority-Task2-Root-tooling-index-v001",
+  "tooling_freeze_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/landing-priority-observer-candidate-v001/HeroLandingPriority-Task2-tooling-freeze-v001.json",
+    "bytes": 5704,
+    "sha256": "41d9db91d0ea632a83c2fc32774068f6ea0cd165103755d7459f9c77c7ea89e2"
+  },
+  "checker_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/landing-priority-observer-candidate-v001/tooling/verify-landing-priority-native-v001.py",
+    "bytes": 45193,
+    "sha256": "4c8eb6e93f95befa47292bdac971acc32081d21a06fc4e35b3b9637bcb473491"
+  },
+  "prereg_template_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/landing-priority-observer-candidate-v001/tooling/Root-prereg-TEMPLATE-v001.json",
+    "bytes": 1537,
+    "sha256": "32384c0a2028175e60804f0cfcb945ce4aaca0415712d687f9168290094ea17d"
+  },
+  "handoff_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/landing-priority-observer-candidate-v001/tooling/HANDOFF.md",
+    "bytes": 5817,
+    "sha256": "f894df34b05bd5cc37a9bcbc728b1131f4e07a6a7f647aac584522a15a647f72"
+  },
+  "report_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/landing-priority-observer-candidate-v001/Task2-report-final-v001.md",
+    "bytes": 3005,
+    "sha256": "83316679808bc092ff00aff4227d82ca1dc313f84473be2059dc7452b95f05ba"
+  },
+  "actual_lineage": {
+    "schema": "hero-landing-priority-actual-input-pins-v001",
+    "compiled_manifest_pin": {
+      "path": "F:/Ourgame/source-assets/production/backups/v143-HeroLandingPriority298-203GREEN-v001/compiled-source-manifest.json",
+      "bytes": 581202,
+      "sha256": "5ddd83f5a16919c084870a29705ee1c0da3fbd13dec7f480330d8e61a4ac95ee"
+    },
+    "source_admission_pin": {
+      "path": "F:/Ourgame/docs/production/first-batch-v2/evidence/HeroLandingPriority-v143-v001/Root-source-admission-v001/actual-source-admission.json",
+      "bytes": 2687,
+      "sha256": "992306f3a95b55d5e1a03af71caaa253198e696fe17973d0c8107ffd41ba1c4b"
+    },
+    "source_repair_admission_pin": {
+      "path": "F:/Ourgame/docs/production/first-batch-v2/evidence/HeroLandingPriority-v143-v001/Root-Printf-literal-repair-v001/actual-source-repair-admission.json",
+      "bytes": 1577,
+      "sha256": "814a59aaaba083b381d39962cbd75d251ebdbb2459560f206a16c10b10a4098e"
+    },
+    "source_candidate_freeze_pin": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/landing-priority-observer-candidate-v001/HeroLandingPriority-Task1-source-freeze-v001.json",
+      "bytes": 6486,
+      "sha256": "cb6e2ac79240ce6a5477b237b6796414182bb0388b2285d1df5135b4e5c4c9d8"
+    },
+    "RootApproved": false,
+    "new_native_verified": false,
+    "FinalAccepted": false
+  },
+  "preflight_arguments": [
+    "--preflight",
+    "--prereg",
+    "<actual Root prereg>",
+    "--out",
+    "<new JSON>"
+  ],
+  "native_arguments": [
+    "--archive",
+    "<archive parent>",
+    "--prereg",
+    "<actual Root prereg>",
+    "--out",
+    "<new JSON>"
+  ],
+  "four_native_arguments": "--case ARCHIVE PREREG repeated exactly four times; --out new JSON",
+  "RootApproved": false,
+  "new_native_verified": false,
+  "FinalAccepted": false
+}

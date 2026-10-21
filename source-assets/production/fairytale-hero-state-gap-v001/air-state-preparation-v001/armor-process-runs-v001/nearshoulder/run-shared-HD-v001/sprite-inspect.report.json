@@ -1,0 +1,55 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\air-state-preparation-v001\\armor-process-runs-v001\\nearshoulder\\run-shared-HD-v001",
+  "states": [
+    "leather_nearshoulder_hero_air6"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "leather_nearshoulder_hero_air6",
+      "source": "frames",
+      "expected_frames": 6,
+      "found_frames": 6,
+      "natural_pose_count": 6,
+      "frame_files": [
+        "frames/leather_nearshoulder_hero_air6/frame-0.png",
+        "frames/leather_nearshoulder_hero_air6/frame-1.png",
+        "frames/leather_nearshoulder_hero_air6/frame-2.png",
+        "frames/leather_nearshoulder_hero_air6/frame-3.png",
+        "frames/leather_nearshoulder_hero_air6/frame-4.png",
+        "frames/leather_nearshoulder_hero_air6/frame-5.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.8739291387078998,
+          "mean": 0.9130736184533729
+        },
+        "dhash_similarity": {
+          "min": 1.0,
+          "mean": 1.0
+        },
+        "motion_presence": 0.0004252355238970588,
+        "centroid_sigma": {
+          "x": 0.378061317666001,
+          "y": 0.5140828673920884
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "leather_nearshoulder_hero_air6: motion presence is too low (0.0004 < 0.0100)"
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "leather_nearshoulder_hero_air6: motion presence is too low (0.0004 < 0.0100)"
+  ]
+}

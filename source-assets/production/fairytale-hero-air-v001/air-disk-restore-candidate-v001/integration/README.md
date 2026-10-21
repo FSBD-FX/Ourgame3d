@@ -1,0 +1,3 @@
+# Narrow Root integration
+
+Only source2 plus unique GameMode include/else-if spawn before pristine StartPlay early return and HUD ContentProof exclusion after existing screenshot installation. HUD does not need a new class include because it only tests the flag. Existing-source byte overlays are supplied as exact needles/pins, never whole source replacements. New observer rejects all old proof flags; visual previews remain allowed. Apply only after Root source review/admission. Current before Source298 CM5ddd; add2 derives300, original203 byte unchanged. Root actual compilation/native execution is still required.

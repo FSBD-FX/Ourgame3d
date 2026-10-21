@@ -1,0 +1,624 @@
+{
+  "schema": "request257-two-body-cell-source-closure-v001",
+  "utc": "2026-10-18T20:03:57.630251+00:00",
+  "generation_request": 257,
+  "source_image": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request257-primary1-body/raw/primary1-bridge-body.png",
+    "bytes": 1580964,
+    "sha256": "61cc190baf284d696971f152f373c8882708849982b7ecaed00b841ccef40d22"
+  },
+  "generator_called_by_this_script": false,
+  "grid": {
+    "canvas": [
+      1536,
+      1024
+    ],
+    "cell": [
+      512,
+      512
+    ],
+    "rows": 2,
+    "columns": 3,
+    "extracted_cells": [
+      0,
+      1
+    ]
+  },
+  "matte_algorithm": {
+    "name": "RGB-preserving magenta dominance alpha v001",
+    "dominance": "min(R,B)-G",
+    "background": "dominance>=220 => alpha0",
+    "soft_edge": "48<=dominance<220 and min(R,B)>=96 => alpha=255-dominance",
+    "other_pixels": "alpha255",
+    "RGB": "Unchanged; no unmix, fill, repaint or color retouch.",
+    "limitation": "Semi-transparent edge RGB can retain original magenta mixture. No visual halo acceptance is claimed."
+  },
+  "shared_alignment": {
+    "integer_translation_xy": [
+      0,
+      -19
+    ],
+    "resample": false,
+    "resize": false,
+    "reason": "Both selected cells have last nonzero alpha y482; shared dy-19 yields old source y463.",
+    "foreground_clipped": false,
+    "per_pose_horizontal_registration": false
+  },
+  "old_reference_metrics": {
+    "old_J0": {
+      "canvas": [
+        512,
+        512
+      ],
+      "alpha_bbox_exclusive": [
+        146,
+        48,
+        366,
+        464
+      ],
+      "alpha_bbox_size": [
+        220,
+        416
+      ],
+      "alpha128_bbox_exclusive": [
+        146,
+        48,
+        366,
+        464
+      ],
+      "alpha_nonzero": 54908,
+      "alpha128": 52153,
+      "alpha255": 49248,
+      "alpha_partial": 5660,
+      "foot_bottom_last_nonzero_y": 463,
+      "foot_bottom_last_alpha128_y": 463,
+      "lowest20rows_alpha128_x_range": [
+        146,
+        366
+      ],
+      "lowest20rows_alpha128_x_midpoint": 256.0,
+      "lowest20rows_semantics": "Silhouette-only projected boot footprint proxy; not anatomical foot sockets.",
+      "opaque_RGB_mean": [
+        114.65115334632878,
+        80.03273229369721,
+        62.752335120207924
+      ],
+      "opaque_RGB_median": [
+        99.0,
+        82.0,
+        64.0
+      ],
+      "display_scale_assumed": 0.17307692307692307,
+      "display_bbox_size_at_72_rule": [
+        38.07692307692307,
+        72.0
+      ]
+    },
+    "old_J1": {
+      "canvas": [
+        512,
+        512
+      ],
+      "alpha_bbox_exclusive": [
+        139,
+        49,
+        372,
+        464
+      ],
+      "alpha_bbox_size": [
+        233,
+        415
+      ],
+      "alpha128_bbox_exclusive": [
+        139,
+        49,
+        372,
+        464
+      ],
+      "alpha_nonzero": 55364,
+      "alpha128": 52458,
+      "alpha255": 49258,
+      "alpha_partial": 6106,
+      "foot_bottom_last_nonzero_y": 463,
+      "foot_bottom_last_alpha128_y": 463,
+      "lowest20rows_alpha128_x_range": [
+        152,
+        372
+      ],
+      "lowest20rows_alpha128_x_midpoint": 262.0,
+      "lowest20rows_semantics": "Silhouette-only projected boot footprint proxy; not anatomical foot sockets.",
+      "opaque_RGB_mean": [
+        114.38217142393114,
+        80.99612245726583,
+        64.38401883957935
+      ],
+      "opaque_RGB_median": [
+        98.0,
+        84.0,
+        68.0
+      ],
+      "display_scale_assumed": 0.17307692307692307,
+      "display_bbox_size_at_72_rule": [
+        40.32692307692307,
+        71.82692307692308
+      ]
+    },
+    "Ready0": {
+      "canvas": [
+        512,
+        512
+      ],
+      "alpha_bbox_exclusive": [
+        149,
+        49,
+        362,
+        464
+      ],
+      "alpha_bbox_size": [
+        213,
+        415
+      ],
+      "alpha128_bbox_exclusive": [
+        149,
+        49,
+        362,
+        464
+      ],
+      "alpha_nonzero": 54088,
+      "alpha128": 51326,
+      "alpha255": 48391,
+      "alpha_partial": 5697,
+      "foot_bottom_last_nonzero_y": 463,
+      "foot_bottom_last_alpha128_y": 463,
+      "lowest20rows_alpha128_x_range": [
+        149,
+        354
+      ],
+      "lowest20rows_alpha128_x_midpoint": 251.5,
+      "lowest20rows_semantics": "Silhouette-only projected boot footprint proxy; not anatomical foot sockets.",
+      "opaque_RGB_mean": [
+        109.74096422888553,
+        79.28213924076792,
+        61.83703581244446
+      ],
+      "opaque_RGB_median": [
+        97.0,
+        83.0,
+        63.0
+      ],
+      "display_scale_assumed": 0.17307692307692307,
+      "display_bbox_size_at_72_rule": [
+        36.86538461538461,
+        71.82692307692308
+      ]
+    }
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "source_crop_box_exclusive": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "source_RGB_crop": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request257-primary1-body/extraction-candidate-v001/original-cells/frame-0-RGB-crop.png",
+        "bytes": 235171,
+        "sha256": "7ad22630c1347b16d193e50008037aa3f65755735d74dfa640d387fd98cd8832"
+      },
+      "source_crop_RGB_sha256": "cb98c3616f93e380c8ae6baa05d8cd7a5965805631c5d983a2ca1cf5e76a915f",
+      "transparent_candidate": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request257-primary1-body/extraction-candidate-v001/transparent-cells/frame-0-RGBA-footline464-candidate.png",
+        "bytes": 265957,
+        "sha256": "f442f6cd5c5ae8cbd5d2aea8677e23055e4a7b5ad5c5b44d6988b4d17e36a56a"
+      },
+      "aligned_RGBA_sha256": "41315690b147cef4d9c319fc2642e8df8c1f72896ecf614c784a11b6555a7c41",
+      "matting": {
+        "background_zero_alpha_pixels": 198786,
+        "partial_key_edge_pixels": 1281,
+        "RGB_pixels_modified_before_alignment": 0,
+        "nontransparent_RGB_pixels_modified_after_alignment": 0,
+        "RGB_decontamination_or_despill": false,
+        "alpha_border20_all_zero": true,
+        "key_dominance_range_border20": [
+          224,
+          249
+        ],
+        "remaining_magenta_dominance_ge48_with_alpha128": 621
+      },
+      "raw_cell_metrics": {
+        "canvas": [
+          512,
+          512
+        ],
+        "alpha_bbox_exclusive": [
+          128,
+          90,
+          419,
+          483
+        ],
+        "alpha_bbox_size": [
+          291,
+          393
+        ],
+        "alpha128_bbox_exclusive": [
+          129,
+          91,
+          419,
+          483
+        ],
+        "alpha_nonzero": 63358,
+        "alpha128": 62341,
+        "alpha255": 62077,
+        "alpha_partial": 1281,
+        "foot_bottom_last_nonzero_y": 482,
+        "foot_bottom_last_alpha128_y": 482,
+        "lowest20rows_alpha128_x_range": [
+          129,
+          409
+        ],
+        "lowest20rows_alpha128_x_midpoint": 269.0,
+        "lowest20rows_semantics": "Silhouette-only projected boot footprint proxy; not anatomical foot sockets.",
+        "opaque_RGB_mean": [
+          118.78665206114987,
+          80.89572627543212,
+          59.776100649193744
+        ],
+        "opaque_RGB_median": [
+          121.0,
+          87.0,
+          56.0
+        ],
+        "display_scale_assumed": 0.17307692307692307,
+        "display_bbox_size_at_72_rule": [
+          50.36538461538461,
+          68.01923076923077
+        ]
+      },
+      "aligned_metrics": {
+        "canvas": [
+          512,
+          512
+        ],
+        "alpha_bbox_exclusive": [
+          128,
+          71,
+          419,
+          464
+        ],
+        "alpha_bbox_size": [
+          291,
+          393
+        ],
+        "alpha128_bbox_exclusive": [
+          129,
+          72,
+          419,
+          464
+        ],
+        "alpha_nonzero": 63358,
+        "alpha128": 62341,
+        "alpha255": 62077,
+        "alpha_partial": 1281,
+        "foot_bottom_last_nonzero_y": 463,
+        "foot_bottom_last_alpha128_y": 463,
+        "lowest20rows_alpha128_x_range": [
+          129,
+          409
+        ],
+        "lowest20rows_alpha128_x_midpoint": 269.0,
+        "lowest20rows_semantics": "Silhouette-only projected boot footprint proxy; not anatomical foot sockets.",
+        "opaque_RGB_mean": [
+          118.78665206114987,
+          80.89572627543212,
+          59.776100649193744
+        ],
+        "opaque_RGB_median": [
+          121.0,
+          87.0,
+          56.0
+        ],
+        "display_scale_assumed": 0.17307692307692307,
+        "display_bbox_size_at_72_rule": [
+          50.36538461538461,
+          68.01923076923077
+        ]
+      },
+      "comparison_to_old": {
+        "old_J0": {
+          "width_ratio": 1.3227272727272728,
+          "height_ratio": 0.9447115384615384,
+          "bbox_top_delta_source_px": 23,
+          "bottom_delta_before_alignment_source_px": 19,
+          "bottom_delta_after_alignment_source_px": 0,
+          "footprint_midpoint_delta_after_source_px": 13.0
+        },
+        "old_J1": {
+          "width_ratio": 1.2489270386266094,
+          "height_ratio": 0.946987951807229,
+          "bbox_top_delta_source_px": 22,
+          "bottom_delta_before_alignment_source_px": 19,
+          "bottom_delta_after_alignment_source_px": 0,
+          "footprint_midpoint_delta_after_source_px": 7.0
+        },
+        "Ready0": {
+          "width_ratio": 1.3661971830985915,
+          "height_ratio": 0.946987951807229,
+          "bbox_top_delta_source_px": 22,
+          "bottom_delta_before_alignment_source_px": 19,
+          "bottom_delta_after_alignment_source_px": 0,
+          "footprint_midpoint_delta_after_source_px": 17.5
+        }
+      },
+      "provisional_markers": {
+        "status": "PROVISIONAL_NOT_APPROVED_NOT_ANATOMICAL",
+        "display_root_aligned": [
+          256,
+          464
+        ],
+        "physical_foot_root": null,
+        "display_root_semantics": "Inherited display pivot; not a measured pelvis/foot contact root.",
+        "visible_closed_hand_grip_center_raw_cell_proposal": [
+          217,
+          350
+        ],
+        "visible_closed_hand_grip_center_aligned_proposal": [
+          217,
+          331
+        ],
+        "grip_uncertainty_source_px_each_axis": 12,
+        "grip_semantics": "Coarse visible fist-center proposal from E628-retained RGB sheet, not measured socket; Root must confirm weapon-hand ownership and grip.",
+        "weapon_axis_artist_starting_proposal": [
+          0.94,
+          -0.341
+        ],
+        "weapon_axis_measured": false,
+        "weapon_axis_angle_uncertainty_degrees": 25,
+        "weapon_axis_semantics": "Inherited prior action artist direction only; no blade/handle exists in this body-only source.",
+        "root_grip_axis_approved": false,
+        "hand_polygon": null,
+        "owner_partition": null
+      }
+    },
+    {
+      "frame": 1,
+      "source_crop_box_exclusive": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "source_RGB_crop": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request257-primary1-body/extraction-candidate-v001/original-cells/frame-1-RGB-crop.png",
+        "bytes": 241163,
+        "sha256": "5511a5fdc01cdaef66ff953335190a62a4b9a4c7ac19960f4762a9a4671434fe"
+      },
+      "source_crop_RGB_sha256": "21e6e684b07ce3935fd256691c87ab7b7e192368904c36547fb1feef564425bf",
+      "transparent_candidate": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request257-primary1-body/extraction-candidate-v001/transparent-cells/frame-1-RGBA-footline464-candidate.png",
+        "bytes": 273551,
+        "sha256": "e6dbe6db028d7eab15604c86a3b74edb52c304e9e4fe0908df7222ea7e91e70e"
+      },
+      "aligned_RGBA_sha256": "642f64d5cef30981867ea8ca6d7c52775891f221b5d61087ef08e750f6a1e080",
+      "matting": {
+        "background_zero_alpha_pixels": 193372,
+        "partial_key_edge_pixels": 1631,
+        "RGB_pixels_modified_before_alignment": 0,
+        "nontransparent_RGB_pixels_modified_after_alignment": 0,
+        "RGB_decontamination_or_despill": false,
+        "alpha_border20_all_zero": true,
+        "key_dominance_range_border20": [
+          238,
+          248
+        ],
+        "remaining_magenta_dominance_ge48_with_alpha128": 853
+      },
+      "raw_cell_metrics": {
+        "canvas": [
+          512,
+          512
+        ],
+        "alpha_bbox_exclusive": [
+          90,
+          55,
+          376,
+          483
+        ],
+        "alpha_bbox_size": [
+          286,
+          428
+        ],
+        "alpha128_bbox_exclusive": [
+          91,
+          56,
+          376,
+          483
+        ],
+        "alpha_nonzero": 68772,
+        "alpha128": 67532,
+        "alpha255": 67141,
+        "alpha_partial": 1631,
+        "foot_bottom_last_nonzero_y": 482,
+        "foot_bottom_last_alpha128_y": 482,
+        "lowest20rows_alpha128_x_range": [
+          96,
+          374
+        ],
+        "lowest20rows_alpha128_x_midpoint": 235.0,
+        "lowest20rows_semantics": "Silhouette-only projected boot footprint proxy; not anatomical foot sockets.",
+        "opaque_RGB_mean": [
+          114.21518893075766,
+          78.97639296406071,
+          60.50471396017337
+        ],
+        "opaque_RGB_median": [
+          103.0,
+          87.0,
+          64.0
+        ],
+        "display_scale_assumed": 0.17307692307692307,
+        "display_bbox_size_at_72_rule": [
+          49.5,
+          74.07692307692308
+        ]
+      },
+      "aligned_metrics": {
+        "canvas": [
+          512,
+          512
+        ],
+        "alpha_bbox_exclusive": [
+          90,
+          36,
+          376,
+          464
+        ],
+        "alpha_bbox_size": [
+          286,
+          428
+        ],
+        "alpha128_bbox_exclusive": [
+          91,
+          37,
+          376,
+          464
+        ],
+        "alpha_nonzero": 68772,
+        "alpha128": 67532,
+        "alpha255": 67141,
+        "alpha_partial": 1631,
+        "foot_bottom_last_nonzero_y": 463,
+        "foot_bottom_last_alpha128_y": 463,
+        "lowest20rows_alpha128_x_range": [
+          96,
+          374
+        ],
+        "lowest20rows_alpha128_x_midpoint": 235.0,
+        "lowest20rows_semantics": "Silhouette-only projected boot footprint proxy; not anatomical foot sockets.",
+        "opaque_RGB_mean": [
+          114.21518893075766,
+          78.97639296406071,
+          60.50471396017337
+        ],
+        "opaque_RGB_median": [
+          103.0,
+          87.0,
+          64.0
+        ],
+        "display_scale_assumed": 0.17307692307692307,
+        "display_bbox_size_at_72_rule": [
+          49.5,
+          74.07692307692308
+        ]
+      },
+      "comparison_to_old": {
+        "old_J0": {
+          "width_ratio": 1.3,
+          "height_ratio": 1.0288461538461537,
+          "bbox_top_delta_source_px": -12,
+          "bottom_delta_before_alignment_source_px": 19,
+          "bottom_delta_after_alignment_source_px": 0,
+          "footprint_midpoint_delta_after_source_px": -21.0
+        },
+        "old_J1": {
+          "width_ratio": 1.2274678111587982,
+          "height_ratio": 1.0313253012048194,
+          "bbox_top_delta_source_px": -13,
+          "bottom_delta_before_alignment_source_px": 19,
+          "bottom_delta_after_alignment_source_px": 0,
+          "footprint_midpoint_delta_after_source_px": -27.0
+        },
+        "Ready0": {
+          "width_ratio": 1.3427230046948357,
+          "height_ratio": 1.0313253012048194,
+          "bbox_top_delta_source_px": -13,
+          "bottom_delta_before_alignment_source_px": 19,
+          "bottom_delta_after_alignment_source_px": 0,
+          "footprint_midpoint_delta_after_source_px": -16.5
+        }
+      },
+      "provisional_markers": {
+        "status": "PROVISIONAL_NOT_APPROVED_NOT_ANATOMICAL",
+        "display_root_aligned": [
+          256,
+          464
+        ],
+        "physical_foot_root": null,
+        "display_root_semantics": "Inherited display pivot; not a measured pelvis/foot contact root.",
+        "visible_closed_hand_grip_center_raw_cell_proposal": [
+          129,
+          190
+        ],
+        "visible_closed_hand_grip_center_aligned_proposal": [
+          129,
+          171
+        ],
+        "grip_uncertainty_source_px_each_axis": 12,
+        "grip_semantics": "Coarse visible fist-center proposal from E628-retained RGB sheet, not measured socket; Root must confirm weapon-hand ownership and grip.",
+        "weapon_axis_artist_starting_proposal": [
+          -0.2,
+          -0.98
+        ],
+        "weapon_axis_measured": false,
+        "weapon_axis_angle_uncertainty_degrees": 25,
+        "weapon_axis_semantics": "Inherited prior action artist direction only; no blade/handle exists in this body-only source.",
+        "root_grip_axis_approved": false,
+        "hand_polygon": null,
+        "owner_partition": null
+      }
+    }
+  ],
+  "dependency_pins": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request257-primary1-body/raw/primary1-bridge-body.png",
+      "bytes": 1580964,
+      "sha256": "61cc190baf284d696971f152f373c8882708849982b7ecaed00b841ccef40d22"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request257-primary1-body/submitted-prompt.txt",
+      "bytes": 3568,
+      "sha256": "267fd2725e2b38af00e180a8f8701bd1f4fc2e81133ac7565ad987b7d44b4c1d"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request257-primary1-body/generation257-result-v001.json",
+      "bytes": 1460,
+      "sha256": "c52ccaa449b98151b291f94bedd67902dc2806d99b6c30c2e602e5c586778045"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v003/curated/frame-0.png",
+      "bytes": 120204,
+      "sha256": "31fba4718be787b98fd92c551a6515a429c29385cb0e67365fc0b8533fd8b5c3"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v003/curated/frame-1.png",
+      "bytes": 120255,
+      "sha256": "9c1db7c10a2805a51c82d9a33ccab83627a084d5e5f536dd81df425642b0a7c2"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/curated/frame-0.png",
+      "bytes": 121133,
+      "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/primary1-measurement-v003/primary1-marker-proposal-v003.json",
+      "bytes": 32999,
+      "sha256": "730f1be4bc17ab4bb2fb520b22c810dc8f392f9e6d1886e3e303ad06cc05b4aa"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/ready-measurement-v002/ready-marker-proposal-v002.json",
+      "bytes": 22526,
+      "sha256": "3aff15e506328c9b37aca2e040b56ad6aeca0f6b6d195865ef362fe74adf1e82"
+    }
+  ],
+  "only_two_new_body_cells": true,
+  "other_generated_cells_not_extracted": true,
+  "old_runtime_frames_2_to_5": "Unchanged and not copied or admitted by this candidate.",
+  "partition_or_armor_created": false,
+  "native_run_performed": false,
+  "derived_images_viewed": false,
+  "E_retention_of_new_derivatives": "PENDING_ROOT",
+  "source_pixels_accepted": false,
+  "art_accepted": false,
+  "FinalAccepted": false
+}

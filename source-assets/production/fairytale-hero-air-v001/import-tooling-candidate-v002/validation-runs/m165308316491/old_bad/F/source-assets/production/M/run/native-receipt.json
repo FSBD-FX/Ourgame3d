@@ -1,0 +1,49 @@
+{
+  "schema": "hero-Air48-native-import-v001",
+  "utc": "2026-10-18T16:53:09.878501+00:00",
+  "manifest": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/import-tooling-candidate-v002/validation-runs/m165308316491/old_bad/F/source-assets/production/M/run/manifest.json",
+    "bytes": 59412,
+    "sha256": "181735a41e382564aad071324d3fd001ca6ad24b168785c71a23ae90089522bb"
+  },
+  "importer": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/import-tooling-candidate-v002/ue-import-hero-Air48-v001.py",
+    "bytes": 13553,
+    "sha256": "e8e8452507abd167bab3570300fb213ec82ee4638cca83d1750489d3a85d72ed"
+  },
+  "contract": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/import-tooling-candidate-v002/air48_import_contract_v001.py",
+    "bytes": 26417,
+    "sha256": "be46ecd04ad68510476ce3a8078179f5aa2446267f3f9fbc8e4c1c901321b16f"
+  },
+  "claim": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/import-tooling-candidate-v002/validation-runs/m165308316491/old_bad/F/source-assets/production/M/run/native-receipt-claim.json",
+    "bytes": 539,
+    "sha256": "466cbec0d0b306e56cc4bc1ceee2df838749c8a3f149530478cb3e77680520c5"
+  },
+  "assets": [],
+  "imported_object_paths": [],
+  "success": false,
+  "automatic_retry_allowed": false,
+  "runtime_verified": false,
+  "native_draw_verified": false,
+  "TrialAllowed": false,
+  "FinalAccepted": false,
+  "texture_compilation_barriers": [
+    {
+      "stage": "existing_sword_before_dimension_gate",
+      "texture": "/Game/Production/FirstBatch/v002/CandidateComponents/T_military_sword_v002.T_military_sword_v002",
+      "before_dimensions": [
+        32,
+        32
+      ],
+      "command": "Editor.AsyncTextureCompilationFinishAll",
+      "command_requested": true,
+      "after_dimensions": [
+        256,
+        256
+      ]
+    }
+  ],
+  "failure": "ValueError('Actual texture dimensions after real compilation finish differ: existing_sword_before_dimension_gate')"
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "known44-static-command-summary-v001",
+  "python_static_validation": {
+    "exit_code": 0,
+    "cases": 26,
+    "python_AST_files": 3,
+    "actual_native_execution": false
+  },
+  "PowerShell_parser_errors": 0,
+  "HUD_patch_check": {
+    "initial_wrong_command": "git apply --check --directory=UnrealGame <patch>",
+    "initial_exit_code": 1,
+    "initial_error": "UnrealGame/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp: No such file or directory",
+    "correct_actual_command": "git apply --check source-assets/production/fairytale-guard-v001/presentation-full-known44-observer-candidate-v001/patches/minimal-HUD-known44-observer-startup-v001.patch",
+    "correct_actual_exit_code": 0,
+    "actual_Source_mutated": false
+  },
+  "UE_started": false,
+  "UBT_started": false,
+  "formal_complete_units": 0
+}

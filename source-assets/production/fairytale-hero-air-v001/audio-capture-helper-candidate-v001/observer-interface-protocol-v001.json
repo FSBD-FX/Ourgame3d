@@ -1,0 +1,37 @@
+{
+  "schema": "native-main-submix-helper-observer-interface-v001",
+  "candidate_only": true,
+  "cpp_class": "UDungeonNativeMainSubmixCaptureV001",
+  "header": "DungeonNativeMainSubmixCaptureV001.h",
+  "root_source_admission_files": [
+    "DungeonNativeMainSubmixCaptureV001.h",
+    "DungeonNativeMainSubmixCaptureV001.cpp"
+  ],
+  "observer_strong_member": "UPROPERTY(Transient) TObjectPtr<UDungeonNativeMainSubmixCaptureV001> MainMixCapture;",
+  "create": "NewObject<UDungeonNativeMainSubmixCaptureV001>(this)",
+  "begin": "bool Begin(UWorld*, const FString& NewOutputDirectory)",
+  "begin_true_means": "Arming accepted; may already be Recording if actual PrimaryVolume is positive. It never means accepted sound or verified signal.",
+  "required_output_directory": "Absolute NEW child of an existing evidence parent, e.g. 原件/audio-v001. Caller must NOT create this child beforehand.",
+  "tick": "Poll() on game thread. No old ContentProbe in any World; one helper process lease.",
+  "start_gate": "Status().Phase==EDungeonNativeMixCapturePhaseV001::Recording && Status().StartRequested && Status().StartMonotonic>0",
+  "movie_origin": "Copy Status().StartMonotonic exactly; enable movie screenshots and normal inputs only after Recording, not while Arming.",
+  "stop": "After last original screenshot callback: disable further movie screenshots, freeze observer game/event/request facts once, Stop() once, then flush screenshot writes. Repeated Stop in ExportPending/Complete returns true without reissue or timestamp reset.",
+  "finish_gate": "Poll until IsTerminal(). Only Phase Complete is successful export; Failed/Aborted preserve all partial originals and require failure report.",
+  "timing_report": "capture_timing.capture_start_monotonic_s=Status.StartMonotonic; capture_stop_monotonic_s=Status.StopMonotonic; frame_wall_offsets_s use that exact start and one real callback each.",
+  "nested_report": "runtime-report.main_submix_capture = SerializeReport(); do not fabricate audiorecorded=true from helper state alone.",
+  "cleanup": "EndPlay before terminal: Abort(reason). Keep owner/helper alive until async completion; no new capture after active/export failure in same process.",
+  "checker": "Python tooling/check-native-main-submix-v001.py --report ACTUAL/runtime-report.json --capture-field main_submix_capture --require-frame-timing --output NEW_JSON_RECEIPT",
+  "checker_scope": "Complete original/canonical PCM identity, independent full WAV decode, old non-silence and100ms/150ms timing gates. No cue identification/listening/device-onset/final mix acceptance.",
+  "native_required_future_checks": [
+    "Normal Arming→Recording→one Stop→async Complete and checker",
+    "Repeated Stop cannot reset start/stop or reexport",
+    "Existing output leaf fails without changing old bytes",
+    "Same-frame abort drains after queued Start; failure prevents process reuse",
+    "Mixer/world loss retains failed state without touching foreign main"
+  ],
+  "actual_Source_changed": false,
+  "compiled": false,
+  "native_run": false,
+  "auditioned": false,
+  "FinalAccepted": false
+}

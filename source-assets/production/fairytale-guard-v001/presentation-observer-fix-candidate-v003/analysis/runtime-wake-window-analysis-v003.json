@@ -1,0 +1,440 @@
+{
+  "schema": "guard-partial-wake-runtime-failure-analysis-v003",
+  "native_report_original_passed": false,
+  "native_report_original_failure": "Actual input/room/coverage timeout: normal_guard_approach_and_cycles",
+  "pid": "55804",
+  "wake_mask": 61,
+  "ready_mask": 15,
+  "windup_mask": 63,
+  "dormant_seen": 48,
+  "facts": [
+    "HUD already loads approved 16 before first Enter and FlushRenderingCommands; renderer contains no LoadObject. Guard loader omits explicit FinishCompilation, unlike hero loader, but this is not proof of causation.",
+    "Frame310 ensure Batch.Accepted failed at GM2021; EnsureFailed elapsed 2.297 seconds.",
+    "Capture wall gap 2.344846401363611 seconds at first Wake0; next game frame DeltaSeconds=.4000000059604645 advanced native Wake0 to Wake2.",
+    "Async writer all1537 saved; zero rejects/failures; peak_pending_jobs1."
+  ],
+  "inference": "Numerical reconstruction of exact observed last outside point, float speed and 5ms central batches reproduces non-progress after EarliestContact endpoint recomputation. Native driver regression is required to confirm against actual UE math/build.",
+  "risk": "No guarantee for arbitrary OS/GPU stalls; never replay Wake, alter window, suppress ensure, or accept incomplete WakeMask. First-use GPU cause is not established.",
+  "wake_window_samples": [
+    {
+      "observation": 285,
+      "wall": 9.517076797783375,
+      "sim": 9.500689398497343,
+      "native_time": 9.500689398497343,
+      "clip": "Dormant",
+      "frame": 0,
+      "draw_id": "45",
+      "delta_wall": 0.033450499176979065,
+      "delta_sim": 0.03333339840173721,
+      "player_ground": [
+        -1065.5193942191995,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 286,
+      "wall": 9.549281500279903,
+      "sim": 9.534022998064756,
+      "native_time": 9.534022998064756,
+      "clip": "Dormant",
+      "frame": 0,
+      "draw_id": "46",
+      "delta_wall": 0.032204702496528625,
+      "delta_sim": 0.03333359956741333,
+      "player_ground": [
+        -1055.979317616102,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 287,
+      "wall": 9.582448698580265,
+      "sim": 9.56735659763217,
+      "native_time": 9.56735659763217,
+      "clip": "Dormant",
+      "frame": 0,
+      "draw_id": "47",
+      "delta_wall": 0.03316719830036163,
+      "delta_sim": 0.03333359956741333,
+      "player_ground": [
+        -1046.4392410130044,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 288,
+      "wall": 9.615404598414898,
+      "sim": 9.600689999759197,
+      "native_time": 9.600689999759197,
+      "clip": "Dormant",
+      "frame": 0,
+      "draw_id": "48",
+      "delta_wall": 0.032955899834632874,
+      "delta_sim": 0.03333340212702751,
+      "player_ground": [
+        -1036.8992209173477,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 289,
+      "wall": 11.96025099977851,
+      "sim": 9.63402359932661,
+      "native_time": 9.63402359932661,
+      "clip": "Wake",
+      "frame": 0,
+      "draw_id": "49",
+      "delta_wall": 2.344846401363611,
+      "delta_sim": 0.03333359956741333,
+      "player_ground": [
+        -1027.3591443142502,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 290,
+      "wall": 11.989490699023008,
+      "sim": 10.034023605287075,
+      "native_time": 10.034023605287075,
+      "clip": "Wake",
+      "frame": 2,
+      "draw_id": "50",
+      "delta_wall": 0.029239699244499207,
+      "delta_sim": 0.4000000059604645,
+      "player_ground": [
+        -912.8791394314158,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 291,
+      "wall": 12.01449279859662,
+      "sim": 10.06735710427165,
+      "native_time": 10.06735710427165,
+      "clip": "Wake",
+      "frame": 2,
+      "draw_id": "51",
+      "delta_wall": 0.025002099573612213,
+      "delta_sim": 0.03333349898457527,
+      "player_ground": [
+        -922.4191872477046,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 292,
+      "wall": 12.045928698033094,
+      "sim": 10.100690603256226,
+      "native_time": 10.100690603256226,
+      "clip": "Wake",
+      "frame": 2,
+      "draw_id": "52",
+      "delta_wall": 0.031435899436473846,
+      "delta_sim": 0.03333349898457527,
+      "player_ground": [
+        -931.9592350639934,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 293,
+      "wall": 12.080563299357891,
+      "sim": 10.134024005383253,
+      "native_time": 10.134024005383253,
+      "clip": "Wake",
+      "frame": 3,
+      "draw_id": "53",
+      "delta_wall": 0.03463460132479668,
+      "delta_sim": 0.03333340212702751,
+      "player_ground": [
+        -941.4992551596509,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 294,
+      "wall": 12.114403497427702,
+      "sim": 10.167357604950666,
+      "native_time": 10.167357604950666,
+      "clip": "Wake",
+      "frame": 3,
+      "draw_id": "54",
+      "delta_wall": 0.03384019806981087,
+      "delta_sim": 0.03333359956741333,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 295,
+      "wall": 12.151670198887587,
+      "sim": 10.20069120451808,
+      "native_time": 10.20069120451808,
+      "clip": "Wake",
+      "frame": 3,
+      "draw_id": "55",
+      "delta_wall": 0.037266701459884644,
+      "delta_sim": 0.03333359956741333,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 296,
+      "wall": 12.180305898189545,
+      "sim": 10.234024703502655,
+      "native_time": 10.234024703502655,
+      "clip": "Wake",
+      "frame": 3,
+      "draw_id": "56",
+      "delta_wall": 0.028635699301958084,
+      "delta_sim": 0.03333349898457527,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 297,
+      "wall": 12.210764799267054,
+      "sim": 10.26735820248723,
+      "native_time": 10.26735820248723,
+      "clip": "Wake",
+      "frame": 3,
+      "draw_id": "57",
+      "delta_wall": 0.030458901077508926,
+      "delta_sim": 0.03333349898457527,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 298,
+      "wall": 12.246366497129202,
+      "sim": 10.300691705197096,
+      "native_time": 10.300691705197096,
+      "clip": "Wake",
+      "frame": 4,
+      "draw_id": "58",
+      "delta_wall": 0.035601697862148285,
+      "delta_sim": 0.03333350270986557,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 299,
+      "wall": 12.283983699977398,
+      "sim": 10.33402530476451,
+      "native_time": 10.33402530476451,
+      "clip": "Wake",
+      "frame": 4,
+      "draw_id": "59",
+      "delta_wall": 0.03761720284819603,
+      "delta_sim": 0.03333359956741333,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 300,
+      "wall": 12.310981899499893,
+      "sim": 10.367358904331923,
+      "native_time": 10.367358904331923,
+      "clip": "Wake",
+      "frame": 4,
+      "draw_id": "60",
+      "delta_wall": 0.02699819952249527,
+      "delta_sim": 0.03333359956741333,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 301,
+      "wall": 12.344724297523499,
+      "sim": 10.40069230273366,
+      "native_time": 10.40069230273366,
+      "clip": "Wake",
+      "frame": 4,
+      "draw_id": "61",
+      "delta_wall": 0.03374239802360535,
+      "delta_sim": 0.03333339840173721,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 302,
+      "wall": 12.381883800029755,
+      "sim": 10.434025906026363,
+      "native_time": 10.434025906026363,
+      "clip": "Wake",
+      "frame": 4,
+      "draw_id": "62",
+      "delta_wall": 0.037159502506256104,
+      "delta_sim": 0.03333360329270363,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 303,
+      "wall": 12.410640899091959,
+      "sim": 10.467359405010939,
+      "native_time": 10.467359405010939,
+      "clip": "Wake",
+      "frame": 5,
+      "draw_id": "63",
+      "delta_wall": 0.02875709906220436,
+      "delta_sim": 0.03333349898457527,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 304,
+      "wall": 12.443492498248816,
+      "sim": 10.500692903995514,
+      "native_time": 10.500692903995514,
+      "clip": "Wake",
+      "frame": 5,
+      "draw_id": "64",
+      "delta_wall": 0.03285159915685654,
+      "delta_sim": 0.03333349898457527,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 305,
+      "wall": 12.477994300425053,
+      "sim": 10.534026604145765,
+      "native_time": 10.534026604145765,
+      "clip": "Wake",
+      "frame": 5,
+      "draw_id": "65",
+      "delta_wall": 0.034501802176237106,
+      "delta_sim": 0.03333370015025139,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 306,
+      "wall": 12.513580400496721,
+      "sim": 10.567360002547503,
+      "native_time": 10.567360002547503,
+      "clip": "Wake",
+      "frame": 5,
+      "draw_id": "66",
+      "delta_wall": 0.035586100071668625,
+      "delta_sim": 0.03333339840173721,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 307,
+      "wall": 12.543497700244188,
+      "sim": 10.600693505257368,
+      "native_time": 10.600693505257368,
+      "clip": "Wake",
+      "frame": 5,
+      "draw_id": "67",
+      "delta_wall": 0.02991729974746704,
+      "delta_sim": 0.03333350270986557,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 308,
+      "wall": 12.577131800353527,
+      "sim": 10.634026903659105,
+      "native_time": 10.634026903659105,
+      "clip": "AxeWindup",
+      "frame": 0,
+      "draw_id": "68",
+      "delta_wall": 0.03363410010933876,
+      "delta_sim": 0.03333339840173721,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 309,
+      "wall": 12.610896598547697,
+      "sim": 10.667366404086351,
+      "native_time": 10.667366404086351,
+      "clip": "AxeWindup",
+      "frame": 0,
+      "draw_id": "69",
+      "delta_wall": 0.03376479819417,
+      "delta_sim": 0.033339500427246094,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 310,
+      "wall": 12.643435299396515,
+      "sim": 10.700699903070927,
+      "native_time": 10.700699903070927,
+      "clip": "AxeWindup",
+      "frame": 0,
+      "draw_id": "70",
+      "delta_wall": 0.032538700848817825,
+      "delta_sim": 0.03333349898457527,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 311,
+      "wall": 12.676424898207188,
+      "sim": 10.734033405780792,
+      "native_time": 10.734033405780792,
+      "clip": "AxeWindup",
+      "frame": 0,
+      "draw_id": "71",
+      "delta_wall": 0.03298959881067276,
+      "delta_sim": 0.03333350270986557,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    },
+    {
+      "observation": 312,
+      "wall": 12.709588699042797,
+      "sim": 10.767366904765368,
+      "native_time": 10.767366904765368,
+      "clip": "AxeWindup",
+      "frame": 0,
+      "draw_id": "72",
+      "delta_wall": 0.033163800835609436,
+      "delta_sim": 0.03333349898457527,
+      "player_ground": [
+        -951.0393317627493,
+        -162.2042858545901
+      ]
+    }
+  ]
+}

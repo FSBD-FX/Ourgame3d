@@ -1,0 +1,25 @@
+{
+  "schema": "StunIR-v004-static-interface-check",
+  "passed": true,
+  "Source4_pins_unchanged": true,
+  "static_cases": [
+    "real positive Stun source20 accepted with real player damage78",
+    "IR.SourceEventId0 accepted in original positive window",
+    "wrong nonzero IR event rejected",
+    "early IR before stun ends rejected",
+    "later action cannot donate frame rejected",
+    "overlapped right-facing player rejected",
+    "uninterrupted action cannot donate IR rejected",
+    "entire observed J request box110..132/dy6 lies inside base135x46 ellipse"
+  ],
+  "synthetic_cases_in_memory_only": true,
+  "native_pixel_assert_AST_identical": true,
+  "private_HurtTime_access_absent": true,
+  "no_direct_guard_owner_write_or_manual_step": true,
+  "CPP_brace_balance": true,
+  "UE_started": false,
+  "UBT_started": false,
+  "View_used": false,
+  "compiled": false,
+  "formal_complete_units": 0
+}

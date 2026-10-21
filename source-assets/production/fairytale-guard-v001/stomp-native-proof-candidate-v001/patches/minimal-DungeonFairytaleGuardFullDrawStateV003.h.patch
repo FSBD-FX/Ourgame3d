@@ -1,0 +1,17 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardFullDrawStateV003.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardFullDrawStateV003.h
+@@ -2,4 +2,6 @@
+ #include "CoreMinimal.h"
+ #include "DungeonFairytaleGuardFullPoseV003.h"
++struct FDungeonFairytaleGuardRowResidentV001
++{FString TexturePath,ClassName;int32 Width=0,Height=0;bool ResourceReady=false,PendingInitialization=false;};
+ /** Full-v003 actual draw readback; legacy partial readback/profile remain separate. */
+ struct FDungeonFairytaleGuardFullDrawV003
+@@ -15,3 +17,7 @@
+  DungeonFairytaleGuardFullV003::EPivotAuthority PivotAuthority=DungeonFairytaleGuardFullV003::EPivotAuthority::Unconfigured;
+  TArray<FString> DrawStack;
++ bool QuadSubmitted=false,QuadScalePosition=false;
++ FVector2D QuadTop=FVector2D::ZeroVector,QuadSize=FVector2D::ZeroVector,QuadUV=FVector2D::ZeroVector,QuadUVSize=FVector2D::ZeroVector,QuadRotationPivot=FVector2D::ZeroVector;
++ double QuadRotationDegrees=0.,QuadDrawScale=1.,UIScale=1.;FLinearColor QuadTint=FLinearColor::White;
++ TArray<FDungeonFairytaleGuardRowResidentV001> RowResidents;
+ };

@@ -1,0 +1,98 @@
+{
+  "schema": "guard-v009-candidate-static-validation",
+  "not_UE_build_or_route_run": true,
+  "python_AST": "3 scripts parsed",
+  "PowerShell_AST": "0 parser errors (separate pwsh check)",
+  "spatial_counterexamples": [
+    {
+      "name": "actual right Ready at150",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "name": "old right stuck/overlapped facing+1 rejected",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "early WU2 y40 rejected despite facing/lock",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "actual locked WU3 y100 allowed",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "name": "late WU before lock rejected",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "late WU sample before original lock rejected",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "late WU mismatched action rejected",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "right position without actual route completion rejected",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "wrong facing rejected at correct point",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "signed X119.999 rejected side-1",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "strict y12 and X150 accepted side-1",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "name": "radius180 exceeded at X180/Y12 rejected side-1",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "signed X119.999 rejected side1",
+      "expected": false,
+      "actual": false
+    },
+    {
+      "name": "strict y12 and X150 accepted side1",
+      "expected": true,
+      "actual": true
+    },
+    {
+      "name": "radius180 exceeded at X180/Y12 rejected side1",
+      "expected": false,
+      "actual": false
+    }
+  ],
+  "pixel_verifier_byte_equal_v002": true,
+  "source_freeze_all_pins_verified": true,
+  "git_apply_check": "exit0 (separate shell check)",
+  "old_frozen_v001_23_and_v002_16_files_verified_unchanged": true,
+  "actual_old_JSON_CLI_regression": {
+    "v002": {
+      "Ready": 15,
+      "AxeWindupEarly": 7
+    },
+    "v003": {
+      "Ready": 0,
+      "AxeWindupEarly": 0
+    }
+  },
+  "no_media_decode_or_additional_View": true
+}

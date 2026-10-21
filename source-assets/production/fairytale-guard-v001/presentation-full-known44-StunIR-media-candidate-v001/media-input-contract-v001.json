@@ -1,0 +1,25 @@
+{
+  "schema": "known44-StunIR-media-input-contract-v001",
+  "native_report_schema": "guard-art-known44-combat-observer-v003",
+  "native_session_schema": "guard-art-known44-combat-session-v003",
+  "scenario": "StunIR",
+  "independent_receipt": "independent-StunIR-v003.json",
+  "exact_independent_source_tooling_freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-full-known44-combat-observer-candidate-v004/StunIR-candidate-freeze-v004.json",
+    "bytes": 3153,
+    "sha256": "e3507a82b417883fe1dff70423c8035b72fa44cbd3c399f0d879f04923a4bf15"
+  },
+  "required_samples": {
+    "Stunned": 4,
+    "InterruptedRecovery": 4
+  },
+  "same_break_event_required": true,
+  "same_original_interrupted_attack_required": true,
+  "Stun_duration_s": 0.4,
+  "IR_clock": "Actual positive original [StunUntil,OccupiedUntil), four normalized phases; SourceEventId0 legal",
+  "accepted_join": "Only consecutive native callbacks Stunned3 to InterruptedRecovery0; otherwise explicit missing join",
+  "UE_started": false,
+  "ffmpeg_started": false,
+  "View_used": false,
+  "formal_complete_units": 0
+}

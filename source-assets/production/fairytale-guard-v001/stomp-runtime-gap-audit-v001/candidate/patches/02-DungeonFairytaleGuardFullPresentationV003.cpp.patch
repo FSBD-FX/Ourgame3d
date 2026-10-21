@@ -1,0 +1,37 @@
+--- UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardFullPresentationV003.cpp
++++ UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardFullPresentationV003.cpp
+@@ -3,6 +3,7 @@
+ #include "DungeonGameMode.h"
+ #include "DungeonStoneGuardDriver.h"
+ #include "DungeonFairytaleGuardFullProfileV003.h"
++#include "DungeonFairytaleGuardStompProfileV004.h"
+ #include "Engine/Texture2D.h"
+ #include "Kismet/GameplayStatics.h"
+ #include "Misc/CommandLine.h"
+@@ -13,10 +14,12 @@
+ 
+ void ADungeonHUD::LoadFairytaleGuardFullTrial()
+ {
+- bUseFairytaleGuardFullPreview=FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleGuardFullPreview"));
++ bUseFairytaleGuardStompPreview=FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleGuardStompPreview"));
++ bUseFairytaleGuardFullPreview=bUseFairytaleGuardStompPreview||FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleGuardFullPreview"));
+  if(!bUseFairytaleGuardFullPreview)return;
+  TArray<UTexture*> ApprovedTextures;
+- for(const auto& Row:DungeonFairytaleGuardFullV003::ProfileFull())
++ const auto& TrialRows=bUseFairytaleGuardStompPreview?DungeonFairytaleGuardStompV004::ProfileStompV004():DungeonFairytaleGuardFullV003::ProfileFull();
++ for(const auto& Row:TrialRows)
+  {
+   if(Row.IsAlias())continue; // Target row owns the only Texture2D; alias has its own explicit trial gate.
+   const FString Gate=DungeonFairytaleGuardFullV003::TrialGateFull(Row);
+@@ -47,9 +50,10 @@
+  // Only terminal death may use the existing central terminal presentation clock.
+  const double TerminalAge=Game&&Game->bGameOver&&F->bDead?double(F->AnimationTime):-1.;
+  R.Selection=SelectFull(S,TerminalAge);
++ R.ProfileId=bUseFairytaleGuardStompPreview?TEXT("GuardStomp50V004"):TEXT("GuardKnown44FullV003");
+  const auto Reject=[this,&R](const FString& Why)
+  {R.MissingReason=Why;FairytaleGuardFullDraws.Add(R);return false;};
+- const FBodyPlan Body=PlanFull(R.Selection);
++ const FBodyPlan Body=bUseFairytaleGuardStompPreview?DungeonFairytaleGuardStompV004::PlanStompV004(R.Selection):PlanFull(R.Selection);
+  R.RequestedClip=UTF8_TO_TCHAR(ClipName(Body.RequestedClip));R.AssetClip=UTF8_TO_TCHAR(ClipName(Body.AssetClip));R.AssetFrame=Body.Frame;
+  const FRow* Row=Body.Row;
+  if(!Row)return Reject(Body.MissingReason);

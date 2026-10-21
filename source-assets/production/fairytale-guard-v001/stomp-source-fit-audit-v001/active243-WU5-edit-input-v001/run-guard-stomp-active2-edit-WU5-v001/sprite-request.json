@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fixed-heavyaxe-armed-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedArmedReady209existing4poses, exactrawcopy, doNOTgenerateorcharge.",
+      "durations_ms": [
+        250,
+        250,
+        250,
+        250
+      ]
+    },
+    "right_stomp_active": {
+      "frames": 2,
+      "fps": 13,
+      "loop": false,
+      "action": "EDIT the FIRST reference, exact StompWindup222 frame5, into TWO landed poses of ONE FAR-foot stomp. It is the actual upperbody AND lowerbody pose to continue, not merely a leg-side label. Keep nearly all of its upperbody silhouette, head position, shoulders, low held axe, two closed hands, foreground NEAR leg and NEAR shoe-under-knee geometry. Keep the NEAR shoe fixed beneath the hip/body; do not step or stretch it behind-left. Keep the visible eye horizontally about54source pixels ahead of the NEAR sole in the512 reference: same actual eye-to-shoe horizontal relationship, no upperbody forward thrust. Same shallow elevated three-quarter side view RIGHT.\nFrame0: lower ONLY the lifted FAR foot from the right/recessed hip forward-right to the ground; the existing foreground NEAR support stays under the same knee in its same place. The FAR foot is already on the ground at the start. Do not rebuild a wide two-foot Ready stance. Frame1: both feet remain in those same contact positions and the existing body loads vertically DOWN a little, retaining the same upperbody-to-NEAR-shoe horizontal relationship. ONE contact then compression, not a second stomp or raised foot. No horizontal body lunge, retreat, jump, leg exchange, actor movement, new swing or grip exchange.\nThe SECOND reference, acceptedArmedReady209, owns ONLY the shared identity details: same squat slabhelmet, small amber eye window, sparse moss on NEAR shoulder, coarse warm stone armor, same fixed single-head stone axe/continuous straight wood shaft/buttcap. Do NOT copy its stance, legs, body spread or pose. The FIRST reference owns the actual continuing geometry. NEAR moss arm stays at BUTTward grip and FAR arm stays at HEADward grip, fists closed. Axe remains low and quiet with the same fixed size/shape. No extra arm, opened fist, swapped grip, replacement prop or changed axe proportions.\nOutput TWO distinct complete connected Guard+sameaxe sprites as a spacious row on solid magenta #FF00FF, no diagram or effects. Use third official guide only for two invisible cells and safe padding. Same body/axe density in both cells, full feet and axe uncropped with48/512-equivalent margins. Native timing remains150ms=75+75; the row has no added anticipation, movement or delay. Separate runtime shock/dust is not included. No labels, arrows, grids, scenery, shadow, detached debris, blur or tiny noisy speckles.",
+      "durations_ms": [
+        75,
+        75
+      ]
+    }
+  },
+  "style": "Same accepted Guard209/actualWU222 grotesque stone slab identity and fixed singleheaded axe. Coarse darkfairytale cartoon ink, broad warm stone planes, little sparse moss. Identity and material only: never substitute Ready stance for the actual WU2225 pose. Same shallow elevated threequarter side view RIGHT, no grains or fine stone noise.",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

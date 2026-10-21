@@ -1,0 +1,11 @@
+{
+  "schema": "known44-static-preliminary-command-failure-v001",
+  "passed": false,
+  "stage": "read-only static candidate validation before final freeze",
+  "failure": "FileNotFoundError: the comparison command used old pixel helper filename verify-native-pixels-v002.py under tooling candidate v010; the actual frozen filename is verify-native-pixels-v010.py.",
+  "native_report_changed": false,
+  "source_changed": false,
+  "UE_started": false,
+  "correction": "The standalone validation uses the actual frozen v010 filename and independently compares the remaining CRC/FIFO/stop-flush assert AST. The subsequent actual static result is retained in static-interface-validation-v001.json; this failed preliminary command remains explicit.",
+  "formal_complete_units": 0
+}

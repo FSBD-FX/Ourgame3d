@@ -1,0 +1,24 @@
+--- futureFullProduction/DungeonHUD.cpp
++++ NEWProductionObserver/DungeonHUD.cpp
+@@ -23,6 +23,7 @@
+ #include "DungeonHeroDodgeProbeV001.h"
+ #include "DungeonGuardMoveProbeV001.h"
+ #include "DungeonHeroAirProbeV001.h"
++#include "DungeonHeroAirProductionProbeV001.h"
+ #include "DungeonGuardArtDeathProbeV005.h"
+ #include "DungeonRunContinueProbe.h"
+ #include "DungeonGuardRunContinueProbe.h"
+@@ -295,7 +296,12 @@
+     if (FParse::Param(FCommandLine::Get(),TEXT("DungeonContentProof")))
+     {
+         InstallFastLosslessProofScreenshots();
+-        if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroAirProofV001")))GetWorld()->SpawnActor<ADungeonHeroAirProbeV001>();
++        const bool AirProduction=FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroAirProductionProofV001"));
++        const bool AirBaseline=FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroAirProofV001"));
++        if(AirProduction&&AirBaseline)
++        {UE_LOG(LogTemp,Error,TEXT("Production Air and unchanged baseline observers are mutually exclusive"));FPlatformMisc::RequestExitWithStatus(false,3);return;}
++        if(AirProduction)GetWorld()->SpawnActor<ADungeonHeroAirProductionProbeV001>();
++        else if(AirBaseline)GetWorld()->SpawnActor<ADungeonHeroAirProbeV001>();
+         else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonGuardMoveProofV001")))GetWorld()->SpawnActor<ADungeonGuardMoveProbeV001>();
+         else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroDodgeProofV001")))GetWorld()->SpawnActor<ADungeonHeroDodgeProbeV001>();
+         else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonGuardStompProofV001")))GetWorld()->SpawnActor<ADungeonGuardStompProbeV001>();

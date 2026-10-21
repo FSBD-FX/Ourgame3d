@@ -1,0 +1,49 @@
+--- frozen-v009/tooling/verify-guard-art-partial-v009.py
++++ new-tooling-v010/tooling/verify-guard-art-partial-v010.py
+@@ -5,6 +5,7 @@
+ CANDIDATE=HERE.parent
+ WORKSPACE=CANDIDATE.parents[3]
+ V001=CANDIDATE.parent/'presentation-candidate-v001'
++V009=CANDIDATE.parent/'presentation-observer-route-candidate-v009'
+ def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
+ def need(v,why):
+  if not v:raise ValueError(why)
+@@ -12,8 +13,10 @@
+ def near(a,b,tol=1.e-8):return math.isfinite(a) and math.isfinite(b) and abs(a-b)<=tol
+ def check_pin(p,r):need(p.is_file() and p.stat().st_size==r['bytes'] and sha(p)==r['sha256'],'Pin differs: '+str(p))
+ def source_check(snapshot,prereg_path):
+- need((CANDIDATE/'observer-route-freeze-v009.json').is_file(),'Complete immutable v009 tooling freeze required')
+- for manifest,base in [(CANDIDATE/'observer-route-freeze-v009.json',CANDIDATE),(V001/'presentation-freeze-v001.json',V001)]:
++ need((CANDIDATE/'observer-route-tooling-freeze-v010.json').is_file(),'Complete immutable v010 tooling freeze required')
++ source_pin=read(CANDIDATE/'v009-source-interface-pin-v010.json');check_pin(WORKSPACE/source_pin['path'],source_pin)
++ for row in read(V009/'source-route-freeze-v009.json')['files']:check_pin(V009/row['path'],row)
++ for manifest,base in [(CANDIDATE/'observer-route-tooling-freeze-v010.json',CANDIDATE),(V001/'presentation-freeze-v001.json',V001)]:
+   if manifest.exists():
+    for row in read(manifest)['files']:check_pin(base/row['path'],row)
+  m=read(snapshot/'compiled-source-manifest.json');files={r['path'].replace('\\','/'):r for r in m['files']}
+@@ -119,7 +122,7 @@
+ 
+ def verify(archive,facts,snapshot,prereg_path):
+  original=archive/'原件';r=read(original/'runtime-report.json');index=read(archive/'index.json')
+- need(index['schema']=='guard-art-partial-native-session-v009' and index['candidate_freeze_sha256']==sha(CANDIDATE/'observer-route-freeze-v009.json'),'Capture does not bind exact new v009 tooling freeze')
++ need(index['schema']=='guard-art-partial-native-session-v010' and index['candidate_freeze_sha256']==sha(CANDIDATE/'observer-route-tooling-freeze-v010.json'),'Capture does not bind exact new v010 tooling freeze')
+  need(index['snapshot_manifest_sha256']==sha(snapshot/'compiled-source-manifest.json') and index['root_prereg_sha256']==sha(prereg_path),'Capture session compiled snapshot / prereg binding changed')
+  need(r['schema']=='guard-art-partial-native-observer-v009' and r['passed'] and r['flow_complete'],'Actual observer RED or wrong schema')
+  need(r['normal_J_full_clear'] is False and r['diagnostic_public_damage_used'] is True and r['guard_public_damage_used'] is False and r['guard_spawned_by_probe'] is False,'Diagnostic/full-combat/Guard-birth scope differs')
+@@ -193,7 +196,7 @@
+  need(masks=={'Wake':63,'Ready':15,'AxeWindup':63} and masks=={'Wake':r['WakeMask'],'Ready':r['ReadyMask'],'AxeWindup':r['WindupMask']},'Each exact drawn row phase required')
+  need(dormant==r['DormantSeen'] and r['DormantUnobserved']==(dormant==0) and gaps>0 and r['procedural_gap_seen'],'Dormant absence / procedural gaps misreported')
+  need(obs[-1]['phase']=='complete' and not obs[-1]['room_cleared'],'Partial trial cannot clear live Guard room')
+- pixel=subprocess.run([sys.executable,'-B','-X','utf8',str(HERE/'verify-native-pixels-v002.py'),'--archive',str(archive)],capture_output=True,text=True,encoding='utf-8')
++ pixel=subprocess.run([sys.executable,'-B','-X','utf8',str(HERE/'verify-native-pixels-v010.py'),'--archive',str(archive)],capture_output=True,text=True,encoding='utf-8')
+  need(pixel.returncode==0,'Original pixel/FIFO verification failed: '+pixel.stderr);p=json.loads(pixel.stdout);need(p['passed'] and p['native_async_writer_verified'],'Native CRC/FIFO not verified')
+  return {'passed':True,'scope':'Actual source-bound native spatial partial art observer; real reached side point and per-draw positions; diagnostic Knight/Bat clears, formal Guard birth, no final visual/art/audio acceptance.','native_frames':len(obs),'DormantSeen':dormant,'masks':masks,'actual_approach_side':side,'coverage_witnesses':coverage,'spatial_route_proof':route_proof,'pixel_proof':p,'visual_reviewed':False,'formal_complete_units':0}
+ 
+@@ -203,6 +206,6 @@
+  if a.source_only:print(json.dumps({'compiled_inputs_verified':True,'strict_registry':m['strict_registered_tests'],'profile_facts':facts,'UE_started':False},ensure_ascii=False));return
+  need(a.archive is not None,'Actual archive required');archive=Path(a.archive).resolve();result=verify(archive,facts,snapshot,prereg)
+  if a.write_receipt:
+-  dest=archive/'原件/independent-guard-art-partial-v009.json';need(not dest.exists(),'Never overwrite receipt');dest.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
++  dest=archive/'原件/independent-guard-art-partial-v010.json';need(not dest.exists(),'Never overwrite receipt');dest.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+  print(json.dumps(result,ensure_ascii=False))
+ if __name__=='__main__':main()

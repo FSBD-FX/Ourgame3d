@@ -1,0 +1,179 @@
+--- actual/DungeonFairytaleSwordAirV001.cpp
++++ candidate/DungeonFairytaleSwordAirV001.cpp
+@@ -1,15 +1,166 @@
+ #include "DungeonFairytaleSwordAirV001.h"
++#include "DungeonFighter.h"
++#include "DungeonGameMode.h"
++#include "Misc/CommandLine.h"
++#include "Misc/Parse.h"
+ 
+ namespace DungeonFairytaleSwordAirV001
+ {
+-const FProfile& Profile(){static const FProfile Pending;return Pending;}
+-bool Select(const FDungeonHeroAirSample&,FSelection&,FString& Diagnostic)
+-{Diagnostic=TEXT("Stage0: real nonattack Air selection is not implemented");return false;}
+-bool BuildDrawPlanFromCommitted(const DungeonFairytaleSwordEquipmentBinding::FBinding&,
+- const FDungeonHeroAirSample&,const FProfile&,const FDrawContext&,FDrawPlan&,FString& Diagnostic)
+-{Diagnostic=TEXT("Stage0: no retained six-pose source closure or atomic Air plan");return false;}
+-bool BuildDrawPlan(const ADungeonGameMode&,const ADungeonFighter&,const FDrawContext&,FDrawPlan&,FString& Diagnostic)
+-{Diagnostic=TEXT("Stage0: actual-owner nonattack Air plan is not implemented");return false;}
+-bool ValidateResidentSet(const FProfile&,const TArray<FResidentTexture>&,FString& Diagnostic)
+-{Diagnostic=TEXT("Stage0: actual complete49 resident preflight is not implemented");return false;}
++namespace
++{
++#include "DungeonFairytaleSwordAirDataV001.inl"
++bool Reject(FString& Why,const TCHAR* Message){Why=Message;return false;}
++bool PointFinite(FVector2D P){return FMath::IsFinite(P.X)&&FMath::IsFinite(P.Y);}
++bool Hash256(const FString& H)
++{
++ if(H.Len()!=64)return false;
++ for(int32 I=0;I<H.Len();++I)if(!((H[I]>=TEXT('0')&&H[I]<=TEXT('9'))||(H[I]>=TEXT('a')&&H[I]<=TEXT('f'))))return false;
++ return true;
+ }
++bool IsArmor(EComponent Component)
++{return Component==EComponent::ShoulderFar||Component==EComponent::Chest||Component==EComponent::ShoulderNear;}
++bool BindingValid(const DungeonFairytaleSwordEquipmentBinding::FBinding& B)
++{
++ using Armor=DungeonFairytaleSwordEquipmentBinding::EArmor;
++ if(!B.RunGuid.IsValid()||!B.RunAlias||!B.OwnerId||!B.Revision||B.Revision==TNumericLimits<uint64>::Max()
++  ||B.ActiveSlot<0||B.ActiveSlot>1||!B.WeaponInstanceId||!B.WeaponVersion||B.WeaponVersion==TNumericLimits<uint64>::Max()
++  ||B.WeaponContentId!=TEXT("WPN-SWD-001"))return false;
++ if(B.Armor==Armor::NoArmor)return !B.ArmorInstanceId&&!B.ArmorVersion&&B.ArmorContentId.IsEmpty();
++ return B.Armor==Armor::LightArmor&&B.ArmorInstanceId&&B.ArmorInstanceId!=B.WeaponInstanceId&&B.ArmorVersion
++  &&B.ArmorVersion!=TNumericLimits<uint64>::Max()&&B.ArmorContentId==TEXT("ARM-LGT-001");
++}
++bool ProfileValid(const FProfile& P)
++{
++ const auto& Approved=Profile();
++ if(!Approved.SourceClosureVerified||!P.SourceClosureVerified||P.ProfileId.IsEmpty()||P.ProfileId!=Approved.ProfileId
++  ||P.SourceClosureSHA256!=Approved.SourceClosureSHA256||!Hash256(P.SourceClosureSHA256)
++  ||P.CanvasSource!=512||P.StandingExtent!=416.||P.StandingDisplay!=72.||P.HeightProjection!=.70||P.WeaponScale!=.5
++  ||!PointFinite(P.ComponentGrip)||P.ComponentGrip!=Approved.ComponentGrip||P.SwordTexturePath!=Approved.SwordTexturePath
++  ||!P.SwordTexturePath.StartsWith(TEXT("/Game/Production/"))||P.SwordSourceSHA256!=Approved.SwordSourceSHA256||!Hash256(P.SwordSourceSHA256))return false;
++ const EComponent Owners[]={EComponent::BodyRest,EComponent::ShoulderFar,EComponent::Chest,EComponent::NearArmWithoutHand,
++  EComponent::ShoulderNear,EComponent::HelmetForeground,EComponent::FarHandForeground,EComponent::NearHand};
++ TSet<FString> Paths;
++ for(int32 I=0;I<PoseCount;++I)
++ {
++  const auto& F=P.Frames[I];const auto& Ref=Approved.Frames[I];TSet<uint8> Order;
++  // Artist roots are projection origins, not feet/bones or alpha-box bounds.
++  // A genuine virtual Root y530 is valid and must never be clamped to512.
++  if(F.Frame!=I||int32(F.Pose)!=I+1||F.ExpectedNonemptyDrawCount!=9||!PointFinite(F.Root)||!PointFinite(F.Grip)
++   ||!PointFinite(F.AxisArtist)||F.AxisArtist==FVector2D::ZeroVector||F.Root!=Ref.Root||F.Grip!=Ref.Grip
++   ||F.AxisArtist!=Ref.AxisArtist||F.SlotOrder!=Ref.SlotOrder)return false;
++  for(auto Component:F.SlotOrder){if(uint32(Component)>uint32(EComponent::IndependentSword)||Order.Contains(uint8(Component)))return false;Order.Add(uint8(Component));}
++  if(Order.Num()!=SlotCount)return false;
++  for(int32 J=0;J<LayersPerPose;++J)
++  {
++   const auto& L=F.Layers[J];const auto& A=Ref.Layers[J];
++   if(L.Component!=Owners[J]||L.KnownOptionalEmpty||!L.SourceAlphaNonzero||L.SourceAlphaNonzero>512u*512u
++    ||!L.TexturePath.StartsWith(TEXT("/Game/Production/"))||Paths.Contains(L.TexturePath)
++    ||!Hash256(L.SourceSHA256)||!Hash256(L.SourceRGBASHA256)||L.TexturePath!=A.TexturePath||L.SourceSHA256!=A.SourceSHA256
++    ||L.SourceRGBASHA256!=A.SourceRGBASHA256||L.SourceAlphaNonzero!=A.SourceAlphaNonzero)return false;
++   Paths.Add(L.TexturePath);
++  }
++ }
++ return Paths.Num()==48&&!Paths.Contains(P.SwordTexturePath);
++}
++bool NativeFloatQuad(FVector2D Top,double Size)
++{
++ if(!PointFinite(Top)||!FMath::IsFinite(Size)||Size<=0.)return false;
++ const float X=float(Top.X),Y=float(Top.Y),Width=float(Size),Right=float(X+Width),Bottom=float(Y+Width);
++ // HUD::DrawTexture and CanvasItem corners narrow to float. Finite1e20 must
++ // not pass merely because the mathematical double quad has positive width.
++ return FMath::IsFinite(X)&&FMath::IsFinite(Y)&&FMath::IsFinite(Width)&&Width>0.f
++  &&FMath::IsFinite(Right)&&FMath::IsFinite(Bottom)&&Right!=X&&Bottom!=Y;
++}
++bool TintFinite(FLinearColor C)
++{return FMath::IsFinite(C.R)&&FMath::IsFinite(C.G)&&FMath::IsFinite(C.B)&&FMath::IsFinite(C.A);}
++}
++const FProfile& Profile(){static const FProfile Data=BuildProfileData();return Data;}
++bool Select(const FDungeonHeroAirSample& Q,FSelection& Out,FString& Diagnostic)
++{
++ if(!Q.Valid||!Q.RunGuid.IsValid()||!Q.OwnerId||!Q.RoomInstanceId||!FMath::IsFinite(Q.NativeTime)||Q.NativeTime<0.
++  ||!FMath::IsFinite(Q.GroundPosition.X)||!FMath::IsFinite(Q.GroundPosition.Y)||(Q.Facing!=-1.f&&Q.Facing!=1.f)
++  ||!FMath::IsFinite(Q.JumpHeight)||Q.JumpHeight<0.f||!FMath::IsFinite(Q.VerticalVelocity)
++  ||!FMath::IsFinite(Q.LandingVisualAge)||Q.LandingVisualAge<0.f||Q.LandingVisualAge>.12f)
++ {Diagnostic=TEXT("Nonattack Air requires complete finite actual-owner sample facts");return false;}
++ FSelection Candidate;
++ if(Q.JumpHeight>0.f||Q.VerticalVelocity>0.f)
++ {
++  Candidate.Frame=Q.VerticalVelocity>315.f?0:Q.VerticalVelocity>90.f?1:Q.VerticalVelocity>=-90.f?2:3;
++ }
++ else if(Q.JumpHeight==0.f&&Q.VerticalVelocity==0.f&&Q.LandingVisualAge<.12f)
++  Candidate.Frame=Q.LandingVisualAge<.06f?4:5;
++ else{Diagnostic=TEXT("Actual owner is outside nonattack Air and original landing window");return false;}
++ Candidate.Valid=true;Candidate.Pose=static_cast<EPose>(Candidate.Frame+1);Out=Candidate;Diagnostic.Reset();return true;
++}
++bool BuildDrawPlanFromCommitted(const DungeonFairytaleSwordEquipmentBinding::FBinding& Binding,
++ const FDungeonHeroAirSample& Sample,const FProfile& Source,const FDrawContext& Context,FDrawPlan& Out,FString& Diagnostic)
++{
++ if(!BindingValid(Binding))return Reject(Diagnostic,TEXT("Nonattack Air requires actual committed SWD with None or LGT identity"));
++ FSelection Selection;
++ if(Sample.RunGuid!=Binding.RunGuid||Sample.OwnerId!=Binding.OwnerId||!Select(Sample,Selection,Diagnostic))return Reject(Diagnostic,TEXT("Nonattack Air sample does not belong to the same committed owner/run"));
++ if(!ProfileValid(Source))return Reject(Diagnostic,TEXT("Nonattack Air retained actual source49 closure is pending, changed or invalid"));
++ if(!PointFinite(Context.GroundScreen)||!FMath::IsFinite(Context.UIScale)||Context.UIScale<=0.
++  ||Context.JumpHeight!=double(Sample.JumpHeight)||!TintFinite(Context.Tint))return Reject(Diagnostic,TEXT("Air actual HUD context is invalid or has a different projection height"));
++ const auto& Frame=Source.Frames[Selection.Frame];FDrawPlan P;P.Supported=true;P.Pose=Selection.Pose;P.Frame=Selection.Frame;
++ P.Facing=Sample.Facing<0.f?-1:1;P.ProfileId=Source.ProfileId;P.Sample=Sample;P.Binding=Binding;P.Tint=Context.Tint;
++ P.RootSource=Frame.Root;P.GripSource=Frame.Grip;P.AxisArtist=Frame.AxisArtist;
++ P.CanvasSize=Source.StandingDisplay*double(Source.CanvasSource)/Source.StandingExtent;
++ P.SourceToScreenScale=Source.StandingDisplay/Source.StandingExtent*Context.UIScale;
++ P.WeaponScale=Source.WeaponScale;P.WeaponWidth=P.CanvasSize*P.WeaponScale*Context.UIScale;
++ const double S=P.SourceToScreenScale;const FVector2D Lift(0.,double(Sample.JumpHeight)*Source.HeightProjection*Context.UIScale);
++ P.GripScreen=Context.GroundScreen-Lift+FVector2D(P.Facing*(Frame.Grip.X-Frame.Root.X)*S,(Frame.Grip.Y-Frame.Root.Y)*S);
++ P.BodyTop=Context.GroundScreen-Lift-FVector2D((P.Facing<0?512.-Frame.Root.X:Frame.Root.X)*S,Frame.Root.Y*S);
++ // Exactly one full parent X reflection: mirrored UV + reflected component
++ // pivot + negative left angle. No second affine mirror is composed here.
++ P.WeaponAngle=FMath::RadiansToDegrees(FMath::Atan2(Frame.AxisArtist.Y,Frame.AxisArtist.X))*(P.Facing<0?-1.:1.);
++ P.SwordPivotUV={P.Facing<0?1.-Source.ComponentGrip.X/512.:Source.ComponentGrip.X/512.,Source.ComponentGrip.Y/512.};
++ P.SwordTop=P.GripScreen-P.SwordPivotUV*P.WeaponWidth;P.TextureU=P.Facing<0?1.:0.;P.TextureDU=P.Facing<0?-1.:1.;
++ if(!FMath::IsFinite(S)||S<=0.||!PointFinite(P.GripScreen)||!PointFinite(P.SwordPivotUV)
++  ||!FMath::IsFinite(float(P.WeaponAngle))||!NativeFloatQuad(P.BodyTop,P.CanvasSize*Context.UIScale)
++  ||!NativeFloatQuad(P.SwordTop,P.WeaponWidth))return Reject(Diagnostic,TEXT("Actual Air submitted float quad collapses, overflows or is invalid"));
++ const bool Light=Binding.Armor==DungeonFairytaleSwordEquipmentBinding::EArmor::LightArmor;
++ for(int32 I=0;I<SlotCount;++I)
++ {
++  auto& Slot=P.Slots[I];Slot.Component=Frame.SlotOrder[I];Slot.Enabled=Light||!IsArmor(Slot.Component);
++  if(Slot.Component==EComponent::IndependentSword)Slot.TexturePath=Source.SwordTexturePath;
++  else
++  {
++   const FTextureSource* Layer=nullptr;for(const auto& L:Frame.Layers)if(L.Component==Slot.Component){Layer=&L;break;}
++   if(!Layer)return Reject(Diagnostic,TEXT("Air ordered source slot has no exclusive component owner"));
++   Slot.TexturePath=Layer->TexturePath;Slot.KnownOptionalEmpty=Layer->KnownOptionalEmpty;
++  }
++  if(Slot.KnownOptionalEmpty)return Reject(Diagnostic,TEXT("Air source49 cannot relabel a missing part as optional empty"));
++  if(Slot.Enabled)++P.NonemptyDrawCount;
++ }
++ if(P.NonemptyDrawCount!=(Light?9:6))return Reject(Diagnostic,TEXT("Air committed None6/LGT9 draw count or source order is invalid"));
++ Out=MoveTemp(P);Diagnostic.Reset();return true;
++}
++bool BuildDrawPlan(const ADungeonGameMode& Game,const ADungeonFighter& Fighter,const FDrawContext& Context,FDrawPlan& Out,FString& Diagnostic)
++{
++ if(!FParse::Param(FCommandLine::Get(),CommandLineFlag)||!FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordEquipmentBinding::CommandLineFlag))
++  return Reject(Diagnostic,TEXT("Nonattack Air requires explicit Air and committed Bound presentation opt-ins"));
++ DungeonFairytaleSwordEquipmentBinding::FBinding Binding;
++ if(!DungeonFairytaleSwordEquipmentBinding::Resolve(Game,Fighter,Binding,Diagnostic))return false;
++ FDungeonHeroAirSample Sample;
++ if(!Fighter.QueryHeroNonAttackAir(Sample))return Reject(Diagnostic,TEXT("Current native hero is outside completed nonattack Air/original Landing"));
++ const FLinearColor ActualTint=Fighter.HitFlash>0.f?FLinearColor(1.7f,.6f,.4f,1.f):FLinearColor::White;
++ if(Sample.NativeTime!=Game.GetSimulationTime()||Sample.PresentationEpoch!=Game.GetRunPresentationEpoch()
++  ||Context.JumpHeight!=double(Fighter.JumpHeight)||Context.Tint!=ActualTint)
++  return Reject(Diagnostic,TEXT("Actual Air HUD sample/epoch/height/Tint differs from current native owner"));
++ return BuildDrawPlanFromCommitted(Binding,Sample,Profile(),Context,Out,Diagnostic);
++}
++bool ValidateResidentSet(const FProfile& Source,const TArray<FResidentTexture>& Residents,FString& Diagnostic)
++{
++ if(!ProfileValid(Source)||Residents.Num()!=ResidentCount)return Reject(Diagnostic,TEXT("Air complete source49/preload is pending or missing"));
++ TSet<FString> Expected,Seen;for(const auto& Frame:Source.Frames)for(const auto& Layer:Frame.Layers)Expected.Add(Layer.TexturePath);Expected.Add(Source.SwordTexturePath);
++ if(Expected.Num()!=ResidentCount)return Reject(Diagnostic,TEXT("Air approved source49 contains duplicate resident paths"));
++ for(const auto& Resource:Residents)
++ {
++  if(!Expected.Contains(Resource.TexturePath)||Seen.Contains(Resource.TexturePath)||Resource.ClassName!=TEXT("Texture2D")
++   ||Resource.Width!=512||Resource.Height!=512||!Resource.ResourceReady||Resource.PendingInitialization)
++   return Reject(Diagnostic,TEXT("Any missing/duplicate/wrong-class/dimension/pending Air resource closes all submitted parts"));
++  Seen.Add(Resource.TexturePath);
++ }
++ Diagnostic.Reset();return true;
++}
++}

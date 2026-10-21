@@ -1,0 +1,26 @@
+--- UnrealGame/Source/CodexDungeon/DungeonHUD.h
++++ UnrealGame/Source/CodexDungeon/DungeonHUD.h
+@@ -11,6 +11,7 @@
+ #include "DungeonFairytaleSwordDrawState.h"
+ #include "DungeonFairytaleSwordHurtDrawState.h"
+ #include "DungeonFairytaleSwordDeathDrawState.h"
++#include "DungeonFairytaleSwordDodgeDrawState.h"
+ #include "DungeonFairytaleGuardDrawState.h"
+ #include "DungeonFairytaleGuardFullDrawStateV003.h"
+ #include "DungeonHUD.generated.h"
+@@ -84,6 +85,7 @@
+     const FDungeonFairytaleSwordDraw& GetFairytaleSwordDraw() const { return FairytaleSwordDraw; }
+     const FDungeonFairytaleSwordHurtDraw& GetFairytaleSwordHurtDraw() const { return FairytaleSwordHurtDraw; }
+     const FDungeonFairytaleSwordDeathDraw& GetFairytaleSwordDeathDraw() const { return FairytaleSwordDeathDraw; }
++    const FDungeonFairytaleSwordDodgeDraw& GetFairytaleSwordDodgeDraw() const { return FairytaleSwordDodgeDraw; }
+     const TArray<FDungeonFairytaleGuardDraw>& GetFairytaleGuardDraws() const { return FairytaleGuardDraws; }
+     const TArray<FDungeonFairytaleGuardFullDrawV003>& GetFairytaleGuardFullDraws() const { return FairytaleGuardFullDraws; }
+     bool IsFairytaleGuardStompPreviewEnabled() const { return bUseFairytaleGuardStompPreview; }
+@@ -153,6 +155,7 @@
+     bool DrawFairytaleSwordHurtBody(ADungeonFighter* Fighter);
+     bool bUseFairytaleSwordDeathPreview=false;
+     FDungeonFairytaleSwordDeathDraw FairytaleSwordDeathDraw;
++    FDungeonFairytaleSwordDodgeDraw FairytaleSwordDodgeDraw; // Stage0 DTO only; no draw/preload routing.
+     bool DrawFairytaleSwordDeathBody(ADungeonFighter* Fighter);
+     UTexture2D* GetFairytaleSwordTexture(const FString& Clip,int32 Index);
+     bool DrawFairytaleSwordBody(ADungeonFighter* Fighter);

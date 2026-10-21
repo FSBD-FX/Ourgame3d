@@ -1,0 +1,130 @@
+{
+  "schema": "Dodge218-readonly-source-overlap-and-kernel-boundaries-addendum-v001",
+  "original_frozen_sourcefit_contract": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/dodge-state-preparation-v001/own-partition-SWD-fit-v001/Dodge218-own-five-partitions-SWD050-Grip-Axis-ground-candidate-v001.json",
+    "bytes": 56602,
+    "sha256": "efbc2ba43b55f759c41b090b21eff3581046ea5748a3732002bd9c85be2a2df6"
+  },
+  "original_candidate_not_modified": true,
+  "actual_source_overlap_rows": [
+    {
+      "frame": 0,
+      "sword_alpha128_intersection_with_source_owner_alpha128_pixels": {
+        "BodyRest": 1997,
+        "NearArmWithoutHand": 0,
+        "HelmetForeground": 0,
+        "NearHand": 1178,
+        "FarHandForeground": 0
+      },
+      "sword_tip_artist_floor_clearance_source_px": 49.10000000000002,
+      "actual_source_mask_axis_extremes_xy": [
+        [
+          153.6,
+          277.2
+        ],
+        [
+          211.2,
+          320.4
+        ]
+      ]
+    },
+    {
+      "frame": 1,
+      "sword_alpha128_intersection_with_source_owner_alpha128_pixels": {
+        "BodyRest": 2122,
+        "NearArmWithoutHand": 0,
+        "HelmetForeground": 0,
+        "NearHand": 1157,
+        "FarHandForeground": 0
+      },
+      "sword_tip_artist_floor_clearance_source_px": 54.03863700993111,
+      "actual_source_mask_axis_extremes_xy": [
+        [
+          108.92045099154393,
+          299.52524343293567
+        ],
+        [
+          174.47963150690924,
+          334.9123010974794
+        ]
+      ]
+    },
+    {
+      "frame": 2,
+      "sword_alpha128_intersection_with_source_owner_alpha128_pixels": {
+        "BodyRest": 1863,
+        "NearArmWithoutHand": 4,
+        "HelmetForeground": 0,
+        "NearHand": 1219,
+        "FarHandForeground": 0
+      },
+      "sword_tip_artist_floor_clearance_source_px": 98.69461421394016,
+      "actual_source_mask_axis_extremes_xy": [
+        [
+          105.6927206490659,
+          286.103423129076
+        ],
+        [
+          178.31204162721704,
+          312.44724063285213
+        ]
+      ]
+    },
+    {
+      "frame": 3,
+      "sword_alpha128_intersection_with_source_owner_alpha128_pixels": {
+        "BodyRest": 1574,
+        "NearArmWithoutHand": 24,
+        "HelmetForeground": 4,
+        "NearHand": 1063,
+        "FarHandForeground": 0
+      },
+      "sword_tip_artist_floor_clearance_source_px": 221.62,
+      "actual_source_mask_axis_extremes_xy": [
+        [
+          145.52,
+          304.89
+        ],
+        [
+          208.4,
+          286.55
+        ]
+      ]
+    }
+  ],
+  "overlap_meaning": "Pixel intersections, not anatomical collision/handhold certification. Sword deliberately draws in front of torso/legs. Helmet4corepx inphase3 andneararm24corepx require actual contact/depth review; no automatic acceptance or local body erase.",
+  "kernel_readonly_pins": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonDodge.h",
+      "bytes": 14663,
+      "sha256": "375ee1aa3d83612a3c686f0b1a6a6d322c97e247ea957c3d7380dcd431fd9ec2"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 122242,
+      "sha256": "818c2c06f4b11d04511f65776a678eaad5f1a2d244ff05b6e6d5bfa1fa1c5a38"
+    }
+  ],
+  "actual_kernel_facts": {
+    "duration_seconds": 0.4,
+    "distance_world_unblocked": 185.0,
+    "speed_world_per_second": 462.5,
+    "direct_iframes_seconds_halfopen": [
+      0.06,
+      0.2
+    ],
+    "cooldown_seconds": 1.2,
+    "body_sweeps_can_block_travel_without_shortening_action": true,
+    "full_action_four_art_samples_ms": [
+      0,
+      100,
+      200,
+      300
+    ],
+    "source_clock": "DungeonFighter.cpp SyncDodgeAction: AnimationTime=float(S.Time-R.Start), AnimationName=dodge; no facing assignment in SyncDodgeAction.",
+    "invariant": "Art does not mutate HP/poise/time/facing/position, collision, iframe windows, resource admission, movement or action priority."
+  },
+  "actual_new_media_viewed": false,
+  "runtime_trial_accepted": false,
+  "next": "RootE then actual4full/fist/owners/join review; source/intersection facts alone do not demonstrate natural grip or equipment continuity."
+}

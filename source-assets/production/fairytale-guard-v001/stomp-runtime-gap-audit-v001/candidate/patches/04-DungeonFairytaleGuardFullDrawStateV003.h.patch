@@ -1,0 +1,10 @@
+--- UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardFullDrawStateV003.h
++++ UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardFullDrawStateV003.h
+@@ -8,6 +8,7 @@
+  bool OptIn=false,TrialAllowed=false,FinalAccepted=false,RegistrationReady=false,TextureReady=false,Drawn=false;
+  bool ProceduralFallback=true,WholebodyIncludesAxe=true,RequestedRowTrialAllowed=false;
+  int32 NativeSourceId=0,AssetFrame=-1;
++ FString ProfileId=TEXT("GuardKnown44FullV003");
+  FString RequestedClip,AssetClip,TexturePath,SourceSHA256,SourceRGBASHA256,TrialApprovalRecord,RequestedTrialApprovalRecord,RegistrationEvidenceSHA256,SourceIndexSHA256,MissingReason;
+  double StandingExtent=0.,TargetBodyHeight=100.8,RowScale=0.,CanvasSize=0.;
+  FVector2D SourceFloorPivot=FVector2D::ZeroVector,GroundScreen=FVector2D::ZeroVector,TopScreen=FVector2D::ZeroVector;

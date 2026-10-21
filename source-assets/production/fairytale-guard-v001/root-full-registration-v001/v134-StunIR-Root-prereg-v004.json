@@ -1,0 +1,44 @@
+{
+  "schema": "guard-known44-combat-Root-prereg-v003",
+  "is_template": false,
+  "pre_registered_before_capture": true,
+  "scenario": "StunIR",
+  "compiled_manifest_sha256": "23e24611ec79759352bd20255f0f051760eb0e888af48c7d69d1b238db5cb079",
+  "source_profile_prereg_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/root-full-registration-v001/v134-known44-source-profile-prereg-v003.json",
+    "bytes": 101952,
+    "sha256": "5dc3d9ae815bfeb2f2f89b31d4c10bbcf3d72b8c03531eef75f38bff821ad236"
+  },
+  "combat_candidate_freeze_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-full-known44-combat-observer-candidate-v004/StunIR-candidate-freeze-v004.json",
+    "bytes": 3153,
+    "sha256": "e3507a82b417883fe1dff70423c8035b72fa44cbd3c399f0d879f04923a4bf15"
+  },
+  "admitted_combat_source_files": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonGuardArtCombatProbeV003.h",
+      "bytes": 869,
+      "sha256": "6609004b697895ccafdd81aa30f989af4f9fa98a9000e78c9ea884c3c4625f94"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonGuardArtCombatProbeV003.cpp",
+      "bytes": 46806,
+      "sha256": "569539aed0966cf47cba330983cf3507b5695935621b659b8bf299cb17c1d735"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": 117627,
+      "sha256": "f20e5116116fdc603e011f7f00eb4fd8d2d94aa9d19806469f6b511fcfd8ebd5"
+    }
+  ],
+  "known44_profile_source_scope": "Read-only source preflight reuse of unchanged AxeCycle tooling-v003 profile checker, with a fresh Root Axe-compatible source prereg bound to this same new compiled snapshot. This never claims an AxeCycle native run.",
+  "Death_implemented": false,
+  "formal_complete_units": 0,
+  "fill_instructions": [
+    "Root integrates only newH/newCPP+minimalHUDpatch; actual Source/DLL/full184 snapshot is new after build; no Content change required.",
+    "Copy prior actual AxeCycle tooling-v003 source prereg to a NEW actual source-profile prereg, updating compiled_manifest_sha256/counts/admitted_source_files from fresh snapshot. Keep actual row10/all13/import/gaps and tooling-v003 freeze intact. It is used only for strict shared profile/source preflight.",
+    "Fill source_profile_prereg_pin with that actual NEW file; compiled_manifest_sha256 and admitted_combat_source_files from same fresh snapshot; combat_candidate_freeze_pin with this whole freeze.",
+    "Then set is_template=false/pre_registered_before_capture=true in NEW Root file before capture. No template approves itself."
+  ],
+  "registered_at_utc": "2026-10-18T07:43:39.667144+00:00"
+}

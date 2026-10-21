@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fixed-heavyaxe-armed-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedArmedReady209existing4poses, exactrawcopy, doNOTgenerateorcharge.",
+      "durations_ms": [
+        250,
+        250,
+        250,
+        250
+      ]
+    },
+    "right_stomp_recovery": {
+      "frames": 4,
+      "fps": 3,
+      "loop": false,
+      "action": "Create FOUR distinct quiet recovery poses after ONE FAR-foot stomp. Reference1 is the actual preceding StompActive245 frame1 and owns the starting body/leg/axe geometry. Reference2 is acceptedArmedReady209: identity details and final return target only, not a replacement starting stance. Reference3 supplies four invisible cells and safe padding; draw no guide lines.\n\nFrame0 must closely continue reference1's low compressed body, compact foreground NEAR support below the hip, two grounded shoes, large readable knee plate, closed fists and quiet low axe. Do not reset sideways, spread into a wide stance or copy a raised Windup foot. Frame1 rises only slightly. Frame2 gradually straightens the knees/chest and brings the held axe toward Ready. Frame3 settles close to reference2's Ready pose. The transition is slow, heavy and punishable, not a new attack.\n\nExactly TWO contiguous hip→knee→ankle→ground-shoe chains in all four frames. Both soles remain grounded; no relift, third boot, extra step or second stomp. Preserve NEAR moss-arm→BUTTward grip and FAR arm→HEADward grip on one continuous shaft. No hand swap, regrip or axe size change.\n\nSame shallow elevated three-quarter view facing right, broad stone planes, sparse moss and coarse grotesque cartoon ink. One shared body/axe density throughout. Complete connected silhouettes, ample padding, solid magenta background; no FX, shadow, labels, separator or scenery.\n",
+      "durations_ms": [
+        375,
+        375,
+        375,
+        375
+      ]
+    }
+  },
+  "style": "Existing acceptedArmedReady209 stoneguard+fixedaxe identity; actualActive2451 owns startinggeometry, Ready209 is identity/finalreturn only. No old224/225/WUraisedfoot motion reference. Same broadcoarsestone, sparseforegroundmoss, darkfairytaleink. Keep fixedaxe dimension/bodydensity and bothclosedgrips.",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

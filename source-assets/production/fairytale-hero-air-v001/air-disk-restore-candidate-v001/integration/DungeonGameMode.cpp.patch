@@ -1,0 +1,20 @@
+--- DungeonGameMode.cpp
++++ DungeonGameMode.cpp candidate overlay
+@@ -1,5 +1,6 @@
+ #include "DungeonGameMode.h"
+ #include "DungeonHeroLandingPriorityProbeV001.h"
++#include "DungeonHeroAirDiskRestoreProbeV001.h"
+ #include "DungeonCombatRules.h"
+ #include "DungeonFighter.h"
+ #include "DungeonRoomLayout.h"
+@@ -1161,7 +1162,9 @@
+ void ADungeonGameMode::StartPlay()
+ {
+     Super::StartPlay();
+-    if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroLandingPriorityProofV001")))
++    if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroAirDiskRestoreProofV001")))
++        GetWorld()->SpawnActor<ADungeonHeroAirDiskRestoreProbeV001>();
++    else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroLandingPriorityProofV001")))
+         GetWorld()->SpawnActor<ADungeonHeroLandingPriorityProbeV001>();
+     // Native Actor BeginPlay still runs. This opt-in origin never constructs a
+     // starter Run, including a failed/contaminated startup or a repeated call.

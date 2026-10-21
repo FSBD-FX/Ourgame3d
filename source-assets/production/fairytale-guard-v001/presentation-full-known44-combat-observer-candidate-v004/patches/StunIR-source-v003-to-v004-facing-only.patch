@@ -1,0 +1,78 @@
+--- source-v003/DungeonGuardArtCombatProbeV003.cpp
++++ source-v004/DungeonGuardArtCombatProbeV003.cpp
+@@ -119,6 +119,17 @@
+   BreakPinned=true;BreakEventId=B->EventId;InterruptedAttackId=S.Action.AttackId;OriginalAction=A->Action;InterruptedAction=I->Action;
+   BrokenAt=B->AtTime;StunEnd=S.StunUntil;OriginalOccupiedUntil=S.OccupiedUntil;OriginalIdleReadyAt=S.IdleReadyAt;MoveStop();return true;
+  }
++ bool ReachNormalStrikePoint(ADungeonFighter* E)
++ {
++  const auto P=Game->PlayerFighter.Get();if(!P||!E)return false;
++  const auto V=E->GetGroundPosition(),D=P->GetGroundPosition()-V;const double DX=D.X*ApproachSide;
++  //140 staging keeps one ordinary30fps inward movement step inside SWD135.
++  // Facing is only observed; only actual A/D input may turn the real player.
++  if(DX<110.||DX>150.||FMath::Abs(D.Y)>6.)return MoveTo(V+FVector2D(ApproachSide*140.,0.))&&ReachNormalStrikePoint(E);
++  MoveStop();
++  if(DX>132.||P->Facing!=float(-ApproachSide)){Key(ApproachSide>0?EKeys::A:EKeys::D,true);return false;}
++  return true;
++ }
+  bool MayRequestJ(const DungeonStoneGuard::FState& S,uint32 Stage,double StartDelay)const
+  {
+   const auto G=Game.Get();const auto P=G?G->PlayerFighter.Get():nullptr;if(!P||Stage>=3)return false;
+@@ -152,7 +163,7 @@
+   const auto P=Game->PlayerFighter->GetGroundPosition(),V=E->GetGroundPosition();
+   for(double Sign:{1.,-1.})
+   {
+-   const double Lane=V.Y+Sign*140.;const FVector2D A(P.X,Lane),B(V.X+ApproachSide*128.,Lane),C(V.X+ApproachSide*128.,V.Y);
++   const double Lane=V.Y+Sign*140.;const FVector2D A(P.X,Lane),B(V.X+ApproachSide*140.,Lane),C(V.X+ApproachSide*140.,V.Y);
+    if(!SegmentLegal(P,A)||!SegmentLegal(A,B)||!SegmentLegal(B,C))continue;
+    RouteLaneY=Lane;RoutePlanned=true;RouteStage=0;RouteStartedWall=FPlatformTime::Seconds();RouteStartPlayer=P;RouteStartGuard=V;
+    auto O=MakeShared<FJsonObject>();O->SetStringField(TEXT("event"),TEXT("normal_route_planned"));O->SetNumberField(TEXT("sim"),Game->GetSimulationTime());
+@@ -165,7 +176,7 @@
+   if(RouteReached)return true;if(!RoutePlanned&&!PrepareRoute(E))return false;
+   if(!Need(FPlatformTime::Seconds()-RouteStartedWall<8.,TEXT("Normal body-aware approach route timed out before actual side point")))return false;
+   const auto P=Game->PlayerFighter->GetGroundPosition(),V=E->GetGroundPosition();
+-  FVector2D Target=RouteStage==0?FVector2D(P.X,RouteLaneY):RouteStage==1?FVector2D(V.X+ApproachSide*128.,RouteLaneY):FVector2D(V.X+ApproachSide*128.,V.Y);
++  FVector2D Target=RouteStage==0?FVector2D(P.X,RouteLaneY):RouteStage==1?FVector2D(V.X+ApproachSide*140.,RouteLaneY):FVector2D(V.X+ApproachSide*140.,V.Y);
+   if(!MoveTo(Target))return false;
+   auto O=MakeShared<FJsonObject>();O->SetStringField(TEXT("event"),TEXT("normal_route_waypoint_reached"));O->SetNumberField(TEXT("stage"),RouteStage);O->SetNumberField(TEXT("sim"),Game->GetSimulationTime());O->SetArrayField(TEXT("actual_player"),XY(P));O->SetArrayField(TEXT("actual_guard"),XY(V));RouteWitnesses.Add(MakeShared<FJsonValueObject>(O));
+   if(++RouteStage<3)return false;
+@@ -179,7 +190,7 @@
+   if(Stopped)return;Stopped=true;Stop=FPlatformTime::Seconds();GIsDumpingMovie=0;TArray<FKey> Held;Keys.GetKeys(Held);for(FKey K:Held)Key(K,false);const bool Flushed=FlushFastLosslessProofScreenshots();
+   const bool Passed=Why.IsEmpty()&&Complete&&Flushed&&!Observations.IsEmpty();
+   Report->SetStringField(TEXT("schema"),TEXT("guard-art-known44-combat-observer-v003"));Report->SetStringField(TEXT("scenario"),Scenario);Report->SetBoolField(TEXT("passed"),Passed);Report->SetBoolField(TEXT("flow_complete"),Complete);Report->SetStringField(TEXT("failure"),Why);
+-  Report->SetStringField(TEXT("scope"),TEXT("Independent StunIR milestone. Formal slot2 Guard birth; normal Enter/E/WASD atapproximately128 and real J windows/hit receipts only. Knight/Bat public diagnostic clears explicitly scoped; no Guard public damage, spawn, teleport, manual Tick/StepTo/SetState, HP/poise/time/stat/RNG writes or invulnerability. Player damage is real and preserved. One actual nonlethal85 PoiseBroken/AttackInterrupted and original StunUntil/OccupiedUntil Stun4/IR4 only. Death is unsupported in this version; not final/full57/art/audio acceptance."));
++  Report->SetStringField(TEXT("scope"),TEXT("Independent StunIR milestone. Formal slot2 Guard birth; normal Enter/E/WASD staging140 then real inward A/D to actual facing/110..132 SWD point and real J windows/hit receipts only. Knight/Bat public diagnostic clears explicitly scoped; no Guard public damage, spawn, teleport, manual Tick/StepTo/SetState, HP/poise/time/stat/RNG writes or invulnerability. Player damage is real and preserved. One actual nonlethal85 PoiseBroken/AttackInterrupted and original StunUntil/OccupiedUntil Stun4/IR4 only. Death is unsupported in this version; not final/full57/art/audio acceptance."));
+   Id(Report,TEXT("process_id"),FPlatformProcess::GetCurrentProcessId());Report->SetStringField(TEXT("run"),Run.ToString(EGuidFormats::Digits));Id(Report,TEXT("owner"),Owner);Id(Report,TEXT("guard_entity"),GuardId);Id(Report,TEXT("light_instance"),Light);Id(Report,TEXT("restart_serial"),Restart);
+   Report->SetBoolField(TEXT("break_pinned"),BreakPinned);Id(Report,TEXT("break_event_id"),BreakEventId);Id(Report,TEXT("interrupted_attack_id"),InterruptedAttackId);Report->SetNumberField(TEXT("break_at"),BrokenAt);Report->SetNumberField(TEXT("stun_end"),StunEnd);Report->SetNumberField(TEXT("original_occupied_until"),OriginalOccupiedUntil);Report->SetNumberField(TEXT("original_idle_ready_at"),OriginalIdleReadyAt);
+   Report->SetObjectField(TEXT("original_interrupted_action"),SerializeAction(OriginalAction));Report->SetObjectField(TEXT("interrupted_action_at_break"),SerializeAction(InterruptedAction));Report->SetNumberField(TEXT("StunMask"),StunMask);Report->SetNumberField(TEXT("InterruptedRecoveryMask"),IRMask);
+@@ -280,7 +291,7 @@
+  JO Facts()
+  {
+   auto O=MakeShared<FJsonObject>();auto G=Game.Get();auto H=HUD.Get();auto P=G?G->PlayerFighter.Get():nullptr;if(!G||!H||!P)return O;
+-  O->SetStringField(TEXT("phase"),PhaseName(Phase));O->SetNumberField(TEXT("sim"),G->GetSimulationTime());O->SetArrayField(TEXT("player_ground"),XY(P->GetGroundPosition()));O->SetNumberField(TEXT("player_HP"),P->Health);O->SetNumberField(TEXT("wallet"),P->Coins);O->SetArrayField(TEXT("camera_ground"),XY(H->GetCameraGroundCenter()));O->SetBoolField(TEXT("room_cleared"),G->bRoomCleared);
++  O->SetStringField(TEXT("phase"),PhaseName(Phase));O->SetNumberField(TEXT("sim"),G->GetSimulationTime());O->SetArrayField(TEXT("player_ground"),XY(P->GetGroundPosition()));O->SetNumberField(TEXT("player_HP"),P->Health);O->SetNumberField(TEXT("player_facing"),P->Facing);O->SetNumberField(TEXT("wallet"),P->Coins);O->SetArrayField(TEXT("camera_ground"),XY(H->GetCameraGroundCenter()));O->SetBoolField(TEXT("room_cleared"),G->bRoomCleared);
+   const auto& Hero=H->GetFairytaleSwordDraw();O->SetBoolField(TEXT("hero_bound_skin"),Hero.EquipmentBindingValid);O->SetBoolField(TEXT("LGT_drawn"),Hero.ArmorDrawn);O->SetNumberField(TEXT("hero_canvas_size"),Hero.CanvasSize);O->SetArrayField(TEXT("actual_rendered_player_stack"),Strings(H->GetRenderedPlayerDrawStack()));O->SetBoolField(TEXT("interface_visible"),H->GetInterfaceVisible());O->SetNumberField(TEXT("text_calls"),H->GetRenderedTextDrawCalls());
+   O->SetObjectField(TEXT("player_melee_action"),SerializeMeleeAction(P->GetMeleeCombatState().Action));O->SetBoolField(TEXT("player_can_start_attack"),P->CanStartAttack());O->SetNumberField(TEXT("player_melee_hit_count"),P->GetMeleeCombatState().HitReceipts.size());
+   FDungeonFirstBatchGuardRoomView Plan;TArray<TSharedPtr<FJsonValue>> Slots;
+@@ -338,7 +349,7 @@
+   for(int32 Try=0;Try<2;++Try)
+   {
+    const int32 Side=RequestedSide?RequestedSide:(Try==0?int32(Near):-int32(Near));
+-   if(LegalPoint(V+FVector2D(Side*128.,0.))){ApproachSide=Side;return true;}
++   if(LegalPoint(V+FVector2D(Side*140.,0.))){ApproachSide=Side;return true;}
+    if(RequestedSide)break;
+   }
+   return Need(false,TEXT("No legal requested normal-input axe approach side; never teleport"));
+@@ -381,10 +392,10 @@
+    if(!FollowRoute(E))return;if(!PinActualBreak(S))return;
+    if(BreakPinned)
+    {
+-    MoveTo(E->GetGroundPosition()+FVector2D(ApproachSide*128.,0.));
++    ReachNormalStrikePoint(E);
+     if(S.Time>=OriginalOccupiedUntil&&StunMask==15&&IRMask==15){MoveStop();Complete=true;Next(9);FinishOnFrame=true;}return;
+    }
+-   const bool At=MoveTo(E->GetGroundPosition()+FVector2D(ApproachSide*128.,0.));if(!At)return;
++   const bool At=ReachNormalStrikePoint(E);if(!At)return;
+    // Wait for a genuine original native Windup before starting the first J chain.
+    if(!CombatStarted){if(S.Phase!=DungeonStoneGuard::EPhase::Windup)return;CombatStarted=true;}
+    const auto& M=P->GetMeleeCombatState();const auto& A=M.Action;

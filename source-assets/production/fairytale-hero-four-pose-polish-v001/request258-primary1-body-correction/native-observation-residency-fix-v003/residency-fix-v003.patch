@@ -1,0 +1,92 @@
+--- before/DungeonHeroLandingPriorityProbeV001.cpp
++++ projected/DungeonHeroLandingPriorityProbeV001.cpp
+@@ -12,6 +12,9 @@
+ #include "UObject/StrongObjectPtr.h"
+ #include "Engine/Texture2D.h"
+ #include "TextureResource.h"
++#if WITH_EDITOR
++#include "TextureCompiler.h"
++#endif
+ #include "RenderingThread.h"
+ #include "RHICommandList.h"
+ #include "Misc/Crc.h"
+@@ -220,6 +223,30 @@
+   const FString Expected=FString(Primary?TEXT("/Game/Production/ArtTrials/EV048/v013/HeroLeatherPrimary1/"):TEXT("/Game/Production/ArtTrials/EV048/v012/HeroLeatherReady/"))+Name+TEXT(".")+Name;if(D.DrawStack[Slots[I]]!=Expected)return false;}
+  return true;
+ }
++JO Bridge258LegacyResidencyStatus(const FString& RequestedPath,const UTexture2D* Texture)
++{
++ auto O=MakeShared<FJsonObject>();O->SetStringField(TEXT("requested_path"),RequestedPath);
++ O->SetNumberField(TEXT("observed_monotonic_s"),FPlatformTime::Seconds());
++ O->SetBoolField(TEXT("object_present"),Texture!=nullptr);
++ if(!Texture)
++ {
++  for(const TCHAR* Key:{TEXT("actual_path"),TEXT("class"),TEXT("width"),TEXT("height"),TEXT("object_flags"),TEXT("is_compiling"),TEXT("async_cache_complete"),TEXT("pending_initialization"),TEXT("resource_initialized"),TEXT("resource_is_proxy")})O->SetField(Key,MakeShared<FJsonValueNull>());
++  O->SetBoolField(TEXT("resource_present"),false);O->SetBoolField(TEXT("editor_status_available"),false);return O;
++ }
++ O->SetStringField(TEXT("actual_path"),Texture->GetPathName());O->SetStringField(TEXT("class"),Texture->GetClass()->GetName());
++ O->SetNumberField(TEXT("width"),Texture->GetSizeX());O->SetNumberField(TEXT("height"),Texture->GetSizeY());Id(O,TEXT("object_flags"),uint64(Texture->GetFlags()));
++ O->SetBoolField(TEXT("pending_initialization"),Texture->HasPendingRenderResourceInitialization());
++ const FTextureResource* Resource=Texture->GetResource();O->SetBoolField(TEXT("resource_present"),Resource!=nullptr);
++ if(Resource){O->SetBoolField(TEXT("resource_initialized"),Resource->IsInitialized());O->SetBoolField(TEXT("resource_is_proxy"),Resource->IsProxy());}
++ else{O->SetField(TEXT("resource_initialized"),MakeShared<FJsonValueNull>());O->SetField(TEXT("resource_is_proxy"),MakeShared<FJsonValueNull>());}
++#if WITH_EDITOR
++ O->SetBoolField(TEXT("editor_status_available"),true);O->SetBoolField(TEXT("is_compiling"),Texture->IsCompiling());O->SetBoolField(TEXT("async_cache_complete"),Texture->IsAsyncCacheComplete());
++#else
++ O->SetBoolField(TEXT("editor_status_available"),false);O->SetField(TEXT("is_compiling"),MakeShared<FJsonValueNull>());O->SetField(TEXT("async_cache_complete"),MakeShared<FJsonValueNull>());
++#endif
++ return O;
++}
++
+ JO DodgeDraw(const FDungeonFairytaleSwordDodgeDraw& D)
+ {
+  auto O=MakeShared<FJsonObject>();Id(O,TEXT("draw_id"),D.DrawId);Id(O,TEXT("player_entity"),D.PlayerEntityId);O->SetNumberField(TEXT("sim"),D.SimulationTime);O->SetBoolField(TEXT("drawn"),D.Drawn);O->SetBoolField(TEXT("atomic_preflight_ready"),D.AtomicPreflightReady);O->SetNumberField(TEXT("frame"),D.Plan.Frame);O->SetNumberField(TEXT("facing"),D.Plan.Facing);O->SetNumberField(TEXT("slot_count"),D.Slots.Num());O->SetNumberField(TEXT("resident_count"),D.ResidentTextures.Num());O->SetArrayField(TEXT("actual_stack"),Strings(D.ActualRenderedStack));
+@@ -241,6 +268,8 @@
+  FGuid Run;FKey PulseKey;TMap<FKey,bool> Keys;
+  TWeakObjectPtr<ADungeonGameMode> Game;TWeakObjectPtr<APlayerController> Controller;TWeakObjectPtr<ADungeonHUD> HUD;
+  TArray<JV> Inputs,Steps,Observations,Offsets,DiagnosticHits,StartupTextures;
++ TArray<JV> Bridge258LegacyResidencyBefore,Bridge258LegacyResidencyAfter;
++ bool Bridge258LegacyFinishRequested=false;int32 Bridge258LegacyFinishTargetCount=0;
+  TArray<JV> HeroAudioCapturedRequests;
+  DungeonHeroLocomotionObservationV001::FRequestCursor HeroAudioCursor;
+  FString HeroAudioLastCurrentScope;
+@@ -337,14 +366,28 @@
+   TArray<TStrongObjectPtr<UTexture2D>> Bridge258LegacyReadbackRefs;
+   if(Bridge258ObservationEnabled()&&Action==TEXT("J"))
+   {
++   TArray<FString> Bridge258LegacyRequestedPaths;
+    for(int32 Frame=0;Frame<2;++Frame)for(const TCHAR* Component:{TEXT("BodyRest"),TEXT("ShoulderFar"),TEXT("Chest"),TEXT("NearArmWithoutHand"),TEXT("ShoulderNear"),TEXT("HelmetForeground"),TEXT("NearHand")})
+    {
+     const bool Armor=FString(Component)==TEXT("ShoulderFar")||FString(Component)==TEXT("Chest")||FString(Component)==TEXT("ShoulderNear");
+     const FString Name=Armor?FString::Printf(TEXT("T_Fairytale_LeatherPrimary1%s_%03d_v001"),Component,Frame):FString::Printf(TEXT("T_Fairytale_SwordPrimary1%s_%03d_v001"),Component,Frame);
+     const FString Path=FString(Armor?TEXT("/Game/Production/ArtTrials/EV048/v013/HeroLeatherPrimary1/"):TEXT("/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/"))+Name+TEXT(".")+Name;
+     Bridge258LegacyReadbackRefs.Emplace(LoadObject<UTexture2D>(nullptr,*Path));
++    Bridge258LegacyRequestedPaths.Add(Path);
+    }
++   for(int32 Index=0;Index<Bridge258LegacyReadbackRefs.Num();++Index)
++    Bridge258LegacyResidencyBefore.Add(MakeShared<FJsonValueObject>(Bridge258LegacyResidencyStatus(Bridge258LegacyRequestedPaths[Index],Bridge258LegacyReadbackRefs[Index].Get())));
++#if WITH_EDITOR
++   // UObject load/render flush do not complete editor platform-data compilation.
++   // Restrict this pre-audio/pre-input barrier to the fourteen retained old layers.
++   TArray<UTexture*> Bridge258LegacyCompilationTargets;
++   for(const auto& Ref:Bridge258LegacyReadbackRefs)if(Ref.Get())Bridge258LegacyCompilationTargets.Add(Ref.Get());
++   Bridge258LegacyFinishRequested=true;Bridge258LegacyFinishTargetCount=Bridge258LegacyCompilationTargets.Num();
++   FTextureCompilingManager::Get().FinishCompilation(Bridge258LegacyCompilationTargets);
++#endif
+    FlushRenderingCommands(); // Before the original strict FindObject/RHI/pending checks, before audio/input.
++   for(int32 Index=0;Index<Bridge258LegacyReadbackRefs.Num();++Index)
++    Bridge258LegacyResidencyAfter.Add(MakeShared<FJsonValueObject>(Bridge258LegacyResidencyStatus(Bridge258LegacyRequestedPaths[Index],Bridge258LegacyReadbackRefs[Index].Get())));
+   }
+   IFileManager::Get().MakeDirectory(*(Directory/TEXT("texture-readback")),false);
+   TSet<FString> Unique;
+@@ -472,6 +515,10 @@
+   if(Bridge258ObservationEnabled())for(const auto& Pin:Bridge258SourcePins)
+   {auto S=MakeShared<FJsonObject>();S->SetNumberField(TEXT("frame"),Pin.Frame);S->SetStringField(TEXT("component"),Pin.Component);S->SetStringField(TEXT("object_path"),Pin.ObjectPath);S->SetStringField(TEXT("source_png"),Pin.SourcePNG);Id(S,TEXT("source_png_bytes"),Pin.SourceBytes);S->SetStringField(TEXT("source_png_sha256"),Pin.SourceSHA256);Bridge258Pins.Add(MakeShared<FJsonValueObject>(S));}
+   R->SetArrayField(TEXT("request258_primary1_bridge_source_pins"),Bridge258Pins);
++  auto LegacyResidency=MakeShared<FJsonObject>();LegacyResidency->SetStringField(TEXT("schema"),TEXT("request258-old14-residency-diagnostics-v003"));
++  LegacyResidency->SetBoolField(TEXT("requested"),Bridge258ObservationEnabled()&&Action==TEXT("J"));LegacyResidency->SetBoolField(TEXT("finish_compilation_requested"),Bridge258LegacyFinishRequested);LegacyResidency->SetNumberField(TEXT("finish_target_count"),Bridge258LegacyFinishTargetCount);
++  LegacyResidency->SetArrayField(TEXT("before_finish"),Bridge258LegacyResidencyBefore);LegacyResidency->SetArrayField(TEXT("after_finish_and_render_flush"),Bridge258LegacyResidencyAfter);
++  LegacyResidency->SetBoolField(TEXT("diagnostics_replace_strict_GPU_source_capture"),false);R->SetObjectField(TEXT("request258_primary1_legacy_residency"),LegacyResidency);
+   R->SetObjectField(TEXT("hero_locomotion_audio"),FinalHeroAudioRequests());
+   R->SetArrayField(TEXT("normal_inputs"),Inputs);R->SetArrayField(TEXT("steps"),Steps);R->SetArrayField(TEXT("observations"),Observations);R->SetArrayField(TEXT("diagnostic_knight_hits"),DiagnosticHits);R->SetArrayField(TEXT("startup_resource_readbacks"),StartupTextures);TArray<JV> Air49;for(int32 I=0;I<FMath::Min(49,StartupTextures.Num());++I)Air49.Add(StartupTextures[I]);R->SetArrayField(TEXT("startup_actual_GPU_source_textures49"),Air49);R->SetBoolField(TEXT("startup_readback_complete"),StartupReadbackComplete);R->SetNumberField(TEXT("startup_readback_stop_monotonic_s"),StartupReadbackStop);R->SetBoolField(TEXT("native_async_capture_writes_flushed"),Flushed);
+   auto Timing=MakeShared<FJsonObject>();Timing->SetBoolField(TEXT("use_fixed_time_step"),FApp::UseFixedTimeStep());Timing->SetNumberField(TEXT("capture_start_monotonic_s"),Start);Timing->SetNumberField(TEXT("capture_stop_monotonic_s"),Stop);Timing->SetArrayField(TEXT("frame_wall_offsets_s"),Offsets);R->SetObjectField(TEXT("capture_timing"),Timing);if(Actor.MainMixCapture)R->SetObjectField(TEXT("main_submix_capture"),Actor.MainMixCapture->SerializeReport());FString Text;auto Writer=TJsonWriterFactory<>::Create(&Text);const bool Serialized=FJsonSerializer::Serialize(R,Writer);const bool Written=Serialized&&EvidenceClaimed&&WriteNewUTF8(Directory/TEXT("runtime-report.json"),Text);if(!Failure.IsEmpty())UE_LOG(LogTemp,Error,TEXT("Landing priority: %s"),*Failure);FPlatformMisc::RequestExitWithStatus(false,Failure.IsEmpty()&&FlowComplete&&Flushed&&AudioComplete&&Written?0:3);

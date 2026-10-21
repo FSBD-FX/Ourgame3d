@@ -1,0 +1,52 @@
+{
+  "request_number": 253,
+  "asset": "fairytale-hero-nativeRight-jump_nonattack",
+  "status": "requested_pending",
+  "source_event": "EV-048",
+  "authorization_events": [
+    "EV-040",
+    "EV-041"
+  ],
+  "window_number": 11,
+  "requested_utc": "2026-10-18T15:45:49.331185+00:00",
+  "prompt_path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/standard-input-v001/prompts/jump_nonattack.txt",
+  "prompt": "Create a single horizontal sprite strip for the game character `fairytale-clock-hero-nonattack-Air6-v001` in the state `jump_nonattack`.\n\nUse the attached accepted idle/direction anchor as the canonical character design for this row. If a state anchor is attached for a non-locomotion state, treat it as approved state vocabulary only. Use the attached layout guide image only for frame count, slot spacing, centering, and safe padding. If an additional generated row strip is attached, use it only as a motion reference, never as a replacement identity source. Do not simply copy the still reference pose. Generate distinct animation poses that create a readable cycle or action.\n\nCharacter: The exact currently accepted body-only SwordReady v002 frame0 identity, fixed native right three-quarter view; common bare grey/charcoal cloth body and original brown gloves/boots.\nStyle contract: EXACT accepted current SwordReady v002 hand-inked grotesque dark-fairytale squat clock/bell-helmet identity; body-only no weapons/armor, not pixel art, no style redesign.\n\nUse this prompt as an authoritative sprite-production spec. Do not expand it into a polished illustration, painterly character image, anime key art, 3D render, vector mascot, glossy app icon, realistic portrait, or marketing artwork.\n\nAnimation action: The exact attached accepted native-RIGHT three-quarter bell/clock-helmet hero, body only in charcoal cloth shirt/trousers and original brown gloves/boots. This is ONE continuous nonattack jump-to-land action, six genuinely articulated poses, not6 different identities. Same rigid squat helmet volume, original crooked top knob, two contained amber eyes, same head/torso/limb anatomical scale and heavy hand-inked contours as the identity anchor. Preserve416-source-pixel standing-equivalent anatomical scale on512 cells: naturally tucked poses are shorter, NEVER zoom or independently fit them. Keep the torso/pelvis spatial reference consistent across the strip; actual world vertical translation comes from the game, do not draw a row of higher/lower world positions. Do not force a boot baseline for airborne poses. No armor/chest/shoulder plates, no sword/handle/shield/staff/rod, no ground/shadow/dust/FX. Future armor and sword are separate modules. Both near and far hands must be real connected wrist/thumb/fingers and arms; no detached gloves, painted socket dots or copied frozen hands. Near hand maintains a natural compact later one-hand grip, but author grip/axis is unknown until actual pixels exist. Body owner is only the accepted frame0; no old canonical/alternate art. Exact left-to-right progression: 0 EARLY RISE: legs push away and begin a genuine knee tuck, connected arms draw in, torso subtly extends; not standing Ready. 1 LATE RISE: both knees tuck more, boots and hips visibly articulate, near/far elbows and wrists naturally adjust. 2 APEX: compact readable floating suspension, knees tucked with distinct boot angles, rigid helmet settles without stretching. 3 DESCENT: legs reopen downward to prepare contact, ankles and shoulders brace, distinct from rise/apex; torso anatomical scale unchanged. 4 LANDING IMPACT: authentic knee/hip compression under weight, boots receive support and connected arms counterbalance; no impact effect and no whole-sprite rotation. 5 LANDING SETTLE: knees/torso reopen toward the actual accepted Ready anatomy, hands remain naturally connected; no exact paste of the idle. In game frames0..3 sample actual H/V, frames4..5 use the already existing .12s landing age. The standard10fps preview is only an author preview, not the gameplay clock..\n\nAnchor lock:\n- Accepted idle/direction anchors own character identity, outfit details, colors, face design, asymmetric markings, and side-specific accessories for final action rows.\n- Base character images and original character sheets are pre-idle sources only. Do not reinterpret or reintroduce base-character details inside a direction-anchor action row.\n- This row owns motion only. Spend the variation budget on limb contacts, arm counter-swing, body height, torso lean, head bob, hair bounce, and loop continuity.\n- Do not redesign or reinterpret identity details while animating. Keep face, hair shape, markings, palette, outline weight, body proportions, outfit, props, and silhouette copied from the approved anchors.\n- Preserve side-specific features exactly as the approved anchors show them. Do not solve hairpin side, earring side, logos, handed props, scars, one-sided markings, asymmetric clothing, or lighting cues from scratch inside the row.\n- When generating a paired left/right row, use the paired row reference only for timing, scale, and animation intensity. Rotate the body, feet, shoulders, face angle, and gaze to the target facing, but keep identity details attached according to the accepted target-direction anchor.\n- For cyclic locomotion, do not let a single running/walking pose anchor determine every frame's leg phase. Use multi-pose motion references and the layout phase guide for foot contacts.\n- Prefer a subtler animation over any change that mutates the character identity.\n\n\n\nTransparency and artifact rules:\n- Prefer pose, expression, and silhouette changes over decorative effects.\n- Effects are allowed only when state-relevant, opaque, hard-edged, sprite-like, fully inside the same frame slot, and physically touching or overlapping the character silhouette.\n- Do not draw detached effects: floating stars, loose sparkles, floating punctuation, floating icons, separated smoke clouds, loose dust, disconnected outline bits, or stray pixels.\n- Do not draw wave marks, motion arcs, speed lines, action streaks, afterimages, blur, smears, halos, glows, auras, floor patches, cast shadows, contact shadows, drop shadows, oval floor shadows, landing marks, or impact bursts.\n- Do not include text, labels, frame numbers, visible grids, guide marks, speech bubbles, thought bubbles, UI panels, code snippets, scenery, checkerboard transparency, white backgrounds, or black backgrounds.\n- Reject any pose that is cropped, overlaps another pose, crosses into a neighboring frame slot, or creates a separate disconnected component that is not attached to the character.\n\nLayout requirements:\n- Exactly 6 full-body frames, left to right, in one horizontal row.\n- The attached layout guide shows the 6 frame boxes, inner safe area, and optional motion phase hints for this row. Follow its slot count, spacing, centering, padding, and phase timing.\n- Do not reproduce the layout guide itself: no visible boxes, guide lines, center marks, labels, stick figures, guide colors, or guide background may appear in the output.\n- Treat the image as 6 equal-width invisible 512x512 frame slots. Fill every slot: each requested slot must contain exactly one complete full-body pose.\n- Spread the 6 poses evenly across the whole image width. Do not leave any requested slot blank or create large empty gaps between poses.\n- Center one complete pose in each slot. No pose may cross into the neighboring slot.\n- Use a perfectly flat pure green #00FF00 chroma-key background across the whole image.\n- Do not use #00FF00, pure green, or chroma-adjacent colors in the character, highlights, props, shadows, or effects.\n- Keep the rendering faithful to the attached reference sprite: same outline weight, same palette, same detail level — do not restyle it.\n- Keep every frame self-contained with at least 48 px horizontal and 48 px vertical safe padding. No character body part should be clipped by the frame slot.\n- Avoid motion blur. Use clear pose changes readable at 512x512.\n- Preserve the same silhouette, face, proportions, palette, material, and props across every frame.\n\nOutput only the sprite strip image.",
+  "prompt_file_sha256": "b348cc411c0d7b800181c79b358bdcfb941e5a61221bd4ecf68f18325759e824",
+  "reference_images": [
+    {
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/curated/frame-0.png",
+        "bytes": 121133,
+        "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+      },
+      "role": "SOLE accepted nativeRight identity",
+      "already_retained": true,
+      "E_retention_receipt": {
+        "path": "E:/OurGame/Knight/过程图稿与视频/2026-10-18-本项目E581-钟盔非攻击跳跃六相输入-v001/E-retention-index-v001.json",
+        "bytes": 3902,
+        "sha256": "1ca6c10c5142385aad7da70858cba161716701555a0fed582290a4456ed2e67a"
+      }
+    },
+    {
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/standard-input-v001/references/layout-guides/jump_nonattack.png",
+        "bytes": 6185,
+        "sha256": "852ff8fe8751dc9331b83497982aea0ee6759b1e86d42a5cadaaef039b624d04"
+      },
+      "role": "Six-slot standard geometry only, no character or physical socket",
+      "already_retained": true,
+      "E_retention_receipt": {
+        "path": "E:/OurGame/Knight/过程图稿与视频/2026-10-18-本项目E581-钟盔非攻击跳跃六相输入-v001/E-retention-index-v001.json",
+        "bytes": 3902,
+        "sha256": "1ca6c10c5142385aad7da70858cba161716701555a0fed582290a4456ed2e67a"
+      }
+    }
+  ],
+  "transparent_background": false,
+  "backend": "image_gen.imagegen",
+  "external_api_calls": 0,
+  "host_fee_usd": null,
+  "raw_destination_planned": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/air-state-preparation-v001/standard-input-v001/raw/jump_nonattack.png",
+  "scope": "Current bell-helmet body-only new action candidate; equipment modules and measured source registration remain separate gates",
+  "formal_complete_units": 0
+}

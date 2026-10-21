@@ -1,0 +1,22 @@
+{
+  "before_snapshot": "before/v001-projected-DungeonHeroLandingPriorityProbeV001.cpp",
+  "before_sha256": "a4782db14de4f94979681d8f909f26dd46e33ebd94ea86db2beed558ea1a41d7",
+  "after_projected": "projected/DungeonHeroLandingPriorityProbeV001.cpp",
+  "after_sha256": "30b1db6503f8641bcac0165cfc134ae7e841b96f3f23b8d68b912a90696a2205",
+  "line_ending": "CRLF",
+  "operations": [
+    {
+      "before": "#include \"Engine/Texture2D.h\"",
+      "after": "#include \"UObject/StrongObjectPtr.h\"\n#include \"Engine/Texture2D.h\"",
+      "fragment": "inline readonly dependency include",
+      "mode": "INSERT_ONLY"
+    },
+    {
+      "before": "  IFileManager::Get().MakeDirectory(*(Directory/TEXT(\"texture-readback\")),false);",
+      "after": "  // The new renderer selects Bridge258 J0/J1, so explicitly retain the old\n  // fourteen layers still required by the unchanged old115 readback contract.\n  TArray<TStrongObjectPtr<UTexture2D>> Bridge258LegacyReadbackRefs;\n  if(Bridge258ObservationEnabled()&&Action==TEXT(\"J\"))\n  {\n   for(int32 Frame=0;Frame<2;++Frame)for(const TCHAR* Component:{TEXT(\"BodyRest\"),TEXT(\"ShoulderFar\"),TEXT(\"Chest\"),TEXT(\"NearArmWithoutHand\"),TEXT(\"ShoulderNear\"),TEXT(\"HelmetForeground\"),TEXT(\"NearHand\")})\n   {\n    const bool Armor=FString(Component)==TEXT(\"ShoulderFar\")||FString(Component)==TEXT(\"Chest\")||FString(Component)==TEXT(\"ShoulderNear\");\n    const FString Name=Armor?FString::Printf(TEXT(\"T_Fairytale_LeatherPrimary1%s_%03d_v001\"),Component,Frame):FString::Printf(TEXT(\"T_Fairytale_SwordPrimary1%s_%03d_v001\"),Component,Frame);\n    const FString Path=FString(Armor?TEXT(\"/Game/Production/ArtTrials/EV048/v013/HeroLeatherPrimary1/\"):TEXT(\"/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/\"))+Name+TEXT(\".\")+Name;\n    Bridge258LegacyReadbackRefs.Emplace(LoadObject<UTexture2D>(nullptr,*Path));\n   }\n   FlushRenderingCommands(); // Before the original strict FindObject/RHI/pending checks, before audio/input.\n  }\n  IFileManager::Get().MakeDirectory(*(Directory/TEXT(\"texture-readback\")),false);",
+      "fragment": "fragments/legacy-preload.inc",
+      "mode": "INSERT_ONLY"
+    }
+  ],
+  "scope": "Only old14 explicit preload/strongref/renderflush and dependency header"
+}

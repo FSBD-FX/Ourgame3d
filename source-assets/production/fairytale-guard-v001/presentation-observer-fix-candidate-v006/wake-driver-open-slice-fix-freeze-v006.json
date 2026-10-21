@@ -1,0 +1,25 @@
+{
+  "schema": "guard-wake-certified-open-slice-fix-candidate-freeze-v006",
+  "scope": "Candidate production patch only. Requires actual native semanticRED from frozen v005 before Root admits. Does not change kernel/AI/time/window/HP/coverage or suppress ensure. Not UE-compiled/run by worker.",
+  "supersedes_proposed_patch": "../presentation-observer-fix-candidate-v003/patches/driver-representable-wake-entry-v003.patch",
+  "required_native_regression": "../presentation-observer-fix-candidate-v005/wake-native-regression-freeze-v005.json",
+  "patch_check": "git apply --check exit0",
+  "new_tests": 0,
+  "files": [
+    {
+      "path": "baseline-driver-pin-v006.json",
+      "bytes": 178,
+      "sha256": "9e672dafe8cdc653ceb808e9571cba001f3101baf13aed24c4365e05fc9a5637"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 2686,
+      "sha256": "8eb83f30fda9ec9d1643095a06967382ac23b23daf74e4dcc826bc8743175c84"
+    },
+    {
+      "path": "patches/driver-certified-open-slice-and-endpoint-wake-entry-v006.patch",
+      "bytes": 4254,
+      "sha256": "c3389e1e75932adafe45750b4353b427c8afccaaf1ff4d2015f652c3544b9cf7"
+    }
+  ]
+}

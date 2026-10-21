@@ -1,0 +1,85 @@
+test_Air_partial_submission_is_rejected (__main__.Causal.test_Air_partial_submission_is_rejected) ... ok
+test_Air_query_mutates_out_is_rejected (__main__.Causal.test_Air_query_mutates_out_is_rejected) ... ok
+test_Dodge_collision_receipt_mismatch_is_rejected (__main__.Causal.test_Dodge_collision_receipt_mismatch_is_rejected) ... ok
+test_Dodge_partial_resources_is_rejected (__main__.Causal.test_Dodge_partial_resources_is_rejected) ... ok
+test_borrowed_equipment_action_id_is_rejected (__main__.Causal.test_borrowed_equipment_action_id_is_rejected) ... ok
+test_changed_Dodge_duration_is_rejected (__main__.Causal.test_changed_Dodge_duration_is_rejected) ... ok
+test_cross_jump_ready_token_is_rejected (__main__.Causal.test_cross_jump_ready_token_is_rejected) ... ok
+test_enqueue_after_window_is_rejected (__main__.Causal.test_enqueue_after_window_is_rejected) ... ok
+test_equipment_borrowed_owner_is_rejected (__main__.Causal.test_equipment_borrowed_owner_is_rejected) ... ok
+test_equipment_deadline_changed_is_rejected (__main__.Causal.test_equipment_deadline_changed_is_rejected) ... ok
+test_equipment_operation_changed_is_rejected (__main__.Causal.test_equipment_operation_changed_is_rejected) ... ok
+test_equipment_real_shortened_duration_is_rejected (__main__.Causal.test_equipment_real_shortened_duration_is_rejected) ... ok
+test_false_completed_Dodge_is_rejected (__main__.Causal.test_false_completed_Dodge_is_rejected) ... ok
+test_first_action_skip_is_rejected (__main__.Causal.test_first_action_skip_is_rejected) ... ok
+test_immediate_H_mutation_is_rejected (__main__.Causal.test_immediate_H_mutation_is_rejected) ... ok
+test_immediate_action_mutation_is_rejected (__main__.Causal.test_immediate_action_mutation_is_rejected) ... ok
+test_incomplete_primary_pose_is_rejected (__main__.Causal.test_incomplete_primary_pose_is_rejected) ... ok
+test_land5_is_not_land4_is_rejected (__main__.Causal.test_land5_is_not_land4_is_rejected) ... ok
+test_late_first_render_age_is_allowed (__main__.Causal.test_late_first_render_age_is_allowed) ... ok
+test_late_start_at_half_open_end_is_rejected (__main__.Causal.test_late_start_at_half_open_end_is_rejected) ... ok
+test_missing_Ready2_is_rejected (__main__.Causal.test_missing_Ready2_is_rejected) ... ok
+test_old_grey_armor_is_rejected (__main__.Causal.test_old_grey_armor_is_rejected) ... ok
+test_preexisting_equipment_action_is_rejected (__main__.Causal.test_preexisting_equipment_action_is_rejected) ... ok
+test_ready_before_actual_equipment_commit_is_rejected (__main__.Causal.test_ready_before_actual_equipment_commit_is_rejected) ... ok
+test_repeated_E_queue_is_rejected (__main__.Causal.test_repeated_E_queue_is_rejected) ... ok
+test_skipped_first_Land4_still_under_06_rejected (__main__.Causal.test_skipped_first_Land4_still_under_06_rejected) ... FAIL
+test_space_immediate_jump_is_rejected (__main__.Causal.test_space_immediate_jump_is_rejected) ... ok
+test_stale_draw_is_rejected (__main__.Causal.test_stale_draw_is_rejected) ... ok
+test_top_Run_only_mutation_rejected (__main__.Causal.test_top_Run_only_mutation_rejected) ... FAIL
+test_valid_queued_J (__main__.Causal.test_valid_queued_J) ... ok
+test_valid_queued_Shift (__main__.Causal.test_valid_queued_Shift) ... ok
+test_wrong_clip_is_rejected (__main__.Causal.test_wrong_clip_is_rejected) ... ok
+test_wrong_epoch_is_rejected (__main__.Causal.test_wrong_epoch_is_rejected) ... ok
+test_wrong_gear_is_rejected (__main__.Causal.test_wrong_gear_is_rejected) ... ok
+test_wrong_grounded_budget_is_rejected (__main__.Causal.test_wrong_grounded_budget_is_rejected) ... ok
+test_wrong_iframe_is_rejected (__main__.Causal.test_wrong_iframe_is_rejected) ... ok
+test_wrong_owner_is_rejected (__main__.Causal.test_wrong_owner_is_rejected) ... ok
+setUpClass (__main__.EveryTypedCallback) ... ERROR
+test_changed_frozen_test_rejected (__main__.SourceOverlay.test_changed_frozen_test_rejected) ... ok
+test_changed_repair_output_rejected (__main__.SourceOverlay.test_changed_repair_output_rejected) ... ok
+test_partial_old_printf_source_rejected (__main__.SourceOverlay.test_partial_old_printf_source_rejected) ... ok
+test_real_298_overlay_and_repair_chain (__main__.SourceOverlay.test_real_298_overlay_and_repair_chain) ... ok
+test_real_exact_three_repairs_reproduce_actual_after_pin (__main__.SourceOverlay.test_real_exact_three_repairs_reproduce_actual_after_pin) ... ok
+test_unknown_new_source_rejected (__main__.SourceOverlay.test_unknown_new_source_rejected) ... ok
+test_unrelated_fighter_change_rejected (__main__.SourceOverlay.test_unrelated_fighter_change_rejected) ... ok
+test_wrong_repair_before_rejected (__main__.SourceOverlay.test_wrong_repair_before_rejected) ... ok
+test_wrong_repair_target_rejected (__main__.SourceOverlay.test_wrong_repair_target_rejected) ... ok
+
+======================================================================
+ERROR: setUpClass (__main__.EveryTypedCallback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-hero-air-v001\landing-priority-observer-candidate-v001\tooling-review-fix-v002\test-landing-priority-v001.py", line 104, in setUpClass
+    assert len(choices)==3
+           ^^^^^^^^^^^^^^^
+AssertionError
+
+======================================================================
+FAIL: test_skipped_first_Land4_still_under_06_rejected (__main__.Causal.test_skipped_first_Land4_still_under_06_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-hero-air-v001\landing-priority-observer-candidate-v001\tooling-review-fix-v002\test-landing-priority-v001.py", line 92, in test_skipped_first_Land4_still_under_06_rejected
+    self.reject(change)
+    ~~~~~~~~~~~^^^^^^^^
+  File "F:\Ourgame\source-assets\production\fairytale-hero-air-v001\landing-priority-observer-candidate-v001\tooling-review-fix-v002\test-landing-priority-v001.py", line 41, in reject
+    with self.assertRaises(ValueError):V.verify_causal(r)
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_top_Run_only_mutation_rejected (__main__.Causal.test_top_Run_only_mutation_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-hero-air-v001\landing-priority-observer-candidate-v001\tooling-review-fix-v002\test-landing-priority-v001.py", line 87, in test_top_Run_only_mutation_rejected
+    def test_top_Run_only_mutation_rejected(self):self.reject(lambda r:r.update(run='b'*32))
+                                                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Ourgame\source-assets\production\fairytale-hero-air-v001\landing-priority-observer-candidate-v001\tooling-review-fix-v002\test-landing-priority-v001.py", line 41, in reject
+    with self.assertRaises(ValueError):V.verify_causal(r)
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 46 tests in 3.487s
+
+FAILED (failures=2, errors=1)

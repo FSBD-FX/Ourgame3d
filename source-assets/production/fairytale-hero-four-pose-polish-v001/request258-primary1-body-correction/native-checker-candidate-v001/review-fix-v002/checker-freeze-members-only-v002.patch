@@ -1,0 +1,34 @@
+--- immutable-v001/verify-primary1-bridge258-native-v001.py
++++ review-fix-v002/verify-primary1-bridge258-native-v001.py
+@@ -77,15 +77,24 @@
+     need(freeze.get('FinalAccepted', False) is False, 'Freeze cannot imply final content acceptance')
+     rows = freeze.get('members', freeze.get('files'))
+     need(type(rows) is list and rows, 'Freeze member list required')
+-    members = []
+-    for entry in rows:
+-        if 'relative_path' in entry:
+-            value = (path.parent/entry['relative_path']).resolve()
+-            need(path.parent in value.parents, 'Local freeze path escapes candidate')
+-            entry = dict(path=value.as_posix(), bytes=entry['bytes'], sha256=entry['sha256'])
+-        members.append(entry)
++    def normalize(entry):
++        need(type(entry) is dict and ('relative_path' in entry) != ('path' in entry),
++             'Frozen entry requires exactly one path representation')
++        if 'relative_path' not in entry:
++            return entry  # Preserve strict original absolute/ROOT-relative path pins, including external C inputs.
++        relative = entry['relative_path']
++        need(type(relative) is str and relative and '\\' not in relative and ':' not in relative
++             and not Path(relative).is_absolute() and not relative.startswith('/')
++             and all(part not in ('', '.', '..') for part in relative.split('/'))
++             and all(ord(char) >= 32 for char in relative), 'Confined canonical local relative_path required')
++        value = (path.parent/relative).resolve()
++        need(path.parent in value.parents, 'Local freeze path escapes candidate')
++        return dict(path=value.as_posix(), bytes=entry['bytes'], sha256=entry['sha256'])
++    members = [normalize(entry) for entry in rows]
+     need(len({resolved(x['path']) for x in members}) == len(members), 'Duplicate freeze member')
+     dependencies = freeze.get('dependency_pins', freeze.get('dependencies', []))
++    need(type(dependencies) is list, 'Freeze dependency list required')
++    dependencies = [normalize(entry) for entry in dependencies]
+     for entry in members+dependencies:
+         check_pin(entry)
+     return freeze, members

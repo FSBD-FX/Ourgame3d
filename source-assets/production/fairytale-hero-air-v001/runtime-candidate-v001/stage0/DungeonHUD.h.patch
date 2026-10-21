@@ -1,0 +1,26 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.h
+@@ -12,6 +12,7 @@
+ #include "DungeonFairytaleSwordHurtDrawState.h"
+ #include "DungeonFairytaleSwordDeathDrawState.h"
+ #include "DungeonFairytaleSwordDodgeDrawState.h"
++#include "DungeonFairytaleSwordAirDrawStateV001.h"
+ #include "DungeonFairytaleGuardDrawState.h"
+ #include "DungeonFairytaleGuardFullDrawStateV003.h"
+ #include "DungeonFairytaleGuardMoveDrawStateV001.h"
+@@ -87,6 +88,7 @@
+     const FDungeonFairytaleSwordHurtDraw& GetFairytaleSwordHurtDraw() const { return FairytaleSwordHurtDraw; }
+     const FDungeonFairytaleSwordDeathDraw& GetFairytaleSwordDeathDraw() const { return FairytaleSwordDeathDraw; }
+     const FDungeonFairytaleSwordDodgeDraw& GetFairytaleSwordDodgeDraw() const { return FairytaleSwordDodgeDraw; }
++    const FDungeonFairytaleSwordAirDrawV001& GetFairytaleSwordAirDraw() const { return FairytaleSwordAirDraw; }
+     const TArray<FDungeonFairytaleGuardDraw>& GetFairytaleGuardDraws() const { return FairytaleGuardDraws; }
+     const TArray<FDungeonFairytaleGuardFullDrawV003>& GetFairytaleGuardFullDraws() const { return FairytaleGuardFullDraws; }
+     bool IsFairytaleGuardStompPreviewEnabled() const { return bUseFairytaleGuardStompPreview; }
+@@ -165,6 +167,7 @@
+     FDungeonFairytaleSwordDeathDraw FairytaleSwordDeathDraw;
+     bool bUseFairytaleSwordDodgePreview=false;
+     FDungeonFairytaleSwordDodgeDraw FairytaleSwordDodgeDraw;
++    FDungeonFairytaleSwordAirDrawV001 FairytaleSwordAirDraw; // Stage0 defaults: no Air renderer or submitted slot.
+     bool DrawFairytaleSwordDodgeBody(ADungeonFighter* Fighter);
+     bool DrawFairytaleSwordDeathBody(ADungeonFighter* Fighter);
+     UTexture2D* GetFairytaleSwordTexture(const FString& Clip,int32 Index);

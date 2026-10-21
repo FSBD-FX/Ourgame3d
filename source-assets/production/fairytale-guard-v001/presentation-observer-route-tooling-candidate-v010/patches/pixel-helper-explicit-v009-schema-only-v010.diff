@@ -1,0 +1,21 @@
+--- frozen-v009/tooling/verify-native-pixels-v002.py
++++ new-tooling-v010/tooling/verify-native-pixels-v010.py
+@@ -12,6 +12,8 @@
+ args=parser.parse_args()
+ archive=Path(args.archive).resolve()
+ original=archive/'原件'
++report=json.loads((original/'runtime-report.json').read_text(encoding='utf-8-sig'))
++assert report['schema']=='guard-art-partial-native-observer-v009'
+ metadata=json.loads((original/'native-lossless-capture.json').read_text(encoding='utf-8-sig'))
+ assert metadata['mode']=='native_viewport_BGRA8_lossless_PNG_zlib0'
+ assert all(metadata[k] is False for k in ['pixel_mutations','simulation_pacing_changed','audio_changed'])
+@@ -42,9 +44,7 @@
+     assert [r['writer_sequence'] for r in movie]==list(range(1,count+1)), 'Serial writer sequence lost or reordered a frame'
+     assert all(async_summary[k]==count for k in ('movie_reserved','movie_enqueued','movie_saved','movie_completed','receipts_saved'))
+     assert all(async_summary[k]==0 for k in ('movie_reservation_failed','movie_failed','rejected','pending'))
+-    report=json.loads((original/'runtime-report.json').read_text(encoding='utf-8-sig'))
+     # This isolated profile never records audio: verify its real native stop/flush, not an absent audio-stop field.
+-    assert report['schema']=='guard-art-partial-native-observer-v002'
+     assert report['silent_video'] is True and report['audio_recorded'] is False
+     assert report['native_async_capture_writes_flushed'] is True
+     assert async_summary['flush_completed_monotonic_s']>=report['capture_timing']['capture_stop_monotonic_s']

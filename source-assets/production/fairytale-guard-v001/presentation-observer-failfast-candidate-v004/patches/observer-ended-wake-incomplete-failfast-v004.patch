@@ -1,0 +1,17 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonGuardArtPartialProbe.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonGuardArtPartialProbe.cpp
+@@ -190,6 +190,14 @@
+   {if(!Need(IFileManager::Get().FileSize(*(Directory/TEXT("prewarm-viewport.png")))>8,TEXT("Actual synchronous prewarm missing")))return;Start=PhaseWall=FPlatformTime::Seconds();Capturing=true;GIsDumpingMovie=-1;return;}
+   if(!Capturing)return;const double Offset=FPlatformTime::Seconds()-Start;auto O=Facts();if(Stopped)return;
+   O->SetNumberField(TEXT("wall_offset_s"),Offset);Observations.Add(MakeShared<FJsonValueObject>(O));Offsets.Add(MakeShared<FJsonValueNumber>(Offset));
++  // Account for the completed real draw above before deciding coverage. Wake is
++  // once-only: an already ended native window cannot produce its missing frame.
++  if(auto E=Enemy(GuardId))if(auto Driver=E->GetStoneGuardDriver())
++  {
++   const auto& S=Driver->State();
++   if(S.WakeStartedAt>=0.&&S.WakeEnd>S.WakeStartedAt&&S.Time>=S.WakeEnd&&WakeMask!=63)
++   {Finish(FString::Printf(TEXT("Native once-only Wake ended with incomplete coverage: WakeMask=%u required63 at %.17g originalEnd=%.17g; no replay or timeout retry"),WakeMask,S.Time,S.WakeEnd));return;}
++  }
+   if(auto H=HUD.Get())if(!Need(!H->GetInterfaceVisible()&&H->GetRenderedTextDrawCalls()==0,TEXT("Hidden interface proof rendered UI text")))return;
+   if(FinishOnFrame)Finish();
+  }

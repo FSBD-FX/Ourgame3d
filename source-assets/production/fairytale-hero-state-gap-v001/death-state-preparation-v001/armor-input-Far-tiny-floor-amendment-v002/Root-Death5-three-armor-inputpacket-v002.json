@@ -1,0 +1,349 @@
+{
+  "schema": "Death5-three-armor-official-inputpacket-v001",
+  "components": [
+    {
+      "component": "Chest",
+      "state": "leather_chest_hero_death5",
+      "frames": 5,
+      "durations_ms": [
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "last_frame_hold": true,
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/run-leather_chest_hero_death5-v001/prompts/leather_chest_hero_death5.txt",
+        "bytes": 8803,
+        "sha256": "8b2cc7595a27e62a21381fefd1f7e6aa69afbc7ff9f79bf93a0d6e024b4c25d3"
+      },
+      "references": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/Chest/Root-native-references-PENDING-E-v001.json",
+        "bytes": 2241,
+        "sha256": "cfa2d0247901f79eea2fbe07d1a821c1ab2ae4903dec387c482b160683c4faf1"
+      },
+      "request": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/run-leather_chest_hero_death5-v001/sprite-request.json",
+        "bytes": 4723,
+        "sha256": "66cb727ec2540fe29bd48c310b7419891864d0737775472c6e8731df9edf1d20"
+      },
+      "official_guide": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/run-leather_chest_hero_death5-v001/references/layout-guides/leather_chest_hero_death5.png",
+        "bytes": 5289,
+        "sha256": "f26859f932a019982f85cedc0750c8273e787f51be4b1782827a690b1fb959ef"
+      },
+      "prepared_run": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/run-leather_chest_hero_death5-v001",
+      "whole_row_shared_scale": true,
+      "per_frame_scale_normalization": false,
+      "common_maximum_window": [
+        128,
+        100
+      ],
+      "window_design": "Chest inherits accepted128x100 maximum; near/far square envelopes allow canonical component bbox rotation bound, not per-frame fill. Final density still requires actual extraction/sourcefit review.",
+      "accepted_identity_alpha_bbox": [
+        213,
+        240,
+        284,
+        329
+      ],
+      "minimum_used_pixels_extract_and_compose": 512,
+      "explicit_chroma": {
+        "mode": "rgb",
+        "unmix_reach": 4,
+        "spill_max_fraction": 0.005
+      },
+      "adapter_changes": [
+        {
+          "before": "Create a single horizontal sprite strip for the game character",
+          "after": "Create a single horizontal ISOLATED ARMOR COMPONENT strip for the game character",
+          "count": 1
+        },
+        {
+          "before": "Do not simply copy the still reference pose. Generate distinct animation poses that create a readable cycle or action.",
+          "after": "Generate only five requested armor component perspectives matching actual Death220 poses.",
+          "count": 1
+        },
+        {
+          "before": "Animation action:",
+          "after": "Armor component action:",
+          "count": 1
+        },
+        {
+          "before": "This row owns motion only. Spend the variation budget on limb contacts, arm counter-swing, body height, torso lean, head bob, hair bounce, and loop continuity.",
+          "after": "This row owns ONLY five projected armor forms; do not generate the body or motions.",
+          "count": 1
+        },
+        {
+          "before": "Exactly 5 full-body frames, left to right, in one horizontal row.",
+          "after": "Exactly FIVE complete isolated requested armor components, left to right in one horizontal row.",
+          "count": 1
+        },
+        {
+          "before": "each requested slot must contain exactly one complete full-body pose.",
+          "after": "each requested slot contains exactly one complete requested armor component.",
+          "count": 1
+        },
+        {
+          "before": "- Prefer pose, expression, and silhouette changes over decorative effects.",
+          "after": "- Only real requested armor perspective/foreshortening; no decorative effect.",
+          "count": 1
+        },
+        {
+          "before": "- Effects are allowed only when state-relevant, opaque, hard-edged, sprite-like, fully inside the same frame slot, and physically touching or overlapping the character silhouette.",
+          "after": "- No effects or character silhouette in this component-only row.",
+          "count": 1
+        },
+        {
+          "before": "- Reject any pose that is cropped, overlaps another pose, crosses into a neighboring frame slot, or creates a separate disconnected component that is not attached to the character.",
+          "after": "- Reject cropped armor or loose fragments; each isolated component is intentionally independent of a hero drawing.",
+          "count": 1
+        },
+        {
+          "before": "Preserve the same silhouette, face, proportions, palette, material, and props across every frame.",
+          "after": "Preserve accepted component construction/material/density; perspective changes with actual Death220 torso/arm pose. No face/body/other props.",
+          "count": 1
+        }
+      ],
+      "source_mount_A_B": null,
+      "Grip_Axis": null,
+      "native_generation_id": null,
+      "actual_native_calls": 0,
+      "newguide_Viewed": false,
+      "TrialAllowed": false,
+      "desired_raw_output": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/Root-native-armor-Death5-v001/raw/leather_chest_hero_death5.png"
+    },
+    {
+      "component": "ShoulderNear",
+      "state": "leather_shouldernear_hero_death5",
+      "frames": 5,
+      "durations_ms": [
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "last_frame_hold": true,
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/run-leather_shouldernear_hero_death5-v001/prompts/leather_shouldernear_hero_death5.txt",
+        "bytes": 8645,
+        "sha256": "b5a886f3c3e944772603ba9bd0127591ef5d1946fff97ae804271e8baabec583"
+      },
+      "references": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/ShoulderNear/Root-native-references-PENDING-E-v001.json",
+        "bytes": 2282,
+        "sha256": "8513c79859bb734ee9abaa042dd81bc17686a2a98d9dab29b18d9f2d5325c3ed"
+      },
+      "request": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/run-leather_shouldernear_hero_death5-v001/sprite-request.json",
+        "bytes": 4601,
+        "sha256": "151b2d679a35393d087dfc9c086d00695d637524638e6edb1317c551a1c985b1"
+      },
+      "official_guide": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/run-leather_shouldernear_hero_death5-v001/references/layout-guides/leather_shouldernear_hero_death5.png",
+        "bytes": 5266,
+        "sha256": "6a7c65551d8c77d8feb70f26200992b9fb594c6d9c8b1d24fe95c167be08d4b7"
+      },
+      "prepared_run": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/run-leather_shouldernear_hero_death5-v001",
+      "whole_row_shared_scale": true,
+      "per_frame_scale_normalization": false,
+      "common_maximum_window": [
+        72,
+        72
+      ],
+      "window_design": "Chest inherits accepted128x100 maximum; near/far square envelopes allow canonical component bbox rotation bound, not per-frame fill. Final density still requires actual extraction/sourcefit review.",
+      "accepted_identity_alpha_bbox": [
+        169,
+        237,
+        228,
+        278
+      ],
+      "minimum_used_pixels_extract_and_compose": 512,
+      "explicit_chroma": {
+        "mode": "rgb",
+        "unmix_reach": 4,
+        "spill_max_fraction": 0.005
+      },
+      "adapter_changes": [
+        {
+          "before": "Create a single horizontal sprite strip for the game character",
+          "after": "Create a single horizontal ISOLATED ARMOR COMPONENT strip for the game character",
+          "count": 1
+        },
+        {
+          "before": "Do not simply copy the still reference pose. Generate distinct animation poses that create a readable cycle or action.",
+          "after": "Generate only five requested armor component perspectives matching actual Death220 poses.",
+          "count": 1
+        },
+        {
+          "before": "Animation action:",
+          "after": "Armor component action:",
+          "count": 1
+        },
+        {
+          "before": "This row owns motion only. Spend the variation budget on limb contacts, arm counter-swing, body height, torso lean, head bob, hair bounce, and loop continuity.",
+          "after": "This row owns ONLY five projected armor forms; do not generate the body or motions.",
+          "count": 1
+        },
+        {
+          "before": "Exactly 5 full-body frames, left to right, in one horizontal row.",
+          "after": "Exactly FIVE complete isolated requested armor components, left to right in one horizontal row.",
+          "count": 1
+        },
+        {
+          "before": "each requested slot must contain exactly one complete full-body pose.",
+          "after": "each requested slot contains exactly one complete requested armor component.",
+          "count": 1
+        },
+        {
+          "before": "- Prefer pose, expression, and silhouette changes over decorative effects.",
+          "after": "- Only real requested armor perspective/foreshortening; no decorative effect.",
+          "count": 1
+        },
+        {
+          "before": "- Effects are allowed only when state-relevant, opaque, hard-edged, sprite-like, fully inside the same frame slot, and physically touching or overlapping the character silhouette.",
+          "after": "- No effects or character silhouette in this component-only row.",
+          "count": 1
+        },
+        {
+          "before": "- Reject any pose that is cropped, overlaps another pose, crosses into a neighboring frame slot, or creates a separate disconnected component that is not attached to the character.",
+          "after": "- Reject cropped armor or loose fragments; each isolated component is intentionally independent of a hero drawing.",
+          "count": 1
+        },
+        {
+          "before": "Preserve the same silhouette, face, proportions, palette, material, and props across every frame.",
+          "after": "Preserve accepted component construction/material/density; perspective changes with actual Death220 torso/arm pose. No face/body/other props.",
+          "count": 1
+        }
+      ],
+      "source_mount_A_B": null,
+      "Grip_Axis": null,
+      "native_generation_id": null,
+      "actual_native_calls": 0,
+      "newguide_Viewed": false,
+      "TrialAllowed": false,
+      "desired_raw_output": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/Root-native-armor-Death5-v001/raw/leather_shouldernear_hero_death5.png"
+    },
+    {
+      "component": "ShoulderFar",
+      "state": "leather_shoulderfar_hero_death5",
+      "frames": 5,
+      "durations_ms": [
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "last_frame_hold": true,
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/run-leather_shoulderfar_hero_death5-v001/prompts/leather_shoulderfar_hero_death5.txt",
+        "bytes": 8732,
+        "sha256": "494bd1d2f5931e7e8acbab1346bfdb3d1ed7b32e10e7866d8836154e5f2a93ce"
+      },
+      "references": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/ShoulderFar/Root-native-references-PENDING-E-v001.json",
+        "bytes": 2844,
+        "sha256": "3d139f7fb21f96ff634268923a3749a0a067a614c6b9105eb2789cab88cf1eb0"
+      },
+      "request": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/run-leather_shoulderfar_hero_death5-v001/sprite-request.json",
+        "bytes": 4689,
+        "sha256": "bdfbf805fdddd66d4f65dff2fbae1cb3381053a83052562a96d72f95c55c7f28"
+      },
+      "official_guide": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/run-leather_shoulderfar_hero_death5-v001/references/layout-guides/leather_shoulderfar_hero_death5.png",
+        "bytes": 5264,
+        "sha256": "4d4031086fbfc880c0b7536aadda5bb252c4ace0d12798fc53a3880900a5bbf4"
+      },
+      "prepared_run": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/armor-input-preparation-v001/run-leather_shoulderfar_hero_death5-v001",
+      "whole_row_shared_scale": true,
+      "per_frame_scale_normalization": false,
+      "common_maximum_window": [
+        36,
+        36
+      ],
+      "window_design": "Chest inherits accepted128x100 maximum; near/far square envelopes allow canonical component bbox rotation bound, not per-frame fill. Final density still requires actual extraction/sourcefit review.",
+      "accepted_identity_alpha_bbox": [
+        290,
+        249,
+        310,
+        277
+      ],
+      "minimum_used_pixels_extract_and_compose": 256,
+      "explicit_chroma": {
+        "mode": "rgb",
+        "unmix_reach": 4,
+        "spill_max_fraction": 0.005
+      },
+      "adapter_changes": [
+        {
+          "before": "Create a single horizontal sprite strip for the game character",
+          "after": "Create a single horizontal ISOLATED ARMOR COMPONENT strip for the game character",
+          "count": 1
+        },
+        {
+          "before": "Do not simply copy the still reference pose. Generate distinct animation poses that create a readable cycle or action.",
+          "after": "Generate only five requested armor component perspectives matching actual Death220 poses.",
+          "count": 1
+        },
+        {
+          "before": "Animation action:",
+          "after": "Armor component action:",
+          "count": 1
+        },
+        {
+          "before": "This row owns motion only. Spend the variation budget on limb contacts, arm counter-swing, body height, torso lean, head bob, hair bounce, and loop continuity.",
+          "after": "This row owns ONLY five projected armor forms; do not generate the body or motions.",
+          "count": 1
+        },
+        {
+          "before": "Exactly 5 full-body frames, left to right, in one horizontal row.",
+          "after": "Exactly FIVE complete isolated requested armor components, left to right in one horizontal row.",
+          "count": 1
+        },
+        {
+          "before": "each requested slot must contain exactly one complete full-body pose.",
+          "after": "each requested slot contains exactly one complete requested armor component.",
+          "count": 1
+        },
+        {
+          "before": "- Prefer pose, expression, and silhouette changes over decorative effects.",
+          "after": "- Only real requested armor perspective/foreshortening; no decorative effect.",
+          "count": 1
+        },
+        {
+          "before": "- Effects are allowed only when state-relevant, opaque, hard-edged, sprite-like, fully inside the same frame slot, and physically touching or overlapping the character silhouette.",
+          "after": "- No effects or character silhouette in this component-only row.",
+          "count": 1
+        },
+        {
+          "before": "- Reject any pose that is cropped, overlaps another pose, crosses into a neighboring frame slot, or creates a separate disconnected component that is not attached to the character.",
+          "after": "- Reject cropped armor or loose fragments; each isolated component is intentionally independent of a hero drawing.",
+          "count": 1
+        },
+        {
+          "before": "Preserve the same silhouette, face, proportions, palette, material, and props across every frame.",
+          "after": "Preserve accepted component construction/material/density; perspective changes with actual Death220 torso/arm pose. No face/body/other props.",
+          "count": 1
+        }
+      ],
+      "source_mount_A_B": null,
+      "Grip_Axis": null,
+      "native_generation_id": null,
+      "actual_native_calls": 0,
+      "newguide_Viewed": false,
+      "TrialAllowed": false,
+      "desired_raw_output": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/death-state-preparation-v001/Root-native-armor-Death5-v001/raw/leather_shoulderfar_hero_death5.png"
+    }
+  ],
+  "total_native_calls_required": 3,
+  "total_new_poses": 15,
+  "base_identity": "Canonical separate brown components184/Near/currentFar187; bodyReady002 identity, Death220 actual5 motion only.",
+  "all_new_refs_pending_E": true,
+  "native_calls_by_worker": 0,
+  "ledger_or_quota_modified": false,
+  "actual_Source_Content_tools_modified": false,
+  "TrialAllowed": false
+}

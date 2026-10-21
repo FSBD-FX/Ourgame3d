@@ -1,0 +1,42 @@
+{
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedArmedReady209existing4poses, exactrawcopy, doNOTgenerateorcharge."
+    },
+    "right_stomp_active": {
+      "frames": 2,
+      "fps": 13,
+      "loop": false,
+      "action": "Create TWO successive full connected Guard+fixed-heavyaxe poses for ONE FAR-foot stomp active phase, facing RIGHT in the SAME shallow elevated three-quarter side view as accepted ArmedReady209. Do not make a pure90-degree profile. Reference1 owns the ONLY character+axe identity; reference2 is exact preceding StompWindup222 frame5 motion. Preserve squat stone slab helmet, tiny recessed amber eye window, sparse moss on foreground NEAR shoulder, broad warm stone armor planes and coarse irregular ink. Low detail; no scattered small spots. Same single-head axe, one straight continuous wood shaft, fixed stone buttcap and fixed axe/body size. NEAR moss shoulder→foreground arm→BUTTward closed fist; FAR arm→HEADward closed fist. Keep both closed fists on these same grip portions throughout. Axe quiet low in front, head RIGHT, no swing/regrip/hand swap/drop.\nCRITICAL CORRECTION TO THE OLD WIDE-STANCE ACTIVE: retain the foreground NEAR support shoe directly BELOW the bent NEAR knee/body as in exact WU222frame5. It must not step, drag or stretch to the BACK-LEFT behind the torso. Preserve the same NEAR-sole-to-visible-eye horizontal projection, about54 source pixels in the attached512 reference (about14px at current100.8/388 display density), while the upper body compresses DOWN. This is a visible-surface artist constraint, not a bone claim. Do not push the upper body/eye window30display pixels to the right relative to the planted NEAR shoe. Do not recenter the body on a new broad stance. No whole-body lunge, actor jump, horizontal slide, front-leg exchange, or phantom rear support leg. Keep the foreground hip→knee→shoe chain recognizable.\nFrame0, at actualActiveAt: the previously lifted FAR leg from the right/recessed hip lands FORWARD-RIGHT of the stationary NEAR support foot. BOTH soles now contact the SAME ground baseline. No repeated lifted/hovering anticipation. FAR foot extends a little forward to contact; NEAR shoe stays under the existing knee and torso. The two-foot stance should be compact and continue the preceding raised-leg pose, not a wide split. Upper body and held axe compress vertically a little from WU5, without horizontal upperbody thrust. Frame1,75ms later: a deeper DOWNWARD weight compression of that SAME single landing, both feet still down in their unchanged contact positions. No second stomp, no relift, no moving the NEAR shoe backward to fake compression. The visible eye moves down with the head, not forward across the planted support. Stone plates remain rigid; flex real knee/hip/shoulder pose instead of rubber-stretching armor.\nTwo distinct artist samples0/75ms cover the unchanged kernel150ms Active interval. Attack geometry/damage stays kernel-owned; do not add visual travel or delay. End in a low fullweight held-axe stance for later Recovery, which is not part of this output. Dust/shock/ring FX are separate; no effects, detached debris, shadows, grids, labels, scene, blur or extra sprites in output. Both complete connected silhouettes including feet and entire axe inside TWO spacious equal invisible cells with48/512-equivalent safe padding. One shared row body/axe density, no pose fills independently; same body and axe sizes in both. Solid magenta #FF00FF background."
+    }
+  },
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    }
+  },
+  "style": "OnlyattachedacceptedArmedReady209owns thewholeGuard+fixedheavyaxeidentity, same shallow elevatedthreequarter view facingRIGHT. Squatstonehelmet/smallambereyes/sparseoliveforegroundshouldermoss/coarseink/broadwarmgreystoneplanes, SAME singleheadedstoneaxe/straightwoodshaft/stonebuttcap dimensionsandratio. Bothlivingfists FULLYCLOSED onONEcontinuousshaft throughout: mossNEARshoulder→foregroundneararm→LOWBUTTwardgrip, FARarm→HIGHHEADwardgrip. No handexchange/regrip/drop/shorteningaxe or changingheadshape. Axe heldquiet lowinfront, headRIGHT clearfeet/eyes; bothhands/axe movecoherently asoneheavyheldobject, no armcounterswing. No206/207neutral/standalone208/bad211references. Keepbody/axeconstantdensity, fullconnectedcompleteposeswith48safearea; no text/grid/scenery/dust/impactarcs/blur/shadows/loosechips. Stoneplatesnotrubber, lowdetailnotgrains/pixeldots/vectorgloss. ",
+  "motion_phase_guides": false,
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

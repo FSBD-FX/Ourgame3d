@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fixed-heavyaxe-armed-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedArmedReady209existing4poses, exactrawcopy, doNOTgenerateorcharge."
+    },
+    "right_stomp_recovery": {
+      "frames": 4,
+      "fps": 3,
+      "loop": false,
+      "action": "Use this ONE exact StompActive245 frame1 image as the sole pose-edit target. Create FOUR successive recovery poses in one spacious horizontal row. Inherit its existing character, stone armor and fixed axe; do not rebuild a wide Ready stance.\n\nPose0 preserves the reference's loaded head, torso, knee plate, closed hands and compact NEAR shoe below the hip. Keep its NEAR-shoe-to-eye horizontal geometry, about79pixels in this512reference. It is the same settled contact, not an additional deeper crouch or forward thrust. Pose1 rises moderately from it. Pose2 straightens to stand. Pose3 holds steadily with a small heavy settling change. Both soles stay grounded throughout; no backward NEAR step, relift, third boot or second stomp.\n\nMaintain exactly two contiguous hip→knee→ankle→ground-shoe chains. Preserve NEAR moss-arm→buttward grip and FAR arm→headward grip on one continuous shaft; no hand swap, regrip, swing or axe resizing.\n\nSame shallow elevated three-quarter right-facing view, coarse grotesque stone/moss/ink identity and one shared body/axe density across all four poses. Complete uncropped connected silhouettes, generous spacing and padding, uniform magenta background. No grid, separator, labels, effects, shadows or scenery.\n"
+    }
+  },
+  "style": "ExistingGuard209 identity inherited through actualActive2451. ONEimage actualA2451 supplies allposegeometry and existingidentity. FreshRecovery4, not editing or copying rejected246/247; no Ready/guide/oldstrip nativeattachment. Samefixedaxe, coarsewarmstone, sparsemoss, thickcartoonink.",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

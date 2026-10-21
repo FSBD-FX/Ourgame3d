@@ -1,0 +1,53 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\dodge-state-preparation-v001\\official-process-runs-v001\\farshoulder-native236\\run-shared-HD-v001",
+  "states": [
+    "leather_farshoulder_hero_dodge"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "leather_farshoulder_hero_dodge",
+      "source": "frames",
+      "expected_frames": 4,
+      "found_frames": 4,
+      "natural_pose_count": 4,
+      "frame_files": [
+        "frames/leather_farshoulder_hero_dodge/frame-0.png",
+        "frames/leather_farshoulder_hero_dodge/frame-1.png",
+        "frames/leather_farshoulder_hero_dodge/frame-2.png",
+        "frames/leather_farshoulder_hero_dodge/frame-3.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.8508643120282351,
+          "mean": 0.9098295594008083
+        },
+        "dhash_similarity": {
+          "min": 1.0,
+          "mean": 1.0
+        },
+        "motion_presence": 0.0003390842013888889,
+        "centroid_sigma": {
+          "x": 0.25560893407149377,
+          "y": 2.064545275640585
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "leather_farshoulder_hero_dodge: motion presence is too low (0.0003 < 0.0100)"
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "leather_farshoulder_hero_dodge: motion presence is too low (0.0003 < 0.0100)"
+  ]
+}

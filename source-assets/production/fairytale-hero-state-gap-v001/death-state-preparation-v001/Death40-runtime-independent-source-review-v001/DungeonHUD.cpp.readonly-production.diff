@@ -1,0 +1,36 @@
+--- frozen-stage0/DungeonHUD.cpp
++++ production/DungeonHUD.cpp
+@@ -1,6 +1,7 @@
+ #include "DungeonHUD.h"
+ #include "DungeonFairytaleSwordWalkTextures.inl"
+ #include "DungeonFairytaleSwordHurtTextures.inl"
++#include "DungeonFairytaleSwordDeathTextures.inl"
+ #include "DungeonFairytaleSwordEquipmentBinding.h"
+ #include "DungeonPresentationScale.h"
+ #include "DungeonFighter.h"
+@@ -68,6 +69,8 @@
+     bUseFairytaleSwordEquipmentBoundPreview=FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordEquipmentBinding::CommandLineFlag);
+     bUseFairytaleSwordHurtPreview=bUseFairytaleSwordEquipmentBoundPreview
+         &&FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordHurtV001::CommandLineFlag);
++    bUseFairytaleSwordDeathPreview=bUseFairytaleSwordEquipmentBoundPreview
++        &&FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordDeathV001::CommandLineFlag);
+     bUseFairytaleSwordWalkPreview=bUseFairytaleSwordEquipmentBoundPreview
+         &&FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordWalkPreview"));
+     bUseFairytaleLookdevPreview=!bUseFairytaleSwordEquipmentBoundPreview
+@@ -145,6 +148,16 @@
+                     if(auto Texture=DungeonFairytaleSwordHurtV001::PreloadTexture(Layer.TexturePath,Frames))ReadyArmorTextures.Add(Texture);
+             if(auto Texture=DungeonFairytaleSwordHurtV001::PreloadTexture(HurtProfile.SwordTexturePath,Frames))ReadyArmorTextures.Add(Texture);
+         }
++        if(bUseFairytaleSwordDeathPreview)
++        {
++            // Own source40 plus the existing sword41. All compile/initialize
++            // during configured startup, before the existing render flush.
++            const auto& DeathProfile=DungeonFairytaleSwordDeathV001::Profile();
++            for(const auto& Phase:DeathProfile.Frames)
++                for(const auto& Layer:Phase.Layers)
++                    if(auto Texture=DungeonFairytaleSwordDeathV001::PreloadTexture(Layer.TexturePath,Frames))ReadyArmorTextures.Add(Texture);
++            if(auto Texture=DungeonFairytaleSwordDeathV001::PreloadTexture(DeathProfile.SwordTexturePath,Frames))ReadyArmorTextures.Add(Texture);
++        }
+ #if WITH_EDITOR
+         FTextureCompilingManager::Get().FinishCompilation(ReadyArmorTextures);
+ #endif

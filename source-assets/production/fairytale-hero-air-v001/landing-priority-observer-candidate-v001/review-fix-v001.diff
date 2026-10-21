@@ -1,0 +1,89 @@
+--- before-review-fix-v001/DungeonHeroLandingPriorityProbeV001.cpp
++++ new-source/DungeonHeroLandingPriorityProbeV001.cpp
+@@ -102,6 +102,10 @@
+ 
+ namespace
+ {
++JO EquipmentAction(const FDungeonEquipmentActionView& E)
++{
++ auto O=MakeShared<FJsonObject>();O->SetNumberField(TEXT("kind"),int32(E.Kind));O->SetBoolField(TEXT("active"),E.Active);Id(O,TEXT("action_id"),E.ActionId);Id(O,TEXT("operation_id"),E.OperationId);Id(O,TEXT("source_id"),E.SourceId);Id(O,TEXT("instance_id"),E.InstanceId);O->SetNumberField(TEXT("slot"),E.Slot);O->SetNumberField(TEXT("start"),E.Start);O->SetNumberField(TEXT("deadline"),E.Deadline);return O;
++}
+ bool SameSample(const FDungeonHeroAirSample& A,const FDungeonHeroAirSample& B)
+ {return A.Valid==B.Valid&&A.RunGuid==B.RunGuid&&A.OwnerId==B.OwnerId&&A.RoomInstanceId==B.RoomInstanceId&&A.PresentationEpoch==B.PresentationEpoch&&A.NativeTime==B.NativeTime&&A.GroundPosition==B.GroundPosition&&A.Facing==B.Facing&&A.JumpHeight==B.JumpHeight&&A.VerticalVelocity==B.VerticalVelocity&&A.LandingVisualAge==B.LandingVisualAge;}
+ bool Brown(const FDungeonFairytaleSwordDraw& D,bool Primary)
+@@ -128,6 +132,8 @@
+  bool Stopped=false,Stopping=false,EvidenceClaimed=false,Capturing=false,PrewarmRequested=false,PrewarmDone=false,AudioRequested=false,StartupReadbackComplete=false,GearPinned=false,KnightCleared=false,AllowKnightDiagnostic=false,EIssued=false,ReadyConsumed=false,LandConsumed=false,FlowComplete=false;
+  double WarmStarted=0.,Start=0.,Stop=0.,PhaseAt=0.,ReleaseAt=0.,NeutralUntil=0.,InitialHP=0.,CaptureFinalHP=0.,StartupReadbackStop=0.,ActionStart=-1.,ActionEnd=-1.,StartLandingAge=-1.;
+  uint64 Owner=0,Room=0,Epoch=0,Restart=0,LightSource=0,Light=0,Sword=0,SwordVersion=0,LightVersion=0,LastDraw=0,ActualActionId=0,PriorActionId=0;
++ uint64 EquipActionId=0,EquipOperationId=0;double EquipStart=-1.,EquipDeadline=-1.;
++ int32 EquipInputIndex=INDEX_NONE,EquipStartedIndex=INDEX_NONE,EquipCommitIndex=INDEX_NONE;
+  int32 ReadyIndex=INDEX_NONE,LandIndex=INDEX_NONE,InputIndex=INDEX_NONE,FirstActionIndex=INDEX_NONE,ReadyJoinFrames=0;uint32 AirMask=0,PrimaryMask=0,DodgeMask=0;
+  FGuid Run;FKey PulseKey;TMap<FKey,bool> Keys;
+  TWeakObjectPtr<ADungeonGameMode> Game;TWeakObjectPtr<APlayerController> Controller;TWeakObjectPtr<ADungeonHUD> HUD;
+@@ -141,6 +147,7 @@
+   if(Game.IsValid())
+   {
+    const auto& InputView=Game->GetEquipmentView();
++   Id(O,TEXT("selected_source_id"),InputView.SelectedSourceId);O->SetObjectField(TEXT("before_equipment_action"),EquipmentAction(InputView.Action));
+    O->SetBoolField(TEXT("context_sampled_before_InputKey"),true);
+    O->SetStringField(TEXT("run"),InputView.RunGuid.ToString(EGuidFormats::Digits));Id(O,TEXT("owner"),InputView.OwnerId);
+    Id(O,TEXT("current_room"),InputView.RoomInstanceId);Id(O,TEXT("epoch"),Game->GetRunPresentationEpoch());
+@@ -255,6 +262,7 @@
+   const uint64 ActionId=Action==TEXT("J")?M.Action.AttackId:Roll?Roll->ActionId:0;
+   auto O=MakeShared<FJsonObject>();const double Offset=FPlatformTime::Seconds()-Start;const int32 Pose=PhysicalPose(P->JumpHeight,P->GetVerticalVelocity(),P->GetLandingVisualAge());
+   O->SetBoolField(TEXT("completed_callback"),true);O->SetNumberField(TEXT("wall_offset_s"),Offset);O->SetNumberField(TEXT("phase"),Phase);O->SetNumberField(TEXT("sim"),G->GetSimulationTime());O->SetStringField(TEXT("run"),V.RunGuid.ToString(EGuidFormats::Digits));Id(O,TEXT("owner"),V.OwnerId);Id(O,TEXT("current_room"),V.RoomInstanceId);Id(O,TEXT("epoch"),G->GetRunPresentationEpoch());Id(O,TEXT("player_entity"),P->GetRuntimeEntityId());
++  O->SetObjectField(TEXT("equipment_action"),EquipmentAction(V.Action));Id(O,TEXT("selected_source_id"),V.SelectedSourceId);Id(O,TEXT("next_operation_id"),V.NextOperationId);
+   O->SetArrayField(TEXT("ground"),XY(P->GetGroundPosition()));O->SetArrayField(TEXT("camera_ground"),XY(H->GetCameraGroundCenter()));O->SetNumberField(TEXT("facing"),P->Facing);O->SetNumberField(TEXT("jump_height"),P->JumpHeight);O->SetNumberField(TEXT("vertical_velocity"),P->GetVerticalVelocity());O->SetNumberField(TEXT("landing_visual_age"),P->GetLandingVisualAge());O->SetNumberField(TEXT("physical_visual_key"),Pose);O->SetNumberField(TEXT("hp"),P->Health);O->SetBoolField(TEXT("dead"),P->bDead);O->SetStringField(TEXT("animation"),P->AnimationName);O->SetBoolField(TEXT("melee_grounded"),M.Grounded);O->SetBoolField(TEXT("wa_grounded"),P->GetWeaponActionsState().Budget.Grounded);
+   O->SetNumberField(TEXT("melee_time"),M.Time);O->SetNumberField(TEXT("wa_time"),P->GetWeaponActionsState().Time);O->SetNumberField(TEXT("dodge_time"),DS.Time);O->SetNumberField(TEXT("weapon_world_time"),G->GetWeaponWorldState().Time);O->SetNumberField(TEXT("native_actor_root_z"),P->GetActorLocation().Z);
+   FDungeonHeroAirSample Q;Q.Valid=true;Q.RunGuid=FGuid(1,2,3,4);Q.OwnerId=91;Q.RoomInstanceId=92;Q.PresentationEpoch=93;Q.NativeTime=-94.;Q.GroundPosition={95.,96.};Q.Facing=-1.f;Q.JumpHeight=97.f;Q.VerticalVelocity=-98.f;Q.LandingVisualAge=99.f;const auto Sentinel=Q;
+@@ -264,8 +272,23 @@
+   if(Roll){Id(X,TEXT("start_event_id"),Roll->StartEventId);Id(X,TEXT("finish_event_id"),Roll->FinishEventId);Id(X,TEXT("block_event_id"),Roll->BlockEventId);X->SetNumberField(TEXT("blocked_at"),Roll->BlockedAt);X->SetNumberField(TEXT("finished_at"),Roll->FinishedAt);X->SetNumberField(TEXT("block"),int32(Roll->Block));X->SetNumberField(TEXT("finish"),int32(Roll->Finish));X->SetNumberField(TEXT("travelled"),Roll->Travelled);X->SetArrayField(TEXT("origin"),{MakeShared<FJsonValueNumber>(Roll->Origin.X),MakeShared<FJsonValueNumber>(Roll->Origin.Y)});X->SetArrayField(TEXT("direction"),{MakeShared<FJsonValueNumber>(Roll->Direction.X),MakeShared<FJsonValueNumber>(Roll->Direction.Y)});}
+   O->SetObjectField(TEXT("action"),X);Observations.Add(MakeShared<FJsonValueObject>(O));Offsets.Add(MakeShared<FJsonValueNumber>(Offset));const int32 Index=Observations.Num()-1;
+   if(!Need(V.RunGuid==Run&&V.OwnerId==Owner&&V.RoomInstanceId==Room&&G->GetRunPresentationEpoch()==Epoch&&G->GetRunRestartSerial()==Restart&&P->GetRuntimeEntityId()==Owner&&P->Health==InitialHP&&!P->bDead&&!G->bGameOver,TEXT("Owner/epoch/HP changed; no repair permitted"))||!Need(!H->GetInterfaceVisible()&&!H->IsCombatRangeDebugEnabled()&&H->GetRenderedTextDrawCalls()==0&&H->GetCombatRangeDebugLineCount()==0,TEXT("HUD/range visibility differs"))||(GearPinned&&!PinGear(P))){BeginStop(Actor);return;}
++  if(Phase==5&&EIssued)
++  {
++   const auto& Equip=V.Action;
++   if(Equip.Active)
++   {
++    if(!Need(Equip.Kind==EDungeonEquipmentActionKind::PickupArmor&&Equip.ActionId>0&&Equip.OperationId>0&&Equip.SourceId==LightSource&&Equip.InstanceId==Light&&Equip.Slot==2&&Equip.Start>=Inputs[EquipInputIndex]->AsObject()->GetNumberField(TEXT("sim"))&&Equip.Deadline==Equip.Start+.50&&Equip.Start<=G->GetSimulationTime()&&G->GetSimulationTime()<Equip.Deadline,TEXT("Actual E armor Action identity/Start/.50 Deadline differs"))){BeginStop(Actor);return;}
++    if(EquipStartedIndex==INDEX_NONE){EquipStartedIndex=Index;EquipActionId=Equip.ActionId;EquipOperationId=Equip.OperationId;EquipStart=Equip.Start;EquipDeadline=Equip.Deadline;}
++    if(!Need(Equip.ActionId==EquipActionId&&Equip.OperationId==EquipOperationId&&Equip.Start==EquipStart&&Equip.Deadline==EquipDeadline&&V.NextOperationId==EquipOperationId,TEXT("Observed E Action changed before commit"))){BeginStop(Actor);return;}
++   }
++   else if(EquipStartedIndex!=INDEX_NONE&&EquipCommitIndex==INDEX_NONE)
++   {
++    if(!Need(Equip.Kind==EDungeonEquipmentActionKind::PickupArmor&&Equip.ActionId==EquipActionId&&Equip.OperationId==EquipOperationId&&Equip.SourceId==LightSource&&Equip.InstanceId==Light&&Equip.Slot==2&&Equip.Start==EquipStart&&Equip.Deadline==EquipDeadline&&G->GetSimulationTime()>=EquipDeadline&&V.Slots[2].InstanceId==Light&&V.Slots[2].Version>0&&V.NextOperationId==EquipOperationId+1,TEXT("Actual E active-to-commit binding/timing/operation differs"))){BeginStop(Actor);return;}
++    EquipCommitIndex=Index;
++   }
++  }
+   const bool Fresh=B.DrawId>LastDraw&&B.SimulationTime==G->GetSimulationTime()&&B.DrawStack==H->GetRenderedPlayerDrawStack();if(!Fresh)return;LastDraw=B.DrawId;
+-  if(Phase==5&&GearPinned&&ReadyIndex==INDEX_NONE&&P->Facing==float(Side)&&P->JumpHeight==0.f&&P->GetVerticalVelocity()==0.f&&P->GetLandingVisualAge()==.12f&&Brown(B,false)&&!A.Drawn)ReadyIndex=Index;
++  if(Phase==5&&GearPinned&&EquipCommitIndex!=INDEX_NONE&&Index>=EquipCommitIndex&&ReadyIndex==INDEX_NONE&&P->Facing==float(Side)&&P->JumpHeight==0.f&&P->GetVerticalVelocity()==0.f&&P->GetLandingVisualAge()==.12f&&Brown(B,false)&&!A.Drawn)ReadyIndex=Index;
+   if(Phase==6&&Pose>=0&&!ActionActive)
+   {
+    if(!Need(QueryOK&&Q.Valid&&A.Drawn&&A.AtomicPreflightReady&&A.PlayerEntityId==Owner&&A.SimulationTime==G->GetSimulationTime()&&A.Plan.Frame==Pose&&A.Plan.Facing==Side&&A.Slots.Num()==9&&A.ResidentTextures.Num()==49&&A.ActualRenderedStack==B.DrawStack,TEXT("Real LGT Air callback lacks full current nine-layer draw"))){BeginStop(Actor);return;}
+@@ -286,7 +309,7 @@
+   if(FirstActionIndex!=INDEX_NONE&&!ActionActive&&Brown(B,false)&&!A.Drawn&&P->GetLandingVisualAge()==.12f)
+   {
+    if(Action==TEXT("Shift")&&!Need(Roll&&Roll->ActionId==ActualActionId&&Roll->Finish==DungeonDodge::EFinish::Completed&&Roll->FinishedAt==ActionEnd&&Roll->End==Roll->Start+DungeonDodge::Duration,TEXT("Real Dodge did not complete its unchanged .40 duration"))){BeginStop(Actor);return;}
+-   ++ReadyJoinFrames;if(ReadyJoinFrames>=2){FlowComplete=Need(AirMask==15&&ReadyConsumed&&LandConsumed&&JumpInputs==1&&(Action==TEXT("J")?PrimaryMask==63:DodgeMask==15),TEXT("Incomplete real Air/action/Ready pose coverage"));CaptureFinalHP=P->Health;BeginStop(Actor);}
++   ++ReadyJoinFrames;if(ReadyJoinFrames>=2){FlowComplete=Need(EquipStartedIndex!=INDEX_NONE&&EquipCommitIndex!=INDEX_NONE&&ReadyIndex>=EquipCommitIndex&&AirMask==15&&ReadyConsumed&&LandConsumed&&JumpInputs==1&&(Action==TEXT("J")?PrimaryMask==63:DodgeMask==15),TEXT("Incomplete real Air/action/Ready pose coverage"));CaptureFinalHP=P->Health;BeginStop(Actor);}
+   }
+  }
+  void Finalize(ADungeonHeroLandingPriorityProbeV001& Actor)
+@@ -294,6 +317,7 @@
+   if(Stopped)return;Stopped=true;GIsDumpingMovie=0;ReleaseKeys();const bool Flushed=FlushFastLosslessProofScreenshots();const bool AudioComplete=Actor.MainMixCapture&&Actor.MainMixCapture->Status().Phase==EDungeonNativeMixCapturePhaseV001::Complete;
+   auto R=MakeShared<FJsonObject>();R->SetStringField(TEXT("schema"),TEXT("hero-landing-priority-native-observer-v001"));R->SetStringField(TEXT("requested_action"),Action);R->SetNumberField(TEXT("requested_facing"),Side);R->SetBoolField(TEXT("passed"),Failure.IsEmpty()&&FlowComplete&&Flushed&&AudioComplete&&StartupReadbackComplete&&Start>StartupReadbackStop);R->SetBoolField(TEXT("flow_complete"),FlowComplete);R->SetStringField(TEXT("failure"),Failure);R->SetBoolField(TEXT("final_accepted"),false);R->SetBoolField(TEXT("visual_reviewed"),false);R->SetBoolField(TEXT("audio_listened"),false);R->SetStringField(TEXT("real_save_restore"),TEXT("OPEN_not_run"));R->SetBoolField(TEXT("player_Guard_HP_position_AI_time_writes"),false);
+   Id(R,TEXT("process_id"),FPlatformProcess::GetCurrentProcessId());R->SetStringField(TEXT("run"),Run.ToString(EGuidFormats::Digits));Id(R,TEXT("owner"),Owner);Id(R,TEXT("current_room"),Room);Id(R,TEXT("epoch"),Epoch);Id(R,TEXT("restart_serial"),Restart);Id(R,TEXT("weapon_instance"),Sword);Id(R,TEXT("weapon_version"),SwordVersion);Id(R,TEXT("armor_instance"),Light);Id(R,TEXT("armor_version"),LightVersion);
++  Id(R,TEXT("light_source_id"),LightSource);R->SetNumberField(TEXT("equipment_input_index"),EquipInputIndex);R->SetNumberField(TEXT("equipment_started_callback_index"),EquipStartedIndex);R->SetNumberField(TEXT("equipment_commit_callback_index"),EquipCommitIndex);R->SetNumberField(TEXT("equipment_start"),EquipStart);R->SetNumberField(TEXT("equipment_deadline"),EquipDeadline);
+   R->SetNumberField(TEXT("initial_hp"),InitialHP);R->SetNumberField(TEXT("capture_final_hp"),CaptureFinalHP);R->SetNumberField(TEXT("ready_callback_index"),ReadyIndex);R->SetNumberField(TEXT("landing_callback_index"),LandIndex);R->SetNumberField(TEXT("priority_input_index"),InputIndex);R->SetNumberField(TEXT("first_action_callback_index"),FirstActionIndex);R->SetNumberField(TEXT("action_start"),ActionStart);R->SetNumberField(TEXT("action_end"),ActionEnd);R->SetNumberField(TEXT("action_start_landing_age"),StartLandingAge);R->SetNumberField(TEXT("air_mask"),AirMask);R->SetNumberField(TEXT("primary_mask"),PrimaryMask);R->SetNumberField(TEXT("dodge_mask"),DodgeMask);R->SetNumberField(TEXT("ready_join_frames"),ReadyJoinFrames);
+   R->SetArrayField(TEXT("normal_inputs"),Inputs);R->SetArrayField(TEXT("steps"),Steps);R->SetArrayField(TEXT("observations"),Observations);R->SetArrayField(TEXT("diagnostic_knight_hits"),DiagnosticHits);R->SetArrayField(TEXT("startup_resource_readbacks"),StartupTextures);TArray<JV> Air49;for(int32 I=0;I<FMath::Min(49,StartupTextures.Num());++I)Air49.Add(StartupTextures[I]);R->SetArrayField(TEXT("startup_actual_GPU_source_textures49"),Air49);R->SetBoolField(TEXT("startup_readback_complete"),StartupReadbackComplete);R->SetNumberField(TEXT("startup_readback_stop_monotonic_s"),StartupReadbackStop);R->SetBoolField(TEXT("native_async_capture_writes_flushed"),Flushed);
+   auto Timing=MakeShared<FJsonObject>();Timing->SetBoolField(TEXT("use_fixed_time_step"),FApp::UseFixedTimeStep());Timing->SetNumberField(TEXT("capture_start_monotonic_s"),Start);Timing->SetNumberField(TEXT("capture_stop_monotonic_s"),Stop);Timing->SetArrayField(TEXT("frame_wall_offsets_s"),Offsets);R->SetObjectField(TEXT("capture_timing"),Timing);if(Actor.MainMixCapture)R->SetObjectField(TEXT("main_submix_capture"),Actor.MainMixCapture->SerializeReport());FString Text;auto Writer=TJsonWriterFactory<>::Create(&Text);const bool Serialized=FJsonSerializer::Serialize(R,Writer);const bool Written=Serialized&&EvidenceClaimed&&WriteNewUTF8(Directory/TEXT("runtime-report.json"),Text);if(!Failure.IsEmpty())UE_LOG(LogTemp,Error,TEXT("Landing priority: %s"),*Failure);FPlatformMisc::RequestExitWithStatus(false,Failure.IsEmpty()&&FlowComplete&&Flushed&&AudioComplete&&Written?0:3);
+@@ -313,7 +337,7 @@
+    case 2:if(P->GetGroundPosition().X>=DungeonRoomLayout::ExplorationPreview().Entry.X+280.){Key(EKeys::D,false);NeutralUntil=Now+.04;Next(3);}break;
+    case 3:if(CanPulse()&&Pulse(Side<0?EKeys::A:EKeys::D))Next(4);break;
+    case 4:if(CanPulse()&&P->Facing==float(Side)){DungeonEquipmentInventory::FItem I;I.ContentId="ARM-LGT-001";const auto Registered=G->RegisterEquipmentSource(TEXT("display.hero.landing.priority.light.v001"),I,P->GetGroundPosition()+FVector2D(24.,0.),true);if(!Need(Registered.Ok()&&!Registered.Replayed,TEXT("Real display source registration rejected")))return;LightSource=Registered.SourceId;Light=Registered.InstanceId;Next(5);}break;
+-   case 5:if(!EIssued){if(CanPulse()&&G->GetEquipmentView().SelectedSourceId==LightSource&&Pulse(EKeys::E))EIssued=true;break;}if(!G->GetEquipmentView().Action.Active&&G->GetEquipmentView().Slots[2].InstanceId==Light&&PinGear(P)&&CanPulse()&&ReadyIndex!=INDEX_NONE){const auto R=Observations[ReadyIndex]->AsObject();if(!Need(!ReadyConsumed&&R->GetNumberField(TEXT("sim"))<=G->GetSimulationTime()&&Now-Start>R->GetNumberField(TEXT("wall_offset_s")),TEXT("Ready callback token stale/reused")))return;if(Pulse(EKeys::SpaceBar)){ReadyConsumed=true;++JumpInputs;Next(6);}}break;
++   case 5:if(!EIssued){if(CanPulse()&&G->GetEquipmentView().SelectedSourceId==LightSource){EquipInputIndex=Inputs.Num();if(Pulse(EKeys::E))EIssued=true;}break;}if(!G->GetEquipmentView().Action.Active&&G->GetEquipmentView().Slots[2].InstanceId==Light&&PinGear(P)&&CanPulse()&&ReadyIndex!=INDEX_NONE){const auto R=Observations[ReadyIndex]->AsObject();if(!Need(!ReadyConsumed&&R->GetNumberField(TEXT("sim"))<=G->GetSimulationTime()&&Now-Start>R->GetNumberField(TEXT("wall_offset_s")),TEXT("Ready callback token stale/reused")))return;if(Pulse(EKeys::SpaceBar)){ReadyConsumed=true;++JumpInputs;Next(6);}}break;
+    case 6:if(LandIndex!=INDEX_NONE&&CanPulse()){const auto Land=Observations[LandIndex]->AsObject();if(!Need(!LandConsumed&&Now-Start>Land->GetNumberField(TEXT("wall_offset_s"))&&P->JumpHeight==0.f&&P->GetVerticalVelocity()==0.f&&P->GetLandingVisualAge()>=0.f&&P->GetLandingVisualAge()<.12f,TEXT("Normal priority input missed actual landing window")))return;PriorActionId=Action==TEXT("J")?P->GetMeleeCombatState().Action.AttackId:P->GetDodgeState().Records.empty()?0:P->GetDodgeState().Records.back().ActionId;InputIndex=Inputs.Num();if(Pulse(Action==TEXT("J")?EKeys::J:EKeys::LeftShift)){LandConsumed=true;Next(7);}}break;
+    case 7:break;default:Need(false,TEXT("Unexpected observer phase"));break;
+   }

@@ -1,0 +1,42 @@
+{
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedArmedReady209existing4poses, exactrawcopy, doNOTgenerateorcharge."
+    },
+    "right_stomp_recovery": {
+      "frames": 4,
+      "fps": 3,
+      "loop": false,
+      "action": "Locally edit ONLY the FIRST TWO poses of reference1, this exact four-pose recovery strip. Preserve the LAST TWO poses, their pixels, composition and placement unchanged.\n\nReference2 is the actual preceding StompActive245 frame1 and owns the starting body and support geometry. Recovery0 must closely continue it: the foreground NEAR shoe stays directly below the same bent knee/hip, with the same compact eye-to-support horizontal relationship. Match reference2's loaded body height, head, closed hands and quiet low axe. Do not add the existing extra-deep forward crouch or move the NEAR shoe behind-left. Do not thrust the eye/torso forward relative to that planted shoe.\n\nRecovery1 rises only slightly from this corrected Recovery0 while keeping the compact NEAR support. Both soles remain grounded. Retain exactly TWO contiguous hip→knee→ankle→ground-shoe chains; no raised foot, third boot, extra step or second stomp. Preserve NEAR-butt/FAR-head grips on the same continuous shaft, fixed axe proportions, stone armor and moss identity.\n\nKeep the strip's same body/axe density and shallow elevated right-facing view. Do not repaint or rescale the last two poses, introduce guide lines, separators, labels, FX, shadows or scenery. Four complete connected silhouettes on uniform magenta, with clear padding. No Ready or guide image is supplied as a competing pose.\n"
+    }
+  },
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    }
+  },
+  "style": "Existing acceptedGuard/Ready209 identity inherited by native246 and Active245, samefixedaxe. Localmotioncorrection only toRecovery0/1; preserveRecovery2/3. No newidentity/base, no extraReady reference or guide reference in nativecall.",
+  "motion_phase_guides": false,
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

@@ -1,0 +1,11 @@
+--- source-assets/production/fairytale-guard-v001/presentation-candidate-v001/production-source/DungeonFairytaleGuardPose.h
++++ UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardPose.h
+@@ -22,7 +22,7 @@
+ {
+  using namespace DungeonStoneGuard;FSelection R;R.EntityId=S.EntityId;R.AttackId=S.Action.AttackId;R.Phase=S.Phase;R.SampleTime=S.Time;R.Facing=S.Facing;
+  if(!S.EntityId||!std::isfinite(S.Time)||S.Time<S.InitialTime||(S.Facing!=1&&S.Facing!=-1))return R;
+- const FEvent* Died=nullptr;const FEvent* Broken=nullptr;const FEvent* LastMove=nullptr;const FEvent* Wake=nullptr;
++ const DungeonStoneGuard::FEvent* Died=nullptr;const DungeonStoneGuard::FEvent* Broken=nullptr;const DungeonStoneGuard::FEvent* LastMove=nullptr;const DungeonStoneGuard::FEvent* Wake=nullptr;
+  for(const auto& E:S.Issued)
+  {
+   if(E.EntityId!=S.EntityId||!std::isfinite(E.AtTime)||E.AtTime>S.Time)return R;

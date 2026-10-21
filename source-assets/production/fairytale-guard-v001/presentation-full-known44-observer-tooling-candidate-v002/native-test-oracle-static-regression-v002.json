@@ -1,0 +1,65 @@
+{
+  "schema": "known44-exact-six-test-oracle-static-regression-v002",
+  "passed": true,
+  "actual_full_suite": {
+    "path": "F:/Ourgame/UnrealGame/Saved/Automation/FirstRoom-20261018-130609/index.json",
+    "bytes": 397292,
+    "sha256": "6e710fd2849a46aa0c644ca7e84c9ce61a277f98993de4747720287676a87e09"
+  },
+  "actual_snapshot": {
+    "path": "F:/Ourgame/source-assets/production/backups/v132-guard-known44-184G/compiled-source-manifest.json",
+    "bytes": 477800,
+    "sha256": "56449bc8c8e26b65af8af4236e0518c46db913f6e7cd28d1f1aa20ed14b08cc5"
+  },
+  "actual_registry": 184,
+  "original_v001_wrong_prefix_count_required": 3,
+  "actual_legacy_prefix_count": 4,
+  "required_exact_test_names": [
+    "CodexDungeon.Content.FairytaleGuardPresentation.NativeClockMaterialAndDeath",
+    "CodexDungeon.Content.FairytaleGuardPresentation.Accepted128DistanceAndBlocked",
+    "CodexDungeon.Content.FairytaleGuardPresentation.InterruptedDeadlineAndPartialRows",
+    "CodexDungeon.Content.FairytaleGuardFullV003.NativeAxe4Recovery4AndStomp6_2_4",
+    "CodexDungeon.Content.FairytaleGuardFullV003.AcceptedPath128AndOriginalInterruptedInterval",
+    "CodexDungeon.Content.FairytaleGuardFullV003.RealTerminalClockAndVersionedProfileIsolation"
+  ],
+  "static_cases": [
+    {
+      "case": "actual full184 including legal fourth legacy-prefix terminal test",
+      "result": "accepted"
+    },
+    {
+      "case": "isolated exact-name gate permits another legal same-prefix extension",
+      "result": "accepted_static_gate_only"
+    },
+    {
+      "case": "missing required target",
+      "result": "rejected"
+    },
+    {
+      "case": "duplicate required target",
+      "result": "rejected"
+    },
+    {
+      "case": "required target invalid state=Fail",
+      "result": "rejected"
+    },
+    {
+      "case": "required target invalid errors=1",
+      "result": "rejected"
+    },
+    {
+      "case": "required target invalid warnings=1",
+      "result": "rejected"
+    },
+    {
+      "case": "required target invalid errors=False",
+      "result": "rejected"
+    }
+  ],
+  "original_candidate_pins_unchanged": true,
+  "copied_actor_protocol_sourcefreeze_exact": true,
+  "UE_started": false,
+  "UBT_started": false,
+  "actual_capture_started": false,
+  "formal_complete_units": 0
+}

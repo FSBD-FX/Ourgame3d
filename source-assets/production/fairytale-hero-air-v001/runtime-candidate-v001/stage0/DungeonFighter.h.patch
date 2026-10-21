@@ -1,0 +1,19 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.h
+@@ -18,6 +18,7 @@
+ #include "DungeonDeathPresentation.h"
+ #include "DungeonDodgePresentation.h"
+ #include "DungeonGuardMovePresentation.h"
++#include "DungeonHeroAirPresentation.h"
+ #include "DungeonFighter.generated.h"
+ 
+ class ADungeonGameMode;
+@@ -48,6 +49,8 @@
+     bool QueryDodgePresentation(FDungeonDodgePresentationSample& Out) const;
+     // Actual Guard-only completed Move facts; read-only and atomic.
+     bool QueryCompletedGuardMove(FDungeonGuardMoveSample& Out) const;
++    // Completed actual hero H/V/landing-age facts only; no new clock/event/save field.
++    bool QueryHeroNonAttackAir(FDungeonHeroAirSample& Out) const;
+ 
+     UPROPERTY(BlueprintReadOnly, Category="Dungeon") float Health = 100.f;
+     UPROPERTY(BlueprintReadOnly, Category="Dungeon") float MaxHealth = 100.f;

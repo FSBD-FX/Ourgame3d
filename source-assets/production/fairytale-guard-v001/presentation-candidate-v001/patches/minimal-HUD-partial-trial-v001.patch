@@ -1,0 +1,57 @@
+--- UnrealGame/Source/CodexDungeon/DungeonHUD.h
++++ UnrealGame/Source/CodexDungeon/DungeonHUD.h
+@@ -9,6 +9,7 @@
+ #include "DungeonActionAudioFeedback.h"
+ #include "DungeonFairytaleLookdevState.h"
+ #include "DungeonFairytaleSwordDrawState.h"
++#include "DungeonFairytaleGuardDrawState.h"
+ #include "DungeonHUD.generated.h"
+ 
+ class UTexture2D;
+@@ -76,6 +77,7 @@
+     const TArray<FDungeonActionAudioPlayRequest>& GetActionAudioPlayReceipts() const { return ActionAudioPlayReceipts; }
+     const FFairytaleLookdevDraw& GetFairytaleLookdevDraw() const { return FairytaleLookdevDraw; }
+     const FDungeonFairytaleSwordDraw& GetFairytaleSwordDraw() const { return FairytaleSwordDraw; }
++    const TArray<FDungeonFairytaleGuardDraw>& GetFairytaleGuardDraws() const { return FairytaleGuardDraws; }
+ private:
+     UPROPERTY() TObjectPtr<UFont> ChineseFont;
+     UPROPERTY() TMap<FString,TObjectPtr<UTexture2D>> Frames;
+@@ -116,6 +118,11 @@
+     FGuid ActionAudioRun;
+     uint64 ActionAudioCursor = 0;
+     uint64 RestoredRunPresentationEpoch=0;
++    bool bUseFairytaleGuardPartialPreview=false;
++    uint64 FairytaleGuardDrawSerial=0;
++    TArray<FDungeonFairytaleGuardDraw> FairytaleGuardDraws;
++    void LoadFairytaleGuardTrial();
++    bool DrawFairytaleGuardBody(ADungeonFighter* Fighter);
+     bool bUseFairytaleSwordWalkPreview=false;
+     bool bUseFairytaleSwordEquipmentBoundPreview=false;
+     bool bUseFairytaleSwordBodyPreview=false;
+--- UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
++++ UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+@@ -229,6 +229,7 @@
+         if(auto Sound=LoadObject<USoundBase>(nullptr,*Path)) ActionAudioSounds.Add(Cue,Sound);
+     }
+     LoadGuardFeedbackSounds();
++    LoadFairytaleGuardTrial();
+     FlushRenderingCommands();
+     if(FParse::Param(FCommandLine::Get(),TEXT("DungeonRunSaveProof"))
+         ||FParse::Param(FCommandLine::Get(),TEXT("DungeonRunRestoreProof")))
+@@ -1014,6 +1015,7 @@
+     if(F->GetStoneGuardDriver())
+     {
+         RenderedNativeGuardEntityIds.Add(F->GetRuntimeEntityId()); // Same actual DrawFighter invocation; no art/gameplay mutation.
++        if(DrawFairytaleGuardBody(F))return;
+         DrawGuardFeedback(F);
+         // Dedicated procedural body placeholder; finite Guard feedback is a separate event consumer.
+         const auto& S=F->GetStoneGuardDriver()->State();const auto& A=S.Action;
+@@ -1577,7 +1579,7 @@
+     Super::DrawHUD(); if(!Canvas) return;
+     if(bUseFairytaleLookdevPreview)
+     {DrawFairytaleLookdev(Cast<ADungeonGameMode>(UGameplayStatics::GetGameMode(this)));return;}
+-    RenderedTextDrawCalls=0;RenderedActorSpriteSizes.Reset();RenderedGuardRoomWarningSlots.Reset();RenderedNativeGuardEntityIds.Reset();
++    RenderedTextDrawCalls=0;RenderedActorSpriteSizes.Reset();RenderedGuardRoomWarningSlots.Reset();RenderedNativeGuardEntityIds.Reset();FairytaleGuardDraws.Reset();
+     UIScale=FMath::Min(Canvas->SizeX/1280.f,Canvas->SizeY/720.f);
+     Origin=FVector2D((Canvas->SizeX-1280*UIScale)*.5f,(Canvas->SizeY-720*UIScale)*.5f);
+     auto Game=Cast<ADungeonGameMode>(UGameplayStatics::GetGameMode(this));

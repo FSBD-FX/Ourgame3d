@@ -1,0 +1,16 @@
+--- v012-native-body
++++ v013-native-body
+@@ -1,6 +1,6 @@
+ if(@(Get-Process -Name 'UnrealEditor*','UnrealBuildTool' -ErrorAction SilentlyContinue).Count){throw 'Close UE/UBT before starting the visible native trial.'}
+-$log=Join-Path $workspace ('UnrealGame\Saved\Bootstrap\guard-room-Move7-trial-'+(Get-Date -Format 'yyyyMMdd-HHmmss-fffffff')+'.log')
+-$arguments=@(('"{0}"' -f (Join-Path $workspace 'UnrealGame\CodexDungeon.uproject')),'/Game/Maps/FirstRoom?DungeonFirstBatchGuardRoom','-game','-windowed','-ResX=1280','-ResY=720','-NoSplash','-NoLiveCoding','-nop4','-DungeonCandidateSprites','-DungeonFairytaleSwordBodyPreview','-DungeonFairytaleSwordBodyV002Preview','-DungeonFairytaleSwordArmorPrimary1Preview','-DungeonFairytaleSwordPrimary2Preview','-DungeonFairytaleSwordPrimary2BodyPreview','-DungeonFairytaleSwordPrimary2ArmorPreview','-DungeonFairytaleSwordPrimary3ArmorPreview','-DungeonFairytaleLeatherReadyPreview','-DungeonFairytaleLeatherPrimary1Preview','-DungeonFairytaleLeatherPrimary2Preview','-DungeonFairytaleLeatherPrimary3Preview','-DungeonFairytaleSwordEquipmentBoundPreview','-DungeonFairytaleSwordWalkPreview','-DungeonFairytaleSwordHurtPreview','-DungeonFairytaleSwordDeathPreview','-DungeonFairytaleSwordDodgePreview',('-abslog="{0}"' -f $log))
++$log=Join-Path $workspace ('UnrealGame\Saved\Bootstrap\guard-room-Air6-v013-trial-'+(Get-Date -Format 'yyyyMMdd-HHmmss-fffffff')+'.log')
++$arguments=@(('"{0}"' -f (Join-Path $workspace 'UnrealGame\CodexDungeon.uproject')),'/Game/Maps/FirstRoom?DungeonFirstBatchGuardRoom','-game','-windowed','-ResX=1280','-ResY=720','-NoSplash','-NoLiveCoding','-nop4','-DungeonCandidateSprites','-DungeonFairytaleSwordBodyPreview','-DungeonFairytaleSwordBodyV002Preview','-DungeonFairytaleSwordArmorPrimary1Preview','-DungeonFairytaleSwordPrimary2Preview','-DungeonFairytaleSwordPrimary2BodyPreview','-DungeonFairytaleSwordPrimary2ArmorPreview','-DungeonFairytaleSwordPrimary3ArmorPreview','-DungeonFairytaleLeatherReadyPreview','-DungeonFairytaleLeatherPrimary1Preview','-DungeonFairytaleLeatherPrimary2Preview','-DungeonFairytaleLeatherPrimary3Preview','-DungeonFairytaleSwordEquipmentBoundPreview','-DungeonFairytaleSwordWalkPreview','-DungeonFairytaleSwordHurtPreview','-DungeonFairytaleSwordDeathPreview','-DungeonFairytaleSwordDodgePreview','-DungeonFairytaleSwordAirPreview',('-abslog="{0}"' -f $log))
+ if($LightArtTrial){$arguments+='-DungeonGuardRoomManualLightSource'}
+ if($GuardFullArt -or $LightArtTrial){$arguments+=@('-DungeonFairytaleGuardFullPreview','-DungeonFairytaleGuardStompPreview','-DungeonFairytaleGuardMoveRigPreview')}
+ $process=Start-Process -FilePath (Join-Path $EngineRoot 'Engine\Binaries\Win64\UnrealEditor.exe') -ArgumentList $arguments -WindowStyle Normal -PassThru
+@@ -9,3 +9,4 @@
+ Write-Output 'Normal3-enemy room; manual input only. Original SWD/LGT Ready/Walk/primaries/Hurt/Death/Dodge and Guard Stomp50 gates remain. No automatic input or diagnostic damage.'
+ Write-Output 'Guard Move7 is one bounded seven-component trial; fixed axe is included once. Rotated-leg outline, diagonal/reversal contact and final content acceptance remain open.'
+ Write-Output "Log $log"
++Write-Output 'Hero Air6 is a bounded SWD/NoArmor and SWD/LGT preview. Landing/Ready joins remain WIP; no formal unit acceptance.'

@@ -1,0 +1,24 @@
+# Hero Air current-renderer baseline observer v001
+
+Root exclusively admits/runs actual Source and evidence. This NEW candidate adds DungeonHeroAirProbeV001.h/.cpp and patches HUD.cpp only to include it and select its explicit flag first in the existing mutually exclusive ContentProof spawn chain. It does not add an Air renderer. Stage0 getter remains zero submitted slots. Required upstream Stage0 source freeze: `37513295d00ee57f1726260c0da10a296e378962cb1d4cbe21bb6e3010d42c2a`; audio helper freeze: `91e1a74f78dcf1b712d121930da8e08e3543254d4227d43c2b774df730089c3e`.
+
+Normal flow: actual Enter releases waiting; optional explicitly flagged public Knight diagnostic; real nearby LGT source and normal E/.50 commit; normal A or D tiny tap; first normal Space; second fresh Space inside original landing window; second full landing window. It never writes player position/HP/AI/H/V/age/kernel clocks, teleports, calls StartJump, touches Guard or shortens scheduler warnings. Knight diagnostic is off unless `-DungeonHeroAirClearKnightDiagnostic` is supplied and logs the exact one original Knight public ApplyCombatHit call; it never assigns HP/death. No J/Shift/K or input into another probe is used here.
+
+Each real native screenshot callback records current owner/run/current room/epoch/time, H/V/age, native action clocks, grounded facts, actor root Z, current old draw ID/clip/source/resource/stack, actual armor/sword drawn flags and new Air draw slot/resident counts. Baseline success means two observed native jumps with four physical velocity regions and both landing halves, each equipped air callback exhibiting current elevated unsupported bareReady0 with no armor/sword and zero new Air slots. This is gap evidence only: `new_air_passed`, visual review, listening and final acceptance remain false. Loss of owner/scope/fresh draw or player damage fails without repair. None6/LGT9 actual production drawing remains later work.
+
+Output parent is an absolute unused single-process directory. An existing sole `native-lossless-capture.json` from the unchanged screenshot installer is permitted. Claim and report use actual Windows CREATE_NEW, exact UTF8 bytes and FlushFileBuffers; old or failed partial originals are never overwritten. Root must still select one fresh directory/PID before launching the screenshot installer. `audio-v001` must not be precreated: the frozen helper creates it exclusively. Warmup screenshot precedes Begin; true Begin is only Arming acceptance. Poll until actual Recording/StartRequested/positive StartMonotonic; use that exact origin for movie/offsets/inputs. Last actual callback disables movie and releases keys, stops mix once, freezes facts, then subsequent ticks Poll to terminal. Finalize flushes PNG and records SerializeReport. EndPlay fails and preserves partial evidence. No old ContentProbe co-runs.
+
+Root after actual Stage0 three semantic RED and helper admission:
+
+```powershell
+python -B F:/Ourgame/source-assets/production/fairytale-hero-air-v001/runtime-candidate-v001/observer-baseline-v001/root-admit-observer-v001.py --validate-only --freeze-sha <reported-freeze-SHA>
+python -B F:/Ourgame/source-assets/production/fairytale-hero-air-v001/runtime-candidate-v001/observer-baseline-v001/root-admit-observer-v001.py --admit --freeze-sha <reported-freeze-SHA>
+```
+
+Expected current Source290 →292, registry203 unchanged, Production1371 unchanged. Before pins include all actual290 plus baseline CM283, Stage0 and frozen helper closure; Root must compile and own the native run. A concrete Root launch after that compile, with a NEW original directory (do not execute from candidate worker):
+
+```powershell
+& G:/UE_5.5/Engine/Binaries/Win64/UnrealEditor.exe F:/Ourgame/UnrealGame/CodexDungeon.uproject '/Game/Maps/FirstRoom?DungeonFirstBatchGuardRoom' -game -windowed -ResX=1280 -ResY=720 -NoSplash -NoLiveCoding -nop4 -DungeonCandidateSprites -DungeonFairytaleSwordEquipmentBoundPreview -DungeonFairytaleSwordWalkPreview -DungeonFairytaleSwordHurtPreview -DungeonFairytaleSwordDeathPreview -DungeonFairytaleSwordDodgePreview -DungeonFairytaleGuardFullPreview -DungeonFairytaleGuardStompPreview -DungeonFairytaleGuardMoveRigPreview -DungeonContentProof -DungeonHeroAirProofV001 -DungeonHeroAirBaselineV001 -DungeonHeroAirFacing=-1 -DungeonHeroAirClearKnightDiagnostic -DungeonFastLosslessCapture -DungeonAsyncLosslessCapture '-DungeonContentProofDir=F:/Ourgame/UnrealGame/Saved/ArtEvidence/HeroAir-v142-baseline-left-NEW/原件'
+```
+
+No fixed-time, null-RHI, no-sound, visible-HUD, range or competing proof flag. Independent audio checker is the frozen helper's `tooling/check-native-main-submix-v001.py --report ACTUAL/runtime-report.json --capture-field main_submix_capture --require-frame-timing --output NEW_JSON_RECEIPT`. Complete export is not non-silence, cue attribution, listening, visual review or acceptance. Preserve all originals and retain before viewing under Root evidence policy.

@@ -1,0 +1,64 @@
+{
+  "schema": "guard-known44-minimal-UE-admission-plan-v004",
+  "source_interface": "DungeonFairytaleGuardFullV003",
+  "source_dependency_freeze": {
+    "path": "source-assets/production/fairytale-guard-v001/presentation-full-candidate-v003/source-freeze-v003.json",
+    "bytes": 2318,
+    "sha256": "3b61d2f6f74bc475084b3fd576790016449b8c0cc94d5a7c1cb5bbe3b833a4e4"
+  },
+  "no_actual_source_modified_by_worker": true,
+  "stage0": {
+    "copy_from_v003": [
+      "production-source/DungeonFairytaleGuardFullProfileV003.h",
+      "production-source/DungeonFairytaleGuardFullDataV003.inl",
+      "stage0/DungeonFairytaleGuardFullPoseV003.h",
+      "stage0/DungeonFairytaleGuardFullV003Tests.cpp"
+    ],
+    "target": "UnrealGame/Source/CodexDungeon; Tests cpp in Tests/",
+    "apply_candidate_delta_after_Data_copy": "patches/full-data-retain-StompRecovery225-explicit-gap-v004.patch",
+    "do_not_admit_HUD_full_patch_or_full_Presentation_yet": true,
+    "filter": "CodexDungeon.Content.FairytaleGuardFullV003",
+    "expected_tests": 3,
+    "expected_semantics": "Three real-kernel/real-world first selector checkpoints RED; preserve actual logs/Source/DLL/report. Candidate standalone results are not this UE evidence."
+  },
+  "production": {
+    "replace_from_v003": [
+      "production-source/DungeonFairytaleGuardFullPoseV003.h"
+    ],
+    "add_from_v003": [
+      "production-source/DungeonFairytaleGuardFullDrawStateV003.h",
+      "production-source/DungeonFairytaleGuardFullPresentationV003.cpp"
+    ],
+    "apply_existing_minimal_HUD_patch": "presentation-full-candidate-v003/patches/minimal-HUD-full-versioned-entry-v003.patch",
+    "patch_check_on_current_actual_HUD": "git -C UnrealGame apply --check exit0 during this candidate audit; recheck latest Root snapshot before apply",
+    "same_tests_byte_equal_stage0_production": true,
+    "required_results": "Same three tests GREEN, old partial three unchanged, then actual complete strict registry GREEN. Current181+3 projects184 only if registry otherwise unchanged; actual typed Root count is authoritative."
+  },
+  "imports_and_trial": {
+    "prepared_new_textures": 28,
+    "reuse_existing_textures": 16,
+    "execute_native_import": false,
+    "Root_approval_required_before_native_import": true,
+    "row_trial_default": false,
+    "final_accepted_default": false,
+    "rows_eligible_for_scoped_Root_trial": [
+      "Dormant",
+      "Wake",
+      "Ready",
+      "AxeWindup",
+      "AxeActive",
+      "AxeRecovery",
+      "StompWindup",
+      "Stunned",
+      "Death",
+      "InterruptedRecovery"
+    ],
+    "always_closed": [
+      "Move",
+      "StompActive",
+      "StompRecovery"
+    ],
+    "requirements": "Root fresh exact old Production set/two SHA passes; actual Texture2D path/dimensions/settings/source filename/save pins/receipt; per-row Root full-mode trialrecord distinct from existing partial approval. No fabricated source/DLL/import/approval hashes."
+  },
+  "capture": "Known44 observer design only; do not use old partial actor with full-preview flag. Future executable new actor/checker need independent admission and real native coverage, Source/Content/DLL/Root prereg exact."
+}

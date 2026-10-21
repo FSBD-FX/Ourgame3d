@@ -1,0 +1,108 @@
+{
+  "schema": "guard-wake-rounding-numerical-reproduction-v003",
+  "scope": "Independent numerical reconstruction from original observation plus read-only native formulas. NOT actual UE-driver execution, compile, runtime, capture, visual or art acceptance.",
+  "frozen_input": {
+    "begin": 9.605689999759198,
+    "wide_end": 9.610689999759199,
+    "replanned_end": 9.607490869337335,
+    "target_from": [
+      -1035.4682208563124,
+      -162.2042858545901
+    ],
+    "speed_float": 286.20001220703125
+  },
+  "original_wide": {
+    "accepted": true,
+    "wake_at": 9.607490869337335,
+    "end": 9.610689999759199,
+    "trace": [
+      {
+        "iteration": 0,
+        "cursor": 9.605689999759198,
+        "limit": 9.610689999759199,
+        "entry": 0.3601739156270644,
+        "exit": 1.0,
+        "next": 9.607490869337333,
+        "r2_at_cursor": 1.004390388136256,
+        "r2_at_next": 1.0000000000000022
+      },
+      {
+        "iteration": 1,
+        "cursor": 9.607490869337333,
+        "limit": 9.610689999759199,
+        "entry": 2.8569510651379144e-13,
+        "exit": 1.0,
+        "next": 9.607490869337335,
+        "r2_at_cursor": 1.0000000000000022,
+        "r2_at_next": 0.9999999999999964
+      }
+    ],
+    "previous_r2": 1.0000000000000022,
+    "r2": 0.9999999999999964
+  },
+  "original_replanned": {
+    "accepted": false,
+    "reason": "!(Next>Cursor)",
+    "end": 9.607490869337335,
+    "trace": [
+      {
+        "iteration": 0,
+        "cursor": 9.605689999759198,
+        "limit": 9.607490869337335,
+        "entry": 0.9999999999991674,
+        "exit": 1.0,
+        "next": 9.607490869337333,
+        "r2_at_cursor": 1.004390388136256,
+        "r2_at_next": 1.0000000000000004
+      },
+      {
+        "iteration": 1,
+        "cursor": 9.607490869337333,
+        "limit": 9.607490869337335,
+        "entry": 0.10533332824707031,
+        "exit": 1.0,
+        "next": 9.607490869337333,
+        "r2_at_cursor": 1.0000000000000004,
+        "r2_at_next": 1.0000000000000004
+      }
+    ]
+  },
+  "candidate_wide": {
+    "accepted": true,
+    "wake_at": 9.607490869337335,
+    "end": 9.610689999759199,
+    "trace": [
+      {
+        "iteration": 0,
+        "cursor": 9.605689999759198,
+        "limit": 9.610689999759199,
+        "entry": 0.3601739156270644,
+        "exit": 1.0,
+        "next": 9.607490869337335,
+        "r2_at_cursor": 1.004390388136256,
+        "r2_at_next": 0.9999999999999964
+      }
+    ],
+    "previous_r2": 1.0000000000000022,
+    "r2": 0.9999999999999964
+  },
+  "candidate_replanned": {
+    "accepted": true,
+    "wake_at": 9.607490869337335,
+    "end": 9.607490869337335,
+    "trace": [
+      {
+        "iteration": 0,
+        "cursor": 9.605689999759198,
+        "limit": 9.607490869337335,
+        "entry": 0.9999999999991674,
+        "exit": 1.0,
+        "next": 9.607490869337335,
+        "r2_at_cursor": 1.004390388136256,
+        "r2_at_next": 0.9999999999999964
+      }
+    ],
+    "previous_r2": 1.0000000000000004,
+    "r2": 0.9999999999999964
+  }
+}

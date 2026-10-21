@@ -1,0 +1,53 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\dodge-state-preparation-v001\\official-process-runs-v001\\chest-native240\\run-shared-HD-v001",
+  "states": [
+    "leather_chest_hero_dodge_correction"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "leather_chest_hero_dodge_correction",
+      "source": "frames",
+      "expected_frames": 4,
+      "found_frames": 4,
+      "natural_pose_count": 4,
+      "frame_files": [
+        "frames/leather_chest_hero_dodge_correction/frame-0.png",
+        "frames/leather_chest_hero_dodge_correction/frame-1.png",
+        "frames/leather_chest_hero_dodge_correction/frame-2.png",
+        "frames/leather_chest_hero_dodge_correction/frame-3.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.9117974082374508,
+          "mean": 0.9451655179134537
+        },
+        "dhash_similarity": {
+          "min": 0.96875,
+          "mean": 0.9817708333333334
+        },
+        "motion_presence": 0.005032647824754902,
+        "centroid_sigma": {
+          "x": 0.5553177473775401,
+          "y": 3.5922090476859543
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "leather_chest_hero_dodge_correction: motion presence is too low (0.0050 < 0.0100)"
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "leather_chest_hero_dodge_correction: motion presence is too low (0.0050 < 0.0100)"
+  ]
+}

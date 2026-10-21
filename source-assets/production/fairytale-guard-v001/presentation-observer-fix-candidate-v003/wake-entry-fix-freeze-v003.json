@@ -1,0 +1,51 @@
+{
+  "schema": "guard-wake-native-driver-rounding-fix-candidate-freeze-v003",
+  "scope": "NEW candidate only; actual driver regression and minimal representable-entry patch. No UE/UBT/media viewing by worker. Original failed capture and v001/v002 candidates preserved.",
+  "native_test": "CodexDungeon.Content.StoneGuardNative.WakeEntryReplannedEndpointNeverRejectsLegalInterval",
+  "new_native_tests": 1,
+  "expected_unchanged_native_tests": 180,
+  "expected_total": 181,
+  "stage0": "Existing actual Driver plus new regression; no stub or production patch until real RED retained.",
+  "files": [
+    {
+      "path": "analysis/numerical-reproduction-result-v003.json",
+      "bytes": 3117,
+      "sha256": "2aee09bf7f8dd9d4fbbd878bdee146afe19ec54d2bf93b5fdd369366854a396d"
+    },
+    {
+      "path": "analysis/reproduce-wake-rounding-v003.py",
+      "bytes": 3486,
+      "sha256": "f436535fd0c62161529d8f005f606cb7e488039b7f099eb40de23d0f560c7001"
+    },
+    {
+      "path": "analysis/runtime-wake-window-analysis-v003.json",
+      "bytes": 12414,
+      "sha256": "5b380111485a17c2e88b3ed0f5a2bf967a0ebfcf2f648a9edf079da616acade0"
+    },
+    {
+      "path": "baseline-evidence-pins-v003.json",
+      "bytes": 1891,
+      "sha256": "e7be075126ce2e4377a010cd291963760bf0110584f729a7fc34041451824aa8"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 3249,
+      "sha256": "4e9c7ebeff311b736dfe4fe0bdaaa5b78d1012fd50f07ed33e959b894b657134"
+    },
+    {
+      "path": "patches/driver-representable-wake-entry-v003.patch",
+      "bytes": 3161,
+      "sha256": "40ab8342c3de2882078257331c5de58500179076a728777c05b08bbacfa7f1ba"
+    },
+    {
+      "path": "tests/DungeonGuardWakeEntryRoundingV003Tests.cpp",
+      "bytes": 8940,
+      "sha256": "5a5b2002f991a437ffb8ff319868324def6393917cec1347bd055ac9e87fa8ac"
+    },
+    {
+      "path": "verification-v003.json",
+      "bytes": 531,
+      "sha256": "691ce2a31ff80b6db79f61545e76232d8bb3dac916f954e94f0494b53d08c088"
+    }
+  ]
+}

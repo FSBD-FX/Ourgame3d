@@ -1,0 +1,43 @@
+{
+  "schema": "guard-known44-combat-Root-prereg-v003",
+  "is_template": true,
+  "pre_registered_before_capture": false,
+  "scenario": "StunIR",
+  "compiled_manifest_sha256": null,
+  "source_profile_prereg_pin": {
+    "path": null,
+    "bytes": null,
+    "sha256": null
+  },
+  "combat_candidate_freeze_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-full-known44-combat-observer-candidate-v004/StunIR-candidate-freeze-v004.json",
+    "bytes": null,
+    "sha256": null
+  },
+  "admitted_combat_source_files": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonGuardArtCombatProbeV003.h",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonGuardArtCombatProbeV003.cpp",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": null,
+      "sha256": null
+    }
+  ],
+  "known44_profile_source_scope": "Read-only source preflight reuse of unchanged AxeCycle tooling-v003 profile checker, with a fresh Root Axe-compatible source prereg bound to this same new compiled snapshot. This never claims an AxeCycle native run.",
+  "Death_implemented": false,
+  "formal_complete_units": 0,
+  "fill_instructions": [
+    "Root integrates only newH/newCPP+minimalHUDpatch; actual Source/DLL/full184 snapshot is new after build; no Content change required.",
+    "Copy prior actual AxeCycle tooling-v003 source prereg to a NEW actual source-profile prereg, updating compiled_manifest_sha256/counts/admitted_source_files from fresh snapshot. Keep actual row10/all13/import/gaps and tooling-v003 freeze intact. It is used only for strict shared profile/source preflight.",
+    "Fill source_profile_prereg_pin with that actual NEW file; compiled_manifest_sha256 and admitted_combat_source_files from same fresh snapshot; combat_candidate_freeze_pin with this whole freeze.",
+    "Then set is_template=false/pre_registered_before_capture=true in NEW Root file before capture. No template approves itself."
+  ]
+}

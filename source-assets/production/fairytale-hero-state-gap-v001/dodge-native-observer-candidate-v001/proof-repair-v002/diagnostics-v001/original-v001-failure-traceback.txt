@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "<string>", line 8, in <module>
+  File "F:\Ourgame\source-assets\production\fairytale-hero-state-gap-v001\dodge-native-observer-candidate-v001\tooling\verify-Dodge-native-v001.py", line 113, in verify
+    f=frame_at(rec['time'],rec['start']);verify_draw(o,f,profile,manifest,r);d=o['dodge_draw'];need(d['draw_id']not in draws,'Duplicate DrawId cannot earn phase credit');draws.add(d['draw_id']);frames.add(f);dodges.append(o)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Ourgame\source-assets\production\fairytale-hero-state-gap-v001\dodge-native-observer-candidate-v001\tooling\verify-Dodge-native-v001.py", line 57, in verify_draw
+    need(point(d['root_source'],root,0)and point(d['grip_source'],grip,0)and point(d['axis_artist'],axis,0),'Author source points differ')
+  File "F:\Ourgame\source-assets\production\fairytale-hero-state-gap-v001\dodge-manual-checkpoint-candidate-v001\dodge_manual_contract_v001.py", line 15, in need
+    if not v:raise ValueError(why)
+             ^^^^^^^^^^^^^^^^^^^^^
+ValueError: Author source points differ

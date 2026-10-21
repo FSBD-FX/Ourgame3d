@@ -1,0 +1,174 @@
+{
+  "schema": "stable-fast-v002-small-component-tests",
+  "passed": true,
+  "checks": 16,
+  "cases": [
+    {
+      "name": "ordinary file",
+      "expected_rejected": false,
+      "states": [
+        {
+          "rejected": false,
+          "method": "Original"
+        },
+        {
+          "rejected": false,
+          "method": "Fast"
+        }
+      ]
+    },
+    {
+      "name": "hidden ordinary file",
+      "expected_rejected": false,
+      "states": [
+        {
+          "rejected": false,
+          "method": "Original"
+        },
+        {
+          "rejected": false,
+          "method": "Fast"
+        }
+      ]
+    },
+    {
+      "name": "ordinary directory",
+      "expected_rejected": false,
+      "states": [
+        {
+          "rejected": false,
+          "method": "Original"
+        },
+        {
+          "rejected": false,
+          "method": "Fast"
+        }
+      ]
+    },
+    {
+      "name": "hardlink leaf",
+      "expected_rejected": true,
+      "states": [
+        {
+          "rejected": true,
+          "method": "Original"
+        },
+        {
+          "rejected": true,
+          "method": "Fast"
+        }
+      ]
+    },
+    {
+      "name": "junction parent",
+      "expected_rejected": true,
+      "states": [
+        {
+          "rejected": true,
+          "method": "Original"
+        },
+        {
+          "rejected": true,
+          "method": "Fast"
+        }
+      ]
+    },
+    {
+      "name": "missing file in existing parent",
+      "expected_rejected": true,
+      "states": [
+        {
+          "rejected": true,
+          "method": "Original"
+        },
+        {
+          "rejected": true,
+          "method": "Fast"
+        }
+      ]
+    },
+    {
+      "name": "missing parent with required file",
+      "expected_rejected": true,
+      "states": [
+        {
+          "rejected": true,
+          "method": "Original"
+        },
+        {
+          "rejected": true,
+          "method": "Fast"
+        }
+      ]
+    },
+    {
+      "name": "missing optional path preserves legacy behavior",
+      "expected_rejected": false,
+      "states": [
+        {
+          "rejected": false,
+          "method": "Original"
+        },
+        {
+          "rejected": false,
+          "method": "Fast"
+        }
+      ]
+    },
+    {
+      "rejected": false,
+      "name": "identical 1778 runtime/engine/CM metadata component",
+      "expected_rejected": false,
+      "component_only": true
+    },
+    {
+      "rejected": true,
+      "name": "runtime SHA changed",
+      "expected_rejected": true,
+      "component_only": true
+    },
+    {
+      "rejected": true,
+      "name": "runtime order changed",
+      "expected_rejected": true,
+      "component_only": true
+    },
+    {
+      "rejected": true,
+      "name": "runtime member omitted",
+      "expected_rejected": true,
+      "component_only": true
+    },
+    {
+      "rejected": true,
+      "name": "engine SHA changed",
+      "expected_rejected": true,
+      "component_only": true
+    },
+    {
+      "rejected": true,
+      "name": "parent CM changed",
+      "expected_rejected": true,
+      "component_only": true
+    },
+    {
+      "rejected": true,
+      "name": "parent count changed",
+      "expected_rejected": true,
+      "component_only": true
+    },
+    {
+      "rejected": true,
+      "name": "old immutable metadata omitted",
+      "expected_rejected": true,
+      "component_only": true
+    }
+  ],
+  "authority": "HOST_COMPONENT_ONLY_NO_ROOT_APPROVAL_OR_NATIVE_CLAIM",
+  "full_launcher_run": false,
+  "all1778_hashes_run": false,
+  "UE_started": false,
+  "actual_stage_modified": false,
+  "RootApproved": false,
+  "FinalAccepted": false
+}

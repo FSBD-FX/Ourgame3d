@@ -1,0 +1,7 @@
+# Observer once-only Wake fail-fast v004
+
+Independent optional cost change; separate from driver root-cause freeze-v003. Applies only one hunk to actual observer Observe, after existing Facts and Observation/Offset append. Once actual native WakeEnd has passed and counted WakeMask!=63, finishes explicit failure immediately. It never replays, changes time/windows/AI/input/coverage, clears a bit or returns success. Existing masks, schema, FIFO/CRC/flush/report and capture flags stay unchanged. Original completed draw/offset is retained before Finish, using the already established FinishOnFrame callback path.
+
+Dry analysis on original PID55804 JSON alone predicts failure after observation309 (zero-based308; consult exact JSON rather than this prose if later input differs), instead of completing the45s phase timeout. Detailed exact count/time and original report pin are in original-failed-report-policy-dry-analysis-v004.json. This is not an actual new native capture or verification pass. No PNG has been Viewed/modified. Root can apply independently after preserving driver semanticRED, then bind the changed CPP in a NEW compiled snapshot/prereg and rerun newmedia version. Same old tooling/verifier coverage remains strict.
+
+Root retains original failed v001 files and old v002 candidate freeze; neither is overwritten. No extra native test/registry count change. Worker only wrote this candidate directory and ran patch-check plus original-JSON dry policy analysis; no UE/UBT/import.

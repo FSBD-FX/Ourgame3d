@@ -1,0 +1,3 @@
+FAIL：独立只读核40 PNG源及decodedRGBA/alpha元数据、五相八组件命名/v019包路径、无空层、E505每项current两遍byte/SHA、原freeze40源集；Production1286两遍当前SHA与compiledv137和1226+Guard28+Hurt32lineage同时一致。
+
+导入构造须注意author manifest不是Hurt importer直接输入：texture_properties→texture_settings；compression→compression_settings，mip_gen TMGS_NoMipmaps→mip_gen_settings TMGS_NO_MIPMAPS，sRGB→srgb，补显式canvas_px512²。Hurt脚本硬编码v017/32/4/3empty不能直接重用执行。新Death须exactv019/40/5/0empty，old1286不变+40=1326仅为本次唯一新增条件，Root导入前freshset/nooverwrite还需核。filter未在author字段，沿provenTF_BILINEAR需Root显式set/verify。原source/metadata不改，GPUfinish/native/Final均未验证。

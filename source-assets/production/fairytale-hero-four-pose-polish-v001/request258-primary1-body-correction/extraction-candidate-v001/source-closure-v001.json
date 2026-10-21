@@ -1,0 +1,729 @@
+{
+  "schema": "request258-two-body-cell-source-closure-v001",
+  "utc": "2026-10-18T20:14:04.159825+00:00",
+  "generation_request": 258,
+  "source_image": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/raw/primary1-bridge-correction.png",
+    "bytes": 1526081,
+    "sha256": "959b58c9a3150505e68e3a2a0235822de8f7a698f5a3929c735aa9bc7fd7b449"
+  },
+  "generator_called_by_this_script": false,
+  "grid": {
+    "canvas": [
+      1536,
+      1024
+    ],
+    "cell": [
+      512,
+      512
+    ],
+    "rows": 2,
+    "columns": 3,
+    "extracted_cells": [
+      0,
+      1
+    ]
+  },
+  "matte_algorithm": {
+    "name": "RGB-preserving magenta dominance alpha v001",
+    "dominance": "min(R,B)-G",
+    "background": "dominance>=220 => alpha0",
+    "soft_edge": "48<=dominance<220 and min(R,B)>=96 => alpha=255-dominance",
+    "other_pixels": "alpha255",
+    "RGB": "Unchanged; no unmix, fill, repaint or color retouch.",
+    "limitation": "Semi-transparent edge RGB can retain original magenta mixture. No visual halo acceptance is claimed."
+  },
+  "shared_alignment": {
+    "integer_translation_xy": [
+      0,
+      0
+    ],
+    "resample": false,
+    "resize": false,
+    "reason": "Both selected raw cells have last nonzero alpha y463, matching old J0/J1/Ready0. Measured shared dy=0; no +1/+2 assumption.",
+    "foreground_clipped": false,
+    "per_pose_horizontal_registration": false
+  },
+  "old_reference_metrics": {
+    "old_J0": {
+      "canvas": [
+        512,
+        512
+      ],
+      "helmet_tan_color_core_proxy_bbox": [
+        180,
+        52,
+        354,
+        226
+      ],
+      "helmet_tan_color_core_proxy_width_height": [
+        174,
+        174
+      ],
+      "helmet_proxy_rule": "alpha>=128; x[170,375); y<subject_top+190; G>=110; B>=75; R-G>=8; G-B>=10. Color-core diagnostic, not complete outer helmet mask or approved socket.",
+      "alpha_bbox_exclusive": [
+        146,
+        48,
+        366,
+        464
+      ],
+      "alpha_bbox_size": [
+        220,
+        416
+      ],
+      "alpha128_bbox_exclusive": [
+        146,
+        48,
+        366,
+        464
+      ],
+      "alpha_nonzero": 54908,
+      "alpha128": 52153,
+      "alpha255": 49248,
+      "alpha_partial": 5660,
+      "foot_bottom_last_nonzero_y": 463,
+      "foot_bottom_last_alpha128_y": 463,
+      "lowest20rows_alpha128_x_range": [
+        146,
+        366
+      ],
+      "lowest20rows_alpha128_x_midpoint": 256.0,
+      "lowest20rows_semantics": "Silhouette-only projected boot footprint proxy; not anatomical foot sockets.",
+      "opaque_RGB_mean": [
+        114.65115334632878,
+        80.03273229369721,
+        62.752335120207924
+      ],
+      "opaque_RGB_median": [
+        99.0,
+        82.0,
+        64.0
+      ],
+      "display_scale_assumed": 0.17307692307692307,
+      "display_bbox_size_at_72_rule": [
+        38.07692307692307,
+        72.0
+      ]
+    },
+    "old_J1": {
+      "canvas": [
+        512,
+        512
+      ],
+      "helmet_tan_color_core_proxy_bbox": [
+        188,
+        53,
+        354,
+        226
+      ],
+      "helmet_tan_color_core_proxy_width_height": [
+        166,
+        173
+      ],
+      "helmet_proxy_rule": "alpha>=128; x[170,375); y<subject_top+190; G>=110; B>=75; R-G>=8; G-B>=10. Color-core diagnostic, not complete outer helmet mask or approved socket.",
+      "alpha_bbox_exclusive": [
+        139,
+        49,
+        372,
+        464
+      ],
+      "alpha_bbox_size": [
+        233,
+        415
+      ],
+      "alpha128_bbox_exclusive": [
+        139,
+        49,
+        372,
+        464
+      ],
+      "alpha_nonzero": 55364,
+      "alpha128": 52458,
+      "alpha255": 49258,
+      "alpha_partial": 6106,
+      "foot_bottom_last_nonzero_y": 463,
+      "foot_bottom_last_alpha128_y": 463,
+      "lowest20rows_alpha128_x_range": [
+        152,
+        372
+      ],
+      "lowest20rows_alpha128_x_midpoint": 262.0,
+      "lowest20rows_semantics": "Silhouette-only projected boot footprint proxy; not anatomical foot sockets.",
+      "opaque_RGB_mean": [
+        114.38217142393114,
+        80.99612245726583,
+        64.38401883957935
+      ],
+      "opaque_RGB_median": [
+        98.0,
+        84.0,
+        68.0
+      ],
+      "display_scale_assumed": 0.17307692307692307,
+      "display_bbox_size_at_72_rule": [
+        40.32692307692307,
+        71.82692307692308
+      ]
+    },
+    "Ready0": {
+      "canvas": [
+        512,
+        512
+      ],
+      "helmet_tan_color_core_proxy_bbox": [
+        173,
+        54,
+        340,
+        231
+      ],
+      "helmet_tan_color_core_proxy_width_height": [
+        167,
+        177
+      ],
+      "helmet_proxy_rule": "alpha>=128; x[170,375); y<subject_top+190; G>=110; B>=75; R-G>=8; G-B>=10. Color-core diagnostic, not complete outer helmet mask or approved socket.",
+      "alpha_bbox_exclusive": [
+        149,
+        49,
+        362,
+        464
+      ],
+      "alpha_bbox_size": [
+        213,
+        415
+      ],
+      "alpha128_bbox_exclusive": [
+        149,
+        49,
+        362,
+        464
+      ],
+      "alpha_nonzero": 54088,
+      "alpha128": 51326,
+      "alpha255": 48391,
+      "alpha_partial": 5697,
+      "foot_bottom_last_nonzero_y": 463,
+      "foot_bottom_last_alpha128_y": 463,
+      "lowest20rows_alpha128_x_range": [
+        149,
+        354
+      ],
+      "lowest20rows_alpha128_x_midpoint": 251.5,
+      "lowest20rows_semantics": "Silhouette-only projected boot footprint proxy; not anatomical foot sockets.",
+      "opaque_RGB_mean": [
+        109.74096422888553,
+        79.28213924076792,
+        61.83703581244446
+      ],
+      "opaque_RGB_median": [
+        97.0,
+        83.0,
+        63.0
+      ],
+      "display_scale_assumed": 0.17307692307692307,
+      "display_bbox_size_at_72_rule": [
+        36.86538461538461,
+        71.82692307692308
+      ]
+    }
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "source_crop_box_exclusive": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "source_RGB_crop": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/extraction-candidate-v001/original-cells/frame-0-RGB-crop.png",
+        "bytes": 223027,
+        "sha256": "3ef0d7cda4b1df8ec5b88f8f6726a3546ff1ef4d7ac36d3ccd81a4507a32fd73"
+      },
+      "source_crop_RGB_sha256": "60c018f64fd66f30db208624c71b1c42448683af11650457334de9b95a1167d1",
+      "transparent_candidate": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/extraction-candidate-v001/transparent-cells/frame-0-RGBA-footline464-candidate.png",
+        "bytes": 256872,
+        "sha256": "a681810e7c3e37c1b9e946b1b1155a0daf0072a924e2cce1245f6b10c95e9465"
+      },
+      "aligned_RGBA_sha256": "92a0da6cef73612e7c31c59a445f6b1c8c20768ac728791c57c556e2d016e853",
+      "matting": {
+        "background_zero_alpha_pixels": 212875,
+        "partial_key_edge_pixels": 1117,
+        "RGB_pixels_modified_before_alignment": 0,
+        "nontransparent_RGB_pixels_modified_after_alignment": 0,
+        "RGB_decontamination_or_despill": false,
+        "alpha_border20_all_zero": true,
+        "key_dominance_range_border20": [
+          220,
+          247
+        ],
+        "remaining_magenta_dominance_ge48_with_alpha128": 649
+      },
+      "raw_cell_metrics": {
+        "canvas": [
+          512,
+          512
+        ],
+        "helmet_tan_color_core_proxy_bbox": [
+          182,
+          105,
+          359,
+          279
+        ],
+        "helmet_tan_color_core_proxy_width_height": [
+          177,
+          174
+        ],
+        "helmet_proxy_rule": "alpha>=128; x[170,375); y<subject_top+190; G>=110; B>=75; R-G>=8; G-B>=10. Color-core diagnostic, not complete outer helmet mask or approved socket.",
+        "alpha_bbox_exclusive": [
+          143,
+          100,
+          372,
+          464
+        ],
+        "alpha_bbox_size": [
+          229,
+          364
+        ],
+        "alpha128_bbox_exclusive": [
+          144,
+          101,
+          372,
+          464
+        ],
+        "alpha_nonzero": 49269,
+        "alpha128": 48436,
+        "alpha255": 48152,
+        "alpha_partial": 1117,
+        "foot_bottom_last_nonzero_y": 463,
+        "foot_bottom_last_alpha128_y": 463,
+        "lowest20rows_alpha128_x_range": [
+          144,
+          366
+        ],
+        "lowest20rows_alpha128_x_midpoint": 255.0,
+        "lowest20rows_semantics": "Silhouette-only projected boot footprint proxy; not anatomical foot sockets.",
+        "opaque_RGB_mean": [
+          123.03661322478817,
+          85.12252865924572,
+          63.750228443263
+        ],
+        "opaque_RGB_median": [
+          123.0,
+          92.0,
+          65.0
+        ],
+        "display_scale_assumed": 0.17307692307692307,
+        "display_bbox_size_at_72_rule": [
+          39.63461538461539,
+          63.0
+        ]
+      },
+      "aligned_metrics": {
+        "canvas": [
+          512,
+          512
+        ],
+        "helmet_tan_color_core_proxy_bbox": [
+          182,
+          105,
+          359,
+          279
+        ],
+        "helmet_tan_color_core_proxy_width_height": [
+          177,
+          174
+        ],
+        "helmet_proxy_rule": "alpha>=128; x[170,375); y<subject_top+190; G>=110; B>=75; R-G>=8; G-B>=10. Color-core diagnostic, not complete outer helmet mask or approved socket.",
+        "alpha_bbox_exclusive": [
+          143,
+          100,
+          372,
+          464
+        ],
+        "alpha_bbox_size": [
+          229,
+          364
+        ],
+        "alpha128_bbox_exclusive": [
+          144,
+          101,
+          372,
+          464
+        ],
+        "alpha_nonzero": 49269,
+        "alpha128": 48436,
+        "alpha255": 48152,
+        "alpha_partial": 1117,
+        "foot_bottom_last_nonzero_y": 463,
+        "foot_bottom_last_alpha128_y": 463,
+        "lowest20rows_alpha128_x_range": [
+          144,
+          366
+        ],
+        "lowest20rows_alpha128_x_midpoint": 255.0,
+        "lowest20rows_semantics": "Silhouette-only projected boot footprint proxy; not anatomical foot sockets.",
+        "opaque_RGB_mean": [
+          123.03661322478817,
+          85.12252865924572,
+          63.750228443263
+        ],
+        "opaque_RGB_median": [
+          123.0,
+          92.0,
+          65.0
+        ],
+        "display_scale_assumed": 0.17307692307692307,
+        "display_bbox_size_at_72_rule": [
+          39.63461538461539,
+          63.0
+        ]
+      },
+      "comparison_to_old": {
+        "old_J0": {
+          "width_ratio": 1.040909090909091,
+          "height_ratio": 0.875,
+          "helmet_tan_proxy_width_ratio": 1.0172413793103448,
+          "helmet_tan_proxy_height_ratio": 1.0,
+          "footspan_width_ratio": 1.009090909090909,
+          "bbox_top_delta_source_px": 52,
+          "bottom_delta_before_alignment_source_px": 0,
+          "bottom_delta_after_alignment_source_px": 0,
+          "footprint_midpoint_delta_after_source_px": -1.0
+        },
+        "old_J1": {
+          "width_ratio": 0.9828326180257511,
+          "height_ratio": 0.8771084337349397,
+          "helmet_tan_proxy_width_ratio": 1.0662650602409638,
+          "helmet_tan_proxy_height_ratio": 1.0057803468208093,
+          "footspan_width_ratio": 1.009090909090909,
+          "bbox_top_delta_source_px": 51,
+          "bottom_delta_before_alignment_source_px": 0,
+          "bottom_delta_after_alignment_source_px": 0,
+          "footprint_midpoint_delta_after_source_px": -7.0
+        },
+        "Ready0": {
+          "width_ratio": 1.0751173708920188,
+          "height_ratio": 0.8771084337349397,
+          "helmet_tan_proxy_width_ratio": 1.0598802395209581,
+          "helmet_tan_proxy_height_ratio": 0.9830508474576272,
+          "footspan_width_ratio": 1.0829268292682928,
+          "bbox_top_delta_source_px": 51,
+          "bottom_delta_before_alignment_source_px": 0,
+          "bottom_delta_after_alignment_source_px": 0,
+          "footprint_midpoint_delta_after_source_px": 3.5
+        }
+      },
+      "provisional_markers": {
+        "status": "PROVISIONAL_NOT_APPROVED_NOT_ANATOMICAL",
+        "display_root_aligned": [
+          256,
+          464
+        ],
+        "physical_foot_root": null,
+        "display_root_semantics": "Inherited display pivot; not a measured pelvis/foot contact root.",
+        "visible_closed_hand_grip_center_raw_cell_proposal": [
+          211,
+          343
+        ],
+        "visible_closed_hand_grip_center_aligned_proposal": [
+          211,
+          343
+        ],
+        "grip_uncertainty_source_px_each_axis": 12,
+        "grip_semantics": "Coarse visible fist-center proposal from E636-retained RGB sheet, not measured socket; Root must confirm weapon-hand ownership and grip.",
+        "weapon_axis_artist_starting_proposal": [
+          0.94,
+          -0.341
+        ],
+        "weapon_axis_measured": false,
+        "weapon_axis_angle_uncertainty_degrees": 25,
+        "weapon_axis_semantics": "Inherited prior action artist direction only; no blade/handle exists in this body-only source.",
+        "root_grip_axis_approved": false,
+        "hand_polygon": null,
+        "owner_partition": null
+      }
+    },
+    {
+      "frame": 1,
+      "source_crop_box_exclusive": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "source_RGB_crop": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/extraction-candidate-v001/original-cells/frame-1-RGB-crop.png",
+        "bytes": 225401,
+        "sha256": "b6c5ef6ab39f9c22944a073de0dd55120f69054059026e3c89bf12942d59311b"
+      },
+      "source_crop_RGB_sha256": "589b1506b5429fef2163c7edea028308df92f473b13895075db81d3fb2851c61",
+      "transparent_candidate": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/extraction-candidate-v001/transparent-cells/frame-1-RGBA-footline464-candidate.png",
+        "bytes": 260588,
+        "sha256": "249681d9e0e373cf6199e3e6de988293b6c2ceab73ffd952663519f1dddb4c3a"
+      },
+      "aligned_RGBA_sha256": "88564691297ef826599e3fd323f1b6cf199715135e59b1f39f5ef07a53f5f78a",
+      "matting": {
+        "background_zero_alpha_pixels": 209526,
+        "partial_key_edge_pixels": 1327,
+        "RGB_pixels_modified_before_alignment": 0,
+        "nontransparent_RGB_pixels_modified_after_alignment": 0,
+        "RGB_decontamination_or_despill": false,
+        "alpha_border20_all_zero": true,
+        "key_dominance_range_border20": [
+          234,
+          247
+        ],
+        "remaining_magenta_dominance_ge48_with_alpha128": 714
+      },
+      "raw_cell_metrics": {
+        "canvas": [
+          512,
+          512
+        ],
+        "helmet_tan_color_core_proxy_bbox": [
+          177,
+          89,
+          342,
+          259
+        ],
+        "helmet_tan_color_core_proxy_width_height": [
+          165,
+          170
+        ],
+        "helmet_proxy_rule": "alpha>=128; x[170,375); y<subject_top+190; G>=110; B>=75; R-G>=8; G-B>=10. Color-core diagnostic, not complete outer helmet mask or approved socket.",
+        "alpha_bbox_exclusive": [
+          132,
+          85,
+          373,
+          464
+        ],
+        "alpha_bbox_size": [
+          241,
+          379
+        ],
+        "alpha128_bbox_exclusive": [
+          133,
+          85,
+          373,
+          464
+        ],
+        "alpha_nonzero": 52618,
+        "alpha128": 51608,
+        "alpha255": 51291,
+        "alpha_partial": 1327,
+        "foot_bottom_last_nonzero_y": 463,
+        "foot_bottom_last_alpha128_y": 463,
+        "lowest20rows_alpha128_x_range": [
+          147,
+          371
+        ],
+        "lowest20rows_alpha128_x_midpoint": 259.0,
+        "lowest20rows_semantics": "Silhouette-only projected boot footprint proxy; not anatomical foot sockets.",
+        "opaque_RGB_mean": [
+          119.5383010664639,
+          83.81433389873467,
+          64.21185003216938
+        ],
+        "opaque_RGB_median": [
+          106.0,
+          92.0,
+          67.0
+        ],
+        "display_scale_assumed": 0.17307692307692307,
+        "display_bbox_size_at_72_rule": [
+          41.71153846153846,
+          65.59615384615384
+        ]
+      },
+      "aligned_metrics": {
+        "canvas": [
+          512,
+          512
+        ],
+        "helmet_tan_color_core_proxy_bbox": [
+          177,
+          89,
+          342,
+          259
+        ],
+        "helmet_tan_color_core_proxy_width_height": [
+          165,
+          170
+        ],
+        "helmet_proxy_rule": "alpha>=128; x[170,375); y<subject_top+190; G>=110; B>=75; R-G>=8; G-B>=10. Color-core diagnostic, not complete outer helmet mask or approved socket.",
+        "alpha_bbox_exclusive": [
+          132,
+          85,
+          373,
+          464
+        ],
+        "alpha_bbox_size": [
+          241,
+          379
+        ],
+        "alpha128_bbox_exclusive": [
+          133,
+          85,
+          373,
+          464
+        ],
+        "alpha_nonzero": 52618,
+        "alpha128": 51608,
+        "alpha255": 51291,
+        "alpha_partial": 1327,
+        "foot_bottom_last_nonzero_y": 463,
+        "foot_bottom_last_alpha128_y": 463,
+        "lowest20rows_alpha128_x_range": [
+          147,
+          371
+        ],
+        "lowest20rows_alpha128_x_midpoint": 259.0,
+        "lowest20rows_semantics": "Silhouette-only projected boot footprint proxy; not anatomical foot sockets.",
+        "opaque_RGB_mean": [
+          119.5383010664639,
+          83.81433389873467,
+          64.21185003216938
+        ],
+        "opaque_RGB_median": [
+          106.0,
+          92.0,
+          67.0
+        ],
+        "display_scale_assumed": 0.17307692307692307,
+        "display_bbox_size_at_72_rule": [
+          41.71153846153846,
+          65.59615384615384
+        ]
+      },
+      "comparison_to_old": {
+        "old_J0": {
+          "width_ratio": 1.0954545454545455,
+          "height_ratio": 0.9110576923076923,
+          "helmet_tan_proxy_width_ratio": 0.9482758620689655,
+          "helmet_tan_proxy_height_ratio": 0.9770114942528736,
+          "footspan_width_ratio": 1.018181818181818,
+          "bbox_top_delta_source_px": 37,
+          "bottom_delta_before_alignment_source_px": 0,
+          "bottom_delta_after_alignment_source_px": 0,
+          "footprint_midpoint_delta_after_source_px": 3.0
+        },
+        "old_J1": {
+          "width_ratio": 1.0343347639484979,
+          "height_ratio": 0.9132530120481928,
+          "helmet_tan_proxy_width_ratio": 0.9939759036144579,
+          "helmet_tan_proxy_height_ratio": 0.9826589595375722,
+          "footspan_width_ratio": 1.018181818181818,
+          "bbox_top_delta_source_px": 36,
+          "bottom_delta_before_alignment_source_px": 0,
+          "bottom_delta_after_alignment_source_px": 0,
+          "footprint_midpoint_delta_after_source_px": -3.0
+        },
+        "Ready0": {
+          "width_ratio": 1.1314553990610328,
+          "height_ratio": 0.9132530120481928,
+          "helmet_tan_proxy_width_ratio": 0.9880239520958084,
+          "helmet_tan_proxy_height_ratio": 0.96045197740113,
+          "footspan_width_ratio": 1.0926829268292684,
+          "bbox_top_delta_source_px": 36,
+          "bottom_delta_before_alignment_source_px": 0,
+          "bottom_delta_after_alignment_source_px": 0,
+          "footprint_midpoint_delta_after_source_px": 7.5
+        }
+      },
+      "provisional_markers": {
+        "status": "PROVISIONAL_NOT_APPROVED_NOT_ANATOMICAL",
+        "display_root_aligned": [
+          256,
+          464
+        ],
+        "physical_foot_root": null,
+        "display_root_semantics": "Inherited display pivot; not a measured pelvis/foot contact root.",
+        "visible_closed_hand_grip_center_raw_cell_proposal": [
+          159,
+          213
+        ],
+        "visible_closed_hand_grip_center_aligned_proposal": [
+          159,
+          213
+        ],
+        "grip_uncertainty_source_px_each_axis": 12,
+        "grip_semantics": "Coarse visible fist-center proposal from E636-retained RGB sheet, not measured socket; Root must confirm weapon-hand ownership and grip.",
+        "weapon_axis_artist_starting_proposal": [
+          -0.2,
+          -0.98
+        ],
+        "weapon_axis_measured": false,
+        "weapon_axis_angle_uncertainty_degrees": 25,
+        "weapon_axis_semantics": "Inherited prior action artist direction only; no blade/handle exists in this body-only source.",
+        "root_grip_axis_approved": false,
+        "hand_polygon": null,
+        "owner_partition": null
+      }
+    }
+  ],
+  "dependency_pins": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/raw/primary1-bridge-correction.png",
+      "bytes": 1526081,
+      "sha256": "959b58c9a3150505e68e3a2a0235822de8f7a698f5a3929c735aa9bc7fd7b449"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/submitted-prompt.txt",
+      "bytes": 2863,
+      "sha256": "c7c2778fc337c06d6e35d7a8992a9433223bc1823777b2d684446ddc4f49b3a1"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/generation258-result-v001.json",
+      "bytes": 1488,
+      "sha256": "000ec80ef5a90b2fa2c0bb81f0dcf2fa75596893c60e1e4e8200358184095129"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v003/curated/frame-0.png",
+      "bytes": 120204,
+      "sha256": "31fba4718be787b98fd92c551a6515a429c29385cb0e67365fc0b8533fd8b5c3"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v003/curated/frame-1.png",
+      "bytes": 120255,
+      "sha256": "9c1db7c10a2805a51c82d9a33ccab83627a084d5e5f536dd81df425642b0a7c2"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/curated/frame-0.png",
+      "bytes": 121133,
+      "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/primary1-measurement-v003/primary1-marker-proposal-v003.json",
+      "bytes": 32999,
+      "sha256": "730f1be4bc17ab4bb2fb520b22c810dc8f392f9e6d1886e3e303ad06cc05b4aa"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/ready-measurement-v002/ready-marker-proposal-v002.json",
+      "bytes": 22526,
+      "sha256": "3aff15e506328c9b37aca2e040b56ad6aeca0f6b6d195865ef362fe74adf1e82"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request257-primary1-body/extraction-candidate-v001/extract-primary257-top-two-v001.py",
+      "bytes": 13278,
+      "sha256": "3f2de33556ede44691f8fdb9448b8fe99efcd8dfec13dedb8f4e8fd84648b6e7"
+    },
+    {
+      "path": "F:/Ourgame/过程图稿与视频/2026-10-19_钟盔攻击修片尺寸锚点_v002/展示副本/primary1-original-six-curated-512-guide-v002.png",
+      "bytes": 608569,
+      "sha256": "62cbc377da574b2357a4cdb61957ba7b8bd5265110a4c52c97241f6d7edc337d"
+    }
+  ],
+  "only_two_new_body_cells": true,
+  "other_generated_cells_not_extracted": true,
+  "old_runtime_frames_2_to_5": "Unchanged and not copied or admitted by this candidate.",
+  "partition_or_armor_created": false,
+  "native_run_performed": false,
+  "derived_images_viewed": false,
+  "E_retention_of_new_derivatives": "PENDING_ROOT",
+  "source_pixels_accepted": false,
+  "art_accepted": false,
+  "FinalAccepted": false
+}

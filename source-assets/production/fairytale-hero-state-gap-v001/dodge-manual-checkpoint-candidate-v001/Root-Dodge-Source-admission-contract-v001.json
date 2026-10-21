@@ -1,0 +1,21 @@
+{
+  "schema": "Dodge-v011-three-Root-admission-input-contract-v001",
+  "roles_in_order": ["stage0", "production", "observer"],
+  "receipt_shape": {
+    "schema": "Root-Dodge-<role>-admission-v001 or an exact typed Root schema containing Dodge and its role",
+    "success": "actual boolean true",
+    "FinalAccepted": "false",
+    "previous_Source_count": "actual map count before this role",
+    "Source_count": "actual map count after this role",
+    "previous": "exact previous pins of every changed existing Source file, and no new-file pin",
+    "admitted": "exact after-pins of every new/modified Source file; no duplicates/deletions",
+    "unaffected_Source_unchanged": "actual boolean true",
+    "candidate_freeze": "real pinned immutable candidate freeze"
+  },
+  "pin_shape": {"path": "Source paths repository relative; freeze pins may be relative or absolute", "bytes": "actual integer size", "sha256": "actual byte SHA256"},
+  "stage0": "Exact frozen7 new files plus DungeonFighter.h/.cpp and DungeonHUD.h; de4bc579dc522621127d2ce0931effd230beb55650ca071a74b586bcd0be5472 candidate.",
+  "production": "Exactly two new DodgePresentation.cpp/Textures.inl. Changes may only touch admitted Dodge headers/implementations and Fighter/HUD/Sword presentation. The actual Stage0 test remains unchanged.",
+  "observer": "Exactly DungeonHeroDodgeProbeV001.h/.cpp plus DungeonHUD.cpp startup; no other module.",
+  "baseline": "Pinned actual v139 Source262. Every unaffected Source file stays byte-identical. Final Source count is derived from this exact map and compared to the fresh CM; never accepted by count alone.",
+  "actual_production_or_observer_admission_claimed": false
+}

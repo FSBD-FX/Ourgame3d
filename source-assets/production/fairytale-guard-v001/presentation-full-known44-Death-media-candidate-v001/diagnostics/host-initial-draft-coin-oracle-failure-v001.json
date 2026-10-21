@@ -1,0 +1,32 @@
+{
+  "schema": "Death-media-initial-draft-host-oracle-failure-v001",
+  "candidate_frozen_at_failure": false,
+  "native_or_independent_failure": false,
+  "archive": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫正常军剑死亡与自动金币试样_native_left_v001",
+  "assertion": "before['wallet']==automatic_reward['before']",
+  "actual_before_observation": 578,
+  "actual_before_callback_wallet": 20,
+  "actual_after_observation": 579,
+  "actual_after_callback_wallet": 33,
+  "actual_new_collections": [
+    {
+      "operation": "1",
+      "object": "2",
+      "before": 20,
+      "after": 24,
+      "amount": 4
+    },
+    {
+      "operation": "2",
+      "object": "3",
+      "before": 24,
+      "after": 33,
+      "amount": 9
+    }
+  ],
+  "finding": "Two actual automatic collections occurred between adjacent callbacks. Intermediate Guard.Before24 is a real ledger state, not an independently rendered callback. Previous image wallet20 must be preserved.",
+  "archive_written": false,
+  "UE_started": false,
+  "ffmpeg_started": false,
+  "View_used": false
+}

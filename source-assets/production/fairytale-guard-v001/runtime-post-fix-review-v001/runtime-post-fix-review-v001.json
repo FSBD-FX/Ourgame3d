@@ -1,0 +1,599 @@
+{
+  "schema": "guard-partial-v130-post-fix-independent-metadata-source-review-v001",
+  "reviewed_utc": "2026-10-18T04:03:39.349805+00:00",
+  "passed": true,
+  "scope": "Read-only Source/metadata review. No UE/UBT/import/media View/image-video decoding or Root-source/docs/tools changes. Not final visual/art/audio/enemy acceptance.",
+  "facts": {
+    "snapshot": "v130-guard-partial-181G",
+    "snapshot_entries": 1892,
+    "Source": 223,
+    "Production": 1226,
+    "strict181GREEN": true,
+    "specialized_v005_native_GREEN": true,
+    "actual_Driver_normalized_equals_v007": true,
+    "Root_prereg_source_and_capture_bindings_exact": true,
+    "frozen_v002_candidate_tooling_unchanged": true,
+    "all16_Texture_paths_SourceSHA_row_scale_pivots_checked": true,
+    "two_fresh_native_runs": [
+      {
+        "version": "v002",
+        "process_id": 55528,
+        "run_guid": "E2D7AC0044AA723D5A3C29B3DA61D7B8",
+        "guard_entity": "4",
+        "requested_and_actual_approach_side": -1,
+        "observations": 657,
+        "prewarm_receipts": 1,
+        "duration_s": 21.882889300584793,
+        "mask_recalculation": {
+          "Wake": 63,
+          "Ready": 15,
+          "AxeWindup": 63
+        },
+        "frame_draw_counts": {
+          "Wake": {
+            "0": 5,
+            "1": 5,
+            "2": 5,
+            "3": 5,
+            "4": 5,
+            "5": 5
+          },
+          "AxeWindup": {
+            "0": 10,
+            "1": 10,
+            "2": 10,
+            "3": 10,
+            "4": 10,
+            "5": 10
+          },
+          "Ready": {
+            "2": 15,
+            "3": 5,
+            "1": 8,
+            "0": 1
+          }
+        },
+        "native_facing_counts": {
+          "Dormant": {
+            "1": 48
+          },
+          "Wake": {
+            "1": 30
+          },
+          "AxeWindup": {
+            "-1": 60
+          },
+          "AxeFollow": {
+            "-1": 96
+          },
+          "Ready": {
+            "-1": 29
+          },
+          "StompWindup": {
+            "-1": 54
+          },
+          "StompFollow": {
+            "-1": 99
+          }
+        },
+        "DormantSeen": 48,
+        "WakeStart": 9.607343492817764,
+        "WakeEnd": 10.607343492817764,
+        "Wake_frame_wall_gap_max_s": 0.03915690258145332,
+        "Wake_frame_native_gap_max_s": 0.0333344005048275,
+        "first_coverage_witnesses": [
+          {
+            "clip": "Wake",
+            "frame": 0,
+            "observation": 289,
+            "draw_id": "49",
+            "sim": 9.633880201727152,
+            "wall_offset": 9.65105539932847,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Wake/T_Guard210_Wake_00.T_Guard210_Wake_00"
+          },
+          {
+            "clip": "Wake",
+            "frame": 1,
+            "observation": 294,
+            "draw_id": "54",
+            "sim": 9.800547800958157,
+            "wall_offset": 9.816385801881552,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Wake/T_Guard210_Wake_01.T_Guard210_Wake_01"
+          },
+          {
+            "clip": "Wake",
+            "frame": 2,
+            "observation": 299,
+            "draw_id": "59",
+            "sim": 9.967216100543737,
+            "wall_offset": 9.98335500061512,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Wake/T_Guard210_Wake_02.T_Guard210_Wake_02"
+          },
+          {
+            "clip": "Wake",
+            "frame": 3,
+            "observation": 304,
+            "draw_id": "64",
+            "sim": 10.13388380035758,
+            "wall_offset": 10.15214329957962,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Wake/T_Guard210_Wake_03.T_Guard210_Wake_03"
+          },
+          {
+            "clip": "Wake",
+            "frame": 4,
+            "observation": 309,
+            "draw_id": "69",
+            "sim": 10.300551302731037,
+            "wall_offset": 10.319452200084925,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Wake/T_Guard210_Wake_04.T_Guard210_Wake_04"
+          },
+          {
+            "clip": "Wake",
+            "frame": 5,
+            "observation": 314,
+            "draw_id": "74",
+            "sim": 10.467218901962042,
+            "wall_offset": 10.483561500906944,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Wake/T_Guard210_Wake_05.T_Guard210_Wake_05"
+          },
+          {
+            "clip": "AxeWindup",
+            "frame": 0,
+            "observation": 319,
+            "draw_id": "79",
+            "sim": 10.633886400610209,
+            "wall_offset": 10.649402499198914,
+            "face": -1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/AxeWindup/T_Guard212_AxeWindup_00.T_Guard212_AxeWindup_00"
+          },
+          {
+            "clip": "AxeWindup",
+            "frame": 1,
+            "observation": 324,
+            "draw_id": "84",
+            "sim": 10.800553999841213,
+            "wall_offset": 10.81463610008359,
+            "face": -1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/AxeWindup/T_Guard212_AxeWindup_01.T_Guard212_AxeWindup_01"
+          },
+          {
+            "clip": "AxeWindup",
+            "frame": 2,
+            "observation": 329,
+            "draw_id": "89",
+            "sim": 10.96722150221467,
+            "wall_offset": 10.982264202088118,
+            "face": -1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/AxeWindup/T_Guard212_AxeWindup_02.T_Guard212_AxeWindup_02"
+          },
+          {
+            "clip": "AxeWindup",
+            "frame": 3,
+            "observation": 334,
+            "draw_id": "94",
+            "sim": 11.133889202028513,
+            "wall_offset": 11.147733502089977,
+            "face": -1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/AxeWindup/T_Guard212_AxeWindup_03.T_Guard212_AxeWindup_03"
+          },
+          {
+            "clip": "AxeWindup",
+            "frame": 4,
+            "observation": 339,
+            "draw_id": "99",
+            "sim": 11.300556600093842,
+            "wall_offset": 11.315172400325537,
+            "face": -1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/AxeWindup/T_Guard212_AxeWindup_04.T_Guard212_AxeWindup_04"
+          },
+          {
+            "clip": "AxeWindup",
+            "frame": 5,
+            "observation": 344,
+            "draw_id": "104",
+            "sim": 11.46732260286808,
+            "wall_offset": 11.483362402766943,
+            "face": -1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/AxeWindup/T_Guard212_AxeWindup_05.T_Guard212_AxeWindup_05"
+          },
+          {
+            "clip": "Ready",
+            "frame": 2,
+            "observation": 397,
+            "draw_id": "157",
+            "sim": 13.234115403145552,
+            "wall_offset": 13.255560800433159,
+            "face": -1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Ready/T_Guard209_Ready_02.T_Guard209_Ready_02"
+          },
+          {
+            "clip": "Ready",
+            "frame": 3,
+            "observation": 401,
+            "draw_id": "161",
+            "sim": 13.367595300078392,
+            "wall_offset": 13.387059602886438,
+            "face": -1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Ready/T_Guard209_Ready_03.T_Guard209_Ready_03"
+          },
+          {
+            "clip": "Ready",
+            "frame": 1,
+            "observation": 482,
+            "draw_id": "242",
+            "sim": 16.06768750026822,
+            "wall_offset": 16.082989800721407,
+            "face": -1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Ready/T_Guard209_Ready_01.T_Guard209_Ready_01"
+          },
+          {
+            "clip": "Ready",
+            "frame": 0,
+            "observation": 655,
+            "draw_id": "415",
+            "sim": 21.83449410274625,
+            "wall_offset": 21.8489612005651,
+            "face": -1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Ready/T_Guard209_Ready_00.T_Guard209_Ready_00"
+          }
+        ],
+        "procedural_gap_counts": {
+          "AxeFollow": 96,
+          "StompWindup": 54,
+          "StompFollow": 99
+        },
+        "maximum_metadata_floor_formula_error_display_px": 2.6590737945753062e-05,
+        "guard_HP": 185,
+        "guard_incoming_receipts": 0,
+        "writer_peak_pending_jobs": 1,
+        "runtime_reject_ensure_fatal_matches": [],
+        "independent_original_pixel_equality_reported": true,
+        "pixels_redecoded_by_this_review": false,
+        "visual_reviewed_by_this_review": false,
+        "audio_recorded": false,
+        "formal_complete_units": 0
+      },
+      {
+        "version": "v003",
+        "process_id": 53660,
+        "run_guid": "B36B80E147E91ACE4E9FD9895E1BCA7D",
+        "guard_entity": "4",
+        "requested_and_actual_approach_side": 1,
+        "observations": 670,
+        "prewarm_receipts": 1,
+        "duration_s": 22.320194900035858,
+        "mask_recalculation": {
+          "Wake": 63,
+          "Ready": 15,
+          "AxeWindup": 63
+        },
+        "frame_draw_counts": {
+          "Wake": {
+            "0": 5,
+            "1": 5,
+            "2": 5,
+            "3": 5,
+            "4": 5,
+            "5": 5
+          },
+          "Ready": {
+            "2": 16,
+            "3": 3,
+            "1": 9,
+            "0": 1
+          },
+          "AxeWindup": {
+            "0": 10,
+            "1": 10,
+            "2": 10,
+            "3": 10,
+            "4": 10,
+            "5": 10
+          }
+        },
+        "native_facing_counts": {
+          "Dormant": {
+            "1": 61
+          },
+          "Wake": {
+            "1": 30
+          },
+          "StompWindup": {
+            "1": 54
+          },
+          "StompFollow": {
+            "1": 99
+          },
+          "Ready": {
+            "1": 29
+          },
+          "AxeWindup": {
+            "1": 60
+          },
+          "AxeFollow": {
+            "1": 96
+          }
+        },
+        "DormantSeen": 61,
+        "WakeStart": 10.04191423174224,
+        "WakeEnd": 11.04191423174224,
+        "Wake_frame_wall_gap_max_s": 0.04463469982147217,
+        "Wake_frame_native_gap_max_s": 0.03333570063114166,
+        "first_coverage_witnesses": [
+          {
+            "clip": "Wake",
+            "frame": 0,
+            "observation": 302,
+            "draw_id": "62",
+            "sim": 10.067203100770712,
+            "wall_offset": 10.086580399423838,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Wake/T_Guard210_Wake_00.T_Guard210_Wake_00"
+          },
+          {
+            "clip": "Wake",
+            "frame": 1,
+            "observation": 307,
+            "draw_id": "67",
+            "sim": 10.23387099802494,
+            "wall_offset": 10.251173999160528,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Wake/T_Guard210_Wake_01.T_Guard210_Wake_01"
+          },
+          {
+            "clip": "Wake",
+            "frame": 2,
+            "observation": 312,
+            "draw_id": "72",
+            "sim": 10.400538798421621,
+            "wall_offset": 10.41905489936471,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Wake/T_Guard210_Wake_02.T_Guard210_Wake_02"
+          },
+          {
+            "clip": "Wake",
+            "frame": 3,
+            "observation": 317,
+            "draw_id": "77",
+            "sim": 10.567206397652626,
+            "wall_offset": 10.586750000715256,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Wake/T_Guard210_Wake_03.T_Guard210_Wake_03"
+          },
+          {
+            "clip": "Wake",
+            "frame": 4,
+            "observation": 322,
+            "draw_id": "82",
+            "sim": 10.733874000608921,
+            "wall_offset": 10.750330600887537,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Wake/T_Guard210_Wake_04.T_Guard210_Wake_04"
+          },
+          {
+            "clip": "Wake",
+            "frame": 5,
+            "observation": 327,
+            "draw_id": "87",
+            "sim": 10.900543700903654,
+            "wall_offset": 10.927744299173355,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Wake/T_Guard210_Wake_05.T_Guard210_Wake_05"
+          },
+          {
+            "clip": "Ready",
+            "frame": 2,
+            "observation": 408,
+            "draw_id": "168",
+            "sim": 13.600618001073599,
+            "wall_offset": 13.62053219974041,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Ready/T_Guard209_Ready_02.T_Guard209_Ready_02"
+          },
+          {
+            "clip": "Ready",
+            "frame": 3,
+            "observation": 414,
+            "draw_id": "174",
+            "sim": 13.800618898123503,
+            "wall_offset": 13.817986398935318,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Ready/T_Guard209_Ready_03.T_Guard209_Ready_03"
+          },
+          {
+            "clip": "AxeWindup",
+            "frame": 0,
+            "observation": 417,
+            "draw_id": "177",
+            "sim": 13.90061929821968,
+            "wall_offset": 13.918060898780823,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/AxeWindup/T_Guard212_AxeWindup_00.T_Guard212_AxeWindup_00"
+          },
+          {
+            "clip": "AxeWindup",
+            "frame": 1,
+            "observation": 422,
+            "draw_id": "182",
+            "sim": 14.067287299782038,
+            "wall_offset": 14.08344180136919,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/AxeWindup/T_Guard212_AxeWindup_01.T_Guard212_AxeWindup_01"
+          },
+          {
+            "clip": "AxeWindup",
+            "frame": 2,
+            "observation": 427,
+            "draw_id": "187",
+            "sim": 14.233954899013042,
+            "wall_offset": 14.253671698272228,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/AxeWindup/T_Guard212_AxeWindup_02.T_Guard212_AxeWindup_02"
+          },
+          {
+            "clip": "AxeWindup",
+            "frame": 3,
+            "observation": 432,
+            "draw_id": "192",
+            "sim": 14.400630500167608,
+            "wall_offset": 14.422115299850702,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/AxeWindup/T_Guard212_AxeWindup_03.T_Guard212_AxeWindup_03"
+          },
+          {
+            "clip": "AxeWindup",
+            "frame": 4,
+            "observation": 437,
+            "draw_id": "197",
+            "sim": 14.567298300564289,
+            "wall_offset": 14.585149798542261,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/AxeWindup/T_Guard212_AxeWindup_04.T_Guard212_AxeWindup_04"
+          },
+          {
+            "clip": "AxeWindup",
+            "frame": 5,
+            "observation": 442,
+            "draw_id": "202",
+            "sim": 14.73396559804678,
+            "wall_offset": 14.759357500821352,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/AxeWindup/T_Guard212_AxeWindup_05.T_Guard212_AxeWindup_05"
+          },
+          {
+            "clip": "Ready",
+            "frame": 1,
+            "observation": 495,
+            "draw_id": "255",
+            "sim": 16.50064169988036,
+            "wall_offset": 16.520994897931814,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Ready/T_Guard209_Ready_01.T_Guard209_Ready_01"
+          },
+          {
+            "clip": "Ready",
+            "frame": 0,
+            "observation": 668,
+            "draw_id": "428",
+            "sim": 22.26824599877,
+            "wall_offset": 22.287806898355484,
+            "face": 1,
+            "source": "/Game/Production/FirstBatch/GuardWhole_v001/Ready/T_Guard209_Ready_00.T_Guard209_Ready_00"
+          }
+        ],
+        "procedural_gap_counts": {
+          "StompWindup": 54,
+          "StompFollow": 99,
+          "AxeFollow": 96
+        },
+        "maximum_metadata_floor_formula_error_display_px": 2.6590737945753062e-05,
+        "guard_HP": 185,
+        "guard_incoming_receipts": 0,
+        "writer_peak_pending_jobs": 1,
+        "runtime_reject_ensure_fatal_matches": [],
+        "independent_original_pixel_equality_reported": true,
+        "pixels_redecoded_by_this_review": false,
+        "visual_reviewed_by_this_review": false,
+        "audio_recorded": false,
+        "formal_complete_units": 0
+      }
+    ]
+  },
+  "inference": "The scoped production driver fix passes the same actual native regression and181 strict suite, and two fresh real captures now observe each once-only Wake phase five times without the prior ensure stall. This supports resolution of the reproduced interval-rejection path; it is not a guarantee against arbitrary future OS/GPU stalls or a global floating-point proof.",
+  "risks_and_boundaries": [
+    "Both approach sides and Ready/AxeWindup facings are covered; Dormant/Wake remain actualFacing+1 in BOTH runs, so left-facing Wake is not covered.",
+    "Only209/210/212partial rows are art-resident. AxeFollow/StompWindup/StompFollow remain explicit procedural gaps; no claim of full57/final enemy acceptance.",
+    "Knight/Bat clears use scoped diagnostic public damage. Guard birth is formal room plan; this is not normal J full-clear proof.",
+    "Pixels are not read or decoded by this review; pixel equality is the unchanged independent checker's recorded result plus metadata receipts/source binding. Root must preserve E then review actual frames/scale/floor/join.",
+    "MP4/VFR/Zip/E retention and actual audio are outside this metadata review; capture reports silent video/audio_recorded=false.",
+    "Old native_v001 failure, v003 wrong-premise fixture, v005 true semanticRED and failed v006 generator remain preserved; no history rewritten."
+  ],
+  "input_pins": {
+    "source-assets/production/backups/v130-guard-partial-181G/compiled-source-manifest.json": {
+      "bytes": 454535,
+      "sha256": "de1bc48f7fc015fe6d087aaac764764f54d217b62b637905501339e88aabc222"
+    },
+    "UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp": {
+      "bytes": 24571,
+      "sha256": "ef1bc7872975fc7d2928364daa88fb9199441061aadd316810dc8230d4898bdd"
+    },
+    "source-assets/production/fairytale-guard-v001/presentation-observer-fix-candidate-v007/syntax-check/reconstructed-driver-candidate.cpp.txt": {
+      "bytes": 24152,
+      "sha256": "39b85c4d52f23c022527a6f6cbe987e7b78f1eb99dd6fd316dfd1d220730460b"
+    },
+    "source-assets/production/fairytale-guard-v001/root-trial-registration-v001/v130-partial-art-root-prereg-v001.json": {
+      "bytes": 16775,
+      "sha256": "a0bd5ab3b0df97887f5b66a9631defdfa06848c3b0746b739fdcf44b00ae0875"
+    },
+    "source-assets/production/fairytale-guard-v001/presentation-candidate-v002/observer-freeze-v002.json": {
+      "bytes": 3689,
+      "sha256": "8f9fa03416fa07f38532c36bf8e0fae47adcd912ee025554a06045b46dedc93a"
+    },
+    "UnrealGame/Saved/Automation/FirstRoom-20261018-115254/index.json": {
+      "bytes": 395983,
+      "sha256": "e0f333b004b7578c3c299732db2bfe27fb259ce74dae6b00ac9232e1786cfe6c"
+    },
+    "UnrealGame/Saved/Automation/FirstRoom-20261018-114859/index.json": {
+      "bytes": 14231,
+      "sha256": "f64babebd24f997b4f583725ac1a7ec9b08d79215fae21bf08c593b22181a8f9"
+    },
+    "UnrealGame/Saved/Bootstrap/last-build.json": {
+      "bytes": 189,
+      "sha256": "0bfe02005e1dd9d948858a73991fb3282531fb8512c30990096a4d8d42461e89"
+    },
+    "过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/index.json": {
+      "bytes": 866,
+      "sha256": "f6c0aab025fcc682e4ff9caa4befd01103ada1d43637777c3d89e8778e574c10"
+    },
+    "过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/原件/runtime-report.json": {
+      "bytes": 2530905,
+      "sha256": "7593bc88609b5c5e16307364ae890ce94065ee00f01e20806f5ed1e5a91f94d2"
+    },
+    "过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/原件/independent-guard-art-partial-v002.json": {
+      "bytes": 35216,
+      "sha256": "97eef084ff7d2c7f3ceffde7c429e5a6f546fab00fbd255a88bb1e7d1961e8a5"
+    },
+    "过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/原件/native-async-write-summary.json": {
+      "bytes": 606,
+      "sha256": "2c0b66b7f329046d604fb528c714ed45b27bae407bea54662ab1931b8d77f35e"
+    },
+    "过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/原件/native-frame-pixels.jsonl": {
+      "bytes": 362960,
+      "sha256": "5eea813590dbb0478878bb8bc306e01ea2266464cccf4350b28094181e9667a9"
+    },
+    "过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/runtime.log": {
+      "bytes": 216741,
+      "sha256": "773a1ff827d684571b42b7072c1c7c3a9eda41834b0f2aef0d5443056f3e3c53"
+    },
+    "过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v003/index.json": {
+      "bytes": 865,
+      "sha256": "ff8b47128a5e05d5e0f20258f77798a6391ecdf3d24e8aa709e38655d67f7a33"
+    },
+    "过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v003/原件/runtime-report.json": {
+      "bytes": 2571017,
+      "sha256": "4323f51a464c198849378771c7f0f86d8514eb8687b74f76905ed185198caf69"
+    },
+    "过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v003/原件/independent-guard-art-partial-v002.json": {
+      "bytes": 35163,
+      "sha256": "cd732f65d210ced56719489bb4d41a404da76a1c05efb9446d7f7015ebb65a0c"
+    },
+    "过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v003/原件/native-async-write-summary.json": {
+      "bytes": 606,
+      "sha256": "89b63c9b705a7153ee224a256e2503124f8a6a3dc393dfb9d0bd47d3912210d2"
+    },
+    "过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v003/原件/native-frame-pixels.jsonl": {
+      "bytes": 370185,
+      "sha256": "954d9ba5405a32029aee2500439189e7fe2afa32ff0ce049f49b9829f51d840e"
+    },
+    "过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v003/runtime.log": {
+      "bytes": 133148,
+      "sha256": "732e7153fd02f7f5fe1a983271989d32c3cdc659ce47af72ea7dff11395c929b"
+    }
+  }
+}

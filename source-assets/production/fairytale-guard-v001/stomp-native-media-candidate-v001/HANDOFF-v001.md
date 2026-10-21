@@ -1,0 +1,23 @@
+# Stomp50 two-side native review media candidate
+
+Root executes this helper only after both actual native processes and frozen independent checker pass. The worker prepared code/contract only: no helper execution, ffmpeg, PNG decode, media generation, View, E access or actual Source/Content/tools changes. No F media leaf is pre-created with false content. Root's later execution creates one NEW dated topic with original/display/index trees, preserving failures.
+
+Inputs: actual left/right archives, the same fresh compiled snapshot, matching left/right preregs and Root's shared normalized50 profile. Both session PIDs/exit0/pass flags, report/receipt hashes, exact candidate/profile/snapshot bindings and the complete readonly official checker rerun must agree. The rerun has no `--write-receipt`; native archives stay readonly. Candidate dependencies are the unchanged523b70ca… native proof whole freeze and exact retained Death5 VFR helper/freezes.
+
+Root invocation from F:/Ourgame, after actual captures:
+
+```powershell
+.\tools\runtime\asset-gen\Scripts\python.exe -B -X utf8 "source-assets/production/fairytale-guard-v001/stomp-native-media-candidate-v001/tooling/prepare-Stomp-native-review-media-v001.py" --left-archive "<actual left F native archive>" --right-archive "<actual right F native archive>" --snapshot "<fresh snapshot directory>" --left-prereg "<actual left prereg.json>" --right-prereg "<actual right prereg.json>" --profile "<actual Native-Stomp50-profile-contract-v001.json>" --output "F:/Ourgame/过程图稿与视频/2026-10-18_怪诞守卫Stomp十二相左右实录审阅_v001"
+```
+
+Add `--validate-only` and omit output to check actual inputs without producing media. That still performs readonly native CRC/source-optical re-verification and PNG decoding, so only Root runs it after both capture processes terminate. An existing output, a native archive ancestor/descendant, missing side, stale snapshot or any failed native/independent receipt is refused. No branch launches UE or automatically opens media.
+
+Each side's complete1280×720 movie sequence becomes a separate silent MP4, using original monotonic callback wall offsets and the original stop time. Simulation/Guard clocks never drive video timing. The retained Death µs ffconcat/encoder/track/framemd5/decoded-final pipeline is unchanged except seven output filenames: passthrough,1µs time base, cap equal original frame count, decoded count equality, each decoded PTS checked against its original offset with the same derived concat rounding bound. No interpolation, invented pose, concatenated attack cycle, changed speed or voice. Prewarm is retained/CRC-verified in the native archive; it has no invented movie timestamp.
+
+Every one of12 phase samples comes from the independent fixed-source optical witness for same natural Stomp Aid2: WU0..5, Active0..1, Recovery0..3. Original PNG name/index, actual DrawId/SourceEventId, exact typed source path/file/RGBA hash and actual submitted quad must match. Four joins use report/receipt-identical original adjacent observations and full actual Guard draws; the before-Ready retains original Axe1, all following endpoints retain Stomp2. First returned Ready follows its actual clock, never fabricated Ready0.
+
+Output tree: `原件/left` and `原件/right` contain original1280×720 samples, eight join endpoints, native final, readonly report/receipt/session copies and per-side source/version/status indices. `展示副本/left` and `/right` contain full720p videos,12 full original rectangles/contact,12 native-pixel crops/contact, four full/crop join pairs, decode logs/framemd5/PTS receipt and decoded final. Labels are outside copied native rectangles; no resize/painting of native game pixels. A constant guard-ground-relative crop box encloses all actual submitted quads across phase and join witnesses; individual crop bounds are recorded and clipped crops are refused. All side output files are hashed in their index; root index binds both sides/documents.
+
+Native/source final and decoded video final are separate, with exact last source index, equal native/decoded counts, hashes and descriptive lossy RGB error. MP4 is lossy presentation; its decoded pixels are never asserted equal to the CRC-verified original PNG. These outputs do not establish physical foot lock, measured floor/contact, hidden bones, independent axe grip, art acceptance or full room completion. FinalAccepted/visual_reviewed remain false. Root must retain the entire new F topic to E with two SHA passes before any View or playback.
+
+Any correction after freeze requires a NEW candidate version. Old523b/621/v002/Root-fill freezes stay unchanged.

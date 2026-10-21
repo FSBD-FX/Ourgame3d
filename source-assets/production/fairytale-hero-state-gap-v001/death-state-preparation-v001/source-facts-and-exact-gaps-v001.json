@@ -1,0 +1,87 @@
+{
+  "schema": "Death5-source-preparation-runtime-facts-and-gaps-v001",
+  "facts": {
+    "source_generation_id": 220,
+    "source_raw_path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/standard-input-candidate-v001/process-batches/2026-10-18-right-body-states-v001/raw/death.png",
+    "raw_SHA256": "f9817539da15cc5f2d09435a1ad2a725beb7164a5d7edcd25408ef0d661a1eed",
+    "curated_E_gate": "E394, current five F/E byte-SHA reverified before View",
+    "identity_E_gate": "Ready002 E381 sameSHA d3f76650...",
+    "Sword_E_gate": "IndependentSWD E422 sameSHA2efb5519...",
+    "actual_source_Death5_Viewed": true,
+    "new_owner_media_Viewed": false,
+    "actual_native_Death_feature_checked": false
+  },
+  "actual_source_rules": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "line": 1540,
+      "fact": "Lethal actual hit resets AnimationTime to0 and labeldeath in poise/death interrupt branch."
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "line": 1551,
+      "fact": "Health<=0 sets bDead and calls existing OnFighterDied."
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "line": 1217,
+      "fact": "Combat body view bAlive = !Fighter->bDead."
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "line": 1812,
+      "fact": "AdvanceTerminalPresentation only dead finite positive delta, adds AnimationTime and lowers JumpHeight; no gameplay/kernel clock or resource advance."
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "line": 1889,
+      "fact": "bGameOver path calls actual Player AdvanceTerminalPresentation then returns; SimulationTime no longer advances."
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "line": 2335,
+      "fact": "Actual player death sets bGameOver; renderer must not change HP, rewards, drops or inventory."
+    }
+  ],
+  "inference": {
+    "body_partition_possible": "25 generated source-only owner textures with exclusive RGBA sum+alpha composite byte-exact to retained five source frames. Semantic ownership boundaries await E/View; numerical equality does not prove occlusion correctness.",
+    "display_root": "Onlyframe0 standing root shoe-supported; fixed[242,464] for late collapse is explicit author continuity proposal, not measured root/COM/footlock.",
+    "weapon": "Reuse old independentSword sourcepivot99,256 at.50; actual bodygloves do not prove retained grip. Author visual-release trajectory only; actual hand contactGrip/hiddenAxis null. No body redraw required for release policy."
+  },
+  "precise_gaps": [
+    {
+      "component": "Chest",
+      "new_poses": 5,
+      "reason": "Upright→buckled→kneeling→side-ground impact→final side/head-turn require pose-specific vest projective silhouettes and true holes. Hurt/Ready coords or rotated cutouts would invent the Death fit."
+    },
+    {
+      "component": "ShoulderNear",
+      "new_poses": 5,
+      "reason": "Near upper arm changes angle/foreshortening as palm supports ground; existingHurt row cannot supply those5 forms."
+    },
+    {
+      "component": "ShoulderFar",
+      "new_poses": 5,
+      "reason": "Far shoulder projection becomes partly/fully head-occluded at2–4. Generate complete independent component; later source fit may occlude it, never assume missing=empty."
+    }
+  ],
+  "blocked_before_SWDLGT_trial": [
+    "Need15 new armor source poses/standard extraction and actual sourcefit/semantic masks review.",
+    "Need Root author root/releasedSword placement decision after E/View; no hidden source sockets can be measured.",
+    "Need new readonly native Death presentation query/shared-plan/rendererTDD later; no actual Source changes in this preparation."
+  ],
+  "Source_read_pins": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 122242,
+      "sha256": "818c2c06f4b11d04511f65776a678eaad5f1a2d244ff05b6e6d5bfa1fa1c5a38"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "bytes": 151572,
+      "sha256": "55066ff73a6dd594db4c0631f76656d8166f43a3b4d3512b53df01021038cc6c"
+    }
+  ],
+  "TrialAllowed": false,
+  "FinalAccepted": false
+}

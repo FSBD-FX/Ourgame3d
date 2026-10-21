@@ -1,0 +1,81 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\stomp-source-fit-audit-v001\\stomp246-recovery4-extraction-review-v001\\run-stomp246-recovery4-shared-HD-v001",
+  "states": [
+    "right_idle",
+    "right_stomp_recovery"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "right_idle",
+      "source": "frames",
+      "expected_frames": 4,
+      "found_frames": 4,
+      "natural_pose_count": 4,
+      "frame_files": [
+        "frames/right/idle/frame-0.png",
+        "frames/right/idle/frame-1.png",
+        "frames/right/idle/frame-2.png",
+        "frames/right/idle/frame-3.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.9754386127921805,
+          "mean": 0.9821599883416154
+        },
+        "dhash_similarity": {
+          "min": 0.921875,
+          "mean": 0.953125
+        },
+        "motion_presence": 0.053607297411151965,
+        "centroid_sigma": {
+          "x": 2.2095872752145036,
+          "y": 4.467112307696949
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "state": "right_stomp_recovery",
+      "source": "frames",
+      "expected_frames": 4,
+      "found_frames": 4,
+      "natural_pose_count": 4,
+      "frame_files": [
+        "frames/right/stomp_recovery/frame-0.png",
+        "frames/right/stomp_recovery/frame-1.png",
+        "frames/right/stomp_recovery/frame-2.png",
+        "frames/right/stomp_recovery/frame-3.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.9032843699416379,
+          "mean": 0.944255819084592
+        },
+        "dhash_similarity": {
+          "min": 0.875,
+          "mean": 0.9114583333333334
+        },
+        "motion_presence": 0.0668704363255719,
+        "centroid_sigma": {
+          "x": 1.7839553324836515,
+          "y": 15.449341426897947
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": []
+    }
+  ],
+  "errors": [],
+  "warnings": []
+}

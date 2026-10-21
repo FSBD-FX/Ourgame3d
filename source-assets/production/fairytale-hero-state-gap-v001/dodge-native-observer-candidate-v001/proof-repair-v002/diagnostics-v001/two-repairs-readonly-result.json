@@ -1,0 +1,135 @@
+{
+  "schema": "Dodge-two-oracle-repairs-readonly-legacy-diagnostic-v002",
+  "old_archive": "F:/Ourgame/过程图稿与视频/2026-10-18_钟盔真实Shift向外闪避四相试样_left_v001",
+  "readonly_originals_unchanged": true,
+  "bindings": [
+    {
+      "path": "F:/Ourgame/过程图稿与视频/2026-10-18_钟盔真实Shift向外闪避四相试样_left_v001/index.json",
+      "bytes": 1077,
+      "sha256": "d30a9ce42e7e398b8c7a0fcf90557d753dd0f767752eb9f7a43f9d2aa0fd2fc3"
+    },
+    {
+      "path": "F:/Ourgame/过程图稿与视频/2026-10-18_钟盔真实Shift向外闪避四相试样_left_v001/原件/runtime-report.json",
+      "bytes": 1883652,
+      "sha256": "18b9666a96e623efd7ea1691907db8005177d1ead76da836b64db14200848551"
+    },
+    {
+      "path": "F:/Ourgame/过程图稿与视频/2026-10-18_钟盔真实Shift向外闪避四相试样_left_v001/原件/native-frame-pixels.jsonl",
+      "bytes": 171292,
+      "sha256": "40fac8c0463bebcf1ca883b9a32287ded0ff34ef63eeee5d03fc1d876fb48cc6"
+    },
+    {
+      "path": "F:/Ourgame/过程图稿与视频/2026-10-18_钟盔真实Shift向外闪避四相试样_left_v001/原件/native-async-write-summary.json",
+      "bytes": 606,
+      "sha256": "c3a973925d49c5f0329ee49a017fb31724310b6cc1543db902561f7dd090213c"
+    }
+  ],
+  "old_official_status_not_changed": true,
+  "new_official_receipt_not_written": true,
+  "two_repaired_oracle_passed": true,
+  "failure": null,
+  "diagnostic_result": {
+    "schema": "hero-Dodge4-independent-native-v001",
+    "passed": true,
+    "scenario": "NormalShiftOutwardUnblockedDodge4",
+    "process_id": 27984,
+    "native_report_pin": {
+      "path": "F:/Ourgame/过程图稿与视频/2026-10-18_钟盔真实Shift向外闪避四相试样_left_v001/原件/runtime-report.json",
+      "bytes": 1883652,
+      "sha256": "18b9666a96e623efd7ea1691907db8005177d1ead76da836b64db14200848551"
+    },
+    "native_Dodge_frames": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "native_Dodge_draws": 11,
+    "actual_action": "1",
+    "original400ms_unblocked185_verified": true,
+    "original60to200ms_iframe_verified": true,
+    "actual33resident_and9slots_verified": true,
+    "actual_quad_source_projection_and_fullXmirror_verified": true,
+    "actual_guard_confirmed_hits": 0,
+    "actual_adjacent_joins": [
+      {
+        "kind": "Dodge3_to_Ready",
+        "from_observation": 299,
+        "to_observation": 300,
+        "from_draw": "324",
+        "to_draw": "325"
+      },
+      {
+        "kind": "Ready_to_Walk",
+        "from_observation": 304,
+        "to_observation": 305,
+        "from_draw": "329",
+        "to_draw": "330"
+      }
+    ],
+    "native_PNG_CRC_FIFO_verified": true,
+    "optical_source_projection": {
+      "passed": true,
+      "source_registered_native_witnesses": [
+        {
+          "frame": 0,
+          "original_PNG": "MovieFrame00290.png",
+          "native_draw_id": "315",
+          "body_opaque_pixels": 1559,
+          "body_median_RGB_error": 0.0,
+          "body_fraction_RGB_error_le55": 1.0,
+          "exposed_blade_pixels": 61,
+          "blade_median_RGB_error": 0.0,
+          "blade_fraction_RGB_error_le65": 1.0
+        },
+        {
+          "frame": 1,
+          "original_PNG": "MovieFrame00292.png",
+          "native_draw_id": "317",
+          "body_opaque_pixels": 1519,
+          "body_median_RGB_error": 0.0,
+          "body_fraction_RGB_error_le55": 1.0,
+          "exposed_blade_pixels": 66,
+          "blade_median_RGB_error": 0.0,
+          "blade_fraction_RGB_error_le65": 1.0
+        },
+        {
+          "frame": 2,
+          "original_PNG": "MovieFrame00295.png",
+          "native_draw_id": "320",
+          "body_opaque_pixels": 1603,
+          "body_median_RGB_error": 0.0,
+          "body_fraction_RGB_error_le55": 1.0,
+          "exposed_blade_pixels": 62,
+          "blade_median_RGB_error": 0.3333333333333333,
+          "blade_fraction_RGB_error_le65": 1.0
+        },
+        {
+          "frame": 3,
+          "original_PNG": "MovieFrame00298.png",
+          "native_draw_id": "323",
+          "body_opaque_pixels": 1578,
+          "body_median_RGB_error": 0.0,
+          "body_fraction_RGB_error_le55": 1.0,
+          "exposed_blade_pixels": 65,
+          "blade_median_RGB_error": 0.0,
+          "blade_fraction_RGB_error_le65": 1.0
+        }
+      ],
+      "registration_search_used": false,
+      "actual_pixels_modified": false,
+      "native_quad_pixel_geometry_separately_required": true,
+      "optical_threshold_authority": "Predeclared candidate gates, not calibrated native acceptance; failure stays failed for Root diagnosis.",
+      "FinalAccepted": false
+    },
+    "native_backwards_covered": false,
+    "blocked_native_covered": false,
+    "source_contact_floor_hidden_socket_physics_verified": false,
+    "audio_recorded": false,
+    "visual_reviewed": false,
+    "FinalAccepted": false
+  },
+  "UE_started": false,
+  "View": false,
+  "FinalAccepted": false
+}

@@ -1,0 +1,10 @@
+diff --git a/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp b/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+@@ -18,1 +18,2 @@
+ #include "DungeonHeroHurtProbeV001.h"
++#include "DungeonHeroDeathProbeV001.h"
+@@ -264,1 +265,2 @@
+-        if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroHurtProofV001")))GetWorld()->SpawnActor<ADungeonHeroHurtProbeV001>();
++        if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroDeathProofV001")))GetWorld()->SpawnActor<ADungeonHeroDeathProbeV001>();
++        else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroHurtProofV001")))GetWorld()->SpawnActor<ADungeonHeroHurtProbeV001>();

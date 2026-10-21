@@ -1,0 +1,36 @@
+{
+  "schema": "guard-v010-tooling-only-schema-contract-validation",
+  "no_UE_or_media_decode_View": true,
+  "pixel_assertion_AST_multiset_unchanged_except_explicit_schema_v002_to_v009": true,
+  "all_other_pixel_CRC_FIFO_source_lines_equal": true,
+  "schema_assertion_unconditional_before_pixel_decode": true,
+  "schema_gate_cases": [
+    {
+      "native_schema": "guard-art-partial-native-observer-v009",
+      "allowed": true
+    },
+    {
+      "native_schema": "guard-art-partial-native-observer-v002",
+      "allowed": false
+    },
+    {
+      "native_schema": "guard-art-partial-native-observer-v010",
+      "allowed": false
+    },
+    {
+      "native_schema": "",
+      "allowed": false
+    },
+    {
+      "native_schema": "invented",
+      "allowed": false
+    }
+  ],
+  "native_cpp_schema": "guard-art-partial-native-observer-v009",
+  "new_session_schema": "guard-art-partial-native-session-v010",
+  "main_pixel_helper_filename": "verify-native-pixels-v010.py",
+  "workspace_resolves_to": "F:/Ourgame",
+  "frozen_v009_all_16_pins_unchanged": true,
+  "python_AST": "both new scripts parsed",
+  "not_actual_new_native_result": true
+}

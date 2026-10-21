@@ -1,0 +1,35 @@
+--- UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
++++ UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+@@ -2,6 +2,7 @@
+ #include "DungeonFairytaleSwordWalkTextures.inl"
+ #include "DungeonFairytaleSwordHurtTextures.inl"
+ #include "DungeonFairytaleSwordDeathTextures.inl"
++#include "DungeonFairytaleSwordDodgeTextures.inl"
+ #include "DungeonFairytaleSwordEquipmentBinding.h"
+ #include "DungeonPresentationScale.h"
+ #include "DungeonFighter.h"
+@@ -73,6 +74,8 @@
+         &&FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordHurtV001::CommandLineFlag);
+     bUseFairytaleSwordDeathPreview=bUseFairytaleSwordEquipmentBoundPreview
+         &&FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordDeathV001::CommandLineFlag);
++    bUseFairytaleSwordDodgePreview=bUseFairytaleSwordEquipmentBoundPreview
++        &&FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordDodgeV001::CommandLineFlag);
+     bUseFairytaleSwordWalkPreview=bUseFairytaleSwordEquipmentBoundPreview
+         &&FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordWalkPreview"));
+     bUseFairytaleLookdevPreview=!bUseFairytaleSwordEquipmentBoundPreview
+@@ -160,6 +163,15 @@
+                     if(auto Texture=DungeonFairytaleSwordDeathV001::PreloadTexture(Layer.TexturePath,Frames))ReadyArmorTextures.Add(Texture);
+             if(auto Texture=DungeonFairytaleSwordDeathV001::PreloadTexture(DeathProfile.SwordTexturePath,Frames))ReadyArmorTextures.Add(Texture);
+         }
++        if(bUseFairytaleSwordDodgePreview)
++        {
++            // All32 nonempty owners and existing sword33 finish at startup.
++            const auto& DodgeProfile=DungeonFairytaleSwordDodgeV001::Profile();
++            for(const auto& Phase:DodgeProfile.Frames)
++                for(const auto& Layer:Phase.Layers)
++                    if(auto Texture=DungeonFairytaleSwordDodgeV001::PreloadTexture(Layer.TexturePath,Frames))ReadyArmorTextures.Add(Texture);
++            if(auto Texture=DungeonFairytaleSwordDodgeV001::PreloadTexture(DodgeProfile.SwordTexturePath,Frames))ReadyArmorTextures.Add(Texture);
++        }
+ #if WITH_EDITOR
+         FTextureCompilingManager::Get().FinishCompilation(ReadyArmorTextures);
+ #endif

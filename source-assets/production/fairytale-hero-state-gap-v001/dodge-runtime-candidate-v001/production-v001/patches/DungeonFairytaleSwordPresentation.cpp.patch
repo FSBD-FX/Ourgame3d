@@ -1,0 +1,25 @@
+--- UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp
++++ UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp
+@@ -97,6 +97,11 @@
+ bool ADungeonHUD::DrawFairytaleSwordBody(ADungeonFighter* F)
+ {
+     if(!F || F->bEnemy)return false;
++    // Clear Dodge observation before higher-priority Death/Hurt can return.
++    const uint64 PreviousDodgeDrawId=FairytaleSwordDodgeDraw.DrawId;
++    FairytaleSwordDodgeDraw=FDungeonFairytaleSwordDodgeDraw();
++    FairytaleSwordDodgeDraw.DrawId=PreviousDodgeDrawId;
++    FairytaleSwordDodgeDraw.OptIn=bUseFairytaleSwordDodgePreview;
+     const uint64 PreviousDeathDrawId=FairytaleSwordDeathDraw.DrawId;
+     FairytaleSwordDeathDraw=FDungeonFairytaleSwordDeathDraw();
+     FairytaleSwordDeathDraw.DrawId=PreviousDeathDrawId;
+@@ -110,6 +115,10 @@
+     FairytaleSwordHurtDraw.OptIn=bUseFairytaleSwordHurtPreview;
+     if(bUseFairytaleSwordHurtPreview && !F->bDead && F->AnimationName==TEXT("hurt"))
+         return DrawFairytaleSwordHurtBody(F);
++    // Death > Hurt > actual air > Dodge. Backward roll keeps actual Facing.
++    if(bUseFairytaleSwordDodgePreview && !F->bDead && F->JumpHeight==0.f && F->GetVerticalVelocity()==0.f
++        && F->AnimationName==TEXT("dodge") && F->GetDodgeState().Phase==DungeonDodge::EPhase::Dodging
++        && DrawFairytaleSwordDodgeBody(F))return true;
+     using namespace DungeonFairytaleSwordBodyV001;
+     const uint64 PreviousDrawId=FairytaleSwordDraw.DrawId;
+     FairytaleSwordDraw=FDungeonFairytaleSwordDraw();

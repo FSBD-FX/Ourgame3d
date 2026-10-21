@@ -1,0 +1,67 @@
+{
+  "runtime_report_schema": "guard-Stomp50-native-observer-v001",
+  "scenario": "FirstNaturalStompAid2Cycle",
+  "session_schema": "guard-Stomp50-native-session-v001",
+  "Root_prereg_schema": "guard-Stomp50-Root-prereg-v001",
+  "profile_id": "GuardStomp50V004",
+  "native_sources": "Exactly Root current approved50 typed mappings; correctedActive242/possibleRecovery243 not assumed before approval. Old224/225 never hardcoded positive.",
+  "expected_single_first_natural_Stomp_attack_id": 2,
+  "clock": "actual completed Guard State.Time / Selection.SampleTime; all original events/window/lock retain exact sub-tick AtTime",
+  "required_masks": {
+    "WU": 63,
+    "Active": 3,
+    "Recovery": 15
+  },
+  "source_phase_offsets": {
+    "StompWindup": [
+      0,
+      0.15,
+      0.3,
+      0.45,
+      0.6,
+      0.75
+    ],
+    "StompActive": [
+      0,
+      0.075
+    ],
+    "StompRecovery": [
+      0,
+      0.375,
+      0.75,
+      1.125
+    ]
+  },
+  "required_true_adjacent_joins": [
+    "Ready-to-StompWU0",
+    "StompWU5-to-Active0",
+    "StompActive1-to-Recovery0",
+    "StompRecovery3-to-actual-Ready"
+  ],
+  "no_Ready0_or_four_Ready_frame_assumption": true,
+  "native_only_controls": [
+    "Enter",
+    "E",
+    "W",
+    "A",
+    "S",
+    "D"
+  ],
+  "predecessor_diagnostics_only": [
+    "ENM-STN-001",
+    "ENM-STN-002"
+  ],
+  "natural_hero_damage_allowed": true,
+  "no_hero_or_Guard_injected_damage_or_heal_or_clocks_or_poses": true,
+  "complete_startup_GPU_resources": 50,
+  "selected_row_residents_all_frames": true,
+  "wholebody_has_axe_one_quad": true,
+  "actual_range_debug_default_off": true,
+  "hidden_UI": true,
+  "CRC_and_FIFO_required": true,
+  "fixed_source_optics_required": true,
+  "all_source_geometry_artist_vs_measured_authority_preserved": true,
+  "old44_entry_and_tests_unchanged": true,
+  "Move6_still_unproved": true,
+  "FinalAccepted": false
+}

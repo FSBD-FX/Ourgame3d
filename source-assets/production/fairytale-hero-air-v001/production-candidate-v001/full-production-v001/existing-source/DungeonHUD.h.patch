@@ -1,0 +1,15 @@
+--- actual/DungeonHUD.h
++++ candidate/DungeonHUD.h
+@@ -167,7 +167,11 @@
+     FDungeonFairytaleSwordDeathDraw FairytaleSwordDeathDraw;
+     bool bUseFairytaleSwordDodgePreview=false;
+     FDungeonFairytaleSwordDodgeDraw FairytaleSwordDodgeDraw;
+-    FDungeonFairytaleSwordAirDrawV001 FairytaleSwordAirDraw; // Stage0 defaults: no Air renderer or submitted slot.
++    FDungeonFairytaleSwordAirDrawV001 FairytaleSwordAirDraw;
++    bool bUseFairytaleSwordAirPreview=false;
++    UPROPERTY() TMap<FString,TObjectPtr<UTexture2D>> FairytaleSwordAirTextures;
++    void LoadFairytaleSwordAirTrial();
++    bool DrawFairytaleSwordAirBody(ADungeonFighter* Fighter);
+     bool DrawFairytaleSwordDodgeBody(ADungeonFighter* Fighter);
+     bool DrawFairytaleSwordDeathBody(ADungeonFighter* Fighter);
+     UTexture2D* GetFairytaleSwordTexture(const FString& Clip,int32 Index);

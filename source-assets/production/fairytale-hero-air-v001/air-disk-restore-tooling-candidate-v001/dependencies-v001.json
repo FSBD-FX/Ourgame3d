@@ -1,0 +1,76 @@
+{
+  "schema": "v144-disk-restore-retained-pure-dependencies-v001",
+  "pins": {
+    "retained_landing_checker": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/landing-priority-observer-candidate-v001/tooling-review-fix-v002/verify-landing-priority-native-v001.py",
+      "bytes": 47567,
+      "sha256": "16681b647f2e55876a92816377c63beb5b79202cf4b0f8a0326086e935662b6a"
+    },
+    "retained_landing_freeze": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-air-v001/landing-priority-observer-candidate-v001/tooling-review-fix-v002/HeroLandingPriority-Task2-tooling-freeze-v002.json",
+      "bytes": 10585,
+      "sha256": "c785c6ce607c4cb8daeebc7a5c29170161c5ed2f7453f1713708223e709f0786"
+    },
+    "walk_manifest": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-import-candidate-v001/import-walk48-v001.json",
+      "bytes": 57164,
+      "sha256": "0098a1f16d99c59a55c2e7b43d9709a4d3c71d9fc14a5d148b84326b57f1f680"
+    },
+    "walk_profile": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-native-root-profile-input-v001/expected-profile-root-from-source-manifest-v001.json",
+      "bytes": 8853,
+      "sha256": "2cb6917f4c78d569f1c9c178fcd4339274e65da7e0ddca7a06afb550a5c2a05e"
+    },
+    "audio_policy_addendum": {
+      "path": "F:/Ourgame/docs/superpowers/specs/2026-10-19-hero-air-disk-restore-audio-addendum-v001.md",
+      "bytes": 641,
+      "sha256": "c406da45c144572dc598a546f75f07d487885280df19510eed7237de3584d4d9"
+    },
+    "audio_gap_source_audit": {
+      "path": "F:/Ourgame/.superpowers/sdd/2026-10-19-hero-air-disk-restore-v144/hero-audio-gap-audit-v001.md",
+      "bytes": 18679,
+      "sha256": "f383db7dc82f3b57053f097e96b311a392cd019f1717b3b5e1f731c89a84253c"
+    },
+    "native_codec_source": {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonRunSnapshotCodec.cpp",
+      "bytes": 74800,
+      "sha256": "205a7df386c440db98f8bc1afd21e5a6100b70eeca3bb050f19c08c1989c4095"
+    },
+    "native_adapter_source": {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonRunSaveAdapterV2.cpp",
+      "bytes": 19299,
+      "sha256": "14a8472acd3e9018db6a32d2886b8e214cdcfde989234d470a63d29e36a56065"
+    },
+    "native_store_source": {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonSaveGenerationStore.cpp",
+      "bytes": 31600,
+      "sha256": "1436ccf8178f35899f3ae5e1d6a1f4660b80ef59d594566b1319ee74ae117505"
+    }
+  },
+  "allowed_old_calls": [
+    "landing.dependencies",
+    "air_contract.source_only (source-art closure only)",
+    "landing.verify_resources",
+    "landing.quad_geometry",
+    "landing.legacy_quads",
+    "landing.legacy_identity",
+    "air.verify_png_fifo",
+    "air.fixed_optical_gate",
+    "air_contract.project",
+    "source_pixels.linear/sample/srgb",
+    "audio.audit(source)",
+    "audio.validate_capture_receipt",
+    "audio.validate_pcm_bytes(target require_non_silent=False)",
+    "audio.validate_frame_timing"
+  ],
+  "forbidden_old_calls": [
+    "landing.verify_causal",
+    "landing.preflight_context",
+    "landing.verify_native",
+    "Air.preflight",
+    "Air.verify_native",
+    "Air.queued_jump_contract",
+    "Guard native causal contracts"
+  ],
+  "no_native_claim": true
+}

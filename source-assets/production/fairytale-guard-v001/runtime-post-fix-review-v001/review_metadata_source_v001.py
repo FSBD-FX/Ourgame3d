@@ -1,0 +1,100 @@
+from pathlib import Path
+import json,hashlib,collections,re,math,datetime
+ROOT=Path('F:/Ourgame')
+HERE=Path(__file__).resolve().parent
+PINS={}
+def read(path):
+    p=ROOT/path if not Path(path).is_absolute() else Path(path)
+    b=p.read_bytes();PINS[p.relative_to(ROOT).as_posix()]=dict(bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
+    return b.decode('utf-8-sig')
+def doc(path):return json.loads(read(path))
+def check(value,name):
+    if not value:raise AssertionError(name)
+def normalize(s):return s.replace('\r\n','\n')
+def pinned(p,item):
+    b=p.read_bytes();return len(b)==item['bytes'] and hashlib.sha256(b).hexdigest()==item['sha256']
+def main():
+    snap=ROOT/'source-assets/production/backups/v130-guard-partial-181G';manifest=doc(snap/'compiled-source-manifest.json')
+    check(len(manifest['files'])==1892 and manifest['source_files']==223 and manifest['production_files']==1226 and manifest['strict_registered_tests']==181,'Exact Root final typed counts')
+    sm={f['path']:f for f in manifest['files']};source=[f for f in manifest['files'] if f['path'].startswith('UnrealGame/Source/')]
+    check(len(source)==223,'Actual frozen Source entry count')
+    for f in source:
+        check(pinned(ROOT/f['path'],f),'Current Source differs from compiled input '+f['path'])
+        check(pinned(snap/'files'/f['path'],f),'Frozen Source copy differs '+f['path'])
+    # Source/binary metadata only. No Content/PNG/movie bytes are read or decoded here.
+    dll=sm['UnrealGame/Binaries/Win64/UnrealEditor-CodexDungeon.dll'];check(pinned(ROOT/dll['path'],dll) and pinned(snap/'files'/dll['path'],dll),'Exact compiled DLL pin')
+    current=read('UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp');expected=read('source-assets/production/fairytale-guard-v001/presentation-observer-fix-candidate-v007/syntax-check/reconstructed-driver-candidate.cpp.txt')
+    check(normalize(current)==normalize(expected),'Actual Driver equals frozen v007 reconstructed source')
+    prereg_path='source-assets/production/fairytale-guard-v001/root-trial-registration-v001/v130-partial-art-root-prereg-v001.json';prereg=doc(prereg_path)
+    mh=PINS[(snap/'compiled-source-manifest.json').relative_to(ROOT).as_posix()]['sha256'];ph=PINS[prereg_path]['sha256']
+    check(prereg['pre_registered_before_capture'] and prereg['compiled_manifest_sha256']==mh,'Root prereg exact manifest binding')
+    check((prereg['source_files'],prereg['production_files'],prereg['strict_registered_tests'])==(223,1226,181),'Root prereg counts')
+    for f in prereg['admitted_source_files']:check(f==sm[f['path']] and pinned(ROOT/f['path'],f),'Admitted Source pin '+f['path'])
+    oldbase=ROOT/'source-assets/production/fairytale-guard-v001/presentation-candidate-v002';frozen=doc(oldbase/'observer-freeze-v002.json')
+    for f in frozen['files']:
+        check(pinned(oldbase/f['path'],f),'Frozen v002 candidate mutation '+f['path'])
+        rel=(oldbase/f['path']).relative_to(ROOT).as_posix();check(sm[rel]['sha256']==f['sha256'],'Root snapshot binds original frozen candidate/tooling '+rel)
+    freezeh=PINS[(oldbase/'observer-freeze-v002.json').relative_to(ROOT).as_posix()]['sha256']
+    full=doc(manifest['full_suite']['path']);check(PINS[manifest['full_suite']['path']]=={k:v for k,v in manifest['full_suite'].items() if k!='path'},'Full suite Root pin')
+    check((full['succeeded'],full['succeededWithWarnings'],full['failed'],full['notRun'],full['inProcess'])==(181,0,0,0,0),'181 strict suite totals')
+    check(len(full['tests'])==181 and all(t['state']=='Success' and t['warnings']==0 and t['errors']==0 for t in full['tests']),'All181 actual per-test outcomes')
+    one=doc('UnrealGame/Saved/Automation/FirstRoom-20261018-114859/index.json');check((one['succeeded'],one['failed'],one['succeededWithWarnings'])==(1,0,0),'Native v005 regression GREEN')
+    check(one['tests'][0]['fullTestPath']=='CodexDungeon.Content.StoneGuardNative.WakeEntryReplannedEndpointNeverRejectsLegalInterval','Exact corrected regression filter')
+    build=doc(manifest['current_build']['path']);check(build['ExitCode']==0 and '114631' in build['Log'],'Exact admitted build0')
+    facts={r['clip']:r for r in prereg['profile_facts']};check(set(facts)=={'Ready','Wake','AxeWindup'} and sum(len(r['frames']) for r in facts.values())==16,'Exact16 approved partial frame map')
+    runs=[]
+    for version,pid,side,n in [('v002',55528,-1,657),('v003',53660,1,670)]:
+        base=ROOT/f'过程图稿与视频/2026-10-18_石守卫三行整身原生试样_{version}'
+        idx=doc(base/'index.json');r=doc(base/'原件/runtime-report.json');ind=doc(base/'原件/independent-guard-art-partial-v002.json');summary=doc(base/'原件/native-async-write-summary.json')
+        receipts=[json.loads(line) for line in read(base/'原件/native-frame-pixels.jsonl').splitlines()];log=read(base/'runtime.log')
+        check(idx['snapshot_manifest_sha256']==mh and idx['root_prereg_sha256']==ph and idx['candidate_freeze_sha256']==freezeh,'Session binding exact '+version)
+        check(r['passed'] and r['flow_complete'] and not r['failure'] and idx['exit_code']==0 and ind['passed'],'Original native/independent outcomes '+version)
+        check(isinstance(r['process_id'],str) and r['process_id']==str(pid) and isinstance(idx['process_id'],int) and idx['process_id']==pid and r['actual_approach_side']==side and r['requested_approach_side']==side,'Canonical native decimal PID and session integer / requested approach '+version)
+        check(r['guard_final_HP']==185 and r['guard_incoming_receipt_count']==0,'Guard no-damage scope '+version)
+        check(not r['normal_J_full_clear'] and r['diagnostic_public_damage_used'] and not r['guard_public_damage_used'] and not r['guard_spawned_by_probe'] and not r['game_tick_called_manually'],'Honest diagnostic/plan/no-clock-write scope '+version)
+        check(not r['audio_recorded'] and not r['visual_reviewed'] and r['formal_complete_units']==0 and r['silent_video'],'No audio/art/final acceptance '+version)
+        obs=r['observations'];offsets=r['capture_timing']['frame_wall_offsets_s'];check(len(obs)==len(offsets)==n==ind['native_frames'],'Observation/offset/movie count '+version)
+        check(not r['capture_timing']['use_fixed_time_step'] and r['native_async_capture_writes_flushed'] and r['capture_stop_before_flush'],'Ordinary native pacing and close/flush '+version)
+        check(len(receipts)==n+1 and receipts[0]['file']=='prewarm-viewport.png','One separate prewarm receipt '+version)
+        for i,q in enumerate(receipts[1:]):
+            check(q['file']==f'MovieFrame{i:05d}.png' and q['width']==1280 and q['height']==720 and q['saved'] and q['async_writer'] and q['writer_sequence']==i+1 and q['copy_crc_matches'] and q['copied_BGRA8_crc32']==q['native_BGRA8_crc32'],'Native CRC receipt sequence '+version+str(i))
+            check(q['capture_callback_monotonic_s']<=q['reservation_completed_monotonic_s']<=q['enqueued_monotonic_s']<=q['save_started_monotonic_s']<=q['save_completed_monotonic_s'],'FIFO metadata chronology '+version+str(i))
+        check(summary['success'] and summary['flushed'] and summary['closed'] and all(summary[k]==n for k in ['movie_reserved','movie_enqueued','movie_saved','movie_completed','receipts_saved']) and all(summary[k]==0 for k in ['movie_failed','movie_reservation_failed','rejected','pending']),'Writer all frames/zero failures '+version)
+        check(ind['pixel_proof']['passed'] and ind['pixel_proof']['every_source_viewport_pixel_crc_matches'] and ind['pixel_proof']['verified_original_PNG_count']==n+1,'Frozen independent checker reports pixel equality '+version)
+        bad=re.findall(r'^.*(?:Stone Guard rejected|Ensure condition failed|Handled ensure|Fatal error).*$' ,log,re.I|re.M);check(not bad,'Runtime reject/ensure/fatal-free '+version)
+        masks={'Wake':0,'Ready':0,'AxeWindup':0};counts=collections.defaultdict(collections.Counter);faces=collections.defaultdict(collections.Counter);lastid=0;dormant=0;gaps=collections.Counter();wake=[];frame_witness={};max_floor_error=0.
+        for i,o in enumerate(obs):
+            check(o['wall_offset_s']==offsets[i] and (i==0 or offsets[i]>offsets[i-1]),'Original strictly increasing offsets '+version+str(i))
+            gn=o.get('guard_native')
+            if gn:check(gn['time']==o['sim'] and gn['HP']==185 and gn['incoming_receipts']==0 and not gn['dead'],'Native state/time/HP per observation '+version+str(i))
+            for d in o['guard_draws']:
+                check(int(d['EntityId'])==int(r['guard_entity']) and int(d['DrawId'])>lastid,'Every actual DrawId new/same Guard '+version+str(i));lastid=int(d['DrawId']);s=d['Selection'];c=s['Clip'];f=s['Frame'];face=s['Facing']
+                check(s['Valid'] and s['SampleTime']==gn['time']==o['sim'],'Actual selection uses real committed clock '+version+str(i));faces[c][face]+=1
+                if c not in ['Dormant','Wake','Ready','AxeWindup']:
+                    check(not d['Drawn'] and d['ProceduralFallback'] and d['MissingReason'] and not d['DrawStack'],'Missing row procedural gap '+version+str(i));gaps[c]+=1;continue
+                row=facts['Wake' if c=='Dormant' else c];source=row['frames'][f]
+                check(d['Drawn'] and d['TextureReady'] and d['RegistrationReady'] and d['TrialAllowed'] and not d['FinalAccepted'] and not d['ProceduralFallback'] and not d['MissingReason'],'Actual approved scoped partial draw '+version+str(i))
+                check(d['WholebodyIncludesAxe'] and d['DrawStack']==[d['TexturePath']] and d['TexturePath']==source['object_path'] and d['SourceSHA256']==source['source']['sha256'],'Exact object/source/single wholebody axe layer '+version+str(i))
+                check(d['SourceFloorPivot']==source['floor_pivot_source_px'] and d['RowScale']==row['ONE_row_display_px_per_source_px'] and d['CanvasSize']==row['ONE_row_canvas_display_px'] and d['StandingExtent']==row['standing_body_extent_px'] and d['TargetBodyHeight']==100.8,'Exact source body-basis/ONEscale/pivot '+version+str(i))
+                px,py=d['SourceFloorPivot'];displayx=512-px if face<0 else px;gx,gy=d['GroundScreen'];tx,ty=d['TopScreen'];err=max(abs(gx-tx-displayx*d['RowScale']),abs(gy-ty-py*d['RowScale']));max_floor_error=max(max_floor_error,err);check(err<2.e-4,'Left/right floor placement within float screen precision '+version+str(i))
+                if c=='Dormant':dormant+=1;check(f==0 and d['AssetClip']=='Wake' and d['AssetFrame']==0,'Dormant explicit Wake0 alias '+version+str(i));continue
+                if c=='Wake':
+                    starts=[0.,.167,.333,.5,.667,.833];expected=sum(s['SampleTime']>=gn['wake_start']+x for x in starts)-1
+                    check(f==expected and gn['wake_start']<=s['SampleTime']<gn['wake_end'],'Wake frame actual original clock '+version+str(i));wake.append(dict(observation=i,wall=o['wall_offset_s'],sim=o['sim'],frame=f,draw_id=d['DrawId'],facing=face))
+                elif c=='AxeWindup':
+                    starts=[0.,.167,.333,.5,.667,.833];expected=sum(s['SampleTime']>=gn['start']+x for x in starts)-1
+                    check(f==expected and s['IntervalStart']==gn['start'] and s['IntervalEnd']==gn['active_at'] and face==side,'Axe Windup frame/native lock side '+version+str(i))
+                else:check(face==side,'Ready uses actual approach-facing '+version+str(i))
+                masks[c]|=1<<f;counts[c][f]+=1;frame_witness.setdefault((c,f),dict(observation=i,draw_id=d['DrawId'],sim=o['sim'],wall_offset=o['wall_offset_s'],face=face,source=source['object_path']))
+        check(masks=={'Wake':63,'Ready':15,'AxeWindup':63}==ind['masks'] and r['WakeMask']==63 and r['ReadyMask']==15 and r['WindupMask']==63,'Independent mask recalculation '+version)
+        check(dormant==r['DormantSeen']==ind['DormantSeen'] and gaps and r['procedural_gap_seen'],'Dormant count and honest gaps '+version)
+        events=r['guard_original_issued_events'];we=[e for e in events if e['Kind']==0];wc=[e for e in events if e['Kind']==1]
+        check(len(we)==len(wc)==1 and we[0]['EndTime']==we[0]['AtTime']+1.==wc[0]['AtTime'],'Unique original exact1s Wake, no replay '+version)
+        check(all(int(b['EventId'])>int(a['EventId']) and b['AtTime']>=a['AtTime'] for a,b in zip(events,events[1:])),'Original immutable event order '+version)
+        runs.append(dict(version=version,process_id=pid,run_guid=r['run'],guard_entity=r['guard_entity'],requested_and_actual_approach_side=side,observations=n,prewarm_receipts=1,duration_s=r['duration_s'],mask_recalculation=masks,frame_draw_counts={k:dict(v) for k,v in counts.items()},native_facing_counts={k:dict(v) for k,v in faces.items()},DormantSeen=dormant,WakeStart=we[0]['AtTime'],WakeEnd=we[0]['EndTime'],Wake_frame_wall_gap_max_s=max(b['wall']-a['wall'] for a,b in zip(wake,wake[1:])),Wake_frame_native_gap_max_s=max(b['sim']-a['sim'] for a,b in zip(wake,wake[1:])),first_coverage_witnesses=[dict(clip=c,frame=f,**v) for (c,f),v in frame_witness.items()],procedural_gap_counts=dict(gaps),maximum_metadata_floor_formula_error_display_px=max_floor_error,guard_HP=185,guard_incoming_receipts=0,writer_peak_pending_jobs=summary['peak_pending_jobs'],runtime_reject_ensure_fatal_matches=bad,independent_original_pixel_equality_reported=True,pixels_redecoded_by_this_review=False,visual_reviewed_by_this_review=False,audio_recorded=False,formal_complete_units=0))
+    check(runs[0]['process_id']!=runs[1]['process_id'] and runs[0]['run_guid']!=runs[1]['run_guid'],'Two fresh process/Run identities')
+    result=dict(schema='guard-partial-v130-post-fix-independent-metadata-source-review-v001',reviewed_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),passed=True,scope='Read-only Source/metadata review. No UE/UBT/import/media View/image-video decoding or Root-source/docs/tools changes. Not final visual/art/audio/enemy acceptance.',facts=dict(snapshot='v130-guard-partial-181G',snapshot_entries=1892,Source=223,Production=1226,strict181GREEN=True,specialized_v005_native_GREEN=True,actual_Driver_normalized_equals_v007=True,Root_prereg_source_and_capture_bindings_exact=True,frozen_v002_candidate_tooling_unchanged=True,all16_Texture_paths_SourceSHA_row_scale_pivots_checked=True,two_fresh_native_runs=runs),inference='The scoped production driver fix passes the same actual native regression and181 strict suite, and two fresh real captures now observe each once-only Wake phase five times without the prior ensure stall. This supports resolution of the reproduced interval-rejection path; it is not a guarantee against arbitrary future OS/GPU stalls or a global floating-point proof.',risks_and_boundaries=['Both approach sides and Ready/AxeWindup facings are covered; Dormant/Wake remain actualFacing+1 in BOTH runs, so left-facing Wake is not covered.','Only209/210/212partial rows are art-resident. AxeFollow/StompWindup/StompFollow remain explicit procedural gaps; no claim of full57/final enemy acceptance.','Knight/Bat clears use scoped diagnostic public damage. Guard birth is formal room plan; this is not normal J full-clear proof.','Pixels are not read or decoded by this review; pixel equality is the unchanged independent checker\'s recorded result plus metadata receipts/source binding. Root must preserve E then review actual frames/scale/floor/join.','MP4/VFR/Zip/E retention and actual audio are outside this metadata review; capture reports silent video/audio_recorded=false.','Old native_v001 failure, v003 wrong-premise fixture, v005 true semanticRED and failed v006 generator remain preserved; no history rewritten.'],input_pins=PINS)
+    dest=HERE/'runtime-post-fix-review-v001.json'
+    if dest.exists():raise SystemExit('Refuse overwrite frozen review output')
+    dest.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');print(dest);print('metadata/source checks PASS, no pixels decoded/View')
+if __name__=='__main__':main()

@@ -1,0 +1,28 @@
+{
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 238,
+    "safe_margin_y": 238
+  },
+  "states": {
+    "leather_shoulderfar_hero_death5": {
+      "frames": 5,
+      "fps": 5,
+      "loop": false,
+      "action": "Exactly FIVE isolated requested armor components, left to right, matching the five exact original Death220 body poses in the attached paired row. Fixed shallow elevated three-quarter RIGHT camera. Reference1 owns ONLY this accepted brown LGT component appearance. Reference2 is the accepted body-only SwordReady002 hero identity/proportion, never draw that body. Reference3 owns ONLY the five actual Death220 torso/upper-arm camera and articulated collapse poses; do not rotate a standing garment cutout or copy the Ready pose five times. Reference4 is the official five-slot layout/count/padding guide, not art to reproduce.\nPhase0 at0s: slack shoulders, bent knees, forward head/torso loss of strength. Phase1 at.20s: knees buckle and torso tilts forward/down-right, both arms change. Phase2 at.40s: kneeling/supporting palms with torso near-horizontal and helmet still attached; real upper arms foreshorten. Phase3 at.60s: collapsed side-ground body and lower shoulder/torso projection, hands resting. Phase4 from.80s: settled corpse with further helmet side-turn and relaxed supported arms; hold this final pose, no loop. The actual five source poses are the geometry authority. No gameplay deadline or physics/drop is added.\nDraw exactly one COMPLETE connected requested component in every slot, at one common physical/illustration scale throughout the row. The common guide window is a MAXIMUM bounding envelope, never a demand that every component fill the same width/height. Rotation/foreshortening naturally changes its projected bbox; do not normalize each frame, enlarge tiny late poses or substitute old frames. Standard extraction will apply one shared row scale, never per-frame fitting.\nWhole components only: the unchanged real body owners/helmet/arms/hands will occlude them later. Do not cut artificial body-shaped holes into armor to solve layering. Genuine empty neckline/arm apertures show flat puregreen #00FF00; dark ink belongs only to material edges, not opaque black backing, gray lining or a painted void over the chest. Brown leather and restrained original gold hardware only; no new metal plates, decorations or copied gray cloth. No hero/head/clock/skin/body/arm/hand/glove/leg/shoe, sword, other armor component, floor/shadow/glow/trails, labels, markers or guide colors. Generous solid puregreen surround. All five components intact and separated, no cropped silhouette or detached fragment. Actual mounting A/B, hidden joints/Grip/Axes and occlusion acceptance remain unknown until source pixels are extracted and reviewed.\nREQUESTED COMPONENT CONTRACT:\nONLY canonical Far187: a THIN small curved warm-brown leather FAR shoulder TAB, whose canonical crop is20x28 pixels, not the bulky near-side cap. Reference5 is the exact canonical crop nearest12x for visibility only, not an enlarged final part. Preserve the same plain tiny curved thin tab and coarse edge. No extra gold rivet/clasp, strap, cup, armor plate or chest part. Track the actual far upper-arm projection as the body folds; in late Death poses the real helmet/body may occlude much of this tab after assembly. Still provide one COMPLETE tab component per slot; do not omit it, paint the helmet, or label a missing frame as empty. Do not mirror it into a near shoulder or enlarge it to fill the guide window."
+    }
+  },
+  "style": "Only accepted current brown LGT ShoulderFar identity, exact hand-ink construction/material. HeroReady002 identity/proportion and Death220 motion only; never draw body or other components.",
+  "motion_phase_guides": false,
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": false,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

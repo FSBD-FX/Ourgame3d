@@ -1,0 +1,78 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonHeroLandingPriorityProbeV001.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonHeroLandingPriorityProbeV001.cpp
+@@ -170,10 +170,50 @@
+ }
+ bool SameSample(const FDungeonHeroAirSample& A,const FDungeonHeroAirSample& B)
+ {return A.Valid==B.Valid&&A.RunGuid==B.RunGuid&&A.OwnerId==B.OwnerId&&A.RoomInstanceId==B.RoomInstanceId&&A.PresentationEpoch==B.PresentationEpoch&&A.NativeTime==B.NativeTime&&A.GroundPosition==B.GroundPosition&&A.Facing==B.Facing&&A.JumpHeight==B.JumpHeight&&A.VerticalVelocity==B.VerticalVelocity&&A.LandingVisualAge==B.LandingVisualAge;}
++// Request258 immutable contract only; no loading, simulation or input.
++bool Bridge258ObservationEnabled()
++{
++ FString RequestedAction;
++ return FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytalePrimary1Bridge258Preview"))
++  &&FParse::Value(FCommandLine::Get(),TEXT("DungeonHeroLandingPriorityAction="),RequestedAction)&&RequestedAction==TEXT("J");
++}
++struct FBridge258SourcePin{int32 Frame;const TCHAR* Component;const TCHAR* ObjectPath;const TCHAR* SourcePNG;uint64 SourceBytes;const TCHAR* SourceSHA256;};
++const FBridge258SourcePin Bridge258SourcePins[]={
++ {0,TEXT("BodyRest"),TEXT("/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/T_Fairytale_Bridge258_BodyRest_000_v001.T_Fairytale_Bridge258_BodyRest_000_v001"),TEXT("F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/BodyRest/frame-0.png"),187738ULL,TEXT("6bb844ea18ace3a17ad86e744ebfbf5b1143b1cafb8d7a3436ac96f4500010a8")},
++ {0,TEXT("ShoulderFar"),TEXT("/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/T_Fairytale_Bridge258_ShoulderFar_000_v001.T_Fairytale_Bridge258_ShoulderFar_000_v001"),TEXT("F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/FarShoulder/frame-0.png"),2947ULL,TEXT("75a095689770e42697306a4308642f12f86293668e875865313a2e74dc107e94")},
++ {0,TEXT("Chest"),TEXT("/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/T_Fairytale_Bridge258_Chest_000_v001.T_Fairytale_Bridge258_Chest_000_v001"),TEXT("F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/Chest/frame-0.png"),18191ULL,TEXT("c6e93fa5efa376d4c0425f097cba4d699a156861bce8222710ea3b6223f44732")},
++ {0,TEXT("NearArmWithoutHand"),TEXT("/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/T_Fairytale_Bridge258_NearArmWithoutHand_000_v001.T_Fairytale_Bridge258_NearArmWithoutHand_000_v001"),TEXT("F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/NearArmWithoutHand/frame-0.png"),6059ULL,TEXT("f45a082a6bf3e33eb6308d5da6528d462bced57ab5a27fbf102b996274efa7b8")},
++ {0,TEXT("ShoulderNear"),TEXT("/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/T_Fairytale_Bridge258_ShoulderNear_000_v001.T_Fairytale_Bridge258_ShoulderNear_000_v001"),TEXT("F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/NearShoulder/frame-0.png"),6405ULL,TEXT("9978b306fe5b564a4f1f5b39ad341df773b5dc42cd2bc00846d48a655f3f1ea4")},
++ {0,TEXT("HelmetForeground"),TEXT("/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/T_Fairytale_Bridge258_HelmetForeground_000_v001.T_Fairytale_Bridge258_HelmetForeground_000_v001"),TEXT("F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/HelmetForeground/frame-0.png"),64363ULL,TEXT("3daebe6bd7d59cd59b8dde96bc020cbc717d54b9ec76dd5b37ee8d7117562ce5")},
++ {0,TEXT("NearHand"),TEXT("/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/T_Fairytale_Bridge258_NearHand_000_v001.T_Fairytale_Bridge258_NearHand_000_v001"),TEXT("F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/NearHand/frame-0.png"),10182ULL,TEXT("bd6e6a18c91cc0ecea7d2a999251f7f752904df49ab0e679a575152faf86d938")},
++ {1,TEXT("BodyRest"),TEXT("/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/T_Fairytale_Bridge258_BodyRest_001_v001.T_Fairytale_Bridge258_BodyRest_001_v001"),TEXT("F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/BodyRest/frame-1.png"),197214ULL,TEXT("1653e5f403e457270b4537433526390c1a5a7420970ba97f77789ef4f8819766")},
++ {1,TEXT("ShoulderFar"),TEXT("/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/T_Fairytale_Bridge258_ShoulderFar_001_v001.T_Fairytale_Bridge258_ShoulderFar_001_v001"),TEXT("F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/FarShoulder/frame-1.png"),3080ULL,TEXT("db8ca9de168204a5bf7f13d4ae86de4838eead663206cba5204698368991c3db")},
++ {1,TEXT("Chest"),TEXT("/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/T_Fairytale_Bridge258_Chest_001_v001.T_Fairytale_Bridge258_Chest_001_v001"),TEXT("F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/Chest/frame-1.png"),17913ULL,TEXT("04dfebd2c8b66015b4067a2eb1f6b8684507e3d0df5ccaca734e8807dd790575")},
++ {1,TEXT("NearArmWithoutHand"),TEXT("/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/T_Fairytale_Bridge258_NearArmWithoutHand_001_v001.T_Fairytale_Bridge258_NearArmWithoutHand_001_v001"),TEXT("F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/NearArmWithoutHand/frame-1.png"),6425ULL,TEXT("fdd0dd4fda28d0877eae70d636733daa4227a36c1ea34d70f22500479fde575c")},
++ {1,TEXT("ShoulderNear"),TEXT("/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/T_Fairytale_Bridge258_ShoulderNear_001_v001.T_Fairytale_Bridge258_ShoulderNear_001_v001"),TEXT("F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/body-partition-fit-candidate-v001/armor-integer-fit/NearShoulder/frame-1.png"),6925ULL,TEXT("6100c5f1af39f77693a8e9ef258cd5a909596c9fff7c506d37d795669f745e6c")},
++ {1,TEXT("HelmetForeground"),TEXT("/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/T_Fairytale_Bridge258_HelmetForeground_001_v001.T_Fairytale_Bridge258_HelmetForeground_001_v001"),TEXT("F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/HelmetForeground/frame-1.png"),56945ULL,TEXT("621f27b84218ce75402c86e4e61f39184e1cc5385f34967510d793ee2e8996c9")},
++ {1,TEXT("NearHand"),TEXT("/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/T_Fairytale_Bridge258_NearHand_001_v001.T_Fairytale_Bridge258_NearHand_001_v001"),TEXT("F:/Ourgame/source-assets/production/fairytale-hero-four-pose-polish-v001/request258-primary1-body-correction/matte-edge-clean-candidate-v002/body-layers/NearHand/frame-1.png"),10387ULL,TEXT("e55f4a43ec7fc795561e63a19e8ee7f46d2fff0354371f66e566684a2cc7ea7a")},
++};
+ bool Brown(const FDungeonFairytaleSwordDraw& D,bool Primary)
+ {
+  if(!D.Active||!D.Supported||!D.ActionPoseSupported||!D.TextureReady||!D.ArmorDrawn||!SwordDrawn(D)||D.GearPlaceholder||D.Frame<0||D.Frame>=(Primary?6:4)||D.DrawStack.Num()!=(Primary?8:7))return false;
+  if(D.Clip!=(Primary?TEXT("sword_primary_1"):TEXT("sword_ready_idle")))return false;
++ if(Primary&&D.Frame<2&&Bridge258ObservationEnabled())
++ {
++  const FString Sword=TEXT("/Game/Production/FirstBatch/v002/CandidateComponents/T_military_sword_v002.T_military_sword_v002");
++  const FVector2D Grip=D.Frame==0?FVector2D(211.,343.):FVector2D(159.,213.);
++  const FVector2D Axis=D.Frame==0?FVector2D(.94,-.341):FVector2D(-.2,-.98);
++  const double Angle=FMath::RadiansToDegrees(FMath::Atan2(Axis.Y,Axis.X))*(D.Facing<0?-1.:1.);
++  if((D.Facing!=1&&D.Facing!=-1)||D.Root!=FVector2D(256.,464.)||D.Grip!=Grip||D.WeaponPath!=Sword||D.WeaponScale!=.5||D.WeaponAngle!=Angle)return false;
++  const TCHAR* Parts[]={TEXT("BodyRest"),TEXT("ShoulderFar"),TEXT("Chest"),TEXT("NearArmWithoutHand"),TEXT("ShoulderNear"),TEXT("HelmetForeground"),TEXT(""),TEXT("NearHand")};
++  for(int32 I=0;I<8;++I)
++  {
++   FString Expected=Sword;
++   if(I!=6){const FString Name=FString::Printf(TEXT("T_Fairytale_Bridge258_%s_%03d_v001"),Parts[I],D.Frame);Expected=FString(TEXT("/Game/Production/ArtTrials/Request258/v001/HeroPrimary1Bridge/"))+Name+TEXT(".")+Name;}
++   if(D.DrawStack[I]!=Expected)return false;
++  }
++  return true;
++ }
+  const TCHAR* Parts[]={TEXT("ShoulderFar"),TEXT("Chest"),TEXT("ShoulderNear")};const int32 Slots[]={1,2,4};
+  for(int32 I=0;I<3;++I){const FString Name=Primary?FString::Printf(TEXT("T_Fairytale_LeatherPrimary1%s_%03d_v001"),Parts[I],D.Frame):FString::Printf(TEXT("T_Fairytale_LeatherReady%s_%03d_v001"),Parts[I],D.Frame);
+   const FString Expected=FString(Primary?TEXT("/Game/Production/ArtTrials/EV048/v013/HeroLeatherPrimary1/"):TEXT("/Game/Production/ArtTrials/EV048/v012/HeroLeatherReady/"))+Name+TEXT(".")+Name;if(D.DrawStack[Slots[I]]!=Expected)return false;}
+@@ -335,6 +375,11 @@
+     if(!Capture(Path,TEXT(""),TEXT(""),Frame,-1))return false;++ExpectedReadbacks;}}
+   else for(const auto& Frame:DodgeArt::Profile().Frames)for(const auto& Layer:Frame.Layers)
+   {if(!Capture(Layer.TexturePath,Layer.SourceSHA256,Layer.SourceRGBASHA256,Frame.Frame,int32(Layer.Component)))return false;++ExpectedReadbacks;}
++  if(Bridge258ObservationEnabled()&&Action==TEXT("J"))
++  {
++   for(const auto& Pin:Bridge258SourcePins)
++   {if(!Capture(Pin.ObjectPath,Pin.SourceSHA256,TEXT(""),Pin.Frame,-1))return false;++ExpectedReadbacks;}
++  }
+   FlushRenderingCommands();StartupReadbackStop=FPlatformTime::Seconds();StartupReadbackComplete=Need(Unique.Num()==ExpectedReadbacks&&StartupTextures.Num()==ExpectedReadbacks,TEXT("All49 independent GPU/source mip originals must finish before capture"));return StartupReadbackComplete;
+  }
+ 
+@@ -406,6 +451,12 @@
+   Id(R,TEXT("process_id"),FPlatformProcess::GetCurrentProcessId());R->SetStringField(TEXT("run"),Run.ToString(EGuidFormats::Digits));Id(R,TEXT("owner"),Owner);Id(R,TEXT("current_room"),Room);Id(R,TEXT("epoch"),Epoch);Id(R,TEXT("restart_serial"),Restart);Id(R,TEXT("weapon_instance"),Sword);Id(R,TEXT("weapon_version"),SwordVersion);Id(R,TEXT("armor_instance"),Light);Id(R,TEXT("armor_version"),LightVersion);
+   Id(R,TEXT("light_source_id"),LightSource);R->SetNumberField(TEXT("equipment_input_index"),EquipInputIndex);R->SetNumberField(TEXT("equipment_started_callback_index"),EquipStartedIndex);R->SetNumberField(TEXT("equipment_commit_callback_index"),EquipCommitIndex);R->SetNumberField(TEXT("equipment_start"),EquipStart);R->SetNumberField(TEXT("equipment_deadline"),EquipDeadline);
+   R->SetNumberField(TEXT("initial_hp"),InitialHP);R->SetNumberField(TEXT("capture_final_hp"),CaptureFinalHP);R->SetNumberField(TEXT("ready_callback_index"),ReadyIndex);R->SetNumberField(TEXT("landing_callback_index"),LandIndex);R->SetNumberField(TEXT("priority_input_index"),InputIndex);R->SetNumberField(TEXT("first_action_callback_index"),FirstActionIndex);R->SetNumberField(TEXT("action_start"),ActionStart);R->SetNumberField(TEXT("action_end"),ActionEnd);R->SetNumberField(TEXT("action_start_landing_age"),StartLandingAge);R->SetNumberField(TEXT("air_mask"),AirMask);R->SetNumberField(TEXT("primary_mask"),PrimaryMask);R->SetNumberField(TEXT("dodge_mask"),DodgeMask);R->SetNumberField(TEXT("ready_join_frames"),ReadyJoinFrames);
++  R->SetBoolField(TEXT("request258_primary1_bridge_optin"),Bridge258ObservationEnabled());
++  R->SetStringField(TEXT("request258_primary1_bridge_source_contract_sha256"),TEXT("f85284dc25d0a5f0be5bf09aa7b9f7dbdf2a62bccbb61e4ca0c5ce0ef1238f6e"));
++  TArray<JV> Bridge258Pins;
++  if(Bridge258ObservationEnabled())for(const auto& Pin:Bridge258SourcePins)
++  {auto S=MakeShared<FJsonObject>();S->SetNumberField(TEXT("frame"),Pin.Frame);S->SetStringField(TEXT("component"),Pin.Component);S->SetStringField(TEXT("object_path"),Pin.ObjectPath);S->SetStringField(TEXT("source_png"),Pin.SourcePNG);Id(S,TEXT("source_png_bytes"),Pin.SourceBytes);S->SetStringField(TEXT("source_png_sha256"),Pin.SourceSHA256);Bridge258Pins.Add(MakeShared<FJsonValueObject>(S));}
++  R->SetArrayField(TEXT("request258_primary1_bridge_source_pins"),Bridge258Pins);
+   R->SetObjectField(TEXT("hero_locomotion_audio"),FinalHeroAudioRequests());
+   R->SetArrayField(TEXT("normal_inputs"),Inputs);R->SetArrayField(TEXT("steps"),Steps);R->SetArrayField(TEXT("observations"),Observations);R->SetArrayField(TEXT("diagnostic_knight_hits"),DiagnosticHits);R->SetArrayField(TEXT("startup_resource_readbacks"),StartupTextures);TArray<JV> Air49;for(int32 I=0;I<FMath::Min(49,StartupTextures.Num());++I)Air49.Add(StartupTextures[I]);R->SetArrayField(TEXT("startup_actual_GPU_source_textures49"),Air49);R->SetBoolField(TEXT("startup_readback_complete"),StartupReadbackComplete);R->SetNumberField(TEXT("startup_readback_stop_monotonic_s"),StartupReadbackStop);R->SetBoolField(TEXT("native_async_capture_writes_flushed"),Flushed);
+   auto Timing=MakeShared<FJsonObject>();Timing->SetBoolField(TEXT("use_fixed_time_step"),FApp::UseFixedTimeStep());Timing->SetNumberField(TEXT("capture_start_monotonic_s"),Start);Timing->SetNumberField(TEXT("capture_stop_monotonic_s"),Stop);Timing->SetArrayField(TEXT("frame_wall_offsets_s"),Offsets);R->SetObjectField(TEXT("capture_timing"),Timing);if(Actor.MainMixCapture)R->SetObjectField(TEXT("main_submix_capture"),Actor.MainMixCapture->SerializeReport());FString Text;auto Writer=TJsonWriterFactory<>::Create(&Text);const bool Serialized=FJsonSerializer::Serialize(R,Writer);const bool Written=Serialized&&EvidenceClaimed&&WriteNewUTF8(Directory/TEXT("runtime-report.json"),Text);if(!Failure.IsEmpty())UE_LOG(LogTemp,Error,TEXT("Landing priority: %s"),*Failure);FPlatformMisc::RequestExitWithStatus(false,Failure.IsEmpty()&&FlowComplete&&Flushed&&AudioComplete&&Written?0:3);

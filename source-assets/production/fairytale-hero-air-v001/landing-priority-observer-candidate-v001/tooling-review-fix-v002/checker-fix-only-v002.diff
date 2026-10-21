@@ -1,0 +1,73 @@
+--- frozen-v001/verify-landing-priority-native-v001.py
++++ review-fix-v002/verify-landing-priority-native-v001.py
+@@ -102,6 +102,9 @@
+     obs=r['observations'];inputs=r['normal_inputs'];ri,li,qi,ai=(r[k] for k in ('ready_callback_index','landing_callback_index','priority_input_index','first_action_callback_index'))
+     need(all(type(x) is int for x in (ri,li,qi,ai)) and 0<=ri<li<ai<len(obs) and 0<=qi<len(inputs),'Completed callback/input indices missing')
+     ready,land,q,first=obs[ri],obs[li],inputs[qi],obs[ai]
++    top_identity=tuple(k for k in IDENTITY if k not in ('player_entity','facing'))
++    need(all(r[k]==ready[k] for k in top_identity) and ready['owner']==ready['player_entity'] and ('player_entity' not in r or r['player_entity']==ready['player_entity']),'Report top identity differs from its actual completed Ready/player')
++    verified_identity={k:ready[k] for k in IDENTITY}
+     ei,esi,eci=(r[k] for k in ('equipment_input_index','equipment_started_callback_index','equipment_commit_callback_index'))
+     need(all(type(x) is int for x in (ei,esi,eci)) and 0<=ei<len(inputs) and 0<=esi<eci<=ri,'Real E start/commit callback indices required before Ready')
+     eqinput=inputs[ei];eqstart=obs[esi]['equipment_action'];eqcommit=obs[eci]['equipment_action']
+@@ -130,6 +133,8 @@
+     need(all(spaces[0][k]==ready[k] for k in IDENTITY),'Space borrowed another Ready owner/gear token')
+     sp=spaces[0]
+     need(sp['before_H']==sp['after_H']==sp['before_V']==sp['after_V']==0 and sp['before_landing_age']==sp['after_landing_age']==f32(.12) and sp['before_melee_grounded'] is True and sp['before_wa_grounded'] is True,'Normal Space must queue unchanged from real grounded Ready')
++    first_land4=next((i for i,o in enumerate(obs) if o['wall_offset_s']>sp['wall_offset_s'] and o['physical_visual_key']==4 and o['jump_height']==o['vertical_velocity']==0 and 0<=o['landing_visual_age']<f32(.06) and o['melee_grounded'] is True and o['wa_grounded'] is True),None)
++    need(first_land4==li,'Landing token skipped the first actual grounded Land4 callback after this Space')
+     air=obs[ri+1:li];frames={o['physical_visual_key'] for o in air if o['jump_height']>0 or o['vertical_velocity']>0}
+     need(frames=={0,1,2,3} and r['air_mask']==15,'All four actual airborne poses required before Land4')
+     first_air=next(o for o in air if o['jump_height']>0 or o['vertical_velocity']>0)
+@@ -172,7 +177,7 @@
+     for o in joins:
+         legacy_identity(o,'sword_ready_idle');need(o['sim']>=end and o['action']['active'] is False and o['new_air_draw']['drawn'] is False,'Ready before real completion or Air still drawn')
+     if r['requested_action']=='Shift':need(all(o['action']['finish']==1 and o['action']['finished_at']==end and int(o['action']['finish_event_id'])>0 for o in joins),'Dodge must retain actual Completed event/clock')
+-    return dict(passed=True,scope='causal_callback_and_queued_input_only',first_action_callback_index=ai,action_start_landing_age=age,actual_action_mask=mask,FinalAccepted=False)
++    return dict(passed=True,scope='causal_callback_and_queued_input_only',verified_identity=verified_identity,first_grounded_Land4_callback_index=first_land4,first_action_callback_index=ai,action_start_landing_age=age,actual_action_mask=mask,FinalAccepted=False)
+ 
+ def dependencies():
+     table=read(HERE/'dependencies-v001.json');rows=table['members'];loaded={}
+@@ -219,7 +224,7 @@
+ 
+ def quad_geometry(o,spec,paths,air,resident_paths):
+     d=o['new_air_draw'] if air else o['dodge_draw'];side=o['facing'];scale=72/416
+-    root,grip,axis=(spec['Root'],spec['Grip'],spec['AxisArtist']) if air else (spec['ground_root_source_xy'],spec['Grip_source_xy'],spec['Axis_artist_raw_xy'])
++    root,grip,axis=(spec['Root'],spec['Grip'],spec['AxisArtist']) if air else (spec['ground_root_source_xy'],spec['Grip_source_xy'],spec['Axis_artist_unit_xy'])
+     need(d['drawn'] is True and d['atomic_preflight_ready'] is True and d['slot_count']==9 and d['frame']==spec['frame'],'Actual complete/current pose submission required')
+     need(d['player_entity']==o['owner'],'Actual drawing player differs from owner')
+     if air:
+@@ -244,6 +249,22 @@
+     top=[f32(g[0]-(root[0] if side>0 else 512-root[0])*scale),f32(g[1]-o['jump_height']*.70-root[1]*scale)];at=[f32(g[0]+side*(grip[0]-root[0])*scale),f32(g[1]-o['jump_height']*.70+(grip[1]-root[1])*scale)]
+     need(point(d['grip_screen'],at,0),'Legacy actual grip projection differs');width=f32(canvas*.5);pivot=[99/512 if side>0 else 1-99/512,.5];swtop=[f32(at[k]-pivot[k]*width) for k in range(2)];angle=f32(math.degrees(math.atan2(axis[1],axis[0]))*side)
+     return [dict(texture=p,component=8 if p==SWORD else -1,drawn=True,top=swtop if p==SWORD else top,size=[width if p==SWORD else f32(canvas)]*2,uv=[0 if side>0 else 1,0],uv_size=[side,1],rotation=angle if p==SWORD else 0,rotation_pivot=pivot if p==SWORD else [0,0]) for p in d['actual_stack']]
++
++def verify_typed_callbacks(r,AM,AP,DM,DP):
++    """Check every related native submission; optical PNG sampling stays separate."""
++    counts={'Air':0,'Dodge':0}
++    for o in r['observations']:
++        for air,manifest,profile,kind in ((True,AM,AP,'Air'),(False,DM,DP,'Dodge')):
++            d=o['new_air_draw' if air else 'dodge_draw']
++            relevant=d['drawn'] is True or d['slot_count']!=0 or bool(d['actual_stack']) or o['old_draw']['clip']==('sword_nonattack_air' if air else 'sword_dodge')
++            if air:relevant=relevant or (o['new_air_query_ok'] is True and o['physical_visual_key'] in range(6) and o['action']['active'] is False)
++            else:relevant=relevant or (r['requested_action']=='Shift' and o['action']['active'] is True)
++            if not relevant:continue
++            frame=o['physical_visual_key'] if air else d['frame'];frames=profile['Frames'] if air else profile['frames']
++            need(type(frame) is int and 0<=frame<len(frames),'Related actual typed callback has invalid source frame')
++            paths={a['component']:a['object_path'] for a in manifest['assets'] if a['frame']==frame};paths['IndependentSword']=SWORD
++            quad_geometry(o,frames[frame],paths,air,{a['object_path'] for a in manifest['assets']}|{SWORD});counts[kind]+=1
++    return dict(passed=True,counts=counts)
+ 
+ def optical(original,r,movie,sources,loaded,frozen,AM,AP):
+     import numpy as np
+@@ -324,8 +345,8 @@
+     need(('-DungeonHeroLandingPriorityClearKnightDiagnostic' in args)==p['diagnostic_clear_knight'],'Diagnostic authorization differs');need(not r['diagnostic_knight_hits'] or p['diagnostic_clear_knight'],'Unapproved diagnostic hit')
+     need(all(o['interface_visible'] is False and o['text_calls']==0 and o['range_debug'] is False and o['range_lines']==0 and all(o[k]==o['sim'] for k in ('melee_time','wa_time','dodge_time','weapon_world_time')) and o['native_actor_root_z']==0 for o in r['observations']),'Actual HUD/range/native clock/root changed')
+     duration=r['capture_timing']['capture_stop_monotonic_s']-r['capture_timing']['capture_start_monotonic_s'];need(all(finite(x['wall_offset_s']) and 0<=x['wall_offset_s']<duration for x in r['normal_inputs']),'Actual normal inputs must occur only while recording')
+-    flow=verify_causal(r);sources,am,ap=sources_for(r['requested_action'],loaded,C);gpu=verify_resources(original,r,sources,am,ap);movie=F.verify_png_fifo(original,r);audio=C.module(C.AUDIO_CHECKER,'landing_frozen_audio',C.AUDIO_CHECKER_SHA).audit(original/'runtime-report.json',require_frame_timing=True);pixels=optical(original,r,movie,sources,loaded,F,am,ap)
+-    return dict(schema='hero-landing-priority-independent-native-v001',passed=True,requested_action=r['requested_action'],requested_facing=r['requested_facing'],process_id=int(r['process_id']),run=r['run'],root_prereg_pin=pin(prereg),compiled_manifest_pin=p['compiled_manifest_pin'],source_admission_pin=p['source_admission_pin'],source_repair_admission_pin=p['source_repair_admission_pin'],source_candidate_freeze_pin=p['source_candidate_freeze_pin'],checker_freeze_pin=p['checker_freeze_pin'],native_report_pin=pin(original/'runtime-report.json'),flow=flow,actual_resources=gpu,native_PNG_FIFO_CRC_verified=True,audio=audio,source_pixels=pixels,visual_reviewed=False,audio_listened=False,FinalAccepted=False)
++    flow=verify_causal(r);sources,am,ap=sources_for(r['requested_action'],loaded,C);typed=verify_typed_callbacks(r,am,ap,read(loaded['import-Dodge32-v001.json']),read(loaded['Dodge-runtime-profile-data-v001.json']));gpu=verify_resources(original,r,sources,am,ap);movie=F.verify_png_fifo(original,r);audio=C.module(C.AUDIO_CHECKER,'landing_frozen_audio',C.AUDIO_CHECKER_SHA).audit(original/'runtime-report.json',require_frame_timing=True);pixels=optical(original,r,movie,sources,loaded,F,am,ap)
++    return dict(schema='hero-landing-priority-independent-native-v001',passed=True,requested_action=r['requested_action'],requested_facing=r['requested_facing'],process_id=int(r['process_id']),**flow['verified_identity'],root_prereg_pin=pin(prereg),compiled_manifest_pin=p['compiled_manifest_pin'],source_admission_pin=p['source_admission_pin'],source_repair_admission_pin=p['source_repair_admission_pin'],source_candidate_freeze_pin=p['source_candidate_freeze_pin'],checker_freeze_pin=p['checker_freeze_pin'],native_report_pin=pin(original/'runtime-report.json'),flow=flow,all_typed_callbacks=typed,actual_resources=gpu,native_PNG_FIFO_CRC_verified=True,audio=audio,source_pixels=pixels,visual_reviewed=False,audio_listened=False,FinalAccepted=False)
+ 
+ def verify_four(cases):
+     need(len(cases)==4 and len({str(Path(a).resolve()) for a,p in cases})==4 and len({str(Path(p).resolve()) for a,p in cases})==4,'Four distinct archive/prereg pairs required')

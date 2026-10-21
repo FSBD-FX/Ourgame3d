@@ -1,0 +1,36 @@
+--- actual/DungeonHUD.cpp
++++ candidate/DungeonHUD.cpp
+@@ -79,6 +79,8 @@
+         &&FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordDeathV001::CommandLineFlag);
+     bUseFairytaleSwordDodgePreview=bUseFairytaleSwordEquipmentBoundPreview
+         &&FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordDodgeV001::CommandLineFlag);
++    bUseFairytaleSwordAirPreview=bUseFairytaleSwordEquipmentBoundPreview
++        &&FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordAirV001::CommandLineFlag);
+     bUseFairytaleSwordWalkPreview=bUseFairytaleSwordEquipmentBoundPreview
+         &&FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordWalkPreview"));
+     bUseFairytaleLookdevPreview=!bUseFairytaleSwordEquipmentBoundPreview
+@@ -282,6 +284,7 @@
+     LoadFairytaleGuardTrial();
+     LoadFairytaleGuardFullTrial();
+     LoadFairytaleGuardMoveRigTrial();
++    LoadFairytaleSwordAirTrial();
+     FlushRenderingCommands();
+     if(FParse::Param(FCommandLine::Get(),TEXT("DungeonRunSaveProof"))
+         ||FParse::Param(FCommandLine::Get(),TEXT("DungeonRunRestoreProof")))
+@@ -328,6 +331,7 @@
+     WorldWeaponCursor=Saved.WorldHistoryThrough;
+     ActionAudioRun=Saved.RunGuid;ActionAudioCursor=Saved.NextActionSequence-1;bActionAudioAttached=true;
+     ActionAudioPlayRequests.Reset();ActionAudioPlayReceipts.Reset();MeleeTrails.Reset();ActorQuads.Reset();FairytaleGuardMoveRigDraws.Reset();
++    FairytaleSwordAirDraw=FDungeonFairytaleSwordAirDrawV001();
+     if(auto* Game=GetWorld()?GetWorld()->GetAuthGameMode<ADungeonGameMode>():nullptr)
+     {
+         ResetGuardFeedback(Game);
+@@ -1648,6 +1652,8 @@
+ void ADungeonHUD::DrawHUD()
+ {
+     FairytaleGuardMoveRigDraws.Reset(); // Every callback, including no-Canvas and early lookdev paths.
++    FairytaleSwordAirDraw=FDungeonFairytaleSwordAirDrawV001();
++    FairytaleSwordAirDraw.OptIn=bUseFairytaleSwordAirPreview;
+     Super::DrawHUD(); if(!Canvas) return;
+     CombatRangeDebugLineCount=0;
+     ++CombatRangeProofFrame;

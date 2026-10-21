@@ -1,0 +1,594 @@
+{
+  "schema": "Dodge-fourphase-originalowner-artistprofile-prepared-v001",
+  "profile_id": "EV048-v018-HeroLeatherDodge-v001",
+  "state": "Dodge",
+  "scope": "Committed SWD+LGT Dodge4 only; limitednativepreparation",
+  "namespace": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge",
+  "import_manifest": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/dodge-state-preparation-v001/Dodge32-native-ready-v001/import-Dodge32-v001.json",
+    "bytes": 67566,
+    "sha256": "78c1ff60ed59e0cf58af8d80504580965c65c386ad0ad437be71aec8f3cf6c9f"
+  },
+  "source_review_preparation_permission": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/dodge-state-preparation-v001/Dodge32-native-ready-v001/Dodge-source-review-preparation-lock-and-32-proof-v001.json",
+    "bytes": 60806,
+    "sha256": "edbeab54bdd820939e69e4973abd6a7576559d3871488c675de320de7a109d89"
+  },
+  "source_closure_digest": "7b62e4e15616c8ada14826ab926361e9a78666f78639eb0e253fbaca50727097",
+  "canvas_source_px": [
+    512,
+    512
+  ],
+  "standing_height_source_px": 416,
+  "standing_display_height_px": 72.0,
+  "body_canvas_display_px": 88.61538461538461,
+  "source_to_display_scale": 0.17307692307692307,
+  "body_scale_constant_all_frames": true,
+  "source_body_heights_not_perframe_normalized": true,
+  "native_facing": 1,
+  "durations_ms": [
+    100,
+    100,
+    100,
+    100
+  ],
+  "duration_ms": 400,
+  "loop": false,
+  "timeline": {
+    "authority": "Actual GetDodgeState() sameowner/action: D.Time - D.Records.back().Start, not wallclock/inputpress/video time. AnimationTime is corroborating float mirror only.",
+    "frame_intervals_ms": [
+      [
+        0,
+        100
+      ],
+      [
+        100,
+        200
+      ],
+      [
+        200,
+        300
+      ],
+      [
+        300,
+        400
+      ]
+    ],
+    "condition": "Only D.Phase=Dodging with lastFinish=None and age in[0,.4), finite values; at .4 realkernelIdle relinquish to actualIdle/Walk/Hurt/Death/etc. No clamp/hold/loop after exit.",
+    "collision_block": "Keep real action clock if wall/body blocked; use actualkernelPosition, not authoredimage displacement or speed*time to force185.",
+    "iframes_half_open_seconds": [
+      0.06,
+      0.2
+    ],
+    "iframes_authority": "Kernel IsDodgeInvulnerableAt only; frame art never grants/prolongs protection.",
+    "gameplay_duration_unchanged": true,
+    "distance_world_unblocked": 185,
+    "speed_world_per_second_unblocked": 462.5,
+    "cooldown_seconds_from_start": 1.2
+  },
+  "clock_priority_source_facts": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/dodge-state-preparation-v001/Dodge32-native-ready-v001/Dodge-real-kernel-clock-priority-and-facing-facts-v001.json",
+    "bytes": 3821,
+    "sha256": "11bbd43b3a2469e7e917399067db53a43d68f69fe2c10d9695fe6a976d450bda"
+  },
+  "stack_back_to_front": [
+    "BodyRest",
+    "ShoulderFar",
+    "Chest",
+    "NearArmWithoutHand",
+    "ShoulderNear",
+    "HelmetForeground",
+    "IndependentSword",
+    "FarHandForeground",
+    "NearHand"
+  ],
+  "body_and_armor_texture_slots_per_frame": 8,
+  "declared_total_slots_including_independent_sword": 9,
+  "expected_nonempty_draw_counts_by_phase": [
+    9,
+    9,
+    9,
+    9
+  ],
+  "known_optional_empty_policy": {
+    "count": 0,
+    "all_FarHandForeground_nonempty": true,
+    "no_missing_texture_can_be_called_empty": true
+  },
+  "whole_body_fallback": "No WholeBody texture. Five owners are exclusive. Fail candidate closed on missing/invalid profile/resource or unsupportedbinding; never forceBodyRest intoWholeBody or silentlyswaptoReady as successfulDodge.",
+  "independent_sword": {
+    "source": {
+      "path": "F:/Ourgame/source-assets/production/first-unit-animation-v002/components/military-sword-clean-v001.png",
+      "bytes": 31902,
+      "sha256": "2efb5519fb3c7ed5a63e58d00c84e39aa02355274af36b43c1775570badded5a"
+    },
+    "object_path": "/Game/Production/FirstBatch/v002/CandidateComponents/T_military_sword_v002.T_military_sword_v002",
+    "source_grip_xy": [
+      99,
+      256
+    ],
+    "native_blade_axis": [
+      1,
+      0
+    ],
+    "weapon_scale": 0.5,
+    "new_sword_raster_imported": false
+  },
+  "facing_and_geometry": {
+    "authority": "Read current actual F.Facing; do not change it based on Dodge.MoveIntent or R.Direction. It can legitimately dodge backwards.",
+    "native_right": 1,
+    "body_all_layers_mirrored_together": true,
+    "NearFar_semantic_layer_order_not_swapped": true,
+    "right_world_point": "Ground + (72/416)*UIScale*(HeroSourcePoint-GroundRootSource)",
+    "left_world_point": "Ground + (72/416)*UIScale*(-(HeroSourcePoint.x-GroundRoot.x), HeroSourcePoint.y-GroundRoot.y)",
+    "sword_HeroSourcePoint": "Grip + .50*R(atan2(artistAxis.y,artistAxis.x))*(SwordSourcePoint-[99,256])",
+    "complete_sword_facing": "Apply same actor X reflection AFTER full weapon matrix; mirroredaxis alone is insufficient.",
+    "DrawTexture_right": "UV U0 DU1; theta=atan2(y,x); pivotUV=(99/512,.5); Size=512*.50*(72/416)*UIScale; Top=GripScreen-pivotUV*Size.",
+    "DrawTexture_left": "UV U1 DU-1; Rotation=-theta; pivotUV=(1-99/512,.5); sameSize; Top=mirroredGripScreen-pivotUV*Size.",
+    "ground_root_role": "Visible pairedshoe artistregistration for source-ground only, notbone/COM/footlock/actorposition.",
+    "draw_context": "Use actual HUD projected actor ground/camera/UIScale and JumpHeight; final pixel test must use current float Screen implementation, not idealized oracle."
+  },
+  "atomic_preload": {
+    "mandatory_candidate_sources": 32,
+    "mandatory_existing_sword_sources": 1,
+    "unique_mandatory_texture_total": 33,
+    "all_frames_even_unselected_required": true,
+    "before_first_quad": "Root preload all33 Texture2D512 expectedmetadata via exactpath, FinishCompilation and existingRenderFlush, then cache-only resident/resource check all33 eachdraw. Receipt of import alone is not GPUfinish.",
+    "failure": "No partial nine-slot draw and no fabricatedempty/sourcefallback.",
+    "actual_import_receipt": null,
+    "actual_GPU_preload_receipt": null,
+    "fresh_compiled_profile_pin": null,
+    "fresh_production_approval_pin": null
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "duration_ms": 100,
+      "sample_interval_ms": [
+        0,
+        100
+      ],
+      "textures": {
+        "BodyRest": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_BodyRest_000_v001.T_Fairytale_Dodge_BodyRest_000_v001",
+        "NearArmWithoutHand": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_NearArmWithoutHand_000_v001.T_Fairytale_Dodge_NearArmWithoutHand_000_v001",
+        "HelmetForeground": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_HelmetForeground_000_v001.T_Fairytale_Dodge_HelmetForeground_000_v001",
+        "NearHand": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_NearHand_000_v001.T_Fairytale_Dodge_NearHand_000_v001",
+        "FarHandForeground": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_FarHandForeground_000_v001.T_Fairytale_Dodge_FarHandForeground_000_v001",
+        "ShoulderFar": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_ShoulderFar_000_v001.T_Fairytale_Dodge_ShoulderFar_000_v001",
+        "Chest": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_Chest_000_v001.T_Fairytale_Dodge_Chest_000_v001",
+        "ShoulderNear": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_ShoulderNear_000_v001.T_Fairytale_Dodge_ShoulderNear_000_v001"
+      },
+      "ground_root_source_xy": [
+        234,
+        464
+      ],
+      "ground_root_authority": "Existing218 paired-visible-shoe artist proposal +-2sourcepx. Not bone/COM/footlock and does not move actor.",
+      "Grip_source_xy": [
+        196,
+        307
+      ],
+      "Grip_source_actual_RGBA": [
+        186,
+        91,
+        46,
+        255
+      ],
+      "Axis_artist_raw_xy": [
+        0.8,
+        0.6
+      ],
+      "Axis_artist_unit_xy": [
+        0.8,
+        0.6
+      ],
+      "Axis_clockwise_y_down_degrees": 36.86989764584402,
+      "axis_role": "Artist bladehold choice on original bare-body glove; no image-measured handle/bone axis.",
+      "weapon_scale": 0.5,
+      "optional_empty": {
+        "BodyRest": false,
+        "NearArmWithoutHand": false,
+        "HelmetForeground": false,
+        "NearHand": false,
+        "FarHandForeground": false,
+        "ShoulderFar": false,
+        "Chest": false,
+        "ShoulderNear": false
+      },
+      "declared_stack_slots": 9,
+      "expected_nonempty_render_layers": [
+        "BodyRest",
+        "ShoulderFar",
+        "Chest",
+        "NearArmWithoutHand",
+        "ShoulderNear",
+        "HelmetForeground",
+        "IndependentSword",
+        "FarHandForeground",
+        "NearHand"
+      ],
+      "expected_nonempty_draw_count_including_sword": 9,
+      "source_body": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-dodge218-shared-HD-v002/curated/frame-0.png",
+        "bytes": 151903,
+        "sha256": "7d53c004b690e3227d08157e275beeb132555abb3ac4774e2280155dadb48ce9"
+      },
+      "source_body_RGBA_sha256": "3769e0e0641693186b50495b28faf86ab5319b292d5a5d231be9b401cb94feea",
+      "armor_integer_translations_xy": {
+        "Chest": [
+          -19,
+          29
+        ],
+        "ShoulderNear": [
+          -85,
+          -5
+        ],
+        "ShoulderFar": [
+          49,
+          30
+        ]
+      },
+      "chest_source_A_artist_tracked_xy": [
+        267.5501278825758,
+        281.7060802327526
+      ],
+      "body_buckle_B_artist_xy": [
+        249.0,
+        311.0
+      ],
+      "near_sleeve_J_artist_xy": [
+        204.0,
+        260.0
+      ],
+      "chest_J_residual_source_xy": [
+        4.214285714285722,
+        5.380252100840323
+      ],
+      "chest_buckle_residual_source_xy": [
+        -0.4498721174242064,
+        -0.29391976724741653
+      ],
+      "J_B_are_artist_surface_targets_not_measured_aperture_axis": true
+    },
+    {
+      "frame": 1,
+      "duration_ms": 100,
+      "sample_interval_ms": [
+        100,
+        200
+      ],
+      "textures": {
+        "BodyRest": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_BodyRest_001_v001.T_Fairytale_Dodge_BodyRest_001_v001",
+        "NearArmWithoutHand": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_NearArmWithoutHand_001_v001.T_Fairytale_Dodge_NearArmWithoutHand_001_v001",
+        "HelmetForeground": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_HelmetForeground_001_v001.T_Fairytale_Dodge_HelmetForeground_001_v001",
+        "NearHand": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_NearHand_001_v001.T_Fairytale_Dodge_NearHand_001_v001",
+        "FarHandForeground": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_FarHandForeground_001_v001.T_Fairytale_Dodge_FarHandForeground_001_v001",
+        "ShoulderFar": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_ShoulderFar_001_v001.T_Fairytale_Dodge_ShoulderFar_001_v001",
+        "Chest": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_Chest_001_v001.T_Fairytale_Dodge_Chest_001_v001",
+        "ShoulderNear": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_ShoulderNear_001_v001.T_Fairytale_Dodge_ShoulderNear_001_v001"
+      },
+      "ground_root_source_xy": [
+        216,
+        464
+      ],
+      "ground_root_authority": "Existing218 paired-visible-shoe artist proposal +-2sourcepx. Not bone/COM/footlock and does not move actor.",
+      "Grip_source_xy": [
+        159,
+        324
+      ],
+      "Grip_source_actual_RGBA": [
+        190,
+        97,
+        46,
+        255
+      ],
+      "Axis_artist_raw_xy": [
+        0.88,
+        0.475
+      ],
+      "Axis_artist_unit_xy": [
+        0.8799890002062457,
+        0.47499406261132576
+      ],
+      "Axis_clockwise_y_down_degrees": 28.35896344613003,
+      "axis_role": "Artist bladehold choice on original bare-body glove; no image-measured handle/bone axis.",
+      "weapon_scale": 0.5,
+      "optional_empty": {
+        "BodyRest": false,
+        "NearArmWithoutHand": false,
+        "HelmetForeground": false,
+        "NearHand": false,
+        "FarHandForeground": false,
+        "ShoulderFar": false,
+        "Chest": false,
+        "ShoulderNear": false
+      },
+      "declared_stack_slots": 9,
+      "expected_nonempty_render_layers": [
+        "BodyRest",
+        "ShoulderFar",
+        "Chest",
+        "NearArmWithoutHand",
+        "ShoulderNear",
+        "HelmetForeground",
+        "IndependentSword",
+        "FarHandForeground",
+        "NearHand"
+      ],
+      "expected_nonempty_draw_count_including_sword": 9,
+      "source_body": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-dodge218-shared-HD-v002/curated/frame-1.png",
+        "bytes": 142648,
+        "sha256": "1ab1a4de65f81374aeaa70a648cfce899b5b36a104c294ed740fd6b0483e8e24"
+      },
+      "source_body_RGBA_sha256": "5670a4f0ca5611e958bd7b2df7081cff4d7b6ec37dd62814013a4b376169df45",
+      "armor_integer_translations_xy": {
+        "Chest": [
+          -16,
+          72
+        ],
+        "ShoulderNear": [
+          -96,
+          15
+        ],
+        "ShoulderFar": [
+          58,
+          91
+        ]
+      },
+      "chest_source_A_artist_tracked_xy": [
+        263.4972276458535,
+        282.97232404853804
+      ],
+      "body_buckle_B_artist_xy": [
+        247.0,
+        355.0
+      ],
+      "near_sleeve_J_artist_xy": [
+        190.0,
+        304.0
+      ],
+      "chest_J_residual_source_xy": [
+        22.533180778032033,
+        3.3729977116704504
+      ],
+      "chest_buckle_residual_source_xy": [
+        0.4972276458535134,
+        -0.027675951461958448
+      ],
+      "J_B_are_artist_surface_targets_not_measured_aperture_axis": true
+    },
+    {
+      "frame": 2,
+      "duration_ms": 100,
+      "sample_interval_ms": [
+        200,
+        300
+      ],
+      "textures": {
+        "BodyRest": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_BodyRest_002_v001.T_Fairytale_Dodge_BodyRest_002_v001",
+        "NearArmWithoutHand": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_NearArmWithoutHand_002_v001.T_Fairytale_Dodge_NearArmWithoutHand_002_v001",
+        "HelmetForeground": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_HelmetForeground_002_v001.T_Fairytale_Dodge_HelmetForeground_002_v001",
+        "NearHand": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_NearHand_002_v001.T_Fairytale_Dodge_NearHand_002_v001",
+        "FarHandForeground": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_FarHandForeground_002_v001.T_Fairytale_Dodge_FarHandForeground_002_v001",
+        "ShoulderFar": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_ShoulderFar_002_v001.T_Fairytale_Dodge_ShoulderFar_002_v001",
+        "Chest": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_Chest_002_v001.T_Fairytale_Dodge_Chest_002_v001",
+        "ShoulderNear": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_ShoulderNear_002_v001.T_Fairytale_Dodge_ShoulderNear_002_v001"
+      },
+      "ground_root_source_xy": [
+        227,
+        464
+      ],
+      "ground_root_authority": "Existing218 paired-visible-shoe artist proposal +-2sourcepx. Not bone/COM/footlock and does not move actor.",
+      "Grip_source_xy": [
+        158,
+        305
+      ],
+      "Grip_source_actual_RGBA": [
+        190,
+        96,
+        44,
+        255
+      ],
+      "Axis_artist_raw_xy": [
+        0.94,
+        0.341
+      ],
+      "Axis_artist_unit_xy": [
+        0.9400559349922475,
+        0.34102029131101746
+      ],
+      "Axis_clockwise_y_down_degrees": 19.939047916809514,
+      "axis_role": "Artist bladehold choice on original bare-body glove; no image-measured handle/bone axis.",
+      "weapon_scale": 0.5,
+      "optional_empty": {
+        "BodyRest": false,
+        "NearArmWithoutHand": false,
+        "HelmetForeground": false,
+        "NearHand": false,
+        "FarHandForeground": false,
+        "ShoulderFar": false,
+        "Chest": false,
+        "ShoulderNear": false
+      },
+      "declared_stack_slots": 9,
+      "expected_nonempty_render_layers": [
+        "BodyRest",
+        "ShoulderFar",
+        "Chest",
+        "NearArmWithoutHand",
+        "ShoulderNear",
+        "HelmetForeground",
+        "IndependentSword",
+        "FarHandForeground",
+        "NearHand"
+      ],
+      "expected_nonempty_draw_count_including_sword": 9,
+      "source_body": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-dodge218-shared-HD-v002/curated/frame-2.png",
+        "bytes": 149855,
+        "sha256": "35c4c64ad3797b67b144356a3a4762895bcb6d9ee2681f4e8581794db8bcae31"
+      },
+      "source_body_RGBA_sha256": "a21a95db3ef2c673a602474c337e7e1481cd3538e6cfc345042141e5a6cb6b04",
+      "armor_integer_translations_xy": {
+        "Chest": [
+          -19,
+          38
+        ],
+        "ShoulderNear": [
+          -97,
+          -3
+        ],
+        "ShoulderFar": [
+          55,
+          49
+        ]
+      },
+      "chest_source_A_artist_tracked_xy": [
+        267.21246272152473,
+        282.93369546964453
+      ],
+      "body_buckle_B_artist_xy": [
+        248.0,
+        321.0
+      ],
+      "near_sleeve_J_artist_xy": [
+        188.0,
+        268.0
+      ],
+      "chest_J_residual_source_xy": [
+        24.65726681127984,
+        0.08893709327549004
+      ],
+      "chest_buckle_residual_source_xy": [
+        0.2124627215247301,
+        -0.0663045303554668
+      ],
+      "J_B_are_artist_surface_targets_not_measured_aperture_axis": true
+    },
+    {
+      "frame": 3,
+      "duration_ms": 100,
+      "sample_interval_ms": [
+        300,
+        400
+      ],
+      "textures": {
+        "BodyRest": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_BodyRest_003_v001.T_Fairytale_Dodge_BodyRest_003_v001",
+        "NearArmWithoutHand": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_NearArmWithoutHand_003_v001.T_Fairytale_Dodge_NearArmWithoutHand_003_v001",
+        "HelmetForeground": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_HelmetForeground_003_v001.T_Fairytale_Dodge_HelmetForeground_003_v001",
+        "NearHand": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_NearHand_003_v001.T_Fairytale_Dodge_NearHand_003_v001",
+        "FarHandForeground": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_FarHandForeground_003_v001.T_Fairytale_Dodge_FarHandForeground_003_v001",
+        "ShoulderFar": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_ShoulderFar_003_v001.T_Fairytale_Dodge_ShoulderFar_003_v001",
+        "Chest": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_Chest_003_v001.T_Fairytale_Dodge_Chest_003_v001",
+        "ShoulderNear": "/Game/Production/ArtTrials/EV048/v018/HeroLeatherDodge/T_Fairytale_Dodge_ShoulderNear_003_v001.T_Fairytale_Dodge_ShoulderNear_003_v001"
+      },
+      "ground_root_source_xy": [
+        247,
+        464
+      ],
+      "ground_root_authority": "Existing218 paired-visible-shoe artist proposal +-2sourcepx. Not bone/COM/footlock and does not move actor.",
+      "Grip_source_xy": [
+        188,
+        293
+      ],
+      "Grip_source_actual_RGBA": [
+        184,
+        90,
+        41,
+        255
+      ],
+      "Axis_artist_raw_xy": [
+        0.96,
+        -0.28
+      ],
+      "Axis_artist_unit_xy": [
+        0.96,
+        -0.28
+      ],
+      "Axis_clockwise_y_down_degrees": -16.26020470831196,
+      "axis_role": "Artist bladehold choice on original bare-body glove; no image-measured handle/bone axis.",
+      "weapon_scale": 0.5,
+      "optional_empty": {
+        "BodyRest": false,
+        "NearArmWithoutHand": false,
+        "HelmetForeground": false,
+        "NearHand": false,
+        "FarHandForeground": false,
+        "ShoulderFar": false,
+        "Chest": false,
+        "ShoulderNear": false
+      },
+      "declared_stack_slots": 9,
+      "expected_nonempty_render_layers": [
+        "BodyRest",
+        "ShoulderFar",
+        "Chest",
+        "NearArmWithoutHand",
+        "ShoulderNear",
+        "HelmetForeground",
+        "IndependentSword",
+        "FarHandForeground",
+        "NearHand"
+      ],
+      "expected_nonempty_draw_count_including_sword": 9,
+      "source_body": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-dodge218-shared-HD-v002/curated/frame-3.png",
+        "bytes": 149472,
+        "sha256": "2669603d8b565c1c08b611792131bdcf3de9b0b9f974279ee1a5c71ed6e5e672"
+      },
+      "source_body_RGBA_sha256": "296b967addfa69c9d1809965bda1edc3b43fc2b28584c96f6c8860e29d87dfc4",
+      "armor_integer_translations_xy": {
+        "Chest": [
+          -23,
+          22
+        ],
+        "ShoulderNear": [
+          -84,
+          -10
+        ],
+        "ShoulderFar": [
+          43,
+          20
+        ]
+      },
+      "chest_source_A_artist_tracked_xy": [
+        267.4730266962083,
+        282.04971893573804
+      ],
+      "body_buckle_B_artist_xy": [
+        244.0,
+        304.0
+      ],
+      "near_sleeve_J_artist_xy": [
+        194.0,
+        249.0
+      ],
+      "chest_J_residual_source_xy": [
+        10.346723044397464,
+        9.291754756871
+      ],
+      "chest_buckle_residual_source_xy": [
+        0.47302669620830784,
+        0.04971893573804209
+      ],
+      "J_B_are_artist_surface_targets_not_measured_aperture_axis": true
+    }
+  ],
+  "sourcefit_precision_failure": {
+    "raw241_edit_protection_pass": false,
+    "source_J_B_targets_pass": false,
+    "original_warning_reports_retained": true,
+    "sourcefit_final_acceptance": false,
+    "postfit_risks": [
+      "Middle two visible near sleeve/armhole rim during real movement",
+      "0/3 changed rawmaterial despite requestedprotection",
+      "Lastphase->Ready and firstphase may pop in pose/root/grip",
+      "Standing72/416 and shoeRoots are author registration not footlock proof",
+      "Blade/guard outsidegrip sourcefit requires native mirroredmotion review"
+    ]
+  },
+  "actual_import_receipt": null,
+  "actual_native_receipt": null,
+  "TrialAllowed": false,
+  "FinalAccepted": false
+}

@@ -1,0 +1,24 @@
+{
+  "schema": "HeroAir-baseline-independent-static-review-v001",
+  "reviewer": "/root/guard_move_media_v141/review_capture_cpp",
+  "scope": "Probe C++ API, native screenshot/audio lifecycle, startup/failure cleanup and original JSON no-replace; read only",
+  "findings_closed": [
+    "MakeShared returns TSharedRef: Serialize(R,Writer), no invalid R.ToSharedRef()",
+    "Startup watchdog now precedes all incomplete owner/bound Run early returns",
+    "EndPlay now records failure, stops movie, aborts incomplete helper, releases keys, flushes PNG and writes failed report",
+    "UE FILEWRITE_NoReplaceExisting is ignored by this Windows OpenWrite path: claim/report now use real Windows CREATE_NEW, exact UTF8 write count and FlushFileBuffers"
+  ],
+  "reviewed_files": [
+    {"path": "new-source/DungeonHeroAirProbeV001.h", "bytes": 960, "sha256": "37812b76ba8eff852a337b6d21b1b3761c8b60c2d1b542efb97085e36cada701"},
+    {"path": "new-source/DungeonHeroAirProbeV001.cpp", "bytes": 27327, "sha256": "26e51d42c07a431021f19aec77bd08099f1645a76b7ede5e283a4df21515cc6a"}
+  ],
+  "conclusion": "No further blocker found in current scope. Arming has no movie/input; Recording owns copied StartMonotonic; last actual Processed callback stops movie and keys then Stop; stopped callbacks add no offsets; Poll terminal precedes Flush/report.",
+  "audio_helper_freeze_sha256": "91e1a74f78dcf1b712d121930da8e08e3543254d4227d43c2b774df730089c3e",
+  "HUD_wiring_independently_reviewed": false,
+  "Root_HUD_wiring_review_required": true,
+  "compiled": false,
+  "UE_run": false,
+  "native_passed": false,
+  "auditioned": false,
+  "final_accepted": false
+}

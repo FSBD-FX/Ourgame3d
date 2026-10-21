@@ -1,0 +1,118 @@
+{
+  "schema": "known44-AxeCycle-static-interface-validation-v001",
+  "passed": true,
+  "UE_started": false,
+  "UBT_started": false,
+  "actual_native_execution": false,
+  "visual_reviewed": false,
+  "formal_complete_units": 0,
+  "source_frozen_files_unchanged": true,
+  "python_AST_parsed": 3,
+  "static_cases": [
+    {
+      "case": "10 known facts plus all13 with3 closed gaps",
+      "result": "accepted_static_interface_only"
+    },
+    {
+      "case": "13 profile facts plus identical all13",
+      "result": "accepted_static_interface_only"
+    },
+    {
+      "case": "duplicate known clip",
+      "result": "rejected"
+    },
+    {
+      "case": "unknown all14 clip",
+      "result": "rejected"
+    },
+    {
+      "case": "missing explicit13 table",
+      "result": "rejected"
+    },
+    {
+      "case": "known tables differ",
+      "result": "rejected"
+    },
+    {
+      "case": "Move forbidden native_source_id",
+      "result": "rejected"
+    },
+    {
+      "case": "Move forbidden trial_allowed",
+      "result": "rejected"
+    },
+    {
+      "case": "Move forbidden source_pose_approved",
+      "result": "rejected"
+    },
+    {
+      "case": "Move forbidden frames",
+      "result": "rejected"
+    },
+    {
+      "case": "StompActive forbidden native_source_id",
+      "result": "rejected"
+    },
+    {
+      "case": "StompActive forbidden trial_allowed",
+      "result": "rejected"
+    },
+    {
+      "case": "StompActive forbidden source_pose_approved",
+      "result": "rejected"
+    },
+    {
+      "case": "StompActive forbidden frames",
+      "result": "rejected"
+    },
+    {
+      "case": "StompRecovery forbidden native_source_id",
+      "result": "rejected"
+    },
+    {
+      "case": "StompRecovery forbidden trial_allowed",
+      "result": "rejected"
+    },
+    {
+      "case": "StompRecovery forbidden source_pose_approved",
+      "result": "rejected"
+    },
+    {
+      "case": "StompRecovery forbidden frames",
+      "result": "rejected"
+    },
+    {
+      "case": "old right-facing overlap dx1.6023 dy44",
+      "result": "rejected"
+    },
+    {
+      "case": "later AttackId cannot fill selected Active mask",
+      "result": "rejected"
+    },
+    {
+      "case": "unlocked Active cannot earn coverage",
+      "result": "rejected"
+    },
+    {
+      "case": "pixel schema guard-art-known44-native-observer-v001/AxeCycle",
+      "result": "accepted_static_gate_only"
+    },
+    {
+      "case": "pixel schema guard-art-partial-native-observer-v009/AxeCycle",
+      "result": "rejected"
+    },
+    {
+      "case": "pixel schema guard-art-partial-native-observer-v002/AxeCycle",
+      "result": "rejected"
+    },
+    {
+      "case": "pixel schema guard-art-known44-native-observer-v001/StunIR",
+      "result": "rejected"
+    },
+    {
+      "case": "native CRC/FIFO/stop-flush assert AST after versioned schema gate",
+      "result": "identical_to_frozen_v010"
+    }
+  ],
+  "limitation": "Static interface/adversarial oracle checks only; no native success, rendered coverage or visual acceptance follows."
+}
