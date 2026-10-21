@@ -1,0 +1,81 @@
+{
+  "request_number": 155,
+  "asset": "fairytale-SwordReady-four-idle-v001",
+  "component": "SwordReady",
+  "status": "generated_retained_pending_extraction",
+  "source_event": "EV-048",
+  "authorization_events": [
+    "EV-040",
+    "EV-041"
+  ],
+  "window_number": 7,
+  "requested_utc": "2026-10-16T00:14:49.679218+00:00",
+  "prompt_path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/prompts/ready-body-only-v001.txt",
+  "prompt": "Create ONE horizontal production component-row with exactly4 separate FULL-BODY canonical131 characters, BODY ONLY, forSwordReady. This is the new existing hero's real sword-body state, not a new identity or an assembled weapon sheet.\n\nREFERENCE OWNERSHIP:131idle0 is the ONLY appearance/proportion/identity authority.131fouridle contact gives original body volume, rigid bell-helmet construction and source colors only; it does NOT override the NEW arm/hand action. Original anatomical guide gives phase order, near/far depth and grip-hand placement, not final colors or a new character. Standard4slot guide gives count/layout. No old human body, realistic knight, armor reference or baked sword identity is attached.\n\nACTION: Four READY-IDLE bodies, same sword-ready closed near-hand guard throughout; tiny actual torso breathing only, helmet rigid, feet planted and4->0 seamless. Near shoulder is image-LEFT and in front; near forearm bends across the chest toward image-RIGHT, ending in a correctly closed grip fist in front of the lower chest. Far hand remains separate and relaxed/counterbalancing, never also grabbing a blade.\n\nHANDS, CRITICAL: the larger near arm starts at image-LEFT/front shoulder, with a real elbow and forearm joining the near hand continuously. That near brown leather hand forms a CLOSED CYLINDRICAL GRIP around an INVISIBLE future sword handle: four fingers curl around the cylinder with correct creases, and ONE opposable thumb lies across the index/middle side on the camera-facing surface. Not an open C claw, pointing finger, flat mitten or extra finger. Preserve131's brown leather glove/cuff identity. The guide redA is a planned palm/grip center and short blue dashes are only an invisible grip-axis cue. Do NOT render a rod, wooden handle, cylinder, pommel, blade, guard or red/blue mark; future separate sword artwork will occupy the grip. Do not leave an oversized empty hole; the closed fist must have credible finger/thumb overlap. Far hand has its own natural opposing thumb anatomy and never duplicates the near hand.\n\nIDENTITY: EXACT same squat bell helmet, crooked top knob, black face opening with two amber eyes, dark cloth shirt/trousers, original belt and brown gloves/boots as131. Helmet shell and body volume stay rigid through motion; no stretching a neck/helmet, tall human anatomy, missing limbs or extra joints. No chestplate, shoulder caps, bracers, greaves or any armor plate baked into the body. Keep the same three-quarter native RIGHT-facing view. Maintain body standing-equivalent height416px on512source canvas, floor at source464 as a design guide; crouch/torso rotation is actual pose, not per-frame rescaling. Hands stay within the body strip; no blade/swoosh expands the bbox. One common native drawing scale across the row; later extraction uses ONE shared ratio, never individual normalized frame fitting. The final actual feet/grip/axis will be measured, not assumed from this diagram.\n\nOUTPUT: exactly4 full-body connected silhouettes on one row, generous green gaps, complete head-knob through boots, no cropping. Flat opaque GREEN #00FF00 background, opaque body interiors and clean hand-inked edges. Render only real body pixels. No sword/weapon/wood rod/shield, armor pieces, slash trail, smoke, glow outside the two eye shapes, sparks, floor/shadow, UI, technical colors/axis/labels/numbers/checkerboard or alternative views. Do not paste one body4times, mirror it to invent attacks or locally repaint an old body. Source timing is [167, 167, 167, 167]ms, but never print it in the artwork.\n\nBOUNDARY: this only prepares the requested sword body row. Real sword is a separate existing component; new palm/axis and original hand-pixel occlusion must be measured after extraction. Old V007 grip/root472/hand polygon and XBW sockets do not apply. Other attacks, movement, armor combinations, effects and audio remain separate work; no complete-unit or motion acceptance is implied.\n",
+  "prompt_file_sha256": "b492983647201d0b73a94550856223f3e217a1ebd1ab97f40a8866d89855343c",
+  "reference_images": [
+    {
+      "role": "sole_identity",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/curated/frame-0.png",
+        "bytes": 117257,
+        "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718"
+      }
+    },
+    {
+      "role": "original131_body_proportions_only_not_new_action",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/qa/idle-contact.png",
+        "bytes": 416256,
+        "sha256": "d720eca9b34139616e6c7d7d6a0f411304ce8e628d3f4fd7bb3e5009edc985ad"
+      }
+    },
+    {
+      "role": "original_anatomical_action_guide_only",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/guides/ready-anatomical-motion-v001.png",
+        "bytes": 23496,
+        "sha256": "d74a5e3c2346c775eb873d05931822887507c9661adb3283426cd3d1d651582f"
+      }
+    },
+    {
+      "role": "standard_component_count_layout",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v001/references/layout-guides/sword_ready_idle.png",
+        "bytes": 4526,
+        "sha256": "8f379aea412fd60f6afb708cc373f79dacd688db9dcf844edb190b3199468420"
+      }
+    }
+  ],
+  "transparent_background": false,
+  "backend": "image_gen.imagegen",
+  "external_api_calls": 0,
+  "host_fee_usd": null,
+  "raw_destination_planned": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v001/raw/sword_ready_idle.png",
+  "source_handoff": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/handoffs/ready-native-input-v001.json",
+    "bytes": 6201,
+    "sha256": "e1993d495eb88a403a989cdd7f20e8635a8ab1f67045f927b8b551f7806f07a5"
+  },
+  "scope": "Canonical131 weapon-specific body state; exact phase timing, body only, all applicable states and equipment binding remain required",
+  "formal_complete_units": 0,
+  "generated_utc": "2026-10-16T00:20:14.169804+00:00",
+  "actual_native_original": {
+    "path": "C:/Users/22499/.codex/generated_images/01a0f834-7bb4-7eb1-a91b-b0d45a166798/exec-98234809-d66c-45c4-9b3c-cc0cf4febc8b.png",
+    "bytes": 1479362,
+    "sha256": "c7c90252194faa969fd3dcfc2edb7cb90b95a15fa09ff52ad637a7d626d85189"
+  },
+  "canonical_raw": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v001/raw/sword_ready_idle.png",
+    "bytes": 1479362,
+    "sha256": "c7c90252194faa969fd3dcfc2edb7cb90b95a15fa09ff52ad637a7d626d85189"
+  },
+  "raw_mode": "RGB",
+  "raw_size": [
+    2171,
+    724
+  ],
+  "source_pixels_modified": false,
+  "runtime_imported": false,
+  "complete_armor": false
+}

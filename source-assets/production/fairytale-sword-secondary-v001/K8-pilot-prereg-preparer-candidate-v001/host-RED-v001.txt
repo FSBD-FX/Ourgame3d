@@ -1,0 +1,168 @@
+test_actual_failed_or_warning_test_overrides_green_summary (__main__.Gates.test_actual_failed_or_warning_test_overrides_green_summary) ... 
+  test_actual_failed_or_warning_test_overrides_green_summary (__main__.Gates.test_actual_failed_or_warning_test_overrides_green_summary) (key='state') ... FAIL
+  test_actual_failed_or_warning_test_overrides_green_summary (__main__.Gates.test_actual_failed_or_warning_test_overrides_green_summary) (key='warnings') ... FAIL
+  test_actual_failed_or_warning_test_overrides_green_summary (__main__.Gates.test_actual_failed_or_warning_test_overrides_green_summary) (key='errors') ... FAIL
+test_duplicate_or_changed_actual_test_ids_rejected (__main__.Gates.test_duplicate_or_changed_actual_test_ids_rejected) ... 
+  test_duplicate_or_changed_actual_test_ids_rejected (__main__.Gates.test_duplicate_or_changed_actual_test_ids_rejected) (duplicate=True) ... FAIL
+  test_duplicate_or_changed_actual_test_ids_rejected (__main__.Gates.test_duplicate_or_changed_actual_test_ids_rejected) (duplicate=False) ... FAIL
+test_error_entry_rejected_even_if_counters_zero (__main__.Gates.test_error_entry_rejected_even_if_counters_zero) ... FAIL
+test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected (__main__.Gates.test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected) ... 
+  test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected (__main__.Gates.test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected) (key='notRun', value=1) ... FAIL
+  test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected (__main__.Gates.test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected) (key='notRun', value=None) ... FAIL
+  test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected (__main__.Gates.test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected) (key='inProcess', value=1) ... FAIL
+  test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected (__main__.Gates.test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected) (key='inProcess', value=None) ... FAIL
+  test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected (__main__.Gates.test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected) (key='warnings', value=1) ... FAIL
+  test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected (__main__.Gates.test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected) (key='warnings', value=None) ... FAIL
+test_output_cannot_escape_or_be_inside_capture_archive (__main__.Gates.test_output_cannot_escape_or_be_inside_capture_archive) ... 
+  test_output_cannot_escape_or_be_inside_capture_archive (__main__.Gates.test_output_cannot_escape_or_be_inside_capture_archive) (output='F:\\Ourgame\\UnrealGame\\Source\\fake.json') ... FAIL
+  test_output_cannot_escape_or_be_inside_capture_archive (__main__.Gates.test_output_cannot_escape_or_be_inside_capture_archive) (output='F:\\Ourgame\\过程图稿与视频\\2026-10-19_军剑K右侧前踏首次原生试验_v001\\prereg.json') ... FAIL
+  test_output_cannot_escape_or_be_inside_capture_archive (__main__.Gates.test_output_cannot_escape_or_be_inside_capture_archive) (output='F:\\Ourgame\\source-assets\\production\\fairytale-sword-secondary-v001\\K8-pilot-prereg-preparer-candidate-v001\\prepare-first-K-pilot-prereg-v001.py') ... FAIL
+test_real_historical203_shape_accepts_only_as_schema_input (__main__.Gates.test_real_historical203_shape_accepts_only_as_schema_input) ... FAIL
+
+======================================================================
+FAIL: test_actual_failed_or_warning_test_overrides_green_summary (__main__.Gates.test_actual_failed_or_warning_test_overrides_green_summary) (key='state')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 24, in test_actual_failed_or_warning_test_overrides_green_summary
+    with self.subTest(key=key),self.assertRaises(M.NotReady):M.validate_green203(self.cm,bad,self.ids)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_actual_failed_or_warning_test_overrides_green_summary (__main__.Gates.test_actual_failed_or_warning_test_overrides_green_summary) (key='warnings')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 24, in test_actual_failed_or_warning_test_overrides_green_summary
+    with self.subTest(key=key),self.assertRaises(M.NotReady):M.validate_green203(self.cm,bad,self.ids)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_actual_failed_or_warning_test_overrides_green_summary (__main__.Gates.test_actual_failed_or_warning_test_overrides_green_summary) (key='errors')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 24, in test_actual_failed_or_warning_test_overrides_green_summary
+    with self.subTest(key=key),self.assertRaises(M.NotReady):M.validate_green203(self.cm,bad,self.ids)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_duplicate_or_changed_actual_test_ids_rejected (__main__.Gates.test_duplicate_or_changed_actual_test_ids_rejected) (duplicate=True)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 28, in test_duplicate_or_changed_actual_test_ids_rejected
+    with self.subTest(duplicate=duplicate),self.assertRaises(M.NotReady):M.validate_green203(self.cm,bad,self.ids)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_duplicate_or_changed_actual_test_ids_rejected (__main__.Gates.test_duplicate_or_changed_actual_test_ids_rejected) (duplicate=False)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 28, in test_duplicate_or_changed_actual_test_ids_rejected
+    with self.subTest(duplicate=duplicate),self.assertRaises(M.NotReady):M.validate_green203(self.cm,bad,self.ids)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_error_entry_rejected_even_if_counters_zero (__main__.Gates.test_error_entry_rejected_even_if_counters_zero)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 31, in test_error_entry_rejected_even_if_counters_zero
+    with self.assertRaises(M.NotReady):M.validate_green203(self.cm,bad,self.ids)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected (__main__.Gates.test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected) (key='notRun', value=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 20, in test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected
+    with self.subTest(key=key,value=value),self.assertRaises(M.NotReady):M.validate_green203(bad,self.suite,self.ids)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected (__main__.Gates.test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected) (key='notRun', value=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 20, in test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected
+    with self.subTest(key=key,value=value),self.assertRaises(M.NotReady):M.validate_green203(bad,self.suite,self.ids)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected (__main__.Gates.test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected) (key='inProcess', value=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 20, in test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected
+    with self.subTest(key=key,value=value),self.assertRaises(M.NotReady):M.validate_green203(bad,self.suite,self.ids)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected (__main__.Gates.test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected) (key='inProcess', value=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 20, in test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected
+    with self.subTest(key=key,value=value),self.assertRaises(M.NotReady):M.validate_green203(bad,self.suite,self.ids)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected (__main__.Gates.test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected) (key='warnings', value=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 20, in test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected
+    with self.subTest(key=key,value=value),self.assertRaises(M.NotReady):M.validate_green203(bad,self.suite,self.ids)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected (__main__.Gates.test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected) (key='warnings', value=None)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 20, in test_manifest_omitted_or_nonzero_notrun_inprocess_warnings_rejected
+    with self.subTest(key=key,value=value),self.assertRaises(M.NotReady):M.validate_green203(bad,self.suite,self.ids)
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_output_cannot_escape_or_be_inside_capture_archive (__main__.Gates.test_output_cannot_escape_or_be_inside_capture_archive) (output='F:\\Ourgame\\UnrealGame\\Source\\fake.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 35, in test_output_cannot_escape_or_be_inside_capture_archive
+    with self.subTest(output=str(output)),self.assertRaises(M.NotReady):M.validate_output(output,archive)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_output_cannot_escape_or_be_inside_capture_archive (__main__.Gates.test_output_cannot_escape_or_be_inside_capture_archive) (output='F:\\Ourgame\\过程图稿与视频\\2026-10-19_军剑K右侧前踏首次原生试验_v001\\prereg.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 35, in test_output_cannot_escape_or_be_inside_capture_archive
+    with self.subTest(output=str(output)),self.assertRaises(M.NotReady):M.validate_output(output,archive)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_output_cannot_escape_or_be_inside_capture_archive (__main__.Gates.test_output_cannot_escape_or_be_inside_capture_archive) (output='F:\\Ourgame\\source-assets\\production\\fairytale-sword-secondary-v001\\K8-pilot-prereg-preparer-candidate-v001\\prepare-first-K-pilot-prereg-v001.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 35, in test_output_cannot_escape_or_be_inside_capture_archive
+    with self.subTest(output=str(output)),self.assertRaises(M.NotReady):M.validate_output(output,archive)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_real_historical203_shape_accepts_only_as_schema_input (__main__.Gates.test_real_historical203_shape_accepts_only_as_schema_input)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v001\test-prereg-gates-v001.py", line 13, in test_real_historical203_shape_accepts_only_as_schema_input
+    self.assertIs(M.validate_green203(self.cm,self.suite,self.ids),True)
+AssertionError: False is not True
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.082s
+
+FAILED (failures=16)

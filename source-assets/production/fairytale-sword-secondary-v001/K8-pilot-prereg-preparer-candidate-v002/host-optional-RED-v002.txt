@@ -1,0 +1,79 @@
+test_actual_pixel_own_freeze_consumes_both_nested_fields (__main__.OptionalInterface.test_actual_pixel_own_freeze_consumes_both_nested_fields) ... FAIL
+test_default_null_stays_pending_and_incomplete_pair_rejects (__main__.OptionalInterface.test_default_null_stays_pending_and_incomplete_pair_rejects) ... FAIL
+test_real_relative_pixel_freeze_is_accepted (__main__.OptionalInterface.test_real_relative_pixel_freeze_is_accepted) ... FAIL
+test_relative_paths_cannot_be_absolute_driven_or_escape (__main__.OptionalInterface.test_relative_paths_cannot_be_absolute_driven_or_escape) ... FAIL
+test_root_members_keep_absolute_paths_and_duplicate_rejected (__main__.OptionalInterface.test_root_members_keep_absolute_paths_and_duplicate_rejected) ... FAIL
+test_unknown_and_mixed_freeze_schema_rejected (__main__.OptionalInterface.test_unknown_and_mixed_freeze_schema_rejected) ... FAIL
+
+======================================================================
+FAIL: test_actual_pixel_own_freeze_consumes_both_nested_fields (__main__.OptionalInterface.test_actual_pixel_own_freeze_consumes_both_nested_fields)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v002\test-optional-pixel-interface-v002.py", line 23, in test_actual_pixel_own_freeze_consumes_both_nested_fields
+    deps=self.adapter()(self.ns());p={'checker_dependencies':deps};pixel=module(CHECKER,'realPixelInterface')
+         ^^^^^^^^^^^^^^
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v002\test-optional-pixel-interface-v002.py", line 17, in adapter
+    self.assertTrue(hasattr(M,'pixel_dependencies'),'optional dependency adapter missing');return M.pixel_dependencies
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : optional dependency adapter missing
+
+======================================================================
+FAIL: test_default_null_stays_pending_and_incomplete_pair_rejects (__main__.OptionalInterface.test_default_null_stays_pending_and_incomplete_pair_rejects)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v002\test-optional-pixel-interface-v002.py", line 27, in test_default_null_stays_pending_and_incomplete_pair_rejects
+    fn=self.adapter();self.assertEqual(fn(self.ns(False)),dict(K_pixel_composition=None,K_pixel_composition_freeze=None))
+       ^^^^^^^^^^^^^^
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v002\test-optional-pixel-interface-v002.py", line 17, in adapter
+    self.assertTrue(hasattr(M,'pixel_dependencies'),'optional dependency adapter missing');return M.pixel_dependencies
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : optional dependency adapter missing
+
+======================================================================
+FAIL: test_real_relative_pixel_freeze_is_accepted (__main__.OptionalInterface.test_real_relative_pixel_freeze_is_accepted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v002\test-optional-pixel-interface-v002.py", line 19, in test_real_relative_pixel_freeze_is_accepted
+    try:j=M.frozen_members(M.filepin(FREEZE))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v002\prepare-first-K-pilot-prereg-v002.py", line 44, in frozen_members
+    for member in j['members']:
+                  ~^^^^^^^^^^^
+KeyError: 'members'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v002\test-optional-pixel-interface-v002.py", line 20, in test_real_relative_pixel_freeze_is_accepted
+    except (KeyError,M.NotReady) as e:self.fail('real pixel files/relative_path schema rejected: '+str(e))
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: real pixel files/relative_path schema rejected: 'members'
+
+======================================================================
+FAIL: test_relative_paths_cannot_be_absolute_driven_or_escape (__main__.OptionalInterface.test_relative_paths_cannot_be_absolute_driven_or_escape)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v002\test-optional-pixel-interface-v002.py", line 38, in test_relative_paths_cannot_be_absolute_driven_or_escape
+    self.assertTrue(hasattr(M,'freeze_member_pins'),'explicit schema/path adapter missing')
+AssertionError: False is not true : explicit schema/path adapter missing
+
+======================================================================
+FAIL: test_root_members_keep_absolute_paths_and_duplicate_rejected (__main__.OptionalInterface.test_root_members_keep_absolute_paths_and_duplicate_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v002\test-optional-pixel-interface-v002.py", line 43, in test_root_members_keep_absolute_paths_and_duplicate_rejected
+    self.assertTrue(hasattr(M,'freeze_member_pins'),'explicit schema/path adapter missing')
+AssertionError: False is not true : explicit schema/path adapter missing
+
+======================================================================
+FAIL: test_unknown_and_mixed_freeze_schema_rejected (__main__.OptionalInterface.test_unknown_and_mixed_freeze_schema_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-pilot-prereg-preparer-candidate-v002\test-optional-pixel-interface-v002.py", line 31, in test_unknown_and_mixed_freeze_schema_rejected
+    self.assertTrue(hasattr(M,'freeze_member_pins'),'explicit schema/path adapter missing')
+AssertionError: False is not true : explicit schema/path adapter missing
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.005s
+
+FAILED (failures=6)

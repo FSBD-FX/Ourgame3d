@@ -1,0 +1,840 @@
+{
+  "schema": "fairytale-native175-primary3-shared-extraction-v1",
+  "created_local": "2026-10-16T18:48:05.620301+08:00",
+  "component": "SwordPrimary3Body",
+  "native_request": 175,
+  "raw": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/run-primary3-v001/raw/sword_primary_3.png",
+    "bytes": 1500738,
+    "sha256": "2fc43b327ee464673954bd39f139fbee334d1ccb1bf17f976a072ad31e88e6f7"
+  },
+  "handoff": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/handoffs/primary3-native-input-approved-v001.json",
+    "bytes": 3195,
+    "sha256": "dafa0fc3ab65aa1a67022a96d265f41396986610ffeb9959a2c42ce706462bfa"
+  },
+  "preparation_freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/preparation-freeze-v001.json",
+    "bytes": 4219,
+    "sha256": "271bea83aa00fe057a6b8ca8f3c417fc0bc7858f8f9319ee2d00201e4dc645e8"
+  },
+  "request": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/run-primary3-v001/sprite-request.json",
+    "bytes": 1847,
+    "sha256": "0fed989a4a36591d1ad27cbd58d41ef1800ca91a9474673ebf4c413428dec03e"
+  },
+  "request_before": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/sprite-request-before-extraction-exact.json",
+    "bytes": 1847,
+    "sha256": "0fed989a4a36591d1ad27cbd58d41ef1800ca91a9474673ebf4c413428dec03e"
+  },
+  "request_exact_unchanged": true,
+  "request_auto_changed": false,
+  "frozen_preparation_mismatches": [],
+  "commands": [
+    {
+      "name": "extract-shared-row",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "F:\\Ourgame\\tools\\scripts\\extract-sprite-shared-row-scale.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-sword-primary3-v001\\run-primary3-v001"
+      ],
+      "tool": {
+        "path": "F:/Ourgame/tools/scripts/extract-sprite-shared-row-scale.py",
+        "bytes": 8626,
+        "sha256": "2d7464dc2e8dd962a7d4dc170c0a7401d09cf1a626415309b4921b7d89d88aa3"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/extract-shared-row-v001.log",
+        "bytes": 2353,
+        "sha256": "ca5059db4238f401d7ae412bd25125371eb43919fbb4baef1e620e4bcff4a6e1"
+      }
+    },
+    {
+      "name": "compose-atlas",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\compose_sprite_atlas.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-sword-primary3-v001\\run-primary3-v001"
+      ],
+      "tool": {
+        "path": "C:/Users/22499/.codex/skills/sprite-gen/scripts/compose_sprite_atlas.py",
+        "bytes": 481,
+        "sha256": "a7475830b99720b69bc645423a2f9aee40d03dad0e7d589ad4756526648a61aa"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/compose-atlas-v001.log",
+        "bytes": 265,
+        "sha256": "bcd51c51afaf60c4bcf180f5cdde7b6e273e186929419757af567759cc37005b"
+      }
+    },
+    {
+      "name": "export-curated",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\export_curated_pngs.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-sword-primary3-v001\\run-primary3-v001",
+        "--state",
+        "sword_primary_3"
+      ],
+      "tool": {
+        "path": "C:/Users/22499/.codex/skills/sprite-gen/scripts/export_curated_pngs.py",
+        "bytes": 477,
+        "sha256": "dcf7910f44a3f43006a43379c0464c88ed7cc3213e3a8062edd59b9009960e1e"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/export-curated-v001.log",
+        "bytes": 976,
+        "sha256": "aeb5cf8cacd93f88fec66d5fc1399972fee8e59376f665fe8f387a3862bfb707"
+      }
+    },
+    {
+      "name": "preview",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\preview_animation.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-sword-primary3-v001\\run-primary3-v001"
+      ],
+      "tool": {
+        "path": "C:/Users/22499/.codex/skills/sprite-gen/scripts/preview_animation.py",
+        "bytes": 459,
+        "sha256": "ff4aa5d1bcfae4731a09732da96d24f540707b834df5cba85b910f88df016496"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/preview-v001.log",
+        "bytes": 289,
+        "sha256": "9d5fa37f35e376550fdd98983c35ae688896bf4770be71cc6e7f626ba64ab6c2"
+      }
+    }
+  ],
+  "frames": [
+    {
+      "frame": 0,
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/run-primary3-v001/curated/frame-0.png",
+        "bytes": 111826,
+        "sha256": "0cf3057aadded713b71ef61895d6c1088a468e8be9e52e3ead5e5956ee2d72b6"
+      },
+      "source_canvas_px": [
+        512,
+        512
+      ],
+      "alpha_bbox_px": [
+        142,
+        66,
+        370,
+        464
+      ],
+      "alpha_bbox_size_px": [
+        228,
+        398
+      ],
+      "diagnostics": [
+        {
+          "role": "hands-body-inspection",
+          "source_roi_px": [
+            80,
+            100,
+            440,
+            390
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-0-hands-body-inspection.png",
+            "bytes": 83760,
+            "sha256": "2d5a7088344cfbeec2d7df3b8ac5a2dd131aae1363f1f0e95eb59458e8f0c5e0"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        },
+        {
+          "role": "feet",
+          "source_roi_px": [
+            128,
+            415,
+            388,
+            465
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-0-feet.png",
+            "bytes": 14296,
+            "sha256": "1b139915dd2e9556416e01474da4bfbd9feb169557890e69b4c73bfea0becbde"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        },
+        {
+          "role": "whole-alpha-bbox",
+          "source_roi_px": [
+            142,
+            66,
+            370,
+            464
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-0-whole-alpha-bbox.png",
+            "bytes": 104687,
+            "sha256": "920b17c78ea8f9f90c10e44ab5dafe946d758645cbba1993d8b12ef32774a4bf"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        }
+      ],
+      "actual_grip_px": null,
+      "actual_axis_xy": null,
+      "actual_thumb_contour": null,
+      "actual_foot_roots_px": null,
+      "actual_body_armor_target_points": null,
+      "measurement_status": "No new derived image viewed. Actual features and finishing-down-cut/anatomy judgment await E retention and review; no design/old markers transplanted."
+    },
+    {
+      "frame": 1,
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/run-primary3-v001/curated/frame-1.png",
+        "bytes": 117953,
+        "sha256": "d072fc4f7fabe2c511470382245426173d645001083d5f7dd0df66125eb66482"
+      },
+      "source_canvas_px": [
+        512,
+        512
+      ],
+      "alpha_bbox_px": [
+        125,
+        62,
+        386,
+        464
+      ],
+      "alpha_bbox_size_px": [
+        261,
+        402
+      ],
+      "diagnostics": [
+        {
+          "role": "hands-body-inspection",
+          "source_roi_px": [
+            80,
+            100,
+            440,
+            390
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-1-hands-body-inspection.png",
+            "bytes": 89004,
+            "sha256": "fd06094b1f9d4befd5e99f2a7fafa05215ee3dd4ba47e00e563b9cebf40d9567"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        },
+        {
+          "role": "feet",
+          "source_roi_px": [
+            128,
+            415,
+            388,
+            465
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-1-feet.png",
+            "bytes": 14042,
+            "sha256": "e2d91de873b8a6241debc5d5ba83ad4f8baf732969188061de4481400cc81b7f"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        },
+        {
+          "role": "whole-alpha-bbox",
+          "source_roi_px": [
+            125,
+            62,
+            386,
+            464
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-1-whole-alpha-bbox.png",
+            "bytes": 111726,
+            "sha256": "ae6348b104abd438e3dc58f564b396327ddcd1a84c5ad2dcd18df1a1c218a572"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        }
+      ],
+      "actual_grip_px": null,
+      "actual_axis_xy": null,
+      "actual_thumb_contour": null,
+      "actual_foot_roots_px": null,
+      "actual_body_armor_target_points": null,
+      "measurement_status": "No new derived image viewed. Actual features and finishing-down-cut/anatomy judgment await E retention and review; no design/old markers transplanted."
+    },
+    {
+      "frame": 2,
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/run-primary3-v001/curated/frame-2.png",
+        "bytes": 114651,
+        "sha256": "6d551d28d7e3e274468e8b30da53192d9d2f39387f3f1e20948899aacb5eb318"
+      },
+      "source_canvas_px": [
+        512,
+        512
+      ],
+      "alpha_bbox_px": [
+        123,
+        60,
+        388,
+        464
+      ],
+      "alpha_bbox_size_px": [
+        265,
+        404
+      ],
+      "diagnostics": [
+        {
+          "role": "hands-body-inspection",
+          "source_roi_px": [
+            80,
+            100,
+            440,
+            390
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-2-hands-body-inspection.png",
+            "bytes": 85068,
+            "sha256": "8e19e5b1adeced48722de8113fcd4e59cc1d080df4d441f015dc68da0eedbc5a"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        },
+        {
+          "role": "feet",
+          "source_roi_px": [
+            128,
+            415,
+            388,
+            465
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-2-feet.png",
+            "bytes": 14385,
+            "sha256": "438884ca88dad1c1435ada6fd4127893d9c87d9c86fe56421c056a2fbe5819f2"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        },
+        {
+          "role": "whole-alpha-bbox",
+          "source_roi_px": [
+            123,
+            60,
+            388,
+            464
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-2-whole-alpha-bbox.png",
+            "bytes": 108779,
+            "sha256": "e33e7e4c2480c94ddbfd2a6667b6beabf5da6fc5c7c41e162881645d8cd09505"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        }
+      ],
+      "actual_grip_px": null,
+      "actual_axis_xy": null,
+      "actual_thumb_contour": null,
+      "actual_foot_roots_px": null,
+      "actual_body_armor_target_points": null,
+      "measurement_status": "No new derived image viewed. Actual features and finishing-down-cut/anatomy judgment await E retention and review; no design/old markers transplanted."
+    },
+    {
+      "frame": 3,
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/run-primary3-v001/curated/frame-3.png",
+        "bytes": 113766,
+        "sha256": "4996fed4a7a1639c11d1d8c8ac8b4b8aac9d12d7168adf7adcd40f7b8c08e92c"
+      },
+      "source_canvas_px": [
+        512,
+        512
+      ],
+      "alpha_bbox_px": [
+        122,
+        69,
+        389,
+        464
+      ],
+      "alpha_bbox_size_px": [
+        267,
+        395
+      ],
+      "diagnostics": [
+        {
+          "role": "hands-body-inspection",
+          "source_roi_px": [
+            80,
+            100,
+            440,
+            390
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-3-hands-body-inspection.png",
+            "bytes": 85301,
+            "sha256": "ed58ce4a6fea83c502bca7c3a67a946e50f4284bd19eb2baede8228cda353fd3"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        },
+        {
+          "role": "feet",
+          "source_roi_px": [
+            128,
+            415,
+            388,
+            465
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-3-feet.png",
+            "bytes": 14223,
+            "sha256": "dea9d363caf574ccf4cc6162c98d33b3083ec47bb64f0c4bc62a601f058132ad"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        },
+        {
+          "role": "whole-alpha-bbox",
+          "source_roi_px": [
+            122,
+            69,
+            389,
+            464
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-3-whole-alpha-bbox.png",
+            "bytes": 107985,
+            "sha256": "d1f15bb64fba1b17f7662e59d406c1362f5fea507140f148429fb9a87a463c0e"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        }
+      ],
+      "actual_grip_px": null,
+      "actual_axis_xy": null,
+      "actual_thumb_contour": null,
+      "actual_foot_roots_px": null,
+      "actual_body_armor_target_points": null,
+      "measurement_status": "No new derived image viewed. Actual features and finishing-down-cut/anatomy judgment await E retention and review; no design/old markers transplanted."
+    },
+    {
+      "frame": 4,
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/run-primary3-v001/curated/frame-4.png",
+        "bytes": 113050,
+        "sha256": "db7b0b174f023daa50e13061565c51a996feeafa26baa92843b3ff6de444be17"
+      },
+      "source_canvas_px": [
+        512,
+        512
+      ],
+      "alpha_bbox_px": [
+        117,
+        79,
+        395,
+        464
+      ],
+      "alpha_bbox_size_px": [
+        278,
+        385
+      ],
+      "diagnostics": [
+        {
+          "role": "hands-body-inspection",
+          "source_roi_px": [
+            80,
+            100,
+            440,
+            390
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-4-hands-body-inspection.png",
+            "bytes": 85656,
+            "sha256": "8dcc7ea2edceb86593b3b8342535c9c9cfc7d1046c754dad4ba360eee7f3e59f"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        },
+        {
+          "role": "feet",
+          "source_roi_px": [
+            128,
+            415,
+            388,
+            465
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-4-feet.png",
+            "bytes": 13890,
+            "sha256": "ec721265936d58e7b16a98bc0cec669b1d807bae8477b39f83c41e97dc58380c"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        },
+        {
+          "role": "whole-alpha-bbox",
+          "source_roi_px": [
+            117,
+            79,
+            395,
+            464
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-4-whole-alpha-bbox.png",
+            "bytes": 107437,
+            "sha256": "fd339a2322feb795227b24288f131f62923910d183779ec3094e18781574e60c"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        }
+      ],
+      "actual_grip_px": null,
+      "actual_axis_xy": null,
+      "actual_thumb_contour": null,
+      "actual_foot_roots_px": null,
+      "actual_body_armor_target_points": null,
+      "measurement_status": "No new derived image viewed. Actual features and finishing-down-cut/anatomy judgment await E retention and review; no design/old markers transplanted."
+    },
+    {
+      "frame": 5,
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/run-primary3-v001/curated/frame-5.png",
+        "bytes": 113159,
+        "sha256": "6745af979b49ae86f9e6da6c33cca8048b997902177ef5e6fde6fda1543c5523"
+      },
+      "source_canvas_px": [
+        512,
+        512
+      ],
+      "alpha_bbox_px": [
+        139,
+        61,
+        372,
+        464
+      ],
+      "alpha_bbox_size_px": [
+        233,
+        403
+      ],
+      "diagnostics": [
+        {
+          "role": "hands-body-inspection",
+          "source_roi_px": [
+            80,
+            100,
+            440,
+            390
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-5-hands-body-inspection.png",
+            "bytes": 83987,
+            "sha256": "0951f14149615a9a35b0eba2e92748a8cfac55a6dd22d7835be535804a931180"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        },
+        {
+          "role": "feet",
+          "source_roi_px": [
+            128,
+            415,
+            388,
+            465
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-5-feet.png",
+            "bytes": 14573,
+            "sha256": "979c2276bfd9518691140b1b57dbbb2d4bc4f1a61fbb00c4a4fe3f86653e755e"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        },
+        {
+          "role": "whole-alpha-bbox",
+          "source_roi_px": [
+            139,
+            61,
+            372,
+            464
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/primary3-extraction-v001/diagnostics-v001/frame-5-whole-alpha-bbox.png",
+            "bytes": 105993,
+            "sha256": "2a4f73734536c46d1205539e168a8fcef9e3714ff9391e68f5ec210b81937341"
+          },
+          "resampled": false,
+          "source_pixel_bytes_preserved": true,
+          "semantic_mask": false,
+          "art_asset": false
+        }
+      ],
+      "actual_grip_px": null,
+      "actual_axis_xy": null,
+      "actual_thumb_contour": null,
+      "actual_foot_roots_px": null,
+      "actual_body_armor_target_points": null,
+      "measurement_status": "No new derived image viewed. Actual features and finishing-down-cut/anatomy judgment await E retention and review; no design/old markers transplanted."
+    }
+  ],
+  "failure": null,
+  "shape_pipeline_passed": true,
+  "durations_ms": [
+    110,
+    110,
+    60,
+    60,
+    160,
+    160
+  ],
+  "loop": false,
+  "metadata": {
+    "frames_manifest": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/run-primary3-v001/frames/frames-manifest.json",
+      "bytes": 6830,
+      "sha256": "d142b939ae47d3e97bb7b17a793f8d95b7ace2cc1f97da46cf9e0bf488d20c63"
+    },
+    "atlas_report": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/run-primary3-v001/sprite-sheet-alpha.report.json",
+      "bytes": 2282,
+      "sha256": "36b743c8ca458fbf4b8573d07d670763b86d14b967bc3db78170059458bd4efd"
+    },
+    "QA_errors": [],
+    "QA_warnings": [],
+    "shared_row_ratio": 1.0,
+    "shared_row_fit": {
+      "policy": "one_raw_component_max_extent_scale_for_entire_row",
+      "scale": 1.0,
+      "source_max_extent": [
+        278,
+        404
+      ],
+      "horizontal_registration": "bbox_center",
+      "per_frame_scale_normalization": false,
+      "frame_records": [
+        {
+          "frame": 0,
+          "source_component_size": [
+            228,
+            398
+          ],
+          "shared_scale": 1.0,
+          "resampled_size": [
+            228,
+            398
+          ],
+          "placement_xy": [
+            142,
+            66
+          ],
+          "alpha_bbox_px": [
+            142,
+            66,
+            370,
+            464
+          ]
+        },
+        {
+          "frame": 1,
+          "source_component_size": [
+            261,
+            402
+          ],
+          "shared_scale": 1.0,
+          "resampled_size": [
+            261,
+            402
+          ],
+          "placement_xy": [
+            125,
+            62
+          ],
+          "alpha_bbox_px": [
+            125,
+            62,
+            386,
+            464
+          ]
+        },
+        {
+          "frame": 2,
+          "source_component_size": [
+            265,
+            404
+          ],
+          "shared_scale": 1.0,
+          "resampled_size": [
+            265,
+            404
+          ],
+          "placement_xy": [
+            123,
+            60
+          ],
+          "alpha_bbox_px": [
+            123,
+            60,
+            388,
+            464
+          ]
+        },
+        {
+          "frame": 3,
+          "source_component_size": [
+            267,
+            395
+          ],
+          "shared_scale": 1.0,
+          "resampled_size": [
+            267,
+            395
+          ],
+          "placement_xy": [
+            122,
+            69
+          ],
+          "alpha_bbox_px": [
+            122,
+            69,
+            389,
+            464
+          ]
+        },
+        {
+          "frame": 4,
+          "source_component_size": [
+            278,
+            385
+          ],
+          "shared_scale": 1.0,
+          "resampled_size": [
+            278,
+            385
+          ],
+          "placement_xy": [
+            117,
+            79
+          ],
+          "alpha_bbox_px": [
+            117,
+            79,
+            395,
+            464
+          ]
+        },
+        {
+          "frame": 5,
+          "source_component_size": [
+            233,
+            403
+          ],
+          "shared_scale": 1.0,
+          "resampled_size": [
+            233,
+            403
+          ],
+          "placement_xy": [
+            139,
+            61
+          ],
+          "alpha_bbox_px": [
+            139,
+            61,
+            372,
+            464
+          ]
+        }
+      ],
+      "raw_component_RGBA_sha256": [
+        "ce9159a618c79e8246ecbafe095a268e51c624e84ce09d22e6801985d75f1f1e",
+        "6c94c521d8aaf7c1b0763dc0de4f5e41cea595a9492389a4b9aee86358cbc7cd",
+        "7e35390556786d65a094eda78a6c4a2e8ae33ee0be9fcfb622e01efd48746bb2",
+        "98e2eb85ee2a992d6f6ce5282b3a53dc22b1b144887927a7dc3979859e764984",
+        "da1e67b08d4d8d241f7c03d89c0e822cecdf090d27be57018c6a831458137a44",
+        "cb3255177b8851979ac2765e536eb6ff671decb2f3a8dba6115a4d55be23b3bc"
+      ]
+    },
+    "actual_atlas_durations_ms": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "actual_gif_durations_ms": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "timing_contract_passed": false,
+    "unique_frame_png_count": 6
+  },
+  "preview_scope": "Unmodified standard600ms shape preview, not proof of660ms kernel /110/110/60/60/160/160ms, true kernel timing or continuous motion.",
+  "root_reported_raw_concern": "Native175 body-only finishing down-cut candidate is retained. Derived closed grasp, short elbow, downward wrist arc, identity and continuity require E retention and review; no prior visual markers are transplanted.",
+  "new_outputs_viewed": false,
+  "raw_viewed_by_this_reviewer": false,
+  "native_called": false,
+  "ue_import_called": false,
+  "motion_accepted": false,
+  "formal_complete_units": 0
+}

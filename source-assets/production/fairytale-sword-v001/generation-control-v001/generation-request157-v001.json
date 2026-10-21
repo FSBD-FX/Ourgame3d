@@ -1,0 +1,62 @@
+{
+  "request_number": 157,
+  "asset": "fairytale-SwordPrimary1-four-idle-v001",
+  "component": "SwordPrimary1",
+  "status": "requested_pending",
+  "source_event": "EV-048",
+  "authorization_events": [
+    "EV-040",
+    "EV-041"
+  ],
+  "window_number": 7,
+  "requested_utc": "2026-10-16T00:32:10.515715+00:00",
+  "prompt_path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/prompts/primary1-body-only-v002.txt",
+  "prompt": "Create exactly SIX complete FULL-BODY poses in one horizontal component row for the existing canonical131 hero's ONE-HANDED military-sword Primary1 body. BODY ONLY, with no sword or handle rendered.\n\nREFERENCE ROLES, STRICT: image1 canonical131 idle0 is the ONLY identity, materials, helmet shape and original squat body-proportion authority. Image2 is actual native155 SwordReady frame0, used ONLY for the single-near-hand guard and separate far hand at the start/end of this action; preserve canonical131 identity. Image3 is an original GRAYSCALE anatomy/motion diagram, used only for arm continuity, six phase order and separate near/far roles; do NOT copy its gray colors, labels or simplified head. Image4 is the standard six-slot count/layout guide. No rejected native156 pose is supplied or to be reused.\n\nTHE ACTIVE NEAR ARM starts on the larger image-LEFT/front shoulder, bends through one anatomically connected elbow/forearm, and ends in ONE brown closed sword-grip fist. The FAR ARM belongs to the smaller image-RIGHT/back shoulder and hangs independently beside the FAR WAIST in EVERY pose. Its brown relaxed hand is always visibly separate from the active fist, never assists/grabs/clasps the active hand, never reaches above the head or across to the weapon. Maintain a clear air or dark-cloth separation between the hands. Do not invent a two-handed overhead chop, clasped prayer hands, boxing double fist or forward shove.\n\nSIX PHASES IN EXACT ORDER: 0 starts in the actual native155 Ready guard, the active single near fist across the lower chest and the far hand relaxed down beside the right waist. 1 loads only the near fist high to image-LEFT of the helmet, near elbow bent; the far hand stays visibly down at the far waist. 2 drives that single near fist diagonally across the chest toward image-RIGHT; far hand stays back beside waist. 3 continues the SAME single-arm cut down and forward to the right below the chest, with a readable low followthrough rather than a straight thrust; far hand stays separately beside the far waist. 4 decelerates the near arm back toward guard; far hand remains separate. 5 MATCHES native155 Ready guard, near fist across the lower chest and relaxed far hand down, ready for seamless return. Exactly two anticipation, two cut, two recovery poses, with real connected shoulder/elbow/wrist changes. Source phases are 85,85,60,60,155,155ms; never print timings in the art.\n\nHAND ANATOMY: one closed near brown leather glove with four visibly curled finger lobes and ONE distinct opposable thumb laid diagonally across the index/middle finger on the camera-facing fist surface. The thumb must have its own visible contour/crease rather than being omitted or confused with a fifth curled finger. Grip an INVISIBLE future cylindrical handle with believable overlapping fingers; no huge open C shape or flat mitten. Do NOT paint a rod/cylinder/wood handle/pommel/guard/blade into this BODY row. The relaxed far hand has a separate natural thumb and must not merge with the near glove. The guide is only a planned pose; actual palm, thumb, handle-axis and foot roots will be measured after generation, not assumed.\n\nEXACT IDENTITY: original canonical131 crooked squat bell helmet, rigid shell/top knob, two amber eyes only inside black face opening, dark original cloth shirt/trousers and belt, brown gloves/boots. Fixed native RIGHT-facing three-quarter camera for ALL six; no new human anatomy or side/back camera. Same standing-equivalent scale across the complete row, 416px body on512 source and floor design464. Weight shift/crouch may be actual pose, but do not stretch the helmet or rescale bodies to normalize each bbox. No armor plates, shoulder caps, bracers, greaves or shield baked into this common body.\n\nOUTPUT: six distinct complete connected full bodies on flat opaque GREEN #00FF00, generous green gaps, uncropped head-knob through boots. Clear original hand-inked outlines and opaque interiors. Render ONLY actual body pixels in the original131 palette. NO blue, purple, orange technical limb colors, colored edge lighting, body rim glow, blue thigh/knee patches, sparks, slash trail, smoke, shadow, floor, UI, labels, arrows, sockets, colored axes or numbers. Only the two contained eye shapes emit amber. Do not copy/mirror one pose six times. Later extraction uses one shared scale for the row, never per-frame fit. Final sword/hand occlusion and runtime binding are separate; this image does not certify complete actions or equipment.\n",
+  "prompt_file_sha256": "31e57c07e8f24d6a652f4d70115e3ee63806cb7e8ca874bdf7e1c0359464975e",
+  "reference_images": [
+    {
+      "role": "sole_identity_canonical131",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/curated/frame-0.png",
+        "bytes": 117257,
+        "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718"
+      }
+    },
+    {
+      "role": "actual155Ready_guard_motion_only",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v001/curated/frame-0.png",
+        "bytes": 112802,
+        "sha256": "7b747dd4bdbfa326653661583afc0b79a3baf9927eea65d931b96ecc78d6130f"
+      }
+    },
+    {
+      "role": "original_grayscale_anatomical_action_only",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/guides/primary1-anatomical-motion-v002.png",
+        "bytes": 34048,
+        "sha256": "2cb7ca462144581c7b8455a636ba6d45bd8f225042321f70e02f4033707781f1"
+      }
+    },
+    {
+      "role": "standard_component_count_layout",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v002/references/layout-guides/sword_primary_1.png",
+        "bytes": 6185,
+        "sha256": "852ff8fe8751dc9331b83497982aea0ee6759b1e86d42a5cadaaef039b624d04"
+      }
+    }
+  ],
+  "transparent_background": false,
+  "backend": "image_gen.imagegen",
+  "external_api_calls": 0,
+  "host_fee_usd": null,
+  "raw_destination_planned": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v002/raw/sword_primary_1.png",
+  "source_handoff": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/handoffs/primary1-native-input-v002.json",
+    "bytes": 7931,
+    "sha256": "6cd427cfb3d9841c494a4dd095b586c8fdb299e3dd5102bd19ac2f0f81412bb9"
+  },
+  "scope": "Canonical131 weapon-specific body state; exact phase timing, body only, all applicable states and equipment binding remain required",
+  "formal_complete_units": 0
+}

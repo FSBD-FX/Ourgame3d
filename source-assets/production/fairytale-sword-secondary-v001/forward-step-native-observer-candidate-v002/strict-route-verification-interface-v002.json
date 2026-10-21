@@ -1,0 +1,19 @@
+{
+  "schema": "swd-normal-route-native-verification-interface-v002",
+  "required_actual_artifact_fields": [
+    "schema=swd-normal-route-native-verification-v002",
+    "case",
+    "route_sha256",
+    "actual_native_route_verified=true only after independent actual native validation",
+    "native_runtime_report:{path,bytes,sha256}",
+    "independent_review_report:{path,bytes,sha256}"
+  ],
+  "route_hash_input_fields": [
+    "facing",
+    "enemy_diagnostic_used",
+    "waypoints"
+  ],
+  "algorithm": "SHA256(UTF8 JSON sort_keys=true,separators=(comma,colon),ensure_ascii=false)",
+  "actual_route_verification_created": false,
+  "normal_route_native_verified": false
+}

@@ -1,0 +1,1000 @@
+{
+  "schema": "fairytale-sword-primary1-source-marker-proposal-v2",
+  "created_local": "2026-10-16T08:40:45.565430+08:00",
+  "component": "SwordPrimary1",
+  "state": "sword_primary_1",
+  "native_request": 157,
+  "source_native_facing": 1,
+  "source_canvas_px": [
+    512,
+    512
+  ],
+  "durations_ms": [
+    85,
+    85,
+    60,
+    60,
+    155,
+    155
+  ],
+  "phase_boundaries_ms": [
+    0,
+    85,
+    170,
+    230,
+    290,
+    445,
+    600
+  ],
+  "runtime_sampler": "Existing GetPrimaryPoseFrame on accepted Action deadlines; phase durations are source contract, not an override of ActionSpeed.",
+  "shared_row_ratio": 0.832,
+  "per_frame_scale": false,
+  "visible_source_heights_px": [
+    409,
+    416,
+    410,
+    407,
+    412,
+    410
+  ],
+  "fixed_display_canvas_at1280x720": 88.61538461538461,
+  "maximum_visible_body_height_px": 72,
+  "ready_marker_proposal": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/ready-measurement-v001/ready-marker-proposal-v001.json",
+    "bytes": 17996,
+    "sha256": "f0e8a250eaea3b2315ea9c9cf86eab0514ba4f6a0b53a14cc322aedcda8c4f7d"
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v002/curated/frame-0.png",
+        "bytes": 114369,
+        "sha256": "cbfdd1c68004597e7d240323cfd39d53c145ac0212bb853ad2dca7ebc2bf7f87"
+      },
+      "diagnostic_crops": [
+        {
+          "role": "near_hand_and_local_occlusion",
+          "roi_px": [
+            218,
+            247,
+            286,
+            313
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/primary1-measurement-v002/frame-0-near_hand_and_local_occlusion-diagnostic.png",
+            "bytes": 8337,
+            "sha256": "53a2ab225798e3105d43d49a2e5af9a8d5b33a1e0da5c7f2c544df2990aef24d"
+          },
+          "resampled": false,
+          "art_asset": false
+        },
+        {
+          "role": "feet",
+          "roi_px": [
+            128,
+            420,
+            386,
+            465
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/primary1-measurement-v002/frame-0-feet-diagnostic.png",
+            "bytes": 14192,
+            "sha256": "148cc3c5a68c2fccefd361fbd9589ab48fabc2701ca07b67bee88531346cb53b"
+          },
+          "resampled": false,
+          "art_asset": false
+        }
+      ],
+      "source_root_px": [
+        256,
+        464
+      ],
+      "root_role": "Fixed display pivot for trial, not a claim of exact per-pose sole center.",
+      "near_boot": {
+        "roi_px": [
+          128,
+          430,
+          230,
+          464
+        ],
+        "alpha_threshold": 128,
+        "last_contact_pixel_y": 463,
+        "span_inclusive_px": [
+          169,
+          204
+        ],
+        "center_x": 186.5,
+        "boundary_below_pixel_y": 464,
+        "meaning": "Visible sole edge only, excluding no hidden inferred foot."
+      },
+      "far_boot": {
+        "roi_px": [
+          250,
+          430,
+          386,
+          464
+        ],
+        "alpha_threshold": 128,
+        "last_contact_pixel_y": 462,
+        "span_inclusive_px": [
+          312,
+          342
+        ],
+        "center_x": 327.0,
+        "boundary_below_pixel_y": 463,
+        "meaning": "Visible sole edge only, excluding no hidden inferred foot."
+      },
+      "two_contact_mean_x": 256.75,
+      "two_contact_x_minus_fixed_pivot": 0.75,
+      "grip_candidate_px": [
+        258,
+        281
+      ],
+      "grip_uncertainty_px": 3,
+      "handle_axis_candidate_xy": [
+        0,
+        -1
+      ],
+      "axis_uncertainty_degrees": 10,
+      "axis_evidence": "New estimate perpendicular to the visible curled-finger crease direction. Invisible cylindrical handle and blade-end sign are not directly observable. Axis sign is chosen only for an initial overlay trial; do not certify exact sword orientation from body-only art.",
+      "visible_fist_replay_polygon_candidate_px": [
+        [
+          243,
+          255
+        ],
+        [
+          264,
+          256
+        ],
+        [
+          275,
+          262
+        ],
+        [
+          280,
+          270
+        ],
+        [
+          278,
+          282
+        ],
+        [
+          274,
+          286
+        ],
+        [
+          272,
+          298
+        ],
+        [
+          266,
+          303
+        ],
+        [
+          246,
+          305
+        ],
+        [
+          232,
+          301
+        ],
+        [
+          225,
+          295
+        ],
+        [
+          225,
+          278
+        ],
+        [
+          231,
+          267
+        ]
+      ],
+      "polygon_basis": "New manual outline of the visible active near fist in this E133-retained unscaled crop. Approximately1-2px boundary error; includes original hand/ink only as a trial polygon, not a certified binary semantic mask. No old V007 polygon or designed guide coordinates reused.",
+      "far_hand_role": "Separate relaxed far-waist hand, not assisting the active grip.",
+      "far_hand_local_occlusion": "Far hand is visually separate from the active fist.",
+      "thumb_status": "Some finger/palm overlap is visible, but an independently traceable opposable thumb across the grip is not established for the complete state. Thumb anatomy remains unaccepted.",
+      "formal_hand_acceptance": false
+    },
+    {
+      "frame": 1,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v002/curated/frame-1.png",
+        "bytes": 118325,
+        "sha256": "0f7e090b9bd18a37d35b8caf444679b309d1909c4f8f7d97e7eebc68a586445d"
+      },
+      "diagnostic_crops": [
+        {
+          "role": "near_hand_and_local_occlusion",
+          "roi_px": [
+            164,
+            94,
+            235,
+            174
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/primary1-measurement-v002/frame-1-near_hand_and_local_occlusion-diagnostic.png",
+            "bytes": 10649,
+            "sha256": "7c805d006f5b2f0e8d7e627278658025fd6474a3b8d718991642b0112cc6a196"
+          },
+          "resampled": false,
+          "art_asset": false
+        },
+        {
+          "role": "feet",
+          "roi_px": [
+            128,
+            420,
+            386,
+            465
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/primary1-measurement-v002/frame-1-feet-diagnostic.png",
+            "bytes": 13946,
+            "sha256": "663812f64be22ff062a74979517f3c27489416bec50370c6396dc21338d9fef7"
+          },
+          "resampled": false,
+          "art_asset": false
+        }
+      ],
+      "source_root_px": [
+        256,
+        464
+      ],
+      "root_role": "Fixed display pivot for trial, not a claim of exact per-pose sole center.",
+      "near_boot": {
+        "roi_px": [
+          128,
+          430,
+          230,
+          464
+        ],
+        "alpha_threshold": 128,
+        "last_contact_pixel_y": 463,
+        "span_inclusive_px": [
+          164,
+          196
+        ],
+        "center_x": 180.0,
+        "boundary_below_pixel_y": 464,
+        "meaning": "Visible sole edge only, excluding no hidden inferred foot."
+      },
+      "far_boot": {
+        "roi_px": [
+          250,
+          430,
+          386,
+          464
+        ],
+        "alpha_threshold": 128,
+        "last_contact_pixel_y": 462,
+        "span_inclusive_px": [
+          310,
+          345
+        ],
+        "center_x": 327.5,
+        "boundary_below_pixel_y": 463,
+        "meaning": "Visible sole edge only, excluding no hidden inferred foot."
+      },
+      "two_contact_mean_x": 253.75,
+      "two_contact_x_minus_fixed_pivot": -2.25,
+      "grip_candidate_px": [
+        202,
+        125
+      ],
+      "grip_uncertainty_px": 3,
+      "handle_axis_candidate_xy": [
+        0.5,
+        -0.8660254
+      ],
+      "axis_uncertainty_degrees": 15,
+      "axis_evidence": "New estimate perpendicular to the visible curled-finger crease direction. Invisible cylindrical handle and blade-end sign are not directly observable. Axis sign is chosen only for an initial overlay trial; do not certify exact sword orientation from body-only art.",
+      "visible_fist_replay_polygon_candidate_px": [
+        [
+          193,
+          102
+        ],
+        [
+          205,
+          101
+        ],
+        [
+          217,
+          106
+        ],
+        [
+          226,
+          113
+        ],
+        [
+          229,
+          120
+        ],
+        [
+          225,
+          129
+        ],
+        [
+          221,
+          135
+        ],
+        [
+          215,
+          143
+        ],
+        [
+          204,
+          148
+        ],
+        [
+          192,
+          147
+        ],
+        [
+          179,
+          141
+        ],
+        [
+          176,
+          132
+        ],
+        [
+          180,
+          120
+        ],
+        [
+          186,
+          109
+        ]
+      ],
+      "polygon_basis": "New manual outline of the visible active near fist in this E133-retained unscaled crop. Approximately1-2px boundary error; includes original hand/ink only as a trial polygon, not a certified binary semantic mask. No old V007 polygon or designed guide coordinates reused.",
+      "far_hand_role": "Separate relaxed far-waist hand, not assisting the active grip.",
+      "far_hand_local_occlusion": "Far hand is visually separate from the active fist.",
+      "thumb_status": "Some finger/palm overlap is visible, but an independently traceable opposable thumb across the grip is not established for the complete state. Thumb anatomy remains unaccepted.",
+      "formal_hand_acceptance": false
+    },
+    {
+      "frame": 2,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v002/curated/frame-2.png",
+        "bytes": 113913,
+        "sha256": "f1b7ae21775342e75d91edfb76b48a640ccebb4aa81110931733548203a21bcc"
+      },
+      "diagnostic_crops": [
+        {
+          "role": "near_hand_and_local_occlusion",
+          "roi_px": [
+            250,
+            231,
+            323,
+            296
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/primary1-measurement-v002/frame-2-near_hand_and_local_occlusion-diagnostic.png",
+            "bytes": 8834,
+            "sha256": "cc0767ce8c0e5850a845123aecc52052a6ef4eb751a1eafd436175ea8f3ea1d6"
+          },
+          "resampled": false,
+          "art_asset": false
+        },
+        {
+          "role": "feet",
+          "roi_px": [
+            128,
+            420,
+            386,
+            465
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/primary1-measurement-v002/frame-2-feet-diagnostic.png",
+            "bytes": 14219,
+            "sha256": "aa2a6cf7c6a709d49897747a75a1961f587749ee2dee05cb90192c13f19e4f8b"
+          },
+          "resampled": false,
+          "art_asset": false
+        }
+      ],
+      "source_root_px": [
+        256,
+        464
+      ],
+      "root_role": "Fixed display pivot for trial, not a claim of exact per-pose sole center.",
+      "near_boot": {
+        "roi_px": [
+          128,
+          430,
+          230,
+          464
+        ],
+        "alpha_threshold": 128,
+        "last_contact_pixel_y": 463,
+        "span_inclusive_px": [
+          161,
+          195
+        ],
+        "center_x": 178.0,
+        "boundary_below_pixel_y": 464,
+        "meaning": "Visible sole edge only, excluding no hidden inferred foot."
+      },
+      "far_boot": {
+        "roi_px": [
+          250,
+          430,
+          386,
+          464
+        ],
+        "alpha_threshold": 128,
+        "last_contact_pixel_y": 462,
+        "span_inclusive_px": [
+          314,
+          348
+        ],
+        "center_x": 331.0,
+        "boundary_below_pixel_y": 463,
+        "meaning": "Visible sole edge only, excluding no hidden inferred foot."
+      },
+      "two_contact_mean_x": 254.5,
+      "two_contact_x_minus_fixed_pivot": -1.5,
+      "grip_candidate_px": [
+        291,
+        264
+      ],
+      "grip_uncertainty_px": 3,
+      "handle_axis_candidate_xy": [
+        0.65,
+        -0.7599342
+      ],
+      "axis_uncertainty_degrees": 15,
+      "axis_evidence": "New estimate perpendicular to the visible curled-finger crease direction. Invisible cylindrical handle and blade-end sign are not directly observable. Axis sign is chosen only for an initial overlay trial; do not certify exact sword orientation from body-only art.",
+      "visible_fist_replay_polygon_candidate_px": [
+        [
+          282,
+          241
+        ],
+        [
+          300,
+          242
+        ],
+        [
+          310,
+          249
+        ],
+        [
+          317,
+          259
+        ],
+        [
+          315,
+          269
+        ],
+        [
+          310,
+          279
+        ],
+        [
+          303,
+          287
+        ],
+        [
+          294,
+          290
+        ],
+        [
+          280,
+          285
+        ],
+        [
+          269,
+          280
+        ],
+        [
+          262,
+          271
+        ],
+        [
+          264,
+          257
+        ],
+        [
+          271,
+          247
+        ]
+      ],
+      "polygon_basis": "New manual outline of the visible active near fist in this E133-retained unscaled crop. Approximately1-2px boundary error; includes original hand/ink only as a trial polygon, not a certified binary semantic mask. No old V007 polygon or designed guide coordinates reused.",
+      "far_hand_role": "Separate relaxed far-waist hand, not assisting the active grip.",
+      "far_hand_local_occlusion": "Far hand is visually separate from the active fist.",
+      "thumb_status": "Some finger/palm overlap is visible, but an independently traceable opposable thumb across the grip is not established for the complete state. Thumb anatomy remains unaccepted.",
+      "formal_hand_acceptance": false
+    },
+    {
+      "frame": 3,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v002/curated/frame-3.png",
+        "bytes": 112979,
+        "sha256": "ddc467f578cff5c74d95b6342ada0be7d26d91945af2a6cecfaf038a83658a1e"
+      },
+      "diagnostic_crops": [
+        {
+          "role": "near_hand_and_local_occlusion",
+          "roi_px": [
+            285,
+            283,
+            389,
+            375
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/primary1-measurement-v002/frame-3-near_hand_and_local_occlusion-diagnostic.png",
+            "bytes": 14775,
+            "sha256": "081dd5dea45d6ee5f5b2c5a1616b150605224a84ac59e6460d3b94a60ad1cada"
+          },
+          "resampled": false,
+          "art_asset": false
+        },
+        {
+          "role": "feet",
+          "roi_px": [
+            128,
+            420,
+            386,
+            465
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/primary1-measurement-v002/frame-3-feet-diagnostic.png",
+            "bytes": 14370,
+            "sha256": "d75f2c99ef8ba06570fd777208db128ab328d87a609fcc846b848ce0761ca0a3"
+          },
+          "resampled": false,
+          "art_asset": false
+        }
+      ],
+      "source_root_px": [
+        256,
+        464
+      ],
+      "root_role": "Fixed display pivot for trial, not a claim of exact per-pose sole center.",
+      "near_boot": {
+        "roi_px": [
+          128,
+          430,
+          230,
+          464
+        ],
+        "alpha_threshold": 128,
+        "last_contact_pixel_y": 463,
+        "span_inclusive_px": [
+          155,
+          185
+        ],
+        "center_x": 170.0,
+        "boundary_below_pixel_y": 464,
+        "meaning": "Visible sole edge only, excluding no hidden inferred foot."
+      },
+      "far_boot": {
+        "roi_px": [
+          250,
+          430,
+          386,
+          464
+        ],
+        "alpha_threshold": 128,
+        "last_contact_pixel_y": 462,
+        "span_inclusive_px": [
+          311,
+          343
+        ],
+        "center_x": 327.0,
+        "boundary_below_pixel_y": 463,
+        "meaning": "Visible sole edge only, excluding no hidden inferred foot."
+      },
+      "two_contact_mean_x": 248.5,
+      "two_contact_x_minus_fixed_pivot": -7.5,
+      "grip_candidate_px": [
+        352,
+        330
+      ],
+      "grip_uncertainty_px": 4,
+      "handle_axis_candidate_xy": [
+        0.94,
+        -0.3411744
+      ],
+      "axis_uncertainty_degrees": 15,
+      "axis_evidence": "New estimate perpendicular to the visible curled-finger crease direction. Invisible cylindrical handle and blade-end sign are not directly observable. Axis sign is chosen only for an initial overlay trial; do not certify exact sword orientation from body-only art.",
+      "visible_fist_replay_polygon_candidate_px": [
+        [
+          341,
+          307
+        ],
+        [
+          362,
+          308
+        ],
+        [
+          374,
+          313
+        ],
+        [
+          380,
+          322
+        ],
+        [
+          378,
+          335
+        ],
+        [
+          372,
+          344
+        ],
+        [
+          365,
+          349
+        ],
+        [
+          362,
+          354
+        ],
+        [
+          353,
+          357
+        ],
+        [
+          345,
+          352
+        ],
+        [
+          335,
+          345
+        ],
+        [
+          326,
+          337
+        ],
+        [
+          325,
+          325
+        ],
+        [
+          330,
+          314
+        ]
+      ],
+      "polygon_basis": "New manual outline of the visible active near fist in this E133-retained unscaled crop. Approximately1-2px boundary error; includes original hand/ink only as a trial polygon, not a certified binary semantic mask. No old V007 polygon or designed guide coordinates reused.",
+      "far_hand_role": "Separate relaxed far-waist hand, not assisting the active grip.",
+      "far_hand_local_occlusion": "Near fist is in front; far fingers emerge beneath/behind it. Their two forearm paths remain distinguishable. Crowded overlap must be checked with actual sword pixels, especially the lower-left fist boundary.",
+      "thumb_status": "Some finger/palm overlap is visible, but an independently traceable opposable thumb across the grip is not established for the complete state. Thumb anatomy remains unaccepted.",
+      "formal_hand_acceptance": false
+    },
+    {
+      "frame": 4,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v002/curated/frame-4.png",
+        "bytes": 116322,
+        "sha256": "7e45683b3b0a8ffbf64ba19970925032ddb13ef0ec8e6ebb93d00fe1d12cd212"
+      },
+      "diagnostic_crops": [
+        {
+          "role": "near_hand_and_local_occlusion",
+          "roi_px": [
+            218,
+            247,
+            286,
+            313
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/primary1-measurement-v002/frame-4-near_hand_and_local_occlusion-diagnostic.png",
+            "bytes": 8290,
+            "sha256": "344467f84d44093cced401be4ebc2d2eb6d7e9fcc13e7716ba6d377e23793b3b"
+          },
+          "resampled": false,
+          "art_asset": false
+        },
+        {
+          "role": "feet",
+          "roi_px": [
+            128,
+            420,
+            386,
+            465
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/primary1-measurement-v002/frame-4-feet-diagnostic.png",
+            "bytes": 13993,
+            "sha256": "17d86c73f5752c895faada22175b05be2a84fa1a32fcee17c0b8795b7dadc162"
+          },
+          "resampled": false,
+          "art_asset": false
+        }
+      ],
+      "source_root_px": [
+        256,
+        464
+      ],
+      "root_role": "Fixed display pivot for trial, not a claim of exact per-pose sole center.",
+      "near_boot": {
+        "roi_px": [
+          128,
+          430,
+          230,
+          464
+        ],
+        "alpha_threshold": 128,
+        "last_contact_pixel_y": 463,
+        "span_inclusive_px": [
+          166,
+          198
+        ],
+        "center_x": 182.0,
+        "boundary_below_pixel_y": 464,
+        "meaning": "Visible sole edge only, excluding no hidden inferred foot."
+      },
+      "far_boot": {
+        "roi_px": [
+          250,
+          430,
+          386,
+          464
+        ],
+        "alpha_threshold": 128,
+        "last_contact_pixel_y": 462,
+        "span_inclusive_px": [
+          314,
+          348
+        ],
+        "center_x": 331.0,
+        "boundary_below_pixel_y": 463,
+        "meaning": "Visible sole edge only, excluding no hidden inferred foot."
+      },
+      "two_contact_mean_x": 256.5,
+      "two_contact_x_minus_fixed_pivot": 0.5,
+      "grip_candidate_px": [
+        258,
+        280
+      ],
+      "grip_uncertainty_px": 3,
+      "handle_axis_candidate_xy": [
+        0,
+        -1
+      ],
+      "axis_uncertainty_degrees": 10,
+      "axis_evidence": "New estimate perpendicular to the visible curled-finger crease direction. Invisible cylindrical handle and blade-end sign are not directly observable. Axis sign is chosen only for an initial overlay trial; do not certify exact sword orientation from body-only art.",
+      "visible_fist_replay_polygon_candidate_px": [
+        [
+          243,
+          254
+        ],
+        [
+          264,
+          255
+        ],
+        [
+          275,
+          261
+        ],
+        [
+          280,
+          269
+        ],
+        [
+          279,
+          281
+        ],
+        [
+          274,
+          286
+        ],
+        [
+          272,
+          297
+        ],
+        [
+          266,
+          302
+        ],
+        [
+          246,
+          304
+        ],
+        [
+          232,
+          300
+        ],
+        [
+          225,
+          294
+        ],
+        [
+          225,
+          277
+        ],
+        [
+          231,
+          266
+        ]
+      ],
+      "polygon_basis": "New manual outline of the visible active near fist in this E133-retained unscaled crop. Approximately1-2px boundary error; includes original hand/ink only as a trial polygon, not a certified binary semantic mask. No old V007 polygon or designed guide coordinates reused.",
+      "far_hand_role": "Separate relaxed far-waist hand, not assisting the active grip.",
+      "far_hand_local_occlusion": "Far hand is visually separate from the active fist.",
+      "thumb_status": "Some finger/palm overlap is visible, but an independently traceable opposable thumb across the grip is not established for the complete state. Thumb anatomy remains unaccepted.",
+      "formal_hand_acceptance": false
+    },
+    {
+      "frame": 5,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v002/curated/frame-5.png",
+        "bytes": 113659,
+        "sha256": "58e8bda396e87b0d1faaf1b476acf7ec793d2e64da9ae07e869d23e4c56700d0"
+      },
+      "diagnostic_crops": [
+        {
+          "role": "near_hand_and_local_occlusion",
+          "roi_px": [
+            218,
+            247,
+            286,
+            313
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/primary1-measurement-v002/frame-5-near_hand_and_local_occlusion-diagnostic.png",
+            "bytes": 8238,
+            "sha256": "6d36d15a74a16b8bbf2acff1a0eec7c61fe87e14c55c01bfa03b3d445aaa16aa"
+          },
+          "resampled": false,
+          "art_asset": false
+        },
+        {
+          "role": "feet",
+          "roi_px": [
+            128,
+            420,
+            386,
+            465
+          ],
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/primary1-measurement-v002/frame-5-feet-diagnostic.png",
+            "bytes": 14013,
+            "sha256": "80020e81cd8579004bfae0e9aa1a0ef1b659d98510d8b055c537a845522b940c"
+          },
+          "resampled": false,
+          "art_asset": false
+        }
+      ],
+      "source_root_px": [
+        256,
+        464
+      ],
+      "root_role": "Fixed display pivot for trial, not a claim of exact per-pose sole center.",
+      "near_boot": {
+        "roi_px": [
+          128,
+          430,
+          230,
+          464
+        ],
+        "alpha_threshold": 128,
+        "last_contact_pixel_y": 463,
+        "span_inclusive_px": [
+          168,
+          203
+        ],
+        "center_x": 185.5,
+        "boundary_below_pixel_y": 464,
+        "meaning": "Visible sole edge only, excluding no hidden inferred foot."
+      },
+      "far_boot": {
+        "roi_px": [
+          250,
+          430,
+          386,
+          464
+        ],
+        "alpha_threshold": 128,
+        "last_contact_pixel_y": 462,
+        "span_inclusive_px": [
+          312,
+          345
+        ],
+        "center_x": 328.5,
+        "boundary_below_pixel_y": 463,
+        "meaning": "Visible sole edge only, excluding no hidden inferred foot."
+      },
+      "two_contact_mean_x": 257.0,
+      "two_contact_x_minus_fixed_pivot": 1.0,
+      "grip_candidate_px": [
+        258,
+        281
+      ],
+      "grip_uncertainty_px": 3,
+      "handle_axis_candidate_xy": [
+        0,
+        -1
+      ],
+      "axis_uncertainty_degrees": 10,
+      "axis_evidence": "New estimate perpendicular to the visible curled-finger crease direction. Invisible cylindrical handle and blade-end sign are not directly observable. Axis sign is chosen only for an initial overlay trial; do not certify exact sword orientation from body-only art.",
+      "visible_fist_replay_polygon_candidate_px": [
+        [
+          243,
+          255
+        ],
+        [
+          264,
+          256
+        ],
+        [
+          275,
+          262
+        ],
+        [
+          280,
+          270
+        ],
+        [
+          279,
+          282
+        ],
+        [
+          274,
+          287
+        ],
+        [
+          272,
+          298
+        ],
+        [
+          266,
+          303
+        ],
+        [
+          246,
+          305
+        ],
+        [
+          232,
+          301
+        ],
+        [
+          225,
+          295
+        ],
+        [
+          225,
+          278
+        ],
+        [
+          231,
+          267
+        ]
+      ],
+      "polygon_basis": "New manual outline of the visible active near fist in this E133-retained unscaled crop. Approximately1-2px boundary error; includes original hand/ink only as a trial polygon, not a certified binary semantic mask. No old V007 polygon or designed guide coordinates reused.",
+      "far_hand_role": "Separate relaxed far-waist hand, not assisting the active grip.",
+      "far_hand_local_occlusion": "Far hand is visually separate from the active fist.",
+      "thumb_status": "Some finger/palm overlap is visible, but an independently traceable opposable thumb across the grip is not established for the complete state. Thumb anatomy remains unaccepted.",
+      "formal_hand_acceptance": false
+    }
+  ],
+  "actual_static_viewed": [
+    "run-primary1-v002/curated/frame-0.png",
+    "run-primary1-v002/curated/frame-1.png",
+    "run-primary1-v002/curated/frame-2.png",
+    "run-primary1-v002/curated/frame-3.png",
+    "run-primary1-v002/curated/frame-4.png",
+    "run-primary1-v002/curated/frame-5.png",
+    "primary1-measurement-v002/frame-0-near_hand_and_local_occlusion-diagnostic.png",
+    "primary1-measurement-v002/frame-0-feet-diagnostic.png",
+    "primary1-measurement-v002/frame-1-near_hand_and_local_occlusion-diagnostic.png",
+    "primary1-measurement-v002/frame-1-feet-diagnostic.png",
+    "primary1-measurement-v002/frame-2-near_hand_and_local_occlusion-diagnostic.png",
+    "primary1-measurement-v002/frame-2-feet-diagnostic.png",
+    "primary1-measurement-v002/frame-3-near_hand_and_local_occlusion-diagnostic.png",
+    "primary1-measurement-v002/frame-3-feet-diagnostic.png",
+    "primary1-measurement-v002/frame-4-near_hand_and_local_occlusion-diagnostic.png",
+    "primary1-measurement-v002/frame-4-feet-diagnostic.png",
+    "primary1-measurement-v002/frame-5-near_hand_and_local_occlusion-diagnostic.png",
+    "primary1-measurement-v002/frame-5-feet-diagnostic.png"
+  ],
+  "continuous_motion_played": false,
+  "ue_imported": false,
+  "art_or_action_accepted": false,
+  "trial_candidate_only": true,
+  "formal_complete_units": 0
+}

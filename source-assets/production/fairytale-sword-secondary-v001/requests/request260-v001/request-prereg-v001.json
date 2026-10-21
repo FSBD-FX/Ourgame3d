@@ -1,0 +1,43 @@
+{
+  "request_number": 260,
+  "asset": "hero-SWD001-K-secondary-body-K0to3-lower-body-correction",
+  "status": "requested_not_yet_returned",
+  "source_event": "EV048",
+  "authorization_events": [
+    "EV-039",
+    "EV-040",
+    "EV-041",
+    "EV-042",
+    "EV-045",
+    "EV-046"
+  ],
+  "window_number": 11,
+  "requested_utc": "2026-10-18T22:10:51.003701+00:00",
+  "prompt_path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/requests/request260-v001/prompt.txt",
+  "prompt": "Edit Reference1, the existing FOUR-POSE animation sheet. Keep its four upper-body poses, hand shapes, helmet sizes, facial cavity, art style, colors, camera and overall body scale. Correct ONLY the anatomy and stance BELOW THE BELT. This is a precise lower-body correction, not a redesign and not four new poses.\n\nReference2 is the accepted Ready body identity and correct leather boot size/short-leg proportions. Reference3 repeats that accepted Ready body at the SAME 1254x1254 sheet size and same 627x627 cell layout as Reference1; use it specifically to match the narrow grounded foot positions and boot widths. Do NOT copy its neutral upper-body pose.\n\nThe current Reference1 boots and stance became too wide. Reduce each individual boot to the accepted Reference2 boot size, bring the feet closer together, and restore the compact short legs from Reference2. Preserve the original upper torso and helmet WITHOUT scaling down the whole character. Reference1's lower-body ground span should decrease by about a quarter, matching Reference3. The accepted centers are approximately localx229 and386 on the627 cell, with rounded boot widths roughly92 and116; these are visual guides, not labels to draw. The crotch, knees and ankles should bend naturally without stretching the pelvis or creating enormous boots.\n\nKeep K0 top-left as a small low-guard knee compression; K1 top-right and K2 bottom-left as coiled anticipation with the CLOSED gripping hand raised beside the helmet, and K3 bottom-right as the first diagonal-cut posture with the CLOSED fist crossing the chest. For K0,K1,K2 keep the SAME compact planted foot positions as the Ready guide; slight knee bends and weight shifts only. For K3 let the front knee receive weight and rear heel unload by rotating the ankle, but do NOT spread the legs wider or shift the whole body sideways. Preserve the closed near hand and separate open balancing far hand in all four cells. No punching or lunging redesign.\n\nOutput the same square1254x1254 canvas, TWO ROWS TWO COLUMNS of equal invisible627x627 cells in exactly the same reading order and spacing. Preserve Reference1 upper-body composition; local sole baseline near568 and body root nearx313.5 in each cell. No per-cell zoom or sliding. Every limb entirely inside its cell. Flat solid #FF00FF background, no floor or shadows. No grid, letters, numbers, labels or borders.\n\nBody ONLY with bronze bell helmet, two amber eyes in black cavity, gray underclothes, existing leather gloves/belt/boots. NO sword, hilt, grip handle, chest plate, shoulder armor, shield, effects, dust or slash arc. No bare human face, skin, hair, extra limbs, realistic microdetail or different outfit. The correction must retain the four clearly distinct original upper-body poses while matching the accepted smaller boot size and compact stance.",
+  "prompt_file_sha256": "080b41e8550cf929289c9bfba57c3aa6067fe5500baf7f38691d368bd32ba507",
+  "reference_images": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/requests/request259-v001/raw/K0to3-body-raw.png",
+      "bytes": 1573205,
+      "sha256": "a6c1a1165c2c4fcc1ace22dc8acf0f0ba31bf1c41f05ffd309841705a7a36db3"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/ready-body-master.png",
+      "bytes": 121133,
+      "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/K-body-anchor-2x2-1254-v002.png",
+      "bytes": 321776,
+      "sha256": "2b11d9bc641ced960c5841fe10f5419c6e2146a27e014f464513e83c0321d493"
+    }
+  ],
+  "transparent_background": false,
+  "backend": "builtin-imagegen",
+  "external_api_calls": 0,
+  "host_fee_usd": null,
+  "raw_destination_planned": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/requests/request260-v001/raw/K0to3-body-corrected-raw.png",
+  "runtime_imported": false,
+  "formal_complete_units": 0
+}

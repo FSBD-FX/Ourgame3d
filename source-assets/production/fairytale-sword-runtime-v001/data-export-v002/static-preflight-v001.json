@@ -1,0 +1,66 @@
+{
+  "schema": "fairytale-sword-presentation-static-preflight-v1",
+  "created_local": "2026-10-16T09:00:45.498683+08:00",
+  "owned_source": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordDrawState.h",
+      "bytes": 874,
+      "sha256": "847bdcdf310472314257051b8d1680e32be9f80fb9c8c555524a7129d26b8cbe"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+      "bytes": 8516,
+      "sha256": "27e5d3acc1664023ecc137fe811e8a7ebeb59178502801c1bb83d41d4d868121"
+    }
+  ],
+  "unchanged_numeric_include": {
+    "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordBodyV001.inl",
+    "bytes": 7363,
+    "sha256": "022d0cff100f3323f6b40c64d929ad6077ae351a5a47a1c5a7a1cd2fc6ad35dd"
+  },
+  "checks": {
+    "HUD_declares_both_helpers": true,
+    "HUD_declares_new_state": true,
+    "new_namespace_only": true,
+    "primary_uses_kernel_frame": true,
+    "primary_requires_real_stage0_ground_start": true,
+    "idle_uses167ms": true,
+    "unsupported_body_remains_new_and_sword_hidden": true,
+    "no_actor_or_kernel_assignments": true,
+    "no_input_or_damage_calls": true,
+    "screenshot_request_is_read_only": true,
+    "weapon_scale_grip_and_axis_design_explicit": true,
+    "source_hand_replay_uses_new_polygon": true,
+    "only_literal_printf_formats": true,
+    "no_old_armor_layer_draw": true,
+    "actual_body_draw_increments_id": true,
+    "new_import_namespace": true
+  },
+  "checks_passed": 16,
+  "checks_failed": 0,
+  "actual_ubt_executed": false,
+  "actual_ue_executed": false,
+  "actor_kernel_or_ids_mutated": false,
+  "existing_source_modified_by_this_task": false,
+  "field_semantics": {
+    "Active": "Opt-in presentation attempted, not combat action Active.",
+    "Supported": "Only live SWD ground-start Primary1 or stable grounded idle.",
+    "DrawId": "Monotonic count of actual new body DrawTexture submissions.",
+    "ActionId_and_times": "Live active melee Action only; zero when no active action.",
+    "Stage": "Actual active melee stage, else-1.",
+    "InstanceId": "Active action weapon instance or current melee instance when idle.",
+    "WeaponAngle": "Actual screen rotation: candidate native atan2 axis, sign reflected for Facing<0.",
+    "DrawStack": "Actual texture paths in order; final repeated body path is original fist pixel replay.",
+    "TextureReady": "New body texture resource and matching marker ready, independent of weapon texture readiness."
+  },
+  "remaining_runtime_checks": [
+    "Actual source import/load and ordinary J phases",
+    "Left/right one-mirror transform",
+    "Fist/weapon layering and frame3 far-finger overlap",
+    "Helmet/eye clearance with first positive-axis blade sign",
+    "Ready-to-action seam and source foot drift",
+    "Unsupported state visibly remains unaccepted Ready0 with no sword"
+  ],
+  "formal_complete_units": 0,
+  "status": "Static only; root must compile and review actual game."
+}

@@ -1,0 +1,83 @@
+{
+  "schema": "observer-v002-local-name-only-fix-v003",
+  "source_original": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/forward-step-native-observer-candidate-v002/projected/UnrealGame/Source/CodexDungeon/DungeonSwdForwardStepProbeV002.cpp",
+    "bytes": 46981,
+    "sha256": "1610e9a3c1dec1836538c59161e8d9ac618ae24a9aaef25f6730ed105769fe8b"
+  },
+  "source_projected": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/forward-step-observer-name-fix-candidate-v003/projected/UnrealGame/Source/CodexDungeon/DungeonSwdForwardStepProbeV002.cpp",
+    "bytes": 47014,
+    "sha256": "5f0d0a978a4defb61ec338bc4d77a31ae51f45a68bba1b284d143eecb60044a9"
+  },
+  "ops": [
+    {
+      "id": "capture-local-declaration",
+      "line": 198,
+      "old_utf8": "const double ReadStop=FPlatformTime::Seconds();",
+      "new_utf8": "const double GPUReadStop=FPlatformTime::Seconds();",
+      "old_occurrences": 1,
+      "new_occurrences": 1,
+      "byte_offset_when_applied": 26597
+    },
+    {
+      "id": "capture-json-read-stop-value",
+      "line": 204,
+      "old_utf8": "O->SetNumberField(TEXT(\"read_stop_monotonic_s\"),ReadStop);",
+      "new_utf8": "O->SetNumberField(TEXT(\"read_stop_monotonic_s\"),GPUReadStop);",
+      "old_occurrences": 1,
+      "new_occurrences": 1,
+      "byte_offset_when_applied": 28161
+    },
+    {
+      "id": "placement-local-key-declaration",
+      "line": 170,
+      "old_utf8": "const FString Key=W.RunGuid.ToString",
+      "new_utf8": "const FString PlacementKey=W.RunGuid.ToString",
+      "old_occurrences": 1,
+      "new_occurrences": 1,
+      "byte_offset_when_applied": 22287
+    },
+    {
+      "id": "placement-key-lookup",
+      "line": 171,
+      "old_utf8": "PlacementKeys.IndexOfByKey(Key);",
+      "new_utf8": "PlacementKeys.IndexOfByKey(PlacementKey);",
+      "old_occurrences": 1,
+      "new_occurrences": 1,
+      "byte_offset_when_applied": 22696
+    },
+    {
+      "id": "placement-key-insert",
+      "line": 172,
+      "old_utf8": "PlacementKeys.Add(Key);",
+      "new_utf8": "PlacementKeys.Add(PlacementKey);",
+      "old_occurrences": 1,
+      "new_occurrences": 1,
+      "byte_offset_when_applied": 22767
+    }
+  ],
+  "inverse_original_all_bytes_exact": true,
+  "unchanged_header_original": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/forward-step-native-observer-candidate-v002/projected/UnrealGame/Source/CodexDungeon/DungeonSwdForwardStepProbeV002.h",
+    "bytes": 937,
+    "sha256": "187b77d26a5a890a714ba2459ed3815e40245e591323b0f383650ca9f86f4c32"
+  },
+  "unchanged_header_projected": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/forward-step-observer-name-fix-candidate-v003/projected/UnrealGame/Source/CodexDungeon/DungeonSwdForwardStepProbeV002.h",
+    "bytes": 937,
+    "sha256": "187b77d26a5a890a714ba2459ed3815e40245e591323b0f383650ca9f86f4c32"
+  },
+  "unchanged_exact_seams_original": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/forward-step-native-observer-candidate-v002/exact-seams-v002.json",
+    "bytes": 2072,
+    "sha256": "1237a5134c870c03ba76b04e86c7d423e43a4fa5fc9879a6cbb11b04088b6948"
+  },
+  "unchanged_exact_seams_projected": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/forward-step-observer-name-fix-candidate-v003/exact-seams-v002.json",
+    "bytes": 2072,
+    "sha256": "1237a5134c870c03ba76b04e86c7d423e43a4fa5fc9879a6cbb11b04088b6948"
+  },
+  "class_file_flag_version": "V002",
+  "new_Unreal_source_files_if_admitted": 2
+}

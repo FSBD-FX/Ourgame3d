@@ -1,0 +1,842 @@
+{
+  "schema": "request260-versus259-numeric-extraction-QC-v001",
+  "created_utc": "2026-10-18T22:14:38.977933+00:00",
+  "actual_raw_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/requests/request260-v001/raw/K0to3-body-corrected-raw.png",
+    "bytes": 1562289,
+    "sha256": "950220ed7af9b0c2e61e927ac852f35846f8b2cc0bf2fed6413753c3fe88593b"
+  },
+  "converter_script_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/request259-extraction-qc-v001/extract-uniform-grid-qc-v001.py",
+    "bytes": 12044,
+    "sha256": "5abd7e99a575dde4cb75ba4d3c586cfd6fce45deee4eb9124df89dc5c5e7de33"
+  },
+  "base_converter_output_schema_retained": "request259-uniform-extraction-numeric-QC-v001",
+  "actual_source_label": "request260",
+  "actual_raw_size": [
+    1254,
+    1254
+  ],
+  "raw_cells": [
+    627,
+    627
+  ],
+  "output_cells": [
+    512,
+    512
+  ],
+  "all_same_scale": 0.8165869218500797,
+  "all_x_translations_zero": true,
+  "original259_immutable_members_verified": true,
+  "original259_pixel_converter_reused_unmodified": true,
+  "references": {
+    "Ready": {
+      "pin": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/ready-body-master.png",
+        "bytes": 121133,
+        "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+      },
+      "stats": {
+        "bbox_alpha1": [
+          149,
+          49,
+          362,
+          464
+        ],
+        "bbox_alpha128": [
+          149,
+          49,
+          362,
+          464
+        ],
+        "alpha_nonzero": 54088,
+        "alpha_ge128": 51326,
+        "soft_alpha": 5697,
+        "edge_nonzero": 0
+      },
+      "proxies": {
+        "heuristic_only": true,
+        "helmet_warm_upper55_largest3": [
+          {
+            "area": 11214,
+            "bbox": [
+              173,
+              89,
+              341,
+              231
+            ],
+            "width": 168,
+            "height": 142
+          },
+          {
+            "area": 667,
+            "bbox": [
+              235,
+              54,
+              272,
+              87
+            ],
+            "width": 37,
+            "height": 33
+          },
+          {
+            "area": 514,
+            "bbox": [
+              279,
+              170,
+              302,
+              199
+            ],
+            "width": 23,
+            "height": 29
+          }
+        ],
+        "lower60_silhouette_largest2": [
+          {
+            "area": 4102,
+            "bbox": [
+              259,
+              404,
+              354,
+              460
+            ],
+            "width": 95,
+            "height": 56
+          },
+          {
+            "area": 3600,
+            "bbox": [
+              149,
+              404,
+              224,
+              464
+            ],
+            "width": 75,
+            "height": 60
+          }
+        ],
+        "lower6_solid_span": [
+          158,
+          342
+        ],
+        "lower6_solid_span_width": 184,
+        "lower6_pixels": 338,
+        "physical_helmet_boot_size": "OPEN_not_segmented",
+        "physical_sole_contact": "OPEN_graphic_lower_contour_only"
+      }
+    },
+    "accepted_J1": {
+      "pin": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/accepted-J1-body-identity.png",
+        "bytes": 260407,
+        "sha256": "43454c2982daf19d577497dd61a792b02ed3fb9aaafd543614fca591a1db60e2"
+      },
+      "stats": {
+        "bbox_alpha1": [
+          132,
+          85,
+          373,
+          464
+        ],
+        "bbox_alpha128": [
+          133,
+          85,
+          373,
+          464
+        ],
+        "alpha_nonzero": 52618,
+        "alpha_ge128": 51608,
+        "soft_alpha": 1327,
+        "edge_nonzero": 0
+      },
+      "proxies": {
+        "heuristic_only": true,
+        "helmet_warm_upper55_largest3": [
+          {
+            "area": 12082,
+            "bbox": [
+              177,
+              121,
+              343,
+              259
+            ],
+            "width": 166,
+            "height": 138
+          },
+          {
+            "area": 2191,
+            "bbox": [
+              136,
+              189,
+              182,
+              252
+            ],
+            "width": 46,
+            "height": 63
+          },
+          {
+            "area": 747,
+            "bbox": [
+              228,
+              89,
+              268,
+              120
+            ],
+            "width": 40,
+            "height": 31
+          }
+        ],
+        "lower60_silhouette_largest2": [
+          {
+            "area": 4128,
+            "bbox": [
+              273,
+              404,
+              371,
+              459
+            ],
+            "width": 98,
+            "height": 55
+          },
+          {
+            "area": 3687,
+            "bbox": [
+              147,
+              404,
+              227,
+              464
+            ],
+            "width": 80,
+            "height": 60
+          }
+        ],
+        "lower6_solid_span": [
+          147,
+          358
+        ],
+        "lower6_solid_span_width": 211,
+        "lower6_pixels": 395,
+        "physical_helmet_boot_size": "OPEN_not_segmented",
+        "physical_sole_contact": "OPEN_graphic_lower_contour_only"
+      }
+    },
+    "accepted_J1_hand_warm_cluster_heuristic": {
+      "area": 2191,
+      "bbox": [
+        136,
+        189,
+        182,
+        252
+      ],
+      "width": 46,
+      "height": 63,
+      "target_source_point": [
+        159,
+        213
+      ],
+      "target_to_component_bbox_distance_px": 0.0,
+      "heuristic_only": true,
+      "anatomical_grip_or_glove_measurement": false
+    }
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "width": 242,
+      "height": 414,
+      "width_delta_to259": -25,
+      "height_delta_to259": -3,
+      "lower6_span": [
+        164,
+        342
+      ],
+      "lower6_span_width": 178,
+      "lower6_span_ratio_to_Ready": 0.967391304347826,
+      "lower6_span_ratio_to259": 0.7416666666666667,
+      "raw627_graphic_bottom_alpha1": 572,
+      "raw627_graphic_bottom_alpha128": 571,
+      "uniform_scale": 0.8165869218500797,
+      "x_translation": 0,
+      "y_integer_translation": -3,
+      "final_graphic_bottom_alpha1": 464,
+      "final_graphic_bottom_alpha128": 464,
+      "alpha128_footprint_unchanged_by_cleanup": true,
+      "lower60_components_left_right_heuristic": [
+        {
+          "area": 3690,
+          "bbox": [
+            153,
+            404,
+            229,
+            464
+          ],
+          "width": 76,
+          "height": 60
+        },
+        {
+          "area": 4026,
+          "bbox": [
+            257,
+            404,
+            350,
+            460
+          ],
+          "width": 93,
+          "height": 56
+        }
+      ],
+      "lower60_width_ratios_to_Ready": [
+        1.0133333333333334,
+        0.9789473684210527
+      ],
+      "lower60_width_ratios_to259": [
+        0.8941176470588236,
+        0.8378378378378378
+      ],
+      "helmet_warm_core_heuristic": {
+        "request259": {
+          "area": 11925,
+          "bbox": [
+            177,
+            101,
+            347,
+            228
+          ],
+          "width": 170,
+          "height": 127
+        },
+        "request260": {
+          "area": 12002,
+          "bbox": [
+            177,
+            104,
+            347,
+            231
+          ],
+          "width": 170,
+          "height": 127
+        },
+        "width_ratio_to_Ready": 1.0119047619047619,
+        "height_ratio_to_Ready": 0.8943661971830986,
+        "center_x_delta_to259": 0.0,
+        "full_helmet_measurement": false
+      },
+      "near_hand_warm_cluster_heuristic": null,
+      "position_heuristics": {
+        "whole_alpha128_bbox_center_old": [
+          260.5,
+          254.5
+        ],
+        "whole_alpha128_bbox_center_new": [
+          274.0,
+          257.0
+        ],
+        "whole_bbox_center_delta": [
+          13.5,
+          2.5
+        ],
+        "lower6_span_center_x_old": 252.0,
+        "lower6_span_center_x_new": 253.0,
+        "lower6_span_center_x_delta": 1.0,
+        "alpha128_centroid_old": [
+          260.2974958790727,
+          278.6624346789184
+        ],
+        "alpha128_centroid_new": [
+          259.99179563677046,
+          274.3601715457766
+        ],
+        "authoring_root_x256_not_anatomically_measured": true,
+        "caution": "Bbox/centroid changes include pose, hand extension and leg narrowing; do not interpret them as whole-body translation. No registration search or X correction applied."
+      },
+      "accepted": false
+    },
+    {
+      "frame": 1,
+      "width": 273,
+      "height": 414,
+      "width_delta_to259": -1,
+      "height_delta_to259": -2,
+      "lower6_span": [
+        158,
+        334
+      ],
+      "lower6_span_width": 176,
+      "lower6_span_ratio_to_Ready": 0.9565217391304348,
+      "lower6_span_ratio_to259": 0.7364016736401674,
+      "raw627_graphic_bottom_alpha1": 572,
+      "raw627_graphic_bottom_alpha128": 572,
+      "uniform_scale": 0.8165869218500797,
+      "x_translation": 0,
+      "y_integer_translation": -3,
+      "final_graphic_bottom_alpha1": 464,
+      "final_graphic_bottom_alpha128": 464,
+      "alpha128_footprint_unchanged_by_cleanup": true,
+      "lower60_components_left_right_heuristic": [
+        {
+          "area": 3667,
+          "bbox": [
+            148,
+            404,
+            223,
+            464
+          ],
+          "width": 75,
+          "height": 60
+        },
+        {
+          "area": 3964,
+          "bbox": [
+            250,
+            404,
+            342,
+            460
+          ],
+          "width": 92,
+          "height": 56
+        }
+      ],
+      "lower60_width_ratios_to_Ready": [
+        1.0,
+        0.968421052631579
+      ],
+      "lower60_width_ratios_to259": [
+        0.8928571428571429,
+        0.8288288288288288
+      ],
+      "helmet_warm_core_heuristic": {
+        "request259": {
+          "area": 12351,
+          "bbox": [
+            170,
+            100,
+            343,
+            229
+          ],
+          "width": 173,
+          "height": 129
+        },
+        "request260": {
+          "area": 12757,
+          "bbox": [
+            170,
+            89,
+            343,
+            232
+          ],
+          "width": 173,
+          "height": 143
+        },
+        "width_ratio_to_Ready": 1.0297619047619047,
+        "height_ratio_to_Ready": 1.0070422535211268,
+        "center_x_delta_to259": 0.0,
+        "full_helmet_measurement": false
+      },
+      "near_hand_warm_cluster_heuristic": {
+        "target": [
+          155,
+          215
+        ],
+        "request259": {
+          "area": 2599,
+          "bbox": [
+            120,
+            146,
+            183,
+            211
+          ],
+          "width": 63,
+          "height": 65,
+          "target_source_point": [
+            155,
+            215
+          ],
+          "target_to_component_bbox_distance_px": 5.0,
+          "heuristic_only": true,
+          "anatomical_grip_or_glove_measurement": false
+        },
+        "request260": {
+          "area": 2638,
+          "bbox": [
+            120,
+            149,
+            183,
+            214
+          ],
+          "width": 63,
+          "height": 65,
+          "target_source_point": [
+            155,
+            215
+          ],
+          "target_to_component_bbox_distance_px": 2.0,
+          "heuristic_only": true,
+          "anatomical_grip_or_glove_measurement": false
+        },
+        "width_ratio_to259": 1.0,
+        "height_ratio_to259": 1.0,
+        "width_ratio_to_accepted_J1_warm_cluster": 1.3695652173913044,
+        "height_ratio_to_accepted_J1_warm_cluster": 1.0317460317460319,
+        "caution": "Warm connected component may include cuff/forearm and changes with pose; not anatomical hand scale or accepted Grip. K1/2 cluster remains wider than accepted-J1 proxy; K3 needs its own Root markers."
+      },
+      "position_heuristics": {
+        "whole_alpha128_bbox_center_old": [
+          252.0,
+          255.0
+        ],
+        "whole_alpha128_bbox_center_new": [
+          252.5,
+          257.0
+        ],
+        "whole_bbox_center_delta": [
+          0.5,
+          2.0
+        ],
+        "lower6_span_center_x_old": 239.5,
+        "lower6_span_center_x_new": 246.0,
+        "lower6_span_center_x_delta": 6.5,
+        "alpha128_centroid_old": [
+          244.97532334089018,
+          270.23707859670867
+        ],
+        "alpha128_centroid_new": [
+          246.59151867248787,
+          265.4514793619871
+        ],
+        "authoring_root_x256_not_anatomically_measured": true,
+        "caution": "Bbox/centroid changes include pose, hand extension and leg narrowing; do not interpret them as whole-body translation. No registration search or X correction applied."
+      },
+      "accepted": false
+    },
+    {
+      "frame": 2,
+      "width": 275,
+      "height": 412,
+      "width_delta_to259": -1,
+      "height_delta_to259": -3,
+      "lower6_span": [
+        160,
+        345
+      ],
+      "lower6_span_width": 185,
+      "lower6_span_ratio_to_Ready": 1.0054347826086956,
+      "lower6_span_ratio_to259": 0.7708333333333334,
+      "raw627_graphic_bottom_alpha1": 562,
+      "raw627_graphic_bottom_alpha128": 562,
+      "uniform_scale": 0.8165869218500797,
+      "x_translation": 0,
+      "y_integer_translation": 5,
+      "final_graphic_bottom_alpha1": 464,
+      "final_graphic_bottom_alpha128": 464,
+      "alpha128_footprint_unchanged_by_cleanup": true,
+      "lower60_components_left_right_heuristic": [
+        {
+          "area": 3806,
+          "bbox": [
+            150,
+            404,
+            227,
+            464
+          ],
+          "width": 77,
+          "height": 60
+        },
+        {
+          "area": 4152,
+          "bbox": [
+            255,
+            404,
+            350,
+            461
+          ],
+          "width": 95,
+          "height": 57
+        }
+      ],
+      "lower60_width_ratios_to_Ready": [
+        1.0266666666666666,
+        1.0
+      ],
+      "lower60_width_ratios_to259": [
+        0.9058823529411765,
+        0.8333333333333334
+      ],
+      "helmet_warm_core_heuristic": {
+        "request259": {
+          "area": 11973,
+          "bbox": [
+            176,
+            102,
+            347,
+            231
+          ],
+          "width": 171,
+          "height": 129
+        },
+        "request260": {
+          "area": 12027,
+          "bbox": [
+            177,
+            105,
+            347,
+            234
+          ],
+          "width": 170,
+          "height": 129
+        },
+        "width_ratio_to_Ready": 1.0119047619047619,
+        "height_ratio_to_Ready": 0.9084507042253521,
+        "center_x_delta_to259": 0.5,
+        "full_helmet_measurement": false
+      },
+      "near_hand_warm_cluster_heuristic": {
+        "target": [
+          150,
+          190
+        ],
+        "request259": {
+          "area": 2528,
+          "bbox": [
+            130,
+            128,
+            195,
+            188
+          ],
+          "width": 65,
+          "height": 60,
+          "target_source_point": [
+            150,
+            190
+          ],
+          "target_to_component_bbox_distance_px": 3.0,
+          "heuristic_only": true,
+          "anatomical_grip_or_glove_measurement": false
+        },
+        "request260": {
+          "area": 2547,
+          "bbox": [
+            130,
+            131,
+            195,
+            191
+          ],
+          "width": 65,
+          "height": 60,
+          "target_source_point": [
+            150,
+            190
+          ],
+          "target_to_component_bbox_distance_px": 0.0,
+          "heuristic_only": true,
+          "anatomical_grip_or_glove_measurement": false
+        },
+        "width_ratio_to259": 1.0,
+        "height_ratio_to259": 1.0,
+        "width_ratio_to_accepted_J1_warm_cluster": 1.4130434782608696,
+        "height_ratio_to_accepted_J1_warm_cluster": 0.9523809523809523,
+        "caution": "Warm connected component may include cuff/forearm and changes with pose; not anatomical hand scale or accepted Grip. K1/2 cluster remains wider than accepted-J1 proxy; K3 needs its own Root markers."
+      },
+      "position_heuristics": {
+        "whole_alpha128_bbox_center_old": [
+          263.0,
+          256.5
+        ],
+        "whole_alpha128_bbox_center_new": [
+          263.5,
+          258.0
+        ],
+        "whole_bbox_center_delta": [
+          0.5,
+          1.5
+        ],
+        "lower6_span_center_x_old": 251.0,
+        "lower6_span_center_x_new": 252.5,
+        "lower6_span_center_x_delta": 1.5,
+        "alpha128_centroid_old": [
+          254.03563345692686,
+          271.32166417874515
+        ],
+        "alpha128_centroid_new": [
+          253.1627074520013,
+          266.4419134396355
+        ],
+        "authoring_root_x256_not_anatomically_measured": true,
+        "caution": "Bbox/centroid changes include pose, hand extension and leg narrowing; do not interpret them as whole-body translation. No registration search or X correction applied."
+      },
+      "accepted": false
+    },
+    {
+      "frame": 3,
+      "width": 283,
+      "height": 398,
+      "width_delta_to259": -4,
+      "height_delta_to259": -2,
+      "lower6_span": [
+        143,
+        348
+      ],
+      "lower6_span_width": 205,
+      "lower6_span_ratio_to_Ready": 1.1141304347826086,
+      "lower6_span_ratio_to259": 0.7915057915057915,
+      "raw627_graphic_bottom_alpha1": 562,
+      "raw627_graphic_bottom_alpha128": 562,
+      "uniform_scale": 0.8165869218500797,
+      "x_translation": 0,
+      "y_integer_translation": 5,
+      "final_graphic_bottom_alpha1": 464,
+      "final_graphic_bottom_alpha128": 464,
+      "alpha128_footprint_unchanged_by_cleanup": true,
+      "lower60_components_left_right_heuristic": [
+        {
+          "area": 4047,
+          "bbox": [
+            126,
+            404,
+            209,
+            464
+          ],
+          "width": 83,
+          "height": 60
+        },
+        {
+          "area": 4553,
+          "bbox": [
+            249,
+            404,
+            351,
+            462
+          ],
+          "width": 102,
+          "height": 58
+        }
+      ],
+      "lower60_width_ratios_to_Ready": [
+        1.1066666666666667,
+        1.0736842105263158
+      ],
+      "lower60_width_ratios_to259": [
+        0.9120879120879121,
+        0.9107142857142857
+      ],
+      "helmet_warm_core_heuristic": {
+        "request259": {
+          "area": 12025,
+          "bbox": [
+            201,
+            109,
+            369,
+            245
+          ],
+          "width": 168,
+          "height": 136
+        },
+        "request260": {
+          "area": 12057,
+          "bbox": [
+            201,
+            112,
+            369,
+            248
+          ],
+          "width": 168,
+          "height": 136
+        },
+        "width_ratio_to_Ready": 1.0,
+        "height_ratio_to_Ready": 0.9577464788732394,
+        "center_x_delta_to259": 0.0,
+        "full_helmet_measurement": false
+      },
+      "near_hand_warm_cluster_heuristic": {
+        "target": [
+          300,
+          300
+        ],
+        "request259": {
+          "area": 2683,
+          "bbox": [
+            253,
+            261,
+            322,
+            321
+          ],
+          "width": 69,
+          "height": 60,
+          "target_source_point": [
+            300,
+            300
+          ],
+          "target_to_component_bbox_distance_px": 0.0,
+          "heuristic_only": true,
+          "anatomical_grip_or_glove_measurement": false
+        },
+        "request260": {
+          "area": 2698,
+          "bbox": [
+            253,
+            263,
+            322,
+            324
+          ],
+          "width": 69,
+          "height": 61,
+          "target_source_point": [
+            300,
+            300
+          ],
+          "target_to_component_bbox_distance_px": 0.0,
+          "heuristic_only": true,
+          "anatomical_grip_or_glove_measurement": false
+        },
+        "width_ratio_to259": 1.0,
+        "height_ratio_to259": 1.0166666666666666,
+        "width_ratio_to_accepted_J1_warm_cluster": 1.5,
+        "height_ratio_to_accepted_J1_warm_cluster": 0.9682539682539683,
+        "caution": "Warm connected component may include cuff/forearm and changes with pose; not anatomical hand scale or accepted Grip. K1/2 cluster remains wider than accepted-J1 proxy; K3 needs its own Root markers."
+      },
+      "position_heuristics": {
+        "whole_alpha128_bbox_center_old": [
+          230.5,
+          263.0
+        ],
+        "whole_alpha128_bbox_center_new": [
+          232.5,
+          265.0
+        ],
+        "whole_bbox_center_delta": [
+          2.0,
+          2.0
+        ],
+        "lower6_span_center_x_old": 232.5,
+        "lower6_span_center_x_new": 245.5,
+        "lower6_span_center_x_delta": 13.0,
+        "alpha128_centroid_old": [
+          245.2856872592185,
+          280.49989680792515
+        ],
+        "alpha128_centroid_new": [
+          250.81808278867103,
+          277.8825708061002
+        ],
+        "authoring_root_x256_not_anatomically_measured": true,
+        "caution": "Bbox/centroid changes include pose, hand extension and leg narrowing; do not interpret them as whole-body translation. No registration search or X correction applied."
+      },
+      "accepted": false
+    }
+  ],
+  "conclusions": {
+    "K0to2_graphic_stance": "Narrowed to178/176/185 vs Ready184 and259240/239/240",
+    "K3_graphic_foot_span": "205 vs Ready184 (+11.4%), versus259259 (-20.8%); pose acceptance remains Root visual decision",
+    "whole_bbox": "K1/K2 whole silhouettes remain wide from raised-limb/pose content; cannot use whole bbox alone as zoom/scale proof",
+    "helmet": "Warm-core widths stable within0..0.5px of259 center and168..173px versusReady168; full helmet dimensions remain OPEN",
+    "near_hand": "Warm-cluster widths63/65/69 versus accepted-J1 proxy46 are a marker/identity risk, but not physical glove measurement; compare poses visually",
+    "whole_body_shift": "No processing X shift. Helmet warm-core x centers change0/0/+0.5/0px; different wholebbox/foot centers do not prove body sliding"
+  },
+  "Root_runtime_art_decision": "PENDING_Root_after_E658_View",
+  "technical_conversion_completed": true,
+  "art_or_runtime_accepted": false,
+  "physical_anatomical_dimensions": "OPEN",
+  "creative_image_generation_calls": 0,
+  "images_viewed": false,
+  "actual_Source_Content_tools_E_ledger_status_mutations": 0,
+  "FinalAccepted": false
+}

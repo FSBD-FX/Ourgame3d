@@ -1,0 +1,119 @@
+{
+  "schema": "secondary8-unadmitted-exact-insert-seams-v001",
+  "FinalAccepted": false,
+  "runtime_not_ready": true,
+  "base_compiled_manifest_sha256": "e08bf832e82c6af093650b7ebde3fa4fc25b59aa47bfe465bb239f7308292564",
+  "operations": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.h",
+      "label": "secondary-trace-include",
+      "kind": "insert_after",
+      "anchor": "#include \"DungeonFairytaleSwordAirDrawStateV001.h\"\r\n",
+      "addition": "#include \"DungeonFairytaleSwordSecondaryDrawStateV001.h\"\r\n"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.h",
+      "label": "texture-forward-declaration",
+      "kind": "insert_after",
+      "anchor": "class UTexture2D;\r\n",
+      "addition": "class UTexture;\r\n"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.h",
+      "label": "same-callback-trace-getter",
+      "kind": "insert_after",
+      "anchor": "    const FDungeonFairytaleSwordAirDrawV001& GetFairytaleSwordAirDraw() const { return FairytaleSwordAirDraw; }\r\n",
+      "addition": "    const FDungeonFairytaleSwordSecondaryDrawV001& GetFairytaleSwordSecondaryDraw() const { return FairytaleSwordSecondaryDraw; }\r\n"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.h",
+      "label": "bounded-secondary-members",
+      "kind": "insert_after",
+      "anchor": "    FDungeonFairytaleSwordAirDrawV001 FairytaleSwordAirDraw;\r\n",
+      "addition": "    bool bUseFairytaleSwordSecondaryPreview=false;\r\n    FDungeonFairytaleSwordSecondaryDrawV001 FairytaleSwordSecondaryDraw;\r\n    void ResetFairytaleSwordSecondaryDraw();\r\n    void PreloadFairytaleSwordSecondary(TArray<UTexture*>& Textures);\r\n    bool DrawFairytaleSwordSecondaryBody(ADungeonFighter* Fighter);\r\n"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "label": "new-explicit-optin",
+      "kind": "insert_after",
+      "anchor": "    bUseFairytaleSwordAirPreview=bUseFairytaleSwordEquipmentBoundPreview\r\n        &&FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordAirV001::CommandLineFlag);\r\n",
+      "addition": "    bUseFairytaleSwordSecondaryPreview=bUseFairytaleSwordEquipmentBoundPreview\r\n        &&FParse::Param(FCommandLine::Get(),TEXT(\"DungeonFairytaleSwordSecondaryPreview\"));\r\n"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "label": "startup-before-existing-FinishCompilation",
+      "kind": "insert_after",
+      "anchor": "            if(auto Texture=DungeonFairytaleSwordDodgeV001::PreloadTexture(DodgeProfile.SwordTexturePath,Frames))ReadyArmorTextures.Add(Texture);\r\n        }\r\n",
+      "addition": "        PreloadFairytaleSwordSecondary(ReadyArmorTextures);\r\n"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "label": "restore-trace-clearing",
+      "kind": "insert_after",
+      "anchor": "    ActionAudioPlayRequests.Reset();ActionAudioPlayReceipts.Reset();MeleeTrails.Reset();ActorQuads.Reset();FairytaleGuardMoveRigDraws.Reset();\r\n    FairytaleSwordAirDraw=FDungeonFairytaleSwordAirDrawV001();\r\n",
+      "addition": "    ResetFairytaleSwordSecondaryDraw();\r\n"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "label": "callback-clearing-before-no-Canvas",
+      "kind": "insert_after",
+      "anchor": "void ADungeonHUD::DrawHUD()\r\n{\r\n",
+      "addition": "    ResetFairytaleSwordSecondaryDraw();\r\n"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+      "label": "clearing-before-Death-Hurt",
+      "kind": "insert_after",
+      "anchor": "    if(!F || F->bEnemy)return false;\r\n",
+      "addition": "    ResetFairytaleSwordSecondaryDraw();\r\n"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+      "label": "dispatch-after-Air-before-J",
+      "kind": "insert_after",
+      "anchor": "    if(bUseFairytaleSwordAirPreview && DrawFairytaleSwordAirBody(F))return true;\r\n",
+      "addition": "    if(bUseFairytaleSwordSecondaryPreview && DrawFairytaleSwordSecondaryBody(F))return true;\r\n"
+    }
+  ],
+  "projected_files": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.h",
+      "before": {
+        "bytes": 16409,
+        "sha256": "94d4f3f8bfe8e3857d005583b1931f14e4255f5ce5af513a7022c2d689ef8db5"
+      },
+      "after": {
+        "bytes": 16927,
+        "sha256": "0386c78f1bda80febbf34dd6f90d016a010d3470f35511c74a1ee4100e0e8fbe"
+      },
+      "insertions": 4,
+      "roundtrip_to_base": true
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "before": {
+        "bytes": 123680,
+        "sha256": "a68a9df57826a3761f2bfbf8511858b139c193589f285c0cc7bbb29ad950e16f"
+      },
+      "after": {
+        "bytes": 123996,
+        "sha256": "c83e284cc230107d69fbe83fcbaad0a3f574017b795bd864ab54eaed7c484a79"
+      },
+      "insertions": 4,
+      "roundtrip_to_base": true
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+      "before": {
+        "bytes": 25397,
+        "sha256": "be8afcfce07e2c02a01481a86a819d6ea516002ccce925a74873871f2a748794"
+      },
+      "after": {
+        "bytes": 25532,
+        "sha256": "6673d80ba17ee29eeac11b2b82b18ec5237f573809b258c6ce27ae8b71fb6980"
+      },
+      "insertions": 2,
+      "roundtrip_to_base": true
+    }
+  ]
+}

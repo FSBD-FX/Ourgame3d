@@ -1,0 +1,814 @@
+{
+  "schema": "K4K5K7-LGT-nine-layer-three-assembly-integer-fit-candidate-v001",
+  "created_utc": "2026-10-18T22:35:13.681905+00:00",
+  "selection": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K8-body-selection-v001/source-body-selection.json",
+    "bytes": 5246,
+    "sha256": "d81bf3eebfbbd3238359a61a5972ec6f16639b43461d44e00f6b4b38aa30d951"
+  },
+  "body_owner_freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/four-owner-freeze-v001.json",
+    "bytes": 16064,
+    "sha256": "f149cd1fc12d0025d5443a16be92d7aec73417d91d824389497d728e6f9ceef0"
+  },
+  "source_recipe": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-LGT-fit-candidate-v001/nine-armor-source-recipe-v001.json",
+    "scope": "Earlier source selection preparation; its pending notes superseded here."
+  },
+  "armor_layer_count": 9,
+  "diagnostic_no_sword_assemblies": 3,
+  "all_existing_RGBA_translations_reversible": true,
+  "all_nonzero_RGBA_clipped_pixels": 0,
+  "canonical_K7_all3_Ready0_PNG_bytes_exact": true,
+  "K6_alias_K0_no_new_layers_or_imports": true,
+  "frames": [
+    {
+      "K_frame": 4,
+      "source_body": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/request263-single-extraction-qc-v001/aligned512/K4-body-footline464-RGBA.png",
+        "bytes": 131468,
+        "sha256": "bb40889db4da13ba969977b42d53e7fa6be523a97835184de36ad5a116e36b38"
+      },
+      "body_stats": {
+        "alpha1_bbox": [
+          89,
+          72,
+          400,
+          464
+        ],
+        "alpha128_bbox": [
+          89,
+          72,
+          400,
+          463
+        ]
+      },
+      "body_owners": {
+        "BodyRest": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/BodyRest/K4.png",
+          "bytes": 73212,
+          "sha256": "7940d50499dac2b7ddf443179b2739b7a4b51412a30187b4b5d1a7701e24b454"
+        },
+        "NearArmWithoutHand": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/NearArmWithoutHand/K4.png",
+          "bytes": 9666,
+          "sha256": "1fef9610585b18feec33e8c31e5153f958f861d3edcc523cd32376d8e0806f0b"
+        },
+        "HelmetForeground": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/HelmetForeground/K4.png",
+          "bytes": 46644,
+          "sha256": "f03cadff5c9504d03faff5d408f80f5df67fc8f0aa7e555fd27f51e2b58ac9f8"
+        },
+        "NearHand": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/NearHand/K4.png",
+          "bytes": 13339,
+          "sha256": "d90e5ffa030883511b0833eff17df33af7bacb85255a0a3e7a8370669a91191f"
+        }
+      },
+      "owner_source_RGBA_exclusive_reassembly_exact": true,
+      "far_hand_protection": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/protection-masks/FarHandWarmHullHeuristic/K4.png",
+        "bytes": 689,
+        "sha256": "5a6f1db3449546c208cdfbc900708e5f6ba47f553616ffe1865b6f071b47c600"
+      },
+      "far_hand_protection_role": "Worker warm component convex hull + padding clipped source-alpha heuristic; not approved full anatomical hand segmentation.",
+      "draw_order_no_sword": [
+        "BodyRest",
+        "ShoulderFar",
+        "Chest",
+        "NearArmWithoutHand",
+        "ShoulderNear",
+        "HelmetForeground",
+        "NearHand"
+      ],
+      "armor_layers": [
+        {
+          "owner": "ShoulderFar",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-integer-assembly-v002/armor-layers/FarShoulder/frame-3.png",
+            "bytes": 2828,
+            "sha256": "3dfd03743968434a669cb37e30f4ddf54c66566d02ca6a8664b721ae904a1397"
+          },
+          "candidate": {
+            "relative_path": "armor-layers/ShoulderFar/K4.png",
+            "bytes": 2818,
+            "sha256": "fff3f6c7d81429c2e1e4dd61e8e1a51f579c7c530ed372e176a73c039eb7562e"
+          },
+          "transform": {
+            "integer_translation_xy": [
+              -95,
+              -43
+            ],
+            "rotation_degrees": 0,
+            "scale_xy": [
+              1,
+              1
+            ],
+            "inverse_translation_RGBA_byte_exact": true,
+            "nonzero_RGBA_clipped_pixels": 0
+          },
+          "raw_alpha1_overlap_near_hand_owner": 0,
+          "raw_alpha1_overlap_far_hand_heuristic": 0,
+          "raw_alpha1_overlap_helmet_owner": 0,
+          "canonical_K7_PNG_bytes_exact": false
+        },
+        {
+          "owner": "Chest",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-integer-assembly-v002/armor-layers/Chest/frame-3.png",
+            "bytes": 17640,
+            "sha256": "016890228dec4cff69e76c087fb4a39e2634604d66716c2f58629bb46010cf52"
+          },
+          "candidate": {
+            "relative_path": "armor-layers/Chest/K4.png",
+            "bytes": 17647,
+            "sha256": "ca0a52a88d55fad2d8258eb0bc5165b4ec76b48ee94d8756e5cdc3ee90a8144c"
+          },
+          "transform": {
+            "integer_translation_xy": [
+              9,
+              3
+            ],
+            "rotation_degrees": 0,
+            "scale_xy": [
+              1,
+              1
+            ],
+            "inverse_translation_RGBA_byte_exact": true,
+            "nonzero_RGBA_clipped_pixels": 0
+          },
+          "raw_alpha1_overlap_near_hand_owner": 0,
+          "raw_alpha1_overlap_far_hand_heuristic": 0,
+          "raw_alpha1_overlap_helmet_owner": 0,
+          "canonical_K7_PNG_bytes_exact": false
+        },
+        {
+          "owner": "ShoulderNear",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-integer-assembly-v002/armor-layers/NearShoulder/frame-2.png",
+            "bytes": 6541,
+            "sha256": "f450e6891689e07f56653adfdd01ae2c492295553533b1372fa3fe9bc8d26adc"
+          },
+          "candidate": {
+            "relative_path": "armor-layers/ShoulderNear/K4.png",
+            "bytes": 6551,
+            "sha256": "381e6306f5713366d8d8a30641b18473f3c97487c3192d4720b528383c61ea51"
+          },
+          "transform": {
+            "integer_translation_xy": [
+              65,
+              8
+            ],
+            "rotation_degrees": 0,
+            "scale_xy": [
+              1,
+              1
+            ],
+            "inverse_translation_RGBA_byte_exact": true,
+            "nonzero_RGBA_clipped_pixels": 0
+          },
+          "raw_alpha1_overlap_near_hand_owner": 0,
+          "raw_alpha1_overlap_far_hand_heuristic": 0,
+          "raw_alpha1_overlap_helmet_owner": 6,
+          "canonical_K7_PNG_bytes_exact": false
+        }
+      ],
+      "assembly": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-LGT-fit-candidate-v001/diagnostic-assembly-no-sword/K4.png",
+        "bytes": 135737,
+        "sha256": "88d679588d8dbad93f1757dc9285411d7e7e371a3adebe54d1d17781d9e0b58f"
+      },
+      "assembly_alpha1_bbox": [
+        89,
+        72,
+        400,
+        464
+      ],
+      "near_hand_final_RGBA_changed_pixels": 0,
+      "far_hand_heuristic_final_RGBA_changed_pixels": 0,
+      "near_hand_changed_bbox": null,
+      "far_hand_changed_bbox": null,
+      "visible_armor_contribution": {
+        "ShoulderNear": {
+          "positive_source_contribution_pixels": 1639,
+          "at_least_half_contribution_pixels": 1469,
+          "effective_alpha_sum": 1472.094118,
+          "positive_bbox": [
+            271,
+            245,
+            322,
+            285
+          ]
+        },
+        "Chest": {
+          "positive_source_contribution_pixels": 4672,
+          "at_least_half_contribution_pixels": 4375,
+          "effective_alpha_sum": 4373.694118,
+          "positive_bbox": [
+            219,
+            242,
+            292,
+            332
+          ]
+        },
+        "ShoulderFar": {
+          "positive_source_contribution_pixels": 422,
+          "at_least_half_contribution_pixels": 346,
+          "effective_alpha_sum": 342.890196,
+          "positive_bbox": [
+            193,
+            218,
+            221,
+            241
+          ]
+        }
+      },
+      "hand_protection_numeric_clear": true,
+      "wear_fit_accepted": false
+    },
+    {
+      "K_frame": 5,
+      "source_body": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/request261-extraction-qc-v001/aligned512/K5-body-footline464-RGBA.png",
+        "bytes": 130643,
+        "sha256": "88f0e001fec16e0c7481a1cfb56ebc242cf05c5c62de62ccb5dda90540e2b1e6"
+      },
+      "body_stats": {
+        "alpha1_bbox": [
+          86,
+          50,
+          356,
+          464
+        ],
+        "alpha128_bbox": [
+          87,
+          50,
+          355,
+          463
+        ]
+      },
+      "body_owners": {
+        "BodyRest": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/BodyRest/K5.png",
+          "bytes": 69665,
+          "sha256": "f9beddb8ea2b812ad0efc12558f85a8f804358da91847bb5b15a0858e5a8af1e"
+        },
+        "NearArmWithoutHand": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/NearArmWithoutHand/K5.png",
+          "bytes": 8051,
+          "sha256": "51185dbaf67f159c16c2177b61033a17a71609e84e748e353cce6fdcd3bd1308"
+        },
+        "HelmetForeground": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/HelmetForeground/K5.png",
+          "bytes": 48636,
+          "sha256": "8c21c408ba1741c4252c16492c23ee510e05d835564f82edfe93e07158930dc2"
+        },
+        "NearHand": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/NearHand/K5.png",
+          "bytes": 15191,
+          "sha256": "8daf3272dac03cddf455579b3310493badfa14ff2ec0ea3be55a5070e915dba6"
+        }
+      },
+      "owner_source_RGBA_exclusive_reassembly_exact": true,
+      "far_hand_protection": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/protection-masks/FarHandWarmHullHeuristic/K5.png",
+        "bytes": 840,
+        "sha256": "c1cede00e224ee1dc8977f27a2730fca44979ab0946ffe68e34f10723a452114"
+      },
+      "far_hand_protection_role": "Worker warm component convex hull + padding clipped source-alpha heuristic; not approved full anatomical hand segmentation.",
+      "draw_order_no_sword": [
+        "BodyRest",
+        "ShoulderFar",
+        "Chest",
+        "NearArmWithoutHand",
+        "ShoulderNear",
+        "HelmetForeground",
+        "NearHand"
+      ],
+      "armor_layers": [
+        {
+          "owner": "ShoulderFar",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-integer-assembly-v002/armor-layers/FarShoulder/frame-2.png",
+            "bytes": 3002,
+            "sha256": "8ea1354a18b10c25df78ad6dc2139f2af2c8e6db1611e7f08bf8d2b1febcb2c5"
+          },
+          "candidate": {
+            "relative_path": "armor-layers/ShoulderFar/K5.png",
+            "bytes": 3000,
+            "sha256": "8ee6596c8e1a972087752e2195372b1395fc9b60a56cad045f41571b83f8ee12"
+          },
+          "transform": {
+            "integer_translation_xy": [
+              -116,
+              -28
+            ],
+            "rotation_degrees": 0,
+            "scale_xy": [
+              1,
+              1
+            ],
+            "inverse_translation_RGBA_byte_exact": true,
+            "nonzero_RGBA_clipped_pixels": 0
+          },
+          "raw_alpha1_overlap_near_hand_owner": 0,
+          "raw_alpha1_overlap_far_hand_heuristic": 0,
+          "raw_alpha1_overlap_helmet_owner": 0,
+          "canonical_K7_PNG_bytes_exact": false
+        },
+        {
+          "owner": "Chest",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-integer-assembly-v002/armor-layers/Chest/frame-2.png",
+            "bytes": 17770,
+            "sha256": "8efef2931c65c698b0e7e633733134207640b36cfc6ef37807fbb8a840a9c1d2"
+          },
+          "candidate": {
+            "relative_path": "armor-layers/Chest/K5.png",
+            "bytes": 17757,
+            "sha256": "03220a01a61a73a0a757d8856befb3540ba219e35aae4619a465cb73cb42537e"
+          },
+          "transform": {
+            "integer_translation_xy": [
+              -17,
+              -6
+            ],
+            "rotation_degrees": 0,
+            "scale_xy": [
+              1,
+              1
+            ],
+            "inverse_translation_RGBA_byte_exact": true,
+            "nonzero_RGBA_clipped_pixels": 0
+          },
+          "raw_alpha1_overlap_near_hand_owner": 2304,
+          "raw_alpha1_overlap_far_hand_heuristic": 0,
+          "raw_alpha1_overlap_helmet_owner": 0,
+          "canonical_K7_PNG_bytes_exact": false
+        },
+        {
+          "owner": "ShoulderNear",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-integer-assembly-v002/armor-layers/NearShoulder/frame-2.png",
+            "bytes": 6541,
+            "sha256": "f450e6891689e07f56653adfdd01ae2c492295553533b1372fa3fe9bc8d26adc"
+          },
+          "candidate": {
+            "relative_path": "armor-layers/ShoulderNear/K5.png",
+            "bytes": 6554,
+            "sha256": "9de6b8bc19ebe8b5834eed8dd918bc63b409dd483186caf71767c288cc02ccc6"
+          },
+          "transform": {
+            "integer_translation_xy": [
+              29,
+              -4
+            ],
+            "rotation_degrees": 0,
+            "scale_xy": [
+              1,
+              1
+            ],
+            "inverse_translation_RGBA_byte_exact": true,
+            "nonzero_RGBA_clipped_pixels": 0
+          },
+          "raw_alpha1_overlap_near_hand_owner": 0,
+          "raw_alpha1_overlap_far_hand_heuristic": 0,
+          "raw_alpha1_overlap_helmet_owner": 0,
+          "canonical_K7_PNG_bytes_exact": false
+        }
+      ],
+      "assembly": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-LGT-fit-candidate-v001/diagnostic-assembly-no-sword/K5.png",
+        "bytes": 132986,
+        "sha256": "2c9812335717f60e8f3c33b68e91cbed3d75694e6eab8ef76f8cdc9e026ca34b"
+      },
+      "assembly_alpha1_bbox": [
+        86,
+        50,
+        356,
+        464
+      ],
+      "near_hand_final_RGBA_changed_pixels": 0,
+      "far_hand_heuristic_final_RGBA_changed_pixels": 0,
+      "near_hand_changed_bbox": null,
+      "far_hand_changed_bbox": null,
+      "visible_armor_contribution": {
+        "ShoulderNear": {
+          "positive_source_contribution_pixels": 1645,
+          "at_least_half_contribution_pixels": 1469,
+          "effective_alpha_sum": 1472.27451,
+          "positive_bbox": [
+            235,
+            233,
+            286,
+            273
+          ]
+        },
+        "Chest": {
+          "positive_source_contribution_pixels": 602,
+          "at_least_half_contribution_pixels": 392,
+          "effective_alpha_sum": 394.445721,
+          "positive_bbox": [
+            193,
+            224,
+            276,
+            299
+          ]
+        },
+        "ShoulderFar": {
+          "positive_source_contribution_pixels": 214,
+          "at_least_half_contribution_pixels": 156,
+          "effective_alpha_sum": 155.007843,
+          "positive_bbox": [
+            175,
+            230,
+            191,
+            259
+          ]
+        }
+      },
+      "hand_protection_numeric_clear": true,
+      "wear_fit_accepted": false
+    },
+    {
+      "K_frame": 7,
+      "source_body": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/ready-body-master.png",
+        "bytes": 121133,
+        "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+      },
+      "body_stats": {
+        "alpha1_bbox": [
+          149,
+          49,
+          362,
+          464
+        ],
+        "alpha128_bbox": [
+          149,
+          49,
+          362,
+          464
+        ]
+      },
+      "body_owners": {
+        "BodyRest": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/BodyRest/K7.png",
+          "bytes": 66008,
+          "sha256": "68801987073bddeb6d6a8a46979ba055d56376b4614f86ec7fbec16e23987049"
+        },
+        "NearArmWithoutHand": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/NearArmWithoutHand/K7.png",
+          "bytes": 6410,
+          "sha256": "8f2ea3cee1d7e7ecd1b71c14eb187993c1af5136eab919988c85f79362b48ec7"
+        },
+        "HelmetForeground": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/HelmetForeground/K7.png",
+          "bytes": 47800,
+          "sha256": "d36cf02971f76669a8329e29841000800a46bcac867b556a165e7c53cf558b49"
+        },
+        "NearHand": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/NearHand/K7.png",
+          "bytes": 10127,
+          "sha256": "cde1e43d76bcd8ac9790c739e6fe9559b8bfa4b4ffd3e258f4197e5f066efa75"
+        }
+      },
+      "owner_source_RGBA_exclusive_reassembly_exact": true,
+      "far_hand_protection": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/protection-masks/FarHandWarmHullHeuristic/K7.png",
+        "bytes": 812,
+        "sha256": "5c38bf76e0fb510c753d12513854a840a985f96011bdda10a044563ccd33a0ab"
+      },
+      "far_hand_protection_role": "Worker warm component convex hull + padding clipped source-alpha heuristic; not approved full anatomical hand segmentation.",
+      "draw_order_no_sword": [
+        "BodyRest",
+        "ShoulderFar",
+        "Chest",
+        "NearArmWithoutHand",
+        "ShoulderNear",
+        "HelmetForeground",
+        "NearHand"
+      ],
+      "armor_layers": [
+        {
+          "owner": "ShoulderFar",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-integer-assembly-v001/armor-layers/FarShoulder/frame-0.png",
+            "bytes": 2594,
+            "sha256": "869cdbb676af81474372457988d78deebbc28d0ab02507f403251e29410a20f9"
+          },
+          "candidate": {
+            "relative_path": "armor-layers/ShoulderFar/K7.png",
+            "bytes": 2594,
+            "sha256": "869cdbb676af81474372457988d78deebbc28d0ab02507f403251e29410a20f9"
+          },
+          "transform": {
+            "integer_translation_xy": [
+              0,
+              0
+            ],
+            "rotation_degrees": 0,
+            "scale_xy": [
+              1,
+              1
+            ],
+            "inverse_translation_RGBA_byte_exact": true,
+            "nonzero_RGBA_clipped_pixels": 0
+          },
+          "raw_alpha1_overlap_near_hand_owner": 0,
+          "raw_alpha1_overlap_far_hand_heuristic": 0,
+          "raw_alpha1_overlap_helmet_owner": 0,
+          "canonical_K7_PNG_bytes_exact": true
+        },
+        {
+          "owner": "Chest",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-integer-assembly-v001/armor-layers/Chest/frame-0.png",
+            "bytes": 16703,
+            "sha256": "eaa8550fbc3889fe710ced97229578ea62911415fbe92c668d53a090418177dd"
+          },
+          "candidate": {
+            "relative_path": "armor-layers/Chest/K7.png",
+            "bytes": 16703,
+            "sha256": "eaa8550fbc3889fe710ced97229578ea62911415fbe92c668d53a090418177dd"
+          },
+          "transform": {
+            "integer_translation_xy": [
+              0,
+              0
+            ],
+            "rotation_degrees": 0,
+            "scale_xy": [
+              1,
+              1
+            ],
+            "inverse_translation_RGBA_byte_exact": true,
+            "nonzero_RGBA_clipped_pixels": 0
+          },
+          "raw_alpha1_overlap_near_hand_owner": 641,
+          "raw_alpha1_overlap_far_hand_heuristic": 0,
+          "raw_alpha1_overlap_helmet_owner": 0,
+          "canonical_K7_PNG_bytes_exact": true
+        },
+        {
+          "owner": "ShoulderNear",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-integer-assembly-v001/armor-layers/NearShoulder/frame-0.png",
+            "bytes": 6597,
+            "sha256": "6a8163a32439cc5a9bf4c60e78ac441a7dea795b225d8220208153f0198093f8"
+          },
+          "candidate": {
+            "relative_path": "armor-layers/ShoulderNear/K7.png",
+            "bytes": 6597,
+            "sha256": "6a8163a32439cc5a9bf4c60e78ac441a7dea795b225d8220208153f0198093f8"
+          },
+          "transform": {
+            "integer_translation_xy": [
+              0,
+              0
+            ],
+            "rotation_degrees": 0,
+            "scale_xy": [
+              1,
+              1
+            ],
+            "inverse_translation_RGBA_byte_exact": true,
+            "nonzero_RGBA_clipped_pixels": 0
+          },
+          "raw_alpha1_overlap_near_hand_owner": 0,
+          "raw_alpha1_overlap_far_hand_heuristic": 0,
+          "raw_alpha1_overlap_helmet_owner": 0,
+          "canonical_K7_PNG_bytes_exact": true
+        }
+      ],
+      "assembly": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-LGT-fit-candidate-v001/diagnostic-assembly-no-sword/K7.png",
+        "bytes": 126523,
+        "sha256": "bf1d3af07101fa6d72df15675b2d28fc814e4beb40eb8f0f749acba6b65daaf4"
+      },
+      "assembly_alpha1_bbox": [
+        149,
+        49,
+        362,
+        464
+      ],
+      "near_hand_final_RGBA_changed_pixels": 0,
+      "far_hand_heuristic_final_RGBA_changed_pixels": 0,
+      "near_hand_changed_bbox": null,
+      "far_hand_changed_bbox": null,
+      "visible_armor_contribution": {
+        "ShoulderNear": {
+          "positive_source_contribution_pixels": 1720,
+          "at_least_half_contribution_pixels": 1527,
+          "effective_alpha_sum": 1528.878431,
+          "positive_bbox": [
+            169,
+            237,
+            228,
+            278
+          ]
+        },
+        "Chest": {
+          "positive_source_contribution_pixels": 4538,
+          "at_least_half_contribution_pixels": 4147,
+          "effective_alpha_sum": 4143.041399,
+          "positive_bbox": [
+            213,
+            240,
+            284,
+            329
+          ]
+        },
+        "ShoulderFar": {
+          "positive_source_contribution_pixels": 367,
+          "at_least_half_contribution_pixels": 275,
+          "effective_alpha_sum": 272.043137,
+          "positive_bbox": [
+            290,
+            249,
+            310,
+            277
+          ]
+        }
+      },
+      "hand_protection_numeric_clear": true,
+      "wear_fit_accepted": false
+    }
+  ],
+  "hand_masks_numeric_clear_all": true,
+  "input_dependency_pins": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K8-body-selection-v001/source-body-selection.json",
+      "bytes": 5246,
+      "sha256": "d81bf3eebfbbd3238359a61a5972ec6f16639b43461d44e00f6b4b38aa30d951"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/request263-single-extraction-qc-v001/aligned512/K4-body-footline464-RGBA.png",
+      "bytes": 131468,
+      "sha256": "bb40889db4da13ba969977b42d53e7fa6be523a97835184de36ad5a116e36b38"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/request261-extraction-qc-v001/aligned512/K5-body-footline464-RGBA.png",
+      "bytes": 130643,
+      "sha256": "88f0e001fec16e0c7481a1cfb56ebc242cf05c5c62de62ccb5dda90540e2b1e6"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/ready-body-master.png",
+      "bytes": 121133,
+      "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-import-v001/import-leather-ready-v001.json",
+      "bytes": 9267,
+      "sha256": "f6c8a947158c1f957cc77ad5412362a2c1cadb0acc18685e85278033936d6b36"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-import-v001/import-leather-primary1-v001.json",
+      "bytes": 28346,
+      "sha256": "3eb0767ae26f0b7864b149f831078fe5fdc90fe2d4fe026d06a6bfe5b1d568df"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-visible-mounts-v001/mounts-v001.json",
+      "bytes": 16716,
+      "sha256": "b82ed99a94917c19ea4dfe1104ed4d6a200f0af1af2a18335fcb15799836f82d"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-visible-mounts-v001/all18-mounts-v002.json",
+      "bytes": 25468,
+      "sha256": "55bedac8b97626b7aa352ef7d313f68ea14cf9a0b3853687eb10b3b57612606b"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-integer-assembly-v002/armor-layers/FarShoulder/frame-3.png",
+      "bytes": 2828,
+      "sha256": "3dfd03743968434a669cb37e30f4ddf54c66566d02ca6a8664b721ae904a1397"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-integer-assembly-v002/armor-layers/Chest/frame-3.png",
+      "bytes": 17640,
+      "sha256": "016890228dec4cff69e76c087fb4a39e2634604d66716c2f58629bb46010cf52"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-integer-assembly-v002/armor-layers/NearShoulder/frame-2.png",
+      "bytes": 6541,
+      "sha256": "f450e6891689e07f56653adfdd01ae2c492295553533b1372fa3fe9bc8d26adc"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-integer-assembly-v002/armor-layers/FarShoulder/frame-2.png",
+      "bytes": 3002,
+      "sha256": "8ea1354a18b10c25df78ad6dc2139f2af2c8e6db1611e7f08bf8d2b1febcb2c5"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-integer-assembly-v002/armor-layers/Chest/frame-2.png",
+      "bytes": 17770,
+      "sha256": "8efef2931c65c698b0e7e633733134207640b36cfc6ef37807fbb8a840a9c1d2"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-integer-assembly-v001/armor-layers/FarShoulder/frame-0.png",
+      "bytes": 2594,
+      "sha256": "869cdbb676af81474372457988d78deebbc28d0ab02507f403251e29410a20f9"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-integer-assembly-v001/armor-layers/Chest/frame-0.png",
+      "bytes": 16703,
+      "sha256": "eaa8550fbc3889fe710ced97229578ea62911415fbe92c668d53a090418177dd"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-integer-assembly-v001/armor-layers/NearShoulder/frame-0.png",
+      "bytes": 6597,
+      "sha256": "6a8163a32439cc5a9bf4c60e78ac441a7dea795b225d8220208153f0198093f8"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/four-owner-freeze-v001.json",
+      "bytes": 16064,
+      "sha256": "f149cd1fc12d0025d5443a16be92d7aec73417d91d824389497d728e6f9ceef0"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/BodyRest/K4.png",
+      "bytes": 73212,
+      "sha256": "7940d50499dac2b7ddf443179b2739b7a4b51412a30187b4b5d1a7701e24b454"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/NearArmWithoutHand/K4.png",
+      "bytes": 9666,
+      "sha256": "1fef9610585b18feec33e8c31e5153f958f861d3edcc523cd32376d8e0806f0b"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/HelmetForeground/K4.png",
+      "bytes": 46644,
+      "sha256": "f03cadff5c9504d03faff5d408f80f5df67fc8f0aa7e555fd27f51e2b58ac9f8"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/NearHand/K4.png",
+      "bytes": 13339,
+      "sha256": "d90e5ffa030883511b0833eff17df33af7bacb85255a0a3e7a8370669a91191f"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/protection-masks/FarHandWarmHullHeuristic/K4.png",
+      "bytes": 689,
+      "sha256": "5a6f1db3449546c208cdfbc900708e5f6ba47f553616ffe1865b6f071b47c600"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/BodyRest/K5.png",
+      "bytes": 69665,
+      "sha256": "f9beddb8ea2b812ad0efc12558f85a8f804358da91847bb5b15a0858e5a8af1e"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/NearArmWithoutHand/K5.png",
+      "bytes": 8051,
+      "sha256": "51185dbaf67f159c16c2177b61033a17a71609e84e748e353cce6fdcd3bd1308"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/HelmetForeground/K5.png",
+      "bytes": 48636,
+      "sha256": "8c21c408ba1741c4252c16492c23ee510e05d835564f82edfe93e07158930dc2"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/NearHand/K5.png",
+      "bytes": 15191,
+      "sha256": "8daf3272dac03cddf455579b3310493badfa14ff2ec0ea3be55a5070e915dba6"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/protection-masks/FarHandWarmHullHeuristic/K5.png",
+      "bytes": 840,
+      "sha256": "c1cede00e224ee1dc8977f27a2730fca44979ab0946ffe68e34f10723a452114"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/BodyRest/K7.png",
+      "bytes": 66008,
+      "sha256": "68801987073bddeb6d6a8a46979ba055d56376b4614f86ec7fbec16e23987049"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/NearArmWithoutHand/K7.png",
+      "bytes": 6410,
+      "sha256": "8f2ea3cee1d7e7ecd1b71c14eb187993c1af5136eab919988c85f79362b48ec7"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/HelmetForeground/K7.png",
+      "bytes": 47800,
+      "sha256": "d36cf02971f76669a8329e29841000800a46bcac867b556a165e7c53cf558b49"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/body-layers/NearHand/K7.png",
+      "bytes": 10127,
+      "sha256": "cde1e43d76bcd8ac9790c739e6fe9559b8bfa4b4ffd3e258f4197e5f066efa75"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K4K5K7-body-owner-candidate-v001/protection-masks/FarHandWarmHullHeuristic/K7.png",
+      "bytes": 812,
+      "sha256": "5c38bf76e0fb510c753d12513854a840a985f96011bdda10a044563ccd33a0ab"
+    }
+  ],
+  "images_viewed": false,
+  "new_art_generation_calls": 0,
+  "wear_fit_accepted": false,
+  "runtime_imported": false,
+  "FinalAccepted": false,
+  "open": [
+    "All body-owner semantic boundaries and existing component orientation need Root View after F/E retention.",
+    "K4 local foot positions remain offset versusK3; no corrective X move or native foot-lock acceptance.",
+    "Far hand protection uses supplied heuristic; numeric clear does not prove full hand silhouette.",
+    "Source-over at owner boundaries is measured using supplied masks; no GPU/resource/native optical claim.",
+    "IndependentSword is omitted and Grip/Axis unapproved; no motion/audio/complete equipment unit claim.",
+    "Canonical K7 Ready0 shoulder overhang is retained unchanged, not trimmed or refitted to improve numeric overlap."
+  ]
+}

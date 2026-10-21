@@ -1,0 +1,37 @@
+            // Observe only the actual placement above; a blocked commit remains Present.
+            // This is independent of AudioScope/Eligible and never dispatches a cue.
+            const auto& PlacementAction=AudioSkill.Action;
+            if(!IsRunInstallGated()&&Fighter==PlayerFighter&&Fighter->IsEquipmentBound()&&!Fighter->bDead
+                &&AudioView.Bound&&AudioView.RunGuid.IsValid()&&AudioView.RoomInstanceId&&AudioView.Revision
+                &&Fighter->GetRuntimeEntityId()==AudioView.OwnerId&&AudioView.OwnerId
+                &&WeaponWorld.RunGuid==AudioView.RunGuid&&WeaponWorld.RoomInstanceId==AudioView.RoomInstanceId
+                &&AudioSkill.Time==SimulationTime&&E.AtTime>=SkillBatchFrom&&E.AtTime<=SkillBatchTo
+                &&Fighter->JumpHeight==0.f&&Fighter->JumpVelocity==0.f&&AudioSkill.Budget.Grounded
+                &&!AudioSkill.Budget.Dead&&Fighter->GetMeleeCombatState().Grounded
+                &&E.EventId&&E.EventId==Fighter->LastSkillEventId&&E.EventId<AudioSkill.NextEventId
+                &&E.ActionId&&E.InstanceId&&E.ActionId==E.Action.ActionId&&E.InstanceId==E.Action.InstanceId
+                &&E.Action.Type==EAction::Skill&&E.Action.Weapon==DungeonContentCombat::EWeapon::SWD001
+                &&E.Action.Active&&E.Action.Locked&&!E.Action.StartedAirborne&&E.Action.ForwardStepIssued
+                &&PlacementAction.Type==EAction::Skill&&PlacementAction.Weapon==E.Action.Weapon
+                &&PlacementAction.Active&&PlacementAction.Locked&&!PlacementAction.StartedAirborne
+                &&PlacementAction.ForwardStepIssued&&PlacementAction.Terminal!=EEvent::Interrupted
+                &&PlacementAction.ActionId==E.ActionId&&PlacementAction.InstanceId==E.InstanceId
+                &&PlacementAction.Start==E.Action.Start&&PlacementAction.ActiveAt==E.AtTime&&E.Action.ActiveAt==E.AtTime
+                &&std::isfinite(SimulationTime)&&std::isfinite(E.AtTime)&&E.AtTime>=0.&&E.AtTime<=SimulationTime
+                &&std::isfinite(E.ForwardStep)&&E.ForwardStep!=0.
+                &&std::isfinite(AudioBefore.X)&&std::isfinite(AudioBefore.Y)
+                &&std::isfinite(AudioAfter.X)&&std::isfinite(AudioAfter.Y))
+            {
+                FDungeonWeaponForwardStepPlacementV001 Placement;
+                Placement.Present=true;Placement.GroundedAtCommit=Fighter->JumpHeight==0.f&&Fighter->JumpVelocity==0.f
+                    &&AudioSkill.Budget.Grounded&&Fighter->GetMeleeCombatState().Grounded;
+                Placement.RunGuid=AudioView.RunGuid;Placement.RoomInstanceId=AudioView.RoomInstanceId;
+                Placement.OwnerId=Fighter->GetRuntimeEntityId();Placement.ActionId=E.ActionId;Placement.InstanceId=E.InstanceId;
+                Placement.EventId=E.EventId;Placement.SubhitId=E.SubhitId;Placement.Kind=E.Kind;Placement.Weapon=E.Action.Weapon;
+                Placement.PresentationEpoch=RunPresentationEpoch;Placement.RunRestartSerial=RunRestartSerial;
+                Placement.EquipmentRevisionAtCommit=AudioView.Revision;Placement.ActionStart=E.Action.Start;
+                Placement.AtTime=E.AtTime;Placement.ObservedSimulationTime=SimulationTime;
+                Placement.RequestedSignedDistance=E.ForwardStep;Placement.Before=AudioBefore;Placement.After=AudioAfter;
+                Placement.CommittedDelta=AudioAfter-AudioBefore;
+                LatestWeaponForwardStepPlacementV001=Placement;
+            }

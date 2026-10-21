@@ -1,0 +1,42 @@
+{
+  "schema": "swd-native-observer-exact-seams-v002",
+  "operations": [
+    {
+      "target": "UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "kind": "insert_after",
+      "anchor": "#include \"DungeonHeroLandingPriorityProbeV001.h\"",
+      "text": "\r\n#include \"DungeonSwdForwardStepProbeV002.h\""
+    },
+    {
+      "target": "UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "kind": "insert_before",
+      "anchor": "    else if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonHeroLandingPriorityProofV001\")))\r\n",
+      "text": "    else if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonSwdForwardStepProofV002\")))\r\n        GetWorld()->SpawnActor<ADungeonSwdForwardStepProbeV002>();\r\n"
+    },
+    {
+      "target": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "kind": "insert_before",
+      "anchor": "        if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonHeroAirDiskRestoreProofV001\")))return;\r\n",
+      "text": "        if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonSwdForwardStepProofV002\")))return;\r\n"
+    }
+  ],
+  "new_files": [
+    "UnrealGame/Source/CodexDungeon/DungeonSwdForwardStepProbeV002.cpp",
+    "UnrealGame/Source/CodexDungeon/DungeonSwdForwardStepProbeV002.h"
+  ],
+  "existing_source_semantics": "Only V002 opt-in observer dispatch/old ContentProbe suppression. Compose exact inserts; never copy whole old HUD. Pilot is explicit -DungeonSwdForwardStepPilotV002 and cannot claim acceptance.",
+  "new_source_files_count": 2,
+  "baseline_files": {
+    "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp": {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": 124031,
+      "sha256": "72f91ee3c142892a655677ba2ae079475f5d14787609ca3f6949065b77b46b15"
+    },
+    "UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp": {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "bytes": 152946,
+      "sha256": "121dcf199de27c15673cec2645d4b0db804989fad67a737558d7185691a422f0"
+    }
+  },
+  "strict_inverse_original_bytes_exact": true
+}

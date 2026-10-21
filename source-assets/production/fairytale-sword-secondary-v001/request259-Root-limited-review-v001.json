@@ -1,0 +1,41 @@
+{
+  "schema": "K259-Root-limited-static-review-v001",
+  "utc": "2026-10-18T22:10:51.001689+00:00",
+  "actual_views": [
+    "E655-retained-K0-aligned512",
+    "E655-retained-K3-aligned512",
+    "E656-retained-ready-anchor1254"
+  ],
+  "status": "REJECT_LOWER_BODY_WIDTH_DRIFT_KEEP_RAW_AND_UPPER_POSE_REFERENCE",
+  "facts": {
+    "hard_body_widths": [
+      267,
+      274,
+      276,
+      287
+    ],
+    "reference_width": 213,
+    "hard_sole6_widths": [
+      240,
+      239,
+      240,
+      259
+    ],
+    "reference_sole6_width": 184,
+    "shared_scale": "512/627",
+    "integer_Y_shifts": [
+      -6,
+      -6,
+      2,
+      2
+    ]
+  },
+  "inference": "Stable approximate helmet core but wider legs/boots/stance. Do not shrink full body or individual-fit frames to hide drift.",
+  "risk": "Static pose only; no armor/sword attachment, runtime, motion, audio or formal acceptance.",
+  "preservation": [
+    "E655",
+    "E656"
+  ],
+  "runtime_imported": false,
+  "formal_complete_units": 0
+}

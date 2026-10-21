@@ -1,0 +1,58 @@
+{
+  "schema": "standard-sprite-tool-nonuniform-timing-diagnosis-v1",
+  "first_run_exit_code": 1,
+  "first_run_assertion": "runtime['animation']['rows'][state]['durations_ms'] == durations",
+  "standard_command_exit_codes_before_assertion": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "request_durations_ms": [
+    85,
+    85,
+    60,
+    60,
+    155,
+    155
+  ],
+  "actual_atlas_durations_ms": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "actual_gif_durations_ms": [
+    100,
+    100,
+    100,
+    100,
+    100,
+    100
+  ],
+  "compose_implementation": {
+    "path": "C:/Users/22499/.codex/skills/sprite-gen/sprite_gen/compose/compose_atlas.py",
+    "bytes": 17740,
+    "sha256": "fe6ab8ba853bf3173d24d2ccd9fcfa3b66282ccbf077efd756d376807c5d6dea"
+  },
+  "compose_source_lines": [
+    216,
+    227
+  ],
+  "preview_implementation": {
+    "path": "C:/Users/22499/.codex/skills/sprite-gen/sprite_gen/qa/preview.py",
+    "bytes": 6442,
+    "sha256": "d9def42272bab8b62cea7b76dad7fc938ba6985f29c715b1eae5c07553307fbd"
+  },
+  "preview_source_lines": [
+    127,
+    134
+  ],
+  "finding": "Installed standard compose/preview derive equal durations from fps and do not honor this request nonuniform array.",
+  "installed_tools_modified": false,
+  "pixels_modified_to_repair": false,
+  "preview_retimed": false,
+  "motion_rhythm_accepted": false
+}

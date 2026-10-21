@@ -1,0 +1,23 @@
+bool ADungeonGameMode::QueryWeaponForwardStepPlacementV001(FDungeonWeaponForwardStepPlacementV001& Out) const
+{
+    Out={};
+    const auto* Fighter=PlayerFighter.Get();
+    if(IsRunInstallGated()||!IsValid(Fighter)||Fighter->bDead||!Fighter->IsEquipmentBound())return false;
+    const auto& W=LatestWeaponForwardStepPlacementV001;const auto& V=GetEquipmentView();
+    const auto& S=Fighter->GetWeaponActionsState();const auto& A=S.Action;
+    if(!W.Present||!W.GroundedAtCommit||!V.Bound||!V.RunGuid.IsValid()
+        ||W.RunGuid!=V.RunGuid||W.RoomInstanceId!=V.RoomInstanceId||!W.RoomInstanceId
+        ||W.OwnerId!=V.OwnerId||!W.OwnerId||Fighter->GetRuntimeEntityId()!=W.OwnerId
+        ||WeaponWorld.RunGuid!=W.RunGuid||WeaponWorld.RoomInstanceId!=W.RoomInstanceId
+        ||W.PresentationEpoch!=RunPresentationEpoch||W.RunRestartSerial!=RunRestartSerial
+        ||W.Kind!=DungeonWeaponActions::EEvent::ForwardStep||W.Weapon!=DungeonContentCombat::EWeapon::SWD001
+        ||!W.EventId||!W.ActionId||!W.InstanceId||W.EventId>=S.NextEventId||W.EventId>Fighter->LastSkillEventId
+        ||S.Budget.Dead||A.Type!=DungeonWeaponActions::EAction::Skill||A.Weapon!=W.Weapon
+        ||!A.Active||!A.Locked||A.StartedAirborne||!A.ForwardStepIssued||A.Terminal==DungeonWeaponActions::EEvent::Interrupted
+        ||A.ActionId!=W.ActionId||A.InstanceId!=W.InstanceId||A.Start!=W.ActionStart||A.ActiveAt!=W.AtTime
+        ||!std::isfinite(SimulationTime)||S.Time!=SimulationTime||SimulationTime<W.AtTime||SimulationTime>=A.End
+        ||!std::isfinite(W.ObservedSimulationTime)||W.ObservedSimulationTime<W.AtTime||W.ObservedSimulationTime>SimulationTime)
+        return false;
+    Out=W;return true;
+}
+

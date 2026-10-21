@@ -1,0 +1,1042 @@
+{
+  "schema": "request261-uniform-extraction-numeric-QC-v001",
+  "created_utc": "2026-10-18T22:18:09.331284+00:00",
+  "source_label": "request261",
+  "actual_raw_size": [
+    1254,
+    1254
+  ],
+  "requested_raw_size": [
+    1254,
+    1254
+  ],
+  "actual_grid": [
+    2,
+    2
+  ],
+  "actual_raw_cell": [
+    627,
+    627
+  ],
+  "output_cell": [
+    512,
+    512
+  ],
+  "inputs": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/requests/request261-v001/raw/K4to7-body-raw.png",
+      "bytes": 1572312,
+      "sha256": "b17d47f158842ac3e54caab74496df1bf0bb2d0205e7b7c764b18a77040fc033"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/ready-body-master.png",
+      "bytes": 121133,
+      "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/accepted-J1-body-identity.png",
+      "bytes": 260407,
+      "sha256": "43454c2982daf19d577497dd61a792b02ed3fb9aaafd543614fca591a1db60e2"
+    },
+    {
+      "path": "C:/Users/22499/.codex/skills/sprite-gen/sprite_gen/frames/extract.py",
+      "bytes": 174274,
+      "sha256": "f2a7902f01069668340d14217bd05c777f5c01853284102e211aba1013a45539"
+    },
+    {
+      "path": "C:/Users/22499/.codex/skills/sprite-gen/sprite_gen/_deps.py",
+      "bytes": 2797,
+      "sha256": "173837b10110d734c8453728438def2d77d2fb2dddba34093af32838191ff01e"
+    }
+  ],
+  "runtime": {
+    "interpreter": "F:\\Ourgame\\tools\\runtime\\asset-gen\\Scripts\\python.exe",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "Pillow": "12.3.0",
+    "numpy": "2.5.3"
+  },
+  "crop_reassembly_RGB_pixel_exact": true,
+  "original_RGB_pixel_sha256": "c35409968e29578cbd054f59ccdeecd2a8953e4e8036fa48ea5ab0273b1afca0",
+  "all_frames_same_scale": 0.8165869218500797,
+  "all_x_shifts_zero": true,
+  "only_per_frame_y_integer_translation": true,
+  "chroma": {
+    "key": [
+      255,
+      0,
+      255
+    ],
+    "threshold": 96.0,
+    "fringe_threshold": 180.0,
+    "fringe_delta": 18.0,
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.0,
+    "deep_opaque_RGB_changed": 0,
+    "verified_original_sprite_gen_primitive": true
+  },
+  "edge_cleanup": {
+    "policy": "uniform alpha1..8→RGBA0 only, no RGB/alpha change above8",
+    "alpha128_geometry_unchanged": true
+  },
+  "references": {
+    "Ready": {
+      "pin": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/ready-body-master.png",
+        "bytes": 121133,
+        "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+      },
+      "stats": {
+        "bbox_alpha1": [
+          149,
+          49,
+          362,
+          464
+        ],
+        "bbox_alpha128": [
+          149,
+          49,
+          362,
+          464
+        ],
+        "alpha_nonzero": 54088,
+        "alpha_ge128": 51326,
+        "soft_alpha": 5697,
+        "edge_nonzero": 0
+      },
+      "proxies": {
+        "heuristic_only": true,
+        "helmet_warm_upper55_largest3": [
+          {
+            "area": 11214,
+            "bbox": [
+              173,
+              89,
+              341,
+              231
+            ],
+            "width": 168,
+            "height": 142
+          },
+          {
+            "area": 667,
+            "bbox": [
+              235,
+              54,
+              272,
+              87
+            ],
+            "width": 37,
+            "height": 33
+          },
+          {
+            "area": 514,
+            "bbox": [
+              279,
+              170,
+              302,
+              199
+            ],
+            "width": 23,
+            "height": 29
+          }
+        ],
+        "lower60_silhouette_largest2": [
+          {
+            "area": 4102,
+            "bbox": [
+              259,
+              404,
+              354,
+              460
+            ],
+            "width": 95,
+            "height": 56
+          },
+          {
+            "area": 3600,
+            "bbox": [
+              149,
+              404,
+              224,
+              464
+            ],
+            "width": 75,
+            "height": 60
+          }
+        ],
+        "lower6_solid_span": [
+          158,
+          342
+        ],
+        "lower6_solid_span_width": 184,
+        "lower6_pixels": 338,
+        "physical_helmet_boot_size": "OPEN_not_segmented",
+        "physical_sole_contact": "OPEN_graphic_lower_contour_only"
+      }
+    },
+    "accepted_J1": {
+      "pin": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/accepted-J1-body-identity.png",
+        "bytes": 260407,
+        "sha256": "43454c2982daf19d577497dd61a792b02ed3fb9aaafd543614fca591a1db60e2"
+      },
+      "stats": {
+        "bbox_alpha1": [
+          132,
+          85,
+          373,
+          464
+        ],
+        "bbox_alpha128": [
+          133,
+          85,
+          373,
+          464
+        ],
+        "alpha_nonzero": 52618,
+        "alpha_ge128": 51608,
+        "soft_alpha": 1327,
+        "edge_nonzero": 0
+      },
+      "proxies": {
+        "heuristic_only": true,
+        "helmet_warm_upper55_largest3": [
+          {
+            "area": 12082,
+            "bbox": [
+              177,
+              121,
+              343,
+              259
+            ],
+            "width": 166,
+            "height": 138
+          },
+          {
+            "area": 2191,
+            "bbox": [
+              136,
+              189,
+              182,
+              252
+            ],
+            "width": 46,
+            "height": 63
+          },
+          {
+            "area": 747,
+            "bbox": [
+              228,
+              89,
+              268,
+              120
+            ],
+            "width": 40,
+            "height": 31
+          }
+        ],
+        "lower60_silhouette_largest2": [
+          {
+            "area": 4128,
+            "bbox": [
+              273,
+              404,
+              371,
+              459
+            ],
+            "width": 98,
+            "height": 55
+          },
+          {
+            "area": 3687,
+            "bbox": [
+              147,
+              404,
+              227,
+              464
+            ],
+            "width": 80,
+            "height": 60
+          }
+        ],
+        "lower6_solid_span": [
+          147,
+          358
+        ],
+        "lower6_solid_span_width": 211,
+        "lower6_pixels": 395,
+        "physical_helmet_boot_size": "OPEN_not_segmented",
+        "physical_sole_contact": "OPEN_graphic_lower_contour_only"
+      }
+    }
+  },
+  "frames": [
+    {
+      "frame": 4,
+      "raw_crop_box": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "raw_pixel_sha256": "bc4dc470208e3a3920f8d886ff47957fb64fd18f990b113ecc0585cc3102db7e",
+      "raw627": {
+        "bbox_alpha1": [
+          105,
+          77,
+          498,
+          582
+        ],
+        "bbox_alpha128": [
+          105,
+          78,
+          497,
+          582
+        ],
+        "alpha_nonzero": 97979,
+        "alpha_ge128": 97252,
+        "soft_alpha": 2573,
+        "edge_nonzero": 0
+      },
+      "uniform512_before_edge": {
+        "bbox_alpha1": [
+          83,
+          60,
+          409,
+          478
+        ],
+        "bbox_alpha128": [
+          86,
+          63,
+          406,
+          475
+        ],
+        "alpha_nonzero": 68112,
+        "alpha_ge128": 64754,
+        "soft_alpha": 6975,
+        "edge_nonzero": 0
+      },
+      "edgeclean512_before_shift": {
+        "bbox_alpha1": [
+          85,
+          63,
+          407,
+          476
+        ],
+        "bbox_alpha128": [
+          86,
+          63,
+          406,
+          475
+        ],
+        "alpha_nonzero": 66105,
+        "alpha_ge128": 64754,
+        "soft_alpha": 4968,
+        "edge_nonzero": 0
+      },
+      "aligned512": {
+        "bbox_alpha1": [
+          85,
+          51,
+          407,
+          464
+        ],
+        "bbox_alpha128": [
+          86,
+          51,
+          406,
+          463
+        ],
+        "alpha_nonzero": 66105,
+        "alpha_ge128": 64754,
+        "soft_alpha": 4968,
+        "edge_nonzero": 0
+      },
+      "transform": {
+        "scale_numerator": 512,
+        "scale_denominator": 627,
+        "scale": 0.8165869218500797,
+        "resampler": "Pillow LANCZOS RGBA premultiplied-alpha resize",
+        "source_center_mapping": "source=(destination+0.5)*627/512-0.5",
+        "x_shift": 0,
+        "y_integer_shift": -12,
+        "subject_bbox_fit": false,
+        "per_frame_scale": false,
+        "anatomical_warp": false
+      },
+      "raw_graphic_foot_boundary_alpha1": 582,
+      "raw_graphic_foot_boundary_alpha128": 582,
+      "ideal_scaled_raw_alpha1_boundary": 475.2535885167464,
+      "aligned_graphic_foot_boundary_alpha1": 464,
+      "aligned_graphic_foot_boundary_alpha128": 463,
+      "raw_RGB_unmixed_foreground_pixels": 2573,
+      "deep_opaque_RGB_changed": 0,
+      "low_alpha_1to8_pixels_zeroed": 2007,
+      "opaque_footprint_unchanged_by_edgecleanup": true,
+      "alpha_mass_preserved_by_y_translation": true,
+      "actual_solid_width": 320,
+      "actual_solid_height": 412,
+      "proxies": {
+        "heuristic_only": true,
+        "helmet_warm_upper55_largest3": [
+          {
+            "area": 13797,
+            "bbox": [
+              220,
+              91,
+              401,
+              243
+            ],
+            "width": 181,
+            "height": 152
+          },
+          {
+            "area": 2688,
+            "bbox": [
+              90,
+              203,
+              184,
+              272
+            ],
+            "width": 94,
+            "height": 69
+          },
+          {
+            "area": 821,
+            "bbox": [
+              293,
+              56,
+              334,
+              90
+            ],
+            "width": 41,
+            "height": 34
+          }
+        ],
+        "lower60_silhouette_largest2": [
+          {
+            "area": 4864,
+            "bbox": [
+              270,
+              403,
+              380,
+              460
+            ],
+            "width": 110,
+            "height": 57
+          },
+          {
+            "area": 4367,
+            "bbox": [
+              116,
+              403,
+              210,
+              463
+            ],
+            "width": 94,
+            "height": 60
+          }
+        ],
+        "lower6_solid_span": [
+          127,
+          369
+        ],
+        "lower6_solid_span_width": 242,
+        "lower6_pixels": 446,
+        "physical_helmet_boot_size": "OPEN_not_segmented",
+        "physical_sole_contact": "OPEN_graphic_lower_contour_only"
+      },
+      "comparison_to_Ready": {
+        "solid_width_ratio": 1.5023474178403755,
+        "solid_height_ratio": 0.9927710843373494,
+        "lower6_span_ratio": 1.315217391304348
+      },
+      "comparison_to_accepted_J1": {
+        "solid_width_ratio": 1.3333333333333333,
+        "solid_height_ratio": 1.087071240105541,
+        "lower6_span_ratio": 1.146919431279621
+      },
+      "width_pose_or_scale_drift_warning": true,
+      "authored_x90_422_safe_envelope_violation": true,
+      "visual_or_runtime_accepted": false
+    },
+    {
+      "frame": 5,
+      "raw_crop_box": [
+        627,
+        0,
+        1254,
+        627
+      ],
+      "raw_pixel_sha256": "5598dbf516268f4f103fa2323311699472029a311d00b1fb8b80d67423da3082",
+      "raw627": {
+        "bbox_alpha1": [
+          106,
+          76,
+          435,
+          582
+        ],
+        "bbox_alpha128": [
+          106,
+          76,
+          435,
+          582
+        ],
+        "alpha_nonzero": 84216,
+        "alpha_ge128": 83533,
+        "soft_alpha": 2353,
+        "edge_nonzero": 0
+      },
+      "uniform512_before_edge": {
+        "bbox_alpha1": [
+          84,
+          60,
+          358,
+          478
+        ],
+        "bbox_alpha128": [
+          87,
+          62,
+          355,
+          475
+        ],
+        "alpha_nonzero": 58715,
+        "alpha_ge128": 55618,
+        "soft_alpha": 6400,
+        "edge_nonzero": 0
+      },
+      "edgeclean512_before_shift": {
+        "bbox_alpha1": [
+          86,
+          62,
+          356,
+          476
+        ],
+        "bbox_alpha128": [
+          87,
+          62,
+          355,
+          475
+        ],
+        "alpha_nonzero": 56851,
+        "alpha_ge128": 55618,
+        "soft_alpha": 4536,
+        "edge_nonzero": 0
+      },
+      "aligned512": {
+        "bbox_alpha1": [
+          86,
+          50,
+          356,
+          464
+        ],
+        "bbox_alpha128": [
+          87,
+          50,
+          355,
+          463
+        ],
+        "alpha_nonzero": 56851,
+        "alpha_ge128": 55618,
+        "soft_alpha": 4536,
+        "edge_nonzero": 0
+      },
+      "transform": {
+        "scale_numerator": 512,
+        "scale_denominator": 627,
+        "scale": 0.8165869218500797,
+        "resampler": "Pillow LANCZOS RGBA premultiplied-alpha resize",
+        "source_center_mapping": "source=(destination+0.5)*627/512-0.5",
+        "x_shift": 0,
+        "y_integer_shift": -12,
+        "subject_bbox_fit": false,
+        "per_frame_scale": false,
+        "anatomical_warp": false
+      },
+      "raw_graphic_foot_boundary_alpha1": 582,
+      "raw_graphic_foot_boundary_alpha128": 582,
+      "ideal_scaled_raw_alpha1_boundary": 475.2535885167464,
+      "aligned_graphic_foot_boundary_alpha1": 464,
+      "aligned_graphic_foot_boundary_alpha128": 463,
+      "raw_RGB_unmixed_foreground_pixels": 2353,
+      "deep_opaque_RGB_changed": 0,
+      "low_alpha_1to8_pixels_zeroed": 1864,
+      "opaque_footprint_unchanged_by_edgecleanup": true,
+      "alpha_mass_preserved_by_y_translation": true,
+      "actual_solid_width": 268,
+      "actual_solid_height": 413,
+      "proxies": {
+        "heuristic_only": true,
+        "helmet_warm_upper55_largest3": [
+          {
+            "area": 12876,
+            "bbox": [
+              174,
+              88,
+              350,
+              234
+            ],
+            "width": 176,
+            "height": 146
+          },
+          {
+            "area": 775,
+            "bbox": [
+              246,
+              55,
+              286,
+              88
+            ],
+            "width": 40,
+            "height": 33
+          },
+          {
+            "area": 703,
+            "bbox": [
+              113,
+              244,
+              169,
+              278
+            ],
+            "width": 56,
+            "height": 34
+          }
+        ],
+        "lower60_silhouette_largest2": [
+          {
+            "area": 4654,
+            "bbox": [
+              250,
+              403,
+              355,
+              460
+            ],
+            "width": 105,
+            "height": 57
+          },
+          {
+            "area": 4125,
+            "bbox": [
+              120,
+              403,
+              204,
+              463
+            ],
+            "width": 84,
+            "height": 60
+          }
+        ],
+        "lower6_solid_span": [
+          130,
+          345
+        ],
+        "lower6_solid_span_width": 215,
+        "lower6_pixels": 426,
+        "physical_helmet_boot_size": "OPEN_not_segmented",
+        "physical_sole_contact": "OPEN_graphic_lower_contour_only"
+      },
+      "comparison_to_Ready": {
+        "solid_width_ratio": 1.2582159624413145,
+        "solid_height_ratio": 0.9951807228915662,
+        "lower6_span_ratio": 1.1684782608695652
+      },
+      "comparison_to_accepted_J1": {
+        "solid_width_ratio": 1.1166666666666667,
+        "solid_height_ratio": 1.0897097625329815,
+        "lower6_span_ratio": 1.018957345971564
+      },
+      "width_pose_or_scale_drift_warning": true,
+      "authored_x90_422_safe_envelope_violation": true,
+      "visual_or_runtime_accepted": false
+    },
+    {
+      "frame": 6,
+      "raw_crop_box": [
+        0,
+        627,
+        627,
+        1254
+      ],
+      "raw_pixel_sha256": "1ccd0e94d56815d15112147d9b7ca9181659bd6c626cb826df004f042a657173",
+      "raw627": {
+        "bbox_alpha1": [
+          181,
+          34,
+          498,
+          559
+        ],
+        "bbox_alpha128": [
+          181,
+          35,
+          498,
+          558
+        ],
+        "alpha_nonzero": 89684,
+        "alpha_ge128": 88989,
+        "soft_alpha": 2351,
+        "edge_nonzero": 0
+      },
+      "uniform512_before_edge": {
+        "bbox_alpha1": [
+          145,
+          25,
+          409,
+          459
+        ],
+        "bbox_alpha128": [
+          148,
+          28,
+          406,
+          456
+        ],
+        "alpha_nonzero": 62477,
+        "alpha_ge128": 59257,
+        "soft_alpha": 6599,
+        "edge_nonzero": 0
+      },
+      "edgeclean512_before_shift": {
+        "bbox_alpha1": [
+          147,
+          28,
+          407,
+          457
+        ],
+        "bbox_alpha128": [
+          148,
+          28,
+          406,
+          456
+        ],
+        "alpha_nonzero": 60526,
+        "alpha_ge128": 59257,
+        "soft_alpha": 4648,
+        "edge_nonzero": 0
+      },
+      "aligned512": {
+        "bbox_alpha1": [
+          147,
+          35,
+          407,
+          464
+        ],
+        "bbox_alpha128": [
+          148,
+          35,
+          406,
+          463
+        ],
+        "alpha_nonzero": 60526,
+        "alpha_ge128": 59257,
+        "soft_alpha": 4648,
+        "edge_nonzero": 0
+      },
+      "transform": {
+        "scale_numerator": 512,
+        "scale_denominator": 627,
+        "scale": 0.8165869218500797,
+        "resampler": "Pillow LANCZOS RGBA premultiplied-alpha resize",
+        "source_center_mapping": "source=(destination+0.5)*627/512-0.5",
+        "x_shift": 0,
+        "y_integer_shift": 7,
+        "subject_bbox_fit": false,
+        "per_frame_scale": false,
+        "anatomical_warp": false
+      },
+      "raw_graphic_foot_boundary_alpha1": 559,
+      "raw_graphic_foot_boundary_alpha128": 558,
+      "ideal_scaled_raw_alpha1_boundary": 456.4720893141946,
+      "aligned_graphic_foot_boundary_alpha1": 464,
+      "aligned_graphic_foot_boundary_alpha128": 463,
+      "raw_RGB_unmixed_foreground_pixels": 2351,
+      "deep_opaque_RGB_changed": 0,
+      "low_alpha_1to8_pixels_zeroed": 1951,
+      "opaque_footprint_unchanged_by_edgecleanup": true,
+      "alpha_mass_preserved_by_y_translation": true,
+      "actual_solid_width": 258,
+      "actual_solid_height": 428,
+      "proxies": {
+        "heuristic_only": true,
+        "helmet_warm_upper55_largest3": [
+          {
+            "area": 12448,
+            "bbox": [
+              182,
+              89,
+              359,
+              218
+            ],
+            "width": 177,
+            "height": 129
+          },
+          {
+            "area": 779,
+            "bbox": [
+              252,
+              40,
+              292,
+              73
+            ],
+            "width": 40,
+            "height": 33
+          },
+          {
+            "area": 577,
+            "bbox": [
+              295,
+              155,
+              319,
+              186
+            ],
+            "width": 24,
+            "height": 31
+          }
+        ],
+        "lower60_silhouette_largest2": [
+          {
+            "area": 4616,
+            "bbox": [
+              266,
+              403,
+              370,
+              460
+            ],
+            "width": 104,
+            "height": 57
+          },
+          {
+            "area": 4182,
+            "bbox": [
+              148,
+              403,
+              233,
+              463
+            ],
+            "width": 85,
+            "height": 60
+          }
+        ],
+        "lower6_solid_span": [
+          159,
+          362
+        ],
+        "lower6_solid_span_width": 203,
+        "lower6_pixels": 424,
+        "physical_helmet_boot_size": "OPEN_not_segmented",
+        "physical_sole_contact": "OPEN_graphic_lower_contour_only"
+      },
+      "comparison_to_Ready": {
+        "solid_width_ratio": 1.2112676056338028,
+        "solid_height_ratio": 1.0313253012048194,
+        "lower6_span_ratio": 1.1032608695652173
+      },
+      "comparison_to_accepted_J1": {
+        "solid_width_ratio": 1.075,
+        "solid_height_ratio": 1.129287598944591,
+        "lower6_span_ratio": 0.9620853080568721
+      },
+      "width_pose_or_scale_drift_warning": true,
+      "authored_x90_422_safe_envelope_violation": false,
+      "visual_or_runtime_accepted": false
+    },
+    {
+      "frame": 7,
+      "raw_crop_box": [
+        627,
+        627,
+        1254,
+        1254
+      ],
+      "raw_pixel_sha256": "e09db57e55ac479447ae8f8d79fb0efe2042e5eda885ad6c2ad821da7d374669",
+      "raw627": {
+        "bbox_alpha1": [
+          159,
+          34,
+          476,
+          559
+        ],
+        "bbox_alpha128": [
+          159,
+          35,
+          476,
+          558
+        ],
+        "alpha_nonzero": 89340,
+        "alpha_ge128": 88648,
+        "soft_alpha": 2377,
+        "edge_nonzero": 0
+      },
+      "uniform512_before_edge": {
+        "bbox_alpha1": [
+          127,
+          25,
+          391,
+          459
+        ],
+        "bbox_alpha128": [
+          130,
+          28,
+          389,
+          456
+        ],
+        "alpha_nonzero": 62237,
+        "alpha_ge128": 59050,
+        "soft_alpha": 6536,
+        "edge_nonzero": 0
+      },
+      "edgeclean512_before_shift": {
+        "bbox_alpha1": [
+          129,
+          27,
+          389,
+          457
+        ],
+        "bbox_alpha128": [
+          130,
+          28,
+          389,
+          456
+        ],
+        "alpha_nonzero": 60278,
+        "alpha_ge128": 59050,
+        "soft_alpha": 4577,
+        "edge_nonzero": 0
+      },
+      "aligned512": {
+        "bbox_alpha1": [
+          129,
+          34,
+          389,
+          464
+        ],
+        "bbox_alpha128": [
+          130,
+          35,
+          389,
+          463
+        ],
+        "alpha_nonzero": 60278,
+        "alpha_ge128": 59050,
+        "soft_alpha": 4577,
+        "edge_nonzero": 0
+      },
+      "transform": {
+        "scale_numerator": 512,
+        "scale_denominator": 627,
+        "scale": 0.8165869218500797,
+        "resampler": "Pillow LANCZOS RGBA premultiplied-alpha resize",
+        "source_center_mapping": "source=(destination+0.5)*627/512-0.5",
+        "x_shift": 0,
+        "y_integer_shift": 7,
+        "subject_bbox_fit": false,
+        "per_frame_scale": false,
+        "anatomical_warp": false
+      },
+      "raw_graphic_foot_boundary_alpha1": 559,
+      "raw_graphic_foot_boundary_alpha128": 558,
+      "ideal_scaled_raw_alpha1_boundary": 456.4720893141946,
+      "aligned_graphic_foot_boundary_alpha1": 464,
+      "aligned_graphic_foot_boundary_alpha128": 463,
+      "raw_RGB_unmixed_foreground_pixels": 2377,
+      "deep_opaque_RGB_changed": 0,
+      "low_alpha_1to8_pixels_zeroed": 1959,
+      "opaque_footprint_unchanged_by_edgecleanup": true,
+      "alpha_mass_preserved_by_y_translation": true,
+      "actual_solid_width": 259,
+      "actual_solid_height": 428,
+      "proxies": {
+        "heuristic_only": true,
+        "helmet_warm_upper55_largest3": [
+          {
+            "area": 12517,
+            "bbox": [
+              161,
+              89,
+              339,
+              218
+            ],
+            "width": 178,
+            "height": 129
+          },
+          {
+            "area": 771,
+            "bbox": [
+              232,
+              40,
+              272,
+              73
+            ],
+            "width": 40,
+            "height": 33
+          },
+          {
+            "area": 600,
+            "bbox": [
+              273,
+              155,
+              297,
+              186
+            ],
+            "width": 24,
+            "height": 31
+          }
+        ],
+        "lower60_silhouette_largest2": [
+          {
+            "area": 4601,
+            "bbox": [
+              246,
+              403,
+              350,
+              460
+            ],
+            "width": 104,
+            "height": 57
+          },
+          {
+            "area": 4106,
+            "bbox": [
+              130,
+              403,
+              213,
+              463
+            ],
+            "width": 83,
+            "height": 60
+          }
+        ],
+        "lower6_solid_span": [
+          141,
+          342
+        ],
+        "lower6_solid_span_width": 201,
+        "lower6_pixels": 430,
+        "physical_helmet_boot_size": "OPEN_not_segmented",
+        "physical_sole_contact": "OPEN_graphic_lower_contour_only"
+      },
+      "comparison_to_Ready": {
+        "solid_width_ratio": 1.215962441314554,
+        "solid_height_ratio": 1.0313253012048194,
+        "lower6_span_ratio": 1.0923913043478262
+      },
+      "comparison_to_accepted_J1": {
+        "solid_width_ratio": 1.0791666666666666,
+        "solid_height_ratio": 1.129287598944591,
+        "lower6_span_ratio": 0.95260663507109
+      },
+      "width_pose_or_scale_drift_warning": true,
+      "authored_x90_422_safe_envelope_violation": false,
+      "visual_or_runtime_accepted": false
+    }
+  ],
+  "technical_extraction_completed": true,
+  "technical_derivative_PNG_count": 24,
+  "creative_image_generation_calls": 0,
+  "images_viewed": false,
+  "armor_or_sword_drawn": false,
+  "Root_runtime_art_decision": "PENDING_Root_visual_review",
+  "scale_or_anatomy_acceptance": false,
+  "physical_helmet_boot_dimensions": "OPEN_heuristic_proxies_only",
+  "visual_review": "PENDING_Root_after_F_E_retention",
+  "runtime_imported": false,
+  "FinalAccepted": false
+}

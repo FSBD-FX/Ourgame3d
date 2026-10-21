@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-common-hero-sword-primary1-v002",
+    "description": "Canonical131 single near-hand sword BODY ONLY: Ready, load, diagonal cut, low forward followthrough, decelerate, Ready. Far hand remains visibly separate beside far waist in ALL six poses.",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "sword_primary_1": {
+      "frames": 6,
+      "fps": 10,
+      "loop": false,
+      "action": "Canonical131 single near-hand sword BODY ONLY: Ready, load, diagonal cut, low forward followthrough, decelerate, Ready. Far hand remains visibly separate beside far waist in ALL six poses.",
+      "durations_ms": [
+        85,
+        85,
+        60,
+        60,
+        155,
+        155
+      ]
+    }
+  },
+  "style": "Canonical131 only: grotesque hand-inked bell helmet, dark cloth, original brown hands and boots. Fixed three-quarter right camera, one-handed sword body only.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": false,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "request_number": 259,
+  "asset": "hero-SWD001-K-secondary-body-K0to3",
+  "status": "requested_not_yet_returned",
+  "source_event": "EV048",
+  "authorization_events": [
+    "EV-039",
+    "EV-040",
+    "EV-041",
+    "EV-042",
+    "EV-045",
+    "EV-046"
+  ],
+  "window_number": 11,
+  "requested_utc": "2026-10-18T21:58:29.521244+00:00",
+  "prompt_path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/requests/request259-v001/prompt.txt",
+  "prompt": "Create four NEW consecutive body poses for the SAME tiny armored dark-fairytale bell-helmet adventurer in the references. This is the first half K0,K1,K2,K3 of one purposeful advancing diagonal sword slash. The sword and removable armor are separate engine layers, so draw ONLY the complete unarmed gray-underclothes body with its existing bronze bell helmet, leather gloves, belt and boots.\n\nReference 1 is the accepted Ready master: it locks exact identity, rigid helmet volume, eye window, hand and boot scale, gray outfit, small chubby proportions and simplified painted line style. Reference 2 is the accepted raised gripping-arm body: use its closed-fist anatomy and same helmet/limb proportions, not its pose verbatim. Reference 3 is a repeated-master layout anchor, not the requested animation: keep its exact camera distance, invisible cell layout, standing-equivalent body scale, body root and sole line, but change each pose as described below.\n\nOutput exactly1024x1024, TWO ROWS TWO COLUMNS, four invisible512x512cells. Reading order top-left K0, top-right K1, bottom-left K2, bottom-right K3. Pure flat #FF00FF background, sharp clean subject edge, no shadows or ground. No labels, guides, borders, separators or drawn coordinates. Fixed three-quarter view facing RIGHT in every cell. Identical camera, helmet/hand/boot size and limb lengths across all four cells. Neutral standing extent is415 source pixels, helmet knob aroundy49, soles aroundy464. Every pose's sole contact remains on localy464 and pelvis stays aroundlocalx256; bend knees/hips naturally instead of resizing or sliding the whole character. A genuine compression may lower the head, but never enlarge the head or widen the stance to compensate. Body including open balancing hand stays inside localx90..422, all parts fully inside each cell.\n\nK0: begin from the accepted Ready low guard with a small grounded knee/hip compression and torso beginning to coil. Near gripping fist stays low in front of the waist, elbow comfortably bent; far empty hand relaxed open and clearly outside the torso. No attack contact yet. Maintain the master helmet, boot shape and narrow stance.\nK1: locked coiling anticipation. Weight on the rear boot, front knee softly bent. Raise the CLOSED near gripping fist beside the rear/outside of the helmet, near localx155,y215, elbow bent rather than punching straight. Helmet and fist have a clear air gap. Turn the chest slightly back while the far hand opens away from the body for balance. Same planted-foot contact centers as K0, no broad squat.\nK2: strongest preparation immediately before the step. A compact purposeful forward-ready coil, near shoulder drawn back and CLOSED fist slightly higher/back aroundlocalx150,y190; elbow remains bent and distinct, hand clear of the rigid helmet. Front leg ready to take weight, rear boot still planted. Helmet moves/tilts slightly with the torso but retains the exact master volume. Far open hand stays outside the torso so future separate chest armor will not cover the fingers. Do not move the entire body forward in the cell.\nK3: first active cutting posture AFTER the actual engine step. Front knee takes weight, rear heel lightly unloads, hips and shoulders turn into the advancing diagonal cut. Move the CLOSED near gripping fist diagonally from beside the helmet across the chest towardlocalx300,y300; flexible elbow and clear forearm, no straight spear-thrust arm. Torso leans purposefully forward, far empty hand trails outside/back for balance. The movement is a single diagonal downward cut, not a punch or second slash. Keep the body's authoring root and local foot baseline fixed; actual world movement is handled by the engine.\n\nFor all poses: a readable thumb curling around a future narrow sword grip and consistent knuckles; NO drawn hilt, blade, staff, handle cap, shield or held object. No orange/brown chest armor or pauldrons; those are separate removable layers. No human face, skin, hair, long nose, extra eyes or redesign. Preserve the sealed black face cavity with exactly two amber eyes, chipped blunt bell helmet with its small square top knob, short rounded limbs, leather boots/gloves, dark outlines and broad simple painted shapes. No slash arc, particles, dust, blur, floor, ground shadow, extra limbs, detached pieces, or realistic surface detail. Make a coherent readable four-pose progression, never four repeated neutral poses.\n",
+  "prompt_file_sha256": "2dbc874e18d84c5d40d3b32c5ff912bf5604f8f3c3ba6f61148c3c16c34760fd",
+  "reference_images": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/ready-body-master.png",
+      "bytes": 121133,
+      "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/accepted-J1-body-identity.png",
+      "bytes": 260407,
+      "sha256": "43454c2982daf19d577497dd61a792b02ed3fb9aaafd543614fca591a1db60e2"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/K-body-anchor-2x2.png",
+      "bytes": 224666,
+      "sha256": "5692f06b64d63e417492ecc0d7e1cdaedb46cef3978a92d199311bec15d24dce"
+    }
+  ],
+  "transparent_background": false,
+  "backend": "builtin-imagegen",
+  "external_api_calls": 0,
+  "host_fee_usd": null,
+  "raw_destination_planned": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/requests/request259-v001/raw/K0to3-body-raw.png",
+  "scope": "New first4of8 Kbody poses on accepted512/72px scale; armor/sword separate; no runtime until real extraction/partition/fit/import/native",
+  "formal_complete_units": 0,
+  "runtime_imported": false,
+  "complete_content_unit": false
+}

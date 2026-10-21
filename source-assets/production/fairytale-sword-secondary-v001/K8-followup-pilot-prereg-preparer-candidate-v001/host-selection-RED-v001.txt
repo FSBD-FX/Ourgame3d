@@ -1,0 +1,128 @@
+test_all_five_exact_frozen_routes_selected_without_mutating_template (__main__.Selection.test_all_five_exact_frozen_routes_selected_without_mutating_template) ... 
+  test_all_five_exact_frozen_routes_selected_without_mutating_template (__main__.Selection.test_all_five_exact_frozen_routes_selected_without_mutating_template) (case='full_left') ... FAIL
+  test_all_five_exact_frozen_routes_selected_without_mutating_template (__main__.Selection.test_all_five_exact_frozen_routes_selected_without_mutating_template) (case='partial_right') ... FAIL
+  test_all_five_exact_frozen_routes_selected_without_mutating_template (__main__.Selection.test_all_five_exact_frozen_routes_selected_without_mutating_template) (case='partial_left') ... FAIL
+  test_all_five_exact_frozen_routes_selected_without_mutating_template (__main__.Selection.test_all_five_exact_frozen_routes_selected_without_mutating_template) (case='blocked_zero_right') ... FAIL
+  test_all_five_exact_frozen_routes_selected_without_mutating_template (__main__.Selection.test_all_five_exact_frozen_routes_selected_without_mutating_template) (case='blocked_zero_left') ... FAIL
+test_case_facing_must_match_real_requested_side (__main__.Selection.test_case_facing_must_match_real_requested_side) ... FAIL
+test_repeated_fullright_and_unknown_case_rejected (__main__.Selection.test_repeated_fullright_and_unknown_case_rejected) ... 
+  test_repeated_fullright_and_unknown_case_rejected (__main__.Selection.test_repeated_fullright_and_unknown_case_rejected) (case='full_right') ... FAIL
+  test_repeated_fullright_and_unknown_case_rejected (__main__.Selection.test_repeated_fullright_and_unknown_case_rejected) (case='invented') ... FAIL
+  test_repeated_fullright_and_unknown_case_rejected (__main__.Selection.test_repeated_fullright_and_unknown_case_rejected) (case='none_full_left') ... FAIL
+test_verified_or_diagnostic_route_cannot_be_invented (__main__.Selection.test_verified_or_diagnostic_route_cannot_be_invented) ... 
+  test_verified_or_diagnostic_route_cannot_be_invented (__main__.Selection.test_verified_or_diagnostic_route_cannot_be_invented) (key='normal_route_native_verified') ... FAIL
+  test_verified_or_diagnostic_route_cannot_be_invented (__main__.Selection.test_verified_or_diagnostic_route_cannot_be_invented) (key='route_native_verification') ... FAIL
+  test_verified_or_diagnostic_route_cannot_be_invented (__main__.Selection.test_verified_or_diagnostic_route_cannot_be_invented) (key='enemy_diagnostic_used') ... FAIL
+
+======================================================================
+FAIL: test_all_five_exact_frozen_routes_selected_without_mutating_template (__main__.Selection.test_all_five_exact_frozen_routes_selected_without_mutating_template) (case='full_left')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-followup-pilot-prereg-preparer-candidate-v001\test-followup-selection-v001.py", line 11, in test_all_five_exact_frozen_routes_selected_without_mutating_template
+    with self.subTest(case=case):self.assertEqual(M.select_case(self.t,case),self.t['cases'][case])
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'facing': -1, 'normal_route_native_verif[160 chars]None}
+
+======================================================================
+FAIL: test_all_five_exact_frozen_routes_selected_without_mutating_template (__main__.Selection.test_all_five_exact_frozen_routes_selected_without_mutating_template) (case='partial_right')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-followup-pilot-prereg-preparer-candidate-v001\test-followup-selection-v001.py", line 11, in test_all_five_exact_frozen_routes_selected_without_mutating_template
+    with self.subTest(case=case):self.assertEqual(M.select_case(self.t,case),self.t['cases'][case])
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'facing': 1, 'normal_route_native_verifi[234 chars]None}
+
+======================================================================
+FAIL: test_all_five_exact_frozen_routes_selected_without_mutating_template (__main__.Selection.test_all_five_exact_frozen_routes_selected_without_mutating_template) (case='partial_left')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-followup-pilot-prereg-preparer-candidate-v001\test-followup-selection-v001.py", line 11, in test_all_five_exact_frozen_routes_selected_without_mutating_template
+    with self.subTest(case=case):self.assertEqual(M.select_case(self.t,case),self.t['cases'][case])
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'facing': -1, 'normal_route_native_verif[378 chars]None}
+
+======================================================================
+FAIL: test_all_five_exact_frozen_routes_selected_without_mutating_template (__main__.Selection.test_all_five_exact_frozen_routes_selected_without_mutating_template) (case='blocked_zero_right')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-followup-pilot-prereg-preparer-candidate-v001\test-followup-selection-v001.py", line 11, in test_all_five_exact_frozen_routes_selected_without_mutating_template
+    with self.subTest(case=case):self.assertEqual(M.select_case(self.t,case),self.t['cases'][case])
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'facing': 1, 'normal_route_native_verifi[233 chars]None}
+
+======================================================================
+FAIL: test_all_five_exact_frozen_routes_selected_without_mutating_template (__main__.Selection.test_all_five_exact_frozen_routes_selected_without_mutating_template) (case='blocked_zero_left')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-followup-pilot-prereg-preparer-candidate-v001\test-followup-selection-v001.py", line 11, in test_all_five_exact_frozen_routes_selected_without_mutating_template
+    with self.subTest(case=case):self.assertEqual(M.select_case(self.t,case),self.t['cases'][case])
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != {'facing': -1, 'normal_route_native_verif[377 chars]None}
+
+======================================================================
+FAIL: test_case_facing_must_match_real_requested_side (__main__.Selection.test_case_facing_must_match_real_requested_side)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-followup-pilot-prereg-preparer-candidate-v001\test-followup-selection-v001.py", line 22, in test_case_facing_must_match_real_requested_side
+    with self.assertRaises(M.NotReady):M.select_case(bad,'full_left')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_repeated_fullright_and_unknown_case_rejected (__main__.Selection.test_repeated_fullright_and_unknown_case_rejected) (case='full_right')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-followup-pilot-prereg-preparer-candidate-v001\test-followup-selection-v001.py", line 15, in test_repeated_fullright_and_unknown_case_rejected
+    with self.subTest(case=case),self.assertRaises(M.NotReady):M.select_case(self.t,case)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_repeated_fullright_and_unknown_case_rejected (__main__.Selection.test_repeated_fullright_and_unknown_case_rejected) (case='invented')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-followup-pilot-prereg-preparer-candidate-v001\test-followup-selection-v001.py", line 15, in test_repeated_fullright_and_unknown_case_rejected
+    with self.subTest(case=case),self.assertRaises(M.NotReady):M.select_case(self.t,case)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_repeated_fullright_and_unknown_case_rejected (__main__.Selection.test_repeated_fullright_and_unknown_case_rejected) (case='none_full_left')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-followup-pilot-prereg-preparer-candidate-v001\test-followup-selection-v001.py", line 15, in test_repeated_fullright_and_unknown_case_rejected
+    with self.subTest(case=case),self.assertRaises(M.NotReady):M.select_case(self.t,case)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_verified_or_diagnostic_route_cannot_be_invented (__main__.Selection.test_verified_or_diagnostic_route_cannot_be_invented) (key='normal_route_native_verified')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-followup-pilot-prereg-preparer-candidate-v001\test-followup-selection-v001.py", line 19, in test_verified_or_diagnostic_route_cannot_be_invented
+    with self.subTest(key=key),self.assertRaises(M.NotReady):M.select_case(bad,'full_left')
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_verified_or_diagnostic_route_cannot_be_invented (__main__.Selection.test_verified_or_diagnostic_route_cannot_be_invented) (key='route_native_verification')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-followup-pilot-prereg-preparer-candidate-v001\test-followup-selection-v001.py", line 19, in test_verified_or_diagnostic_route_cannot_be_invented
+    with self.subTest(key=key),self.assertRaises(M.NotReady):M.select_case(bad,'full_left')
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+======================================================================
+FAIL: test_verified_or_diagnostic_route_cannot_be_invented (__main__.Selection.test_verified_or_diagnostic_route_cannot_be_invented) (key='enemy_diagnostic_used')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "F:\Ourgame\source-assets\production\fairytale-sword-secondary-v001\K8-followup-pilot-prereg-preparer-candidate-v001\test-followup-selection-v001.py", line 19, in test_verified_or_diagnostic_route_cannot_be_invented
+    with self.subTest(key=key),self.assertRaises(M.NotReady):M.select_case(bad,'full_left')
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: NotReady not raised
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.012s
+
+FAILED (failures=12)

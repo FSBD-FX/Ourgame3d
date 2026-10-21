@@ -1,0 +1,44 @@
+{
+  "request_number": 261,
+  "asset": "hero-SWD001-K-secondary-body-K4to7",
+  "status": "requested_not_yet_returned",
+  "source_event": "EV048",
+  "authorization_events": [
+    "EV-039",
+    "EV-040",
+    "EV-041",
+    "EV-042",
+    "EV-045",
+    "EV-046"
+  ],
+  "window_number": 11,
+  "requested_utc": "2026-10-18T22:16:42.380861+00:00",
+  "prompt_path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/requests/request261-v001/prompt.txt",
+  "prompt": "Create the FOUR FOLLOWING body poses K4,K5,K6,K7 completing ONE advancing diagonal sword slash by the same tiny grotesque dark-fairytale bell-helmet adventurer.\n\nReference1 is the ORIGINAL accepted Ready master and is the primary identity, scale, glove/boot size and style authority. Reference2 is the first four poses of this SAME action after the narrow-stance correction: only use its bottom-right K3 pose as motion continuity into K4, while keeping the original master proportions. Reference3 is the fixed627-cell layout/scale/sole guide; its repeated neutral poses are not the requested action. Do not widen boots or legs relative to Reference1/3.\n\nOutput exactly1254x1254, TWO ROWS TWO COLUMNS of invisible627x627cells: K4 top-left, K5 top-right, K6 bottom-left, K7 bottom-right. Flat solid #FF00FF background, no floor, shadows, captions, grid or guide marks. Fixed three-quarter camera facing RIGHT. Identical rigid bell helmet size, short-limb lengths, glove and boot size and camera scale across all cells. Master-equivalent standing extent about508px per627cell; root localx313.5,y568. Foot soles stay near568 and feet stay compact at master contact centers aboutx229 and386. Do not slide the entire character inside cells or encode another world step. Small knee bend/rear heel lift is allowed, never a broad lunge or big squat.\n\nK4: the decisive LOW diagonal cutting follow-through, immediately after Reference2 bottom-right K3. Near CLOSED gripping fist continues on a smooth curved downward-forward arc to localx420,y420 (approximately342,343 on512source), clearly in front of the lower chest/waist. Elbow remains softly bent, shoulder rotates through, torso still slightly forward with the same front-weighted compact feet as K3. Rear empty far hand trails behind outside the torso. This is the last active pose of the SAME slash, not a second hit, punch or spear thrust. Show a complete anatomically coherent arm; keep glove the master size.\n\nK5: early recovery, retain the low closed sword grip aroundlocalx380,y425, soften the forward lean and begin unwinding the chest. Elbow folds toward the waist naturally. Far hand moves back toward relaxed balance. Front foot stays planted, rear heel settles, no second step or windup.\n\nK6: late recovery, torso mostly upright, knees softly settling, CLOSED near grip smoothly returns toward the accepted low Ready guard aroundlocalx270,y395. Far open hand returns to the master position without crossing the near grip. Same compact planted boots and exact master helmet proportions; no overhead backswing, new strike or open weapon hand.\n\nK7: fully settle into the ORIGINAL accepted Ready master body pose from Reference1, with its exact compact stance, helmet tilt/size, bent near arm and low closed gripping fist. Match its silhouette and proportions as closely as possible so the engine can join the actual Ready loop. Far hand relaxed open as in the master. Not a new idle design or extra dramatic pose.\n\nDraw complete BODY ONLY: original bronze chipped bell helmet with small square top knob, sealed black cavity and exactly TWO amber eyes; gray soft underclothes; leather closed near glove, open balancing far glove, belt and compact boots. Sword and removable armor will be independent engine layers. NO sword/blade/hilt/handle, staff, shield, chest armor, pauldrons, effect, slash arc, blur, dust or ground. Preserve simple broad painted cartoon shapes, dark contours and restrained colors; no human skin/face/hair, extra limbs, realistic microdetail, costume changes, exaggerated oversized fists or boots. All parts fully inside their own cells. Four genuinely consecutive recovery poses leading naturally back to the exact master Ready.",
+  "prompt_file_sha256": "40161545efb9537161593b00092f8259d50b2e909387fd5d6a2ad785409e2f7c",
+  "reference_images": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/ready-body-master.png",
+      "bytes": 121133,
+      "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/requests/request260-v001/raw/K0to3-body-corrected-raw.png",
+      "bytes": 1562289,
+      "sha256": "950220ed7af9b0c2e61e927ac852f35846f8b2cc0bf2fed6413753c3fe88593b"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/K-body-anchor-2x2-1254-v002.png",
+      "bytes": 321776,
+      "sha256": "2b11d9bc641ced960c5841fe10f5419c6e2146a27e014f464513e83c0321d493"
+    }
+  ],
+  "transparent_background": false,
+  "backend": "builtin-imagegen",
+  "external_api_calls": 0,
+  "host_fee_usd": null,
+  "raw_destination_planned": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/requests/request261-v001/raw/K4to7-body-raw.png",
+  "runtime_imported": false,
+  "formal_complete_units": 0,
+  "scope": "New recovery group from original master with corrected K3 continuity; original accepted Ready may be reused verbatim for final K7 if generated pose drifts"
+}

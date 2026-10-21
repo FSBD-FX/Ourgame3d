@@ -1,0 +1,80 @@
+{
+  "schema": "forward-step-placement-witness-exact-inserts-v001",
+  "baseline_files": {
+    "DungeonWorldProjectiles.h": {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.h",
+      "bytes": 4515,
+      "sha256": "06a874893c7521417759a00a4d0213d0b81ff85f4bc258abc2ddc94c71f1908a"
+    },
+    "DungeonGameMode.h": {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.h",
+      "bytes": 14819,
+      "sha256": "31fd58350d4209ac1e62f8c8cc53327310127325ea7989437091b239304435d9"
+    },
+    "DungeonWorldProjectiles.cpp": {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.cpp",
+      "bytes": 27829,
+      "sha256": "1c94c6fd233bd4dd2bd239623b098a49ffa4e72d6c606f01e5e2d4aa58158310"
+    }
+  },
+  "projected_files": {
+    "DungeonWorldProjectiles.h": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/forward-step-placement-witness-candidate-v001/projected/DungeonWorldProjectiles.h",
+      "bytes": 5328,
+      "sha256": "bd4a6e0f0c8d9ffcf5bb2c89a01cf0c54d3ca36a9043c7af593f0be3e9889dc8"
+    },
+    "DungeonGameMode.h": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/forward-step-placement-witness-candidate-v001/projected/DungeonGameMode.h",
+      "bytes": 15176,
+      "sha256": "85eae5215626005e3e577614ae9ef4fa440426bf8764dcbe285758c0921b3a98"
+    },
+    "DungeonWorldProjectiles.cpp": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/forward-step-placement-witness-candidate-v001/projected/DungeonWorldProjectiles.cpp",
+      "bytes": 32999,
+      "sha256": "554361d4d9e020a5023b0ebc389693972848f79657f7d692794c71b7fb7e70b2"
+    }
+  },
+  "ops": [
+    {
+      "id": "placement-dto",
+      "file": "DungeonWorldProjectiles.h",
+      "anchor": "enum class EDungeonWorldProjectileStop : uint8\n",
+      "where": "before",
+      "insert": "// Transient actual post-placement facts, including a fully blocked zero commit.\n// Not audio eligibility, a movement request, saved state, or a new event domain.\nstruct FDungeonWeaponForwardStepPlacementV001\n{\n    bool Present=false, GroundedAtCommit=false;\n    FGuid RunGuid;\n    uint64 RoomInstanceId=0,OwnerId=0,ActionId=0,InstanceId=0,EventId=0;\n    uint32 SubhitId=0;\n    uint64 PresentationEpoch=0,RunRestartSerial=0,EquipmentRevisionAtCommit=0;\n    DungeonWeaponActions::EEvent Kind=DungeonWeaponActions::EEvent::Started;\n    DungeonContentCombat::EWeapon Weapon=DungeonContentCombat::EWeapon::SWD001;\n    double ActionStart=0.,AtTime=0.,ObservedSimulationTime=0.,RequestedSignedDistance=0.;\n    FVector2D Before=FVector2D::ZeroVector,After=FVector2D::ZeroVector,CommittedDelta=FVector2D::ZeroVector;\n};\n\n"
+    },
+    {
+      "id": "const-copy-getter-declaration",
+      "file": "DungeonGameMode.h",
+      "anchor": "    const FDungeonActionAudioState& GetActionAudioState() const { return ActionAudioState; }\n",
+      "where": "after",
+      "insert": "    // Read during the same still-active action; copy the real commit key before End.\n    bool QueryWeaponForwardStepPlacementV001(FDungeonWeaponForwardStepPlacementV001& Out) const;\n"
+    },
+    {
+      "id": "latest-transient-member",
+      "file": "DungeonGameMode.h",
+      "anchor": "    FDungeonActionAudioState ActionAudioState;\n",
+      "where": "after",
+      "insert": "    // Latest real placement observation only; not serialized and never an audio source.\n    FDungeonWeaponForwardStepPlacementV001 LatestWeaponForwardStepPlacementV001;\n"
+    },
+    {
+      "id": "const-copy-getter-definition",
+      "file": "DungeonWorldProjectiles.cpp",
+      "anchor": "void ADungeonGameMode::ConsumeBoundWeaponEvents(ADungeonFighter* Fighter,const std::vector<DungeonWeaponActions::FEvent>& Events)\n",
+      "where": "before",
+      "insert": "bool ADungeonGameMode::QueryWeaponForwardStepPlacementV001(FDungeonWeaponForwardStepPlacementV001& Out) const\n{\n    Out={};\n    const auto* Fighter=PlayerFighter.Get();\n    if(IsRunInstallGated()||!IsValid(Fighter)||Fighter->bDead||!Fighter->IsEquipmentBound())return false;\n    const auto& W=LatestWeaponForwardStepPlacementV001;const auto& V=GetEquipmentView();\n    const auto& S=Fighter->GetWeaponActionsState();const auto& A=S.Action;\n    if(!W.Present||!W.GroundedAtCommit||!V.Bound||!V.RunGuid.IsValid()\n        ||W.RunGuid!=V.RunGuid||W.RoomInstanceId!=V.RoomInstanceId||!W.RoomInstanceId\n        ||W.OwnerId!=V.OwnerId||!W.OwnerId||Fighter->GetRuntimeEntityId()!=W.OwnerId\n        ||WeaponWorld.RunGuid!=W.RunGuid||WeaponWorld.RoomInstanceId!=W.RoomInstanceId\n        ||W.PresentationEpoch!=RunPresentationEpoch||W.RunRestartSerial!=RunRestartSerial\n        ||W.Kind!=DungeonWeaponActions::EEvent::ForwardStep||W.Weapon!=DungeonContentCombat::EWeapon::SWD001\n        ||!W.EventId||!W.ActionId||!W.InstanceId||W.EventId>=S.NextEventId||W.EventId>Fighter->LastSkillEventId\n        ||S.Budget.Dead||A.Type!=DungeonWeaponActions::EAction::Skill||A.Weapon!=W.Weapon\n        ||!A.Active||!A.Locked||A.StartedAirborne||!A.ForwardStepIssued||A.Terminal==DungeonWeaponActions::EEvent::Interrupted\n        ||A.ActionId!=W.ActionId||A.InstanceId!=W.InstanceId||A.Start!=W.ActionStart||A.ActiveAt!=W.AtTime\n        ||!std::isfinite(SimulationTime)||S.Time!=SimulationTime||SimulationTime<W.AtTime||SimulationTime>=A.End\n        ||!std::isfinite(W.ObservedSimulationTime)||W.ObservedSimulationTime<W.AtTime||W.ObservedSimulationTime>SimulationTime)\n        return false;\n    Out=W;return true;\n}\n\n"
+    },
+    {
+      "id": "post-real-placement-observation",
+      "file": "DungeonWorldProjectiles.cpp",
+      "anchor": "            if(DungeonHeroForwardStepAudioV001::Eligible(E,AudioSkill.Action,Fighter->GetRuntimeEntityId(),\n",
+      "where": "before",
+      "insert": "            // Observe only the actual placement above; a blocked commit remains Present.\n            // This is independent of AudioScope/Eligible and never dispatches a cue.\n            const auto& PlacementAction=AudioSkill.Action;\n            if(!IsRunInstallGated()&&Fighter==PlayerFighter&&Fighter->IsEquipmentBound()&&!Fighter->bDead\n                &&AudioView.Bound&&AudioView.RunGuid.IsValid()&&AudioView.RoomInstanceId&&AudioView.Revision\n                &&Fighter->GetRuntimeEntityId()==AudioView.OwnerId&&AudioView.OwnerId\n                &&WeaponWorld.RunGuid==AudioView.RunGuid&&WeaponWorld.RoomInstanceId==AudioView.RoomInstanceId\n                &&AudioSkill.Time==SimulationTime&&E.AtTime>=SkillBatchFrom&&E.AtTime<=SkillBatchTo\n                &&Fighter->JumpHeight==0.f&&Fighter->JumpVelocity==0.f&&AudioSkill.Budget.Grounded\n                &&!AudioSkill.Budget.Dead&&Fighter->GetMeleeCombatState().Grounded\n                &&E.EventId&&E.EventId==Fighter->LastSkillEventId&&E.EventId<AudioSkill.NextEventId\n                &&E.ActionId&&E.InstanceId&&E.ActionId==E.Action.ActionId&&E.InstanceId==E.Action.InstanceId\n                &&E.Action.Type==EAction::Skill&&E.Action.Weapon==DungeonContentCombat::EWeapon::SWD001\n                &&E.Action.Active&&E.Action.Locked&&!E.Action.StartedAirborne&&E.Action.ForwardStepIssued\n                &&PlacementAction.Type==EAction::Skill&&PlacementAction.Weapon==E.Action.Weapon\n                &&PlacementAction.Active&&PlacementAction.Locked&&!PlacementAction.StartedAirborne\n                &&PlacementAction.ForwardStepIssued&&PlacementAction.Terminal!=EEvent::Interrupted\n                &&PlacementAction.ActionId==E.ActionId&&PlacementAction.InstanceId==E.InstanceId\n                &&PlacementAction.Start==E.Action.Start&&PlacementAction.ActiveAt==E.AtTime&&E.Action.ActiveAt==E.AtTime\n                &&std::isfinite(SimulationTime)&&std::isfinite(E.AtTime)&&E.AtTime>=0.&&E.AtTime<=SimulationTime\n                &&std::isfinite(E.ForwardStep)&&E.ForwardStep!=0.\n                &&std::isfinite(AudioBefore.X)&&std::isfinite(AudioBefore.Y)\n                &&std::isfinite(AudioAfter.X)&&std::isfinite(AudioAfter.Y))\n            {\n                FDungeonWeaponForwardStepPlacementV001 Placement;\n                Placement.Present=true;Placement.GroundedAtCommit=Fighter->JumpHeight==0.f&&Fighter->JumpVelocity==0.f\n                    &&AudioSkill.Budget.Grounded&&Fighter->GetMeleeCombatState().Grounded;\n                Placement.RunGuid=AudioView.RunGuid;Placement.RoomInstanceId=AudioView.RoomInstanceId;\n                Placement.OwnerId=Fighter->GetRuntimeEntityId();Placement.ActionId=E.ActionId;Placement.InstanceId=E.InstanceId;\n                Placement.EventId=E.EventId;Placement.SubhitId=E.SubhitId;Placement.Kind=E.Kind;Placement.Weapon=E.Action.Weapon;\n                Placement.PresentationEpoch=RunPresentationEpoch;Placement.RunRestartSerial=RunRestartSerial;\n                Placement.EquipmentRevisionAtCommit=AudioView.Revision;Placement.ActionStart=E.Action.Start;\n                Placement.AtTime=E.AtTime;Placement.ObservedSimulationTime=SimulationTime;\n                Placement.RequestedSignedDistance=E.ForwardStep;Placement.Before=AudioBefore;Placement.After=AudioAfter;\n                Placement.CommittedDelta=AudioAfter-AudioBefore;\n                LatestWeaponForwardStepPlacementV001=Placement;\n            }\n"
+    }
+  ],
+  "strict_inverse_all_original_bytes_exact": true,
+  "existing_audio_scope_and_append_original_bytes_unchanged": true,
+  "existing_motion_dedupe_windows_original_bytes_unchanged": true,
+  "actual_source_files_before": 303,
+  "proposed_source_files_after": 303,
+  "actual_source_modified": false
+}

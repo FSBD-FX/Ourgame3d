@@ -1,0 +1,59 @@
+{
+  "schema": "K8-checker-production-content-ID-correction-v002",
+  "predecessor_freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K8-native-pixel-checker-candidate-v001/candidate-freeze-v001.json",
+    "bytes": 4710,
+    "sha256": "748b99eee086760d740e60ba0a98b53ef7801c1a2497d7c5394e4ec5c2c18568"
+  },
+  "predecessor_script": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K8-native-pixel-checker-candidate-v001/verify-K8-native-pixels-v001.py",
+    "bytes": 23035,
+    "sha256": "cfc489cc72b71a9e65c86e293aa30e3bca39a58b3897208817eef87b191681b2"
+  },
+  "new_script": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K8-native-pixel-checker-candidate-v002/verify-K8-native-pixels-v002.py",
+    "bytes": 23039,
+    "sha256": "aa677a9c15fb5dcf2414c22b7b5940870db4711d8d566e22122d942d6ee08188"
+  },
+  "independent_review": {
+    "path": "F:/Ourgame/.superpowers/sdd/2026-10-19-swd-secondary-v147/K8-native-pixel-checker-review-v001.md",
+    "bytes": 6120,
+    "sha256": "53a3275b04445e6f4c9499a36b88d4ed1ca7d6f6e41a804ffe416bcf645b6c43"
+  },
+  "sole_behavior_change": "binding.weapon_content: SWD-001 -> actual production WPN-SWD-001",
+  "other_changes": "Three one-occurrence self-freeze/result schema version strings only; entry/test basenames are v002",
+  "string_changes": [
+    {
+      "before": "b['weapon_content']=='SWD-001'",
+      "after": "b['weapon_content']=='WPN-SWD-001'",
+      "occurrences": 1
+    },
+    {
+      "before": "candidate-freeze-v001.json",
+      "after": "candidate-freeze-v002.json",
+      "occurrences": 1
+    },
+    {
+      "before": "K8-native-pixel-checker-candidate-freeze-v001",
+      "after": "K8-native-pixel-checker-candidate-freeze-v002",
+      "occurrences": 1
+    },
+    {
+      "before": "K8-independent-actual-native-pixel-audit-v001",
+      "after": "K8-independent-actual-native-pixel-audit-v002",
+      "occurrences": 1
+    }
+  ],
+  "inverse_string_substitution_full_predecessor_bytes_exact": true,
+  "changed_function_definitions": [
+    "own_freeze",
+    "typed_slots",
+    "audit"
+  ],
+  "all_other_function_definitions_exact": true,
+  "original_sampler_and_pure_functions_byte_unchanged": true,
+  "all_geometry_GPU_PNG_ROI_thresholds_and_OPEN_fields_unchanged": true,
+  "actual_native_run": false,
+  "actual_native_pixel_composition_verified": false,
+  "FinalAccepted": false
+}

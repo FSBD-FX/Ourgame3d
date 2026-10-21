@@ -1,0 +1,36 @@
+{
+  "schema": "secondary8-host-mutation-evidence-v001",
+  "candidate_unchanged": true,
+  "ue_build_run": false,
+  "native_run": false,
+  "mutations": [
+    {
+      "mutation": "wrong-recovery-boundary",
+      "exit_code": 1,
+      "mutation_detected": true,
+      "source_sha256": "eec5b1e39c7a007cbb93e1da17cce17da577d7c37a1d44108b352396eb21b19d",
+      "failures": [
+        "FAIL base-boundary-11"
+      ]
+    },
+    {
+      "mutation": "skip-future-resource-check",
+      "exit_code": 1,
+      "mutation_detected": true,
+      "source_sha256": "07ae06b29cd15e5a7a83aa928c1e3175a943bafac7943b7ca37ef5f7de662870",
+      "failures": [
+        "FAIL missing-future-K7-layer-closes-entire-draw",
+        "FAIL missing-independent-sword-closes-draw"
+      ]
+    },
+    {
+      "mutation": "ignore-explicit-optin",
+      "exit_code": 1,
+      "mutation_detected": true,
+      "source_sha256": "75d717b6c470cf8b5d5736a38b3ebfaeba5711bdf736a9ca03e80694d5f39c5e",
+      "failures": [
+        "FAIL default-off-untouched"
+      ]
+    }
+  ]
+}

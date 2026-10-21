@@ -1,0 +1,15 @@
+// Transient actual post-placement facts, including a fully blocked zero commit.
+// Not audio eligibility, a movement request, saved state, or a new event domain.
+struct FDungeonWeaponForwardStepPlacementV001
+{
+    bool Present=false, GroundedAtCommit=false;
+    FGuid RunGuid;
+    uint64 RoomInstanceId=0,OwnerId=0,ActionId=0,InstanceId=0,EventId=0;
+    uint32 SubhitId=0;
+    uint64 PresentationEpoch=0,RunRestartSerial=0,EquipmentRevisionAtCommit=0;
+    DungeonWeaponActions::EEvent Kind=DungeonWeaponActions::EEvent::Started;
+    DungeonContentCombat::EWeapon Weapon=DungeonContentCombat::EWeapon::SWD001;
+    double ActionStart=0.,AtTime=0.,ObservedSimulationTime=0.,RequestedSignedDistance=0.;
+    FVector2D Before=FVector2D::ZeroVector,After=FVector2D::ZeroVector,CommittedDelta=FVector2D::ZeroVector;
+};
+

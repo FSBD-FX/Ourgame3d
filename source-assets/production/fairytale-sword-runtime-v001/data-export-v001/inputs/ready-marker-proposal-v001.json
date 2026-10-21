@@ -1,0 +1,592 @@
+{
+  "schema": "fairytale-sword-ready-source-marker-proposal-v1",
+  "created_local": "2026-10-16T08:33:36.079142+08:00",
+  "component": "SwordReady",
+  "state": "sword_ready_idle",
+  "frame_count": 4,
+  "durations_ms": [
+    167,
+    167,
+    167,
+    167
+  ],
+  "source_native_facing": 1,
+  "source_canvas_px": [
+    512,
+    512
+  ],
+  "shared_row_ratio": 0.7111111111111111,
+  "per_frame_scale": false,
+  "fixed_display_canvas_at1280x720": 88.61538461538461,
+  "max_visible_height_px": 72,
+  "visible_body_heights_source_px": [
+    415,
+    416,
+    415,
+    415
+  ],
+  "frames": [
+    {
+      "frame": 0,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v001/curated/frame-0.png",
+        "bytes": 112802,
+        "sha256": "7b747dd4bdbfa326653661583afc0b79a3baf9927eea65d931b96ecc78d6130f"
+      },
+      "near_hand_crop": {
+        "role": "near_hand",
+        "roi_px": [
+          188,
+          248,
+          285,
+          315
+        ],
+        "file": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/ready-measurement-v001/frame-0-near_hand-diagnostic.png",
+          "bytes": 11754,
+          "sha256": "626d8118457fc1ddea9bf882df7dd276b6d9994573cb872256397f6c7b2ee38a"
+        },
+        "resampled": false,
+        "art_asset": false
+      },
+      "source_root_px": [
+        256,
+        464
+      ],
+      "root_basis": {
+        "near_boot": {
+          "roi_px": [
+            142,
+            430,
+            230,
+            464
+          ],
+          "alpha_threshold": 128,
+          "last_contact_pixel_y": 463,
+          "span_inclusive_px": [
+            185,
+            194
+          ],
+          "center_x": 189.5,
+          "boundary_below_pixel_y": 464,
+          "meaning": "Visible opaque boot sole edge in explicit boot ROI; no ground/shadow pixels."
+        },
+        "far_boot": {
+          "roi_px": [
+            260,
+            430,
+            368,
+            464
+          ],
+          "alpha_threshold": 128,
+          "last_contact_pixel_y": 460,
+          "span_inclusive_px": [
+            314,
+            330
+          ],
+          "center_x": 322.0,
+          "boundary_below_pixel_y": 461,
+          "meaning": "Visible opaque boot sole edge in explicit boot ROI; no ground/shadow pixels."
+        },
+        "two_contact_mean_x": 255.75,
+        "interpretation": "Use the near sole lower edge y464 and approximately centered two visible boot contacts. Far sole is 3px higher in this fixed3/4 image; do not force both feet onto one source Y."
+      },
+      "grip_candidate_px": [
+        258,
+        282
+      ],
+      "grip_uncertainty_px": 3,
+      "handle_axis_candidate_xy": [
+        0,
+        -1
+      ],
+      "axis_uncertainty_degrees": 10,
+      "axis_evidence": "Visible approximately horizontal curled-finger creases suggest a vertical held cylinder. The hidden cylinder and its directed blade end are not observable; this is a trial alignment estimate, not exact physical ground truth.",
+      "visible_fist_replay_polygon_candidate_px": [
+        [
+          242,
+          256
+        ],
+        [
+          264,
+          256
+        ],
+        [
+          274,
+          262
+        ],
+        [
+          279,
+          270
+        ],
+        [
+          278,
+          281
+        ],
+        [
+          274,
+          286
+        ],
+        [
+          272,
+          297
+        ],
+        [
+          266,
+          303
+        ],
+        [
+          246,
+          305
+        ],
+        [
+          232,
+          301
+        ],
+        [
+          225,
+          295
+        ],
+        [
+          225,
+          278
+        ],
+        [
+          231,
+          267
+        ]
+      ],
+      "polygon_basis": "New manual trace from this retained original source-hand crop, covering the visible fist and black edge while excluding the cuff and belt. No old V007 polygon/root/marker reused. Approximate1-2px boundary; not a certified semantic mask.",
+      "closed_finger_crease_visibility": "Four curled-finger bands/creases are readable; no separate far hand overlaps this fist.",
+      "thumb_independently_visible": false,
+      "thumb_status": "Cannot independently isolate a thumb crossing the index/middle finger from these source pixels. Do not label thumb anatomy accepted.",
+      "occlusion_status": "Only an approximate whole visible near-fist replay polygon is proposed. It does not prove which hidden thumb/finger should cover a later weapon; require actual sword overlay review."
+    },
+    {
+      "frame": 1,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v001/curated/frame-1.png",
+        "bytes": 113355,
+        "sha256": "04c48e214cfd693dab4afacb7f2bb3abca7ab22e717e982a1d394e5174449be1"
+      },
+      "near_hand_crop": {
+        "role": "near_hand",
+        "roi_px": [
+          188,
+          248,
+          285,
+          315
+        ],
+        "file": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/ready-measurement-v001/frame-1-near_hand-diagnostic.png",
+          "bytes": 11730,
+          "sha256": "a01002db6ce6fec67373961be358915ec2af8326d714647f84962181a433887a"
+        },
+        "resampled": false,
+        "art_asset": false
+      },
+      "source_root_px": [
+        256,
+        464
+      ],
+      "root_basis": {
+        "near_boot": {
+          "roi_px": [
+            142,
+            430,
+            230,
+            464
+          ],
+          "alpha_threshold": 128,
+          "last_contact_pixel_y": 463,
+          "span_inclusive_px": [
+            179,
+            201
+          ],
+          "center_x": 190.0,
+          "boundary_below_pixel_y": 464,
+          "meaning": "Visible opaque boot sole edge in explicit boot ROI; no ground/shadow pixels."
+        },
+        "far_boot": {
+          "roi_px": [
+            260,
+            430,
+            368,
+            464
+          ],
+          "alpha_threshold": 128,
+          "last_contact_pixel_y": 460,
+          "span_inclusive_px": [
+            312,
+            332
+          ],
+          "center_x": 322.0,
+          "boundary_below_pixel_y": 461,
+          "meaning": "Visible opaque boot sole edge in explicit boot ROI; no ground/shadow pixels."
+        },
+        "two_contact_mean_x": 256.0,
+        "interpretation": "Use the near sole lower edge y464 and approximately centered two visible boot contacts. Far sole is 3px higher in this fixed3/4 image; do not force both feet onto one source Y."
+      },
+      "grip_candidate_px": [
+        258,
+        281
+      ],
+      "grip_uncertainty_px": 3,
+      "handle_axis_candidate_xy": [
+        0,
+        -1
+      ],
+      "axis_uncertainty_degrees": 10,
+      "axis_evidence": "Visible approximately horizontal curled-finger creases suggest a vertical held cylinder. The hidden cylinder and its directed blade end are not observable; this is a trial alignment estimate, not exact physical ground truth.",
+      "visible_fist_replay_polygon_candidate_px": [
+        [
+          243,
+          256
+        ],
+        [
+          265,
+          257
+        ],
+        [
+          275,
+          263
+        ],
+        [
+          280,
+          271
+        ],
+        [
+          279,
+          282
+        ],
+        [
+          274,
+          287
+        ],
+        [
+          272,
+          297
+        ],
+        [
+          266,
+          302
+        ],
+        [
+          246,
+          304
+        ],
+        [
+          232,
+          300
+        ],
+        [
+          225,
+          294
+        ],
+        [
+          225,
+          277
+        ],
+        [
+          232,
+          266
+        ]
+      ],
+      "polygon_basis": "New manual trace from this retained original source-hand crop, covering the visible fist and black edge while excluding the cuff and belt. No old V007 polygon/root/marker reused. Approximate1-2px boundary; not a certified semantic mask.",
+      "closed_finger_crease_visibility": "Four curled-finger bands/creases are readable; no separate far hand overlaps this fist.",
+      "thumb_independently_visible": false,
+      "thumb_status": "Cannot independently isolate a thumb crossing the index/middle finger from these source pixels. Do not label thumb anatomy accepted.",
+      "occlusion_status": "Only an approximate whole visible near-fist replay polygon is proposed. It does not prove which hidden thumb/finger should cover a later weapon; require actual sword overlay review."
+    },
+    {
+      "frame": 2,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v001/curated/frame-2.png",
+        "bytes": 113455,
+        "sha256": "fd00251555fb2254206f5d8e981a564b28b18d42d19af8b52ca294fb048ba972"
+      },
+      "near_hand_crop": {
+        "role": "near_hand",
+        "roi_px": [
+          188,
+          248,
+          285,
+          315
+        ],
+        "file": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/ready-measurement-v001/frame-2-near_hand-diagnostic.png",
+          "bytes": 11691,
+          "sha256": "30357362e05b923d3fa20a716bef4c2c7f88a35f84ab615d03639a34d9ce98a1"
+        },
+        "resampled": false,
+        "art_asset": false
+      },
+      "source_root_px": [
+        256,
+        464
+      ],
+      "root_basis": {
+        "near_boot": {
+          "roi_px": [
+            142,
+            430,
+            230,
+            464
+          ],
+          "alpha_threshold": 128,
+          "last_contact_pixel_y": 463,
+          "span_inclusive_px": [
+            183,
+            192
+          ],
+          "center_x": 187.5,
+          "boundary_below_pixel_y": 464,
+          "meaning": "Visible opaque boot sole edge in explicit boot ROI; no ground/shadow pixels."
+        },
+        "far_boot": {
+          "roi_px": [
+            260,
+            430,
+            368,
+            464
+          ],
+          "alpha_threshold": 128,
+          "last_contact_pixel_y": 460,
+          "span_inclusive_px": [
+            313,
+            334
+          ],
+          "center_x": 323.5,
+          "boundary_below_pixel_y": 461,
+          "meaning": "Visible opaque boot sole edge in explicit boot ROI; no ground/shadow pixels."
+        },
+        "two_contact_mean_x": 255.5,
+        "interpretation": "Use the near sole lower edge y464 and approximately centered two visible boot contacts. Far sole is 3px higher in this fixed3/4 image; do not force both feet onto one source Y."
+      },
+      "grip_candidate_px": [
+        259,
+        284
+      ],
+      "grip_uncertainty_px": 3,
+      "handle_axis_candidate_xy": [
+        0,
+        -1
+      ],
+      "axis_uncertainty_degrees": 10,
+      "axis_evidence": "Visible approximately horizontal curled-finger creases suggest a vertical held cylinder. The hidden cylinder and its directed blade end are not observable; this is a trial alignment estimate, not exact physical ground truth.",
+      "visible_fist_replay_polygon_candidate_px": [
+        [
+          245,
+          259
+        ],
+        [
+          265,
+          259
+        ],
+        [
+          275,
+          264
+        ],
+        [
+          280,
+          272
+        ],
+        [
+          279,
+          284
+        ],
+        [
+          275,
+          288
+        ],
+        [
+          272,
+          299
+        ],
+        [
+          266,
+          304
+        ],
+        [
+          247,
+          306
+        ],
+        [
+          232,
+          302
+        ],
+        [
+          225,
+          296
+        ],
+        [
+          225,
+          279
+        ],
+        [
+          233,
+          268
+        ]
+      ],
+      "polygon_basis": "New manual trace from this retained original source-hand crop, covering the visible fist and black edge while excluding the cuff and belt. No old V007 polygon/root/marker reused. Approximate1-2px boundary; not a certified semantic mask.",
+      "closed_finger_crease_visibility": "Four curled-finger bands/creases are readable; no separate far hand overlaps this fist.",
+      "thumb_independently_visible": false,
+      "thumb_status": "Cannot independently isolate a thumb crossing the index/middle finger from these source pixels. Do not label thumb anatomy accepted.",
+      "occlusion_status": "Only an approximate whole visible near-fist replay polygon is proposed. It does not prove which hidden thumb/finger should cover a later weapon; require actual sword overlay review."
+    },
+    {
+      "frame": 3,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v001/curated/frame-3.png",
+        "bytes": 112938,
+        "sha256": "86e8c702e1455bf6fde682f0cd384d5e0f41ba7e0935af6b5cb0704b4e3970d6"
+      },
+      "near_hand_crop": {
+        "role": "near_hand",
+        "roi_px": [
+          188,
+          248,
+          285,
+          315
+        ],
+        "file": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/ready-measurement-v001/frame-3-near_hand-diagnostic.png",
+          "bytes": 11659,
+          "sha256": "83695171df67660b02ea0349f426d8e3cc12ed0e4cf85d8801924b041b23a138"
+        },
+        "resampled": false,
+        "art_asset": false
+      },
+      "source_root_px": [
+        256,
+        464
+      ],
+      "root_basis": {
+        "near_boot": {
+          "roi_px": [
+            142,
+            430,
+            230,
+            464
+          ],
+          "alpha_threshold": 128,
+          "last_contact_pixel_y": 463,
+          "span_inclusive_px": [
+            186,
+            195
+          ],
+          "center_x": 190.5,
+          "boundary_below_pixel_y": 464,
+          "meaning": "Visible opaque boot sole edge in explicit boot ROI; no ground/shadow pixels."
+        },
+        "far_boot": {
+          "roi_px": [
+            260,
+            430,
+            368,
+            464
+          ],
+          "alpha_threshold": 128,
+          "last_contact_pixel_y": 460,
+          "span_inclusive_px": [
+            314,
+            331
+          ],
+          "center_x": 322.5,
+          "boundary_below_pixel_y": 461,
+          "meaning": "Visible opaque boot sole edge in explicit boot ROI; no ground/shadow pixels."
+        },
+        "two_contact_mean_x": 256.5,
+        "interpretation": "Use the near sole lower edge y464 and approximately centered two visible boot contacts. Far sole is 3px higher in this fixed3/4 image; do not force both feet onto one source Y."
+      },
+      "grip_candidate_px": [
+        258,
+        282
+      ],
+      "grip_uncertainty_px": 3,
+      "handle_axis_candidate_xy": [
+        0,
+        -1
+      ],
+      "axis_uncertainty_degrees": 10,
+      "axis_evidence": "Visible approximately horizontal curled-finger creases suggest a vertical held cylinder. The hidden cylinder and its directed blade end are not observable; this is a trial alignment estimate, not exact physical ground truth.",
+      "visible_fist_replay_polygon_candidate_px": [
+        [
+          243,
+          256
+        ],
+        [
+          264,
+          256
+        ],
+        [
+          274,
+          262
+        ],
+        [
+          279,
+          270
+        ],
+        [
+          279,
+          282
+        ],
+        [
+          274,
+          286
+        ],
+        [
+          272,
+          297
+        ],
+        [
+          266,
+          303
+        ],
+        [
+          246,
+          305
+        ],
+        [
+          232,
+          301
+        ],
+        [
+          225,
+          295
+        ],
+        [
+          225,
+          278
+        ],
+        [
+          231,
+          267
+        ]
+      ],
+      "polygon_basis": "New manual trace from this retained original source-hand crop, covering the visible fist and black edge while excluding the cuff and belt. No old V007 polygon/root/marker reused. Approximate1-2px boundary; not a certified semantic mask.",
+      "closed_finger_crease_visibility": "Four curled-finger bands/creases are readable; no separate far hand overlaps this fist.",
+      "thumb_independently_visible": false,
+      "thumb_status": "Cannot independently isolate a thumb crossing the index/middle finger from these source pixels. Do not label thumb anatomy accepted.",
+      "occlusion_status": "Only an approximate whole visible near-fist replay polygon is proposed. It does not prove which hidden thumb/finger should cover a later weapon; require actual sword overlay review."
+    }
+  ],
+  "actual_viewed": [
+    "run-ready-v001/qa/sword_ready_idle-contact.png",
+    "run-ready-v001/curated/frame-0.png",
+    "run-ready-v001/curated/frame-1.png",
+    "run-ready-v001/curated/frame-2.png",
+    "run-ready-v001/curated/frame-3.png",
+    "ready-measurement-v001/frame-0-near_hand-diagnostic.png",
+    "ready-measurement-v001/frame-1-near_hand-diagnostic.png",
+    "ready-measurement-v001/frame-2-near_hand-diagnostic.png",
+    "ready-measurement-v001/frame-3-near_hand-diagnostic.png",
+    "ready-measurement-v001/frame-0-feet-diagnostic.png"
+  ],
+  "motion_played": false,
+  "ue_imported": false,
+  "art_accepted": false,
+  "trial_candidate_only": true,
+  "formal_complete_units": 0,
+  "scope": "Actual visible pixels establish a usable Ready pose candidate and reproducible alignment estimates. Thumb and sword overlay remain open; this is not full action/armor/combat acceptance."
+}

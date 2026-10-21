@@ -1,0 +1,1342 @@
+{
+  "schema": "request263-SINGLE-full1254-uniform512-technical-QC-v001",
+  "source_label": "request263",
+  "pose_label": "K4",
+  "created_utc": "2026-10-18T22:25:30.270882+00:00",
+  "inputs": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/requests/request263-v001/raw/K4-single-corrected-raw.png",
+      "bytes": 1423628,
+      "sha256": "1e3b07a0a80c0dd2c0774f69844ccfcaadfa3d80b3213729b20d8b4d3ac7c20c"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/ready-body-master.png",
+      "bytes": 121133,
+      "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/request260-extraction-qc-v001/aligned512/K3-body-footline464-RGBA.png",
+      "bytes": 131292,
+      "sha256": "ce6cd031a5bac1a86c5b63f25f75db8fdf1f19911aec28acb8cb50771c23a4a7"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/request261-extraction-qc-v001/aligned512/K4-body-footline464-RGBA.png",
+      "bytes": 146686,
+      "sha256": "4e90a5203db3778c31bd40d1713dec6c317cedc4937d9d163116aa4858dba911"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/request259-extraction-qc-v001/extract-uniform-grid-qc-v001.py",
+      "bytes": 12044,
+      "sha256": "5abd7e99a575dde4cb75ba4d3c586cfd6fce45deee4eb9124df89dc5c5e7de33"
+    },
+    {
+      "path": "C:/Users/22499/.codex/skills/sprite-gen/sprite_gen/frames/extract.py",
+      "bytes": 174274,
+      "sha256": "f2a7902f01069668340d14217bd05c777f5c01853284102e211aba1013a45539"
+    },
+    {
+      "path": "C:/Users/22499/.codex/skills/sprite-gen/sprite_gen/_deps.py",
+      "bytes": 2797,
+      "sha256": "173837b10110d734c8453728438def2d77d2fb2dddba34093af32838191ff01e"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/requests/request263-v001/prompt.txt",
+      "bytes": 2335,
+      "sha256": "65e6eb1e919953f2dc321b433760780bbc6903caefaa2deeabaea2131d437668"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/request260-extraction-qc-v001/request260-extraction-final-freeze-v001.json",
+      "bytes": 11714,
+      "sha256": "ed5d05b49fc4c0123e26f608e6f5f4025de385d7d43936c58d41b463c6ca723b"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/request261-extraction-qc-v001/extraction-freeze-v001.json",
+      "bytes": 9262,
+      "sha256": "da5ec2071f6737d61812b545fbbba6e44110beee47561f3cbd7467d92f2f12e6"
+    }
+  ],
+  "requested_raw_size": [
+    512,
+    512
+  ],
+  "actual_raw_size": [
+    1254,
+    1254
+  ],
+  "actual_pose_count": 1,
+  "actual_grid": null,
+  "entire_canvas_used": true,
+  "raw_RGB_saved_pixel_exact": true,
+  "raw_original_RGB_pixel_sha256": "5343bca4c01dc97454e32ec0a545cef71c06a160a17c11344de039ec2a0ea335",
+  "runtime": {
+    "interpreter": "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+    "python": "3.14.6 (tags/v3.14.6:c63aec6, Jun 10 2026, 10:26:10) [MSC v.1944 64 bit (AMD64)]",
+    "Pillow": "12.3.0",
+    "numpy": "2.5.2"
+  },
+  "chroma": {
+    "key": [
+      255,
+      0,
+      255
+    ],
+    "threshold": 96.0,
+    "fringe_threshold": 180.0,
+    "fringe_delta": 18.0,
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.0,
+    "deep_opaque_RGB_changed": 0
+  },
+  "edge_cleanup": {
+    "policy": "uniform alpha1..8->RGBA0; all >8 unchanged",
+    "alpha128_geometry_unchanged": true
+  },
+  "references": {
+    "Ready": {
+      "pin": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/ready-body-master.png",
+        "bytes": 121133,
+        "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+      },
+      "stats": {
+        "bbox_alpha1": [
+          149,
+          49,
+          362,
+          464
+        ],
+        "bbox_alpha128": [
+          149,
+          49,
+          362,
+          464
+        ],
+        "alpha_nonzero": 54088,
+        "alpha_ge128": 51326,
+        "soft_alpha": 5697,
+        "edge_nonzero": 0
+      },
+      "proxies": {
+        "heuristic_only": true,
+        "helmet_warm_upper55_largest3": [
+          {
+            "area": 11214,
+            "bbox": [
+              173,
+              89,
+              341,
+              231
+            ],
+            "width": 168,
+            "height": 142
+          },
+          {
+            "area": 667,
+            "bbox": [
+              235,
+              54,
+              272,
+              87
+            ],
+            "width": 37,
+            "height": 33
+          },
+          {
+            "area": 514,
+            "bbox": [
+              279,
+              170,
+              302,
+              199
+            ],
+            "width": 23,
+            "height": 29
+          }
+        ],
+        "lower60_silhouette_largest2": [
+          {
+            "area": 4102,
+            "bbox": [
+              259,
+              404,
+              354,
+              460
+            ],
+            "width": 95,
+            "height": 56
+          },
+          {
+            "area": 3600,
+            "bbox": [
+              149,
+              404,
+              224,
+              464
+            ],
+            "width": 75,
+            "height": 60
+          }
+        ],
+        "lower6_solid_span": [
+          158,
+          342
+        ],
+        "lower6_solid_span_width": 184,
+        "lower6_pixels": 338,
+        "physical_helmet_boot_size": "OPEN_not_segmented",
+        "physical_sole_contact": "OPEN_graphic_lower_contour_only"
+      },
+      "position_and_pelvis_heuristics": {
+        "heuristic_only": true,
+        "helmet_warm_upper55_components": [
+          {
+            "area": 11214,
+            "bbox": [
+              173,
+              89,
+              341,
+              231
+            ],
+            "width": 168,
+            "height": 142,
+            "bbox_center": [
+              257.0,
+              160.0
+            ],
+            "pixel_centroid": [
+              261.75878366327805,
+              164.94435527019797
+            ]
+          },
+          {
+            "area": 667,
+            "bbox": [
+              235,
+              54,
+              272,
+              87
+            ],
+            "width": 37,
+            "height": 33,
+            "bbox_center": [
+              253.5,
+              70.5
+            ],
+            "pixel_centroid": [
+              254.00449775112443,
+              69.06896551724138
+            ]
+          },
+          {
+            "area": 514,
+            "bbox": [
+              279,
+              170,
+              302,
+              199
+            ],
+            "width": 23,
+            "height": 29,
+            "bbox_center": [
+              290.5,
+              184.5
+            ],
+            "pixel_centroid": [
+              290.15564202334633,
+              184.00778210116732
+            ]
+          },
+          {
+            "area": 334,
+            "bbox": [
+              310,
+              174,
+              327,
+              200
+            ],
+            "width": 17,
+            "height": 26,
+            "bbox_center": [
+              318.5,
+              187.0
+            ],
+            "pixel_centroid": [
+              318.07185628742513,
+              186.19161676646706
+            ]
+          }
+        ],
+        "head_center_heuristic": [
+          261.75878366327805,
+          164.94435527019797
+        ],
+        "pelvis_reference_heuristic": {
+          "method": "Fixed x[176,336),y[304,384) neutral-color lower tunic/trouser ROI; largest4 connected components. Not anatomical pelvis or root measurement.",
+          "RGB_rule": "alpha>=128,maxRGB-minRGB<=35,30<=R<=170",
+          "components": [
+            {
+              "area": 5908,
+              "bbox": [
+                183,
+                312,
+                321,
+                384
+              ],
+              "width": 138,
+              "height": 72,
+              "bbox_center": [
+                252.0,
+                348.0
+              ],
+              "pixel_centroid": [
+                254.73493568043332,
+                350.60748138117805
+              ]
+            },
+            {
+              "area": 70,
+              "bbox": [
+                293,
+                304,
+                307,
+                312
+              ],
+              "width": 14,
+              "height": 8,
+              "bbox_center": [
+                300.0,
+                308.0
+              ],
+              "pixel_centroid": [
+                299.5,
+                306.5285714285714
+              ]
+            },
+            {
+              "area": 7,
+              "bbox": [
+                254,
+                305,
+                255,
+                312
+              ],
+              "width": 1,
+              "height": 7,
+              "bbox_center": [
+                254.5,
+                308.5
+              ],
+              "pixel_centroid": [
+                254.0,
+                308.0
+              ]
+            },
+            {
+              "area": 3,
+              "bbox": [
+                277,
+                308,
+                278,
+                311
+              ],
+              "width": 1,
+              "height": 3,
+              "bbox_center": [
+                277.5,
+                309.5
+              ],
+              "pixel_centroid": [
+                277.0,
+                309.0
+              ]
+            }
+          ],
+          "largest_component_centroid": [
+            254.73493568043332,
+            350.60748138117805
+          ],
+          "authoring_root_fixed": [
+            256,
+            464
+          ],
+          "true_anatomical_pelvis": "OPEN"
+        },
+        "whole_alpha128_centroid": [
+          256.14094221252384,
+          274.61366558859055
+        ],
+        "whole_bbox_center": [
+          255.5,
+          256.5
+        ]
+      }
+    },
+    "260K3": {
+      "pin": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/request260-extraction-qc-v001/aligned512/K3-body-footline464-RGBA.png",
+        "bytes": 131292,
+        "sha256": "ce6cd031a5bac1a86c5b63f25f75db8fdf1f19911aec28acb8cb50771c23a4a7"
+      },
+      "stats": {
+        "bbox_alpha1": [
+          90,
+          65,
+          374,
+          464
+        ],
+        "bbox_alpha128": [
+          91,
+          66,
+          374,
+          464
+        ],
+        "alpha_nonzero": 56254,
+        "alpha_ge128": 55080,
+        "soft_alpha": 4420,
+        "edge_nonzero": 0
+      },
+      "proxies": {
+        "heuristic_only": true,
+        "helmet_warm_upper55_largest3": [
+          {
+            "area": 12057,
+            "bbox": [
+              201,
+              112,
+              369,
+              248
+            ],
+            "width": 168,
+            "height": 136
+          },
+          {
+            "area": 2127,
+            "bbox": [
+              96,
+              221,
+              178,
+              285
+            ],
+            "width": 82,
+            "height": 64
+          },
+          {
+            "area": 768,
+            "bbox": [
+              255,
+              263,
+              318,
+              285
+            ],
+            "width": 63,
+            "height": 22
+          }
+        ],
+        "lower60_silhouette_largest2": [
+          {
+            "area": 4553,
+            "bbox": [
+              249,
+              404,
+              351,
+              462
+            ],
+            "width": 102,
+            "height": 58
+          },
+          {
+            "area": 4047,
+            "bbox": [
+              126,
+              404,
+              209,
+              464
+            ],
+            "width": 83,
+            "height": 60
+          }
+        ],
+        "lower6_solid_span": [
+          143,
+          348
+        ],
+        "lower6_solid_span_width": 205,
+        "lower6_pixels": 439,
+        "physical_helmet_boot_size": "OPEN_not_segmented",
+        "physical_sole_contact": "OPEN_graphic_lower_contour_only"
+      },
+      "position_and_pelvis_heuristics": {
+        "heuristic_only": true,
+        "helmet_warm_upper55_components": [
+          {
+            "area": 12057,
+            "bbox": [
+              201,
+              112,
+              369,
+              248
+            ],
+            "width": 168,
+            "height": 136,
+            "bbox_center": [
+              285.0,
+              180.0
+            ],
+            "pixel_centroid": [
+              287.4666998424152,
+              175.18719416106825
+            ]
+          },
+          {
+            "area": 2127,
+            "bbox": [
+              96,
+              221,
+              178,
+              285
+            ],
+            "width": 82,
+            "height": 64,
+            "bbox_center": [
+              137.0,
+              253.0
+            ],
+            "pixel_centroid": [
+              135.00564174894217,
+              257.1932299012694
+            ]
+          },
+          {
+            "area": 768,
+            "bbox": [
+              255,
+              263,
+              318,
+              285
+            ],
+            "width": 63,
+            "height": 22,
+            "bbox_center": [
+              286.5,
+              274.0
+            ],
+            "pixel_centroid": [
+              281.8411458333333,
+              276.6848958333333
+            ]
+          },
+          {
+            "area": 728,
+            "bbox": [
+              282,
+              71,
+              321,
+              103
+            ],
+            "width": 39,
+            "height": 32,
+            "bbox_center": [
+              301.5,
+              87.0
+            ],
+            "pixel_centroid": [
+              301.2692307692308,
+              85.48351648351648
+            ]
+          }
+        ],
+        "head_center_heuristic": [
+          287.4666998424152,
+          175.18719416106825
+        ],
+        "pelvis_reference_heuristic": {
+          "method": "Fixed x[176,336),y[304,384) neutral-color lower tunic/trouser ROI; largest4 connected components. Not anatomical pelvis or root measurement.",
+          "RGB_rule": "alpha>=128,maxRGB-minRGB<=35,30<=R<=170",
+          "components": [
+            {
+              "area": 6760,
+              "bbox": [
+                177,
+                304,
+                318,
+                384
+              ],
+              "width": 141,
+              "height": 80,
+              "bbox_center": [
+                247.5,
+                344.0
+              ],
+              "pixel_centroid": [
+                244.17618343195267,
+                343.1662721893491
+              ]
+            },
+            {
+              "area": 5,
+              "bbox": [
+                309,
+                311,
+                314,
+                312
+              ],
+              "width": 5,
+              "height": 1,
+              "bbox_center": [
+                311.5,
+                311.5
+              ],
+              "pixel_centroid": [
+                311.0,
+                311.0
+              ]
+            },
+            {
+              "area": 3,
+              "bbox": [
+                239,
+                304,
+                240,
+                307
+              ],
+              "width": 1,
+              "height": 3,
+              "bbox_center": [
+                239.5,
+                305.5
+              ],
+              "pixel_centroid": [
+                239.0,
+                305.0
+              ]
+            },
+            {
+              "area": 2,
+              "bbox": [
+                318,
+                304,
+                319,
+                306
+              ],
+              "width": 1,
+              "height": 2,
+              "bbox_center": [
+                318.5,
+                305.0
+              ],
+              "pixel_centroid": [
+                318.0,
+                304.5
+              ]
+            }
+          ],
+          "largest_component_centroid": [
+            244.17618343195267,
+            343.1662721893491
+          ],
+          "authoring_root_fixed": [
+            256,
+            464
+          ],
+          "true_anatomical_pelvis": "OPEN"
+        },
+        "whole_alpha128_centroid": [
+          250.81808278867103,
+          277.8825708061002
+        ],
+        "whole_bbox_center": [
+          232.5,
+          265.0
+        ]
+      }
+    },
+    "261K4": {
+      "pin": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/request261-extraction-qc-v001/aligned512/K4-body-footline464-RGBA.png",
+        "bytes": 146686,
+        "sha256": "4e90a5203db3778c31bd40d1713dec6c317cedc4937d9d163116aa4858dba911"
+      },
+      "stats": {
+        "bbox_alpha1": [
+          85,
+          51,
+          407,
+          464
+        ],
+        "bbox_alpha128": [
+          86,
+          51,
+          406,
+          463
+        ],
+        "alpha_nonzero": 66105,
+        "alpha_ge128": 64754,
+        "soft_alpha": 4968,
+        "edge_nonzero": 0
+      },
+      "proxies": {
+        "heuristic_only": true,
+        "helmet_warm_upper55_largest3": [
+          {
+            "area": 13797,
+            "bbox": [
+              220,
+              91,
+              401,
+              243
+            ],
+            "width": 181,
+            "height": 152
+          },
+          {
+            "area": 2688,
+            "bbox": [
+              90,
+              203,
+              184,
+              272
+            ],
+            "width": 94,
+            "height": 69
+          },
+          {
+            "area": 821,
+            "bbox": [
+              293,
+              56,
+              334,
+              90
+            ],
+            "width": 41,
+            "height": 34
+          }
+        ],
+        "lower60_silhouette_largest2": [
+          {
+            "area": 4864,
+            "bbox": [
+              270,
+              403,
+              380,
+              460
+            ],
+            "width": 110,
+            "height": 57
+          },
+          {
+            "area": 4367,
+            "bbox": [
+              116,
+              403,
+              210,
+              463
+            ],
+            "width": 94,
+            "height": 60
+          }
+        ],
+        "lower6_solid_span": [
+          127,
+          369
+        ],
+        "lower6_solid_span_width": 242,
+        "lower6_pixels": 446,
+        "physical_helmet_boot_size": "OPEN_not_segmented",
+        "physical_sole_contact": "OPEN_graphic_lower_contour_only"
+      },
+      "position_and_pelvis_heuristics": {
+        "heuristic_only": true,
+        "helmet_warm_upper55_components": [
+          {
+            "area": 13797,
+            "bbox": [
+              220,
+              91,
+              401,
+              243
+            ],
+            "width": 181,
+            "height": 152,
+            "bbox_center": [
+              310.5,
+              167.0
+            ],
+            "pixel_centroid": [
+              312.66369500616076,
+              167.81640936435457
+            ]
+          },
+          {
+            "area": 2688,
+            "bbox": [
+              90,
+              203,
+              184,
+              272
+            ],
+            "width": 94,
+            "height": 69,
+            "bbox_center": [
+              137.0,
+              237.5
+            ],
+            "pixel_centroid": [
+              136.87276785714286,
+              238.82589285714286
+            ]
+          },
+          {
+            "area": 821,
+            "bbox": [
+              293,
+              56,
+              334,
+              90
+            ],
+            "width": 41,
+            "height": 34,
+            "bbox_center": [
+              313.5,
+              73.0
+            ],
+            "pixel_centroid": [
+              313.8501827040195,
+              72.68940316686967
+            ]
+          },
+          {
+            "area": 608,
+            "bbox": [
+              333,
+              177,
+              358,
+              209
+            ],
+            "width": 25,
+            "height": 32,
+            "bbox_center": [
+              345.5,
+              193.0
+            ],
+            "pixel_centroid": [
+              344.7055921052632,
+              192.29934210526315
+            ]
+          }
+        ],
+        "head_center_heuristic": [
+          312.66369500616076,
+          167.81640936435457
+        ],
+        "pelvis_reference_heuristic": {
+          "method": "Fixed x[176,336),y[304,384) neutral-color lower tunic/trouser ROI; largest4 connected components. Not anatomical pelvis or root measurement.",
+          "RGB_rule": "alpha>=128,maxRGB-minRGB<=35,30<=R<=170",
+          "components": [
+            {
+              "area": 7012,
+              "bbox": [
+                180,
+                304,
+                336,
+                384
+              ],
+              "width": 156,
+              "height": 80,
+              "bbox_center": [
+                258.0,
+                344.0
+              ],
+              "pixel_centroid": [
+                253.09540787221906,
+                343.2521391899601
+              ]
+            },
+            {
+              "area": 385,
+              "bbox": [
+                290,
+                304,
+                324,
+                325
+              ],
+              "width": 34,
+              "height": 21,
+              "bbox_center": [
+                307.0,
+                314.5
+              ],
+              "pixel_centroid": [
+                307.16103896103897,
+                310.70649350649353
+              ]
+            },
+            {
+              "area": 7,
+              "bbox": [
+                268,
+                312,
+                275,
+                313
+              ],
+              "width": 7,
+              "height": 1,
+              "bbox_center": [
+                271.5,
+                312.5
+              ],
+              "pixel_centroid": [
+                271.0,
+                312.0
+              ]
+            },
+            {
+              "area": 3,
+              "bbox": [
+                324,
+                383,
+                327,
+                384
+              ],
+              "width": 3,
+              "height": 1,
+              "bbox_center": [
+                325.5,
+                383.5
+              ],
+              "pixel_centroid": [
+                325.0,
+                383.0
+              ]
+            }
+          ],
+          "largest_component_centroid": [
+            253.09540787221906,
+            343.2521391899601
+          ],
+          "authoring_root_fixed": [
+            256,
+            464
+          ],
+          "true_anatomical_pelvis": "OPEN"
+        },
+        "whole_alpha128_centroid": [
+          272.55406615807516,
+          275.45127714118047
+        ],
+        "whole_bbox_center": [
+          246.0,
+          257.0
+        ]
+      }
+    }
+  },
+  "frame": {
+    "frame": 4,
+    "raw_full_canvas_box": [
+      0,
+      0,
+      1254,
+      1254
+    ],
+    "raw1254": {
+      "bbox_alpha1": [
+        218,
+        150,
+        979,
+        1108
+      ],
+      "bbox_alpha128": [
+        218,
+        150,
+        979,
+        1107
+      ],
+      "alpha_nonzero": 357543,
+      "alpha_ge128": 356179,
+      "soft_alpha": 4359,
+      "edge_nonzero": 0
+    },
+    "uniform512_before_edge": {
+      "bbox_alpha1": [
+        86,
+        59,
+        402,
+        455
+      ],
+      "bbox_alpha128": [
+        89,
+        61,
+        400,
+        452
+      ],
+      "alpha_nonzero": 62364,
+      "alpha_ge128": 59342,
+      "soft_alpha": 6050,
+      "edge_nonzero": 0
+    },
+    "edgeclean512_before_shift": {
+      "bbox_alpha1": [
+        89,
+        61,
+        400,
+        453
+      ],
+      "bbox_alpha128": [
+        89,
+        61,
+        400,
+        452
+      ],
+      "alpha_nonzero": 60384,
+      "alpha_ge128": 59342,
+      "soft_alpha": 4070,
+      "edge_nonzero": 0
+    },
+    "aligned512": {
+      "bbox_alpha1": [
+        89,
+        72,
+        400,
+        464
+      ],
+      "bbox_alpha128": [
+        89,
+        72,
+        400,
+        463
+      ],
+      "alpha_nonzero": 60384,
+      "alpha_ge128": 59342,
+      "soft_alpha": 4070,
+      "edge_nonzero": 0
+    },
+    "transform": {
+      "scale_numerator": 512,
+      "scale_denominator": 1254,
+      "scale": 0.4082934609250399,
+      "resampler": "Pillow LANCZOS RGBA premultiplied-alpha resize",
+      "source_center_mapping": "source=(destination+0.5)*1254/512-0.5",
+      "x_shift": 0,
+      "y_integer_shift": 11,
+      "subject_bbox_fit": false,
+      "per_component_or_pose_scale": false,
+      "anatomical_warp": false,
+      "crop": false
+    },
+    "raw_graphic_foot_boundary_alpha1": 1108,
+    "raw_graphic_foot_boundary_alpha128": 1107,
+    "final_graphic_foot_boundary_alpha1": 464,
+    "final_graphic_foot_boundary_alpha128": 463,
+    "actual_solid_width": 311,
+    "actual_solid_height": 391,
+    "proxies": {
+      "heuristic_only": true,
+      "helmet_warm_upper55_largest3": [
+        {
+          "area": 12309,
+          "bbox": [
+            221,
+            125,
+            394,
+            259
+          ],
+          "width": 173,
+          "height": 134
+        },
+        {
+          "area": 2574,
+          "bbox": [
+            94,
+            214,
+            185,
+            282
+          ],
+          "width": 91,
+          "height": 68
+        },
+        {
+          "area": 830,
+          "bbox": [
+            294,
+            77,
+            335,
+            110
+          ],
+          "width": 41,
+          "height": 33
+        }
+      ],
+      "lower60_silhouette_largest2": [
+        {
+          "area": 4714,
+          "bbox": [
+            269,
+            403,
+            373,
+            461
+          ],
+          "width": 104,
+          "height": 58
+        },
+        {
+          "area": 4029,
+          "bbox": [
+            137,
+            403,
+            223,
+            463
+          ],
+          "width": 86,
+          "height": 60
+        }
+      ],
+      "lower6_solid_span": [
+        147,
+        369
+      ],
+      "lower6_solid_span_width": 222,
+      "lower6_pixels": 523,
+      "physical_helmet_boot_size": "OPEN_not_segmented",
+      "physical_sole_contact": "OPEN_graphic_lower_contour_only"
+    },
+    "position_and_pelvis_heuristics": {
+      "heuristic_only": true,
+      "helmet_warm_upper55_components": [
+        {
+          "area": 12309,
+          "bbox": [
+            221,
+            125,
+            394,
+            259
+          ],
+          "width": 173,
+          "height": 134,
+          "bbox_center": [
+            307.5,
+            192.0
+          ],
+          "pixel_centroid": [
+            310.5130392395808,
+            186.59655536599237
+          ]
+        },
+        {
+          "area": 2574,
+          "bbox": [
+            94,
+            214,
+            185,
+            282
+          ],
+          "width": 91,
+          "height": 68,
+          "bbox_center": [
+            139.5,
+            248.0
+          ],
+          "pixel_centroid": [
+            139.51398601398603,
+            249.64141414141415
+          ]
+        },
+        {
+          "area": 830,
+          "bbox": [
+            294,
+            77,
+            335,
+            110
+          ],
+          "width": 41,
+          "height": 33,
+          "bbox_center": [
+            314.5,
+            93.5
+          ],
+          "pixel_centroid": [
+            314.60843373493975,
+            93.60120481927711
+          ]
+        },
+        {
+          "area": 577,
+          "bbox": [
+            330,
+            195,
+            354,
+            226
+          ],
+          "width": 24,
+          "height": 31,
+          "bbox_center": [
+            342.0,
+            210.5
+          ],
+          "pixel_centroid": [
+            341.4627383015598,
+            209.36221837088388
+          ]
+        }
+      ],
+      "head_center_heuristic": [
+        310.5130392395808,
+        186.59655536599237
+      ],
+      "pelvis_reference_heuristic": {
+        "method": "Fixed x[176,336),y[304,384) neutral-color lower tunic/trouser ROI; largest4 connected components. Not anatomical pelvis or root measurement.",
+        "RGB_rule": "alpha>=128,maxRGB-minRGB<=35,30<=R<=170",
+        "components": [
+          {
+            "area": 6177,
+            "bbox": [
+              187,
+              305,
+              335,
+              384
+            ],
+            "width": 148,
+            "height": 79,
+            "bbox_center": [
+              261.0,
+              344.5
+            ],
+            "pixel_centroid": [
+              253.45199935243645,
+              349.84782256758945
+            ]
+          },
+          {
+            "area": 717,
+            "bbox": [
+              274,
+              304,
+              326,
+              333
+            ],
+            "width": 52,
+            "height": 29,
+            "bbox_center": [
+              300.0,
+              318.5
+            ],
+            "pixel_centroid": [
+              297.7629009762901,
+              313.2914923291492
+            ]
+          },
+          {
+            "area": 1,
+            "bbox": [
+              223,
+              308,
+              224,
+              309
+            ],
+            "width": 1,
+            "height": 1,
+            "bbox_center": [
+              223.5,
+              308.5
+            ],
+            "pixel_centroid": [
+              223.0,
+              308.0
+            ]
+          },
+          {
+            "area": 1,
+            "bbox": [
+              251,
+              310,
+              252,
+              311
+            ],
+            "width": 1,
+            "height": 1,
+            "bbox_center": [
+              251.5,
+              310.5
+            ],
+            "pixel_centroid": [
+              251.0,
+              310.0
+            ]
+          }
+        ],
+        "largest_component_centroid": [
+          253.45199935243645,
+          349.84782256758945
+        ],
+        "authoring_root_fixed": [
+          256,
+          464
+        ],
+        "true_anatomical_pelvis": "OPEN"
+      },
+      "whole_alpha128_centroid": [
+        271.5976879781605,
+        283.3663004280274
+      ],
+      "whole_bbox_center": [
+        244.5,
+        267.5
+      ]
+    },
+    "comparisons": {
+      "Ready": {
+        "graphic_solid_width_ratio": 1.460093896713615,
+        "graphic_solid_height_ratio": 0.9421686746987952,
+        "lower6_span_ratio": 1.2065217391304348,
+        "helmet_warm_core_width_ratio": 1.0297619047619047,
+        "helmet_warm_core_height_ratio": 0.9436619718309859,
+        "helmet_warm_core_area_ratio": 1.097645799892991,
+        "head_core_centroid_delta": [
+          48.75425557630274,
+          21.6522000957944
+        ],
+        "interpretation": "Contour and color-proxy comparisons only. Lower total height can reflect crouch/lean; no automatic body scale judgment."
+      },
+      "260K3": {
+        "graphic_solid_width_ratio": 1.098939929328622,
+        "graphic_solid_height_ratio": 0.9824120603015075,
+        "lower6_span_ratio": 1.0829268292682928,
+        "helmet_warm_core_width_ratio": 1.0297619047619047,
+        "helmet_warm_core_height_ratio": 0.9852941176470589,
+        "helmet_warm_core_area_ratio": 1.0209007215725305,
+        "head_core_centroid_delta": [
+          23.046339397165582,
+          11.409361204924124
+        ],
+        "interpretation": "Contour and color-proxy comparisons only. Lower total height can reflect crouch/lean; no automatic body scale judgment."
+      },
+      "261K4": {
+        "graphic_solid_width_ratio": 0.971875,
+        "graphic_solid_height_ratio": 0.9490291262135923,
+        "lower6_span_ratio": 0.9173553719008265,
+        "helmet_warm_core_width_ratio": 0.9558011049723757,
+        "helmet_warm_core_height_ratio": 0.881578947368421,
+        "helmet_warm_core_area_ratio": 0.8921504674929333,
+        "head_core_centroid_delta": [
+          -2.1506557665799733,
+          18.780146001637803
+        ],
+        "interpretation": "Contour and color-proxy comparisons only. Lower total height can reflect crouch/lean; no automatic body scale judgment."
+      }
+    },
+    "low_alpha_1to8_pixels_zeroed": 1980,
+    "deep_opaque_RGB_changed": 0,
+    "inverse_y_translation_RGBA_exact": true,
+    "alpha128_footprint_unchanged_by_cleanup": true
+  },
+  "technical_extraction_completed": true,
+  "technical_derivative_PNG_count": 9,
+  "creative_image_generation_calls": 0,
+  "images_viewed": false,
+  "actual_Source_Content_tools_E_status_ledger_mutations": 0,
+  "scale_or_anatomy_accepted": false,
+  "physical_helmet_boot_pelvis_dimensions": "OPEN_heuristic_proxies_only",
+  "visual_review": "PENDING_Root_after_F_E_retention",
+  "runtime_imported": false,
+  "FinalAccepted": false
+}

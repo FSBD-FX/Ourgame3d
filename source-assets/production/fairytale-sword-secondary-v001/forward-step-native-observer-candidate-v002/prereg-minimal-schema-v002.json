@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Root-filled source-compiled normal-K prereg v002",
+  "type": "object",
+  "required": [
+    "schema",
+    "ready",
+    "route_mode",
+    "K_profile_runtime_ready",
+    "observer_editor_compile_verified",
+    "observer_fresh_review_approved",
+    "placement_witness_source_ready",
+    "review_report",
+    "compiled_manifest",
+    "editor_executable",
+    "game_dll",
+    "uproject",
+    "resource_pins",
+    "map",
+    "cases",
+    "checker_dependencies"
+  ],
+  "properties": {
+    "schema": {
+      "const": "swd-forward-step-native-readiness-v002"
+    },
+    "ready": {
+      "const": true
+    },
+    "route_mode": {
+      "enum": [
+        "exploratory_pilot",
+        "strict"
+      ]
+    },
+    "K_profile_runtime_ready": {
+      "const": true
+    },
+    "observer_editor_compile_verified": {
+      "const": true
+    },
+    "observer_fresh_review_approved": {
+      "const": true
+    },
+    "placement_witness_source_ready": {
+      "const": true
+    },
+    "review_report": {
+      "$ref": "#/$defs/pin"
+    },
+    "compiled_manifest": {
+      "$ref": "#/$defs/pin"
+    },
+    "editor_executable": {
+      "$ref": "#/$defs/pin"
+    },
+    "game_dll": {
+      "$ref": "#/$defs/pin"
+    },
+    "uproject": {
+      "$ref": "#/$defs/pin"
+    },
+    "resource_pins": {
+      "type": "array",
+      "minItems": 81,
+      "maxItems": 81,
+      "items": {
+        "$ref": "#/$defs/resource"
+      }
+    },
+    "map": {
+      "const": "/Game/Maps/FirstRoom?DungeonFirstBatchGuardRoom"
+    },
+    "cases": {
+      "type": "object",
+      "description": "At minimum requested case. {facing:+/-1,normal_route_native_verified:false for first pilot,enemy_diagnostic_used:false,waypoints:[{xy:[x,y],tolerance_cm:4,allow_blocked_contact:false}],route_native_verification:null}; strict must provide independent route evidence pin instead of null."
+    },
+    "checker_dependencies": {
+      "type": "object",
+      "required": [
+        "main_mix",
+        "native_png",
+        "K_pixel_composition"
+      ],
+      "properties": {
+        "main_mix": {
+          "$ref": "#/$defs/pin"
+        },
+        "native_png": {
+          "$ref": "#/$defs/pin"
+        },
+        "K_pixel_composition": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/pin"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "$defs": {
+    "pin": {
+      "type": "object",
+      "required": [
+        "path",
+        "bytes",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "resource": {
+      "type": "object",
+      "required": [
+        "group",
+        "frame",
+        "component",
+        "texture",
+        "source_png",
+        "bytes",
+        "sha256",
+        "rgba_sha256",
+        "uasset"
+      ],
+      "properties": {
+        "group": {
+          "enum": [
+            "K",
+            "Ready"
+          ]
+        },
+        "frame": {
+          "type": "integer"
+        },
+        "component": {
+          "type": "integer"
+        },
+        "texture": {
+          "type": "string"
+        },
+        "source_png": {
+          "type": "string"
+        },
+        "bytes": {
+          "type": "integer"
+        },
+        "sha256": {
+          "type": "string"
+        },
+        "rgba_sha256": {
+          "type": "string"
+        },
+        "uasset": {
+          "$ref": "#/$defs/pin"
+        }
+      }
+    }
+  },
+  "description": "Template stays ready=false until true source/compile/review/resource evidence is filled. This schema describes runnable Root prereg, not a claim current candidate is ready. Python driver adds strict route and complete manifest gates."
+}

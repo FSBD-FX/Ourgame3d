@@ -1,0 +1,213 @@
+{
+  "schema": "fairytale-sword-body-native-input-v1",
+  "created_local": "2026-10-16T09:55:17.617607+08:00",
+  "rows": [
+    {
+      "component": "SwordReady",
+      "state": "sword_ready_idle",
+      "run_dir": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002",
+      "raw_output_path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/raw/sword_ready_idle.png",
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/prompts/ready-body-only-v002.txt",
+        "bytes": 4858,
+        "sha256": "a96a4626808fd9321b492f534d9c451d7e991432883a2d29ad35266ecee174b6"
+      },
+      "reference_images_in_order": [
+        {
+          "role": "sole_identity131",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/curated/frame-0.png",
+            "bytes": 117257,
+            "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718"
+          }
+        },
+        {
+          "role": "original_grayscale_low_outward_anatomy_only",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/guides/ready-anatomical-motion-v002.png",
+            "bytes": 23486,
+            "sha256": "96355912690eeca7c60ec41e6cd2a893491d0077803b21ad299edd4de9cc784f"
+          }
+        },
+        {
+          "role": "standard_component_count_layout",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/references/layout-guides/sword_ready_idle.png",
+            "bytes": 4526,
+            "sha256": "8f379aea412fd60f6afb708cc373f79dacd688db9dcf844edb190b3199468420"
+          }
+        }
+      ],
+      "frame_count": 4,
+      "durations_ms": [
+        167,
+        167,
+        167,
+        167
+      ],
+      "loop": true,
+      "fit_window_px": [
+        416,
+        416
+      ],
+      "target_mounts": [
+        {
+          "frame": 0,
+          "A": [
+            275,
+            315
+          ],
+          "grip_design_px": [
+            275,
+            315
+          ],
+          "near_wrist_design_px": [
+            255,
+            304
+          ],
+          "grip_axis_design_xy": [
+            0.94,
+            -0.341
+          ],
+          "far_hand_design_px": [
+            345,
+            365
+          ],
+          "source_root_design_px": [
+            256,
+            464
+          ],
+          "meaning": "Authoring pose only; not a measured joint/grip/root/clearance."
+        },
+        {
+          "frame": 1,
+          "A": [
+            275,
+            314
+          ],
+          "grip_design_px": [
+            275,
+            314
+          ],
+          "near_wrist_design_px": [
+            255,
+            303
+          ],
+          "grip_axis_design_xy": [
+            0.94,
+            -0.341
+          ],
+          "far_hand_design_px": [
+            345,
+            364
+          ],
+          "source_root_design_px": [
+            256,
+            464
+          ],
+          "meaning": "Authoring pose only; not a measured joint/grip/root/clearance."
+        },
+        {
+          "frame": 2,
+          "A": [
+            275,
+            316
+          ],
+          "grip_design_px": [
+            275,
+            316
+          ],
+          "near_wrist_design_px": [
+            255,
+            305
+          ],
+          "grip_axis_design_xy": [
+            0.94,
+            -0.341
+          ],
+          "far_hand_design_px": [
+            345,
+            366
+          ],
+          "source_root_design_px": [
+            256,
+            464
+          ],
+          "meaning": "Authoring pose only; not a measured joint/grip/root/clearance."
+        },
+        {
+          "frame": 3,
+          "A": [
+            275,
+            315
+          ],
+          "grip_design_px": [
+            275,
+            315
+          ],
+          "near_wrist_design_px": [
+            255,
+            304
+          ],
+          "grip_axis_design_xy": [
+            0.94,
+            -0.341
+          ],
+          "far_hand_design_px": [
+            345,
+            365
+          ],
+          "source_root_design_px": [
+            256,
+            464
+          ],
+          "meaning": "Authoring pose only; not a measured joint/grip/root/clearance."
+        }
+      ],
+      "source_native_facing": 1,
+      "source_canvas_px": [
+        512,
+        512
+      ],
+      "source_root_design_px": [
+        256,
+        464
+      ],
+      "shared_row_scale": true,
+      "target_mounts_are_measured": false,
+      "numeric_design_contract": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/ready-design-contract-v002.json",
+        "bytes": 3686,
+        "sha256": "54188bbdc854830ce30ee2666de488ec16569c5b1ada4a02f493cf14511db09a"
+      },
+      "standard_prepare_command": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\prepare_sprite_run.py",
+        "--out-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-sword-v001\\run-ready-v002",
+        "--character-id",
+        "fairytale-common-hero-sword-ready-v002",
+        "--base-image",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-idle-v002\\curated\\frame-0.png",
+        "--description",
+        "Exactly four distinct canonical131 BODY-ONLY low-outward single-hand Ready breaths. Short near arm bends continuously through a visible elbow/wrist into a closed brown fist below/right of chest; far relaxed hand visibly separate beside far thigh.",
+        "--style",
+        "EXACT canonical131 grotesque hand-inked dark-fairytale bell helmet/dark cloth/brown gloves and boots. Same squat short-limbed identity; body-only no armor or sword.",
+        "--cell-size",
+        "512",
+        "--chroma-key",
+        "#00FF00",
+        "--request",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-sword-v001\\requests\\ready-numeric-input-v002.json"
+      ],
+      "standard_prepare_exit_code": 0,
+      "new_guides_viewed": false,
+      "generated": false,
+      "actual_raw_sha256": null,
+      "formal_complete_units": 0
+    }
+  ]
+}

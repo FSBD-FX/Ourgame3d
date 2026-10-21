@@ -1,0 +1,33 @@
+{
+  "field_sources": {
+    "Present": "Set true only on actual existing de-duplicated ForwardStep post-SetActorLocation/post-Sync branch, including measured zero delta.",
+    "RunGuid/RoomInstanceId/EquipmentRevisionAtCommit": "Already existing actual AudioView=GetEquipmentView(), checked against WeaponWorld Run/Room. Revision observed only, never frozen-version query equality.",
+    "OwnerId": "Fighter->GetRuntimeEntityId(), same actual PlayerFighter and current equipment OwnerId.",
+    "ActionId/InstanceId/EventId/SubhitId/Kind/Weapon/ActionStart/AtTime/RequestedSignedDistance": "Unchanged true E fields / E.Action fields after original LastSkillEventId de-duplication; IDs not created or borrowed from J.",
+    "Before": "Existing AudioBefore=Fighter->GetGroundPosition() immediately before existing SweepWeaponStep and placement.",
+    "After": "Existing AudioAfter=Fighter->GetGroundPosition() after existing SetActorLocation and SyncWeaponMuzzleTransform.",
+    "CommittedDelta": "Exact actual After-Before, NOT SweepWeaponStep return/request/planned End or observer inference.",
+    "GroundedAtCommit": "Actual Fighter JumpHeight/JumpVelocity plus actual WeaponActions budget and Melee grounded states read at commit.",
+    "PresentationEpoch": "Existing GameMode RunPresentationEpoch; real CommitPreparedRunGroup increments at existing .cpp354 after publish. Candidate never increments/resets it.",
+    "RunRestartSerial": "Existing GameMode RunRestartSerial; BeginEquipmentRun .cpp513 increments, legacy RestartRun .cpp2122 increments. Candidate never increments/resets it.",
+    "ObservedSimulationTime": "Existing actual SimulationTime at the commit, not a new clock or observation sequence."
+  },
+  "lifecycle": {
+    "new_run": "RunGuid + existing RunRestartSerial differ; query rejects old stored value without changing business reset paths.",
+    "new_room": "actual EquipmentView and WeaponWorld RoomInstanceId differ; query rejects old stored room.",
+    "restore": "existing RunPresentationEpoch increment invalidates all pre-restore values, even if persisted Run/Room/Action/Event IDs match; install-gated queries also return false.",
+    "death": "bDead / budget.Dead read directly; getter clears Out and rejects. No death rules changed.",
+    "new_action_or_weapon": "current actual Skill ActionId/InstanceId/ActionStart must match witness, plus actual current action must remain active/locked/ForwardStepIssued.",
+    "action_End_or_interrupt": "getter rejects !Active, Interrupted or SimulationTime>=A.End. Observer must read each callback during the real active action and preserve its own local copy. End-time lookup cannot manufacture an instant placement proof.",
+    "dedupe": "Producer is inside the unchanged E.EventId>LastSkillEventId branch after LastSkillEventId=E.EventId; no new IDs or sequences. Getter also checks EventId against real consumed LastSkillEventId and real kernel NextEventId.",
+    "observer_stale_key": "A successful getter returns latest same-active-action actual fact, not a per-callback new event guarantee. Observer MUST compare Run/Room/Owner/PresentationEpoch/RunRestartSerial/Action/Instance/Event/Subhit/AtTime to its genuine expected event and de-duplicate locally; do not infer zero from lack of audio DTO or getter failure.",
+    "no_snapshot_restore": "Private latest value is transient; no D13 Owner/World/Run schema or restoration assignments added.",
+    "audio_independent": "Witness neither requires HeroLocomotionAudioActiveV001 nor calls audio eligibility or Append. Actual audio branch preserved byte-for-byte and remains silent on zero."
+  },
+  "actual_root_facts": {
+    "WorldProjectiles_baseline_sha256": "1c94c6fd233bd4dd2bd239623b098a49ffa4e72d6c606f01e5e2d4aa58158310",
+    "current_CM_parent_supplied": "ae00569b",
+    "no_claim_CM_was_independently_recomputed": true
+  },
+  "not_yet_native_verified": true
+}

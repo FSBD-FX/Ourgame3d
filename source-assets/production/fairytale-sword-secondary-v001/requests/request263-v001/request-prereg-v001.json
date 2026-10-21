@@ -1,0 +1,43 @@
+{
+  "request_number": 263,
+  "asset": "hero-SWD001-K4-single-compact-followthrough-correction",
+  "status": "requested_not_yet_returned",
+  "source_event": "EV048",
+  "authorization_events": [
+    "EV-039",
+    "EV-040",
+    "EV-041",
+    "EV-042",
+    "EV-045",
+    "EV-046"
+  ],
+  "window_number": 11,
+  "requested_utc": "2026-10-18T22:22:03.481179+00:00",
+  "prompt_path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/requests/request263-v001/prompt.txt",
+  "prompt": "Edit ONLY Reference1: one complete BODY pose at the low diagonal cutting follow-through K4. Output ONE pose, not an animation sheet. Preserve its bent near arm and CLOSED low-front gripping fist, far open balancing hand, gray outfit, torso rotation/forward lean, helmet tilt and bell identity. Make a targeted proportional correction without changing this action pose or rescaling the whole character.\n\nReference2 is the ORIGINAL accepted Ready master, authority for the rigid helmet/glove/boot dimensions, short limbs, camera and hand-painted cartoon style. Reference3 is the immediately preceding compact K3 attack pose; K4 must keep the SAME compact planted feet as K3 while the wrist follows through farther down/front.\n\nIn Reference1 the front boot is too large and too far to the right; bring it left to match Reference3, and reduce both boots to the compact master dimensions. Match K3's below-belt silhouette and foot positions, keeping its front-weighted knee and lightly unloaded rear heel, while preserving Reference1's distinct low cutting upper body. Do not spread the legs into another lunge. Restore the rigid helmet and gripping glove to the master size; the helmet should not become larger just because the torso leans forward. Preserve its tilt and upper-body position naturally, with no stretched neck or giant mitten.\n\nOne square512x512 canvas, fixed three-quarter RIGHT-facing view and the SAME camera scale as all references; complete body fully inside. Authored root/pelvis aroundx256; sole baseline near464; master standing-equivalent height415. For the compact K3 foot positions, approximate boot centers arex167 and300 with widths83 and102; these are layout guides, not drawn numbers. No bbox fitting, whole-body zoom, sideways slide, or different framing.\n\nFlat solid #FF00FF background instead of transparency, no floor/shadow. Body ONLY with chipped bronze bell helmet/square top knob, black cavity with two amber eyes, gray soft underclothes, leather gloves/belt/boots. NO sword/hilt/handle, shield, chest armor, pauldrons, effects, motion blur, text, labels or grid. No extra pose, raised attack hand, new windup, human skin/hair/face, extra limbs, realistic detail or costume redesign. The final image must keep Reference1's unique LOW diagonal-cut arm pose and match Reference3's compact planted feet.\n",
+  "prompt_file_sha256": "65e6eb1e919953f2dc321b433760780bbc6903caefaa2deeabaea2131d437668",
+  "reference_images": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/request261-extraction-qc-v001/aligned512/K4-body-footline464-RGBA.png",
+      "bytes": 146686,
+      "sha256": "4e90a5203db3778c31bd40d1713dec6c317cedc4937d9d163116aa4858dba911"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/references/ready-body-master.png",
+      "bytes": 121133,
+      "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/request260-extraction-qc-v001/aligned512/K3-body-footline464-RGBA.png",
+      "bytes": 131292,
+      "sha256": "ce6cd031a5bac1a86c5b63f25f75db8fdf1f19911aec28acb8cb50771c23a4a7"
+    }
+  ],
+  "transparent_background": false,
+  "backend": "builtin-imagegen",
+  "external_api_calls": 0,
+  "host_fee_usd": null,
+  "raw_destination_planned": "F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/requests/request263-v001/raw/K4-single-corrected-raw.png",
+  "runtime_imported": false,
+  "formal_complete_units": 0
+}

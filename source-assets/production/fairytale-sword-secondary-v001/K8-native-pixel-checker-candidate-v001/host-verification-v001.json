@@ -1,0 +1,46 @@
+{
+  "schema": "K8-host-preparation-verification-v001",
+  "utc": "2026-10-18T23:20:37.061254+00:00",
+  "commands": [
+    {
+      "argv": [
+        "F:/Ourgame/tools/runtime/asset-gen/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-sword-secondary-v001\\K8-native-pixel-checker-candidate-v001\\test_K8_pixel_gates_v001.py"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "...........................\n----------------------------------------------------------------------\nRan 27 tests in 12.923s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "F:/Ourgame/tools/runtime/asset-gen/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-sword-secondary-v001\\K8-native-pixel-checker-candidate-v001\\verify-K8-native-pixels-v001.py",
+        "--source-preflight"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"status\": \"SourceInputsVerified\",\n  \"actual_source_uasset_resources\": 81,\n  \"source_contract\": {\n    \"path\": \"F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/K8-production-contract-builder-candidate-v001/output/source-contract-package-v001/source-contract-v001.json\",\n    \"bytes\": 156178,\n    \"sha256\": \"ef1d2418b7bae89da963fe6d3963c250fa84f89b7108581058dbf06d12be1d4b\"\n  },\n  \"resource_table\": {\n    \"path\": \"F:/Ourgame/source-assets/production/fairytale-sword-secondary-v001/Root-native-resource-inputs-v001/K57-plus-Ready24-source-uasset-pins-v001.json\",\n    \"bytes\": 72590,\n    \"sha256\": \"b5f3d6689ed3cb43ded9f4bbbd25036352bf948270b123bae3c21e1521574961\"\n  },\n  \"original_functions_unchanged\": 8,\n  \"native_run_attempted\": false,\n  \"actual_native_pixel_composition_verified\": false,\n  \"FinalAccepted\": false\n}\n",
+      "stderr": ""
+    }
+  ],
+  "observed_TDD_RED": [
+    {
+      "stage": "first test run before implementation",
+      "exit_code": 1,
+      "reason": "FileNotFoundError verify-K8-native-pixels-v001.py"
+    },
+    {
+      "stage": "new independent ROI tests before helper extraction",
+      "exit_code": 1,
+      "reason": "AttributeError component_evidence absent; two tests failed"
+    }
+  ],
+  "actual_native_run": false,
+  "actual_native_pixel_composition_verified": false,
+  "FinalAccepted": false
+}

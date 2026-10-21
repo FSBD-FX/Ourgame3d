@@ -1,0 +1,29 @@
+{
+  "schema": "swd-native-observer-exact-seams-v001",
+  "operations": [
+    {
+      "target": "UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "kind": "insert_after",
+      "anchor": "#include \"DungeonHeroLandingPriorityProbeV001.h\"",
+      "text": "\r\n#include \"DungeonSwdForwardStepProbeV001.h\""
+    },
+    {
+      "target": "UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "kind": "insert_before",
+      "anchor": "    else if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonHeroLandingPriorityProofV001\")))\r\n",
+      "text": "    else if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonSwdForwardStepProofV001\")))\r\n        GetWorld()->SpawnActor<ADungeonSwdForwardStepProbeV001>();\r\n"
+    },
+    {
+      "target": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "kind": "insert_before",
+      "anchor": "        if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonHeroAirDiskRestoreProofV001\")))return;\r\n",
+      "text": "        if(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonSwdForwardStepProofV001\")))return;\r\n"
+    }
+  ],
+  "new_files": [
+    "UnrealGame/Source/CodexDungeon/DungeonSwdForwardStepProbeV001.cpp",
+    "UnrealGame/Source/CodexDungeon/DungeonSwdForwardStepProbeV001.h"
+  ],
+  "existing_source_semantics": "Only explicit new flag dispatch and old ContentProbe suppression; no default production branch changes. Compose inserts into latest independently reviewed HUD; never copy full old projected HUD over K runtime changes.",
+  "new_source_files_count": 2
+}

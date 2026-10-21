@@ -1,0 +1,68 @@
+{
+  "schema": "hero-swd-forward-step-audio-exact-seams-v001",
+  "status": "UNAPPLIED_CANDIDATE",
+  "files": [
+    {
+      "name": "DungeonActionAudioFeedback.h",
+      "before": "before/DungeonActionAudioFeedback.h",
+      "projected": "projected/DungeonActionAudioFeedback.h",
+      "before_bytes": 1042,
+      "before_sha256": "06db7fb74adf07a953c0a1046156567e6368c40958136b791da240ed44bf33d5",
+      "after_bytes": 3108,
+      "after_sha256": "a2e121c0a60474919989c75c78c5a64fb0d247b1e4dd764923251c1fed88c9f5",
+      "line_ending": "LF",
+      "operations": [
+        {
+          "before": "// Transient presentation facts only.",
+          "after": "// Optional actual ForwardStep commit witness on the existing transient journal.\n// Source key = this EventId/SubhitId plus the parent record's Run/Room/Owner/Action/Instance.\nstruct FDungeonActionAudioForwardStepV001\n{\n    bool Present = false;\n    uint64 EventId = 0;\n    uint32 SubhitId = 0;\n    double RequestedSignedDistance = 0.0;\n    FVector2D Before{0.,0.}, After{0.,0.}, CommittedDelta{0.,0.};\n};\n\nnamespace DungeonHeroForwardStepAudioV001\n{\n// Reads the real post-placement result. No movement, cadence, IDs or clocks are created.\ninline bool Eligible(const DungeonWeaponActions::FEvent& E,const DungeonWeaponActions::FAction& Current,\n    uint64 Owner,uint64 ExpectedOwner,bool ActiveGroundedScope,double Now,FVector2D Before,FVector2D After)\n{\n    using namespace DungeonWeaponActions;\n    if(!ActiveGroundedScope||!Owner||Owner!=ExpectedOwner||E.Kind!=EEvent::ForwardStep||!E.EventId\n        ||!E.ActionId||!E.InstanceId||E.Action.Type!=EAction::Skill||E.Action.Weapon!=EWeapon::SWD001\n        ||!E.Action.Active||!E.Action.Locked||E.Action.StartedAirborne||!E.Action.ForwardStepIssued\n        ||E.ActionId!=E.Action.ActionId||E.InstanceId!=E.Action.InstanceId\n        ||Current.Type!=EAction::Skill||Current.Weapon!=EWeapon::SWD001||!Current.Active||!Current.Locked\n        ||Current.StartedAirborne||!Current.ForwardStepIssued||!Current.NextSubhit||Current.Terminal==EEvent::Interrupted\n        ||Current.ActionId!=E.ActionId||Current.InstanceId!=E.InstanceId\n        ||Current.Start!=E.Action.Start||Current.ActiveAt!=E.AtTime||E.Action.ActiveAt!=E.AtTime\n        ||!std::isfinite(E.AtTime)||E.AtTime<0.||!std::isfinite(Now)||Now<E.AtTime||Now-E.AtTime>.25\n        ||!std::isfinite(E.ForwardStep)||E.ForwardStep==0.\n        ||!std::isfinite(Before.X)||!std::isfinite(Before.Y)||!std::isfinite(After.X)||!std::isfinite(After.Y))return false;\n    const double DX=After.X-Before.X,DY=After.Y-Before.Y,DistanceSquared=DX*DX+DY*DY;\n    return std::isfinite(DistanceSquared)&&DistanceSquared>1.e-8;\n}\n}\n\n// Transient presentation facts only."
+        },
+        {
+          "before": "    uint64 OperationId = 0, Revision = 0;",
+          "after": "    uint64 OperationId = 0, Revision = 0;\n    FDungeonActionAudioForwardStepV001 ForwardStep;"
+        }
+      ]
+    },
+    {
+      "name": "DungeonWorldProjectiles.cpp",
+      "before": "before/DungeonWorldProjectiles.cpp",
+      "projected": "projected/DungeonWorldProjectiles.cpp",
+      "before_bytes": 25886,
+      "before_sha256": "e3643e5f45a4339dfc7c27a5843435cd2229b9cc6c8ea04ea25815d605db8fcc",
+      "after_bytes": 27829,
+      "after_sha256": "1c94c6fd233bd4dd2bd239623b098a49ffa4e72d6c606f01e5e2d4aa58158310",
+      "line_ending": "CRLF",
+      "operations": [
+        {
+          "before": "            const auto Delta=SweepWeaponStep(Fighter,E.ForwardStep,E.AtTime);",
+          "after": "            const auto AudioBefore=Fighter->GetGroundPosition();\n            const auto Delta=SweepWeaponStep(Fighter,E.ForwardStep,E.AtTime);"
+        },
+        {
+          "before": "            Fighter->SetActorLocation(FVector(End.X,End.Y,0));Fighter->SyncWeaponMuzzleTransform();\n",
+          "after": "            Fighter->SetActorLocation(FVector(End.X,End.Y,0));Fighter->SyncWeaponMuzzleTransform();\n            const auto AudioAfter=Fighter->GetGroundPosition();\n            const auto& AudioSkill=Fighter->GetWeaponActionsState();const auto& AudioView=GetEquipmentView();\n            const bool AudioScope=Fighter==PlayerFighter&&Fighter->IsEquipmentBound()&&AudioView.Bound\n                &&AudioView.RunGuid.IsValid()&&AudioView.RoomInstanceId&&AudioView.Revision\n                &&ActionAudioState.RunGuid==AudioView.RunGuid&&WeaponWorld.RunGuid==AudioView.RunGuid\n                &&WeaponWorld.RoomInstanceId==AudioView.RoomInstanceId&&AudioSkill.Time==SimulationTime\n                &&E.AtTime>=SkillBatchFrom&&E.AtTime<=SkillBatchTo&&HeroLocomotionAudioActiveV001()\n                &&Fighter->JumpHeight==0.f&&Fighter->JumpVelocity==0.f&&AudioSkill.Budget.Grounded\n                &&Fighter->GetMeleeCombatState().Grounded;\n            if(DungeonHeroForwardStepAudioV001::Eligible(E,AudioSkill.Action,Fighter->GetRuntimeEntityId(),\n                AudioView.OwnerId,AudioScope,SimulationTime,AudioBefore,AudioAfter))\n            {\n                const uint64 AudioSequence=ActionAudioState.NextSequence;\n                AppendActionAudio(TEXT(\"HERO_STEP_LIGHT_01\"),E.AtTime,Fighter->GetRuntimeEntityId(),\n                    E.ActionId,E.InstanceId,0,AudioView.Revision);\n                if(ActionAudioState.NextSequence==AudioSequence+1&&!ActionAudioState.Records.IsEmpty()\n                    &&ActionAudioState.Records.Last().Sequence==AudioSequence)\n                {\n                    auto& Witness=ActionAudioState.Records.Last().ForwardStep;Witness.Present=true;\n                    Witness.EventId=E.EventId;Witness.SubhitId=E.SubhitId;Witness.RequestedSignedDistance=E.ForwardStep;\n                    Witness.Before=AudioBefore;Witness.After=AudioAfter;Witness.CommittedDelta=AudioAfter-AudioBefore;\n                }\n            }\n"
+        }
+      ]
+    },
+    {
+      "name": "DungeonHUD.cpp",
+      "before": "before/DungeonHUD.cpp",
+      "projected": "projected/DungeonHUD.cpp",
+      "before_bytes": 123680,
+      "before_sha256": "a68a9df57826a3761f2bfbf8511858b139c193589f285c0cc7bbb29ad950e16f",
+      "after_bytes": 124031,
+      "after_sha256": "72f91ee3c142892a655677ba2ae079475f5d14787609ca3f6949065b77b46b15",
+      "line_ending": "CRLF",
+      "operations": [
+        {
+          "before": "    if (auto Sound=LoadObject<USoundBase>(nullptr,TEXT(\"/Game/ThirdParty/Kenney/ImpactSounds/ImpactLight/SW_ImpactLight.SW_ImpactLight\")))",
+          "after": "    if(auto Sound=LoadObject<USoundBase>(nullptr,TEXT(\"/Game/Production/HeroLocomotion/v001/Audio/SW_AUD_HERO_STEP_LIGHT_01_v001.SW_AUD_HERO_STEP_LIGHT_01_v001\")))\n    {PreloadedSounds.Add(Sound);ActionAudioSounds.Add(TEXT(\"HERO_STEP_LIGHT_01\"),Sound);}\n    if (auto Sound=LoadObject<USoundBase>(nullptr,TEXT(\"/Game/ThirdParty/Kenney/ImpactSounds/ImpactLight/SW_ImpactLight.SW_ImpactLight\")))"
+        },
+        {
+          "before": "        const float Volume=Melee?.25f:Record.Cue==TEXT(\"XBW_RELOAD_INSERT_01\")?.55f:.32f;",
+          "after": "        const bool HeroForwardStep=Record.Cue==TEXT(\"HERO_STEP_LIGHT_01\");\n        const float Volume=(Melee||HeroForwardStep)?.25f:Record.Cue==TEXT(\"XBW_RELOAD_INSERT_01\")?.55f:.32f;"
+        }
+      ]
+    }
+  ],
+  "actual_project_writes": 0,
+  "UE_runs": 0
+}
