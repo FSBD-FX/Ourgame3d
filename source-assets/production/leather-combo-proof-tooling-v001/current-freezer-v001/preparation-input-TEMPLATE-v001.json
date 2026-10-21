@@ -1,0 +1,106 @@
+{
+  "schema": "checkpoint-v126-preparation-input-v001",
+  "template_only": true,
+  "snapshot_name": "v126-combo-161G",
+  "output_input_directory": "source-assets/production/checkpoint-v126-root-input-v001",
+  "expected_test_count": 161,
+  "base_manifest": {
+    "path": "source-assets/production/backups/v125-p1-157G/compiled-source-manifest.json",
+    "bytes": 380701,
+    "sha256": "fcdc47d2268dc13b75c1d7e27a1794e4a130bbd8314fa1df2b4a7e80aa4e8c6d"
+  },
+  "native_source_freeze": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/leather-combo-source-v001/source-freeze-v001.json",
+    "bytes": 5794,
+    "sha256": "de124ef6dc023d6e001ccbf92c1f185f83406e39d1d6a16c93ccf592ab2be85c"
+  },
+  "production": {
+    "baseline_count": 1115,
+    "new_packages": 36,
+    "expected_total": 1151
+  },
+  "current_automation": {
+    "report": null,
+    "expected_count": 161,
+    "full_test_paths": []
+  },
+  "source_deltas": [],
+  "translation_units": [],
+  "build_log": null,
+  "last_build": null,
+  "dll": null,
+  "build_history": [],
+  "new_import_order": [
+    "Primary2",
+    "Primary3"
+  ],
+  "imports": {
+    "Ready": {
+      "path": "UnrealGame/Saved/Bootstrap/leather-ready-v001-import-20261016-164451-394112.json",
+      "bytes": 13281,
+      "sha256": "ae0efff25cf32c7c14bd7275b052bc5d648298087cd430f8128916d10d6e3f1b"
+    },
+    "Primary1": {
+      "path": "UnrealGame/Saved/Bootstrap/leather-primary1-v002-v001-import-20261016-180837-920536.json",
+      "bytes": 31689,
+      "sha256": "96113a6ffb18e3503a02ac6a3800d22ff86485073a479e2ed56abc683373ac5e"
+    },
+    "Primary2": null,
+    "Primary3": null
+  },
+  "assemblies": {
+    "Ready": {
+      "path": "source-assets/production/fairytale-lgt-readability-v003/ready-integer-assembly-v001/assembly-freeze-v001.json",
+      "bytes": 6634,
+      "sha256": "804ec889a031fd0cffec806ce5764eb701fa4be0c20dc767b9ed797f13aaa682"
+    },
+    "Primary1": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-integer-assembly-v002/assembly-freeze-v002.json",
+      "bytes": 26577,
+      "sha256": "8f3d1b818bb3e036b11bf175cfda6695d29d5e151fb5966808134b43e4c2d5c8"
+    },
+    "Primary2": null,
+    "Primary3": null
+  },
+  "proof_tools": [
+    {
+      "path": "tools/scripts/capture-leather-combo-trial-v001.ps1",
+      "bytes": 5722,
+      "sha256": "47882492a0611fc7f1e34cb4c30161721f5863b13de256096b5c5e0bb553056d"
+    },
+    {
+      "path": "tools/scripts/postprocess-leather-combo-trial-v001.py",
+      "bytes": 52905,
+      "sha256": "bca77073169e14026fe49fe229df17898026bcabfc986465981ba5100c82a29a"
+    },
+    {
+      "path": "tools/scripts/verify-leather-combo-proof-v001.py",
+      "bytes": 3124,
+      "sha256": "3d9ee38ff51f542e79cdd6772e918cfe6a9c8eb0256da7cba295e7957fa34486"
+    },
+    {
+      "path": "tools/scripts/verify-native-bound-capture-pixels-v001.py",
+      "bytes": 5508,
+      "sha256": "09b03628b31964dd117b00e66bff4db1d18ef63c19b56665db5d517c92231166"
+    }
+  ],
+  "additional_files": [
+    {
+      "path": "source-assets/production/leather-combo-proof-tooling-v001/tooling-freeze-v001.json",
+      "bytes": 8048,
+      "sha256": "23f2ff6189b7ef9e69ee6fe601ae2070a4dd756e0053ca313255c69f04f39144"
+    }
+  ],
+  "fill_instructions": [
+    "Copy to a NEW Root-owned input file, fill real pins then set template_only=false; never mutate this frozen template.",
+    "Only final actually compiled production + exact full161 strictGREEN report can pass. Current actual157 or Stage0 RED is not substituted.",
+    "Use --inspect-source for a read-only UNAPPROVED current delta/include-consumer plan; Root must independently approve every source_deltas pin and full translation_units set.",
+    "build_history contains preserved prior exit0 receipt/log pairs in chronological order. build_log/last_build are the final exit0 linked build and must not be duplicated in build_history.",
+    "Fill actual Primary2/Primary3 two distinct18 receipts and all four exact assemblies. new_import_order must follow real sequential old-package counts1115 then1133.",
+    "current_automation.report exact pin, expected_count and full_test_paths are the final actual full report with all old157 retained plus the approved new groups.",
+    "proof_tools contains actual admitted combo3 + unchanged pixel verifier pins. Include other new Ready/P1/default tools, import/checker tools, production/admission evidence and this current-freezer tooling freeze in additional_files.",
+    "All import manifests/reference pins, registration proof pins, four assembly freeze files closures and native source freeze files are traversed automatically; no future snapshot manifest pin is an input.",
+    "Preparer/freezer default read-only. --execute writes NEW input directory/NEW short snapshot only, preserves failure and never runs UE/UBT/import/media or awards acceptance."
+  ],
+  "formal_complete_units": 0
+}

@@ -1,0 +1,31 @@
+{
+  "schema": "leather-primary1-observed-second-ready-source-v003",
+  "input": {
+    "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.cpp",
+    "bytes": 30967,
+    "sha256": "b13be30b3e73baac625a5901b6c41bfbcde755a39bab67b3fce5eb0a7505877e"
+  },
+  "change": "On first actual observed P1 AttackId of the turned-facing attack only, reset ReadySeen[6] to0. Keep request reset. No increment/forced pose/frame/clock/gear writes.",
+  "only_this_replacement": true,
+  "first_attack_reset": false,
+  "second_attack_first_actual_frame_reset": true,
+  "repeat_second_attack_frames_reset": false,
+  "actual_patch_check_exit": 0,
+  "files": [
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\leather-primary1-proof-tooling-v001\\primary1-native-source-v003\\DungeonFairytaleEquipmentBoundProbe.cpp",
+      "bytes": 31228,
+      "sha256": "446e0b6b9e83fb528e17fe3f99a3a607355ec881d81261540c0c0c9cf1e11c93"
+    },
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\leather-primary1-proof-tooling-v001\\primary1-native-source-v003\\primary1-observed-second-ready-v003.patch",
+      "bytes": 1241,
+      "sha256": "173eae1e21fa24e288cc68463c4da65f294bdcdc8b84282073527194ee3b0da7"
+    }
+  ],
+  "author_ActualSource_written": false,
+  "author_UE_UBT_run": false,
+  "compiled": false,
+  "native_trial_run": false,
+  "formal_complete_units": 0
+}

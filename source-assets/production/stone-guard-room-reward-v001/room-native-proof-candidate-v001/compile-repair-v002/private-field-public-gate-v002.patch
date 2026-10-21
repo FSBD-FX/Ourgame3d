@@ -1,0 +1,11 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonGuardRoomFlowProbe.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonGuardRoomFlowProbe.cpp
+@@ -181,7 +181,7 @@
+    {JInitialHP=K->Health;InitialDodge=P->GetDodgeState().NextActionId;Next(4);}break;
+   case 4:if(Now-PhaseWall<2.2){if(P->CanStartAttack())Pulse(EKeys::J);}else{MoveStop();Next(5);}break;
+   case 5:
+-   if(P->GetDodgeState().NextActionId==InitialDodge&&!A.Active&&P->HurtTime<=0.f&&CanPulse()){Key(P->Facing>0?EKeys::A:EKeys::D,true);Pulse(EKeys::LeftShift);}
++   if(P->GetDodgeState().NextActionId==InitialDodge&&!A.Active&&P->CanStartAttack()&&CanPulse()){Key(P->Facing>0?EKeys::A:EKeys::D,true);Pulse(EKeys::LeftShift);}
+    if(DodgeObserved&&P->GetDodgeState().Phase==DungeonDodge::EPhase::Idle&&P->GetDodgeState().NextActionId>InitialDodge){MoveStop();if(!Need(JAttacks.Num()>0&&JHitReceipts>0&&JActualHPLoss>0.,TEXT("Real J must have accepted native receipt and positive HP loss before diagnostic hit")))return;Next(6);}break;
+   case 6:if(CanPulse()&&DiagnosticKill(K))Next(7);break;
+   case 7:if(K&&K->bDead&&K->bDeathReported){if(!Need(!G->bRoomCleared&&G->CaptureRunRewardsSnapshot().Objects.Num()==1,TEXT("Future slots cleared early or Knight ground reward missing")))return;Next(8);}break;

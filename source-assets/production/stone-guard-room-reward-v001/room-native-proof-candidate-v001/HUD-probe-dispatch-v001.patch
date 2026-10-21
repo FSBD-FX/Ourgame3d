@@ -1,0 +1,59 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+@@ -10,6 +10,7 @@
+ #include "DungeonFairytaleSwordProbe.h"
+ #include "DungeonFairytaleEquipmentBoundProbe.h"
+ #include "DungeonFairytaleWalkProbe.h"
++#include "DungeonGuardRoomFlowProbe.h"
+ #include "DungeonRunContinueProbe.h"
+ #include "DungeonGuardRunContinueProbe.h"
+ #include "DungeonRoomLayout.h"
+@@ -234,10 +235,12 @@
+         GetWorld()->SpawnActor<ADungeonRunContinueProbe>();
+     if (FParse::Param(FCommandLine::Get(),TEXT("DungeonProof")))
+         GetWorld()->SpawnActor<ADungeonProbe>();
++    if(FParse::Param(FCommandLine::Get(),TEXT("DungeonGuardRoomManualLightSource")))GetWorld()->SpawnActor<ADungeonGuardRoomFlowProbe>();
+     if (FParse::Param(FCommandLine::Get(),TEXT("DungeonContentProof")))
+     {
+         InstallFastLosslessProofScreenshots();
+-        if(FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleWalkProof")))GetWorld()->SpawnActor<ADungeonFairytaleWalkProbe>();
++        if(FParse::Param(FCommandLine::Get(),TEXT("DungeonGuardRoomFlowProof")))GetWorld()->SpawnActor<ADungeonGuardRoomFlowProbe>();
++        else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleWalkProof")))GetWorld()->SpawnActor<ADungeonFairytaleWalkProbe>();
+         else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonGuardRunSaveProof"))||FParse::Param(FCommandLine::Get(),TEXT("DungeonGuardRunRestoreProof")))GetWorld()->SpawnActor<ADungeonGuardRunContinueProbe>();
+         else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleEquipmentBoundProof")))GetWorld()->SpawnActor<ADungeonFairytaleEquipmentBoundProbe>();
+         else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordBodyProof")))GetWorld()->SpawnActor<ADungeonFairytaleSwordProbe>();
+@@ -1010,6 +1013,7 @@
+     if(bUseFairytaleSwordBodyPreview&&!F->bEnemy&&DrawFairytaleSwordBody(F))return;
+     if(F->GetStoneGuardDriver())
+     {
++        RenderedNativeGuardEntityIds.Add(F->GetRuntimeEntityId()); // Same actual DrawFighter invocation; no art/gameplay mutation.
+         DrawGuardFeedback(F);
+         // Dedicated procedural body placeholder; finite Guard feedback is a separate event consumer.
+         const auto& S=F->GetStoneGuardDriver()->State();const auto& A=S.Action;
+@@ -1573,7 +1577,7 @@
+     Super::DrawHUD(); if(!Canvas) return;
+     if(bUseFairytaleLookdevPreview)
+     {DrawFairytaleLookdev(Cast<ADungeonGameMode>(UGameplayStatics::GetGameMode(this)));return;}
+-    RenderedTextDrawCalls=0;RenderedActorSpriteSizes.Reset();RenderedGuardRoomWarningSlots.Reset();
++    RenderedTextDrawCalls=0;RenderedActorSpriteSizes.Reset();RenderedGuardRoomWarningSlots.Reset();RenderedNativeGuardEntityIds.Reset();
+     UIScale=FMath::Min(Canvas->SizeX/1280.f,Canvas->SizeY/720.f);
+     Origin=FVector2D((Canvas->SizeX-1280*UIScale)*.5f,(Canvas->SizeY-720*UIScale)*.5f);
+     auto Game=Cast<ADungeonGameMode>(UGameplayStatics::GetGameMode(this));
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.h
+@@ -54,6 +54,7 @@
+     bool GetInterfaceVisible() const { return bShowInterface; }
+     int32 GetRenderedTextDrawCalls() const { return RenderedTextDrawCalls; }
+     const TArray<FString>& GetRenderedGuardRoomWarningSlots() const { return RenderedGuardRoomWarningSlots; }
++    const TArray<uint64>& GetRenderedNativeGuardEntityIds() const { return RenderedNativeGuardEntityIds; }
+     float GetRenderedActorSpriteSize(ADungeonFighter* Fighter) const { return RenderedActorSpriteSizes.FindRef(Fighter); }
+     bool GetRenderedArmorLayersUsed() const { return bRenderedArmorLayersUsed; }
+     const TArray<FString>& GetRenderedArmorLayerPaths() const { return RenderedArmorLayerPaths; }
+@@ -143,6 +144,7 @@
+     TMap<ADungeonFighter*,float> RenderedActorSpriteSizes;
+     int32 RenderedTextDrawCalls = 0;
+     TArray<FString> RenderedGuardRoomWarningSlots;
++    TArray<uint64> RenderedNativeGuardEntityIds;
+     bool bShowInterface = false;
+     bool bRenderedArmorLayersUsed = false;
+     TArray<FString> RenderedArmorLayerPaths;

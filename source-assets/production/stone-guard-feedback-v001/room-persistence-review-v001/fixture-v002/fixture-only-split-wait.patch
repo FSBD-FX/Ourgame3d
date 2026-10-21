@@ -1,0 +1,13 @@
+--- a/DungeonFirstBatchGuardRoomTests.cpp
++++ b/DungeonFirstBatchGuardRoomTests.cpp
+@@ -29,7 +29,9 @@
+ }
+ bool Future(FCodecWorld& W,const TCHAR* Content,double After)
+ {
+- if(!W.AdvanceTo(After+3.21))return false;
++ const double Deadline=After+3.21;
++ const double FirstSegment=FMath::Min(Deadline,W.Game->GetSimulationTime()+2.);
++ if(!W.AdvanceTo(FirstSegment)||!W.AdvanceTo(Deadline))return false;
+  auto E=Enemy(W,Content);if(!E)return false;E->bAIEnabled=false;return true;
+ }
+ }

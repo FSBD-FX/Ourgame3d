@@ -1,0 +1,24 @@
+diff --git a/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.h b/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.h
+index be085f7..b1466b2 100644
+--- a/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.h
+@@ -110,6 +110,9 @@ public:
+     static FAttackDefinition AttackDefinition(EAttack Kind);
+     const FState& State() const { return S; }
+     FState Capture() const { return S; }
++    FPolicy CapturePolicy() const { return Policy; }
++    // Same entity and immutable birth only; retains this receiver's validated policy.
++    bool Restore(const FState& Saved);
+     bool IsValid() const { return Initialized; }
+     EAttack ChooseAttack(const FWorldInput& World) const;
+     FResult StepTo(double Now, const FWorldInput& World, const std::vector<FIncomingHit>& Hits={});
+diff --git a/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.cpp b/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.cpp
+index b51ba5a..5ad8d2f 100644
+--- a/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.cpp
+@@ -398,4 +398,5 @@ bool FGuardKernel::ResetForNewEntity(std::uint64_t Id,double Now,FPoint P,int Fa
+     FGuardKernel Candidate(Id,Now,P,Face,Policy); if(!Candidate.IsValid())return false;
+     *this=Candidate; return true;
+ }
++bool FGuardKernel::Restore(const FState&) { return false; } // Honest Stage0 semantic stub.
+ }

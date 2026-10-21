@@ -1,0 +1,92 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.h
+@@ -5,6 +5,7 @@
+ #include "DungeonContentCombat.h"
+ #include "DungeonStoneKnightDriver.h"
+ #include "DungeonStoneBatDriver.h"
++#include "DungeonStoneGuardDriver.h"
+ #include "DungeonStoneFeedback.h"
+ #include "DungeonWeaponActions.h"
+ #include "DungeonWeaponPoseSocket.h"
+@@ -110,6 +111,12 @@
+     const FDungeonStoneKnightDriver* GetStoneKnightDriver() const { return StoneKnight.Get(); }
+     bool InitializeStoneBat(uint64 EntityId,double StartTime=0.0);
+     const FDungeonStoneBatDriver* GetStoneBatDriver() const { return StoneBat.Get(); }
++    bool InitializeStoneGuard(uint64 EntityId,double StartTime=0.0);
++    const FDungeonStoneGuardDriver* GetStoneGuardDriver() const { return StoneGuard.Get(); }
++    bool ClaimStoneGuardDeathEligibility(); // Explicit local once marker; not reward settlement.
++    bool IsStoneGuardDeathSettled() const { return StoneGuard && bDeathReported; }
++    FVector2D GetCombatBodyHalfExtent() const;
++    FVector2D GetProjectileHurtHalfExtent() const;
+     const DungeonStoneFeedback::FJournal& GetStoneFeedback() const { return StoneFeedback; }
+     // Bound player uses Run-scoped OwnerId; enemy/legacy IDs remain QA-only. No D13 IO yet.
+     uint64 GetRuntimeEntityId() const;
+@@ -181,6 +188,10 @@
+     bool bEquipmentUiArrowLatch = false;
+     TUniquePtr<FDungeonStoneKnightDriver> StoneKnight;
+     TUniquePtr<FDungeonStoneBatDriver> StoneBat;
++    TUniquePtr<FDungeonStoneGuardDriver> StoneGuard;
++    double LastGuardSyncTime=0.0;
++    bool bGuardDeathObserved=false;
++    void SyncStoneGuardState();
+     DungeonStoneFeedback::FJournal StoneFeedback;
+     double LastStoneSyncTime = 0.0;
+     void SyncStoneKnightState();
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -1738,3 +1738,19 @@
+         }
+     }
+ }
++
++// Native Guard Stage0: complete public API, no manufactured Actor/Run success.
++bool ADungeonFighter::InitializeStoneGuard(uint64,double){return false;}
++bool ADungeonFighter::ClaimStoneGuardDeathEligibility(){return false;}
++FVector2D ADungeonFighter::GetCombatBodyHalfExtent() const
++{
++    if(StoneGuard)return FVector2D(40.,28.);
++    if(StoneBat)return FVector2D(16.,12.);
++    if(StoneKnight)return FVector2D(24.,20.);
++    return FVector2D(18.,16.);
++}
++FVector2D ADungeonFighter::GetProjectileHurtHalfExtent() const
++{
++    return GetCombatBodyHalfExtent();
++}
++void ADungeonFighter::SyncStoneGuardState(){}
+--- a/UnrealGame/Source/CodexDungeon/DungeonGameMode.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonGameMode.h
+@@ -18,6 +18,7 @@
+ struct FDungeonKnightBody;
+ struct FDungeonKnightBatch;
+ struct FDungeonBatBatch;
++struct FDungeonGuardBatch;
+ struct FDungeonRunSnapshot;
+ class FDungeonRunAggregate;
+ class FDungeonRunInstaller;
+@@ -59,6 +60,7 @@
+ 
+     UFUNCTION(BlueprintPure, Category="Dungeon") ADungeonFighter* GetPlayerFighter() const;
+     ADungeonFighter* SpawnStoneBat(FVector2D GroundPosition);
++    ADungeonFighter* SpawnStoneGuard(FVector2D GroundPosition);
+     UFUNCTION(BlueprintCallable, Category="Dungeon") void RestartRun();
+     UFUNCTION(BlueprintCallable, Category="Dungeon") void TryAttack(ADungeonFighter* Attacker);
+     UFUNCTION(BlueprintCallable, Category="Dungeon") void TryInteract();
+@@ -204,6 +206,7 @@
+     FDungeonKnightFrame MakeKnightDamageFrame(ADungeonFighter* Knight) const;
+     void AcceptKnightBatch(ADungeonFighter* Knight, const FDungeonKnightBatch& Batch);
+     void AcceptBatBatch(ADungeonFighter* Bat, const FDungeonBatBatch& Batch);
++    void AcceptGuardBatch(ADungeonFighter* Guard,const FDungeonGuardBatch& Batch);
+     TArray<FDungeonKnightBody> SkillBatchBodies;
+     TArray<FDungeonKnightBody> MotionBatchBodies;
+     bool bSimulatingMotion = false;
+--- a/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp
+@@ -2369,3 +2369,7 @@
+         NextRoom();
+     }
+ }
++
++// Native Guard Stage0: no generic enemy may masquerade as ENM-STN-003.
++ADungeonFighter* ADungeonGameMode::SpawnStoneGuard(FVector2D){return nullptr;}
++void ADungeonGameMode::AcceptGuardBatch(ADungeonFighter*,const FDungeonGuardBatch&){}

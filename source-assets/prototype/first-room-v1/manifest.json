@@ -1,0 +1,252 @@
+{
+  "version": 1,
+  "purpose": "free CC0 conversion for first-room gameplay prototype, not final art",
+  "generator": "Blender 5.2.2 LTS offline workbench",
+  "paid_generation_cost": 0,
+  "size_px": [
+    256,
+    256
+  ],
+  "color": "RGBA",
+  "facing": "right",
+  "ground_pivot_px": [
+    128,
+    220
+  ],
+  "characters": {
+    "human": {
+      "clips": {
+        "idle": {
+          "frames": [
+            "sprites/human/idle/human_idle_000.png",
+            "sprites/human/idle/human_idle_001.png",
+            "sprites/human/idle/human_idle_002.png",
+            "sprites/human/idle/human_idle_003.png",
+            "sprites/human/idle/human_idle_004.png",
+            "sprites/human/idle/human_idle_005.png",
+            "sprites/human/idle/human_idle_006.png",
+            "sprites/human/idle/human_idle_007.png"
+          ],
+          "fps": 8,
+          "loop": true,
+          "source_action": "idle",
+          "fallback": null
+        },
+        "walk": {
+          "frames": [
+            "sprites/human/walk/human_walk_000.png",
+            "sprites/human/walk/human_walk_001.png",
+            "sprites/human/walk/human_walk_002.png",
+            "sprites/human/walk/human_walk_003.png",
+            "sprites/human/walk/human_walk_004.png",
+            "sprites/human/walk/human_walk_005.png",
+            "sprites/human/walk/human_walk_006.png",
+            "sprites/human/walk/human_walk_007.png"
+          ],
+          "fps": 12,
+          "loop": true,
+          "source_action": "walk",
+          "fallback": null
+        },
+        "attack": {
+          "frames": [
+            "sprites/human/attack/human_attack_000.png",
+            "sprites/human/attack/human_attack_001.png",
+            "sprites/human/attack/human_attack_002.png",
+            "sprites/human/attack/human_attack_003.png",
+            "sprites/human/attack/human_attack_004.png",
+            "sprites/human/attack/human_attack_005.png"
+          ],
+          "fps": 15,
+          "loop": false,
+          "source_action": "attack-melee-right",
+          "fallback": null
+        },
+        "hurt": {
+          "frames": [
+            "sprites/human/hurt/human_hurt_000.png",
+            "sprites/human/hurt/human_hurt_001.png"
+          ],
+          "fps": 10,
+          "loop": false,
+          "source_action": "idle",
+          "fallback": "neutral pose with 9/5 degree lean; no original hurt take"
+        },
+        "death": {
+          "frames": [
+            "sprites/human/death/human_death_000.png",
+            "sprites/human/death/human_death_001.png",
+            "sprites/human/death/human_death_002.png",
+            "sprites/human/death/human_death_003.png",
+            "sprites/human/death/human_death_004.png",
+            "sprites/human/death/human_death_005.png",
+            "sprites/human/death/human_death_006.png",
+            "sprites/human/death/human_death_007.png"
+          ],
+          "fps": 12,
+          "loop": false,
+          "source_action": "die",
+          "fallback": null
+        }
+      },
+      "ground_pivot_px": [
+        128.0,
+        220.0001
+      ]
+    },
+    "orc": {
+      "clips": {
+        "idle": {
+          "frames": [
+            "sprites/orc/idle/orc_idle_000.png",
+            "sprites/orc/idle/orc_idle_001.png",
+            "sprites/orc/idle/orc_idle_002.png",
+            "sprites/orc/idle/orc_idle_003.png",
+            "sprites/orc/idle/orc_idle_004.png",
+            "sprites/orc/idle/orc_idle_005.png",
+            "sprites/orc/idle/orc_idle_006.png",
+            "sprites/orc/idle/orc_idle_007.png"
+          ],
+          "fps": 8,
+          "loop": true,
+          "source_action": "idle",
+          "fallback": null
+        },
+        "walk": {
+          "frames": [
+            "sprites/orc/walk/orc_walk_000.png",
+            "sprites/orc/walk/orc_walk_001.png",
+            "sprites/orc/walk/orc_walk_002.png",
+            "sprites/orc/walk/orc_walk_003.png",
+            "sprites/orc/walk/orc_walk_004.png",
+            "sprites/orc/walk/orc_walk_005.png",
+            "sprites/orc/walk/orc_walk_006.png",
+            "sprites/orc/walk/orc_walk_007.png"
+          ],
+          "fps": 12,
+          "loop": true,
+          "source_action": "walk",
+          "fallback": null
+        },
+        "attack": {
+          "frames": [
+            "sprites/orc/attack/orc_attack_000.png",
+            "sprites/orc/attack/orc_attack_001.png",
+            "sprites/orc/attack/orc_attack_002.png",
+            "sprites/orc/attack/orc_attack_003.png",
+            "sprites/orc/attack/orc_attack_004.png",
+            "sprites/orc/attack/orc_attack_005.png"
+          ],
+          "fps": 15,
+          "loop": false,
+          "source_action": "attack-melee-right",
+          "fallback": null
+        },
+        "hurt": {
+          "frames": [
+            "sprites/orc/hurt/orc_hurt_000.png",
+            "sprites/orc/hurt/orc_hurt_001.png"
+          ],
+          "fps": 10,
+          "loop": false,
+          "source_action": "idle",
+          "fallback": "neutral pose with 9/5 degree lean; no original hurt take"
+        },
+        "death": {
+          "frames": [
+            "sprites/orc/death/orc_death_000.png",
+            "sprites/orc/death/orc_death_001.png",
+            "sprites/orc/death/orc_death_002.png",
+            "sprites/orc/death/orc_death_003.png",
+            "sprites/orc/death/orc_death_004.png",
+            "sprites/orc/death/orc_death_005.png",
+            "sprites/orc/death/orc_death_006.png",
+            "sprites/orc/death/orc_death_007.png"
+          ],
+          "fps": 12,
+          "loop": false,
+          "source_action": "die",
+          "fallback": null
+        }
+      },
+      "ground_pivot_px": [
+        128.0,
+        220.0001
+      ]
+    }
+  },
+  "source": {
+    "pack": "Kenney Mini Dungeon",
+    "license": "CC0 1.0",
+    "local_root": "F:\\Ourgame\\source-assets\\third-party\\preparation-2026-10-10-v1\\kenney-mini-dungeon\\extracted",
+    "url": "https://kenney.nl/assets/mini-dungeon"
+  },
+  "status": "64 frames passed pixel checks; character and item contact sheets visually reviewed; prototype art, not game runtime proof",
+  "items": {
+    "sword": {
+      "file": "items/sword.png",
+      "source": "weapon-sword.fbx",
+      "size_px": [
+        256,
+        256
+      ],
+      "pivot_px": [
+        128,
+        128
+      ],
+      "purpose": "inventory icon"
+    },
+    "coin": {
+      "file": "items/coin.png",
+      "source": "coin.fbx",
+      "size_px": [
+        256,
+        256
+      ],
+      "pivot_px": [
+        128,
+        128
+      ],
+      "purpose": "inventory icon"
+    },
+    "potion": {
+      "file": "items/potion.png",
+      "source": "potion.fbx",
+      "size_px": [
+        256,
+        256
+      ],
+      "pivot_px": [
+        128,
+        128
+      ],
+      "purpose": "inventory icon"
+    },
+    "chest": {
+      "file": "items/chest.png",
+      "source": "chest.fbx",
+      "size_px": [
+        256,
+        256
+      ],
+      "pivot_px": [
+        128,
+        128
+      ],
+      "purpose": "inventory icon"
+    },
+    "shield": {
+      "file": "items/shield.png",
+      "source": "shield-round.fbx",
+      "size_px": [
+        256,
+        256
+      ],
+      "pivot_px": [
+        128,
+        128
+      ],
+      "purpose": "inventory icon"
+    }
+  }
+}

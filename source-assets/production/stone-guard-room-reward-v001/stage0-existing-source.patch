@@ -1,0 +1,51 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonGameMode.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonGameMode.h
+@@ -71,6 +71,8 @@
+     bool BeginEquipmentRun(EDungeonEquipmentRunConfig Config = EDungeonEquipmentRunConfig::IntegrationPreview, uint64 CombatSeed = 1);
+     bool BeginManualWeaponPreview(); // Explicit QA entry; duplicate calls in the same manual Run are observations.
+     bool BeginSceneExplorationPreview(); // Explicit development layout, not a formal D07/D08/D13 entry.
++    bool BeginFirstBatchGuardRoom(uint64 Seed=71); // Explicit native finite Bridge game entry; no QA flag required.
++    bool QueryFirstBatchGuardRoom(FDungeonFirstBatchGuardRoomView& Out) const;
+     const FDungeonSceneRoomView& GetSceneRoomView() const;
+     const FDungeonSceneRoomView* FindSceneRoomView(uint64 RoomInstanceId) const;
+     const FDungeonSceneInteractionView& GetSceneInteractionView() const;
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunRewards.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunRewards.h
+@@ -1,6 +1,7 @@
+ #pragma once
+ #include "CoreMinimal.h"
+ #include "DungeonWorldProjectiles.h"
++#include "DungeonFirstBatchGuardRoom.h"
+ 
+ // Bound-development reward facts only. This is not formal D08 allocation,
+ // equipment loot, account progression, a disk payload or completed Run Continue.
+@@ -85,6 +86,7 @@
+     TArray<FDungeonRunRewardCollection> Collections;
+     TArray<FDungeonRunRewardRetiredEntity> RetiredEntities;
+     TArray<FDungeonRunRewardRoomExit> RoomExits;
++    TArray<FDungeonFirstBatchGuardRoomView> RoomPlans; // Schema2 only; legacy schema1 stays empty. 
+ };
+ struct FDungeonRunRewardDeathResult
+ {
+--- a/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp
+@@ -2473,3 +2473,19 @@
+     for(const auto& H:Batch.Hits)if(bSimulationBatch&&H.Target.IsValid())
+         PendingDamage.Add({Guard,H.Target.Get(),float(H.Damage),float(H.Stagger),H.AtTime});
+ }
++
++// Stage0: genuine existing FirstBatch/Scene setup, intentionally no Bridge plan
++// or future-wave/reward implementation. Native positive witnesses must fail.
++bool ADungeonGameMode::BeginFirstBatchGuardRoom(uint64 Seed)
++{
++    if(IsRunInstallGated()||!IsValid(PlayerFighter)||!GetWorld())return false;
++    const auto Layout=DungeonRoomLayout::ExplorationPreview();
++    PlayerFighter->SetActorLocation(FVector(Layout.Entry.X,Layout.Entry.Y,0.));
++    if(!BeginEquipmentRun(EDungeonEquipmentRunConfig::FirstBatch,Seed))return false;
++    PlayerFighter->SetActorTickEnabled(false);
++    if(!SceneObjects->BeginRoom(EquipmentRuntime->View.RunGuid,EquipmentRuntime->View.RoomInstanceId)
++        ||!SpawnSceneExplorationRoom())return false;
++    bWaitingForStart=true;return true;
++}
++bool ADungeonGameMode::QueryFirstBatchGuardRoom(FDungeonFirstBatchGuardRoomView&) const
++{return false;}

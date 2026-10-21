@@ -1,0 +1,108 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.cpp
+@@ -23,6 +23,54 @@
+     return Target.X==From.X?Previous:(Target.X<From.X?-1:1);
+ }
+ bool Increasing(double A,double B) { return Finite(B)&&B>A; }
++bool InAttackRange(FPoint Target,FPoint Center)
++{
++    return AxeRange(Target,Center)||Ellipse(Target,Center,160,90);
++}
++enum class EAxisEntry { Unreachable, Found, Invalid };
++EAxisEntry FirstAxisAttackEntry(FPoint From,FPoint Target,bool AlongY,FPoint& Entry)
++{
++    // On either axis, both attack cross-sections are concentric intervals.
++    // Their union therefore has the greater of the two available half-reaches.
++    const double Fixed=std::abs(AlongY?Target.X-From.X:Target.Y-From.Y);
++    const double FixedRadius=AlongY?160.:90.;
++    const double MovingRadius=AlongY?90.:160.;
++    double Reach=-1;
++    if(Fixed<=(AlongY?180.:65.))Reach=AlongY?65.:180.;
++    if(Fixed<=FixedRadius)
++    {
++        const double Ratio=Fixed/FixedRadius;
++        Reach=std::max(Reach,MovingRadius*std::sqrt(std::max(0.,1.-Ratio*Ratio)));
++    }
++    if(Reach<0)return EAxisEntry::Unreachable;
++    const double Start=AlongY?From.Y:From.X, Goal=AlongY?Target.Y:Target.X;
++    const double Sign=Goal<Start?-1.:1.;
++    Entry=From;
++    double Coordinate=Goal-Sign*Reach;
++    // A rounded analytical boundary must not reverse the pursuit direction.
++    if(Sign*(Coordinate-Start)<0)Coordinate=Start;
++    if(AlongY)Entry.Y=Coordinate;else Entry.X=Coordinate;
++    if(InAttackRange(Target,Entry))return EAxisEntry::Found;
++
++    // Only correct analytical-boundary rounding. This searches representable
++    // coordinates, not simulation substeps or a world-space epsilon. The target
++    // coordinate is inside this nonempty cross-section; the boundary is outside.
++    double Outside=Coordinate, Inside=Goal;
++    constexpr int MaxRefinements=std::numeric_limits<double>::max_exponent
++        -std::numeric_limits<double>::min_exponent+std::numeric_limits<double>::digits+4;
++    for(int I=0;I<MaxRefinements;++I)
++    {
++        const double Mid=Outside+(Inside-Outside)*.5;
++        if(Mid==Outside||Mid==Inside)
++        {
++            if(AlongY)Entry.Y=Inside;else Entry.X=Inside;
++            return InAttackRange(Target,Entry)?EAxisEntry::Found:EAxisEntry::Invalid;
++        }
++        FPoint Probe=From;if(AlongY)Probe.Y=Mid;else Probe.X=Mid;
++        if(InAttackRange(Target,Probe))Inside=Mid;else Outside=Mid;
++    }
++    return EAxisEntry::Invalid;
++}
+ }
+ 
+ FGuardKernel::FGuardKernel(std::uint64_t Id,double Time,FPoint P,int Face,FPolicy InPolicy)
+@@ -163,26 +211,43 @@
+     if(!Visible(W))return Advance(To);
+     S.Facing=FacingToward(S.Position,W.Target,S.Facing);
+     // Do not walk into a player merely because both attack cooldowns are closed.
+-    if(AxeRange(W.Target,S.Position)||Ellipse(W.Target,S.Position,160,90))return Advance(To);
++    if(InAttackRange(W.Target,S.Position))return Advance(To);
+     for(int Axis=0;Axis<3&&S.Time<To;++Axis)
+     {
+         const double DX=W.Target.X-S.Position.X, DY=W.Target.Y-S.Position.Y;
+         const bool AlignY=DY!=0;
+-        const double Gap=AlignY?std::abs(DY):std::max(0.,std::abs(DX)-180.);
++        FPoint Endpoint=S.Position;
++        const auto Entry=FirstAxisAttackEntry(S.Position,W.Target,AlignY,Endpoint);
++        if(Entry==EAxisEntry::Invalid)return false;
++        if(Entry==EAxisEntry::Unreachable)
++        {
++            // No attack shape can be entered on this alignment segment.
++            if(AlignY)Endpoint.Y=W.Target.Y;else Endpoint.X=W.Target.X;
++        }
++        const double Gap=std::abs(AlignY?Endpoint.Y-S.Position.Y:Endpoint.X-S.Position.X);
+         if(Gap==0)return Advance(To);
+         const double Travel=std::min(Gap,160.*(To-S.Time));
+-        const double End=Travel==Gap?std::min(To,S.Time+Travel/160.):To;
++        const bool ReachedEndpoint=Travel==Gap;
++        double End=ReachedEndpoint?std::min(To,S.Time+Gap/160.):To;
++        if(!(End>S.Time))End=std::nextafter(S.Time,To);
+         if(!(End>S.Time)||!W.Sweep)return false;
+-        FPoint Goal=S.Position;
+-        if(AlignY)Goal.Y+=DY>0?Travel:-Travel;else Goal.X+=DX>0?Travel:-Travel;
++        FPoint Goal=Endpoint;
++        if(!ReachedEndpoint)
++        {
++            Goal=S.Position;
++            if(AlignY)Goal.Y+=DY>0?Travel:-Travel;else Goal.X+=DX>0?Travel:-Travel;
++        }
+         const auto Q=W.Sweep({S.Time,End,S.Position,Goal,40,28});
+         if(!Q.Accepted||!Finite(Q.Fraction)||Q.Fraction<0||Q.Fraction>1
+             ||static_cast<unsigned>(Q.Stop)>static_cast<unsigned>(EStop::Body)
+             ||(Q.Stop==EStop::None&&Q.Fraction!=1))return false;
+         const auto From=S.Position;
+-        S.Position={From.X+(Goal.X-From.X)*Q.Fraction,From.Y+(Goal.Y-From.Y)*Q.Fraction,From.Z};
++        // Preserve the absolute analytical endpoint instead of re-adding a
++        // rounded difference to a partition-dependent intermediate position.
++        S.Position=Q.Fraction==1?Goal:FPoint{From.X+(Goal.X-From.X)*Q.Fraction,
++            From.Y+(Goal.Y-From.Y)*Q.Fraction,From.Z};
+         if(!PointValid(S.Position)||!Advance(End)||!Emit(R,EEventKind::Movement,End,0,0,From,S.Position))return false;
+-        if(Q.Stop!=EStop::None||AxeRange(W.Target,S.Position)||Ellipse(W.Target,S.Position,160,90))return Advance(To);
++        if(Q.Stop!=EStop::None||InAttackRange(W.Target,S.Position))return Advance(To);
+     }
+     return Advance(To);
+ }

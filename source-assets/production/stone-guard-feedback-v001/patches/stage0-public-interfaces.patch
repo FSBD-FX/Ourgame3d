@@ -1,0 +1,38 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.h
+@@ -7,6 +7,7 @@
+ #include "DungeonStoneBatDriver.h"
+ #include "DungeonStoneGuardDriver.h"
+ #include "DungeonStoneFeedback.h"
++#include "DungeonStoneGuardFeedback.h"
+ #include "DungeonWeaponActions.h"
+ #include "DungeonWeaponPoseSocket.h"
+ #include "DungeonDodge.h"
+@@ -123,6 +124,7 @@
+     FVector2D GetCombatBodyHalfExtent() const;
+     FVector2D GetProjectileHurtHalfExtent() const;
+     const DungeonStoneFeedback::FJournal& GetStoneFeedback() const { return StoneFeedback; }
++    const DungeonGuardFeedback::FJournal& GetGuardFeedback() const { static const DungeonGuardFeedback::FJournal Empty;return Empty; }
+     // Bound player uses Run-scoped OwnerId; enemy/legacy IDs remain QA-only. No D13 IO yet.
+     uint64 GetRuntimeEntityId() const;
+     bool bDeathReported = false;
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.h
+@@ -3,6 +3,7 @@
+ #include "CoreMinimal.h"
+ #include "GameFramework/HUD.h"
+ #include "DungeonStoneFeedback.h"
++#include "DungeonGuardFeedbackTypes.h"
+ #include "DungeonExploration.h"
+ #include "DungeonWorldProjectiles.h"
+ #include "DungeonActionAudioFeedback.h"
+@@ -38,6 +39,9 @@
+     virtual void DrawHUD() override;
+     void AttachRestoredRunPresentation(const FDungeonRunAudioContinuation& Saved,uint64 Epoch);
+     int32 GetStoneAudioPlayRequests(const FString& Cue) const { return StoneAudioPlayRequests.FindRef(Cue); }
++    int32 GetGuardAudioPlayRequests(const FString&) const { return 0; }
++    const TArray<FDungeonGuardAudioPlayRequest>& GetGuardAudioPlayReceipts() const { static const TArray<FDungeonGuardAudioPlayRequest> Empty;return Empty; }
++    const TArray<FDungeonGuardEffectSpawnRequest>& GetGuardEffectSpawnRequests() const { static const TArray<FDungeonGuardEffectSpawnRequest> Empty;return Empty; }
+     int32 GetExplorationRoomNumber() const { const auto E=CurrentExploration();return E?E->RoomId():0; }
+     uint64 GetExplorationResetSerial() const { return ExplorationResetSerial; }
+     int32 GetExploredVertexCount() const {const auto E=CurrentExploration();return E?int32(E->ExploredVertexCount()):0;}

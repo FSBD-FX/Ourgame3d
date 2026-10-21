@@ -1,0 +1,118 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonHeroLandingPriorityProbeV001.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonHeroLandingPriorityProbeV001.cpp
+@@ -38,6 +38,68 @@
+ #include "Windows/HideWindowsPlatformTypes.h"
+ #endif
+ 
++#include <array>
++#include <cstdint>
++#include <vector>
++namespace DungeonHeroLocomotionObservationV001
++{
++struct FRequestScopeKey { std::array<std::uint64_t,8> Fields{}; };
++class FRequestCursor
++{
++ struct FThrough {FRequestScopeKey Scope;std::uint64_t Sequence=0;};
++ std::vector<FThrough> Through;
++public:
++ bool Observe(const FRequestScopeKey& Scope,std::uint64_t Sequence,std::uint64_t& Gap)
++ {
++  Gap=0;if(!Sequence)return false;
++  for(auto& T:Through)if(T.Scope.Fields==Scope.Fields)
++  {
++   if(Sequence<=T.Sequence)return false;
++   Gap=Sequence-T.Sequence-1;T.Sequence=Sequence;return true;
++  }
++  Through.push_back({Scope,Sequence});Gap=Sequence-1;return true;
++ }
++};
++}
++
++namespace DungeonHeroLocomotionObservationV001
++{
++using FAudioJO=TSharedPtr<FJsonObject>;using FAudioJV=TSharedPtr<FJsonValue>;
++void AudioId(FAudioJO O,const TCHAR* Key,uint64 Value){O->SetStringField(Key,FString::Printf(TEXT("%llu"),Value));}
++void AudioNull(FAudioJO O,const TCHAR* Key){O->SetField(Key,MakeShared<FJsonValueNull>());}
++TArray<FAudioJV> AudioXY(FVector2D V){return {MakeShared<FJsonValueNumber>(V.X),MakeShared<FJsonValueNumber>(V.Y)};}
++FAudioJO CurrentScope(const ADungeonGameMode& G,const ADungeonFighter& P)
++{
++ auto O=MakeShared<FJsonObject>();const auto& V=G.GetEquipmentView();O->SetStringField(TEXT("run"),V.RunGuid.ToString(EGuidFormats::Digits));AudioId(O,TEXT("owner"),P.GetRuntimeEntityId());AudioId(O,TEXT("room"),V.RoomInstanceId);AudioId(O,TEXT("epoch"),G.GetRunPresentationEpoch());AudioId(O,TEXT("restart"),G.GetRunRestartSerial());return O;
++}
++FAudioJO RequestScope(const DungeonHeroLocomotionAudioV001::FScope& S)
++{
++ auto O=MakeShared<FJsonObject>();AudioId(O,TEXT("owner"),S.Owner);AudioId(O,TEXT("room"),S.Room);AudioId(O,TEXT("epoch"),S.Epoch);AudioId(O,TEXT("restart"),S.Restart);O->SetBoolField(TEXT("run_available"),false);AudioNull(O,TEXT("run"));return O;
++}
++FRequestScopeKey RequestKey(FGuid Run,const DungeonHeroLocomotionAudioV001::FScope& S)
++{return {{{Run.A,Run.B,Run.C,Run.D,S.Owner,S.Room,S.Restart,S.Epoch}}};}
++FAudioJO GroundWitness(const ADungeonFighter& P)
++{
++ auto O=MakeShared<FJsonObject>();FDungeonCompletedGroundMotion M;const bool Available=P.QueryCompletedGroundMotion(M);O->SetBoolField(TEXT("available"),Available);O->SetStringField(TEXT("semantics"),TEXT("actual_completed_callback_motion_not_event_source_interval"));
++ if(Available){O->SetStringField(TEXT("run"),M.RunGuid.ToString(EGuidFormats::Digits));AudioId(O,TEXT("owner"),M.OwnerId);AudioId(O,TEXT("room"),M.RoomInstanceId);O->SetNumberField(TEXT("from_time_s"),M.FromTime);O->SetNumberField(TEXT("to_time_s"),M.ToTime);O->SetArrayField(TEXT("from_xy"),AudioXY(M.From));O->SetArrayField(TEXT("to_xy"),AudioXY(M.To));O->SetNumberField(TEXT("accepted_distance_cm"),M.AcceptedDistance);O->SetNumberField(TEXT("walk_distance_cm"),M.WalkDistance);O->SetBoolField(TEXT("grounded"),M.Grounded);O->SetBoolField(TEXT("ordinary_eligible"),M.OrdinaryEligible);O->SetBoolField(TEXT("had_move_intent"),M.HadMoveIntent);}
++ return O;
++}
++FAudioJO WallWindow(double Lower,double Upper,double Start)
++{
++ auto O=MakeShared<FJsonObject>();O->SetNumberField(TEXT("lower_monotonic_s"),Lower);O->SetNumberField(TEXT("upper_monotonic_s"),Upper);O->SetNumberField(TEXT("lower_offset_s"),Lower-Start);O->SetNumberField(TEXT("upper_offset_s"),Upper-Start);O->SetStringField(TEXT("semantics"),TEXT("first_seen_between_completed_callbacks_not_emission_timestamp"));return O;
++}
++FAudioJO RequestRow(const FDungeonHeroLocomotionAudioPlayRequestV001& R,int32 Callback,int32 Phase,double Sim,FAudioJO Window,FAudioJO Current)
++{
++ namespace A=DungeonHeroLocomotionAudioV001;const auto& E=R.Source;auto O=MakeShared<FJsonObject>();AudioId(O,TEXT("sequence"),E.Sequence);O->SetObjectField(TEXT("request_scope"),RequestScope(E.Scope));O->SetObjectField(TEXT("first_seen_current_scope"),Current);
++ O->SetStringField(TEXT("cue"),R.Cue.ToString());O->SetNumberField(TEXT("cue_enum"),int32(E.Cue));O->SetStringField(TEXT("asset_path"),R.SoundPath);O->SetNumberField(TEXT("volume"),R.Volume);O->SetNumberField(TEXT("pitch"),R.Pitch);O->SetNumberField(TEXT("at_time_s"),E.AtTime);O->SetNumberField(TEXT("requested_at_time_s"),R.RequestedAt);O->SetArrayField(TEXT("ground_position_at_dispatch"),AudioXY(R.GroundPosition));
++ O->SetNumberField(TEXT("first_seen_callback_index"),Callback);O->SetNumberField(TEXT("first_seen_phase"),Phase);O->SetNumberField(TEXT("first_seen_sim_time_s"),Sim);O->SetObjectField(TEXT("first_seen_wall_window"),Window);O->SetBoolField(TEXT("request_wall_time_available"),false);AudioNull(O,TEXT("request_monotonic_s"));
++ const TCHAR* Cause=TEXT("unknown_existing_cue");switch(E.Cue){case A::ECue::StepLight01:case A::ECue::StepLight02:Cause=TEXT("ground_distance_threshold");break;case A::ECue::TakeoffLight01:Cause=TEXT("successful_takeoff");break;case A::ECue::LandLight01:case A::ECue::LandFirm01:Cause=TEXT("natural_landing");break;case A::ECue::DodgeShort01:Cause=TEXT("dodge_started");break;}
++ O->SetStringField(TEXT("source_cause"),Cause);O->SetStringField(TEXT("source_cause_basis"),TEXT("mapped_existing_cue_enum_not_new_gameplay_event"));O->SetBoolField(TEXT("source_interval_available"),false);AudioNull(O,TEXT("source_from_time_s"));AudioNull(O,TEXT("source_to_time_s"));O->SetBoolField(TEXT("source_distance_available"),false);AudioNull(O,TEXT("source_distance_cm"));
++ AudioId(O,TEXT("step_ordinal"),E.StepOrdinal);O->SetNumberField(TEXT("fall_speed_cm_s"),E.FallSpeed);O->SetNumberField(TEXT("fall_distance_cm"),E.FallDistance);AudioId(O,TEXT("dodge_event_id"),E.DodgeEventId);AudioId(O,TEXT("dodge_action_id"),E.DodgeActionId);O->SetBoolField(TEXT("event_id_available"),E.DodgeEventId!=0);if(E.DodgeEventId)AudioId(O,TEXT("event_id"),E.DodgeEventId);else AudioNull(O,TEXT("event_id"));
++ const bool Landing=E.Cue==A::ECue::LandLight01||E.Cue==A::ECue::LandFirm01;O->SetBoolField(TEXT("landing_fields_applicable"),Landing);O->SetBoolField(TEXT("step_fields_applicable"),E.Cue==A::ECue::StepLight01||E.Cue==A::ECue::StepLight02);O->SetBoolField(TEXT("dodge_fields_applicable"),E.Cue==A::ECue::DodgeShort01);O->SetBoolField(TEXT("request_only"),true);O->SetBoolField(TEXT("audible_or_mix_attribution_proven"),false);return O;
++}
++}
++
+ namespace
+ {
+ using JO=TSharedPtr<FJsonObject>;using JV=TSharedPtr<FJsonValue>;
+@@ -138,6 +200,30 @@
+  FGuid Run;FKey PulseKey;TMap<FKey,bool> Keys;
+  TWeakObjectPtr<ADungeonGameMode> Game;TWeakObjectPtr<APlayerController> Controller;TWeakObjectPtr<ADungeonHUD> HUD;
+  TArray<JV> Inputs,Steps,Observations,Offsets,DiagnosticHits,StartupTextures;
++ TArray<JV> HeroAudioCapturedRequests;
++ DungeonHeroLocomotionObservationV001::FRequestCursor HeroAudioCursor;
++ FString HeroAudioLastCurrentScope;
++ double HeroAudioPreviousCallbackWall=0.;int32 HeroAudioCallbackCount=0,HeroAudioScopeChanges=0,HeroAudioSequenceGaps=0;
++ uint64 HeroAudioGapMissingSequences=0;bool HeroAudioRingLimitSeen=false,HeroAudioFirstSnapshotTruncationPossible=false;
++ JO ObserveHeroAudioRequests(ADungeonGameMode& G,ADungeonFighter& P,int32 Callback,double Wall)
++ {
++  namespace O=DungeonHeroLocomotionObservationV001;const auto& V=G.GetEquipmentView();const auto& Ring=G.GetHeroLocomotionAudioPlayRequestsV001();auto Out=MakeShared<FJsonObject>();auto Current=O::CurrentScope(G,P);auto Window=O::WallWindow(HeroAudioPreviousCallbackWall>0.?HeroAudioPreviousCallbackWall:Start,Wall,Start);
++  const FString Context=V.RunGuid.ToString(EGuidFormats::Digits)+FString::Printf(TEXT("/%llu/%llu/%llu/%llu"),P.GetRuntimeEntityId(),V.RoomInstanceId,G.GetRunRestartSerial(),G.GetRunPresentationEpoch());const bool First=HeroAudioLastCurrentScope.IsEmpty(),Changed=!First&&Context!=HeroAudioLastCurrentScope;
++  if(Changed)++HeroAudioScopeChanges;HeroAudioLastCurrentScope=Context;HeroAudioRingLimitSeen|=Ring.Num()>=256;
++  if((First||Changed)&&Ring.Num()>0&&Ring[0].Source.Sequence>1)HeroAudioFirstSnapshotTruncationPossible=true;
++  Out->SetStringField(TEXT("schema"),TEXT("hero-locomotion-request-observation-v001"));Out->SetNumberField(TEXT("callback_index"),Callback);Out->SetObjectField(TEXT("current_scope"),Current);Out->SetObjectField(TEXT("callback_wall_window"),Window);Out->SetObjectField(TEXT("ground_witness"),O::GroundWitness(P));Out->SetNumberField(TEXT("ring_snapshot_count"),Ring.Num());O::AudioId(Out,TEXT("ring_first_sequence"),Ring.Num()?Ring[0].Source.Sequence:0);O::AudioId(Out,TEXT("ring_last_sequence"),Ring.Num()?Ring.Last().Source.Sequence:0);Out->SetBoolField(TEXT("scope_changed"),Changed);Out->SetNumberField(TEXT("ring_limit"),256);
++  TArray<JV> New;for(const auto& R:Ring)
++  {
++   uint64 Gap=0;if(!HeroAudioCursor.Observe(O::RequestKey(V.RunGuid,R.Source.Scope),R.Source.Sequence,Gap))continue;
++   if(Gap){++HeroAudioSequenceGaps;HeroAudioGapMissingSequences+=Gap;}
++   auto Row=O::RequestRow(R,Callback,Phase,G.GetSimulationTime(),Window,Current);const auto& S=R.Source.Scope;Row->SetBoolField(TEXT("request_scope_matches_current"),S.Owner==P.GetRuntimeEntityId()&&S.Room==V.RoomInstanceId&&S.Restart==G.GetRunRestartSerial()&&S.Epoch==G.GetRunPresentationEpoch());O::AudioId(Row,TEXT("sequence_gap_before"),Gap);const auto Value=MakeShared<FJsonValueObject>(Row);New.Add(Value);HeroAudioCapturedRequests.Add(Value);
++  }
++  Out->SetNumberField(TEXT("new_request_count"),New.Num());Out->SetNumberField(TEXT("captured_request_prefix_count"),HeroAudioCapturedRequests.Num());Out->SetArrayField(TEXT("new_requests"),New);Out->SetBoolField(TEXT("request_only"),true);Out->SetBoolField(TEXT("audible_or_mix_attribution_proven"),false);HeroAudioPreviousCallbackWall=Wall;++HeroAudioCallbackCount;return Out;
++ }
++ JO FinalHeroAudioRequests() const
++ {
++  auto O=MakeShared<FJsonObject>();O->SetStringField(TEXT("schema"),TEXT("hero-locomotion-request-observation-v001"));O->SetArrayField(TEXT("captured_requests"),HeroAudioCapturedRequests);O->SetNumberField(TEXT("captured_request_count"),HeroAudioCapturedRequests.Num());O->SetNumberField(TEXT("callback_count"),HeroAudioCallbackCount);O->SetNumberField(TEXT("scope_change_count"),HeroAudioScopeChanges);O->SetNumberField(TEXT("sequence_gap_count"),HeroAudioSequenceGaps);DungeonHeroLocomotionObservationV001::AudioId(O,TEXT("sequence_gap_missing_sequence_total"),HeroAudioGapMissingSequences);O->SetNumberField(TEXT("ring_limit"),256);O->SetBoolField(TEXT("ring_limit_seen"),HeroAudioRingLimitSeen);O->SetBoolField(TEXT("first_snapshot_truncation_possible"),HeroAudioFirstSnapshotTruncationPossible);O->SetStringField(TEXT("scope_reset_policy"),TEXT("existing_getter_resets_on_owner_run_room_restart_epoch; only_first_seen_requests_retained_here"));O->SetStringField(TEXT("sequence_gap_semantics"),TEXT("missing_producer_sequences_are_not_proven_ring_loss_or_missing_playback"));O->SetStringField(TEXT("completeness"),TEXT("complete_first_seen_sequence_only; unobserved_ring_eviction_or_scope_reset_cannot_be_reconstructed"));O->SetBoolField(TEXT("request_only"),true);O->SetBoolField(TEXT("audible_or_mix_attribution_proven"),false);return O;
++ }
+  void Next(int32 P){Phase=P;PhaseAt=FPlatformTime::Seconds();auto O=MakeShared<FJsonObject>();O->SetNumberField(TEXT("phase"),P);O->SetNumberField(TEXT("wall_offset_s"),PhaseAt-Start);O->SetNumberField(TEXT("sim"),Game.IsValid()?Game->GetSimulationTime():0.);Steps.Add(MakeShared<FJsonValueObject>(O));}
+  bool Need(bool Yes,const FString& Why){if(!Yes&&Failure.IsEmpty())Failure=Why;return Yes;}
+  void Key(FKey K,bool Down)
+@@ -270,6 +356,7 @@
+   Id(O,TEXT("weapon_instance"),V.Slots[V.ActiveSlot].InstanceId);Id(O,TEXT("weapon_version"),V.Slots[V.ActiveSlot].Version);Id(O,TEXT("armor_instance"),V.Slots[2].InstanceId);Id(O,TEXT("armor_version"),V.Slots[2].Version);O->SetBoolField(TEXT("interface_visible"),H->GetInterfaceVisible());O->SetNumberField(TEXT("text_calls"),H->GetRenderedTextDrawCalls());O->SetBoolField(TEXT("range_debug"),H->IsCombatRangeDebugEnabled());O->SetNumberField(TEXT("range_lines"),H->GetCombatRangeDebugLineCount());
+   auto X=MakeShared<FJsonObject>();X->SetBoolField(TEXT("active"),ActionActive);Id(X,TEXT("id"),ActionId);X->SetNumberField(TEXT("start"),Action==TEXT("J")?M.Action.Start:Roll?Roll->Start:-1.);X->SetNumberField(TEXT("end"),Action==TEXT("J")?M.Action.End:Roll?Roll->End:-1.);X->SetBoolField(TEXT("started_airborne"),Action==TEXT("J")&&M.Action.StartedAirborne);X->SetNumberField(TEXT("stage"),int32(M.Action.Stage));X->SetNumberField(TEXT("action_speed_pct"),M.Action.ActionSpeedPct);X->SetBoolField(TEXT("invulnerable"),P->IsDodgeInvulnerableAt(G->GetSimulationTime()));
+   if(Roll){Id(X,TEXT("start_event_id"),Roll->StartEventId);Id(X,TEXT("finish_event_id"),Roll->FinishEventId);Id(X,TEXT("block_event_id"),Roll->BlockEventId);X->SetNumberField(TEXT("blocked_at"),Roll->BlockedAt);X->SetNumberField(TEXT("finished_at"),Roll->FinishedAt);X->SetNumberField(TEXT("block"),int32(Roll->Block));X->SetNumberField(TEXT("finish"),int32(Roll->Finish));X->SetNumberField(TEXT("travelled"),Roll->Travelled);X->SetArrayField(TEXT("origin"),{MakeShared<FJsonValueNumber>(Roll->Origin.X),MakeShared<FJsonValueNumber>(Roll->Origin.Y)});X->SetArrayField(TEXT("direction"),{MakeShared<FJsonValueNumber>(Roll->Direction.X),MakeShared<FJsonValueNumber>(Roll->Direction.Y)});}
++  O->SetObjectField(TEXT("hero_locomotion_audio"),ObserveHeroAudioRequests(*G,*P,Observations.Num(),Start+Offset));
+   O->SetObjectField(TEXT("action"),X);Observations.Add(MakeShared<FJsonValueObject>(O));Offsets.Add(MakeShared<FJsonValueNumber>(Offset));const int32 Index=Observations.Num()-1;
+   if(!Need(V.RunGuid==Run&&V.OwnerId==Owner&&V.RoomInstanceId==Room&&G->GetRunPresentationEpoch()==Epoch&&G->GetRunRestartSerial()==Restart&&P->GetRuntimeEntityId()==Owner&&P->Health==InitialHP&&!P->bDead&&!G->bGameOver,TEXT("Owner/epoch/HP changed; no repair permitted"))||!Need(!H->GetInterfaceVisible()&&!H->IsCombatRangeDebugEnabled()&&H->GetRenderedTextDrawCalls()==0&&H->GetCombatRangeDebugLineCount()==0,TEXT("HUD/range visibility differs"))||(GearPinned&&!PinGear(P))){BeginStop(Actor);return;}
+   if(Phase==5&&EIssued)
+@@ -319,6 +406,7 @@
+   Id(R,TEXT("process_id"),FPlatformProcess::GetCurrentProcessId());R->SetStringField(TEXT("run"),Run.ToString(EGuidFormats::Digits));Id(R,TEXT("owner"),Owner);Id(R,TEXT("current_room"),Room);Id(R,TEXT("epoch"),Epoch);Id(R,TEXT("restart_serial"),Restart);Id(R,TEXT("weapon_instance"),Sword);Id(R,TEXT("weapon_version"),SwordVersion);Id(R,TEXT("armor_instance"),Light);Id(R,TEXT("armor_version"),LightVersion);
+   Id(R,TEXT("light_source_id"),LightSource);R->SetNumberField(TEXT("equipment_input_index"),EquipInputIndex);R->SetNumberField(TEXT("equipment_started_callback_index"),EquipStartedIndex);R->SetNumberField(TEXT("equipment_commit_callback_index"),EquipCommitIndex);R->SetNumberField(TEXT("equipment_start"),EquipStart);R->SetNumberField(TEXT("equipment_deadline"),EquipDeadline);
+   R->SetNumberField(TEXT("initial_hp"),InitialHP);R->SetNumberField(TEXT("capture_final_hp"),CaptureFinalHP);R->SetNumberField(TEXT("ready_callback_index"),ReadyIndex);R->SetNumberField(TEXT("landing_callback_index"),LandIndex);R->SetNumberField(TEXT("priority_input_index"),InputIndex);R->SetNumberField(TEXT("first_action_callback_index"),FirstActionIndex);R->SetNumberField(TEXT("action_start"),ActionStart);R->SetNumberField(TEXT("action_end"),ActionEnd);R->SetNumberField(TEXT("action_start_landing_age"),StartLandingAge);R->SetNumberField(TEXT("air_mask"),AirMask);R->SetNumberField(TEXT("primary_mask"),PrimaryMask);R->SetNumberField(TEXT("dodge_mask"),DodgeMask);R->SetNumberField(TEXT("ready_join_frames"),ReadyJoinFrames);
++  R->SetObjectField(TEXT("hero_locomotion_audio"),FinalHeroAudioRequests());
+   R->SetArrayField(TEXT("normal_inputs"),Inputs);R->SetArrayField(TEXT("steps"),Steps);R->SetArrayField(TEXT("observations"),Observations);R->SetArrayField(TEXT("diagnostic_knight_hits"),DiagnosticHits);R->SetArrayField(TEXT("startup_resource_readbacks"),StartupTextures);TArray<JV> Air49;for(int32 I=0;I<FMath::Min(49,StartupTextures.Num());++I)Air49.Add(StartupTextures[I]);R->SetArrayField(TEXT("startup_actual_GPU_source_textures49"),Air49);R->SetBoolField(TEXT("startup_readback_complete"),StartupReadbackComplete);R->SetNumberField(TEXT("startup_readback_stop_monotonic_s"),StartupReadbackStop);R->SetBoolField(TEXT("native_async_capture_writes_flushed"),Flushed);
+   auto Timing=MakeShared<FJsonObject>();Timing->SetBoolField(TEXT("use_fixed_time_step"),FApp::UseFixedTimeStep());Timing->SetNumberField(TEXT("capture_start_monotonic_s"),Start);Timing->SetNumberField(TEXT("capture_stop_monotonic_s"),Stop);Timing->SetArrayField(TEXT("frame_wall_offsets_s"),Offsets);R->SetObjectField(TEXT("capture_timing"),Timing);if(Actor.MainMixCapture)R->SetObjectField(TEXT("main_submix_capture"),Actor.MainMixCapture->SerializeReport());FString Text;auto Writer=TJsonWriterFactory<>::Create(&Text);const bool Serialized=FJsonSerializer::Serialize(R,Writer);const bool Written=Serialized&&EvidenceClaimed&&WriteNewUTF8(Directory/TEXT("runtime-report.json"),Text);if(!Failure.IsEmpty())UE_LOG(LogTemp,Error,TEXT("Landing priority: %s"),*Failure);FPlatformMisc::RequestExitWithStatus(false,Failure.IsEmpty()&&FlowComplete&&Flushed&&AudioComplete&&Written?0:3);
+  }

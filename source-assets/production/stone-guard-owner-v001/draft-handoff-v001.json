@@ -1,0 +1,243 @@
+{
+  "schema": "stone-guard-owner-draft-plan-v001",
+  "status": "proposal and unapplied deltas; not Stage0 ready/test frozen",
+  "created_local": "2026-10-17T01:28:37",
+  "actual_source_written": false,
+  "UE_UBT_run": false,
+  "tests_registered_or_frozen": false,
+  "pure_dependency": {
+    "agent": "/root/guard_kernel_review",
+    "future_api": [
+      "FPolicy CapturePolicy() const",
+      "bool FGuardKernel::Restore(const FState&)"
+    ],
+    "policy": "explicit independent saved Policy; receiver binds birth and validates finite radius [0,160]"
+  },
+  "native_payload": {
+    "owner_kind": "append StoneGuard",
+    "owner_schema": 3,
+    "wrapper_schema": 1,
+    "fields": [
+      "Policy",
+      "Kernel",
+      "DeathObserved"
+    ],
+    "complete_state_fields": 33,
+    "ordered_histories": [
+      "Windows",
+      "Closures",
+      "HitReceipts",
+      "ReceivedHits",
+      "Issued"
+    ],
+    "last_sync_time": "derived exactly from saved Kernel.Time at a validated consumed boundary",
+    "feedback_consumer": "none exists for Guard; do not fake Knight seed"
+  },
+  "compatibility": {
+    "legacy_owner": 2,
+    "legacy_root": 1,
+    "legacy_codec": "bound-run-v1 unchanged exact field set",
+    "new_root": 2,
+    "new_scope": "append BoundDevelopmentV2",
+    "new_codec": "bound-run-v2",
+    "new_optional_field": "required Guard with explicitnull for nonGuard only in v2",
+    "recommended_new_disk_namespace": "BoundRunOnly-v2",
+    "adapter_v2_implemented": false,
+    "legacy_adapter_v1_still_rejects_schema2": "requires explicit new scope guard hunk before enabling new root writes"
+  },
+  "necessary_reward_scope": {
+    "current_guard_actor_admitted": true,
+    "full_local_eligibility_saved": true,
+    "formal_DeathReported_required": false,
+    "formal_Death_records_required_absent": true,
+    "ResolveDeath003_supported": false,
+    "fixed5rule_unchanged": true,
+    "historical_guard_supported": false
+  },
+  "patch_apply_check": {
+    "all_four_exit": 0,
+    "stdout": "",
+    "stderr": "",
+    "applied": false
+  },
+  "remaining_before_stage0": [
+    "Root pureRestore actualRED→GREEN",
+    "approve versioned native-owner and disk scope",
+    "honest NativeOwner Stage0 support stub plus real-flow frozen tests",
+    "public custom-policy spawn/initializer seam for genuine native source fixture if included",
+    "explicit AdapterV2 scope/write/load exact-version binding"
+  ],
+  "patches": [
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/patches/01-native-owner-draft-v001.patch",
+      "bytes": 13017,
+      "sha256": "d56d420f14c4caa56bb1f6b28f4d29b27d9fe077e1cda9f6b63ceb9c45d3c839"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/patches/02-root-current-reward-admission-draft-v001.patch",
+      "bytes": 6965,
+      "sha256": "a0a89a29c209e91c6cd30ef4c379254112c5e97fc221d121b27ab4bdd3a80a81"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/patches/03-codec-versioned-fields-draft-v001.patch",
+      "bytes": 8521,
+      "sha256": "9931f18719190eb11432b6a39451339bfc049eb84bf6661eae25e2df08a9bb66"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/patches/04-staged-guard-exact-readback-draft-v001.patch",
+      "bytes": 6662,
+      "sha256": "5b89649db457614ff2a78b9a8b4bb51e3bd449f7e2365fe4fb9a4dbc0b3951d1"
+    }
+  ],
+  "read_dependencies": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.h",
+      "bytes": 6028,
+      "sha256": "2114ce5af6f048f5177f3afa91f9a209e1affd380eee356cd265d8a42567520e"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.cpp",
+      "bytes": 19953,
+      "sha256": "63a85012e4e8b23230b5f475818e8b38d160e29150b9a2076fe6f84cc2852cc9"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.h",
+      "bytes": 11149,
+      "sha256": "6b83f8b87ef27e7b955d4b4e4efa4976685ee6f16fd900c914b985ad950e4eee"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.h",
+      "bytes": 12551,
+      "sha256": "c8fefc2af65829812b94d3b283979144b600710cb1fbd043875b5229c8968b2a"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "bytes": 148263,
+      "sha256": "c39dee9a506b728048a21e0d43492d53133e14d876baa2878046ba3ca835cd9a"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonRunSaveAdapter.h",
+      "bytes": 3620,
+      "sha256": "e1850366cfde80b99b9e9415285ada48fb3f4468d4dac9098102de0c2ab3da36"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonRunSaveAdapter.cpp",
+      "bytes": 17980,
+      "sha256": "7815b3d668eb50176f6c0e2544574c63de15ae411671fbf33152d57fc6261f62"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneFeedback.h",
+      "bytes": 2032,
+      "sha256": "428dbef96f572c94d25800827a96e20664a8b630d75c7434162911bbeb5d3a0b"
+    }
+  ],
+  "before": [
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/before/DungeonFighter.cpp",
+      "bytes": 109072,
+      "sha256": "b3bd3f61f24c352bdee8817d4e23cc233bb1657d27c7f3ffaf045cb00c338424"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/before/DungeonFighterSnapshot.h",
+      "bytes": 3680,
+      "sha256": "4668cc12f6091729b6aecc54a1c738e1f867b1c63f6eb2afd90375d0797ccf3e"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/before/DungeonRunAggregate.cpp",
+      "bytes": 20916,
+      "sha256": "bf95a12e4bdc1dc72bac0c505c8ad9fa56b42512fee1d79c110c62341bab8599"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/before/DungeonRunInstaller.cpp",
+      "bytes": 16834,
+      "sha256": "9fdc4a8c136db09c3b437b52f986e5fc16e18347e9d4554a46ca616e737a78cc"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/before/DungeonRunRewards.cpp",
+      "bytes": 20232,
+      "sha256": "029da9b86f8fe75d46ac4068fee69fd3fa78a6b466f812ec39dcfe549279e74d"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/before/DungeonRunSnapshot.h",
+      "bytes": 2894,
+      "sha256": "f7b14565c0d25fc988b2a14be4e084ca4237cc839f7a6ed3ea353df716b0f6bc"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/before/DungeonRunSnapshotCodec.cpp",
+      "bytes": 68247,
+      "sha256": "0dc1a8e720c018700a62828859bb8f1d49c793d725adbae82d8b5252f4bf6728"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/before/DungeonStoneGuardDriver.cpp",
+      "bytes": 20792,
+      "sha256": "d8a2a25a472fc5c376e46f0aa97f86c5b6c1646f55e100d812feca687e90e94d"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/before/DungeonStoneGuardDriver.h",
+      "bytes": 1665,
+      "sha256": "55e4e8eaa74ad93022ebd23f18049cfa3833559dd22c651c2868f6ebbda76b1a"
+    }
+  ],
+  "draft_files": [
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/draft-source/DungeonFighter.cpp",
+      "bytes": 109825,
+      "sha256": "b716145d65cde8344b7334925139d1a7cf5434b71b95fb8bc4d75e31bca98a2a"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/draft-source/DungeonFighterSnapshot.h",
+      "bytes": 4198,
+      "sha256": "414fee742b156df2bb02c8d5386f5c9d6b208e1beac0e9828780032f943c9449"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/draft-source/DungeonRunAggregate.cpp",
+      "bytes": 21389,
+      "sha256": "b8d4998ae97e5ce79e52e3cbe598ad3b580285c6cf8eeaf8d4e9d690b0b7b29b"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/draft-source/DungeonRunInstaller.cpp",
+      "bytes": 17006,
+      "sha256": "f85b036035f6879aef0fa602425da857dddf9f40f9d60825f29deb018710727d"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/draft-source/DungeonRunRewards.cpp",
+      "bytes": 20949,
+      "sha256": "4e3ba1db1947506426c76d0647d867ce3708ec89d481e60e8c63ccf2c53a50cb"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/draft-source/DungeonRunSnapshot.h",
+      "bytes": 2914,
+      "sha256": "14bb19c90e0e828cd9735ae42a30830c3ae57ccd59abfe993d34d93bca3ee45c"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/draft-source/DungeonRunSnapshotCodec.cpp",
+      "bytes": 73394,
+      "sha256": "b61ae478cdd31912c8145dd95a91fa25f0f71c2a2b694aceec5a2437e2687f1b"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/draft-source/DungeonStoneGuardDriver.cpp",
+      "bytes": 21224,
+      "sha256": "b6c57c3ee843bd77ee8e9618049f5ba1817ec05b52d2369f15e175190908012b"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/draft-source/DungeonStoneGuardDriver.h",
+      "bytes": 2118,
+      "sha256": "fc8cbe27690b838022cdaf14a161545feff96a5636fd0927fd78ba74e65ce464"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/draft-source/DungeonStoneGuardOwnerValue.h",
+      "bytes": 5143,
+      "sha256": "fba48c2f809d574c564ef2147d9423bf78859cffb01e4c573d8df959fd74c325"
+    }
+  ],
+  "contract": {
+    "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/interface-and-integration-contract-v001.md",
+    "bytes": 12034,
+    "sha256": "a8ee65c1b1068bff7f5fb46f79a75212b75d02834202dd95c2a133badcb0c7a7"
+  },
+  "wire_fields": {
+    "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v001/guard-wire-field-map-v001.json",
+    "bytes": 2319,
+    "sha256": "b431a69f975ad691180bb125b45be8fe2cc33e62f80eaf344c74d19a62461630"
+  }
+}

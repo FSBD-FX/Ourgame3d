@@ -1,0 +1,1036 @@
+{
+  "schema": "HeroLocomotionLocalAudioRecipes-v001",
+  "recipes": [
+    {
+      "cue_id": "AUD-HERO-STEP-LIGHT-01",
+      "label_zh": "轻脚步变体一",
+      "frames": 11520,
+      "role": "generic footstep adapted toward a small leather-boot stone-floor candidate",
+      "global_fade_in_frames": 96,
+      "global_fade_out_frames": 864,
+      "layers": [
+        {
+          "source_name": "footstep00.ogg",
+          "crop_start_frame48k": 1056,
+          "crop_frame_count48k": 8640,
+          "playback_speed_source_frames_per_output_frame": 1.08,
+          "pitch_semitones_derived_no_time_stretch": 1.3323757486649273,
+          "output_offset_frame48k": 0,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.34,
+          "high_pass_hz": 90,
+          "low_pass_hz": 7800,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9917041955772308,
+              -1.9834083911544615,
+              0.9917041955772308,
+              1.0,
+              -1.9833395695993392,
+              0.9834772127095841
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.14894851791039135,
+              0.2978970358207827,
+              0.14894851791039135,
+              1.0,
+              -0.6519384535751298,
+              0.24773252521669537
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "handleSmallLeather.ogg",
+          "crop_start_frame48k": 1344,
+          "crop_frame_count48k": 9600,
+          "playback_speed_source_frames_per_output_frame": 1.03,
+          "pitch_semitones_derived_no_time_stretch": 0.5117320489019247,
+          "output_offset_frame48k": 576,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.055,
+          "high_pass_hz": 220,
+          "low_pass_hz": 5000,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9798426958744011,
+              -1.9596853917488022,
+              0.9798426958744011,
+              1.0,
+              -1.959279033557446,
+              0.9600917499401596
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.07223087532575319,
+              0.14446175065150638,
+              0.07223087532575319,
+              1.0,
+              -1.1092287926184268,
+              0.39815229392143947
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "metalClick.ogg",
+          "crop_start_frame48k": 0,
+          "crop_frame_count48k": 6720,
+          "playback_speed_source_frames_per_output_frame": 1.1,
+          "pitch_semitones_derived_no_time_stretch": 1.6500422849992202,
+          "output_offset_frame48k": 864,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.01,
+          "high_pass_hz": 1800,
+          "low_pass_hz": 7000,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.8464592541088376,
+              -1.6929185082176752,
+              0.8464592541088376,
+              1.0,
+              -1.669203142931193,
+              0.7166338735041577
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.12531780861353742,
+              0.25063561722707484,
+              0.12531780861353742,
+              1.0,
+              -0.7799706256827,
+              0.2812418601368497
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        }
+      ],
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "source_pins": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\footstep00.ogg",
+          "bytes": 9475,
+          "sha256": "6fe61ef1fc3bcf0e253bf2eb64759db6cb69e2fe452f4d88cc597ecf78a3d601"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\handleSmallLeather.ogg",
+          "bytes": 10492,
+          "sha256": "ae3cbf695aa0a8b98b5a80a835be5a3ccbd5446a24db2235cd4c3cd6fc92ed96"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\metalClick.ogg",
+          "bytes": 13615,
+          "sha256": "9851a69d0c613e13bceef08060ecc4148f098ef487927cbebe270d642398a3b3"
+        }
+      ]
+    },
+    {
+      "cue_id": "AUD-HERO-STEP-LIGHT-02",
+      "label_zh": "轻脚步变体二",
+      "frames": 12480,
+      "role": "second generic footstep source; small articulation variation, material unverified",
+      "global_fade_in_frames": 96,
+      "global_fade_out_frames": 864,
+      "layers": [
+        {
+          "source_name": "footstep03.ogg",
+          "crop_start_frame48k": 576,
+          "crop_frame_count48k": 10320,
+          "playback_speed_source_frames_per_output_frame": 1.04,
+          "pitch_semitones_derived_no_time_stretch": 0.6790023403964102,
+          "output_offset_frame48k": 0,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.34,
+          "high_pass_hz": 95,
+          "low_pass_hz": 7600,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9912453406164228,
+              -1.9824906812328456,
+              0.9912453406164228,
+              1.0,
+              -1.9824140357032891,
+              0.9825673267624025
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.14292294126240776,
+              0.2858458825248155,
+              0.14292294126240776,
+              1.0,
+              -0.6837776515449537,
+              0.25546941659458494
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "handleSmallLeather.ogg",
+          "crop_start_frame48k": 1824,
+          "crop_frame_count48k": 8640,
+          "playback_speed_source_frames_per_output_frame": 0.98,
+          "pitch_semitones_derived_no_time_stretch": -0.34975614791419807,
+          "output_offset_frame48k": 768,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.05,
+          "high_pass_hz": 220,
+          "low_pass_hz": 4800,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9798426958744011,
+              -1.9596853917488022,
+              0.9798426958744011,
+              1.0,
+              -1.959279033557446,
+              0.9600917499401596
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.06745527388907191,
+              0.13491054777814382,
+              0.06745527388907191,
+              1.0,
+              -1.1429805025399011,
+              0.41280159809618877
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "metalClick.ogg",
+          "crop_start_frame48k": 0,
+          "crop_frame_count48k": 6720,
+          "playback_speed_source_frames_per_output_frame": 1.18,
+          "pitch_semitones_derived_no_time_stretch": 2.8654423150453976,
+          "output_offset_frame48k": 1200,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.009,
+          "high_pass_hz": 1800,
+          "low_pass_hz": 6800,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.8464592541088376,
+              -1.6929185082176752,
+              0.8464592541088376,
+              1.0,
+              -1.669203142931193,
+              0.7166338735041577
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.11961070846016204,
+              0.2392214169203241,
+              0.11961070846016204,
+              1.0,
+              -0.8122751400875439,
+              0.29071797392819204
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        }
+      ],
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "source_pins": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\footstep03.ogg",
+          "bytes": 10559,
+          "sha256": "a86756b9af9f370455ab47844239bb07fd1bee7a113068c91f0fcd9b72703fae"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\handleSmallLeather.ogg",
+          "bytes": 10492,
+          "sha256": "ae3cbf695aa0a8b98b5a80a835be5a3ccbd5446a24db2235cd4c3cd6fc92ed96"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\metalClick.ogg",
+          "bytes": 13615,
+          "sha256": "9851a69d0c613e13bceef08060ecc4148f098ef487927cbebe270d642398a3b3"
+        }
+      ]
+    },
+    {
+      "cue_id": "AUD-HERO-TAKEOFF-LIGHT-01",
+      "label_zh": "轻甲起跳",
+      "frames": 12480,
+      "role": "light push-off contact plus short cloth movement; not an aerial loop",
+      "global_fade_in_frames": 96,
+      "global_fade_out_frames": 960,
+      "layers": [
+        {
+          "source_name": "footstep05.ogg",
+          "crop_start_frame48k": 480,
+          "crop_frame_count48k": 8160,
+          "playback_speed_source_frames_per_output_frame": 1.1,
+          "pitch_semitones_derived_no_time_stretch": 1.6500422849992202,
+          "output_offset_frame48k": 0,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.22,
+          "high_pass_hz": 100,
+          "low_pass_hz": 7000,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9907866979404267,
+              -1.9815733958808535,
+              0.9907866979404267,
+              1.0,
+              -1.9814885091445735,
+              0.9816582826171344
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.12531780861353742,
+              0.25063561722707484,
+              0.12531780861353742,
+              1.0,
+              -0.7799706256827,
+              0.2812418601368497
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "cloth1.ogg",
+          "crop_start_frame48k": 3600,
+          "crop_frame_count48k": 12480,
+          "playback_speed_source_frames_per_output_frame": 1.28,
+          "pitch_semitones_derived_no_time_stretch": 4.273725722703304,
+          "output_offset_frame48k": 480,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.13,
+          "high_pass_hz": 300,
+          "low_pass_hz": 7200,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9726138984998436,
+              -1.9452277969996872,
+              0.9726138984998436,
+              1.0,
+              -1.9444776577670935,
+              0.9459779362322813
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.13110643991662593,
+              0.26221287983325187,
+              0.13110643991662593,
+              1.0,
+              -0.7477891782585034,
+              0.2722149379250073
+            ]
+          ],
+          "fade_in_frames48k": 192,
+          "fade_out_frames48k": 960,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "handleSmallLeather.ogg",
+          "crop_start_frame48k": 960,
+          "crop_frame_count48k": 7680,
+          "playback_speed_source_frames_per_output_frame": 1.15,
+          "pitch_semitones_derived_no_time_stretch": 2.4196063340358047,
+          "output_offset_frame48k": 720,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.045,
+          "high_pass_hz": 200,
+          "low_pass_hz": 5000,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.981658268403261,
+              -1.963316536806522,
+              0.981658268403261,
+              1.0,
+              -1.9629800893893397,
+              0.9636529842237055
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.07223087532575319,
+              0.14446175065150638,
+              0.07223087532575319,
+              1.0,
+              -1.1092287926184268,
+              0.39815229392143947
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "metalClick.ogg",
+          "crop_start_frame48k": 0,
+          "crop_frame_count48k": 6240,
+          "playback_speed_source_frames_per_output_frame": 1.15,
+          "pitch_semitones_derived_no_time_stretch": 2.4196063340358047,
+          "output_offset_frame48k": 1680,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.009,
+          "high_pass_hz": 1800,
+          "low_pass_hz": 7000,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.8464592541088376,
+              -1.6929185082176752,
+              0.8464592541088376,
+              1.0,
+              -1.669203142931193,
+              0.7166338735041577
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.12531780861353742,
+              0.25063561722707484,
+              0.12531780861353742,
+              1.0,
+              -0.7799706256827,
+              0.2812418601368497
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        }
+      ],
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "source_pins": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\cloth1.ogg",
+          "bytes": 16508,
+          "sha256": "ddb93a3671233f95da0e0b10367f082f7eb42fa6caaddcf776410aa8833c747d"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\footstep05.ogg",
+          "bytes": 10288,
+          "sha256": "817957e1f95d97fd36870064c41673895575cde17bccb245f50364c86ed10198"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\handleSmallLeather.ogg",
+          "bytes": 10492,
+          "sha256": "ae3cbf695aa0a8b98b5a80a835be5a3ccbd5446a24db2235cd4c3cd6fc92ed96"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\metalClick.ogg",
+          "bytes": 13615,
+          "sha256": "9851a69d0c613e13bceef08060ecc4148f098ef487927cbebe270d642398a3b3"
+        }
+      ]
+    },
+    {
+      "cue_id": "AUD-HERO-LAND-LIGHT-01",
+      "label_zh": "轻落地",
+      "frames": 14400,
+      "role": "one real ground contact, small body; Land5 must not retrigger",
+      "global_fade_in_frames": 96,
+      "global_fade_out_frames": 1200,
+      "layers": [
+        {
+          "source_name": "footstep03.ogg",
+          "crop_start_frame48k": 576,
+          "crop_frame_count48k": 10800,
+          "playback_speed_source_frames_per_output_frame": 0.98,
+          "pitch_semitones_derived_no_time_stretch": -0.34975614791419807,
+          "output_offset_frame48k": 0,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.41,
+          "high_pass_hz": 70,
+          "low_pass_hz": 6900,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9935417402819352,
+              -1.9870834805638704,
+              0.9935417402819352,
+              1.0,
+              -1.9870417710103634,
+              0.9871251901173788
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.12245397472965128,
+              0.24490794945930255,
+              0.12245397472965128,
+              1.0,
+              -0.7961072257760665,
+              0.2859231246946716
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "dropLeather.ogg",
+          "crop_start_frame48k": 0,
+          "crop_frame_count48k": 13920,
+          "playback_speed_source_frames_per_output_frame": 1.08,
+          "pitch_semitones_derived_no_time_stretch": 1.3323757486649273,
+          "output_offset_frame48k": 288,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.095,
+          "high_pass_hz": 90,
+          "low_pass_hz": 4600,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9917041955772308,
+              -1.9834083911544615,
+              0.9917041955772308,
+              1.0,
+              -1.9833395695993392,
+              0.9834772127095841
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.06278921613455499,
+              0.12557843226910997,
+              0.06278921613455499,
+              1.0,
+              -1.1768946604181523,
+              0.4280515249563723
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "cloth2.ogg",
+          "crop_start_frame48k": 2400,
+          "crop_frame_count48k": 9600,
+          "playback_speed_source_frames_per_output_frame": 1.08,
+          "pitch_semitones_derived_no_time_stretch": 1.3323757486649273,
+          "output_offset_frame48k": 1248,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.035,
+          "high_pass_hz": 260,
+          "low_pass_hz": 5600,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9762216118213549,
+              -1.9524432236427098,
+              0.9762216118213549,
+              1.0,
+              -1.9518777319531233,
+              0.9530087153322974
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.08717908371247932,
+              0.17435816742495863,
+              0.08717908371247932,
+              1.0,
+              -1.0089216239649903,
+              0.35763795881490784
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "metalClick.ogg",
+          "crop_start_frame48k": 0,
+          "crop_frame_count48k": 6240,
+          "playback_speed_source_frames_per_output_frame": 1.04,
+          "pitch_semitones_derived_no_time_stretch": 0.6790023403964102,
+          "output_offset_frame48k": 1056,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.014,
+          "high_pass_hz": 1500,
+          "low_pass_hz": 6400,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.8703307793103342,
+              -1.7406615586206684,
+              0.8703307793103342,
+              1.0,
+              -1.7237761727625092,
+              0.757546944478829
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.108447438890226,
+              0.216894877780452,
+              0.108447438890226,
+              1.0,
+              -0.8772706323073944,
+              0.3110603878682986
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        }
+      ],
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "source_pins": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\cloth2.ogg",
+          "bytes": 11787,
+          "sha256": "8a7451193c38bc05483aec25dd193e163a15d44cf7fff04ac7912573231b0201"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\dropLeather.ogg",
+          "bytes": 11695,
+          "sha256": "097e1d3b74949b0145fda0519d40b7e0773ab82ec4858727f95be830927e1a45"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\footstep03.ogg",
+          "bytes": 10559,
+          "sha256": "a86756b9af9f370455ab47844239bb07fd1bee7a113068c91f0fcd9b72703fae"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\metalClick.ogg",
+          "bytes": 13615,
+          "sha256": "9851a69d0c613e13bceef08060ecc4148f098ef487927cbebe270d642398a3b3"
+        }
+      ]
+    },
+    {
+      "cue_id": "AUD-HERO-LAND-FIRM-01",
+      "label_zh": "较重落地",
+      "frames": 19200,
+      "role": "firmer small-hero landing, not heavy stone enemy or damage impact",
+      "global_fade_in_frames": 96,
+      "global_fade_out_frames": 1680,
+      "layers": [
+        {
+          "source_name": "footstep00.ogg",
+          "crop_start_frame48k": 960,
+          "crop_frame_count48k": 10080,
+          "playback_speed_source_frames_per_output_frame": 0.88,
+          "pitch_semitones_derived_no_time_stretch": -2.213094853649129,
+          "output_offset_frame48k": 0,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.5,
+          "high_pass_hz": 65,
+          "low_pass_hz": 6200,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9940016581760924,
+              -1.9880033163521849,
+              0.9940016581760924,
+              1.0,
+              -1.9879673359239014,
+              0.98803929678047
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.10299487551513173,
+              0.20598975103026346,
+              0.10299487551513173,
+              1.0,
+              -0.9099699633540052,
+              0.3219494654145321
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "footstep05.ogg",
+          "crop_start_frame48k": 480,
+          "crop_frame_count48k": 10560,
+          "playback_speed_source_frames_per_output_frame": 0.93,
+          "pitch_semitones_derived_no_time_stretch": -1.2563685440003187,
+          "output_offset_frame48k": 672,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.13,
+          "high_pass_hz": 65,
+          "low_pass_hz": 3400,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9940016581760924,
+              -1.9880033163521849,
+              0.9940016581760924,
+              1.0,
+              -1.9879673359239014,
+              0.98803929678047
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.03734031834004973,
+              0.07468063668009946,
+              0.03734031834004973,
+              1.0,
+              -1.383890375154829,
+              0.533251648515028
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "dropLeather.ogg",
+          "crop_start_frame48k": 0,
+          "crop_frame_count48k": 17280,
+          "playback_speed_source_frames_per_output_frame": 0.95,
+          "pitch_semitones_derived_no_time_stretch": -0.8880069773253232,
+          "output_offset_frame48k": 240,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.16,
+          "high_pass_hz": 70,
+          "low_pass_hz": 4300,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9935417402819352,
+              -1.9870834805638704,
+              0.9935417402819352,
+              1.0,
+              -1.9870417710103634,
+              0.9871251901173788
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.05600437976917372,
+              0.11200875953834744,
+              0.05600437976917372,
+              1.0,
+              -1.2280752791907716,
+              0.4520927982674667
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "cloth1.ogg",
+          "crop_start_frame48k": 3600,
+          "crop_frame_count48k": 11520,
+          "playback_speed_source_frames_per_output_frame": 1.04,
+          "pitch_semitones_derived_no_time_stretch": 0.6790023403964102,
+          "output_offset_frame48k": 2160,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.06,
+          "high_pass_hz": 240,
+          "low_pass_hz": 5200,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9780304792065595,
+              -1.956060958413119,
+              0.9780304792065595,
+              1.0,
+              -1.9555782403150352,
+              0.9565436765112031
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.07711229931102144,
+              0.15422459862204288,
+              0.07711229931102144,
+              1.0,
+              -1.07563699325378,
+              0.3840861904978658
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "metalClick.ogg",
+          "crop_start_frame48k": 0,
+          "crop_frame_count48k": 8160,
+          "playback_speed_source_frames_per_output_frame": 0.97,
+          "pitch_semitones_derived_no_time_stretch": -0.5273201710511647,
+          "output_offset_frame48k": 1392,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.018,
+          "high_pass_hz": 1400,
+          "low_pass_hz": 6200,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.8784326444354152,
+              -1.7568652888708305,
+              0.8784326444354152,
+              1.0,
+              -1.7420316577790227,
+              0.7716989199626388
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.10299487551513173,
+              0.20598975103026346,
+              0.10299487551513173,
+              1.0,
+              -0.9099699633540052,
+              0.3219494654145321
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        }
+      ],
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "source_pins": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\cloth1.ogg",
+          "bytes": 16508,
+          "sha256": "ddb93a3671233f95da0e0b10367f082f7eb42fa6caaddcf776410aa8833c747d"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\dropLeather.ogg",
+          "bytes": 11695,
+          "sha256": "097e1d3b74949b0145fda0519d40b7e0773ab82ec4858727f95be830927e1a45"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\footstep00.ogg",
+          "bytes": 9475,
+          "sha256": "6fe61ef1fc3bcf0e253bf2eb64759db6cb69e2fe452f4d88cc597ecf78a3d601"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\footstep05.ogg",
+          "bytes": 10288,
+          "sha256": "817957e1f95d97fd36870064c41673895575cde17bccb245f50364c86ed10198"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\metalClick.ogg",
+          "bytes": 13615,
+          "sha256": "9851a69d0c613e13bceef08060ecc4148f098ef487927cbebe270d642398a3b3"
+        }
+      ]
+    },
+    {
+      "cue_id": "AUD-HERO-DODGE-SHORT-01",
+      "label_zh": "轻甲短闪避",
+      "frames": 14400,
+      "role": "cloth and leather motion with a light floor contact, not weapon whoosh",
+      "global_fade_in_frames": 144,
+      "global_fade_out_frames": 1200,
+      "layers": [
+        {
+          "source_name": "cloth1.ogg",
+          "crop_start_frame48k": 3360,
+          "crop_frame_count48k": 14400,
+          "playback_speed_source_frames_per_output_frame": 1.14,
+          "pitch_semitones_derived_no_time_stretch": 2.268405892680202,
+          "output_offset_frame48k": 0,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.14,
+          "high_pass_hz": 400,
+          "low_pass_hz": 7200,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9636527639641732,
+              -1.9273055279283464,
+              0.9636527639641732,
+              1.0,
+              -1.9259839697318861,
+              0.9286270861248077
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.13110643991662593,
+              0.26221287983325187,
+              0.13110643991662593,
+              1.0,
+              -0.7477891782585034,
+              0.2722149379250073
+            ]
+          ],
+          "fade_in_frames48k": 240,
+          "fade_out_frames48k": 960,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "handleSmallLeather.ogg",
+          "crop_start_frame48k": 960,
+          "crop_frame_count48k": 10560,
+          "playback_speed_source_frames_per_output_frame": 1.22,
+          "pitch_semitones_derived_no_time_stretch": 3.4425737734579385,
+          "output_offset_frame48k": 288,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.055,
+          "high_pass_hz": 240,
+          "low_pass_hz": 5000,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9780304792065595,
+              -1.956060958413119,
+              0.9780304792065595,
+              1.0,
+              -1.9555782403150352,
+              0.9565436765112031
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.07223087532575319,
+              0.14446175065150638,
+              0.07223087532575319,
+              1.0,
+              -1.1092287926184268,
+              0.39815229392143947
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "footstep05.ogg",
+          "crop_start_frame48k": 480,
+          "crop_frame_count48k": 6720,
+          "playback_speed_source_frames_per_output_frame": 1.25,
+          "pitch_semitones_derived_no_time_stretch": 3.863137138648348,
+          "output_offset_frame48k": 720,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.13,
+          "high_pass_hz": 160,
+          "low_pass_hz": 5600,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.9852995072686459,
+              -1.9705990145372918,
+              0.9852995072686459,
+              1.0,
+              -1.9703828983741989,
+              0.970815130700386
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.08717908371247932,
+              0.17435816742495863,
+              0.08717908371247932,
+              1.0,
+              -1.0089216239649903,
+              0.35763795881490784
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        },
+        {
+          "source_name": "metalClick.ogg",
+          "crop_start_frame48k": 0,
+          "crop_frame_count48k": 6240,
+          "playback_speed_source_frames_per_output_frame": 1.2,
+          "pitch_semitones_derived_no_time_stretch": 3.1564128700055254,
+          "output_offset_frame48k": 960,
+          "peak_reference_after_crop_speed_filter_envelope": 1.0,
+          "relative_linear_gain_after_peak_reference": 0.009,
+          "high_pass_hz": 2000,
+          "low_pass_hz": 6500,
+          "filter_kind": "causal Butterworth, order2 HP then order2 LP, zero initial state",
+          "HP_SOS": [
+            [
+              0.8308980212742372,
+              -1.6617960425484744,
+              0.8308980212742372,
+              1.0,
+              -1.632993161855452,
+              0.6905989232414969
+            ]
+          ],
+          "LP_SOS": [
+            [
+              0.11120634769898018,
+              0.22241269539796035,
+              0.11120634769898018,
+              1.0,
+              -0.8609721320690646,
+              0.3057975228649854
+            ]
+          ],
+          "fade_in_frames48k": 96,
+          "fade_out_frames48k": 720,
+          "fade_shape": "linear endpoint inclusive, first and last exactly zero"
+        }
+      ],
+      "sample_rate_hz": 48000,
+      "channels": 1,
+      "source_pins": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\cloth1.ogg",
+          "bytes": 16508,
+          "sha256": "ddb93a3671233f95da0e0b10367f082f7eb42fa6caaddcf776410aa8833c747d"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\footstep05.ogg",
+          "bytes": 10288,
+          "sha256": "817957e1f95d97fd36870064c41673895575cde17bccb245f50364c86ed10198"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\handleSmallLeather.ogg",
+          "bytes": 10492,
+          "sha256": "ae3cbf695aa0a8b98b5a80a835be5a3ccbd5446a24db2235cd4c3cd6fc92ed96"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-candidate-v001\\originals\\rpg\\metalClick.ogg",
+          "bytes": 13615,
+          "sha256": "9851a69d0c613e13bceef08060ecc4148f098ef487927cbebe270d642398a3b3"
+        }
+      ]
+    }
+  ],
+  "interpolation": "linear numpy interp, positions i*speed, length floor((input_frames-1)/speed)+1",
+  "randomness": null,
+  "synthetic_signal_added": false,
+  "silence_padding": "zeros only outside exact layers"
+}

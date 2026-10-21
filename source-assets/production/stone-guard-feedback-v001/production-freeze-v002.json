@@ -1,0 +1,142 @@
+{
+  "schema": "guard-feedback-production-candidate-freeze-v2",
+  "status": "production candidate frozen after real Root3RED; no UE production compile/run/device audition by child",
+  "Root_actual_stage0_evidence": {
+    "path": "docs/production/first-batch-v2/evidence/guard-feedback-v001/root-threeRED-v001/manifest.json",
+    "bytes": 44244,
+    "sha256": "de35b1135b1f43c16e5e73efe8363b770f8bb5027e01e5b251bea6af715bdc1e"
+  },
+  "local_checks": {
+    "pure_native_kernel_cpp17": "exit0 after preserved standalone invocation/fixture failures; not UE HUD proof",
+    "audio_exact_pcm_reproduction": 11,
+    "audio_clipped_samples": 0,
+    "audio_import_preflight": "exit0",
+    "patch_check": "git apply --check exit0",
+    "UE_production_compiled_by_child": false,
+    "audio_auditioned": false,
+    "external_api_calls": 0
+  },
+  "files": [
+    {
+      "path": "production-v002-source/DungeonGuardFeedbackTypes.h",
+      "bytes": 346,
+      "sha256": "71b40850a0adfbfc44c71e37a95f1209fb808a3ad198536fd10f9ae5df60b0d2"
+    },
+    {
+      "path": "production-v002-source/DungeonStoneGuardFeedback.h",
+      "bytes": 7029,
+      "sha256": "509d352d083f004c1c1d41fc30f500605f253c685e385b01b5c3e28e53129866"
+    },
+    {
+      "path": "production-v002-source/DungeonStoneGuardFeedbackPresentation.cpp",
+      "bytes": 7002,
+      "sha256": "e14c27facc67710e0a7343ee2a248b890f5fc1dfd9f4f3f517dffb1ca00b7cc5"
+    },
+    {
+      "path": "audio-v001/manifest.json",
+      "bytes": 11614,
+      "sha256": "77513da470c2be29948e5e793bc417d22e87653657f6b69e5b42e41367afa838"
+    },
+    {
+      "path": "audio-v001/SW_AUD_GUARD_AXE_RELEASE_01_v001.wav",
+      "bytes": 26924,
+      "sha256": "c2d2c8a6f52ab730bb446e160fc3411409a696da2f9ae490fa8095adfe2b9482"
+    },
+    {
+      "path": "audio-v001/SW_AUD_GUARD_AXE_WINDUP_01_v001.wav",
+      "bytes": 46124,
+      "sha256": "d5332fde78aa9fbfeef53240b8cb99f1e0d1caac81a20eb55df569195c1aa4c8"
+    },
+    {
+      "path": "audio-v001/SW_AUD_GUARD_DEATH_01_v001.wav",
+      "bytes": 82604,
+      "sha256": "cd63d5f3574398b875858aa3ff990df81f95008a4a7eaa2e0528b7668ebd13a6"
+    },
+    {
+      "path": "audio-v001/SW_AUD_GUARD_HIT_FLESH_LEATHER_01_v001.wav",
+      "bytes": 13484,
+      "sha256": "fecf23e4c80fa5fe9f44aeb9e89e3091923d6054c8aa154c6ad807a09b988a0b"
+    },
+    {
+      "path": "audio-v001/SW_AUD_GUARD_HIT_METAL_01_v001.wav",
+      "bytes": 25964,
+      "sha256": "31c40ae35bbed25df25c3d6e176d6f280dbc44cacf25548d0f7084d98c86c217"
+    },
+    {
+      "path": "audio-v001/SW_AUD_GUARD_HIT_STONE_01_v001.wav",
+      "bytes": 19244,
+      "sha256": "1a62c18d9bb103a50319d7f3d105cf689af193b2502c93c13716d53e1c8604cd"
+    },
+    {
+      "path": "audio-v001/SW_AUD_GUARD_STEP_01_v001.wav",
+      "bytes": 17324,
+      "sha256": "f7e51d4f547961c5caa476ab1dae3051fafe5137856d240b31c007749d58eeaf"
+    },
+    {
+      "path": "audio-v001/SW_AUD_GUARD_STOMP_IMPACT_01_v001.wav",
+      "bytes": 46124,
+      "sha256": "92dbe5245a95d8423aad0b944e27f22605f0d04b4d9faded5b732d0f4ebbcfc2"
+    },
+    {
+      "path": "audio-v001/SW_AUD_GUARD_STOMP_WINDUP_01_v001.wav",
+      "bytes": 34604,
+      "sha256": "a69e1bb0248daa060b70c142b6a94c0f8975a4e8687fac9eff6459ff1e510c79"
+    },
+    {
+      "path": "audio-v001/SW_AUD_GUARD_STUN_01_v001.wav",
+      "bytes": 44204,
+      "sha256": "d4e5c5bc5bd62096d89e9e475ca5573b6bdec63f3e775946eb0972664ed5ef47"
+    },
+    {
+      "path": "audio-v001/SW_AUD_GUARD_WAKE_01_v001.wav",
+      "bytes": 62444,
+      "sha256": "01e8e0e08e7ad6124391d14c283ef6efc5b40b068c0d643bc1a042b9c04b3c98"
+    },
+    {
+      "path": "tooling/make-guard-voices-v001.py",
+      "bytes": 4193,
+      "sha256": "065f105af8a81bbd31e5c77d06654aa861a7533622842c8189c0fd10f6eccf4f"
+    },
+    {
+      "path": "tooling/mix-actual-guard-timeline-v001.py",
+      "bytes": 3600,
+      "sha256": "51fff09e08f64c8cd67c1567196533d04f82ee214a027bc0bc7b4f6331c652e5"
+    },
+    {
+      "path": "tooling/ue-import-guard-audio-v001.py",
+      "bytes": 4654,
+      "sha256": "aed15061de02f89f2fdd75efb7aaf34f62a43d4830896456e886d8306fa6d05b"
+    },
+    {
+      "path": "patches/production-after-stage0-v002.patch",
+      "bytes": 12579,
+      "sha256": "37cdfef197fc2a6544068969a24e3c28341591b2109771112378da29601d3cf8"
+    },
+    {
+      "path": "production-patch-base-pins.json",
+      "bytes": 1232,
+      "sha256": "007b5892f3689e7916c4b05d1f881bf223fbca3b345abf30108fa965d045610b"
+    },
+    {
+      "path": "HANDOFF-v001.md",
+      "bytes": 4983,
+      "sha256": "40529091ead38fded10b39c505cf2001b3abf223c700b352403e07e6233195d2"
+    },
+    {
+      "path": "EVENT-MAP-v001.md",
+      "bytes": 4249,
+      "sha256": "f814fe358829bf1191bc0636690a75b6f461f0bcb235ec24aacbeb530f1962ae"
+    },
+    {
+      "path": "audio-numeric-verification-v001.json",
+      "bytes": 246,
+      "sha256": "12520c911dd9b10d46e9f48673eb98b2f8247a946a566339e7b379e4d9a43b66"
+    },
+    {
+      "path": "stage0-freeze-v002.json",
+      "bytes": 1282,
+      "sha256": "fb12d6f3294eaaee5e5685bcc6e14f72849e4885bed402ba949c7afed1ffd8cb"
+    }
+  ],
+  "supersedes": "production-freeze-v001.json; explicit raw Fighter pointer in HUD loop avoids UE template deduction through TObjectPtr when comparing weak owners. No test/oracle/gameplay change."
+}

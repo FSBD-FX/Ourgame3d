@@ -1,0 +1,21 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -349,8 +349,16 @@
+             const bool Settled=Saved.Schema==2;FString RewardWhy;
+             if(Settled&&(!C.Rewards||C.Rewards->Schema!=2||C.Rewards->RunGuid!=C.RunGuid
+                 ||!DungeonGuardRoomRewardsV2::Validate(*C.Rewards,nullptr,RewardWhy)
+-                ||!C.Rewards->Deaths.ContainsByPredicate([&](const auto& D){return D.Death.EntityId==S.EntityId&&D.Death.RoomInstanceId==S.RoomInstanceId&&D.Death.ContentId==S.EnemyContentId;})))
+-                return Reject(TEXT("Formal Guard settlement has no explicit valid schema2 room reward owner"));
++                ||!C.Rewards->Deaths.ContainsByPredicate([&](const auto& D)
++                {
++                    if(D.Death.EntityId!=S.EntityId||D.Death.RoomInstanceId!=S.RoomInstanceId||D.Death.ContentId!=S.EnemyContentId
++                        ||D.Death.Position!=S.GroundPosition)return false;
++                    const DungeonStoneGuard::FEvent* OriginalDeath=nullptr;
++                    for(const auto& E:G.Issued)if(E.Kind==DungeonStoneGuard::EEventKind::Died)
++                    {if(OriginalDeath)return false;OriginalDeath=&E;}
++                    return OriginalDeath&&OriginalDeath->AtTime==D.Death.AtTime;
++                })))
++                return Reject(TEXT("Formal Guard settlement differs from its original native death/reward owner"));
+             if((Saved.Schema!=1&&Saved.Schema!=2)||!Pure.Restore(G)||G.EntityId!=S.EntityId||G.Time>C.SimulationTime
+                 ||(!C.GameOver&&G.Time!=C.SimulationTime)||S.Health!=float(G.HP)||S.MaxHealth!=float(Def.HP)
+                 ||S.Dead!=(G.Phase==DungeonStoneGuard::EPhase::Dead)||S.DeathReported!=Settled||Settled&&!G.RewardClaimed||Saved.DeathObserved!=S.Dead

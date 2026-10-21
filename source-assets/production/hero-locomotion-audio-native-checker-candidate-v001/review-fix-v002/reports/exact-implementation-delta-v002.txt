@@ -1,0 +1,13 @@
+def verify_fixed_normal_inputs(r):
+    expected = [('Enter', True), ('Enter', False), ('D', True), ('D', False), ('D', True), ('D', False),
+                ('E', True), ('E', False), ('SpaceBar', True), ('SpaceBar', False), ('LeftShift', True), ('LeftShift', False)]
+    rows = r['normal_inputs']
+    need(type(rows) is list and len(rows) == len(expected)
+         and all(type(x) is dict and type(x.get('key')) is str and type(x.get('down')) is bool for x in rows)
+         and [(x['key'], x['down']) for x in rows] == expected,
+         'Exact fixed Shift_right normal-input edges required')
+    return dict(passed=True, exact_ordered_input_edges=12)
+
+
+# Exactly one added call as verify_session first statement:
+    verify_fixed_normal_inputs(r)

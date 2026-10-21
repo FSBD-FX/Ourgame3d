@@ -1,0 +1,36 @@
+--- a/DungeonRoomCoinAllocation.h
++++ b/DungeonRoomCoinAllocation.h
+@@ -46,6 +46,10 @@
+ // Budget >= 0, every weight > 0, RoomInstanceId != 0, exact SlotIds unique.
+ // Empty slots are accepted only for budget 0 (empty allocation, no payout).
+ // Checked uint64 sum/product: an unrepresentable intermediate is rejected.
+-// Any rejection preserves all fields of Out; successful result replaces Out.
++// Validation/arithmetic rejection preserves Out; success replaces Out.
++// ResourceFailure is returned for allocation/length exceptions only when
++// _CPPUNWIND is enabled. In UE no-exception builds, resource exhaustion follows
++// the platform/STL fatal-OOM policy; it cannot be reported as ResourceFailure.
++// No no-exception resource-failure atomicity or recovery is promised.
+ EStatus TryAllocate(const FRequest& Request,FAllocation& Out);
+ }
+--- a/DungeonRoomCoinAllocation.cpp
++++ b/DungeonRoomCoinAllocation.cpp
+@@ -85,7 +85,9 @@
+ }
+ EStatus TryAllocate(const FRequest& Request,FAllocation& Out)
+ {
++    #if defined(_CPPUNWIND)
+     try
++    #endif
+     {
+         FAllocation Candidate;
+         const auto Status=Build(Request,Candidate);
+@@ -93,7 +95,9 @@
+         Out=std::move(Candidate);
+         return EStatus::Ok;
+     }
++    #if defined(_CPPUNWIND)
+     catch(const std::bad_alloc&){return EStatus::ResourceFailure;}
+     catch(const std::length_error&){return EStatus::ResourceFailure;}
++    #endif
+ }
+ }

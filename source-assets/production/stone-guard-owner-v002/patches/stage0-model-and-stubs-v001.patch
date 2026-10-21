@@ -1,0 +1,113 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighterSnapshot.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighterSnapshot.h
+@@ -5,13 +5,14 @@
+ #include "DungeonDodge.h"
+ #include "DungeonStoneKnight.h"
+ #include "DungeonStoneBat.h"
++#include "DungeonStoneGuard.h"
+ #include "DungeonWeaponPoseSocket.h"
+ #include "DungeonEquipmentRuntime.h"
+ #include "DungeonWorldProjectiles.h"
+ 
+ // Versioned owner values only. None of these fields is an Actor/Controller,
+ // component, weak pointer, simulation-batch query cache or replay command.
+-enum class EDungeonFighterOwnerKind : uint8 { Unsupported, BoundPlayer, StoneKnight, StoneBat };
++enum class EDungeonFighterOwnerKind : uint8 { Unsupported, BoundPlayer, StoneKnight, StoneBat, StoneGuard };
+ struct FDungeonFighterEmissionPoseSnapshot
+ {
+     uint64 EventId=0, ActionId=0;
+@@ -29,6 +30,15 @@
+     DungeonContentCombat::FCombatState Combat;
+     DungeonWeaponActions::FState WeaponActions;
+     DungeonDodge::FState Dodge;
++};
++// Guard schema1 preserves explicit policy outside FState, and a native
++// observer independently from local eligibility and formal reward settlement.
++struct FDungeonStoneGuardOwnerSnapshot
++{
++    uint32 Schema=1;
++    DungeonStoneGuard::FPolicy Policy;
++    DungeonStoneGuard::FState Kernel;
++    bool DeathObserved=false;
+ };
+ struct FDungeonFighterOwnerSnapshot
+ {
+@@ -73,6 +83,8 @@
+     TOptional<FDungeonPlayerKernelSnapshot> Player;
+     TOptional<DungeonStoneKnight::FState> Knight;
+     TOptional<DungeonStoneBat::FState> Bat;
++    // Only Guard uses owner schema3. Old schema2 layouts/wire remain V1.
++    TOptional<FDungeonStoneGuardOwnerSnapshot> Guard;
+ };
+ 
+ // Call-scoped read-only views of the approved saved aggregate. Pointers here
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunSnapshot.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunSnapshot.h
+@@ -10,7 +10,7 @@
+ 
+ // Complete values for the presently implemented bound-development owners.
+ // This is not a canonical disk bundle, Account/Settings/Journal, or Continue.
+-enum class EDungeonRunScope:uint8 { Unsupported, BoundDevelopmentV1 };
++enum class EDungeonRunScope:uint8 { Unsupported, BoundDevelopmentV1, BoundDevelopmentV2 };
+ enum class EDungeonRunGeometryKind:uint8 { Unsupported, FlatBoundsV1, SceneExplorationV1 };
+ struct FDungeonRunGeometrySnapshot
+ {
+--- a/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.h
+@@ -15,6 +15,11 @@
+ {
+ public:
+     FDungeonStoneGuardDriver(ADungeonFighter* Owner,uint64 EntityId,double StartTime=0.);
++    FDungeonStoneGuardDriver(ADungeonFighter* Owner,uint64 EntityId,double InitialTime,
++        DungeonStoneGuard::FPoint InitialPosition,DungeonStoneGuard::FPolicy SavedPolicy);
++    DungeonStoneGuard::FPolicy CapturePolicy() const {return Kernel.CapturePolicy();}
++    // Validated same-birth replacement. No Step/BeginCombat/Sync/world query.
++    bool Restore(const DungeonStoneGuard::FState& Saved);
+     const DungeonStoneGuard::FState& State() const {return Kernel.State();}
+     DungeonStoneGuard::FState Capture() const {return Kernel.Capture();} // Readback only, not a D13 schema.
+     FDungeonGuardBatch StepTo(double Now,const FDungeonKnightFrame& Frame,
+--- a/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp
+@@ -124,6 +124,13 @@
+ }
+ FDungeonStoneGuardDriver::FDungeonStoneGuardDriver(ADungeonFighter* InOwner,uint64 Id,double Time)
+     :Owner(InOwner),Kernel(Id,Time,InOwner?Guard::FPoint{InOwner->GetGroundPosition().X,InOwner->GetGroundPosition().Y,0.}:Guard::FPoint{}){}
++FDungeonStoneGuardDriver::FDungeonStoneGuardDriver(ADungeonFighter* InOwner,uint64 Id,double InitialTime,
++    Guard::FPoint InitialPosition,Guard::FPolicy SavedPolicy)
++    :Owner(InOwner),Kernel(Id,InitialTime,InitialPosition,1,SavedPolicy){}
++bool FDungeonStoneGuardDriver::Restore(const Guard::FState& Saved)
++{
++    (void)Saved;return false; // Honest Stage0: no accepted native owner restore.
++}
+ bool FDungeonStoneGuardDriver::BeginCombat(){return Kernel.BeginCombat();}
+ bool FDungeonStoneGuardDriver::NotifyOtherAcceptedEnemiesCleared(){return Kernel.NotifyOtherAcceptedEnemiesCleared();}
+ bool FDungeonStoneGuardDriver::ClaimDeathReward(){return Kernel.ClaimDeathReward().Accepted;}
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.h
+@@ -113,6 +113,7 @@
+     const FDungeonStoneBatDriver* GetStoneBatDriver() const { return StoneBat.Get(); }
+     bool InitializeStoneGuard(uint64 EntityId,double StartTime=0.0);
+     const FDungeonStoneGuardDriver* GetStoneGuardDriver() const { return StoneGuard.Get(); }
++    bool IsStoneGuardDeathObserved() const {return StoneGuard && bGuardDeathObserved;}
+     bool ClaimStoneGuardDeathEligibility(); // Explicit local once marker; not reward settlement.
+     bool IsStoneGuardDeathSettled() const { return StoneGuard && bDeathReported; }
+     FVector2D GetCombatBodyHalfExtent() const;
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -108,6 +108,8 @@
+ bool ValidateFighterOwner(const FOwnerSnapshot& S,const FOwnerContext& C,FValidatedFighterOwner& Candidate,FString& Diagnostic)
+ {
+     const auto Reject=[&Diagnostic](const TCHAR* Why){Diagnostic=Why;return false;};
++    if(S.Guard.IsSet()||S.Kind==EDungeonFighterOwnerKind::StoneGuard||S.Schema==3)
++        return Reject(TEXT("Guard owner validation is not implemented (Stage0)"));
+     if(S.Schema!=2||!S.RunGuid.IsValid()||!S.RoomInstanceId||!S.EntityId
+         ||S.RunGuid!=C.RunGuid||S.RoomInstanceId!=C.RoomInstanceId||S.EntityId!=C.EntityId
+         ||!FMath::IsFinite(C.SimulationTime)||C.SimulationTime<0.||!C.Equipment||!C.WeaponWorld)
+@@ -358,6 +360,7 @@
+         if(!Local.EntityId||(Game->PlayerFighter==this)!=(Local.EntityId==Equipment.View.OwnerId))
+             return Reject(TEXT("Capture cannot substitute a QA/object ID for the true GM binding"));
+     }
++    if(StoneGuard)return Reject(TEXT("Guard owner capture is not implemented (Stage0)"));
+     FOwnerSnapshot S;S.RunGuid=Context->RunGuid;S.RoomInstanceId=Context->RoomInstanceId;S.EntityId=Context->EntityId;
+     S.Kind=StoneKnight?EDungeonFighterOwnerKind::StoneKnight:StoneBat?EDungeonFighterOwnerKind::StoneBat:
+         !bEnemy?EDungeonFighterOwnerKind::BoundPlayer:EDungeonFighterOwnerKind::Unsupported;

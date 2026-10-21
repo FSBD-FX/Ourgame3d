@@ -1,0 +1,32 @@
+{
+  "schema": "guard-boundary-fixture-failure-classification-v2",
+  "report": {
+    "path": "F:/Ourgame/UnrealGame/Saved/Automation/FirstRoom-20261017-042208/index.json",
+    "bytes": 13898,
+    "sha256": "1874ee0d4e03e58c1edbc41d8fd750428f4a3afc0197fd0b7549f4269848a6d8"
+  },
+  "core_groups_success": 3,
+  "core_errors": 0,
+  "core_warnings": 0,
+  "boundary_errors": 10,
+  "boundary_warnings": 2,
+  "fixture_read_assertions": [
+    "Expected 'Actually read every retained published profile file' to be true.",
+    "Expected 'Actually read every retained published profile file' to be true."
+  ],
+  "fixture_read_warnings": [
+    "LogStreaming: Failed to read file 'F:/Ourgame/UnrealGame/Saved/Automation/StoneGuardV1Boundary/0311AAB443D1C80A903BDD8892FF6591/BoundRunOnly-v1/9c7649a8-470c-72f6-ca3b-f38edba6b893/writer.lock' error.",
+    "LogStreaming: Failed to read file 'F:/Ourgame/UnrealGame/Saved/Automation/StoneGuardV1Boundary/0311AAB443D1C80A903BDD8892FF6591/BoundRunOnly-v1/9c7649a8-470c-72f6-ca3b-f38edba6b893/writer.lock' error."
+  ],
+  "remaining_version_behavior_errors": [
+    "Expected 'V1 MakeGeneration rejects a fullylegal GuardV2 instead of mislabeling old descriptors' to be false.",
+    "Expected 'Version rejection preserves every outputheader field and exact payload bytes' to be true.",
+    "Expected 'Mandatory V1 read-validator rejects deliberate oldenvelope around legalV2 codec' to be false.",
+    "Expected 'Mislabel failure preserves prior sealedpointer and allV1 owning values' to be true.",
+    "Expected 'Actual V1Commit failsclosed before Store publication' to be 3, but it was 0.",
+    "Expected 'Actual rejected V2 leaves every existing profile slot/marker/lease filebyte unchanged with no new files' to be true.",
+    "Expected 'No unsupported V2 head or payload was published' to be true.",
+    "Expected 'Same V1 writer still normally publishes validgen2 after refusedV2' to be 0, but it was 8."
+  ],
+  "pure_boundary_RED_yet": false
+}

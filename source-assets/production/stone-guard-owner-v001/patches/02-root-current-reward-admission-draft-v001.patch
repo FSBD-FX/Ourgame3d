@@ -1,0 +1,91 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunSnapshot.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunSnapshot.h
+@@ -10,7 +10,7 @@
+ 
+ // Complete values for the presently implemented bound-development owners.
+ // This is not a canonical disk bundle, Account/Settings/Journal, or Continue.
+-enum class EDungeonRunScope:uint8 { Unsupported, BoundDevelopmentV1 };
++enum class EDungeonRunScope:uint8 { Unsupported, BoundDevelopmentV1, BoundDevelopmentV2 };
+ enum class EDungeonRunGeometryKind:uint8 { Unsupported, FlatBoundsV1, SceneExplorationV1 };
+ struct FDungeonRunGeometrySnapshot
+ {
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunAggregate.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunAggregate.cpp
+@@ -37,7 +37,7 @@
+ {return S.Fighters.FindByPredicate([Id](const auto& F){return F.EntityId==Id;});}
+ FDungeonRunRewardActorFact RewardActor(const FDungeonFighterOwnerSnapshot& F)
+ {
+-    const bool Claimed=F.Knight.IsSet()?F.Knight.GetValue().RewardClaimed:F.Bat.IsSet()?F.Bat.GetValue().RewardClaimed:false;
++    const bool Claimed=F.Knight.IsSet()?F.Knight.GetValue().RewardClaimed:F.Bat.IsSet()?F.Bat.GetValue().RewardClaimed:F.Guard.IsSet()?F.Guard.GetValue().Kernel.RewardClaimed:false;
+     return {F.EntityId,F.RoomInstanceId,F.Kind==EDungeonFighterOwnerKind::BoundPlayer?TEXT("player"):F.EnemyContentId,
+         F.Enemy,F.Dead,F.DeathReported,Claimed};
+ }
+@@ -181,6 +181,8 @@
+     };
+     if(!AddActor(Game.PlayerFighter,true))return false;
+     for(const auto& Enemy:Game.Enemies)if(!AddActor(Enemy,false))return false;
++    if(Candidate.Fighters.ContainsByPredicate([](const auto& F){return F.Guard.IsSet();}))
++    {Candidate.Schema=2;Candidate.Scope=EDungeonRunScope::BoundDevelopmentV2;}
+     for(const auto& Entry:Game.WorldEntityIds)if(Entry.Key.IsValid()&&!CurrentActors.Contains(Entry.Key.Get()))
+         return Fail(Diagnostic,TEXT("A live admitted world actor is absent from the current owner array"));
+     for(const auto& P:Game.Pickups)Candidate.Pickups.Add({P.Position,P.Kind,P.bConsumed,P.RunGuid,P.ObjectId,P.SourceId,P.RoomInstanceId});
+@@ -199,7 +201,9 @@
+     // All candidate owners are independent values. No live GameMode, Actor,
+     // controller, World, event consumer or file operation is accessed here.
+     const auto& S=Saved;const auto& V=S.Equipment.View;
+-    if(S.Schema!=1||S.Scope!=EDungeonRunScope::BoundDevelopmentV1||!S.RunGuid.IsValid()||!S.OwnerId||!S.RoomInstanceId
++    const bool HasGuard=S.Fighters.ContainsByPredicate([](const auto& F){return F.Guard.IsSet();});
++    if((HasGuard?(S.Schema!=2||S.Scope!=EDungeonRunScope::BoundDevelopmentV2)
++                :(S.Schema!=1||S.Scope!=EDungeonRunScope::BoundDevelopmentV1))||!S.RunGuid.IsValid()||!S.OwnerId||!S.RoomInstanceId
+         ||S.RoomNumber<=0||S.RoomInstanceId!=uint64(S.RoomNumber)||!FiniteTime(S.SimulationTime)
+         ||!FMath::IsFinite(S.LastStoneWakeStartedAt)||(S.LastStoneWakeStartedAt!= -1.&&S.LastStoneWakeStartedAt<0.)||S.LastStoneWakeStartedAt>S.SimulationTime
+         ||S.GameOver&&S.WaitingForStart||!V.Bound||V.RunGuid!=S.RunGuid||V.OwnerId!=S.OwnerId||V.RoomInstanceId!=S.RoomInstanceId)
+@@ -236,7 +240,7 @@
+         FC.SimulationTime=S.SimulationTime;FC.GameOver=S.GameOver;FC.Equipment=&S.Equipment;FC.WeaponWorld=&World;
+         if(!ADungeonFighter::ValidateOwnerSnapshot(F,FC,Why))return OwnerFailure(Diagnostic,TEXT("Fighter"),Why);
+         RC.CurrentActors.Add(RewardActor(F));
+-        const double Wake=F.Knight.IsSet()?F.Knight.GetValue().WakeStartedAt:F.Bat.IsSet()?F.Bat.GetValue().WakeStartedAt:-1.;
++        const double Wake=F.Knight.IsSet()?F.Knight.GetValue().WakeStartedAt:F.Bat.IsSet()?F.Bat.GetValue().WakeStartedAt:F.Guard.IsSet()?F.Guard.GetValue().Kernel.WakeStartedAt:-1.;
+         if(Wake>S.LastStoneWakeStartedAt)return Fail(Diagnostic,TEXT("Global wake throttle precedes a current accepted stone wake"));
+     }
+     FDungeonRunRewards Rewards;if(!Rewards.Restore(S.Rewards,RC,Why))return OwnerFailure(Diagnostic,TEXT("Rewards"),Why);
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunInstaller.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunInstaller.cpp
+@@ -32,7 +32,7 @@
+     C.SimulationTime=S.SimulationTime;C.PlayerCoins=S.Fighters[0].Coins;C.WeaponWorld=&World;
+     for(const auto& F:S.Fighters)
+     {
+-        const bool Claimed=F.Knight.IsSet()?F.Knight.GetValue().RewardClaimed:F.Bat.IsSet()?F.Bat.GetValue().RewardClaimed:false;
++        const bool Claimed=F.Knight.IsSet()?F.Knight.GetValue().RewardClaimed:F.Bat.IsSet()?F.Bat.GetValue().RewardClaimed:F.Guard.IsSet()?F.Guard.GetValue().Kernel.RewardClaimed:false;
+         C.CurrentActors.Add({F.EntityId,F.RoomInstanceId,F.Kind==EDungeonFighterOwnerKind::BoundPlayer?TEXT("player"):F.EnemyContentId,
+             F.Enemy,F.Dead,F.DeathReported,Claimed});
+     }
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunRewards.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunRewards.cpp
+@@ -152,7 +152,15 @@
+             else
+             {
+                 const auto* D=Death(S,A.EntityId);
+-                if(!A.Enemy||!EnemyContent(A.ContentId)||B->RoomInstanceId!=S.CurrentRoomInstanceId
++                if(A.ContentId==TEXT("ENM-STN-003"))
++                {
++                    // The real Guard local eligibility may be true, but formal settlement is absent.
++                    // Do not add003 to EnemyContent/ResolveDeath or fixed5coin source allocation.
++                    if(!A.Enemy||B->RoomInstanceId!=S.CurrentRoomInstanceId||A.DeathReported||D
++                        ||A.RewardClaimed&&!A.Dead)
++                        return Fail(Why,TEXT("Current Guard contains unsupported formal settlement or premature eligibility"));
++                }
++                else if(!A.Enemy||!EnemyContent(A.ContentId)||B->RoomInstanceId!=S.CurrentRoomInstanceId
+                     ||A.DeathReported!=A.RewardClaimed||A.DeathReported&&!A.Dead||bool(D)!=A.DeathReported
+                     ||D&&(D->Death.RoomInstanceId!=A.RoomInstanceId||D->Death.ContentId!=A.ContentId))
+                     return Fail(Why,TEXT("Current enemy death/source/claim facts disagree"));
+@@ -166,7 +174,8 @@
+             BindingIds.Add(B.EntityId);
+             if(B.EntityId==S.OwnerId)
+             {if(B.ContentId!=TEXT("player"))return Fail(Why,TEXT("Wrong player binding content"));continue;}
+-            if(!EnemyContent(B.ContentId))return Fail(Why,TEXT("Unsupported world actor content"));
++            const bool CurrentUnsettledGuard=B.ContentId==TEXT("ENM-STN-003")&&B.RoomInstanceId==S.CurrentRoomInstanceId;
++            if(!EnemyContent(B.ContentId)&&!CurrentUnsettledGuard)return Fail(Why,TEXT("Unsupported world actor content"));
+             if(B.RoomInstanceId==S.CurrentRoomInstanceId)
+             {if(!CurrentIds.Contains(B.EntityId))return Fail(Why,TEXT("Missing current world enemy"));continue;}
+             const auto* R=S.RetiredEntities.FindByPredicate([&](const auto& X){return X.Actor.EntityId==B.EntityId;});

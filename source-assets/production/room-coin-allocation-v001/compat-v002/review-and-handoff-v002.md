@@ -1,0 +1,11 @@
+# Explicit exception-policy compatibility v002
+
+2026-10-17. New candidate only; v001 files/tests/freeze remain untouched. ActualSource, Build.cs, UE/UBT and runtime were not changed or executed here.
+
+Verified fact: actual `CodexDungeon.Build.cs` has no exception opt-in. UE5.5 `VCToolChain.cs:908–913` adds `_HAS_EXCEPTIONS=0` and `PLATFORM_EXCEPTIONS_DISABLED=1` when exception handling is disabled. The v001 production implementation's explicit try/catch, compiled with MSVC C++17 `/EHs-c- /W4 /WX`, produced C4530 promoted to C2220 at its try statement; build exit2. Original test iostream also warned under the initial no-STL-policy probe. A second preserved run with the actual UE STL definitions removes the test harness warning, but original production still fails C4530/C2220 at the same line. These are standalone compiler observations, not an attempted UE production compile.
+
+Minimal compatibility candidate: exact same integer Build body and allocation API. `_CPPUNWIND` gates only the try/catch around the independent candidate/build/final move. With unwinding enabled, `bad_alloc`/`length_error` map to ResourceFailure. Without unwinding, validation and checked-arithmetic failures still return status without modifying Out; resource exhaustion follows platform/STL fatal allocation policy and cannot return ResourceFailure or promise recoverability. Header now says this explicitly. No floating fallback, altered budget, warning suppression or module-wide exception opt-in.
+
+Actual same-test evidence: unchanged v001 standalone tests pass all197 checks with `/EHsc /W4 /WX` and separately `/EHs-c- /D_HAS_EXCEPTIONS=0 /DPLATFORM_EXCEPTIONS_DISABLED=1 /W4 /WX`. Both compile0 and run0, logs pristine. Preprocessor policy probes separately record `_CPPUNWIND` enabled/disabled for those exact flags. No resource exhaustion was injected and no fatal-OOM recovery is claimed.
+
+`compatibility-v001-to-v002.patch` changes only CPP preprocessor wrappers and the header resource-policy comments. Root should preserve its actual Stage0 RED and existing UE test bytes, admit these new source bytes, touch destination mtimes, then perform real UE compile/full regression. Current formal source/room binding remains null; no claim, death, payout, pickup, wallet, persistence or content-unit completion is added by this compatibility fix.

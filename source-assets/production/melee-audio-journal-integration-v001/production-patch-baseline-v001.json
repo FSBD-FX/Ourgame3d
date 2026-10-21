@@ -1,0 +1,42 @@
+{
+  "schema": "unapplied-melee-audio-journal-production-patch-v1",
+  "status": "UNAPPLIED_NOT_COMPILED_NOT_GREEN",
+  "captured_at_utc": "2026-10-16T12:32:50.765028+00:00",
+  "patch": {
+    "path": "source-assets/production/melee-audio-journal-integration-v001/production-v001.patch",
+    "bytes": 5616,
+    "sha256": "260f0136815e477df4a8bc656ae5fd46118229a328a2778c32722e264ab3f673"
+  },
+  "source_baseline": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 102391,
+      "sha256": "df0f34023a3535b9e1f0d71fc73c4115af56294fd59bc2f0d0a109f2dad77fed"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.cpp",
+      "bytes": 25155,
+      "sha256": "0bc43aaf55c8576b93f8fde87cd8db92f04153d682ba332aa2620ac547687fb9"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": 108871,
+      "sha256": "4408906f11c8d398f60dcbe03bec3f6ba048891f2fb16e7b0a00444567032252"
+    }
+  ],
+  "difference_from_test_plan_baseline": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "test_plan_sha256": "b938adc86036a5a8693ac0799d0dd32645e513ce52cb60ff2078a69731bfc39f",
+      "patch_baseline_sha256": "4408906f11c8d398f60dcbe03bec3f6ba048891f2fb16e7b0a00444567032252"
+    }
+  ],
+  "patch_files": 3,
+  "hunks": 4,
+  "schema_changed": false,
+  "game_mode_changed": false,
+  "kernels_changed": false,
+  "five_existing_cues_changed": false,
+  "actual_source_written": false,
+  "policy": "Root first runs genuine semantic RED using the frozen3test candidate. Rebase these small hunks onto then-current Root HUD/Source; never restore full baseline files. Both per-source original bound direct PlaySound2D calls are removed. Legacy unbound direct paths are explicitly retained."
+}

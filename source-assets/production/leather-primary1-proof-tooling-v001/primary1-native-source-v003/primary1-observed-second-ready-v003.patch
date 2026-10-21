@@ -1,0 +1,19 @@
+diff --git a/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.cpp b/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.cpp
+index 23b3a48..22464b2 100644
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.cpp
+@@ -199,7 +199,13 @@ void ADungeonFairytaleEquipmentBoundProbe::ScreenshotProcessed()
+     {
+         const int32 Side=D.Facing<0?0:1;
+         LeatherPrimary1Masks[Side]|=1<<D.Frame;
+-        if(!LeatherPrimary1AttackIds[Side])LeatherPrimary1AttackIds[Side]=D.ActionId;
++        if(!LeatherPrimary1AttackIds[Side])
++        {
++            LeatherPrimary1AttackIds[Side]=D.ActionId;
++            // Only the first observed actual second attack discards any old Ready
++            // captured between the normal J request and its native processing.
++            if(LeatherPrimaryTurnRequested)ReadySeen[6]=0;
++        }
+         else if(LeatherPrimary1AttackIds[Side]!=D.ActionId)Mismatch(TEXT("primary1_facing_reuses_multiple_attacks"),Observation);
+         int32 NewArmorPaths=0;
+         for(const auto& Path:D.DrawStack)if(Path.Contains(TEXT("/EV048/v013/HeroLeatherPrimary1/")))++NewArmorPaths;

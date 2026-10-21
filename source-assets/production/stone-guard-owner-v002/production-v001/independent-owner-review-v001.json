@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "reviewer": "/root/run_codec_stage0/guard_owner_prod_review",
+  "reviewed_at_utc": "2026-10-16T19:47:27.2122016Z",
+  "scope": "Read-only narrow static review of Guard owner validation/capture/restore, native Driver reconstruction, and exact Guard value equality. No Codec/reward/full-project review.",
+  "assessment": "One confirmed native-ground projection defect was reported and corrected in the candidate; no remaining confirmed issue in this limited scope. UE execution remains unverified by this reviewer.",
+  "source_mutations": false,
+  "ue_or_ubt_executed": false,
+  "reviewed_files": [
+    {
+      "path": "candidate-source/DungeonFighter.cpp",
+      "sha256": "ca53e66373f1d64451954ebc270c5ee248f6f4454b80e2376065c5cfe7f49eba"
+    },
+    {
+      "path": "candidate-source/DungeonStoneGuardOwnerValue.h",
+      "sha256": "52975d12a667a33747fe1fca168460f82627384a0e014d730d2a9704f13062de"
+    },
+    {
+      "path": "candidate-source/DungeonStoneGuardDriver.cpp",
+      "sha256": "da61c077b1f8a35972810165cf5ed534f55d2383661f3b1397afe1b649e5cdf9"
+    }
+  ],
+  "resolved_findings": [
+    {
+      "id": "GUARD-OWNER-GROUND-Z-001",
+      "priority": "P1",
+      "status": "candidate_correction_read_only_confirmed",
+      "original_path": "candidate-source/DungeonFighter.cpp",
+      "original_lines": "332-337",
+      "original_sha256": "b716145d65cde8344b7334925139d1a7cf5434b71b95fb8bc4d75e31bca98a2a",
+      "facts": [
+        "Pure PointValid admits every finite nonnegative Z: ActualSource/DungeonStoneGuard.cpp:14.",
+        "Pure constructor retains birth/current Z: ActualSource/DungeonStoneGuard.cpp:469-474.",
+        "Pure saved validation requires Position.Z==InitialPosition.Z but does not require zero: ActualSource/DungeonStoneGuard.cpp:283-284.",
+        "Original owner projection required native JumpHeight/JumpVelocity zero while checking only kernel XY.",
+        "Native Driver QuerySweep rejects nonzero query From.Z or To.Z: candidate-source/DungeonStoneGuardDriver.cpp:176-180."
+      ],
+      "inference": "A lawful pure nonzero-Z state could be reconstructed using its saved birth and pass the old owner projection with a zero native JumpHeight, leaving native body/display inconsistent with kernel height.",
+      "risk": "The accepted snapshot could later reject native movement or use a different kernel combat height from the restored ground actor.",
+      "confirmed_correction": "candidate-source/DungeonFighter.cpp:336 now rejects G.InitialPosition.Z!=0.||G.Position.Z!=0.; native zero JumpHeight/JumpVelocity constraints remain at337.",
+      "runtime_reproduction": "Not executed; finding and correction verified by direct static predicate tracing. Frozen UE groups were not modified."
+    }
+  ],
+  "checked_invariants": [
+    "Guard kind requires owner Schema3 and exactly the Guard optional; legacy Player/Knight/Bat owner Schema2 remains distinct.",
+    "Stable current003 identity/content and saved aggregate equipment/world context are validated before publishing any owner changes.",
+    "Pure validation and temporary native Driver both reconstruct saved immutable birth and explicit saved Policy; Driver Restore delegates to the existing same-birth pure Restore.",
+    "No Step/Sync/BeginCombat/world query occurs in the newly added Guard Restore path.",
+    "Guard capture checks LastGuardSyncTime==Kernel.Time and copies actual native DeathObserved separately from local Kernel.RewardClaimed and formal DeathReported.",
+    "Guard observer and driver publication occur only after candidate validation; failed validation returns before mutation.",
+    "Formal Guard DeathReported remains rejected; local RewardClaimed is retained without being converted into settlement.",
+    "Exact value helper compares every FState member, every nested wire value member, explicit Policy, observer, wrapper Schema, optional presence, and ordered history values.",
+    "Per-double comparison uses IEEE representation bytes; padded aggregate structs are never memcmp compared."
+  ],
+  "static_member_coverage": {
+    "FPoint": 3,
+    "FPolicy": 1,
+    "FAction": 20,
+    "FDamageWindow": 9,
+    "FWindowClosure": 2,
+    "FHitReceipt": 3,
+    "FReceivedHit": 4,
+    "FEvent": 10,
+    "FState": 33
+  },
+  "direct_ordered_histories": [
+    "Windows",
+    "Closures",
+    "HitReceipts",
+    "ReceivedHits",
+    "Issued"
+  ],
+  "limitations": [
+    "No actual Owner/Driver UE execution, UBT, staged installation, or target automation performed.",
+    "Static member-reference coverage supplements direct source review; it is not runtime proof.",
+    "No claim about Codec, reward admission, disk continuation, full-room settlement, or full project correctness."
+  ]
+}

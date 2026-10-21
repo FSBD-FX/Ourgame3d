@@ -1,0 +1,585 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -931,7 +931,7 @@
+ {
+     if(RunInstallBlocksFighter(*this))return false;
+     // This is initial spawn configuration, never a continue/reset/healing operation.
+-    if (StoneKnight || StoneBat || !EntityId || !FMath::IsFinite(StartTime) || StartTime < 0.0 || bDead) return false;
++    if (StoneKnight || StoneBat || StoneGuard || !EntityId || !FMath::IsFinite(StartTime) || StartTime < 0.0 || bDead) return false;
+     const auto Definition = DungeonStoneKnight::FKnightKernel::Definition();
+     EnemyContentId = UTF8_TO_TCHAR(Definition.ContentId);
+     bEnemy = true; bAIEnabled = true;
+@@ -953,7 +953,7 @@
+ {
+     if(RunInstallBlocksFighter(*this))return false;
+     const auto Game=GetWorld()?GetWorld()->GetAuthGameMode<ADungeonGameMode>():nullptr;
+-    if(StoneKnight||StoneBat||IsEquipmentBound()||bDead||!EntityId||!FMath::IsFinite(StartTime)||StartTime<0.)return false;
++    if(StoneKnight||StoneBat||StoneGuard||IsEquipmentBound()||bDead||!EntityId||!FMath::IsFinite(StartTime)||StartTime<0.)return false;
+     if(Game&&Game->GetEquipmentView().Bound&&(GetRuntimeEntityId()!=EntityId||StartTime!=Game->GetSimulationTime()))return false;
+     // Initial admission preserves the current Run and central clock.
+     const auto D=DungeonStoneBat::FBatKernel::Definition();
+@@ -988,7 +988,7 @@
+     if (IsEquipmentBound()) return GetWorld()->GetAuthGameMode<ADungeonGameMode>()->GetEquipmentView().OwnerId;
+     const auto Game=GetWorld()?GetWorld()->GetAuthGameMode<ADungeonGameMode>():nullptr;
+     if (Game&&Game->GetEquipmentView().Bound) return Game->FindWorldEntityId(this);
+-    return StoneKnight ? StoneKnight->State().EntityId : StoneBat?StoneBat->State().EntityId:(uint64(1) << 63) | uint64(GetUniqueID());
++    return StoneKnight ? StoneKnight->State().EntityId : StoneBat?StoneBat->State().EntityId:StoneGuard?StoneGuard->State().EntityId:(uint64(1) << 63) | uint64(GetUniqueID());
+ }
+ 
+ void ADungeonFighter::SyncStoneKnightState()
+@@ -1080,6 +1080,7 @@
+ 
+ float ADungeonFighter::GetArmorRating(bool Magic) const
+ {
++    if(StoneGuard){const auto D=DungeonStoneGuard::FGuardKernel::Definition();return float(Magic?D.Ward:D.Armor);}
+     if(StoneBat){const auto D=DungeonStoneBat::FBatKernel::Definition();return float(Magic?D.Ward:D.Armor);}
+     if (IsEquipmentBound()) {const auto& S=GetWorld()->GetAuthGameMode<ADungeonGameMode>()->GetEquipmentView().Stats;return float(Magic?S.Ward:S.Armor);}
+     if (StoneKnight)
+@@ -1092,6 +1093,7 @@
+ }
+ float ADungeonFighter::GetMoveSpeed() const
+ {
++    if(StoneGuard)return float(DungeonStoneGuard::FGuardKernel::Definition().MoveSpeed);
+     if(StoneBat)return float(DungeonStoneBat::FBatKernel::Definition().MoveSpeed);
+     if (IsEquipmentBound()) return float(GetWorld()->GetAuthGameMode<ADungeonGameMode>()->GetEquipmentView().Stats.MoveSpeed);
+     if (StoneKnight) return float(DungeonStoneKnight::FKnightKernel::Definition().MoveSpeed);
+@@ -1099,6 +1101,7 @@
+ }
+ float ADungeonFighter::GetPoiseThreshold() const
+ {
++    if(StoneGuard)return float(DungeonStoneGuard::FGuardKernel::Definition().Poise);
+     if(StoneBat)return float(DungeonStoneBat::FBatKernel::Definition().Poise);
+     if (IsEquipmentBound()) return float(GetWorld()->GetAuthGameMode<ADungeonGameMode>()->GetEquipmentView().Stats.Poise);
+     if (StoneKnight) return float(DungeonStoneKnight::FKnightKernel::Definition().Poise);
+@@ -1108,7 +1111,7 @@
+ void ADungeonFighter::MoveOnGround(FVector2D Direction, float DeltaSeconds)
+ {
+     if(RunInstallBlocksFighter(*this))return;
+-    if (StoneKnight || StoneBat || bDead || HurtTime > 0.f || DeltaSeconds <= 0.f || bSuppressOrdinaryMovement || Dodge.State().Phase==DungeonDodge::EPhase::Dodging)
++    if (StoneKnight || StoneBat || StoneGuard || bDead || HurtTime > 0.f || DeltaSeconds <= 0.f || bSuppressOrdinaryMovement || Dodge.State().Phase==DungeonDodge::EPhase::Dodging)
+     {
+         return;
+     }
+@@ -1162,7 +1165,7 @@
+ void ADungeonFighter::StartJump()
+ {
+     if(RunInstallBlocksFighter(*this))return;
+-    if (!StoneKnight && !StoneBat && GetEquipmentActionDeadline()<=0 && Dodge.State().Phase!=DungeonDodge::EPhase::Dodging && !WeaponSkills.State().Action.Active && !bDead && JumpHeight <= 0.f && JumpVelocity <= 0.f && HurtTime <= 0.f && AttackTime <= 0.f && ArmorChangeRemaining <= 0.f)
++    if (!StoneKnight && !StoneBat && !StoneGuard && GetEquipmentActionDeadline()<=0 && Dodge.State().Phase!=DungeonDodge::EPhase::Dodging && !WeaponSkills.State().Action.Active && !bDead && JumpHeight <= 0.f && JumpVelocity <= 0.f && HurtTime <= 0.f && AttackTime <= 0.f && ArmorChangeRemaining <= 0.f)
+     {
+         JumpVelocity = 630.f;
+         bAirPrimarySpent = false;
+@@ -1174,29 +1177,33 @@
+ bool ADungeonFighter::CanStartAttack() const
+ {
+     if(RunInstallBlocksFighter(*this))return false;
+-    return !StoneKnight && !StoneBat && GetEquipmentActionDeadline()<=0 && Dodge.State().Phase!=DungeonDodge::EPhase::Dodging && !WeaponSkills.State().Action.Active && !bDead && AttackTime <= 0.f && AttackCooldown <= 0.f && HurtTime <= 0.f && ArmorChangeRemaining <= 0.f
++    return !StoneKnight && !StoneBat && !StoneGuard && GetEquipmentActionDeadline()<=0 && Dodge.State().Phase!=DungeonDodge::EPhase::Dodging && !WeaponSkills.State().Action.Active && !bDead && AttackTime <= 0.f && AttackCooldown <= 0.f && HurtTime <= 0.f && ArmorChangeRemaining <= 0.f
+         && !(JumpHeight > 0.f && bAirPrimarySpent);
+ }
+ 
+ float ADungeonFighter::GetAttackRange() const
+ {
++    if(StoneGuard)return StoneGuard->State().Action.InProgress?float(StoneGuard->State().Action.Kind==DungeonStoneGuard::EAttack::AxeSweep?180.:160.):0.f;
+     return IsContentMelee() ? float((bResolvingContentWindow ? HitAction : Combat.State().Action).Range)
+         : bEnemy ? 112.f : (WeaponId == TEXT("axe") ? 150.f : 135.f);
+ }
+ 
+ float ADungeonFighter::GetAttackDamage() const
+ {
++    if(StoneGuard)return StoneGuard->State().Action.InProgress?float(StoneGuard->State().Action.Damage):0.f;
+     return IsContentMelee() ? float((bResolvingContentWindow ? HitAction : Combat.State().Action).Damage)
+         : bEnemy ? 13.f : (WeaponId == TEXT("axe") ? 42.f : 26.f);
+ }
+ 
+ float ADungeonFighter::GetAttackStagger() const
+ {
++    if(StoneGuard)return StoneGuard->State().Action.InProgress?float(StoneGuard->State().Action.Stagger):0.f;
+     return IsContentMelee() ? float((bResolvingContentWindow ? HitAction : Combat.State().Action).Stagger) : 13.f;
+ }
+ 
+ float ADungeonFighter::GetAttackDepth() const
+ {
++    if(StoneGuard)return StoneGuard->State().Action.InProgress?float(StoneGuard->State().Action.Kind==DungeonStoneGuard::EAttack::AxeSweep?65.:90.):0.f;
+     return IsContentMelee() ? float((bResolvingContentWindow ? HitAction : Combat.State().Action).Depth)
+         : bEnemy ? 44.f : (WeaponId == TEXT("axe") ? 66.f : 52.f);
+ }
+@@ -1235,7 +1242,7 @@
+         if (JumpHeight>0 || JumpVelocity>0) bAirPrimarySpent=true;
+         SyncContentAction();return;
+     }
+-    if (StoneKnight || StoneBat || Dodge.State().Phase==DungeonDodge::EPhase::Dodging || WeaponSkills.State().Action.Active || ArmorChangeRemaining > 0.f) return;
++    if (StoneKnight || StoneBat || StoneGuard || Dodge.State().Phase==DungeonDodge::EPhase::Dodging || WeaponSkills.State().Action.Active || ArmorChangeRemaining > 0.f) return;
+     if (IsContentMelee())
+     {
+         if (Combat.State().Weapon != ContentWeapon())
+@@ -1291,6 +1298,18 @@
+         auto Game=GetWorld()->GetAuthGameMode<ADungeonGameMode>();const auto& S=Game->GetEquipmentView().Stats;
+         ActualDamage*=float(Magic?S.MagicVulnerabilityMultiplier:S.PhysicalVulnerabilityMultiplier);
+         if (ActualDamage>0) Game->CancelEquipmentAction();
++    }
++    if(StoneGuard)
++    {
++        auto Game=GetWorld()?GetWorld()->GetAuthGameMode<ADungeonGameMode>():nullptr;if(!Game)return;
++        const float Incoming=DamageOverTime?0.f:Stagger>=0.f?Stagger:Attacker?Attacker->GetAttackStagger():13.f;
++        if(!FMath::IsFinite(Incoming)||Incoming<0.f)return;
++        const auto Frame=Game->MakeKnightFrame(this,StoneGuard->State().Time,Game->SimulationTime,
++            Game->bSimulationBatch?Game->SkillBatchBodies:Game->CaptureKnightBodies());
++        const auto Batch=StoneGuard->ApplyResolvedHit(FMath::Min(double(ActualDamage),StoneGuard->State().HP),Incoming,Frame);
++        if(!Batch.Accepted)return;
++        HitFlash=.22f;Game->AcceptGuardBatch(this,Batch);SyncStoneGuardState();if(bDead)Game->OnFighterDied(this);
++        return; // No second mitigation, generic iframe/push, or second HP owner.
+     }
+     if (StoneKnight)
+     {
+@@ -1379,7 +1398,7 @@
+ void ADungeonFighter::ResetFighter(FVector2D GroundPosition)
+ {
+     if(RunInstallBlocksFighter(*this))return;
+-    if (StoneKnight || StoneBat || IsEquipmentBound()) return; // Transfers/continue must never reset a bound Run.
++    if (StoneKnight || StoneBat || StoneGuard || IsEquipmentBound()) return; // Transfers/continue must never reset a bound Run.
+     Health = MaxHealth;
+     JumpHeight = 0.f;
+     JumpVelocity = 0.f;
+@@ -1441,7 +1460,7 @@
+ FVector2D ADungeonFighter::PredictGroundPosition(double DeltaSeconds) const
+ {
+     const auto Origin=GetGroundPosition();
+-    if (StoneKnight || StoneBat || bDead || HurtTime>0.f || DeltaSeconds<=0.0 || Dodge.State().Phase==DungeonDodge::EPhase::Dodging) return Origin;
++    if (StoneKnight || StoneBat || StoneGuard || bDead || HurtTime>0.f || DeltaSeconds<=0.0 || Dodge.State().Phase==DungeonDodge::EPhase::Dodging) return Origin;
+     FVector2D Direction=ReadMoveIntent();
+     if (bEnemy)
+     {
+@@ -1637,7 +1656,7 @@
+ void ADungeonFighter::SimulateMotion(float DeltaSeconds, bool ConsumeInputEdges)
+ {
+     if(RunInstallBlocksFighter(*this))return;
+-    if (StoneKnight || StoneBat)
++    if (StoneKnight || StoneBat || StoneGuard)
+     {
+         HitFlash = FMath::Max(0.f, HitFlash-DeltaSeconds);
+         return; // Driver advances only once in GameMode's absolute-time action batch.
+@@ -1703,7 +1722,7 @@
+ void ADungeonFighter::SimulateActionsTo(double Now, float DeltaSeconds, std::vector<DungeonWeaponActions::FEvent>* DeferredEvents)
+ {
+     if(RunInstallBlocksFighter(*this))return;
+-    if (StoneKnight || StoneBat) return;
++    if (StoneKnight || StoneBat || StoneGuard) return;
+     if (bDead) return;
+     if (IsContentMelee() || IsEquipmentBound()) AdvanceContentActionTo(Now);
+     // Bound GameMode first commits old world contacts and endpoint damage.
+@@ -1739,18 +1758,68 @@
+     }
+ }
+ 
+-// Native Guard Stage0: complete public API, no manufactured Actor/Run success.
+-bool ADungeonFighter::InitializeStoneGuard(uint64,double){return false;}
+-bool ADungeonFighter::ClaimStoneGuardDeathEligibility(){return false;}
++bool ADungeonFighter::InitializeStoneGuard(uint64 EntityId,double StartTime)
++{
++    if(RunInstallBlocksFighter(*this))return false;
++    auto Game=GetWorld()?GetWorld()->GetAuthGameMode<ADungeonGameMode>():nullptr;
++    if(!Game||!Game->GetEquipmentView().Bound||StoneKnight||StoneBat||StoneGuard||IsEquipmentBound()||bDead||!bEnemy
++        ||EnemyContentId!=TEXT("ENM-STN-003")||!EntityId||!FMath::IsFinite(StartTime)||StartTime<0.
++        ||GetRuntimeEntityId()!=EntityId||StartTime!=Game->GetSimulationTime()||JumpHeight!=0.f||JumpVelocity!=0.f)return false;
++    auto Candidate=MakeUnique<FDungeonStoneGuardDriver>(this,EntityId,StartTime);
++    if(!Candidate->BeginCombat())return false;
++    const auto D=DungeonStoneGuard::FGuardKernel::Definition();
++    StoneGuard=MoveTemp(Candidate);MaxHealth=Health=float(D.HP);bEnemy=true;bAIEnabled=true;
++    WeaponId=TEXT("enemy_stone_guard_twohand_axe");bHasAxe=true;
++    AttackTime=AttackElapsed=AttackCooldown=InvulnerableTime=HurtTime=0.f;
++    ArmorChangeRemaining=0.f;PendingArmorId.Reset();JumpHeight=JumpVelocity=0.f;
++    LastGuardSyncTime=StartTime;bGuardDeathObserved=false;SetActorTickEnabled(false);SyncStoneGuardState();return true;
++}
++bool ADungeonFighter::ClaimStoneGuardDeathEligibility()
++{
++    if(RunInstallBlocksFighter(*this)||!StoneGuard||!bDead||StoneGuard->State().HP!=0.)return false;
++    return StoneGuard->ClaimDeathReward();
++}
+ FVector2D ADungeonFighter::GetCombatBodyHalfExtent() const
+ {
+-    if(StoneGuard)return FVector2D(40.,28.);
+-    if(StoneBat)return FVector2D(16.,12.);
+-    if(StoneKnight)return FVector2D(24.,20.);
+-    return FVector2D(18.,16.);
++    if(StoneGuard){const auto D=DungeonStoneGuard::FGuardKernel::Definition();return {D.BodyHalfX,D.BodyHalfY};}
++    if(StoneBat){const auto D=DungeonStoneBat::FBatKernel::Definition();return {D.BodyHalfX,D.BodyHalfY};}
++    if(StoneKnight){const auto D=DungeonStoneKnight::FKnightKernel::Definition();return {D.BodyHalfX,D.BodyHalfY};}
++    return {18.,16.};
+ }
+ FVector2D ADungeonFighter::GetProjectileHurtHalfExtent() const
+ {
+-    return GetCombatBodyHalfExtent();
+-}
+-void ADungeonFighter::SyncStoneGuardState(){}
++    if(StoneGuard){const auto D=DungeonStoneGuard::FGuardKernel::Definition();return {D.HurtHalfX,D.HurtHalfY};}
++    if(StoneBat){const auto D=DungeonStoneBat::FBatKernel::Definition();return {D.HurtHalfX,D.HurtHalfY};}
++    if(StoneKnight){const auto D=DungeonStoneKnight::FKnightKernel::Definition();return {D.HurtHalfX,D.HurtHalfY};}
++    return {18.,16.};
++}
++void ADungeonFighter::SyncStoneGuardState()
++{
++    if(!StoneGuard)return;const auto& S=StoneGuard->State();const auto& A=S.Action;
++    const FVector2D P(S.Position.X,S.Position.Y);bMoving=GetGroundPosition()!=P;SetActorLocation({P.X,P.Y,0});
++    Health=float(S.HP);bDead=S.Phase==DungeonStoneGuard::EPhase::Dead;Facing=float(S.Facing);
++    JumpHeight=float(S.Position.Z);JumpVelocity=0.f;InvulnerableTime=0.f;
++    using Phase=DungeonStoneGuard::EPhase;
++    const bool Owned=S.Phase==Phase::Windup||S.Phase==Phase::Active||S.Phase==Phase::Recovery;
++    AttackTime=Owned?float(FMath::Max(0.,S.OccupiedUntil-S.Time)):0.f;
++    HurtTime=S.Phase==Phase::Stunned?float(FMath::Max(0.,S.StunUntil-S.Time)):0.f;
++    PoiseAccumulation=float(S.PoiseAccum);PoiseProtection=float(FMath::Max(0.,S.ProtectionUntil-S.Time));ComboStage=0;
++    const TCHAR* Pose=TEXT("idle");const TCHAR* PhaseName=TEXT("idle");
++    switch(S.Phase)
++    {
++    case Phase::Dormant:Pose=PhaseName=TEXT("dormant");break;
++    case Phase::Waking:Pose=PhaseName=TEXT("wake");break;
++    case Phase::Idle:Pose=bMoving?TEXT("walk"):TEXT("idle");break;
++    case Phase::Windup:Pose=A.Kind==DungeonStoneGuard::EAttack::AxeSweep?TEXT("axe_windup"):TEXT("stomp_windup");PhaseName=TEXT("windup");break;
++    case Phase::Active:Pose=A.Kind==DungeonStoneGuard::EAttack::AxeSweep?TEXT("axe_active"):TEXT("stomp_active");PhaseName=TEXT("active");break;
++    case Phase::Recovery:Pose=PhaseName=TEXT("recovery");break;
++    case Phase::Stunned:Pose=PhaseName=TEXT("hurt");break;
++    case Phase::Dead:Pose=PhaseName=TEXT("death");break;
++    }
++    SetAnimation(FString(TEXT("stone_guard_placeholder_"))+Pose,float(FMath::Max(0.,S.Time-LastGuardSyncTime)));
++    AttackPhase=PhaseName;
++    if(S.Phase==Phase::Waking)AnimationTime=float(S.Time-S.WakeStartedAt);
++    else if(Owned)AnimationTime=float(S.Time-A.Start);
++    else if(S.Phase==Phase::Stunned)AnimationTime=float(FMath::Max(0.,S.Time-(S.StunUntil-.4)));
++    LastGuardSyncTime=S.Time;
++}
+--- a/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp
+@@ -474,7 +474,7 @@
+ bool ADungeonGameMode::BeginEquipmentRun(EDungeonEquipmentRunConfig Config, uint64 CombatSeed)
+ {
+     if(IsRunInstallGated())return false;
+-    if (!IsValid(PlayerFighter) || PlayerFighter->StoneKnight || PlayerFighter->StoneBat) return false;
++    if (!IsValid(PlayerFighter) || PlayerFighter->StoneKnight || PlayerFighter->StoneBat || PlayerFighter->StoneGuard) return false;
+     const FVector2D InitialPosition = PlayerFighter->GetGroundPosition();
+     // This is the explicit new-Run boundary, never a transfer or continue operation.
+     auto Runtime = MakeUnique<FDungeonEquipmentRuntime>();
+@@ -648,7 +648,7 @@
+ 
+ bool ADungeonGameMode::SetupSceneExplorationPreviewRun()
+ {
+-    if(!IsValid(PlayerFighter)||PlayerFighter->StoneKnight||PlayerFighter->StoneBat||!GetWorld())return false;
++    if(!IsValid(PlayerFighter)||PlayerFighter->StoneKnight||PlayerFighter->StoneBat||PlayerFighter->StoneGuard||!GetWorld())return false;
+     const auto Layout=DungeonRoomLayout::ExplorationPreview();
+     PlayerFighter->SetActorLocation(FVector(Layout.Entry.X,Layout.Entry.Y,0.));
+     if(!BeginEquipmentRun(EDungeonEquipmentRunConfig::IntegrationPreview,1))return false;
+@@ -808,7 +808,7 @@
+ 
+ bool ADungeonGameMode::SetupManualWeaponPreviewRun()
+ {
+-    if(!IsValid(PlayerFighter)||PlayerFighter->StoneKnight||PlayerFighter->StoneBat||!GetWorld())return false;
++    if(!IsValid(PlayerFighter)||PlayerFighter->StoneKnight||PlayerFighter->StoneBat||PlayerFighter->StoneGuard||!GetWorld())return false;
+     PlayerFighter->SetActorLocation(FVector(-460.,0.,0.));
+     if(!BeginEquipmentRun(EDungeonEquipmentRunConfig::IntegrationPreview,1))return false;
+     PlayerFighter->SetActorTickEnabled(false);
+@@ -1205,7 +1205,7 @@
+         B.Fighter = Fighter; B.EntityId = Fighter->GetRuntimeEntityId();
+         B.Start = B.End = Fighter->GetGroundPosition();
+         B.StartHeight = B.EndHeight = Fighter->GetCombatHeight();
+-        B.BodyHalfExtent = Fighter->StoneBat ? FVector2D(16.,12.) : Fighter->StoneKnight ? FVector2D(24.0,20.0) : FVector2D(18.0,16.0);
++        B.BodyHalfExtent = Fighter->GetCombatBodyHalfExtent();
+         B.bBlocksBody = !Fighter->StoneBat || B.StartHeight<=40.;
+         B.bAlive = !Fighter->bDead;
+         B.bCanTakeDamage = Fighter->CanReceiveDirectHit();
+@@ -1366,7 +1366,7 @@
+     for (auto& B:Bodies) if (auto A=B.Fighter.Get())
+     {
+         B.End=A->PredictGroundPosition(Dt);
+-        if (!A->StoneKnight && !A->StoneBat && (A->JumpHeight>0.f||A->JumpVelocity>0.f))
++        if (!A->StoneKnight && !A->StoneBat && !A->StoneGuard && (A->JumpHeight>0.f||A->JumpVelocity>0.f))
+             B.EndHeight=double(float(FMath::Max(0.0,double(A->JumpHeight)+double(A->JumpVelocity)*Dt-900.0*Dt*Dt)));
+         if (A->Dodge.State().Phase==DungeonDodge::EPhase::Dodging)
+         {
+@@ -1389,10 +1389,15 @@
+             // This batch is split at every actual Z40 crossing before ordinary movement is admitted.
+             B.bBlocksBody=B.StartHeight<=40.||B.EndHeight<=40.;}
+     }
++    for(auto& B:Bodies)if(auto A=B.Fighter.Get())if(A->StoneGuard&&!A->bDead)
++    {
++        auto Preview=*A->StoneGuard;const auto Batch=Preview.StepTo(ToTime,MakeKnightFrame(A,FromTime,ToTime,Bodies));
++        if(Batch.Accepted){const auto& P=Preview.State().Position;B.End={P.X,P.Y};B.EndHeight=P.Z;B.MotionSegments=Batch.MotionSegments;}
++    }
+     const auto Unresolved=Bodies;
+     for (auto& B:Bodies) if (auto A=B.Fighter.Get())
+     {
+-        if (A->StoneKnight || A->StoneBat) continue;
++        if (A->StoneKnight || A->StoneBat || A->StoneGuard) continue;
+         if (A->Dodge.State().Phase==DungeonDodge::EPhase::Dodging)
+         {
+             auto Preview=A->Dodge;
+@@ -1452,6 +1457,16 @@
+             if (S.Phase==DungeonStoneKnight::EPhase::Stunned) Bound(S.StunUntil);
+             if (S.Action.InProgress) {Bound(S.Action.LockAt);Bound(S.Action.ActiveAt);Bound(S.Action.ActiveEnd);Bound(S.Action.RecoveryEnd);}
+         }
++        if(F->StoneGuard)
++        {
++            using GP=DungeonStoneGuard::EPhase;const auto& S=F->StoneGuard->State();const auto& GuardAction=S.Action;
++            if(!S.Awakened&&S.WakeStartedAt>=0.)Bound(S.WakeEnd);
++            if(S.Phase==GP::Dormant&&S.CombatStartedAt>=0.)Bound(S.CombatStartedAt+12.);
++            if(S.Phase==GP::Stunned)Bound(S.StunUntil);
++            if(S.Phase==GP::Idle){Bound(S.IdleReadyAt);Bound(S.AxeReadyAt);Bound(S.StompReadyAt);}
++            if(S.Phase==GP::Windup){Bound(GuardAction.LockAt);Bound(GuardAction.ActiveAt);}if(S.Phase==GP::Active)Bound(GuardAction.ActiveEnd);
++            if(S.Phase==GP::Recovery||(GuardAction.Interrupted&&GuardAction.CompletedAt<0.))Bound(S.OccupiedUntil);
++        }
+         if(F->StoneBat)
+         {
+             using BP=DungeonStoneBat::EPhase;using BA=DungeonStoneBat::EAttack;const auto& S=F->StoneBat->State();const auto& BatAction=S.Action;
+@@ -1465,7 +1480,7 @@
+             if(S.Phase==BP::Windup&&BatAction.Locked&&BatAction.Kind==BA::Wing&&!BatAction.PathBlocked)Heights(BatAction.Origin,BatAction.Endpoint,BatAction.LockAt,BatAction.ActiveAt);
+             if(S.Phase==BP::Rising){auto Q=S.RiseOrigin;Q.Z=90.;const double End=S.RiseStartedAt+(90.-S.RiseOrigin.Z)/(70./.3);Bound(End);Heights(S.RiseOrigin,Q,S.RiseStartedAt,End);}
+         }
+-        if (!F->IsEquipmentBound()&&!F->IsContentMelee()&&!F->StoneKnight&&!F->StoneBat&&F->AttackTime>0&&!F->bAttackResolved)
++        if (!F->IsEquipmentBound()&&!F->IsContentMelee()&&!F->StoneKnight&&!F->StoneBat&&!F->StoneGuard&&F->AttackTime>0&&!F->bAttackResolved)
+             Bound(From+FMath::Max(0.0,double((F->bEnemy?.46f:F->WeaponId==TEXT("axe")?.31f:.17f)-F->AttackElapsed)));
+     };
+     FighterBoundary(PlayerFighter);
+@@ -1484,6 +1499,16 @@
+ double ADungeonGameMode::EarliestContact(double ToTime,const TArray<FDungeonKnightBody>& Bodies)
+ {
+     double Earliest=ToTime;
++    for(ADungeonFighter* E:Enemies)if(IsValid(E)&&E->StoneGuard&&!E->bDead)
++    {
++        auto Preview=*E->StoneGuard;const auto Batch=Preview.StepTo(ToTime,MakeKnightFrame(E,SimulationTime,ToTime,Bodies));
++        if(Batch.Accepted)
++        {
++            for(const auto& H:Batch.Hits)Earliest=FMath::Min(Earliest,H.AtTime);
++            for(const auto& Event:Batch.Events)if(Event.AtTime>SimulationTime)Earliest=FMath::Min(Earliest,Event.AtTime);
++        }
++    }
++
+     for(ADungeonFighter* E:Enemies)if(IsValid(E)&&E->StoneBat&&!E->bDead)
+     {
+         auto Preview=*E->StoneBat;const auto Batch=Preview.StepTo(ToTime,MakeKnightFrame(E,SimulationTime,ToTime,Bodies));
+@@ -1547,17 +1572,39 @@
+         if(!Batch.Accepted){for(int32 J=I;J<Accepted.Num();++J)if(Accepted[J].Target==Bat)BatLoss[J]=0.;continue;}
+         Bat->HitFlash=.22f;AcceptBatBatch(Bat,Batch);Bat->SyncStoneBatState();if(Bat->bDead)OnFighterDied(Bat);
+     }
++    TArray<double> GuardLoss;GuardLoss.Init(0.,Accepted.Num());TSet<ADungeonFighter*> GuardTargets;
++    for(int32 I=0;I<Accepted.Num();++I)
++    {
++        auto Guard=Accepted[I].Target;if(!IsValid(Guard)||!Guard->StoneGuard||Guard->bDead||GuardTargets.Contains(Guard))continue;
++        GuardTargets.Add(Guard);std::vector<DungeonStoneGuard::FIncomingHit> Hits;
++        uint64 Receipt=Guard->StoneGuard->State().LastDamageReceiptId;double Remaining=Guard->StoneGuard->State().HP;
++        for(int32 J=I;J<Accepted.Num();++J)if(Accepted[J].Target==Guard)
++        {
++            const auto& H=Accepted[J];if(!FMath::IsFinite(H.Damage)||H.Damage<=0.f)continue;
++            const float Rating=FMath::Max(0.f,Guard->GetArmorRating(H.Magic));
++            const float Actual=H.Damage*(1.f-FMath::Min(.6f,Rating/(100.f+Rating)));
++            const float Stagger=H.DamageOverTime?0.f:H.Stagger>=0.f?H.Stagger:H.Attacker?H.Attacker->GetAttackStagger():13.f;
++            if(!FMath::IsFinite(Actual)||Actual<0.f||!FMath::IsFinite(Stagger)||Stagger<0.f)continue;
++            const double Loss=FMath::Min(Remaining,double(Actual));Remaining-=Loss;GuardLoss[J]=Loss;
++            Hits.push_back({++Receipt,H.AtTime,Loss,Stagger});
++        }
++        const auto Frame=MakeKnightFrame(Guard,Guard->StoneGuard->State().Time,SimulationTime,SkillBatchBodies);
++        const auto Batch=Guard->StoneGuard->StepTo(SimulationTime,Frame,Hits);
++        ensureMsgf(Batch.Accepted,TEXT("Stone Guard rejected resolved receipts; never reset its authority or apply generic damage."));
++        if(!Batch.Accepted){for(int32 J=I;J<Accepted.Num();++J)if(Accepted[J].Target==Guard)GuardLoss[J]=0.;continue;}
++        Guard->HitFlash=.22f;AcceptGuardBatch(Guard,Batch);Guard->SyncStoneGuardState();if(Guard->bDead)OnFighterDied(Guard);
++    }
+     for(int32 I=0;I<Accepted.Num();++I)if(IsValid(Accepted[I].Target))
+     {
+         const auto& H=Accepted[I];
+         const float Before=H.Target->Health;
+         const auto& Old=H.Target->HurtProtectionSource;
+         const bool SameAction=H.Source.OwnerId&&Old.OwnerId==H.Source.OwnerId&&Old.ActionId==H.Source.ActionId;
+-        if(!H.Target->StoneBat)H.Target->ApplyCombatHitInternal(H.Damage,H.Attacker,H.Stagger,true,H.Magic,H.DamageOverTime,SameAction);
+-        const double Loss=H.Target->StoneBat?BatLoss[I]:FMath::Max(0.0,double(Before)-H.Target->Health);
++        if(!H.Target->StoneBat&&!H.Target->StoneGuard)H.Target->ApplyCombatHitInternal(H.Damage,H.Attacker,H.Stagger,true,H.Magic,H.DamageOverTime,SameAction);
++        const double Loss=H.Target->StoneGuard?GuardLoss[I]:H.Target->StoneBat?BatLoss[I]:FMath::Max(0.0,double(Before)-H.Target->Health);
+         if (H.Source.OwnerId&&Loss>0.0)
+         {
+-            if (!H.DamageOverTime&&!H.Target->StoneKnight&&!H.Target->StoneBat) H.Target->HurtProtectionSource=H.Source;
++            if (!H.DamageOverTime&&!H.Target->StoneKnight&&!H.Target->StoneBat&&!H.Target->StoneGuard) H.Target->HurtProtectionSource=H.Source;
+             FDungeonWorldWeaponEvent Fact;Fact.Kind=H.DamageOverTime?EDungeonWorldWeaponEventKind::BurnTickCommitted:EDungeonWorldWeaponEventKind::DirectHitCommitted;
+             Fact.Key=H.Source;Fact.TargetId=H.Target->GetRuntimeEntityId();Fact.AtTime=H.AtTime;
+             Fact.Position=H.ImpactPosition;Fact.Height=H.ImpactHeight;Fact.Damage=H.Damage;Fact.Stagger=H.Stagger;
+@@ -1879,7 +1926,7 @@
+             // Timers, existing resources and ballistic velocity advance exactly once.
+             // XY is the already resolved query result, not a second movement attempt.
+             Fighter->bSuppressOrdinaryMovement=true;Fighter->SimulateMotion(Step,false);Fighter->bSuppressOrdinaryMovement=false;
+-            if (Fighter->StoneKnight) return;
++            if (Fighter->StoneKnight || Fighter->StoneGuard) return;
+             for (const auto& P:Predicted) if (P.Fighter.Get()==Fighter)
+             {
+                 if (Fighter->Dodge.State().Phase==DungeonDodge::EPhase::Dodging)
+@@ -1926,7 +1973,7 @@
+                 ensureMsgf(Batch.Accepted,TEXT("Stone knight rejected authoritative simulation interval; never reset its state to repair it."));
+                 AcceptKnightBatch(Enemy,Batch);Enemy->SyncStoneKnightState();
+             }
+-            else if(!Enemy->StoneBat)Enemy->SimulateActionsTo(ToTime,Step);
++            else if(!Enemy->StoneBat&&!Enemy->StoneGuard)Enemy->SimulateActionsTo(ToTime,Step);
+         }
+         SimulationTime=ToTime;
+         if (EquipmentRuntime->View.Bound) WeaponWorld.Time=ToTime;
+@@ -1941,6 +1988,12 @@
+             const auto Batch=Enemy->StoneBat->StepTo(ToTime,MakeKnightFrame(Enemy,Enemy->StoneBat->State().Time,ToTime,Bodies));
+             ensureMsgf(Batch.Accepted,TEXT("Stone bat rejected authoritative interval; do not reset or advance past its obligation."));
+             AcceptBatBatch(Enemy,Batch);Enemy->SyncStoneBatState();if(Enemy->bDead)OnFighterDied(Enemy);
++        }
++        for(ADungeonFighter* Enemy:Enemies)if(IsValid(Enemy)&&Enemy->StoneGuard)
++        {
++            const auto Batch=Enemy->StoneGuard->StepTo(ToTime,MakeKnightFrame(Enemy,Enemy->StoneGuard->State().Time,ToTime,Bodies));
++            ensureMsgf(Batch.Accepted,TEXT("Stone Guard rejected authoritative interval; preserve state, never reset or masquerade as generic AI."));
++            if(Batch.Accepted){AcceptGuardBatch(Enemy,Batch);Enemy->SyncStoneGuardState();if(Enemy->bDead)OnFighterDied(Enemy);}
+         }
+         CommitPendingDamage();
+         if (PlayerFighter->IsEquipmentBound())
+@@ -2139,7 +2192,7 @@
+ void ADungeonGameMode::ResolveAttack(ADungeonFighter* Attacker)
+ {
+     if(IsRunInstallGated())return;
+-    if (!IsValid(Attacker) || Attacker->bDead || Attacker->StoneKnight || Attacker->StoneBat || bGameOver)
++    if (!IsValid(Attacker) || Attacker->bDead || Attacker->StoneKnight || Attacker->StoneBat || Attacker->StoneGuard || bGameOver)
+     {
+         return;
+     }
+@@ -2198,6 +2251,22 @@
+     if (!IsValid(Fighter) || !Fighter->bDead || Fighter->bDeathReported)
+     {
+         return;
++    }
++    if(Fighter->StoneGuard)
++    {
++        if(!Fighter->bGuardDeathObserved)
++        {
++            Fighter->bGuardDeathObserved=true;
++            LastMessage=TEXT("裂岩守卫已死亡；正式房间奖励／存续消费者尚未接入，未发币且未结算清房。");
++            for(ADungeonFighter* Stone:Enemies)
++            {
++                if(!IsValid(Stone)||Stone==Fighter||Stone->bDead||(!Stone->StoneKnight&&!Stone->StoneBat&&!Stone->StoneGuard))continue;
++                bool Cleared=true;for(ADungeonFighter* Other:Enemies)if(IsValid(Other)&&Other!=Stone&&!Other->bDead){Cleared=false;break;}
++                if(Cleared){if(Stone->StoneGuard)Stone->StoneGuard->NotifyOtherAcceptedEnemiesCleared();
++                    else if(Stone->StoneKnight)Stone->StoneKnight->NotifyOtherAcceptedEnemiesCleared();else Stone->StoneBat->NotifyOtherAcceptedEnemiesCleared();}
++            }
++        }
++        return; // bDeathReported remains false; local death eligibility is not reward settlement.
+     }
+     TUniquePtr<FDungeonRunRewards> RewardCandidate;
+     FDungeonRunRewardDeathResult ResolvedReward;
+@@ -2267,11 +2336,11 @@
+     // set never counts as "all other enemies killed" and cannot wake a lone statue.
+     for (ADungeonFighter* Knight : Enemies)
+     {
+-        if (!Enemies.Contains(Fighter) || !IsValid(Knight) || Knight->bDead || (!Knight->StoneKnight&&!Knight->StoneBat) || Knight == Fighter) continue;
++        if (!Enemies.Contains(Fighter) || !IsValid(Knight) || Knight->bDead || (!Knight->StoneKnight&&!Knight->StoneBat&&!Knight->StoneGuard) || Knight == Fighter) continue;
+         bool OthersCleared = true;
+         for (ADungeonFighter* Other : Enemies)
+             if (IsValid(Other) && Other != Knight && !Other->bDead) { OthersCleared = false; break; }
+-        if (OthersCleared){if(Knight->StoneKnight)Knight->StoneKnight->NotifyOtherAcceptedEnemiesCleared();else Knight->StoneBat->NotifyOtherAcceptedEnemiesCleared();}
++        if (OthersCleared){if(Knight->StoneGuard)Knight->StoneGuard->NotifyOtherAcceptedEnemiesCleared();else if(Knight->StoneKnight)Knight->StoneKnight->NotifyOtherAcceptedEnemiesCleared();else Knight->StoneBat->NotifyOtherAcceptedEnemiesCleared();}
+     }
+     if (DeadCount == 1&&!EquipmentRuntime->View.Bound)
+     {
+@@ -2370,6 +2439,27 @@
+     }
+ }
+ 
+-// Native Guard Stage0: no generic enemy may masquerade as ENM-STN-003.
+-ADungeonFighter* ADungeonGameMode::SpawnStoneGuard(FVector2D){return nullptr;}
+-void ADungeonGameMode::AcceptGuardBatch(ADungeonFighter*,const FDungeonGuardBatch&){}
++ADungeonFighter* ADungeonGameMode::SpawnStoneGuard(FVector2D GroundPosition)
++{
++    if(IsRunInstallGated()||!GetWorld()||!EquipmentRuntime->View.Bound||!IsValid(PlayerFighter)||bGameOver
++        ||!FMath::IsFinite(GroundPosition.X)||!FMath::IsFinite(GroundPosition.Y)
++        ||!DungeonRoomLayout::CenterBounds().IsInsideOrOn(GroundPosition))return nullptr;
++    auto Guard=GetWorld()->SpawnActor<ADungeonFighter>();if(!Guard)return nullptr;
++    Guard->bEnemy=true;Guard->bAIEnabled=false;Guard->EnemyContentId=TEXT("ENM-STN-003");Guard->ResetFighter(GroundPosition);
++    Enemies.Add(Guard);AdmitWorldFighters();const uint64 Id=FindWorldEntityId(Guard);
++    if(!Id||!Guard->InitializeStoneGuard(Id,SimulationTime))
++    {
++        Enemies.Remove(Guard);WorldEntityIds.Remove(Guard);
++        WeaponWorld.ActorBindings.RemoveAll([Id](const FDungeonWorldActorBinding& B){return B.EntityId==Id;});
++        Guard->Destroy();return nullptr; // Retire any consumed ID, never silently reuse it.
++    }
++    bRoomCleared=false;return Guard;
++}
++void ADungeonGameMode::AcceptGuardBatch(ADungeonFighter* Guard,const FDungeonGuardBatch& Batch)
++{
++    if(!Batch.Accepted||!IsValid(Guard)||!Guard->StoneGuard)return;
++    for(const auto& E:Batch.Events)if(E.Kind==DungeonStoneGuard::EEventKind::WakeStarted)LastStoneWakeStartedAt=E.AtTime;
++    // Only the normal accepted PendingDamage path may change a real target's HP.
++    for(const auto& H:Batch.Hits)if(bSimulationBatch&&H.Target.IsValid())
++        PendingDamage.Add({Guard,H.Target.Get(),float(H.Damage),float(H.Stagger),H.AtTime});
++}
+--- a/UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.cpp
+@@ -83,6 +83,7 @@
+         bool Consumed=false;for(const auto& Receipt:Receipts)if(SameEmission(Receipt.Key,P.Key)&&Receipt.TargetId==Body.EntityId){Consumed=true;break;}
+         if(Consumed)continue;
+         FVector2D Hurt(18.,16.);
++        if(Body.Fighter->GetStoneGuardDriver())Hurt=Body.Fighter->GetProjectileHurtHalfExtent();
+         if(Body.Fighter->GetStoneBatDriver()){const auto D=DungeonStoneBat::FBatKernel::Definition();Hurt={D.HurtHalfX,D.HurtHalfY};}
+         if(Body.Fighter->GetStoneKnightDriver()){const auto D=DungeonStoneKnight::FKnightKernel::Definition();Hurt={D.HurtHalfX,D.HurtHalfY};}
+         const auto Center=BodyPosition(Body,From,To,P.Source.AtTime);
+@@ -151,6 +152,7 @@
+         bool Consumed=false;for (const auto& H:Receipts) if (SameEmission(H.Key,P.Key)&&H.TargetId==B.EntityId) {Consumed=true;break;}
+         if (Consumed) continue;
+         FVector2D Hurt(18,16);
++        if(B.Fighter->GetStoneGuardDriver())Hurt=B.Fighter->GetProjectileHurtHalfExtent();
+         if(B.Fighter->GetStoneBatDriver()){const auto Def=DungeonStoneBat::FBatKernel::Definition();Hurt={Def.HurtHalfX,Def.HurtHalfY};}
+         if (B.Fighter->GetStoneKnightDriver())
+         {
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+@@ -992,6 +992,57 @@
+ void ADungeonHUD::DrawFighter(ADungeonFighter* F)
+ {
+     if(bUseFairytaleSwordBodyPreview&&!F->bEnemy&&DrawFairytaleSwordBody(F))return;
++    if(F->GetStoneGuardDriver())
++    {
++        // Dedicated procedural placeholder only. No completed Guard sprite/FX/SFX claim.
++        const auto& S=F->GetStoneGuardDriver()->State();const auto& A=S.Action;
++        const FVector2D P=Ground(F->GetGroundPosition());const float Side=F->Facing;
++        Oval(P.X-24.f,P.Y-5.f,48.f,10.f,FLinearColor(0,0,0,.25f));
++        const FLinearColor Edge(.10f,.12f,.12f,1.f);
++        const FLinearColor Rock=F->HitFlash>0.f?FLinearColor(.63f,.53f,.35f,1.f):FLinearColor(.35f,.38f,.38f,1.f);
++        if(F->bDead)
++        {
++            DrawRect(Edge,P.X-27.f,P.Y-13.f,54.f,13.f);DrawRect(Rock,P.X-24.f,P.Y-11.f,48.f,9.f);
++            return;
++        }
++        if(S.Phase==DungeonStoneGuard::EPhase::Windup||S.Phase==DungeonStoneGuard::EPhase::Active)
++        {
++            const auto C=A.LockedCenter;const FLinearColor Hint=S.Phase==DungeonStoneGuard::EPhase::Windup
++                ?FLinearColor(.95f,.50f,.12f,.55f):FLinearColor(1.f,.72f,.20f,.8f);
++            if(A.Kind==DungeonStoneGuard::EAttack::AxeSweep)
++            {
++                const FVector2D V[]={Ground({C.X,C.Y-65.}),Ground({C.X+180.*A.Facing,C.Y-65.}),
++                    Ground({C.X+180.*A.Facing,C.Y+65.}),Ground({C.X,C.Y+65.})};
++                for(int32 I=0;I<4;++I)Line(V[I].X,V[I].Y,V[(I+1)%4].X,V[(I+1)%4].Y,Hint,1.5f);
++            }
++            else for(int32 I=0;I<32;++I)
++            {
++                const double T=2.*PI*double(I)/32.,U=2.*PI*double(I+1)/32.;
++                const auto V=Ground({C.X+160.*FMath::Cos(T),C.Y+90.*FMath::Sin(T)});
++                const auto W=Ground({C.X+160.*FMath::Cos(U),C.Y+90.*FMath::Sin(U)});
++                Line(V.X,V.Y,W.X,W.Y,Hint,1.5f);
++            }
++        }
++        // Blocky large stone silhouette, clearly separate from existing human/Knight sprites.
++        DrawRect(Edge,P.X-25.f,P.Y-65.f,50.f,59.f);DrawRect(Rock,P.X-22.f,P.Y-62.f,44.f,54.f);
++        DrawRect(Edge,P.X-18.f,P.Y-82.f,36.f,23.f);DrawRect(Rock,P.X-15.f,P.Y-79.f,30.f,17.f);
++        DrawRect(Edge,P.X-23.f,P.Y-11.f,18.f,11.f);DrawRect(Edge,P.X+5.f,P.Y-11.f,18.f,11.f);
++        const FLinearColor Eye=S.Phase==DungeonStoneGuard::EPhase::Dormant?Edge:FLinearColor(.95f,.60f,.18f,1.f);
++        DrawRect(Eye,P.X-10.f,P.Y-73.f,6.f,3.f);DrawRect(Eye,P.X+4.f,P.Y-73.f,6.f,3.f);
++        Line(P.X-8.f,P.Y-56.f,P.X+3.f,P.Y-42.f,Edge,2.f);Line(P.X+3.f,P.Y-42.f,P.X-6.f,P.Y-27.f,Edge,2.f);
++        // Two-handed stone axe reads the real phase clock; this is not an authored action clip.
++        float Lift=0.f;
++        if(S.Phase==DungeonStoneGuard::EPhase::Windup&&A.Kind==DungeonStoneGuard::EAttack::AxeSweep)
++            Lift=float(FMath::Clamp((S.Time-A.Start)/(A.ActiveAt-A.Start),0.,1.));
++        else if(S.Phase==DungeonStoneGuard::EPhase::Active)Lift=.45f;
++        const FVector2D Grip(P.X+Side*14.f,P.Y-43.f),Tip(P.X+Side*(44.f-18.f*Lift),P.Y-14.f-78.f*Lift);
++        Line(Grip.X-Side*9.f,Grip.Y+12.f,Tip.X,Tip.Y,Edge,7.f);
++        Line(Grip.X-Side*9.f,Grip.Y+12.f,Tip.X,Tip.Y,FLinearColor(.31f,.23f,.14f,1.f),3.f);
++        DrawRect(Edge,Tip.X-13.f,Tip.Y-9.f,26.f,19.f);DrawRect(Rock,Tip.X-10.f,Tip.Y-6.f,20.f,13.f);
++        DrawRect(Edge,Grip.X-3.f,Grip.Y-3.f,6.f,6.f);DrawRect(Edge,Grip.X-Side*8.f-3.f,Grip.Y+5.f,6.f,6.f);
++        return; // Never borrow generic enemy sprites, sword trails or Knight-only sounds.
++    }
++
+     using namespace DungeonPalette;
+     FVector2D P=Ground(F->GetGroundPosition());
+     constexpr float BodyScale=float(DungeonPresentationScale::RelativeScale);

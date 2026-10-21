@@ -1,0 +1,56 @@
+{
+  "schema": "stone-guard-room-reward-stage0-v001",
+  "exact_before": {
+    "path": "F:/Ourgame/source-assets/production/stone-guard-room-reward-v001/exact-before-pins-v001.json",
+    "bytes": 4819,
+    "sha256": "5a76c4dde6bf607659611e24594c28c6b4b5404c2174afa3164c1e1f2bc56313"
+  },
+  "files": [
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-room-reward-v001/stage0-source/DungeonFirstBatchGuardRoom.h",
+      "bytes": 881,
+      "sha256": "4ee74a532d316b472ccedcfc0a4bf056c12eae64a67f7e89f44725b4b4e257ab"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-room-reward-v001/stage0-source/DungeonGameMode.cpp",
+      "bytes": 147569,
+      "sha256": "66cfc1e23c30047b7d948da21a6e0a640a47ef9e4ead59020b6f879b8f00cde6"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-room-reward-v001/stage0-source/DungeonGameMode.h",
+      "bytes": 12749,
+      "sha256": "9421f80b4c41437e2c11ba57755a13343a102217247adf53ff09bb984c882d8a"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-room-reward-v001/stage0-source/DungeonRunRewards.h",
+      "bytes": 4689,
+      "sha256": "158f0f71fadb49ad4d0de8ec57b292026189da43214d10a1bcd96d91120200aa"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-room-reward-v001/new-tests/DungeonFirstBatchGuardRoomTests.cpp",
+      "bytes": 8454,
+      "sha256": "70a36087734daa101751f2a1270c9d5072b82ab0b63232cf8ebc7d94096cfa78"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-room-reward-v001/stage0-existing-source.patch",
+      "bytes": 2850,
+      "sha256": "1031089369e6df6b58d328964f98eea7c3c394e89528e3ef784bb0889f739f1c"
+    }
+  ],
+  "test_groups": [
+    "CodexDungeon.Content.FirstBatchGuardRoom.SeededFullManifestAndPreallocation",
+    "CodexDungeon.Content.FirstBatchGuardRoom.FutureWavesDeathCoinPickupAndClearOnce",
+    "CodexDungeon.Content.FirstBatchGuardRoom.RootV2PendingPlanAndSettlementContinuity"
+  ],
+  "expected_first_semantic_RED": [
+    "Expected committed complete native Bridge slot plan after real FirstBatch room entry",
+    "Expected future required slots prevent room-clear after initial true death",
+    "Expected RootV2 and explicit Rewards schema2 for complete pending Guard-room plan"
+  ],
+  "legal_precondition": "Real new FirstBatch bound Run20 initial wallet with existing Scene geometry/nativeKnight/normal freshEnter. No SpawnStoneGuard/QAflag/forcedstate used.",
+  "damage_scope": "Existing actual ApplyCombatHit adapter used for deterministic real native death; not a normalJ hit-geometry proof.",
+  "tests_remain_identical_for_production": true,
+  "UE_UBT_native_run": false,
+  "actualSource_modified": false,
+  "status": "ROOT_MUST_COMPILE_AND_VERIFY_REAL_THREE_RED"
+}

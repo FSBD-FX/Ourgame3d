@@ -1,0 +1,30 @@
+{
+  "candidate": "stone-guard-feedback-v001",
+  "stage": "Stage0 interfaces and three semantic witnesses; NOT compiled/run by child",
+  "registered_tests": 3,
+  "automation_filter": "CodexDungeon.Content.StoneGuardFeedback",
+  "expected_stage0": "Three semantic RED, one error per group if actual existing fixtures remain admitted. Root must preserve all actual failures.",
+  "files": [
+    {
+      "path": "stage0-v002-source/DungeonGuardFeedbackTypes.h",
+      "bytes": 346,
+      "sha256": "71b40850a0adfbfc44c71e37a95f1209fb808a3ad198536fd10f9ae5df60b0d2"
+    },
+    {
+      "path": "stage0-v002-source/DungeonStoneGuardFeedback.h",
+      "bytes": 1337,
+      "sha256": "d4a13c771f0e7887fcd5a6c4b537a2044992f9e6fb049d8690a9f1ae270a5317"
+    },
+    {
+      "path": "stage0-v002-source/Tests/DungeonStoneGuardFeedbackTests.cpp",
+      "bytes": 11877,
+      "sha256": "6d94cdafeda9fa8057274cd9e73b544dca73483c020698088ceb8454a80ebbe0"
+    },
+    {
+      "path": "patches/stage0-public-interfaces.patch",
+      "bytes": 2222,
+      "sha256": "bb11aaa1cfd40ad1619fc75a6b5419e5c1bed632fbe4509e486f437c689c806b"
+    }
+  ],
+  "supersedes": "stage0-freeze-v001.json (unadmitted: pure kernel movement fixture lacked its mandatory accepted Sweep callback)"
+}

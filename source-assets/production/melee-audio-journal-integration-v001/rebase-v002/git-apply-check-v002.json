@@ -1,0 +1,102 @@
+{
+  "schema": "unapplied-melee-audio-rebase-git-apply-check-v2",
+  "git_version_exit_code": 0,
+  "git_version_stdout": "git version 2.55.0.windows.2\n",
+  "git_version_stderr": "",
+  "cwd": "F:\\Ourgame",
+  "argv": [
+    "git",
+    "-C",
+    "F:\\Ourgame",
+    "apply",
+    "--check",
+    "F:\\Ourgame\\source-assets\\production\\melee-audio-journal-integration-v001\\rebase-v002\\production-rebased-v002.patch"
+  ],
+  "started_utc": "2026-10-16T13:44:19.720409+00:00",
+  "finished_utc": "2026-10-16T13:44:19.782144+00:00",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "error: patch failed: UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.cpp:317\nerror: UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.cpp: patch does not apply\n",
+  "passed": false,
+  "actual_apply_performed": false,
+  "actual_source_before": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 102391,
+      "sha256": "df0f34023a3535b9e1f0d71fc73c4115af56294fd59bc2f0d0a109f2dad77fed"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.cpp",
+      "bytes": 25155,
+      "sha256": "0bc43aaf55c8576b93f8fde87cd8db92f04153d682ba332aa2620ac547687fb9"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": 109356,
+      "sha256": "e097e82c223bcece8ce67d9b834615c1825c3f5f110ef63f53ef6db53133a2ac"
+    }
+  ],
+  "actual_source_after": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 102391,
+      "sha256": "df0f34023a3535b9e1f0d71fc73c4115af56294fd59bc2f0d0a109f2dad77fed"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.cpp",
+      "bytes": 25155,
+      "sha256": "0bc43aaf55c8576b93f8fde87cd8db92f04153d682ba332aa2620ac547687fb9"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": 109356,
+      "sha256": "e097e82c223bcece8ce67d9b834615c1825c3f5f110ef63f53ef6db53133a2ac"
+    }
+  ],
+  "old_candidate_before": [
+    {
+      "path": "source-assets/production/melee-audio-journal-integration-v001/production-v001.patch",
+      "bytes": 5616,
+      "sha256": "260f0136815e477df4a8bc656ae5fd46118229a328a2778c32722e264ab3f673"
+    },
+    {
+      "path": "source-assets/production/melee-audio-journal-integration-v001/production-patch-baseline-v001.json",
+      "bytes": 1829,
+      "sha256": "cd12044c870feef94c0eeebfd5104500c8ef408b64967e23a17367826bb6378a"
+    },
+    {
+      "path": "source-assets/production/melee-audio-journal-integration-v001/baseline-v001.json",
+      "bytes": 6378,
+      "sha256": "712ca95ee6e169782308fd4aa4dbed6ad7a6375bc4b4293c75f414bb2645f35a"
+    },
+    {
+      "path": "source-assets/production/melee-audio-journal-integration-v001/Tests/DungeonMeleeAudioJournalIntegrationTests.cpp",
+      "bytes": 16647,
+      "sha256": "c2de7b0a3fc49970d3145d51fb12ded19cb7c34ee9bf7935b03171a9657815d5"
+    }
+  ],
+  "old_candidate_after": [
+    {
+      "path": "source-assets/production/melee-audio-journal-integration-v001/production-v001.patch",
+      "bytes": 5616,
+      "sha256": "260f0136815e477df4a8bc656ae5fd46118229a328a2778c32722e264ab3f673"
+    },
+    {
+      "path": "source-assets/production/melee-audio-journal-integration-v001/production-patch-baseline-v001.json",
+      "bytes": 1829,
+      "sha256": "cd12044c870feef94c0eeebfd5104500c8ef408b64967e23a17367826bb6378a"
+    },
+    {
+      "path": "source-assets/production/melee-audio-journal-integration-v001/baseline-v001.json",
+      "bytes": 6378,
+      "sha256": "712ca95ee6e169782308fd4aa4dbed6ad7a6375bc4b4293c75f414bb2645f35a"
+    },
+    {
+      "path": "source-assets/production/melee-audio-journal-integration-v001/Tests/DungeonMeleeAudioJournalIntegrationTests.cpp",
+      "bytes": 16647,
+      "sha256": "c2de7b0a3fc49970d3145d51fb12ded19cb7c34ee9bf7935b03171a9657815d5"
+    }
+  ],
+  "source_and_old_candidate_unchanged": true,
+  "scope": "git apply --check only. Does not compile tests, apply patch, prove actual audio or runtime RED/GREEN."
+}

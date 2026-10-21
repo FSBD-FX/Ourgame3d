@@ -1,0 +1,127 @@
+{
+  "schema": "checkpoint-v126-preparation-input-v002",
+  "template_only": true,
+  "snapshot_name": "v126-combo-161G",
+  "output_input_directory": "source-assets/production/checkpoint-v126-root-input-v002",
+  "expected_test_count": 161,
+  "base_manifest": {
+    "path": "source-assets/production/backups/v125-p1-157G/compiled-source-manifest.json",
+    "bytes": 380701,
+    "sha256": "fcdc47d2268dc13b75c1d7e27a1794e4a130bbd8314fa1df2b4a7e80aa4e8c6d"
+  },
+  "native_source_freeze": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/leather-combo-source-v001/source-freeze-v001.json",
+    "bytes": 5794,
+    "sha256": "de124ef6dc023d6e001ccbf92c1f185f83406e39d1d6a16c93ccf592ab2be85c"
+  },
+  "production": {
+    "baseline_count": 1115,
+    "new_packages": 36,
+    "expected_total": 1151
+  },
+  "current_automation": {
+    "report": null,
+    "expected_count": 161,
+    "full_test_paths": []
+  },
+  "source_deltas": [],
+  "translation_units": [],
+  "build_log": null,
+  "last_build": null,
+  "dll": null,
+  "build_history": [],
+  "new_import_order": [
+    "Primary2",
+    "Primary3"
+  ],
+  "imports": {
+    "Ready": {
+      "path": "UnrealGame/Saved/Bootstrap/leather-ready-v001-import-20261016-164451-394112.json",
+      "bytes": 13281,
+      "sha256": "ae0efff25cf32c7c14bd7275b052bc5d648298087cd430f8128916d10d6e3f1b"
+    },
+    "Primary1": {
+      "path": "UnrealGame/Saved/Bootstrap/leather-primary1-v002-v001-import-20261016-180837-920536.json",
+      "bytes": 31689,
+      "sha256": "96113a6ffb18e3503a02ac6a3800d22ff86485073a479e2ed56abc683373ac5e"
+    },
+    "Primary2": {
+      "path": "UnrealGame/Saved/Bootstrap/leather-primary2-combo-v001-import-20261016-194453-924659.json",
+      "bytes": 31388,
+      "sha256": "4f7fc1aa80c96648c4dec84b84c217302412aa3be66b81e1988914e53256ec70"
+    },
+    "Primary3": {
+      "path": "UnrealGame/Saved/Bootstrap/leather-primary3-combo-v001-import-20261016-194456-196483.json",
+      "bytes": 31388,
+      "sha256": "158a6f3d75a501a5c9295eb5c699efed13e9313f2024bf322a009d6029e4048b"
+    }
+  },
+  "assemblies": {
+    "Ready": {
+      "path": "source-assets/production/fairytale-lgt-readability-v003/ready-integer-assembly-v001/assembly-freeze-v001.json",
+      "bytes": 6634,
+      "sha256": "804ec889a031fd0cffec806ce5764eb701fa4be0c20dc767b9ed797f13aaa682"
+    },
+    "Primary1": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-integer-assembly-v002/assembly-freeze-v002.json",
+      "bytes": 26577,
+      "sha256": "8f3d1b818bb3e036b11bf175cfda6695d29d5e151fb5966808134b43e4c2d5c8"
+    },
+    "Primary2": {
+      "path": "source-assets/production/fairytale-lgt-readability-v003/primary2-integer-assembly-v001/assembly-freeze-v001.json",
+      "bytes": 14507,
+      "sha256": "4f8a569da416b048e143c61538ae92aaaf3732bd23ac3f92f1ebc02bb0a36e0e"
+    },
+    "Primary3": {
+      "path": "source-assets/production/fairytale-lgt-readability-v003/primary3-integer-assembly-v001/assembly-freeze-v001.json",
+      "bytes": 14510,
+      "sha256": "6345f549bcc8a8e0978949a2ed74f6bafe053b75fe3cb11456b9baca45ceb50f"
+    }
+  },
+  "proof_tools": [
+    {
+      "path": "tools/scripts/capture-leather-combo-trial-v001.ps1",
+      "bytes": 5722,
+      "sha256": "47882492a0611fc7f1e34cb4c30161721f5863b13de256096b5c5e0bb553056d"
+    },
+    {
+      "path": "tools/scripts/postprocess-leather-combo-trial-v001.py",
+      "bytes": 52905,
+      "sha256": "bca77073169e14026fe49fe229df17898026bcabfc986465981ba5100c82a29a"
+    },
+    {
+      "path": "tools/scripts/verify-leather-combo-proof-v001.py",
+      "bytes": 3124,
+      "sha256": "3d9ee38ff51f542e79cdd6772e918cfe6a9c8eb0256da7cba295e7957fa34486"
+    },
+    {
+      "path": "tools/scripts/verify-native-bound-capture-pixels-v001.py",
+      "bytes": 5508,
+      "sha256": "09b03628b31964dd117b00e66bff4db1d18ef63c19b56665db5d517c92231166"
+    }
+  ],
+  "additional_files": [
+    {
+      "path": "source-assets/production/leather-combo-proof-tooling-v001/tooling-freeze-v001.json",
+      "bytes": 8048,
+      "sha256": "23f2ff6189b7ef9e69ee6fe601ae2070a4dd756e0053ca313255c69f04f39144"
+    },
+    {
+      "path": "source-assets/production/leather-combo-proof-tooling-v001/current-freezer-v001/tooling-freeze-v001.json",
+      "bytes": 6862,
+      "sha256": "987f58a830aa7c245d1025e570f228f38774dad74dd97bcca517c2e5406866c6"
+    }
+  ],
+  "fill_instructions": [
+    "Copy to NEW Root input; keep this frozen template immutable. Set template_only=false only after actual final production build/full161 GREEN pins are supplied.",
+    "All Source/Config delta, transitive header/inl consumers, exit0 linked build_history and strict full test registry gates stay identical to current-freezer-v001.",
+    "joint_import_proof must pin a NEW Root external proof following joint-import-proof-TEMPLATE-v001.json; do not edit either actual native18 receipt.",
+    "The reviewed joint importer uses one fixed old1115 inventory in one UE invocation; both real receipts legally record1115, and final disk must be exact old1115 plus actual18+18=1151.",
+    "Root supplies real process PID/exit0, exact single UE log, importer/decoder/import-contract pins, both receipt pins and final36 inventory proving P2 saved hashes unchanged after P3.",
+    "Root final36 inventory files must exactly equal both actual receipts' saved_uasset/bytes/SHA and actual current Production delta. No timestamp/filename inference can substitute for hash equality.",
+    "Add this current-freezer-v002 tooling freeze, other new Ready/P1/default tools and preserved production/admission evidence pins to additional_files. The v002 preparer automatically pins its own executing file/common.",
+    "No actual --execute preparation or snapshot is permitted before full current161 clean GREEN. Default is read-only; failures preserve new partial directories without publishing a manifest."
+  ],
+  "formal_complete_units": 0,
+  "joint_import_proof": null
+}

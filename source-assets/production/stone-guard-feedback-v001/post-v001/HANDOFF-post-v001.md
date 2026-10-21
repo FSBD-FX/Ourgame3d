@@ -1,0 +1,7 @@
+# Optional native request export and offline listening
+
+This post package does not alter any frozen production/source/tooling file. Root may include `DungeonStoneGuardFeedbackProof.h` in its real world Guard proof and call `DungeonGuardFeedbackProof::WriteNativeRequests(*Game,*HUD,FreshAbsoluteJsonPath,Why)` once before exiting. It reads actual public HUD receipts, retains original entity/event/sequence/attack/target/time/actual-loss and concrete loaded object paths, and writes no authority. Compile of this optional export has NOT been attempted in UE. It is a helper, not a new successful runtime proof.
+
+Run the already frozen mixer with project Python: `tooling/mix-actual-guard-timeline-v001.py --native-report <fresh-native-json> --output <new-folder>`. Preserve resulting media to E before playback. It is a dry mono sum of requested voices/gains/timestamps, NOT loopback audio. Current exporter does not capture component Stop clock: a cancelled windup may therefore remain audible in this reconstruction. True cancellation and actual device output must be checked in the game.
+
+Production v002 is authoritative: use `production-v002-source` with the same minimal patch; v001 files remain historical. Exact material FX mapping is FleshLeather→HitPuff, Metal→HitSparks, Stone→StoneChips (the earlier event table abbreviated the FX options). No per-source claims of physical material collision queries are added.

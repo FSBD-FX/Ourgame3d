@@ -1,0 +1,511 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -108,9 +108,8 @@
+ bool ValidateFighterOwner(const FOwnerSnapshot& S,const FOwnerContext& C,FValidatedFighterOwner& Candidate,FString& Diagnostic)
+ {
+     const auto Reject=[&Diagnostic](const TCHAR* Why){Diagnostic=Why;return false;};
+-    if(S.Guard.IsSet()||S.Kind==EDungeonFighterOwnerKind::StoneGuard||S.Schema==3)
+-        return Reject(TEXT("Guard owner validation is not implemented (Stage0)"));
+-    if(S.Schema!=2||!S.RunGuid.IsValid()||!S.RoomInstanceId||!S.EntityId
++    const bool Guard=S.Kind==EDungeonFighterOwnerKind::StoneGuard;
++    if(S.Schema!=(Guard?3u:2u)||!S.RunGuid.IsValid()||!S.RoomInstanceId||!S.EntityId
+         ||S.RunGuid!=C.RunGuid||S.RoomInstanceId!=C.RoomInstanceId||S.EntityId!=C.EntityId
+         ||!FMath::IsFinite(C.SimulationTime)||C.SimulationTime<0.||!C.Equipment||!C.WeaponWorld)
+         return Reject(TEXT("Unknown fighter schema or missing/mismatched saved aggregate context"));
+@@ -138,9 +137,9 @@
+     const bool Player=S.Kind==EDungeonFighterOwnerKind::BoundPlayer,Knight=S.Kind==EDungeonFighterOwnerKind::StoneKnight,Bat=S.Kind==EDungeonFighterOwnerKind::StoneBat;
+     if(!HasPlayerBinding||!Binding||(!Player&&Binding->RoomInstanceId!=S.RoomInstanceId))
+         return Reject(TEXT("Fighter is absent from the approved player birth/current enemy binding table"));
+-    if((!Player&&!Knight&&!Bat)||S.Player.IsSet()!=Player||S.Knight.IsSet()!=Knight||S.Bat.IsSet()!=Bat
++    if((!Player&&!Knight&&!Bat&&!Guard)||S.Player.IsSet()!=Player||S.Knight.IsSet()!=Knight||S.Bat.IsSet()!=Bat||S.Guard.IsSet()!=Guard
+         ||S.Enemy==Player||((S.EntityId==V.OwnerId)!=Player)
+-        ||Binding->ContentId!=(Player?TEXT("player"):Knight?TEXT("ENM-STN-001"):TEXT("ENM-STN-002"))
++        ||Binding->ContentId!=(Player?TEXT("player"):Knight?TEXT("ENM-STN-001"):Bat?TEXT("ENM-STN-002"):TEXT("ENM-STN-003"))
+         ||(!Player&&S.EnemyContentId!=Binding->ContentId))return Reject(TEXT("Fighter kind, kernel variant, content, team or stable owner conflicts"));
+     const float Nonnegative[]={S.Health,S.MaxHealth,S.JumpHeight,S.InvulnerableTime,S.HurtTime,S.AttackCooldown,S.PoiseAccumulation,
+         S.PoiseDecayDelay,S.PoiseProtection,S.FocusMirror,S.AttackElapsed,S.ArmorChangeRemaining,S.FocusConsumeAge,
+@@ -307,7 +306,7 @@
+             }
+             for(const auto& H:K.HitReceipts)if(!KnownEntity(H.TargetId))return Reject(TEXT("Knight hit references an unknown saved historical entity"));
+         }
+-        else
++        else if(Bat)
+         {
+             const auto& B=S.Bat.GetValue();DungeonStoneBat::FBatKernel Pure(S.EntityId,B.InitialTime,B.InitialPosition);
+             const auto Def=DungeonStoneBat::FBatKernel::Definition();
+@@ -325,6 +324,23 @@
+             for(const auto& H:B.HitReceipts)if(!KnownEntity(H.TargetId))return Reject(TEXT("Bat hit references an unknown saved historical entity"));
+             for(const auto& H:B.Issued)if(H.TargetId&&!KnownEntity(H.TargetId))return Reject(TEXT("Bat event references an unknown saved historical entity"));
+         }
++        else
++        {
++            const auto& Saved=S.Guard.GetValue();const auto& G=Saved.Kernel;
++            DungeonStoneGuard::FGuardKernel Pure(S.EntityId,G.InitialTime,G.InitialPosition,1,Saved.Policy);
++            const auto Def=DungeonStoneGuard::FGuardKernel::Definition();
++            if(Saved.Schema!=1||!Pure.Restore(G)||G.EntityId!=S.EntityId||G.Time>C.SimulationTime
++                ||(!C.GameOver&&G.Time!=C.SimulationTime)||S.Health!=float(G.HP)||S.MaxHealth!=float(Def.HP)
++                ||S.Dead!=(G.Phase==DungeonStoneGuard::EPhase::Dead)||S.DeathReported||Saved.DeathObserved!=S.Dead
++                ||!NativeOwnerPositionProjection(S.GroundPosition,G.Position.X,G.Position.Y)
++                ||G.InitialPosition.Z!=0.||G.Position.Z!=0.
++                ||S.JumpHeight!=0.f||S.JumpVelocity!=0.f||S.Facing!=float(G.Facing)
++                ||!S.HasAxe||S.WeaponId!=TEXT("enemy_stone_guard_twohand_axe")||!S.ArmorId.IsEmpty())
++                return Reject(TEXT("Guard birth/policy/state/native projection or local-death observer conflicts"));
++            for(const auto& H:G.HitReceipts)if(!KnownEntity(H.TargetId))return Reject(TEXT("Guard hit references an unknown saved historical entity"));
++            for(const auto& Evt:G.Issued)if(Evt.TargetId&&!KnownEntity(Evt.TargetId))return Reject(TEXT("Guard event references an unknown saved historical entity"));
++            // G.RewardClaimed is local eligibility. It does not authorize DeathReported or5coins.
++        }
+     }
+     Diagnostic.Reset();return true;
+ }
+@@ -360,11 +376,12 @@
+         if(!Local.EntityId||(Game->PlayerFighter==this)!=(Local.EntityId==Equipment.View.OwnerId))
+             return Reject(TEXT("Capture cannot substitute a QA/object ID for the true GM binding"));
+     }
+-    if(StoneGuard)return Reject(TEXT("Guard owner capture is not implemented (Stage0)"));
+     FOwnerSnapshot S;S.RunGuid=Context->RunGuid;S.RoomInstanceId=Context->RoomInstanceId;S.EntityId=Context->EntityId;
+     S.Kind=StoneKnight?EDungeonFighterOwnerKind::StoneKnight:StoneBat?EDungeonFighterOwnerKind::StoneBat:
+-        !bEnemy?EDungeonFighterOwnerKind::BoundPlayer:EDungeonFighterOwnerKind::Unsupported;
+-    if(StoneKnight&&StoneBat)return Reject(TEXT("Two stone drivers cannot own the same fighter"));
++        StoneGuard?EDungeonFighterOwnerKind::StoneGuard:!bEnemy?EDungeonFighterOwnerKind::BoundPlayer:EDungeonFighterOwnerKind::Unsupported;
++    if(int32(bool(StoneKnight))+int32(bool(StoneBat))+int32(bool(StoneGuard))>1)
++        return Reject(TEXT("Multiple stone drivers cannot own the same fighter"));
++    if(StoneGuard)S.Schema=3;
+     S.GroundPosition=GetGroundPosition();
+     S.Health=Health;
+     S.MaxHealth=MaxHealth;
+@@ -412,6 +429,11 @@
+     for(const auto& H:SkillHitReceipts)S.SkillHitReceipts.push_back({H.ActionId,H.SubhitId,H.TargetId});
+     if(S.Kind==EDungeonFighterOwnerKind::BoundPlayer)S.Player=FDungeonPlayerKernelSnapshot{Combat.Capture(),WeaponSkills.Capture(),Dodge.Capture()};
+     if(StoneKnight)S.Knight=StoneKnight->Capture();if(StoneBat)S.Bat=StoneBat->Capture();
++    if(StoneGuard)
++    {
++        if(LastGuardSyncTime!=StoneGuard->State().Time)return Reject(TEXT("Guard native mirror has not consumed the exact producer boundary"));
++        S.Guard=FDungeonStoneGuardOwnerSnapshot{1,StoneGuard->CapturePolicy(),StoneGuard->Capture(),bGuardDeathObserved};
++    }
+     FValidatedFighterOwner Candidate;if(!ValidateFighterOwner(S,*Context,Candidate,Diagnostic))return false;
+     Out=MoveTemp(S);Diagnostic.Reset();return true;
+ }
+@@ -425,7 +447,7 @@
+     FValidatedFighterOwner Candidate;if(!ValidateFighterOwner(S,Context,Candidate,Diagnostic))return false;
+     // Construct weak-owner drivers only after the full pure candidate passes.
+     // Neither constructor reads a live GM or issues an action/reward.
+-    TUniquePtr<FDungeonStoneKnightDriver> NewKnight;TUniquePtr<FDungeonStoneBatDriver> NewBat;
++    TUniquePtr<FDungeonStoneKnightDriver> NewKnight;TUniquePtr<FDungeonStoneBatDriver> NewBat;TUniquePtr<FDungeonStoneGuardDriver> NewGuard;
+     DungeonStoneFeedback::FJournal NewFeedback;
+     if(S.Knight.IsSet())
+     {
+@@ -437,6 +459,12 @@
+     {
+         const auto& B=S.Bat.GetValue();NewBat=MakeUnique<FDungeonStoneBatDriver>(this,S.EntityId,B.InitialTime,B.InitialPosition);
+         if(!NewBat->Restore(B)){Diagnostic=TEXT("Bat candidate driver rejected immutable saved birth origin/time");return false;}
++    }
++    if(S.Guard.IsSet())
++    {
++        const auto& G=S.Guard.GetValue();
++        NewGuard=MakeUnique<FDungeonStoneGuardDriver>(this,S.EntityId,G.Kernel.InitialTime,G.Kernel.InitialPosition,G.Policy);
++        if(!NewGuard->Restore(G.Kernel)){Diagnostic=TEXT("Guard candidate driver rejected complete birth/policy/history");return false;}
+     }
+     std::vector<FEmissionPoseSocket> NewPoses;std::vector<FSkillHitReceipt> NewHits;
+     for(const auto& P:S.EmissionPoseSockets)NewPoses.push_back({P.EventId,P.ActionId,P.SubhitId,P.Pose});
+@@ -452,7 +480,7 @@
+     }
+     // No fallible validation, simulation or external effect follows this point.
+     Combat=MoveTemp(Candidate.Combat);WeaponSkills=MoveTemp(Candidate.Weapons);Dodge=MoveTemp(Candidate.Dodge);
+-    StoneKnight=MoveTemp(NewKnight);StoneBat=MoveTemp(NewBat);StoneFeedback=MoveTemp(NewFeedback);
++    StoneKnight=MoveTemp(NewKnight);StoneBat=MoveTemp(NewBat);StoneGuard=MoveTemp(NewGuard);StoneFeedback=MoveTemp(NewFeedback);
+     Health=S.Health;
+     MaxHealth=S.MaxHealth;
+     JumpHeight=S.JumpHeight;
+@@ -496,6 +524,8 @@
+     HitAction={};bResolvingContentWindow=false;BatchSkillStepAt=-1.;BatchSkillStepDelta=FVector2D::ZeroVector;
+     bSuppressOrdinaryMovement=false;bEquipmentUiArrowLatch=false;
+     LastStoneSyncTime=S.Knight.IsSet()?S.Knight.GetValue().Time:0.;LastBatSyncTime=S.Bat.IsSet()?S.Bat.GetValue().Time:0.;
++    LastGuardSyncTime=S.Guard.IsSet()?S.Guard.GetValue().Kernel.Time:0.;
++    bGuardDeathObserved=S.Guard.IsSet()&&S.Guard.GetValue().DeathObserved;
+     // The native, unattached SceneComponent root has no collision/physics.
+     // This public exact path assigns saved body XY even when the ordinary
+     // movement setter would suppress a tiny correction. Kernel XY is untouched.
+--- a/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp
+@@ -129,7 +129,9 @@
+     :Owner(InOwner),Kernel(Id,InitialTime,InitialPosition,1,SavedPolicy){}
+ bool FDungeonStoneGuardDriver::Restore(const Guard::FState& Saved)
+ {
+-    (void)Saved;return false; // Honest Stage0: no accepted native owner restore.
++    // Native staging is value-only: no Actor/World read, clock step,
++    // BeginCombat, Sync, heal, feedback or issued event.
++    return Kernel.Restore(Saved);
+ }
+ bool FDungeonStoneGuardDriver::BeginCombat(){return Kernel.BeginCombat();}
+ bool FDungeonStoneGuardDriver::NotifyOtherAcceptedEnemiesCleared(){return Kernel.NotifyOtherAcceptedEnemiesCleared();}
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunAggregate.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunAggregate.cpp
+@@ -37,7 +37,7 @@
+ {return S.Fighters.FindByPredicate([Id](const auto& F){return F.EntityId==Id;});}
+ FDungeonRunRewardActorFact RewardActor(const FDungeonFighterOwnerSnapshot& F)
+ {
+-    const bool Claimed=F.Knight.IsSet()?F.Knight.GetValue().RewardClaimed:F.Bat.IsSet()?F.Bat.GetValue().RewardClaimed:false;
++    const bool Claimed=F.Knight.IsSet()?F.Knight.GetValue().RewardClaimed:F.Bat.IsSet()?F.Bat.GetValue().RewardClaimed:F.Guard.IsSet()?F.Guard.GetValue().Kernel.RewardClaimed:false;
+     return {F.EntityId,F.RoomInstanceId,F.Kind==EDungeonFighterOwnerKind::BoundPlayer?TEXT("player"):F.EnemyContentId,
+         F.Enemy,F.Dead,F.DeathReported,Claimed};
+ }
+@@ -181,6 +181,8 @@
+     };
+     if(!AddActor(Game.PlayerFighter,true))return false;
+     for(const auto& Enemy:Game.Enemies)if(!AddActor(Enemy,false))return false;
++    if(Candidate.Fighters.ContainsByPredicate([](const auto& F){return F.Guard.IsSet();}))
++    {Candidate.Schema=2;Candidate.Scope=EDungeonRunScope::BoundDevelopmentV2;}
+     for(const auto& Entry:Game.WorldEntityIds)if(Entry.Key.IsValid()&&!CurrentActors.Contains(Entry.Key.Get()))
+         return Fail(Diagnostic,TEXT("A live admitted world actor is absent from the current owner array"));
+     for(const auto& P:Game.Pickups)Candidate.Pickups.Add({P.Position,P.Kind,P.bConsumed,P.RunGuid,P.ObjectId,P.SourceId,P.RoomInstanceId});
+@@ -199,7 +201,9 @@
+     // All candidate owners are independent values. No live GameMode, Actor,
+     // controller, World, event consumer or file operation is accessed here.
+     const auto& S=Saved;const auto& V=S.Equipment.View;
+-    if(S.Schema!=1||S.Scope!=EDungeonRunScope::BoundDevelopmentV1||!S.RunGuid.IsValid()||!S.OwnerId||!S.RoomInstanceId
++    const bool HasGuard=S.Fighters.ContainsByPredicate([](const auto& F){return F.Guard.IsSet();});
++    if((HasGuard?(S.Schema!=2||S.Scope!=EDungeonRunScope::BoundDevelopmentV2)
++                :(S.Schema!=1||S.Scope!=EDungeonRunScope::BoundDevelopmentV1))||!S.RunGuid.IsValid()||!S.OwnerId||!S.RoomInstanceId
+         ||S.RoomNumber<=0||S.RoomInstanceId!=uint64(S.RoomNumber)||!FiniteTime(S.SimulationTime)
+         ||!FMath::IsFinite(S.LastStoneWakeStartedAt)||(S.LastStoneWakeStartedAt!= -1.&&S.LastStoneWakeStartedAt<0.)||S.LastStoneWakeStartedAt>S.SimulationTime
+         ||S.GameOver&&S.WaitingForStart||!V.Bound||V.RunGuid!=S.RunGuid||V.OwnerId!=S.OwnerId||V.RoomInstanceId!=S.RoomInstanceId)
+@@ -236,7 +240,7 @@
+         FC.SimulationTime=S.SimulationTime;FC.GameOver=S.GameOver;FC.Equipment=&S.Equipment;FC.WeaponWorld=&World;
+         if(!ADungeonFighter::ValidateOwnerSnapshot(F,FC,Why))return OwnerFailure(Diagnostic,TEXT("Fighter"),Why);
+         RC.CurrentActors.Add(RewardActor(F));
+-        const double Wake=F.Knight.IsSet()?F.Knight.GetValue().WakeStartedAt:F.Bat.IsSet()?F.Bat.GetValue().WakeStartedAt:-1.;
++        const double Wake=F.Knight.IsSet()?F.Knight.GetValue().WakeStartedAt:F.Bat.IsSet()?F.Bat.GetValue().WakeStartedAt:F.Guard.IsSet()?F.Guard.GetValue().Kernel.WakeStartedAt:-1.;
+         if(Wake>S.LastStoneWakeStartedAt)return Fail(Diagnostic,TEXT("Global wake throttle precedes a current accepted stone wake"));
+     }
+     FDungeonRunRewards Rewards;if(!Rewards.Restore(S.Rewards,RC,Why))return OwnerFailure(Diagnostic,TEXT("Rewards"),Why);
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunRewards.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunRewards.cpp
+@@ -152,7 +152,15 @@
+             else
+             {
+                 const auto* D=Death(S,A.EntityId);
+-                if(!A.Enemy||!EnemyContent(A.ContentId)||B->RoomInstanceId!=S.CurrentRoomInstanceId
++                if(A.ContentId==TEXT("ENM-STN-003"))
++                {
++                    // The real Guard local eligibility may be true, but formal settlement is absent.
++                    // Do not add003 to EnemyContent/ResolveDeath or fixed5coin source allocation.
++                    if(!A.Enemy||B->RoomInstanceId!=S.CurrentRoomInstanceId||A.DeathReported||D
++                        ||A.RewardClaimed&&!A.Dead)
++                        return Fail(Why,TEXT("Current Guard contains unsupported formal settlement or premature eligibility"));
++                }
++                else if(!A.Enemy||!EnemyContent(A.ContentId)||B->RoomInstanceId!=S.CurrentRoomInstanceId
+                     ||A.DeathReported!=A.RewardClaimed||A.DeathReported&&!A.Dead||bool(D)!=A.DeathReported
+                     ||D&&(D->Death.RoomInstanceId!=A.RoomInstanceId||D->Death.ContentId!=A.ContentId))
+                     return Fail(Why,TEXT("Current enemy death/source/claim facts disagree"));
+@@ -166,7 +174,8 @@
+             BindingIds.Add(B.EntityId);
+             if(B.EntityId==S.OwnerId)
+             {if(B.ContentId!=TEXT("player"))return Fail(Why,TEXT("Wrong player binding content"));continue;}
+-            if(!EnemyContent(B.ContentId))return Fail(Why,TEXT("Unsupported world actor content"));
++            const bool CurrentUnsettledGuard=B.ContentId==TEXT("ENM-STN-003")&&B.RoomInstanceId==S.CurrentRoomInstanceId;
++            if(!EnemyContent(B.ContentId)&&!CurrentUnsettledGuard)return Fail(Why,TEXT("Unsupported world actor content"));
+             if(B.RoomInstanceId==S.CurrentRoomInstanceId)
+             {if(!CurrentIds.Contains(B.EntityId))return Fail(Why,TEXT("Missing current world enemy"));continue;}
+             const auto* R=S.RetiredEntities.FindByPredicate([&](const auto& X){return X.Actor.EntityId==B.EntityId;});
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunSnapshotCodec.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunSnapshotCodec.cpp
+@@ -226,7 +226,7 @@
+ 
+ struct FArchive
+ {
+-    bool Reading=false,Good=true;FString& Why;uint64 Storage=0;int32 Nodes=0;
++    bool Reading=false,Good=true;FString& Why;uint64 Storage=0;int32 Nodes=0;uint8 CodecVersion=1;
+     explicit FArchive(bool Read,FString& Diagnostic):Reading(Read),Why(Diagnostic){}
+     void Reject(const TCHAR* Message){Good=false;Fail(Why,Message);}
+     bool Allocate(uint64 Count,uint64 Size)
+@@ -248,6 +248,8 @@
+         else{Object=MakeShared<FJsonObject>();Node=MakeShared<FJsonValueObject>(Object);}
+     }
+     bool Reading()const{return Archive.Reading;}
++    uint8 CodecVersion()const{return Archive.CodecVersion;}
++    void Reject(const TCHAR* Why){Archive.Reject(Why);}
+     bool Good()const{return Archive.Good;}
+     template<class T>void Field(const TCHAR* Name,T& Value)
+     {
+@@ -275,9 +277,9 @@
+     return Number<=static_cast<U>(Last);
+ }
+ #define ENUM_DOMAIN(T,Last) bool KnownEnum(T V){return EnumWithin(V,T::Last);}
+-ENUM_DOMAIN(EDungeonRunScope,BoundDevelopmentV1)
++ENUM_DOMAIN(EDungeonRunScope,BoundDevelopmentV2)
+ ENUM_DOMAIN(EDungeonRunGeometryKind,SceneExplorationV1)
+-ENUM_DOMAIN(EDungeonFighterOwnerKind,StoneBat)
++ENUM_DOMAIN(EDungeonFighterOwnerKind,StoneGuard)
+ ENUM_DOMAIN(EDungeonEquipmentRunConfig,FirstBatch)
+ ENUM_DOMAIN(EDungeonEquipmentActionKind,SwitchWeapon)
+ ENUM_DOMAIN(EDungeonEquipmentFailure,InternalConsistency)
+@@ -300,6 +302,9 @@
+ ENUM_DOMAIN(DungeonStoneBat::EPhase,Dead)
+ ENUM_DOMAIN(DungeonStoneBat::EAttack,Wing)
+ ENUM_DOMAIN(DungeonStoneBat::EEventKind,DescentDue)
++ENUM_DOMAIN(DungeonStoneGuard::EPhase,Dead)
++ENUM_DOMAIN(DungeonStoneGuard::EAttack,Stomp)
++ENUM_DOMAIN(DungeonStoneGuard::EEventKind,RewardClaimed)
+ ENUM_DOMAIN(DungeonWeaponPoseSocket::EClip,Reload)
+ ENUM_DOMAIN(DungeonEquipmentStats::EPackage,Cursed)
+ ENUM_DOMAIN(DungeonEquipmentStats::EError,NotImplemented)
+@@ -650,6 +655,62 @@
+ void Fields(FObject& O,FDungeonPlayerKernelSnapshot& S)
+ {
+     O.Field(TEXT("Combat"),S.Combat);O.Field(TEXT("WeaponActions"),S.WeaponActions);O.Field(TEXT("Dodge"),S.Dodge);
++}
++void Fields(FObject& O,DungeonStoneGuard::FPoint& S)
++{
++    O.Field(TEXT("X"),S.X);O.Field(TEXT("Y"),S.Y);O.Field(TEXT("Z"),S.Z);
++}
++void Fields(FObject& O,DungeonStoneGuard::FPolicy& S)
++{
++    O.Field(TEXT("ExtremelyCloseRadius"),S.ExtremelyCloseRadius);
++}
++void Fields(FObject& O,DungeonStoneGuard::FAction& S)
++{
++    O.Field(TEXT("AttackId"),S.AttackId);O.Field(TEXT("Kind"),S.Kind);O.Field(TEXT("InProgress"),S.InProgress);O.Field(TEXT("Locked"),S.Locked);
++    O.Field(TEXT("WindowIssued"),S.WindowIssued);O.Field(TEXT("Interrupted"),S.Interrupted);O.Field(TEXT("Start"),S.Start);O.Field(TEXT("LockAt"),S.LockAt);
++    O.Field(TEXT("ActiveAt"),S.ActiveAt);O.Field(TEXT("ActiveEnd"),S.ActiveEnd);O.Field(TEXT("RecoveryEnd"),S.RecoveryEnd);O.Field(TEXT("CooldownEnd"),S.CooldownEnd);
++    O.Field(TEXT("InterruptedAt"),S.InterruptedAt);O.Field(TEXT("CompletedAt"),S.CompletedAt);O.Field(TEXT("Damage"),S.Damage);O.Field(TEXT("Stagger"),S.Stagger);
++    O.Field(TEXT("Origin"),S.Origin);O.Field(TEXT("LockedCenter"),S.LockedCenter);O.Field(TEXT("Target"),S.Target);O.Field(TEXT("Facing"),S.Facing);
++}
++void Fields(FObject& O,DungeonStoneGuard::FDamageWindow& S)
++{
++    O.Field(TEXT("AttackId"),S.AttackId);O.Field(TEXT("EventId"),S.EventId);O.Field(TEXT("Kind"),S.Kind);O.Field(TEXT("Start"),S.Start);
++    O.Field(TEXT("End"),S.End);O.Field(TEXT("Damage"),S.Damage);O.Field(TEXT("Stagger"),S.Stagger);O.Field(TEXT("Center"),S.Center);
++    O.Field(TEXT("Facing"),S.Facing);
++}
++void Fields(FObject& O,DungeonStoneGuard::FWindowClosure& S)
++{
++    O.Field(TEXT("AttackId"),S.AttackId);O.Field(TEXT("AtTime"),S.AtTime);
++}
++void Fields(FObject& O,DungeonStoneGuard::FHitReceipt& S)
++{
++    O.Field(TEXT("AttackId"),S.AttackId);O.Field(TEXT("TargetId"),S.TargetId);O.Field(TEXT("AtTime"),S.AtTime);
++}
++void Fields(FObject& O,DungeonStoneGuard::FReceivedHit& S)
++{
++    O.Field(TEXT("ReceiptId"),S.ReceiptId);O.Field(TEXT("AtTime"),S.AtTime);O.Field(TEXT("ActualHPLoss"),S.ActualHPLoss);O.Field(TEXT("Stagger"),S.Stagger);
++}
++void Fields(FObject& O,DungeonStoneGuard::FEvent& S)
++{
++    O.Field(TEXT("EventId"),S.EventId);O.Field(TEXT("EntityId"),S.EntityId);O.Field(TEXT("TargetId"),S.TargetId);O.Field(TEXT("Kind"),S.Kind);
++    O.Field(TEXT("AtTime"),S.AtTime);O.Field(TEXT("EndTime"),S.EndTime);O.Field(TEXT("Amount"),S.Amount);O.Field(TEXT("From"),S.From);
++    O.Field(TEXT("To"),S.To);O.Field(TEXT("Action"),S.Action);
++}
++void Fields(FObject& O,DungeonStoneGuard::FState& S)
++{
++    O.Field(TEXT("Version"),S.Version);O.Field(TEXT("EntityId"),S.EntityId);O.Field(TEXT("NextAttackId"),S.NextAttackId);O.Field(TEXT("NextEventId"),S.NextEventId);
++    O.Field(TEXT("LastDamageReceiptId"),S.LastDamageReceiptId);O.Field(TEXT("InitialTime"),S.InitialTime);O.Field(TEXT("Time"),S.Time);O.Field(TEXT("HP"),S.HP);
++    O.Field(TEXT("PoiseAccum"),S.PoiseAccum);O.Field(TEXT("PoiseDecayOrigin"),S.PoiseDecayOrigin);O.Field(TEXT("LastPoiseAt"),S.LastPoiseAt);O.Field(TEXT("ProtectionUntil"),S.ProtectionUntil);
++    O.Field(TEXT("StunUntil"),S.StunUntil);O.Field(TEXT("CombatStartedAt"),S.CombatStartedAt);O.Field(TEXT("WakeStartedAt"),S.WakeStartedAt);O.Field(TEXT("WakeEnd"),S.WakeEnd);
++    O.Field(TEXT("AxeReadyAt"),S.AxeReadyAt);O.Field(TEXT("StompReadyAt"),S.StompReadyAt);O.Field(TEXT("OccupiedUntil"),S.OccupiedUntil);O.Field(TEXT("IdleReadyAt"),S.IdleReadyAt);
++    O.Field(TEXT("WakeQueued"),S.WakeQueued);O.Field(TEXT("Awakened"),S.Awakened);O.Field(TEXT("RewardClaimed"),S.RewardClaimed);O.Field(TEXT("Phase"),S.Phase);
++    O.Field(TEXT("InitialPosition"),S.InitialPosition);O.Field(TEXT("Position"),S.Position);O.Field(TEXT("Facing"),S.Facing);O.Field(TEXT("Action"),S.Action);
++    O.Field(TEXT("Windows"),S.Windows);O.Field(TEXT("Closures"),S.Closures);O.Field(TEXT("HitReceipts"),S.HitReceipts);O.Field(TEXT("ReceivedHits"),S.ReceivedHits);
++    O.Field(TEXT("Issued"),S.Issued);
++}
++void Fields(FObject& O,FDungeonStoneGuardOwnerSnapshot& S)
++{
++    O.Field(TEXT("Schema"),S.Schema);O.Field(TEXT("Policy"),S.Policy);O.Field(TEXT("Kernel"),S.Kernel);O.Field(TEXT("DeathObserved"),S.DeathObserved);
+ }
+ void Fields(FObject& O,FDungeonFighterOwnerSnapshot& S)
+ {
+@@ -667,6 +728,9 @@
+     O.Field(TEXT("AnimationName"),S.AnimationName);O.Field(TEXT("AttackPhase"),S.AttackPhase);O.Field(TEXT("HeightAnchorRelative"),S.HeightAnchorRelative);O.Field(TEXT("CustomMuzzle"),S.CustomMuzzle);
+     O.Field(TEXT("CustomMuzzleRelative"),S.CustomMuzzleRelative);O.Field(TEXT("BatObservedHeight"),S.BatObservedHeight);O.Field(TEXT("Player"),S.Player);O.Field(TEXT("Knight"),S.Knight);
+     O.Field(TEXT("Bat"),S.Bat);
++    if(O.CodecVersion()==2)O.Field(TEXT("Guard"),S.Guard);
++    else if(S.Schema!=2||S.Kind==EDungeonFighterOwnerKind::StoneGuard||S.Guard.IsSet())
++        O.Reject(TEXT("Legacy bound-run-v1 cannot contain a Guard owner or new owner schema"));
+ }
+ void Fields(FObject& O,FDungeonWorldProjectile& S)
+ {
+@@ -1044,10 +1108,17 @@
+ 
+ bool Document(FArchive& Archive,FNode& Node,FDungeonRunSnapshot& Snapshot)
+ {
+-    FObject Envelope(Archive,Node);FString Codec=TEXT("bound-run-v1");
+-    Envelope.Field(TEXT("codec"),Codec);Envelope.Field(TEXT("snapshot"),Snapshot);
++    FObject Envelope(Archive,Node);FString Codec=Snapshot.Schema==2?TEXT("bound-run-v2"):TEXT("bound-run-v1");
++    // Decode the explicit discriminator before selecting any owner field layout.
++    Envelope.Field(TEXT("codec"),Codec);
++    if(Codec.Equals(TEXT("bound-run-v1"),ESearchCase::CaseSensitive))Archive.CodecVersion=1;
++    else if(Codec.Equals(TEXT("bound-run-v2"),ESearchCase::CaseSensitive))Archive.CodecVersion=2;
++    else{Archive.Reject(TEXT("Unknown Run codec version"));return false;}
++    Envelope.Field(TEXT("snapshot"),Snapshot);
+     if(!Envelope.Finish())return false;
+-    if(!Codec.Equals(TEXT("bound-run-v1"),ESearchCase::CaseSensitive)){Archive.Reject(TEXT("Unknown Run codec version"));return false;}
++    if(Archive.CodecVersion==1?(Snapshot.Schema!=1||Snapshot.Scope!=EDungeonRunScope::BoundDevelopmentV1)
++        :(Snapshot.Schema!=2||Snapshot.Scope!=EDungeonRunScope::BoundDevelopmentV2))
++    {Archive.Reject(TEXT("Run codec version and complete root schema/scope disagree"));return false;}
+     return Archive.Good;
+ }
+ bool Serialize(FDungeonRunSnapshot& Snapshot,TArray<uint8>& Bytes,FString& Why)
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunInstaller.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunInstaller.cpp
+@@ -1,5 +1,6 @@
+ #include "DungeonRunInstaller.h"
+ #include "DungeonFighter.h"
++#include "DungeonStoneGuardOwnerValue.h"
+ #include "DungeonGameMode.h"
+ #include "Components/BoxComponent.h"
+ #include "Components/SceneComponent.h"
+@@ -32,7 +33,7 @@
+     C.SimulationTime=S.SimulationTime;C.PlayerCoins=S.Fighters[0].Coins;C.WeaponWorld=&World;
+     for(const auto& F:S.Fighters)
+     {
+-        const bool Claimed=F.Knight.IsSet()?F.Knight.GetValue().RewardClaimed:F.Bat.IsSet()?F.Bat.GetValue().RewardClaimed:false;
++        const bool Claimed=F.Knight.IsSet()?F.Knight.GetValue().RewardClaimed:F.Bat.IsSet()?F.Bat.GetValue().RewardClaimed:F.Guard.IsSet()?F.Guard.GetValue().Kernel.RewardClaimed:false;
+         C.CurrentActors.Add({F.EntityId,F.RoomInstanceId,F.Kind==EDungeonFighterOwnerKind::BoundPlayer?TEXT("player"):F.EnemyContentId,
+             F.Enemy,F.Dead,F.DeathReported,Claimed});
+     }
+@@ -118,7 +119,8 @@
+         FDungeonFighterOwnerSnapshot Actual;
+         if(!F->CaptureOwnerSnapshot(Actual,Why,&Context))return OwnerFail(Why,TEXT("Staged fighter native Capture"),Why);
+         auto* Muzzle=F->GetWeaponMuzzleComponent();auto* Anchor=Muzzle?Muzzle->GetAttachParent():nullptr;
+-        if(Actual.Schema!=Saved.Schema||Actual.Kind!=Saved.Kind||Actual.GroundPosition!=Saved.GroundPosition
++        if(!DungeonStoneGuardOwnerValue::Same(Actual.Guard,Saved.Guard)
++            ||Actual.Schema!=Saved.Schema||Actual.Kind!=Saved.Kind||Actual.GroundPosition!=Saved.GroundPosition
+             ||Actual.Health!=Saved.Health||Actual.MaxHealth!=Saved.MaxHealth||Actual.JumpHeight!=Saved.JumpHeight
+             ||Actual.JumpVelocity!=Saved.JumpVelocity||Actual.Facing!=Saved.Facing||Actual.Dead!=Saved.Dead
+             ||Actual.DeathReported!=Saved.DeathReported||Actual.Coins!=Saved.Coins||!Anchor||!Anchor->IsRegistered()
+--- /dev/null
++++ b/UnrealGame/Source/CodexDungeon/DungeonStoneGuardOwnerValue.h
+@@ -0,0 +1,135 @@
++#pragma once
++#include "DungeonFighterSnapshot.h"
++// Exact value equality after owner validation; never memcmp padded structs.
++// Per-double IEEE bits preserve signed zero as required by the canonical Codec.
++namespace DungeonStoneGuardOwnerValue
++{
++inline bool Number(double A,double B){return FMemory::Memcmp(&A,&B,sizeof(double))==0;}
++inline bool Same(const DungeonStoneGuard::FPoint& A,const DungeonStoneGuard::FPoint& B)
++{
++    return Number(A.X,B.X)
++        &&Number(A.Y,B.Y)
++        &&Number(A.Z,B.Z);
++}
++inline bool Same(const DungeonStoneGuard::FPolicy& A,const DungeonStoneGuard::FPolicy& B)
++{
++    return Number(A.ExtremelyCloseRadius,B.ExtremelyCloseRadius);
++}
++inline bool Same(const DungeonStoneGuard::FAction& A,const DungeonStoneGuard::FAction& B)
++{
++    return A.AttackId==B.AttackId
++        &&A.Kind==B.Kind
++        &&A.InProgress==B.InProgress
++        &&A.Locked==B.Locked
++        &&A.WindowIssued==B.WindowIssued
++        &&A.Interrupted==B.Interrupted
++        &&A.Facing==B.Facing
++        &&Number(A.Start,B.Start)
++        &&Number(A.LockAt,B.LockAt)
++        &&Number(A.ActiveAt,B.ActiveAt)
++        &&Number(A.ActiveEnd,B.ActiveEnd)
++        &&Number(A.RecoveryEnd,B.RecoveryEnd)
++        &&Number(A.CooldownEnd,B.CooldownEnd)
++        &&Number(A.InterruptedAt,B.InterruptedAt)
++        &&Number(A.CompletedAt,B.CompletedAt)
++        &&Number(A.Damage,B.Damage)
++        &&Number(A.Stagger,B.Stagger)
++        &&Same(A.Origin,B.Origin)
++        &&Same(A.LockedCenter,B.LockedCenter)
++        &&Same(A.Target,B.Target);
++}
++inline bool Same(const DungeonStoneGuard::FDamageWindow& A,const DungeonStoneGuard::FDamageWindow& B)
++{
++    return A.AttackId==B.AttackId
++        &&A.EventId==B.EventId
++        &&A.Kind==B.Kind
++        &&A.Facing==B.Facing
++        &&Number(A.Start,B.Start)
++        &&Number(A.End,B.End)
++        &&Number(A.Damage,B.Damage)
++        &&Number(A.Stagger,B.Stagger)
++        &&Same(A.Center,B.Center);
++}
++inline bool Same(const DungeonStoneGuard::FWindowClosure& A,const DungeonStoneGuard::FWindowClosure& B)
++{
++    return A.AttackId==B.AttackId
++        &&Number(A.AtTime,B.AtTime);
++}
++inline bool Same(const DungeonStoneGuard::FHitReceipt& A,const DungeonStoneGuard::FHitReceipt& B)
++{
++    return A.AttackId==B.AttackId
++        &&A.TargetId==B.TargetId
++        &&Number(A.AtTime,B.AtTime);
++}
++inline bool Same(const DungeonStoneGuard::FReceivedHit& A,const DungeonStoneGuard::FReceivedHit& B)
++{
++    return A.ReceiptId==B.ReceiptId
++        &&Number(A.AtTime,B.AtTime)
++        &&Number(A.ActualHPLoss,B.ActualHPLoss)
++        &&Number(A.Stagger,B.Stagger);
++}
++inline bool Same(const DungeonStoneGuard::FEvent& A,const DungeonStoneGuard::FEvent& B)
++{
++    return A.EventId==B.EventId
++        &&A.EntityId==B.EntityId
++        &&A.TargetId==B.TargetId
++        &&A.Kind==B.Kind
++        &&Number(A.AtTime,B.AtTime)
++        &&Number(A.EndTime,B.EndTime)
++        &&Number(A.Amount,B.Amount)
++        &&Same(A.From,B.From)
++        &&Same(A.To,B.To)
++        &&Same(A.Action,B.Action);
++}
++template<class T>bool Sequence(const std::vector<T>& A,const std::vector<T>& B)
++{
++    if(A.size()!=B.size())return false;
++    for(std::size_t I=0;I<A.size();++I)if(!Same(A[I],B[I]))return false;
++    return true;
++}
++inline bool Same(const DungeonStoneGuard::FState& A,const DungeonStoneGuard::FState& B)
++{
++    return A.Version==B.Version
++        &&A.EntityId==B.EntityId
++        &&A.NextAttackId==B.NextAttackId
++        &&A.NextEventId==B.NextEventId
++        &&A.LastDamageReceiptId==B.LastDamageReceiptId
++        &&A.WakeQueued==B.WakeQueued
++        &&A.Awakened==B.Awakened
++        &&A.RewardClaimed==B.RewardClaimed
++        &&A.Phase==B.Phase
++        &&A.Facing==B.Facing
++        &&Number(A.InitialTime,B.InitialTime)
++        &&Number(A.Time,B.Time)
++        &&Number(A.HP,B.HP)
++        &&Number(A.PoiseAccum,B.PoiseAccum)
++        &&Number(A.PoiseDecayOrigin,B.PoiseDecayOrigin)
++        &&Number(A.LastPoiseAt,B.LastPoiseAt)
++        &&Number(A.ProtectionUntil,B.ProtectionUntil)
++        &&Number(A.StunUntil,B.StunUntil)
++        &&Number(A.CombatStartedAt,B.CombatStartedAt)
++        &&Number(A.WakeStartedAt,B.WakeStartedAt)
++        &&Number(A.WakeEnd,B.WakeEnd)
++        &&Number(A.AxeReadyAt,B.AxeReadyAt)
++        &&Number(A.StompReadyAt,B.StompReadyAt)
++        &&Number(A.OccupiedUntil,B.OccupiedUntil)
++        &&Number(A.IdleReadyAt,B.IdleReadyAt)
++        &&Same(A.InitialPosition,B.InitialPosition)
++        &&Same(A.Position,B.Position)
++        &&Same(A.Action,B.Action)
++        &&Sequence(A.Windows,B.Windows)
++        &&Sequence(A.Closures,B.Closures)
++        &&Sequence(A.HitReceipts,B.HitReceipts)
++        &&Sequence(A.ReceivedHits,B.ReceivedHits)
++        &&Sequence(A.Issued,B.Issued);
++}
++inline bool Same(const FDungeonStoneGuardOwnerSnapshot& A,const FDungeonStoneGuardOwnerSnapshot& B)
++{
++    return A.Schema==B.Schema
++        &&A.DeathObserved==B.DeathObserved
++        &&Same(A.Policy,B.Policy)
++        &&Same(A.Kernel,B.Kernel);
++}
++inline bool Same(const TOptional<FDungeonStoneGuardOwnerSnapshot>& A,const TOptional<FDungeonStoneGuardOwnerSnapshot>& B)
++{return A.IsSet()==B.IsSet()&&(!A.IsSet()||Same(A.GetValue(),B.GetValue()));}
++}

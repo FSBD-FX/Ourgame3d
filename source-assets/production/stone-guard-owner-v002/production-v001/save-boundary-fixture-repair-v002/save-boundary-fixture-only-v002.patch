@@ -1,0 +1,46 @@
+--- a/UnrealGame/Source/CodexDungeon/Tests/DungeonStoneGuardOwnerSaveBoundaryTests.cpp
++++ b/UnrealGame/Source/CodexDungeon/Tests/DungeonStoneGuardOwnerSaveBoundaryTests.cpp
+@@ -19,7 +19,24 @@
+ TMap<FString,TArray<uint8>> BoundaryDiskBytes(FAutomationTestBase& T,const FString& Directory)
+ {
+  TMap<FString,TArray<uint8>> Result;TArray<FString> Paths;IFileManager::Get().FindFilesRecursive(Paths,*Directory,TEXT("*"),true,false,false);
+- for(const auto& P:Paths){TArray<uint8> B;T.TestTrue(TEXT("Actually read every retained published profile file"),FFileHelper::LoadFileToArray(B,*P));Result.Add(P,MoveTemp(B));}return Result;
++ // The currently owned root writer.lock is an OS lease with share mode0,
++ // not published payload. Exclude only that exact file, not similarly named
++ // files in recovery/history subdirectories; their bytes still matter.
++ FString OwnLease=Directory/TEXT("writer.lock");FPaths::NormalizeFilename(OwnLease);
++ for(const auto& P:Paths)
++ {
++  FString Normal=P;FPaths::NormalizeFilename(Normal);if(Normal.Equals(OwnLease,ESearchCase::CaseSensitive))continue;
++  TArray<uint8> B;T.TestTrue(TEXT("Actually read every published/unlocked profile file byte"),FFileHelper::LoadFileToArray(B,*P));Result.Add(P,MoveTemp(B));
++ }
++ return Result;
++}
++bool BoundaryOwnLeaseHeld(FAutomationTestBase& T,const BoundarySave::FReadContext& C,const FString& Directory)
++{
++ // A second real Store/OS handle must be excluded, before and after the
++ // rejected publication. Never attempt to read the owned lease payload.
++ BoundaryStore::FGenerationStore Contender(C.ProfilesDirectory,C.ProfileId,BoundarySave::CurrentVersions);
++ return T.TestTrue(TEXT("Current root writer.lock still exists while owned"),IFileManager::Get().FileExists(*(Directory/TEXT("writer.lock"))))
++  &&T.TestEqual(TEXT("Independent real writer remains excluded by actual OS lease"),int32(Contender.OpenWriter()),int32(BoundaryStore::EStatus::WriterBusy));
+ }
+ bool BoundarySameDisk(const TMap<FString,TArray<uint8>>& A,const TMap<FString,TArray<uint8>>& B)
+ {if(A.Num()!=B.Num())return false;for(const auto& E:A){const auto* V=B.Find(E.Key);if(!V||*V!=E.Value)return false;}return true;}
+@@ -51,6 +68,7 @@
+  if(!TestEqual(TEXT("Actual existing V1 writer lease opens"),int32(Disk.OpenWriter()),int32(BoundaryStore::EStatus::Ok)))return false;
+  const auto First=BoundarySave::Commit(Disk,Legacy,Request);if(!TestEqual(TEXT("Actual supported V1 generation publishes through mandatory validator"),int32(First.Status),int32(BoundaryStore::EStatus::Ok)))return false;
+  BoundarySave::FLoadedRun Original;if(!TestEqual(TEXT("Published V1 actually reads and fullyseals"),int32(BoundarySave::Load(Disk,C,Original).Status),int32(BoundaryStore::EStatus::Ok)))return false;
++ if(!BoundaryOwnLeaseHeld(*this,C,Disk.GetProfileDirectory()))return false;
+  const auto DiskBefore=BoundaryDiskBytes(*this,Disk.GetProfileDirectory());if(!TestTrue(TEXT("Real published slot/marker files exist before newV2 rejection"),DiskBefore.Num()>=2))return false;
+  if(!W.Rich())return false;FDungeonRunSnapshot V2;FDungeonValidatedRun V2Sealed;if(!SealGuard(W,V2,V2Sealed))return false;
+  TArray<uint8> V2Bytes;if(!TestTrue(TEXT("Genuine guardedRoot independently encodes exactV2 before V1Adapter rejection"),V2.Schema==2&&V2.Scope==EDungeonRunScope::BoundDevelopmentV2&&DungeonRunSnapshotCodec::Encode(V2,V2Bytes,Why)&&V2Bytes==FCodecOracle::Bytes(FGuardWire::DocumentV2(V2))))return false;
+@@ -63,7 +81,8 @@
+  TestTrue(TEXT("Mislabel failure preserves prior sealedpointer and allV1 owning values"),SealedOut.Get()==SealedPointer&&CodecSignature(*SealedOut.Get())==CodecSignature(Legacy));
+  const auto Rejected=BoundarySave::Commit(Disk,V2,Request);TestEqual(TEXT("Actual V1Commit failsclosed before Store publication"),int32(Rejected.Status),int32(BoundaryStore::EStatus::InvalidRequest));
+  TestFalse(TEXT("Rejected V2 writer never claims possiblypublished acknowledgement"),Rejected.PublicationMayHaveSucceeded);
+- TestTrue(TEXT("Actual rejected V2 leaves every existing profile slot/marker/lease filebyte unchanged with no new files"),BoundarySameDisk(DiskBefore,BoundaryDiskBytes(*this,Disk.GetProfileDirectory())));
++ TestTrue(TEXT("Actual rejected V2 leaves every published slot/marker and other unlocked file byte unchanged with no new files"),BoundarySameDisk(DiskBefore,BoundaryDiskBytes(*this,Disk.GetProfileDirectory())));
++ if(!BoundaryOwnLeaseHeld(*this,C,Disk.GetProfileDirectory()))return false;
+  BoundarySave::FLoadedRun StillV1;if(!TestEqual(TEXT("Previouslypublished V1 remains fresh-readable at original head"),int32(BoundarySave::Load(Disk,C,StillV1).Status),int32(BoundaryStore::EStatus::Ok)))return false;
+  TestTrue(TEXT("No unsupported V2 head or payload was published"),StillV1.ObservedHeadGeneration==1&&BoundaryGenerationSignature(StillV1.Generation)==BoundaryGenerationSignature(Original.Generation));
+  Request.RunGuid=Legacy.RunGuid;Request.OwnerId=Legacy.OwnerId;const auto Second=BoundarySave::Commit(Disk,Legacy,Request);

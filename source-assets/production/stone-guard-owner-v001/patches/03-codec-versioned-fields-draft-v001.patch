@@ -1,0 +1,136 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunSnapshotCodec.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunSnapshotCodec.cpp
+@@ -226,7 +226,7 @@
+ 
+ struct FArchive
+ {
+-    bool Reading=false,Good=true;FString& Why;uint64 Storage=0;int32 Nodes=0;
++    bool Reading=false,Good=true;FString& Why;uint64 Storage=0;int32 Nodes=0;uint8 CodecVersion=1;
+     explicit FArchive(bool Read,FString& Diagnostic):Reading(Read),Why(Diagnostic){}
+     void Reject(const TCHAR* Message){Good=false;Fail(Why,Message);}
+     bool Allocate(uint64 Count,uint64 Size)
+@@ -248,6 +248,8 @@
+         else{Object=MakeShared<FJsonObject>();Node=MakeShared<FJsonValueObject>(Object);}
+     }
+     bool Reading()const{return Archive.Reading;}
++    uint8 CodecVersion()const{return Archive.CodecVersion;}
++    void Reject(const TCHAR* Why){Archive.Reject(Why);}
+     bool Good()const{return Archive.Good;}
+     template<class T>void Field(const TCHAR* Name,T& Value)
+     {
+@@ -275,9 +277,9 @@
+     return Number<=static_cast<U>(Last);
+ }
+ #define ENUM_DOMAIN(T,Last) bool KnownEnum(T V){return EnumWithin(V,T::Last);}
+-ENUM_DOMAIN(EDungeonRunScope,BoundDevelopmentV1)
++ENUM_DOMAIN(EDungeonRunScope,BoundDevelopmentV2)
+ ENUM_DOMAIN(EDungeonRunGeometryKind,SceneExplorationV1)
+-ENUM_DOMAIN(EDungeonFighterOwnerKind,StoneBat)
++ENUM_DOMAIN(EDungeonFighterOwnerKind,StoneGuard)
+ ENUM_DOMAIN(EDungeonEquipmentRunConfig,FirstBatch)
+ ENUM_DOMAIN(EDungeonEquipmentActionKind,SwitchWeapon)
+ ENUM_DOMAIN(EDungeonEquipmentFailure,InternalConsistency)
+@@ -300,6 +302,9 @@
+ ENUM_DOMAIN(DungeonStoneBat::EPhase,Dead)
+ ENUM_DOMAIN(DungeonStoneBat::EAttack,Wing)
+ ENUM_DOMAIN(DungeonStoneBat::EEventKind,DescentDue)
++ENUM_DOMAIN(DungeonStoneGuard::EPhase,Dead)
++ENUM_DOMAIN(DungeonStoneGuard::EAttack,Stomp)
++ENUM_DOMAIN(DungeonStoneGuard::EEventKind,RewardClaimed)
+ ENUM_DOMAIN(DungeonWeaponPoseSocket::EClip,Reload)
+ ENUM_DOMAIN(DungeonEquipmentStats::EPackage,Cursed)
+ ENUM_DOMAIN(DungeonEquipmentStats::EError,NotImplemented)
+@@ -650,6 +655,62 @@
+ void Fields(FObject& O,FDungeonPlayerKernelSnapshot& S)
+ {
+     O.Field(TEXT("Combat"),S.Combat);O.Field(TEXT("WeaponActions"),S.WeaponActions);O.Field(TEXT("Dodge"),S.Dodge);
++}
++void Fields(FObject& O,DungeonStoneGuard::FPoint& S)
++{
++    O.Field(TEXT("X"),S.X);O.Field(TEXT("Y"),S.Y);O.Field(TEXT("Z"),S.Z);
++}
++void Fields(FObject& O,DungeonStoneGuard::FPolicy& S)
++{
++    O.Field(TEXT("ExtremelyCloseRadius"),S.ExtremelyCloseRadius);
++}
++void Fields(FObject& O,DungeonStoneGuard::FAction& S)
++{
++    O.Field(TEXT("AttackId"),S.AttackId);O.Field(TEXT("Kind"),S.Kind);O.Field(TEXT("InProgress"),S.InProgress);O.Field(TEXT("Locked"),S.Locked);
++    O.Field(TEXT("WindowIssued"),S.WindowIssued);O.Field(TEXT("Interrupted"),S.Interrupted);O.Field(TEXT("Start"),S.Start);O.Field(TEXT("LockAt"),S.LockAt);
++    O.Field(TEXT("ActiveAt"),S.ActiveAt);O.Field(TEXT("ActiveEnd"),S.ActiveEnd);O.Field(TEXT("RecoveryEnd"),S.RecoveryEnd);O.Field(TEXT("CooldownEnd"),S.CooldownEnd);
++    O.Field(TEXT("InterruptedAt"),S.InterruptedAt);O.Field(TEXT("CompletedAt"),S.CompletedAt);O.Field(TEXT("Damage"),S.Damage);O.Field(TEXT("Stagger"),S.Stagger);
++    O.Field(TEXT("Origin"),S.Origin);O.Field(TEXT("LockedCenter"),S.LockedCenter);O.Field(TEXT("Target"),S.Target);O.Field(TEXT("Facing"),S.Facing);
++}
++void Fields(FObject& O,DungeonStoneGuard::FDamageWindow& S)
++{
++    O.Field(TEXT("AttackId"),S.AttackId);O.Field(TEXT("EventId"),S.EventId);O.Field(TEXT("Kind"),S.Kind);O.Field(TEXT("Start"),S.Start);
++    O.Field(TEXT("End"),S.End);O.Field(TEXT("Damage"),S.Damage);O.Field(TEXT("Stagger"),S.Stagger);O.Field(TEXT("Center"),S.Center);
++    O.Field(TEXT("Facing"),S.Facing);
++}
++void Fields(FObject& O,DungeonStoneGuard::FWindowClosure& S)
++{
++    O.Field(TEXT("AttackId"),S.AttackId);O.Field(TEXT("AtTime"),S.AtTime);
++}
++void Fields(FObject& O,DungeonStoneGuard::FHitReceipt& S)
++{
++    O.Field(TEXT("AttackId"),S.AttackId);O.Field(TEXT("TargetId"),S.TargetId);O.Field(TEXT("AtTime"),S.AtTime);
++}
++void Fields(FObject& O,DungeonStoneGuard::FReceivedHit& S)
++{
++    O.Field(TEXT("ReceiptId"),S.ReceiptId);O.Field(TEXT("AtTime"),S.AtTime);O.Field(TEXT("ActualHPLoss"),S.ActualHPLoss);O.Field(TEXT("Stagger"),S.Stagger);
++}
++void Fields(FObject& O,DungeonStoneGuard::FEvent& S)
++{
++    O.Field(TEXT("EventId"),S.EventId);O.Field(TEXT("EntityId"),S.EntityId);O.Field(TEXT("TargetId"),S.TargetId);O.Field(TEXT("Kind"),S.Kind);
++    O.Field(TEXT("AtTime"),S.AtTime);O.Field(TEXT("EndTime"),S.EndTime);O.Field(TEXT("Amount"),S.Amount);O.Field(TEXT("From"),S.From);
++    O.Field(TEXT("To"),S.To);O.Field(TEXT("Action"),S.Action);
++}
++void Fields(FObject& O,DungeonStoneGuard::FState& S)
++{
++    O.Field(TEXT("Version"),S.Version);O.Field(TEXT("EntityId"),S.EntityId);O.Field(TEXT("NextAttackId"),S.NextAttackId);O.Field(TEXT("NextEventId"),S.NextEventId);
++    O.Field(TEXT("LastDamageReceiptId"),S.LastDamageReceiptId);O.Field(TEXT("InitialTime"),S.InitialTime);O.Field(TEXT("Time"),S.Time);O.Field(TEXT("HP"),S.HP);
++    O.Field(TEXT("PoiseAccum"),S.PoiseAccum);O.Field(TEXT("PoiseDecayOrigin"),S.PoiseDecayOrigin);O.Field(TEXT("LastPoiseAt"),S.LastPoiseAt);O.Field(TEXT("ProtectionUntil"),S.ProtectionUntil);
++    O.Field(TEXT("StunUntil"),S.StunUntil);O.Field(TEXT("CombatStartedAt"),S.CombatStartedAt);O.Field(TEXT("WakeStartedAt"),S.WakeStartedAt);O.Field(TEXT("WakeEnd"),S.WakeEnd);
++    O.Field(TEXT("AxeReadyAt"),S.AxeReadyAt);O.Field(TEXT("StompReadyAt"),S.StompReadyAt);O.Field(TEXT("OccupiedUntil"),S.OccupiedUntil);O.Field(TEXT("IdleReadyAt"),S.IdleReadyAt);
++    O.Field(TEXT("WakeQueued"),S.WakeQueued);O.Field(TEXT("Awakened"),S.Awakened);O.Field(TEXT("RewardClaimed"),S.RewardClaimed);O.Field(TEXT("Phase"),S.Phase);
++    O.Field(TEXT("InitialPosition"),S.InitialPosition);O.Field(TEXT("Position"),S.Position);O.Field(TEXT("Facing"),S.Facing);O.Field(TEXT("Action"),S.Action);
++    O.Field(TEXT("Windows"),S.Windows);O.Field(TEXT("Closures"),S.Closures);O.Field(TEXT("HitReceipts"),S.HitReceipts);O.Field(TEXT("ReceivedHits"),S.ReceivedHits);
++    O.Field(TEXT("Issued"),S.Issued);
++}
++void Fields(FObject& O,FDungeonStoneGuardOwnerSnapshot& S)
++{
++    O.Field(TEXT("Schema"),S.Schema);O.Field(TEXT("Policy"),S.Policy);O.Field(TEXT("Kernel"),S.Kernel);O.Field(TEXT("DeathObserved"),S.DeathObserved);
+ }
+ void Fields(FObject& O,FDungeonFighterOwnerSnapshot& S)
+ {
+@@ -667,6 +728,9 @@
+     O.Field(TEXT("AnimationName"),S.AnimationName);O.Field(TEXT("AttackPhase"),S.AttackPhase);O.Field(TEXT("HeightAnchorRelative"),S.HeightAnchorRelative);O.Field(TEXT("CustomMuzzle"),S.CustomMuzzle);
+     O.Field(TEXT("CustomMuzzleRelative"),S.CustomMuzzleRelative);O.Field(TEXT("BatObservedHeight"),S.BatObservedHeight);O.Field(TEXT("Player"),S.Player);O.Field(TEXT("Knight"),S.Knight);
+     O.Field(TEXT("Bat"),S.Bat);
++    if(O.CodecVersion()==2)O.Field(TEXT("Guard"),S.Guard);
++    else if(S.Schema!=2||S.Kind==EDungeonFighterOwnerKind::StoneGuard||S.Guard.IsSet())
++        O.Reject(TEXT("Legacy bound-run-v1 cannot contain a Guard owner or new owner schema"));
+ }
+ void Fields(FObject& O,FDungeonWorldProjectile& S)
+ {
+@@ -1044,10 +1108,17 @@
+ 
+ bool Document(FArchive& Archive,FNode& Node,FDungeonRunSnapshot& Snapshot)
+ {
+-    FObject Envelope(Archive,Node);FString Codec=TEXT("bound-run-v1");
+-    Envelope.Field(TEXT("codec"),Codec);Envelope.Field(TEXT("snapshot"),Snapshot);
++    FObject Envelope(Archive,Node);FString Codec=Snapshot.Schema==2?TEXT("bound-run-v2"):TEXT("bound-run-v1");
++    // Decode the explicit discriminator before selecting any owner field layout.
++    Envelope.Field(TEXT("codec"),Codec);
++    if(Codec.Equals(TEXT("bound-run-v1"),ESearchCase::CaseSensitive))Archive.CodecVersion=1;
++    else if(Codec.Equals(TEXT("bound-run-v2"),ESearchCase::CaseSensitive))Archive.CodecVersion=2;
++    else{Archive.Reject(TEXT("Unknown Run codec version"));return false;}
++    Envelope.Field(TEXT("snapshot"),Snapshot);
+     if(!Envelope.Finish())return false;
+-    if(!Codec.Equals(TEXT("bound-run-v1"),ESearchCase::CaseSensitive)){Archive.Reject(TEXT("Unknown Run codec version"));return false;}
++    if(Archive.CodecVersion==1?(Snapshot.Schema!=1||Snapshot.Scope!=EDungeonRunScope::BoundDevelopmentV1)
++        :(Snapshot.Schema!=2||Snapshot.Scope!=EDungeonRunScope::BoundDevelopmentV2))
++    {Archive.Reject(TEXT("Run codec version and complete root schema/scope disagree"));return false;}
+     return Archive.Good;
+ }
+ bool Serialize(FDungeonRunSnapshot& Snapshot,TArray<uint8>& Bytes,FString& Why)

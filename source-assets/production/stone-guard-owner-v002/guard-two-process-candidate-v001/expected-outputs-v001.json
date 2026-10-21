@@ -1,0 +1,97 @@
+{
+  "schema": "guard-two-process-expected-output-contract-v1",
+  "status": "candidate_only_not_runtime_evidence",
+  "session_schema": "guard-disk-v2-two-native-processes-v1",
+  "role_schema": "guard-disk-v2-two-process-role-v1",
+  "verification_schema": "independent-guard-disk-v2-two-process-verification-v1",
+  "source_files": [
+    "runtime-report.json",
+    "source-codec.json",
+    "prewarm-viewport.png",
+    "MovieFrame*.png",
+    "native-frame-pixels.jsonl",
+    "native-lossless-capture.json",
+    "native-async-write-summary.json"
+  ],
+  "restore_files": [
+    "runtime-report.json",
+    "restored-codec.json",
+    "restored-paused-codec.json",
+    "deadline-codec.json",
+    "death-reentry-before-codec.json",
+    "death-reentry-after-codec.json",
+    "continued-codec.json",
+    "prewarm-viewport.png",
+    "MovieFrame*.png",
+    "native-frame-pixels.jsonl",
+    "native-lossless-capture.json",
+    "native-async-write-summary.json"
+  ],
+  "session_files": [
+    "two-process-session.json",
+    "source-native.log",
+    "restore-native.log",
+    "independent-verifier-output.txt",
+    "two-process-verification-v001.json",
+    "BoundRunOnly-v2/<fresh-profile-guid>/slot-A.bundle.json",
+    "BoundRunOnly-v2/<fresh-profile-guid>/slot-A.commit.json"
+  ],
+  "success_requirements": {
+    "actual_roles": 2,
+    "distinct_nonoverlapping_PIDs": true,
+    "source_exit_before_restore": true,
+    "exit_codes": [
+      0,
+      0
+    ],
+    "native_report_passed": [
+      true,
+      true
+    ],
+    "full_source_install_pause_codec_bytes_equal": true,
+    "initial_no_Run_and_real_R_preserved": true,
+    "RootSchema": 2,
+    "Scope": "BoundDevelopmentV2",
+    "namespace": "BoundRunOnly-v2",
+    "generation": "1",
+    "parent": "0",
+    "source_living_HP": 184,
+    "next_living_HP": 183,
+    "saved_live_phase": "Active",
+    "final_live_phase": "Recovery",
+    "same_original_attack_ID_absolute_deadlines": true,
+    "next_actual_receipt_increment": 1,
+    "dead_local_claim": true,
+    "dead_native_observed": true,
+    "dead_formal_death_reported": false,
+    "twice_dead_observer_reentry_full_codec_byte_equal": true,
+    "every_native_PNG_CRC_unique_FIFO_flush_verified": true,
+    "restart_serial": 0
+  },
+  "must_remain_false": [
+    "visual_running_proof_reviewed",
+    "audio_device_auditioned",
+    "full_D13_profile",
+    "formal_room_encounter_complete",
+    "formal_reward_consumer_complete",
+    "guard_audio_complete"
+  ],
+  "formal_complete_units": 0,
+  "source_steps": [
+    "source_real_Enter_down",
+    "source_real_Enter_up",
+    "source_two_public003_spawns_one_real_lethal_localclaim",
+    "source_genuine_wake_first_axe",
+    "source_public_native_mitigation_and_interrupt",
+    "source_original_live_deadline_and_deadobserver_committed"
+  ],
+  "restore_steps": [
+    "restore_real_R_down_behind_pristine_gate",
+    "restore_real_R_up",
+    "restore_actual_V2_LoadAndPreparePristine_Install",
+    "restore_real_fresh_Enter_down",
+    "restore_real_Enter_up_wait_original_active_end",
+    "restore_next_actual_receipt_and_twice_deadobserver_reentry",
+    "restore_original_deadline_next_receipt_deadobserver_late_once"
+  ]
+}

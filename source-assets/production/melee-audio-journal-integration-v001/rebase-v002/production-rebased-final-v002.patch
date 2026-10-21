@@ -1,0 +1,79 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -606,12 +606,22 @@
+         {
+             const TCHAR* Family = Event.Action.Weapon == EWeapon::GSW001 ? TEXT("GSW")
+                 : Event.Action.Weapon == EWeapon::SPR001 ? TEXT("SPR") : TEXT("SWD");
+             const TCHAR* Cue = Event.Action.Weapon == EWeapon::SPR001 ? TEXT("THRUST") : TEXT("WHOOSH");
+-            const FString Name = FString::Printf(TEXT("SW_AUD_%s_%s_%02d_v001"),Family,Cue,Event.Stage+1);
+-            const FString SoundPath = FString::Printf(TEXT("/Game/Production/FirstBatch/v001/Audio/%s.%s"),*Name,*Name);
+-            if (auto Sound=LoadObject<USoundBase>(nullptr,*SoundPath))
+-                UGameplayStatics::PlaySound2D(this,Sound,.25f);
++            const FString AudioCue=FString::Printf(TEXT("%s_%s_%02d"),Family,Cue,Event.Stage+1);
++            if(IsEquipmentBound())
++            {
++                if(auto Game=GetWorld()->GetAuthGameMode<ADungeonGameMode>())
++                    Game->AppendActionAudio(*AudioCue,Event.AtTime,GetRuntimeEntityId(),Event.AttackId,
++                        Event.Action.WeaponInstanceId,0,Game->GetEquipmentView().Revision);
++            }
++            else
++            {
++                // Historical unbound prototypes retain their original direct path.
++                const FString Name=TEXT("SW_AUD_")+AudioCue+TEXT("_v001");
++                const FString SoundPath=FString::Printf(TEXT("/Game/Production/FirstBatch/v001/Audio/%s.%s"),*Name,*Name);
++                if(auto Sound=LoadObject<USoundBase>(nullptr,*SoundPath))UGameplayStatics::PlaySound2D(this,Sound,.25f);
++            }
+             HitAction = Event.Action;
+             bResolvingContentWindow = true;
+             if (auto Game = GetWorld()->GetAuthGameMode<ADungeonGameMode>()) Game->ResolveAttack(this);
+             bResolvingContentWindow = false;
+--- a/UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.cpp
+@@ -317,11 +317,13 @@
+                 {
+                     const TCHAR* Family=E.Action.Weapon==DungeonContentCombat::EWeapon::GSW001?TEXT("GSW")
+                         :E.Action.Weapon==DungeonContentCombat::EWeapon::SPR001?TEXT("SPR"):TEXT("SWD");
+                     const TCHAR* Cue=E.Action.Weapon==DungeonContentCombat::EWeapon::SPR001?TEXT("THRUST"):TEXT("WHOOSH");
+-                    const FString Name=FString::Printf(TEXT("SW_AUD_%s_%s_03_v001"),Family,Cue);
+-                    const FString Path=FString::Printf(TEXT("/Game/Production/FirstBatch/v001/Audio/%s.%s"),*Name,*Name);
+-                    if (USoundBase* Sound=LoadObject<USoundBase>(nullptr,*Path)) UGameplayStatics::PlaySound2D(Fighter,Sound,.25f);
++                    // This branch already admitted one new authoritative WindowCreated.
++                    // Each real spear subhit keeps its own E.AtTime and journal sequence.
++                    const FString AudioCue=FString::Printf(TEXT("%s_%s_03"),Family,Cue);
++                    AppendActionAudio(*AudioCue,E.AtTime,Fighter->GetRuntimeEntityId(),E.ActionId,
++                        E.InstanceId,0,EquipmentRuntime->View.Revision);
+                 }
+             }
+             AppendWeaponWorldEvent(Fact);
+         }
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+@@ -187,11 +187,13 @@
+     }
+     for (const FString Family : {TEXT("SWD"),TEXT("GSW"),TEXT("SPR")})
+         for (int32 Stage=1;Stage<=3;++Stage)
+         {
+-            const FString Name=FString::Printf(TEXT("SW_AUD_%s_%s_%02d_v001"),*Family,Family==TEXT("SPR")?TEXT("THRUST"):TEXT("WHOOSH"),Stage);
++            const FString AudioCue=FString::Printf(TEXT("%s_%s_%02d"),*Family,Family==TEXT("SPR")?TEXT("THRUST"):TEXT("WHOOSH"),Stage);
++            const FString Name=TEXT("SW_AUD_")+AudioCue+TEXT("_v001");
+             const FString Path=FString::Printf(TEXT("/Game/Production/FirstBatch/v001/Audio/%s.%s"),*Name,*Name);
+-            if (auto Sound=LoadObject<USoundBase>(nullptr,*Path)) PreloadedSounds.Add(Sound);
++            if(auto Sound=LoadObject<USoundBase>(nullptr,*Path))
++            {PreloadedSounds.Add(Sound);ActionAudioSounds.Add(AudioCue,Sound);}
+         }
+     if (auto Sound=LoadObject<USoundBase>(nullptr,TEXT("/Game/ThirdParty/Kenney/ImpactSounds/ImpactLight/SW_ImpactLight.SW_ImpactLight")))
+     { PreloadedSounds.Add(Sound); StoneSounds.Add(TEXT("impact"),Sound); }
+     for (const FString Cue : {TEXT("AWAKE"),TEXT("ARMOR_SCRAPE"),TEXT("CHARGE_BRAKE"),TEXT("FRACTURE")})
+@@ -274,9 +276,11 @@
+             || Age<0. || Age>.25) continue;
+         const auto Sound=ActionAudioSounds.Find(Record.Cue);
+         if(!Sound || !Sound->Get()) continue;
+         // Candidate mix gains; actual listening remains separate from event correctness.
+-        const float Volume=Record.Cue==TEXT("XBW_RELOAD_INSERT_01")?.55f:.32f;
++        const bool Melee=Record.Cue.StartsWith(TEXT("SWD_WHOOSH_"))||Record.Cue.StartsWith(TEXT("GSW_WHOOSH_"))
++            ||Record.Cue.StartsWith(TEXT("SPR_THRUST_"));
++        const float Volume=Melee?.25f:Record.Cue==TEXT("XBW_RELOAD_INSERT_01")?.55f:.32f;
+         UGameplayStatics::PlaySound2D(this,Sound->Get(),Volume,1.f);
+         ++ActionAudioPlayRequests.FindOrAdd(Record.Cue);
+         FDungeonActionAudioPlayRequest Request;Request.Source=Record;
+         Request.SoundPath=Sound->Get()->GetPathName();Request.RequestedAt=Now;Request.Volume=Volume;

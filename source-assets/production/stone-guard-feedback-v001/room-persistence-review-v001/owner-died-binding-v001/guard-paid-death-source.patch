@@ -1,0 +1,18 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFirstBatchGuardRoomRuntime.inl
++++ b/UnrealGame/Source/CodexDungeon/DungeonFirstBatchGuardRoomRuntime.inl
+@@ -100,6 +100,15 @@
+   ||(X->ContentId==TEXT("ENM-STN-003")&&!F->StoneGuard))return;
+  FDungeonRunRewardDeathRequest Q;Q.EntityId=Id;Q.RoomInstanceId=P.RoomInstanceId;Q.ContentId=X->ContentId;
+  Q.AtTime=F->StoneKnight?F->StoneKnight->State().Time:F->StoneBat?F->StoneBat->State().Time:F->StoneGuard->State().Time;
++ if(F->StoneGuard)
++ {
++  // A resolved contact can precede the batch endpoint; only the original
++  // immutable Died fact owns the paid death clock, never final State.Time.
++  int32 DeathEvents=0;
++  for(const auto& E:F->StoneGuard->State().Issued)if(E.Kind==DungeonStoneGuard::EEventKind::Died)
++  {Q.AtTime=E.AtTime;++DeathEvents;}
++  if(DeathEvents!=1){LastMessage=TEXT("Bridge Guard死亡缺少唯一原生Died来源，保留未结算状态。");return;}
++ }
+  Q.Position=F->GetGroundPosition();Q.FirstDeath=X->Group==0;Q.RoomCleared=X->Group==2;
+  auto Candidate=MakeUnique<FDungeonRunRewards>(*RunRewards);FString Why;const auto R=Candidate->ResolveDeath(Q,Why);
+  if(!R.Ok()){LastMessage=TEXT("Bridge死亡结算拒绝：")+Why;return;}

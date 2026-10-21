@@ -1,0 +1,40 @@
+--- a/UnrealGame/Source/CodexDungeon/Tests/StoneGuardOwnerFixture_v002.h
++++ b/UnrealGame/Source/CodexDungeon/Tests/StoneGuardOwnerFixture_v002.h
+@@ -75,15 +75,27 @@
+  ADungeonFighter* Guard=nullptr;
+  explicit FGuardWorld(FAutomationTestBase& T):FCodecWorld(T){}
+  const G::FState& State()const{return Guard->GetStoneGuardDriver()->State();}
++ void Diagnostic(const TCHAR* Stage) const
++ {
++  const auto P=Player->GetGroundPosition(),A=Guard->GetGroundPosition(),Delta=P-A;const auto& S=State();
++  Test.AddInfo(FString::Printf(TEXT("GuardOwnerFixture stage=%s playerXY=(%.17g,%.17g) guardXY=(%.17g,%.17g) deltaXY=(%.17g,%.17g) wakeEllipseR2=%.17g rootTime=%.17g guardTime=%.17g birth=%.17g combatStart=%.17g wakeStart=%.17g wakeEnd=%.17g phase=%d awakened=%d queued=%d AI=%d waiting=%d gameOver=%d playerHP=%.17g actionId=%llu actionKind=%d actionActive=%d gate=%d windows=%llu closures=%llu hits=%llu received=%llu issued=%llu"),
++   Stage,P.X,P.Y,A.X,A.Y,Delta.X,Delta.Y,FMath::Square(Delta.X/235.)+FMath::Square(Delta.Y/110.),
++   Game->GetSimulationTime(),S.Time,S.InitialTime,S.CombatStartedAt,S.WakeStartedAt,S.WakeEnd,int32(S.Phase),int32(S.Awakened),int32(S.WakeQueued),int32(Guard->bAIEnabled),int32(Game->bWaitingForStart),int32(Game->bGameOver),double(Player->Health),
++   static_cast<unsigned long long>(S.Action.AttackId),int32(S.Action.Kind),int32(S.Action.InProgress),int32(Game->GetRunInstallGate()),static_cast<unsigned long long>(S.Windows.size()),static_cast<unsigned long long>(S.Closures.size()),static_cast<unsigned long long>(S.HitReceipts.size()),static_cast<unsigned long long>(S.ReceivedHits.size()),static_cast<unsigned long long>(S.Issued.size())));
++ }
+  bool Rich()
+  {
+-  Guard=Game->SpawnStoneGuard({-150,0});
++  // The accepted Scene fixture starts at its real Layout.Entry, not at0.
++  // Preserve the known150cm axe/wake relation without relocating the player.
++  const FVector2D GuardSpawn=Player->GetGroundPosition()-FVector2D(150.,0.);
++  Guard=Game->SpawnStoneGuard(GuardSpawn);
+   if(!Test.TestTrue(TEXT("Genuine admitted003 native driver uses actual current Run/room/entity,185HP and40x28 body"),Guard&&Guard->GetStoneGuardDriver()
+     &&Guard->GetRuntimeEntityId()!=Game->GetEquipmentView().OwnerId&&Guard->Health==185&&Guard->GetCombatBodyHalfExtent()==FVector2D(40,28)))return false;
+   const auto& Bindings=Game->GetWeaponWorldState().ActorBindings;
+   if(!Test.TestTrue(TEXT("Actual stable003 World binding is present without a fabricated owner snapshot"),Bindings.ContainsByPredicate([&](const auto& B){return B.EntityId==Guard->GetRuntimeEntityId()&&B.RoomInstanceId==Game->GetEquipmentView().RoomInstanceId&&B.ContentId==TEXT("ENM-STN-003");})))return false;
++  Diagnostic(TEXT("admitted-before-tick"));
+   for(int32 N=0;N<400&&!State().Action.InProgress&&!Game->bGameOver;++N)Frame(.01f);
+-  if(!Test.TestTrue(TEXT("Real GameMode clock starts Guard axe after genuine wake"),State().Action.InProgress&&State().Action.Kind==G::EAttack::AxeSweep))return false;
++  if(!Test.TestTrue(TEXT("Real GameMode clock starts Guard axe after genuine wake"),State().Action.InProgress&&State().Action.Kind==G::EAttack::AxeSweep)){Diagnostic(TEXT("failed-first-axe"));return false;}
+   if(!AdvanceTo(State().Action.ActiveAt+.001))return Test.TestTrue(TEXT("Real complete batch reaches active boundary"),false);
+   if(!Test.TestTrue(TEXT("Actual immutable window and native once-hit receipt exist before Owner API"),!State().Windows.empty()&&!State().HitReceipts.empty()&&Player->Health<100))return false;
+   Guard->ApplyCombatHit(1.6f,Player,85.f);
+@@ -93,6 +105,7 @@
+   const uint64 OldAttack=State().Action.AttackId;
+   for(int32 N=0;N<650&&State().Action.AttackId==OldAttack&&!Game->bGameOver;++N)Frame(.01f);
+   if(!Test.TestTrue(TEXT("Second real attack leaves previous closure/history intact"),State().Action.InProgress&&State().Action.AttackId>OldAttack))return false;
++  Diagnostic(TEXT("second-action-before-active"));
+   return AdvanceTo(State().Action.ActiveAt+.001)&&Test.TestTrue(TEXT("Every native producer history remains nonempty at complete current root time"),
+    State().Time==Game->GetSimulationTime()&&!State().Windows.empty()&&!State().Closures.empty()&&!State().HitReceipts.empty()&&!State().ReceivedHits.empty()&&!State().Issued.empty());
+  }

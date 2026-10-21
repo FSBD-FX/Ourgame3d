@@ -1,0 +1,15 @@
+{
+  "schema": "root-leather-combo-final36-inventory-v001",
+  "template_only": true,
+  "production_packages": 1151,
+  "old_packages_unchanged": 1115,
+  "new_packages": 36,
+  "p2_saved_hashes_unchanged_after_p3": true,
+  "mismatches": null,
+  "files": [],
+  "fill_instructions": [
+    "Root writes a NEW inventory; do not change actual native receipts.",
+    "Read all36 actual new package bytes, compare to both receipts saved_bytes/saved_sha256; current fullProduction must exactly equal historical old1115 plus these36.",
+    "Only real zero mismatches permits mismatches=0/template_only=false. This is package-integrity evidence, not art/runtime/audio/full-unit acceptance."
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schema": "root-leather-combo-joint-import-proof-v001",
+  "template_only": true,
+  "mode": "single_process_two18_fixed_old1115",
+  "same_process": true,
+  "importer": {
+    "path": "tools/scripts/ue-import-leather-combo-v001.py",
+    "bytes": 6553,
+    "sha256": "e431a6ca295098229ed041616fd814a4e2009db9554e0f9876251111e24e3b3a"
+  },
+  "decoder": {
+    "path": "tools/scripts/ue-import-armor-primary2-four-v001.py",
+    "bytes": 14990,
+    "sha256": "5c667edbeb81eac54648d14ff92b8883d1b15a39a05cc3b56c17933dd29eb49a"
+  },
+  "import_contract": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/combo-import-v001/root-import-contract-v001.json",
+    "bytes": 989,
+    "sha256": "3506ebdc2a46cb784366ad621bebbea0f761633c35b557b73262f82a0381de6a"
+  },
+  "process": {
+    "pid": null,
+    "exit_code": null,
+    "log": {
+      "path": "UnrealGame/Saved/Bootstrap/leather-combo-v001-import-20261017-034431-5778279.log",
+      "bytes": 271870,
+      "sha256": "7bf1430a02d8e965dc0fb5ce9f7efbf09d273c8714382528a12fe25ddcea3c93"
+    }
+  },
+  "receipts": {
+    "Primary2": {
+      "path": "UnrealGame/Saved/Bootstrap/leather-primary2-combo-v001-import-20261016-194453-924659.json",
+      "bytes": 31388,
+      "sha256": "4f7fc1aa80c96648c4dec84b84c217302412aa3be66b81e1988914e53256ec70"
+    },
+    "Primary3": {
+      "path": "UnrealGame/Saved/Bootstrap/leather-primary3-combo-v001-import-20261016-194456-196483.json",
+      "bytes": 31388,
+      "sha256": "158a6f3d75a501a5c9295eb5c699efed13e9313f2024bf322a009d6029e4048b"
+    }
+  },
+  "old_packages_unchanged": 1115,
+  "p2_saved_hashes_unchanged_after_p3": true,
+  "final36_inventory": null,
+  "fill_instructions": [
+    "Root creates a NEW external record with real launch/wait process PID and exit0; the importer does not put PID/exit0 in the native receipts.",
+    "The pinned single UE log independently corroborates importer invocation, exactly two ordered receipt paths and clean Python/engine shutdown, but cannot independently recover an OS process PID.",
+    "Fill/pin a NEW actual final36 inventory from current package bytes; retain all original native receipts unmodified; set template_only=false after real evidence is bound."
+  ]
+}

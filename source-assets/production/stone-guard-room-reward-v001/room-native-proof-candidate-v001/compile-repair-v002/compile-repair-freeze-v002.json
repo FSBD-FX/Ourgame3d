@@ -1,0 +1,49 @@
+{
+  "schema": "guard-room-proof-private-field-compile-repair-v002",
+  "status": "UNCOMPILED_UNRUN_ROOT_ONLY",
+  "actual_failure": "C2248 ADungeonFighter::HurtTime private",
+  "exact_original": {
+    "path": "F:/Ourgame/source-assets/production/stone-guard-room-reward-v001/room-native-proof-candidate-v001/new-source/DungeonGuardRoomFlowProbe.cpp",
+    "bytes": 26259,
+    "sha256": "fa2e64a88c779894e3a7cdb3126b565d0dce02df75d8879ceb59292f2cc35446"
+  },
+  "frozen_v001": {
+    "path": "F:/Ourgame/source-assets/production/stone-guard-room-reward-v001/room-native-proof-candidate-v001/proof-candidate-freeze-v001.json",
+    "bytes": 6316,
+    "sha256": "972783195244fdb739525363671fc7d820608fa75cea1368ecbd881d70315473"
+  },
+  "observed_public_decl": {
+    "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.h",
+    "bytes": 12233,
+    "sha256": "3128060579200a9984e6f011d20689c869036164c2a471f17402639772d03c6c"
+  },
+  "observed_actual_implementation": {
+    "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+    "bytes": 121495,
+    "sha256": "c31ae4c10a52707ba555864012a1ef920c855328e83a6d8d478a8ba3fd36cebb"
+  },
+  "single_replacement": {
+    "before": "P->HurtTime<=0.f",
+    "after": "P->CanStartAttack()",
+    "occurrences": 1
+  },
+  "exact_full_line_reversal_restores_all_original_bytes": true,
+  "assertions_or_runtime_game_state_changed": false,
+  "files": [
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-room-reward-v001/room-native-proof-candidate-v001/compile-repair-v002/DungeonGuardRoomFlowProbe.cpp",
+      "bytes": 26262,
+      "sha256": "7da364280846ca58f6342ac6300398dd69add41facfb2bcde515a61fc9aa7207"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-room-reward-v001/room-native-proof-candidate-v001/compile-repair-v002/private-field-public-gate-v002.patch",
+      "bytes": 1259,
+      "sha256": "55c4cea3d44c53c6590fb2865dc0e51c1258f201b0d532792ef07d9e4286fd75"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-room-reward-v001/room-native-proof-candidate-v001/compile-repair-v002/README.md",
+      "bytes": 708,
+      "sha256": "f0a02a0a666e5e48190ce4ff24b23b28f34e4ea31f71b2e761cdfa239b9cd72a"
+    }
+  ]
+}

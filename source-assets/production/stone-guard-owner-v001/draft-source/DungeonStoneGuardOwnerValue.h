@@ -1,0 +1,135 @@
+#pragma once
+#include "DungeonFighterSnapshot.h"
+// Draft: exact value equality only, after owner validation. Never memcmp padded structs.
+// Per-double IEEE bits preserve signed zero as required by the canonical Codec.
+namespace DungeonStoneGuardOwnerValue
+{
+inline bool Number(double A,double B){return FMemory::Memcmp(&A,&B,sizeof(double))==0;}
+inline bool Same(const DungeonStoneGuard::FPoint& A,const DungeonStoneGuard::FPoint& B)
+{
+    return Number(A.X,B.X)
+        &&Number(A.Y,B.Y)
+        &&Number(A.Z,B.Z);
+}
+inline bool Same(const DungeonStoneGuard::FPolicy& A,const DungeonStoneGuard::FPolicy& B)
+{
+    return Number(A.ExtremelyCloseRadius,B.ExtremelyCloseRadius);
+}
+inline bool Same(const DungeonStoneGuard::FAction& A,const DungeonStoneGuard::FAction& B)
+{
+    return A.AttackId==B.AttackId
+        &&A.Kind==B.Kind
+        &&A.InProgress==B.InProgress
+        &&A.Locked==B.Locked
+        &&A.WindowIssued==B.WindowIssued
+        &&A.Interrupted==B.Interrupted
+        &&A.Facing==B.Facing
+        &&Number(A.Start,B.Start)
+        &&Number(A.LockAt,B.LockAt)
+        &&Number(A.ActiveAt,B.ActiveAt)
+        &&Number(A.ActiveEnd,B.ActiveEnd)
+        &&Number(A.RecoveryEnd,B.RecoveryEnd)
+        &&Number(A.CooldownEnd,B.CooldownEnd)
+        &&Number(A.InterruptedAt,B.InterruptedAt)
+        &&Number(A.CompletedAt,B.CompletedAt)
+        &&Number(A.Damage,B.Damage)
+        &&Number(A.Stagger,B.Stagger)
+        &&Same(A.Origin,B.Origin)
+        &&Same(A.LockedCenter,B.LockedCenter)
+        &&Same(A.Target,B.Target);
+}
+inline bool Same(const DungeonStoneGuard::FDamageWindow& A,const DungeonStoneGuard::FDamageWindow& B)
+{
+    return A.AttackId==B.AttackId
+        &&A.EventId==B.EventId
+        &&A.Kind==B.Kind
+        &&A.Facing==B.Facing
+        &&Number(A.Start,B.Start)
+        &&Number(A.End,B.End)
+        &&Number(A.Damage,B.Damage)
+        &&Number(A.Stagger,B.Stagger)
+        &&Same(A.Center,B.Center);
+}
+inline bool Same(const DungeonStoneGuard::FWindowClosure& A,const DungeonStoneGuard::FWindowClosure& B)
+{
+    return A.AttackId==B.AttackId
+        &&Number(A.AtTime,B.AtTime);
+}
+inline bool Same(const DungeonStoneGuard::FHitReceipt& A,const DungeonStoneGuard::FHitReceipt& B)
+{
+    return A.AttackId==B.AttackId
+        &&A.TargetId==B.TargetId
+        &&Number(A.AtTime,B.AtTime);
+}
+inline bool Same(const DungeonStoneGuard::FReceivedHit& A,const DungeonStoneGuard::FReceivedHit& B)
+{
+    return A.ReceiptId==B.ReceiptId
+        &&Number(A.AtTime,B.AtTime)
+        &&Number(A.ActualHPLoss,B.ActualHPLoss)
+        &&Number(A.Stagger,B.Stagger);
+}
+inline bool Same(const DungeonStoneGuard::FEvent& A,const DungeonStoneGuard::FEvent& B)
+{
+    return A.EventId==B.EventId
+        &&A.EntityId==B.EntityId
+        &&A.TargetId==B.TargetId
+        &&A.Kind==B.Kind
+        &&Number(A.AtTime,B.AtTime)
+        &&Number(A.EndTime,B.EndTime)
+        &&Number(A.Amount,B.Amount)
+        &&Same(A.From,B.From)
+        &&Same(A.To,B.To)
+        &&Same(A.Action,B.Action);
+}
+template<class T>bool Sequence(const std::vector<T>& A,const std::vector<T>& B)
+{
+    if(A.size()!=B.size())return false;
+    for(std::size_t I=0;I<A.size();++I)if(!Same(A[I],B[I]))return false;
+    return true;
+}
+inline bool Same(const DungeonStoneGuard::FState& A,const DungeonStoneGuard::FState& B)
+{
+    return A.Version==B.Version
+        &&A.EntityId==B.EntityId
+        &&A.NextAttackId==B.NextAttackId
+        &&A.NextEventId==B.NextEventId
+        &&A.LastDamageReceiptId==B.LastDamageReceiptId
+        &&A.WakeQueued==B.WakeQueued
+        &&A.Awakened==B.Awakened
+        &&A.RewardClaimed==B.RewardClaimed
+        &&A.Phase==B.Phase
+        &&A.Facing==B.Facing
+        &&Number(A.InitialTime,B.InitialTime)
+        &&Number(A.Time,B.Time)
+        &&Number(A.HP,B.HP)
+        &&Number(A.PoiseAccum,B.PoiseAccum)
+        &&Number(A.PoiseDecayOrigin,B.PoiseDecayOrigin)
+        &&Number(A.LastPoiseAt,B.LastPoiseAt)
+        &&Number(A.ProtectionUntil,B.ProtectionUntil)
+        &&Number(A.StunUntil,B.StunUntil)
+        &&Number(A.CombatStartedAt,B.CombatStartedAt)
+        &&Number(A.WakeStartedAt,B.WakeStartedAt)
+        &&Number(A.WakeEnd,B.WakeEnd)
+        &&Number(A.AxeReadyAt,B.AxeReadyAt)
+        &&Number(A.StompReadyAt,B.StompReadyAt)
+        &&Number(A.OccupiedUntil,B.OccupiedUntil)
+        &&Number(A.IdleReadyAt,B.IdleReadyAt)
+        &&Same(A.InitialPosition,B.InitialPosition)
+        &&Same(A.Position,B.Position)
+        &&Same(A.Action,B.Action)
+        &&Sequence(A.Windows,B.Windows)
+        &&Sequence(A.Closures,B.Closures)
+        &&Sequence(A.HitReceipts,B.HitReceipts)
+        &&Sequence(A.ReceivedHits,B.ReceivedHits)
+        &&Sequence(A.Issued,B.Issued);
+}
+inline bool Same(const FDungeonStoneGuardOwnerSnapshot& A,const FDungeonStoneGuardOwnerSnapshot& B)
+{
+    return A.Schema==B.Schema
+        &&A.DeathObserved==B.DeathObserved
+        &&Same(A.Policy,B.Policy)
+        &&Same(A.Kernel,B.Kernel);
+}
+inline bool Same(const TOptional<FDungeonStoneGuardOwnerSnapshot>& A,const TOptional<FDungeonStoneGuardOwnerSnapshot>& B)
+{return A.IsSet()==B.IsSet()&&(!A.IsSet()||Same(A.GetValue(),B.GetValue()));}
+}

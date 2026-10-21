@@ -1,0 +1,161 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonGameMode.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonGameMode.h
+@@ -9,11 +9,14 @@
+ #include "DungeonWorldProjectiles.h"
+ #include "DungeonSceneObjects.h"
+ #include "DungeonActionAudioFeedback.h"
++#include "DungeonHeroLocomotionAudioNativeV001.h"
+ #include "DungeonRunRewards.h"
+ #include "DungeonRunExploration.h"
+ #include "DungeonGameMode.generated.h"
+ 
+ class ADungeonFighter;
++class USoundBase;
++class USoundConcurrency;
+ struct FDungeonKnightFrame;
+ struct FDungeonKnightBody;
+ struct FDungeonKnightBatch;
+@@ -105,6 +108,7 @@
+     bool TrySwitchEquipment();
+     const FDungeonWeaponWorldState& GetWeaponWorldState() const { return WeaponWorld; }
+     const FDungeonActionAudioState& GetActionAudioState() const { return ActionAudioState; }
++    const TArray<FDungeonHeroLocomotionAudioPlayRequestV001>& GetHeroLocomotionAudioPlayRequestsV001() const { return HeroLocomotionPlayRequests; }
+     bool IsFairytaleLookdevPreview() const { return bFairytaleLookdevPreview; }
+     int32 GetFairytaleLookdevFacing() const { return FairytaleLookdevFacing; }
+     double GetFairytaleLookdevEpoch() const { return FairytaleLookdevEpoch; }
+@@ -160,6 +164,25 @@
+     void CollectAutomaticRunRewards();
+     bool RetireRunRewardRoom();
+     FDungeonWeaponWorldState WeaponWorld;
++    // New transient named-event prototype adapter; never part of Schema1.
++    DungeonHeroLocomotionAudioV001::FState HeroLocomotionState;
++    DungeonHeroLocomotionAudioV001::FScope HeroLocomotionAttachedScope;
++    TWeakObjectPtr<ADungeonFighter> HeroLocomotionOwner;
++    FGuid HeroLocomotionRun;
++    bool bHeroLocomotionSoundsLoaded=false;
++    UPROPERTY() TArray<TObjectPtr<USoundBase>> HeroLocomotionSounds;
++    UPROPERTY() TObjectPtr<USoundConcurrency> HeroLocomotionConcurrency;
++    TArray<FDungeonHeroLocomotionAudioPlayRequestV001> HeroLocomotionPlayRequests;
++    void LoadHeroLocomotionAudioV001();
++    DungeonHeroLocomotionAudioV001::FScope HeroLocomotionScopeV001() const;
++    bool HeroLocomotionAudioActiveV001() const;
++    bool RefreshHeroLocomotionAudioV001();
++    void ObserveHeroGroundDistanceV001(ADungeonFighter* Fighter,double From,double To,double Distance,
++        bool Grounded,bool OrdinaryEligible,bool HadIntent);
++    void ObserveHeroTakeoffV001(ADungeonFighter* Fighter,double AtTime);
++    void ObserveHeroAirMotionV001(ADungeonFighter* Fighter,double From,double To,double FromHeight,double ToHeight,double FallingSpeed);
++    void ObserveHeroDodgeV001(ADungeonFighter* Fighter,const std::vector<DungeonDodge::FEvent>& Events);
++    void DispatchHeroLocomotionAudioV001();
+     FDungeonActionAudioState ActionAudioState;
+     TMap<uint64,FDungeonActionAudioWeaponCursor> ActionAudioWeaponCursors;
+     void SeedActionAudioWeapon(ADungeonFighter* Fighter);
+--- a/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp
+@@ -352,6 +352,7 @@
+     RunInstallGate=EDungeonRunInstallGate::AwaitExplicitContinue;
+     RunInstallNeutralArmed=false;RunInstallPreviousEnter=Controller->IsInputKeyDown(EKeys::Enter);
+     SuppressRestoreContinueEnter=true;++RunPresentationEpoch;
++    RefreshHeroLocomotionAudioV001(); // Silent installed H/V and actual Dodge tail; no queued audio restore.
+     for(const auto& F:Group.Fighters){F->SetActorHiddenInGame(false);F->SetActorTickEnabled(false);F->SetActorEnableCollision(false);}
+     for(const auto& G:SceneWorldActors)if(G.IsValid()){G->SetActorHiddenInGame(false);G->SetActorTickEnabled(false);G->SetActorEnableCollision(true);}
+     if(auto* HUD=Cast<ADungeonHUD>(Controller->GetHUD()))HUD->AttachRestoredRunPresentation(Saved->Audio,RunPresentationEpoch);
+@@ -521,6 +522,7 @@
+     V.Bound = true; EquipmentRuntime->Fail(EDungeonEquipmentFailure::None,TEXT(""));
+     EquipmentRuntime->RefreshView(); UpdateEquipmentMirrors();
+     SeedActionAudioWeapon(PlayerFighter);
++    RefreshHeroLocomotionAudioV001(); // Silent initialized owner/tail.
+     return true;
+ }
+ 
+@@ -1162,6 +1164,7 @@
+ void ADungeonGameMode::StartPlay()
+ {
+     Super::StartPlay();
++    LoadHeroLocomotionAudioV001();
+     if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroAirDiskRestoreProofV001")))
+         GetWorld()->SpawnActor<ADungeonHeroAirDiskRestoreProbeV001>();
+     else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroLandingPriorityProofV001")))
+@@ -1864,6 +1867,8 @@
+ {
+     TGuardValue<bool> RunTickGuard(bRunTickActive,true);
+     Super::Tick(DeltaSeconds);
++    RefreshHeroLocomotionAudioV001(); // Scope/room attachment precedes any real input.
++    if(!HeroLocomotionAudioActiveV001())DispatchHeroLocomotionAudioV001(); // Drain while gated/waiting/terminal.
+     if(IsRunInstallGated()){if(RunInstallGate==EDungeonRunInstallGate::AwaitExplicitContinue)ObserveRunInstallInput();return;}
+     if(SuppressRestoreContinueEnter)
+         if(auto* C=UGameplayStatics::GetPlayerController(this,0))
+@@ -1954,6 +1959,7 @@
+             const bool HadIntent=!Fighter->bEnemy&&!Fighter->ReadMoveIntent().IsNearlyZero();
+             // Timers, existing resources and ballistic velocity advance exactly once.
+             // XY is the already resolved query result, not a second movement attempt.
++            const double AudioFallingSpeed=FMath::Max(0.,1800.*double(Step)-double(Fighter->JumpVelocity));
+             Fighter->bSuppressOrdinaryMovement=true;Fighter->SimulateMotion(Step,false);Fighter->bSuppressOrdinaryMovement=false;
+             if (Fighter->StoneKnight || Fighter->StoneGuard) return;
+             for (const auto& P:Predicted) if (P.Fighter.Get()==Fighter)
+@@ -1969,6 +1975,8 @@
+                     Fighter->Combat.NotifyLand();
+                     if (!Fighter->IsEquipmentBound()) Fighter->WeaponSkills.NotifyLand();
+                 }
++                // Authoritative resolved H crossing; legacy audio is suppressed in this batch.
++                if(!Fighter->bDead)ObserveHeroAirMotionV001(Fighter,FromTime,ToTime,P.StartHeight,P.EndHeight,AudioFallingSpeed);
+                 const auto Actual=Fighter->GetGroundPosition();
+                 Fighter->bMoving=Actual!=P.Start;
+                 Fighter->RecordCompletedGroundMotion(P.Start,Actual,FromTime,ToTime,
+@@ -2062,6 +2070,7 @@
+         else ZeroBatches=0;
+     }
+     PlayerFighter->EndGroundMotionFrame(SimulationTime);
++    DispatchHeroLocomotionAudioV001(); // Completed real tick; same-endpoint terminal state suppresses stale cues.
+     bSceneEquipmentTargetLost=false;
+     ObserveRunExploration(); // One observation per completed Tick, independent of Canvas.
+ }
+@@ -2122,6 +2131,7 @@
+     PlayerFighter->ArmorId.Reset();
+     PlayerFighter->bHasAxe = false;
+     PlayerFighter->ResetFighter(FVector2D(-460.f, 0.f));
++    RefreshHeroLocomotionAudioV001(); // Silent genuine legacy new run.
+     if (Controller)
+     {
+         Controller->Possess(PlayerFighter);
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -778,6 +778,7 @@
+     C.FreshPress=FreshPress; C.Grounded=JumpHeight<=KINDA_SMALL_NUMBER && JumpVelocity<=0.f;
+     C.CanStart=true; C.Facing=Facing<0.f?-1:1; C.MoveIntent={MoveIntent.X,MoveIntent.Y};
+     // A failed request has no cancellation, receipt or resource side effects.
++    Game->RefreshHeroLocomotionAudioV001(); // Seed old tail before the real accepted event exists.
+     const auto R=Dodge.TryStart(Dodge.State().Time,C);
+     if (!R.Accepted) return false;
+     if (IsEquipmentBound()) Game->CancelEquipmentAction();
+@@ -787,6 +788,7 @@
+     if(IsEquipmentBound())Game->ObservePendingActionAudio(this);
+     ClearPendingAttackInput();
+     SyncDodgeAction();
++    Game->ObserveHeroDodgeV001(this,R.Events); // Accepted real Started only, never restored Records.
+     return true;
+ }
+ 
+@@ -1214,6 +1216,8 @@
+     if(!FMath::IsFinite(From.X)||!FMath::IsFinite(From.Y)||!FMath::IsFinite(To.X)||!FMath::IsFinite(To.Y)
+         ||!FMath::IsFinite(FromTime)||!FMath::IsFinite(ToTime)||FromTime<0.||ToTime<FromTime
+         ||!FMath::IsFinite(Distance)){bInvalidGroundMotion=true;CompletedGroundMotion.Published=false;return;}
++    if(auto* AudioGame=GetWorld()?GetWorld()->GetAuthGameMode<ADungeonGameMode>():nullptr)
++        AudioGame->ObserveHeroGroundDistanceV001(this,FromTime,ToTime,Distance,Grounded,OrdinaryEligible,HadIntent);
+     bUnconsumedGroundMotion=true;
+     if(Grounded&&OrdinaryEligible&&HadIntent)PendingWalkDistance+=Distance;
+     if(!FMath::IsFinite(PendingWalkDistance)){bInvalidGroundMotion=true;return;}
+@@ -1315,10 +1319,14 @@
+     if(RunInstallBlocksFighter(*this))return;
+     if (!StoneKnight && !StoneBat && !StoneGuard && GetEquipmentActionDeadline()<=0 && Dodge.State().Phase!=DungeonDodge::EPhase::Dodging && !WeaponSkills.State().Action.Active && !bDead && JumpHeight <= 0.f && JumpVelocity <= 0.f && HurtTime <= 0.f && AttackTime <= 0.f && ArmorChangeRemaining <= 0.f)
+     {
++        if(auto* AudioGame=GetWorld()?GetWorld()->GetAuthGameMode<ADungeonGameMode>():nullptr)
++            AudioGame->RefreshHeroLocomotionAudioV001(); // Seed grounded facts before the actual successful takeoff.
+         JumpVelocity = 630.f;
+         bAirPrimarySpent = false;
+         Combat.NotifyTakeoff();
+         WeaponSkills.NotifyTakeoff();
++        if(auto* AudioGame=GetWorld()?GetWorld()->GetAuthGameMode<ADungeonGameMode>():nullptr)
++            AudioGame->ObserveHeroTakeoffV001(this,AudioGame->GetSimulationTime());
+     }
+ }
+ 

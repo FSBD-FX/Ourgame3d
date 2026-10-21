@@ -1,0 +1,180 @@
+{
+  "schema": "stone-guard-owner-stage0-fixture-repair-v2",
+  "created": "2026-10-17T03:32:40.740015",
+  "status": "candidate_only_actual_native_retest_pending",
+  "registered_groups": 3,
+  "production_stubs_changed": false,
+  "actual_source_written": false,
+  "ue_or_ubt_executed": false,
+  "first_actual_failure": {
+    "report": {
+      "path": "F:/Ourgame/UnrealGame/Saved/Automation/FirstRoom-20261017-032629/index.json",
+      "bytes": 3570,
+      "sha256": "e2c0435ae4c399184c995fb6a351808e2bb63e0fa43bb8637da6f894fcc7a1fc"
+    },
+    "success": 0,
+    "fail": 3,
+    "errors": 3,
+    "warnings": 0,
+    "notRun": 0,
+    "inProcess": 0,
+    "classification": "native_fixture_premise_failure_not_semanticRED"
+  },
+  "single_behavioral_change": "Spawn current Guard150cm left of actual current player, instead of absolute(-150,0)",
+  "unchanged_main_test": {
+    "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v002/stage0-fixture-repair-v002/DungeonStoneGuardOwnerTests.cpp",
+    "bytes": 19560,
+    "sha256": "1296e2baf7a26f3d6f8dd5d161217ddba45cf729daef14139853581fd1eef6d7"
+  },
+  "source_line_references": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "lines": [
+        649,
+        653,
+        659
+      ]
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonRoomLayout.h",
+      "lines": [
+        10,
+        11,
+        23,
+        26
+      ]
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.cpp",
+      "lines": [
+        489,
+        494,
+        505,
+        548
+      ]
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp",
+      "lines": [
+        229,
+        269
+      ]
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/Tests/RunCodecFixture_v001.h",
+      "lines": [
+        172,
+        180,
+        184
+      ]
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/Tests/DungeonStoneGuardNativeTests.cpp",
+      "lines": [
+        34
+      ]
+    }
+  ],
+  "read_only_source_inputs": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "bytes": 148263,
+      "sha256": "c39dee9a506b728048a21e0d43492d53133e14d876baa2878046ba3ca835cd9a"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonRoomLayout.h",
+      "bytes": 1026,
+      "sha256": "ee588bb4944224b57027da359e4f6c4bd884baa97eba9bdf9c6badcbcdbdf29c"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.cpp",
+      "bytes": 42213,
+      "sha256": "6198551820b8e01ace25ce061169a671e342cc60bab6f6dc800df767d77b1d9f"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp",
+      "bytes": 21547,
+      "sha256": "f2c44a685d43f319835d087772c51aa7b07cccc9a6f29b0934348d07c73ec988"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/Tests/RunCodecFixture_v001.h",
+      "bytes": 55002,
+      "sha256": "e80634a729ee95d4b846eb83da8de8d8cd835872b41aaf2c7900530817db34cb"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/Tests/DungeonStoneGuardNativeTests.cpp",
+      "bytes": 14672,
+      "sha256": "406892b287684c00e753b39e36c8eee62722e68717af37a53c6b23bb3732a93d"
+    }
+  ],
+  "standalone_pure_hypothesis": {
+    "compile_exit": 0,
+    "run_exit": 0,
+    "wrong_relation_reproduced": true,
+    "relative_axe_in_original_budget": true,
+    "native_UE_executed": false
+  },
+  "normal_git_apply_check_exit": 0,
+  "files": [
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v002/stage0-fixture-repair-v002/before-DungeonStoneGuardOwnerTests.cpp",
+      "bytes": 19560,
+      "sha256": "1296e2baf7a26f3d6f8dd5d161217ddba45cf729daef14139853581fd1eef6d7"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v002/stage0-fixture-repair-v002/before-StoneGuardOwnerFixture_v002.h",
+      "bytes": 10656,
+      "sha256": "9a98d7f77d1ea58d42f30d84124a7e5013cacf7b1470795e085047e75790660a"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v002/stage0-fixture-repair-v002/DungeonStoneGuardOwnerTests.cpp",
+      "bytes": 19560,
+      "sha256": "1296e2baf7a26f3d6f8dd5d161217ddba45cf729daef14139853581fd1eef6d7"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v002/stage0-fixture-repair-v002/fixture-only-v002.patch",
+      "bytes": 4304,
+      "sha256": "43283c4c0b103b735af08e0300dee3a09feb354d5042d9e3b912c302a15b247c"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v002/stage0-fixture-repair-v002/pure-position-hypothesis/build.log",
+      "bytes": 79,
+      "sha256": "d5f1a3d49f1da1936804cbcbfe32f1c3439ca9e98e9bb395231d51d7c655f4e9"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v002/stage0-fixture-repair-v002/pure-position-hypothesis/DungeonStoneGuard.obj",
+      "bytes": 654296,
+      "sha256": "d6d28397fa3da25e4acda23120f1dbe9ae2643a0a3af15e436d71db91a34c4a5"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v002/stage0-fixture-repair-v002/pure-position-hypothesis/position.cpp",
+      "bytes": 1378,
+      "sha256": "5c2619ed0541c4adbc432d7aeca7d80d83a60088f1894cec4ff0c3e7be6e7f24"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v002/stage0-fixture-repair-v002/pure-position-hypothesis/position.exe",
+      "bytes": 370176,
+      "sha256": "b0e607cfe7751da935021ca2ffaa6f6d739037b11fdbeadd7cd1d8c4a922b08b"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v002/stage0-fixture-repair-v002/pure-position-hypothesis/position.obj",
+      "bytes": 367569,
+      "sha256": "3ff3c976e2f14c2f5ce7cbb735251bab4e68ff5e44ef431d10066429201a081c"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v002/stage0-fixture-repair-v002/pure-position-hypothesis/run.log",
+      "bytes": 238,
+      "sha256": "606c453d7514c2d352a9a3b69105af25e9eb04ab5fb0422ffc8b67ff72972bc1"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v002/stage0-fixture-repair-v002/root-cause-and-fix-v002.md",
+      "bytes": 3190,
+      "sha256": "c3ad89e900a078cadcb1b3fe6e596f6573f3a96e14e373ef517f23309419b364"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-owner-v002/stage0-fixture-repair-v002/StoneGuardOwnerFixture_v002.h",
+      "bytes": 12354,
+      "sha256": "e1d605a51b8d89e58a63afd5ed2dcab524a6a01ba52380022c8b2e0ef5b77eb9"
+    }
+  ]
+}

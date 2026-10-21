@@ -1,0 +1,20 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+@@ -9,6 +9,7 @@
+ #include "DungeonFairytaleSwordProbe.h"
+ #include "DungeonFairytaleEquipmentBoundProbe.h"
+ #include "DungeonRunContinueProbe.h"
++#include "DungeonGuardRunContinueProbe.h"
+ #include "DungeonRoomLayout.h"
+ #include "DungeonXBWBodyPose.h"
+ #include "DungeonRunSnapshot.h"
+@@ -226,7 +227,8 @@
+     if (FParse::Param(FCommandLine::Get(),TEXT("DungeonContentProof")))
+     {
+         InstallFastLosslessProofScreenshots();
+-        if(FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleEquipmentBoundProof")))GetWorld()->SpawnActor<ADungeonFairytaleEquipmentBoundProbe>();
++        if(FParse::Param(FCommandLine::Get(),TEXT("DungeonGuardRunSaveProof"))||FParse::Param(FCommandLine::Get(),TEXT("DungeonGuardRunRestoreProof")))GetWorld()->SpawnActor<ADungeonGuardRunContinueProbe>();
++        else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleEquipmentBoundProof")))GetWorld()->SpawnActor<ADungeonFairytaleEquipmentBoundProbe>();
+         else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordBodyProof")))GetWorld()->SpawnActor<ADungeonFairytaleSwordProbe>();
+         else GetWorld()->SpawnActor<ADungeonContentProbe>();
+     }

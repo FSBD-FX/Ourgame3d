@@ -1,0 +1,34 @@
+{
+  "schema": "NONRELEASE_ART_DIAGNOSTIC-tool-final-verification-v001",
+  "verified_at_local": "2026-10-17T04:01:10.865723+08:00",
+  "source_preflight": {
+    "actual_exit_code": 0,
+    "source_mismatches": 0,
+    "production_packages": 1151,
+    "current_full_automation_succeeded": null,
+    "actual_native_verified": false,
+    "command": "verify-leather-combo-art-diagnostic-v001.py --diagnostic-inputs source-assets/production/leather-combo-diagnostic-root-input-v001/diagnostic-compiled-inputs-v001.json --source-only"
+  },
+  "PowerShell_ParseFile": {
+    "actual_exit_code": 0,
+    "parse_errors": 0,
+    "capture_invoked": false
+  },
+  "Python_AST_valid": true,
+  "unchanged_full_function_AST": {
+    "verify_flow": true,
+    "verify_pixels": true
+  },
+  "capture_executed": false,
+  "postprocess_executed": false,
+  "media_viewed": false,
+  "formal_fullGREEN_tools_modified": false,
+  "current_full_GREEN": false,
+  "formal_complete_units": 0,
+  "limitations": [
+    "Source-only preflight does not validate any runtime capture.",
+    "Root must execute and review actual native output; tool preparation makes no art or full-unit acceptance claim.",
+    "Any subsequent Source/Config/DLL/Production mutation invalidates the exact diagnostic inputs.",
+    "preparation-verification-v001.json is preserved draft evidence; this final verification records completed read-only checks."
+  ]
+}

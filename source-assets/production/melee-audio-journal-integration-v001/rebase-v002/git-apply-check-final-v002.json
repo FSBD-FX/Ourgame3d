@@ -1,0 +1,81 @@
+{
+  "schema": "unapplied-melee-audio-rebase-final-git-apply-check-v2",
+  "started_utc": "2026-10-16T13:46:12.915448+00:00",
+  "finished_utc": "2026-10-16T13:46:13.020371+00:00",
+  "cwd": "F:\\Ourgame",
+  "argv": [
+    "git",
+    "-C",
+    "F:\\Ourgame",
+    "apply",
+    "--check",
+    "F:\\Ourgame\\source-assets\\production\\melee-audio-journal-integration-v001\\rebase-v002\\production-rebased-final-v002.patch"
+  ],
+  "patch": {
+    "path": "source-assets/production/melee-audio-journal-integration-v001/rebase-v002/production-rebased-final-v002.patch",
+    "bytes": 5590,
+    "sha256": "9f6fe7f1f88718eb42bf1bae0958b1bb00bb8a19e46d1dbc88664234ef888dec"
+  },
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "",
+  "passed": true,
+  "actual_apply_performed": false,
+  "source_context_line_endings": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "actual_line_ending": "CRLF",
+      "context_line_endings_preserved": true,
+      "logic_hunks_equal_original_v001": true
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.cpp",
+      "actual_line_ending": "LF",
+      "context_line_endings_preserved": true,
+      "logic_hunks_equal_original_v001": true
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "actual_line_ending": "CRLF",
+      "context_line_endings_preserved": true,
+      "logic_hunks_equal_original_v001": true
+    }
+  ],
+  "actual_source_before": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 102391,
+      "sha256": "df0f34023a3535b9e1f0d71fc73c4115af56294fd59bc2f0d0a109f2dad77fed"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.cpp",
+      "bytes": 25155,
+      "sha256": "0bc43aaf55c8576b93f8fde87cd8db92f04153d682ba332aa2620ac547687fb9"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": 109356,
+      "sha256": "e097e82c223bcece8ce67d9b834615c1825c3f5f110ef63f53ef6db53133a2ac"
+    }
+  ],
+  "actual_source_after": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 102391,
+      "sha256": "df0f34023a3535b9e1f0d71fc73c4115af56294fd59bc2f0d0a109f2dad77fed"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.cpp",
+      "bytes": 25155,
+      "sha256": "0bc43aaf55c8576b93f8fde87cd8db92f04153d682ba332aa2620ac547687fb9"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": 109356,
+      "sha256": "e097e82c223bcece8ce67d9b834615c1825c3f5f110ef63f53ef6db53133a2ac"
+    }
+  ],
+  "source_unchanged": true,
+  "old_v001_candidate_preserved": true,
+  "scope": "Default git apply --check only, no ignore-whitespace option. Candidate uses actual perfile context line endings. No UE/UBT or runtime pass claimed."
+}

@@ -1,0 +1,71 @@
+{
+  "schema": "guard-owner-production-static-field-review-v1",
+  "guard_values": [
+    {
+      "type": "FPoint",
+      "fields": 3,
+      "codec_named_fields_exact": true,
+      "same_reads_each_side": true
+    },
+    {
+      "type": "FPolicy",
+      "fields": 1,
+      "codec_named_fields_exact": true,
+      "same_reads_each_side": true
+    },
+    {
+      "type": "FAction",
+      "fields": 20,
+      "codec_named_fields_exact": true,
+      "same_reads_each_side": true
+    },
+    {
+      "type": "FDamageWindow",
+      "fields": 9,
+      "codec_named_fields_exact": true,
+      "same_reads_each_side": true
+    },
+    {
+      "type": "FWindowClosure",
+      "fields": 2,
+      "codec_named_fields_exact": true,
+      "same_reads_each_side": true
+    },
+    {
+      "type": "FHitReceipt",
+      "fields": 3,
+      "codec_named_fields_exact": true,
+      "same_reads_each_side": true
+    },
+    {
+      "type": "FReceivedHit",
+      "fields": 4,
+      "codec_named_fields_exact": true,
+      "same_reads_each_side": true
+    },
+    {
+      "type": "FEvent",
+      "fields": 10,
+      "codec_named_fields_exact": true,
+      "same_reads_each_side": true
+    },
+    {
+      "type": "FState",
+      "fields": 33,
+      "codec_named_fields_exact": true,
+      "same_reads_each_side": true
+    }
+  ],
+  "state_fields": 33,
+  "ordered_containers": [
+    "Windows",
+    "Closures",
+    "HitReceipts",
+    "ReceivedHits",
+    "Issued"
+  ],
+  "preexisting_field_blocks_unchanged": 92,
+  "legacy_fighter_tail_only_guard_conditional": true,
+  "public_Encode_Decode_atomic_bodies_unchanged": true,
+  "runtime_verification": false
+}

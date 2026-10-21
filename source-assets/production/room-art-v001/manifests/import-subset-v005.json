@@ -1,0 +1,302 @@
+{
+  "schema": "room-art-layer-import-subset-v1",
+  "version": 5,
+  "frozen": true,
+  "map_mode": "side_scroll_mode",
+  "map_kind": "brawler",
+  "visual_model": "parallax_layers",
+  "engine_target": "project-native_UE5",
+  "runtime_object_model": [
+    "existing_walkable_belt",
+    "interactive_scene_objects",
+    "scene_hooks"
+  ],
+  "collision_model": "existing_explicit_gameplay_geometry_not_image_pixels",
+  "stage_canvas_px": [
+    1280,
+    720
+  ],
+  "stage_segment_count": 1,
+  "scope": "background_layer_assets_for_existing_one_screen_room_not_complete_map",
+  "shared_anchor_px": [
+    0,
+    0
+  ],
+  "wall_footline_stage_y": 323,
+  "layers": [
+    {
+      "id": "far",
+      "ue_asset_name": "T_RoomFar_v001",
+      "ue_destination": "/Game/Production/RoomArt/v001/",
+      "file": "F:\\Ourgame\\source-assets\\production\\room-art-v001\\processed\\dungeon-far-stage-1280x720-v001.png",
+      "sha256": "e47331e48cce6c9bc1496660fbe364528131a37c3c4df5490b6e88fd8f1c97e1",
+      "source_file": "F:\\Ourgame\\source-assets\\production\\room-art-v001\\raw\\25-dungeon-far-scenery-v001.png",
+      "source_sha256": "7ae8d66140ea545cb285076085faa03a15bf829f9c267ce24190867ba54e77b3",
+      "source_dimensions_px": [
+        1672,
+        941
+      ],
+      "normalized_dimensions_px": [
+        1280,
+        720
+      ],
+      "display_dimensions_px": [
+        1280,
+        720
+      ],
+      "normalization": {
+        "method": "continuous_center_crop_then_single_uniform_LANCZOS_resample_no_anisotropic_stretch",
+        "crop_box_source_px": [
+          0,
+          0.25,
+          1672,
+          940.75
+        ],
+        "scale": 0.7655502392344498
+      },
+      "mode": "RGBA",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "anchor": "top_left",
+      "anchor_px": [
+        0,
+        0
+      ],
+      "render_order": -30,
+      "scroll_factors": [
+        0.1,
+        0
+      ],
+      "repeat": {
+        "x": false,
+        "y": false
+      },
+      "runtime_zoom": 1.2,
+      "wall_footline_target_stage_y": 323,
+      "wall_footline_is_authoring_anchor_not_pixel_collision": true,
+      "visual_arch_base_estimate_stage_y": 323,
+      "lowest_decorative_masonry_estimate_stage_y": 340,
+      "lower_region": "opaque_deep_teal_atmosphere_no_walkable_floor",
+      "collision_role": "none",
+      "source_request_number": 25,
+      "source_prompt": "F:\\Ourgame\\source-assets\\production\\room-art-v001\\prompts\\25-far-scenery.txt",
+      "reference_files": [],
+      "status": "scenery_only_candidate_normalized_and_visually_reviewed_pending_runtime",
+      "limitations": [
+        "not_a_complete_map",
+        "no_gameplay_props_actors_or_collision",
+        "not_seamless_not_infinite_level",
+        "existing_walkable_belt_and_scene_hooks_remain_runtime_authority",
+        "zoom_camera_edge_coverage_requires_runtime_check"
+      ]
+    },
+    {
+      "id": "mid",
+      "ue_asset_name": "T_RoomMid_v001",
+      "ue_destination": "/Game/Production/RoomArt/v001/",
+      "file": "F:\\Ourgame\\source-assets\\production\\room-art-v001\\processed\\dungeon-mid-stage-1280x720-v004.png",
+      "sha256": "d87993aa8305c704f42f7372f2d71ac61815371364da4e71dbe2e0b6525e6a12",
+      "source_file": "F:\\Ourgame\\source-assets\\production\\room-art-v001\\raw\\26-dungeon-mid-wall-v001.png",
+      "source_sha256": "cbb2e3725178541064c2f09275fe2e51ae95d73bd153dd5ef86a3ccd60b54610",
+      "source_dimensions_px": [
+        1672,
+        941
+      ],
+      "normalized_dimensions_px": [
+        1280,
+        720
+      ],
+      "display_dimensions_px": [
+        1280,
+        720
+      ],
+      "normalization": {
+        "method": "skill_remove_bg_magenta_then_continuous_center_crop_and_single_uniform_LANCZOS_no_fit_no_trim_no_translate",
+        "skill_script": "C:/Users/22499/.codex/skills/generate2dsprite/scripts/generate2dsprite.py",
+        "function": "remove_bg_magenta",
+        "threshold": 90,
+        "edge_threshold": 190,
+        "crop_box_source_px": [
+          0,
+          0.25,
+          1672,
+          940.75
+        ],
+        "scale": 0.7655502392344498,
+        "forced_lower_mask_applied": false,
+        "residue_cleanup_predicate": "alpha>0 and R>100 and B>100 and R>G+40 and B>G+40 -> alpha0",
+        "residue_removed_source_pixels": 545,
+        "post_resample_alpha_cleanup": {
+          "predicate": "A>0 and R>60 and B>60 and R>G+15 and B>G+15 -> alpha0",
+          "removed_pixels": 1891,
+          "adds_or_repaints_pixels": false
+        }
+      },
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "nontransparent_bbox_px": [
+        0,
+        0,
+        1280,
+        321
+      ],
+      "lower_region_y323_720_alpha_extrema": [
+        0,
+        0
+      ],
+      "opaque_magenta_fraction": 0.0,
+      "anchor": "top_left",
+      "anchor_px": [
+        0,
+        0
+      ],
+      "render_order": -20,
+      "scroll_factors": [
+        0.3,
+        0
+      ],
+      "repeat": {
+        "x": false,
+        "y": false
+      },
+      "runtime_zoom": 1.2,
+      "wall_footline_target_stage_y": 323,
+      "collision_role": "none",
+      "source_request_number": 26,
+      "source_prompt": "F:\\Ourgame\\source-assets\\production\\room-art-v001\\prompts\\26-mid-wall-transparent.txt",
+      "reference_files": [
+        {
+          "file": "F:\\Ourgame\\source-assets\\production\\room-art-v001\\processed\\dungeon-far-stage-1280x720-v001.png",
+          "sha256": "e47331e48cce6c9bc1496660fbe364528131a37c3c4df5490b6e88fd8f1c97e1"
+        }
+      ],
+      "status": "final_palette_safe_matte_candidate_pixel_qc_pass_pending_runtime",
+      "limitations": [
+        "not_gameplay_pillars",
+        "not_a_complete_map",
+        "lower_floor_alpha_zero_no_gameplay_geometry",
+        "camera_zoom_parallax_edges_require_runtime_check"
+      ],
+      "supersedes_processed_file": "F:\\Ourgame\\source-assets\\production\\room-art-v001\\processed\\dungeon-mid-stage-1280x720-v003.png",
+      "superseded_reason": "removed_lowalpha_magenta_residue_after_resample",
+      "previous_processing_attempts": [
+        {
+          "file": "dungeon-mid-stage-1280x720-v001.png",
+          "result": "rejected_180_260_overkeys_warm_masonry"
+        },
+        {
+          "file": "dungeon-mid-stage-1280x720-v002.png",
+          "result": "90_140_recovered4334opaque_pixels_but_residual_magenta_edges"
+        }
+      ],
+      "post_resample_magenta_residue_alpha_pixel_count": 0
+    },
+    {
+      "id": "floor",
+      "ue_asset_name": "T_RoomFloor_v001",
+      "ue_destination": "/Game/Production/RoomArt/v001/",
+      "file": "F:\\Ourgame\\source-assets\\production\\room-art-v001\\processed\\dungeon-floor-tile-512-v001.png",
+      "sha256": "268563d9b2ef74651fee8b978e1e63c18585a0a5068df39b99bc2f119e5a4b16",
+      "source_file": "F:\\Ourgame\\source-assets\\production\\room-art-v001\\raw\\27-dungeon-stone-floor-v001.png",
+      "source_sha256": "6bdc3e87c2515e8ba810fa0fb1e5fa9fa300a5fb2bdc7494198c11a58cb02ec9",
+      "source_dimensions_px": [
+        1254,
+        1254
+      ],
+      "normalized_dimensions_px": [
+        512,
+        512
+      ],
+      "display_dimensions_px": [
+        256,
+        256
+      ],
+      "display_dimensions_kind": "proposed_world_grid_skin_tile_not_fullcanvas",
+      "normalization": {
+        "method": "single_uniform_LANCZOS_square_resample",
+        "scale": 0.4082934609250399,
+        "crop_box_source_px": [
+          0,
+          0,
+          1254,
+          1254
+        ],
+        "seam_blend_applied": false
+      },
+      "mode": "RGBA",
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "anchor": "world_grid_top_left",
+      "anchor_px": [
+        0,
+        0
+      ],
+      "stage_floor_start_y": 323,
+      "render_order": -10,
+      "scroll_factors": [
+        1,
+        1
+      ],
+      "repeat": {
+        "x": true,
+        "y": true,
+        "seamless_certified": false,
+        "review_preview": "F:\\Ourgame\\source-assets\\production\\room-art-v001\\reviews\\floor-2x2-repeat-preview-v001.png"
+      },
+      "runtime_zoom": "follow_existing_world_grid_not_parallax_plate",
+      "collision_role": "none_material_only",
+      "source_request_number": 27,
+      "source_prompt": "F:\\Ourgame\\source-assets\\production\\room-art-v001\\prompts\\27-repeat-stone-floor.txt",
+      "reference_files": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\room-art-v001\\processed\\dungeon-far-stage-1280x720-v001.png",
+          "sha256": "e47331e48cce6c9bc1496660fbe364528131a37c3c4df5490b6e88fd8f1c97e1"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\room-art-v001\\processed\\dungeon-mid-stage-1280x720-v003.png",
+          "sha256": "d24cde5bcbb0b35854aa6e4dc0f47e778fbfc6d049b3cdcdbdf759b02a97b235"
+        }
+      ],
+      "repeat_qc": {
+        "x_edge_mae_rgb": 4.237630208333333,
+        "y_edge_mae_rgb": 4.983072916666667,
+        "near_x_edge_adjacent_mae_rgb": 2.1875,
+        "near_y_edge_adjacent_mae_rgb": 3.0846354166666665
+      },
+      "status": "stable_ground_material_candidate_repeat_visual_review_pending",
+      "limitations": [
+        "no_collision_from_pixels",
+        "not_a_platform_or_terrain_chunk",
+        "existing_walkable_belt_bounds_remain_authority",
+        "seamless_not_assumed_from_prompt"
+      ]
+    }
+  ],
+  "full_map_complete": false,
+  "runtime_verified": false,
+  "external_api_calls": 0,
+  "host_fee_usd": null,
+  "ledger": "F:/Ourgame/source-assets/production/first-unit-animation-v003/generation-ledger.json",
+  "accounting": {
+    "cumulative_EV039_onward_requests": 27,
+    "current_window": 2,
+    "current_window_requested": 3,
+    "limit": 24,
+    "prior_EV038_requests": 24,
+    "lifetime_requests": 51
+  },
+  "previous_frozen_manifest": "F:\\Ourgame\\source-assets\\production\\room-art-v001\\manifests\\import-subset-v004.json",
+  "limitations": [
+    "three_background_material_layers_not_complete_map",
+    "no_scene_hooks_or_gameplay_geometry_changed",
+    "parallax_camera_bounds_and_zoom_require_runtime_review",
+    "floor_repeat_seams_need_runtime_material_check"
+  ]
+}

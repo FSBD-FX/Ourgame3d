@@ -1,0 +1,12 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunSaveAdapter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunSaveAdapter.cpp
+@@ -71,6 +71,9 @@
+ }
+ bool RunMatches(const FDungeonRunSnapshot& Saved,const FReadContext& Context,FString& Diagnostic)
+ {
++    // CodecV2 is a native-owner capability, never an implicit diskV1 upgrade.
++    if(Saved.Schema!=1||Saved.Scope!=EDungeonRunScope::BoundDevelopmentV1)
++        return Fail(Diagnostic,TEXT("BoundRunOnly-v1 refuses newer Run schema/scope; no implicit disk migration"));
+     if(Context.ExpectedRunGuid.IsValid()&&Context.ExpectedRunGuid!=Saved.RunGuid)
+         return Fail(Diagnostic,TEXT("Decoded Run does not match the caller's expected Run identity"));
+     if(Context.ExpectedOwnerId&&Context.ExpectedOwnerId!=Saved.OwnerId)

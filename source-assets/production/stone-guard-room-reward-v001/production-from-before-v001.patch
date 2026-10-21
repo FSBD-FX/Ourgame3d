@@ -1,0 +1,336 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonGameMode.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonGameMode.h
+@@ -71,6 +71,9 @@
+     bool BeginEquipmentRun(EDungeonEquipmentRunConfig Config = EDungeonEquipmentRunConfig::IntegrationPreview, uint64 CombatSeed = 1);
+     bool BeginManualWeaponPreview(); // Explicit QA entry; duplicate calls in the same manual Run are observations.
+     bool BeginSceneExplorationPreview(); // Explicit development layout, not a formal D07/D08/D13 entry.
++    bool BeginFirstBatchGuardRoom(uint64 Seed=71); // Explicit native finite Bridge game entry; no QA flag required.
++    bool QueryFirstBatchGuardRoom(FDungeonFirstBatchGuardRoomView& Out) const;
++    UFUNCTION(BlueprintCallable, Category="Dungeon") void StartFirstBatchGuardRoom();
+     const FDungeonSceneRoomView& GetSceneRoomView() const;
+     const FDungeonSceneRoomView* FindSceneRoomView(uint64 RoomInstanceId) const;
+     const FDungeonSceneInteractionView& GetSceneInteractionView() const;
+@@ -107,6 +110,11 @@
+     double GetFairytaleLookdevEpoch() const { return FairytaleLookdevEpoch; }
+ 
+ private:
++    bool bFirstBatchGuardRoomRequested=false;
++    void AdvanceFirstBatchGuardRoom();
++    void SettleFirstBatchGuardDeath(ADungeonFighter* Fighter);
++    bool GuardRoomAnchorLegal(FVector2D Position,FVector2D Half,double MinimumDistance) const;
++    bool GuardRoomMayStartAttack(uint64 Entity,double At) const;
+     friend class FDungeonRunAggregate;
+     friend class FDungeonRunInstaller;
+     friend class ADungeonFighter;
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunRewards.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunRewards.h
+@@ -1,6 +1,7 @@
+ #pragma once
+ #include "CoreMinimal.h"
+ #include "DungeonWorldProjectiles.h"
++#include "DungeonFirstBatchGuardRoom.h"
+ 
+ // Bound-development reward facts only. This is not formal D08 allocation,
+ // equipment loot, account progression, a disk payload or completed Run Continue.
+@@ -85,6 +86,7 @@
+     TArray<FDungeonRunRewardCollection> Collections;
+     TArray<FDungeonRunRewardRetiredEntity> RetiredEntities;
+     TArray<FDungeonRunRewardRoomExit> RoomExits;
++    TArray<FDungeonFirstBatchGuardRoomView> RoomPlans; // Schema2 only; legacy schema1 stays empty. 
+ };
+ struct FDungeonRunRewardDeathResult
+ {
+@@ -114,6 +116,8 @@
+ {
+ public:
+     bool Begin(FGuid RunGuid,uint64 OwnerId,uint64 RoomInstanceId,int32 InitialCoins,FString& Diagnostic);
++    bool BeginFirstBatchGuardPlan(uint64 Seed,uint64 InitialEntity,double AtTime,FString& Diagnostic);
++    bool CommitFirstBatchGuardPlan(const FDungeonFirstBatchGuardRoomView& Plan,FString& Diagnostic);
+     FDungeonRunRewardDeathResult ResolveDeath(const FDungeonRunRewardDeathRequest&,FString& Diagnostic);
+     // GameMode checks real survival/ground/range/LOS, with no idle/attack gate.
+     // An exact committed request may be read again after death/room exit.
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunRewards.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunRewards.cpp
+@@ -1,4 +1,5 @@
+ #include "DungeonRunRewards.h"
++#include "DungeonGuardRoomRewardsV2.h"
+ #include <limits>
+ 
+ namespace
+@@ -37,6 +38,8 @@
+ // Pure value validation. No pointer enters State and no result is installed here.
+ bool Validate(const FS& S,const FDungeonRunRewardValidationContext* C,FString& Why)
+ {
++    if(S.Schema==2)return DungeonGuardRoomRewardsV2::Validate(S,C,Why);
++    if(!S.RoomPlans.IsEmpty())return Fail(Why,TEXT("Legacy reward schema1 cannot carry a Bridge plan"));
+     if(S.Schema!=1||!S.Bound||!S.RunGuid.IsValid()||!S.OwnerId||!S.CurrentRoomInstanceId
+         ||S.CurrentRoomInstanceId==std::numeric_limits<uint64>::max()||S.InitialCoins<0)
+         return Fail(Why,TEXT("Unsupported or unbound reward schema/scope"));
+@@ -201,6 +204,7 @@
+ }
+ FDungeonRunRewardDeathResult FDungeonRunRewards::ResolveDeath(const FDungeonRunRewardDeathRequest& Q,FString& Diagnostic)
+ {
++    if(State.Schema==2)return DungeonGuardRoomRewardsV2::ResolveDeath(State,Q,Diagnostic);
+     FDungeonRunRewardDeathResult R;R.Status=EDungeonRunRewardStatus::InvalidRequest;
+     if(!State.Bound){R.Status=EDungeonRunRewardStatus::Unbound;Fail(Diagnostic,TEXT("No bound reward Run"));return R;}
+     if(const auto* Old=Death(State,Q.EntityId))
+@@ -272,6 +276,7 @@
+     if(Q.RoomInstanceId!=State.CurrentRoomInstanceId||Q.NextRoomInstanceId!=Q.RoomInstanceId+1||Actors.Num()!=Q.EntityIds.Num())
+         return Fail(Diagnostic,TEXT("Room exit does not follow current scope"));
+     FS Candidate=State;Candidate.RoomExits.Add(Q);Candidate.CurrentRoomInstanceId=Q.NextRoomInstanceId;
++    if(Candidate.Schema==2)Candidate.RoomPlans.Add(DungeonGuardRoomRewardsV2::Plan(Candidate.RunGuid,Q.NextRoomInstanceId,Candidate.RoomPlans[0].Seed,Q.AtTime));
+     for(const auto& A:Actors)
+     {if(A.RoomInstanceId!=Q.RoomInstanceId)return Fail(Diagnostic,TEXT("Retired actor came from another room"));Candidate.RetiredEntities.Add({A,Q.AtTime});}
+     for(auto& O:Candidate.Objects)if(O.RoomInstanceId==Q.RoomInstanceId){O.Retired=true;O.RetiredAt=Q.AtTime;}
+@@ -282,3 +287,16 @@
+ {
+     FS Candidate=Saved;if(!Validate(Candidate,&Context,Diagnostic))return false;State=MoveTemp(Candidate);return true;
+ }
++
++bool FDungeonRunRewards::BeginFirstBatchGuardPlan(uint64 Seed,uint64 InitialEntity,double AtTime,FString& Why)
++{
++ if(State.Schema!=1||!State.Bound||State.CurrentRoomInstanceId!=1||!State.Deaths.IsEmpty()||!State.RoomPlans.IsEmpty()||!InitialEntity)return false;
++ auto C=State;C.Schema=2;auto P=DungeonGuardRoomRewardsV2::Plan(C.RunGuid,1,Seed,AtTime);
++ P.Slots[0].Stage=EDungeonGuardRoomSlotStage::Materialized;P.Slots[0].EntityId=InitialEntity;P.Slots[0].MaterializedAt=AtTime;C.RoomPlans.Add(P);
++ if(!Validate(C,nullptr,Why))return false;State=MoveTemp(C);return true;
++}
++bool FDungeonRunRewards::CommitFirstBatchGuardPlan(const FDungeonFirstBatchGuardRoomView& P,FString& Why)
++{
++ if(State.Schema!=2||State.RoomPlans.IsEmpty()||P.RoomInstanceId!=State.CurrentRoomInstanceId)return false;
++ auto C=State;C.RoomPlans.Last()=P;if(!Validate(C,nullptr,Why))return false;State=MoveTemp(C);return true;
++}
+--- a/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp
+@@ -4,6 +4,7 @@
+ #include "DungeonRoomLayout.h"
+ #include "DungeonHUD.h"
+ #include "DungeonRunAggregate.h"
++#include "DungeonGuardRoomRewardsV2.h"
+ #include "DungeonNativeGeometryGuards.h"
+ #include "DungeonRunInstaller.h"
+ #include "Engine/Engine.h"
+@@ -166,6 +167,7 @@
+         }
+     }
+     Super::InitGame(MapName,Options,ErrorMessage);
++    bFirstBatchGuardRoomRequested=UGameplayStatics::HasOption(Options,TEXT("DungeonFirstBatchGuardRoom"));
+ }
+ bool ADungeonGameMode::IsPristineContinueBootstrap(FString& Why) const
+ {
+@@ -688,7 +690,11 @@
+     Knight->SetActorTickEnabled(false);Knight->ResetFighter({300.,0.});Enemies.Add(Knight);AdmitWorldFighters();
+     const uint64 Entity=FindWorldEntityId(Knight);
+     if(!Entity||!Knight->InitializeStoneKnight(Entity,SimulationTime))return false;
+-    SceneEncounterEntityId=Entity;bRoomCleared=false;return true;
++    SceneEncounterEntityId=Entity;bRoomCleared=false;
++    if(RunRewards&&RunRewards->Capture().Schema==2)
++    {auto P=RunRewards->Capture().RoomPlans.Last();P.Slots[0].EntityId=Entity;P.Slots[0].Stage=EDungeonGuardRoomSlotStage::Materialized;P.Slots[0].MaterializedAt=SimulationTime;
++     FString Why;if(!RunRewards->CommitFirstBatchGuardPlan(P,Why)){LastMessage=Why;return false;}}
++    return true;
+ }
+ 
+ bool ADungeonGameMode::CanBeginSceneInteraction() const
+@@ -1165,6 +1171,7 @@
+         for(auto Enemy:Enemies)if(IsValid(Enemy)){Enemy->SetActorTickEnabled(false);Enemy->bAIEnabled=false;}
+         return;
+     }
++    if(bFirstBatchGuardRoomRequested){RestartRun();return;}
+     RestartRun();
+     bWaitingForStart = FParse::Param(FCommandLine::Get(),TEXT("DungeonManualWeaponPreview"))
+         || FParse::Param(FCommandLine::Get(),TEXT("DungeonSceneExplorationPreview"))
+@@ -1231,7 +1238,8 @@
+     Frame.Bodies = Bodies;
+     for (auto& B : Frame.Bodies)
+         B.bSameTeam = B.Fighter.IsValid() && B.Fighter->bEnemy == Knight->bEnemy;
+-    Frame.bCanStartAttack = !bGameOver && !bWaitingForStart && Knight->bAIEnabled;
++    Frame.bCanStartAttack = !bGameOver && !bWaitingForStart && Knight->bAIEnabled
++        &&GuardRoomMayStartAttack(FindWorldEntityId(Knight),FromTime);
+     // One whole-room wake warning may begin per second, including real-damage triggers.
+     Frame.bCanBeginWake = LastStoneWakeStartedAt < 0.0 || FromTime >= LastStoneWakeStartedAt+1.0;
+     return Frame;
+@@ -2023,6 +2031,7 @@
+             CommitPendingDamage();
+         }
+         bSimulationBatch=false;
++        AdvanceFirstBatchGuardRoom(); // Full same-timestamp deaths precede settlement/admission.
+         // Every old/bat/new-player damage and death at this point has drained.
+         // Currency precedes equipment/scene commits and has no idle requirement.
+         CollectAutomaticRunRewards();
+@@ -2058,6 +2067,9 @@
+     {
+         return;
+     }
++    if(bFirstBatchGuardRoomRequested||(RunRewards&&RunRewards->Capture().Schema==2))
++    {if(Controller){Controller->Possess(PlayerFighter);Controller->SetInputMode(FInputModeGameOnly());Controller->bShowMouseCursor=false;AddTickPrerequisiteActor(Controller);}
++     BeginFirstBatchGuardRoom(EquipmentRuntime->View.Bound?EquipmentRuntime->View.CombatSeed:71);return;}
+     if(SceneObjects->Current().Active||FParse::Param(FCommandLine::Get(),TEXT("DungeonSceneExplorationPreview")))
+     {
+         if(Controller)
+@@ -2262,6 +2274,7 @@
+     {
+         return;
+     }
++    if(Fighter->bEnemy&&RunRewards&&RunRewards->Capture().Schema==2){SettleFirstBatchGuardDeath(Fighter);return;}
+     if(Fighter->StoneGuard)
+     {
+         if(!Fighter->bGuardDeathObserved)
+@@ -2473,3 +2486,5 @@
+     for(const auto& H:Batch.Hits)if(bSimulationBatch&&H.Target.IsValid())
+         PendingDamage.Add({Guard,H.Target.Get(),float(H.Damage),float(H.Stagger),H.AtTime});
+ }
++
++#include "DungeonFirstBatchGuardRoomRuntime.inl"
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighterSnapshot.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighterSnapshot.h
+@@ -87,6 +87,8 @@
+     TOptional<FDungeonStoneGuardOwnerSnapshot> Guard;
+ };
+ 
++struct FDungeonRunRewardSnapshot;
++
+ // Call-scoped read-only views of the approved saved aggregate. Pointers here
+ // never enter a payload. The target Actor need not belong to the live GM map.
+ struct FDungeonFighterRestoreContext
+@@ -97,4 +99,5 @@
+     bool GameOver=false;
+     const FDungeonEquipmentRuntimeSnapshot* Equipment=nullptr;
+     const FDungeonWeaponWorldState* WeaponWorld=nullptr;
++    const FDungeonRunRewardSnapshot* Rewards=nullptr; // Explicit formal Guard settlement owner, never a saved pointer.
+ };
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -1,4 +1,5 @@
+ #include "DungeonFighter.h"
++#include "DungeonGuardRoomRewardsV2.h"
+ #include "DungeonFairytaleSwordWalkProfile.h"
+ #include "Misc/CommandLine.h"
+ #include "Misc/Parse.h"
+@@ -345,9 +346,14 @@
+             const auto& Saved=S.Guard.GetValue();const auto& G=Saved.Kernel;
+             DungeonStoneGuard::FGuardKernel Pure(S.EntityId,G.InitialTime,G.InitialPosition,1,Saved.Policy);
+             const auto Def=DungeonStoneGuard::FGuardKernel::Definition();
+-            if(Saved.Schema!=1||!Pure.Restore(G)||G.EntityId!=S.EntityId||G.Time>C.SimulationTime
++            const bool Settled=Saved.Schema==2;FString RewardWhy;
++            if(Settled&&(!C.Rewards||C.Rewards->Schema!=2||C.Rewards->RunGuid!=C.RunGuid
++                ||!DungeonGuardRoomRewardsV2::Validate(*C.Rewards,nullptr,RewardWhy)
++                ||!C.Rewards->Deaths.ContainsByPredicate([&](const auto& D){return D.Death.EntityId==S.EntityId&&D.Death.RoomInstanceId==S.RoomInstanceId&&D.Death.ContentId==S.EnemyContentId;})))
++                return Reject(TEXT("Formal Guard settlement has no explicit valid schema2 room reward owner"));
++            if((Saved.Schema!=1&&Saved.Schema!=2)||!Pure.Restore(G)||G.EntityId!=S.EntityId||G.Time>C.SimulationTime
+                 ||(!C.GameOver&&G.Time!=C.SimulationTime)||S.Health!=float(G.HP)||S.MaxHealth!=float(Def.HP)
+-                ||S.Dead!=(G.Phase==DungeonStoneGuard::EPhase::Dead)||S.DeathReported||Saved.DeathObserved!=S.Dead
++                ||S.Dead!=(G.Phase==DungeonStoneGuard::EPhase::Dead)||S.DeathReported!=Settled||Settled&&!G.RewardClaimed||Saved.DeathObserved!=S.Dead
+                 ||!NativeOwnerPositionProjection(S.GroundPosition,G.Position.X,G.Position.Y)
+                 ||G.InitialPosition.Z!=0.||G.Position.Z!=0.
+                 ||S.JumpHeight!=0.f||S.JumpVelocity!=0.f||S.Facing!=float(G.Facing)
+@@ -381,13 +387,13 @@
+     const auto Transform=GetActorTransform();
+     if(Transform.GetTranslation().Z!=0.||Transform.GetRotation()!=FQuat::Identity||Transform.GetScale3D()!=FVector::OneVector
+         ||RootComponent->GetAttachParent())return Reject(TEXT("Schema2 supports the real flat, unattached native actor transform only"));
+-    FDungeonEquipmentRuntimeSnapshot Equipment;FOwnerContext Local;const FOwnerContext* Context=ExplicitStaging;
++    FDungeonEquipmentRuntimeSnapshot Equipment;FDungeonRunRewardSnapshot RewardOwner;FOwnerContext Local;const FOwnerContext* Context=ExplicitStaging;
+     if(!Context)
+     {
+         const auto Game=GetWorld()?GetWorld()->GetAuthGameMode<ADungeonGameMode>():nullptr;
+         if(!Game||!Game->EquipmentRuntime||!Game->EquipmentRuntime->View.Bound||Game->bSimulationBatch||Game->bSimulatingMotion
+             ||!Game->PendingDamage.IsEmpty())return Reject(TEXT("Capture requires the true bound GM outside its full simulation/damage batch"));
+-        Equipment=Game->EquipmentRuntime->Capture();Local.Equipment=&Equipment;Local.WeaponWorld=&Game->WeaponWorld;
++        Equipment=Game->EquipmentRuntime->Capture();RewardOwner=Game->CaptureRunRewardsSnapshot();Local.Rewards=&RewardOwner;Local.Equipment=&Equipment;Local.WeaponWorld=&Game->WeaponWorld;
+         Local.RunGuid=Equipment.View.RunGuid;Local.RoomInstanceId=Equipment.View.RoomInstanceId;
+         Local.EntityId=Game->FindWorldEntityId(this);Local.SimulationTime=Game->SimulationTime;Local.GameOver=Game->bGameOver;Context=&Local;
+         if(!Local.EntityId||(Game->PlayerFighter==this)!=(Local.EntityId==Equipment.View.OwnerId))
+@@ -449,7 +455,7 @@
+     if(StoneGuard)
+     {
+         if(LastGuardSyncTime!=StoneGuard->State().Time)return Reject(TEXT("Guard native mirror has not consumed the exact producer boundary"));
+-        S.Guard=FDungeonStoneGuardOwnerSnapshot{1,StoneGuard->CapturePolicy(),StoneGuard->Capture(),bGuardDeathObserved};
++        S.Guard=FDungeonStoneGuardOwnerSnapshot{bDeathReported?2u:1u,StoneGuard->CapturePolicy(),StoneGuard->Capture(),bGuardDeathObserved};
+     }
+     FValidatedFighterOwner Candidate;if(!ValidateFighterOwner(S,*Context,Candidate,Diagnostic))return false;
+     Out=MoveTemp(S);Diagnostic.Reset();return true;
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunAggregate.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunAggregate.cpp
+@@ -181,7 +181,7 @@
+     };
+     if(!AddActor(Game.PlayerFighter,true))return false;
+     for(const auto& Enemy:Game.Enemies)if(!AddActor(Enemy,false))return false;
+-    if(Candidate.Fighters.ContainsByPredicate([](const auto& F){return F.Guard.IsSet();}))
++    if(Candidate.Rewards.Schema==2||Candidate.Fighters.ContainsByPredicate([](const auto& F){return F.Guard.IsSet();}))
+     {Candidate.Schema=2;Candidate.Scope=EDungeonRunScope::BoundDevelopmentV2;}
+     for(const auto& Entry:Game.WorldEntityIds)if(Entry.Key.IsValid()&&!CurrentActors.Contains(Entry.Key.Get()))
+         return Fail(Diagnostic,TEXT("A live admitted world actor is absent from the current owner array"));
+@@ -201,7 +201,7 @@
+     // All candidate owners are independent values. No live GameMode, Actor,
+     // controller, World, event consumer or file operation is accessed here.
+     const auto& S=Saved;const auto& V=S.Equipment.View;
+-    const bool HasGuard=S.Fighters.ContainsByPredicate([](const auto& F){return F.Guard.IsSet();});
++    const bool HasGuard=S.Rewards.Schema==2||S.Fighters.ContainsByPredicate([](const auto& F){return F.Guard.IsSet();});
+     if((HasGuard?(S.Schema!=2||S.Scope!=EDungeonRunScope::BoundDevelopmentV2)
+                 :(S.Schema!=1||S.Scope!=EDungeonRunScope::BoundDevelopmentV1))||!S.RunGuid.IsValid()||!S.OwnerId||!S.RoomInstanceId
+         ||S.RoomNumber<=0||S.RoomInstanceId!=uint64(S.RoomNumber)||!FiniteTime(S.SimulationTime)
+@@ -237,7 +237,7 @@
+     for(const auto& F:S.Fighters)
+     {
+         FDungeonFighterRestoreContext FC;FC.RunGuid=S.RunGuid;FC.RoomInstanceId=S.RoomInstanceId;FC.EntityId=F.EntityId;
+-        FC.SimulationTime=S.SimulationTime;FC.GameOver=S.GameOver;FC.Equipment=&S.Equipment;FC.WeaponWorld=&World;
++        FC.SimulationTime=S.SimulationTime;FC.GameOver=S.GameOver;FC.Equipment=&S.Equipment;FC.WeaponWorld=&World;FC.Rewards=&S.Rewards;
+         if(!ADungeonFighter::ValidateOwnerSnapshot(F,FC,Why))return OwnerFailure(Diagnostic,TEXT("Fighter"),Why);
+         RC.CurrentActors.Add(RewardActor(F));
+         const double Wake=F.Knight.IsSet()?F.Knight.GetValue().WakeStartedAt:F.Bat.IsSet()?F.Bat.GetValue().WakeStartedAt:F.Guard.IsSet()?F.Guard.GetValue().Kernel.WakeStartedAt:-1.;
+@@ -259,6 +259,9 @@
+     if(Index!=S.Pickups.Num())return Fail(Diagnostic,TEXT("Unknown or historical physical pickup exists in the current room"));
+     FDungeonSceneObjects Scene;if(!Scene.Restore(S.Scene,Why))return OwnerFailure(Diagnostic,TEXT("Scene"),Why);
+     const auto& Room=S.Scene.CurrentRoom;const auto& Interaction=S.Scene.Interaction;
++    if(S.Rewards.Schema==2&&(!Room.Active||V.Config!=EDungeonEquipmentRunConfig::FirstBatch
++        ||S.Rewards.RoomPlans.ContainsByPredicate([&](const auto& P){return P.Seed!=V.CombatSeed;})))
++        return Fail(Diagnostic,TEXT("Formal Bridge plan requires actual FirstBatch Scene and same immutable seed"));
+     if(S.Geometry.Schema!=1||S.Geometry.Kind!=(Room.Active?EDungeonRunGeometryKind::SceneExplorationV1:EDungeonRunGeometryKind::FlatBoundsV1))
+         return Fail(Diagnostic,TEXT("Unsupported reconstruction geometry or Scene scope mismatch"));
+     if(Interaction.AtTime>S.SimulationTime||S.SceneCommitRequested!=(Interaction.Pending&&!Interaction.NeedsConfirmation))
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunInstaller.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunInstaller.cpp
+@@ -25,7 +25,7 @@
+     const FDungeonEquipmentRuntimeSnapshot& Equipment,const FDungeonWeaponWorldState& World)
+ {
+     FDungeonFighterRestoreContext C;C.RunGuid=S.RunGuid;C.RoomInstanceId=S.RoomInstanceId;C.EntityId=Entity;
+-    C.SimulationTime=S.SimulationTime;C.GameOver=S.GameOver;C.Equipment=&Equipment;C.WeaponWorld=&World;return C;
++    C.SimulationTime=S.SimulationTime;C.GameOver=S.GameOver;C.Equipment=&Equipment;C.WeaponWorld=&World;C.Rewards=&S.Rewards;return C;
+ }
+ FDungeonRunRewardValidationContext RewardContext(const FDungeonRunSnapshot& S,const FDungeonWeaponWorldState& World)
+ {
+--- a/UnrealGame/Source/CodexDungeon/DungeonRunSnapshotCodec.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonRunSnapshotCodec.cpp
+@@ -278,6 +278,7 @@
+ }
+ #define ENUM_DOMAIN(T,Last) bool KnownEnum(T V){return EnumWithin(V,T::Last);}
+ ENUM_DOMAIN(EDungeonRunScope,BoundDevelopmentV2)
++ENUM_DOMAIN(EDungeonGuardRoomSlotStage,Dead)
+ ENUM_DOMAIN(EDungeonRunGeometryKind,SceneExplorationV1)
+ ENUM_DOMAIN(EDungeonFighterOwnerKind,StoneGuard)
+ ENUM_DOMAIN(EDungeonEquipmentRunConfig,FirstBatch)
+@@ -842,12 +843,26 @@
+     O.Field(TEXT("RoomInstanceId"),S.RoomInstanceId);O.Field(TEXT("NextRoomInstanceId"),S.NextRoomInstanceId);O.Field(TEXT("AtTime"),S.AtTime);O.Field(TEXT("EntityIds"),S.EntityIds);
+     O.Field(TEXT("ObjectIds"),S.ObjectIds);
+ }
++void Fields(FObject& O,FDungeonGuardRoomSlot& S)
++{
++ O.Field(TEXT("SlotId"),S.SlotId);O.Field(TEXT("ContentId"),S.ContentId);O.Field(TEXT("Group"),S.Group);O.Field(TEXT("Weight"),S.Weight);O.Field(TEXT("Coins"),S.Coins);
++ O.Field(TEXT("EntityId"),S.EntityId);O.Field(TEXT("CoinObjectId"),S.CoinObjectId);O.Field(TEXT("Stage"),S.Stage);O.Field(TEXT("SpawnPosition"),S.SpawnPosition);
++ O.Field(TEXT("WarningAt"),S.WarningAt);O.Field(TEXT("MaterializedAt"),S.MaterializedAt);O.Field(TEXT("DeadAt"),S.DeadAt);O.Field(TEXT("RetryAt"),S.RetryAt);O.Field(TEXT("AnchorAttempt"),S.AnchorAttempt);
++}
++void Fields(FObject& O,FDungeonFirstBatchGuardRoomView& S)
++{
++ O.Field(TEXT("Version"),S.Version);O.Field(TEXT("RunGuid"),S.RunGuid);O.Field(TEXT("RoomInstanceId"),S.RoomInstanceId);O.Field(TEXT("Seed"),S.Seed);
++ O.Field(TEXT("TemplateId"),S.TemplateId);O.Field(TEXT("GoldSourceId"),S.GoldSourceId);O.Field(TEXT("GoldBudget"),S.GoldBudget);
++ O.Field(TEXT("EnteredAt"),S.EnteredAt);O.Field(TEXT("OrientationUntil"),S.OrientationUntil);O.Field(TEXT("ClearAt"),S.ClearAt);O.Field(TEXT("Slots"),S.Slots);
++}
+ void Fields(FObject& O,FDungeonRunRewardSnapshot& S)
+ {
+     O.Field(TEXT("Schema"),S.Schema);O.Field(TEXT("Bound"),S.Bound);O.Field(TEXT("RunGuid"),S.RunGuid);O.Field(TEXT("OwnerId"),S.OwnerId);
+     O.Field(TEXT("CurrentRoomInstanceId"),S.CurrentRoomInstanceId);O.Field(TEXT("NextSourceId"),S.NextSourceId);O.Field(TEXT("NextObjectId"),S.NextObjectId);O.Field(TEXT("NextOperationId"),S.NextOperationId);
+     O.Field(TEXT("InitialCoins"),S.InitialCoins);O.Field(TEXT("Deaths"),S.Deaths);O.Field(TEXT("Sources"),S.Sources);O.Field(TEXT("Objects"),S.Objects);
+     O.Field(TEXT("Collections"),S.Collections);O.Field(TEXT("RetiredEntities"),S.RetiredEntities);O.Field(TEXT("RoomExits"),S.RoomExits);
++    if(S.Schema==2){if(O.CodecVersion()!=2)O.Reject(TEXT("Bridge Rewards schema2 requires bound-run-v2"));else O.Field(TEXT("RoomPlans"),S.RoomPlans);}
++    else if(!S.RoomPlans.IsEmpty())O.Reject(TEXT("Legacy reward schema1 cannot carry Bridge fields"));
+ }
+ void Fields(FObject& O,DungeonExploration::FBounds& S)
+ {

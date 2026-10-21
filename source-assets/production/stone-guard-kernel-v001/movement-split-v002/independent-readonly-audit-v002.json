@@ -1,0 +1,65 @@
+{
+  "old_freeze": {
+    "path": "F:/Ourgame/docs/production/first-batch-v2/evidence/stone-guard-kernel-v001/final-freeze-v001.json",
+    "bytes": 13719,
+    "sha256": "c1332eadf163000b841414814e443af619f3f9ba726b8e7e1817a5a5acd0b64f"
+  },
+  "old_pinned_files_verified": 54,
+  "old_pin_mismatches": 0,
+  "actual_UE_RED": {
+    "report": {
+      "path": "F:/Ourgame/UnrealGame/Saved/Automation/FirstRoom-20261016-231203/index.json",
+      "bytes": 12977,
+      "sha256": "8f592244148c91706b8aa93f31049cfc4438e749f22497e5c5fb5c295d65273e"
+    },
+    "succeeded": 3,
+    "failed": 1,
+    "errors": 24,
+    "warnings": 0,
+    "notRun": 0,
+    "inProcess": 0,
+    "tests": [
+      {
+        "name": "CodexDungeon.Content.StoneGuardKernel.AtomicClockDeathAndObligations",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "CodexDungeon.Content.StoneGuardKernel.GeometryAndCancellation",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "CodexDungeon.Content.StoneGuardKernel.MovementFirstEntryPartitionAndZeroReceipts",
+        "state": "Fail",
+        "errors": 24,
+        "warnings": 0
+      },
+      {
+        "name": "CodexDungeon.Content.StoneGuardKernel.WakeAndAuthoredSchedules",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      }
+    ]
+  },
+  "current_actual_cpp_before_admission": {
+    "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.cpp",
+    "bytes": 16540,
+    "sha256": "4de8ffab4f8b8a6ac4400c268199b84adf630bdaf1943803c548ff05851dd061"
+  },
+  "current_actual_tests_unchanged_from_root_admission": true,
+  "git_apply_check": {
+    "old_CRLF_patch_exit": 1,
+    "LF_patch_exit": 0,
+    "LF_patch": {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-kernel-v001/movement-split-v002/movement-first-entry-v002-lf.patch",
+      "bytes": 5501,
+      "sha256": "7dbd32665b9b929030046605f115569da98d802bc226a7915f51c7307bc8adb9"
+    },
+    "mutation": false
+  },
+  "author_UE_run": false
+}

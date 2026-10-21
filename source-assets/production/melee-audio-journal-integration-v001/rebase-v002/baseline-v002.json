@@ -1,0 +1,65 @@
+{
+  "schema": "unapplied-melee-audio-journal-rebase-v2",
+  "status": "UNAPPLIED_NOT_COMPILED_NOT_UE_RED_OR_GREEN",
+  "captured_at_utc": "2026-10-16T13:44:19.782144+00:00",
+  "source_baseline": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 102391,
+      "sha256": "df0f34023a3535b9e1f0d71fc73c4115af56294fd59bc2f0d0a109f2dad77fed"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.cpp",
+      "bytes": 25155,
+      "sha256": "0bc43aaf55c8576b93f8fde87cd8db92f04153d682ba332aa2620ac547687fb9"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": 109356,
+      "sha256": "e097e82c223bcece8ce67d9b834615c1825c3f5f110ef63f53ef6db53133a2ac"
+    }
+  ],
+  "patch": {
+    "path": "source-assets/production/melee-audio-journal-integration-v001/rebase-v002/production-rebased-v002.patch",
+    "bytes": 5616,
+    "sha256": "9d3e7d1f2c6964b83fd152e9cdae92e1e7dbf4fe23eb1b9944b21082085feef5"
+  },
+  "original_patch": {
+    "path": "source-assets/production/melee-audio-journal-integration-v001/production-v001.patch",
+    "bytes": 5616,
+    "sha256": "260f0136815e477df4a8bc656ae5fd46118229a328a2778c32722e264ab3f673"
+  },
+  "test_candidate": {
+    "path": "source-assets/production/melee-audio-journal-integration-v001/Tests/DungeonMeleeAudioJournalIntegrationTests.cpp",
+    "bytes": 16647,
+    "sha256": "c2de7b0a3fc49970d3145d51fb12ded19cb7c34ee9bf7935b03171a9657815d5"
+  },
+  "test_groups": 3,
+  "test_names": [
+    "CodexDungeon.Content.MeleeAudioJournal.NormalPrimaryThreeFamiliesEachStageOnce",
+    "CodexDungeon.Content.MeleeAudioJournal.NormalSkillsRealIndependentSubhitsOnce",
+    "CodexDungeon.Content.MeleeAudioJournal.RealPreActivePoiseCancelIsSilentThenFreshPrimaryOnce"
+  ],
+  "tests_changed": false,
+  "scope": "Threefiles/fourhunks only. Fighter/World baseline and logic unchanged from v001. HUD hunk positions regenerated against actual current Source; no ActualSource writes or wholefile restore. Root alone admits tests and runs actual RED before production patch.",
+  "candidate_targets": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "normalized_candidate_sha256": "486acd449d44a4bfcfab94f1c3c0abfee394bce773369480b124865bf4f75879",
+      "logic_hunks_equal_original": true
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonWorldProjectiles.cpp",
+      "normalized_candidate_sha256": "f8d23566499c0d285f07245226f1752b6e9b2e77b2e07692e4a72c99c7cbb58f",
+      "logic_hunks_equal_original": true
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "normalized_candidate_sha256": "f67b4975427796f6bfe636dd9f9b23d1a4e80913034356dac276072c3c4fcd54",
+      "logic_hunks_equal_original": true
+    }
+  ],
+  "old_candidate_preserved": true,
+  "actual_source_unchanged": true,
+  "schema_rng_clock_five_old_cues_changed": false
+}

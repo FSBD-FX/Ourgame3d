@@ -1,0 +1,198 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighterSnapshot.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighterSnapshot.h
+@@ -5,13 +5,14 @@
+ #include "DungeonDodge.h"
+ #include "DungeonStoneKnight.h"
+ #include "DungeonStoneBat.h"
++#include "DungeonStoneGuard.h"
+ #include "DungeonWeaponPoseSocket.h"
+ #include "DungeonEquipmentRuntime.h"
+ #include "DungeonWorldProjectiles.h"
+ 
+ // Versioned owner values only. None of these fields is an Actor/Controller,
+ // component, weak pointer, simulation-batch query cache or replay command.
+-enum class EDungeonFighterOwnerKind : uint8 { Unsupported, BoundPlayer, StoneKnight, StoneBat };
++enum class EDungeonFighterOwnerKind : uint8 { Unsupported, BoundPlayer, StoneKnight, StoneBat, StoneGuard };
+ struct FDungeonFighterEmissionPoseSnapshot
+ {
+     uint64 EventId=0, ActionId=0;
+@@ -29,6 +30,15 @@
+     DungeonContentCombat::FCombatState Combat;
+     DungeonWeaponActions::FState WeaponActions;
+     DungeonDodge::FState Dodge;
++};
++// Guard-specific owner wrapper. Policy is deliberately outside the pure FState.
++// DeathObserved is the once native notification, not formal reward settlement.
++struct FDungeonStoneGuardOwnerSnapshot
++{
++    uint32 Schema=1;
++    DungeonStoneGuard::FPolicy Policy;
++    DungeonStoneGuard::FState Kernel;
++    bool DeathObserved=false;
+ };
+ struct FDungeonFighterOwnerSnapshot
+ {
+@@ -73,6 +83,8 @@
+     TOptional<FDungeonPlayerKernelSnapshot> Player;
+     TOptional<DungeonStoneKnight::FState> Knight;
+     TOptional<DungeonStoneBat::FState> Bat;
++    // Owner schema3 is Guard-only; old owner schema2 stays byte-compatible in wire-v1.
++    TOptional<FDungeonStoneGuardOwnerSnapshot> Guard;
+ };
+ 
+ // Call-scoped read-only views of the approved saved aggregate. Pointers here
+--- a/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.h
+@@ -16,7 +16,13 @@
+ public:
+     FDungeonStoneGuardDriver(ADungeonFighter* Owner,uint64 EntityId,double StartTime=0.);
+     const DungeonStoneGuard::FState& State() const {return Kernel.State();}
+-    DungeonStoneGuard::FState Capture() const {return Kernel.Capture();} // Readback only, not a D13 schema.
++    // Explicit immutable birth/policy for independent staging. Does not BeginCombat.
++    FDungeonStoneGuardDriver(ADungeonFighter* Owner,uint64 EntityId,double InitialTime,
++        DungeonStoneGuard::FPoint InitialPosition,DungeonStoneGuard::FPolicy SavedPolicy);
++    DungeonStoneGuard::FState Capture() const {return Kernel.Capture();}
++    DungeonStoneGuard::FPolicy CapturePolicy() const {return Kernel.CapturePolicy();}
++    // Pure validated restore preserves this receiver's exact birth and policy.
++    bool Restore(const DungeonStoneGuard::FState& Saved);
+     FDungeonGuardBatch StepTo(double Now,const FDungeonKnightFrame& Frame,
+         const std::vector<DungeonStoneGuard::FIncomingHit>& Hits={});
+     FDungeonGuardBatch ApplyResolvedHit(double ActualHPLoss,double LegalStagger,const FDungeonKnightFrame& Frame);
+--- a/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp
+@@ -124,6 +124,14 @@
+ }
+ FDungeonStoneGuardDriver::FDungeonStoneGuardDriver(ADungeonFighter* InOwner,uint64 Id,double Time)
+     :Owner(InOwner),Kernel(Id,Time,InOwner?Guard::FPoint{InOwner->GetGroundPosition().X,InOwner->GetGroundPosition().Y,0.}:Guard::FPoint{}){}
++FDungeonStoneGuardDriver::FDungeonStoneGuardDriver(ADungeonFighter* InOwner,uint64 Id,double InitialTime,
++    Guard::FPoint InitialPosition,Guard::FPolicy SavedPolicy)
++    :Owner(InOwner),Kernel(Id,InitialTime,InitialPosition,1,SavedPolicy){}
++bool FDungeonStoneGuardDriver::Restore(const Guard::FState& Saved)
++{
++    // No Owner/World read, StepTo, receipt, BeginCombat, heal, action or feedback.
++    return Kernel.Restore(Saved);
++}
+ bool FDungeonStoneGuardDriver::BeginCombat(){return Kernel.BeginCombat();}
+ bool FDungeonStoneGuardDriver::NotifyOtherAcceptedEnemiesCleared(){return Kernel.NotifyOtherAcceptedEnemiesCleared();}
+ bool FDungeonStoneGuardDriver::ClaimDeathReward(){return Kernel.ClaimDeathReward().Accepted;}
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -108,7 +108,8 @@
+ bool ValidateFighterOwner(const FOwnerSnapshot& S,const FOwnerContext& C,FValidatedFighterOwner& Candidate,FString& Diagnostic)
+ {
+     const auto Reject=[&Diagnostic](const TCHAR* Why){Diagnostic=Why;return false;};
+-    if(S.Schema!=2||!S.RunGuid.IsValid()||!S.RoomInstanceId||!S.EntityId
++    const bool Guard=S.Kind==EDungeonFighterOwnerKind::StoneGuard;
++    if(S.Schema!=(Guard?3u:2u)||!S.RunGuid.IsValid()||!S.RoomInstanceId||!S.EntityId
+         ||S.RunGuid!=C.RunGuid||S.RoomInstanceId!=C.RoomInstanceId||S.EntityId!=C.EntityId
+         ||!FMath::IsFinite(C.SimulationTime)||C.SimulationTime<0.||!C.Equipment||!C.WeaponWorld)
+         return Reject(TEXT("Unknown fighter schema or missing/mismatched saved aggregate context"));
+@@ -136,9 +137,9 @@
+     const bool Player=S.Kind==EDungeonFighterOwnerKind::BoundPlayer,Knight=S.Kind==EDungeonFighterOwnerKind::StoneKnight,Bat=S.Kind==EDungeonFighterOwnerKind::StoneBat;
+     if(!HasPlayerBinding||!Binding||(!Player&&Binding->RoomInstanceId!=S.RoomInstanceId))
+         return Reject(TEXT("Fighter is absent from the approved player birth/current enemy binding table"));
+-    if((!Player&&!Knight&&!Bat)||S.Player.IsSet()!=Player||S.Knight.IsSet()!=Knight||S.Bat.IsSet()!=Bat
++    if((!Player&&!Knight&&!Bat&&!Guard)||S.Player.IsSet()!=Player||S.Knight.IsSet()!=Knight||S.Bat.IsSet()!=Bat||S.Guard.IsSet()!=Guard
+         ||S.Enemy==Player||((S.EntityId==V.OwnerId)!=Player)
+-        ||Binding->ContentId!=(Player?TEXT("player"):Knight?TEXT("ENM-STN-001"):TEXT("ENM-STN-002"))
++        ||Binding->ContentId!=(Player?TEXT("player"):Knight?TEXT("ENM-STN-001"):Bat?TEXT("ENM-STN-002"):TEXT("ENM-STN-003"))
+         ||(!Player&&S.EnemyContentId!=Binding->ContentId))return Reject(TEXT("Fighter kind, kernel variant, content, team or stable owner conflicts"));
+     const float Nonnegative[]={S.Health,S.MaxHealth,S.JumpHeight,S.InvulnerableTime,S.HurtTime,S.AttackCooldown,S.PoiseAccumulation,
+         S.PoiseDecayDelay,S.PoiseProtection,S.FocusMirror,S.AttackElapsed,S.ArmorChangeRemaining,S.FocusConsumeAge,
+@@ -305,7 +306,7 @@
+             }
+             for(const auto& H:K.HitReceipts)if(!KnownEntity(H.TargetId))return Reject(TEXT("Knight hit references an unknown saved historical entity"));
+         }
+-        else
++        else if(Bat)
+         {
+             const auto& B=S.Bat.GetValue();DungeonStoneBat::FBatKernel Pure(S.EntityId,B.InitialTime,B.InitialPosition);
+             const auto Def=DungeonStoneBat::FBatKernel::Definition();
+@@ -323,6 +324,22 @@
+             for(const auto& H:B.HitReceipts)if(!KnownEntity(H.TargetId))return Reject(TEXT("Bat hit references an unknown saved historical entity"));
+             for(const auto& H:B.Issued)if(H.TargetId&&!KnownEntity(H.TargetId))return Reject(TEXT("Bat event references an unknown saved historical entity"));
+         }
++        else
++        {
++            const auto& Saved=S.Guard.GetValue();const auto& G=Saved.Kernel;
++            DungeonStoneGuard::FGuardKernel Pure(S.EntityId,G.InitialTime,G.InitialPosition,1,Saved.Policy);
++            const auto Def=DungeonStoneGuard::FGuardKernel::Definition();
++            if(Saved.Schema!=1||!Pure.Restore(G)||G.EntityId!=S.EntityId||G.Time>C.SimulationTime
++                ||(!C.GameOver&&G.Time!=C.SimulationTime)||S.Health!=float(G.HP)||S.MaxHealth!=float(Def.HP)
++                ||S.Dead!=(G.Phase==DungeonStoneGuard::EPhase::Dead)||S.DeathReported||Saved.DeathObserved!=S.Dead
++                ||!NativeOwnerPositionProjection(S.GroundPosition,G.Position.X,G.Position.Y)
++                ||S.JumpHeight!=0.f||S.JumpVelocity!=0.f||S.Facing!=float(G.Facing)
++                ||!S.HasAxe||S.WeaponId!=TEXT("enemy_stone_guard_twohand_axe")||!S.ArmorId.IsEmpty())
++                return Reject(TEXT("Guard birth/policy/state/native projection or local-death observer conflicts"));
++            for(const auto& H:G.HitReceipts)if(!KnownEntity(H.TargetId))return Reject(TEXT("Guard hit references an unknown saved historical entity"));
++            for(const auto& Evt:G.Issued)if(Evt.TargetId&&!KnownEntity(Evt.TargetId))return Reject(TEXT("Guard event references an unknown saved historical entity"));
++            // G.RewardClaimed is local eligibility. It does not authorize DeathReported or5coins.
++        }
+     }
+     Diagnostic.Reset();return true;
+ }
+@@ -360,8 +377,10 @@
+     }
+     FOwnerSnapshot S;S.RunGuid=Context->RunGuid;S.RoomInstanceId=Context->RoomInstanceId;S.EntityId=Context->EntityId;
+     S.Kind=StoneKnight?EDungeonFighterOwnerKind::StoneKnight:StoneBat?EDungeonFighterOwnerKind::StoneBat:
+-        !bEnemy?EDungeonFighterOwnerKind::BoundPlayer:EDungeonFighterOwnerKind::Unsupported;
+-    if(StoneKnight&&StoneBat)return Reject(TEXT("Two stone drivers cannot own the same fighter"));
++        StoneGuard?EDungeonFighterOwnerKind::StoneGuard:!bEnemy?EDungeonFighterOwnerKind::BoundPlayer:EDungeonFighterOwnerKind::Unsupported;
++    if(int32(bool(StoneKnight))+int32(bool(StoneBat))+int32(bool(StoneGuard))>1)
++        return Reject(TEXT("Multiple stone drivers cannot own the same fighter"));
++    if(StoneGuard)S.Schema=3;
+     S.GroundPosition=GetGroundPosition();
+     S.Health=Health;
+     S.MaxHealth=MaxHealth;
+@@ -409,6 +428,11 @@
+     for(const auto& H:SkillHitReceipts)S.SkillHitReceipts.push_back({H.ActionId,H.SubhitId,H.TargetId});
+     if(S.Kind==EDungeonFighterOwnerKind::BoundPlayer)S.Player=FDungeonPlayerKernelSnapshot{Combat.Capture(),WeaponSkills.Capture(),Dodge.Capture()};
+     if(StoneKnight)S.Knight=StoneKnight->Capture();if(StoneBat)S.Bat=StoneBat->Capture();
++    if(StoneGuard)
++    {
++        if(LastGuardSyncTime!=StoneGuard->State().Time)return Reject(TEXT("Guard native mirror has not consumed the exact producer boundary"));
++        S.Guard=FDungeonStoneGuardOwnerSnapshot{1,StoneGuard->CapturePolicy(),StoneGuard->Capture(),bGuardDeathObserved};
++    }
+     FValidatedFighterOwner Candidate;if(!ValidateFighterOwner(S,*Context,Candidate,Diagnostic))return false;
+     Out=MoveTemp(S);Diagnostic.Reset();return true;
+ }
+@@ -422,7 +446,7 @@
+     FValidatedFighterOwner Candidate;if(!ValidateFighterOwner(S,Context,Candidate,Diagnostic))return false;
+     // Construct weak-owner drivers only after the full pure candidate passes.
+     // Neither constructor reads a live GM or issues an action/reward.
+-    TUniquePtr<FDungeonStoneKnightDriver> NewKnight;TUniquePtr<FDungeonStoneBatDriver> NewBat;
++    TUniquePtr<FDungeonStoneKnightDriver> NewKnight;TUniquePtr<FDungeonStoneBatDriver> NewBat;TUniquePtr<FDungeonStoneGuardDriver> NewGuard;
+     DungeonStoneFeedback::FJournal NewFeedback;
+     if(S.Knight.IsSet())
+     {
+@@ -434,6 +458,12 @@
+     {
+         const auto& B=S.Bat.GetValue();NewBat=MakeUnique<FDungeonStoneBatDriver>(this,S.EntityId,B.InitialTime,B.InitialPosition);
+         if(!NewBat->Restore(B)){Diagnostic=TEXT("Bat candidate driver rejected immutable saved birth origin/time");return false;}
++    }
++    if(S.Guard.IsSet())
++    {
++        const auto& G=S.Guard.GetValue();
++        NewGuard=MakeUnique<FDungeonStoneGuardDriver>(this,S.EntityId,G.Kernel.InitialTime,G.Kernel.InitialPosition,G.Policy);
++        if(!NewGuard->Restore(G.Kernel)){Diagnostic=TEXT("Guard candidate driver rejected complete birth/policy/history");return false;}
+     }
+     std::vector<FEmissionPoseSocket> NewPoses;std::vector<FSkillHitReceipt> NewHits;
+     for(const auto& P:S.EmissionPoseSockets)NewPoses.push_back({P.EventId,P.ActionId,P.SubhitId,P.Pose});
+@@ -449,7 +479,7 @@
+     }
+     // No fallible validation, simulation or external effect follows this point.
+     Combat=MoveTemp(Candidate.Combat);WeaponSkills=MoveTemp(Candidate.Weapons);Dodge=MoveTemp(Candidate.Dodge);
+-    StoneKnight=MoveTemp(NewKnight);StoneBat=MoveTemp(NewBat);StoneFeedback=MoveTemp(NewFeedback);
++    StoneKnight=MoveTemp(NewKnight);StoneBat=MoveTemp(NewBat);StoneGuard=MoveTemp(NewGuard);StoneFeedback=MoveTemp(NewFeedback);
+     Health=S.Health;
+     MaxHealth=S.MaxHealth;
+     JumpHeight=S.JumpHeight;
+@@ -493,6 +523,8 @@
+     HitAction={};bResolvingContentWindow=false;BatchSkillStepAt=-1.;BatchSkillStepDelta=FVector2D::ZeroVector;
+     bSuppressOrdinaryMovement=false;bEquipmentUiArrowLatch=false;
+     LastStoneSyncTime=S.Knight.IsSet()?S.Knight.GetValue().Time:0.;LastBatSyncTime=S.Bat.IsSet()?S.Bat.GetValue().Time:0.;
++    LastGuardSyncTime=S.Guard.IsSet()?S.Guard.GetValue().Kernel.Time:0.;
++    bGuardDeathObserved=S.Guard.IsSet()&&S.Guard.GetValue().DeathObserved;
+     // The native, unattached SceneComponent root has no collision/physics.
+     // This public exact path assigns saved body XY even when the ordinary
+     // movement setter would suppress a tiny correction. Kernel XY is untouched.

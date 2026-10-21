@@ -1,0 +1,46 @@
+{
+  "state": "READY 4th UE regression against ORIGINAL 4de8 production; no v002 production applied",
+  "filter": "CodexDungeon.Content.StoneGuardKernel.MovementFirstEntryPartitionAndZeroReceipts",
+  "new_UE_registration_count": 1,
+  "original_3_tests_unchanged": true,
+  "actual_standalone": {
+    "build_exit": 0,
+    "run_exit": 1,
+    "groups": 1,
+    "cases": 6,
+    "checks": 66,
+    "failed": 24
+  },
+  "admit_only": [
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-kernel-v001/movement-split-v002/tests/DungeonStoneGuardMovementTests.cpp",
+      "bytes": 559,
+      "sha256": "8194ebe0a5899b9cb10d4ba7d885e1343e49da0c01d1c0af353788e16cf712f3",
+      "destination": "UnrealGame/Source/CodexDungeon/Tests/DungeonStoneGuardMovementTests.cpp"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-kernel-v001/movement-split-v002/tests/StoneGuardMovementCases.h",
+      "bytes": 4524,
+      "sha256": "df3302b244abaa0efec77e8afbc5ad6b2020c93342a11912f96b52ee57492727",
+      "destination": "UnrealGame/Source/CodexDungeon/Tests/StoneGuardMovementCases.h"
+    }
+  ],
+  "original_production": {
+    "path": "F:/Ourgame/source-assets/production/stone-guard-kernel-v001/movement-split-v002/before-v001/DungeonStoneGuard.cpp",
+    "bytes": 16540,
+    "sha256": "4de8ffab4f8b8a6ac4400c268199b84adf630bdaf1943803c548ff05851dd061"
+  },
+  "red_logs": [
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-kernel-v001/movement-split-v002/runs/movement-RED-v001/build.log",
+      "bytes": 106,
+      "sha256": "5768d329071fc96836d455a5733c3431a894a64e7d1fdb2814314c3bd4019234"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-kernel-v001/movement-split-v002/runs/movement-RED-v001/run.log",
+      "bytes": 3864,
+      "sha256": "ae79565a69c799bc41c2dbb88902ed45599120dcbd9e715252804b1e6d81bc10"
+    }
+  ],
+  "UE_run_by_author": false
+}

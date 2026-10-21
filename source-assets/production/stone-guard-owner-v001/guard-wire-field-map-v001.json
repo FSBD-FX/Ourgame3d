@@ -1,0 +1,121 @@
+{
+  "schema": "guard-wire-field-map-draft-v001",
+  "definitions_source": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.h",
+  "policy_outside_state": true,
+  "fields": {
+    "FPoint": [
+      "X",
+      "Y",
+      "Z"
+    ],
+    "FPolicy": [
+      "ExtremelyCloseRadius"
+    ],
+    "FAction": [
+      "AttackId",
+      "Kind",
+      "InProgress",
+      "Locked",
+      "WindowIssued",
+      "Interrupted",
+      "Start",
+      "LockAt",
+      "ActiveAt",
+      "ActiveEnd",
+      "RecoveryEnd",
+      "CooldownEnd",
+      "InterruptedAt",
+      "CompletedAt",
+      "Damage",
+      "Stagger",
+      "Origin",
+      "LockedCenter",
+      "Target",
+      "Facing"
+    ],
+    "FDamageWindow": [
+      "AttackId",
+      "EventId",
+      "Kind",
+      "Start",
+      "End",
+      "Damage",
+      "Stagger",
+      "Center",
+      "Facing"
+    ],
+    "FWindowClosure": [
+      "AttackId",
+      "AtTime"
+    ],
+    "FHitReceipt": [
+      "AttackId",
+      "TargetId",
+      "AtTime"
+    ],
+    "FReceivedHit": [
+      "ReceiptId",
+      "AtTime",
+      "ActualHPLoss",
+      "Stagger"
+    ],
+    "FEvent": [
+      "EventId",
+      "EntityId",
+      "TargetId",
+      "Kind",
+      "AtTime",
+      "EndTime",
+      "Amount",
+      "From",
+      "To",
+      "Action"
+    ],
+    "FState": [
+      "Version",
+      "EntityId",
+      "NextAttackId",
+      "NextEventId",
+      "LastDamageReceiptId",
+      "InitialTime",
+      "Time",
+      "HP",
+      "PoiseAccum",
+      "PoiseDecayOrigin",
+      "LastPoiseAt",
+      "ProtectionUntil",
+      "StunUntil",
+      "CombatStartedAt",
+      "WakeStartedAt",
+      "WakeEnd",
+      "AxeReadyAt",
+      "StompReadyAt",
+      "OccupiedUntil",
+      "IdleReadyAt",
+      "WakeQueued",
+      "Awakened",
+      "RewardClaimed",
+      "Phase",
+      "InitialPosition",
+      "Position",
+      "Facing",
+      "Action",
+      "Windows",
+      "Closures",
+      "HitReceipts",
+      "ReceivedHits",
+      "Issued"
+    ]
+  },
+  "owner_wrapper": [
+    "Schema",
+    "Policy",
+    "Kernel",
+    "DeathObserved"
+  ],
+  "all_containers_order_preserved": true,
+  "numbers": "existing strict uint decimal-string / IEEE lowercasehex; optional Guard explicitnull in wirev2 only",
+  "new_codec": "bound-run-v2",
+  "old_codec_unchanged": "bound-run-v1",
+  "actual_source_written": false
+}

@@ -1,0 +1,9 @@
+{
+  "status": "PRESERVED_TOOL_INVOCATION_FAILURE",
+  "shell": "PowerShell",
+  "actual_exit_code": 1,
+  "diagnostic": "The term 'k' is not recognized as a name of a cmdlet, function, script file, or executable program.",
+  "cause": "Nested Python bytes-literal quotes were escaped with backslash inside a PowerShell double-quoted command, allowing the shell to parse the expression instead of Python.",
+  "audio_or_manifest_regenerated": false,
+  "correction": "Use a saved Python helper with a plain invocation; preserve both failed verifier and shell attempt."
+}

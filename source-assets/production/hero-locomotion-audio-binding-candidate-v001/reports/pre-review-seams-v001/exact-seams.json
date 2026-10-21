@@ -1,0 +1,110 @@
+{
+  "status": "PROPOSAL_NOT_APPLIED",
+  "base_compiled_source_manifest": "F:\\Ourgame\\source-assets\\production\\backups\\v144-HeroAirDiskRestore300-203GREEN-v001\\compiled-source-manifest.json",
+  "base_manifest_sha256": "fb225bef1e9b2e3584a16d3eff192bd39587867b68c0fcdb525a4d876324e59a",
+  "files": [
+    {
+      "actual_source": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\DungeonGameMode.h",
+      "source_bytes": 13259,
+      "source_sha256": "0968a56a27df097ee530eaf8862a6e67b9c7f28af1b030f874355cb28b2f0f1c",
+      "line_ending": "CRLF",
+      "operations": [
+        {
+          "before": "#include \"DungeonActionAudioFeedback.h\"",
+          "after": "#include \"DungeonActionAudioFeedback.h\"\n#include \"DungeonHeroLocomotionAudioNativeV001.h\""
+        },
+        {
+          "before": "\nclass ADungeonFighter;\n",
+          "after": "\nclass ADungeonFighter;\nclass USoundBase;\nclass USoundConcurrency;\n"
+        },
+        {
+          "before": "    bool IsFairytaleLookdevPreview() const { return bFairytaleLookdevPreview; }",
+          "after": "    const TArray<FDungeonHeroLocomotionAudioPlayRequestV001>& GetHeroLocomotionAudioPlayRequestsV001() const { return HeroLocomotionPlayRequests; }\n    bool IsFairytaleLookdevPreview() const { return bFairytaleLookdevPreview; }"
+        },
+        {
+          "before": "    FDungeonActionAudioState ActionAudioState;",
+          "after": "    // New transient named-event prototype adapter; never part of Schema1.\n    DungeonHeroLocomotionAudioV001::FState HeroLocomotionState;\n    DungeonHeroLocomotionAudioV001::FScope HeroLocomotionAttachedScope;\n    TWeakObjectPtr<ADungeonFighter> HeroLocomotionOwner;\n    FGuid HeroLocomotionRun;\n    bool bHeroLocomotionSoundsLoaded=false;\n    UPROPERTY() TArray<TObjectPtr<USoundBase>> HeroLocomotionSounds;\n    UPROPERTY() TObjectPtr<USoundConcurrency> HeroLocomotionConcurrency;\n    TArray<FDungeonHeroLocomotionAudioPlayRequestV001> HeroLocomotionPlayRequests;\n    void LoadHeroLocomotionAudioV001();\n    DungeonHeroLocomotionAudioV001::FScope HeroLocomotionScopeV001() const;\n    bool HeroLocomotionAudioActiveV001() const;\n    bool RefreshHeroLocomotionAudioV001();\n    void ObserveHeroGroundDistanceV001(ADungeonFighter* Fighter,double From,double To,double Distance,\n        bool Grounded,bool OrdinaryEligible,bool HadIntent);\n    void ObserveHeroTakeoffV001(ADungeonFighter* Fighter,double AtTime);\n    void ObserveHeroAirMotionV001(ADungeonFighter* Fighter,double From,double To,double FromHeight,double ToHeight,double FallingSpeed);\n    void ObserveHeroDodgeV001(ADungeonFighter* Fighter,const std::vector<DungeonDodge::FEvent>& Events);\n    void DispatchHeroLocomotionAudioV001();\n    FDungeonActionAudioState ActionAudioState;"
+        }
+      ],
+      "result_bytes": 14819,
+      "result_sha256": "31fd58350d4209ac1e62f8c8cc53327310127325ea7989437091b239304435d9"
+    },
+    {
+      "actual_source": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\DungeonGameMode.cpp",
+      "source_bytes": 151996,
+      "source_sha256": "a8668ce98c42c3217e19198e6dfa18c0bd9feb8a3beae4aef8a5c8d0d8ac32b3",
+      "line_ending": "CRLF",
+      "operations": [
+        {
+          "before": "    Super::StartPlay();",
+          "after": "    Super::StartPlay();\n    LoadHeroLocomotionAudioV001();"
+        },
+        {
+          "before": "    SeedActionAudioWeapon(PlayerFighter);\n    return true;",
+          "after": "    SeedActionAudioWeapon(PlayerFighter);\n    RefreshHeroLocomotionAudioV001(); // Silent initialized owner/tail.\n    return true;"
+        },
+        {
+          "before": "    SuppressRestoreContinueEnter=true;++RunPresentationEpoch;",
+          "after": "    SuppressRestoreContinueEnter=true;++RunPresentationEpoch;\n    RefreshHeroLocomotionAudioV001(); // Silent installed H/V and actual Dodge tail; no queued audio restore."
+        },
+        {
+          "before": "    PlayerFighter->ResetFighter(FVector2D(-460.f, 0.f));",
+          "after": "    PlayerFighter->ResetFighter(FVector2D(-460.f, 0.f));\n    RefreshHeroLocomotionAudioV001(); // Silent genuine legacy new run."
+        },
+        {
+          "before": "    Super::Tick(DeltaSeconds);\n    if(IsRunInstallGated())",
+          "after": "    Super::Tick(DeltaSeconds);\n    RefreshHeroLocomotionAudioV001(); // Scope/room attachment precedes any real input.\n    if(IsRunInstallGated())"
+        },
+        {
+          "before": "            Fighter->bSuppressOrdinaryMovement=true;Fighter->SimulateMotion(Step,false);Fighter->bSuppressOrdinaryMovement=false;",
+          "after": "            const double AudioFallingSpeed=FMath::Max(0.,1800.*double(Step)-double(Fighter->JumpVelocity));\n            Fighter->bSuppressOrdinaryMovement=true;Fighter->SimulateMotion(Step,false);Fighter->bSuppressOrdinaryMovement=false;"
+        },
+        {
+          "before": "                const auto Actual=Fighter->GetGroundPosition();\n                Fighter->bMoving=Actual!=P.Start;",
+          "after": "                // Authoritative resolved H crossing; legacy audio is suppressed in this batch.\n                if(!Fighter->bDead)ObserveHeroAirMotionV001(Fighter,FromTime,ToTime,P.StartHeight,P.EndHeight,AudioFallingSpeed);\n                const auto Actual=Fighter->GetGroundPosition();\n                Fighter->bMoving=Actual!=P.Start;"
+        },
+        {
+          "before": "    PlayerFighter->EndGroundMotionFrame(SimulationTime);",
+          "after": "    PlayerFighter->EndGroundMotionFrame(SimulationTime);\n    DispatchHeroLocomotionAudioV001(); // Completed real tick; same-endpoint terminal state suppresses stale cues."
+        }
+      ],
+      "result_bytes": 152831,
+      "result_sha256": "1ff4113b3ab50b8b43c197d44df4c91525bdb9b5024f5465377200fc4e2950f7"
+    },
+    {
+      "actual_source": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\DungeonFighter.cpp",
+      "source_bytes": 133898,
+      "source_sha256": "c90846cf6255e57a96f3c66f4880d1af0a8271ff934bcaf0187698f3066c1713",
+      "line_ending": "CRLF",
+      "operations": [
+        {
+          "before": "    ClearPendingAttackInput();\n    SyncDodgeAction();\n    return true;",
+          "after": "    ClearPendingAttackInput();\n    SyncDodgeAction();\n    Game->ObserveHeroDodgeV001(this,R.Events); // Accepted real Started only, never restored Records.\n    return true;"
+        },
+        {
+          "before": "    bUnconsumedGroundMotion=true;\n    if(Grounded&&OrdinaryEligible&&HadIntent)PendingWalkDistance+=Distance;",
+          "after": "    if(auto* AudioGame=GetWorld()?GetWorld()->GetAuthGameMode<ADungeonGameMode>():nullptr)\n        AudioGame->ObserveHeroGroundDistanceV001(this,FromTime,ToTime,Distance,Grounded,OrdinaryEligible,HadIntent);\n    bUnconsumedGroundMotion=true;\n    if(Grounded&&OrdinaryEligible&&HadIntent)PendingWalkDistance+=Distance;"
+        },
+        {
+          "before": "        Combat.NotifyTakeoff();\n        WeaponSkills.NotifyTakeoff();",
+          "after": "        Combat.NotifyTakeoff();\n        WeaponSkills.NotifyTakeoff();\n        if(auto* AudioGame=GetWorld()?GetWorld()->GetAuthGameMode<ADungeonGameMode>():nullptr)\n            AudioGame->ObserveHeroTakeoffV001(this,AudioGame->GetSimulationTime());"
+        },
+        {
+          "before": "    if (JumpHeight > 0.f || JumpVelocity > 0.f)\n    {\n        JumpHeight = FMath::Max(0.f, JumpHeight + JumpVelocity * DeltaSeconds - 900.f * DeltaSeconds * DeltaSeconds);",
+          "after": "    const double AudioFromHeight=double(JumpHeight);\n    if (JumpHeight > 0.f || JumpVelocity > 0.f)\n    {\n        JumpHeight = FMath::Max(0.f, JumpHeight + JumpVelocity * DeltaSeconds - 900.f * DeltaSeconds * DeltaSeconds);"
+        },
+        {
+          "before": "        JumpVelocity -= 1800.f * DeltaSeconds;\n        if (JumpHeight <= 0.f)",
+          "after": "        JumpVelocity -= 1800.f * DeltaSeconds;\n        if(auto* AudioGame=GetWorld()?GetWorld()->GetAuthGameMode<ADungeonGameMode>():nullptr)\n            if(!AudioGame->bSimulatingMotion)\n            {\n                const double AudioFromTime=AudioGame->GetSimulationTime();\n                AudioGame->ObserveHeroAirMotionV001(this,AudioFromTime,AudioFromTime+double(DeltaSeconds),\n                    AudioFromHeight,double(JumpHeight),FMath::Max(0.,-double(JumpVelocity)));\n            }\n        if (JumpHeight <= 0.f)"
+        }
+      ],
+      "result_bytes": 134898,
+      "result_sha256": "be610b7caaf4c850f80201fb7e588147bde66fa17a7e7310885cf763e2926372"
+    }
+  ],
+  "new_source_files": [
+    "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-binding-candidate-v001\\Source\\DungeonHeroLocomotionAudioNativeV001.cpp",
+    "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-binding-candidate-v001\\Source\\DungeonHeroLocomotionAudioNativeV001.h",
+    "F:\\Ourgame\\source-assets\\production\\hero-locomotion-audio-binding-candidate-v001\\Source\\DungeonHeroLocomotionAudioV001.h"
+  ]
+}

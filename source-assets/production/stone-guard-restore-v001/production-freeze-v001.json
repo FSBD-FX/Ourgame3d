@@ -1,0 +1,484 @@
+{
+  "status": "READY for Root actual production admission; author standalone verified; no author UE/UBT",
+  "stage0_actual_build_exit": 0,
+  "stage0_actual_three_clean_semantic_RED": true,
+  "stage0_actual_errors_per_group": 1,
+  "public_api": [
+    "bool FGuardKernel::Restore(const FState& Saved)",
+    "FPolicy FGuardKernel::CapturePolicy() const"
+  ],
+  "state_layout_and_version": "FState v1 unchanged",
+  "receiver_contract": "Initialized exact EntityId/InitialTime/InitialPosition; validated receiving Policy retained including finite radius [0,160]; earlier same-birth progress permitted",
+  "owner_dependency": "Native Owner explicitly saves State+Policy and reconstructs receiver with saved Policy; Native/Owner/Codec/Installer/settlement not completed by this pure slice",
+  "failure_atomicity": "Validation before owning temporary copy; one move assignment after successful validation; no Step/world/mitigation/reward/event replay",
+  "old_gameplay_methods_text_identical_to_v124": true,
+  "production_patch_check_exit": 0,
+  "frozen_new_test_files_unchanged": true,
+  "frozen_new_test_count": 3,
+  "final_conventional_suites": {
+    "groups": 14,
+    "checks": 364,
+    "failed": 0,
+    "restore_groups": 3,
+    "restore_checks": 151,
+    "old_groups": 11,
+    "old_checks": 213
+  },
+  "real_capture_probe": {
+    "states": 11521,
+    "rejected_or_mismatched": 0
+  },
+  "independent_minimal_programs": {
+    "count": 7,
+    "build_run_all_zero": true,
+    "forged_histories_rejected": 6,
+    "legitimate_controls_accepted": true
+  },
+  "review_found_and_fixed": [
+    "mandatory wake/recovery events deleted before later death",
+    "stagger forged across an outgoing Hit boundary",
+    "integer85 and40+45 threshold exactness",
+    "WakeStarted proof of prior nonlethal batch",
+    "zero-stagger forced prefix legal rejection",
+    "reward before last lethal-StepTo acknowledged receipt"
+  ],
+  "validation_limits": [
+    "v1 lacks same-cursor call boundaries and world inputs",
+    "compatible pre-lethal receipt prefix plus event batch boundaries, not unique original batch replay",
+    "unknown weak-poise addition parenthesization uses operation-derived IEEE rounding bound; exact single and provably binary-lattice sums remain exact",
+    "saved poise projection and all action/movement times remain exact; bitwise unique provenance needs schema extension"
+  ],
+  "author_wrote_ActualSource": false,
+  "author_ran_UE_UBT": false,
+  "author_modified_Native_Owner_Codec_Installer": false,
+  "required_Root_next": [
+    "admit only candidate h/cpp",
+    "keep frozen tests byte-identical and refresh source mtimes",
+    "actual compile and targeted three GREEN",
+    "actual full157; not a claimed result"
+  ],
+  "verification_runs": [
+    {
+      "name": "final-frozen3-GREEN-v003",
+      "build_exit": 0,
+      "run_exit": 0,
+      "summary": [
+        "SUMMARY groups=3 checks=151 failed=0"
+      ]
+    },
+    {
+      "name": "final-main-GREEN-v003",
+      "build_exit": 0,
+      "run_exit": 0,
+      "summary": [
+        "SUMMARY groups=6 checks=125 failed=0"
+      ]
+    },
+    {
+      "name": "final-boundary-GREEN-v003",
+      "build_exit": 0,
+      "run_exit": 0,
+      "summary": [
+        "SUMMARY groups=3 checks=16 failed=0"
+      ]
+    },
+    {
+      "name": "final-straight-GREEN-v003",
+      "build_exit": 0,
+      "run_exit": 0,
+      "summary": [
+        "SUMMARY groups=1 cases=6 checks=66 failed=0"
+      ]
+    },
+    {
+      "name": "final-curved-GREEN-v003",
+      "build_exit": 0,
+      "run_exit": 0,
+      "summary": [
+        "SUMMARY groups=1 cases=2 checks=6 failed=0"
+      ]
+    },
+    {
+      "name": "final-realcapture-GREEN-v003",
+      "build_exit": 0,
+      "run_exit": 0,
+      "summary": [
+        "SUMMARY checked=11521 rejected=0"
+      ]
+    },
+    {
+      "name": "final-independent-InterleavedControl-GREEN-v004",
+      "build_exit": 0,
+      "run_exit": 0,
+      "summary": [
+        "SETUP=1 REAL_RESTORE=1 FORGED_RESTORE=0",
+        "WITNESS_SETUP=1 REAL_HIT_AFTER_BREAK=0"
+      ]
+    },
+    {
+      "name": "final-independent-MissingWakeCompletion-GREEN-v004",
+      "build_exit": 0,
+      "run_exit": 0,
+      "summary": [
+        "SETUP=1 REAL_RESTORE=1 FORGED_RESTORE=0 DEATH_AT=2 WAKE_END=1"
+      ]
+    },
+    {
+      "name": "final-independent-MissingRecoveryStart-GREEN-v004",
+      "build_exit": 0,
+      "run_exit": 0,
+      "summary": [
+        "SETUP=1 REAL_RESTORE=1 FORGED_RESTORE=0 DEATH_AT=2.3 ACTIVE_END=2.2"
+      ]
+    },
+    {
+      "name": "final-independent-WakeStartedDeathPrefix-GREEN-v004",
+      "build_exit": 0,
+      "run_exit": 0,
+      "summary": [
+        "SETUP=1 REAL_RESTORE=1 FORGED_RESTORE=0 WAKE_START=0"
+      ]
+    },
+    {
+      "name": "final-independent-IntegerBoundary-GREEN-v004",
+      "build_exit": 0,
+      "run_exit": 0,
+      "summary": [
+        "SETUP=1 REAL_RESTORE=1 FORGED_RESTORE=0"
+      ]
+    },
+    {
+      "name": "final-independent-ZeroStaggerForcedPrefix-GREEN-v004",
+      "build_exit": 0,
+      "run_exit": 0,
+      "summary": [
+        "SETUP=1 LEGAL_RESTORE=1 ORIGIN=0 LAST=-1"
+      ]
+    },
+    {
+      "name": "final-independent-RewardBeforeAcknowledgedReceipt-GREEN-v004",
+      "build_exit": 0,
+      "run_exit": 0,
+      "summary": [
+        "SETUP=1 REAL_RESTORE=1 FORGED_RESTORE=0 CLAIM_AT=2.25 LAST_RECEIVED=2.5"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/candidate-source/DungeonStoneGuard.h",
+      "bytes": 5894,
+      "sha256": "6c71de106f3d728aec593d1528331714442e6756878cf49af3d04f48e68eb9de"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/candidate-source/DungeonStoneGuard.cpp",
+      "bytes": 42213,
+      "sha256": "6198551820b8e01ace25ce061169a671e342cc60bab6f6dc800df767d77b1d9f"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/patches/production-restore-v001.patch",
+      "bytes": 24787,
+      "sha256": "2904f2f286064254eab7f349b60ef8a5dab7cc1f8370efdcc96c406cf1bb28df"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/before-v124/DungeonStoneGuard.h",
+      "bytes": 5704,
+      "sha256": "2e3922448abc2b152de646a475a0926522eb43dad5e7ff3849f6bf097f87ef48"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/before-v124/DungeonStoneGuard.cpp",
+      "bytes": 19459,
+      "sha256": "0387697ec2618f473623e83c9974a9248e7b7f4ffe82a4d7df9cad26e00ed4f7"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/validator-implementation-v001.inc",
+      "bytes": 22300,
+      "sha256": "f75cea1b7dbab2ef7e0582f4bc34c2be9f3847460e5fa812c4d8e0c9d419805e"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/BuildCandidate.ps1",
+      "bytes": 1517,
+      "sha256": "867237e67c28c7f349f8bd95d56623096edd116e35e88fd708fcb521583f6860"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/RunStandalone.ps1",
+      "bytes": 2124,
+      "sha256": "368950c84a2bad94e2247c86d0c7e17b5659900d76e0c09831e4886e9a0f381d"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/author-probes-v001/RealCaptureContinuation.cpp",
+      "bytes": 2583,
+      "sha256": "eca4610ed21ba184e1f8536143436b5900a0bf8e853956b866d4d1123f96c700"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/tests/StoneGuardRestoreCases.h",
+      "bytes": 17641,
+      "sha256": "4a3ac2479e3df70dd9c473062c6a3f97ee04e3b12edfb4df07271a410c16f611"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/tests/DungeonStoneGuardRestoreTests.cpp",
+      "bytes": 1364,
+      "sha256": "65f696cdbd971cf1cd557be98e9dedbefa0782ecefe22c985f895d2822cda470"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/tests/DungeonStoneGuardRestoreStandalone.cpp",
+      "bytes": 649,
+      "sha256": "acc6cd001925d183c43e4599a673163cd74136b903a64687572174188393b571"
+    },
+    {
+      "path": "F:/Ourgame/docs/production/first-batch-v2/evidence/stone-guard-restore-v001/stage0-admission-freeze-v001.json",
+      "bytes": 4097,
+      "sha256": "8eea409b604c3252030d19d13459157e1709016ed30f5a76ea1f3669e2f6bf66"
+    },
+    {
+      "path": "F:/Ourgame/docs/production/first-batch-v2/evidence/stone-guard-restore-v001/root-actual-threeRED-v001/manifest.json",
+      "bytes": 39629,
+      "sha256": "3f72427e93240df72d26c5e1210d25f126016d25dad6fea8f1b9a6d02daae48a"
+    },
+    {
+      "path": "F:/Ourgame/docs/production/first-batch-v2/evidence/stone-guard-restore-v001/implementation-plan-v001.md",
+      "bytes": 3112,
+      "sha256": "f08635c06e7cd9bbf403db0206dac00a60e37184531891c7d0aa95cd18c44438"
+    },
+    {
+      "path": "F:/Ourgame/docs/production/first-batch-v2/evidence/stone-guard-restore-v001/validation-boundaries-v001.md",
+      "bytes": 3014,
+      "sha256": "8a6393876f6b40a39fde0bc8289d5a8e809397918db3d1c150ab7fce83f1839e"
+    },
+    {
+      "path": "F:/Ourgame/docs/production/first-batch-v2/evidence/stone-guard-restore-v001/production-contract-and-results-v001.md",
+      "bytes": 6151,
+      "sha256": "94fd9a19dc0a8daf4624ca12315559562bd4e25d16a29b163a9d01f8b5303faa"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-frozen3-GREEN-v003/build.log",
+      "bytes": 105,
+      "sha256": "ec52a198d057c0e2ed0c8b351da657371b04e944566d89a9b6782280133a2ecc"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-frozen3-GREEN-v003/run.log",
+      "bytes": 8714,
+      "sha256": "d710c6256c78c3d6d3c93912c1123d7d211a19bb67e6579bdb48acdfa432cc14"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-frozen3-GREEN-v003/stone-guard-restore.exe",
+      "bytes": 504320,
+      "sha256": "15027e79b182b3beebab718d277d2af9c7ae9525f1b3456c1fcfddd287a04518"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-main-GREEN-v003/build.log",
+      "bytes": 98,
+      "sha256": "67399acd75844fbcb5f85e3aa2b6042143296baf4c8013745248f117548a7732"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-main-GREEN-v003/run.log",
+      "bytes": 5905,
+      "sha256": "34a669ed38605333bc8edb0d967420934092fa521dc6586c24ed7c1f47fe27e5"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-main-GREEN-v003/stone-guard-restore.exe",
+      "bytes": 434688,
+      "sha256": "67f4b89a7f5bb76932ba8c8464894e6d51ff769b86d98d57870a2c598d1830e7"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-boundary-GREEN-v003/build.log",
+      "bytes": 99,
+      "sha256": "4a24ed1b362a648de8c924a31d41fdb415dab6555077b5a7311e1f06ddc903f5"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-boundary-GREEN-v003/run.log",
+      "bytes": 977,
+      "sha256": "029548db827f407de554000f9a6c6b8a79d4ff25ab933fb148a867c54304011a"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-boundary-GREEN-v003/stone-guard-restore.exe",
+      "bytes": 372224,
+      "sha256": "66f38973397fded3addd3edde03a41d1e8661b92238acd9799db6024289380ba"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-straight-GREEN-v003/build.log",
+      "bytes": 106,
+      "sha256": "5768d329071fc96836d455a5733c3431a894a64e7d1fdb2814314c3bd4019234"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-straight-GREEN-v003/run.log",
+      "bytes": 3863,
+      "sha256": "6f784b7942ba1998b564287fa95dc24210d7166d43a475242902b0ef10f1d001"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-straight-GREEN-v003/stone-guard-restore.exe",
+      "bytes": 382976,
+      "sha256": "6c054ebd99b953178d2e8870702c84707ea6ef75dac5b74468dbb427793f45cd"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-curved-GREEN-v003/build.log",
+      "bytes": 112,
+      "sha256": "b7290e60ff8ee0568d428116578460144c2eedbac21c9eb0e11361c766f15e84"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-curved-GREEN-v003/run.log",
+      "bytes": 409,
+      "sha256": "b35c4e413985757b35531f021e201f463c9606d694a60398783a157e30504c76"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-curved-GREEN-v003/stone-guard-restore.exe",
+      "bytes": 370176,
+      "sha256": "4bbe8ce5d45b013c43e0aa57e6a722329ea156538eb76329ce9ca042dee7dfcc"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-realcapture-GREEN-v003/build.log",
+      "bytes": 94,
+      "sha256": "5794e785ec144ce5422035792ee07ed73703e87e76e6b736ec83388a379090c3"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-realcapture-GREEN-v003/run.log",
+      "bytes": 51,
+      "sha256": "ef1f775cdde256889273347100f0ece597b451567e0b6639223a58283a1f870a"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-realcapture-GREEN-v003/stone-guard-restore.exe",
+      "bytes": 392192,
+      "sha256": "864a28310a28b9a71b084b5182d7ad9e83c350c9d26e3d4cf97f723f7491598f"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-InterleavedControl-GREEN-v004/build.log",
+      "bytes": 89,
+      "sha256": "2d4a5e35c1ef8d370708858713989b83c3e7d2c819658a97deda2ee610c76067"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-InterleavedControl-GREEN-v004/run.log",
+      "bytes": 345,
+      "sha256": "796fe90bd912702bdb05d184655b9686c49e6b0f63510c38362221fcc484afee"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-InterleavedControl-GREEN-v004/stone-guard-restore.exe",
+      "bytes": 374272,
+      "sha256": "ab58cb18cf5c8c8e17a97d2132d8bd3a03caa1f10d1f05f3dbf025d8a803feb6"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-MissingWakeCompletion-GREEN-v004/build.log",
+      "bytes": 92,
+      "sha256": "57e3f226734a104c7be9c74d41372a26fda665cf8a4bac57aa0b447517888b10"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-MissingWakeCompletion-GREEN-v004/run.log",
+      "bytes": 80,
+      "sha256": "51665e52e59ddc38404bdc52486556c6a5553757fedd683497f203d022dae90a"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-MissingWakeCompletion-GREEN-v004/stone-guard-restore.exe",
+      "bytes": 370688,
+      "sha256": "097e87a0197611f9d030fff5a023896737c89c22817e3c83f5e5a9419a117573"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-MissingRecoveryStart-GREEN-v004/build.log",
+      "bytes": 91,
+      "sha256": "4c5bc9788e39d040e866d4f8c252e73f22046bc457fd0b8b916e910ebd8bae04"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-MissingRecoveryStart-GREEN-v004/run.log",
+      "bytes": 86,
+      "sha256": "8df99cb658326ccd4bb843c41b016c564b9886ccdd75e2fee235ce861af07450"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-MissingRecoveryStart-GREEN-v004/stone-guard-restore.exe",
+      "bytes": 371200,
+      "sha256": "bbe16ca29425b0d6804f49e1a90782d153aaef3cca3088e4f030f2f0571a512d"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-WakeStartedDeathPrefix-GREEN-v004/build.log",
+      "bytes": 93,
+      "sha256": "9fe3a072f5e1912f0d45b8983da35726132c9c82ba5aa3b1cb6a5ccddf83c8e1"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-WakeStartedDeathPrefix-GREEN-v004/run.log",
+      "bytes": 71,
+      "sha256": "b4353a1105be21f79e084da074eaa518bf5b1bf543f6172f12c4aae20b143f20"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-WakeStartedDeathPrefix-GREEN-v004/stone-guard-restore.exe",
+      "bytes": 366080,
+      "sha256": "d7fa6bd172216adfac395e333d91039c67c00d77440b19bc23f6fa1c0a359005"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-IntegerBoundary-GREEN-v004/build.log",
+      "bytes": 86,
+      "sha256": "3ed4d0ed68179cf929609dd83764e9829f644717f4b7d170abed33d3edd792e6"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-IntegerBoundary-GREEN-v004/run.log",
+      "bytes": 58,
+      "sha256": "0779454420c35c3185106895f85e5268dad295ad702fb755ae1921fe22c5d285"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-IntegerBoundary-GREEN-v004/stone-guard-restore.exe",
+      "bytes": 369152,
+      "sha256": "9e8a95ee8837678e64d8bbe1bda49f00ee94506fc0468735d560165271ccee3e"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-ZeroStaggerForcedPrefix-GREEN-v004/build.log",
+      "bytes": 94,
+      "sha256": "1761b72b15a73d461e9779b6cdb035d08270232cefd139efc378c275601e3513"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-ZeroStaggerForcedPrefix-GREEN-v004/run.log",
+      "bytes": 59,
+      "sha256": "dbc3c39b67f3f3ba2bbf6f2a0388ebaf3cbb9c75713765f92f071108929b0c40"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-ZeroStaggerForcedPrefix-GREEN-v004/stone-guard-restore.exe",
+      "bytes": 369664,
+      "sha256": "37400eee09dbf2f487195b52d6d8cae8e04f8a2e59acf0b539aee29c620e65e3"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-RewardBeforeAcknowledgedReceipt-GREEN-v004/build.log",
+      "bytes": 102,
+      "sha256": "404516f89517b10d4c19486e86e0c186aaa8ac90d970ee506bfce0ca6dc2b3ff"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-RewardBeforeAcknowledgedReceipt-GREEN-v004/run.log",
+      "bytes": 90,
+      "sha256": "2a902f3cf6aae805df467a09c9d289c82d7b2b2ba749a2f442cd8c377c2360b6"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/runs/final-independent-RewardBeforeAcknowledgedReceipt-GREEN-v004/stone-guard-restore.exe",
+      "bytes": 366592,
+      "sha256": "77e0c6e6e88bc972fe7f6b1a8cb941f4a91d458bc67b7d270c9fdb77ebb4a2c4"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/review-probes-v001/fix-rerun-v002/InterleavedControl.cpp",
+      "bytes": 1541,
+      "sha256": "d7870d3b183a25b869205261b097a27d25736b721801252393e9eee66dca7ba4"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/review-probes-v001/fix-rerun-v002/MissingWakeCompletion.cpp",
+      "bytes": 1022,
+      "sha256": "01a03c834f01116e438f8b94c7b1d89efb27d761de31f1cfb4c88a18d7b6e73c"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/review-probes-v001/fix-rerun-v002/MissingRecoveryStart.cpp",
+      "bytes": 1092,
+      "sha256": "ec4b9cd44ffa39a45d7c70df5738ba747e44b09c1d6fed9a46d48a98ff7810c4"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/review-probes-v001/fix-rerun-v002/WakeStartedDeathPrefix.cpp",
+      "bytes": 686,
+      "sha256": "6005c302cc955a54cb3a4b13eb96286f18739e27c1089e553e7c713ae0028086"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/review-probes-v001/fix-rerun-v002/IntegerBoundary.cpp",
+      "bytes": 879,
+      "sha256": "2c141a193c3f5436159145e810e951a550a27c4353e21147e964deab19a56e7c"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/review-probes-v001/fix-rerun-v002/ZeroStaggerForcedPrefix.cpp",
+      "bytes": 731,
+      "sha256": "3c90053c06be28de5aa10a423fc540e613ef9170c5cd01731ea5be28cae4394c"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/stone-guard-restore-v001/review-probes-v001/fix-rerun-v002/RewardBeforeAcknowledgedReceipt.cpp",
+      "bytes": 712,
+      "sha256": "14c86836c04b39ed043df7a48fcfafc4d04548bd16c44645ef326fae083f6200"
+    }
+  ]
+}
