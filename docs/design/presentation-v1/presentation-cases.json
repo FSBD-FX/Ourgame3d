@@ -1,0 +1,305 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "module": "D-12",
+  "source_event": "EV-030",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "scope": "future_running_acceptance; projection_and_memory_arithmetic_only_checked_in_reference_validator",
+  "cases": [
+    {
+      "id": "ARTCASE-01",
+      "setup": "同一X/Z，两角色地面Y不同；后方角色跳跃",
+      "expected": "正Y角色向上/更远，排序仍按地面；跳起身体而阴影留原地面位置",
+      "evidence": "实际运行录屏及地面坐标叠层"
+    },
+    {
+      "id": "ARTCASE-02",
+      "setup": "按W/左摇杆上，再开地图、返回、进入下一房",
+      "expected": "正式正Y远离镜头约定在输入/地图/预告/排序一致；不把旧原型证明当新方案验收",
+      "evidence": "输入轨迹与屏幕投影对照"
+    },
+    {
+      "id": "ARTCASE-03",
+      "setup": "最长枪/戟在左右朝向及±15%射程边界",
+      "expected": "武器尖端/判定/刀光不互相误导，逻辑画布不裁切；镜像一次并修正持握点",
+      "evidence": "有判定叠层的暂停帧和连续挥击"
+    },
+    {
+      "id": "ARTCASE-04",
+      "setup": "大刀、重剑、短刃在同一敌人上命中与挥空",
+      "expected": "蓄力/重心/收势及音色可分，挥空无命中停顿与接触音；不增加命中或削韧",
+      "evidence": "相同条件逐动作对照录像"
+    },
+    {
+      "id": "ARTCASE-05",
+      "setup": "武器前摇40%前后与攻速增益中途到期",
+      "expected": "时轴仍由起攻固定，40%只按原规则锁其余属性；显示不提前转向/加速或重播",
+      "evidence": "ActionID/锁定时点/动画游标事件表"
+    },
+    {
+      "id": "ARTCASE-06",
+      "setup": "多段刀、三连铳与命中表现停顿接近下一子击",
+      "expected": "下一真实事件抢断姿态停帧，原子击次数/间隔不变；音画不排队到后摇外",
+      "evidence": "事件编号与逐帧输出对照"
+    },
+    {
+      "id": "ARTCASE-07",
+      "setup": "表现停顿期间有燃烧tick、冷却和增援时间到达",
+      "expected": "局部视觉强调不冻结或拖后任何权威时钟",
+      "evidence": "开启与关闭强调的同种子事件时刻对照"
+    },
+    {
+      "id": "ARTCASE-08",
+      "setup": "渲染长帧跨过多个已发生发射/接触事件",
+      "expected": "逻辑和去重不变；可合并非关键表现，不能延后播放成新的伤害；关键预告丢失判失败",
+      "evidence": "受控帧率压力下日志和画面"
+    },
+    {
+      "id": "ARTCASE-09",
+      "setup": "空中主攻中落地，以及一次离地已用主攻后再次按攻",
+      "expected": "落地接回原时间轴；不播放新起手并产生第二次空攻；影子与朝向连续",
+      "evidence": "同AttackID与空攻次数对照"
+    },
+    {
+      "id": "ARTCASE-10",
+      "setup": "合法闪避拒绝直接伤害，但身上已有燃烧",
+      "expected": "受免疫攻击不播成功接触；真实DoT仍有损血/状态反馈，不画全能护罩",
+      "evidence": "伤害原因与屏幕标记"
+    },
+    {
+      "id": "ARTCASE-11",
+      "setup": "石骑锁线后玩家移动Y，冲空进入恢复",
+      "expected": "预告锁线不追玩家；失手姿态显示原恢复窗，不因恢复动画短而提前起招",
+      "evidence": "锁线/有效/恢复原数值叠层"
+    },
+    {
+      "id": "ARTCASE-12",
+      "setup": "石蝠休眠、激活、高位、下降、合法低位恢复",
+      "expected": "休眠可辨但不伪新增敌，实际高度决定低位提示，翅尖或影子不成为受击体",
+      "evidence": "Z与原目标体判定对照"
+    },
+    {
+      "id": "ARTCASE-13",
+      "setup": "普通敌死亡而其弹体仍飞行；另测Boss合法胜利与同点双亡",
+      "expected": "普通旧弹仍可见有效；Boss仅合法成功清自有危险；双亡不播通关/领奖",
+      "evidence": "死亡/成功事件键与音画记录"
+    },
+    {
+      "id": "ARTCASE-14",
+      "setup": "同房休眠怪、未来增援与出生位置重试",
+      "expected": "只真实休眠实体有像；future无半透明人形，预告按真实slot位置/时钟；重试不换ID乱播多个成功出生",
+      "evidence": "D07槽位状态和画面"
+    },
+    {
+      "id": "ARTCASE-15",
+      "setup": "前景树根/拱门挡住玩家与正在预告的范围",
+      "expected": "上层遮挡淡化或轮廓回退，碰撞不变，不顺带揭示隐藏怪",
+      "evidence": "前后景开启/关闭对照"
+    },
+    {
+      "id": "ARTCASE-16",
+      "setup": "同场密集命中/弹体达到表现池压力",
+      "expected": "先降装饰，必须保留真实危险轮廓/敌弹与地面位置；连回退都失败则拒绝通过验收",
+      "evidence": "实际池计数/帧率/录屏，不能仅靠日志称可见"
+    },
+    {
+      "id": "ARTCASE-17",
+      "setup": "关闭颜色辅助、音频、震屏、全屏闪光和震动",
+      "expected": "攻击、出生、状态与好坏词仍由形状/文字可辨；游戏参数不变",
+      "evidence": "静音/灰阶/低特效的同场录像"
+    },
+    {
+      "id": "ARTCASE-18",
+      "setup": "33武器×12甲的左右朝向、双手握持与袍袖覆盖",
+      "expected": "保留家族和套装识别；手/武器/甲分层正确，没有第三只手/浮空枪；碰撞未随甲轮廓扩大",
+      "evidence": "组合清单、接触表和挑错后的动作验证"
+    },
+    {
+      "id": "ARTCASE-19",
+      "setup": "换装/购买动作未提交、被取消、成功和未知事务结果",
+      "expected": "手上旧外观到提交才变；失败无获得声/新装备；未知不先播成功再重买",
+      "evidence": "OperationID/外观/音频事件对照"
+    },
+    {
+      "id": "ARTCASE-20",
+      "setup": "霰弹原齐射、双响与实际实体独头弹",
+      "expected": "齐射按目标合计反馈且短迹不二次命中；双响两枪有两次真实事件；实体弹跟随真弹位置",
+      "evidence": "源定义与弹体/伤害记录"
+    },
+    {
+      "id": "ARTCASE-21",
+      "setup": "暂停、恢复、房切换、剧情回顾与重播加载",
+      "expected": "世界效果年龄和音频游标按规则冻结/恢复，不补播过期枪声、领奖音或多次成功声；UI声不推进局内时钟",
+      "evidence": "暂停前后事件序列和听验"
+    },
+    {
+      "id": "ARTCASE-22",
+      "setup": "基础强化和附魔正负变化、法杖自带色彩但未实际触发元素",
+      "expected": "品阶/附魔分开，装饰不伪触发燃烧冰冻或电伤；坏词仍可辨",
+      "evidence": "各来源状态/实际触发与展示对照"
+    },
+    {
+      "id": "ARTCASE-23",
+      "setup": "512角色与1024长武器/大体型图集裁剪、缩放和镜像",
+      "expected": "逻辑锚点与手/尖端/枪口一致，无黑边白边和相邻帧漏色；导出参数可追溯",
+      "evidence": "原件、manifest、游戏实拍与图集边缘检查"
+    },
+    {
+      "id": "ARTCASE-24",
+      "setup": "最终选择候选音频/图片进入发行包",
+      "expected": "逐文件对应来源/许可证据/版本/哈希；未试听或无证据资源不能凭下载状态称正式验收",
+      "evidence": "实际导出清单、保留母版和包内所需许可材料"
+    }
+  ],
+  "projection_reference_cases": [
+    {
+      "id": "PROJ-GROUND",
+      "point": [
+        0,
+        0,
+        0
+      ],
+      "camera": [
+        0,
+        0
+      ],
+      "expected": [
+        640,
+        510
+      ]
+    },
+    {
+      "id": "PROJ-RIGHT",
+      "point": [
+        100,
+        0,
+        0
+      ],
+      "camera": [
+        0,
+        0
+      ],
+      "expected": [
+        705,
+        510
+      ]
+    },
+    {
+      "id": "PROJ-FAR",
+      "point": [
+        0,
+        100,
+        0
+      ],
+      "camera": [
+        0,
+        0
+      ],
+      "expected": [
+        640,
+        462
+      ]
+    },
+    {
+      "id": "PROJ-JUMP",
+      "point": [
+        0,
+        0,
+        100
+      ],
+      "camera": [
+        0,
+        0
+      ],
+      "expected": [
+        640,
+        440
+      ]
+    },
+    {
+      "id": "PROJ-FAR-JUMP",
+      "point": [
+        100,
+        100,
+        100
+      ],
+      "camera": [
+        0,
+        0
+      ],
+      "expected": [
+        705,
+        392
+      ]
+    },
+    {
+      "id": "PROJ-CAMERA",
+      "point": [
+        100,
+        100,
+        0
+      ],
+      "camera": [
+        100,
+        100
+      ],
+      "expected": [
+        640,
+        510
+      ]
+    }
+  ],
+  "attachment_reference_cases": [
+    {
+      "id": "PIVOT-RIGHT",
+      "pivot": [
+        256,
+        440
+      ],
+      "local_cm": [
+        30,
+        20
+      ],
+      "scale": 2,
+      "trim_offset": [
+        100,
+        80
+      ],
+      "facing": 1,
+      "expected_untrimmed": [
+        316,
+        400
+      ],
+      "expected_trimmed": [
+        216,
+        320
+      ]
+    },
+    {
+      "id": "PIVOT-LEFT",
+      "pivot": [
+        256,
+        440
+      ],
+      "local_cm": [
+        30,
+        20
+      ],
+      "scale": 2,
+      "trim_offset": [
+        100,
+        80
+      ],
+      "facing": -1,
+      "expected_untrimmed": [
+        196,
+        400
+      ],
+      "expected_trimmed": [
+        96,
+        320
+      ]
+    }
+  ]
+}

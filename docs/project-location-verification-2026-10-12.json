@@ -1,0 +1,23 @@
+{
+  "localDate": "2026-10-12",
+  "newRoot": "F:\\Ourgame",
+  "launcherIdempotent": true,
+  "processes": [
+    {
+      "Name": "blender.exe",
+      "ProcessId": 5268,
+      "CommandLine": "\"E:\\SteamLibrary\\steamapps\\common\\Blender\\blender.exe\" --no-window-focus --factory-startup --python \"F:\\Ourgame\\tools\\scripts\\blender-bootstrap.py\""
+    },
+    {
+      "Name": "UnrealEditor.exe",
+      "ProcessId": 34216,
+      "CommandLine": "\"G:\\UE_5.5\\Engine\\Binaries\\Win64\\UnrealEditor.exe\" \"F:\\Ourgame\\UnrealGame\\CodexDungeon.uproject\" -NoSplash -NoLiveCoding -nop4 -abslog=\"F:\\Ourgame\\UnrealGame\\Saved\\Bootstrap\\editor-20261012-192323.log\""
+    }
+  ],
+  "powershellParseErrors": [],
+  "documentationFilesChecked": 10,
+  "missingDocumentationLinks": [],
+  "blenderConfiguredCheck": "tools/runtime/blender-mcp/logs/configured-check-20261012-192359/verification.json",
+  "unrealConfiguredCheck": "tools/runtime/unreal-mcp/logs/2026-10-12_192358/verification.json",
+  "scope": "New-root editor startup and configured MCP reads, copied source verification, documentation and launch syntax; no new C++ build, PIE or gameplay verification"
+}

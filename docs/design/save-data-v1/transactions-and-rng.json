@@ -1,0 +1,425 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "module": "D-13",
+  "source_event": "EV-031",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposal_not_individually_approved",
+  "parameter_status": "unimplemented_and_unplaytested",
+  "scope": "UE5+Blender首版单人；只定义文档/JSON事务、随机、奖励与恢复接口，不新增收益、不实现联网或本地防作弊。",
+  "io_contract_ref": "save-rules.json",
+  "source_refs": [
+    {"id":"SRC-D04-ORDER","path":"docs/design/inventory-v1/inventory-rules.json","json_pointer":"/event_order","purpose":"伤害死亡、到期、合法治疗、自动货币拾取与库存提交次序"},
+    {"id":"SRC-D04-TXN","path":"docs/design/inventory-v1/inventory-rules.json","json_pointer":"/transaction","purpose":"所有权、数量、费用、券与最终属性原子更新"},
+    {"id":"SRC-D04-PICKUP","path":"docs/design/inventory-v1/inventory-rules.json","json_pointer":"/currency_pickup","purpose":"真实拾取才入账，结算不再加碎片"},
+    {"id":"SRC-D04-EXIT","path":"docs/design/inventory-v1/inventory-rules.json","json_pointer":"/exit","purpose":"免费出口和收费出口安全条件、离房清理与状态保留"},
+    {"id":"SRC-D06-SUCCESS","path":"docs/design/bosses-v1/common-rules.json","json_pointer":"/settlement","purpose":"同点双死不成功，Boss成功键和终局先入账后展示"},
+    {"id":"SRC-D06-SAVE","path":"docs/design/bosses-v1/common-rules.json","json_pointer":"/persistence/save_during_boss_fight_adopted","purpose":"本轮覆盖Boss中途保存未采用项，与root保存规则一致"},
+    {"id":"SRC-D07-MANIFEST","path":"docs/design/dungeon-v1/common-rules.json","json_pointer":"/manifest","purpose":"有限房间清单、稳定SlotID与真实死亡"},
+    {"id":"SRC-D07-ROUTE","path":"docs/design/dungeon-v1/common-rules.json","json_pointer":"/generation","purpose":"种子路线、固定布局、返回和重试不重抽"},
+    {"id":"SRC-D07-SAVE","path":"docs/design/dungeon-v1/common-rules.json","json_pointer":"/persistence","purpose":"本轮明确覆盖midcombat_save_adopted=false，保留原文件"},
+    {"id":"SRC-D08-RNG","path":"docs/design/economy-v1/common-rules.json","json_pointer":"/rng","purpose":"随机流、同源固定结果与解锁快照"},
+    {"id":"SRC-D08-BUDGET","path":"docs/design/economy-v1/common-rules.json","json_pointer":"/room_budget","purpose":"有限manifest总预算只分一次，跨波不再分配"},
+    {"id":"SRC-D08-TXN","path":"docs/design/economy-v1/facilities.json","json_pointer":"/transaction","purpose":"收费设施、整包或托盘、当前钱包与目标/报价版本"},
+    {"id":"SRC-D08-FACILITIES","path":"docs/design/economy-v1/facilities.json","json_pointer":"/facilities","purpose":"现有九类设施、有限次数、未知结果托盘与已生成报价"},
+    {"id":"SRC-D08-REWARDS","path":"docs/design/economy-v1/reward-sources.json","json_pointer":"/sources","purpose":"沿用原金币/碎片/首次奖励数量，不新增收益"},
+    {"id":"SRC-D08-DELIVERY","path":"docs/design/economy-v1/reward-sources.json","json_pointer":"/delivery_and_idempotency","purpose":"来源与拾取分离、每敌/房/地面对象去重键、待落地"},
+    {"id":"SRC-D08-SEED","path":"docs/design/economy-v1/reward-sources.json","json_pointer":"/seed_and_save_interface","purpose":"每来源独立通道、第一次解析冻结全部结果"},
+    {"id":"SRC-D08-DISC","path":"docs/design/economy-v1/reward-sources.json","json_pointer":"/discovery_contract","purpose":"实际发现交互与首次Boss独立；付门票不发碎片"},
+    {"id":"SRC-V2-GEN","path":"docs/design/equipment-v2/enchant-rules.json","json_pointer":"/generation","purpose":"integer_uniform_center_quantile_v1及原q、完整合法组合抽样"},
+    {"id":"SRC-V2-OPS","path":"docs/design/equipment-v2/enchant-rules.json","json_pointer":"/operations","purpose":"觉醒/重洗抽样，升阶保原q，洗净不重抽"},
+    {"id":"SRC-V2-SAVE","path":"docs/design/equipment-v2/enchant-rules.json","json_pointer":"/persistence","purpose":"原结果、原q、算法与目录版本持久化；未知数据不重造"},
+    {"id":"SRC-D09-ACCOUNT","path":"docs/design/progression-v1/hub-rules.json","json_pointer":"/canonical_account_fields","purpose":"实付receipt、账号锁、已购样品与待选项"},
+    {"id":"SRC-D09-HUB","path":"docs/design/progression-v1/hub-rules.json","json_pointer":"/hub_transaction","purpose":"账号购买及同ID不同digest拒绝"},
+    {"id":"SRC-D09-RESET","path":"docs/design/progression-v1/hub-rules.json","json_pointer":"/talent_reset","purpose":"只退原实付、已退款证据不删除"},
+    {"id":"SRC-D09-START","path":"docs/design/progression-v1/hub-rules.json","json_pointer":"/new_run","purpose":"同事务冻结成长与样品、清待选项、固定20金币初始化一次"},
+    {"id":"SRC-D09-SAMPLE","path":"docs/design/progression-v1/unlocks.json","json_pointer":"/research_sample_order","purpose":"首匹配N04报价、现金一次样品、账号与Run同逻辑事务"},
+    {"id":"SRC-D10-FACT","path":"docs/design/narrative-v1/story-flow.json","json_pointer":"/fact_transaction","purpose":"剧情事实不等已读，原成功证据回填不重发奖励"},
+    {"id":"SRC-D10-END","path":"docs/design/narrative-v1/story-flow.json","json_pointer":"/ending","purpose":"首次与每Run结局receipt及当时支线快照"}
+  ],
+  "shared_commit_contract": {
+    "storage_root": "每Profile一个完整bundle：账号、零或一个activeRun、当前完整tick状态、OperationID结果日志、奖励去重证据与RNG状态；IO/A-B代/校验/发布marker只由save-rules.json定义。",
+    "forbidden_mix": "不得把较新账号余额或已购样品标志与较旧Run物品/金币拼接；任一代的所有相关字段均随该完整代选择。",
+    "publication_is_success": "候选中字段先一致不等于持久成功；只在整代经过校验且发布marker有效后，向玩法确认结果和放行一次成功/开奖音效。",
+    "tick_order": [
+      "完成本tick所有到期伤害与所有死亡；玩家死亡时禁用新拾取/付费/Boss成功",
+      "按D04/D03处理到期及其破韧、存活者旧装备合法治疗；不改原相对顺序",
+      "处理应发生的自动货币拾取与既有合法奖励事件；构造一致候选并保留稳定事件身份",
+      "在原库存提交点重验手动交易；合入同tick候选；随后按原规则完成本tick其他状态",
+      "只在完整tick边界冻结仿真并请求保存；不把半次伤害批次或半笔交易写成恢复点",
+      "整代发布后安装已提交分支并确认结果；继续下一个模拟tick"
+    ],
+    "io_wait": "强制提交短暂冻结仿真、输入动作与模拟时钟，属于技术保存暂停；不得IO中继续跑world后覆盖成旧快照。",
+    "failure": "保持同一post-damage基线、同一候选、同OperationID和RNG结果，进入save-rules.json命名的SAVE_FAILED_TECHNICAL_PAUSE；先检查marker是否其实已发布，再重试同一候选；未发布不揭示随机结果。",
+    "manual_cancel_before_publish": "仅撤尚未提交且标为可取消的手动交易分支；回到本tick该交易前基线，含已发生真实伤害、自然计时、合法治疗和此前应处理事件。若同tick还有强制奖励/拾取，仍须发布包含它们的完整候选；不能整体回上一个健康状态。",
+    "noncancellable_candidates": ["玩家真实死亡/终局结束", "已合法触发的奖励/永久入账", "自动货币拾取", "已执行的房间迁移与其清理/一次恢复", "已揭示结果的提交（揭示本应只发生在发布后）"],
+    "death_failure": "死亡/终局候选保存失败不能点取消复活、拿新ID重算同点胜负或回滚本tick伤害；保留故障暂停供同候选重试。",
+    "crash_recovery": "只加载save-rules.json选定的完整已发布bundle；最新published损坏/未知版本/marker不可信时按root进入RECOVERY_REQUIRED，不自动降到较旧兼容代。明确整代备份恢复才可回退。不自动执行日志、不重播伤害/治疗/交易/掉落回调；未发布临时候选不可当成功拼入。",
+    "resume_time": "恢复本局模拟时钟与各next_tick/deadline；离线/暂停实际时长不推进CD、DoT、动作、波次预告或奖励。",
+    "autosave": "建议每5活跃模拟秒请求一次；真正恢复点只认最后完整published generation。磁盘/排队/崩溃可使回退超过5秒，不承诺零损。",
+    "forced_boundaries": ["关键账号/库存/经济交易", "任何将向玩家揭示的随机结果", "奖励入账/掉落解析与来源托盘归属", "房间迁移", "新局创建", "死亡/放弃/通关结算", "正常暂停退出"],
+    "no_runtime_or_security_claim": "以上是未实现设计合同；校验用于识别损坏，不承诺本地防修改、回滚旧备份防刷或联网exactly-once。"
+  },
+  "operation_identity": {
+    "namespace": ["ProfileID", "OperationID"],
+    "OperationID": "在首次提交意图创建时分配唯一值；重试、丢回复、同一次按键回调保持同值。加载旧记录不生成新的操作ID去执行。",
+    "request_digest": "SHA-256(canonical_request_v1完整规范化请求字节)；绑定操作类型、ProfileID/AccountID/可空RunID、源/目的身份与版本、整数数量、选择/原落点、报价/目录版本、所用券、目标阶/节点、确认风险版本。保存原规范请求以核对哈希冲突；不得只对金额或OperationID取摘要。",
+    "canonical_request_v1": "固定字段名排序、显式null、稳定ID大小写规则、整数货币/数量、固定精度坐标表示；不纳入展示语言/墙钟/重试计数；不以不稳定浮点或容器迭代序列化作为规范字节。具体编码由实现验证。",
+    "lookup_order": [
+      "先查Profile内OperationID：同规范请求/digest返回原记录；不同请求拒绝OPERATION_ID_CONFLICT，即使源已卖出或当前版本已变",
+      "未命中再查稳定RewardKey/OfferID/EndingID等语义去重证据，不能换OperationID重领同源",
+      "再按操作重验当前合法性；钱包取当前余额，目标/库存/报价/必要账号版本照原规则重验",
+      "通过才构造候选；以该完整generation的发布为唯一提交点"
+    ],
+    "terminal_records": ["COMMITTED", "REJECTED", "CANCELLED_BEFORE_PUBLISH"],
+    "pending_not_committed": "内存中的私有CandidateID、BaseTickID、规范请求、预抽结果与光标变化；失败重试沿用。磁盘暂存不因有日志字样而自动变成已提交记录。",
+    "committed_record_fields": ["OperationID", "operation_type", "request_digest", "canonical_request_version", "canonical_request", "ProfileID", "AccountID", "RunID_or_null", "semantic_keys", "committed_tick", "commit_generation_id", "rules_versions", "result_code", "exact_result", "touched_versions", "rng_receipt_ids", "reward_receipt_ids"],
+    "exact_result": "原金额、费用/退款、交付/转移实例ID、派生栈ID、结果词条/原q、已冻结快照ID、已消费来源/次数与剩余数、receipt身份、当时终态。返回它只表示原结果，不在当前库存重建已消耗/丢弃/结束的物品。",
+    "cancelled_or_rejected": "保留ID与规范请求/digest、原因及无提交效果的结果；同ID同请求返回相同结果，需要新意图才可分配新ID。取消未揭示随机候选丢弃私有抽样分支，已发布游标不变。",
+    "single_writer": "同Profile本地存档写者串行；版本/锁是单人完整性约束，不代表已实现服务器、多人抢拾、云合并或跨进程竞态解决。"
+  },
+  "operation_types": [
+    {
+      "id":"TX01-SLOT-DEATH-REWARD","name":"有限敌人首次真实死亡奖励解析",
+      "requires":"本tick真实伤害造成该稳定Slot首次死亡，Run未结束；不包括苏醒、实体化、脚本移除或生成重试。",
+      "key":"RunID/RoomInstanceID/SlotID/SourceID/first_true_death",
+      "atomic_fields":["Slot killed与原死亡tick","分配给该Slot的既有金币额度","原RewardResultID/待落地或地面ObjectID","来源解析与Operation结果"],
+      "rng":"通常分配额度确定；若该来源包含已定义随机，沿原来源独立通道，整包结果与游标同候选。",
+      "recovery":"恢复原killed与同一对象/待落地，回调不再发一份金币；未拾取不算钱包收入。",
+      "cancel_before_publish":false,"source_ref_ids":["SRC-D07-MANIFEST","SRC-D08-BUDGET","SRC-D08-DELIVERY"]
+    },
+    {
+      "id":"TX02-ROOM-CLEAR-RESOLVE","name":"完整manifest终态清房掉落解析",
+      "requires":"D07所有必需Slot真实死亡终态、玩家仍存活、本局活动；前段清/清波不满足。",
+      "key":"RunID/RoomInstanceID/SourceID",
+      "atomic_fields":["full_room_clear","bonus_presence含empty","筛选快照与全部确定结果","固定ItemInstanceID/地面ObjectID或pending_ground_delivery","各通道游标","Operation结果"],
+      "rng":"一次解析原D08概率/池；无额外奖励时也写已解析empty，不能返回再抽。",
+      "recovery":"保留完整已清房/原掉落；不按恢复时背包或天赋更改结果，不把药变成治疗。",
+      "cancel_before_publish":false,"source_ref_ids":["SRC-D07-MANIFEST","SRC-D08-SEED","SRC-D08-DELIVERY"]
+    },
+    {
+      "id":"TX03-CURRENCY-PICKUP","name":"真实金币/普通碎片拾取",
+      "requires":"D04存活/活动Run/落地/LOS/近距；本tick全伤害死亡先处理。",
+      "key":"RunID/RoomInstanceID/GroundObjectID/pickup_once",
+      "atomic_fields":["地面对象移除或已拾终态","本局金币或账号permanent_shards与earned_shards_total","PickupReceipt","来源对象归属/版本","Operation结果"],
+      "rng":"无；拾取不得重造源实例或重抽。",
+      "recovery":"恢复已拾则对象消失且账已加；恢复未拾则对象仍在且账未加。结算只展示。",
+      "cancel_before_publish":false,"source_ref_ids":["SRC-D04-PICKUP","SRC-D08-DELIVERY","SRC-D09-ACCOUNT"]
+    },
+    {
+      "id":"TX04-ITEM-TRANSFER","name":"拾物/替换/丢弃/并拆栈",
+      "requires":"完成原D04动作，源/槽/数量/落点/所有权与容量重新合法；最后武器禁手动丢弃。",
+      "key":"OperationID；原ItemInstanceID/StackID全流程保持或记录确定派生ID",
+      "atomic_fields":["来源减少/移除","目的装入/合栈","旧物落地与派生栈ID","最终属性与HP按新最终上限截一次","源目的版本","Operation结果"],
+      "rng":"无；同实例弹匣/CD/附魔不重置。",
+      "recovery":"恢复同一归属/数量，未完成动作恢复其原进度；load本身不免费完成动作。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-D04-TXN","SRC-D04-ORDER"]
+    },
+    {
+      "id":"TX05-SHOP-STOCK-RESOLVE","name":"普通商人装备库存预生成并揭示",
+      "requires":"现有OfferID在第一次展示前解析；库存是D08既有55报价，不因查看刷新。",
+      "key":"RunID/FacilityInstanceID/OfferID/stock_generation0",
+      "atomic_fields":["固定OfferID/ItemInstanceID/初始弹匣","基础强化品阶/完整附魔原q","价格/库存版本","各随机游标/已解析结果","Operation结果"],
+      "rng":"shop_stock与enchantment子通道；商品全词条只在整代发布后展示。",
+      "recovery":"重新打开仍显示同实例同价格，未购买不算持有；不重置库存/弹匣。",
+      "cancel_before_publish":false,"source_ref_ids":["SRC-D08-FACILITIES","SRC-D08-SEED","SRC-V2-GEN"]
+    },
+    {
+      "id":"TX06-KNOWN-BUNDLE-PURCHASE","name":"普通已知商品/确定三选一整包购买",
+      "requires":"D04完整安全及原动作，整包目的容量/旧物落点合法；报价/库存版本一致，当前钱足；每笔最多一张匹配原规则券。",
+      "key":"OperationID与固定OfferID或FacilityInstanceID/useOrdinal/ChoiceID",
+      "atomic_fields":["金币/合法券扣除","整包同实例/数量转移及替换","库存或次数消耗","源目的版本/最终属性","Operation结果"],
+      "rng":"无新抽样；普通装备沿已发布库存结果，确定转轮random=false。",
+      "recovery":"已发布购买返回原整包，满包未提交不扣钱；不拆成先扣钱后交物。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-D04-TXN","SRC-D08-TXN","SRC-D08-FACILITIES"]
+    },
+    {
+      "id":"TX07-ROULETTE-SPIN","name":"有限风险轮盘抽取",
+      "requires":"完整安全、余次/钱或FUN003合法、源端托盘为空；确认后才能抽。",
+      "key":"RunID/FacilityInstanceID/useOrdinal；OperationID绑定原确认请求",
+      "atomic_fields":["20金币或合法券扣除","使用次数+1","固定0..99抽样/OutcomeID及游标","金币结果同笔入钱包或固定ItemInstanceID进唯一托盘或empty","Operation结果"],
+      "rng":"原FAC-ROULETTE四段整数概率不变；费用/次数/结果/游标同代；满包不改池。",
+      "recovery":"原结果为empty也消耗一次；物品保留托盘，未领不能再转；发布后不退钱重抽。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-D08-FACILITIES","SRC-D08-TXN"]
+    },
+    {
+      "id":"TX08-KEY-BOX-OPEN","name":"钥匙补给箱开箱",
+      "requires":"D08已存在箱与匹配钥匙、完整安全、未开且唯一源托盘可绑定。",
+      "key":"RunID/ObjectID/SourceID/open_once",
+      "atomic_fields":["一把匹配钥匙扣除","箱opened","固定ItemInstanceID/结果绑定源托盘","解析结果/游标","Operation结果"],
+      "rng":"按本局解锁快照预抽且隐藏，发布后才揭示；不以当前背包筛掉结果。",
+      "recovery":"即使有空位也先保持箱托盘，另作0.25s领取；不自动塞包，不复制地面物或退钥匙再抽。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-D08-DELIVERY","SRC-D08-SEED"]
+    },
+    {
+      "id":"TX09-TRAY-CLAIM-OR-FORFEIT","name":"源端托盘领取/明确放弃",
+      "requires":"领取完成D04完整安全与容量/动作；放弃须已有显式确认。两个模式写进digest，不共用不同请求的ID。",
+      "key":"RunID/TrayID/ResultID/claim_or_forfeit_once",
+      "atomic_fields":["托盘已领/放弃终态","同一实例转移或合法并栈（放弃则无交付）","源目的版本","Operation结果"],
+      "rng":"无；领取失败留原结果，不重新开奖。",
+      "recovery":"已领不再生成；已放弃不恢复次数/费/钥匙。离区确认或结束Run按原规则销毁未领局内奖。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-D08-DELIVERY","SRC-D08-FACILITIES"]
+    },
+    {
+      "id":"TX10-BASIC-FORGE","name":"基础强化",
+      "requires":"现有章cap、目标实例/等级、30/55/85原步费或合法FUN005及完整安全。",
+      "key":"OperationID+ItemInstanceID+fromGrade+toGrade",
+      "atomic_fields":["金币或合法券扣除","原实例grade变化","目标版本/最终属性与HP截断","Operation结果"],
+      "rng":"无；不改附魔包/原q/弹匣/CD，不额外治疗。",
+      "recovery":"原实例已升则返回原记录，不以新OperationID跳过等级/次数前置。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-D08-FACILITIES","SRC-D04-TXN"]
+    },
+    {
+      "id":"TX11-ENCHANT-AWAKEN-OR-REROLL","name":"附魔觉醒/整套重洗",
+      "requires":"完整合法组合存在、原目标/阶/报价版本一致、完整安全与当前金币足够。",
+      "key":"RunID/ItemInstanceID/expected_from_enchantment_revision/next_enchant_operation_ordinal；OperationID只绑定这次请求，不作为改seed入口",
+      "resolve_once_lock":"觉醒/重洗先锁原ItemInstanceID和附魔revision；同revision/ordinal只有一个候选解析，已发布结果与revision前进一起保存。换OperationID仍须命中原来源/结果或因旧revision拒绝，不能给同一次源操作换抽样。",
+      "atomic_fields":["金币扣除","整套package/affix/magnitude/原q","算法/目录版本","RNG所有消耗游标","enchantment_revision/operation_ordinal前进及解析源锁","目标版本/最终属性","Operation结果"],
+      "rng":"先确认和重验后，在私有候选按v2完整组合及整数幅度抽样；禁止开奖预览再取消；未发布不展示词条也不播成功声。",
+      "recovery":"发布后显示失败恢复同整套结果；未发布失败同候选重试，取消可弃未揭示分支且不推进已发布游标。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-V2-GEN","SRC-V2-OPS","SRC-V2-SAVE","SRC-D08-TXN"]
+    },
+    {
+      "id":"TX12-ENCHANT-UPGRADE-OR-CLEANSE","name":"附魔升阶/整套洗净",
+      "requires":"按v2全部下一阶合法区间或原洗净资格；原价/合法FUN006规则；完整安全。",
+      "key":"OperationID+ItemInstanceID+fromEnchantVersion",
+      "atomic_fields":["金币或合法券扣除","同整套原q升阶或全部附魔移除","目标版本/最终属性与HP截断","Operation结果"],
+      "rng":"不抽新数；升阶保原有正负词及原q有理数；洗净清整包不挑坏词。",
+      "recovery":"保存原q而非按当前幅度反算；数据不支持时恢复/迁移阻断，不免费重抽替词。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-V2-OPS","SRC-V2-SAVE","SRC-D08-TXN"]
+    },
+    {
+      "id":"TX13-HIDDEN-ENTRY-RIGHT","name":"付费隐藏入口的一次入场权",
+      "requires":"可选入口已确认路线/遗留风险、完整安全、当前钱或原工具足够；主路免费不变。",
+      "key":"RunID/EntranceID/entry_right_once",
+      "atomic_fields":["金币/合法工具扣除","原RoomInstanceID/同seed一次EntryRight","入场权状态/Operation结果"],
+      "rng":"目的房/有限清单绑定原生成结果，不因转换失败重抽。",
+      "recovery":"权已发布则技术转换重试不二次扣费；权不等于发现/杀Boss，不预发碎片。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-D08-FACILITIES","SRC-D08-DISC","SRC-D04-EXIT"]
+    },
+    {
+      "id":"TX14-ROOM-TRANSITION","name":"普通/跨章房间迁移",
+      "requires":"按D04免费/付费各自安全条件及已确认风险；存在一次入场权则查原权。",
+      "key":"RunID/TransitionID/transitionOrdinal",
+      "atomic_fields":["目的RoomInstanceID/布局/有限manifest及原访问状态","出口/入场权消耗状态","旧房弹/部署物清理不退款","玩家状态/CD/next_tick保留","仅合法主线跨章一次20%恢复标记及实际HP","Operation结果"],
+      "rng":"目的布局/清单如需首次解析，在迁移前候选固定并发布；返回不能重新生成。",
+      "recovery":"加载已发布目的完整tick，不再次清理/恢复或重新扣门票；未发布候选故障暂停不能偷渡继续。",
+      "cancel_before_publish":false,"source_ref_ids":["SRC-D04-EXIT","SRC-D07-ROUTE","SRC-D07-MANIFEST","SRC-D09-START"]
+    },
+    {
+      "id":"TX15-BOSS-SUCCESS","name":"非终局主线/可选Boss合法成功",
+      "requires":"本tick全部伤害/死亡后玩家存活；真实BossSpawnID首次合法成功；可选成功不推进主线或给跨章恢复。",
+      "key":"RunID/RoomInstanceID/BossSpawnID",
+      "atomic_fields":["Boss成功receipt与本局过关","原D08保证碎片入账号/earned","该AccountID/BossID首次额外碎片及首次标志（若未领）","既有金币/局内奖励固定来源与对象","对应D10事实union及待展示","D06成功清理自有剩余伤害","Operation结果"],
+      "rng":"仅原奖励来源需要的抽样；金额沿D08，不加剧情奖励。",
+      "recovery":"成功receipt、首次、账号余额、Run终态/地面奖同代；显示或回调重复不再领。",
+      "cancel_before_publish":false,"source_ref_ids":["SRC-D06-SUCCESS","SRC-D08-REWARDS","SRC-D08-DELIVERY","SRC-D10-FACT"]
+    },
+    {
+      "id":"TX16-DISCOVERY","name":"隐藏发现点实际安全交互",
+      "requires":"实际到达点并完成0.25s、安全、同点伤害死亡后存活；进入/付费/显图/Boss死不替代交互。",
+      "key":"AccountID/DiscoveryID；同时记录原RunID/SourceID事件receipt",
+      "atomic_fields":["账号发现标志","原D08首次2碎片与earned（未领时）","D10对应支线事实","本局来源事件/Operation结果"],
+      "rng":"无；再次发现可展示已知文字，0重复经济奖励。",
+      "recovery":"账号key已领即不再付碎片；已读/当前位置不能反推成功。",
+      "cancel_before_publish":false,"source_ref_ids":["SRC-D08-DISC","SRC-D08-REWARDS","SRC-D10-FACT"]
+    },
+    {
+      "id":"TX17-FINAL-BOSS-AND-ENDING","name":"最终Boss碎片/首次/剧情/终局根提交",
+      "requires":"本局BOS-DEM-001按D06合法成功，全部同点伤害后玩家存活；账号已有M05不能代替本局成功。",
+      "key":"RunID/RoomInstanceID/BossSpawnID；ending_receipt=AccountID/RunID/END-OPEN-GATE",
+      "atomic_fields":["最终Boss本局成功与原12碎片","原首次额外2碎片及AccountID/BossID标志（若未领）","STORY-M05与world_liberated=true","本局结局receipt和当时已知S01..05快照","首次结局receipt仅空时设置且不改旧快照","RunEnded胜利tombstone/结算仅展示累计","局内金币装备托盘销毁与activeRun解除","Operation结果"],
+      "rng":"无额外终局金币/装备或结局随机；原终局金币0沿用。",
+      "recovery":"一代里要么仍是此前完整局，要么已入碎片/已解誓/有结局/已结束；不得账号已奖励但Run还可杀Boss。",
+      "cancel_before_publish":false,"source_ref_ids":["SRC-D06-SUCCESS","SRC-D08-REWARDS","SRC-D10-END","SRC-D10-FACT"]
+    },
+    {
+      "id":"TX18-DEATH-OR-ABANDON-END","name":"真实死亡/明确放弃结束Run",
+      "requires":"真实HP死亡或已有明确放弃意图；同点双死归失败，无新Boss奖励/事实。",
+      "key":"AccountID/RunID/end_once",
+      "atomic_fields":["结束原因与最终tick/结算receipt","已入账永久碎片保留且不二次入账","本局物品/金币/地面未拾奖/未领托盘结束","未买样品资格保持原false","activeRun解除与RunEnded tombstone","Operation结果"],
+      "rng":"无；延迟弹/脚本回调不得在结束局新增收入。",
+      "recovery":"已结束只展示原结算；未拾碎片不补发；保存失败暂停不能取消真实死亡。",
+      "cancel_before_publish":false,"source_ref_ids":["SRC-D06-SUCCESS","SRC-D04-PICKUP","SRC-D09-ACCOUNT","SRC-D09-SAMPLE"]
+    },
+    {
+      "id":"TX19-TALENT-RANK-BUY","name":"局外天赋一级购买",
+      "requires":"HUB_IDLE且activeRun为空、账号/价格版本、当前等级/前置/上限、碎片足够。",
+      "key":"OperationID；新PurchaseReceiptID=该购买OperationID",
+      "atomic_fields":["permanent_shards扣原价格","TalentID当前rank+1","该rank actual_paid_shards/price_rules_version/未退款receipt","account_version","Operation结果"],
+      "rng":"无；退款不算新earned，购买不改历史Run冻结快照。",
+      "recovery":"等级、扣款、实付凭证共同恢复；缺凭据阻断退款迁移，不按现价猜支付。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-D09-HUB","SRC-D09-RESET","SRC-D09-ACCOUNT"]
+    },
+    {
+      "id":"TX20-TALENT-RESET-ALL","name":"局外天赋全部退款",
+      "requires":"HUB_IDLE且无未结束局；每个现持rank恰有一张活跃实付receipt且无孤儿/重复/负额。",
+      "key":"OperationID；退款覆盖明确PurchaseReceiptID集合及集合digest",
+      "atomic_fields":["所有天赋rank归零","仅当前未退款实付额之和回permanent_shards","每张原receipt.refunded_by_reset_operation_id","ResetReceipt含逐张ID与原实付/总额","account_version/Operation结果"],
+      "rng":"无；研究/已购样品不退不清，earned_shards_total不增加。",
+      "recovery":"重复同重置不再退；重新买须新receipt，下次只退新未退凭据；无凭据整体拒绝不部分退。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-D09-RESET","SRC-D09-HUB"]
+    },
+    {
+      "id":"TX21-RESEARCH-BUY","name":"局外永久研究购买",
+      "requires":"HUB_IDLE、无未结束Run、永久研究前置/尚未解锁、版本与碎片足够。",
+      "key":"OperationID；AccountID/ContentUnlockID永久拥有键",
+      "atomic_fields":["碎片扣除","unlocked_research_ids union","ResearchPurchaseReceipt原实付/规则版本","账号版本/Operation结果"],
+      "rng":"无；不刷新旧Run库存/概率/快照，也不免费送样品。",
+      "recovery":"研究永久且不可退款；样品标志是独立字段，购买研究不会把它设true。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-D09-HUB","SRC-D09-ACCOUNT","SRC-D09-SAMPLE"]
+    },
+    {
+      "id":"TX22-NEXT-SAMPLE-SELECTION","name":"局外下一局样品待选项",
+      "requires":"HUB_IDLE无未结束Run；null或已研究且永久样品未购的一个ContentUnlockID。",
+      "key":"OperationID+AccountID+expected_account_version",
+      "atomic_fields":["selected_sample_unlock_id写null或一个ID","账号版本/Operation结果"],
+      "rng":"无，无费用。",
+      "recovery":"这是下一局待选项；不改已存在Run冻结选择，回菜单有待续局仍禁止修改。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-D09-HUB","SRC-D09-START","SRC-D09-SAMPLE"]
+    },
+    {
+      "id":"TX23-NEW-RUN-CREATE","name":"创建新局并冻结成长/选择",
+      "requires":"无任何未结束/starting/ending/recovery Run，重验账号版本及样品live资格。",
+      "key":"OperationID；首次创建时分配并固定唯一RunID/StarterInstanceID",
+      "atomic_fields":["唯一activeRun与run_seed","冻结天赋/贡献/解锁/已购样品快照/规则版本/叙事语境","把账号待选样品转入本局冻结选择并同笔清空账号待选项","固定WPN-SWD-001 +0无附魔/20金币/起始HP专注与空槽","初始路线承诺/随机流状态","账号/Run版本/Operation结果"],
+      "rng":"RunSeed首次分配后同候选固定；起始装备不走自然品阶/附魔随机；不生成免费样品。",
+      "recovery":"同ID返回原RunID/原选择，即使账号待选已清null；继续不再20金币/满血/重取天赋/另开Run。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-D09-START","SRC-D09-SAMPLE","SRC-D07-ROUTE"]
+    },
+    {
+      "id":"TX24-SAMPLE-OFFER-BIND","name":"研究样品首匹配N04绑定",
+      "requires":"本局冻结选择非null且尚未发报价；按原FUN服务/目标匹配决定首个符合N04。",
+      "key":"RunID/ContentUnlockID/first_qualifying_N04_NodeID/sample0",
+      "atomic_fields":["固定首匹配NodeID/OfferID/ItemInstanceID/原固定价格","issued_once/未售库存","Operation结果"],
+      "rng":"固定选定内容，不重抽；绑定先发布再显示，不消费账号样品已购资格。",
+      "recovery":"当前匹配失效只禁用原点报价，不能转移后续N04/换物/补第二报价。",
+      "cancel_before_publish":false,"source_ref_ids":["SRC-D09-SAMPLE"]
+    },
+    {
+      "id":"TX25-SAMPLE-CROSS-SCOPE-BUY","name":"账号一次研究样品现金购买",
+      "requires":"本局冻结选择与live账号均合法、原绑定N04报价未售、服务目标仍匹配、完整安全/原动作/整物容量、现金足够；不能FUN002抵扣。",
+      "key":"OperationID；永久claim=AccountID/ContentUnlockID/sample_success_once",
+      "atomic_fields":["Run金币扣除","同ItemInstanceID交付/合法替换","原Offer已售","账号permanent_sample_purchased[ContentUnlockID]=true","SampleReceipt含原Offer/Run/费用/实例","账号/Run版本/Operation结果"],
+      "rng":"无；已知物品无溢出托盘，满包整体拒绝。",
+      "recovery":"账号资格与本局钱物同一代；已买后死亡/丢弃仍true；没买结束保持false且下一局要明确重选。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-D09-SAMPLE","SRC-D09-START","SRC-D04-TXN"]
+    },
+    {
+      "id":"TX26-PRESENTATION-SEEN","name":"剧情/结局已读与回顾游标",
+      "requires":"存在已提交事实/结局receipt，或原可选序章/营地文本；不把已读作为玩法事实证据。",
+      "key":"OperationID与PresentationID/ReceiptID",
+      "atomic_fields":["presentation_seen或游标","原待展示队列相应状态","Operation结果"],
+      "rng":"无；不增加碎片，不复活Boss，不刷新库存/样品/CD。",
+      "recovery":"可以恢复待展示文字；不得因此重放奖励或成功音效；跳过不改结局receipt快照。",
+      "cancel_before_publish":true,"source_ref_ids":["SRC-D10-FACT","SRC-D10-END"]
+    }
+  ],
+  "stable_reward_keys": [
+    {"id":"KEY-SLOT-GOLD","fields":["RunID","RoomInstanceID","SlotID","SourceID","first_true_death"],"scope":"run","receipt":"原分配额度、真实死亡tick、RewardResultID及地面交付引用；Slot多次回调、跨波、实体化完成均不再产出。","source_ref_ids":["SRC-D08-DELIVERY","SRC-D07-MANIFEST"]},
+    {"id":"KEY-ROOM-SOURCE","fields":["RunID","RoomInstanceID","SourceID"],"scope":"run","receipt":"来源解析一次，包含empty与所有结果index；clear回调不是新来源。","source_ref_ids":["SRC-D08-DELIVERY","SRC-D08-SEED"]},
+    {"id":"KEY-GROUND-OBJECT","fields":["RunID","RoomInstanceID","SourceID","result_index"],"scope":"run","receipt":"稳定GroundObjectID；per-enemy源须将原SlotID包含在SourceID派生身份或实例身份中，不能不同敌共用一个对象键。","source_ref_ids":["SRC-D08-DELIVERY"]},
+    {"id":"KEY-PICKUP","fields":["RunID","RoomInstanceID","GroundObjectID","pickup_once"],"scope":"run_with_permanent_receipt_if_shard","receipt":"从同一对象入账一次；永久碎片receipt保留到账号去重档案，不因Run结束删除。","source_ref_ids":["SRC-D04-PICKUP","SRC-D09-ACCOUNT"]},
+    {"id":"KEY-BOSS-SUCCESS","fields":["RunID","RoomInstanceID","BossSpawnID"],"scope":"run","receipt":"D06唯一成功事件，挂D08重复碎片/局内来源和D10事实；不另建可重复剧情成功键。","source_ref_ids":["SRC-D06-SUCCESS","SRC-D10-FACT"]},
+    {"id":"KEY-FIRST-BOSS","fields":["AccountID","BossID","first_boss_success"],"scope":"account","receipt":"原D08该Boss首次SourceID、实付奖励数量、首个成功事件及OperationID；跟同笔Boss成功保存。","source_ref_ids":["SRC-D08-REWARDS","SRC-D06-SUCCESS"]},
+    {"id":"KEY-DISCOVERY","fields":["AccountID","DiscoveryID"],"scope":"account","receipt":"实际交互receipt和原D08首次来源；独立于Boss首次和EntryRight，重复无新钱。","source_ref_ids":["SRC-D08-DISC","SRC-D10-FACT"]},
+    {"id":"KEY-ROULETTE","fields":["RunID","FacilityInstanceID","useOrdinal"],"scope":"run","receipt":"本次原OperationID、OutcomeID、结果/游标、费用/券与托盘；不可改OperationID绕过有限次数。","source_ref_ids":["SRC-D08-FACILITIES"]},
+    {"id":"KEY-BOX-TRAY","fields":["RunID","ObjectID","SourceID","result_index0"],"scope":"run","receipt":"同一源托盘与ItemInstanceID及开/领/放弃状态，领取不再生成地面副本。","source_ref_ids":["SRC-D08-DELIVERY"]},
+    {"id":"KEY-SAMPLE","fields":["AccountID","ContentUnlockID","sample_success_once"],"scope":"account","receipt":"该研究一次样品PurchaseReceipt含RunID、OfferID、ItemInstanceID、金币原价；退天赋不删。","source_ref_ids":["SRC-D09-SAMPLE"]},
+    {"id":"KEY-TALENT-PAYMENT","fields":["AccountID","PurchaseOperationID"],"scope":"account","receipt":"TalentID/rank/actual_paid_shards/price_rules_version/refunded_by_reset_operation_id；同等级重新购买有新receipt。","source_ref_ids":["SRC-D09-RESET"]},
+    {"id":"KEY-ENDING","fields":["AccountID","RunID","EndingID"],"scope":"account","receipt":"成功事件键/叙事语境/故事版本/当时支线集合；first_ending_receipt只指向首次，不重写。","source_ref_ids":["SRC-D10-END"]},
+    {"id":"KEY-RUN-END","fields":["AccountID","RunID","end_once"],"scope":"account","receipt":"结束原因/终态/结算receipt与原generation；阻止旧Run回调重领，但不阻止载入较旧完整备份的本地回退（非防作弊）。","source_ref_ids":["SRC-D09-ACCOUNT","SRC-D06-SUCCESS"]}
+  ],
+  "reward_delivery_state_machine": {
+    "source_states": ["UNRESOLVED", "RESOLVED_EMPTY", "RESOLVED_PENDING_GROUND", "RESOLVED_GROUND_AVAILABLE", "RESOLVED_TRAY_AVAILABLE", "AUTO_CREDITED", "CLAIMED", "FORFEITED_OR_RUN_ENDED"],
+    "separate_axes": "来源是否解析、实例在哪里、是否拾取/领取、是否永久入账为独立字段，以同一receipt链关联；地面生成不能顺手把账号余额加上。",
+    "ground": "解析原来源一次并固定对象；无合法落点时保存RESOLVED_PENDING_GROUND与原位置候选/结果ID。之后合法投放只移动同一对象引用，不抽样、不入钱包。拾取另以KEY-PICKUP扣地面并加钱包/账号。",
+    "tray": "未知轮盘/钥匙箱结果一份绑定源托盘；开箱/开奖与领取两笔操作，开时消耗费用/钥匙，领时转同实例。托盘不占随身容量、不自动使用、不保证离区后保留。",
+    "auto_credit": "Boss保证/首次碎片与发现首次碎片，在原合法事件同根入永久账；不再生成同奖励可拾地面碎片。无奖励资格的展示效果不可调用入账接口。",
+    "ended_run": "销毁未拾局内地面币/普通碎片与未领托盘，不补发/兑换。已入账碎片与其永久证据留账号。Run结束后延迟命中不能新造收入。",
+    "duplicate_new_operation_id": "语义键已成功时返回原receipt的已完成结果或当前领取状态，不再造物；journal ID去重不能代替来源键去重。",
+    "conservation": "同ItemInstanceID只能处于地面/源托盘/库存/明确销毁之一；来源与拾取receipt引用一致。物品并拆栈记录数量守恒与派生ID，已消费不因重试receipt复活。"
+  },
+  "rng_contract": {
+    "run_identity": "RunID、RunSeed、随机实现版本、内容/属性/附魔/路线规则版本随新局创建保存；算法尚未实现，不能声称跨版本/平台已经一致。",
+    "namespace_reconciliation": "D08 common-rules的RunID+SourceID+RollOrdinal+RulesVersion是逻辑抽样身份；reward-sources的RunSeed+RoomInstanceID+SourceID+ContentVersion+RollChannel是物理子流输入。D13保存两者映射：Profile/Run→stream→source_instance→channel→ordinal；SourceID模板不可单独充当跨房唯一实例。",
+    "streams": [
+      {"id":"route","partition":"RunID/route_commitment_id/layout_or_manifest_channel","save":"选定路线图/分支锁/布局ID/所有已解析有限manifest/相关游标"},
+      {"id":"reward_source","partition":"RunID/RoomInstanceID/SourceInstanceID/RollChannel","save":"presence含empty、类别/目的/模板/品阶等完整结果、合格集合与抽样游标"},
+      {"id":"shop_stock","partition":"RunID/FacilityInstanceID/OfferID/stock_generation0/channel","save":"固定报价实例/初弹匣/所有原词条/结果/游标"},
+      {"id":"enchantment","partition":"RunID/ItemInstanceID/generation0_or_enchantment_revision/enchant_operation_ordinal/channel","save":"原来源锁、附魔revision/操作ordinal、包/词条/整数幅度/原q分子分母/算法和目录版本/游标；不以可随意更换的OperationID改变同源seed"},
+      {"id":"wheel_facility_operation","partition":"RunID/FacilityInstanceID/useOrdinal/channel","save":"原0..99结果/OutcomeID/物品或金币或empty/费用和次数/游标"}
+    ],
+    "cursor_fields": ["stream_namespace", "algorithm_id_and_version", "seed_or_full_PRNG_state", "source_instance_id", "channel", "next_draw_ordinal", "raw_draws_consumed_including_rejection_sampling", "last_resolution_receipt_id"],
+    "persist_full_state": "若PRNG不能从版本/seed/ordinal无歧义恢复，保存全部内部状态；抽样序数与底层原始数消耗分开，拒绝采样也推进底层游标。仅存seed不能代替已解析结果/当前游标。",
+    "candidate_atomicity": "抽样在确认与全部前置重验之后的私有候选中发生；费用/券/次数/源解析、完整结果、所有受影响游标与Operation结果同候选保存。整代未发布，不把候选结果送给UI/动画/日志展示/成功声。",
+    "resolve_once_lock": "按SourceInstanceKey、OfferID、箱ObjectID、轮盘useOrdinal、装备InstanceID/附魔revision/ordinal锁一次解析；OperationID换值不创建第二份同源结果。已解析来源返回持久结果；旧目标revision/已用ordinal拒绝。新合法重洗必须基于新revision、正常再付原费，属于下一次操作。",
+    "pre_roll": "商人库存、房间有限manifest、源箱结果等可在既有规定解析点预抽；先整代发布，再向玩家展示对应结果。玩家未来是否购买不再改变该结果。尚未解析的来源只保留身份/seed/游标承诺，不靠加载触发重新抽取。",
+    "load": "只装载保存的结果/游标/原q；不调用随机生成接口。继续后的首次合法新事件才允许在原流下一ordinal抽样；旧结果不按当前背包/最新解锁/新HP钱包重新筛选。",
+    "invalid_pool_or_data": "保留原pending来源/实例/规则版本并进入配置/恢复提示，不能换seed、空吞原奖励、自动降价或替换好词；不承诺所有配置已引擎验证。",
+    "v2_quantile": "integer_uniform_center_quantile_v1原q有理数逐词保存；升阶按原q映射，新阶幅度不是下一次q来源。自然掉落/觉醒/重洗的完整合法组合、幅度和算法版本均保存。",
+    "finite_manifest": "进入房间前固定有限SlotID/敌定义/组/触发义务/奖励分配并发布；跨波、苏醒、实体化失败、回退深入线、读档与返回均不重抽也不重新分配预算。存当前每Slot状态及已用预算，不只存初seed。",
+    "no_new_random_revenue": "不改D08概率、金额、有限库存、轮盘次数或D09样品价格；不按HP/钱包/天赋强度动态补偿，不因load赠物。",
+    "local_rollback_limit": "玩家自行复制旧完整代或修改本地文件可能回到旧游标/旧资格；设计不提供防作弊保证，也不新增在线服务。"
+  },
+  "receipt_and_compaction": {
+    "root_placement": "日志、最小精确结果、永久receipt/去重键和当前Run全部证据随每完整bundle保存；不能只指向另一代或可丢失外部日志文件。",
+    "account_mandatory": ["永久碎片Pickup/Award receipt与earned累计依据", "首次Boss/发现claim及原成功事件", "每张天赋原实付及已退款指针/重置覆盖集合", "永久研究购买receipt", "研究样品已购与购买receipt", "首次/每Run结局receipt", "结束Run tombstone与新局创建receipt", "全Profile OperationID→request_digest/规范请求及原精确结果"],
+    "run_mandatory": ["每有限Slot真实死亡与奖励分配/来源解析", "地面/托盘/库存/销毁归属链", "商人报价/库存/有限次数", "全部随机结果与原q/各游标", "入场权/迁移及一次跨章恢复", "当前完整tick中未完成动作/状态/生成重试"],
+    "allowed": "损失无关紧要的调试文字、重复目录说明、同结果冗余展示可删；等价结构去重、无损压缩、索引重建可做。压缩也是新完整generation，校验后才发布。",
+    "forbidden": "按最近N条或最近N天直接删OperationID/digest/精确结果、已退款receipt、首次/样品已购标志；仅保余额或等级；仅保Bloom filter（误判丢合法请求）；只保交易counter而不能重现原结果；删旧Run键后接收旧回调再次领钱。",
+    "closed_run": "可移除已结束Run的非永久战斗位置/弹体等恢复载荷；先把永久入账、结束、创建与原Operation精确结果/去重证明折入账号档案。结果中旧InstanceID是历史引用，不能让读档重建已结束物品。",
+    "growth_cost": "无限长游戏历史会增加日志/receipt体积与写盘成本；首版采用保守保留+无损压缩。尚无玩家局数或实际存档体积，不能给性能上限；将来若改变保留协议须有显式版本与可证明去重等价，不能悄悄遗忘历史。",
+    "shard_invariant": "无明确管理迁移时，earned_shards_total = permanent_shards + 未退款天赋actual_paid_shards之和 + 永久研究actual_paid_shards之和；退款不增加earned，奖励落地未拾不计earned。",
+    "receipt_missing": "有余额/等级但实付或成功证据缺失时进入RECOVERY_REQUIRED并保留原档；不按现价格补款、不以已读剧情推首次、不推测新旧两代各一半。"
+  },
+  "presentation_ack": {
+    "success_sound": "同进程只为从未发布→该generation已发布的提交边沿发一次成功/开奖事件；事件带OperationID/ReceiptID，D12消费者去重。重复回调/同ID重试/load原成功都不再播。",
+    "lost_response": "整代发布后UI未收到回复，查询日志显示原结果；若重启，只恢复静态结果/待读剧情，不自动重播交易成功声。",
+    "audio_crash_boundary": "本地音频播放与磁盘marker无法成为同一原子物理事件；崩溃可能错过一次成功声，不为补声重播交易，也不承诺跨进程严格恰好一次可听音效。",
+    "story": "已提交待展示文字/结局receipt可恢复，展示、跳过、回顾只动presentation_seen/cursor，不动钱包/事实/原支线快照。"
+  },
+  "paper_recovery_cases": [
+    {"id":"REC01","before":"地面普通碎片对象O1可拾，账号余额5。","interrupt":"同tick伤害先致死，随后近距拾取回调到达。","selected_published_state":"死亡完整候选或此前最后完整代；不加载半个拾取。","expected":"死亡tick不满足拾取，不加碎片；死亡结算不补O1。若载入此前代，按该代完整世界继续，明确这是崩溃回退。","source_ref_ids":["SRC-D04-ORDER","SRC-D04-PICKUP"]},
+    {"id":"REC02","before":"碎片O2真实合法拾取，候选余额5→6。","interrupt":"对象消失/余额/receipt整代已发布，UI回复前退出。","selected_published_state":"已发布完整拾取代。","expected":"余额6，O2已拾；重发同OperationID或不同ID同GroundObjectID都不再+1；结算仅显示累计。","source_ref_ids":["SRC-D04-PICKUP","SRC-D08-DELIVERY"]},
+    {"id":"REC03","before":"有限Slot S3第一次真实死亡，原分配金币7，地面无可达落点。","interrupt":"RESOLVED_PENDING_GROUND完整代发布后退出。","selected_published_state":"S3 killed、结果7、同ObjectID待落地。","expected":"余额未加；恢复不重做死亡/RNG；之后合法落点只投同O3，跨波/回调不再生成7金币。","source_ref_ids":["SRC-D07-MANIFEST","SRC-D08-DELIVERY"]},
+    {"id":"REC04","before":"完整manifest清房的额外presence抽成empty。","interrupt":"结果/游标已发布后离房返回。","selected_published_state":"来源RESOLVED_EMPTY。","expected":"无奖励即已解析；不按返回/读档或新解锁再次抽，不重分房间预算。","source_ref_ids":["SRC-D08-SEED","SRC-D08-BUDGET"]},
+    {"id":"REC05","before":"轮盘费用20、余额40、余次2、托盘空。","interrupt":"候选抽到小药并游标推进，但写盘失败，未揭示。","selected_published_state":"进程存活时保存故障暂停；先查marker，再沿同候选重试。崩溃仅load符合root规则的完整代。","expected":"不能看到结果再换ID重抽；同Facility/useOrdinal源锁不随OperationID变。重试发布后余额20/余次1/同药同托盘。可取消未发布私有手动分支，但保留该tick真实伤害/时间；已发布不可取消退款。","source_ref_ids":["SRC-D08-TXN","SRC-D08-FACILITIES"]},
+    {"id":"REC06","before":"已开箱扣一钥匙，未知药已进入唯一源托盘，背包满。","interrupt":"完整开箱代发布，未完成0.25s领取时退出。","selected_published_state":"箱opened、钥匙已扣、托盘原InstanceID。","expected":"恢复原托盘；领取须重新满足原动作/容量规则，load不免费完成；不退钥匙、不补地面副本、不抽新药。","source_ref_ids":["SRC-D08-DELIVERY"]},
+    {"id":"REC07","before":"账号研究样品未购，原N04报价已绑定，Run有足额金币。","interrupt":"购买候选跨账号Run写入中，临时代损坏未发布。","selected_published_state":"此前完整账号+Run代，或同候选成功重试后的完整代；不能混。","expected":"旧代=钱未扣/物未得/flag=false；新代=钱扣/同实例交付/flag=true。禁用新账号flag搭旧Run库存。","source_ref_ids":["SRC-D09-SAMPLE","SRC-D09-ACCOUNT"]},
+    {"id":"REC08","before":"已买样品完整代后真实死亡；同研究永久样品flag=true。","interrupt":"死亡结算已发布后再次新局。","selected_published_state":"已结束Run与永久样品receipt。","expected":"局内样品可销毁，flag仍true；退天赋、丢物、回顾对白或新局不恢复该研究样品资格。","source_ref_ids":["SRC-D09-SAMPLE","SRC-D09-RESET"]},
+    {"id":"REC09","before":"余额5，根基rank2有未退实付2与6两张receipt。","interrupt":"全退操作R9完整发布后丢回复，重复请求。","selected_published_state":"rank0、余额13、两张receipt均refunded_by=R9。","expected":"同ID返回退款8/余额13原结果；新ID全退0；再买一级付2生成新receipt，下一全退仅新2，不能再退旧8。","source_ref_ids":["SRC-D09-RESET"]},
+    {"id":"REC10","before":"账号有待选研究U10且无未结束Run。","interrupt":"新局原RunID=R10、冻结U10/20金币、账号待选清null完整代发布，回复丢失。","selected_published_state":"同一个R10的完整启动代。","expected":"同OperationID恢复R10和U10快照；不读已清null替换快照，不再发20金币、不另建R11。结束后未重选则下一局样品null。","source_ref_ids":["SRC-D09-START","SRC-D09-SAMPLE"]},
+    {"id":"REC11","before":"第一次击败石牢Boss，玩家与Boss同tick都归零。","interrupt":"成功回调在全量死亡后到达。","selected_published_state":"该tick完整失败终态。","expected":"无新4保证碎片、无首次2、无M01、无成功金币；保留此前已入账碎片。不得因Boss死亡动画或已读文字反推胜利。","source_ref_ids":["SRC-D06-SUCCESS","SRC-D08-REWARDS","SRC-D10-FACT"]},
+    {"id":"REC12","before":"首次最终Boss合法成功前余额10，已有S01、S03。","interrupt":"终局根候选12保证+2首次、M05/解誓、结局快照与Run结束已发布，展示前退出。","selected_published_state":"已结束完整代。","expected":"余额24，只一次；有原S01/S03结局receipt及first指针；没有activeRun/终局金币/可再杀Boss。恢复可显示原结局，不能再奖励。","source_ref_ids":["SRC-D06-SUCCESS","SRC-D08-REWARDS","SRC-D10-END"]},
+    {"id":"REC13","before":"玩家本tick真实死亡，候选结束Run。","interrupt":"强制保存失败但进程仍活。","selected_published_state":"SAVE_FAILED_TECHNICAL_PAUSE同死亡候选等待重试；不得进HUB_IDLE。","expected":"不能取消、重置天赋或新开局来复活；不回滚HP/计时；退出崩溃后只load符合root规则的完整已发布代并说明回退，不能把内存死亡一半合并。","source_ref_ids":["SRC-D06-SUCCESS","SRC-D09-ACCOUNT"]},
+    {"id":"REC14","before":"房间后续组warning0.7s，原有限SlotID已预留；玩家燃烧next_tick和武器弹都在原房。","interrupt":"暂停退出保存后离线一小时。","selected_published_state":"原完整tick含warning余时、预留、同弹体/状态与游标。","expected":"离线不烧血、不走预告/CD、不苏醒再抽；继续下一个tick按原次序推进，跨波不重置预算。","source_ref_ids":["SRC-D07-SAVE","SRC-D07-MANIFEST","SRC-D08-SEED"]},
+    {"id":"REC15","before":"已扣隐藏门费并发布EntryRight，技术转换失败。","interrupt":"尚未完成目的房迁移时退出。","selected_published_state":"原房+同EntryRight与绑定目的room/seed。","expected":"继续原入场权不再扣钱、不重抽布局；未实际发现/未杀Boss不给碎片，不能以门票receipt当发现receipt。","source_ref_ids":["SRC-D08-DISC","SRC-D08-FACILITIES","SRC-D07-ROUTE"]},
+    {"id":"REC16","before":"附魔I升II已有原q=1/2，升级费用足够。","interrupt":"升级完整代发布后重复OperationID但请求改成重洗。","selected_published_state":"原升级结果/原q与digest。","expected":"拒绝OPERATION_ID_CONFLICT，不扣第二费/不改词；同请求返回原升级。若目录版本缺失则恢复/迁移提示，不按现词幅反算q。","source_ref_ids":["SRC-V2-GEN","SRC-V2-OPS","SRC-D09-HUB"]},
+    {"id":"REC17","before":"地面对象已拾与天赋旧receipt已退款，Run结束后的journal需压缩。","interrupt":"新压缩代写入失败，旧代仍可用。","selected_published_state":"旧完整已发布代；成功压缩时为等价新完整代。","expected":"无论选哪代，原拾取/已退款/样品与首次去重证据仍在；不能因只留最近N条而再次加钱或退款。","source_ref_ids":["SRC-D04-PICKUP","SRC-D09-RESET","SRC-D09-ACCOUNT"]},
+    {"id":"REC18","before":"附魔手动交易同tick先受真实伤害10并合法治疗2，HP50→42，再构造随机候选。","interrupt":"写失败，用户取消尚未发布的收费分支；同tick另有已合法自动拾取。","selected_published_state":"取消候选只撤收费/词条/私有RNG分支；重建保留HP42、已走模拟时间和自动拾取的完整候选。","expected":"不得退回HP50或去掉那次应入账拾取；剩余强制项成功发布后才解暂停；若失败继续故障暂停。","source_ref_ids":["SRC-D04-ORDER","SRC-D04-TXN","SRC-D08-TXN"]},
+    {"id":"REC19","before":"普通地面碎片已解析未拾，Boss永久碎片已合法入账。","interrupt":"主动放弃结束Run完整发布。","selected_published_state":"放弃终态与此前账号Boss入账receipt。","expected":"只保Boss已入账和其他已拾碎片；地面未拾不补，结算不把来源总产出当已获；回顾故事不再发奖。","source_ref_ids":["SRC-D04-PICKUP","SRC-D08-DELIVERY","SRC-D10-FACT"]},
+    {"id":"REC20","before":"自动保存目标每5活跃模拟秒，上一代在t=10s；下一请求在t=15s但IO未发布。","interrupt":"在t=15s保存等待中断电。","selected_published_state":"t=10s最后完整published generation。","expected":"恢复点取实际已发布tick；请求间隔不能证明损失绝对不超过5s，失败/长IO更不能保证。不得把临时较新账号余额合并到t=10s Run。","source_ref_ids":["SRC-D07-SAVE","SRC-D09-ACCOUNT"]}
+  ],
+  "explicit_overrides_and_boundaries": [
+    "D07 /persistence/midcombat_save_adopted=false由D13精确完整tick中途续局方案覆盖；保留旧源作为历史，不改战斗/波次规则。",
+    "D06 /persistence/save_during_boss_fight_adopted=false由D13同一精确完整tick方案覆盖；Boss阶段/阈值/动作不重置，旧源保留。",
+    "D04/D08/v2的逻辑提交在此收紧为完整generation持久发布后才确认；先扣费/先播放开奖再异步落盘不符合本设计。",
+    "旧D08多种RNG key表述统一为已保存分层命名空间映射，不改概率或原v2抽样算法。",
+    "D08地面对象通用键需将per-enemy Slot身份纳入来源实例，避免同房同模板敌共用ObjectID；保持原每敌奖励键与总预算。",
+    "首版仅本地单Profile单写者、零或一未结束Run；未设计云多端合并、多人恢复、远端权威、联网反作弊。",
+    "事务日志不可作为load后的玩法命令列表；任一未证实成功记录不得以剧情已读或动画到达补发奖励。"
+  ],
+  "future_runtime_acceptance": [
+    "逐操作在候选前/文件写中/校验后marker前/marker后回复前故障注入，验证只有完整旧代或完整新代",
+    "读档不调用伤害/治疗/奖励/RNG回调；恢复同完整tick，暂停一小时CD/DoT不变",
+    "样品、首次Boss、终局、新Run冻结/清待选项跨账号Run同代，故障不混版本",
+    "同ID不同规范请求拒绝，同ID同请求及不同ID同RewardKey均不复制收益",
+    "未发布随机结果全链路不可见；空结果、满包托盘、原q升级与跨波不重抽",
+    "故障暂停下真实伤害/时间不撤，死亡/奖励/迁移不可取消复活；取消手动分支不吞其他强制事件",
+    "压缩前后所有规范请求/digest/精确结果/永久receipt等价，原退款与首次样品不能重领",
+    "量测实际bundle体积、持续写盘延迟/失败、5秒目标达成率与可感知保存暂停；当前没有这些实测数据"
+  ]
+}

@@ -1,0 +1,4241 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "source_event": "EV-031",
+  "module": "D-13",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposal_not_individually_user_approved",
+  "schema_kind": "state_field_catalog_not_runtime_save_or_executable_JSON_Schema",
+  "io_contract_ref": "save-rules.json",
+  "root_scope": "one_ProfileID_one_complete_bundle_account_activeRun_or_null_settings_and_read_history",
+  "capture_contract": {
+    "boundary": "完整仿真tick/事件批次结算完成后；tick是提交边界，不在本模块指定固定频率。暂停请求先结清该边界已到期事件、死亡和已接受提交，再冻结。",
+    "clock": "run_sim_time为可往返精度double仿真秒；UTC仅诊断，不结算离线成长/DoT/HoT/CD/聚焦/刷怪。",
+    "event_cursor": "保留最后完整批次游标与每个已接受动作/子事件游标；截止同点事件全部已消费，future schedule仅含真正未消费事件。",
+    "deadline": "绝对仿真deadline与next_tick保持原数值；剩余schedule按保存边界记录due_time和remaining_s，数值编码与一致性校验引用save-rules.json，不从剩余秒重新起算next_tick。",
+    "precision": "位置/速度/仿真时间/锁定快照采用往返精度；整数ID序号/计数不经float；禁止NaN/Inf与按美术帧率量化。"
+  },
+  "precedence": [
+    {
+      "source_refs": [
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/persistence/midcombat_save_adopted",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/persistence/save_during_boss_fight_adopted",
+          "access": "read_only"
+        }
+      ],
+      "D13_override": "采用精确局内暂停退出保存/继续；旧false为当时未决定的接口标记，保留旧文件。D07显式技术修复仍另行确认，不拿修复清弹/取消动作代替普通继续。"
+    }
+  ],
+  "restore_pipeline": [
+    "验证完整同代bundle、版本、校验与profile身份；IO回退/隔离/迁移遵守save-rules.json",
+    "在不可活动、不可输入的暂存世界恢复账号/Run/所有房间/实例/实体/游标/事务/已读，再验证跨引用与一致性",
+    "恢复真正战斗姿态、投射物、锁定地面提示、剩余预告与音频事件游标；渲染后保持暂停，不重放已消费命中/掉落/音效",
+    "显示同RunID继续预览；无未结束局才可新局/天赋/研究/全退/选样品",
+    "玩家新按明确继续，并且世界按钮全松开、轴回中后才启同一run_sim_time；确认键被UI消费",
+    "恢复动作/状态/DoT/CD/聚焦/敌人/刷怪原剩余时间；不赠治疗、无敌、清场、装填、冷却重置或动作重起"
+  ],
+  "field_groups": [
+    {
+      "id": "SAVE-G01",
+      "name": "档案身份与分离版本",
+      "scope": "bundle",
+      "fields": [
+        {
+          "name": "ProfileID",
+          "type": "stable_local_id",
+          "purpose": "一个本地档永久身份"
+        },
+        {
+          "name": "GenerationID",
+          "type": "stable_generation_id",
+          "purpose": "同代完整bundle代号；根IO合同生成"
+        },
+        {
+          "name": "parent_generation",
+          "type": "GenerationID_or_null",
+          "purpose": "上代一致bundle引用"
+        },
+        {
+          "name": "build_id",
+          "type": "string",
+          "purpose": "诊断构建身份，不代替content_rules_version"
+        },
+        {
+          "name": "run_sim_time_or_null",
+          "type": "round_trip_double_or_null",
+          "purpose": "同activeRun.run_sim_time一致；无局为null"
+        },
+        {
+          "name": "payload",
+          "type": "complete_root_payload",
+          "purpose": "account+activeRun|null+settings/已读+journal同代"
+        },
+        {
+          "name": "schema_version",
+          "type": "version",
+          "purpose": "字段布局/编码版本"
+        },
+        {
+          "name": "content_rules_version",
+          "type": "version_manifest",
+          "purpose": "逐模块内容定义/数值规则与hash，含generator/RNG/属性/附魔/叙事版本"
+        },
+        {
+          "name": "coordinate_version",
+          "type": "version",
+          "purpose": "持久化世界位置、向量、坐标空间和房间基准解释的版本；仅渲染投影/深度排序变化不等于世界轴变化"
+        },
+        {
+          "name": "capture_boundary_id",
+          "type": "stable_event_cursor",
+          "purpose": "最后完整事件批次"
+        },
+        {
+          "name": "saved_at_utc",
+          "type": "timestamp_diagnostic",
+          "purpose": "显示保存时间；不驱动仿真"
+        }
+      ],
+      "restore_rule": "先验证身份/同代/三种版本；未知版本完整保留并按根规则恢复。若只有投影/排序改变而世界坐标未变，可显式登记恒等世界变换；真实世界坐标迁移必须有映射，不只改版本标签。",
+      "invariants": [
+        "schema/content/coordinate版本彼此不能替代",
+        "不记录或声称当前原型已存在任何有效档案"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/lifecycle/no_silent_version_upgrade_of_unfinished_run",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/spatial_contract/legacy_migration",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G02",
+      "name": "账号余额与生命周期",
+      "scope": "account",
+      "fields": [
+        {
+          "name": "account_version",
+          "type": "nonnegative_integer",
+          "purpose": "沿D09乐观并发版本"
+        },
+        {
+          "name": "permanent_shards",
+          "type": "nonnegative_integer",
+          "purpose": "已实际入账减实际消费/加合法退款"
+        },
+        {
+          "name": "earned_shards_total",
+          "type": "nonnegative_integer",
+          "purpose": "累计奖励入账，退款不计新增收入"
+        },
+        {
+          "name": "active_run_id",
+          "type": "RunID_or_null",
+          "purpose": "未结束局锁的事实"
+        },
+        {
+          "name": "lifecycle",
+          "type": "D09_state_enum",
+          "purpose": "HUB_IDLE/RUN_STARTING/RUN_ACTIVE/RUN_SUSPENDED/RUN_ENDING/RECOVERY_REQUIRED"
+        }
+      ],
+      "restore_rule": "保留账号原字段，暂停待续不能被主菜单或营地叙事改为HUB_IDLE。",
+      "invariants": [
+        "earned_shards_total等于余额+未退款天赋实付+研究实付（无管理迁移时）",
+        "未结束局锁天赋/研究/全退/样品选择/新局"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/canonical_account_fields",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/lifecycle",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/talent_reset/conservation_invariant_without_admin_migration",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G03",
+      "name": "天赋等级与实付退款票据",
+      "scope": "account",
+      "fields": [
+        {
+          "name": "talent_ranks",
+          "type": "map<TalentID,integer>",
+          "purpose": "沿TAL-*所有当前等级"
+        },
+        {
+          "name": "talent_purchase_receipts",
+          "type": "map<PurchaseOperationID,receipt>",
+          "purpose": "保留TalentID/rank/actual_paid_shards/price_rules_version/refunded_by_reset_operation_id"
+        },
+        {
+          "name": "reset_receipts",
+          "type": "map<OperationID,result>",
+          "purpose": "本次全退覆盖的原票据与实际退款，不覆盖历史票据"
+        }
+      ],
+      "restore_rule": "按原实付凭据覆盖当前等级，不用新价或全表280猜退款；缺凭据进入RECOVERY_REQUIRED。",
+      "invariants": [
+        "每个当前rank 1..owned_rank恰一张未退有效票据",
+        "全退不清研究/样品/历史已读"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/talent_reset",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/talents.json",
+          "pointer": "/nodes",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G04",
+      "name": "研究解锁与下一局样品选择",
+      "scope": "account",
+      "fields": [
+        {
+          "name": "unlocked_research_ids",
+          "type": "set<ContentUnlockID>",
+          "purpose": "沿UNL-*永久研究事实"
+        },
+        {
+          "name": "research_purchase_receipts",
+          "type": "map<ResearchOperationID,receipt>",
+          "purpose": "保留ContentUnlockID/actual_paid_shards/price_rules_version"
+        },
+        {
+          "name": "permanent_sample_purchased",
+          "type": "map<ContentUnlockID,bool>",
+          "purpose": "研究与成功付费样品分别记录"
+        },
+        {
+          "name": "selected_sample_unlock_id",
+          "type": "ContentUnlockID_or_null",
+          "purpose": "仅下一次新局候选，创建新局同事务清空"
+        }
+      ],
+      "restore_rule": "恢复研究原事实；unlocked_item_ids从同版本22基础ID+研究映射派生，不能独立编辑账号解锁集合。",
+      "invariants": [
+        "创建新Run重试返回同RunID/原快照，不用已清null覆盖选择",
+        "成功样品永久旗标不因死亡/丢弃/全退清空"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/canonical_account_fields",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/derived_fields",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/unlocks.json",
+          "pointer": "/research_sample_order/new_run_selection_commit",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G05",
+      "name": "账号剧情事实与终局凭据",
+      "scope": "account",
+      "fields": [
+        {
+          "name": "story_fact_ids",
+          "type": "set<StoryFactID>",
+          "purpose": "STORY-M01..05/S01..05/O01..02原事实"
+        },
+        {
+          "name": "boss_first_success_keys_D08",
+          "type": "set<unique_success_key>",
+          "purpose": "账号首胜消费证据，不能从已读推断"
+        },
+        {
+          "name": "discovery_keys_D08",
+          "type": "set<DiscoveryID>",
+          "purpose": "实际发现交互证据"
+        },
+        {
+          "name": "world_liberated",
+          "type": "bool",
+          "purpose": "与STORY-M05/可信终Boss成功同事实"
+        },
+        {
+          "name": "first_ending_receipt",
+          "type": "EndingReceipt_or_null",
+          "purpose": "RunID/EndingID/narrative_context/story_version/snapshot_side_fact_ids/success_event_key"
+        },
+        {
+          "name": "ending_run_receipts",
+          "type": "map<RunID,EndingReceipt>",
+          "purpose": "以后每次合法回响胜利独立凭据"
+        }
+      ],
+      "restore_rule": "已提交奖励/事实/结局同逻辑事务恢复；缺演出只重开原凭据的展示，不产生成功事件。",
+      "invariants": [
+        "世界解誓与M05不一致进入恢复，不按地点或已读补造首次结局",
+        "旧可信成功只可映射事实，不重发碎片/奖励，不虚构历史支线快照"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/state_domains",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/fact_transaction",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/ending",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G06",
+      "name": "新局冻结成长及叙事上下文",
+      "scope": "activeRun",
+      "fields": [
+        {
+          "name": "RunID",
+          "type": "stable_id",
+          "purpose": "继续不换局"
+        },
+        {
+          "name": "start_OperationID",
+          "type": "OperationID",
+          "purpose": "一次新局初始化凭据"
+        },
+        {
+          "name": "progression_snapshot",
+          "type": "immutable_record",
+          "purpose": "原talent_ranks/talent_contributions/unlocked_research_ids/unlocked_item_ids/selected_sample_unlock_id/sample_purchase_flags_snapshot/rules_versions"
+        },
+        {
+          "name": "narrative_context",
+          "type": "enum",
+          "purpose": "live_expedition或recorded_echo_expedition"
+        },
+        {
+          "name": "run_mainline_success_BossIDs",
+          "type": "set<BossID>",
+          "purpose": "本Run成功不由账号M01..05补齐"
+        },
+        {
+          "name": "run_optional_success_BossIDs",
+          "type": "set<BossID>",
+          "purpose": "本Run可选成功"
+        }
+      ],
+      "restore_rule": "恢复同Run原冻结来源；talent_contributions是D09逐来源冻结贡献而非当前最终属性，必须与原版本/rank相符。只新Run触发WPN-SWD-001/20金币初始化。",
+      "invariants": [
+        "继续不得再发初始20金币/满血/100focus/空CD",
+        "账号新事实不倒灌本局叙事上下文/自然掉落资格"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/new_run",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/new_run_context",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G07",
+      "name": "仿真时钟与全局事件游标",
+      "scope": "activeRun",
+      "fields": [
+        {
+          "name": "run_sim_time",
+          "type": "round_trip_double",
+          "purpose": "唯一权威仿真秒"
+        },
+        {
+          "name": "completed_batch_cursor",
+          "type": "stable_cursor",
+          "purpose": "边界前已消费批次"
+        },
+        {
+          "name": "event_id_counters",
+          "type": "map<namespace,integer>",
+          "purpose": "新实例/AttackID/OperationID等单调序号防碰撞"
+        },
+        {
+          "name": "future_event_schedule",
+          "type": "ordered_pending_events",
+          "purpose": "EventID/owner/scope/due_time/remaining_s/priority/subevent_cursor；不含输入队列"
+        },
+        {
+          "name": "pause_reason",
+          "type": "enum",
+          "purpose": "继续后仍暂停；不改变战斗现场"
+        }
+      ],
+      "restore_rule": "保留原时间、事件ID、顺序和未来deadline；同点旧事件不能补发，已接受未发射子段不是新输入。",
+      "invariants": [
+        "不从电脑时间差推进任何run字段",
+        "绝对deadline与remaining_s必须同保存边界一致，保留deadline不以当前墙钟重基"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/clock",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/clock",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/event_order",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/frame_order",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/animation_clock_contract",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G08",
+      "name": "空间状态与移动连续性",
+      "scope": "activeRun.player_and_room_entities",
+      "fields": [
+        {
+          "name": "entity_id",
+          "type": "stable_id",
+          "purpose": "PlayerID/EnemySpawnID/ProjectileID等"
+        },
+        {
+          "name": "RunID_and_RoomInstanceID",
+          "type": "scope_refs",
+          "purpose": "所属本局/原房间"
+        },
+        {
+          "name": "ground_position_xy_cm",
+          "type": "double_pair",
+          "purpose": "真实地面投影，不存屏幕坐标"
+        },
+        {
+          "name": "ground_velocity_xy_cm_s",
+          "type": "double_pair",
+          "purpose": "实际连续移动/冲锋/击退速度"
+        },
+        {
+          "name": "z_cm_and_vz_cm_s",
+          "type": "double_pair",
+          "purpose": "独立离地高度与垂直速度"
+        },
+        {
+          "name": "facing",
+          "type": "enum_or_unit_vector",
+          "purpose": "锁朝与Y移动保朝向"
+        },
+        {
+          "name": "locomotion_state",
+          "type": "enum",
+          "purpose": "grounded/airborne及实体合法飞行子态"
+        },
+        {
+          "name": "motion_trajectory_cursor",
+          "type": "record_or_null",
+          "purpose": "已接受闪避/冲锋/飞行落点轨迹的段与余时"
+        },
+        {
+          "name": "camera_world_anchor",
+          "type": "double_pair",
+          "purpose": "冻结当前有界视口，继续不重新取景藏威胁"
+        }
+      ],
+      "restore_rule": "用coordinate_version恢复持久化世界坐标/向量/房间基准，渲染投影与输入排序按表现/构建规则联调；仅投影变化允许已登记的恒等世界变换。真实坐标迁移才同时映射实体/向量/弹线/锁点/锚点，不因表现差异擅自翻转旧Y。",
+      "invariants": [
+        "跳跃不改变地面排序",
+        "合法旧场景无法恢复时进入根恢复流程；普通继续不得传送或推开角色"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/movement",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/jump",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/charge",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/spatial_contract",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G09",
+      "name": "玩家资源与受伤事实",
+      "scope": "activeRun.player",
+      "fields": [
+        {
+          "name": "current_HP",
+          "type": "nonnegative_double",
+          "purpose": "真实血量；0与dead一致"
+        },
+        {
+          "name": "current_focus",
+          "type": "double_0_to_100",
+          "purpose": "真实聚焦，不离线恢复"
+        },
+        {
+          "name": "last_focus_spend_time",
+          "type": "sim_time_or_null",
+          "purpose": "恢复延迟原起点"
+        },
+        {
+          "name": "poise_accumulation",
+          "type": "nonnegative_double",
+          "purpose": "累积削韧"
+        },
+        {
+          "name": "last_poise_damage_time",
+          "type": "sim_time_or_null",
+          "purpose": "衰减延迟原起点"
+        },
+        {
+          "name": "poise_protection_deadline",
+          "type": "sim_deadline_or_null",
+          "purpose": "原保护"
+        },
+        {
+          "name": "hurt_stun_deadline",
+          "type": "sim_deadline_or_null",
+          "purpose": "原受伤结束"
+        },
+        {
+          "name": "direct_hurt_iframe_intervals",
+          "type": "interval_set",
+          "purpose": "D02独立实际受伤无敌，不扩时"
+        },
+        {
+          "name": "air_primary_consumed_this_takeoff",
+          "type": "bool",
+          "purpose": "离地一次主攻资格已消耗事实"
+        },
+        {
+          "name": "dodge_cooldown_deadline",
+          "type": "sim_deadline",
+          "purpose": "角色闪避CD"
+        },
+        {
+          "name": "element_role_ICDs",
+          "type": "map<element,sim_deadline>",
+          "purpose": "角色同附魔元素ICD"
+        }
+      ],
+      "restore_rule": "从同版本原始来源计算合法上限用于验证，不能像新换装再次截HP或补满；保留实际无敌区间并集和剩余动作。",
+      "invariants": [
+        "落地/暂停/读档不重置本次AttackID子段或空中主攻资格",
+        "当前HP超同版本合法范围视不一致，禁止静默治疗或截值掩盖"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/baseline",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/jump",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/hurt",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/dodge",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/effect_resolution",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G10",
+      "name": "动作绝对时间锁定与未来子事件",
+      "scope": "activeRun.all_accepted_actions",
+      "fields": [
+        {
+          "name": "ActionID_and_AttackID",
+          "type": "stable_ids",
+          "purpose": "同一攻击所有子段共享攻击身份"
+        },
+        {
+          "name": "definition_id_and_instance_version",
+          "type": "versioned_refs",
+          "purpose": "原武器主攻/技、敌人或Boss攻击定义"
+        },
+        {
+          "name": "action_state_and_phase",
+          "type": "enum",
+          "purpose": "idle/primary/skill/dodge/reload/switch/equip/hurt/dead与当前段"
+        },
+        {
+          "name": "accepted_start_time_and_frozen_timeline",
+          "type": "record",
+          "purpose": "起攻冻结windup/active/recovery/speed/所有绝对关键点"
+        },
+        {
+          "name": "lock_time_and_locked_flag",
+          "type": "sim_time_and_bool",
+          "purpose": "玩家40%/敌50%仅锁一次"
+        },
+        {
+          "name": "locked_properties_snapshot",
+          "type": "record_or_null",
+          "purpose": "锁时伤害/资源预算/暴击结果/附魔/成长来源/遗物资格/锁朝或锁点；不是当前derived最终属性缓存"
+        },
+        {
+          "name": "remaining_schedule",
+          "type": "ordered_event_records",
+          "purpose": "未来发射/子段/装填/提交/恢复末端EventID、绝对due_time、remaining_s、消费游标"
+        },
+        {
+          "name": "emitted_and_consumed_sub_event_ids",
+          "type": "set<SubEventID>",
+          "purpose": "只补未消费子事件"
+        },
+        {
+          "name": "target_attempt_history",
+          "type": "set<AttackID_SubEventID_TargetID>",
+          "purpose": "每子段尝试/命中去重"
+        },
+        {
+          "name": "resource_reservations",
+          "type": "record",
+          "purpose": "whole-trigger已预留与实际已发射支出、未发余额"
+        },
+        {
+          "name": "cancel_or_interrupt_reason",
+          "type": "record_or_null",
+          "purpose": "真实已中断与必需恢复，不由读档取消"
+        }
+      ],
+      "restore_rule": "未锁动作继续等原lock_time并原法重验；已锁动作不读新属性重算。恢复后沿原schedule，真正未来子段保留，过去段不补播或再伤害。",
+      "invariants": [
+        "每AttackID一次暴击抽取；同AttackID合法后续子段例外不能因读档丢失",
+        "未发预算在真实打断/死亡/动作结束按旧规则释放；继续不主动释放",
+        "技能CD从已接受起点保留，读档不重新收费"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/weapon_timing_extension",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/attack",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/equipment",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/control",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/animation_clock_contract",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G11",
+      "name": "装备实例原始结果",
+      "scope": "activeRun.instance_registry",
+      "fields": [
+        {
+          "name": "content_id",
+          "type": "stable_ContentID",
+          "purpose": "原装备内容ID"
+        },
+        {
+          "name": "instance_id",
+          "type": "stable_InstanceID",
+          "purpose": "唯一装备实例"
+        },
+        {
+          "name": "instance_version",
+          "type": "nonnegative_integer",
+          "purpose": "原装备并发版本"
+        },
+        {
+          "name": "basic_upgrade_grade",
+          "type": "integer_0_to_3",
+          "purpose": "D08原基础强化级"
+        },
+        {
+          "name": "basic_growth_rules_version",
+          "type": "version",
+          "purpose": "D08原成长规则"
+        },
+        {
+          "name": "grade_source_kind_and_spawn_or_operation_ID",
+          "type": "record",
+          "purpose": "原强化或出生来源"
+        },
+        {
+          "name": "enchant_package",
+          "type": "original_enum",
+          "purpose": "v2原附魔包"
+        },
+        {
+          "name": "enchant_tier",
+          "type": "integer_or_null",
+          "purpose": "v2原阶数"
+        },
+        {
+          "name": "affix_ids",
+          "type": "ordered_AffixID_array",
+          "purpose": "v2原有序词条，保负词"
+        },
+        {
+          "name": "magnitudes",
+          "type": "ordered_numeric_array",
+          "purpose": "v2原实际值"
+        },
+        {
+          "name": "original_quantile_rationals",
+          "type": "ordered_rational_array",
+          "purpose": "原q分子分母，不从magnitude倒算"
+        },
+        {
+          "name": "generation_seed",
+          "type": "original_seed",
+          "purpose": "原生成seed"
+        },
+        {
+          "name": "algorithm_version",
+          "type": "version",
+          "purpose": "原生成算法"
+        },
+        {
+          "name": "affix_catalog_version",
+          "type": "version",
+          "purpose": "原词条目录"
+        },
+        {
+          "name": "attribute_rules_version",
+          "type": "version",
+          "purpose": "原属性规则"
+        },
+        {
+          "name": "intrinsic_definition_hash",
+          "type": "hash",
+          "purpose": "原固有定义兼容依据"
+        },
+        {
+          "name": "magazine_remaining",
+          "type": "nonnegative_integer",
+          "purpose": "每实例当前弹仓"
+        },
+        {
+          "name": "weapon_skill_cooldown_deadline",
+          "type": "sim_deadline",
+          "purpose": "v2原字段，备选同钟"
+        },
+        {
+          "name": "owner_location_ref",
+          "type": "unique_location",
+          "purpose": "槽/地面/托盘恰一处"
+        }
+      ],
+      "restore_rule": "按原结果载入；不重新随机、替换不认识词条或把新目录资格套旧包。quality_label/growth加成/final_current_effective_stats只由原字段派生。",
+      "invariants": [
+        "原q用于合法升阶，不从magnitude倒算q",
+        "切换/地面/回房不装填、不清技能CD",
+        "旧攻击/弹体保留锁定旧grade附魔，不从当前实例反算"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/persistence",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/equipment-growth.json",
+          "pointer": "/instance_fields",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/equipment-growth.json",
+          "pointer": "/preserve_runtime_state_contract",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G12",
+      "name": "携带槽位堆叠与归属",
+      "scope": "activeRun.inventory",
+      "fields": [
+        {
+          "name": "weapon_slot_instance_ids",
+          "type": "array_2<InstanceID_or_null>",
+          "purpose": "两个武器槽与active_weapon_slot"
+        },
+        {
+          "name": "armor_instance_id",
+          "type": "InstanceID_or_null",
+          "purpose": "一甲"
+        },
+        {
+          "name": "quick_slots",
+          "type": "array_2<StackID_or_null>",
+          "purpose": "两快捷槽，不增后备背包"
+        },
+        {
+          "name": "relic_slot_instance_ids",
+          "type": "array_3<InstanceID_or_null>",
+          "purpose": "三遗物不重复ID"
+        },
+        {
+          "name": "utility_keyring",
+          "type": "map<ItemID,StackID>",
+          "purpose": "功能物按原ID上限"
+        },
+        {
+          "name": "stack_registry",
+          "type": "map<StackID,record>",
+          "purpose": "ItemID/integer_quantity/stack_version/source/unique_owner"
+        },
+        {
+          "name": "active_weapon_slot",
+          "type": "integer",
+          "purpose": "真实当前武器，比较预览不改变"
+        },
+        {
+          "name": "ownership_versions",
+          "type": "map<source_or_destination,integer>",
+          "purpose": "并发提交验证版本"
+        }
+      ],
+      "restore_rule": "重建每个实例唯一归属和原StackID；全栈转移保ID，拆分/合并按D04既成结果恢复，不临时重新分ID。",
+      "invariants": [
+        "任一有效实例/堆叠不能同时在槽位/地面/托盘",
+        "数量整数且不超D03 cap；同ID快捷只能原槽合并",
+        "最终属性重新由源派生一次，恢复本身不是库存提交"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/capacity",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/transfer",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/items.json",
+          "pointer": "/items",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G13",
+      "name": "道具状态来源next_tick与ICD",
+      "scope": "activeRun.player_and_enemies",
+      "fields": [
+        {
+          "name": "status_slots",
+          "type": "map<targetID_StatusID,status>",
+          "purpose": "使用burn/slow/shock/regen_hp/temporary_tonic稳定ID"
+        },
+        {
+          "name": "source_IDs_and_source_action",
+          "type": "record",
+          "purpose": "施加者/实例/AttackID/道具来源与已死来源引用"
+        },
+        {
+          "name": "magnitude_and_bound_bundle",
+          "type": "raw_record",
+          "purpose": "真实强度；药剂正负同包，不分离清除"
+        },
+        {
+          "name": "applied_at_and_expiry",
+          "type": "sim_times",
+          "purpose": "原开始与到期"
+        },
+        {
+          "name": "next_tick",
+          "type": "sim_time_or_null",
+          "purpose": "burn/HoT原下一跳，等强刷新保留"
+        },
+        {
+          "name": "tick_interval_and_ticks_consumed",
+          "type": "versioned_value_and_integer",
+          "purpose": "剩余跳数依原状态事实，不从满持续重建"
+        },
+        {
+          "name": "target_shock_ICD_deadline",
+          "type": "sim_deadline",
+          "purpose": "普通2秒/Boss4秒按原角色类型"
+        },
+        {
+          "name": "character_item_ID_cooldowns",
+          "type": "map<ItemID,sim_deadline>",
+          "purpose": "换掉或捡同ID也不清"
+        },
+        {
+          "name": "shared_item_lock_deadline",
+          "type": "sim_deadline",
+          "purpose": "提交起2秒共享锁"
+        }
+      ],
+      "restore_rule": "恢复原状态包/next_tick/到期顺序；到期同点burn按原inclusive、陷阱expiry优先规则结算；读档不先过一遍状态刷新函数。",
+      "invariants": [
+        "离线不补跳、不刷新next_tick、不提前到期",
+        "每跳按当时目标防御/当前治疗效率，不能把保存时derived最终属性固化到所有跳",
+        "死亡不复活；玩家自身已施加状态不因Boss成功清弹消失",
+        "shock是瞬时追加削韧而非可重放的持续状态；只保存其已消费事件与target_shock_ICD_deadline。"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/items-v1/states.json",
+          "pointer": "/states",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/healing",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/use",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/control",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G14",
+      "name": "条件防具遗物与实际治疗预算",
+      "scope": "activeRun.player_per_room",
+      "fields": [
+        {
+          "name": "conditional_armor_state",
+          "type": "map<ArmorID,record>",
+          "purpose": "已真实触发buff/站定计时/来源/期限及原ICD"
+        },
+        {
+          "name": "lifesteal_heal_budget_by_attack_or_origin",
+          "type": "map<budget_key,actual_remaining>",
+          "purpose": "吸血等来源原攻击/房间真实预算，不能换装刷新"
+        },
+        {
+          "name": "lifesteal_rolling_1s_actual_heal_events",
+          "type": "ordered_list<sim_time,actual_heal,receiptID>",
+          "purpose": "角色滚动1秒真实治疗历史；每AttackID最多3HP、滚动1秒最多6HP依v2，不从保存时剩余预算猜未来释放时间"
+        },
+        {
+          "name": "PAS008_room_heal_used",
+          "type": "map<RunID_PlayerID_RoomID_ItemID,double>",
+          "purpose": "效率后真实已回复量/剩余6HP预算"
+        },
+        {
+          "name": "PAS008_death_dedup",
+          "type": "set<RunID_EnemySpawnID_first_real_death>",
+          "purpose": "原武器击杀资格死亡事实"
+        },
+        {
+          "name": "PAS008_cooldown_deadline",
+          "type": "sim_deadline",
+          "purpose": "满血合法事件亦已启8秒CD"
+        },
+        {
+          "name": "other_declared_room_proc_budgets",
+          "type": "versioned_record",
+          "purpose": "仅目录定义的已有房间预算，无新增奖励机制"
+        }
+      ],
+      "restore_rule": "按原触发事实恢复计时和实耗；条件源被中断已经清除就保留清除，读档不伪造起攻/装填结束/站定完成。",
+      "invariants": [
+        "暂停/回房/跨波/换遗物不刷新每房预算",
+        "PAS008同时要求锁定时与死亡结算时装备且玩家存活；来源资格不靠当前图标猜",
+        "角色滚动1秒吸血历史保原时间，不能只存remaining=0；离线不释放，继续按原每项到窗后再释放额度。"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/items-v1/items.json",
+          "pointer": "/items/29/effects/0",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/armor_trait_interop",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/effect_resolution",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/combat_across_groups",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/stat-definitions.json",
+          "pointer": "/9",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G15",
+      "name": "已接受道具交互与提交票据",
+      "scope": "activeRun.pending_real_action_and_journal",
+      "fields": [
+        {
+          "name": "OperationID_and_request_digest",
+          "type": "stable_id_and_digest",
+          "purpose": "同ID同请求重试返回原结果，异载荷拒绝"
+        },
+        {
+          "name": "action_kind_target_and_destination",
+          "type": "record",
+          "purpose": "已接受真正动作的源/目标/选槽/合法旧物落点"
+        },
+        {
+          "name": "source_destination_quote_coupon_versions",
+          "type": "record",
+          "purpose": "D04提交时原版本依据"
+        },
+        {
+          "name": "accepted_time_and_commit_deadline",
+          "type": "sim_times",
+          "purpose": "原动作进度，不把预览当接受"
+        },
+        {
+          "name": "effective_damage_cancel_latch",
+          "type": "bool",
+          "purpose": "同点伤害后治疗也不解除取消"
+        },
+        {
+          "name": "commit_state_and_result_receipt",
+          "type": "enum_and_record_or_null",
+          "purpose": "未提交/已提交结果属于完整bundle的一侧"
+        },
+        {
+          "name": "old_and_new_instance_refs",
+          "type": "record",
+          "purpose": "提交前旧归属或提交后唯一新归属"
+        }
+      ],
+      "restore_rule": "纯预览/暂停整理意图不保存；已真实开始的拾取/装甲/喝药/服务保存原余时并按旧规则重验，不能自动免费完成或取消。",
+      "invariants": [
+        "损伤/CD/时间不因未提交取消回滚",
+        "同点合法治疗读取旧装备再库存提交；最大HP截一次仅发生于原提交",
+        "读档界面重新确认不重复实际扣费/计数/交付"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/action_policy",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/transaction",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/pause",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/use",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G16",
+      "name": "普通敌精英AI与真实休眠",
+      "scope": "activeRun.room_actors",
+      "fields": [
+        {
+          "name": "SpawnID_SlotID_content_id_elite_variant",
+          "type": "stable_refs",
+          "purpose": "同休眠/显现/苏醒始终同ID"
+        },
+        {
+          "name": "HP_spawn_max_HP_poise_and_protection",
+          "type": "actual_numeric_state",
+          "purpose": "生成最大HP作为本实体事实与当前HP，不把精英倍率重乘"
+        },
+        {
+          "name": "AI_state_and_target_ID",
+          "type": "versioned_state",
+          "purpose": "追近/失视/出招/强制恢复/休眠/苏醒等真实状态"
+        },
+        {
+          "name": "attack_cooldown_deadlines",
+          "type": "map<AttackDefinitionID,time>",
+          "purpose": "接受起点CD；失败/打断不返还"
+        },
+        {
+          "name": "choice_RNG_and_recent_history",
+          "type": "record",
+          "purpose": "合法候选已选结果及历史，不重新选招"
+        },
+        {
+          "name": "dormancy_wake_state",
+          "type": "record",
+          "purpose": "真实休眠、唤醒来源、队列、warning_deadline、group_combat_start、fallback_deadline"
+        },
+        {
+          "name": "flying_pending_low_recovery",
+          "type": "record_or_null",
+          "purpose": "已接受即锁存、合法低点、下降轨迹、actual_z20_arrival、anchored_deadline、rise余时"
+        },
+        {
+          "name": "guard_state",
+          "type": "record_or_null",
+          "purpose": "方向守盾起止与开放恢复，非永久减伤"
+        }
+      ],
+      "restore_rule": "按原AI/动作状态继续，不回到满血待机；石蝠pending低位义务直到真正合法Z20到达且满1.8秒后清。",
+      "invariants": [
+        "睡着实体真实可受伤；未物化future不存在HP/身体，不能混淆",
+        "普通精英不按Boss控制抗性",
+        "断追踪不复位HP/奖励；死亡移除身体但留普通旧弹"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/behavior",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/dormancy",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/flying",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/guard",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/enemies.json",
+          "pointer": "/enemies/1/behavior/pending_low_recovery",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G17",
+      "name": "支援来源登记与招式配额",
+      "scope": "activeRun.room_combat_registry",
+      "fields": [
+        {
+          "name": "support_source_registry",
+          "type": "map<GroupID_TargetID_SourceID,record>",
+          "purpose": "enemy_move_support/enemy_guard_support每来源强度/原期限/施法者"
+        },
+        {
+          "name": "committed_action_reservations",
+          "type": "map<AttackID,capability_record>",
+          "purpose": "windup/active总动作、冲锋、弹体、支援配额归属"
+        },
+        {
+          "name": "projectile_capacity_reservations",
+          "type": "map<AttackID,emission_group>",
+          "purpose": "整组未发预留数量与逐发转live记录"
+        },
+        {
+          "name": "live_projectile_registry",
+          "type": "set<ProjectileID>",
+          "purpose": "已发实体占容量到despawn，施法者死不释放"
+        },
+        {
+          "name": "last_warning_start_time",
+          "type": "sim_time",
+          "purpose": "D05新攻击预警最小间隔原起点"
+        }
+      ],
+      "restore_rule": "先恢复每份预留/来源，再由真实有效登记派生配额计数交叉校验；被压制弱支援仍保原期，强源死后可恢复剩余。",
+      "invariants": [
+        "来源死亡仅去自己buff，不刷新其他源期限",
+        "死亡释放actor及未发弹预留，不能释放已发弹容量",
+        "不得用载入后从0计数令同房多开一招或超2弹"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/support",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/encounter",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/projectile",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G18",
+      "name": "投射物部署物与死者来源tombstone",
+      "scope": "activeRun.room_world_effects",
+      "fields": [
+        {
+          "name": "ProjectileID_or_DeployableID",
+          "type": "stable_id",
+          "purpose": "同世界对象，不能从表现重造"
+        },
+        {
+          "name": "owner_entity_id_team_RunID_RoomInstanceID",
+          "type": "scope_refs",
+          "purpose": "原房间/阵营/施加者"
+        },
+        {
+          "name": "owner_tombstone",
+          "type": "minimal_record_or_ref",
+          "purpose": "已死owner身份/类型/死亡事实/奖励消费键/攻击归属；保留到最后引用释放，不含可行动AI"
+        },
+        {
+          "name": "AttackID_SubEventID_locked_snapshot",
+          "type": "record",
+          "purpose": "发射时原伤害/附魔/暴击与来源资格"
+        },
+        {
+          "name": "actual_origin_locked_heading_position_velocity_height",
+          "type": "round_trip_record",
+          "purpose": "实际逐发枪口、平行线、已行距离、当前Z"
+        },
+        {
+          "name": "lifetime_deadline_and_collision_cursor",
+          "type": "record",
+          "purpose": "原存活余时、扫掠段历史、防同点二次碰撞"
+        },
+        {
+          "name": "hit_attempt_dedup",
+          "type": "set<effect_target>",
+          "purpose": "已接触/穿透/消耗事实"
+        },
+        {
+          "name": "trap_armed_at_expiry_trigger_state",
+          "type": "record_or_null",
+          "purpose": "D03布置起0.5武装/20寿命/已触发一次与归属cap"
+        }
+      ],
+      "restore_rule": "死owner旧弹继续原扫掠/容量；读档不复活owner、不让旧弹吸血复活。trap按原寿命/到期优先；原清理事件已提交则不载入已清对象。",
+      "invariants": [
+        "普通敌死亡/波清旧弹保留；Boss合法成功后自有弹未来段已被清才不恢复",
+        "离房清原房弹/部署物无退款；附着玩家状态/CD独立保留",
+        "来源tombstone不是实体槽、不能占身体/AI或二次领奖"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/projectile",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/encounter/projectile_capacity_reservation",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/effect_resolution",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/trap",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/exit",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G19",
+      "name": "路线选择与全部已建立房间",
+      "scope": "activeRun.route_and_room_registry",
+      "fields": [
+        {
+          "name": "RunSeed_generator_version_graph_IDs",
+          "type": "record",
+          "purpose": "D07原种子/图节点边ID"
+        },
+        {
+          "name": "branch_choice_locks",
+          "type": "map<choiceID,nodeID_or_null>",
+          "purpose": "本局已选分支，不重随机"
+        },
+        {
+          "name": "current_RegionID_NodeID_RoomInstanceID",
+          "type": "stable_refs",
+          "purpose": "所在章节节点房间"
+        },
+        {
+          "name": "room_layout_selections",
+          "type": "map<RoomInstanceID,LayoutID_version>",
+          "purpose": "既定每房布局"
+        },
+        {
+          "name": "rooms",
+          "type": "map<RoomInstanceID,room_state>",
+          "purpose": "全部已建立房间；可返回房间保相同manifest/掉落/设施"
+        },
+        {
+          "name": "revealed_nodes_and_discoveries",
+          "type": "record",
+          "purpose": "实际揭示与实际发现分开"
+        },
+        {
+          "name": "cross_chapter_heal_consumption",
+          "type": "set<transition_key>",
+          "purpose": "一次20%过渡恢复既成事实"
+        }
+      ],
+      "restore_rule": "恢复完整既定图与已建房间，不只当前房；未选支路不写成当前清房义务，重返同房不新增实例/掉落。",
+      "invariants": [
+        "免费主线许可不依赖金币或未读文本",
+        "地图揭示不等DISC发现，不自动入账",
+        "20%过渡只在原合法章节退出提交一次，读档不再治疗"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/dungeon-v1/regions-and-routes.json",
+          "pointer": "/generation_contract",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/regions-and-routes.json",
+          "pointer": "/route_contract",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/common-rules.json",
+          "pointer": "/finite_supplies",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G20",
+      "name": "有限manifest未来槽与深度锁存",
+      "scope": "activeRun.rooms[RoomInstanceID].encounter",
+      "fields": [
+        {
+          "name": "manifest_version_and_sorted_SlotIDs",
+          "type": "record",
+          "purpose": "入房前完整有限清单，含required/reward_eligible/content_id"
+        },
+        {
+          "name": "slot_state_by_ID",
+          "type": "map<SlotID,D07_state>",
+          "purpose": "planned/trigger_latched/queued/reserved/warning/emerging/dormant/active/killed"
+        },
+        {
+          "name": "GroupIDs_dependencies_terminal_receipts",
+          "type": "record",
+          "purpose": "已完成依赖与真正全灭事实"
+        },
+        {
+          "name": "TriggerID_latches",
+          "type": "map<TriggerID,event_receipt>",
+          "purpose": "一次触发锁存，包括依赖未到先越深入线"
+        },
+        {
+          "name": "max_swept_ground_X_and_depth",
+          "type": "double_pair",
+          "purpose": "连续地面扫掠最大深度；跳跃/回退不撤"
+        },
+        {
+          "name": "room_state_clear_receipt",
+          "type": "D07_enum_and_receipt_or_null",
+          "purpose": "整房终态一次；前段清/喘息不等房清"
+        }
+      ],
+      "restore_rule": "未物化槽只恢复义务/状态，不生成隐形无敌actor；trigger已锁即保留，依赖未到排队。清房必须所有有限required真死与未来义务全终。",
+      "invariants": [
+        "同Slot重试/苏醒/显现不换SpawnID",
+        "房清终态不能暗刷后续必需敌",
+        "当前无敌人不等安全或清房"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/manifest",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/trigger",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/clear",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/room-sequences.json",
+          "pointer": "/templates/0",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G21",
+      "name": "整组预留锚点与预告剩余时序",
+      "scope": "activeRun.rooms[RoomInstanceID].spawn_registry",
+      "fields": [
+        {
+          "name": "group_reservation_owner_and_slot_claims",
+          "type": "record",
+          "purpose": "GroupID原整组actor/threat/全部role帽及各slot脚印归属"
+        },
+        {
+          "name": "reserved_since",
+          "type": "sim_time",
+          "purpose": "6秒备用/12秒技术故障等原等待起点"
+        },
+        {
+          "name": "anchor_candidate_IDs_and_selected_anchor",
+          "type": "record",
+          "purpose": "原锚点候选/已预告锚点/预留非重叠脚印"
+        },
+        {
+          "name": "retry_count_backoff_deadline",
+          "type": "integer_and_time",
+          "purpose": "未物化失败保持同槽同预留；1秒后重新全预告"
+        },
+        {
+          "name": "warning_started_at_deadline_remaining",
+          "type": "record",
+          "purpose": "已真实预告1.2秒剩余时；全房warning gap原下一许可"
+        },
+        {
+          "name": "materialization_gap_deadline",
+          "type": "sim_deadline",
+          "purpose": "全房0.8秒显现间隔余时"
+        },
+        {
+          "name": "emerge_started_at_deadline_remaining",
+          "type": "record",
+          "purpose": "显现0.6秒与石像wake取later，不重开满时"
+        },
+        {
+          "name": "breather_start_deadline_remaining",
+          "type": "record",
+          "purpose": "依赖真死批次之后2秒喘息余时"
+        },
+        {
+          "name": "orientation_and_dormant_wake_gap_deadlines",
+          "type": "record",
+          "purpose": "入场与唤醒全房原间隔"
+        }
+      ],
+      "restore_rule": "先恢复预留归属/锚点与已预告余时再渲染；普通继续不自动更换锚点或补一整段预告。真正到物化时仍按原220距离/重叠规则重验，失败后保同ID走新完整预告。",
+      "invariants": [
+        "预留而未物化槽占D07帽，苏醒/显现为active不再申请一份",
+        "350初选/220复核在旧时点执行，载入本身不算新初选",
+        "保留原reserved_since避免反复退出无限推迟故障阈值"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/budget",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/spawn",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/dormancy",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/combat_across_groups",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G22",
+      "name": "Boss阶段成功与终局",
+      "scope": "activeRun.boss_encounter",
+      "fields": [
+        {
+          "name": "BossSpawnID_boss_id_spawn_max_HP",
+          "type": "stable_refs_and_double",
+          "purpose": "同Boss实体，原生成HP作阈值基准"
+        },
+        {
+          "name": "current_phase_and_pending_phase",
+          "type": "original_phase_id_types",
+          "purpose": "D06有整数与稳定字符串两种原ID，保留类型"
+        },
+        {
+          "name": "phase_cue_start_deadline_remaining",
+          "type": "record_or_null",
+          "purpose": "原1.2秒转换提示，跨更多阈值只取latest且不重启提示"
+        },
+        {
+          "name": "mandatory_recovery_deadline_and_stun",
+          "type": "record",
+          "purpose": "破韧原恢复/0.25僵直/3秒保护不重开"
+        },
+        {
+          "name": "recent_attack_history_and_rng_choice",
+          "type": "record",
+          "purpose": "合法候选选择与最多连续两同招历史"
+        },
+        {
+          "name": "Boss_success_key_and_receipt",
+          "type": "RunID_RoomInstanceID_BossSpawnID_receipt_or_null",
+          "purpose": "全量同点damage/death后玩家存活才成功"
+        },
+        {
+          "name": "cleanup_receipt_and_local_drop_IDs",
+          "type": "record_or_null",
+          "purpose": "合法成功后Boss自有旧弹/未来段清理及一次地面奖励"
+        },
+        {
+          "name": "final_ending_commit_and_run_terminal_receipt",
+          "type": "record_or_null",
+          "purpose": "BOS-DEM-001本Run成功、END-OPEN-GATE与账号事实在结束屏前原提交"
+        }
+      ],
+      "restore_rule": "未成功Boss继续原HP/阶段/动作/旧弹；已合法成功恢复原奖励/剧情/清理结果不再打一遍，不从演出结束触发新结算。",
+      "invariants": [
+        "Boss与玩家同死只失败，不能读档改成功",
+        "阶段不锁血/回血/无敌/清CD；暂停不赠额外提示",
+        "玩家已附着burn next_tick/状态/CD不因成功cleanup清除",
+        "终局后剩余局内装备/金币按原结束结果消耗；终局屏重看不建新Run"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/phase",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/settlement",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/attack",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/bosses.json",
+          "pointer": "/bosses/4/phases",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/success_pipeline",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/ending",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G23",
+      "name": "预算分配来源解析与奖励幂等",
+      "scope": "activeRun.rooms[RoomInstanceID].rewards_and_account_journal",
+      "fields": [
+        {
+          "name": "allocation_version_room_gold_budget",
+          "type": "record",
+          "purpose": "入战斗前一次房间预算"
+        },
+        {
+          "name": "full_sorted_slot_weights_exact_integer_allocations",
+          "type": "record",
+          "purpose": "稳定SlotID最大余数分配原结果"
+        },
+        {
+          "name": "per_slot_first_true_death_payout_status",
+          "type": "map<SlotID,receipt>",
+          "purpose": "真实死亡一次地面金币结果，不等钱包已收"
+        },
+        {
+          "name": "reward_source_resolution_state",
+          "type": "map<SourceID,record>",
+          "purpose": "原presence含空结果/qualified_set/utility匹配上下文/类别用途模板结果"
+        },
+        {
+          "name": "spawned_ground_stack_IDs_and_pending_delivery",
+          "type": "record",
+          "purpose": "没合法地面先保同结果同ID，不早入账"
+        },
+        {
+          "name": "pickup_commits",
+          "type": "map<ground_object_key,receipt>",
+          "purpose": "真实存活拾取原入账事实"
+        },
+        {
+          "name": "account_Boss_firsts_and_discovery_consumption",
+          "type": "record",
+          "purpose": "账号首胜/发现消费与本局来源区分"
+        }
+      ],
+      "restore_rule": "不因波数、敌人剩余、load或新解锁再分配/roll。奖励生成与拾取分别恢复；已生成未拿仍地面，已拿仅原账。",
+      "invariants": [
+        "普通敌死金币先落地，实际拾取才进钱包",
+        "已存活拾取碎片即永久入账，结算不二次加",
+        "脚本移除/未物化失败/同死/延迟run_end命中不给奖励"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/gold_partition",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/delivery_and_idempotency",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/seed_and_save_interface",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G24",
+      "name": "地面物件与延后交付",
+      "scope": "activeRun.rooms[RoomInstanceID].world_objects",
+      "fields": [
+        {
+          "name": "GroundObjectID_SourceID_result_index",
+          "type": "stable_refs",
+          "purpose": "原来源一份结果，含金币/碎片/装备/道具"
+        },
+        {
+          "name": "InstanceID_or_StackID_quantity",
+          "type": "unique_refs_and_integer",
+          "purpose": "不复制实例/堆叠"
+        },
+        {
+          "name": "ground_position_settled_and_drop_anchor",
+          "type": "record",
+          "purpose": "真实位置/落定与合法地面锚点"
+        },
+        {
+          "name": "pickup_state_and_version",
+          "type": "enum_and_integer",
+          "purpose": "pending_ground_delivery/ground/claimed/forfeited等既成事实"
+        },
+        {
+          "name": "origin_room_and_leave_disposition",
+          "type": "record",
+          "purpose": "原房清/跨区弃置规则，已确认弃置保票据"
+        }
+      ],
+      "restore_rule": "地面待收物恢复同位置同ID；不能因载入自动装包/治疗/卖出/存入账号。无合法地面走原pending delivery诊断，不另抽或丢弃。",
+      "invariants": [
+        "ground与claimed互斥；世界对象移除和入账同原提交",
+        "半栈转移余量真实留原对象，合并保目的StackID",
+        "掉落不会阻挡角色，但必须合法可达"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/currency_pickup",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/drop_placement",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/transfer",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/delivery_and_idempotency/failure_or_missing_ground_point",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G25",
+      "name": "设施报价库存次数与原随机结果",
+      "scope": "activeRun.facilities",
+      "fields": [
+        {
+          "name": "FacilityInstanceID_facility_id_NodeID",
+          "type": "stable_refs",
+          "purpose": "九类原FAC-*具体本局设施"
+        },
+        {
+          "name": "OfferIDs_instance_refs_quotes_quote_versions",
+          "type": "record",
+          "purpose": "原55库存+合法样品附加报价各自固定"
+        },
+        {
+          "name": "stock_versions_and_sold_flags",
+          "type": "record",
+          "purpose": "已售库存不刷新"
+        },
+        {
+          "name": "uses_remaining_and_committed_operation_keys",
+          "type": "record",
+          "purpose": "轮盘/转轮原有限次数"
+        },
+        {
+          "name": "wheel_choice_lock_and_resolved_outcome",
+          "type": "record_or_null",
+          "purpose": "已提交选项/抽取结果；纯未确认预览不持久"
+        },
+        {
+          "name": "service_target_instance_version_and_result",
+          "type": "record_or_null",
+          "purpose": "强化/觉醒/洗词/升阶/净化的原目标原结果"
+        },
+        {
+          "name": "tool_coupon_consumption_receipts",
+          "type": "record",
+          "purpose": "费用/功能票实际已消费，失败未提交不消费"
+        }
+      ],
+      "restore_rule": "恢复同OfferID价格库存次数与已提交结果；已付款响应丢失展示同结果，不再抽签、不退款重试。",
+      "invariants": [
+        "查看/取消/重返/离线不刷新库存和抽取",
+        "已知商品整包不够放不得付费后送地面溢出物",
+        "FUN002不支持D09现金研究样品，费用票据依原适用边界"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/economy-v1/facilities.json",
+          "pointer": "/facilities",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/common-rules.json",
+          "pointer": "/transactions",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/transaction",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G26",
+      "name": "来源绑定托盘与开箱钥匙",
+      "scope": "activeRun.facility_or_object_bound_rewards",
+      "fields": [
+        {
+          "name": "TrayKey",
+          "type": "RunID_ObjectID_or_FacilityInstanceID_SourceID_result_index",
+          "purpose": "不是个人额外背包"
+        },
+        {
+          "name": "same_ItemInstanceID_or_bundle",
+          "type": "unique_ref",
+          "purpose": "已提交未知轮盘物品或公共箱唯一结果"
+        },
+        {
+          "name": "open_or_spin_OperationID_and_consumption",
+          "type": "receipt",
+          "purpose": "原扣金币/钥匙/次数与托盘结果同事务"
+        },
+        {
+          "name": "claim_or_forfeit_state_and_receipt",
+          "type": "record",
+          "purpose": "未领取/领取/明确弃置，重试原结果"
+        },
+        {
+          "name": "claim_action_state",
+          "type": "real_action_or_null",
+          "purpose": "安全0.25秒或道具类真实领取动作余时"
+        }
+      ],
+      "restore_rule": "托盘未领取就阻止新spin；开箱已扣一钥匙恢复同托盘，不因有空槽自动装包或出地面副本。",
+      "invariants": [
+        "每设施一个pending托盘",
+        "跨区/结束局明确损失无退款；已领取不得再生",
+        "公共箱来源RWD-REG-02-N04-COMMON-SUPPLY与RWD-REG-05-N04-COMMON-SUPPLY仍分别绑定"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/economy-v1/common-rules.json",
+          "pointer": "/reward_tray",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/delivery_and_idempotency/common_box_source_bound_delivery",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G27",
+      "name": "门票入口情报与过渡票据",
+      "scope": "activeRun.route_services",
+      "fields": [
+        {
+          "name": "entry_entitlement",
+          "type": "map<RunID_HiddenNodeID,receipt>",
+          "purpose": "已付隐藏节点入场权及原OperationID"
+        },
+        {
+          "name": "intel_reveal_records",
+          "type": "map<SourceID,result>",
+          "purpose": "只揭既有内容不等发现奖励"
+        },
+        {
+          "name": "transition_OperationID_state",
+          "type": "record_or_null",
+          "purpose": "已接受路线/原起点终点/成本/完整提交边界"
+        },
+        {
+          "name": "consumed_cross_chapter_recovery_key",
+          "type": "set<transition_key>",
+          "purpose": "已用一次跨主章恢复不再触发"
+        },
+        {
+          "name": "discarded_room_loot_receipts",
+          "type": "record",
+          "purpose": "原已确认损失来源，不假装自动收集"
+        }
+      ],
+      "restore_rule": "费用与权限同票据，重入/返回已付节点不再收；普通free exit保留玩家DoT/CD，已提交离房清原房攻击无退款。",
+      "invariants": [
+        "支付门票不是Boss成功/发现或额外永久奖励",
+        "load后未提交风险确认只重开预览，不能自动过门或执行旧确认",
+        "已完成过渡不得回旧房再触发一次恢复"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/economy-v1/facilities.json",
+          "pointer": "/facilities/4/entry_entitlement",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/exit",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/common-rules.json",
+          "pointer": "/finite_supplies",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G28",
+      "name": "研究样品跨账号Run事实",
+      "scope": "account_and_activeRun_same_bundle",
+      "fields": [
+        {
+          "name": "selected_unlock_and_snapshot_flags",
+          "type": "immutable_run_snapshot_refs",
+          "purpose": "D09冻结所选研究与起局旗标"
+        },
+        {
+          "name": "first_qualifying_N04_binding",
+          "type": "NodeID_or_null",
+          "purpose": "第一次匹配N04已发行后不移动"
+        },
+        {
+          "name": "sample_OfferID_ItemInstanceID_fixed_price",
+          "type": "record_or_null",
+          "purpose": "RunID/ContentUnlockID/first_qualifying_N04_NodeID/sample0"
+        },
+        {
+          "name": "offer_issued_sold_disabled_reason_context",
+          "type": "record",
+          "purpose": "原资格/服务工具当前不匹配只禁用不换"
+        },
+        {
+          "name": "cross_scope_purchase_receipt",
+          "type": "OperationID_request_result",
+          "purpose": "金币/库存/old_drop/stock/永久样品旗标/account与run版本同结果"
+        }
+      ],
+      "restore_rule": "先恢复同代账号和Run再验证sample旗标/报价/实例/实扣一致；半边缺失按根恢复流程，不能自己拼旗标与上一代金币。",
+      "invariants": [
+        "成功一次样品永不重卖；未购本局结束资格仍false但下局需重新选择",
+        "无有效N04不发样品，不耗资格",
+        "已知样品无未知托盘兜底，不以读档发免费道具"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/sample_cross_scope_transaction",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/unlocks.json",
+          "pointer": "/research_sample_order",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G29",
+      "name": "分流RNG与已解析随机事实",
+      "scope": "activeRun.rng_and_sources",
+      "fields": [
+        {
+          "name": "RunSeed_and_algorithm_version",
+          "type": "record",
+          "purpose": "算法/版本不静默替换"
+        },
+        {
+          "name": "stream_states_and_cursors",
+          "type": "map<stream,state>",
+          "purpose": "route/reward_source/shop_stock/enchantment/wheel_facility_operation及战斗合法选招/暴击流各自已用游标"
+        },
+        {
+          "name": "roll_key_and_ordinal",
+          "type": "record",
+          "purpose": "RunID+SourceID+RollOrdinal+RulesVersion；奖励channel原键保留"
+        },
+        {
+          "name": "resolved_results_and_qualified_sets",
+          "type": "map<roll_key,record>",
+          "purpose": "presence含空结果、每channel结果、资格集合/工具匹配原上下文"
+        },
+        {
+          "name": "operation_rng_before_after",
+          "type": "receipt_record",
+          "purpose": "提交事务游标和结果一致"
+        }
+      ],
+      "restore_rule": "已解析结果是事实，seed不代替结果；restore不能从seed重放到估算游标或拿新资格重筛。未解析来源按原流继续，非法配置保pending报告。",
+      "invariants": [
+        "暂停/取消未提交/重试/重返/load/波数不重新roll",
+        "不按当前HP/金币/天赋实力动态权重",
+        "战斗crit结果在AttackID锁时保留一次；AI选择history一起恢复",
+        "战斗流/序列化state由锁定的算法版本定义；此字段不新增随机判定、改概率或给敌人新增暴击。"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/economy-v1/common-rules.json",
+          "pointer": "/rng",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/seed_and_save_interface",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/generation",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/attack/legal_candidate_selection",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G30",
+      "name": "统一操作日志与终止事务",
+      "scope": "bundle.journal",
+      "fields": [
+        {
+          "name": "OperationID_request_digest_scope",
+          "type": "stable_id_and_record",
+          "purpose": "账号/Run/设施/修复/新局/结束/奖励统一原请求"
+        },
+        {
+          "name": "committed_result_and_generation",
+          "type": "record",
+          "purpose": "精确结果/实例ID/余额变化/事实引用/已提交代号"
+        },
+        {
+          "name": "pending_start_end_recovery_identity",
+          "type": "record_or_null",
+          "purpose": "同RunID/OperationID待协调而非第二局"
+        },
+        {
+          "name": "reward_and_event_receipts",
+          "type": "map<unique_key,record>",
+          "purpose": "死亡/拾取/Boss/发现/房清/掉落/结局各事件原消费"
+        },
+        {
+          "name": "run_end_reason_and_receipt",
+          "type": "record_or_null",
+          "purpose": "death/victory/explicit_abandon原结算；已存碎片保留，局内金币装备依原结束"
+        }
+      ],
+      "restore_rule": "按根IO提交状态恢复同一结果；账号与Run版本/实际费用/奖励凭据共同验证。不持久化半个tick中的临时修改副本。",
+      "invariants": [
+        "同OperationID同digest返回原结果，异payload拒绝",
+        "只有原终止事务完成才active_run_id=null；写失败/恢复中仍锁新局",
+        "放弃待续局与活动局同结束事务，不发额外Boss/清房/退出奖励"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/canonical_account_fields/operation_journal",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/lifecycle",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/common-rules.json",
+          "pointer": "/transactions",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/transaction",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G31",
+      "name": "设置与有效重绑配置",
+      "scope": "bundle.settings",
+      "fields": [
+        {
+          "name": "accessibility_setting_values",
+          "type": "map<SettingID,value>",
+          "purpose": "SET-UI-SCALE/TEXT/COLOR/SHAKE/FLASH/HIT-NUMBERS/VIBRATION/SUBTITLES/DIALOGUE/LESSONS/AUDIO/FOCUS原选项"
+        },
+        {
+          "name": "input_binding_schema_version_and_bindings",
+          "type": "record",
+          "purpose": "ActionID到键鼠/手柄映射及冲突校验结果"
+        },
+        {
+          "name": "input_device_preference",
+          "type": "record",
+          "purpose": "首版同一个玩家槽；设备断连不自动添人"
+        },
+        {
+          "name": "locale_and_text_preferences",
+          "type": "record",
+          "purpose": "初始中文与同版本文本展示"
+        }
+      ],
+      "restore_rule": "验证设置原选项与重绑冲突；配置不合法按save-rules.json恢复流程保原记录，不将冲突映射直接激活。不以设置改变判定/CD/危险提示。",
+      "invariants": [
+        "恢复重绑不恢复按键按住/轴输入事件",
+        "新接/重连设备保持暂停，按钮松开轴回中+新确认",
+        "静音/少特效保留形状文字警示"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/ui-input-v1/hud-and-feedback.json",
+          "pointer": "/accessibility_settings",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/ui-input-v1/input-rules.json",
+          "pointer": "/rebind",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/ui-input-v1/input-rules.json",
+          "pointer": "/hotplug_and_focus",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/accessibility_and_effect_budget",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G32",
+      "name": "已读教程证据与当前展示游标",
+      "scope": "bundle.read_history_and_activeRun.presentation",
+      "fields": [
+        {
+          "name": "presentation_seen_ids",
+          "type": "set<PresentationID>",
+          "purpose": "D10纯已读事实"
+        },
+        {
+          "name": "story_version_and_current_dialogue_cursor",
+          "type": "record_or_null",
+          "purpose": "原DialogueID/行/已展开文字或跳过位置"
+        },
+        {
+          "name": "pending_story_presentation_ids",
+          "type": "ordered_ids",
+          "purpose": "已成功但未看演出只补展示"
+        },
+        {
+          "name": "shown_skipped_reviewed_lesson_ids",
+          "type": "sets<LessonID>",
+          "purpose": "说明已看/跳过/复习与实践分开"
+        },
+        {
+          "name": "practice_evidence_by_lesson_with_version",
+          "type": "record",
+          "purpose": "只来自实际权威动作证据"
+        },
+        {
+          "name": "observed_mechanism_evidence_by_lesson_not_action_mastery",
+          "type": "record",
+          "purpose": "观察机制不等熟练"
+        },
+        {
+          "name": "auto_hint_shown_by_lesson_this_RunID",
+          "type": "map<LessonID,count>",
+          "purpose": "同局最多一次原策略"
+        },
+        {
+          "name": "current_hint_and_unique_pending_context",
+          "type": "record_or_null",
+          "purpose": "重载后必须检查当前场景仍有效，失效纯提示丢弃"
+        },
+        {
+          "name": "presentation_event_cursor",
+          "type": "set_or_watermark<EventID>",
+          "purpose": "原已播放声音/VFX/命中提示游标防重复，关键未过期提示按事实重建"
+        }
+      ],
+      "restore_rule": "既成事实/已读/教程证据分域；继续先恢复原游戏姿态、预告和已消费表现游标。UI光标可重建，无动作输入重放。",
+      "invariants": [
+        "查看/跳过/回顾不生成奖励/死亡/发现，不删D06/D07预告",
+        "纸面帧号/粒子缓存不存；原动作绝对时间采样当前姿态",
+        "旧台词/过期非关键音效不排队重播成新攻击"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/state_domains",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/presentation",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/ui-input-v1/tutorials.json",
+          "pointer": "/state_domains",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/ui-input-v1/tutorials.json",
+          "pointer": "/presentation",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/animation_clock_contract",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/feedback_truth",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-G33",
+      "name": "显式技术故障与修复记录",
+      "scope": "activeRun.recovery",
+      "fields": [
+        {
+          "name": "technical_fault_ID_reason_and_paused_state",
+          "type": "record_or_null",
+          "purpose": "D07 12秒或不可恢复空间故障可见暂停"
+        },
+        {
+          "name": "RepairOperationID_and_pre_repair_generation",
+          "type": "record_or_null",
+          "purpose": "按根策略显式修复一次原seed同Room/Slot"
+        },
+        {
+          "name": "repair_actor_repositions_and_warning_schedule",
+          "type": "record",
+          "purpose": "仅尚未完成活体的合法重定位与完整进入预告"
+        },
+        {
+          "name": "cancelled_unemitted_and_room_attacks",
+          "type": "receipt_set",
+          "purpose": "仅显式repair许可取消的未发动作/room绑定live攻击，无退款"
+        },
+        {
+          "name": "preserved_survivor_state_refs",
+          "type": "record",
+          "purpose": "保玩家/幸存敌HP/状态next_tick/CD/物品钱/深度锁存/预留/已死槽原事实"
+        }
+      ],
+      "restore_rule": "此组严格引用save-rules.json /technical_room_repair；普通continue完全不执行修复。显式修复后改位置仍保来源期限，完整预告不是复活已完成Slot或刷新伤害。",
+      "invariants": [
+        "完成真死Slot永不复活/再领奖",
+        "清理异常攻击无退款，不清玩家DoT/治疗计数/CD",
+        "若已存姿态无明确可恢复政策进入恢复；禁止偷偷回idle"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/technical_fault",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/technical_fault/repair_boundary",
+          "access": "read_only"
+        }
+      ]
+    }
+  ],
+  "future_acceptance_cases": [
+    {
+      "id": "SAVE-F01",
+      "title": "长时间离线冻结",
+      "status": "future_not_run",
+      "setup": "在run_sim_time=100.125存一份含0.2秒剩余burn下一跳、2秒CD的战中档；改变墙钟并重新进入。",
+      "expected": "验证后暂停画面仍为100.125；burn next_tick/CD原绝对值不变。新确认且释放输入后才剩0.2秒跳；无离线聚焦或HP回复。",
+      "field_group_refs": [
+        "SAVE-G07",
+        "SAVE-G09",
+        "SAVE-G13"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/clock",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/clock",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/event_order",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/frame_order",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/animation_clock_contract",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/baseline",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/jump",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/hurt",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/dodge",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/effect_resolution",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/states.json",
+          "pointer": "/states",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/healing",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/use",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/control",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F02",
+      "title": "40%锁定前后",
+      "status": "future_not_run",
+      "setup": "分别在玩家攻击40%前、锁后保存；锁后改变展示配置不改源。",
+      "expected": "锁前仍等原lock_time重验，锁后沿原伤害/暴击/预留；不重起动画、不多抽暴击、不重复扣整trigger。",
+      "field_group_refs": [
+        "SAVE-G10",
+        "SAVE-G29"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/weapon_timing_extension",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/attack",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/equipment",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/control",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/animation_clock_contract",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/common-rules.json",
+          "pointer": "/rng",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/seed_and_save_interface",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/generation",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/attack/legal_candidate_selection",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F03",
+      "title": "多发已发与未发分开",
+      "status": "future_not_run",
+      "setup": "WPN-RFL-002一次动作中部分弹已发，其余仍在future schedule。",
+      "expected": "已发保独立实际origin/Z与扫描游标；未来每发按真正发射时枪口；消耗仅真实发射，原AttackID/去重/一次暴击沿用。",
+      "field_group_refs": [
+        "SAVE-G10",
+        "SAVE-G11",
+        "SAVE-G18"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/weapon_timing_extension",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/attack",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/equipment",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/control",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/animation_clock_contract",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/persistence",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/equipment-growth.json",
+          "pointer": "/instance_fields",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/equipment-growth.json",
+          "pointer": "/preserve_runtime_state_contract",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/projectile",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/encounter/projectile_capacity_reservation",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/effect_resolution",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/trap",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/exit",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F04",
+      "title": "空中攻击落地继续",
+      "status": "future_not_run",
+      "setup": "离地一次主攻已消费，攻击尚未结束而Z接近地面时保存。",
+      "expected": "载入不发第二空攻；合法落地不重开攻击/去重。新跃起才新takeoff资格；不赠落地无敌。",
+      "field_group_refs": [
+        "SAVE-G08",
+        "SAVE-G09",
+        "SAVE-G10"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/movement",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/jump",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/charge",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/spatial_contract",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/baseline",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/hurt",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/dodge",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/effect_resolution",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/weapon_timing_extension",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/attack",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/equipment",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/control",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/animation_clock_contract",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F05",
+      "title": "闪避窗口中继续",
+      "status": "future_not_run",
+      "setup": "保存落在D02真实闪避[0.06,0.20)内，并有独立hurt iframe重叠。",
+      "expected": "仍暂停原位置；明确继续后原运动余程/两个实际区间并集继续，不能补全0.4秒或赠新0.65秒。",
+      "field_group_refs": [
+        "SAVE-G09",
+        "SAVE-G10"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/baseline",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/jump",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/hurt",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/dodge",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/effect_resolution",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/weapon_timing_extension",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/attack",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/equipment",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/control",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/animation_clock_contract",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F06",
+      "title": "燃烧等强刷新后的下一跳",
+      "status": "future_not_run",
+      "setup": "burn等强刷新只改expiry后、next_tick尚未到达时保存。",
+      "expected": "next_tick不从读档+1秒重排；到期同点inclusive仍按原顺序；不被直伤无敌挡掉。",
+      "field_group_refs": [
+        "SAVE-G13",
+        "SAVE-G07"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/items-v1/states.json",
+          "pointer": "/states",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/healing",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/use",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/control",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/clock",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/clock",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/event_order",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/frame_order",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/animation_clock_contract",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F07",
+      "title": "HoT与药剂负面绑定",
+      "status": "future_not_run",
+      "setup": "ITM-REC-003已真实回两跳且temporary_tonic仍活动时保存。",
+      "expected": "剩余原跳数每跳读当时治疗效率；过量已损失不补。药剂正负同包到期，不读档只留正效果。",
+      "field_group_refs": [
+        "SAVE-G13"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/items-v1/states.json",
+          "pointer": "/states",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/healing",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/use",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/control",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F08",
+      "title": "未提交动作与伤害取消锁",
+      "status": "future_not_run",
+      "setup": "拾甲/喝药前摇中同点收到实际DoT随后合法HoT；在完整批次边界保存。",
+      "expected": "若旧规则已取消，载入保持取消且不退款真实伤害；若仍是已接受未提交动作，继续原余时。恢复不拿治疗清取消锁。",
+      "field_group_refs": [
+        "SAVE-G15",
+        "SAVE-G13"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/action_policy",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/transaction",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/pause",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/use",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/states.json",
+          "pointer": "/states",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/healing",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/control",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F09",
+      "title": "普通敌owner死但旧弹活",
+      "status": "future_not_run",
+      "setup": "敌人真死已释放actor配额，一枚原房飞弹仍在途中且占live弹容量。",
+      "expected": "仅载入dead owner tombstone，不复活actor；弹体继续可伤、占容量，死亡金币只一次。",
+      "field_group_refs": [
+        "SAVE-G16",
+        "SAVE-G17",
+        "SAVE-G18",
+        "SAVE-G23"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/behavior",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/dormancy",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/flying",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/guard",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/enemies.json",
+          "pointer": "/enemies/1/behavior/pending_low_recovery",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/support",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/encounter",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/projectile",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/projectile",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/encounter/projectile_capacity_reservation",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/effect_resolution",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/trap",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/exit",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/gold_partition",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/delivery_and_idempotency",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/seed_and_save_interface",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F10",
+      "title": "支援弱源被压制",
+      "status": "future_not_run",
+      "setup": "同组有强弱两来源登记，弱源尚有原余期；强源死亡后保存。",
+      "expected": "强源去自己的buff，弱源仅其未过期部分恢复；没有重算满4秒、叠加或改攻速。",
+      "field_group_refs": [
+        "SAVE-G17"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/support",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/encounter",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/projectile",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F11",
+      "title": "石蝠受创仍欠低位窗",
+      "status": "future_not_run",
+      "setup": "ENM-STN-002攻击已接受，下降未到合法Z20被破韧，然后保存。",
+      "expected": "pending_low_recovery保留；恢复原受伤和连续下降；实际合法到Z20才起至少1.8秒窗，不高空直接清标。",
+      "field_group_refs": [
+        "SAVE-G16",
+        "SAVE-G10"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/behavior",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/dormancy",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/flying",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/guard",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/enemies.json",
+          "pointer": "/enemies/1/behavior/pending_low_recovery",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/weapon_timing_extension",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/attack",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/equipment",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/control",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/animation_clock_contract",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F12",
+      "title": "深入线先锁存依赖后就绪",
+      "status": "future_not_run",
+      "setup": "RSEQ-001玩家已扫过40%深入线但G1未真全灭，回退后保存。",
+      "expected": "恢复Trigger锁存/最大深度，G2仍排队；G1完成和原喘息结束才整组接纳，不能漏触发或重复触发。",
+      "field_group_refs": [
+        "SAVE-G20",
+        "SAVE-G21"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/manifest",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/trigger",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/clear",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/room-sequences.json",
+          "pointer": "/templates/0",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/budget",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/spawn",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/dormancy",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/combat_across_groups",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F13",
+      "title": "预告播到一半",
+      "status": "future_not_run",
+      "setup": "RSEQ-001未来槽已整组预留，某slot 1.2秒预告已过0.7秒时保存。",
+      "expected": "同ID同锚点保剩0.5秒，重画原全形状；0.8秒全房间隔/其他预留不归零。物化时220复核失败才按原backoff重做全预告。",
+      "field_group_refs": [
+        "SAVE-G21"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/budget",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/spawn",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/dormancy",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/combat_across_groups",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F14",
+      "title": "预留失败接近故障阈值",
+      "status": "future_not_run",
+      "setup": "slot预留已等待11.8秒且从未物化，下一重试/12秒故障待到时保存。",
+      "expected": "离线不推进；继续不把reserved_since改now，余0.2秒按原故障流程显式暂停。不假死槽/领奖/清房。",
+      "field_group_refs": [
+        "SAVE-G21",
+        "SAVE-G33"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/budget",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/spawn",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/dormancy",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/combat_across_groups",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/technical_fault",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/technical_fault/repair_boundary",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F15",
+      "title": "房间末敌死但未来义务未终",
+      "status": "future_not_run",
+      "setup": "当前全部活动actor真死，深度future required尚未触发或仍有队列。",
+      "expected": "不恢复成room_cleared；保深入提示/未来义务。波清不清旧弹、CD、玩家DoT或预算。",
+      "field_group_refs": [
+        "SAVE-G20",
+        "SAVE-G18"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/manifest",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/trigger",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/clear",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/room-sequences.json",
+          "pointer": "/templates/0",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/projectile",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/encounter/projectile_capacity_reservation",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/effect_resolution",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/trap",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/exit",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F16",
+      "title": "Boss多阈值排队",
+      "status": "future_not_run",
+      "setup": "BOS-DEM-001在强制恢复期间跨到更后阶段，提示开始后又跨阈值，再保存。",
+      "expected": "恢复latest pending及原cue_deadline，不重开1.2秒、不跳必要恢复；保HP/CD/保护/弹体，死亡优先。",
+      "field_group_refs": [
+        "SAVE-G22",
+        "SAVE-G10"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/phase",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/settlement",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/attack",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/bosses.json",
+          "pointer": "/bosses/4/phases",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/success_pipeline",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/ending",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/weapon_timing_extension",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/attack",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/equipment",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/control",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/animation_clock_contract",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F17",
+      "title": "Boss与玩家同点死",
+      "status": "future_not_run",
+      "setup": "同点Boss死亡、其已发旧弹造成玩家死亡；只在完整damage/death批次后保存。",
+      "expected": "run_failure无新Boss碎片/剧情/ending；此前已入账号碎片保留。不能靠读档成功cleanup提前删除那枚致死弹。",
+      "field_group_refs": [
+        "SAVE-G22",
+        "SAVE-G18",
+        "SAVE-G30"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/phase",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/settlement",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/attack",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/bosses.json",
+          "pointer": "/bosses/4/phases",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/success_pipeline",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/ending",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/projectile",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/encounter/projectile_capacity_reservation",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/effect_resolution",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/trap",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/exit",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/canonical_account_fields/operation_journal",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/lifecycle",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/common-rules.json",
+          "pointer": "/transactions",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/transaction",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F18",
+      "title": "Boss成功但展示前退出",
+      "status": "future_not_run",
+      "setup": "合法Boss成功与奖励/故事/cleanup同事务后、胜利演出前退出。",
+      "expected": "恢复原成功票据与同地面DropIDs；不二次奖励。玩家既有burn next_tick/CD仍保，Boss自有旧弹已清不复活。",
+      "field_group_refs": [
+        "SAVE-G22",
+        "SAVE-G23",
+        "SAVE-G32"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/phase",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/settlement",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/attack",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/bosses.json",
+          "pointer": "/bosses/4/phases",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/success_pipeline",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/ending",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/gold_partition",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/delivery_and_idempotency",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/seed_and_save_interface",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/state_domains",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/presentation",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/ui-input-v1/tutorials.json",
+          "pointer": "/state_domains",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/ui-input-v1/tutorials.json",
+          "pointer": "/presentation",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/animation_clock_contract",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/feedback_truth",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F19",
+      "title": "地面金币与永久碎片两侧",
+      "status": "future_not_run",
+      "setup": "同代有一堆未拾金币、一堆已实际拾碎片，以及半栈转移剩物。",
+      "expected": "金币仍地面不入账；碎片只保永久入账无地面副本；原StackID/余量/目的归属一致。",
+      "field_group_refs": [
+        "SAVE-G12",
+        "SAVE-G23",
+        "SAVE-G24"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/capacity",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/transfer",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/items.json",
+          "pointer": "/items",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/gold_partition",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/delivery_and_idempotency",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/seed_and_save_interface",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/currency_pickup",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/drop_placement",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/delivery_and_idempotency/failure_or_missing_ground_point",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F20",
+      "title": "轮盘或公共箱已扣费未领取",
+      "status": "future_not_run",
+      "setup": "未知轮盘物品在托盘；另一房公共箱已耗钥匙但库存满。",
+      "expected": "各托盘保持原唯一实例，轮盘阻新spin；箱不返钥匙、不因空槽自动装包/出地面副本。重复claim同票据。",
+      "field_group_refs": [
+        "SAVE-G25",
+        "SAVE-G26",
+        "SAVE-G30"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/economy-v1/facilities.json",
+          "pointer": "/facilities",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/common-rules.json",
+          "pointer": "/transactions",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/transaction",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/common-rules.json",
+          "pointer": "/reward_tray",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/delivery_and_idempotency/common_box_source_bound_delivery",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/canonical_account_fields/operation_journal",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/lifecycle",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/transaction",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F21",
+      "title": "样品跨scope原子性",
+      "status": "future_not_run",
+      "setup": "UNL-PAS-008样品在首匹配N04付费交付完成但客户端未看到响应。",
+      "expected": "同完整bundle恢复扣金币/实例/已售/永久样品旗标与两版本；下一N04无第二报价，不能拼旧余额与新旗标。",
+      "field_group_refs": [
+        "SAVE-G28",
+        "SAVE-G04",
+        "SAVE-G30"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/sample_cross_scope_transaction",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/unlocks.json",
+          "pointer": "/research_sample_order",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/canonical_account_fields",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/derived_fields",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/unlocks.json",
+          "pointer": "/research_sample_order/new_run_selection_commit",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/canonical_account_fields/operation_journal",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/lifecycle",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/common-rules.json",
+          "pointer": "/transactions",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/transaction",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F22",
+      "title": "天赋退款与暂停锁",
+      "status": "future_not_run",
+      "setup": "暂停未结束局时进入营地；或HUB_IDLE有当前等级缺原实付票据。",
+      "expected": "暂停局只可看，天赋/研究/全退/样品选择/新局均锁。缺票据不猜当前价退款，保原数据进恢复。",
+      "field_group_refs": [
+        "SAVE-G02",
+        "SAVE-G03",
+        "SAVE-G04"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/canonical_account_fields",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/lifecycle",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/talent_reset/conservation_invariant_without_admin_migration",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/talent_reset",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/talents.json",
+          "pointer": "/nodes",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/derived_fields",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/progression-v1/unlocks.json",
+          "pointer": "/research_sample_order/new_run_selection_commit",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F23",
+      "title": "空随机结果同样固定",
+      "status": "future_not_run",
+      "setup": "房奖励bonus_presence首次解析为空，退出重返，期间账号发生另一局的合法研究后再检查旧结果。",
+      "expected": "同Run已解析空结果/资格快照不改、不重新roll；新研究只适用于真正新Run。",
+      "field_group_refs": [
+        "SAVE-G06",
+        "SAVE-G23",
+        "SAVE-G29"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/new_run",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/new_run_context",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/gold_partition",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/delivery_and_idempotency",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/reward-sources.json",
+          "pointer": "/seed_and_save_interface",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/economy-v1/common-rules.json",
+          "pointer": "/rng",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/generation",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/attack/legal_candidate_selection",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F24",
+      "title": "终局已读不代替事实",
+      "status": "future_not_run",
+      "setup": "终Boss成功凭据存在但END-OPEN-GATE尚未看；另造只有presentation_seen缺成功证据的受损候选。",
+      "expected": "前者只展示原ending receipt不再成功；后者不能从已读/所在终房补造M05/解誓/奖励，按根恢复流程处理。",
+      "field_group_refs": [
+        "SAVE-G05",
+        "SAVE-G22",
+        "SAVE-G32"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/state_domains",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/fact_transaction",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/ending",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/phase",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/settlement",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/common-rules.json",
+          "pointer": "/attack",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/bosses-v1/bosses.json",
+          "pointer": "/bosses/4/phases",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/success_pipeline",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/narrative-v1/story-flow.json",
+          "pointer": "/presentation",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/ui-input-v1/tutorials.json",
+          "pointer": "/state_domains",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/ui-input-v1/tutorials.json",
+          "pointer": "/presentation",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/animation_clock_contract",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/feedback_truth",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F25",
+      "title": "坐标版本与输入松开",
+      "status": "future_not_run",
+      "setup": "旧或未知持久化坐标版本候选与投影/排序差异分别存在；恢复时控制器摇杆未回中。",
+      "expected": "仅表现投影/排序变化且世界解释未变时按已登记恒等变换；真实世界变化必须完整映射验证，不能只改版本标签或擅自翻Y。保持暂停，轴回中且新明确继续；确认不穿透跳跃/攻击。",
+      "field_group_refs": [
+        "SAVE-G01",
+        "SAVE-G08",
+        "SAVE-G31"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/progression-v1/hub-rules.json",
+          "pointer": "/lifecycle/no_silent_version_upgrade_of_unfinished_run",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/spatial_contract/legacy_migration",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/movement",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/jump",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/charge",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/spatial_contract",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/ui-input-v1/hud-and-feedback.json",
+          "pointer": "/accessibility_settings",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/ui-input-v1/input-rules.json",
+          "pointer": "/rebind",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/ui-input-v1/input-rules.json",
+          "pointer": "/hotplug_and_focus",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/accessibility_and_effect_budget",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F26",
+      "title": "显式repair不同于continue",
+      "status": "future_not_run",
+      "setup": "同一含旧弹、受伤状态与已死槽故障档，分别选普通继续与明确技术修复。",
+      "expected": "普通继续不清弹/不取消动作/不改位置。明确repair仅根允许攻击清理和未完成活体重定位+完整预告，保HP/状态next_tick/CD/预留/触发；已完成Slot永不复活/再领奖。",
+      "field_group_refs": [
+        "SAVE-G33",
+        "SAVE-G18",
+        "SAVE-G21"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/technical_fault",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/technical_fault/repair_boundary",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/projectile",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/enemies-v1/common-rules.json",
+          "pointer": "/encounter/projectile_capacity_reservation",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/effect_resolution",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/trap",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/exit",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/budget",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/spawn",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/dormancy",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/combat_across_groups",
+          "access": "read_only"
+        }
+      ]
+    },
+    {
+      "id": "SAVE-F27",
+      "title": "滚动治疗预算释放时点",
+      "status": "future_not_run",
+      "setup": "一个AttackID已实际吸血3HP，角色最近1秒多次共已回复6HP，在最旧一项即将出窗前保存。",
+      "expected": "保每次actual_heal及原仿真时间；继续不再用同AttackID预算，滚动额度只在各原事件真正出1秒窗时释放。离线不回满预算，换武器/回房不清。",
+      "field_group_refs": [
+        "SAVE-G14",
+        "SAVE-G07"
+      ],
+      "source_refs": [
+        {
+          "path": "docs/design/items-v1/items.json",
+          "pointer": "/items/29/effects/0",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/armor_trait_interop",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/enchant-rules.json",
+          "pointer": "/effect_resolution",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/combat_across_groups",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/equipment-v2/stat-definitions.json",
+          "pointer": "/9",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/player-combat-v1/player-combat-rules.json",
+          "pointer": "/clock",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/items-v1/common-rules.json",
+          "pointer": "/clock",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/inventory-v1/inventory-rules.json",
+          "pointer": "/event_order",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/dungeon-v1/common-rules.json",
+          "pointer": "/frame_order",
+          "access": "read_only"
+        },
+        {
+          "path": "docs/design/presentation-v1/visual-rules.json",
+          "pointer": "/animation_clock_contract",
+          "access": "read_only"
+        }
+      ]
+    }
+  ],
+  "not_persisted": [
+    "derived_final_effective_stats/quality_label/HUD比较总分；从相同原始来源与锁定版本派生并校验",
+    "paper_animation_frame/sprite索引/装饰粒子位置/震屏偏移；以权威动作绝对时间和已消费表现游标重建",
+    "physical_input_down_states/primary_buffer/item_buffer/输入事件队列/未执行整理意图/未经确认交易预览",
+    "可重新由权威记录计算的清房/完整安全/HUD标签/容量合计缓存；必须交叉校验，不能覆盖权威预留和真实攻击",
+    "未知版本字段不得静默丢弃；与save-rules.json迁移和隔离合同一致"
+  ],
+  "global_invariants": [
+    "ProfileID是本地档身份，不冒充联网账号；account.active_run_id与activeRun.RunID必须一致或均null",
+    "一个ProfileID至多一个未结束activeRun；RUN_STARTING/RUN_ACTIVE/RUN_SUSPENDED/RUN_ENDING/RECOVERY_REQUIRED均保留锁",
+    "账号+Run+设置/已读同代完整bundle；不按scope拼接不同代以凑最新金币或旗标",
+    "每个可拥有实例/堆叠恰有一个位置归属；所有实体和攻击归RunID/RoomInstanceID；未知owner用有限tombstone保留，不能复活",
+    "同时间damage/death先于合法治疗/拾取/库存设施/Boss成功；每种事实只消费一次",
+    "普通敌死亡/普通波结束不清已发射弹；Boss合法成功和真实离房按各自旧规则清理",
+    "内容定义ID、稳定实例ID与OperationID职责分开；重试不新增ID，不重新随机，不更改历史凭据",
+    "本文件只定义未来保存事实；静态校验通过不等于可读写存档或精确恢复已实现"
+  ],
+  "stable_catalog_bindings": [
+    {
+      "path": "docs/design/equipment-v1/weapons.json",
+      "pointer": "",
+      "access": "read_only",
+      "ids": [
+        "WPN-KNF-001",
+        "WPN-KNF-002",
+        "WPN-KNF-003",
+        "WPN-DAO-001",
+        "WPN-DAO-002",
+        "WPN-DAO-003",
+        "WPN-SWD-001",
+        "WPN-SWD-002",
+        "WPN-SWD-003",
+        "WPN-GSW-001",
+        "WPN-GSW-002",
+        "WPN-GSW-003",
+        "WPN-SPR-001",
+        "WPN-SPR-002",
+        "WPN-SPR-003",
+        "WPN-HAL-001",
+        "WPN-HAL-002",
+        "WPN-HAL-003",
+        "WPN-XBW-001",
+        "WPN-XBW-002",
+        "WPN-XBW-003",
+        "WPN-PST-001",
+        "WPN-PST-002",
+        "WPN-PST-003",
+        "WPN-SGN-001",
+        "WPN-SGN-002",
+        "WPN-SGN-003",
+        "WPN-RFL-001",
+        "WPN-RFL-002",
+        "WPN-RFL-003",
+        "WPN-STF-001",
+        "WPN-STF-002",
+        "WPN-STF-003"
+      ]
+    },
+    {
+      "path": "docs/design/equipment-v1/armor.json",
+      "pointer": "",
+      "access": "read_only",
+      "ids": [
+        "ARM-LGT-001",
+        "ARM-LGT-002",
+        "ARM-LGT-003",
+        "ARM-MED-001",
+        "ARM-MED-002",
+        "ARM-MED-003",
+        "ARM-HVY-001",
+        "ARM-HVY-002",
+        "ARM-HVY-003",
+        "ARM-ROB-001",
+        "ARM-ROB-002",
+        "ARM-ROB-003"
+      ]
+    },
+    {
+      "path": "docs/design/items-v1/items.json",
+      "pointer": "/items",
+      "access": "read_only",
+      "ids": [
+        "ITM-REC-001",
+        "ITM-REC-002",
+        "ITM-REC-003",
+        "ITM-REC-004",
+        "ITM-REC-005",
+        "ITM-REC-006",
+        "ITM-BOO-001",
+        "ITM-BOO-002",
+        "ITM-BOO-003",
+        "ITM-BOO-004",
+        "ITM-BOO-005",
+        "ITM-BOO-006",
+        "ITM-THR-001",
+        "ITM-THR-002",
+        "ITM-THR-003",
+        "ITM-THR-004",
+        "ITM-THR-005",
+        "ITM-THR-006",
+        "ITM-TRP-001",
+        "ITM-TRP-002",
+        "ITM-TRP-003",
+        "ITM-TRP-004",
+        "ITM-PAS-001",
+        "ITM-PAS-002",
+        "ITM-PAS-003",
+        "ITM-PAS-004",
+        "ITM-PAS-005",
+        "ITM-PAS-006",
+        "ITM-PAS-007",
+        "ITM-PAS-008",
+        "ITM-FUN-001",
+        "ITM-FUN-002",
+        "ITM-FUN-003",
+        "ITM-FUN-004",
+        "ITM-FUN-005",
+        "ITM-FUN-006"
+      ]
+    },
+    {
+      "path": "docs/design/items-v1/states.json",
+      "pointer": "/states",
+      "access": "read_only",
+      "ids": [
+        "burn",
+        "slow",
+        "shock",
+        "regen_hp",
+        "temporary_tonic"
+      ]
+    },
+    {
+      "path": "docs/design/enemies-v1/enemies.json",
+      "pointer": "/enemies",
+      "access": "read_only",
+      "ids": [
+        "ENM-STN-001",
+        "ENM-STN-002",
+        "ENM-STN-003",
+        "ENM-STN-004",
+        "ENM-ELF-001",
+        "ENM-ELF-002",
+        "ENM-ELF-003",
+        "ENM-TRE-001",
+        "ENM-TRE-002",
+        "ENM-TRE-003",
+        "ENM-ROB-001",
+        "ENM-ROB-002",
+        "ENM-ROB-003",
+        "ENM-SKL-001",
+        "ENM-SKL-002",
+        "ENM-SKL-003",
+        "ENM-GOB-001",
+        "ENM-GOB-002",
+        "ENM-GOB-003",
+        "ENM-MEC-001",
+        "ENM-MEC-002",
+        "ENM-MEC-003",
+        "ENM-BST-001",
+        "ENM-BST-002",
+        "ENM-BST-003",
+        "ENM-DEM-001",
+        "ENM-DEM-002",
+        "ENM-DEM-003"
+      ]
+    },
+    {
+      "path": "docs/design/enemies-v1/enemies.json",
+      "pointer": "/elite_variants",
+      "access": "read_only",
+      "ids": [
+        "ELT-STN-001",
+        "ELT-ELF-001",
+        "ELT-TRE-001",
+        "ELT-ROB-001",
+        "ELT-SKL-001",
+        "ELT-GOB-001",
+        "ELT-MEC-001",
+        "ELT-BST-001",
+        "ELT-DEM-001"
+      ]
+    },
+    {
+      "path": "docs/design/bosses-v1/bosses.json",
+      "pointer": "/bosses",
+      "access": "read_only",
+      "ids": [
+        "BOS-STN-001",
+        "BOS-FOR-001",
+        "BOS-RIT-001",
+        "BOS-MEC-001",
+        "BOS-DEM-001",
+        "BOS-GOB-001",
+        "BOS-BST-001"
+      ]
+    },
+    {
+      "path": "docs/design/dungeon-v1/room-sequences.json",
+      "pointer": "/templates",
+      "access": "read_only",
+      "ids": [
+        "RSEQ-001",
+        "RSEQ-002",
+        "RSEQ-003",
+        "RSEQ-004",
+        "RSEQ-005",
+        "RSEQ-006"
+      ]
+    },
+    {
+      "path": "docs/design/economy-v1/facilities.json",
+      "pointer": "/facilities",
+      "access": "read_only",
+      "ids": [
+        "FAC-MERCHANT",
+        "FAC-SUPPLY",
+        "FAC-CHOICE-WHEEL",
+        "FAC-ROULETTE",
+        "FAC-INTEL-ENTRY",
+        "FAC-FORGE",
+        "FAC-ENCHANT-PROGRESS",
+        "FAC-ENCHANT-REROLL",
+        "FAC-ENCHANT-CLEANSE"
+      ]
+    },
+    {
+      "path": "docs/design/progression-v1/talents.json",
+      "pointer": "/nodes",
+      "access": "read_only",
+      "ids": [
+        "TAL-VIT",
+        "TAL-GRD",
+        "TAL-MED",
+        "TAL-ATK",
+        "TAL-BRK",
+        "TAL-CRT",
+        "TAL-MOV",
+        "TAL-FOC",
+        "TAL-RLD"
+      ]
+    },
+    {
+      "path": "docs/design/progression-v1/unlocks.json",
+      "pointer": "/unlocks",
+      "access": "read_only",
+      "ids": [
+        "UNL-REC-002",
+        "UNL-REC-006",
+        "UNL-BOO-005",
+        "UNL-BOO-006",
+        "UNL-THR-004",
+        "UNL-THR-006",
+        "UNL-THR-005",
+        "UNL-TRP-003",
+        "UNL-TRP-004",
+        "UNL-PAS-005",
+        "UNL-PAS-006",
+        "UNL-PAS-008",
+        "UNL-FUN-003",
+        "UNL-FUN-005"
+      ]
+    }
+  ],
+  "coordinate_contract_ref": "compatibility-and-coop.json#/version_contract"
+}

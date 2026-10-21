@@ -1,0 +1,1266 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "module": "D-14",
+  "source_event": "EV-032",
+  "user_message": "ok",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "runtime_tested_this_turn": false,
+  "authority": "assistant_proposal_not_individually_user_approved",
+  "premise_audit": {
+    "facts": [
+      "D01至D13已有文档和结构化数据；已明确全局先设计再制作，用户本轮ok仅授权继续D14，不等于逐项参数与最终发行规模获批。",
+      "旧FirstRoom记录与v004实际报告支持19项原型行为检查；未覆盖完整目录、Boss/五区、正式库存成长、完整输入和真实存档。",
+      "D14章成长、有限deck与模型是新增助手提案；固定章、非玩家天赋/钱包隐藏适配，不能凭纸面算术证明零天赋通关。",
+      "旧HUD+Y朝下/W向-Y与D11/D12正式方向差异仍在；D13明确结构/内容/坐标版本独立且正常恢复不净化。"
+    ],
+    "reasoning": [
+      "14模块矩阵要分文档覆盖、助手待审、真实实现、运行试玩四层；不能把14份文档计作14个完成的产品系统。",
+      "首批先验证首区完整交易/战斗/保存/跨章链，加技术测试台覆盖差异大的动作，而非同时量产全部内容。",
+      "跨章测试壳能够验证章节事务并保留未结束锁，不需要新增切片通关奖励或篡改完整五区胜利条件。"
+    ],
+    "risks": [
+      "现有短原型不能证明世界碰撞/导航、最低移动或最短刀实用性、长局存档、真实补给和整体难度。",
+      "长期内容组合会放大动画/持握遮挡/敌人组合/UI/保存与回归成本；没有真实测量或报价不猜工期/预算。",
+      "D08旧双装备锻造钱包例若假设已持甲却未计获取，不能作为零天赋无甲默认开局的保证路线。"
+    ]
+  },
+  "status_layers": {
+    "design_coverage": "入口与数据、正常/失败合同和待验证项存在；不表示规则必然正确或无剩余问题。",
+    "user_review": "方向与范围来自用户记录；新参数/曲线/名字/每阶段小集合均助手待审，整体审阅后按用户后续制作指令推进。",
+    "implementation": "以真实代码/导入/运行证据标记；通用原型剑斧/药水不可冒充正式WPN/ITM全目录。",
+    "runtime_and_playtest": "需要运行事件/视频证明、实际输入、真人手感与整局测量；本轮没有新运行验收。",
+    "acceptance_rule": "paper_coverage_static_validation_and_abstract_models_never_set_runtime_or_release_passed",
+    "gate_is_external_approval": false
+  },
+  "module_coverage": [
+    {
+      "module": "D-01",
+      "name": "整体循环",
+      "entry": "整体框架与单局循环设计.md",
+      "data_refs": [],
+      "coverage": "双资源、开局/跨章/死亡/放弃/继续/胜负结算与循环接口。",
+      "implemented": "历史原型只有反复房间、死亡R重开；没有完整据点/五区/永久记录/结算循环。",
+      "test": "零天赋、零金币沿免费主线创建局→多遭遇→Boss合法成功→跨章，失败/放弃/继续各分支不重复初始化或付奖。",
+      "design_document_available": true,
+      "individual_parameters_user_approved": false,
+      "formal_module_runtime_complete": false,
+      "design_review_passed": false,
+      "runtime_acceptance": "NOT_EXECUTED_FOR_FORMAL_DESIGN",
+      "playtest_acceptance": "NOT_PROVEN"
+    },
+    {
+      "module": "D-02",
+      "name": "玩家与战斗",
+      "entry": "玩家角色与战斗规则设计.md",
+      "data_refs": [
+        "docs/design/player-combat-v1/player-combat-rules.json"
+      ],
+      "coverage": "完整动作、闪避/空攻、受击/破韧/无敌、属性锁点和同点时序；武器v1/v2为基础。",
+      "implemented": "历史原型有XY移动、独立跳跃、简单剑斧攻击/朝向深度高度检查；D02闪避/空攻/完整时间轴未按设计实现。",
+      "test": "起攻/40%锁点、落地不洗后摇、受击/闪避无敌与DoT、最低移动及资源空状态，分别实跑。",
+      "design_document_available": true,
+      "individual_parameters_user_approved": false,
+      "formal_module_runtime_complete": false,
+      "design_review_passed": false,
+      "runtime_acceptance": "NOT_EXECUTED_FOR_FORMAL_DESIGN",
+      "playtest_acceptance": "NOT_PROVEN"
+    },
+    {
+      "module": "D-03",
+      "name": "道具与状态",
+      "entry": "道具与状态系统设计.md",
+      "data_refs": [
+        "docs/design/items-v1/items.json",
+        "docs/design/items-v1/common-rules.json",
+        "docs/design/items-v1/states.json"
+      ],
+      "coverage": "六类36件、属性来源合并、三使用模板、状态共享/冷却/next_tick/治疗预算。",
+      "implemented": "历史原型仅通用potion恢复30，并非已接入ITM目录或共享状态系统。",
+      "test": "满血不消耗、前摇中断、同点死亡不能被治疗复活、燃烧刷新不重置首跳、道具不继承武器暴击/吸血/附魔。",
+      "design_document_available": true,
+      "individual_parameters_user_approved": false,
+      "formal_module_runtime_complete": false,
+      "design_review_passed": false,
+      "runtime_acceptance": "NOT_EXECUTED_FOR_FORMAL_DESIGN",
+      "playtest_acceptance": "NOT_PROVEN"
+    },
+    {
+      "module": "D-04",
+      "name": "携带与交互",
+      "entry": "携带与交互系统设计.md",
+      "data_refs": [
+        "docs/design/inventory-v1/inventory-rules.json"
+      ],
+      "coverage": "16流程/11文字UI态、槽位/数量/拾取/替换/丢弃/整包购买/暂停整理/出口与唯一归属。",
+      "implemented": "历史原型仅E拾取/出口与Q切剑斧；完整实例库存、重绑目标、交易及暂停整理未实现。",
+      "test": "背包满、同ID补栈/余留、替换、最后武器、旧装备同点治疗、费用/归属一次提交与取消保真实伤害。",
+      "design_document_available": true,
+      "individual_parameters_user_approved": false,
+      "formal_module_runtime_complete": false,
+      "design_review_passed": false,
+      "runtime_acceptance": "NOT_EXECUTED_FOR_FORMAL_DESIGN",
+      "playtest_acceptance": "NOT_PROVEN"
+    },
+    {
+      "module": "D-05",
+      "name": "普通敌人与精英",
+      "entry": "敌人分类与普通精英设计.md",
+      "data_refs": [
+        "docs/design/enemies-v1/enemies.json",
+        "docs/design/enemies-v1/common-rules.json",
+        "docs/design/enemies-v1/target-profiles.json"
+      ],
+      "coverage": "九类28基础+9精英、65攻击定义、实体/受击体、休眠低飞冲锋与配额。",
+      "implemented": "历史原型三个兽人有简单追击/攻击/死亡；不能作为ENM-STN等正式AI或九类敌人已实现。",
+      "test": "石骑锁线/失手恢复，石蝠实际到合法Z=20后至少1.80s低位，休眠可伤且兜底苏醒，活弹容量及死亡留弹。",
+      "design_document_available": true,
+      "individual_parameters_user_approved": false,
+      "formal_module_runtime_complete": false,
+      "design_review_passed": false,
+      "runtime_acceptance": "NOT_EXECUTED_FOR_FORMAL_DESIGN",
+      "playtest_acceptance": "NOT_PROVEN"
+    },
+    {
+      "module": "D-06",
+      "name": "Boss与特殊遭遇",
+      "entry": "Boss与特殊遭遇设计.md",
+      "data_refs": [
+        "docs/design/bosses-v1/bosses.json",
+        "docs/design/bosses-v1/common-rules.json",
+        "docs/design/bosses-v1/arena-contracts.json"
+      ],
+      "coverage": "五主线+二可选、27攻击、阶段/控制/配额、奖励与纸面场地/走位。",
+      "implemented": "七个设计Boss、阶段、真实场地和同点胜负均未制作。",
+      "test": "所有招免费地面反制、最短刀/长枪弱区可接近、阶段排队不锁血、玩家Boss双死无新奖励/故事。",
+      "design_document_available": true,
+      "individual_parameters_user_approved": false,
+      "formal_module_runtime_complete": false,
+      "design_review_passed": false,
+      "runtime_acceptance": "NOT_EXECUTED_FOR_FORMAL_DESIGN",
+      "playtest_acceptance": "NOT_PROVEN"
+    },
+    {
+      "module": "D-07",
+      "name": "区域房间与遭遇",
+      "entry": "区域房间与遭遇流程设计.md",
+      "data_refs": [
+        "docs/design/dungeon-v1/regions-and-routes.json",
+        "docs/design/dungeon-v1/room-sequences.json",
+        "docs/design/dungeon-v1/common-rules.json"
+      ],
+      "coverage": "五区、35免费主节点、支路/隐藏候选、六时序样例与future/预留/清房合同。",
+      "implemented": "历史原型仅重复房间并提高兽人HP，无五区地图/manifest/深度触发/波次/出生重验。",
+      "test": "免费路线无付费/跳跃/支线门槛，必需深入线不在clear门后；任何残留、休眠、未实体化义务/预留都不误判清房。",
+      "design_document_available": true,
+      "individual_parameters_user_approved": false,
+      "formal_module_runtime_complete": false,
+      "design_review_passed": false,
+      "runtime_acceptance": "NOT_EXECUTED_FOR_FORMAL_DESIGN",
+      "playtest_acceptance": "NOT_PROVEN"
+    },
+    {
+      "module": "D-08",
+      "name": "品质掉落与经济",
+      "entry": "品质掉落与局内经济设计.md",
+      "data_refs": [
+        "docs/design/economy-v1/common-rules.json",
+        "docs/design/economy-v1/facilities.json",
+        "docs/design/economy-v1/budget-scenarios.json"
+      ],
+      "coverage": "四档基础强化/附魔独立、有限整房预算、九类设施、补给与主支路收支。",
+      "implemented": "历史原型金币每拾+5、药水与斧固定掉落；未实现D08有限来源/价格/库存/强化/附魔/轮盘。",
+      "test": "零币主路可行；整manifest分币不因波/重试扩增；实际掉落/拾取≠理论收入；现金与券容量/报价/次数一致。",
+      "design_document_available": true,
+      "individual_parameters_user_approved": false,
+      "formal_module_runtime_complete": false,
+      "design_review_passed": false,
+      "runtime_acceptance": "NOT_EXECUTED_FOR_FORMAL_DESIGN",
+      "playtest_acceptance": "NOT_PROVEN"
+    },
+    {
+      "module": "D-09",
+      "name": "成长与解锁",
+      "entry": "局内成长与局外天赋解锁设计.md",
+      "data_refs": [
+        "docs/design/progression-v1/hub-rules.json",
+        "docs/design/progression-v1/talents.json",
+        "docs/design/progression-v1/unlocks.json"
+      ],
+      "coverage": "九天赋27rank/十四研究、原实付全退、未结束局锁、快照与一次付费样品。",
+      "implemented": "永久碎片/天赋/研究/快照/实付凭据/样品均未制作。",
+      "test": "同Run冻结；暂停/恢复锁购买退款选样品与第二局；重复请求不再扣费；退款逐rank原实付，样品跨域同代。",
+      "design_document_available": true,
+      "individual_parameters_user_approved": false,
+      "formal_module_runtime_complete": false,
+      "design_review_passed": false,
+      "runtime_acceptance": "NOT_EXECUTED_FOR_FORMAL_DESIGN",
+      "playtest_acceptance": "NOT_PROVEN"
+    },
+    {
+      "module": "D-10",
+      "name": "世界观NPC与叙事",
+      "entry": "世界观NPC与叙事设计.md",
+      "data_refs": [
+        "docs/design/narrative-v1/story-flow.json"
+      ],
+      "coverage": "五章事实、五NPC、五可选见闻、一个正常结局/可选插页及重试回响。",
+      "implemented": "正式NPC服务/故事事实/结局凭据未制作，原型提示不是叙事系统。",
+      "test": "事实/本Run成功/已读独立；跳过回顾不付奖、不缩Boss预告；支线/金币/天赋不门控正常结局。",
+      "design_document_available": true,
+      "individual_parameters_user_approved": false,
+      "formal_module_runtime_complete": false,
+      "design_review_passed": false,
+      "runtime_acceptance": "NOT_EXECUTED_FOR_FORMAL_DESIGN",
+      "playtest_acceptance": "NOT_PROVEN"
+    },
+    {
+      "module": "D-11",
+      "name": "UI输入与教学",
+      "entry": "UI输入与新手引导设计.md",
+      "data_refs": [
+        "docs/design/ui-input-v1/input-rules.json"
+      ],
+      "coverage": "HUD/设施/成长/结算流程、键鼠手柄/重绑/消费、五区按需引导与辅助设置。",
+      "implemented": "历史原型有基础中文HUD和键鼠控制；完整UI/手柄/重绑/上下文所有权与教程未制作。",
+      "test": "Enter/South确认不穿透攻击跳跃，UI02/07/08实时、检视暂停；恢复中立门、断设备/失焦保持暂停与安全取消。",
+      "design_document_available": true,
+      "individual_parameters_user_approved": false,
+      "formal_module_runtime_complete": false,
+      "design_review_passed": false,
+      "runtime_acceptance": "NOT_EXECUTED_FOR_FORMAL_DESIGN",
+      "playtest_acceptance": "NOT_PROVEN"
+    },
+    {
+      "module": "D-12",
+      "name": "美术动画特效音频",
+      "entry": "美术动画特效与音频规范.md",
+      "data_refs": [
+        "docs/design/presentation-v1/visual-rules.json",
+        "docs/design/presentation-v1/weapon-motion.json"
+      ],
+      "coverage": "二维手绘分层候选、11家族动作/四甲轮廓、敌Boss提示、五区/40音频事件与制作规格。",
+      "implemented": "历史有64转绘帧、程序房间/影子、3个音频代表导入与命中音接线；正式画风/全部动作/提示/混音未验。",
+      "test": "四代表武器力量/刺击/装填/施法可区分；正Y远处向上、-groundY排序且跳跃不改；低帧不虚构伤害事件，关键预告不可被特效遮蔽。",
+      "design_document_available": true,
+      "individual_parameters_user_approved": false,
+      "formal_module_runtime_complete": false,
+      "design_review_passed": false,
+      "runtime_acceptance": "NOT_EXECUTED_FOR_FORMAL_DESIGN",
+      "playtest_acceptance": "NOT_PROVEN"
+    },
+    {
+      "module": "D-13",
+      "name": "存档数据与合作边界",
+      "entry": "存档数据与后续合作边界设计.md",
+      "data_refs": [
+        "docs/design/save-data-v1/save-rules.json",
+        "docs/design/save-data-v1/state-schema.json",
+        "docs/design/save-data-v1/transactions-and-rng.json",
+        "docs/design/save-data-v1/compatibility-and-coop.json"
+      ],
+      "coverage": "精确中途/Boss恢复、完整同代bundle、事务/RNG/奖励、A/B marker/失败/版本与合作接口。",
+      "implemented": "正式产品存档/迁移/IO中断测试/联网均未实现；runtime-report不是续局档。",
+      "test": "完整动作/DoT/旧弹/future与随机游标精确继续；同代发布、丢ACK重试、最新坏/未知版阻止静默回退，离线无成长。",
+      "design_document_available": true,
+      "individual_parameters_user_approved": false,
+      "formal_module_runtime_complete": false,
+      "design_review_passed": false,
+      "runtime_acceptance": "NOT_EXECUTED_FOR_FORMAL_DESIGN",
+      "playtest_acceptance": "NOT_PROVEN"
+    },
+    {
+      "module": "D-14",
+      "name": "难度数值与整体验收",
+      "entry": "难度数值与整体设计验收.md",
+      "data_refs": [
+        "docs/design/balance-v1/integration-rules.json",
+        "docs/design/balance-v1/system-acceptance.json"
+      ],
+      "coverage": "本轮整局基准/有限deck、跨系统场景、覆盖矩阵、风险与首批制作门槛。",
+      "implemented": "本轮仅设计/静态和纸面模型；未制作新难度玩法、未进行完整五区运行。",
+      "test": "固定章曲线保旧速度/预告/判定/DoT/奖励，不按天赋钱包隐藏适配；零天赋/部分/满成长、多武器多种子的真实完整局后才可判断平衡。",
+      "design_document_available": true,
+      "individual_parameters_user_approved": false,
+      "formal_module_runtime_complete": false,
+      "design_review_passed": false,
+      "runtime_acceptance": "NOT_EXECUTED_FOR_FORMAL_DESIGN",
+      "playtest_acceptance": "NOT_PROVEN"
+    }
+  ],
+  "historical_prototype_evidence": {
+    "note_ref": "SRC-PROTOTYPE-NOTE",
+    "report_ref": "SRC-PROTOTYPE-RUN",
+    "date": "2026-10-12",
+    "map": "FirstRoom",
+    "report_checks": 19,
+    "report_passed": true,
+    "report_elapsed_simulation_s": 17.000083923339844,
+    "capture_record": {
+      "frames": 578,
+      "fixed_simulation_fps": 30,
+      "approx_video_duration_s": 19.27,
+      "audio_track": false,
+      "source": "SRC-PROTOTYPE-NOTE",
+      "distinguish": "video_capture_duration_and_report_elapsed_clock_are_different_record_fields"
+    },
+    "supports": [
+      "XY_and_jump_separation",
+      "facing_depth_height_hit_examples",
+      "prototype_single_death_drop",
+      "prototype_potion_cap_and_full_health_preservation",
+      "prototype_axe_pickup_switch_and_room_exit",
+      "controller_start_and_movement_walk_animation"
+    ],
+    "does_not_support": [
+      "current_D02_dodge_air_attack_and_all_timing",
+      "formal_equipment_inventory_status_and_economy",
+      "ENM_Boss_5_region_or_dynamic_manifest_runtime",
+      "real_profile_progression_or_precise_save",
+      "gamepad_rebind_accessibility_or_formal_2D_art_acceptance",
+      "realtime_performance_or_human_skill_balance",
+      "zero_talent_full_run_clear_or_release"
+    ],
+    "source_not_rewritten": true,
+    "new_engine_run": false
+  },
+  "cross_system_contracts": [
+    {
+      "id": "SYS-01",
+      "topic": "同点伤害/死亡优先",
+      "modules": [
+        "D-02",
+        "D-03",
+        "D-04",
+        "D-06",
+        "D-13"
+      ],
+      "contract": "全量到期伤害与死亡先于合法幸存者治疗、自动货币拾取、交互提交和新请求；旧装备合法治疗先于最终换装一次截HP。",
+      "required_runtime_acceptance": "构造DoT/攻击/治疗/换甲同时间戳，核对死者不复活/不领奖；取消不回滚真实伤害。",
+      "source_refs": [
+        "SRC-D03-RULES",
+        "SRC-D04-RULES",
+        "SRC-D06-RULES",
+        "SRC-D13-RULES"
+      ],
+      "status": "future_acceptance_not_executed",
+      "runtime_passed": false
+    },
+    {
+      "id": "SYS-02",
+      "topic": "动作/属性/资源锁定",
+      "modules": [
+        "D-02",
+        "D-03",
+        "D-08",
+        "D-09",
+        "D-12",
+        "D-13"
+      ],
+      "contract": "动作时间轴起攻固定，40%锁其余属性及预算，资源按原规则；落地/存档/表现不重开动作或免费取消后摇。",
+      "required_runtime_acceptance": "重剑空攻落地后摇、枪多刺独立子窗、弩最后一发后摇→装填、法杖资源不足与恢复时刻逐帧核对。",
+      "source_refs": [
+        "SRC-D02-RULES",
+        "SRC-D03-RULES",
+        "SRC-WEAPONS"
+      ],
+      "status": "future_acceptance_not_executed",
+      "runtime_passed": false
+    },
+    {
+      "id": "SYS-03",
+      "topic": "实例/奖励/随机/账本同代",
+      "modules": [
+        "D-04",
+        "D-08",
+        "D-09",
+        "D-10",
+        "D-13"
+      ],
+      "contract": "来源消耗、数量/归属/费用/库存、账号标记、RNG结果与游标、操作凭据在同一完整bundle发布；同ID摘要不同拒绝。",
+      "required_runtime_acceptance": "交易重复/确认丢失/付费容量不足/样品跨域/奖励换OperationID重试均不得复制或重抽；中断前后检查全根。",
+      "source_refs": [
+        "SRC-D04-RULES",
+        "SRC-D09-RULES",
+        "SRC-D13-RULES",
+        "SRC-D13-TXN"
+      ],
+      "status": "future_acceptance_not_executed",
+      "runtime_passed": false
+    },
+    {
+      "id": "SYS-04",
+      "topic": "future义务与安全",
+      "modules": [
+        "D-04",
+        "D-05",
+        "D-07",
+        "D-08",
+        "D-13"
+      ],
+      "contract": "future不是隐形实体；有限manifest/锁存/预留不因回退或存档消失；一波清完不等整房清除或完整安全。",
+      "required_runtime_acceptance": "保留任意一存活/休眠槽和未实体化义务，跨深入线后回退/保存；出口/服务不提前开放，重试不增预算或奖。",
+      "source_refs": [
+        "SRC-D07-RULES",
+        "SRC-D07-WAVES",
+        "SRC-D04-RULES"
+      ],
+      "status": "future_acceptance_not_executed",
+      "runtime_passed": false
+    },
+    {
+      "id": "SYS-05",
+      "topic": "Boss双死/阶段/奖励",
+      "modules": [
+        "D-06",
+        "D-08",
+        "D-10",
+        "D-13"
+      ],
+      "contract": "全量同点伤害后玩家存活才提交Boss成功/故事/奖励；阈值排队，不锁血/清CD；成功清其自有剩余伤害不清附身状态。",
+      "required_runtime_acceptance": "玩家Boss同点0HP、跨多个阈值、死后旧弹、成功响应丢失与回看剧情；成功和失败各只一次。",
+      "source_refs": [
+        "SRC-D06-RULES",
+        "SRC-D10-RULES",
+        "SRC-D13-RULES"
+      ],
+      "status": "future_acceptance_not_executed",
+      "runtime_passed": false
+    },
+    {
+      "id": "SYS-06",
+      "topic": "身体/命中/可反制空间",
+      "modules": [
+        "D-02",
+        "D-05",
+        "D-06",
+        "D-07",
+        "D-12"
+      ],
+      "contract": "身体碰撞与受击体独立；近战中心精检，直弹扫掠受击体；实际房间需有可达免费地面反制路线。",
+      "required_runtime_acceptance": "最短刀负射程对最大Boss、枪45cm弱区、石骑冲锋同点攻击与截停、石蝠低位、出生LOS/220cm重验及障碍遮挡。",
+      "source_refs": [
+        "SRC-D02-RULES",
+        "SRC-D05-BODIES",
+        "SRC-D06-ARENAS",
+        "SRC-D07-RULES"
+      ],
+      "status": "future_acceptance_not_executed",
+      "runtime_passed": false
+    },
+    {
+      "id": "SYS-07",
+      "topic": "封顶/来源作用域",
+      "modules": [
+        "D-02",
+        "D-03",
+        "D-08",
+        "D-09"
+      ],
+      "contract": "基础强化、附魔、遗物/药剂、天赋按同预算合并；不扩原负词资格，武器增伤/暴击/吸血不套道具/DoT/固定电震。",
+      "required_runtime_acceptance": "零/部分/满天赋合法装备组合、负词与grade叠加、治疗来源/滚动预算、无甲御护及临时到期同点。",
+      "source_refs": [
+        "SRC-STATS",
+        "SRC-AFFIXES",
+        "SRC-D03-RULES",
+        "SRC-D09-TALENTS"
+      ],
+      "status": "future_acceptance_not_executed",
+      "runtime_passed": false
+    },
+    {
+      "id": "SYS-08",
+      "topic": "免费主线与真实供给",
+      "modules": [
+        "D-01",
+        "D-06",
+        "D-07",
+        "D-08",
+        "D-09",
+        "D-14"
+      ],
+      "contract": "零金币/零天赋不门控主线；补给产出不等已治疗，目录掉落不等每局保证已持甲；副本不因清波免费恢复。",
+      "required_runtime_acceptance": "不买任何东西跑全部免费路线；空资源仍有武器/移动反制；有费服务可拒绝且不锁出口；入账按实际拾取。",
+      "source_refs": [
+        "SRC-D01",
+        "SRC-D07-ROUTES",
+        "SRC-D08-RULES",
+        "SRC-D08-BUDGET",
+        "SRC-D09-RULES"
+      ],
+      "status": "future_acceptance_not_executed",
+      "runtime_passed": false
+    },
+    {
+      "id": "SYS-09",
+      "topic": "成长冻结与未结束局锁",
+      "modules": [
+        "D-01",
+        "D-09",
+        "D-10",
+        "D-11",
+        "D-13"
+      ],
+      "contract": "同Run成长/解锁/叙事快照冻结，暂停/恢复/菜单不释放未结束锁；合法Run奖励可同代更新账号，不开放局外购买。",
+      "required_runtime_acceptance": "保存返菜单尝试购买/全退/选样品/第二局；真实结束后重试同新局OperationID；实际付费凭据全退一次。",
+      "source_refs": [
+        "SRC-D09-RULES",
+        "SRC-D10-RULES",
+        "SRC-D13-RULES"
+      ],
+      "status": "future_acceptance_not_executed",
+      "runtime_passed": false
+    },
+    {
+      "id": "SYS-10",
+      "topic": "剧情事实/已读/本局成功",
+      "modules": [
+        "D-08",
+        "D-10",
+        "D-11",
+        "D-13"
+      ],
+      "contract": "账号事实、本Run过关、已读/教程证据各自独立；跳过回顾不领奖、不缩玩法预告、不刷新库存。",
+      "required_runtime_acceptance": "已读终章但无成功、已解誓新Run、首次奖励后崩溃回看、NPC在营地但仍未结束局等路径。",
+      "source_refs": [
+        "SRC-D10-RULES",
+        "SRC-D11-RULES",
+        "SRC-D13-COMPAT"
+      ],
+      "status": "future_acceptance_not_executed",
+      "runtime_passed": false
+    },
+    {
+      "id": "SYS-11",
+      "topic": "输入上下文消费/暂停恢复",
+      "modules": [
+        "D-02",
+        "D-04",
+        "D-11",
+        "D-13"
+      ],
+      "contract": "确认/关闭由当前上下文独占消费；暂停整理是意图，恢复后才真实动作；物理释放/中立后才接受新玩法边沿。",
+      "required_runtime_acceptance": "Enter/South确认不跳跃，方向导航不世界交互，UI02/07/08不暂停，设备断连/失焦/读档不自动续动或付款。",
+      "source_refs": [
+        "SRC-D11-RULES",
+        "SRC-D04-RULES",
+        "SRC-D13-RULES"
+      ],
+      "status": "future_acceptance_not_executed",
+      "runtime_passed": false
+    },
+    {
+      "id": "SYS-12",
+      "topic": "表现不产生判定/坐标一致",
+      "modules": [
+        "D-02",
+        "D-05",
+        "D-07",
+        "D-11",
+        "D-12",
+        "D-13"
+      ],
+      "contract": "玩法事件驱动动作/声画；局部命中停帧不冻结仿真；投影/输入/排序共同适配，纯显示变化不盲反已存Y。",
+      "required_runtime_acceptance": "相同世界命中在不同画面帧率下结果相同；正Y远处向上、-groundY排序、落脚影子同点、跳高不改排序；低帧不补虚假攻击。",
+      "source_refs": [
+        "SRC-D12-RULES",
+        "SRC-D12-MOTION",
+        "SRC-D13-COMPAT",
+        "SRC-CODE-HUD",
+        "SRC-CODE-INPUT"
+      ],
+      "status": "future_acceptance_not_executed",
+      "runtime_passed": false
+    },
+    {
+      "id": "SYS-13",
+      "topic": "精确恢复/最高已发布代",
+      "modules": [
+        "D-03",
+        "D-05",
+        "D-06",
+        "D-07",
+        "D-09",
+        "D-13"
+      ],
+      "contract": "账号/Run/设置/凭据同代，精确动作/弹道/next_tick/future/RNG，离线不推进；最新已发布坏/未知版不静默低代覆盖。",
+      "required_runtime_acceptance": "A/B断写、marker前后丢ACK、坏最新bundle/未知schema、缺旧规则/ID/退款凭据、未发布垃圾、只可完整备份恢复。",
+      "source_refs": [
+        "SRC-D13-RULES",
+        "SRC-D13-SCHEMA",
+        "SRC-D13-COMPAT"
+      ],
+      "status": "future_acceptance_not_executed",
+      "runtime_passed": false
+    },
+    {
+      "id": "SYS-14",
+      "topic": "可审阅证据与范围",
+      "modules": [
+        "D-01",
+        "D-11",
+        "D-12",
+        "D-13",
+        "D-14"
+      ],
+      "contract": "静态/抽象模型与实际运行验收分开；每次可见成果保留版本原件/展示副本，运行短证明先录制并审阅再称完成。",
+      "required_runtime_acceptance": "新切片每阶段提供有版本的运行录屏与事件日志；没有测量不报实时性能/通关率/工期/成本；不把首区结束称五章通关。",
+      "source_refs": [
+        "SRC-PROTOTYPE-NOTE",
+        "SRC-PROTOTYPE-RUN",
+        "SRC-D12",
+        "SRC-D13"
+      ],
+      "status": "future_acceptance_not_executed",
+      "runtime_passed": false
+    }
+  ],
+  "critical_gates_and_risks": [
+    {
+      "id": "GAP-01",
+      "priority": "blocks_geometry_acceptance_and_bulk_content",
+      "finding": "实际身体碰撞/受击体/LOS/出生路径/镜头未验证；BOS-MEC-001最短负射程刀的开阔正面理论余量仅0.8cm。",
+      "evidence": [
+        "SRC-D06-ARENAS",
+        "SRC-D02-RULES",
+        "SRC-D05-BODIES"
+      ],
+      "facts": {
+        "shortest_negative_reach_cm": 74.8,
+        "front_contact_cm": 74,
+        "theoretical_margin_cm": 0.8
+      },
+      "meaning": "positive_paper_margin_is_not_a_runtime_tolerance_or_all_weapon_clear_proof",
+      "next": "先在实机实空间测碰撞容差和可接近性，保免费侧路；首区先验石像Boss，机械Boss需后续专门回归；必要调整只新版本记录，不改旧源。",
+      "status": "UNVERIFIED_RUNTIME"
+    },
+    {
+      "id": "GAP-02",
+      "priority": "blocks_economy_and_full_run_balance_claims",
+      "finding": "目录/全拾收入/确定药物产出不等实际取得装备或有效治疗；D08 BUD-001锻甲前未列装备获取，不能当默认无甲零消费开局。",
+      "evidence": [
+        "SRC-D08-BUDGET",
+        "SRC-D09-RULES",
+        "SRC-D08-RULES"
+      ],
+      "next": "D14基准显式从SWD001+0/无甲/20金币/零天赋起；有甲预算单列实际来源/价格或受控fixture，不将旧条件算例升级成保证；跑多武器多seed的零天赋全局。",
+      "status": "CONDITIONAL_PAPER_MODEL_NOT_BALANCE_PASS"
+    },
+    {
+      "id": "GAP-03",
+      "priority": "blocks_persistence_acceptance",
+      "finding": "存档仅合同，A/B真实发布、中断、对象重建和精确战斗继续未实现/未注入。",
+      "evidence": [
+        "SRC-D13-RULES",
+        "SRC-D13-SCHEMA",
+        "SRC-D13-TXN"
+      ],
+      "next": "首批完成同代账本与恢复后做marker前后/丢ACK/最新损坏/未知版/旧规则缺失注入；无证据不允许标已可靠保存。",
+      "status": "NOT_IMPLEMENTED"
+    },
+    {
+      "id": "GAP-04",
+      "priority": "blocks_input_visual_acceptance_and_art_bulk",
+      "finding": "旧原型输入/投影/排序与正式契约不同；正式四类甲持握、提示可读性、手柄/重绑与混音尚无运行证明。",
+      "evidence": [
+        "SRC-CODE-HUD",
+        "SRC-CODE-INPUT",
+        "SRC-D11-RULES",
+        "SRC-D12-RULES"
+      ],
+      "next": "先统一世界语义与输入/投影/排序，四代表动作/四甲在同场景验证；真实画风样片审阅与来源许可可核验后再扩量，付费生成依既有首次花费确认。",
+      "status": "KNOWN_MISMATCH_AND_UNVERIFIED_PRESENTATION"
+    },
+    {
+      "id": "GAP-05",
+      "priority": "blocks_full_run_or_release_readiness",
+      "finding": "本轮固定章曲线、15主线战斗deck与模型不是完整通关/实际难度/性能证据；首区切片不是全五区产品。",
+      "evidence": [
+        "SRC-D01",
+        "SRC-D07-ROUTES",
+        "SRC-D09-TALENTS"
+      ],
+      "next": "整体设计审阅后先做首区切片再扩章；逐步补33武器/12甲/36道具/28+9敌/7Boss/5区，实跑零/部分/满成长和失败/继续长局，依据测量迭代。",
+      "status": "FUTURE_FULL_RUN_TEST"
+    }
+  ],
+  "first_production_slice": {
+    "status": "assistant_proposed_scope_pending_overall_design_review_and_later_production_instruction",
+    "work_started_this_turn": false,
+    "goal": "first_region_end_to_end_solo_chain_with_representative_combat_economy_profile_and_exact_save_contracts",
+    "current_rule_authority": "integration-rules.json",
+    "region": "REG-01",
+    "main_nodes": [
+      "REG-01-N01",
+      "REG-01-N02",
+      "REG-01-N03",
+      "REG-01-N04",
+      "REG-01-N05",
+      "REG-01-N06",
+      "REG-01-N07"
+    ],
+    "decks": "D14_integration_rules_first_region_finite_manifest_for_N02_N03_N05; no_implicit_all_enemy_candidates",
+    "chapter_boundary": {
+      "destination": "REG-02-N01",
+      "form": "noncombat_entry_test_shell_after_real_D01_cross_chapter_transaction",
+      "at_destination": "show_development_slice_scope_then_remain_paused",
+      "run_state": "same_unfinished_RunID_and_D09_lock_remain",
+      "rewards": "no_chapter2_or_terminal_reward_no_fake_final_success",
+      "recovery": "resume_can_view_paused_scope_or_explicitly_abandon_under_D01; no_auto_end_or_new_run"
+    },
+    "formal_new_run": {
+      "weapon": "WPN-SWD-001",
+      "grade": 0,
+      "armor": null,
+      "gold": 20,
+      "talent_baseline": "zero_for_required_balance_target; other_frozen_profiles_in_labeled_regressions",
+      "rule": "unchanged_D09_start_initializer_not_technical_test_loadout"
+    },
+    "representative_weapon_testbench": [
+      {
+        "id": "WPN-GSW-001",
+        "name": "裂碑重剑",
+        "why": "双手举重、低动作移动、长完整后摇/削韧；落地与存档不能取消承诺。"
+      },
+      {
+        "id": "WPN-SPR-001",
+        "name": "疾雨短枪",
+        "why": "45cm近身弱区、窄纵深/最近目标、独立三刺子窗与收杆。"
+      },
+      {
+        "id": "WPN-XBW-001",
+        "name": "栓机猎弩",
+        "why": "单矢一次发射、弹匣/末弹后摇与真实上弦、穿透技能和扫掠。"
+      },
+      {
+        "id": "WPN-STF-001",
+        "name": "余烬灯杖",
+        "why": "慢火球不隐含燃烧、专注耗用/等待恢复、火线一次命中与显式燃烧。"
+      }
+    ],
+    "weapon_testbench_scope": "separate_labeled_technical_fixture_selects_existing_definitions; does_not_grant_four_weapons_to_formal_start_or_guarantee_route_drop; cannot_submit_profile_progression_rewards",
+    "armor_testbench": [
+      {
+        "id": "ARM-LGT-001",
+        "name": "行路短衣",
+        "type": "light"
+      },
+      {
+        "id": "ARM-MED-001",
+        "name": "巡路环甲",
+        "type": "medium"
+      },
+      {
+        "id": "ARM-HVY-001",
+        "name": "门栓板甲",
+        "type": "heavy"
+      },
+      {
+        "id": "ARM-ROB-001",
+        "name": "灰烛法袍",
+        "type": "robe"
+      }
+    ],
+    "armor_scope": "four_silhouettes_hold_points_occlusion_and_selected_actual_stats; not_full12_armor_production_or_free_formal_start_armor",
+    "enemies": [
+      {
+        "id": "ENM-STN-001",
+        "name": "沉石骑士",
+        "why": "用户指定锁线直冲/停止与失手反击。"
+      },
+      {
+        "id": "ENM-STN-002",
+        "name": "灰翼石蝠",
+        "why": "用户指定接近激活；真实休眠/可伤/低位反击义务。"
+      },
+      {
+        "id": "ENM-STN-003",
+        "name": "裂岩守卫",
+        "why": "D14首区有限组合所需大型身体/慢动作，不新增敌种。"
+      },
+      {
+        "id": "ENM-STN-004",
+        "name": "石纹哨像",
+        "why": "D14首区有限组合所需可见远程/旧弹容量与分波。"
+      },
+      {
+        "id": "ENM-GOB-001",
+        "name": "碎刃哥布林",
+        "why": "D14首区N05最后一组的现有近战定义；完整首区切片须一并实现。"
+      }
+    ],
+    "elite_scope": "catalogue_retained_but_first_slice_elite_variants_may_follow_after_parent_behavior_proof; never_use_in_roster_before_implemented_and_teaching_ready",
+    "boss": {
+      "id": "BOS-STN-001",
+      "name": "裂冠石像统领",
+      "scope": "all_selected_existing_attack_phase_control_and_success_rules_not_a_generic_HP_dummy",
+      "arena": "actual_readable_free_ground_routes_and_body_hurtbox_boundaries_required"
+    },
+    "item_subset": [
+      {
+        "id": "ITM-REC-001",
+        "name": "赤莓小药瓶",
+        "role": "瞬时合法恢复/满血不浪费"
+      },
+      {
+        "id": "ITM-REC-004",
+        "name": "澄蓝专注液",
+        "role": "与法杖专注/CD作用域"
+      },
+      {
+        "id": "ITM-THR-002",
+        "name": "燃油陶罐",
+        "role": "一次投掷/伤害与共享燃烧next_tick"
+      },
+      {
+        "id": "ITM-TRP-001",
+        "name": "折叠钉板",
+        "role": "布置/武装/命中预算/离房清理"
+      },
+      {
+        "id": "ITM-PAS-001",
+        "name": "铆铁护环",
+        "role": "遗物被动属性同预算与实例转移"
+      },
+      {
+        "id": "ITM-FUN-002",
+        "name": "行商折价票",
+        "role": "券/现金/整包交付同事务"
+      },
+      {
+        "id": "ITM-REC-002",
+        "name": "浓缩红药瓶",
+        "role": "UNL-REC-002研究与一次付费样品跨域回归"
+      }
+    ],
+    "item_subset_rule": "all_eligibility_sources_prices_unlocks_and_quantities_follow_original_catalogue_and_D14_deck; test_fixtures_cannot_be_added_as_guaranteed_free_route_rewards",
+    "systems_required": [
+      "D04_targeted_pickup_replace_drop_slots_and_whole_offer_capacity",
+      "D08_source_budget_wallet_merchant_recovery_basic_forge_and_selected_enchant_transaction",
+      "D09_one_representative_talent_TAL-VIT_and_research_UNL-REC-002_with_actual_paid_receipts_frozen_new_run_snapshot_and_sample_once",
+      "D10_STORY-M01_account_fact_current_run_success_and_seen_separation",
+      "D11_keyboard_mouse_gamepad_context_consumption_pause_release_gate_basic_rebind_and_feedback",
+      "D12_four_representative_weapon_motion_four_armor_silhouettes_ground_tells_and_readability",
+      "D13_whole_profile_bundle_midfight_suspend_resume_transactions_rng_and_failure_recovery"
+    ],
+    "growth_fixture_rule": "real_route_shards_and_affordability_checked_from_accepted_receipts; insufficient_balance_refuses; controlled_profile_fixtures_have_explicit_origins_and_never_prove_real_earning_time",
+    "deferred_from_first_slice": [
+      "remaining_weapon_and_armor_catalogue_content",
+      "remaining_items_and_full_facility_variety",
+      "other_regions_and_six_other_Bosses",
+      "full_narrative_voice_and_bulk_final_art",
+      "full_long_run_balance_release_packaging",
+      "multiplayer_implementation"
+    ],
+    "retained_long_term_catalogue": {
+      "weapon_families": 11,
+      "weapons": 33,
+      "armor_types": 4,
+      "armor": 12,
+      "items": 36,
+      "enemy_families": 9,
+      "base_enemies": 28,
+      "elite_variants": 9,
+      "bosses": 7,
+      "regions": 5,
+      "status": "existing_assistant_design_catalogue_retained_not_first_slice_or_individual_release_count_approval"
+    },
+    "final_release_scope_redefined_by_slice": false
+  },
+  "stage_gates": [
+    {
+      "id": "GATE-00",
+      "stage": "整体设计交接",
+      "entry": "D01-D14入口/数据可读，跨系统问题有归属与明确待运行项。",
+      "exit": "静态引用/冻结/模型范围检查完成，用户可审阅首批内容和分歧；按用户后续制作指令进入制作，不增加外部审批。",
+      "proof": "versioned_design_and_validation_scope",
+      "status": "design_only_no_production_this_turn"
+    },
+    {
+      "id": "GATE-01",
+      "stage": "尽早可玩的空间与时序骨架",
+      "entry": "已获后续制作推进，首区坐标/身体/判定/事件与输入契约选定。",
+      "exit": "SWD001与石骑/石蝠小房在正常输入下可玩；影子、正Y向远处、排序/跳高、预警/命中/低位可反制；先提供短运行证明再扩内容。",
+      "proof": "dated_versioned_recording_and_event_trace_reviewed_not_just_clean_build",
+      "status": "future_not_executed"
+    },
+    {
+      "id": "GATE-02",
+      "stage": "代表动作与四甲",
+      "entry": "空间/时序骨架实机证据可查。",
+      "exit": "独立技术台四武器各原主攻/技/资源/取消/恢复通过，四甲轮廓/持握/遮挡和属性合并可读；已有素材/占位先验风格，批量美术前审阅。",
+      "proof": "same_scene_comparison_in_running_game_plus_boundary_logs",
+      "status": "future_not_executed"
+    },
+    {
+      "id": "GATE-03",
+      "stage": "首区贯通与真实持久化",
+      "entry": "首区有限manifest与来源/设施/成长/保存已按同一规则版本实现。",
+      "exit": "N01..N07→REG02-N01真跨章后暂停；胜负/放弃/中途退出/继续、费用/数量/归属、sample/首次事实、坏档/未知版本均有运行和文件中断证据。",
+      "proof": "playable_build_save_fixtures_crash_injection_and_short_reviewed_recording",
+      "status": "future_not_executed"
+    },
+    {
+      "id": "GATE-04",
+      "stage": "首区试玩与扩章决策",
+      "entry": "首区功能/IO关键阻断已解决，有用户能玩到的构建。",
+      "exit": "采集零/部分成长、多武器、多seed实际耗时/伤害/资源/失败原因/输入设备体验；用数据迭代，不将首区成功当全局零天赋通关。",
+      "proof": "declared_sample_size_build_seed_loadout_and_player_context_no_fabricated_statistics",
+      "status": "future_not_executed"
+    },
+    {
+      "id": "GATE-05",
+      "stage": "五区与长期内容验收",
+      "entry": "依据首区测量按后续指令逐步扩章/目录，保持旧源版本和兼容回归。",
+      "exit": "全部拟发行范围从新局至终Boss成功/失败/继续/结算实际贯通；各武器可反制、经济/成长/表现/性能与保存验证；正式风格/音频/打包分别证据。",
+      "proof": "full_run_and_long_session_tests_recordings_target_machine_measurements_and_acceptance_index",
+      "status": "future_not_executed"
+    }
+  ],
+  "acceptance_judgment": {
+    "authored_coverage": "14_module_draft_coverage_is_document_status_only_pending_current_D14_integration_static_validation",
+    "fundamental_mainline_softlock_proven": "none_newly_proven_by_this_scoped_read_only_review; this_is_not_proof_of_absence_or_playability",
+    "formal_runtime_modules_accepted": 0,
+    "full_run_zero_talent_win_verified": false,
+    "live_balance_or_realtime_performance_verified": false,
+    "first_slice_completed": false,
+    "release_ready": false,
+    "continuation": "finish_D14_document_review_then_follow_later_user_production_instruction_for_staged_slice",
+    "no_external_approval_invented": true,
+    "no_engine_run_download_network_or_paid_generation_this_turn": true
+  },
+  "current_D14_refs": [
+    {
+      "path": "docs/design/balance-v1/integration-rules.json",
+      "role": "root_authority_for_curve_fixed_chapter_scaling_and15_mainline_finite_decks",
+      "historical_freeze": false
+    },
+    {
+      "path": "难度数值与整体设计验收.md",
+      "role": "root_overview",
+      "historical_freeze": false
+    }
+  ],
+  "status_snapshot_refs": [
+    {
+      "path": "README.md",
+      "role": "observed_current_progress_and_asset_state; parent_updates_this_turn",
+      "historical_freeze": false
+    },
+    {
+      "path": "整体设计清单与推进顺序.md",
+      "role": "design_workflow_and_entry_gates; parent_updates_this_turn",
+      "historical_freeze": false
+    }
+  ],
+  "source_refs": [
+    {
+      "id": "SRC-D01",
+      "path": "整体框架与单局循环设计.md",
+      "sha256": "448cb6a0032c0425e353145ecf762534f630b7b5b8db7302054db5ae9b13ff65",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D02",
+      "path": "玩家角色与战斗规则设计.md",
+      "sha256": "da7d170fc71f67bb5fca06fbf8538d9cdf22b8998254f0033447db4a3219b949",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D02-RULES",
+      "path": "docs/design/player-combat-v1/player-combat-rules.json",
+      "sha256": "ab22cd0f131fa8f025ea16db9d1536028526b35c467aeb0008fe2dca59c413ef",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D03",
+      "path": "道具与状态系统设计.md",
+      "sha256": "4c7536f4b71bd74563edbb8e393a2bb452ead0fc74db4cfa201c605b710a8bbf",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D03-RULES",
+      "path": "docs/design/items-v1/common-rules.json",
+      "sha256": "b5815a10f313b7364b1dde66b0eac9f703104ea260d4e4470094cffe31652e99",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D03-STATES",
+      "path": "docs/design/items-v1/states.json",
+      "sha256": "97ee61346d5c6387dc25aa01a75d64fcd12d60b5917d0b7f594d05b25b0c06a3",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D03-CATALOG",
+      "path": "docs/design/items-v1/items.json",
+      "sha256": "09e40ef363ddcd2507efcbdfa4cf388916623e62015dcb41229a62d6badc2bc1",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D04",
+      "path": "携带与交互系统设计.md",
+      "sha256": "b0b4e570b17adedf2b94cea92d52942b36de88c5da58aee71ed6f597bfa90b37",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D04-RULES",
+      "path": "docs/design/inventory-v1/inventory-rules.json",
+      "sha256": "7eb6f7da968622a1583b4e63069208513a09e0ef74d12e244c18e20332f08942",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D05",
+      "path": "敌人分类与普通精英设计.md",
+      "sha256": "036e34f250fde186a01c8c9e3d2a9f2502d22a85246240a801b31ba9113e7e99",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D05-CATALOG",
+      "path": "docs/design/enemies-v1/enemies.json",
+      "sha256": "d01dd609a95ff9ad182638982a0ac7de864dbbd29f6b03995f9a3625a0c44266",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D05-RULES",
+      "path": "docs/design/enemies-v1/common-rules.json",
+      "sha256": "0296b0d87fc1d16ef1f90d15b73aa08544b7e1c5ca173db898cf2d20f93976f5",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D05-BODIES",
+      "path": "docs/design/enemies-v1/target-profiles.json",
+      "sha256": "e5649ff4f5c53f0740126923f2a5a99b73d3e523a2d2dd4dc4e75e60ae85c4e5",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D06",
+      "path": "Boss与特殊遭遇设计.md",
+      "sha256": "4083a47d7ce8b21beeb1f972aa2ad5c96b28afedb76572ce29948007f6078fba",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D06-CATALOG",
+      "path": "docs/design/bosses-v1/bosses.json",
+      "sha256": "4592953c92856927bfcc4f08f319758571cc8ea37fc95774b043328a0329542f",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D06-RULES",
+      "path": "docs/design/bosses-v1/common-rules.json",
+      "sha256": "4eed5d3221103121ed28c74207c8b4377954b8d8094e008d5dcf8085acfcb66d",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D06-ARENAS",
+      "path": "docs/design/bosses-v1/arena-contracts.json",
+      "sha256": "38c6c1199c8da677dd892403291df1385c6cf9f8bd57173fa318d4a94c11ba69",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D07",
+      "path": "区域房间与遭遇流程设计.md",
+      "sha256": "de35d0f95b0e146434dfa00a1103fc58c8feaa93d94ee8aa0db43df18e0a4495",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D07-ROUTES",
+      "path": "docs/design/dungeon-v1/regions-and-routes.json",
+      "sha256": "105dcac17fc91ed6a4e32acabc3e1b665ea9f9ddddf1ec13baf1aabc1abcd2a1",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D07-WAVES",
+      "path": "docs/design/dungeon-v1/room-sequences.json",
+      "sha256": "d92f739e2718ec0353f6b5b5ef19d86c00bb5dffb2d057b32dec133563839851",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D07-RULES",
+      "path": "docs/design/dungeon-v1/common-rules.json",
+      "sha256": "bc8b274b6aa76eb67a159ef4acd400d51fc695655e8b696f94a74489757c9960",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D08",
+      "path": "品质掉落与局内经济设计.md",
+      "sha256": "92a4efc5b30a43fd0ba5199a75d2039e8cc127c01ec1a46d66f092faded52d83",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D08-RULES",
+      "path": "docs/design/economy-v1/common-rules.json",
+      "sha256": "e08960c5fea63655a5f0bbb9f3223f49a3d8a3480c4164c492e19a6004f60f98",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D08-FACILITIES",
+      "path": "docs/design/economy-v1/facilities.json",
+      "sha256": "a2ebd6ebff3e283b5708afb88fbc36509405a5fdf88bf73fc5d7bcdbce104b88",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D08-BUDGET",
+      "path": "docs/design/economy-v1/budget-scenarios.json",
+      "sha256": "2ea5fbd96c48f0199088c0250d3769e51bafe0b1476c6cf1426ead470c542ca2",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D09",
+      "path": "局内成长与局外天赋解锁设计.md",
+      "sha256": "75796f55ed8a1dac9c72ac221f84232821e3115917a906365338b8e7ba90cda7",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D09-RULES",
+      "path": "docs/design/progression-v1/hub-rules.json",
+      "sha256": "edcd7bcaf78d86416dc01ee0b31f9aa3c3477fa2ea80654cd181f1700b9deb40",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D09-TALENTS",
+      "path": "docs/design/progression-v1/talents.json",
+      "sha256": "67f12dc215a628d94c41efa2a92e9a3929785036cab86d4cd11ec8dc958fb2f5",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D09-UNLOCKS",
+      "path": "docs/design/progression-v1/unlocks.json",
+      "sha256": "0ec649fdeb8d820d3e008508f1ddd79858b3b6456e93170aa9875eefd3e99ab0",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D10",
+      "path": "世界观NPC与叙事设计.md",
+      "sha256": "ef105b0ff3fdc49186050a27a0eabd6997ceec487740d52b64af4c4fe6504dd5",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D10-RULES",
+      "path": "docs/design/narrative-v1/story-flow.json",
+      "sha256": "92bfcb6dcc79924d2e0bcd22a3d9dc80e256708619a415e577308f632d7bb661",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D11",
+      "path": "UI输入与新手引导设计.md",
+      "sha256": "964d146f1f1f7d8995c19111b9dd0e4fbb2966c8a3c8d5dcf9a81d65b8667066",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D11-RULES",
+      "path": "docs/design/ui-input-v1/input-rules.json",
+      "sha256": "693a1ce332da2249a1c608bccc4fde5ad604ae0134abf0d550074947f3ef88f8",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D12",
+      "path": "美术动画特效与音频规范.md",
+      "sha256": "853499e55a67d66bccdd6cf8a41d8421d99112b8326741a6756ea24969b68f4c",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D12-RULES",
+      "path": "docs/design/presentation-v1/visual-rules.json",
+      "sha256": "7dcb1373f3d7da66575cd2255365dea67dfe9daf411d20986dae80342a705003",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D12-MOTION",
+      "path": "docs/design/presentation-v1/weapon-motion.json",
+      "sha256": "de7442fe4ff9f3cf18f4357a9a8001437e6ecd83f30c3571e1a522e92b6b4fdd",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D13",
+      "path": "存档数据与后续合作边界设计.md",
+      "sha256": "5c65af38f877a0f9a188311b281986180c128f8555fed0302d04fded40409141",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D13-RULES",
+      "path": "docs/design/save-data-v1/save-rules.json",
+      "sha256": "0e08f2dff76918012baf344840ded958af9f6badb66f61a9d5541f521ccc6968",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D13-SCHEMA",
+      "path": "docs/design/save-data-v1/state-schema.json",
+      "sha256": "4dc7fb0235b68790cbbda08a25d8d6f1e05e0a18df0bbfb6648430faa31ec4cd",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D13-TXN",
+      "path": "docs/design/save-data-v1/transactions-and-rng.json",
+      "sha256": "78272f64a2e727c4ed00aa36d3c21908afa42baa317da2e9c503674cf1cb5b72",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D13-COMPAT",
+      "path": "docs/design/save-data-v1/compatibility-and-coop.json",
+      "sha256": "5c04e458b4ac8ce9b2bd07828879506d2d9865f41928b0daad63c74431b22fea",
+      "mutated": false
+    },
+    {
+      "id": "SRC-WEAPONS",
+      "path": "docs/design/equipment-v1/weapons.json",
+      "sha256": "95757819382832cfa31e6596f3ba90f1e983e83fbd69504da3c99d5ea2a272b4",
+      "mutated": false
+    },
+    {
+      "id": "SRC-ARMOR",
+      "path": "docs/design/equipment-v1/armor.json",
+      "sha256": "9407e458aef80b9f0d8f0e958b089e7b7a6f4180aef41b7b7df97534fe780e9d",
+      "mutated": false
+    },
+    {
+      "id": "SRC-STATS",
+      "path": "docs/design/equipment-v2/stat-definitions.json",
+      "sha256": "2f8c3fe15aa2dc940f867be118b948e80ae9ae4c654bc70580021ade79d37bc9",
+      "mutated": false
+    },
+    {
+      "id": "SRC-AFFIXES",
+      "path": "docs/design/equipment-v2/enchant-rules.json",
+      "sha256": "520214b7b3b8195f769f7a77c7ecc40baca2039746f7bc73cbe49b4445756a55",
+      "mutated": false
+    },
+    {
+      "id": "SRC-PROTOTYPE-NOTE",
+      "path": "docs/first-playable-room-2026-10-12.md",
+      "sha256": "878fe4cd300de6870d368d898f9311101ab910efe5ea4f892ba073280fa134db",
+      "mutated": false
+    },
+    {
+      "id": "SRC-PROTOTYPE-RUN",
+      "path": "过程图稿与视频/2026-10-12_首个2.5D战斗房间_v004/runtime-report.json",
+      "sha256": "c63019fb8d8b297d5a36936c64572c24af4ece65a7d85321c3fba691e9d4641d",
+      "mutated": false
+    },
+    {
+      "id": "SRC-PROTOTYPE-MANIFEST",
+      "path": "source-assets/prototype/first-room-v1/manifest.json",
+      "sha256": "9efaf177f21ffae98c24987362461e4d69d323b6cae518e79fe2f7a7504d876e",
+      "mutated": false
+    },
+    {
+      "id": "SRC-CODE-HUD",
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "sha256": "207828a928401417e4dfad8110dc1f399b91883578aa40d0c2e8649863539ac4",
+      "mutated": false
+    },
+    {
+      "id": "SRC-CODE-INPUT",
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "sha256": "911a7b5b478cd6d427dd4e1962cea98fadf4cc86f5d94e204765f73f788f5c8c",
+      "mutated": false
+    },
+    {
+      "id": "SRC-CODE-RUN",
+      "path": "UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "sha256": "9c0cd2c3aef11a202b46b81e85395bc2f5a2405a7f337ba1216e82debde07229",
+      "mutated": false
+    }
+  ]
+}

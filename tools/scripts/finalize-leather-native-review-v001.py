@@ -1,0 +1,13 @@
+from pathlib import Path
+import json,hashlib,datetime
+R=Path('F:/Ourgame');A=R/'过程图稿与视频/2026-10-17_软皮轻甲实景播放复核_v001'
+def read(p):return json.loads(p.read_text(encoding='utf-8-sig'))
+def desc(p):
+ b=p.read_bytes();return dict(path=p.as_posix(),bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
+for name in ['browser-ready-playback-v001.json','browser-existing-flow-playback-v001.json']:
+ v=read(A/'原件'/name);assert v['ended'] and v['error'] is None and v['currentTime']==v['duration'] and v['readyState']==4 and (v['width'],v['height'])==(1280,720)
+ for suffix in []:pass
+v=read(A/'source-version-status-index.json');v['browser_playback']={'new_ready':read(A/'原件/browser-ready-playback-v001.json'),'existing_flow':read(A/'原件/browser-existing-flow-playback-v001.json'),'both_ended_error_null':True};v['art_review']='Root actually viewed native whole scene and all8 unscaled Ready crops after E280; trial silhouette improved, eyes/helmet/hands readable. Complete motion/art/audio remains NEEDS_WORK.';v['updated_local']=datetime.datetime.now().astimezone().isoformat();v['browser_screenshots']=[desc(A/'原件'/n) for n in ['browser-ready-end-v001.png','browser-existing-flow-end-v001.png']]
+(A/'source-version-status-index.json').write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+p=A/'原件/root-native-art-review-v001.json';assert not p.exists();p.write_text(json.dumps(dict(root_actually_viewed_native_whole_scene=True,root_actually_viewed_native_eight_crops=True,reviewed_after_retention='E280',browser_both_recordings_ended_error_null=True,trial_scope='Actual one light pickup commit, Ready4 each facing, 72px/source Canvas72*512/416, independent sword. Default separate3commit63cubed proof unaffected.',observations=['warm orange-brown jerkin and short shoulder cap are visibly clearer than previous gray armor at current small scale','helmet/amber eye window remain visible in both facings','unchanged near hand is in front of jerkin and independent sword; no visible chest layer cover of hands in selected idle poses','far cap is narrow and subordinate; new belt stays at waist, pouch naturally behind near hand'],remaining=['new style walk/attack/equip/hurt/death states absent; do not enable this Ready trial as whole-game style replacement','small clasp/stitch detail cannot be relied on as72px equipment recognition','full 20pairings/all unit VFX/SFX/saves and formal source drops unfinished','world pickup white boxes/ground markers remain placeholders'],human_style_acceptance_claimed=False,formal_complete_units=0),ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+print(json.dumps(dict(both_playback_complete=True,actual_native_eight_reviewed=True,full_unit_complete=False)))

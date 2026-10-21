@@ -1,0 +1,226 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-13",
+  "source_event": "EV-024",
+  "module": "D-06",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "user_requested_continue_design; all_boss_counts_names_stats_actions_assistant_proposed",
+  "scope": {
+    "main_bosses": 5,
+    "optional_bosses": 2,
+    "attack_definitions": 27,
+    "final_launch_count_confirmed": false,
+    "summons": false,
+    "permanent_damage_fields": false,
+    "flying_bosses": false,
+    "grabs": false,
+    "second_health_bars": false
+  },
+  "stats_proposed_ranges": {
+    "hp": [
+      650,
+      1800
+    ],
+    "armor": [
+      15,
+      50
+    ],
+    "ward": [
+      10,
+      50
+    ],
+    "poise": [
+      120,
+      200
+    ],
+    "move_cm_s": [
+      150,
+      200
+    ]
+  },
+  "body": {
+    "max_half_x_cm": 56,
+    "player_body_half_x_cm": 18,
+    "player_body_half_y_cm": 16,
+    "shortest_player_melee_range_cm": 88,
+    "hurtbox_separate_from_body": true,
+    "melee_geometry": "target_center_exact_shape",
+    "projectile_geometry": "continuous_projectile_vs_independent_hurtbox_and_fixed_center_hard_bounds",
+    "actual_z_required": true,
+    "contact_damage": false,
+    "death_removes_body_blocking": true,
+    "minimum_player_reach_with_negative_affix_cm": 74.8
+  },
+  "activation": {
+    "one_boss_per_encounter": true,
+    "ordinary_adds": 0,
+    "intro_warning_s": 1.5,
+    "player_keeps_control": true,
+    "boss_damageable_during_intro": true,
+    "no_refill_or_resource_reset": true,
+    "blockers_must_not_close_through_actors": true,
+    "offscreen_attack_start_allowed": false
+  },
+  "attack": {
+    "lock_fraction": 0.5,
+    "min_melee_or_area_windup_s": 0.8,
+    "min_charge_or_projectile_windup_s": 1.0,
+    "min_recovery_s": 1.8,
+    "cooldown_starts_at": "accepted_start",
+    "cooldown_min": "windup+active+recovery+0.30",
+    "cooldown_refunded_on_interrupt": false,
+    "tracks_target_after_lock": false,
+    "moves_or_turns_during_recovery": false,
+    "unlisted_phase_damage_multiplier": false,
+    "enemy_crit": false,
+    "nominal_full_attack_damage_cap": 48,
+    "default_height_center_cm": 0,
+    "default_height_tolerance_cm": 65,
+    "explicit_attack_height_override": true,
+    "max_concurrent_boss_actions": 1,
+    "max_consecutive_same_attack": 2,
+    "legal_candidate_selection": "phase_pool; cooldown; range; LOS; visible_warning; full_projectile_capacity; recent_history; seeded_weighted_choice",
+    "no_legal_attack": "normal_bounded_reposition; no_teleport_no_heal_no_hidden_attack",
+    "default_legal_candidate_weight": 1
+  },
+  "charge": {
+    "distance": "speed*active",
+    "swept_movement": true,
+    "stop_on_wall_body_or_valid_contact": true,
+    "same_time_order": "attack_geometry_actual_height_and_invulnerability_then_body_stop",
+    "glancing_body_contact_may_stop_without_damage": true,
+    "hit_reach_must_cover_head_on_body_contact": true,
+    "no_turn_or_tracking_or_overlap": true,
+    "miss_wall_or_body_stop_keeps_full_recovery": true,
+    "one_attempt_per_target_subhit": true
+  },
+  "projectile": {
+    "live_damage_projectile_cap": 2,
+    "reserve_whole_emission_group_on_accept": true,
+    "transfer_reserved_to_live_on_emission": true,
+    "interrupt_death_action_end_releases_unemitted_only": true,
+    "emitted_keep_capacity_until_despawn": true,
+    "actual_muzzle_origin": true,
+    "fixed_corridor_half_y": "projectile_half_y+reference_player_hurtbox_half_y16",
+    "center_x_bounds": "0..max_distance_from_each_actual_muzzle",
+    "ignore_owner_body": true,
+    "allied_body_blocks_without_damage": true,
+    "allied_block_not_conditioned_on_player_damage_bounds": true,
+    "earliest_wall_or_body_contact_then_damage_qualification_then_consume": true,
+    "actual_emission_height": true,
+    "lifetime": "max_distance/speed",
+    "homing": false,
+    "persistent_damage_fields": false,
+    "telegraphed_subregions_per_attack_cap": 2
+  },
+  "control": {
+    "poise_break_stun_s": 0.25,
+    "poise_protection_s": 3,
+    "poise_decay_delay_s": 1,
+    "poise_decay_per_s": 20,
+    "on_break_during_windup_or_active": "cancel_unemitted_or_future_subhits; keep_cooldown; stun0.25_then_full_declared_recovery",
+    "on_break_during_recovery": "do_not_restart_full_recovery; earliest_next_action=max(original_recovery_deadline,stun_end)",
+    "burn_base_dps_cap": 6,
+    "burn_duration_s": 3,
+    "burn_tick_rule": "D03_shared_target_slot_keep_next_tick; current_ward_and_vulnerability_each_tick",
+    "slow_raw_cap_pct": 25,
+    "slow_boss_multiplier_applied_once": 0.5,
+    "slow_final_cap_pct": 12.5,
+    "slow_duration_s": 2,
+    "slow_affects_attack_charge_or_projectile_speed": false,
+    "shock_additional_stagger_cap": 10,
+    "shock_target_icd_s": 4,
+    "shock_refused_during_protection_does_not_extend_icd": true,
+    "push_pull_displacement_immune": true,
+    "push_pull_damage_and_stagger_retained": true,
+    "race_element_immunity": false,
+    "boss_control_rules_apply_to_ordinary_elites": false
+  },
+  "phase": {
+    "hp_fraction_uses_spawn_max_hp": true,
+    "crossing_threshold_sets_pending_phase_only": true,
+    "current_action_and_mandatory_recovery_complete_before_transition": true,
+    "transition_cue_s": 1.2,
+    "transition_damageable_and_controllable": true,
+    "no_hp_gate_or_heal_or_second_bar": true,
+    "no_invulnerability": true,
+    "no_reset_cooldowns_resources_states_poise_protection_or_projectiles": true,
+    "multiple_crossed_thresholds": "latest_eligible_phase_only; no_queue_of_unneeded_cues",
+    "damage_during_cue_retargets_pending_phase_without_restarting_cue": true,
+    "death_has_priority": true,
+    "same_spawn_id_and_reward_id": true,
+    "base_warning_and_recovery_cannot_shorten": true
+  },
+  "arena_proposal": {
+    "half_x_cm": 1000,
+    "half_y_cm": 450,
+    "obstacles_in_first_validation_layout": 0,
+    "free_ground_route_required_for_every_attack": true,
+    "route_must_not_require_specific_drop_or_consumable": true,
+    "camera_must_show_source_and_warning": true,
+    "D07_geometry_navigation_spawn_verification_pending": true,
+    "paper_budget_proves_safe": false,
+    "paper_walk_escape_probe": {
+      "base_player_cm_s": 265,
+      "minimum_idle_stat_multiplier": 0.65,
+      "carried_slow_multiplier": 0.75,
+      "stress_walk_cm_s": 129.1875,
+      "reaction_allowance_s": 0.15,
+      "extra_distance_margin_cm": 1,
+      "criterion": "(first_damage_time_minus_lock_time-0.15)*129.1875 > required_Y_escape_distance+1",
+      "scope": "open_flat_ground_idle_player; not mid_attack_hurt_or_cornered; no proof_of_actual_navigation_or_player_reaction"
+    }
+  },
+  "settlement": {
+    "key": [
+      "RunID",
+      "RoomInstanceID",
+      "BossSpawnID"
+    ],
+    "same_timestamp_priority": "all_due_damage_then_all_deaths_then_check_player_alive_then_boss_success_transaction",
+    "simultaneous_player_and_boss_death": "run_failure_no_new_boss_reward_or_story_commit; prior_banked_progress_kept",
+    "successful_clear": "commit_guaranteed_meta_first_reward_and_story_once; register_local_drop_spawns_once; then_encounter_resolved",
+    "resolved_encounter_cleanup": "after_same_timestamp_damage_batch_and_success_commit_remove_boss_owned_world_projectiles_future_attack_subhits_and_unemitted_reservations; preserve_independently_applied_player_states_next_tick_and_cooldowns_resources",
+    "cleanup_is_boss_encounter_end_not_ordinary_enemy_death_rule": true,
+    "main_nonfinal_clear": "safe_reward_selection_then_free_chapter_exit; D01_once_transition_heal_only_when_crossing_main_chapter",
+    "main_final_clear": "guaranteed_permanent_rewards_and_story_commit_before_run_victory_screen; local_equipment_ends_with_run",
+    "optional_clear": "optional_rewards_only; no_main_progress_gate_or_chapter_transition_heal",
+    "reward_prices_amounts_weights_defined": false,
+    "death_callback_or_script_removal_rewards": false,
+    "cleared_boss_respawns_on_return": false,
+    "resolved_cleanup_preserves_player_attached_states_next_tick_cooldowns_and_resources": true
+  },
+  "optional_encounter": {
+    "entry_requires_full_D04_safe_state": true,
+    "return_route_is_free": true,
+    "unique_mainline_required_key_or_unlock": false,
+    "required_for_default_story_victory": false,
+    "health_or_loot_resets_on_reentry": false,
+    "paid_ticket_cost_if_any": "D08 not defined here"
+  },
+  "persistence": {
+    "save_during_boss_fight_adopted": false,
+    "if_D13_adopts_save_during_fight_required_state": [
+      "same_RunID_RoomInstanceID_BossSpawnID",
+      "hp_maxhp_position_facing",
+      "phase_pending_phase_cue_remaining",
+      "attack_id_subhit_history_timeline_recovery_deadline_cooldowns",
+      "poise_protection_and_element_expiries_and_burn_next_tick",
+      "projectiles_and_unemitted_capacity_reservations",
+      "seeded_choice_history",
+      "clear_transaction_and_drop_spawn_IDs"
+    ],
+    "pause_advances_attack_or_dot_or_cooldown": false,
+    "continue_creates_new_reward_or_refills_boss": false
+  },
+  "future_dependencies": [
+    "D07 arenas_routes_camera_activation",
+    "D08 rewards_quality_prices_supply",
+    "D09 final_growth_baselines",
+    "D10 names_factions_story",
+    "D11/12 warning_UI_art_animation_audio",
+    "D13 persistence_and_atomic_clear",
+    "D14 full_difficulty_and_weapon_playtests"
+  ]
+}

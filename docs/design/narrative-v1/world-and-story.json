@@ -1,0 +1,164 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "source_event": "EV-028",
+  "module": "D-10",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "all_story_names_cast_dialogue_structure_and_presentation_are_assistant_proposals_not_individual_user_approvals",
+  "working_names": {
+    "city": "余烬城",
+    "hub": "灯渡营地",
+    "player_role": "执灯客",
+    "covenant": "留城誓约",
+    "anchor": "回身灯",
+    "archive": "灯谱"
+  },
+  "product_project_rename": false,
+  "pitch": "这座城最初立誓不抛下任何人，后来却不再允许任何人离开；走到誓约源头，让保护重新成为可以选择的事。",
+  "user_constraints": [
+    "single_player_first_UE5_Blender_2_5D",
+    "in_run_gold_outside_shards",
+    "progress_through_increasingly_strong_regions_and_Bosses_to_story_clear",
+    "complete_design_before_new_gameplay_implementation"
+  ],
+  "tone": {
+    "primary": "有危机感的奇幻冒险，人物有具体利益与选择",
+    "humor": "生活与职业上的小摩擦，不拿受难者取乐",
+    "delivery": "short_simplified_Chinese_text_first",
+    "full_voice_or_cinematic_animation_committed": false
+  },
+  "approaches_considered": [
+    {
+      "id": "TREASURE_ONLY",
+      "adopted": false,
+      "tradeoff": "易解释金币但五关动机与通关变化薄弱"
+    },
+    {
+      "id": "WORLD_TIME_LOOP",
+      "adopted": false,
+      "tradeoff": "易解释重打但引入世界记忆与撤销结局的复杂状态"
+    },
+    {
+      "id": "PERSISTENT_WORLD_REBUILT_GATES",
+      "adopted": true,
+      "tradeoff": "记忆与历史保留，需明确首通前关口载体重建及首通后回响语境"
+    }
+  ],
+  "history": [
+    {
+      "order": 1,
+      "fact": "灾祸迫近，城卫、林庭、祭仪和工造以临时契约维持防卫与供养。"
+    },
+    {
+      "order": 2,
+      "fact": "灾祸退去，领主担心城邦解散，不肯执行返还与离城条款。"
+    },
+    {
+      "order": 3,
+      "fact": "誓约被持续续签为强制征役；不同群体或得利、或自保、或被困，各有责任。"
+    },
+    {
+      "order": 4,
+      "fact": "灯渡营地发现进入封域的方法，执灯客自愿寻找停止强留的源头。"
+    },
+    {
+      "order": 5,
+      "fact": "本局五关成功揭开机制，最终击败仍在续写誓约的烬誓领主，让出入成为自由选择。"
+    }
+  ],
+  "player": {
+    "identity": "voluntary_adventurer_no_fixed_bloodline_gender_class_or_exclusive_weapon",
+    "expedition_body": "temporary_tangible_xingshen_from_hub_anchor",
+    "true_body": "remains_at_hub_but_hub_mutations_still_D09_locked_until_run_terminal",
+    "death_fiction": "expedition_body_dissolves_after_gameplay_death_result; not_a_resurrection_skill",
+    "resident_escape_limit": "anchor_only_connects_established_volunteer; no_public_city_resident_teleport_service",
+    "no_extra_revive_teleport_or_invulnerability": true,
+    "saved_exit_is_not_death_or_hub_return": true
+  },
+  "resources": {
+    "gold": "existing_in_run_gold; accepted_by_city_contract_facilities; expires_with_run_imprint",
+    "gear": "all_local_loot_ends_with_run_imprint_on_failure_abandon_or_victory; no_carryout_buyback_or_exchange",
+    "permanent_shards_display_name": "遗物碎片",
+    "permanent_shards_field": "permanent_shards",
+    "shards_lore": "legal_D08_bank_event_records_fragments_in_lamp_archive_for_existing_training_and_research",
+    "story_facts": "separate_nonconsumable_account_records_no_item_slots_or_paywall",
+    "new_currency_reward_or_conversion": false
+  },
+  "repeat_contract": {
+    "world_time_rewinds": false,
+    "failed_run_reopens_from_region1": true,
+    "account_knowledge_persists": true,
+    "before_first_victory": "unrevoked_covenant_rebuilds_gate_bodies_between_distinct_new_runs_only",
+    "gate_carriers": {
+      "BOS-STN-001": "军令碑驱动的可重塑石壳",
+      "BOS-FOR-001": "母根生出的守关冠枝，不是整座林庭唯一生命",
+      "BOS-RIT-001": "由祭仪名册役额重组的仪式骨身",
+      "BOS-MEC-001": "按封存图样再造的关口机体"
+    },
+    "within_same_run_cleared_rooms_respawn": false,
+    "boss_attack_or_spawning_rules_modified": false,
+    "final_victory": "covenant_enforced_confinement_ends_in_real_world_once",
+    "after_first_victory_label": "回响远征",
+    "after_first_victory": "same_existing_new_run_loop_as_recorded_reconstruction_for_practice_and_research; real_city_stays_open",
+    "adds_new_mode_difficulty_maps_or_reward_rules": false,
+    "replay_first_reward_eligibility": "original_D08_account_claim_keys; no_regrant_for_lore",
+    "no_failure_clock_or_resident_death_quota": true,
+    "final_Boss_carrier": "BOS-DEM-001 is the lord maintained oath-body; the lord remains responsible for renewal, not an innocent puppet. Existing qualifying final success automatically severs covenant via surviving xingshen lamp imprint. Same-time double death destroys only this carrier, grants no success/liberation and permits a new-run carrier.",
+    "final_severing_adds_interaction_resource_phase_or_delay": false,
+    "optional_Boss_defeat": "BOS-GOB-001 retreats beyond current vault; BOS-BST-001 yields current den. HP0 uses unchanged death/success cleanup; retreat is offscreen narrative after defeat, no new flee AI/invulnerability/half-HP escape. New run may encounter same individuals, same run never respawns."
+  },
+  "opposition": {
+    "final_boss_id": "BOS-DEM-001",
+    "motive": "恐惧重演弃城与离散，把替人决定去留当作保护。",
+    "responsibility": "知道灾后续签，持续主动维护强制征役，不以程序故障免责。",
+    "ending_boundary": "defeat_ends_enforced_covenant; no_scripted_surprise_second_boss_or_mandatory_spare_choice"
+  },
+  "content_scope": {
+    "existing_regions": 5,
+    "existing_enemy_families": 9,
+    "existing_bosses": 7,
+    "proposed_service_characters": 5,
+    "new_combat_NPCs": 0,
+    "new_combat_areas": 0,
+    "new_enemy_attacks": 0,
+    "new_item_IDs": 0,
+    "normal_endings": 1,
+    "optional_text_inserts": 5,
+    "new_rescue_escort_affinity_quests": 0,
+    "new_rewards": 0
+  },
+  "source_precedence": [
+    "D10 retains D07 region/Boss display names as current proposals; old files not renamed",
+    "D10 specifies optional discovery interaction0.25s under full D04 safety; D08 source/key/amount unchanged",
+    "D10 story record is appended to existing successful Boss/discovery event; no second reward source",
+    "D01/D04/D06 death_and_success_order outranks narrative playback",
+    "D09 snapshot_and_unfinished_run_hub_lock outranks true_body_at_hub fiction"
+  ],
+  "references": {
+    "regions": "region-story.json",
+    "NPCs": "npcs-and-dialogue.json",
+    "state": "story-flow.json",
+    "overview": "../../../世界观NPC与叙事设计.md"
+  },
+  "production_requirements": [
+    "five_portrait_or_service-sign_visual_identities_reusable_no_five_fully_animated_actors",
+    "existing_hub_menu_story_review_panel",
+    "five_existing_hidden_point_labels_no_new_rooms",
+    "readable_short_Chinese_dialogue_and_skippable_ending",
+    "asset_spec_cost_and_audio_direction_deferred_D12; no_assets_generated"
+  ],
+  "unverified": [
+    "emotional_pacing",
+    "Chinese_text_readability_during_play",
+    "actual_save_resume_skip_atomicity",
+    "time_and_cost_of_production"
+  ],
+  "technology_and_equipment": {
+    "coexistence": "mechanical_and_rune_crafts_explain_blades_spears_halberds_crossbows_firearms_and_staves_without_new_families",
+    "chapter1_sources": "old_armories_and_trade_explain_D08_all45_template_pool_eligibility; no_extra_story_grade_or_tech_gate",
+    "enchantment_fiction": "short_equipment_contract_with_explicit_benefits_and_burdens; preserve_v2_good_bad_effects",
+    "negative_affix_is_moral_or_ending_penalty": false
+  }
+}

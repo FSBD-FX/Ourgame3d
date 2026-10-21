@@ -1,0 +1,132 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "符朔八道",
+			"instance": "E4D4E9874EE4D598D37AA486A9AA4D27",
+			"instanceName": "符朔八道-57220",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (24H2) [10.0.26100.4946] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 3060 Laptop GPU",
+			"cPUModel": "12th Gen Intel(R) Core(TM) i7-12700H",
+			"rAMInGB": 16,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.10.14-14.43.08",
+	"succeeded": 2,
+	"succeededWithWarnings": 0,
+	"failed": 1,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.12634110450744629,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "AllDueHitsResolve",
+			"fullTestPath": "CodexDungeon.Content.DamageBatch.AllDueHitsResolve",
+			"state": "Fail",
+			"deviceInstance": [
+				"E4D4E9874EE4D598D37AA486A9AA4D27"
+			],
+			"duration": 0.092607699334621429,
+			"dateTime": "2026.10.14-14.43.08",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "LogStreaming: FlushAsyncLoading(334): 1 QueuedPackages, 0 AsyncPackages",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.14-14.43.08"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'The nonlethal control counts all three 13 damage hits, not merely two lethal hits' to be 61.000000, but it was 87.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDamageBatchTests.cpp",
+					"lineNumber": 125,
+					"timestamp": "2026.10.14-14.43.08"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Three already-due 13 damage hits exhaust 20 HP in the same batch' to be 0.000000, but it was 7.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDamageBatchTests.cpp",
+					"lineNumber": 142,
+					"timestamp": "2026.10.14-14.43.08"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'New iframes from the first hit cannot suppress the other accepted due hits' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDamageBatchTests.cpp",
+					"lineNumber": 144,
+					"timestamp": "2026.10.14-14.43.08"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'The real authority game mode receives the resulting player death' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDamageBatchTests.cpp",
+					"lineNumber": 146,
+					"timestamp": "2026.10.14-14.43.08"
+				}
+			],
+			"warnings": 0,
+			"errors": 4,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "LowFpsAirWindowUsesMotionTime",
+			"fullTestPath": "CodexDungeon.Content.DamageBatch.LowFpsAirWindowUsesMotionTime",
+			"state": "Success",
+			"deviceInstance": [
+				"E4D4E9874EE4D598D37AA486A9AA4D27"
+			],
+			"duration": 0.016864601522684097,
+			"dateTime": "2026.10.14-14.43.08",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "PreexistingIframesStillBlock",
+			"fullTestPath": "CodexDungeon.Content.DamageBatch.PreexistingIframesStillBlock",
+			"state": "Success",
+			"deviceInstance": [
+				"E4D4E9874EE4D598D37AA486A9AA4D27"
+			],
+			"duration": 0.016868799924850464,
+			"dateTime": "2026.10.14-14.43.08",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		}
+	]
+}

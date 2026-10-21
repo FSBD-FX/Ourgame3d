@@ -1,0 +1,1684 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "source_event": "EV-027",
+  "module": "D-09",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposed_research_costs_dependencies_and_bounded_paid_sample_source; user_ok_continues_design_not_individual_approval",
+  "hub_rules_ref": "hub-rules.json",
+  "source_refs": {
+    "D03_items": "../items-v1/items.json",
+    "D08_sources": "../economy-v1/reward-sources.json",
+    "D08_facilities": "../economy-v1/facilities.json",
+    "D04_inventory": "../inventory-v1/inventory-rules.json"
+  },
+  "source_sha256": {
+    "D03_items": "09e40ef363ddcd2507efcbdfa4cf388916623e62015dcb41229a62d6badc2bc1",
+    "D08_reward_sources": "9bd5e424ff2344a70d9fc8cbb25ced3cef1161cdd33092e0fc8998bf01d83369"
+  },
+  "counts": {
+    "content_research_nodes": 14,
+    "root_nodes": 10,
+    "dependency_edges": 4,
+    "total_cost_shards": 130,
+    "natural_new_item_IDs": 0,
+    "optional_research_sample_extra_offers_max_per_run": 1
+  },
+  "research": {
+    "show_all_from_start": true,
+    "buy_only_outside_active_or_suspended_run": true,
+    "no_combat_action_mainline_story_or_base_equipment_locked": true,
+    "no_specified_Boss_or_already_looted_locked_item_required": true,
+    "stat_talent_dependency": false,
+    "not_refundable_or_disableable": true,
+    "talent_refund_or_unspent_talent_points_do_not_change_research": true,
+    "base_pool_22_items_remain": true,
+    "effective_at": "next_new_run_start_snapshot_only; never_mutate_existing_resolved_source_or_active_run",
+    "transaction": "hub_rules_account_atomically_validate_shards_current_prerequisites_and_version_then_cost_once_set_unlock_and_journal; duplicateOperation_returns_same_record",
+    "no_stat_gain_or_starting_item": true,
+    "fixed_D08_shop_stock_or_wheel_outcomes_changed": false,
+    "sample_offer_is_explicit_D09_addition": true,
+    "canonical_account_ownership_field": "unlocked_research_ids; ContentUnlockID set",
+    "derived_unlocked_item_ids": "22 D03 base IDs plus item_id for each ContentUnlockID in unlocked_research_ids; not independent account flags"
+  },
+  "natural_pool_rules": {
+    "preserve_D08_class_and_purpose_weights_and_existing_empty_group_FUN_fallback": true,
+    "same_purpose_ID_selection": "uniform_among_run_unlocked_and_qualified_IDs; more_eligible_IDs_may_dilute_specific_ID",
+    "class_guarantee_is_not_ID_guarantee": true,
+    "unmatched_FUN": "retain_D08_no_match_exclusion_and_FUN_to_REC_transfer; no_gold_shard_substitution",
+    "D03_effects_caps_carry_and_costs_unchanged": true,
+    "pool_membership_does_not_force_spawn": true,
+    "research_unlocked_before_newrun_required": true
+  },
+  "unlocks": [
+    {
+      "id": "UNL-REC-002",
+      "item_id": "ITM-REC-002",
+      "name": "浓缩红药瓶",
+      "category": "REC",
+      "cost_shards": 6,
+      "prerequisite_unlock_ids": [],
+      "prerequisite_talent_ids": [],
+      "required_Boss_kills_or_unseen_item_pickups": [],
+      "visible_from_account_start": true,
+      "purchase_location": "outside_run_hub_content_research",
+      "research_limit": 1,
+      "purchase_permanent": true,
+      "refund_or_disable_supported": false,
+      "talent_refund_affects_this_unlock": false,
+      "effect": "derive_existing_item_ID_in_next_new_run.unlocked_item_ids_from_unlocked_research_ids; no_starting_item_or_immediate_stat_gain",
+      "effect_summary": "一次回复55基础HP，受治疗效率/缺血/存活限制；单槽上限1。",
+      "does_not_modify_D03_effects": true,
+      "natural_sources": [
+        {
+          "pool_id": "POOL-BONUS-ITEM",
+          "source_ids": [
+            "RWD-REG-01-N02-BONUS",
+            "RWD-REG-01-N03-BONUS",
+            "RWD-REG-01-N05-BONUS",
+            "RWD-REG-01-BCHOICE-BONUS",
+            "RWD-REG-02-N02-BONUS",
+            "RWD-REG-02-N03-BONUS",
+            "RWD-REG-02-N05-BONUS",
+            "RWD-REG-02-BCHOICE-BONUS",
+            "RWD-REG-03-N02-BONUS",
+            "RWD-REG-03-N03-BONUS",
+            "RWD-REG-03-N05-BONUS",
+            "RWD-REG-03-BCHOICE-BONUS",
+            "RWD-REG-04-N02-BONUS",
+            "RWD-REG-04-N03-BONUS",
+            "RWD-REG-04-N05-BONUS",
+            "RWD-REG-04-BCHOICE-BONUS",
+            "RWD-REG-05-N02-BONUS",
+            "RWD-REG-05-N03-BONUS",
+            "RWD-REG-05-N05-BONUS",
+            "RWD-REG-05-BCHOICE-BONUS"
+          ],
+          "node_ids": [
+            "REG-01-B01",
+            "REG-01-B02",
+            "REG-01-N02",
+            "REG-01-N03",
+            "REG-01-N05",
+            "REG-02-B01",
+            "REG-02-B02",
+            "REG-02-N02",
+            "REG-02-N03",
+            "REG-02-N05",
+            "REG-03-B01",
+            "REG-03-B02",
+            "REG-03-N02",
+            "REG-03-N03",
+            "REG-03-N05",
+            "REG-04-B01",
+            "REG-04-B02",
+            "REG-04-N02",
+            "REG-04-N03",
+            "REG-04-N05",
+            "REG-05-B01",
+            "REG-05-B02",
+            "REG-05-N02",
+            "REG-05-N03",
+            "REG-05-N05"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; existing_source_presence0.15_then_unchanged_category_purpose_pool; FUN_also_saved_actual_match_context"
+        },
+        {
+          "pool_id": "POOL-COMMON-SUPPLY",
+          "source_ids": [
+            "RWD-REG-02-N04-COMMON-SUPPLY",
+            "RWD-REG-05-N04-COMMON-SUPPLY"
+          ],
+          "node_ids": [
+            "REG-02-N04",
+            "REG-05-N04"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; actually_reachable_unopened_common_box_and_one_key; category60_25_15_then_uniform_unlocked_item; source_bound_tray"
+        }
+      ],
+      "natural_source_matching_ref": null,
+      "natural_specific_item_guaranteed": false,
+      "research_sample": {
+        "item_id": "ITM-REC-002",
+        "quantity": 1,
+        "price_gold": 33,
+        "price_status": "assistant_proposed_unplaytested_not_resale_value",
+        "account_successful_purchase_limit": 1,
+        "current_node_match": {
+          "kind": "normal_item_offer",
+          "condition": "one_fixed_D03_item_available_for_purchase; current_full_HP_or_no_current_status_does_not_silently_remove_natural_pool_items; ownership_capacity_checked_at_commit"
+        },
+        "delivery_kind": "quick",
+        "delivery_action_s": 0.25,
+        "exact_item_effects_ref": "../items-v1/items.json#ITM-REC-002",
+        "random_content_grade_enchant_or_stats": false,
+        "auto_use_or_auto_equip_outside_D04_destination_commit": false,
+        "full_effect_and_downside_preview": true
+      },
+      "authority": "assistant_proposed_untested",
+      "status": "design_only",
+      "account_state_rule_ref": "account_unlock_state_contract"
+    },
+    {
+      "id": "UNL-REC-006",
+      "item_id": "ITM-REC-006",
+      "name": "赤蓝调和剂",
+      "category": "REC",
+      "cost_shards": 10,
+      "prerequisite_unlock_ids": [
+        "UNL-REC-002"
+      ],
+      "prerequisite_talent_ids": [],
+      "required_Boss_kills_or_unseen_item_pickups": [],
+      "visible_from_account_start": true,
+      "purchase_location": "outside_run_hub_content_research",
+      "research_limit": 1,
+      "purchase_permanent": true,
+      "refund_or_disable_supported": false,
+      "talent_refund_affects_this_unlock": false,
+      "effect": "derive_existing_item_ID_in_next_new_run.unlocked_item_ids_from_unlocked_research_ids; no_starting_item_or_immediate_stat_gain",
+      "effect_summary": "一次回复20基础HP与25专注，各自截断；只有生命部分受治疗效率。",
+      "does_not_modify_D03_effects": true,
+      "natural_sources": [
+        {
+          "pool_id": "POOL-BONUS-ITEM",
+          "source_ids": [
+            "RWD-REG-01-N02-BONUS",
+            "RWD-REG-01-N03-BONUS",
+            "RWD-REG-01-N05-BONUS",
+            "RWD-REG-01-BCHOICE-BONUS",
+            "RWD-REG-02-N02-BONUS",
+            "RWD-REG-02-N03-BONUS",
+            "RWD-REG-02-N05-BONUS",
+            "RWD-REG-02-BCHOICE-BONUS",
+            "RWD-REG-03-N02-BONUS",
+            "RWD-REG-03-N03-BONUS",
+            "RWD-REG-03-N05-BONUS",
+            "RWD-REG-03-BCHOICE-BONUS",
+            "RWD-REG-04-N02-BONUS",
+            "RWD-REG-04-N03-BONUS",
+            "RWD-REG-04-N05-BONUS",
+            "RWD-REG-04-BCHOICE-BONUS",
+            "RWD-REG-05-N02-BONUS",
+            "RWD-REG-05-N03-BONUS",
+            "RWD-REG-05-N05-BONUS",
+            "RWD-REG-05-BCHOICE-BONUS"
+          ],
+          "node_ids": [
+            "REG-01-B01",
+            "REG-01-B02",
+            "REG-01-N02",
+            "REG-01-N03",
+            "REG-01-N05",
+            "REG-02-B01",
+            "REG-02-B02",
+            "REG-02-N02",
+            "REG-02-N03",
+            "REG-02-N05",
+            "REG-03-B01",
+            "REG-03-B02",
+            "REG-03-N02",
+            "REG-03-N03",
+            "REG-03-N05",
+            "REG-04-B01",
+            "REG-04-B02",
+            "REG-04-N02",
+            "REG-04-N03",
+            "REG-04-N05",
+            "REG-05-B01",
+            "REG-05-B02",
+            "REG-05-N02",
+            "REG-05-N03",
+            "REG-05-N05"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; existing_source_presence0.15_then_unchanged_category_purpose_pool; FUN_also_saved_actual_match_context"
+        },
+        {
+          "pool_id": "POOL-COMMON-SUPPLY",
+          "source_ids": [
+            "RWD-REG-02-N04-COMMON-SUPPLY",
+            "RWD-REG-05-N04-COMMON-SUPPLY"
+          ],
+          "node_ids": [
+            "REG-02-N04",
+            "REG-05-N04"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; actually_reachable_unopened_common_box_and_one_key; category60_25_15_then_uniform_unlocked_item; source_bound_tray"
+        }
+      ],
+      "natural_source_matching_ref": null,
+      "natural_specific_item_guaranteed": false,
+      "research_sample": {
+        "item_id": "ITM-REC-006",
+        "quantity": 1,
+        "price_gold": 19,
+        "price_status": "assistant_proposed_unplaytested_not_resale_value",
+        "account_successful_purchase_limit": 1,
+        "current_node_match": {
+          "kind": "normal_item_offer",
+          "condition": "one_fixed_D03_item_available_for_purchase; current_full_HP_or_no_current_status_does_not_silently_remove_natural_pool_items; ownership_capacity_checked_at_commit"
+        },
+        "delivery_kind": "quick",
+        "delivery_action_s": 0.25,
+        "exact_item_effects_ref": "../items-v1/items.json#ITM-REC-006",
+        "random_content_grade_enchant_or_stats": false,
+        "auto_use_or_auto_equip_outside_D04_destination_commit": false,
+        "full_effect_and_downside_preview": true
+      },
+      "authority": "assistant_proposed_untested",
+      "status": "design_only",
+      "account_state_rule_ref": "account_unlock_state_contract"
+    },
+    {
+      "id": "UNL-BOO-005",
+      "item_id": "ITM-BOO-005",
+      "name": "凝神苦饮",
+      "category": "BOO",
+      "cost_shards": 8,
+      "prerequisite_unlock_ids": [],
+      "prerequisite_talent_ids": [],
+      "required_Boss_kills_or_unseen_item_pickups": [],
+      "visible_from_account_start": true,
+      "purchase_location": "outside_run_hub_content_research",
+      "research_limit": 1,
+      "purchase_permanent": true,
+      "refund_or_disable_supported": false,
+      "talent_refund_affects_this_unlock": false,
+      "effect": "derive_existing_item_ID_in_next_new_run.unlocked_item_ids_from_unlocked_research_ids; no_starting_item_or_immediate_stat_gain",
+      "effect_summary": "15秒专注恢复+25%、法杖成本-15%，同时魔法易伤+15%；整包互斥与属性封顶不变。",
+      "does_not_modify_D03_effects": true,
+      "natural_sources": [
+        {
+          "pool_id": "POOL-BONUS-ITEM",
+          "source_ids": [
+            "RWD-REG-01-N02-BONUS",
+            "RWD-REG-01-N03-BONUS",
+            "RWD-REG-01-N05-BONUS",
+            "RWD-REG-01-BCHOICE-BONUS",
+            "RWD-REG-02-N02-BONUS",
+            "RWD-REG-02-N03-BONUS",
+            "RWD-REG-02-N05-BONUS",
+            "RWD-REG-02-BCHOICE-BONUS",
+            "RWD-REG-03-N02-BONUS",
+            "RWD-REG-03-N03-BONUS",
+            "RWD-REG-03-N05-BONUS",
+            "RWD-REG-03-BCHOICE-BONUS",
+            "RWD-REG-04-N02-BONUS",
+            "RWD-REG-04-N03-BONUS",
+            "RWD-REG-04-N05-BONUS",
+            "RWD-REG-04-BCHOICE-BONUS",
+            "RWD-REG-05-N02-BONUS",
+            "RWD-REG-05-N03-BONUS",
+            "RWD-REG-05-N05-BONUS",
+            "RWD-REG-05-BCHOICE-BONUS"
+          ],
+          "node_ids": [
+            "REG-01-B01",
+            "REG-01-B02",
+            "REG-01-N02",
+            "REG-01-N03",
+            "REG-01-N05",
+            "REG-02-B01",
+            "REG-02-B02",
+            "REG-02-N02",
+            "REG-02-N03",
+            "REG-02-N05",
+            "REG-03-B01",
+            "REG-03-B02",
+            "REG-03-N02",
+            "REG-03-N03",
+            "REG-03-N05",
+            "REG-04-B01",
+            "REG-04-B02",
+            "REG-04-N02",
+            "REG-04-N03",
+            "REG-04-N05",
+            "REG-05-B01",
+            "REG-05-B02",
+            "REG-05-N02",
+            "REG-05-N03",
+            "REG-05-N05"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; existing_source_presence0.15_then_unchanged_category_purpose_pool; FUN_also_saved_actual_match_context"
+        }
+      ],
+      "natural_source_matching_ref": null,
+      "natural_specific_item_guaranteed": false,
+      "research_sample": {
+        "item_id": "ITM-BOO-005",
+        "quantity": 1,
+        "price_gold": 16,
+        "price_status": "assistant_proposed_unplaytested_not_resale_value",
+        "account_successful_purchase_limit": 1,
+        "current_node_match": {
+          "kind": "normal_item_offer",
+          "condition": "one_fixed_D03_item_available_for_purchase; current_full_HP_or_no_current_status_does_not_silently_remove_natural_pool_items; ownership_capacity_checked_at_commit"
+        },
+        "delivery_kind": "quick",
+        "delivery_action_s": 0.25,
+        "exact_item_effects_ref": "../items-v1/items.json#ITM-BOO-005",
+        "random_content_grade_enchant_or_stats": false,
+        "auto_use_or_auto_equip_outside_D04_destination_commit": false,
+        "full_effect_and_downside_preview": true
+      },
+      "authority": "assistant_proposed_untested",
+      "status": "design_only",
+      "account_state_rule_ref": "account_unlock_state_contract"
+    },
+    {
+      "id": "UNL-BOO-006",
+      "item_id": "ITM-BOO-006",
+      "name": "破阵酊",
+      "category": "BOO",
+      "cost_shards": 8,
+      "prerequisite_unlock_ids": [],
+      "prerequisite_talent_ids": [],
+      "required_Boss_kills_or_unseen_item_pickups": [],
+      "visible_from_account_start": true,
+      "purchase_location": "outside_run_hub_content_research",
+      "research_limit": 1,
+      "purchase_permanent": true,
+      "refund_or_disable_supported": false,
+      "talent_refund_affects_this_unlock": false,
+      "effect": "derive_existing_item_ID_in_next_new_run.unlocked_item_ids_from_unlocked_research_ids; no_starting_item_or_immediate_stat_gain",
+      "effect_summary": "12秒直接削韧+20%，动作速度-10%；不增固定感电削韧、不穿破韧保护。",
+      "does_not_modify_D03_effects": true,
+      "natural_sources": [
+        {
+          "pool_id": "POOL-BONUS-ITEM",
+          "source_ids": [
+            "RWD-REG-01-N02-BONUS",
+            "RWD-REG-01-N03-BONUS",
+            "RWD-REG-01-N05-BONUS",
+            "RWD-REG-01-BCHOICE-BONUS",
+            "RWD-REG-02-N02-BONUS",
+            "RWD-REG-02-N03-BONUS",
+            "RWD-REG-02-N05-BONUS",
+            "RWD-REG-02-BCHOICE-BONUS",
+            "RWD-REG-03-N02-BONUS",
+            "RWD-REG-03-N03-BONUS",
+            "RWD-REG-03-N05-BONUS",
+            "RWD-REG-03-BCHOICE-BONUS",
+            "RWD-REG-04-N02-BONUS",
+            "RWD-REG-04-N03-BONUS",
+            "RWD-REG-04-N05-BONUS",
+            "RWD-REG-04-BCHOICE-BONUS",
+            "RWD-REG-05-N02-BONUS",
+            "RWD-REG-05-N03-BONUS",
+            "RWD-REG-05-N05-BONUS",
+            "RWD-REG-05-BCHOICE-BONUS"
+          ],
+          "node_ids": [
+            "REG-01-B01",
+            "REG-01-B02",
+            "REG-01-N02",
+            "REG-01-N03",
+            "REG-01-N05",
+            "REG-02-B01",
+            "REG-02-B02",
+            "REG-02-N02",
+            "REG-02-N03",
+            "REG-02-N05",
+            "REG-03-B01",
+            "REG-03-B02",
+            "REG-03-N02",
+            "REG-03-N03",
+            "REG-03-N05",
+            "REG-04-B01",
+            "REG-04-B02",
+            "REG-04-N02",
+            "REG-04-N03",
+            "REG-04-N05",
+            "REG-05-B01",
+            "REG-05-B02",
+            "REG-05-N02",
+            "REG-05-N03",
+            "REG-05-N05"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; existing_source_presence0.15_then_unchanged_category_purpose_pool; FUN_also_saved_actual_match_context"
+        }
+      ],
+      "natural_source_matching_ref": null,
+      "natural_specific_item_guaranteed": false,
+      "research_sample": {
+        "item_id": "ITM-BOO-006",
+        "quantity": 1,
+        "price_gold": 16,
+        "price_status": "assistant_proposed_unplaytested_not_resale_value",
+        "account_successful_purchase_limit": 1,
+        "current_node_match": {
+          "kind": "normal_item_offer",
+          "condition": "one_fixed_D03_item_available_for_purchase; current_full_HP_or_no_current_status_does_not_silently_remove_natural_pool_items; ownership_capacity_checked_at_commit"
+        },
+        "delivery_kind": "quick",
+        "delivery_action_s": 0.25,
+        "exact_item_effects_ref": "../items-v1/items.json#ITM-BOO-006",
+        "random_content_grade_enchant_or_stats": false,
+        "auto_use_or_auto_equip_outside_D04_destination_commit": false,
+        "full_effect_and_downside_preview": true
+      },
+      "authority": "assistant_proposed_untested",
+      "status": "design_only",
+      "account_state_rule_ref": "account_unlock_state_contract"
+    },
+    {
+      "id": "UNL-THR-004",
+      "item_id": "ITM-THR-004",
+      "name": "电痕脉冲罐",
+      "category": "THR",
+      "cost_shards": 8,
+      "prerequisite_unlock_ids": [],
+      "prerequisite_talent_ids": [],
+      "required_Boss_kills_or_unseen_item_pickups": [],
+      "visible_from_account_start": true,
+      "purchase_location": "outside_run_hub_content_research",
+      "research_limit": 1,
+      "purchase_permanent": true,
+      "refund_or_disable_supported": false,
+      "talent_refund_affects_this_unlock": false,
+      "effect": "derive_existing_item_ID_in_next_new_run.unlocked_item_ids_from_unlocked_research_ids; no_starting_item_or_immediate_stat_gain",
+      "effect_summary": "固定落点12魔法直伤/4削韧，合法存活目标尝试8感电削韧；最多4目标，服从ICD/保护。",
+      "does_not_modify_D03_effects": true,
+      "natural_sources": [
+        {
+          "pool_id": "POOL-BONUS-ITEM",
+          "source_ids": [
+            "RWD-REG-01-N02-BONUS",
+            "RWD-REG-01-N03-BONUS",
+            "RWD-REG-01-N05-BONUS",
+            "RWD-REG-01-BCHOICE-BONUS",
+            "RWD-REG-02-N02-BONUS",
+            "RWD-REG-02-N03-BONUS",
+            "RWD-REG-02-N05-BONUS",
+            "RWD-REG-02-BCHOICE-BONUS",
+            "RWD-REG-03-N02-BONUS",
+            "RWD-REG-03-N03-BONUS",
+            "RWD-REG-03-N05-BONUS",
+            "RWD-REG-03-BCHOICE-BONUS",
+            "RWD-REG-04-N02-BONUS",
+            "RWD-REG-04-N03-BONUS",
+            "RWD-REG-04-N05-BONUS",
+            "RWD-REG-04-BCHOICE-BONUS",
+            "RWD-REG-05-N02-BONUS",
+            "RWD-REG-05-N03-BONUS",
+            "RWD-REG-05-N05-BONUS",
+            "RWD-REG-05-BCHOICE-BONUS"
+          ],
+          "node_ids": [
+            "REG-01-B01",
+            "REG-01-B02",
+            "REG-01-N02",
+            "REG-01-N03",
+            "REG-01-N05",
+            "REG-02-B01",
+            "REG-02-B02",
+            "REG-02-N02",
+            "REG-02-N03",
+            "REG-02-N05",
+            "REG-03-B01",
+            "REG-03-B02",
+            "REG-03-N02",
+            "REG-03-N03",
+            "REG-03-N05",
+            "REG-04-B01",
+            "REG-04-B02",
+            "REG-04-N02",
+            "REG-04-N03",
+            "REG-04-N05",
+            "REG-05-B01",
+            "REG-05-B02",
+            "REG-05-N02",
+            "REG-05-N03",
+            "REG-05-N05"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; existing_source_presence0.15_then_unchanged_category_purpose_pool; FUN_also_saved_actual_match_context"
+        },
+        {
+          "pool_id": "POOL-COMMON-SUPPLY",
+          "source_ids": [
+            "RWD-REG-02-N04-COMMON-SUPPLY",
+            "RWD-REG-05-N04-COMMON-SUPPLY"
+          ],
+          "node_ids": [
+            "REG-02-N04",
+            "REG-05-N04"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; actually_reachable_unopened_common_box_and_one_key; category60_25_15_then_uniform_unlocked_item; source_bound_tray"
+        }
+      ],
+      "natural_source_matching_ref": null,
+      "natural_specific_item_guaranteed": false,
+      "research_sample": {
+        "item_id": "ITM-THR-004",
+        "quantity": 1,
+        "price_gold": 16,
+        "price_status": "assistant_proposed_unplaytested_not_resale_value",
+        "account_successful_purchase_limit": 1,
+        "current_node_match": {
+          "kind": "normal_item_offer",
+          "condition": "one_fixed_D03_item_available_for_purchase; current_full_HP_or_no_current_status_does_not_silently_remove_natural_pool_items; ownership_capacity_checked_at_commit"
+        },
+        "delivery_kind": "quick",
+        "delivery_action_s": 0.25,
+        "exact_item_effects_ref": "../items-v1/items.json#ITM-THR-004",
+        "random_content_grade_enchant_or_stats": false,
+        "auto_use_or_auto_equip_outside_D04_destination_commit": false,
+        "full_effect_and_downside_preview": true
+      },
+      "authority": "assistant_proposed_untested",
+      "status": "design_only",
+      "account_state_rule_ref": "account_unlock_state_contract"
+    },
+    {
+      "id": "UNL-THR-006",
+      "item_id": "ITM-THR-006",
+      "name": "震荡响罐",
+      "category": "THR",
+      "cost_shards": 10,
+      "prerequisite_unlock_ids": [
+        "UNL-THR-004"
+      ],
+      "prerequisite_talent_ids": [],
+      "required_Boss_kills_or_unseen_item_pickups": [],
+      "visible_from_account_start": true,
+      "purchase_location": "outside_run_hub_content_research",
+      "research_limit": 1,
+      "purchase_permanent": true,
+      "refund_or_disable_supported": false,
+      "talent_refund_affects_this_unlock": false,
+      "effect": "derive_existing_item_ID_in_next_new_run.unlocked_item_ids_from_unlocked_research_ids; no_starting_item_or_immediate_stat_gain",
+      "effect_summary": "固定落点22物理/34削韧，最多4目标；不保证Boss破韧。",
+      "does_not_modify_D03_effects": true,
+      "natural_sources": [
+        {
+          "pool_id": "POOL-BONUS-ITEM",
+          "source_ids": [
+            "RWD-REG-01-N02-BONUS",
+            "RWD-REG-01-N03-BONUS",
+            "RWD-REG-01-N05-BONUS",
+            "RWD-REG-01-BCHOICE-BONUS",
+            "RWD-REG-02-N02-BONUS",
+            "RWD-REG-02-N03-BONUS",
+            "RWD-REG-02-N05-BONUS",
+            "RWD-REG-02-BCHOICE-BONUS",
+            "RWD-REG-03-N02-BONUS",
+            "RWD-REG-03-N03-BONUS",
+            "RWD-REG-03-N05-BONUS",
+            "RWD-REG-03-BCHOICE-BONUS",
+            "RWD-REG-04-N02-BONUS",
+            "RWD-REG-04-N03-BONUS",
+            "RWD-REG-04-N05-BONUS",
+            "RWD-REG-04-BCHOICE-BONUS",
+            "RWD-REG-05-N02-BONUS",
+            "RWD-REG-05-N03-BONUS",
+            "RWD-REG-05-N05-BONUS",
+            "RWD-REG-05-BCHOICE-BONUS"
+          ],
+          "node_ids": [
+            "REG-01-B01",
+            "REG-01-B02",
+            "REG-01-N02",
+            "REG-01-N03",
+            "REG-01-N05",
+            "REG-02-B01",
+            "REG-02-B02",
+            "REG-02-N02",
+            "REG-02-N03",
+            "REG-02-N05",
+            "REG-03-B01",
+            "REG-03-B02",
+            "REG-03-N02",
+            "REG-03-N03",
+            "REG-03-N05",
+            "REG-04-B01",
+            "REG-04-B02",
+            "REG-04-N02",
+            "REG-04-N03",
+            "REG-04-N05",
+            "REG-05-B01",
+            "REG-05-B02",
+            "REG-05-N02",
+            "REG-05-N03",
+            "REG-05-N05"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; existing_source_presence0.15_then_unchanged_category_purpose_pool; FUN_also_saved_actual_match_context"
+        },
+        {
+          "pool_id": "POOL-COMMON-SUPPLY",
+          "source_ids": [
+            "RWD-REG-02-N04-COMMON-SUPPLY",
+            "RWD-REG-05-N04-COMMON-SUPPLY"
+          ],
+          "node_ids": [
+            "REG-02-N04",
+            "REG-05-N04"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; actually_reachable_unopened_common_box_and_one_key; category60_25_15_then_uniform_unlocked_item; source_bound_tray"
+        }
+      ],
+      "natural_source_matching_ref": null,
+      "natural_specific_item_guaranteed": false,
+      "research_sample": {
+        "item_id": "ITM-THR-006",
+        "quantity": 1,
+        "price_gold": 18,
+        "price_status": "assistant_proposed_unplaytested_not_resale_value",
+        "account_successful_purchase_limit": 1,
+        "current_node_match": {
+          "kind": "normal_item_offer",
+          "condition": "one_fixed_D03_item_available_for_purchase; current_full_HP_or_no_current_status_does_not_silently_remove_natural_pool_items; ownership_capacity_checked_at_commit"
+        },
+        "delivery_kind": "quick",
+        "delivery_action_s": 0.25,
+        "exact_item_effects_ref": "../items-v1/items.json#ITM-THR-006",
+        "random_content_grade_enchant_or_stats": false,
+        "auto_use_or_auto_equip_outside_D04_destination_commit": false,
+        "full_effect_and_downside_preview": true
+      },
+      "authority": "assistant_proposed_untested",
+      "status": "design_only",
+      "account_state_rule_ref": "account_unlock_state_contract"
+    },
+    {
+      "id": "UNL-THR-005",
+      "item_id": "ITM-THR-005",
+      "name": "锥钉投弹",
+      "category": "THR",
+      "cost_shards": 8,
+      "prerequisite_unlock_ids": [],
+      "prerequisite_talent_ids": [],
+      "required_Boss_kills_or_unseen_item_pickups": [],
+      "visible_from_account_start": true,
+      "purchase_location": "outside_run_hub_content_research",
+      "research_limit": 1,
+      "purchase_permanent": true,
+      "refund_or_disable_supported": false,
+      "talent_refund_affects_this_unlock": false,
+      "effect": "derive_existing_item_ID_in_next_new_run.unlocked_item_ids_from_unlocked_research_ids; no_starting_item_or_immediate_stat_gain",
+      "effect_summary": "小范围只打最近1目标，60物理/28削韧；不自动优先Boss或穿甲。",
+      "does_not_modify_D03_effects": true,
+      "natural_sources": [
+        {
+          "pool_id": "POOL-BONUS-ITEM",
+          "source_ids": [
+            "RWD-REG-01-N02-BONUS",
+            "RWD-REG-01-N03-BONUS",
+            "RWD-REG-01-N05-BONUS",
+            "RWD-REG-01-BCHOICE-BONUS",
+            "RWD-REG-02-N02-BONUS",
+            "RWD-REG-02-N03-BONUS",
+            "RWD-REG-02-N05-BONUS",
+            "RWD-REG-02-BCHOICE-BONUS",
+            "RWD-REG-03-N02-BONUS",
+            "RWD-REG-03-N03-BONUS",
+            "RWD-REG-03-N05-BONUS",
+            "RWD-REG-03-BCHOICE-BONUS",
+            "RWD-REG-04-N02-BONUS",
+            "RWD-REG-04-N03-BONUS",
+            "RWD-REG-04-N05-BONUS",
+            "RWD-REG-04-BCHOICE-BONUS",
+            "RWD-REG-05-N02-BONUS",
+            "RWD-REG-05-N03-BONUS",
+            "RWD-REG-05-N05-BONUS",
+            "RWD-REG-05-BCHOICE-BONUS"
+          ],
+          "node_ids": [
+            "REG-01-B01",
+            "REG-01-B02",
+            "REG-01-N02",
+            "REG-01-N03",
+            "REG-01-N05",
+            "REG-02-B01",
+            "REG-02-B02",
+            "REG-02-N02",
+            "REG-02-N03",
+            "REG-02-N05",
+            "REG-03-B01",
+            "REG-03-B02",
+            "REG-03-N02",
+            "REG-03-N03",
+            "REG-03-N05",
+            "REG-04-B01",
+            "REG-04-B02",
+            "REG-04-N02",
+            "REG-04-N03",
+            "REG-04-N05",
+            "REG-05-B01",
+            "REG-05-B02",
+            "REG-05-N02",
+            "REG-05-N03",
+            "REG-05-N05"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; existing_source_presence0.15_then_unchanged_category_purpose_pool; FUN_also_saved_actual_match_context"
+        },
+        {
+          "pool_id": "POOL-COMMON-SUPPLY",
+          "source_ids": [
+            "RWD-REG-02-N04-COMMON-SUPPLY",
+            "RWD-REG-05-N04-COMMON-SUPPLY"
+          ],
+          "node_ids": [
+            "REG-02-N04",
+            "REG-05-N04"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; actually_reachable_unopened_common_box_and_one_key; category60_25_15_then_uniform_unlocked_item; source_bound_tray"
+        }
+      ],
+      "natural_source_matching_ref": null,
+      "natural_specific_item_guaranteed": false,
+      "research_sample": {
+        "item_id": "ITM-THR-005",
+        "quantity": 1,
+        "price_gold": 18,
+        "price_status": "assistant_proposed_unplaytested_not_resale_value",
+        "account_successful_purchase_limit": 1,
+        "current_node_match": {
+          "kind": "normal_item_offer",
+          "condition": "one_fixed_D03_item_available_for_purchase; current_full_HP_or_no_current_status_does_not_silently_remove_natural_pool_items; ownership_capacity_checked_at_commit"
+        },
+        "delivery_kind": "quick",
+        "delivery_action_s": 0.25,
+        "exact_item_effects_ref": "../items-v1/items.json#ITM-THR-005",
+        "random_content_grade_enchant_or_stats": false,
+        "auto_use_or_auto_equip_outside_D04_destination_commit": false,
+        "full_effect_and_downside_preview": true
+      },
+      "authority": "assistant_proposed_untested",
+      "status": "design_only",
+      "account_state_rule_ref": "account_unlock_state_contract"
+    },
+    {
+      "id": "UNL-TRP-003",
+      "item_id": "ITM-TRP-003",
+      "name": "霜纹踏印",
+      "category": "TRP",
+      "cost_shards": 8,
+      "prerequisite_unlock_ids": [],
+      "prerequisite_talent_ids": [],
+      "required_Boss_kills_or_unseen_item_pickups": [],
+      "visible_from_account_start": true,
+      "purchase_location": "outside_run_hub_content_research",
+      "research_limit": 1,
+      "purchase_permanent": true,
+      "refund_or_disable_supported": false,
+      "talent_refund_affects_this_unlock": false,
+      "effect": "derive_existing_item_ID_in_next_new_run.unlocked_item_ids_from_unlocked_research_ids; no_starting_item_or_immediate_stat_gain",
+      "effect_summary": "近身部署霜印，10魔法/4削韧后减速25%2秒，Boss半幅；需武装且敌踩中。",
+      "does_not_modify_D03_effects": true,
+      "natural_sources": [
+        {
+          "pool_id": "POOL-BONUS-ITEM",
+          "source_ids": [
+            "RWD-REG-01-N02-BONUS",
+            "RWD-REG-01-N03-BONUS",
+            "RWD-REG-01-N05-BONUS",
+            "RWD-REG-01-BCHOICE-BONUS",
+            "RWD-REG-02-N02-BONUS",
+            "RWD-REG-02-N03-BONUS",
+            "RWD-REG-02-N05-BONUS",
+            "RWD-REG-02-BCHOICE-BONUS",
+            "RWD-REG-03-N02-BONUS",
+            "RWD-REG-03-N03-BONUS",
+            "RWD-REG-03-N05-BONUS",
+            "RWD-REG-03-BCHOICE-BONUS",
+            "RWD-REG-04-N02-BONUS",
+            "RWD-REG-04-N03-BONUS",
+            "RWD-REG-04-N05-BONUS",
+            "RWD-REG-04-BCHOICE-BONUS",
+            "RWD-REG-05-N02-BONUS",
+            "RWD-REG-05-N03-BONUS",
+            "RWD-REG-05-N05-BONUS",
+            "RWD-REG-05-BCHOICE-BONUS"
+          ],
+          "node_ids": [
+            "REG-01-B01",
+            "REG-01-B02",
+            "REG-01-N02",
+            "REG-01-N03",
+            "REG-01-N05",
+            "REG-02-B01",
+            "REG-02-B02",
+            "REG-02-N02",
+            "REG-02-N03",
+            "REG-02-N05",
+            "REG-03-B01",
+            "REG-03-B02",
+            "REG-03-N02",
+            "REG-03-N03",
+            "REG-03-N05",
+            "REG-04-B01",
+            "REG-04-B02",
+            "REG-04-N02",
+            "REG-04-N03",
+            "REG-04-N05",
+            "REG-05-B01",
+            "REG-05-B02",
+            "REG-05-N02",
+            "REG-05-N03",
+            "REG-05-N05"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; existing_source_presence0.15_then_unchanged_category_purpose_pool; FUN_also_saved_actual_match_context"
+        },
+        {
+          "pool_id": "POOL-COMMON-SUPPLY",
+          "source_ids": [
+            "RWD-REG-02-N04-COMMON-SUPPLY",
+            "RWD-REG-05-N04-COMMON-SUPPLY"
+          ],
+          "node_ids": [
+            "REG-02-N04",
+            "REG-05-N04"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; actually_reachable_unopened_common_box_and_one_key; category60_25_15_then_uniform_unlocked_item; source_bound_tray"
+        }
+      ],
+      "natural_source_matching_ref": null,
+      "natural_specific_item_guaranteed": false,
+      "research_sample": {
+        "item_id": "ITM-TRP-003",
+        "quantity": 1,
+        "price_gold": 16,
+        "price_status": "assistant_proposed_unplaytested_not_resale_value",
+        "account_successful_purchase_limit": 1,
+        "current_node_match": {
+          "kind": "normal_item_offer",
+          "condition": "one_fixed_D03_item_available_for_purchase; current_full_HP_or_no_current_status_does_not_silently_remove_natural_pool_items; ownership_capacity_checked_at_commit"
+        },
+        "delivery_kind": "quick",
+        "delivery_action_s": 0.25,
+        "exact_item_effects_ref": "../items-v1/items.json#ITM-TRP-003",
+        "random_content_grade_enchant_or_stats": false,
+        "auto_use_or_auto_equip_outside_D04_destination_commit": false,
+        "full_effect_and_downside_preview": true
+      },
+      "authority": "assistant_proposed_untested",
+      "status": "design_only",
+      "account_state_rule_ref": "account_unlock_state_contract"
+    },
+    {
+      "id": "UNL-TRP-004",
+      "item_id": "ITM-TRP-004",
+      "name": "接地电桩",
+      "category": "TRP",
+      "cost_shards": 10,
+      "prerequisite_unlock_ids": [
+        "UNL-TRP-003"
+      ],
+      "prerequisite_talent_ids": [],
+      "required_Boss_kills_or_unseen_item_pickups": [],
+      "visible_from_account_start": true,
+      "purchase_location": "outside_run_hub_content_research",
+      "research_limit": 1,
+      "purchase_permanent": true,
+      "refund_or_disable_supported": false,
+      "talent_refund_affects_this_unlock": false,
+      "effect": "derive_existing_item_ID_in_next_new_run.unlocked_item_ids_from_unlocked_research_ids; no_starting_item_or_immediate_stat_gain",
+      "effect_summary": "近身部署电桩，10魔法/4削韧后尝试10感电削韧；最多3目标，服从ICD/保护。",
+      "does_not_modify_D03_effects": true,
+      "natural_sources": [
+        {
+          "pool_id": "POOL-BONUS-ITEM",
+          "source_ids": [
+            "RWD-REG-01-N02-BONUS",
+            "RWD-REG-01-N03-BONUS",
+            "RWD-REG-01-N05-BONUS",
+            "RWD-REG-01-BCHOICE-BONUS",
+            "RWD-REG-02-N02-BONUS",
+            "RWD-REG-02-N03-BONUS",
+            "RWD-REG-02-N05-BONUS",
+            "RWD-REG-02-BCHOICE-BONUS",
+            "RWD-REG-03-N02-BONUS",
+            "RWD-REG-03-N03-BONUS",
+            "RWD-REG-03-N05-BONUS",
+            "RWD-REG-03-BCHOICE-BONUS",
+            "RWD-REG-04-N02-BONUS",
+            "RWD-REG-04-N03-BONUS",
+            "RWD-REG-04-N05-BONUS",
+            "RWD-REG-04-BCHOICE-BONUS",
+            "RWD-REG-05-N02-BONUS",
+            "RWD-REG-05-N03-BONUS",
+            "RWD-REG-05-N05-BONUS",
+            "RWD-REG-05-BCHOICE-BONUS"
+          ],
+          "node_ids": [
+            "REG-01-B01",
+            "REG-01-B02",
+            "REG-01-N02",
+            "REG-01-N03",
+            "REG-01-N05",
+            "REG-02-B01",
+            "REG-02-B02",
+            "REG-02-N02",
+            "REG-02-N03",
+            "REG-02-N05",
+            "REG-03-B01",
+            "REG-03-B02",
+            "REG-03-N02",
+            "REG-03-N03",
+            "REG-03-N05",
+            "REG-04-B01",
+            "REG-04-B02",
+            "REG-04-N02",
+            "REG-04-N03",
+            "REG-04-N05",
+            "REG-05-B01",
+            "REG-05-B02",
+            "REG-05-N02",
+            "REG-05-N03",
+            "REG-05-N05"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; existing_source_presence0.15_then_unchanged_category_purpose_pool; FUN_also_saved_actual_match_context"
+        },
+        {
+          "pool_id": "POOL-COMMON-SUPPLY",
+          "source_ids": [
+            "RWD-REG-02-N04-COMMON-SUPPLY",
+            "RWD-REG-05-N04-COMMON-SUPPLY"
+          ],
+          "node_ids": [
+            "REG-02-N04",
+            "REG-05-N04"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; actually_reachable_unopened_common_box_and_one_key; category60_25_15_then_uniform_unlocked_item; source_bound_tray"
+        }
+      ],
+      "natural_source_matching_ref": null,
+      "natural_specific_item_guaranteed": false,
+      "research_sample": {
+        "item_id": "ITM-TRP-004",
+        "quantity": 1,
+        "price_gold": 18,
+        "price_status": "assistant_proposed_unplaytested_not_resale_value",
+        "account_successful_purchase_limit": 1,
+        "current_node_match": {
+          "kind": "normal_item_offer",
+          "condition": "one_fixed_D03_item_available_for_purchase; current_full_HP_or_no_current_status_does_not_silently_remove_natural_pool_items; ownership_capacity_checked_at_commit"
+        },
+        "delivery_kind": "quick",
+        "delivery_action_s": 0.25,
+        "exact_item_effects_ref": "../items-v1/items.json#ITM-TRP-004",
+        "random_content_grade_enchant_or_stats": false,
+        "auto_use_or_auto_equip_outside_D04_destination_commit": false,
+        "full_effect_and_downside_preview": true
+      },
+      "authority": "assistant_proposed_untested",
+      "status": "design_only",
+      "account_state_rule_ref": "account_unlock_state_contract"
+    },
+    {
+      "id": "UNL-PAS-005",
+      "item_id": "ITM-PAS-005",
+      "name": "回声棱镜",
+      "category": "PAS",
+      "cost_shards": 12,
+      "prerequisite_unlock_ids": [],
+      "prerequisite_talent_ids": [],
+      "required_Boss_kills_or_unseen_item_pickups": [],
+      "visible_from_account_start": true,
+      "purchase_location": "outside_run_hub_content_research",
+      "research_limit": 1,
+      "purchase_permanent": true,
+      "refund_or_disable_supported": false,
+      "talent_refund_affects_this_unlock": false,
+      "effect": "derive_existing_item_ID_in_next_new_run.unlocked_item_ids_from_unlocked_research_ids; no_starting_item_or_immediate_stat_gain",
+      "effect_summary": "装备后专注恢复+15%、治疗效率-10%，占遗物槽；不即时恢复。",
+      "does_not_modify_D03_effects": true,
+      "natural_sources": [
+        {
+          "pool_id": "POOL-RELIC",
+          "source_ids": [
+            "RWD-REG-01-N05-RELIC",
+            "RWD-REG-02-N05-RELIC",
+            "RWD-REG-03-N05-RELIC",
+            "RWD-REG-04-N05-RELIC",
+            "RWD-REG-05-N05-RELIC"
+          ],
+          "node_ids": [
+            "REG-01-N05",
+            "REG-02-N05",
+            "REG-03-N05",
+            "REG-04-N05",
+            "REG-05-N05"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; N05_complete_guarantees_one_PAS_pool_result_not_selected_ID; purpose_then_uniform_unlocked"
+        }
+      ],
+      "natural_source_matching_ref": null,
+      "natural_specific_item_guaranteed": false,
+      "research_sample": {
+        "item_id": "ITM-PAS-005",
+        "quantity": 1,
+        "price_gold": 40,
+        "price_status": "assistant_proposed_unplaytested_not_resale_value",
+        "account_successful_purchase_limit": 1,
+        "current_node_match": {
+          "kind": "normal_item_offer",
+          "condition": "one_fixed_D03_item_available_for_purchase; current_full_HP_or_no_current_status_does_not_silently_remove_natural_pool_items; ownership_capacity_checked_at_commit"
+        },
+        "delivery_kind": "relic",
+        "delivery_action_s": 0.5,
+        "exact_item_effects_ref": "../items-v1/items.json#ITM-PAS-005",
+        "random_content_grade_enchant_or_stats": false,
+        "auto_use_or_auto_equip_outside_D04_destination_commit": false,
+        "full_effect_and_downside_preview": true
+      },
+      "authority": "assistant_proposed_untested",
+      "status": "design_only",
+      "account_state_rule_ref": "account_unlock_state_contract"
+    },
+    {
+      "id": "UNL-PAS-006",
+      "item_id": "ITM-PAS-006",
+      "name": "薄血契印",
+      "category": "PAS",
+      "cost_shards": 12,
+      "prerequisite_unlock_ids": [],
+      "prerequisite_talent_ids": [],
+      "required_Boss_kills_or_unseen_item_pickups": [],
+      "visible_from_account_start": true,
+      "purchase_location": "outside_run_hub_content_research",
+      "research_limit": 1,
+      "purchase_permanent": true,
+      "refund_or_disable_supported": false,
+      "talent_refund_affects_this_unlock": false,
+      "effect": "derive_existing_item_ID_in_next_new_run.unlocked_item_ids_from_unlocked_research_ids; no_starting_item_or_immediate_stat_gain",
+      "effect_summary": "装备后合法武器直伤吸血+2%、最大HP-10%；原吸血/治疗预算与不复活限制不变。",
+      "does_not_modify_D03_effects": true,
+      "natural_sources": [
+        {
+          "pool_id": "POOL-RELIC",
+          "source_ids": [
+            "RWD-REG-01-N05-RELIC",
+            "RWD-REG-02-N05-RELIC",
+            "RWD-REG-03-N05-RELIC",
+            "RWD-REG-04-N05-RELIC",
+            "RWD-REG-05-N05-RELIC"
+          ],
+          "node_ids": [
+            "REG-01-N05",
+            "REG-02-N05",
+            "REG-03-N05",
+            "REG-04-N05",
+            "REG-05-N05"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; N05_complete_guarantees_one_PAS_pool_result_not_selected_ID; purpose_then_uniform_unlocked"
+        }
+      ],
+      "natural_source_matching_ref": null,
+      "natural_specific_item_guaranteed": false,
+      "research_sample": {
+        "item_id": "ITM-PAS-006",
+        "quantity": 1,
+        "price_gold": 40,
+        "price_status": "assistant_proposed_unplaytested_not_resale_value",
+        "account_successful_purchase_limit": 1,
+        "current_node_match": {
+          "kind": "normal_item_offer",
+          "condition": "one_fixed_D03_item_available_for_purchase; current_full_HP_or_no_current_status_does_not_silently_remove_natural_pool_items; ownership_capacity_checked_at_commit"
+        },
+        "delivery_kind": "relic",
+        "delivery_action_s": 0.5,
+        "exact_item_effects_ref": "../items-v1/items.json#ITM-PAS-006",
+        "random_content_grade_enchant_or_stats": false,
+        "auto_use_or_auto_equip_outside_D04_destination_commit": false,
+        "full_effect_and_downside_preview": true
+      },
+      "authority": "assistant_proposed_untested",
+      "status": "design_only",
+      "account_state_rule_ref": "account_unlock_state_contract"
+    },
+    {
+      "id": "UNL-PAS-008",
+      "item_id": "ITM-PAS-008",
+      "name": "肃清徽章",
+      "category": "PAS",
+      "cost_shards": 16,
+      "prerequisite_unlock_ids": [
+        "UNL-PAS-006"
+      ],
+      "prerequisite_talent_ids": [],
+      "required_Boss_kills_or_unseen_item_pickups": [],
+      "visible_from_account_start": true,
+      "purchase_location": "outside_run_hub_content_research",
+      "research_limit": 1,
+      "purchase_permanent": true,
+      "refund_or_disable_supported": false,
+      "talent_refund_affects_this_unlock": false,
+      "effect": "derive_existing_item_ID_in_next_new_run.unlocked_item_ids_from_unlocked_research_ids; no_starting_item_or_immediate_stat_gain",
+      "effect_summary": "合资格武器直杀回复基础2HP，角色CD8秒、每房实际回复上限6HP；占遗物槽。",
+      "does_not_modify_D03_effects": true,
+      "natural_sources": [
+        {
+          "pool_id": "POOL-RELIC",
+          "source_ids": [
+            "RWD-REG-01-N05-RELIC",
+            "RWD-REG-02-N05-RELIC",
+            "RWD-REG-03-N05-RELIC",
+            "RWD-REG-04-N05-RELIC",
+            "RWD-REG-05-N05-RELIC"
+          ],
+          "node_ids": [
+            "REG-01-N05",
+            "REG-02-N05",
+            "REG-03-N05",
+            "REG-04-N05",
+            "REG-05-N05"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; N05_complete_guarantees_one_PAS_pool_result_not_selected_ID; purpose_then_uniform_unlocked"
+        }
+      ],
+      "natural_source_matching_ref": null,
+      "natural_specific_item_guaranteed": false,
+      "research_sample": {
+        "item_id": "ITM-PAS-008",
+        "quantity": 1,
+        "price_gold": 40,
+        "price_status": "assistant_proposed_unplaytested_not_resale_value",
+        "account_successful_purchase_limit": 1,
+        "current_node_match": {
+          "kind": "normal_item_offer",
+          "condition": "one_fixed_D03_item_available_for_purchase; current_full_HP_or_no_current_status_does_not_silently_remove_natural_pool_items; ownership_capacity_checked_at_commit"
+        },
+        "delivery_kind": "relic",
+        "delivery_action_s": 0.5,
+        "exact_item_effects_ref": "../items-v1/items.json#ITM-PAS-008",
+        "random_content_grade_enchant_or_stats": false,
+        "auto_use_or_auto_equip_outside_D04_destination_commit": false,
+        "full_effect_and_downside_preview": true
+      },
+      "authority": "assistant_proposed_untested",
+      "status": "design_only",
+      "account_state_rule_ref": "account_unlock_state_contract"
+    },
+    {
+      "id": "UNL-FUN-003",
+      "item_id": "ITM-FUN-003",
+      "name": "轮盘代投券",
+      "category": "FUN",
+      "cost_shards": 8,
+      "prerequisite_unlock_ids": [],
+      "prerequisite_talent_ids": [],
+      "required_Boss_kills_or_unseen_item_pickups": [],
+      "visible_from_account_start": true,
+      "purchase_location": "outside_run_hub_content_research",
+      "research_limit": 1,
+      "purchase_permanent": true,
+      "refund_or_disable_supported": false,
+      "talent_refund_affects_this_unlock": false,
+      "effect": "derive_existing_item_ID_in_next_new_run.unlocked_item_ids_from_unlocked_research_ids; no_starting_item_or_immediate_stat_gain",
+      "effect_summary": "只代一笔普通轮盘20金币，不增次数或改概率，仍可空奖；最多携带1。",
+      "does_not_modify_D03_effects": true,
+      "natural_sources": [
+        {
+          "pool_id": "POOL-BONUS-ITEM",
+          "source_ids": [
+            "RWD-REG-01-N02-BONUS",
+            "RWD-REG-01-N03-BONUS",
+            "RWD-REG-01-N05-BONUS",
+            "RWD-REG-01-BCHOICE-BONUS",
+            "RWD-REG-02-N02-BONUS",
+            "RWD-REG-02-N03-BONUS",
+            "RWD-REG-02-N05-BONUS",
+            "RWD-REG-02-BCHOICE-BONUS",
+            "RWD-REG-03-N02-BONUS",
+            "RWD-REG-03-N03-BONUS",
+            "RWD-REG-03-N05-BONUS",
+            "RWD-REG-03-BCHOICE-BONUS",
+            "RWD-REG-04-N02-BONUS",
+            "RWD-REG-04-N03-BONUS",
+            "RWD-REG-04-N05-BONUS",
+            "RWD-REG-04-BCHOICE-BONUS",
+            "RWD-REG-05-N02-BONUS",
+            "RWD-REG-05-N03-BONUS",
+            "RWD-REG-05-N05-BONUS",
+            "RWD-REG-05-BCHOICE-BONUS"
+          ],
+          "node_ids": [
+            "REG-01-B01",
+            "REG-01-B02",
+            "REG-01-N02",
+            "REG-01-N03",
+            "REG-01-N05",
+            "REG-02-B01",
+            "REG-02-B02",
+            "REG-02-N02",
+            "REG-02-N03",
+            "REG-02-N05",
+            "REG-03-B01",
+            "REG-03-B02",
+            "REG-03-N02",
+            "REG-03-N03",
+            "REG-03-N05",
+            "REG-04-B01",
+            "REG-04-B02",
+            "REG-04-N02",
+            "REG-04-N03",
+            "REG-04-N05",
+            "REG-05-B01",
+            "REG-05-B02",
+            "REG-05-N02",
+            "REG-05-N03",
+            "REG-05-N05"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; existing_source_presence0.15_then_unchanged_category_purpose_pool; FUN_also_saved_actual_match_context"
+        }
+      ],
+      "natural_source_matching_ref": "../economy-v1/reward-sources.json#utility_matching",
+      "natural_specific_item_guaranteed": false,
+      "research_sample": {
+        "item_id": "ITM-FUN-003",
+        "quantity": 1,
+        "price_gold": 18,
+        "price_status": "assistant_proposed_unplaytested_not_resale_value",
+        "account_successful_purchase_limit": 1,
+        "current_node_match": {
+          "kind": "current_N04_roulette",
+          "legal_node_ids": [
+            "REG-02-N04",
+            "REG-04-N04"
+          ],
+          "facility_id": "FAC-ROULETTE",
+          "conditions": [
+            "same_current_N04_has_standard_roulette",
+            "remaining_uses>0",
+            "accepts_FUN003",
+            "no_committed_pending_reward_blocks_use"
+          ],
+          "maximum_fee_saved_gold": 20,
+          "maximum_net_saving_vs_cash_service": 2
+        },
+        "delivery_kind": "utility",
+        "delivery_action_s": 0.25,
+        "exact_item_effects_ref": "../items-v1/items.json#ITM-FUN-003",
+        "random_content_grade_enchant_or_stats": false,
+        "auto_use_or_auto_equip_outside_D04_destination_commit": false,
+        "full_effect_and_downside_preview": true
+      },
+      "authority": "assistant_proposed_untested",
+      "status": "design_only",
+      "account_state_rule_ref": "account_unlock_state_contract"
+    },
+    {
+      "id": "UNL-FUN-005",
+      "item_id": "ITM-FUN-005",
+      "name": "铁匠初锻工票",
+      "category": "FUN",
+      "cost_shards": 6,
+      "prerequisite_unlock_ids": [],
+      "prerequisite_talent_ids": [],
+      "required_Boss_kills_or_unseen_item_pickups": [],
+      "visible_from_account_start": true,
+      "purchase_location": "outside_run_hub_content_research",
+      "research_limit": 1,
+      "purchase_permanent": true,
+      "refund_or_disable_supported": false,
+      "talent_refund_affects_this_unlock": false,
+      "effect": "derive_existing_item_ID_in_next_new_run.unlocked_item_ids_from_unlocked_research_ids; no_starting_item_or_immediate_stat_gain",
+      "effect_summary": "只代合法基础锻造0→1的30金币，保留原目标/章节cap/资源限制；最多携带1。",
+      "does_not_modify_D03_effects": true,
+      "natural_sources": [
+        {
+          "pool_id": "POOL-BONUS-ITEM",
+          "source_ids": [
+            "RWD-REG-01-N02-BONUS",
+            "RWD-REG-01-N03-BONUS",
+            "RWD-REG-01-N05-BONUS",
+            "RWD-REG-01-BCHOICE-BONUS",
+            "RWD-REG-02-N02-BONUS",
+            "RWD-REG-02-N03-BONUS",
+            "RWD-REG-02-N05-BONUS",
+            "RWD-REG-02-BCHOICE-BONUS",
+            "RWD-REG-03-N02-BONUS",
+            "RWD-REG-03-N03-BONUS",
+            "RWD-REG-03-N05-BONUS",
+            "RWD-REG-03-BCHOICE-BONUS",
+            "RWD-REG-04-N02-BONUS",
+            "RWD-REG-04-N03-BONUS",
+            "RWD-REG-04-N05-BONUS",
+            "RWD-REG-04-BCHOICE-BONUS",
+            "RWD-REG-05-N02-BONUS",
+            "RWD-REG-05-N03-BONUS",
+            "RWD-REG-05-N05-BONUS",
+            "RWD-REG-05-BCHOICE-BONUS"
+          ],
+          "node_ids": [
+            "REG-01-B01",
+            "REG-01-B02",
+            "REG-01-N02",
+            "REG-01-N03",
+            "REG-01-N05",
+            "REG-02-B01",
+            "REG-02-B02",
+            "REG-02-N02",
+            "REG-02-N03",
+            "REG-02-N05",
+            "REG-03-B01",
+            "REG-03-B02",
+            "REG-03-N02",
+            "REG-03-N03",
+            "REG-03-N05",
+            "REG-04-B01",
+            "REG-04-B02",
+            "REG-04-N02",
+            "REG-04-N03",
+            "REG-04-N05",
+            "REG-05-B01",
+            "REG-05-B02",
+            "REG-05-N02",
+            "REG-05-N03",
+            "REG-05-N05"
+          ],
+          "class_or_presence_guarantee": "one_pool_item_per_source_if_its_existing_presence_and_completion_pass; not_this_specific_ID",
+          "eligibility": "run_start_snapshot.unlocked_item_ids_contains_this_item_ID_derived_from_unlocked_research_ids; existing_source_presence0.15_then_unchanged_category_purpose_pool; FUN_also_saved_actual_match_context"
+        }
+      ],
+      "natural_source_matching_ref": "../economy-v1/reward-sources.json#utility_matching",
+      "natural_specific_item_guaranteed": false,
+      "research_sample": {
+        "item_id": "ITM-FUN-005",
+        "quantity": 1,
+        "price_gold": 27,
+        "price_status": "assistant_proposed_unplaytested_not_resale_value",
+        "account_successful_purchase_limit": 1,
+        "current_node_match": {
+          "kind": "current_N04_basic_smith",
+          "legal_node_ids": [
+            "REG-01-N04",
+            "REG-02-N04",
+            "REG-03-N04",
+            "REG-04-N04",
+            "REG-05-N04"
+          ],
+          "facility_id": "FAC-FORGE",
+          "conditions": [
+            "same_current_N04_has_legal_basic_smith",
+            "owned_weapon_or_armor_grade0_target",
+            "original_service_eligible_and_chapter_cap>=1"
+          ],
+          "maximum_fee_saved_gold": 30,
+          "maximum_net_saving_vs_cash_service": 3
+        },
+        "delivery_kind": "utility",
+        "delivery_action_s": 0.25,
+        "exact_item_effects_ref": "../items-v1/items.json#ITM-FUN-005",
+        "random_content_grade_enchant_or_stats": false,
+        "auto_use_or_auto_equip_outside_D04_destination_commit": false,
+        "full_effect_and_downside_preview": true
+      },
+      "authority": "assistant_proposed_untested",
+      "status": "design_only",
+      "account_state_rule_ref": "account_unlock_state_contract"
+    }
+  ],
+  "research_sample_order": {
+    "name": "研究样品订购",
+    "kind": "bounded_paid_research_sample_order",
+    "adopted_design_proposal": true,
+    "not_free_trial": true,
+    "existing_facility_attachment": "FAC-MERCHANT_in_current_N04; not_new_tenth_facility",
+    "D08_override": "one_extra_sample_source_and_offer_max_per_run_on_top_of_unchanged55_fixed_offers; no_base_pool_probability_or_guaranteed_coin_shard_income_change",
+    "per_account_per_ContentUnlockID_successful_purchase_limit": 1,
+    "per_run_selected_unlock_count_min": 0,
+    "per_run_selected_unlock_count_max": 1,
+    "selection_location": "outside_run_before_new_run_commit",
+    "selected_field": "selected_sample_unlock_id",
+    "eligibility_at_selection": [
+      "ContentUnlockID_in_unlocked_research_ids",
+      "permanent_sample_purchased[ContentUnlockID]==false"
+    ],
+    "new_run_snapshot_fields": [
+      "selected_sample_unlock_id",
+      "sample_purchase_flags_snapshot"
+    ],
+    "live_account_flags_revalidated_at_purchase": true,
+    "offer_identity": "RunID/ContentUnlockID/first_qualifying_N04_NodeID/sample0",
+    "item_instance_identity": "same_saved_OfferID_ItemInstanceID; not_recreated_on_view_cancel_reentry_or_failed_commit",
+    "offer_generation": {
+      "candidate_nodes": [
+        "REG-01-N04",
+        "REG-02-N04",
+        "REG-03-N04",
+        "REG-04-N04",
+        "REG-05-N04"
+      ],
+      "evaluate": "on_N04_visit_or_current_matching_condition_change_while_no_sample_offer_issued; full_D04_safety_required_for_paid_commit",
+      "first_matching_only": true,
+      "if_FUN_current_service_or_target_missing": "no_offer_at_this_node_and_no_account_flag_consumed; future_first_matching_N04_may_qualify",
+      "if_offer_already_issued": "same_item_price_InstanceID_at_original_N04_only; later_N04_never_generate_second_or_move_offer",
+      "current_match_becomes_invalid_after_issue": "show_disabled_reason; no_payment; no_move_or_substitute_or_reroll; can_become_legal_again_only_at_original_node",
+      "no_valid_N04_all_run": "no_sample_offer_no_purchase_flag; next_new_run_can_select_again"
+    },
+    "stock": {
+      "quantity": 1,
+      "per_run_offer_max": 1,
+      "restock_refresh_return_move_or_reprice": false,
+      "exact_fixed_selected_content": true,
+      "ordinary_55_offers_unchanged": true
+    },
+    "payment": {
+      "currency": "gold",
+      "function_discounts_waivers_or_meta_shards_allowed": false,
+      "FUN002_exclusion_explicit": "sample_commission_quote_is_D09_cash_only_special_offer; not_D08_ordinary_discountable_goods",
+      "does_not_reduce_original_roulette_or_smith_service_count_or_cost_before_actual_use": true,
+      "research_shards_and_sample_gold_separate": true
+    },
+    "commit_preconditions": [
+      "alive_active_run_current_bound_N04_full_D04_safety",
+      "same_selected_ContentUnlockID_in_run_snapshot_and_live_account_unlocked_research_ids",
+      "same_fixed_unsold_OfferID_ItemInstanceID_and_quote",
+      "live_permanent_sample_purchased[ContentUnlockID]==false",
+      "current_FUN_specific_matching_service_target_and_remaining_use_still_legal_if_applicable",
+      "wallet_has_full_quoted_gold",
+      "whole_item_destination_capacity_and_legal_old_relic_or_stack_drop_point",
+      "D04_duplicates_stacks_keyring_caps_and_item_kind_action_completed"
+    ],
+    "atomic_commit_fields": [
+      "gold_debit",
+      "inventory_instance_or_quantity_and_any_old_drop",
+      "offer_sold_once",
+      "permanent_sample_purchased[ContentUnlockID]=true",
+      "account_flag_version",
+      "OperationID_cross_account_run_purchase_record"
+    ],
+    "result_recovery": "repeat_OperationID_returns_same_committed_item_and_flag_no_second_cost_or_purchase; D13_atomic_persistence_not_implemented",
+    "on_cancel_or_failed_prevalidation": "no_gold_no_item_no_flag_change; same_offer_if_already_issued",
+    "on_skip_or_run_end_without_purchase": "local_offer_and_frozen_selection_end; account_qualification_remains_false; next_new_run_requires_explicit_hub_reselection; no_automatic_carryover",
+    "on_purchase_then_death_drop_forfeit_or_nonuse": "sample_flag_stays_true_permanently; run_item_can_end; no_refund_or_second_sample_for_same_unlock",
+    "cannot_use_result": "no_auto_effect_no_compulsory_purchase; current_item_use_reason_and_all_drawbacks_shown; ordinary_full_HP_not_recast_as_free_health",
+    "no_reward_tray_for_known_sample": "known_fixed_item_capacity_must_fit_before_payment; no_extra_backpack_or_overflow_gift",
+    "account_flag_is_not_research_unlock_flag": true,
+    "talent_full_refund_clears_sample_flags": false,
+    "coins_fragments_output_delta": {
+      "mainline_gross_gold": 0,
+      "repeat_mainline_shards": 0
+    },
+    "no_extra_service_uses_or_function_ticket_loop": true,
+    "account_selected_field_scope": "selected_sample_unlock_id_is_hub_pending_selection_only; not_auto_reused_for_future_runs",
+    "new_run_selection_commit": {
+      "prevalidate_live": [
+        "pending_selected_ContentUnlockID_is_null_or_currently_in_unlocked_research_ids",
+        "nonnull_pending_selection_requires_live_permanent_sample_purchased[ContentUnlockID]==false"
+      ],
+      "atomic_fields": [
+        "new_RunID_and_immutable_selected_sample_unlock_id_snapshot",
+        "sample_purchase_flags_snapshot",
+        "account.selected_sample_unlock_id=null",
+        "new_run_OperationID_commit_record"
+      ],
+      "retry_same_OperationID": "return_same_created_RunID_and_frozen_snapshot; do_not_consume_pending_again_or_reinitialize_or_spawn_second_offer",
+      "purchase_does_not_mutate_frozen_run_selection": true,
+      "next_run_without_new_hub_selection": "null_selection_no_sample_offer_even_if_previous_run_did_not_buy",
+      "unpurchased_qualification": "remains_available_but_requires_explicit_hub_reselection_for_each_later_new_run",
+      "failed_uncommitted_start": "no_partial_pending_clear_or_snapshot; reconcile_same_OperationID_via_hub_rules_recovery_before_editing_or_second_run"
+    }
+  },
+  "examples": [
+    {
+      "id": "EX-UNLOCK-BOO005-RARE",
+      "scope": "only15_mainline_N02_N03_N05_bonus_sources_in_one_complete_run; exclude_branch_keyed_samples_and_missed_rooms",
+      "assumptions": [
+        "BOO005_researched_before_new_run",
+        "BOO_category20pct_and_arcane_purpose10pct_unchanged",
+        "uniform_source_Bernoulli_no_reentry_reroll"
+      ],
+      "per_room_probability": 0.003,
+      "source_count": 15,
+      "at_least_one_probability": 0.044067175161094374,
+      "claim": "about4.4067pct_in_this_limited_route; not_whole_game_appearance_rate_or_guarantee"
+    },
+    {
+      "id": "EX-UNLOCK-BOO006-RARE",
+      "scope": "only15_mainline_bonus_sources; both_BOO005_and_BOO006_unlocked_so_arcane_no_longer_transfers_to_offense",
+      "per_room_probability": 0.0045,
+      "source_count": 15,
+      "at_least_one_probability": 0.06541465763974541,
+      "claim": "about6.5415pct_on_this_limited_route; offense_group30pct_shared_with_BOO001; class20pct_unchanged"
+    },
+    {
+      "id": "EX-UNLOCK-TRP004-RARE",
+      "scope": "only15_mainline_N02_N03_N05_bonus_sources; exclude_common_keyed_boxes_optional_branches_and_research_sample",
+      "assumptions": [
+        "TRP004_and_prerequisite_TRP003_in_newrun_unlocked_item_ids",
+        "TRP_category10pct_stagger_purpose10pct_TRP004_only"
+      ],
+      "per_room_probability": 0.0015,
+      "source_count": 15,
+      "at_least_one_probability": 0.02226527873743378,
+      "claim": "about2.2265pct_on_this_limited_route; not_global_frequency"
+    },
+    {
+      "id": "EX-UNLOCK-PAS-SHARE",
+      "scope": "5_completed_mainline_N05_relic_sources_with_PAS006_andPAS008_both_unlocked",
+      "purpose_share": 0.05,
+      "ID_count_in_purpose": 2,
+      "per_source_probability": 0.025,
+      "source_count": 5,
+      "at_least_one_PAS008_probability": 0.11890430664062512,
+      "claim": "N05_guarantees_PAS_class_not_this_ID; sustain5pct_is_split2.5pct_each"
+    },
+    {
+      "id": "EX-UNLOCK-KEYED-REC",
+      "scope": "one_actually_opened_keyed_common_box",
+      "category_share": 0.6,
+      "REC_eligible_count_after_REC002": 5,
+      "REC002_probability_then": 0.12,
+      "REC_eligible_count_after_REC006": 6,
+      "each_REC_probability_then": 0.09999999999999999,
+      "claim": "REC_class60pct_unchanged; same_class_IDs_dilute_from12pct_to10pct; opening_requires_key"
+    },
+    {
+      "id": "EX-SAMPLE-BOO005",
+      "unlock_cost_shards": 8,
+      "sample_price_gold": 16,
+      "steps": [
+        "research_at_hub",
+        "select_UNL-BOO-005_before_new_run",
+        "first_N04_issues_exact_one_BOO005_offer",
+        "valid_cash_purchase_sets_permanent_sample_purchased_true",
+        "carry_and_use_by_D03; no_free_start_or_probability_boost"
+      ],
+      "if_not_bought": "same_run_not_reissued_elsewhere; next_run_can_select_again"
+    },
+    {
+      "id": "EX-SAMPLE-FUN003",
+      "unlock_cost_shards": 8,
+      "sample_price_gold": 18,
+      "first_possible_current_match_node": "REG-02-N04",
+      "requires": "remaining_roulette_uses>0_and_no_pending_reward",
+      "service_fee_waived_gold": 20,
+      "maximum_net_saving_gold": 2,
+      "roulette_weights_and_use_cap_changed": false,
+      "if_current_two_uses_consumed_after_quote": "purchase_revalidation_rejects; no_flag_or_charge_no_move_to_REG04"
+    },
+    {
+      "id": "EX-SAMPLE-FUN005",
+      "unlock_cost_shards": 6,
+      "sample_price_gold": 27,
+      "requires": "owned_grade0_target_at_current_N04_smith_and_original_service_legal",
+      "service_fee_waived_gold": 30,
+      "maximum_net_saving_gold": 3,
+      "grant": "one_coupon_not_free_upgrade_and_no_refill"
+    },
+    {
+      "id": "EX-RESEARCH-CHAIN",
+      "steps": [
+        {
+          "id": "UNL-REC-006",
+          "before_parent": "visible_blocked_no_payment"
+        },
+        {
+          "id": "UNL-REC-002",
+          "cost_shards": 6
+        },
+        {
+          "id": "UNL-REC-006",
+          "cost_shards": 10
+        }
+      ],
+      "total_chain_cost_shards": 16,
+      "talents_required": 0,
+      "specified_Bosses_required": 0
+    },
+    {
+      "id": "EX-RESEARCH-ALL-BUDGET",
+      "total_research_cost": 130,
+      "D08_first_complete_mainline_shards": 70,
+      "D08_later_complete_mainline_shards": 60,
+      "sum_first_plus_one_repeat": 130,
+      "assumptions": [
+        "all_qualifying_sources_completed_and_credited",
+        "no_talent_or_other_permanent_spend",
+        "not_a_time_or_attempts_guarantee"
+      ],
+      "comparison": "account_can_also_research_from_partial_run_banked_shards; no_Boss_completion_research_gate"
+    }
+  ],
+  "D08_override_points": [
+    "the_existing55_fixed_offers_and94_sources_are_preserved_as_history",
+    "D09_may_add_one_selected_exact_research_sample_offer_to_existing_N04_FAC-MERCHANT_per_run",
+    "cash_only_sample_is_explicit_exception_to_ordinary_FUN002_discount_target",
+    "no_natural_source_weight_changes_no_new_currency_or_fragment_income_no_extra_wheel_or_smith_use",
+    "all_known_sample_capacity_prevalidated_no_D08_unknown_result_tray_extension"
+  ],
+  "unchanged_baseline": {
+    "D08_mainline_gross_gold": 700,
+    "D08_repeat_mainline_shards": 60,
+    "D08_first_mainline_shards": 70,
+    "D08_fixed_offer_rows": 55,
+    "D08_facility_categories": 9
+  },
+  "future_dependencies": [
+    "D11_all_research_nodes_sources_costs_drawbacks_and_cash_sample_UI",
+    "D13_atomic_account_run_sample_purchase_and_save_recovery",
+    "D14_research_prices_sample_prices_and_first_exposure_playtests"
+  ],
+  "account_unlock_state_contract": {
+    "visible_locked_prerequisite": "not_researched_and_some_parent_not_researched; show_exact_parent_cost_and_effect_no_payment",
+    "visible_insufficient_shards": "parents_researched_but_current_account_shards_below_cost; no_payment",
+    "researchable": "outside_run_all_parents_researched_current_shards_enough_not_already_researched",
+    "researched": "ContentUnlockID in unlocked_research_ids; no_repeat_payment_refund_or_disable; next_newrun_snapshot",
+    "sample_qualification": "separate_permanent_sample_purchased_flag_not_research_flag; qualification_requires_researched_and_sample_not_purchased"
+  }
+}

@@ -1,0 +1,277 @@
+{
+  "design_date": "2026-10-13",
+  "source_event": "EV-023",
+  "status": "passed",
+  "scope": "design_schema_arithmetic_references_and_cross_system_contracts_only",
+  "runtime_implemented": false,
+  "AI_navigation_geometry_animation_balance_verified": false,
+  "base_enemy_count": 28,
+  "elite_variant_count": 9,
+  "attack_definition_count": 65,
+  "target_profile_count": 28,
+  "encounter_template_count": 12,
+  "checks_by_group": {
+    "counts": 5,
+    "identity": 2,
+    "schema": 186,
+    "status": 33,
+    "stats": 140,
+    "body": 28,
+    "dormancy": 5,
+    "inheritance": 46,
+    "timing": 260,
+    "damage": 130,
+    "geometry": 130,
+    "charge": 15,
+    "projectile": 44,
+    "profiles": 114,
+    "flying": 38,
+    "guard": 2,
+    "support": 3,
+    "control": 1,
+    "encounters": 128,
+    "arithmetic": 6,
+    "historical_hash": 15,
+    "aggregation": 3,
+    "provenance": 2,
+    "local_links": 98
+  },
+  "checks": 1434,
+  "errors": [],
+  "paper_examples": [
+    {
+      "name": "elite_stone",
+      "hp": 148.5,
+      "direct_charge_damage": 23.0
+    },
+    {
+      "name": "bat_low_vs_slow_heavy",
+      "low_s": 1.8,
+      "full_heavy_cycle_s": 1.4874999999999998,
+      "remaining_margin_s": 0.3125000000000002,
+      "not_a_guarantee_at_every_range": true
+    },
+    {
+      "name": "shield_front_raw20",
+      "final_armor": 75,
+      "mitigation": 0.42857142857142855,
+      "hp_loss": 11.428571428571427
+    },
+    {
+      "name": "shield_dot_uses_base_ward",
+      "base_ward": 5,
+      "raw_tick": 6,
+      "hp_loss_each_tick": 5.7142857142857135
+    },
+    {
+      "name": "parallel_projectile_central_gap",
+      "robe_half_gap_cm": 10,
+      "elf_half_gap_cm": 11,
+      "walls_and_movement_still_require_playtest": true
+    }
+  ],
+  "charge_contact_cases": [
+    {
+      "attack_id": "ENM-STN-001-A1",
+      "max_distance_cm": 496,
+      "head_on_contact_center_cm": 42,
+      "attack_x_reach_cm": 65,
+      "recovery_s": 1.6
+    },
+    {
+      "attack_id": "ENM-ELF-002-A2",
+      "max_distance_cm": 100,
+      "head_on_contact_center_cm": 36,
+      "attack_x_reach_cm": 110,
+      "recovery_s": 1.5
+    },
+    {
+      "attack_id": "ENM-GOB-003-A2",
+      "max_distance_cm": 247.5,
+      "head_on_contact_center_cm": 47,
+      "attack_x_reach_cm": 70,
+      "recovery_s": 1.5
+    },
+    {
+      "attack_id": "ATK-BST-001-B",
+      "max_distance_cm": 182.00000000000003,
+      "head_on_contact_center_cm": 36,
+      "attack_x_reach_cm": 40,
+      "recovery_s": 1.5
+    },
+    {
+      "attack_id": "ATK-BST-002-A",
+      "max_distance_cm": 341,
+      "head_on_contact_center_cm": 54,
+      "attack_x_reach_cm": 60,
+      "recovery_s": 1.5
+    }
+  ],
+  "projectile_flight_calculations": [
+    {
+      "attack_id": "ENM-STN-004-A1",
+      "max_distance_cm": 650,
+      "speed_cm_s": 430,
+      "calculated_lifetime_s": 1.5116279069767442,
+      "count": 1
+    },
+    {
+      "attack_id": "ENM-ELF-001-A1",
+      "max_distance_cm": 680,
+      "speed_cm_s": 480,
+      "calculated_lifetime_s": 1.4166666666666667,
+      "count": 1
+    },
+    {
+      "attack_id": "ENM-ELF-003-A2",
+      "max_distance_cm": 560,
+      "speed_cm_s": 320,
+      "calculated_lifetime_s": 1.75,
+      "count": 1
+    },
+    {
+      "attack_id": "ENM-TRE-001-A2",
+      "max_distance_cm": 420,
+      "speed_cm_s": 300,
+      "calculated_lifetime_s": 1.4,
+      "count": 1
+    },
+    {
+      "attack_id": "ENM-ROB-001-A2",
+      "max_distance_cm": 430,
+      "speed_cm_s": 420,
+      "calculated_lifetime_s": 1.0238095238095237,
+      "count": 1
+    },
+    {
+      "attack_id": "ENM-ROB-002-A1",
+      "max_distance_cm": 620,
+      "speed_cm_s": 480,
+      "calculated_lifetime_s": 1.2916666666666667,
+      "count": 1
+    },
+    {
+      "attack_id": "ENM-SKL-003-A1",
+      "max_distance_cm": 650,
+      "speed_cm_s": 650,
+      "calculated_lifetime_s": 1.0,
+      "count": 1
+    },
+    {
+      "attack_id": "ENM-GOB-001-A2",
+      "max_distance_cm": 360,
+      "speed_cm_s": 480,
+      "calculated_lifetime_s": 0.75,
+      "count": 1
+    },
+    {
+      "attack_id": "ENM-GOB-002-A1",
+      "max_distance_cm": 360,
+      "speed_cm_s": 720,
+      "calculated_lifetime_s": 0.5,
+      "count": 1
+    },
+    {
+      "attack_id": "ATK-MEC-001-A",
+      "max_distance_cm": 520,
+      "speed_cm_s": 500,
+      "calculated_lifetime_s": 1.04,
+      "count": 1
+    },
+    {
+      "attack_id": "ATK-DEM-002-A",
+      "max_distance_cm": 560,
+      "speed_cm_s": 280,
+      "calculated_lifetime_s": 2.0,
+      "count": 1
+    },
+    {
+      "attack_id": "ELT-ELF-001-A1",
+      "max_distance_cm": 680,
+      "speed_cm_s": 480,
+      "calculated_lifetime_s": 1.4166666666666667,
+      "count": 2
+    },
+    {
+      "attack_id": "ELT-ROB-001-A1",
+      "max_distance_cm": 620,
+      "speed_cm_s": 480,
+      "calculated_lifetime_s": 1.2916666666666667,
+      "count": 2
+    },
+    {
+      "attack_id": "ATK-ELT-MEC-001-C",
+      "max_distance_cm": 484,
+      "speed_cm_s": 440,
+      "calculated_lifetime_s": 1.1,
+      "count": 1
+    },
+    {
+      "attack_id": "ATK-ELT-DEM-001-C",
+      "max_distance_cm": 450,
+      "speed_cm_s": 360,
+      "calculated_lifetime_s": 1.25,
+      "count": 1
+    }
+  ],
+  "historical_design_sha256": {
+    "玩家角色与战斗规则设计.md": "da7d170fc71f67bb5fca06fbf8538d9cdf22b8998254f0033447db4a3219b949",
+    "docs/design/player-combat-v1/player-combat-rules.json": "ab22cd0f131fa8f025ea16db9d1536028526b35c467aeb0008fe2dca59c413ef",
+    "道具与状态系统设计.md": "4c7536f4b71bd74563edbb8e393a2bb452ead0fc74db4cfa201c605b710a8bbf",
+    "docs/design/items-v1/common-rules.json": "b5815a10f313b7364b1dde66b0eac9f703104ea260d4e4470094cffe31652e99",
+    "docs/design/items-v1/states.json": "97ee61346d5c6387dc25aa01a75d64fcd12d60b5917d0b7f594d05b25b0c06a3",
+    "docs/design/items-v1/items.json": "09e40ef363ddcd2507efcbdfa4cf388916623e62015dcb41229a62d6badc2bc1",
+    "docs/design/items-v1/consumables.json": "e940715c2d85ff05b8431903ca6bcd7cba9adeed0cebc79c3304253f7ef487eb",
+    "docs/design/items-v1/passives-and-utilities.json": "ec38d990658cc930bf9bb98ca52e2fcd1fecaab9b6fe80cfc40486b2e88eb85a",
+    "携带与交互系统设计.md": "b0b4e570b17adedf2b94cea92d52942b36de88c5da58aee71ed6f597bfa90b37",
+    "docs/design/inventory-v1/inventory-rules.json": "7eb6f7da968622a1583b4e63069208513a09e0ef74d12e244c18e20332f08942",
+    "docs/design/inventory-v1/paper-examples.json": "bb0af7a10fcfa6b7725a42045eb048c4f26cb4cd22aace8cda10cebb9c78f156",
+    "docs/design/inventory-v1/01-交互流程与界面状态.md": "4e2d4bd1fe5a12a9f84c4a9a1fe306cb8edfaca5b5d72cfcc21ba62d918ae3f6",
+    "docs/design/inventory-v1/02-边界案例.md": "d0181b8d2c35cc0fa4eabff2bf23787b151332dfef95dd539431e22059e626aa",
+    "docs/design/equipment-v1/weapons.json": "95757819382832cfa31e6596f3ba90f1e983e83fbd69504da3c99d5ea2a272b4",
+    "docs/design/equipment-v1/armor.json": "9407e458aef80b9f0d8f0e958b089e7b7a6f4180aef41b7b7df97534fe780e9d"
+  },
+  "future_runtime_scenarios_documented_not_executed": 9,
+  "review_fixes": [
+    "charge_front_reach_covers_body_contact",
+    "bat_A1_radius80_covers_legal_endpoint",
+    "bat_pending_low_recovery_survives_interrupt",
+    "projectiles_use_hurtbox_before_body_consumption",
+    "move_support_same_canonical_group_and_source_registry",
+    "guard_no_second_mitigation_no_dot_direction_bonus",
+    "scan_inherited_and_elite_extra_capabilities_for_encounter_caps",
+    "whole_projectile_group_capacity2",
+    "release_unemitted_projectile_capacity_on_interrupt_death_or_action_end",
+    "self_guard_exempt_from_ally_buff_target_requirement",
+    "15_explicit_enemy_outgoing_projectile_profiles"
+  ],
+  "local_document_links": 98,
+  "current_design_sha256": {
+    "敌人分类与普通精英设计.md": "036e34f250fde186a01c8c9e3d2a9f2502d22a85246240a801b31ba9113e7e99",
+    "docs/design/enemies-v1/common-rules.json": "0296b0d87fc1d16ef1f90d15b73aa08544b7e1c5ca173db898cf2d20f93976f5",
+    "docs/design/enemies-v1/encounter-templates.json": "4fe3a6607b46f42b2e1150d5e061e5f024afa988c984205ac1cacbb3031b8ab2",
+    "docs/design/enemies-v1/enemies.json": "d01dd609a95ff9ad182638982a0ac7de864dbbd29f6b03995f9a3625a0c44266",
+    "docs/design/enemies-v1/enemy-projectile-profiles.json": "895f105ba5f2b3707aa642b50c2dbf8cef369dc9e0e0ae70f29a586c38effb6f",
+    "docs/design/enemies-v1/mech-beasts-demons.json": "f6d5475ba13eb1cb93cd626ec32f6bcf976ce8bfbb0db2253401812b2aaaf369",
+    "docs/design/enemies-v1/robes-bones-goblins.json": "7f48ef3d3f8beec832a4e34f75cd14646e26590e83957f70172316302eeb1f53",
+    "docs/design/enemies-v1/stone-forest.json": "5757ef0e4da5830546dff944d1e717c22fbf92e7692229bbadd5b9397aeea0c5",
+    "docs/design/enemies-v1/target-profiles.json": "e5649ff4f5c53f0740126923f2a5a99b73d3e523a2d2dd4dc4e75e60ae85c4e5",
+    "docs/design/enemies-v1/01-石像与森林敌人.md": "b1edd5ba84c19c6b5dda1005fccddacde0dee456dcb2da624af38814ab4b02ca",
+    "docs/design/enemies-v1/02-教团骷髅与哥布林.md": "f75a861ec049449c27dedb7b782bb33757ec2ee5c535597f447eeddaff21853c",
+    "docs/design/enemies-v1/03-机械野兽与恶魔.md": "c2ede5450b75ffab2b489a02428d0b6cbb8cfbf210a575862d40c1bdcc05db67"
+  },
+  "final_recheck": {
+    "checks": 368,
+    "errors": [],
+    "local_document_links": 102,
+    "projectile_profiles": 15,
+    "source_aggregation_rechecked": true,
+    "new_boundary_cases": [
+      "double_projectile_interrupt_reservation_release",
+      "source_death_reveals_other_unexpired_same_group_source",
+      "self_guard_without_ally",
+      "actual_muzzle_and_fixed_depth_corridor"
+    ]
+  },
+  "projectile_profile_count": 15
+}

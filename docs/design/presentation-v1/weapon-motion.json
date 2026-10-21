@@ -1,0 +1,1621 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "module": "D-12",
+  "source_event": "EV-030",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "proposal_status": "assistant_proposed_untested",
+  "scope": "weapon_and_body_armor_presentation_only_no_gameplay_or_assets_generated",
+  "catalogue_counts": {
+    "weapon_families": 11,
+    "weapon_variants": 33,
+    "secondary_motion_profiles": 33,
+    "armor_profiles": 12,
+    "armor_types": 4
+  },
+  "source_preservation": [
+    {
+      "path": "docs/design/equipment-v1/weapons.json",
+      "sha256": "95757819382832cfa31e6596f3ba90f1e983e83fbd69504da3c99d5ea2a272b4"
+    },
+    {
+      "path": "docs/design/equipment-v1/weapons-melee.json",
+      "sha256": "4138a066af69198cac5b6ce510922657f2951201c24d3e3b6a32a90e8f2de140"
+    },
+    {
+      "path": "docs/design/equipment-v1/weapons-ranged.json",
+      "sha256": "bf15650a421f842ccdaae10f53631efaed52780821cc1c755a087364eafe661d"
+    },
+    {
+      "path": "docs/design/equipment-v1/armor.json",
+      "sha256": "9407e458aef80b9f0d8f0e958b089e7b7a6f4180aef41b7b7df97534fe780e9d"
+    },
+    {
+      "path": "docs/design/equipment-v1/00-共同规则.md",
+      "sha256": "60e45a78ae50a4701c33e9cbee2e9f32284a9e190a08fd9b9db49d4ee1ea9014"
+    },
+    {
+      "path": "docs/design/equipment-v1/04-装备流程与制作验收.md",
+      "sha256": "1524b8cfd0f1b3fac9e5e9ee9327f800f7836b4ce972a555577c6a875dd6889d"
+    },
+    {
+      "path": "docs/design/equipment-v2/stat-definitions.json",
+      "sha256": "2f8c3fe15aa2dc940f867be118b948e80ae9ae4c654bc70580021ade79d37bc9"
+    },
+    {
+      "path": "docs/design/equipment-v2/00-属性附魔共同规则.md",
+      "sha256": "12278ea720388723cbbc15408bc166e7ffe542aa4f3fe03ca455ad2f52974a17"
+    },
+    {
+      "path": "docs/design/player-combat-v1/player-combat-rules.json",
+      "sha256": "ab22cd0f131fa8f025ea16db9d1536028526b35c467aeb0008fe2dca59c413ef"
+    },
+    {
+      "path": "docs/design/items-v1/common-rules.json",
+      "sha256": "b5815a10f313b7364b1dde66b0eac9f703104ea260d4e4470094cffe31652e99"
+    },
+    {
+      "path": "docs/design/inventory-v1/inventory-rules.json",
+      "sha256": "7eb6f7da968622a1583b4e63069208513a09e0ef74d12e244c18e20332f08942"
+    }
+  ],
+  "authority": {
+    "base_equipment": "../equipment-v1/weapons.json and armor.json remain authoritative; references resolve by stable ID and JSON pointer",
+    "timing": "../items-v1/common-rules.json#/weapon_timing_extension overrides old full snapshot wording; ../player-combat-v1/player-combat-rules.json governs aerial use and per-emission positions",
+    "stats": "../equipment-v2/stat-definitions.json; D03/D08/D09 merge unchanged",
+    "inventory": "../inventory-v1/inventory-rules.json real commit and cancellation only",
+    "names_counts_rates": "assistant proposals; EV-030 is continuation not per-parameter user approval"
+  },
+  "coordinate_contract": {
+    "world_axes": {
+      "X": "left_right_facing_sign",
+      "Y": "depth_positive_away_from_camera_and_up_screen",
+      "Z": "independent_jump_height"
+    },
+    "art_axes": "rig_local u right and v up in cm around the corresponding primary pivot; image_px uses the unified production-plan.json origin/axes/pivot/trim/single-mirror contract; never equate local v with world Z alone",
+    "coordinate_metadata_authority_ref": "production-plan.json unified image_px and rig_local coordinate contract; authoritative for pixel origin, conversion, trim offset and one-time left-facing mirror",
+    "sprite_root": "ground projection at actor X/Y; character visual rises by actual Z; ground_shadow remains at ground projection",
+    "same_depth_cross_layer": "body far arm/weapon behind torso and near arm/weapon in front; switch masks at declared pose crossover markers; no depth displacement from layer order",
+    "whole_actor_sort": "root pipeline sorts actors by actual ground Y with the formal far/near projection; local limb layers never reorder whole characters by weapon tip",
+    "legacy_prototype": "formal positive Y projection/sort is a future migration; do not modify legacy DungeonHUD Ground=510+Y*.48 or claim it already matches",
+    "sprite_extent_does_not_change_hurtbox": true,
+    "asset_visual_scale_must_match_import_reference": true
+  },
+  "simulation_event_contract": {
+    "consumer_only": true,
+    "authoritative_damage_from_animation_frames_or_notify": false,
+    "animation_can_start_new_attack_or_subhit": false,
+    "event_envelope": [
+      "RunID",
+      "actor_instance_id",
+      "weapon_instance_id",
+      "AttackID_or_OperationID",
+      "action_kind",
+      "event_kind",
+      "logical_sim_time",
+      "event_serial",
+      "subhit_id_or_emission_id_if_present",
+      "effective_timeline_snapshot_id",
+      "locked_facing_if_present",
+      "actual_origin_world_cm_if_emission",
+      "accepted_contact_result_if_hit"
+    ],
+    "events": {
+      "accepted_start": "start pose from already frozen full effective W/A/R and subwindow schedule; no new damage/resource snapshot",
+      "lock": "source 40% of frozen windup; lock marker/pose reads real acceptance; no direction autoaim, no early glow that implies guarantee",
+      "emit": "use each actual emission origin/height and locked direction plus intrinsic source spread; no old same-Y line if actor moved Y between emissions",
+      "active_subhit": "pose reaches source subwindow; no extra hits from trail geometry",
+      "hit_resolved": "only accepted result gives target material contact; include source damage zone/aggregate/penetration result",
+      "status_applied_or_ended": "status cue follows actual accepted status life; rejection no fake freezing/poise break",
+      "action_end": "return idle when source full recovery ends; never retain blocking pose as input lock",
+      "interrupted": "discard only presentation for interrupted action; logic decides reservations, cooldown and airborne slot; already-created projectiles follow original lifetime",
+      "inventory_commit": "replace visible equipped instance only on actual D04 commit; old visuals remain before commit",
+      "trait_start_or_end": "armor cue reads accepted conditional trait state, no local frame timer grants effect"
+    },
+    "deduplication_key": "RunID + actor_instance_id + AttackID_or_OperationID + event_kind + event_serial + subhit_or_emission_ID_if_present",
+    "many_targets_one_subhit": "coalesce presentation hitstop once; retain distinct legal contact points at bounded root FX budget; do not stack target count into hold length",
+    "same_shot_shotgun": "consume source per-target aggregated shot receipt; cosmetic rays never collide again",
+    "low_render_rate": "process all event receipts once; coalesce already happened subhits/emissions into a bounded composite flash/sound summary when necessary; no promise each emission occupies a unique rendered frame",
+    "late_event_policy": "seek current absolute phase; do not queue new-looking attacks or projectile emissions after original recovery/end; delayed cosmetic contact may be omitted/coalesced without dropping authoritative outcomes",
+    "pause_policy": "only real simulation pause freezes logic; live UI02/07/08 do not pause; presentation pause cannot modify any timer"
+  },
+  "phase_binding": {
+    "timing_source_reference_only": true,
+    "base_W_A_R_CD_copied_as_new_authority": false,
+    "timeline_snapshot_at": "accepted_attack_start_D03",
+    "other_attack_snapshot_at": "40_percent_windup_lock_D03",
+    "effective_speed_rule_ref": "../equipment-v2/stat-definitions.json action_speed_pct: clamp and subwindow floor remain source owned",
+    "clip_sampling": "sample normalized authored curves against current absolute effective phase; source frame number is not a simulation timestamp",
+    "short_window_policy": "preserve event order and subhit IDs when a render frame skips a window; sample contact pose for cosmetic event then current phase without adding simulation dwell",
+    "lock_readability": "within existing windup use hand/shoulder settle around true lock; may use subtle cue event but cannot extend short windup to meet a minimum animation frame count",
+    "cancel_readability": "before-lock reverse cancel follows source acceptance, never a universal jump/dodge cancel; fixed windup is not hold-to-charge",
+    "root_motion_authority": "actor XY/Z changes only from source movement/displacement; exported in-place animation root has no authority",
+    "turning": "face from legal source rules; after lock no visual auto-turn to hit target",
+    "critical_hit": "one attack crit result in snapshot; stronger contact cue only on actual legal hit, not a second crit roll"
+  },
+  "presentation_hitstop": {
+    "source_ref": "../equipment-v1/00-共同规则.md and each weapon audio_vfx",
+    "inherited_light_standard_heavy_s": [
+      0.025,
+      0.045,
+      0.075
+    ],
+    "ceiling_s": 0.08,
+    "scope": "rendered contact pose only; optional actor-only cosmetic hold; ground root and simulation pose continue real positions",
+    "simulation_clock_paused": false,
+    "gameplay_modified": false,
+    "does_not_change": [
+      "W/A/R",
+      "subwindow_schedule",
+      "hit_count",
+      "damage",
+      "resource_cost",
+      "projectile_speed_or_lifetime",
+      "skill_CD",
+      "reload",
+      "movement",
+      "hurt_or_dodge_iframes",
+      "enemy_telegraph",
+      "trait_or_status_timers"
+    ],
+    "overlapping_contacts": "take one capped remaining cosmetic hold, never sum or extend a group by number of targets",
+    "next_critical_event": "immediately end cosmetic hold on next real emission/subhit/lock/phase_change/interruption/death/action_end; re-sample current absolute phase without replay",
+    "phase_change_scope": "authoritative action-segment transition, including windup/active/recovery, or an authoritative Boss-stage transition when it occurs; presentation cannot create or delay either transition",
+    "socket_safety": "logic emission origins come from unfrozen combat pose/authoritative attachment, not frozen rendered bone; emission pose overrides hold so muzzle can coincide with actual origin",
+    "reduced_motion": "root accessibility can suppress cosmetic hold/flash without suppressing authoritative events"
+  },
+  "families": [
+    {
+      "id": "KNF",
+      "name": "小刀",
+      "weapon_ids": [
+        "WPN-KNF-001",
+        "WPN-KNF-002",
+        "WPN-KNF-003"
+      ],
+      "grip": "单手贴肋；双匕按逐件双手；低重心不改变身体高度或受击体",
+      "anticipation": "短收腕显出刀尖；双匕两手分离；不作重兵器大绕肩",
+      "strike": "刀尖短伸和局部腕旋；主线窄直，不能变成宽扇",
+      "recovery": "快回肋侧，但仍完整保留源后摇；双击间隙不开放取消",
+      "silhouette": "短刃、短护手和空手/第二刃均清楚",
+      "sound_direction": "细短风切、皮革摩擦；接触点小而锐",
+      "hit_and_miss": "正数命中才接触音与点火星；落空只有风切和收手，不播钻甲音",
+      "source_timing": "equipment-v1/weapons.json per instance + D03 accepted-start effective timeline",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "DAO",
+      "name": "大刀",
+      "weapon_ids": [
+        "WPN-DAO-001",
+        "WPN-DAO-002",
+        "WPN-DAO-003"
+      ],
+      "grip": "双手短至长柄，配重靠刀头；刀刃与上肢保持分层",
+      "anticipation": "先沉肩扭胯，刀头稍滞后；不能在前摇临时加蓄力等待",
+      "strike": "腰带宽刃作前向横扫，惯性由肩胯传到刃端；低扫另作俯身",
+      "recovery": "刃先停、膝缓冲、身体再回正；不把全部重量交给屏幕震动",
+      "silhouette": "宽背刀头和弯/阔刃；不与细直重剑同剪影",
+      "sound_direction": "中低频厚风切、刀身余震和承重落脚",
+      "hit_and_miss": "合法接触按源轻重停顿；扫空仍完整收势，只保风声，无命中震响",
+      "source_timing": "equipment-v1/weapons.json per instance + D03 accepted-start effective timeline",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "SWD",
+      "name": "单手剑",
+      "weapon_ids": [
+        "WPN-SWD-001",
+        "WPN-SWD-002",
+        "WPN-SWD-003"
+      ],
+      "grip": "一手短柄；另一手平衡；刺剑侧身，弯剑指护外展",
+      "anticipation": "肩臂收势短于重剑；刺剑直线预备，弯剑准备返刃",
+      "strike": "军剑斜斩、刺剑送尖、弯剑斩返；家族内部不是同一横砍换皮",
+      "recovery": "收腕/回肘恢复，双斩首段后不回待机",
+      "silhouette": "短柄单手轮廓与留空的副手",
+      "sound_direction": "中频短金属鸣；刺击细尖、弯剑两触点一实一轻",
+      "hit_and_miss": "剑身风切与目标材质接触分开；落空不播金属碰撞",
+      "source_timing": "equipment-v1/weapons.json per instance + D03 accepted-start effective timeline",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "GSW",
+      "name": "重剑",
+      "weapon_ids": [
+        "WPN-GSW-001",
+        "WPN-GSW-002",
+        "WPN-GSW-003"
+      ],
+      "grip": "双手长柄，直厚剑身；肩线与刃线清楚",
+      "anticipation": "高举或肩侧蓄势，膝胯先承重；长锋空区不画成发光实墙",
+      "strike": "窄面重劈/远端斜劈/双砸；剑尖落点明确，绝不新增冲击波",
+      "recovery": "剑停后膝缓冲、拔回和起身；所有后摇继续按源走完",
+      "silhouette": "长直厚刃、长柄，区别大刀横向阔头",
+      "sound_direction": "低频风压与短深金属触点；双砸保持两个逻辑节拍",
+      "hit_and_miss": "命中才局部震响；落空可有无伤害地面轻尘，但不播敌人受击/破韧",
+      "source_timing": "equipment-v1/weapons.json per instance + D03 accepted-start effective timeline",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "SPR",
+      "name": "长枪",
+      "weapon_ids": [
+        "WPN-SPR-001",
+        "WPN-SPR-002",
+        "WPN-SPR-003"
+      ],
+      "grip": "双手导杆，前手作导向、后手送力；细长杆保持直线",
+      "anticipation": "后手小收、枪尖对线，动作紧而读得出；不以横扫当默认",
+      "strike": "枪尖高速直送，主攻速度、窄纵深、远端距离同时可读；撩刺另有低起弧",
+      "recovery": "短促收杆显露空档；三刺有三个峰值，保护/落空不省略后续",
+      "silhouette": "枪尖细长、杆尾配重，握区较暗，主攻空区不发亮",
+      "sound_direction": "尖细破风、杆身短回弹；接触是点刺音而非斧砍",
+      "hit_and_miss": "刺空只留细直残影；命中出点状火星，不能让杆身整段像连续伤害",
+      "source_timing": "equipment-v1/weapons.json per instance + D03 accepted-start effective timeline",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "HAL",
+      "name": "戟",
+      "weapon_ids": [
+        "WPN-HAL-001",
+        "WPN-HAL-002",
+        "WPN-HAL-003"
+      ],
+      "grip": "双手长杆；侧刃/倒钩/月刃与尾帽独立标记",
+      "anticipation": "换握可见，戟刃不会穿掌；长戟刺扫准备与短半握区别",
+      "strike": "刺与扫/钩斩/刃尾连击分别换形状，间隙暗下，不画一整块包络",
+      "recovery": "回收和换握完整保留；牵引只跟实际目标位移回执",
+      "silhouette": "枪尖、侧刃、尾帽三点；倒钩朝前侧有可辨反勾",
+      "sound_direction": "刺细扫宽、钩回收金属颤音、杆尾闷顶",
+      "hit_and_miss": "合法牵引才接地拖移；空钩回收无抓取线，Boss免位移仍可接触伤害",
+      "source_timing": "equipment-v1/weapons.json per instance + D03 accepted-start effective timeline",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "XBW",
+      "name": "弩",
+      "weapon_ids": [
+        "WPN-XBW-001",
+        "WPN-XBW-002",
+        "WPN-XBW-003"
+      ],
+      "grip": "弓臂水平、弩槽与枪口不同；袖弩抬腕，其余双手承托",
+      "anticipation": "提弩/压肩拉紧弦，不出现火药蓄焰",
+      "strike": "实际发射事件放弦和矢尾；袖弩三压逐发，重弩躯干后坐",
+      "recovery": "收弩后摇与独立上弦装填分开，不能用绞盘转完伪造加弹",
+      "silhouette": "横向弓臂、弩槽、绞盘/轮仓；与枪管差异优先",
+      "sound_direction": "弦啪、木机和齿轮；禁止枪口爆鸣/火药焰",
+      "hit_and_miss": "飞矢实际碰撞才目标/墙接触；空射有弦音无命中停顿，绳钩失败按真实生命周期收回",
+      "source_timing": "equipment-v1/weapons.json per instance + D03 accepted-start effective timeline",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "PST",
+      "name": "手枪",
+      "weapon_ids": [
+        "WPN-PST-001",
+        "WPN-PST-002",
+        "WPN-PST-003"
+      ],
+      "grip": "短管单手为主，决斗铳双手托腕；枪口位置独立",
+      "anticipation": "举腕、压稳，固定前摇不变为按住蓄力",
+      "strike": "枪口焰跟实际射击，腕后坐；双响每发有独立事件",
+      "recovery": "腕回位与真实装填分开；后撤技能严格在源指定阶段",
+      "silhouette": "转轮、并排双管、长单管三种短兵器轮廓",
+      "sound_direction": "清脆短火药响，双响节拍不合成散弹齐鸣",
+      "hit_and_miss": "击发音不等于命中音；飞弹命中才接触；空弹拒绝不假播放发射/消耗",
+      "source_timing": "equipment-v1/weapons.json per instance + D03 accepted-start effective timeline",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "SGN",
+      "name": "霰弹枪",
+      "weapon_ids": [
+        "WPN-SGN-001",
+        "WPN-SGN-002",
+        "WPN-SGN-003"
+      ],
+      "grip": "双手顶肩，短粗/长收束/鼓仓持握不同",
+      "anticipation": "肩胯顶住，长管贴腮，低重心只是姿势",
+      "strike": "瞬时射线齐射后坐；短弹迹仅展示实际射线截点，绝不生成第二套伤害丸",
+      "recovery": "回肩沉管、逐腔或鼓仓装填；双枪技能依两个发射回执",
+      "silhouette": "粗短枪口、细长收束管、鼓腹仓一眼可分",
+      "sound_direction": "低而短喷响；一枪多丸不叠成多重炸响",
+      "hit_and_miss": "同枪同目标按聚合回执一次接触表现；扇面空处不能铺满命中火星；铅柱技能用实体单弹",
+      "source_timing": "equipment-v1/weapons.json per instance + D03 accepted-start effective timeline",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "RFL",
+      "name": "步枪",
+      "weapon_ids": [
+        "WPN-RFL-001",
+        "WPN-RFL-002",
+        "WPN-RFL-003"
+      ],
+      "grip": "双手枪托架肩；栓机、三连枪机、刺刀清楚",
+      "anticipation": "长线稳枪；定射站定用脚姿表达，不添加瞄准吸附",
+      "strike": "单发/固定三连各随真实发射；刺刀技能切到独立近战姿态",
+      "recovery": "拉栓退壳属于射击后摇，补弹属于装填；不能混成一次免费补仓",
+      "silhouette": "长枪管木托/铜三段机/短管刺刀三类",
+      "sound_direction": "单发长响、三连有规律、刺刀只有刃风接触",
+      "hit_and_miss": "每发击发与弹着分离；栓机落空仍拉栓，刺刀不出枪口焰或退壳",
+      "source_timing": "equipment-v1/weapons.json per instance + D03 accepted-start effective timeline",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "STF",
+      "name": "法杖",
+      "weapon_ids": [
+        "WPN-STF-001",
+        "WPN-STF-002",
+        "WPN-STF-003"
+      ],
+      "grip": "杖头、握点、施法手分开；火灯/霜刻/双针不同",
+      "anticipation": "火球聚小焰、冰片短指引、电针夹腕对线；不能统一旋转法阵",
+      "strike": "火球慢弹、冰片双弹、雷线瞬时；地面火线/霜扇与贯闪另用技能动作",
+      "recovery": "收杖和专注不足反馈不混同；无弹匣装填动画",
+      "silhouette": "灯笼、冰棱刻头、音叉双针；魔光不淹没手和尖端",
+      "sound_direction": "火呼啸、冰脆双声、干短电音；不用火药爆鸣",
+      "hit_and_miss": "主攻不暗示固有状态；状态仅真实生效回执出现；落空只有施法/飞行/到期消散无命中音",
+      "source_timing": "equipment-v1/weapons.json per instance + D03 accepted-start effective timeline",
+      "status": "assistant_proposed_untested"
+    }
+  ],
+  "weapon_variants": [
+    {
+      "id": "WPN-KNF-001",
+      "name": "折巷短刃",
+      "family": "KNF",
+      "source_ref": "../equipment-v1/weapons.json#/0",
+      "primary": {
+        "source_pattern_pointer": "/0/primary_pattern",
+        "motion_profile_id": "MOT-WPN-KNF-001-PRIMARY",
+        "distinct_pose": "单直刃反握护手，手腕短伸，贴肋回手",
+        "source_event_structure_summary": "一刺",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "跨步点刺",
+        "source_pointer": "/0/secondary",
+        "motion_profile_id": "MOT-WPN-KNF-001-SECONDARY",
+        "distinct_pose": "单脚跨步后点刺，脚位跟真实截停结果；无滑行追敌",
+        "source_event_structure_summary": "一刺",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "短皮革声配细刀风，跨步音和接触音分离",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-KNF-002",
+      "name": "燕尾双匕",
+      "family": "KNF",
+      "source_ref": "../equipment-v1/weapons.json#/1",
+      "primary": {
+        "source_pattern_pointer": "/1/primary_pattern",
+        "motion_profile_id": "MOT-WPN-KNF-002-PRIMARY",
+        "distinct_pose": "不等长双匕，两个手臂刺点独立；不镜像复制成同一把刃",
+        "source_event_structure_summary": "两刺",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "撤身回刃",
+        "source_pointer": "/1/secondary",
+        "motion_profile_id": "MOT-WPN-KNF-002-SECONDARY",
+        "distinct_pose": "先退脚再回横刃，退步和回刃分开；受阻缩短退步",
+        "source_event_structure_summary": "一横切",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "两次轻触点依子击事件，回切有短宽风声",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-KNF-003",
+      "name": "破缝锥刃",
+      "family": "KNF",
+      "source_ref": "../equipment-v1/weapons.json#/2",
+      "primary": {
+        "source_pattern_pointer": "/2/primary_pattern",
+        "motion_profile_id": "MOT-WPN-KNF-003-PRIMARY",
+        "distinct_pose": "三棱短锥与小护盘，肘贴身直钻；主攻只显示瞬时钻甲火星",
+        "source_event_structure_summary": "一锥刺",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "寻缝深刺",
+        "source_pointer": "/2/secondary",
+        "motion_profile_id": "MOT-WPN-KNF-003-SECONDARY",
+        "distinct_pose": "沉肩深刺，保持极窄直线；不显示主攻穿甲图标",
+        "source_event_structure_summary": "一深刺",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "软体短闷、金属尖触；主攻与技能强弱分开",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-DAO-001",
+      "name": "断梁大刀",
+      "family": "DAO",
+      "source_ref": "../equipment-v1/weapons.json#/3",
+      "primary": {
+        "source_pattern_pointer": "/3/primary_pattern",
+        "motion_profile_id": "MOT-WPN-DAO-001-PRIMARY",
+        "distinct_pose": "断口宽背、刀头配重，扭胯带刃，双手扫出",
+        "source_event_structure_summary": "一宽扫",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "压阵横扫",
+        "source_pointer": "/3/secondary",
+        "motion_profile_id": "MOT-WPN-DAO-001-SECONDARY",
+        "distinct_pose": "更大压扫，真实推退后目标接地滑移；Boss不表现被推",
+        "source_event_structure_summary": "一宽扫",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "厚风和低刀震，技能脚掌承重更明显",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-DAO-002",
+      "name": "折肘短斩刀",
+      "family": "DAO",
+      "source_ref": "../equipment-v1/weapons.json#/4",
+      "primary": {
+        "source_pattern_pointer": "/4/primary_pattern",
+        "motion_profile_id": "MOT-WPN-DAO-002-PRIMARY",
+        "distinct_pose": "短柄厚弯刃，收肘短扫仍有刃重下坠；不复用匕首刺",
+        "source_event_structure_summary": "一短扫",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "贴地截步",
+        "source_pointer": "/4/secondary",
+        "motion_profile_id": "MOT-WPN-DAO-002-SECONDARY",
+        "distinct_pose": "降低身形贴地斜扫，低尘线不暗示绊倒；遵守该技特殊高差",
+        "source_event_structure_summary": "一低扫",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "中低短砍，技能地尘仅表现",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-DAO-003",
+      "name": "铸潮阔刀",
+      "family": "DAO",
+      "source_ref": "../equipment-v1/weapons.json#/5",
+      "primary": {
+        "source_pattern_pointer": "/5/primary_pattern",
+        "motion_profile_id": "MOT-WPN-DAO-003-PRIMARY",
+        "distinct_pose": "阔头长柄，刃从身后蓄宽扫；外沿接触由命中区回执选强弱",
+        "source_event_structure_summary": "一宽扫含源内外沿分区",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "回潮二扫",
+        "source_pointer": "/5/secondary",
+        "motion_profile_id": "MOT-WPN-DAO-003-SECONDARY",
+        "distinct_pose": "两次前向回潮扫，回刃间隙无亮刃伤害；仍原锁朝向",
+        "source_event_structure_summary": "两扫",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "长低频风声，两扫触点分离；刀根残影低亮",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-SWD-001",
+      "name": "尺衡军剑",
+      "family": "SWD",
+      "source_ref": "../equipment-v1/weapons.json#/6",
+      "primary": {
+        "source_pattern_pointer": "/6/primary_pattern",
+        "motion_profile_id": "MOT-WPN-SWD-001-PRIMARY",
+        "distinct_pose": "单手直剑和空手平衡，中频斜落，作为动作对照基准",
+        "source_event_structure_summary": "一斜斩",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "进身斜斩",
+        "source_pointer": "/6/secondary",
+        "motion_profile_id": "MOT-WPN-SWD-001-SECONDARY",
+        "distinct_pose": "真实小步进身后斜斩；脚位受阻不延长剑身",
+        "source_event_structure_summary": "一斜斩",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "利落中频，进步脚声独立",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-SWD-002",
+      "name": "银线刺剑",
+      "family": "SWD",
+      "source_ref": "../equipment-v1/weapons.json#/7",
+      "primary": {
+        "source_pattern_pointer": "/7/primary_pattern",
+        "motion_profile_id": "MOT-WPN-SWD-002-PRIMARY",
+        "distinct_pose": "细剑与孔护碗，躯干侧身直臂送尖",
+        "source_event_structure_summary": "一直刺",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "三点连刺",
+        "source_pointer": "/7/secondary",
+        "motion_profile_id": "MOT-WPN-SWD-002-SECONDARY",
+        "distinct_pose": "三个剑尖峰值与回手间隔；不画持续光线锁住目标",
+        "source_event_structure_summary": "三刺",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "细尖风声，三次轻触点按各自合法命中",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-SWD-003",
+      "name": "折锋弯剑",
+      "family": "SWD",
+      "source_ref": "../equipment-v1/weapons.json#/8",
+      "primary": {
+        "source_pattern_pointer": "/8/primary_pattern",
+        "motion_profile_id": "MOT-WPN-SWD-003-PRIMARY",
+        "distinct_pose": "轻弯单刃和较大指护，外斜斩后内收返刃",
+        "source_event_structure_summary": "两斩",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "带身拨锋",
+        "source_pointer": "/8/secondary",
+        "motion_profile_id": "MOT-WPN-SWD-003-SECONDARY",
+        "distinct_pose": "脚下顶住肩带横拨；推离不是格挡成功",
+        "source_event_structure_summary": "一横拨",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "两斩一实一轻，技能护手震声，无护盾音",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-GSW-001",
+      "name": "裂碑重剑",
+      "family": "GSW",
+      "source_ref": "../equipment-v1/weapons.json#/9",
+      "primary": {
+        "source_pattern_pointer": "/9/primary_pattern",
+        "motion_profile_id": "MOT-WPN-GSW-001-PRIMARY",
+        "distinct_pose": "齐厚剑尖高举重劈，剑停膝缓冲，再费力拔回",
+        "source_event_structure_summary": "一重劈",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "落碑重压",
+        "source_pointer": "/9/secondary",
+        "motion_profile_id": "MOT-WPN-GSW-001-SECONDARY",
+        "distinct_pose": "独立更高举剑、重压、起身，裂纹不产生冲击波",
+        "source_event_structure_summary": "一下砸",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "低风压与短地震响；无合法命中不播敌人破韧",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-GSW-002",
+      "name": "远誓长锋",
+      "family": "GSW",
+      "source_ref": "../equipment-v1/weapons.json#/10",
+      "primary": {
+        "source_pattern_pointer": "/10/primary_pattern",
+        "motion_profile_id": "MOT-WPN-GSW-002-PRIMARY",
+        "distinct_pose": "长细厚刃、长护手和尾握，肩侧远端斜劈；源近身空区残影暗",
+        "source_event_structure_summary": "一远端斜劈",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "掠锋平斩",
+        "source_pointer": "/10/secondary",
+        "motion_profile_id": "MOT-WPN-GSW-002-SECONDARY",
+        "distinct_pose": "先放平长刃再转胯扫，只有技能才具源贴身覆盖",
+        "source_event_structure_summary": "一平斩",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "渐强长风与深金属鸣，技能用短宽风",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-GSW-003",
+      "name": "双脊钝剑",
+      "family": "GSW",
+      "source_ref": "../equipment-v1/weapons.json#/11",
+      "primary": {
+        "source_pattern_pointer": "/11/primary_pattern",
+        "motion_profile_id": "MOT-WPN-GSW-003-PRIMARY",
+        "distinct_pose": "短宽双脊圆钝头，斜落借回弹再下砸，两个尖端落点",
+        "source_event_structure_summary": "两砸",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "蓄身直顶",
+        "source_pointer": "/11/secondary",
+        "motion_profile_id": "MOT-WPN-GSW-003-SECONDARY",
+        "distinct_pose": "胸前平推剑身再回收，不做盾冲或无敌光",
+        "source_event_structure_summary": "一直顶",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "两声沉闷砸击，直顶单个重接触",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-SPR-001",
+      "name": "疾雨短枪",
+      "family": "SPR",
+      "source_ref": "../equipment-v1/weapons.json#/12",
+      "primary": {
+        "source_pattern_pointer": "/12/primary_pattern",
+        "motion_profile_id": "MOT-WPN-SPR-001-PRIMARY",
+        "distinct_pose": "细杆叶尖，前手稳定后手短促送杆；快刺不甩棍",
+        "source_event_structure_summary": "一点刺",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "迅雷三刺",
+        "source_pointer": "/12/secondary",
+        "motion_profile_id": "MOT-WPN-SPR-001-SECONDARY",
+        "distinct_pose": "三次短送杆与回收，保持细线且不锁住首目标",
+        "source_event_structure_summary": "三刺",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "尖短风切，枪杆不绘连续发光长条",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-SPR-002",
+      "name": "守门长矛",
+      "family": "SPR",
+      "source_ref": "../equipment-v1/weapons.json#/13",
+      "primary": {
+        "source_pattern_pointer": "/13/primary_pattern",
+        "motion_profile_id": "MOT-WPN-SPR-002-PRIMARY",
+        "distinct_pose": "超长细杆菱矛与尾配重，远送回杆；握柄空区暗",
+        "source_event_structure_summary": "一长刺可源两目标穿透",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "撑杆退刺",
+        "source_pointer": "/13/secondary",
+        "motion_profile_id": "MOT-WPN-SPR-002-SECONDARY",
+        "distinct_pose": "先立后脚短退再远刺，墙角实际退距不足不假滑出",
+        "source_event_structure_summary": "一退刺",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "长细风声，穿透第二目标反馈按实际伤害减弱",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-SPR-003",
+      "name": "逐阵棘枪",
+      "family": "SPR",
+      "source_ref": "../equipment-v1/weapons.json#/14",
+      "primary": {
+        "source_pattern_pointer": "/14/primary_pattern",
+        "motion_profile_id": "MOT-WPN-SPR-003-PRIMARY",
+        "distinct_pose": "侧棘宽叶尖，低起向前撩，仍受源高差限制",
+        "source_event_structure_summary": "一撩刺",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "横杆逐阵",
+        "source_pointer": "/14/secondary",
+        "motion_profile_id": "MOT-WPN-SPR-003-SECONDARY",
+        "distinct_pose": "前手换中段、杆平横拨，近身解围仍是攻击不是挡伤",
+        "source_event_structure_summary": "一横杆",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "撩刺中频、横杆木金属闷触，真实推移才滑尘",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-HAL-001",
+      "name": "巡门长戟",
+      "family": "HAL",
+      "source_ref": "../equipment-v1/weapons.json#/15",
+      "primary": {
+        "source_pattern_pointer": "/15/primary_pattern",
+        "motion_profile_id": "MOT-WPN-HAL-001-PRIMARY",
+        "distinct_pose": "长杆三点剪影，先窄刺再换腰转杆宽扫；换握间隙暗",
+        "source_event_structure_summary": "一刺加一扫",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "开门推斩",
+        "source_pointer": "/15/secondary",
+        "motion_profile_id": "MOT-WPN-HAL-001-SECONDARY",
+        "distinct_pose": "握位前移作近身斜扫，推斩无招架特效",
+        "source_event_structure_summary": "一斜扫",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "先细刺后宽风；不把整个外包络画成实心命中块",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-HAL-002",
+      "name": "倒钩战戟",
+      "family": "HAL",
+      "source_ref": "../equipment-v1/weapons.json#/16",
+      "primary": {
+        "source_pattern_pointer": "/16/primary_pattern",
+        "motion_profile_id": "MOT-WPN-HAL-002-PRIMARY",
+        "distinct_pose": "内倒钩加小直尖，外侧前钩；主攻不拉人与出血",
+        "source_event_structure_summary": "一钩斩",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "回钩牵引",
+        "source_pointer": "/16/secondary",
+        "motion_profile_id": "MOT-WPN-HAL-002-SECONDARY",
+        "distinct_pose": "前手推杆后手回拉，按实际牵引回执绷杆；Boss仅接触",
+        "source_event_structure_summary": "一回钩",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "回收金属颤音，不额外长出实体锁链攻击",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-HAL-003",
+      "name": "半握月戟",
+      "family": "HAL",
+      "source_ref": "../equipment-v1/weapons.json#/17",
+      "primary": {
+        "source_pattern_pointer": "/17/primary_pattern",
+        "motion_profile_id": "MOT-WPN-HAL-003-PRIMARY",
+        "distinct_pose": "短杆半月刃与尾帽，中段半握宽扫",
+        "source_event_structure_summary": "一月刃扫",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "刃尾连击",
+        "source_pointer": "/17/secondary",
+        "motion_profile_id": "MOT-WPN-HAL-003-SECONDARY",
+        "distinct_pose": "先月刃宽扫，再换手将尾帽送前窄顶，两形状分开",
+        "source_event_structure_summary": "一扫加一杆尾顶",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "第一下风切第二下闷顶，不能都播砍刃声",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-XBW-001",
+      "name": "栓机猎弩",
+      "family": "XBW",
+      "source_ref": "../equipment-v1/weapons.json#/18",
+      "primary": {
+        "source_pattern_pointer": "/18/primary_pattern",
+        "motion_profile_id": "MOT-WPN-XBW-001-PRIMARY",
+        "distinct_pose": "双手水平弩，弓臂释放清楚；收弩与上弦独立",
+        "source_event_structure_summary": "一弩矢",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "贯甲弩矢",
+        "source_pointer": "/18/secondary",
+        "motion_profile_id": "MOT-WPN-XBW-001-SECONDARY",
+        "distinct_pose": "压肩架弩放紧弦，重矢仅按源允许穿透",
+        "source_event_structure_summary": "一贯穿弩矢",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "弦啪木机，技能更紧弦音，无火药焰",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-XBW-002",
+      "name": "转轮袖弩",
+      "family": "XBW",
+      "source_ref": "../equipment-v1/weapons.json#/19",
+      "primary": {
+        "source_pattern_pointer": "/19/primary_pattern",
+        "motion_profile_id": "MOT-WPN-XBW-002-PRIMARY",
+        "distinct_pose": "前臂袖弩、转轮逐格推进，另一手参与装矢",
+        "source_event_structure_summary": "一弩矢",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "连压三矢",
+        "source_pointer": "/19/secondary",
+        "motion_profile_id": "MOT-WPN-XBW-002-SECONDARY",
+        "distinct_pose": "连续三次压柄，每次发射转一格；低帧率按回执可合并展示",
+        "source_event_structure_summary": "三弩矢",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "短弦声配转轮咔哒，不能合成霰弹一响",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-XBW-003",
+      "name": "绞盘重弩",
+      "family": "XBW",
+      "source_ref": "../equipment-v1/weapons.json#/20",
+      "primary": {
+        "source_pattern_pointer": "/20/primary_pattern",
+        "motion_profile_id": "MOT-WPN-XBW-003-PRIMARY",
+        "distinct_pose": "双手重弩架肩，躯干后坐；低头绞盘上弦",
+        "source_event_structure_summary": "一重弩矢可源两目标穿透",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "钩索牵引",
+        "source_pointer": "/20/secondary",
+        "motion_profile_id": "MOT-WPN-XBW-003-SECONDARY",
+        "distinct_pose": "独立绳钩弹头与可见绳索，收线仅表现；飞矢与牵引都读逻辑回执",
+        "source_event_structure_summary": "一绳钩弩矢",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "厚弓臂拍击、绞盘声，失败绳索按飞矢结束收回",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-PST-001",
+      "name": "旧港转轮短铳",
+      "family": "PST",
+      "source_ref": "../equipment-v1/weapons.json#/21",
+      "primary": {
+        "source_pattern_pointer": "/21/primary_pattern",
+        "motion_profile_id": "MOT-WPN-PST-001-PRIMARY",
+        "distinct_pose": "小转轮短枪、单手抬腕和短回弹",
+        "source_event_structure_summary": "一枪弹",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "撤步双响",
+        "source_pointer": "/21/secondary",
+        "motion_profile_id": "MOT-WPN-PST-001-SECONDARY",
+        "distinct_pose": "两次开火之后才撤步；跟真实后撤时轴/截停，不提前闪退",
+        "source_event_structure_summary": "两枪弹再源后撤",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "清脆短枪声，两个枪声与撤步脚步分离",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-PST-002",
+      "name": "双管礼仪铳",
+      "family": "PST",
+      "source_ref": "../equipment-v1/weapons.json#/22",
+      "primary": {
+        "source_pattern_pointer": "/22/primary_pattern",
+        "motion_profile_id": "MOT-WPN-PST-002-PRIMARY",
+        "distinct_pose": "并排双短管，两次腕压和两腔装填清楚",
+        "source_event_structure_summary": "两枪弹",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "压火分射",
+        "source_pointer": "/22/secondary",
+        "motion_profile_id": "MOT-WPN-PST-002-SECONDARY",
+        "distinct_pose": "压低枪身两次分射；第二发不追已推走的目标",
+        "source_event_structure_summary": "两枪弹",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "主攻与技能按不同源节拍，不另造随机散布",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-PST-003",
+      "name": "冷铁单发决斗铳",
+      "family": "PST",
+      "source_ref": "../equipment-v1/weapons.json#/23",
+      "primary": {
+        "source_pattern_pointer": "/23/primary_pattern",
+        "motion_profile_id": "MOT-WPN-PST-003-PRIMARY",
+        "distinct_pose": "细长单管、双手托腕，单发后压腕停住",
+        "source_event_structure_summary": "一窄枪弹",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "定音贯铳",
+        "source_pointer": "/23/secondary",
+        "motion_profile_id": "MOT-WPN-PST-003-SECONDARY",
+        "distinct_pose": "肩肘更稳后贯铳；瞄线是淡提示，不高亮锁敌",
+        "source_event_structure_summary": "一贯穿枪弹",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "单发干金属响和更尖弹尾，命中与瞄线无因果保证",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-SGN-001",
+      "name": "矿工短喷",
+      "family": "SGN",
+      "source_ref": "../equipment-v1/weapons.json#/24",
+      "primary": {
+        "source_pattern_pointer": "/24/primary_pattern",
+        "motion_profile_id": "MOT-WPN-SGN-001-PRIMARY",
+        "distinct_pose": "短粗管双手顶肩、明显上身后坐、逐腔装填",
+        "source_event_structure_summary": "一枪源六射线聚合",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "顶肩重喷",
+        "source_pointer": "/24/secondary",
+        "motion_profile_id": "MOT-WPN-SGN-001-SECONDARY",
+        "distinct_pose": "更低重心顶肩喷，推力只跟目标聚合结果",
+        "source_event_structure_summary": "一枪源六射线聚合",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "低短喷响，一目标一次合计接触，不六次堆叠震动",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-SGN-002",
+      "name": "长管收束猎铳",
+      "family": "SGN",
+      "source_ref": "../equipment-v1/weapons.json#/25",
+      "primary": {
+        "source_pattern_pointer": "/25/primary_pattern",
+        "motion_profile_id": "MOT-WPN-SGN-002-PRIMARY",
+        "distinct_pose": "长细收束管贴腮，较小绵长后坐，双腔装填",
+        "source_event_structure_summary": "一枪源四射线聚合",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "单孔铅柱",
+        "source_pointer": "/25/secondary",
+        "motion_profile_id": "MOT-WPN-SGN-002-SECONDARY",
+        "distinct_pose": "一次收束环姿势提示后发实体铅柱；无扇形、无免费改库存",
+        "source_event_structure_summary": "一实体铅柱",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "主攻窄扇，技能一条粗拖尾与单点接触",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-SGN-003",
+      "name": "鼓腹扫荡铳",
+      "family": "SGN",
+      "source_ref": "../equipment-v1/weapons.json#/26",
+      "primary": {
+        "source_pattern_pointer": "/26/primary_pattern",
+        "motion_profile_id": "MOT-WPN-SGN-003-PRIMARY",
+        "distinct_pose": "鼓腹仓和宽口短管，整体取仓装仓；较散后坐",
+        "source_event_structure_summary": "一枪源八射线聚合",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "双响清道",
+        "source_pointer": "/26/secondary",
+        "motion_profile_id": "MOT-WPN-SGN-003-SECONDARY",
+        "distinct_pose": "两次独立后坐/枪焰，各按该枪源六射线聚合",
+        "source_event_structure_summary": "两枪各源六射线聚合",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "两声低喷各自独立，不能做持续喷火器",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-RFL-001",
+      "name": "哨岗栓动步枪",
+      "family": "RFL",
+      "source_ref": "../equipment-v1/weapons.json#/27",
+      "primary": {
+        "source_pattern_pointer": "/27/primary_pattern",
+        "motion_profile_id": "MOT-WPN-RFL-001-PRIMARY",
+        "distinct_pose": "长管木托架肩，击发后拉栓退壳；拉栓不是加弹",
+        "source_event_structure_summary": "一枪弹",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "支肩定射",
+        "source_pointer": "/27/secondary",
+        "motion_profile_id": "MOT-WPN-RFL-001-SECONDARY",
+        "distinct_pose": "双脚稳肩定射，完全站定只读取源移动约束",
+        "source_event_structure_summary": "一枪弹",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "长单响加独立拉栓声，落空仍完成拉栓后摇",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-RFL-002",
+      "name": "铜胆三连铳",
+      "family": "RFL",
+      "source_ref": "../equipment-v1/weapons.json#/28",
+      "primary": {
+        "source_pattern_pointer": "/28/primary_pattern",
+        "motion_profile_id": "MOT-WPN-RFL-002-PRIMARY",
+        "distinct_pose": "铜色三段枪机，三次规律后坐，供弹仓分格",
+        "source_event_structure_summary": "三枪弹",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "定距点放",
+        "source_pointer": "/28/secondary",
+        "motion_profile_id": "MOT-WPN-RFL-002-SECONDARY",
+        "distinct_pose": "压稳枪托只单发定距点放；不能复用三响假帧",
+        "source_event_structure_summary": "一枪弹",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "三连读实际三个发射事件，技能仅一声一尾",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-RFL-003",
+      "name": "带刺卡宾枪",
+      "family": "RFL",
+      "source_ref": "../equipment-v1/weapons.json#/29",
+      "primary": {
+        "source_pattern_pointer": "/29/primary_pattern",
+        "motion_profile_id": "MOT-WPN-RFL-003-PRIMARY",
+        "distinct_pose": "短管刺刀、短半自动后坐、填仓独立",
+        "source_event_structure_summary": "一枪弹",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "反手刺刀",
+        "source_pointer": "/29/secondary",
+        "motion_profile_id": "MOT-WPN-RFL-003-SECONDARY",
+        "distinct_pose": "反手托枪前刺再收；空仓仍可按源使用，不击发/退壳",
+        "source_event_structure_summary": "一近战刺刀",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "主攻短枪响，技能只有金属风声和近战接触",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-STF-001",
+      "name": "余烬灯杖",
+      "family": "STF",
+      "source_ref": "../equipment-v1/weapons.json#/30",
+      "primary": {
+        "source_pattern_pointer": "/30/primary_pattern",
+        "motion_profile_id": "MOT-WPN-STF-001-PRIMARY",
+        "distinct_pose": "灯笼杖头聚小火球后推送，慢弹从实际杖头发出",
+        "source_event_structure_summary": "一慢火球无隐含燃烧",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "铺炭火线",
+        "source_pointer": "/30/secondary",
+        "motion_profile_id": "MOT-WPN-STF-001-SECONDARY",
+        "distinct_pose": "杖头下压铺窄地面火线，一次直伤后低亮余炭不伤；燃烧标记只读状态回执",
+        "source_event_structure_summary": "一次地面火线",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "火球轻呼啸，火线一次点亮后转余炭，不能永久地毯",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-STF-002",
+      "name": "霜脊刻杖",
+      "family": "STF",
+      "source_ref": "../equipment-v1/weapons.json#/31",
+      "primary": {
+        "source_pattern_pointer": "/31/primary_pattern",
+        "motion_profile_id": "MOT-WPN-STF-002-PRIMARY",
+        "distinct_pose": "霜刻细头，两次短指引发片；两弹不重瞄",
+        "source_event_structure_summary": "两冰片无隐含寒缓",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "霜扇刻痕",
+        "source_pointer": "/31/secondary",
+        "motion_profile_id": "MOT-WPN-STF-002-SECONDARY",
+        "distinct_pose": "杖尖划地面三角霜扇；脚边低亮霜纹不冰封全身",
+        "source_event_structure_summary": "一次地面霜扇",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "两声脆冰读源发射；技能霜线一次扩开",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "WPN-STF-003",
+      "name": "鸣针导杖",
+      "family": "STF",
+      "source_ref": "../equipment-v1/weapons.json#/32",
+      "primary": {
+        "source_pattern_pointer": "/32/primary_pattern",
+        "motion_profile_id": "MOT-WPN-STF-003-PRIMARY",
+        "distinct_pose": "双针音叉，夹腕对线后弹放，极窄瞬时电线",
+        "source_event_structure_summary": "一次瞬时线无隐含电震",
+        "binding": "authoritative_primary_subhit_or_emission_events; no_extra_contacts"
+      },
+      "secondary": {
+        "name": "双极贯闪",
+        "source_pointer": "/32/secondary",
+        "motion_profile_id": "MOT-WPN-STF-003-SECONDARY",
+        "distinct_pose": "双针闭合拉开贯闪，至多源两目标；电震回执不等于强制麻痹",
+        "source_event_structure_summary": "一次瞬时贯闪",
+        "binding": "authoritative_secondary_subhit_or_emission_and_actual_displacement_events; no_extra_contacts"
+      },
+      "sound_and_contact_distinction": "干短电音，后目标强弱按实际回执；不分叉第三目标",
+      "hitstop_source": "source audio_vfx plus common presentation-only ceiling; no override of attack timing",
+      "status": "assistant_proposed_untested"
+    }
+  ],
+  "armor_profiles": [
+    {
+      "id": "ARM-LGT-001",
+      "name": "行路短衣",
+      "type": "LGT",
+      "source_ref": "../equipment-v1/armor.json#/0",
+      "silhouette": "腰长褐软皮衣，软肩、外露膝、小布包",
+      "material_audio": "软皮摩擦和软底鞋",
+      "trait_cue": "常驻轻步不加速度拖影，不生成额外闪避残像",
+      "motion_compatibility": "下摆短，肩部留双手举刃空间",
+      "compatible_weapon_families": [
+        "KNF",
+        "DAO",
+        "SWD",
+        "GSW",
+        "SPR",
+        "HAL",
+        "XBW",
+        "PST",
+        "SGN",
+        "RFL",
+        "STF"
+      ],
+      "new_block_or_movement": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ARM-LGT-002",
+      "name": "折风短甲",
+      "type": "LGT",
+      "source_ref": "../equipment-v1/armor.json#/1",
+      "silhouette": "后收层叠皮片、单侧窄肩、短布尾",
+      "material_audio": "短皮片与布尾声",
+      "trait_cue": "收势移步必须读取真实 trait start/end；空攻/空中起攻/打断不假亮风圈",
+      "motion_compatibility": "布尾在双手持杆后方，不遮枪尖与脚影",
+      "compatible_weapon_families": [
+        "KNF",
+        "DAO",
+        "SWD",
+        "GSW",
+        "SPR",
+        "HAL",
+        "XBW",
+        "PST",
+        "SGN",
+        "RFL",
+        "STF"
+      ],
+      "new_block_or_movement": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ARM-LGT-003",
+      "name": "铜扣游射衣",
+      "type": "LGT",
+      "source_ref": "../equipment-v1/armor.json#/2",
+      "silhouette": "灰绿短外衣、铜扣、窄弹袋",
+      "material_audio": "软底鞋与一次短扣响",
+      "trait_cue": "填毕换位仅实际补弹成功触发；满仓/取消/切枪不播成功铜点",
+      "motion_compatibility": "弹袋不占枪托/绞盘空间；法杖可穿但不假触发装填",
+      "compatible_weapon_families": [
+        "KNF",
+        "DAO",
+        "SWD",
+        "GSW",
+        "SPR",
+        "HAL",
+        "XBW",
+        "PST",
+        "SGN",
+        "RFL",
+        "STF"
+      ],
+      "new_block_or_movement": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ARM-MED-001",
+      "name": "巡路环甲",
+      "type": "MED",
+      "source_ref": "../equipment-v1/armor.json#/3",
+      "silhouette": "短罩衣露环甲、中圆肩、膝上开衩",
+      "material_audio": "皮鞋加轻链环颤音",
+      "trait_cue": "均衡常驻属性无周期护罩或反伤火花",
+      "motion_compatibility": "环甲胸腹分片跟胸/胯，开衩保留弓步",
+      "compatible_weapon_families": [
+        "KNF",
+        "DAO",
+        "SWD",
+        "GSW",
+        "SPR",
+        "HAL",
+        "XBW",
+        "PST",
+        "SGN",
+        "RFL",
+        "STF"
+      ],
+      "new_block_or_movement": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ARM-MED-002",
+      "name": "锁肩鳞甲",
+      "type": "MED",
+      "source_ref": "../equipment-v1/armor.json#/4",
+      "silhouette": "厚窄鳞胸、后收锁肩、短裙甲",
+      "material_audio": "短密金属片叩击",
+      "trait_cue": "韧性增量不显示霸体；有效伤害仍接触，破韧才读真正打断",
+      "motion_compatibility": "锁肩有上举替换片，双手高举不把肩片顶入脸",
+      "compatible_weapon_families": [
+        "KNF",
+        "DAO",
+        "SWD",
+        "GSW",
+        "SPR",
+        "HAL",
+        "XBW",
+        "PST",
+        "SGN",
+        "RFL",
+        "STF"
+      ],
+      "new_block_or_movement": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ARM-MED-003",
+      "name": "灰盐护纹甲",
+      "type": "MED",
+      "source_ref": "../equipment-v1/armor.json#/5",
+      "silhouette": "深罩衣嵌灰白护纹、少量环甲外露",
+      "material_audio": "轻链加短布摩擦",
+      "trait_cue": "仅有效魔法伤害回执短亮护纹；不表示净化或免伤",
+      "motion_compatibility": "膝上开衩，护纹随胸腹局部变形不独立漂移",
+      "compatible_weapon_families": [
+        "KNF",
+        "DAO",
+        "SWD",
+        "GSW",
+        "SPR",
+        "HAL",
+        "XBW",
+        "PST",
+        "SGN",
+        "RFL",
+        "STF"
+      ],
+      "new_block_or_movement": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ARM-HVY-001",
+      "name": "门栓板甲",
+      "type": "HVY",
+      "source_ref": "../equipment-v1/armor.json#/6",
+      "silhouette": "门栓横梁胸板、大方肩、厚胫",
+      "material_audio": "低铁壳脚步与短低频受击",
+      "trait_cue": "甲面接触亮点不变护盾；无额外格挡",
+      "motion_compatibility": "大肩分近/远和上举折片，握点与双手动作不断开",
+      "compatible_weapon_families": [
+        "KNF",
+        "DAO",
+        "SWD",
+        "GSW",
+        "SPR",
+        "HAL",
+        "XBW",
+        "PST",
+        "SGN",
+        "RFL",
+        "STF"
+      ],
+      "new_block_or_movement": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ARM-HVY-002",
+      "name": "沉锚铆甲",
+      "type": "HVY",
+      "source_ref": "../equipment-v1/armor.json#/7",
+      "silhouette": "圆领密铆、锚形腰板、短链，重心低",
+      "material_audio": "低脚步带单次链响",
+      "trait_cue": "链条迟摆只视觉，不能降低跳高或新添击退抵抗",
+      "motion_compatibility": "腰板分前/后，蹲势上翻不改逻辑身体位置",
+      "compatible_weapon_families": [
+        "KNF",
+        "DAO",
+        "SWD",
+        "GSW",
+        "SPR",
+        "HAL",
+        "XBW",
+        "PST",
+        "SGN",
+        "RFL",
+        "STF"
+      ],
+      "new_block_or_movement": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ARM-HVY-003",
+      "name": "封釉重甲",
+      "type": "HVY",
+      "source_ref": "../equipment-v1/armor.json#/8",
+      "silhouette": "米白分节釉甲、蓝灰封线、圆宽肩",
+      "material_audio": "干陶铁叩声",
+      "trait_cue": "有效魔法受击封线短亮，不清状态、不形成第二减伤罩",
+      "motion_compatibility": "板缝对齐关节；扫戟时远肩不遮侧刃",
+      "compatible_weapon_families": [
+        "KNF",
+        "DAO",
+        "SWD",
+        "GSW",
+        "SPR",
+        "HAL",
+        "XBW",
+        "PST",
+        "SGN",
+        "RFL",
+        "STF"
+      ],
+      "new_block_or_movement": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ARM-ROB-001",
+      "name": "灰烛法袍",
+      "type": "ROB",
+      "source_ref": "../equipment-v1/armor.json#/9",
+      "silhouette": "直落灰长袍、暖橙内衬、窄袖",
+      "material_audio": "软布扫地和短织线音",
+      "trait_cue": "专注确在恢复且有缺口时织线低亮；不是施法/免费回满",
+      "motion_compatibility": "长袍分前后与左右开片，弓步/跳跃可展开而脚影不离地",
+      "compatible_weapon_families": [
+        "KNF",
+        "DAO",
+        "SWD",
+        "GSW",
+        "SPR",
+        "HAL",
+        "XBW",
+        "PST",
+        "SGN",
+        "RFL",
+        "STF"
+      ],
+      "new_block_or_movement": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ARM-ROB-002",
+      "name": "断章短袍",
+      "type": "ROB",
+      "source_ref": "../equipment-v1/armor.json#/10",
+      "silhouette": "不对称及膝短袍、分长前襟、纸页绣边",
+      "material_audio": "短布摆和轻纸边声",
+      "trait_cue": "短等待恢复提示只读真实恢复状态，不加新施法动作",
+      "motion_compatibility": "左右不对称有独立朝向构图；手指/武器握点始终露出",
+      "compatible_weapon_families": [
+        "KNF",
+        "DAO",
+        "SWD",
+        "GSW",
+        "SPR",
+        "HAL",
+        "XBW",
+        "PST",
+        "SGN",
+        "RFL",
+        "STF"
+      ],
+      "new_block_or_movement": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ARM-ROB-003",
+      "name": "静脉长袍",
+      "type": "ROB",
+      "source_ref": "../equipment-v1/armor.json#/11",
+      "silhouette": "及踝深蓝袍、两道浅蓝绣脉、窄肩沉褶",
+      "material_audio": "沉布摆声和低导流声",
+      "trait_cue": "真实站定导流生效后绣脉向胸亮，移动/受伤/起动作按真实 end 立即熄灭",
+      "motion_compatibility": "袖口收在握点之后；袍褶不能遮足迹与近地攻击预警",
+      "compatible_weapon_families": [
+        "KNF",
+        "DAO",
+        "SWD",
+        "GSW",
+        "SPR",
+        "HAL",
+        "XBW",
+        "PST",
+        "SGN",
+        "RFL",
+        "STF"
+      ],
+      "new_block_or_movement": false,
+      "status": "assistant_proposed_untested"
+    }
+  ],
+  "component_strategy": {
+    "basis": "one shared character body/locomotion scaffold + eleven family pose bases + per-weapon primary corrections + thirty-three secondary motion profiles + armor skins and type deformation sets",
+    "not_equipment_cross_product": "do not paint a complete animation set for every 33 weapon x 12 armor combination",
+    "skin_layers": [
+      "body_core",
+      "far_leg",
+      "far_arm",
+      "armor_back_or_far",
+      "weapon_far_segment",
+      "armor_torso",
+      "near_leg",
+      "weapon_mid_segment",
+      "near_arm",
+      "armor_front_or_near",
+      "weapon_near_segment"
+    ],
+    "two_hand_crossovers": "weapon is one rigid asset with near/mid/far masks driven by pose; two visible hands follow primary/secondary grip markers, not two copies of full weapon",
+    "exception_cost": "dual knives, asymmetric hook/tail exchanges, shoulder cannon recoil and long robe folds need authored corrective pieces; count in root budget after proof, not blanket reuse",
+    "armor_deformation_sets": [
+      "neutral_walk",
+      "wide_step_or_jump",
+      "low_pose_or_dodge",
+      "one_hand_reach",
+      "two_hand_overhead",
+      "polearm_cross_grip",
+      "shoulder_fire_or_reload",
+      "cast_and_hurt_death"
+    ],
+    "compatibility_scope": "all 11 families x all 12 skins need future pose sampling review, not 132 hand-painted full clip sets",
+    "no_extra_gameplay_from_armor": true
+  },
+  "export_contract": {
+    "proposal_status": "assistant_proposed_untested",
+    "source_format": "layered editable art plus optional Blender .blend render source; no mandatory paid skeletal plugin",
+    "delivery_files": [
+      "PNG RGBA8 sRGB color parts on transparent background",
+      "motion.json normalized pose curves and source-timing references",
+      "sockets.json named local coordinates/orientations and facing variants",
+      "manifest.json stable asset IDs/source IDs/version/provenance/units/pivot/canvas/trim/color/approval state",
+      "preview_contact_sheet.png only when assets are later created and archived per root media README"
+    ],
+    "source_sampling_proposal_fps": 60,
+    "preview_sampling_proposal_fps": 24,
+    "sampling_rates_are_not_hit_or_logic_rates": true,
+    "source_editability": "retain rig/parts/key poses; baking at source rate does not replace continuous timing/event metadata",
+    "canvas_and_trim": "actor/body-armor layers share the aligned character logical canvas and ground pivot, with trim offset stored for every part/frame; a detached weapon has its own canvas, primary grip pivot and parent attachment transform, not a copied actor ground pivot; never snap each frame center to bounding box",
+    "coordinate_conversion_ref": "production-plan.json unified image_px/rig_local coordinate contract; apply its pivot, trim and one-time mirror conversion rather than a second local convention",
+    "scale_units": "attachment metadata in logical cm with explicit source-pixels-per-cm; dimensions measured in later asset intake, no guessed new gameplay muzzle offsets",
+    "marker_catalogue": [
+      "ground_root",
+      "foot_near",
+      "foot_far",
+      "hand_near",
+      "hand_far",
+      "grip_primary",
+      "grip_secondary",
+      "weapon_tip",
+      "weapon_tail",
+      "emitter_primary",
+      "muzzle_or_bolt_rail_or_staff_head",
+      "ejection_cosmetic",
+      "tether_visual_origin"
+    ],
+    "required_common_markers": [
+      "ground_root",
+      "foot_near",
+      "foot_far",
+      "hand_near",
+      "hand_far",
+      "grip_primary"
+    ],
+    "required_common_markers_scope": "assembled character visual rig, not every texture or detached weapon component; armor layers inherit the rig ground/feet/hands and store their aligned canvas offsets",
+    "detached_weapon_marker_scope": "primary grip pivot and parent attachment transform plus conditional weapon-specific markers; no foot markers or actor ground pivot required on the weapon component",
+    "conditional_markers": {
+      "two_hand_or_dual_weapon": "grip_secondary plus actual near/far hand assignment",
+      "melee": "weapon_tip; polearm blade/tail variants also weapon_tail",
+      "ranged_or_staff": "emitter_primary and muzzle_or_bolt_rail_or_staff_head",
+      "visible_ejection_only": "ejection_cosmetic; omitted if no casing animation",
+      "XBW_003_secondary_tether": "tether_visual_origin"
+    },
+    "marker_ownership": "logical attachment reference is combat data/approved rig; cosmetic offsets and recoil never move damage origin or range; validate current emission pose against origin receipt",
+    "motion_tracks": [
+      "in_place_root",
+      "torso",
+      "near_arm",
+      "far_arm",
+      "grip_primary",
+      "grip_secondary",
+      "weapon_transform",
+      "weapon_layer_masks",
+      "armor_deformation_key",
+      "cosmetic_contact_pose"
+    ],
+    "export_validation": [
+      "all required IDs and paired hand grips resolve",
+      "alpha edges and trim preserve pivot",
+      "near/far masks have no duplicated whole weapon",
+      "contact/emit poses align source geometry under projection",
+      "frame-rate change does not add/remove source events",
+      "left/right and all armor types retain silhouette/feet"
+    ],
+    "import_paths_suggestion": "Content/Art/Characters/Player/Equipment/<stable_ID>/<version>; source-assets/art/player/equipment/<stable_ID>/<version>; files are proposals not created assets"
+  },
+  "left_right_rules": {
+    "default": "mirror pose/layout X by facing while preserving stable IDs; gameplay facing is source authority",
+    "do_not_mirror": [
+      "readable runes/UI/text",
+      "event/subhit ordering",
+      "resource magazine count",
+      "world Y or jump Z",
+      "identity of long/short dual blades"
+    ],
+    "explicit_exceptions": [
+      "KNF-002 dual knives keep distinct blade length and real hand assignment after near/far swap",
+      "HAL-002 hook stays correct cutting-facing orientation; separate authored left pose if naive flip overlaps torso",
+      "HAL-003 blade/tail swap uses declared crossover markers, not weapon duplicate",
+      "PST/SGN/RFL ejection side may use cosmetic opposite-side part; ejecta never become attack projectile",
+      "ARM-LGT-002 one-sided shoulder and ARM-ROB-002 asymmetrical hems need separate near/far layer maps",
+      "STF head runes remain readable and electrical endpoints follow actual directional emission"
+    ],
+    "push_pull": "visual displacement reads source actual signed facing result; mirroring never manually applies a second sign"
+  },
+  "aerial_landing_and_equip": {
+    "air_primary": "D02 one accepted primary per takeoff, same weapon full timeline/cost; lower body uses real air pose while upper family pose runs; ground-only secondary/reload/dodge stay illegal",
+    "landing": "switch lower body to legal landing locomotion pose without ending/restarting attack, spending/refunding extra resources, resetting subhit IDs, or spawning ground slam; ground shadow stays anchored",
+    "ground_effects": "only source ground attacks project to ground; aerial attacks do not acquire automatic downward aiming or area on landing",
+    "weapon_switch": "read real D02 switch action and complete; no visible equip commit earlier than logical switch; all existing bullets/skill cooldown/magazine persist",
+    "inventory_equip": "read D04 OperationID start/commit/cancel; old held/armor instance remains before commit, new skin appears on same successful commit; cancelled previews never become visible equipped state",
+    "blend_boundary": "cosmetic crossfade may soften commit but must not show an active new muzzle or both equipped weapon effects; all gameplay uses actual current instance",
+    "interrupt_or_death": "release animation state without granting invulnerability/get-up; break overlay only on actual poise break; dead body presentation does not end still-valid projectile outcomes",
+    "trait_compatibility": "ARM-LGT-002 reads start locomotion, not landing frame; armor recovery/standing traits read existing logical status, never animation idleness"
+  },
+  "future_acceptance": {
+    "static_design_checks": [
+      "unique 11 families and 33 actual weapon IDs",
+      "every weapon has distinct primary and matching named secondary",
+      "all 12 armor IDs/types and every family compatibility referenced",
+      "source hashes unchanged",
+      "no copied new base timing/damage/range authority"
+    ],
+    "runtime_checks_not_performed": [
+      "frame-skip or low-render-rate burst receipts do not double fire",
+      "extreme allowed action/reload speed and live UI transitions preserve source timeline",
+      "all 33 primaries and 33 secondaries both facings with four armor deformation types",
+      "shortest knife/longest spear visual reach/inner empty zones match source precise geometry",
+      "actual projectile emission position during Y move/jump/cosmetic hitstop",
+      "shotgun ray aggregation and delayed flight contact differ correctly",
+      "landing/interruption/equip cancel have no extra attacks/refills or wrong skin",
+      "long weapons/robes/hook cross-layer silhouette and floor warnings remain visible"
+    ]
+  },
+  "known_limits": [
+    "No sprites, rigs, animations, audio or UE assets created; fps and component plan are assistant proposals",
+    "Formal positive-Y art projection is not yet migrated into the existing prototype",
+    "Visual readability and compatibility cannot be certified without asset sampling and a running-game check",
+    "66 primary/secondary motion profile IDs are design references, not 66 completed clips; source/reuse correction cost remains root budget responsibility"
+  ]
+}

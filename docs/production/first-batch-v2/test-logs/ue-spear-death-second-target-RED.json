@@ -1,0 +1,68 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "符朔八道",
+			"instance": "79252083406E76983D83E4B351056E9F",
+			"instanceName": "符朔八道-15664",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (24H2) [10.0.26100.4946] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 3060 Laptop GPU",
+			"cPUModel": "12th Gen Intel(R) Core(TM) i7-12700H",
+			"rAMInGB": 16,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.10.14-14.25.48",
+	"succeeded": 0,
+	"succeededWithWarnings": 0,
+	"failed": 1,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.047575302422046661,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "SpearNearestAndDedup",
+			"fullTestPath": "CodexDungeon.Content.SpearNearestAndDedup",
+			"state": "Fail",
+			"deviceInstance": [
+				"79252083406E76983D83E4B351056E9F"
+			],
+			"duration": 0.047575302422046661,
+			"dateTime": "2026.10.14-14.25.48",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "LogStreaming: FlushAsyncLoading(334): 1 QueuedPackages, 0 AsyncPackages",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.14-14.25.48"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Killing nearest target cannot admit a second target in the same attack' to be 100.000000, but it was 79.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonGameplayTests.cpp",
+					"lineNumber": 145,
+					"timestamp": "2026.10.14-14.25.48"
+				}
+			],
+			"warnings": 0,
+			"errors": 1,
+			"artifacts": []
+		}
+	]
+}

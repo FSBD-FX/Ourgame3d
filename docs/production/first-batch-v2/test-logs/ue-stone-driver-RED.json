@@ -1,0 +1,350 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "符朔八道",
+			"instance": "1CCB9540468F3DB943EAC8B8E6F9165F",
+			"instanceName": "符朔八道-56548",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (24H2) [10.0.26100.4946] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 3060 Laptop GPU",
+			"cPUModel": "12th Gen Intel(R) Core(TM) i7-12700H",
+			"rAMInGB": 16,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.10.14-15.25.09",
+	"succeeded": 9,
+	"succeededWithWarnings": 0,
+	"failed": 5,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.25201189517974854,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "DepthFacingAndHeight",
+			"fullTestPath": "CodexDungeon.Combat.DepthFacingAndHeight",
+			"state": "Success",
+			"deviceInstance": [
+				"1CCB9540468F3DB943EAC8B8E6F9165F"
+			],
+			"duration": 0.0020316988229751587,
+			"dateTime": "2026.10.14-15.25.09",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "AllDueHitsResolve",
+			"fullTestPath": "CodexDungeon.Content.DamageBatch.AllDueHitsResolve",
+			"state": "Success",
+			"deviceInstance": [
+				"1CCB9540468F3DB943EAC8B8E6F9165F"
+			],
+			"duration": 0.017259098589420319,
+			"dateTime": "2026.10.14-15.25.09",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "LowFpsAirWindowUsesMotionTime",
+			"fullTestPath": "CodexDungeon.Content.DamageBatch.LowFpsAirWindowUsesMotionTime",
+			"state": "Success",
+			"deviceInstance": [
+				"1CCB9540468F3DB943EAC8B8E6F9165F"
+			],
+			"duration": 0.016835298389196396,
+			"dateTime": "2026.10.14-15.25.09",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "PreexistingIframesStillBlock",
+			"fullTestPath": "CodexDungeon.Content.DamageBatch.PreexistingIframesStillBlock",
+			"state": "Success",
+			"deviceInstance": [
+				"1CCB9540468F3DB943EAC8B8E6F9165F"
+			],
+			"duration": 0.016615599393844604,
+			"dateTime": "2026.10.14-15.25.09",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ChargeQueryHasNoSideEffects",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightDriver.ChargeQueryHasNoSideEffects",
+			"state": "Fail",
+			"deviceInstance": [
+				"1CCB9540468F3DB943EAC8B8E6F9165F"
+			],
+			"duration": 0.039995100349187851,
+			"dateTime": "2026.10.14-15.25.09",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Kernel wakes' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonStoneKnightDriverTests.cpp",
+					"lineNumber": 80,
+					"timestamp": "2026.10.14-15.25.09"
+				}
+			],
+			"warnings": 0,
+			"errors": 1,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "DormancyAndResolvedDamage",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightDriver.DormancyAndResolvedDamage",
+			"state": "Fail",
+			"deviceInstance": [
+				"1CCB9540468F3DB943EAC8B8E6F9165F"
+			],
+			"duration": 0.016570098698139191,
+			"dateTime": "2026.10.14-15.25.09",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Dormant step accepted' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonStoneKnightDriverTests.cpp",
+					"lineNumber": 64,
+					"timestamp": "2026.10.14-15.25.09"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Actual damage enters wake in existing kernel' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonStoneKnightDriverTests.cpp",
+					"lineNumber": 68,
+					"timestamp": "2026.10.14-15.25.09"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Kernel keeps actual lost HP' to be 93.000000, but it was 110.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonStoneKnightDriverTests.cpp",
+					"lineNumber": 69,
+					"timestamp": "2026.10.14-15.25.09"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Full warning completes' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonStoneKnightDriverTests.cpp",
+					"lineNumber": 72,
+					"timestamp": "2026.10.14-15.25.09"
+				}
+			],
+			"warnings": 0,
+			"errors": 4,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MovingTargetContinuousContact",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightDriver.MovingTargetContinuousContact",
+			"state": "Fail",
+			"deviceInstance": [
+				"1CCB9540468F3DB943EAC8B8E6F9165F"
+			],
+			"duration": 0.01615530252456665,
+			"dateTime": "2026.10.14-15.25.09",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Kernel wakes' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonStoneKnightDriverTests.cpp",
+					"lineNumber": 148,
+					"timestamp": "2026.10.14-15.25.09"
+				}
+			],
+			"warnings": 0,
+			"errors": 1,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ShieldPoiseResumeAndReward",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightDriver.ShieldPoiseResumeAndReward",
+			"state": "Fail",
+			"deviceInstance": [
+				"1CCB9540468F3DB943EAC8B8E6F9165F"
+			],
+			"duration": 0.016470599919557571,
+			"dateTime": "2026.10.14-15.25.09",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Kernel wakes' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonStoneKnightDriverTests.cpp",
+					"lineNumber": 126,
+					"timestamp": "2026.10.14-15.25.09"
+				}
+			],
+			"warnings": 0,
+			"errors": 1,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "StaticWallAndBodyStops",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightDriver.StaticWallAndBodyStops",
+			"state": "Fail",
+			"deviceInstance": [
+				"1CCB9540468F3DB943EAC8B8E6F9165F"
+			],
+			"duration": 0.027403600513935089,
+			"dateTime": "2026.10.14-15.25.09",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Real registered static box stops swept 24cm body at X166' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonStoneKnightDriverTests.cpp",
+					"lineNumber": 106,
+					"timestamp": "2026.10.14-15.25.09"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Old invulnerability blocks damage, actual body still stops at X258' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonStoneKnightDriverTests.cpp",
+					"lineNumber": 114,
+					"timestamp": "2026.10.14-15.25.09"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Earlier allied body blocks without friendly damage' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonStoneKnightDriverTests.cpp",
+					"lineNumber": 116,
+					"timestamp": "2026.10.14-15.25.09"
+				}
+			],
+			"warnings": 0,
+			"errors": 3,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ArmorSwapAndStats",
+			"fullTestPath": "CodexDungeon.Content.ArmorSwapAndStats",
+			"state": "Success",
+			"deviceInstance": [
+				"1CCB9540468F3DB943EAC8B8E6F9165F"
+			],
+			"duration": 0.016676399856805801,
+			"dateTime": "2026.10.14-15.25.09",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "HitAndPickupCannotSkipRecovery",
+			"fullTestPath": "CodexDungeon.Content.HitAndPickupCannotSkipRecovery",
+			"state": "Success",
+			"deviceInstance": [
+				"1CCB9540468F3DB943EAC8B8E6F9165F"
+			],
+			"duration": 0.016711503267288208,
+			"dateTime": "2026.10.14-15.25.09",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MeleeChainTiming",
+			"fullTestPath": "CodexDungeon.Content.MeleeChainTiming",
+			"state": "Success",
+			"deviceInstance": [
+				"1CCB9540468F3DB943EAC8B8E6F9165F"
+			],
+			"duration": 0.016396798193454742,
+			"dateTime": "2026.10.14-15.25.09",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "SpearNearestAndDedup",
+			"fullTestPath": "CodexDungeon.Content.SpearNearestAndDedup",
+			"state": "Success",
+			"deviceInstance": [
+				"1CCB9540468F3DB943EAC8B8E6F9165F"
+			],
+			"duration": 0.016398001462221146,
+			"dateTime": "2026.10.14-15.25.09",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "PickupCapAndSingleReward",
+			"fullTestPath": "CodexDungeon.Gameplay.PickupCapAndSingleReward",
+			"state": "Success",
+			"deviceInstance": [
+				"1CCB9540468F3DB943EAC8B8E6F9165F"
+			],
+			"duration": 0.016492798924446106,
+			"dateTime": "2026.10.14-15.25.09",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		}
+	]
+}

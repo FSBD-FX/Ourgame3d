@@ -1,0 +1,3949 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-13",
+  "source_event": "EV-023",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "nine_families_and_two_stone_behaviors_user_defined; counts_names_stats_actions_assistant_proposed",
+  "counts": {
+    "base": 28,
+    "elite_variants": 9,
+    "unique_base_attack_definitions": 56,
+    "unique_elite_attack_definitions": 9
+  },
+  "common_rules_file": "common-rules.json",
+  "target_profiles_file": "target-profiles.json",
+  "source_files": [
+    "stone-forest.json",
+    "robes-bones-goblins.json",
+    "mech-beasts-demons.json"
+  ],
+  "entry_source_file": {
+    "ENM-STN-001": "stone-forest.json",
+    "ENM-STN-002": "stone-forest.json",
+    "ENM-STN-003": "stone-forest.json",
+    "ENM-STN-004": "stone-forest.json",
+    "ENM-ELF-001": "stone-forest.json",
+    "ENM-ELF-002": "stone-forest.json",
+    "ENM-ELF-003": "stone-forest.json",
+    "ENM-TRE-001": "stone-forest.json",
+    "ENM-TRE-002": "stone-forest.json",
+    "ENM-TRE-003": "stone-forest.json",
+    "ELT-STN-001": "stone-forest.json",
+    "ELT-ELF-001": "stone-forest.json",
+    "ELT-TRE-001": "stone-forest.json",
+    "ENM-ROB-001": "robes-bones-goblins.json",
+    "ENM-ROB-002": "robes-bones-goblins.json",
+    "ENM-ROB-003": "robes-bones-goblins.json",
+    "ENM-SKL-001": "robes-bones-goblins.json",
+    "ENM-SKL-002": "robes-bones-goblins.json",
+    "ENM-SKL-003": "robes-bones-goblins.json",
+    "ENM-GOB-001": "robes-bones-goblins.json",
+    "ENM-GOB-002": "robes-bones-goblins.json",
+    "ENM-GOB-003": "robes-bones-goblins.json",
+    "ELT-ROB-001": "robes-bones-goblins.json",
+    "ELT-SKL-001": "robes-bones-goblins.json",
+    "ELT-GOB-001": "robes-bones-goblins.json",
+    "ENM-MEC-001": "mech-beasts-demons.json",
+    "ENM-MEC-002": "mech-beasts-demons.json",
+    "ENM-MEC-003": "mech-beasts-demons.json",
+    "ENM-BST-001": "mech-beasts-demons.json",
+    "ENM-BST-002": "mech-beasts-demons.json",
+    "ENM-BST-003": "mech-beasts-demons.json",
+    "ENM-DEM-001": "mech-beasts-demons.json",
+    "ENM-DEM-002": "mech-beasts-demons.json",
+    "ENM-DEM-003": "mech-beasts-demons.json",
+    "ELT-MEC-001": "mech-beasts-demons.json",
+    "ELT-BST-001": "mech-beasts-demons.json",
+    "ELT-DEM-001": "mech-beasts-demons.json"
+  },
+  "adapter_contract": {
+    "lock_aliases": [
+      "aim_lock_fraction",
+      "lock_fraction",
+      "lock_at_windup_fraction"
+    ],
+    "lock_alias_value": 0.5,
+    "elite_damage_fields_are_pre_multiplier": true,
+    "elite_multipliers_apply_once_to_inherited_and_extra_direct_damage_only": true,
+    "elite_effective_stats": "inherit_parent; hp*1.35, direct_damage*1.15, poise+10; other_stats_unchanged",
+    "projectile_contact": "root common-rules applies to all source groups; center hard bound is not a current-projectile-box-only target test",
+    "attack_override": "replaces_attack_id_if_explicit; otherwise behavior_change selects parent primary attack; original retained only if explicit",
+    "body_and_hurtbox_are_independent": "target-profiles.json; source body remains movement projection"
+  },
+  "enemies": [
+    {
+      "id": "ENM-STN-001",
+      "name": "沉石骑士",
+      "family": "STN",
+      "role": "直线冲锋／中型近战",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 110,
+        "armor": 45,
+        "ward": 20,
+        "poise": 60,
+        "move_cm_s": 185
+      },
+      "body": {
+        "half_x_cm": 24,
+        "half_y_cm": 20
+      },
+      "activation": {
+        "type": "dormant_proximity_or_actual_damage",
+        "near_ellipse_rx_cm": 260,
+        "near_ellipse_ry_cm": 110,
+        "require_los_for_proximity": true,
+        "damage_requires_positive_hp_loss": true,
+        "wake_warning_s": 0.85,
+        "damageable_while_dormant": true,
+        "counts_for_room_clear_while_dormant": true,
+        "room_clear_fallback": "root_common_rules_explicit_queued_wake_after_12_s_or_all_other_alive_enemies_cleared",
+        "no_attack_before_warning_end": true
+      },
+      "attacks": [
+        {
+          "id": "ENM-STN-001-A1",
+          "name": "盾锋冲阵",
+          "type": "charge",
+          "windup_s": 0.9,
+          "active_s": 0.8,
+          "recovery_s": 1.6,
+          "cooldown_s": 3.8,
+          "damage": 20,
+          "damage_type": "physical",
+          "stagger": 24,
+          "shape": {
+            "type": "swept_charge",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "path_max_cm": 496,
+            "path_speed_cm_s": 620,
+            "half_y_cm": 24,
+            "front_reach_cm": 65
+          },
+          "telegraph": "持盾压低，脚下显示完整直线窄带；0.45s锁定目标点和方向，之后不转弯。",
+          "counter": "锁定后横向Y移出窄带；冲空或撞墙后有完整1.60s恢复，可重剑／短刀近身。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only",
+          "activation_range": {
+            "min_distance_cm": 140,
+            "max_distance_cm": 500,
+            "max_abs_y_cm": 55
+          },
+          "movement": {
+            "type": "fixed_direction_sweep",
+            "speed_cm_s": 620,
+            "max_distance_cm": 496,
+            "stop_on_wall_or_living_body": true,
+            "stop_before_body_overlap": true,
+            "early_collision_keeps_full_recovery_s": 1.6,
+            "contact_damage_only_attack_shape": true,
+            "stop_on_valid_hit": true
+          }
+        },
+        {
+          "id": "ENM-STN-001-A2",
+          "name": "盾沿横撞",
+          "type": "melee",
+          "windup_s": 0.7,
+          "active_s": 0.12,
+          "recovery_s": 0.9,
+          "cooldown_s": 2.2,
+          "damage": 13,
+          "damage_type": "physical",
+          "stagger": 18,
+          "shape": {
+            "type": "forward_rectangle",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "x_min_cm": 0,
+            "x_max_cm": 90,
+            "half_y_cm": 32
+          },
+          "telegraph": "盾沿翻起并发出摩擦声，0.35s锁朝；不附带无提示身体伤害。",
+          "counter": "退至90cm外或侧移出32cm半宽；近身诱出后再反击。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only"
+        }
+      ],
+      "behavior": {
+        "movement": "缓慢接近到140—500cm，Y先对齐再考虑冲锋；被近身优先盾沿横撞。",
+        "attack_choice": "同一时点只启动一招；冲锋不在途中改接盾撞。"
+      },
+      "counterplay": "让冲锋越过原站位；石甲只减伤，不抗某家族武器／元素，也没有永久霸体。",
+      "combination_risk": "不与大体型近战和第二条冲锋线同时封住全部出口；需至少一个横向Y逃逸通道。",
+      "asset_notes": "沉睡石像、裂缝亮起、冲锋窄带、盾锋／刹停姿态；近处苏醒声可辨方向。",
+      "tuning_rationale": "110HP/45甲提供中型石甲耐久；60韧让小刀难以每击打断；620冲速快于玩家265，但0.9s预警与锁定后0.45s留出横移，1.6s罚空窗覆盖最慢1.4875s重剑周期。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-STN-002",
+      "name": "灰翼石蝠",
+      "family": "STN",
+      "role": "近身激活／高低位轮换空中单位",
+      "size": "small",
+      "locomotion": "flying",
+      "stats": {
+        "hp": 55,
+        "armor": 15,
+        "ward": 10,
+        "poise": 25,
+        "move_cm_s": 220
+      },
+      "body": {
+        "half_x_cm": 16,
+        "half_y_cm": 12
+      },
+      "activation": {
+        "type": "dormant_proximity_or_actual_damage",
+        "near_ellipse_rx_cm": 180,
+        "near_ellipse_ry_cm": 85,
+        "require_los_for_proximity": true,
+        "damage_requires_positive_hp_loss": true,
+        "wake_warning_s": 0.8,
+        "damageable_while_dormant": true,
+        "counts_for_room_clear_while_dormant": true,
+        "room_clear_fallback": "root_common_rules_explicit_queued_wake_after_12_s_or_all_other_alive_enemies_cleared",
+        "no_attack_before_warning_end": true
+      },
+      "attacks": [
+        {
+          "id": "ENM-STN-002-A1",
+          "name": "低掠啄击",
+          "type": "melee",
+          "windup_s": 0.8,
+          "active_s": 0.25,
+          "recovery_s": 2.1,
+          "cooldown_s": 3.7,
+          "damage": 12,
+          "damage_type": "physical",
+          "stagger": 10,
+          "shape": {
+            "type": "moving_ellipse",
+            "height_center_cm": 20,
+            "height_tolerance_cm": 65,
+            "radius_x_cm": 80,
+            "radius_y_cm": 30
+          },
+          "telegraph": "收翼发出石响，预览一条俯冲线和可反击落点；0.40s锁点，此后不追随。",
+          "counter": "Y移开锁点或避过低掠；它必在Z20定点恢复1.8s，短刀与最慢重剑均有机会。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only",
+          "descent": {
+            "from_height_cm": 90,
+            "to_height_cm": 20,
+            "horizontal_max_cm": 260,
+            "horizontal_speed_cap_cm_s": 1040,
+            "active_s": 0.25,
+            "damage_gate_max_actual_z_cm": 65,
+            "continuous_sweep": true,
+            "attack_center_uses_actual_actor_z": true
+          },
+          "low_recovery": {
+            "height_cm": 20,
+            "anchored_duration_s": 1.8,
+            "rise_after_anchor_s": 0.3,
+            "locked_target_endpoint_max_abs_x_cm": 70,
+            "locked_target_endpoint_max_abs_y_cm": 18,
+            "endpoint_candidates_cm": [
+              [
+                70,
+                0
+              ],
+              [
+                -70,
+                0
+              ],
+              [
+                60,
+                18
+              ],
+              [
+                60,
+                -18
+              ],
+              [
+                -60,
+                18
+              ],
+              [
+                -60,
+                -18
+              ],
+              [
+                50,
+                0
+              ],
+              [
+                -50,
+                0
+              ]
+            ],
+            "endpoint_selection": "At 50% lock choose the first sweep-legal non-overlap candidate within this attack horizontal movement budget relative to locked player point; endpoint never follows later player movement.",
+            "no_legal_endpoint": "Reject damaging descent, retain cooldown and show missed-flight cue; seek nearest legal low point with continuous movement, then complete 1.8s anchored low recovery. Never teleport or land inside a body.",
+            "cannot_skip_with_elite_or_chapter_scaling": true,
+            "poise_break_interrupt_keeps_low_window": true,
+            "clock_starts": "actual_arrival_at_legal_z20_point"
+          }
+        },
+        {
+          "id": "ENM-STN-002-A2",
+          "name": "落翼横拍",
+          "type": "melee",
+          "windup_s": 0.8,
+          "active_s": 0.2,
+          "recovery_s": 2.1,
+          "cooldown_s": 3.6,
+          "damage": 10,
+          "damage_type": "physical",
+          "stagger": 12,
+          "shape": {
+            "type": "ellipse",
+            "height_center_cm": 20,
+            "height_tolerance_cm": 65,
+            "radius_x_cm": 80,
+            "radius_y_cm": 35
+          },
+          "telegraph": "0.40s锁定低位落点，后半前摇缓慢下降；翅尖触地声与地面椭圆提示同时出现。",
+          "counter": "绕开35cm纵深或在提示后退；横拍只有一次接触，随后低位恢复不可跳过。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only",
+          "descent": {
+            "from_height_cm": 90,
+            "to_height_cm": 20,
+            "phase": "second_half_windup",
+            "end_by_active_start": true,
+            "continuous_sweep": true,
+            "attack_center_uses_actual_actor_z": true,
+            "horizontal_max_cm": 140,
+            "horizontal_speed_cap_cm_s": 350
+          },
+          "low_recovery": {
+            "height_cm": 20,
+            "anchored_duration_s": 1.8,
+            "rise_after_anchor_s": 0.3,
+            "locked_target_endpoint_max_abs_x_cm": 70,
+            "locked_target_endpoint_max_abs_y_cm": 18,
+            "endpoint_candidates_cm": [
+              [
+                70,
+                0
+              ],
+              [
+                -70,
+                0
+              ],
+              [
+                60,
+                18
+              ],
+              [
+                60,
+                -18
+              ],
+              [
+                -60,
+                18
+              ],
+              [
+                -60,
+                -18
+              ],
+              [
+                50,
+                0
+              ],
+              [
+                -50,
+                0
+              ]
+            ],
+            "endpoint_selection": "At 50% lock choose the first sweep-legal non-overlap candidate within this attack horizontal movement budget relative to locked player point; endpoint never follows later player movement.",
+            "no_legal_endpoint": "Reject damaging descent, retain cooldown and show missed-flight cue; seek nearest legal low point with continuous movement, then complete 1.8s anchored low recovery. Never teleport or land inside a body.",
+            "cannot_skip_with_elite_or_chapter_scaling": true,
+            "poise_break_interrupt_keeps_low_window": true,
+            "clock_starts": "actual_arrival_at_legal_z20_point"
+          }
+        }
+      ],
+      "behavior": {
+        "hover_height_cm": 90,
+        "hover_body_blocks_ground": false,
+        "low_body_obeys_normal_collision": true,
+        "high_idle_max_s": 2.4,
+        "choose_descent_only_after_legal_endpoint": true,
+        "recovery_timeline": "Every attack, miss or interrupt enters Z20 anchored 1.8s. Remaining 0.3s recovery may rise to Z90. No second attack interrupts the low window.",
+        "collision": "High flight respects walls and room boundary. At low height body uses XY collision; movement is swept rather than a teleport.",
+        "ground_body_blocking_max_actual_z_cm": 40,
+        "low_recovery_clock_starts": "actual_arrival_at_legal_z20_point_not_early_windup_or_high_hurt",
+        "high_idle_max_applies_when": "cooldown_ready_action_slot_available_and_legal_low_endpoint_exists",
+        "pending_low_recovery": {
+          "set_when": "any_attack_accepted",
+          "poise_break_clears": false,
+          "resume_after_hurt": "continue_swept_descent_to_legal_z20_point_before_high_idle_or_any_new_attack",
+          "timer_starts": "actual_arrival_at_legal_z20_point",
+          "clear_when": "completed_at_least_1.8s_low_recovery_at_z20",
+          "death_can_terminate": true,
+          "new_attack_or_rise_before_clear": false
+        }
+      },
+      "counterplay": "高悬90cm时地面近战高度差通常超65，不是免疫；跳攻／有合法高度的投射物仍可命中。等每次1.8s低位窗可用任一家族武器反击。",
+      "combination_risk": "同房初次最多安排一只；远程弹线不得覆盖所有低位反击点。无合法低位落点的狭窄房型不投放。",
+      "asset_notes": "高低两层阴影／实际高度一致，地面落点提示；低位僵住的翼部姿态要能看见，不能只改变碰撞却仍播放高飞。",
+      "tuning_rationale": "55HP使短窗近身反击可见进展；20cm低位与70×18cm接近预算保证88cm短刀不被空中敌永久排斥；1.8s窗大于最慢1.19/.8=1.4875s重剑周期，空中高度判定不放宽。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-STN-003",
+      "name": "裂岩守卫",
+      "family": "STN",
+      "role": "大型宽扫／近身压迫",
+      "size": "large",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 185,
+        "armor": 60,
+        "ward": 15,
+        "poise": 85,
+        "move_cm_s": 160
+      },
+      "body": {
+        "half_x_cm": 40,
+        "half_y_cm": 28
+      },
+      "activation": {
+        "type": "dormant_proximity_or_actual_damage",
+        "near_ellipse_rx_cm": 235,
+        "near_ellipse_ry_cm": 110,
+        "require_los_for_proximity": true,
+        "damage_requires_positive_hp_loss": true,
+        "wake_warning_s": 1.0,
+        "damageable_while_dormant": true,
+        "counts_for_room_clear_while_dormant": true,
+        "room_clear_fallback": "root_common_rules_explicit_queued_wake_after_12_s_or_all_other_alive_enemies_cleared",
+        "no_attack_before_warning_end": true
+      },
+      "attacks": [
+        {
+          "id": "ENM-STN-003-A1",
+          "name": "石斧横抡",
+          "type": "melee",
+          "windup_s": 1.0,
+          "active_s": 0.2,
+          "recovery_s": 1.4,
+          "cooldown_s": 3.1,
+          "damage": 24,
+          "damage_type": "physical",
+          "stagger": 30,
+          "shape": {
+            "type": "forward_rectangle",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "x_min_cm": 0,
+            "x_max_cm": 180,
+            "half_y_cm": 65
+          },
+          "telegraph": "斧头拖地再抬起，前向宽矩形提示；0.50s锁朝，后半前摇无转身追刀。",
+          "counter": "移到身后／180cm外，利用1.4s收斧后摇。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only"
+        },
+        {
+          "id": "ENM-STN-003-A2",
+          "name": "裂地顿足",
+          "type": "area",
+          "windup_s": 0.9,
+          "active_s": 0.15,
+          "recovery_s": 1.5,
+          "cooldown_s": 3.0,
+          "damage": 18,
+          "damage_type": "physical",
+          "stagger": 25,
+          "shape": {
+            "type": "ellipse",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "radius_x_cm": 160,
+            "radius_y_cm": 90
+          },
+          "telegraph": "双脚扎地，地面显示完整椭圆；0.45s锁住自身施法中心，抬脚到落地之间无额外伤害。",
+          "counter": "离开椭圆或依真实高度跳过低位落震；落震仅单次，不残留每帧伤害。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only",
+          "center_lock": "own_xy_at_50_percent_windup",
+          "attack_locomotion": "stationary"
+        }
+      ],
+      "behavior": {
+        "movement": "慢速追近，出招全程站定；前方玩家且距离≤180cm用横抡，极近／侧方用顿足。",
+        "attack_choice": "两招共享动作占用；顿足不能紧接横抡有效窗追加。"
+      },
+      "counterplay": "在锁朝之后走身后，或诱出低位顿足再跳；85韧仍能积累破韧，石皮不制造弹开小刀。",
+      "combination_risk": "40×28cm大身体需留左右／Y出口；不和另一大型单位在窄廊并排。",
+      "asset_notes": "大体型轮廓、斧头拖地、清楚脚下椭圆与硬收斧；尸体移除阻挡。",
+      "tuning_rationale": "185HP/60甲是清楚的大型耐久，代价为160移速；24主伤低于100HP的四分之一但30削韧能破无甲玩家，1s预警支持走位，顿足1.5s恢复覆盖最慢重剑。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-STN-004",
+      "name": "石纹哨像",
+      "family": "STN",
+      "role": "中型固定弹道远程",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 80,
+        "armor": 30,
+        "ward": 35,
+        "poise": 40,
+        "move_cm_s": 170
+      },
+      "body": {
+        "half_x_cm": 23,
+        "half_y_cm": 18
+      },
+      "activation": {
+        "type": "dormant_proximity_or_actual_damage",
+        "near_ellipse_rx_cm": 260,
+        "near_ellipse_ry_cm": 120,
+        "require_los_for_proximity": true,
+        "damage_requires_positive_hp_loss": true,
+        "wake_warning_s": 0.9,
+        "damageable_while_dormant": true,
+        "counts_for_room_clear_while_dormant": true,
+        "room_clear_fallback": "root_common_rules_explicit_queued_wake_after_12_s_or_all_other_alive_enemies_cleared",
+        "no_attack_before_warning_end": true
+      },
+      "attacks": [
+        {
+          "id": "ENM-STN-004-A1",
+          "name": "刻纹石矢",
+          "type": "projectile",
+          "windup_s": 0.85,
+          "active_s": 0.06,
+          "recovery_s": 0.95,
+          "cooldown_s": 2.2,
+          "damage": 13,
+          "damage_type": "physical",
+          "stagger": 12,
+          "shape": {
+            "type": "straight_projectile",
+            "height_center_cm": 20,
+            "height_tolerance_cm": 65,
+            "max_distance_cm": 650,
+            "speed_cm_s": 430,
+            "radius_cm": 6
+          },
+          "telegraph": "胸前刻纹聚亮并显示单条发射方向；0.425s锁瞄点，石矢发射后直行。",
+          "counter": "锁定后Y横移，借实体墙阻弹；近身可迫使改用慢掌击。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only",
+          "projectile": {
+            "spawn_height_cm": 20,
+            "speed_cm_s": 430,
+            "max_distance_cm": 650,
+            "lifetime_s": 1.5116279069767442,
+            "homing": false,
+            "pierce_players": false,
+            "swept_collision": true,
+            "direction": "normalized_xy_toward_locked_point",
+            "allied_body_blocks_without_damage": true,
+            "first_blocking_body_or_wall_stops": true,
+            "body_collision_uses_actual_height": true,
+            "ignore_emitter_body": true,
+            "ai_requires_clear_initial_line": true
+          },
+          "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+          "projectile_geometry_profile_id": "ENM-STN-004-A1"
+        },
+        {
+          "id": "ENM-STN-004-A2",
+          "name": "碎纹掌击",
+          "type": "melee",
+          "windup_s": 0.65,
+          "active_s": 0.12,
+          "recovery_s": 0.95,
+          "cooldown_s": 2.1,
+          "damage": 11,
+          "damage_type": "physical",
+          "stagger": 15,
+          "shape": {
+            "type": "forward_rectangle",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "x_min_cm": 0,
+            "x_max_cm": 100,
+            "half_y_cm": 32
+          },
+          "telegraph": "先举石掌再压出，0.325s锁朝，不因贴近自动造成身体伤害。",
+          "counter": "短暂退出100cm或走侧面，掌击落空后反击。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only"
+        }
+      ],
+      "behavior": {
+        "preferred_range_cm": [
+          280,
+          450
+        ],
+        "retreat_max_continuous_s": 1.0,
+        "movement": "射程外缓慢找LOS；不能边无限后退边射击；前摇／恢复站定。",
+        "attack_choice": "近距≤100cm用掌击，远距有LOS才发石矢。"
+      },
+      "counterplay": "慢石矢可侧移；35魔抗只是减伤不是法杖免疫，石甲30也不拒枪械。",
+      "combination_risk": "与石骑配对时石矢不能覆盖冲锋所有可逃Y通道；初见避免同时两哨像交叉射线。",
+      "asset_notes": "胸纹聚能、真实石矢飞行和墙撞碎反馈；弹道不用背景色区分。",
+      "tuning_rationale": "80HP让远程威胁可优先处理，430速度给远距侧移窗口；石像远程不使用瞬发命中，以免与冲锋叠出不可读伤害。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-ELF-001",
+      "name": "苔弓斥候",
+      "family": "ELF",
+      "role": "小型远程／横移牵制",
+      "size": "small",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 65,
+        "armor": 8,
+        "ward": 15,
+        "poise": 25,
+        "move_cm_s": 250
+      },
+      "body": {
+        "half_x_cm": 16,
+        "half_y_cm": 14
+      },
+      "activation": {
+        "type": "patrol_los_or_actual_damage",
+        "awareness_rx_cm": 520,
+        "awareness_ry_cm": 220,
+        "require_los": true,
+        "alert_warning_s": 0.7,
+        "damageable_during_alert": true,
+        "no_attack_before_warning_end": true
+      },
+      "attacks": [
+        {
+          "id": "ENM-ELF-001-A1",
+          "name": "苔羽平射",
+          "type": "projectile",
+          "windup_s": 0.8,
+          "active_s": 0.06,
+          "recovery_s": 0.65,
+          "cooldown_s": 1.9,
+          "damage": 12,
+          "damage_type": "physical",
+          "stagger": 9,
+          "shape": {
+            "type": "straight_projectile",
+            "height_center_cm": 20,
+            "height_tolerance_cm": 65,
+            "max_distance_cm": 680,
+            "speed_cm_s": 480,
+            "radius_cm": 5
+          },
+          "telegraph": "拉满弓、弦音和瞄线；0.40s锁点，箭不纠偏。",
+          "counter": "锁定后Y侧移；箭射完0.65s站定且不会边退边射。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only",
+          "projectile": {
+            "spawn_height_cm": 20,
+            "speed_cm_s": 480,
+            "max_distance_cm": 680,
+            "lifetime_s": 1.4166666666666667,
+            "homing": false,
+            "pierce_players": false,
+            "swept_collision": true,
+            "direction": "normalized_xy_toward_locked_point",
+            "allied_body_blocks_without_damage": true,
+            "first_blocking_body_or_wall_stops": true,
+            "body_collision_uses_actual_height": true,
+            "ignore_emitter_body": true,
+            "ai_requires_clear_initial_line": true
+          },
+          "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+          "projectile_geometry_profile_id": "ENM-ELF-001-A1"
+        },
+        {
+          "id": "ENM-ELF-001-A2",
+          "name": "短刃解围",
+          "type": "melee",
+          "windup_s": 0.6,
+          "active_s": 0.12,
+          "recovery_s": 0.7,
+          "cooldown_s": 1.8,
+          "damage": 9,
+          "damage_type": "physical",
+          "stagger": 9,
+          "shape": {
+            "type": "forward_rectangle",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "x_min_cm": 0,
+            "x_max_cm": 85,
+            "half_y_cm": 25
+          },
+          "telegraph": "收弓并翻短刃，0.30s锁朝；不是被贴近立即无预警反伤。",
+          "counter": "退一步诱刀，再贴近；近身小刀不会因远程AI永久后退而追不上。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only"
+        }
+      ],
+      "behavior": {
+        "preferred_range_cm": [
+          270,
+          430
+        ],
+        "retreat_max_continuous_s": 1.2,
+        "movement": "追击时不超过250；一次后退最多1.2s，之后至少一次站定出招或0.7s站定观察，禁止无限绕圈风筝。",
+        "attack_choice": "贴近85cm内短刃，其余LOS可射；弓箭前摇／恢复不主动移动。"
+      },
+      "counterplay": "比无甲玩家265略慢，可追近；低韧适合打断但仍有共同1s破韧保护，不能永控。",
+      "combination_risk": "与冲锋／大型单位配合会放大卡位，需避免弓箭单线覆盖唯一出口。",
+      "asset_notes": "弓满弦轮廓、短刀亮相，前后移动落脚清楚；精灵族与友军NPC外观区分。",
+      "tuning_rationale": "250移速略低于玩家265，65HP和8甲保持追上后收益；0.8s射前摇让侧移不只靠0.14s闪避保护。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-ELF-002",
+      "name": "荆刃游侠",
+      "family": "ELF",
+      "role": "中型轻近战／短突刺",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 85,
+        "armor": 15,
+        "ward": 10,
+        "poise": 35,
+        "move_cm_s": 250
+      },
+      "body": {
+        "half_x_cm": 18,
+        "half_y_cm": 15
+      },
+      "activation": {
+        "type": "patrol_los_or_actual_damage",
+        "awareness_rx_cm": 430,
+        "awareness_ry_cm": 180,
+        "require_los": true,
+        "alert_warning_s": 0.7,
+        "damageable_during_alert": true,
+        "no_attack_before_warning_end": true
+      },
+      "attacks": [
+        {
+          "id": "ENM-ELF-002-A1",
+          "name": "荆刃快斩",
+          "type": "melee",
+          "windup_s": 0.6,
+          "active_s": 0.12,
+          "recovery_s": 0.8,
+          "cooldown_s": 1.9,
+          "damage": 13,
+          "damage_type": "physical",
+          "stagger": 12,
+          "shape": {
+            "type": "forward_rectangle",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "x_min_cm": 0,
+            "x_max_cm": 95,
+            "half_y_cm": 32
+          },
+          "telegraph": "刀尖向外收起，0.30s锁朝，快斩只快在周期，保留完整预警。",
+          "counter": "靠距离诱空、在锁朝后走侧；不因每次命中自动硬直。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only"
+        },
+        {
+          "id": "ENM-ELF-002-A2",
+          "name": "踏枝突刺",
+          "type": "charge",
+          "windup_s": 0.8,
+          "active_s": 0.25,
+          "recovery_s": 1.5,
+          "cooldown_s": 2.9,
+          "damage": 16,
+          "damage_type": "physical",
+          "stagger": 17,
+          "shape": {
+            "type": "swept_charge",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "path_max_cm": 100,
+            "path_speed_cm_s": 400,
+            "front_reach_cm": 110,
+            "half_y_cm": 26
+          },
+          "telegraph": "前脚压低并显示100cm短直线位移，0.40s锁定方向。",
+          "counter": "横移出26cm窄带；突刺碰墙／身体提前停，仍收完1.5s后摇。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only",
+          "movement": {
+            "type": "fixed_direction_sweep",
+            "speed_cm_s": 400,
+            "max_distance_cm": 100,
+            "stop_on_wall_or_living_body": true,
+            "stop_before_body_overlap": true,
+            "early_collision_keeps_full_recovery_s": 1.5,
+            "stop_on_valid_hit": true
+          }
+        }
+      ],
+      "behavior": {
+        "movement": "接近后保持65—160cm，攻击全程只用明确突刺位移，不以动画暗增位置。",
+        "attack_choice": "95cm内快斩，100—200cm对齐后突刺；不绕到身后瞬时反向出招。"
+      },
+      "counterplay": "在两种明确节奏间判断侧移或拉距；小刀拼短窗，长枪卡窄带范围，重剑等突刺恢复。",
+      "combination_risk": "轻近战围身需受共同围攻名额限制，不能两只同时身体挤死。",
+      "asset_notes": "快斩与踏枝起手姿态不同，突刺带显示真实100cm位移预算。",
+      "tuning_rationale": "85HP/35韧让轻兵可被规划破韧；快斩0.6s前摇仍高于统一0.55下界；突刺距离短以免与石骑同质。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-ELF-003",
+      "name": "月纹织咒者",
+      "family": "ELF",
+      "role": "中型法术远程／地面区域预警",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 78,
+        "armor": 5,
+        "ward": 35,
+        "poise": 30,
+        "move_cm_s": 190
+      },
+      "body": {
+        "half_x_cm": 18,
+        "half_y_cm": 15
+      },
+      "activation": {
+        "type": "patrol_los_or_actual_damage",
+        "awareness_rx_cm": 500,
+        "awareness_ry_cm": 210,
+        "require_los": true,
+        "alert_warning_s": 0.7,
+        "damageable_during_alert": true,
+        "no_attack_before_warning_end": true
+      },
+      "attacks": [
+        {
+          "id": "ENM-ELF-003-A1",
+          "name": "月纹落印",
+          "type": "area",
+          "windup_s": 0.95,
+          "active_s": 0.12,
+          "recovery_s": 1.05,
+          "cooldown_s": 2.6,
+          "damage": 15,
+          "damage_type": "magic",
+          "stagger": 12,
+          "shape": {
+            "type": "locked_target_ellipse",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "radius_x_cm": 100,
+            "radius_y_cm": 60,
+            "max_cast_distance_cm": 460
+          },
+          "telegraph": "完整地面椭圆从启动就可见，0.475s锁瞄点后不追玩家；落印仅一次。",
+          "counter": "看到后走出椭圆，或按真实高度躲低位；在施法者1.05s收势近身。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only",
+          "center_lock": "target_xy_at_50_percent_windup",
+          "requires_los_to_target_and_area": true,
+          "no_residual_field": true
+        },
+        {
+          "id": "ENM-ELF-003-A2",
+          "name": "月屑直弹",
+          "type": "projectile",
+          "windup_s": 0.85,
+          "active_s": 0.08,
+          "recovery_s": 0.95,
+          "cooldown_s": 2.3,
+          "damage": 12,
+          "damage_type": "magic",
+          "stagger": 9,
+          "shape": {
+            "type": "straight_projectile",
+            "height_center_cm": 30,
+            "height_tolerance_cm": 65,
+            "max_distance_cm": 560,
+            "speed_cm_s": 320,
+            "radius_cm": 10
+          },
+          "telegraph": "法印旋转并露出单发方向，0.425s锁点，飞弹很慢但实体大。",
+          "counter": "侧移或绕实体墙；不追踪、不爆炸、不衍生第二层弹。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only",
+          "projectile": {
+            "spawn_height_cm": 30,
+            "speed_cm_s": 320,
+            "max_distance_cm": 560,
+            "lifetime_s": 1.75,
+            "homing": false,
+            "pierce_players": false,
+            "swept_collision": true,
+            "direction": "normalized_xy_toward_locked_point",
+            "allied_body_blocks_without_damage": true,
+            "first_blocking_body_or_wall_stops": true,
+            "body_collision_uses_actual_height": true,
+            "ignore_emitter_body": true,
+            "ai_requires_clear_initial_line": true
+          },
+          "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+          "projectile_geometry_profile_id": "ENM-ELF-003-A2"
+        }
+      ],
+      "behavior": {
+        "preferred_range_cm": [
+          260,
+          400
+        ],
+        "retreat_max_continuous_s": 0.9,
+        "movement": "低速找LOS，法术全程站定；不召唤／治疗／复活，不制造无限敌人。",
+        "attack_choice": "玩家横移频繁且落印就绪用落印，其余用单发弹；只占一份攻击动作。"
+      },
+      "counterplay": "预警区域与直弹可以走位避开；35魔抗鼓励切物理但法杖依旧可打，不按种族免元素。",
+      "combination_risk": "落印不能与大范围顿足同时覆盖全部安全位置；与弓手的两种预警首次分房教学。",
+      "asset_notes": "月纹符号、地面完整轮廓、慢弹形状；不以袍色与别族法袍单位混淆。",
+      "tuning_rationale": "78HP/5甲使冲到施法者身边能快速处理，0.95s落印预警和60cm纵深半径允许不用闪避也能脱离。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-TRE-001",
+      "name": "根须幼株",
+      "family": "TRE",
+      "role": "小型近程／弱远程试探",
+      "size": "small",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 60,
+        "armor": 15,
+        "ward": 0,
+        "poise": 25,
+        "move_cm_s": 180
+      },
+      "body": {
+        "half_x_cm": 17,
+        "half_y_cm": 14
+      },
+      "activation": {
+        "type": "patrol_los_or_actual_damage",
+        "awareness_rx_cm": 360,
+        "awareness_ry_cm": 160,
+        "require_los": true,
+        "alert_warning_s": 0.7,
+        "damageable_during_alert": true,
+        "no_attack_before_warning_end": true
+      },
+      "attacks": [
+        {
+          "id": "ENM-TRE-001-A1",
+          "name": "须尖直戳",
+          "type": "melee",
+          "windup_s": 0.7,
+          "active_s": 0.12,
+          "recovery_s": 0.85,
+          "cooldown_s": 2.0,
+          "damage": 11,
+          "damage_type": "physical",
+          "stagger": 13,
+          "shape": {
+            "type": "forward_rectangle",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "x_min_cm": 0,
+            "x_max_cm": 110,
+            "half_y_cm": 25
+          },
+          "telegraph": "根须先卷紧再伸直，0.35s锁朝，窄前向带可见。",
+          "counter": "横移出窄带或借长武器先手；没有根须触碰持续掉血。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only"
+        },
+        {
+          "id": "ENM-TRE-001-A2",
+          "name": "硬籽吐射",
+          "type": "projectile",
+          "windup_s": 0.85,
+          "active_s": 0.06,
+          "recovery_s": 0.95,
+          "cooldown_s": 2.3,
+          "damage": 8,
+          "damage_type": "physical",
+          "stagger": 8,
+          "shape": {
+            "type": "straight_projectile",
+            "height_center_cm": 20,
+            "height_tolerance_cm": 65,
+            "max_distance_cm": 420,
+            "speed_cm_s": 300,
+            "radius_cm": 7
+          },
+          "telegraph": "口部鼓起并噗声预警，0.425s锁点，单粒硬籽直飞。",
+          "counter": "侧移后靠近；它发射完不后撤，不附毒／缠绕状态。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only",
+          "projectile": {
+            "spawn_height_cm": 20,
+            "speed_cm_s": 300,
+            "max_distance_cm": 420,
+            "lifetime_s": 1.4,
+            "homing": false,
+            "pierce_players": false,
+            "swept_collision": true,
+            "direction": "normalized_xy_toward_locked_point",
+            "allied_body_blocks_without_damage": true,
+            "first_blocking_body_or_wall_stops": true,
+            "body_collision_uses_actual_height": true,
+            "ignore_emitter_body": true,
+            "ai_requires_clear_initial_line": true
+          },
+          "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+          "projectile_geometry_profile_id": "ENM-TRE-001-A2"
+        }
+      ],
+      "behavior": {
+        "movement": "180速度慢追；不会无限后退，距离≤110cm须尖，110—360cm用硬籽。",
+        "attack_choice": "两招均站定，吐射落空也完整后摇，不用大树身体遮住提示。"
+      },
+      "counterplay": "适合学习低位近攻和慢弹侧移；0魔抗不代表额外火系倍伤，所有家族都可处理。",
+      "combination_risk": "可作大型树人周边小怪，但不能凭大量小身体组成无通道的人墙。",
+      "asset_notes": "小枝幼株清楚脚点，卷须与鼓口轮廓不同；硬籽实体容易看见。",
+      "tuning_rationale": "60HP/25韧适合早期小体型教学，8远程伤与300弹速用于空间试探，不能替代弓手远程压力。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-TRE-002",
+      "name": "枯枝长臂",
+      "family": "TRE",
+      "role": "中型长臂横扫／预警根刺",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 110,
+        "armor": 25,
+        "ward": 10,
+        "poise": 50,
+        "move_cm_s": 185
+      },
+      "body": {
+        "half_x_cm": 25,
+        "half_y_cm": 20
+      },
+      "activation": {
+        "type": "patrol_los_or_actual_damage",
+        "awareness_rx_cm": 390,
+        "awareness_ry_cm": 180,
+        "require_los": true,
+        "alert_warning_s": 0.7,
+        "damageable_during_alert": true,
+        "no_attack_before_warning_end": true
+      },
+      "attacks": [
+        {
+          "id": "ENM-TRE-002-A1",
+          "name": "枝臂横扫",
+          "type": "melee",
+          "windup_s": 0.8,
+          "active_s": 0.18,
+          "recovery_s": 1.05,
+          "cooldown_s": 2.5,
+          "damage": 17,
+          "damage_type": "physical",
+          "stagger": 20,
+          "shape": {
+            "type": "forward_rectangle",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "x_min_cm": 15,
+            "x_max_cm": 160,
+            "half_y_cm": 55
+          },
+          "telegraph": "树臂向一侧卷起，0.40s锁朝与扇扫方向；真实判定用前矩形，不暗扩到身后。",
+          "counter": "锁朝后走背面，或退出160cm；近身15cm盲区不等于可以穿身体。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only"
+        },
+        {
+          "id": "ENM-TRE-002-A2",
+          "name": "前根破土",
+          "type": "area",
+          "windup_s": 0.95,
+          "active_s": 0.15,
+          "recovery_s": 1.25,
+          "cooldown_s": 2.9,
+          "damage": 15,
+          "damage_type": "physical",
+          "stagger": 17,
+          "shape": {
+            "type": "locked_target_ellipse",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "radius_x_cm": 90,
+            "radius_y_cm": 45,
+            "max_cast_distance_cm": 260
+          },
+          "telegraph": "落点泥土鼓起完整椭圆，0.475s锁点，随后不追踪。",
+          "counter": "移出45cm窄纵深，抓1.25s拔根窗；伤害单次，无缠绕／眩晕／残留地刺。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only",
+          "center_lock": "target_xy_at_50_percent_windup",
+          "requires_los_to_target_and_area": true,
+          "no_residual_field": true
+        }
+      ],
+      "behavior": {
+        "movement": "慢近身，不在施根时位移；玩家贴近用枝扫，距离160—260用根刺。",
+        "attack_choice": "地刺只是预警地面攻击，无额外控制状态。"
+      },
+      "counterplay": "近身利用锁朝，远处观察地面锁点后横移；50韧可被大刀／重剑规划破韧。",
+      "combination_risk": "55cm横扫宽度不能和邻近大树／石骑同时封闭仅存Y退路。",
+      "asset_notes": "伸长枝臂的起手显著，地刺警告从阴影与隆土形状可读，不需仅靠颜色。",
+      "tuning_rationale": "110HP/50韧位于中型上限，长臂以185慢追换160cm覆盖；根刺纵深45与0.95s前摇为可侧移空隙。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-TRE-003",
+      "name": "古根树卫",
+      "family": "TRE",
+      "role": "大型正面重砸／远距窄根线",
+      "size": "large",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 190,
+        "armor": 40,
+        "ward": 25,
+        "poise": 90,
+        "move_cm_s": 160
+      },
+      "body": {
+        "half_x_cm": 40,
+        "half_y_cm": 30
+      },
+      "activation": {
+        "type": "patrol_los_or_actual_damage",
+        "awareness_rx_cm": 460,
+        "awareness_ry_cm": 200,
+        "require_los": true,
+        "alert_warning_s": 0.7,
+        "damageable_during_alert": true,
+        "no_attack_before_warning_end": true
+      },
+      "attacks": [
+        {
+          "id": "ENM-TRE-003-A1",
+          "name": "古枝重砸",
+          "type": "melee",
+          "windup_s": 1.0,
+          "active_s": 0.18,
+          "recovery_s": 1.5,
+          "cooldown_s": 3.2,
+          "damage": 25,
+          "damage_type": "physical",
+          "stagger": 30,
+          "shape": {
+            "type": "forward_rectangle",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "x_min_cm": 0,
+            "x_max_cm": 210,
+            "half_y_cm": 45
+          },
+          "telegraph": "双臂抬过树冠并明确前方长矩形，0.50s锁朝后不补转身。",
+          "counter": "横移出45cm纵深或走背面；1.5s拔臂恢复给最慢重剑一次完整窗口。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only"
+        },
+        {
+          "id": "ENM-TRE-003-A2",
+          "name": "直根贯地",
+          "type": "area",
+          "windup_s": 1.05,
+          "active_s": 0.15,
+          "recovery_s": 1.3,
+          "cooldown_s": 3.0,
+          "damage": 18,
+          "damage_type": "physical",
+          "stagger": 22,
+          "shape": {
+            "type": "forward_rectangle",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "x_min_cm": 60,
+            "x_max_cm": 360,
+            "half_y_cm": 32
+          },
+          "telegraph": "地面出现60—360cm连续窄线，0.525s锁朝后整线同时一次突起，不追玩家。",
+          "counter": "移到侧面或进入60cm内安全近位；若靠近仍尊重双方身体碰撞。",
+          "aim_lock_fraction": 0.5,
+          "max_hits_per_player_per_attack": 1,
+          "interrupt_rule": "poise_break_or_death_only",
+          "attack_locomotion": "stationary",
+          "no_residual_field": true
+        }
+      ],
+      "behavior": {
+        "movement": "160速度慢追，出招站定；近距重砸，中距对齐用直根。",
+        "attack_choice": "不自愈／复活／召唤，狭长根线是一次地面攻击并非地形墙。"
+      },
+      "counterplay": "区分长窄重砸与中远根线；大体型是高耐久目标，90韧仍有限且无Boss减控。",
+      "combination_risk": "体宽大，不与另一大体型并列封住路线；放根线时必须留一侧Y逃生带。",
+      "asset_notes": "树冠双臂重砸与扎地根线有不同动作；根线结束后立即移除视觉伤害区域。",
+      "tuning_rationale": "190HP/40甲形成大型耐久而不靠免火；25主伤在无甲100HP下四击致死，1s预警、慢追和1.5s恢复交换这种威胁；窄根线给短刀近身机会。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-ROB-001",
+      "name": "烛袍侍从",
+      "family": "ROB",
+      "role": "近身法刃；逼近后用短刀迫使玩家离开原弹线",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 80,
+        "armor": 5,
+        "ward": 20,
+        "poise": 25,
+        "move_cm_s": 210
+      },
+      "body": {
+        "half_x_cm": 18,
+        "half_y_cm": 16
+      },
+      "activation": {
+        "type": "sight",
+        "requires_los": true,
+        "does_not_see_through_walls": true,
+        "half_x_cm": 650,
+        "half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ENM-ROB-001-A1",
+          "name": "烛刃划击",
+          "type": "melee",
+          "windup_s": 0.6,
+          "active_s": 0.12,
+          "recovery_s": 0.62,
+          "cooldown_s": 1.7,
+          "damage": 11,
+          "damage_type": "physical",
+          "stagger": 10,
+          "shape": {
+            "type": "rect",
+            "x_min_cm": 0,
+            "x_max_cm": 105,
+            "half_y_cm": 34,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "position_rule": "source_xy_and_locked_facing_during_active"
+          },
+          "telegraph": "前摇抬起烛刃，脚下显示窄前向区域；0.30秒锁朝向",
+          "counter": "在前摇移至侧后或离开105厘米；后摇0.62秒可反击",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            0,
+            120
+          ]
+        },
+        {
+          "id": "ENM-ROB-001-A2",
+          "name": "引烛火珠",
+          "type": "projectile",
+          "windup_s": 0.85,
+          "active_s": 0.08,
+          "recovery_s": 0.7,
+          "cooldown_s": 2.5,
+          "damage": 12,
+          "damage_type": "magic",
+          "stagger": 8,
+          "shape": {
+            "type": "projectile",
+            "speed_cm_s": 420,
+            "max_distance_cm": 430,
+            "capsule_radius_cm": 10,
+            "height_center_cm": 35,
+            "height_tolerance_cm": 65,
+            "muzzle_forward_cm": 24,
+            "muzzle_height_cm": 35,
+            "continuous_sweep": true,
+            "trajectory": "locked_facing_straight_fixed_y_fixed_z_after_emission",
+            "blocking": "wall_closed_door_first_body_including_allies",
+            "ally_hit": "consume_projectile_no_friendly_damage",
+            "penetration_count": 1,
+            "damage_channel": "one_direct_hit_per_projectile"
+          },
+          "telegraph": "杖端凝出明显火珠并画固定直行弹线；0.425秒锁朝向",
+          "counter": "错开Y弹线或利用墙/友军遮挡；不必依赖随机魔抗装备",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            150,
+            400
+          ],
+          "element": {
+            "state": "burn",
+            "dps": 2,
+            "duration_s": 3,
+            "first_tick_delay_s": 1,
+            "on_positive_direct_hp_loss_and_target_alive_only": true,
+            "shared_target_slot": true
+          },
+          "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+          "projectile_geometry_profile_id": "ENM-ROB-001-A2"
+        }
+      ],
+      "behavior": {
+        "preferred_range_cm": [
+          80,
+          140
+        ],
+        "priority": "近身合法则划击；150至400厘米且射线清晰时火珠，否则正常步行追近",
+        "no_attack_while_repositioning": true,
+        "will_not_fire_through_allies": true
+      },
+      "counterplay": "短刀范围窄；保留横向/纵深走位，以火珠前摇作接近窗口。",
+      "combination_risk": "与远射手同时出现时会推动玩家改变纵深；不能加第二个同时射击者。",
+      "asset_notes": [
+        "人形短袍持刃/抬杖两动作",
+        "烛刃前向提示",
+        "单火珠及燃烧状态标记"
+      ],
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-ROB-002",
+      "name": "灰袍咒术师",
+      "family": "ROB",
+      "role": "直线施法与高位横扫；用高度差要求选择地面走位",
+      "size": "small",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 60,
+        "armor": 0,
+        "ward": 25,
+        "poise": 22,
+        "move_cm_s": 190
+      },
+      "body": {
+        "half_x_cm": 16,
+        "half_y_cm": 14
+      },
+      "activation": {
+        "type": "sight",
+        "requires_los": true,
+        "does_not_see_through_walls": true,
+        "half_x_cm": 650,
+        "half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ENM-ROB-002-A1",
+          "name": "灰烬咒弹",
+          "type": "projectile",
+          "windup_s": 0.9,
+          "active_s": 0.1,
+          "recovery_s": 0.65,
+          "cooldown_s": 2.6,
+          "damage": 14,
+          "damage_type": "magic",
+          "stagger": 10,
+          "shape": {
+            "type": "projectile",
+            "speed_cm_s": 480,
+            "max_distance_cm": 620,
+            "capsule_radius_cm": 9,
+            "height_center_cm": 35,
+            "height_tolerance_cm": 65,
+            "muzzle_forward_cm": 24,
+            "muzzle_height_cm": 35,
+            "continuous_sweep": true,
+            "trajectory": "locked_facing_straight_fixed_y_fixed_z_after_emission",
+            "blocking": "wall_closed_door_first_body_including_allies",
+            "ally_hit": "consume_projectile_no_friendly_damage",
+            "penetration_count": 1,
+            "damage_channel": "one_direct_hit_per_projectile"
+          },
+          "telegraph": "双手合拢形成明亮符核；0.45秒锁定直线，发射前符核收紧",
+          "counter": "沿Y离开弹线后接近；弹速480厘米/秒，不追踪转弯",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            220,
+            570
+          ],
+          "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+          "projectile_geometry_profile_id": "ENM-ROB-002-A1"
+        },
+        {
+          "id": "ENM-ROB-002-A2",
+          "name": "悬符横扫",
+          "type": "area",
+          "windup_s": 0.9,
+          "active_s": 0.12,
+          "recovery_s": 0.9,
+          "cooldown_s": 3.2,
+          "damage": 12,
+          "damage_type": "magic",
+          "stagger": 12,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 190,
+            "radius_y_cm": 50,
+            "forward_offset_cm": 140,
+            "height_center_cm": 80,
+            "height_tolerance_cm": 45,
+            "requires_effect_center_los": true
+          },
+          "telegraph": "符带抬到胸上方，显示独立高位带和上跳危险图标；地面投影仅示横向边界、不画地面必伤",
+          "counter": "保持地面可从高度上避开；跳起到35至125厘米时可能被扫中；也可退出椭圆纵深",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            0,
+            290
+          ],
+          "effect_center_rule": "source_xy_plus_locked_facing_times_140_no_tracking",
+          "grounded_target_note": "ground_z_0_is_outside_height_band"
+        }
+      ],
+      "behavior": {
+        "preferred_range_cm": [
+          300,
+          500
+        ],
+        "priority": "220至570厘米清晰射线优先咒弹；玩家进入290厘米内且预计处于高位带时用悬符；否则慢速重定位",
+        "high_attack_not_triggered_by_grounded_player_alone": true,
+        "no_post_lock_height_tracking": true
+      },
+      "counterplay": "地面接近时悬符不伤地面角色；精确纵深站位能避直飞弹。高位提示须与地面招式明确区分。",
+      "combination_risk": "与地面横扫/冲锋同步可夹击跳跃与地面两路；director不得安排同时间不可回避的高低覆盖。",
+      "asset_notes": [
+        "小体型长袖施法者",
+        "低位单弹与高位符带各一套预警",
+        "高位危险图标及高度可读轮廓"
+      ],
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-ROB-003",
+      "name": "钟袍监礼官",
+      "family": "ROB",
+      "role": "大型护持支援；护友期间暴露，自身靠慢地面震波防近身",
+      "size": "large",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 160,
+        "armor": 20,
+        "ward": 40,
+        "poise": 65,
+        "move_cm_s": 165
+      },
+      "body": {
+        "half_x_cm": 27,
+        "half_y_cm": 23
+      },
+      "activation": {
+        "type": "sight",
+        "requires_los": true,
+        "does_not_see_through_walls": true,
+        "half_x_cm": 650,
+        "half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ENM-ROB-003-A1",
+          "name": "护持钟音",
+          "type": "support",
+          "windup_s": 0.75,
+          "active_s": 0.1,
+          "recovery_s": 0.65,
+          "cooldown_s": 6.0,
+          "damage": 0,
+          "damage_type": "none",
+          "stagger": 0,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 220,
+            "radius_y_cm": 130,
+            "forward_offset_cm": 0,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "requires_effect_center_los": true
+          },
+          "telegraph": "双臂举钟并连接最多两条可见护持线；0.375秒锁友军实例",
+          "counter": "护持前摇破韧可阻止；击杀施法者立即撤本人护持；未护到的目标保持原防御",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "targets": {
+            "team": "same_team",
+            "exclude_self": true,
+            "max_count": 2,
+            "selection": "nearest_then_stable_entity_id_at_lock",
+            "lock_at_fraction": 0.5,
+            "requires_los_at_lock_and_commit": true,
+            "range_rechecked_at_commit": true,
+            "no_retarget_after_lock": true
+          },
+          "buff": {
+            "slot": "enemy_guard_support",
+            "armor_flat": 12,
+            "ward_flat": 12,
+            "duration_s": 3,
+            "stacking": "strongest_package_only_equal_refresh_no_sum",
+            "final_armor_ward_cap": 150,
+            "final_damage_reduction_cap": 0.6,
+            "removed_on_source_death_or_room_exit": true,
+            "no_healing_or_attack_speed": true,
+            "source_registry": true,
+            "weaker_sources_suppressed_not_deleted": true,
+            "source_death_recomputes_remaining_sources": true,
+            "refresh_updates_own_source_only": true
+          },
+          "accept_condition": "at_least_one_eligible_ally_receives_actual_defense_gain"
+        },
+        {
+          "id": "ENM-ROB-003-A2",
+          "name": "沉钟地震",
+          "type": "area",
+          "windup_s": 0.95,
+          "active_s": 0.12,
+          "recovery_s": 0.95,
+          "cooldown_s": 3.5,
+          "damage": 18,
+          "damage_type": "magic",
+          "stagger": 20,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 165,
+            "radius_y_cm": 100,
+            "forward_offset_cm": 0,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "requires_effect_center_los": true
+          },
+          "telegraph": "钟底落地前脚下椭圆先收拢再闪亮；0.475秒锁定自身地面中心",
+          "counter": "离开165×100厘米椭圆，或在生效时处于65厘米以上高度；长后摇可反击",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            0,
+            175
+          ],
+          "effect_center_rule": "source_ground_xy_at_lock_z_0_no_tracking"
+        }
+      ],
+      "behavior": {
+        "preferred_range_cm": [
+          180,
+          270
+        ],
+        "priority": "有可增益友军且CD允许时护持；近身才用沉钟，其余站在友军侧后正常移动",
+        "no_infinite_heal_or_summon": true,
+        "same_support_buff_not_stacked": true
+      },
+      "counterplay": "优先处理护持源，也可先清未被选中的敌人；护持只有防御，不会缩短招式预警。",
+      "combination_risk": "不与两个盾卫同处狭窄过道；护持源最多一个，避免全房防御增益循环。",
+      "asset_notes": [
+        "大型钟袍剪影",
+        "护持连线/受益图标/死亡撤销表现",
+        "地面震波范围与低位提示"
+      ],
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-SKL-001",
+      "name": "朽骨短刃",
+      "family": "SKL",
+      "role": "低血近战；窄刺与宽扫要求判断覆盖形状",
+      "size": "small",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 50,
+        "armor": 10,
+        "ward": 0,
+        "poise": 20,
+        "move_cm_s": 230
+      },
+      "body": {
+        "half_x_cm": 16,
+        "half_y_cm": 14
+      },
+      "activation": {
+        "type": "sight",
+        "requires_los": true,
+        "does_not_see_through_walls": true,
+        "half_x_cm": 650,
+        "half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ENM-SKL-001-A1",
+          "name": "骨刃直刺",
+          "type": "melee",
+          "windup_s": 0.55,
+          "active_s": 0.1,
+          "recovery_s": 0.55,
+          "cooldown_s": 1.6,
+          "damage": 10,
+          "damage_type": "physical",
+          "stagger": 9,
+          "shape": {
+            "type": "rect",
+            "x_min_cm": 0,
+            "x_max_cm": 100,
+            "half_y_cm": 30,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "position_rule": "source_xy_and_locked_facing_during_active"
+          },
+          "telegraph": "骨臂后收、窄直带预警；0.275秒锁朝向",
+          "counter": "退过100厘米或横移离开30厘米半宽",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            0,
+            115
+          ]
+        },
+        {
+          "id": "ENM-SKL-001-A2",
+          "name": "侧骨横斩",
+          "type": "melee",
+          "windup_s": 0.7,
+          "active_s": 0.14,
+          "recovery_s": 0.75,
+          "cooldown_s": 2.2,
+          "damage": 13,
+          "damage_type": "physical",
+          "stagger": 12,
+          "shape": {
+            "type": "rect",
+            "x_min_cm": 0,
+            "x_max_cm": 140,
+            "half_y_cm": 55,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "position_rule": "source_xy_and_locked_facing_during_active"
+          },
+          "telegraph": "肩部扭转并展示更宽前向带；0.35秒锁朝向",
+          "counter": "后退超140厘米或绕到背后；不能只用避直刺的微小Y移动",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            0,
+            150
+          ]
+        }
+      ],
+      "behavior": {
+        "preferred_range_cm": [
+          60,
+          100
+        ],
+        "priority": "每两次被接受的直刺后，下一次近身选择横斩；被打断仍计接受次数，不回滚模式",
+        "no_random_mixup_after_lock": true
+      },
+      "counterplay": "横斩预警比直刺更长且更宽，观察动作后选后退或绕背；低韧可用重武器打断但非每击硬直。",
+      "combination_risk": "多只短刃围身易产生身体封锁；同侧排队接近，最多两只近身且留一个纵深逃离方向。",
+      "asset_notes": [
+        "小骷髅短刃",
+        "直刺/横斩两姿势",
+        "断骨死亡不保留阻挡"
+      ],
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-SKL-002",
+      "name": "骨盾卫",
+      "family": "SKL",
+      "role": "中型盾线；限时守盾后大开放窗，全武器可攻击",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 110,
+        "armor": 35,
+        "ward": 5,
+        "poise": 55,
+        "move_cm_s": 175
+      },
+      "body": {
+        "half_x_cm": 21,
+        "half_y_cm": 18
+      },
+      "activation": {
+        "type": "sight",
+        "requires_los": true,
+        "does_not_see_through_walls": true,
+        "half_x_cm": 650,
+        "half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ENM-SKL-002-A1",
+          "name": "骨盾撞击",
+          "type": "melee",
+          "windup_s": 0.75,
+          "active_s": 0.12,
+          "recovery_s": 0.8,
+          "cooldown_s": 2.2,
+          "damage": 12,
+          "damage_type": "physical",
+          "stagger": 16,
+          "shape": {
+            "type": "rect",
+            "x_min_cm": 0,
+            "x_max_cm": 110,
+            "half_y_cm": 45,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "position_rule": "source_xy_and_locked_facing_during_active"
+          },
+          "telegraph": "盾牌后拉并画短宽撞击区域；0.375秒锁朝向",
+          "counter": "后退或绕侧，撞击只判一次且无额外推人控制",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            0,
+            120
+          ]
+        },
+        {
+          "id": "ENM-SKL-002-A2",
+          "name": "定向守盾",
+          "type": "support",
+          "windup_s": 0.55,
+          "active_s": 0.9,
+          "recovery_s": 1.5,
+          "cooldown_s": 4.0,
+          "damage": 0,
+          "damage_type": "none",
+          "stagger": 0,
+          "shape": {
+            "type": "directional_guard",
+            "half_angle_deg": 60,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "position_rule": "source_body_and_locked_facing",
+            "incoming_direction": "vector_from_defender_to_direct_hit_origin",
+            "zero_length_direction_rule": "no_directional_bonus"
+          },
+          "telegraph": "盾举至正前并出现盾面符号；0.275秒锁朝向，结束后盾下垂1.50秒",
+          "counter": "任何武器守盾期间仍能合法伤血；可绕背，或等待1.50秒完全开放窗用最慢重剑反击",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "guard": {
+            "only_during_active": true,
+            "armor_flat": 40,
+            "ward_flat": 20,
+            "formula": "ordinary_A_div_100_plus_A_and_W_div_100_plus_W",
+            "final_armor_ward_cap": 150,
+            "final_damage_reduction_cap": 0.6,
+            "front_direct_hits_only": true,
+            "no_reflection": true,
+            "no_dot_bonus": true,
+            "never_zeroes_all_damage": true,
+            "max_guard_s": 0.9,
+            "open_recovery_s": 1.5,
+            "no_turn_or_new_action_during_open_recovery": true
+          },
+          "accept_distance_cm": [
+            80,
+            300
+          ]
+        }
+      ],
+      "behavior": {
+        "preferred_range_cm": [
+          80,
+          150
+        ],
+        "priority": "80至300厘米可守盾；玩家进入120厘米且撞击可用时撞击，不能守盾期间发动撞击",
+        "guard_then_open_window_must_complete": true,
+        "no_indefinite_guard_restarts": true
+      },
+      "counterplay": "守盾是有方向的临时护甲/魔抗，不是免疫；绕背仍用基础A35/W5。守盾后1.50秒不转向不出招，足够最慢攻速重剑完成1.4875秒基准周期。",
+      "combination_risk": "盾卫不能堵死唯一通路；与大型单位同房须留两侧通道，不加双守盾交替永久堵路。",
+      "asset_notes": [
+        "盾举/盾落开放剪影",
+        "盾面朝向图标",
+        "守盾结束明确声效/姿态"
+      ],
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-SKL-003",
+      "name": "裂弓骸骨",
+      "family": "SKL",
+      "role": "中型直线弓手；受近身压制后只能短刀自保",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 75,
+        "armor": 10,
+        "ward": 0,
+        "poise": 25,
+        "move_cm_s": 200
+      },
+      "body": {
+        "half_x_cm": 18,
+        "half_y_cm": 16
+      },
+      "activation": {
+        "type": "sight",
+        "requires_los": true,
+        "does_not_see_through_walls": true,
+        "half_x_cm": 650,
+        "half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ENM-SKL-003-A1",
+          "name": "朽弦骨箭",
+          "type": "projectile",
+          "windup_s": 0.8,
+          "active_s": 0.1,
+          "recovery_s": 0.7,
+          "cooldown_s": 2.3,
+          "damage": 12,
+          "damage_type": "physical",
+          "stagger": 10,
+          "shape": {
+            "type": "projectile",
+            "speed_cm_s": 650,
+            "max_distance_cm": 650,
+            "capsule_radius_cm": 8,
+            "height_center_cm": 35,
+            "height_tolerance_cm": 65,
+            "muzzle_forward_cm": 24,
+            "muzzle_height_cm": 35,
+            "continuous_sweep": true,
+            "trajectory": "locked_facing_straight_fixed_y_fixed_z_after_emission",
+            "blocking": "wall_closed_door_first_body_including_allies",
+            "ally_hit": "consume_projectile_no_friendly_damage",
+            "penetration_count": 1,
+            "damage_channel": "one_direct_hit_per_projectile"
+          },
+          "telegraph": "拉满骨弓并显示固定Y瞄线；0.40秒锁朝向",
+          "counter": "横移出弹线或利用友军身体/墙；空中高度仍实际检查",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            220,
+            600
+          ],
+          "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+          "projectile_geometry_profile_id": "ENM-SKL-003-A1"
+        },
+        {
+          "id": "ENM-SKL-003-A2",
+          "name": "掰骨反划",
+          "type": "melee",
+          "windup_s": 0.55,
+          "active_s": 0.1,
+          "recovery_s": 0.65,
+          "cooldown_s": 1.6,
+          "damage": 8,
+          "damage_type": "physical",
+          "stagger": 7,
+          "shape": {
+            "type": "rect",
+            "x_min_cm": 0,
+            "x_max_cm": 85,
+            "half_y_cm": 30,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "position_rule": "source_xy_and_locked_facing_during_active"
+          },
+          "telegraph": "收弓掰骨后窄带预警；0.275秒锁朝向",
+          "counter": "离开85厘米短刃范围，在0.65秒后摇反击",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            0,
+            100
+          ]
+        }
+      ],
+      "behavior": {
+        "preferred_range_cm": [
+          320,
+          500
+        ],
+        "priority": "射线清晰才拉弓；近100厘米反划；中间区正常移动重定位",
+        "retreat_requires_walkable_space": true,
+        "no_firing_while_retreating": true
+      },
+      "counterplay": "压进220厘米射击下界逼其重定位；弓箭在锁定后不追Y，友军挡箭时不透体。",
+      "combination_risk": "射手最多一个同时开火；不把盾卫挡在其永久清晰射线前而让玩家无法近身。",
+      "asset_notes": [
+        "中型骨弓手",
+        "长拉弓姿态",
+        "骨箭飞行与撞友军消散反馈"
+      ],
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-GOB-001",
+      "name": "碎刃哥布林",
+      "family": "GOB",
+      "role": "小型游斗；短刀近打，短射程石块迫使追逐",
+      "size": "small",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 45,
+        "armor": 0,
+        "ward": 0,
+        "poise": 20,
+        "move_cm_s": 250
+      },
+      "body": {
+        "half_x_cm": 15,
+        "half_y_cm": 13
+      },
+      "activation": {
+        "type": "sight",
+        "requires_los": true,
+        "does_not_see_through_walls": true,
+        "half_x_cm": 650,
+        "half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ENM-GOB-001-A1",
+          "name": "碎刃捅刺",
+          "type": "melee",
+          "windup_s": 0.55,
+          "active_s": 0.1,
+          "recovery_s": 0.6,
+          "cooldown_s": 1.6,
+          "damage": 9,
+          "damage_type": "physical",
+          "stagger": 8,
+          "shape": {
+            "type": "rect",
+            "x_min_cm": 0,
+            "x_max_cm": 95,
+            "half_y_cm": 28,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "position_rule": "source_xy_and_locked_facing_during_active"
+          },
+          "telegraph": "刀藏腰侧后前举；0.275秒锁朝向",
+          "counter": "退过95厘米或错Y；攻击期不能继续高速追着刺",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            0,
+            110
+          ]
+        },
+        {
+          "id": "ENM-GOB-001-A2",
+          "name": "掷路石",
+          "type": "projectile",
+          "windup_s": 0.8,
+          "active_s": 0.08,
+          "recovery_s": 0.7,
+          "cooldown_s": 2.4,
+          "damage": 8,
+          "damage_type": "physical",
+          "stagger": 6,
+          "shape": {
+            "type": "projectile",
+            "speed_cm_s": 480,
+            "max_distance_cm": 360,
+            "capsule_radius_cm": 10,
+            "height_center_cm": 28,
+            "height_tolerance_cm": 65,
+            "muzzle_forward_cm": 24,
+            "muzzle_height_cm": 28,
+            "continuous_sweep": true,
+            "trajectory": "locked_facing_straight_fixed_y_fixed_z_after_emission",
+            "blocking": "wall_closed_door_first_body_including_allies",
+            "ally_hit": "consume_projectile_no_friendly_damage",
+            "penetration_count": 1,
+            "damage_channel": "one_direct_hit_per_projectile"
+          },
+          "telegraph": "头上举石并展示短弹线；0.40秒锁朝向",
+          "counter": "错开Y；超过360厘米石块销毁，不会沿远射手长度飞行",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            170,
+            320
+          ],
+          "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+          "projectile_geometry_profile_id": "ENM-GOB-001-A2"
+        }
+      ],
+      "behavior": {
+        "preferred_range_cm": [
+          70,
+          130
+        ],
+        "priority": "近110厘米捅刺；170至320厘米且清线投石；其余步行绕接近目标的同侧可走路线",
+        "no_circle_through_player_body": true,
+        "no_attack_during_walk": true
+      },
+      "counterplay": "短射程投石能被提前后退或侧移避开；用其固定站定出招压制高走速。",
+      "combination_risk": "同场过多高速小型体会堵脚；最多两只参与近身，其他等待而不是挤进角色投影。",
+      "asset_notes": [
+        "小型尖耳短刃剪影",
+        "举石明确前摇",
+        "同族动作与骷髅短刃不同重心"
+      ],
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-GOB-002",
+      "name": "火瓶哥布林",
+      "family": "GOB",
+      "role": "中型投罐；延时地面范围火伤，可借敌人聚集反绕",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 80,
+        "armor": 5,
+        "ward": 0,
+        "poise": 28,
+        "move_cm_s": 190
+      },
+      "body": {
+        "half_x_cm": 18,
+        "half_y_cm": 16
+      },
+      "activation": {
+        "type": "sight",
+        "requires_los": true,
+        "does_not_see_through_walls": true,
+        "half_x_cm": 650,
+        "half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ENM-GOB-002-A1",
+          "name": "抛焰瓶",
+          "type": "projectile",
+          "windup_s": 0.95,
+          "active_s": 0.1,
+          "recovery_s": 0.75,
+          "cooldown_s": 3.2,
+          "damage": 10,
+          "damage_type": "magic",
+          "stagger": 10,
+          "shape": {
+            "type": "projectile",
+            "speed_cm_s": 720,
+            "max_distance_cm": 360,
+            "capsule_radius_cm": 12,
+            "height_center_cm": 40,
+            "height_tolerance_cm": 65,
+            "muzzle_forward_cm": 20,
+            "muzzle_height_cm": 40,
+            "trajectory": "visual_lob_to_locked_ground_point_fixed_xy_speed",
+            "visual_apex_cm": 90,
+            "continuous_wall_sweep": true,
+            "body_collision": "pass_over_bodies_no_impact_damage",
+            "wall_collision": "burst_on_near_legal_side_no_wall_penetration",
+            "flight_time_rule": "distance_to_locked_point_div_720_max_0_5_s",
+            "impact_shape": {
+              "type": "ellipse",
+              "radius_x_cm": 110,
+              "radius_y_cm": 65,
+              "forward_offset_cm": 0,
+              "height_center_cm": 0,
+              "height_tolerance_cm": 65,
+              "requires_effect_center_los": true
+            },
+            "damage_channel": "one_explosion_attack_id_each_target_once",
+            "aim_point_rule": "target_ground_xy_at_lock_clamp_total_xy_distance_to_360_no_follow"
+          },
+          "telegraph": "举瓶点燃并在0.475秒锁目标地面点；落点椭圆持续显示到爆炸，弧线不能临时追踪",
+          "counter": "离开110×65厘米锁定椭圆；墙挡瓶和爆炸LOS，飞行最多0.50秒，低位爆炸可按高度躲避",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            180,
+            340
+          ],
+          "element": {
+            "state": "burn",
+            "dps": 2,
+            "duration_s": 3,
+            "first_tick_delay_s": 1,
+            "on_positive_direct_hp_loss_and_target_alive_only": true,
+            "shared_target_slot": true
+          },
+          "persistent_fire_field": false,
+          "projectile_subhit_count": 1,
+          "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+          "projectile_geometry_profile_id": "ENM-GOB-002-A1"
+        },
+        {
+          "id": "ENM-GOB-002-A2",
+          "name": "空瓶反敲",
+          "type": "melee",
+          "windup_s": 0.55,
+          "active_s": 0.1,
+          "recovery_s": 0.65,
+          "cooldown_s": 1.6,
+          "damage": 7,
+          "damage_type": "physical",
+          "stagger": 6,
+          "shape": {
+            "type": "rect",
+            "x_min_cm": 0,
+            "x_max_cm": 75,
+            "half_y_cm": 30,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "position_rule": "source_xy_and_locked_facing_during_active"
+          },
+          "telegraph": "双手收空瓶后向前敲击；0.275秒锁朝向",
+          "counter": "贴近迫使弱短敲，再在0.65秒后摇反击",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            0,
+            90
+          ]
+        }
+      ],
+      "behavior": {
+        "preferred_range_cm": [
+          220,
+          320
+        ],
+        "priority": "180至340厘米且初始LOS合法时投瓶；近90厘米弱敲；无合法落点不投，正常移位",
+        "no_throw_through_wall": true,
+        "cannot_create_infinite_ground_fire": true
+      },
+      "counterplay": "抛物线只越身体、不越墙；落点锁后不追玩家，接近到90至180厘米迫使换位。",
+      "combination_risk": "与直线射手不能同时接受射击；落点若与冲锋一起封住唯一走廊必须延后一次攻击。",
+      "asset_notes": [
+        "中型背瓶剪影",
+        "点燃/抛罐/敲瓶三表现",
+        "锁点椭圆及爆炸；不生产常驻火地面"
+      ],
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-GOB-003",
+      "name": "铁桶蛮兵",
+      "family": "GOB",
+      "role": "大型慢重击与直线短冲锋；高削韧、巨大后摇",
+      "size": "large",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 180,
+        "armor": 45,
+        "ward": 0,
+        "poise": 80,
+        "move_cm_s": 160
+      },
+      "body": {
+        "half_x_cm": 29,
+        "half_y_cm": 24
+      },
+      "activation": {
+        "type": "sight",
+        "requires_los": true,
+        "does_not_see_through_walls": true,
+        "half_x_cm": 650,
+        "half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ENM-GOB-003-A1",
+          "name": "铁桶横抡",
+          "type": "melee",
+          "windup_s": 0.85,
+          "active_s": 0.18,
+          "recovery_s": 1.0,
+          "cooldown_s": 2.8,
+          "damage": 20,
+          "damage_type": "physical",
+          "stagger": 26,
+          "shape": {
+            "type": "rect",
+            "x_min_cm": 0,
+            "x_max_cm": 165,
+            "half_y_cm": 65,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "position_rule": "source_xy_and_locked_facing_during_active"
+          },
+          "telegraph": "铁桶举过肩，画宽前向带；0.425秒锁朝向",
+          "counter": "退过165厘米或绕背；1.00秒后摇时选择重击或两次轻击",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            0,
+            175
+          ]
+        },
+        {
+          "id": "ENM-GOB-003-A2",
+          "name": "埋头桶冲",
+          "type": "charge",
+          "windup_s": 0.95,
+          "active_s": 0.55,
+          "recovery_s": 1.5,
+          "cooldown_s": 4.2,
+          "damage": 22,
+          "damage_type": "physical",
+          "stagger": 30,
+          "shape": {
+            "type": "rect",
+            "x_min_cm": 0,
+            "x_max_cm": 70,
+            "half_y_cm": 48,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "position_rule": "source_xy_and_locked_facing_during_active",
+            "continuous_sweep": true,
+            "charge_speed_cm_s": 450,
+            "max_travel_cm": 247.5,
+            "path": "straight_locked_facing_and_y_line",
+            "stop_on_wall_or_any_body": true,
+            "stop_on_first_valid_player_contact": true,
+            "no_damage_to_allies": true,
+            "no_push_through_bodies": true,
+            "single_attack_id": true
+          },
+          "telegraph": "蹬脚俯身、地面直线路径从0.475秒起锁定；冲前清晰喊声",
+          "counter": "提前移出48厘米半宽路径；冲到墙或身体即停，不转向追Y、不推人连撞",
+          "lock_fraction": 0.5,
+          "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+          "movement_during_action": "none_except_explicit_charge",
+          "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+          "accept_distance_cm": [
+            160,
+            310
+          ],
+          "director_slot": "one_charge",
+          "collision_rule": "early_stop_keeps_remaining_action_time_and_cooldown"
+        }
+      ],
+      "behavior": {
+        "preferred_range_cm": [
+          110,
+          165
+        ],
+        "priority": "近175厘米横抡；160至310厘米且冲锋通路可用时桶冲，重叠区优先横抡；无冲锋位则步行",
+        "fixed_charge_not_modified_by_move_buffs": true,
+        "blocked_charge_does_not_skip_recovery": true
+      },
+      "counterplay": "普通走速最慢，冲锋0.95秒预警比闪避无敌长，依靠方向/距离躲；未破韧不等于免伤或免控。",
+      "combination_risk": "不与另一冲锋者同时起攻；大型体与骨盾卫不能合围封死所有方向。",
+      "asset_notes": [
+        "大型铁桶肩背剪影",
+        "横抡与埋头冲两种起势",
+        "扫掠冲锋停步/撞墙表现"
+      ],
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-MEC-001",
+      "name": "校准巡灯",
+      "family": "MEC",
+      "role": "小型直线远程／迫使换线",
+      "size": "small",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 60,
+        "armor": 20,
+        "ward": 5,
+        "poise": 25,
+        "move_cm_s": 180
+      },
+      "body": {
+        "half_x_cm": 16,
+        "half_y_cm": 14
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-MEC-001-A",
+          "name": "校准光钉",
+          "type": "projectile",
+          "windup_s": 0.85,
+          "active_s": 0.1,
+          "recovery_s": 0.7,
+          "cooldown_s": 2.2,
+          "damage": 16,
+          "damage_type": "magic",
+          "stagger": 10,
+          "shape": {
+            "type": "projectile_swept_rectangle",
+            "speed_cm_s": 500,
+            "max_distance_cm": 520,
+            "lifetime_s": 1.04,
+            "half_x_cm": 6,
+            "half_y_cm": 10,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "spawn_forward_cm": 20,
+            "spawn_height_mode": "actual_actor_height_plus_height_center",
+            "direction": "locked_facing_x",
+            "stops_at_wall_or_closed_door": true,
+            "stops_at_first_body_including_ally": true,
+            "ally_damage": false,
+            "homing": false,
+            "ignore_owner_body": true,
+            "center_hard_bounds_test": true,
+            "center_hard_bounds_meaning": "See enemy-projectile-profiles.json actual emission origin, [0,max_distance] X and fixed corridor_half_y; current tiny projectile box is not the center gate.",
+            "hurtbox_sweep": true,
+            "hurtbox_sweep_meaning": "在硬界内，对独立hurtbox作连续弹体精检；不以当前弹体小框包含目标中心作为接触条件。",
+            "first_contact_order": "连续扫掠定位首个阻挡身体/墙或独立hurtbox接触；合法敌对hurtbox接触先检查硬界/实际高度/无敌并结算或拒绝，再消散；友军同法挡弹但无伤，墙/门直接截断，忽略owner；同点按稳定碰撞优先序，不穿过拒绝接触继续找后排。"
+          },
+          "telegraph": "透镜亮、虚瞄线跟随；0.425s锁定后变实线并停止跟Y，短脉冲声后只发一枚。",
+          "counter": "沿Y换线或实体掩体截断；靠近利用0.70s后摇。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "projectile_count": 1,
+          "emission_offsets_s": [
+            0
+          ],
+          "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+          "projectile_geometry_profile_id": "ATK-MEC-001-A"
+        },
+        {
+          "id": "ATK-MEC-001-B",
+          "name": "探杆拍击",
+          "type": "melee",
+          "windup_s": 0.6,
+          "active_s": 0.12,
+          "recovery_s": 0.65,
+          "cooldown_s": 1.8,
+          "damage": 12,
+          "damage_type": "physical",
+          "stagger": 10,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 85,
+            "half_y_cm": 30,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "探杆后收与卡齿声；0.30s锁朝向。",
+          "counter": "后退85cm前向范围或绕背。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          240,
+          420
+        ],
+        "selection": "距离240..520且瞄线清楚优先光钉；前向85内可拍击；其他情况普通移动。",
+        "positioning": "射后普通步退最多100cm，遇阻停止；锁定后队友挡线则打空，不穿友军。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "看瞄线换Y或贴近打短招破绽；不需要远程武器。",
+      "combination_risk": "冲锋在场须留Y逃生通道；巡灯与其他远程同用唯一远程名额。",
+      "asset_notes": "小透镜造物：待机、校准、发射、探杆、后摇、破韧、死亡。窄亮芯带实边，不只靠颜色。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-MEC-002",
+      "name": "蒸压锤卫",
+      "family": "MEC",
+      "role": "大型近战／重击破绽",
+      "size": "large",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 180,
+        "armor": 50,
+        "ward": 10,
+        "poise": 80,
+        "move_cm_s": 160
+      },
+      "body": {
+        "half_x_cm": 32,
+        "half_y_cm": 26
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-MEC-002-A",
+          "name": "蒸锤砸落",
+          "type": "melee",
+          "windup_s": 1.15,
+          "active_s": 0.18,
+          "recovery_s": 1.05,
+          "cooldown_s": 2.9,
+          "damage": 26,
+          "damage_type": "physical",
+          "stagger": 24,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 165,
+            "half_y_cm": 45,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "锤头高举、压力表三格递亮；0.575s锁朝向，落锤框显示宽度。",
+          "counter": "走出前向框或绕背，砸空后完整反击；不追踪转身。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        },
+        {
+          "id": "ATK-MEC-002-B",
+          "name": "近身泄压",
+          "type": "area",
+          "windup_s": 0.8,
+          "active_s": 0.15,
+          "recovery_s": 0.95,
+          "cooldown_s": 2.5,
+          "damage": 14,
+          "damage_type": "magic",
+          "stagger": 10,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 110,
+            "radius_y_cm": 60,
+            "anchor": "self_at_lock",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "胸阀展开、脚下椭圆边亮、连续嘶声；0.40s固定中心。",
+          "counter": "走出椭圆或按实际高度躲地面中心；余烟不伤害。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "area_pulses": 1,
+          "visual_duration_s": 0.3
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          100,
+          150
+        ],
+        "selection": "前向165内优先蒸锤；自身110×60椭圆内且锤未就绪可泄压；其他时候慢速接近。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "高护甲增加投入，但退出路径免费；普通快刀、重击或魔法都可抓破绽。",
+      "combination_risk": "不与另一大身体堵死全部Y通路；身体不附带接触伤。",
+      "asset_notes": "锤头、压力表、胸阀形成不同提示；泄压余烟与有效伤害窗分离。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-MEC-003",
+      "name": "旗讯使者",
+      "family": "MEC",
+      "role": "中型支援／提高友军走位压力",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 90,
+        "armor": 25,
+        "ward": 20,
+        "poise": 40,
+        "move_cm_s": 200
+      },
+      "body": {
+        "half_x_cm": 21,
+        "half_y_cm": 17
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-MEC-003-A",
+          "name": "行军讯号",
+          "type": "support",
+          "windup_s": 0.9,
+          "active_s": 0.1,
+          "recovery_s": 0.7,
+          "cooldown_s": 8,
+          "damage": 0,
+          "damage_type": "none",
+          "stagger": 0,
+          "shape": {
+            "type": "ally_circle",
+            "radius_cm": 300,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "line_of_sight_required": true,
+            "max_targets": 2
+          },
+          "telegraph": "旗杆展开、顶部指令图标、候选虚连线；0.45s锁候选，提交时实线确认。",
+          "counter": "先击败使者或趁站定靠近；不缩短友军攻击预警。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "support": {
+            "group": "enemy_move_support",
+            "stat": "normal_move_pct",
+            "magnitude_pct": 10,
+            "duration_s": 4,
+            "max_targets": 2,
+            "include_self": false,
+            "initial_target_sort": "distance_then_stable_entity_id",
+            "eligible": "alive_active_non_boss_allies_without_equal_or_stronger_enemy_move_support_source_and_with_actual_move_gain",
+            "lock_candidates_at_fraction": 0.5,
+            "revalidate_range_los_alive_at_commit": true,
+            "no_replacement_target_on_failed_commit": true,
+            "stacking": "same_group_strongest_only_no_stack_no_refresh",
+            "expires_on": "original_expiry_or_caster_death_or_recipient_death_or_room_end",
+            "does_not_change": [
+              "attack_timing",
+              "charge_speed",
+              "projectile_speed",
+              "cooldowns",
+              "hp",
+              "armor",
+              "ward",
+              "poise"
+            ],
+            "source_registry": "record_each_caster_source_and_original_expiry; strongest_only; remove_dead_source_then_recompute; no_duration_refresh"
+          },
+          "accept_requires": "至少1名合法友军，否则拒绝起招；接受后候选离开则无效果且CD照走。"
+        },
+        {
+          "id": "ATK-MEC-003-B",
+          "name": "旗杆横拨",
+          "type": "melee",
+          "windup_s": 0.65,
+          "active_s": 0.14,
+          "recovery_s": 0.75,
+          "cooldown_s": 2.1,
+          "damage": 14,
+          "damage_type": "physical",
+          "stagger": 12,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 105,
+            "half_y_cm": 45,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "旗杆横放，手臂反侧拉开；0.325s锁朝向。",
+          "counter": "后退或绕背，横拨结束再进身。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          180,
+          280
+        ],
+        "selection": "有未受同组讯号友军且支援就绪时优先讯号；无目标只移动或近身横拨，不空放循环。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "可以先切支援，也能清前排；不会无限治疗、加速叠层或重置CD。",
+      "combination_risk": "同房最多1个旗讯支援实体；支援占总攻击名额，不占弹体远程名额。",
+      "asset_notes": "机械旗杆/指令环；成功目标显示来源与剩余时间，施法者死连线和加速撤销，无新召唤。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-BST-001",
+      "name": "钩爪獾",
+      "family": "BST",
+      "role": "小型近战／试探扑咬",
+      "size": "small",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 55,
+        "armor": 5,
+        "ward": 0,
+        "poise": 25,
+        "move_cm_s": 250
+      },
+      "body": {
+        "half_x_cm": 18,
+        "half_y_cm": 14
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-BST-001-A",
+          "name": "短促咬击",
+          "type": "melee",
+          "windup_s": 0.55,
+          "active_s": 0.12,
+          "recovery_s": 0.55,
+          "cooldown_s": 1.6,
+          "damage": 12,
+          "damage_type": "physical",
+          "stagger": 8,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 75,
+            "half_y_cm": 27,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "缩颈露齿、前爪停住；0.275s锁朝向后低吼。",
+          "counter": "保持75cm外，咬空后进身；无每帧贴身伤害。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        },
+        {
+          "id": "ATK-BST-001-B",
+          "name": "贴地扑咬",
+          "type": "charge",
+          "windup_s": 0.8,
+          "active_s": 0.28,
+          "recovery_s": 1.5,
+          "cooldown_s": 2.9,
+          "damage": 16,
+          "damage_type": "physical",
+          "stagger": 14,
+          "shape": {
+            "type": "body_swept_rectangle",
+            "speed_cm_s": 650,
+            "duration_s": 0.28,
+            "max_displacement_cm": 182.00000000000003,
+            "half_x_cm": 40,
+            "half_y_cm": 36,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "stops_at_wall_or_closed_door": true,
+            "stops_at_first_body_including_ally": true,
+            "stops_on_invulnerable_player_contact": true,
+            "homing": false,
+            "target_center_test": true,
+            "contact_order": "连续扫掠中先在该时点检查伤害几何/高度/无敌，再执行身体阻挡停下；无敌拒绝仍截停，实体触碰不必造成伤害。"
+          },
+          "telegraph": "压后腿、前方182cm窄道；0.40s锁左右与Y，蓄力声后直扑。",
+          "counter": "沿Y退出窄道或退出位移终点，冲空/碰墙/接触停止后完整1.50s反击。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "charge_contact": "路径扫掠；第一次玩家接触无论成功或无敌拒绝均停并进入后摇，不穿任何身体。"
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          65,
+          170
+        ],
+        "selection": "75内优先短咬；对齐、90..182距离且扑击就绪可扑；其他时候普通移动接近。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "小血量易清，但仍有完整扑咬代价；走位、实际高度或闪避皆可反制。",
+      "combination_risk": "成对出现时同房仍仅1冲锋，另一只需等攻击名额；不在玩家脚下生成。",
+      "asset_notes": "低矮獾体型；露齿、压腿、扑空趴地不同于普通跑动，无毒/出血。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-BST-002",
+      "name": "崖牙巨兽",
+      "family": "BST",
+      "role": "大型冲锋／直线占道",
+      "size": "large",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 190,
+        "armor": 25,
+        "ward": 5,
+        "poise": 90,
+        "move_cm_s": 170
+      },
+      "body": {
+        "half_x_cm": 36,
+        "half_y_cm": 28
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-BST-002-A",
+          "name": "崖牙直撞",
+          "type": "charge",
+          "windup_s": 0.95,
+          "active_s": 0.55,
+          "recovery_s": 1.5,
+          "cooldown_s": 3.4,
+          "damage": 24,
+          "damage_type": "physical",
+          "stagger": 26,
+          "shape": {
+            "type": "body_swept_rectangle",
+            "speed_cm_s": 620,
+            "duration_s": 0.55,
+            "max_displacement_cm": 341,
+            "half_x_cm": 60,
+            "half_y_cm": 46,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "stops_at_wall_or_closed_door": true,
+            "stops_at_first_body_including_ally": true,
+            "stops_on_invulnerable_player_contact": true,
+            "homing": false,
+            "target_center_test": true,
+            "contact_order": "连续扫掠中先在该时点检查伤害几何/高度/无敌，再执行身体阻挡停下；无敌拒绝仍截停，实体触碰不必造成伤害。"
+          },
+          "telegraph": "刨地两次、低头露角、前方341cm占道框；0.475s锁左右与Y，不转弯。",
+          "counter": "沿Y退出占道，避开实体身体后从侧背打完整1.50s疲顿。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "charge_contact": "首次玩家接触或墙/门/存活身体阻挡即停并进后摇；有效期提前终止，不补剩余冲刺。"
+        },
+        {
+          "id": "ATK-BST-002-B",
+          "name": "低头横顶",
+          "type": "melee",
+          "windup_s": 0.85,
+          "active_s": 0.16,
+          "recovery_s": 0.95,
+          "cooldown_s": 2.4,
+          "damage": 20,
+          "damage_type": "physical",
+          "stagger": 22,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 135,
+            "half_y_cm": 55,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "前蹄撑开、头向一侧拉；短宽地面框，0.425s锁左右。",
+          "counter": "退出前向框或绕背，无格挡/特定武器要求。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          130,
+          260
+        ],
+        "selection": "对齐且160..341距离可直撞；前向135内可横顶；盲区只普通转位，不追加全周接触伤。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "大体积、长距离、重承诺；仍可破韧、挂共享元素或按40cm推拉，遇墙截断。",
+      "combination_risk": "禁止无侧向逃生带的窄廊；冲锋1、总预警2，远程不能封死其换线空间。",
+      "asset_notes": "大肩角兽；刨地、直冲、冲空喘息、横顶区分；撞墙只反馈停止，无额外伤害。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-BST-003",
+      "name": "棘背猞猁",
+      "family": "BST",
+      "role": "中型侧翼近战／双拍节奏",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 95,
+        "armor": 10,
+        "ward": 0,
+        "poise": 40,
+        "move_cm_s": 260
+      },
+      "body": {
+        "half_x_cm": 22,
+        "half_y_cm": 18
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-BST-003-A",
+          "name": "交替双爪",
+          "type": "melee",
+          "windup_s": 0.7,
+          "active_s": 0.32,
+          "recovery_s": 0.8,
+          "cooldown_s": 2.2,
+          "damage": 9,
+          "damage_type": "physical",
+          "stagger": 8,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 105,
+            "half_y_cm": 33,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "双爪交叉抬起，0.35s锁左右；预警双拍，第一爪后仍有第二爪。",
+          "counter": "退出两爪共同区域再反击，不要求每0.18s连闪。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "damage_unit": "per_subhit",
+          "hits": [
+            {
+              "subhit_id": "claw_1",
+              "offset_s": 0,
+              "duration_s": 0.1,
+              "damage": 9,
+              "stagger": 8
+            },
+            {
+              "subhit_id": "claw_2",
+              "offset_s": 0.18,
+              "duration_s": 0.1,
+              "damage": 9,
+              "stagger": 8
+            }
+          ],
+          "attack_id_rule": "一轮AttackID、两独立子命中，各对子目标只试一次。已接纳首爪的第二爪沿受伤无敌例外但仍检查闪避；首爪拒绝不允许次爪绕过其他AttackID的受伤无敌。"
+        },
+        {
+          "id": "ATK-BST-003-B",
+          "name": "收身突抓",
+          "type": "melee",
+          "windup_s": 0.85,
+          "active_s": 0.14,
+          "recovery_s": 0.75,
+          "cooldown_s": 2.1,
+          "damage": 18,
+          "damage_type": "physical",
+          "stagger": 16,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 135,
+            "half_y_cm": 28,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "肩背高拱、单爪回收、窄长地面框；0.425s锁左右与Y，身体不传送。",
+          "counter": "沿Y退出窄线或退出135cm前向，再打后摇。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          90,
+          140
+        ],
+        "selection": "105内可双爪；105..135对齐可突抓；冷却时找侧翼。",
+        "positioning": "待机每次最多0.30s侧向普通移动，速度260；遇阻停，无无敌/自动绕背，出招后不横移追人。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "读双拍和单长抓，走位保留免费解法；棘刺只作轮廓，无接触反伤。",
+      "combination_risk": "双爪前摇至两个有效窗结束共占一个名额，第二爪间隙不释放；进入后摇才释放名额，后摇仍须完整完成。",
+      "asset_notes": "中型猫科，双爪两声节拍、单长抓高拱、侧步独立姿态；无出血。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-DEM-001",
+      "name": "灰镰使",
+      "family": "DEM",
+      "role": "中型近战／低高位识别",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 105,
+        "armor": 15,
+        "ward": 35,
+        "poise": 50,
+        "move_cm_s": 210
+      },
+      "body": {
+        "half_x_cm": 22,
+        "half_y_cm": 18
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-DEM-001-A",
+          "name": "低弧镰扫",
+          "type": "melee",
+          "windup_s": 0.8,
+          "active_s": 0.16,
+          "recovery_s": 0.85,
+          "cooldown_s": 2.2,
+          "damage": 20,
+          "damage_type": "physical",
+          "stagger": 20,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 155,
+            "half_y_cm": 42,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "镰刃压低、地面弧轮廓、低音刮擦；0.40s锁朝向。",
+          "counter": "走出范围或按实际高度跳过低中心，扫空后反击。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        },
+        {
+          "id": "ATK-DEM-001-B",
+          "name": "高位钩镰",
+          "type": "melee",
+          "windup_s": 0.9,
+          "active_s": 0.16,
+          "recovery_s": 1.05,
+          "cooldown_s": 2.5,
+          "damage": 22,
+          "damage_type": "physical",
+          "stagger": 22,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 155,
+            "half_y_cm": 42,
+            "height_center_cm": 80,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "镰柄举肩，80cm高处短横标和高音破风；0.45s锁朝向，地面非伤害区。",
+          "counter": "保持地面可躲；盲跳可能进入高度，退出X/Y范围亦有效。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "height_warning": "中心Z80/容差65，地面中心Z0不合法；跳起Z15..145可命中，不是全高度必中。"
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          120,
+          150
+        ],
+        "selection": "可进攻时低弧→高钩交替，须CD和空间合法；轮到高钩而玩家在地面也不改为地面必中。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "高低提示决定跳或留地，走位始终可行；不即时读输入变招。",
+      "combination_risk": "其他敌人不能同时封死高钩所有地面安全区域。",
+      "asset_notes": "镰刃低压/过肩姿态与不同声部，不仅换颜色；恶魔不自动免燃烧。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-DEM-002",
+      "name": "烬眼持灯者",
+      "family": "DEM",
+      "role": "中型慢弹远程／约束路线",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 80,
+        "armor": 0,
+        "ward": 40,
+        "poise": 30,
+        "move_cm_s": 190
+      },
+      "body": {
+        "half_x_cm": 20,
+        "half_y_cm": 16
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-DEM-002-A",
+          "name": "缓行烬球",
+          "type": "projectile",
+          "windup_s": 0.95,
+          "active_s": 0.1,
+          "recovery_s": 0.9,
+          "cooldown_s": 2.6,
+          "damage": 18,
+          "damage_type": "magic",
+          "stagger": 10,
+          "shape": {
+            "type": "projectile_swept_rectangle",
+            "speed_cm_s": 280,
+            "max_distance_cm": 560,
+            "lifetime_s": 2,
+            "half_x_cm": 6,
+            "half_y_cm": 16,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "spawn_forward_cm": 20,
+            "spawn_height_mode": "actual_actor_height_plus_height_center",
+            "direction": "locked_facing_x",
+            "stops_at_wall_or_closed_door": true,
+            "stops_at_first_body_including_ally": true,
+            "ally_damage": false,
+            "homing": false,
+            "ignore_owner_body": true,
+            "center_hard_bounds_test": true,
+            "center_hard_bounds_meaning": "See enemy-projectile-profiles.json actual emission origin, [0,max_distance] X and fixed corridor_half_y; current tiny projectile box is not the center gate.",
+            "hurtbox_sweep": true,
+            "hurtbox_sweep_meaning": "在硬界内，对独立hurtbox作连续弹体精检；不以当前弹体小框包含目标中心作为接触条件。",
+            "first_contact_order": "连续扫掠定位首个阻挡身体/墙或独立hurtbox接触；合法敌对hurtbox接触先检查硬界/实际高度/无敌并结算或拒绝，再消散；友军同法挡弹但无伤，墙/门直接截断，忽略owner；同点按稳定碰撞优先序，不穿过拒绝接触继续找后排。"
+          },
+          "telegraph": "提灯拉开、灯芯膨胀；0.475s锁左右/Y后固定瞄线，只吐一球。",
+          "counter": "沿Y绕慢弹或借墙截断；近身打0.90s后摇。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "projectile_count": 1,
+          "emission_offsets_s": [
+            0
+          ],
+          "on_positive_surviving_hit": {
+            "state": "burn",
+            "magnitude_dps": 2,
+            "duration_s": 3,
+            "first_tick_after_s": 1,
+            "tick_interval_s": 1,
+            "shares_target_slot": true
+          },
+          "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+          "projectile_geometry_profile_id": "ATK-DEM-002-A"
+        },
+        {
+          "id": "ATK-DEM-002-B",
+          "name": "灯壳回摆",
+          "type": "melee",
+          "windup_s": 0.65,
+          "active_s": 0.14,
+          "recovery_s": 0.75,
+          "cooldown_s": 2,
+          "damage": 13,
+          "damage_type": "physical",
+          "stagger": 12,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 95,
+            "half_y_cm": 40,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "灯收背后、肩扭转；0.325s锁朝向。",
+          "counter": "后退或绕背，不追身补击。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          260,
+          430
+        ],
+        "selection": "240..560对齐且射线清晰优先烬球，前向95内可回摆，其他时候普通调线。",
+        "positioning": "射后普通后退最多80cm，遇墙停；无传送/离地无敌。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "慢弹易看清，但无视路线会中18直伤+低强度燃烧；近战可逼墙打短招。",
+      "combination_risk": "弹在飞时占唯一远程名额，最长2s；同阵营挡弹也消散，无弹墙堆叠。",
+      "asset_notes": "地面持灯者；慢弹实边、共用燃烧图标，火尾只表现无追加伤害地毯。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-DEM-003",
+      "name": "坠印魔",
+      "family": "DEM",
+      "role": "大型范围法术／锁落点与近身圈",
+      "size": "large",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 155,
+        "armor": 30,
+        "ward": 45,
+        "poise": 70,
+        "move_cm_s": 170
+      },
+      "body": {
+        "half_x_cm": 30,
+        "half_y_cm": 24
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-DEM-003-A",
+          "name": "坠印落点",
+          "type": "area",
+          "windup_s": 0.95,
+          "active_s": 0.12,
+          "recovery_s": 1,
+          "cooldown_s": 2.7,
+          "damage": 24,
+          "damage_type": "magic",
+          "stagger": 18,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 100,
+            "radius_y_cm": 55,
+            "anchor": "target_ground_at_lock",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "双手结印；候选空心圈，0.475s锁玩家当时地面XY并闭圈，余0.475s不再追。",
+          "counter": "退出100×55椭圆或到墙另一侧，法后靠近；无需抗魔装。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "target_point": {
+            "max_range_cm": 440,
+            "requires_line_of_sight_at_accept_and_lock": true,
+            "no_valid_lock_behavior": "锁定点目标已死亡/超距/遮挡则空放，CD不退、正常后摇。",
+            "lock_follows_after_lock": false,
+            "caster_movement_after_accept": "none"
+          },
+          "area_pulses": 1
+        },
+        {
+          "id": "ATK-DEM-003-B",
+          "name": "近身震踏",
+          "type": "area",
+          "windup_s": 0.8,
+          "active_s": 0.12,
+          "recovery_s": 0.95,
+          "cooldown_s": 2.2,
+          "damage": 18,
+          "damage_type": "physical",
+          "stagger": 20,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 95,
+            "radius_y_cm": 60,
+            "anchor": "self_at_lock",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "前脚抬起、紧贴自身小椭圆；0.40s定中心，无远端落点标。",
+          "counter": "退出自身圈或跳过实际低位中心，落足后反击。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "area_pulses": 1
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          180,
+          330
+        ],
+        "selection": "150..440且LOS合法优先落点；玩家进自身95×60圈且落点未就绪可震踏；不瞬移至落点、不召唤。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "区别远点与脚下圈，决定逼近或短退；大体型仍可破韧打断。",
+      "combination_risk": "不得与冲锋同时封死所有Y出口；单次法术仅1落点，余光不持续伤害。",
+      "asset_notes": "大型结印者：候选圈→锁圈→单击→余光，天空表现不是全高度判定。",
+      "reward_eligible": true,
+      "status": "design_only"
+    }
+  ],
+  "elite_variants": [
+    {
+      "id": "ELT-STN-001",
+      "name": "裂冠沉石骑士",
+      "family": "STN",
+      "parent_id": "ENM-STN-001",
+      "stat_multipliers": {
+        "hp": 1.35,
+        "damage": 1.15
+      },
+      "poise_bonus": 10,
+      "behavior_change": "保留原冲锋整段1.60s恢复；新增近中距地面盾踏，迫使玩家区分直线冲锋与椭圆区域，不以第二段追撞偷取消后摇。",
+      "extra_attack": {
+        "id": "ELT-STN-001-A1",
+        "name": "侧翼盾踏",
+        "type": "area",
+        "windup_s": 0.95,
+        "active_s": 0.15,
+        "recovery_s": 1.4,
+        "cooldown_s": 3.0,
+        "damage": 15,
+        "damage_type": "physical",
+        "stagger": 18,
+        "shape": {
+          "type": "forward_offset_ellipse",
+          "height_center_cm": 0,
+          "height_tolerance_cm": 65,
+          "center_x_cm": 130,
+          "center_y_cm": 0,
+          "radius_x_cm": 100,
+          "radius_y_cm": 65
+        },
+        "telegraph": "盾面向地，前方完整椭圆预览；0.475s锁定朝向与中心。",
+        "counter": "从椭圆侧面移出或按真实高度跳过；盾踏收势不能接无预警冲锋。",
+        "aim_lock_fraction": 0.5,
+        "max_hits_per_player_per_attack": 1,
+        "interrupt_rule": "poise_break_or_death_only",
+        "center_lock": "own_xy_plus_facing_offset_at_50_percent_windup",
+        "damage_is_pre_elite_multiplier": true
+      },
+      "telegraph_not_shortened": true,
+      "reward_policy": "独立实体结算一次；不保证掉装备，奖励预算由D08来源决定。",
+      "status": "design_only"
+    },
+    {
+      "id": "ELT-ELF-001",
+      "name": "双痕苔弓手",
+      "family": "ELF",
+      "parent_id": "ENM-ELF-001",
+      "stat_multipliers": {
+        "hp": 1.35,
+        "damage": 1.15
+      },
+      "poise_bonus": 10,
+      "behavior_change": "苔羽平射改为两条固定平行箭线，预警更长；短刃和后退上限保持，不增翻滚／瞬移。",
+      "attack_override": {
+        "id": "ELT-ELF-001-A1",
+        "name": "双痕平射",
+        "type": "projectile",
+        "windup_s": 1.0,
+        "active_s": 0.08,
+        "recovery_s": 0.9,
+        "cooldown_s": 2.4,
+        "damage": 12,
+        "damage_type": "physical",
+        "stagger": 9,
+        "shape": {
+          "type": "parallel_projectiles",
+          "height_center_cm": 20,
+          "height_tolerance_cm": 65,
+          "max_distance_cm": 680,
+          "speed_cm_s": 480,
+          "radius_cm": 5,
+          "parallel_offsets_y_cm": [
+            -32,
+            32
+          ]
+        },
+        "telegraph": "完整两条平行线均显示，0.50s锁点；两箭同时直飞且不纠偏，不在一箭后突然补瞄。",
+        "counter": "在两线间或线外走位，近身逼短刃；同一轮最多受其中一次伤害。",
+        "aim_lock_fraction": 0.5,
+        "max_hits_per_player_per_attack": 1,
+        "interrupt_rule": "poise_break_or_death_only",
+        "replaces_attack_id": "ENM-ELF-001-A1",
+        "damage_is_pre_elite_multiplier": true,
+        "projectile": {
+          "count": 2,
+          "spawn_height_cm": 20,
+          "speed_cm_s": 480,
+          "max_distance_cm": 680,
+          "lifetime_s": 1.4166666666666667,
+          "homing": false,
+          "pierce_players": false,
+          "swept_collision": true,
+          "direction": "parallel_to_direction_locked_at_50_percent",
+          "shared_attack_id": true,
+          "allied_body_blocks_without_damage": true,
+          "first_blocking_body_or_wall_stops": true,
+          "body_collision_uses_actual_height": true,
+          "ignore_emitter_body": true,
+          "ai_requires_clear_initial_line": true
+        },
+        "original_attack_retained": false,
+        "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+        "projectile_geometry_profile_id": "ELT-ELF-001-A1"
+      },
+      "telegraph_not_shortened": true,
+      "reward_policy": "同一实体／AttackID去重；不是两箭两份击杀奖。",
+      "status": "design_only"
+    },
+    {
+      "id": "ELT-TRE-001",
+      "name": "裂根长臂",
+      "family": "TRE",
+      "parent_id": "ENM-TRE-002",
+      "stat_multipliers": {
+        "hp": 1.35,
+        "damage": 1.15
+      },
+      "poise_bonus": 10,
+      "behavior_change": "新增两段错位地刺；两位置在同一完整前摇中预告，仍无缠绕，单玩家同一AttackID最多受一次。",
+      "extra_attack": {
+        "id": "ELT-TRE-001-A1",
+        "name": "错根连破",
+        "type": "area",
+        "windup_s": 0.95,
+        "active_s": 0.55,
+        "recovery_s": 1.35,
+        "cooldown_s": 3.3,
+        "damage": 12,
+        "damage_type": "physical",
+        "stagger": 12,
+        "shape": {
+          "type": "two_locked_ellipses",
+          "height_center_cm": 0,
+          "height_tolerance_cm": 65,
+          "radius_x_cm": 75,
+          "radius_y_cm": 40,
+          "max_cast_distance_cm": 260,
+          "centers_offset_x_cm": [
+            -70,
+            70
+          ],
+          "centers_offset_y_cm": [
+            0,
+            0
+          ]
+        },
+        "telegraph": "两个地面椭圆从前摇启动均显示，并标注第一／第二；0.475s同时锁定两点，此后不随玩家移动。",
+        "counter": "移动到两区侧面，读完第二次突起再回；任何一段命中后本轮不再对该玩家加第二份伤害。",
+        "aim_lock_fraction": 0.5,
+        "max_hits_per_player_per_attack": 1,
+        "interrupt_rule": "poise_break_or_death_only",
+        "subhits": [
+          {
+            "at_active_s": 0,
+            "damage": 12,
+            "stagger": 12,
+            "center_index": 0
+          },
+          {
+            "at_active_s": 0.4,
+            "damage": 12,
+            "stagger": 12,
+            "center_index": 1
+          }
+        ],
+        "center_lock": "target_xy_at_50_percent_windup_plus_both_offsets",
+        "damage_is_pre_elite_multiplier": true,
+        "requires_los_to_target_and_area": true,
+        "no_residual_field": true
+      },
+      "telegraph_not_shortened": true,
+      "reward_policy": "两段共享一个实体击杀结算；不额外产奖／产收集物。",
+      "status": "design_only"
+    },
+    {
+      "id": "ELT-ROB-001",
+      "name": "复调咒术师",
+      "family": "ROB",
+      "parent_id": "ENM-ROB-002",
+      "stat_multipliers": {
+        "hp": 1.35,
+        "damage": 1.15
+      },
+      "poise_bonus": 10,
+      "behavior_change": {
+        "rule": "every_third_accepted_primary_spell_replaced_by_parallel_two_bolt_pattern",
+        "count_includes_interrupted_starts": true,
+        "counter_persists_while_alive_in_room": true,
+        "other_attacks_unchanged": true
+      },
+      "attack_override": {
+        "id": "ELT-ROB-001-A1",
+        "name": "复调双符弹",
+        "type": "projectile",
+        "windup_s": 0.9,
+        "active_s": 0.34,
+        "recovery_s": 1.05,
+        "cooldown_s": 4.2,
+        "damage": 7,
+        "damage_type": "magic",
+        "stagger": 5,
+        "shape": {
+          "type": "projectile",
+          "speed_cm_s": 480,
+          "max_distance_cm": 620,
+          "capsule_radius_cm": 9,
+          "height_center_cm": 35,
+          "height_tolerance_cm": 65,
+          "muzzle_forward_cm": 24,
+          "muzzle_height_cm": 35,
+          "continuous_sweep": true,
+          "trajectory": "two_separate_parallel_locked_facing_lines_no_tracking",
+          "blocking": "wall_closed_door_first_body_including_allies",
+          "ally_hit": "consume_projectile_no_friendly_damage",
+          "penetration_count": 1,
+          "damage_channel": "one_direct_hit_per_projectile",
+          "emission_y_offsets_cm": [
+            -35,
+            35
+          ],
+          "subhit_emission_times_from_active_start_s": [
+            0,
+            0.28
+          ],
+          "per_projectile_distinct_subhit_id": true,
+          "shared_attack_id": true,
+          "same_accepted_attack_hurt_iframe_exception": "later_legitimate_subhit_may_hit_but_each_checks_dodge_and_contact_dedup"
+        },
+        "telegraph": "合手后分出两道可见符轨，0.45秒锁中央线与±35厘米两平行线；两发时点预告0/0.28秒",
+        "counter": "两轨间有明确可走中缝，也可离开整个双轨范围；较长1.05秒后摇可接近",
+        "lock_fraction": 0.5,
+        "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+        "movement_during_action": "none_except_explicit_charge",
+        "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+        "accept_distance_cm": [
+          220,
+          570
+        ],
+        "per_projectile_damage": 7,
+        "per_projectile_stagger": 5,
+        "projectile_count": 2,
+        "total_base_damage_if_both_hit": 14,
+        "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+        "projectile_geometry_profile_id": "ELT-ROB-001-A1"
+      },
+      "telegraph_not_shortened": true,
+      "extra_cost": "特殊射击后摇由0.65延长至1.05秒，伤害分两弹且合计基础仍14；新弹线留中缝。",
+      "status": "design_only"
+    },
+    {
+      "id": "ELT-SKL-001",
+      "name": "枪盾骸卫",
+      "family": "SKL",
+      "parent_id": "ENM-SKL-002",
+      "stat_multipliers": {
+        "hp": 1.35,
+        "damage": 1.15
+      },
+      "poise_bonus": 10,
+      "behavior_change": {
+        "rule": "front_legal_direct_hit_during_guard_sets_one_counter_opportunity",
+        "full_guard_and_open_recovery_required": true,
+        "counter_opportunity_expires_s_after_open_recovery": 1.0,
+        "break_clears_opportunity": true,
+        "counter_does_not_bypass_director_or_cooldown": true,
+        "new_incoming_hit_does_not_queue_extra_counter": true
+      },
+      "extra_attack": {
+        "id": "ELT-SKL-001-A3",
+        "name": "露盾反刺",
+        "type": "melee",
+        "windup_s": 0.85,
+        "active_s": 0.15,
+        "recovery_s": 0.95,
+        "cooldown_s": 3.4,
+        "damage": 16,
+        "damage_type": "physical",
+        "stagger": 18,
+        "shape": {
+          "type": "rect",
+          "x_min_cm": 0,
+          "x_max_cm": 160,
+          "half_y_cm": 30,
+          "height_center_cm": 0,
+          "height_tolerance_cm": 65,
+          "position_rule": "source_xy_and_locked_facing_during_active"
+        },
+        "telegraph": "盾下垂后长枪后收0.85秒，显示窄刺线；0.425秒锁朝向，守盾此时已结束",
+        "counter": "先等守盾后1.50秒开放窗；若未打断反刺，再错开窄Y或后撤，绝非受到攻击即时反伤",
+        "lock_fraction": 0.5,
+        "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+        "movement_during_action": "none_except_explicit_charge",
+        "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+        "accept_distance_cm": [
+          0,
+          175
+        ],
+        "accept_condition": "one_guard_front_direct_hit_record_then_full_1_5_s_open_recovery_completed_and_token_available",
+        "guard_active": false
+      },
+      "telegraph_not_shortened": true,
+      "extra_cost": "守盾结束仍完整开放1.50秒；反刺另有0.85秒前摇和0.95秒后摇，期间不守盾。",
+      "status": "design_only"
+    },
+    {
+      "id": "ELT-GOB-001",
+      "name": "乱旗斥候",
+      "family": "GOB",
+      "parent_id": "ENM-GOB-001",
+      "stat_multipliers": {
+        "hp": 1.35,
+        "damage": 1.15
+      },
+      "poise_bonus": 10,
+      "behavior_change": {
+        "rule": "after_first_actual_damage_may_use_flag_support_if_ally_and_cooldown_legal",
+        "flag_never_self_buffs": true,
+        "other_attacks_unchanged": true
+      },
+      "extra_attack": {
+        "id": "ELT-GOB-001-A3",
+        "name": "乱旗催行",
+        "type": "support",
+        "windup_s": 0.75,
+        "active_s": 0.1,
+        "recovery_s": 0.8,
+        "cooldown_s": 6.0,
+        "damage": 0,
+        "damage_type": "none",
+        "stagger": 0,
+        "shape": {
+          "type": "ellipse",
+          "radius_x_cm": 220,
+          "radius_y_cm": 130,
+          "forward_offset_cm": 0,
+          "height_center_cm": 0,
+          "height_tolerance_cm": 65,
+          "requires_effect_center_los": true
+        },
+        "telegraph": "放下刀举起破旗，最多两条移速连线，0.375秒锁友军",
+        "counter": "0.75秒站定可被破韧；击杀旗手撤增益，攻击时轴与固定冲锋速度都不增加",
+        "lock_fraction": 0.5,
+        "cooldown_origin": "accepted_start_not_refunded_on_interrupt",
+        "movement_during_action": "none_except_explicit_charge",
+        "subhit_rule": "one_attempt_per_target_for_this_attack_unless_explicit_subhits",
+        "targets": {
+          "team": "same_team",
+          "exclude_self": true,
+          "max_count": 2,
+          "selection": "nearest_then_stable_entity_id_at_lock",
+          "requires_los_at_lock_and_commit": true,
+          "range_rechecked_at_commit": true,
+          "no_retarget_after_lock": true
+        },
+        "buff": {
+          "slot": "enemy_move_support",
+          "move_speed_pct": 10,
+          "duration_s": 3,
+          "stacking": "strongest_only_equal_refresh_no_sum",
+          "removed_on_source_death_or_room_exit": true,
+          "affects_only_normal_walk": true,
+          "no_attack_speed_charge_speed_or_healing": true,
+          "source_registry": true,
+          "weaker_sources_suppressed_not_deleted": true,
+          "source_death_recomputes_remaining_sources": true,
+          "refresh_updates_own_source_only": true
+        },
+        "accept_condition": "damaged_at_least_once_this_room_and_one_eligible_ally_can_gain_walk_speed"
+      },
+      "telegraph_not_shortened": true,
+      "extra_cost": "举旗时放弃追逐与攻击1.65秒，不能催快攻击预警，击杀后增益撤销。",
+      "status": "design_only"
+    },
+    {
+      "id": "ELT-MEC-001",
+      "name": "旗讯监令者",
+      "family": "MEC",
+      "parent_id": "ENM-MEC-003",
+      "stat_multipliers": {
+        "hp": 1.35,
+        "damage": 1.15
+      },
+      "poise_bonus": 10,
+      "behavior_change": "继承讯号/横拨；讯号仍最多2且不叠不续。额外电针与支援共享名额，不同一步支援后射击。",
+      "extra_attack": {
+        "id": "ATK-ELT-MEC-001-C",
+        "name": "监令电针",
+        "type": "projectile",
+        "windup_s": 1.1,
+        "active_s": 0.1,
+        "recovery_s": 0.9,
+        "cooldown_s": 3,
+        "damage": 20,
+        "damage_type": "magic",
+        "stagger": 12,
+        "shape": {
+          "type": "projectile_swept_rectangle",
+          "speed_cm_s": 440,
+          "max_distance_cm": 484,
+          "lifetime_s": 1.1,
+          "half_x_cm": 6,
+          "half_y_cm": 10,
+          "height_center_cm": 0,
+          "height_tolerance_cm": 65,
+          "spawn_forward_cm": 20,
+          "spawn_height_mode": "actual_actor_height_plus_height_center",
+          "direction": "locked_facing_x",
+          "stops_at_wall_or_closed_door": true,
+          "stops_at_first_body_including_ally": true,
+          "ally_damage": false,
+          "homing": false,
+          "ignore_owner_body": true,
+          "center_hard_bounds_test": true,
+          "center_hard_bounds_meaning": "See enemy-projectile-profiles.json actual emission origin, [0,max_distance] X and fixed corridor_half_y; current tiny projectile box is not the center gate.",
+          "hurtbox_sweep": true,
+          "hurtbox_sweep_meaning": "在硬界内，对独立hurtbox作连续弹体精检；不以当前弹体小框包含目标中心作为接触条件。",
+          "first_contact_order": "连续扫掠定位首个阻挡身体/墙或独立hurtbox接触；合法敌对hurtbox接触先检查硬界/实际高度/无敌并结算或拒绝，再消散；友军同法挡弹但无伤，墙/门直接截断，忽略owner；同点按稳定碰撞优先序，不穿过拒绝接触继续找后排。"
+        },
+        "telegraph": "旗顶直立、针端三次点亮、固定瞄线；0.55s锁左右/Y。",
+        "counter": "换Y或借墙，针出后近身；同房仅1远程实体。",
+        "lock_at_windup_fraction": 0.5,
+        "movement_during_windup": "none",
+        "movement_during_recovery": "none",
+        "one_attempt_per_player_per_subhit": true,
+        "cooldown_starts": "accepted_attack",
+        "refund_on_interrupt": false,
+        "crit_enabled": false,
+        "projectile_count": 1,
+        "emission_offsets_s": [
+          0
+        ],
+        "on_positive_surviving_hit": {
+          "state": "shock",
+          "magnitude_stagger": 6,
+          "target_internal_cooldown_s": 2,
+          "blocked_during_poise_protection": true
+        },
+        "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+        "projectile_geometry_profile_id": "ATK-ELT-MEC-001-C"
+      },
+      "telegraph_not_shortened": true,
+      "extra_attack_damage_is_base_before_elite_multiplier": true,
+      "control_profile": "普通敌人：0.40s破韧硬直、1.0s破韧保护；共享元素与40cm推拉，非Boss免控。",
+      "status": "design_only"
+    },
+    {
+      "id": "ELT-BST-001",
+      "name": "裂岩巨牙",
+      "family": "BST",
+      "parent_id": "ENM-BST-002",
+      "stat_multipliers": {
+        "hp": 1.35,
+        "damage": 1.15
+      },
+      "poise_bonus": 10,
+      "behavior_change": "继承直撞/横顶及至少1.50s直撞恢复，不缩短任何反击窗口，无撞墙反弹/二次追踪/无敌；新增宽震地同样先预警，结束有1.15s反击。",
+      "extra_attack": {
+        "id": "ATK-ELT-BST-001-C",
+        "name": "震地低吼",
+        "type": "area",
+        "windup_s": 0.95,
+        "active_s": 0.18,
+        "recovery_s": 1.15,
+        "cooldown_s": 2.9,
+        "damage": 18,
+        "damage_type": "physical",
+        "stagger": 20,
+        "shape": {
+          "type": "ellipse",
+          "radius_x_cm": 140,
+          "radius_y_cm": 75,
+          "anchor": "self_at_lock",
+          "height_center_cm": 0,
+          "height_tolerance_cm": 65,
+          "target_center_test": true,
+          "line_of_sight_required": true
+        },
+        "telegraph": "四足撑稳、吸气、脚下140×75椭圆；0.475s定中心。",
+        "counter": "走出或跳过低位中心，后摇1.15s反击；无恐惧/持续减速。",
+        "lock_at_windup_fraction": 0.5,
+        "movement_during_windup": "none",
+        "movement_during_recovery": "none",
+        "one_attempt_per_player_per_subhit": true,
+        "cooldown_starts": "accepted_attack",
+        "refund_on_interrupt": false,
+        "crit_enabled": false,
+        "area_pulses": 1
+      },
+      "telegraph_not_shortened": true,
+      "extra_attack_damage_is_base_before_elite_multiplier": true,
+      "control_profile": "普通敌人：0.40s破韧硬直、1.0s破韧保护；共享元素与40cm推拉，非Boss免控。",
+      "status": "design_only"
+    },
+    {
+      "id": "ELT-DEM-001",
+      "name": "双弧镰使",
+      "family": "DEM",
+      "parent_id": "ENM-DEM-001",
+      "stat_multipliers": {
+        "hp": 1.35,
+        "damage": 1.15
+      },
+      "poise_bonus": 10,
+      "behavior_change": "继承低弧/高钩高度；两次近战间最多插一次缓弧，无后摇取消。无远程名额则等待或合法近战，不变瞬时斩。",
+      "extra_attack": {
+        "id": "ATK-ELT-DEM-001-C",
+        "name": "横镰缓弧",
+        "type": "projectile",
+        "windup_s": 0.9,
+        "active_s": 0.1,
+        "recovery_s": 0.95,
+        "cooldown_s": 2.7,
+        "damage": 18,
+        "damage_type": "magic",
+        "stagger": 16,
+        "shape": {
+          "type": "projectile_swept_rectangle",
+          "speed_cm_s": 360,
+          "max_distance_cm": 450,
+          "lifetime_s": 1.25,
+          "half_x_cm": 6,
+          "half_y_cm": 16,
+          "height_center_cm": 0,
+          "height_tolerance_cm": 65,
+          "spawn_forward_cm": 20,
+          "spawn_height_mode": "actual_actor_height_plus_height_center",
+          "direction": "locked_facing_x",
+          "stops_at_wall_or_closed_door": true,
+          "stops_at_first_body_including_ally": true,
+          "ally_damage": false,
+          "homing": false,
+          "ignore_owner_body": true,
+          "center_hard_bounds_test": true,
+          "center_hard_bounds_meaning": "See enemy-projectile-profiles.json actual emission origin, [0,max_distance] X and fixed corridor_half_y; current tiny projectile box is not the center gate.",
+          "hurtbox_sweep": true,
+          "hurtbox_sweep_meaning": "在硬界内，对独立hurtbox作连续弹体精检；不以当前弹体小框包含目标中心作为接触条件。",
+          "first_contact_order": "连续扫掠定位首个阻挡身体/墙或独立hurtbox接触；合法敌对hurtbox接触先检查硬界/实际高度/无敌并结算或拒绝，再消散；友军同法挡弹但无伤，墙/门直接截断，忽略owner；同点按稳定碰撞优先序，不穿过拒绝接触继续找后排。"
+        },
+        "telegraph": "镰刃平举停住，前向虚线锁后出单枚慢刃；0.45s锁左右/Y。",
+        "counter": "换Y、墙截或等0.95s后摇近身，无回程/追踪。",
+        "lock_at_windup_fraction": 0.5,
+        "movement_during_windup": "none",
+        "movement_during_recovery": "none",
+        "one_attempt_per_player_per_subhit": true,
+        "cooldown_starts": "accepted_attack",
+        "refund_on_interrupt": false,
+        "crit_enabled": false,
+        "projectile_count": 1,
+        "emission_offsets_s": [
+          0
+        ],
+        "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+        "projectile_geometry_profile_id": "ATK-ELT-DEM-001-C"
+      },
+      "telegraph_not_shortened": true,
+      "extra_attack_damage_is_base_before_elite_multiplier": true,
+      "control_profile": "普通敌人：0.40s破韧硬直、1.0s破韧保护；共享元素与40cm推拉，非Boss免控。",
+      "status": "design_only"
+    }
+  ],
+  "projectile_profiles_file": "enemy-projectile-profiles.json"
+}

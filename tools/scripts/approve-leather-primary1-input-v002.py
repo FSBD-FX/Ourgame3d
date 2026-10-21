@@ -1,0 +1,15 @@
+from pathlib import Path
+import json,hashlib
+R=Path('F:/Ourgame');F=R/'source-assets/production/fairytale-lgt-readability-v003';B=F/'primary1-leather-input-v001';O=F/'primary1-leather-approved-v002';assert not O.exists();O.mkdir()
+def desc(p):
+ b=p.read_bytes();return dict(path=p.as_posix(),bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
+p=B/'primary1-leather-native-input-draft-v001.json';assert desc(p)['sha256']=='c0f5e3a6533420c16096b1b4ab781d8a4eab8975454d57c2d856b33e4574c804';v=json.loads(p.read_text(encoding='utf-8'))
+detail={'Chest':'Replace the old small metal chest plates with the SECOND image\'s sleeveless, waist-length soft brown leather jerkin: round gold front clasp, belt, one attached small pouch and lower hem. Turn and flex this same construction through all six original torso views. No shoulder caps or grey undercloth.',
+'NearShoulder':'The FIRST row has a helmet-like metal silhouette: REMOVE its crown, helmet rim, horn/top strap, raised metal boss and all metal identity. Replace each with ONLY the SECOND image\'s short rounded foreground brown leather shoulder cap and small diamond stitch. Preserve only the six old view angles/foreshortenings. No chest/vest, second cap, grey inner lining or dangling oval.',
+'FarShoulder':'Replace the old broad plates with ONLY the SECOND image\'s TINY NARROW curved leather far-side tab. Keep six distinct compressed far-side action views; remove the broad near-shoulder silhouette, strap boss, collar, torso seam and grey lining. Never mirror or substitute a broad near cap.'}
+for r in v['rows']:
+ for ref in r['reference_images_in_order']:assert desc(Path(ref['file']['path']))==ref['file']
+ text='EDIT the FIRST image (six separated old armor components, motion/view basis only). The SECOND image is the sole new leather appearance anchor. '+detail[r['component']]+'\n\nKeep the original six left-to-right phases, distinct action angles and row positions; do not clone the idle pose. Keep all components separated with generous GREEN #00FF00 between and around them, on one opaque green row. Match the second image\'s simple ink outline, warm brown/tan planes and soft leather construction. Output only this one component type in six views. No person, helmet, eyes, hands, arms, weapons, detached parts, floor, shadows, text or grid.\n'
+ q=O/(r['component']+'-edit-v002.txt');q.write_text(text,encoding='utf-8');r['prompt']=desc(q);r['generation_ready']=True;r['root_prompt_override']='short reviewed edit prompt; underlying numeric standard-prepare inputs unchanged; no extra prepare execution claimed';r['root_actually_viewed_target_and_anchor_after_E282']=True
+v['root_review']='Six retained targets/anchors actually viewed. Near old helmet-like outline explicitly discarded, new Ready construction sole identity; all18A/B remainnull. Approved for three native edits188-190 only; not extraction/fit/runtime acceptance.';v['source_draft']=desc(p);v['source_event']='EV-048'
+q=O/'primary1-leather-approved-v002.json';q.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');print(json.dumps(desc(q),ensure_ascii=False))

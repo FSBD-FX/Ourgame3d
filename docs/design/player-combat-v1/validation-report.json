@@ -1,0 +1,35 @@
+{
+  "design_date": "2026-10-13",
+  "status": "passed",
+  "checks": 351,
+  "errors": [],
+  "scope": "Design JSON, source catalogue preservation, parameter arithmetic, inherited primary/skill phase sums at three speed factors, explicit edge-case declarations, status labels and local document links only. No UE runtime, collision, input, animation, hand feel or game balance verification.",
+  "weapon_count": 33,
+  "armor_count": 12,
+  "scaled_phase_cases": 198,
+  "local_document_links": 58,
+  "future_runtime_scenarios_documented_not_executed": 20,
+  "source_catalogue_sha256": {
+    "weapons.json": "95757819382832cfa31e6596f3ba90f1e983e83fbd69504da3c99d5ea2a272b4",
+    "armor.json": "9407e458aef80b9f0d8f0e958b089e7b7a6f4180aef41b7b7df97534fe780e9d"
+  },
+  "current_design_sha256": {
+    "玩家角色与战斗规则设计.md": "da7d170fc71f67bb5fca06fbf8538d9cdf22b8998254f0033447db4a3219b949",
+    "docs/design/player-combat-v1/player-combat-rules.json": "ab22cd0f131fa8f025ea16db9d1536028526b35c467aeb0008fe2dca59c413ef"
+  },
+  "paper_examples": {
+    "flat_jump_flight_s": 0.7,
+    "flat_jump_apex_cm": 110.25,
+    "heavy_sword_cycle_s": 1.19,
+    "heavy_sword_remaining_after_immediate_jump_s": 0.49,
+    "dodge_iframe_s": 0.14
+  },
+  "review_notes": [
+    "Uncommitted equipment pickup can cancel into a valid dodge; Q weapon switching cannot.",
+    "Each actual projectile emission uses its current source position and height.",
+    "Interrupted dodge loses remaining dodge protection without refreshing independent hurt protection or cooldown.",
+    "Primary buffering is limited to final primary recovery and invalid buffered requests are cleared.",
+    "Airborne-start attacks never qualify for ground-start armor traits; dodge clears named movement and stationary effects."
+  ],
+  "runtime_implemented": false
+}

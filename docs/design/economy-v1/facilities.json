@@ -1,0 +1,1642 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "source_event": "EV-026",
+  "module": "D-08",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposed_prices_stocks_sources_and_risks; v2_enchant_operations_preserved",
+  "common_rules_ref": "common-rules.json",
+  "source_contracts": {
+    "D01": "../../../整体框架与单局循环设计.md",
+    "D03": "../items-v1/items.json",
+    "D04": "../inventory-v1/inventory-rules.json",
+    "D07": "../dungeon-v1/regions-and-routes.json",
+    "v2_enchant": "../equipment-v2/enchant-rules.json"
+  },
+  "scope": {
+    "facility_categories": 9,
+    "merchant_instances": 5,
+    "finite_supply_instances": 5,
+    "merchant_offer_rows": 35,
+    "supply_offer_rows": 20,
+    "guaranteed_small_potions": 10,
+    "guaranteed_small_potion_undiscounted_total_cost": 180,
+    "deterministic_wheel_instances": 2,
+    "roulette_instances": 2,
+    "roulette_total_use_cap": 4,
+    "optional_common_supply_objects": 2
+  },
+  "price_table_gold": {
+    "ITM-REC-001": 18,
+    "ITM-REC-003": 22,
+    "ITM-REC-004": 12,
+    "ITM-REC-005": 12,
+    "ITM-THR-001": 14
+  },
+  "shop_grade_by_chapter": [
+    0,
+    1,
+    1,
+    2,
+    2
+  ],
+  "shop_kind_base_prices_gold": {
+    "weapon": 32,
+    "armor": 28
+  },
+  "shop_grade_price_rule": {
+    "cumulative_forge_cost_by_grade": [
+      0,
+      30,
+      85,
+      170
+    ],
+    "grade_cost_fraction_charged": 0.5,
+    "rounding": "ceil",
+    "depends_on_enchant_quality": false,
+    "shop_grade3_adopted": false
+  },
+  "v2_enchant_source_sha256": "520214b7b3b8195f769f7a77c7ecc40baca2039746f7bc73cbe49b4445756a55",
+  "facilities": [
+    {
+      "id": "FAC-MERCHANT",
+      "name": "普通商店",
+      "category": "ordinary_merchant",
+      "nodes": [
+        "REG-01-N04",
+        "REG-02-N04",
+        "REG-03-N04",
+        "REG-04-N04",
+        "REG-05-N04"
+      ],
+      "status": "design_only",
+      "authority": "assistant_proposed_untested",
+      "requires": "full_D04_safe_alive_grounded_idle_owned_and_versioned_targets",
+      "mainline_purchase_required": false,
+      "instances": [
+        {
+          "chapter": 1,
+          "node_id": "REG-01-N04",
+          "instance_id": "REG-01-FAC-MERCHANT",
+          "restock": false,
+          "offers": [
+            {
+              "offer_id": "REG-01-N04-OFFER-ITM-REC-001",
+              "content_id": "ITM-REC-001",
+              "name": "赤莓小药瓶",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 18,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-01-N04-OFFER-ITM-REC-003",
+              "content_id": "ITM-REC-003",
+              "name": "回春温饮",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 22,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-01-N04-OFFER-ITM-REC-004",
+              "content_id": "ITM-REC-004",
+              "name": "澄蓝专注液",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-01-N04-OFFER-ITM-REC-005",
+              "content_id": "ITM-REC-005",
+              "name": "清浊盐水",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-01-N04-OFFER-ITM-THR-001",
+              "content_id": "ITM-THR-001",
+              "name": "黑火药爆弹",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 14,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-01-N04-OFFER-WPN-KNF-001",
+              "content_id": "WPN-KNF-001",
+              "name": "折巷短刃",
+              "kind": "weapon",
+              "basic_upgrade_grade": 0,
+              "grade_label": "素制",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 32,
+              "price_formula": "kind_base_weapon32_or_armor28 + ceil(cumulative_basic_forge_cost_for_grade*.5); enchant_result_never_changes_price",
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "owned_destination_and_legal_old_item_drop_point_selected_before_confirm; whole_instance_or_refuse",
+              "delivery_action_s": 0.35,
+              "equipment_generation": {
+                "when": "once_before_run_shop_visibility; stable_OfferID_InstanceID_seed_result",
+                "enchant_rules_ref": "../equipment-v2/enchant-rules.json",
+                "spawn_enchant_chance": 0.4,
+                "spawn_none_chance": 0.6,
+                "enchant_tier_pool": "early",
+                "package_weights": {
+                  "beneficial": 0.6,
+                  "mixed": 0.3,
+                  "cursed": 0.1
+                },
+                "show_entire_committed_enchantment_before_purchase": true,
+                "view_cancel_return_reload_rerolls": false,
+                "new_weapon_magazine": "v1_initial_once_at_stock_generation; not_regenerated_on_view"
+              }
+            },
+            {
+              "offer_id": "REG-01-N04-OFFER-ARM-LGT-001",
+              "content_id": "ARM-LGT-001",
+              "name": "行路短衣",
+              "kind": "armor",
+              "basic_upgrade_grade": 0,
+              "grade_label": "素制",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 28,
+              "price_formula": "kind_base_weapon32_or_armor28 + ceil(cumulative_basic_forge_cost_for_grade*.5); enchant_result_never_changes_price",
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "owned_destination_and_legal_old_item_drop_point_selected_before_confirm; whole_instance_or_refuse",
+              "delivery_action_s": 0.5,
+              "equipment_generation": {
+                "when": "once_before_run_shop_visibility; stable_OfferID_InstanceID_seed_result",
+                "enchant_rules_ref": "../equipment-v2/enchant-rules.json",
+                "spawn_enchant_chance": 0.4,
+                "spawn_none_chance": 0.6,
+                "enchant_tier_pool": "early",
+                "package_weights": {
+                  "beneficial": 0.6,
+                  "mixed": 0.3,
+                  "cursed": 0.1
+                },
+                "show_entire_committed_enchantment_before_purchase": true,
+                "view_cancel_return_reload_rerolls": false,
+                "new_weapon_magazine": "v1_initial_once_at_stock_generation; not_regenerated_on_view"
+              }
+            }
+          ]
+        },
+        {
+          "chapter": 2,
+          "node_id": "REG-02-N04",
+          "instance_id": "REG-02-FAC-MERCHANT",
+          "restock": false,
+          "offers": [
+            {
+              "offer_id": "REG-02-N04-OFFER-ITM-REC-001",
+              "content_id": "ITM-REC-001",
+              "name": "赤莓小药瓶",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 18,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-02-N04-OFFER-ITM-REC-003",
+              "content_id": "ITM-REC-003",
+              "name": "回春温饮",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 22,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-02-N04-OFFER-ITM-REC-004",
+              "content_id": "ITM-REC-004",
+              "name": "澄蓝专注液",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-02-N04-OFFER-ITM-REC-005",
+              "content_id": "ITM-REC-005",
+              "name": "清浊盐水",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-02-N04-OFFER-ITM-THR-001",
+              "content_id": "ITM-THR-001",
+              "name": "黑火药爆弹",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 14,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-02-N04-OFFER-WPN-SPR-001",
+              "content_id": "WPN-SPR-001",
+              "name": "疾雨短枪",
+              "kind": "weapon",
+              "basic_upgrade_grade": 1,
+              "grade_label": "精制",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 47,
+              "price_formula": "kind_base_weapon32_or_armor28 + ceil(cumulative_basic_forge_cost_for_grade*.5); enchant_result_never_changes_price",
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "owned_destination_and_legal_old_item_drop_point_selected_before_confirm; whole_instance_or_refuse",
+              "delivery_action_s": 0.35,
+              "equipment_generation": {
+                "when": "once_before_run_shop_visibility; stable_OfferID_InstanceID_seed_result",
+                "enchant_rules_ref": "../equipment-v2/enchant-rules.json",
+                "spawn_enchant_chance": 0.4,
+                "spawn_none_chance": 0.6,
+                "enchant_tier_pool": "middle",
+                "package_weights": {
+                  "beneficial": 0.6,
+                  "mixed": 0.3,
+                  "cursed": 0.1
+                },
+                "show_entire_committed_enchantment_before_purchase": true,
+                "view_cancel_return_reload_rerolls": false,
+                "new_weapon_magazine": "v1_initial_once_at_stock_generation; not_regenerated_on_view"
+              }
+            },
+            {
+              "offer_id": "REG-02-N04-OFFER-ARM-MED-001",
+              "content_id": "ARM-MED-001",
+              "name": "巡路环甲",
+              "kind": "armor",
+              "basic_upgrade_grade": 1,
+              "grade_label": "精制",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 43,
+              "price_formula": "kind_base_weapon32_or_armor28 + ceil(cumulative_basic_forge_cost_for_grade*.5); enchant_result_never_changes_price",
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "owned_destination_and_legal_old_item_drop_point_selected_before_confirm; whole_instance_or_refuse",
+              "delivery_action_s": 0.5,
+              "equipment_generation": {
+                "when": "once_before_run_shop_visibility; stable_OfferID_InstanceID_seed_result",
+                "enchant_rules_ref": "../equipment-v2/enchant-rules.json",
+                "spawn_enchant_chance": 0.4,
+                "spawn_none_chance": 0.6,
+                "enchant_tier_pool": "middle",
+                "package_weights": {
+                  "beneficial": 0.6,
+                  "mixed": 0.3,
+                  "cursed": 0.1
+                },
+                "show_entire_committed_enchantment_before_purchase": true,
+                "view_cancel_return_reload_rerolls": false,
+                "new_weapon_magazine": "v1_initial_once_at_stock_generation; not_regenerated_on_view"
+              }
+            }
+          ]
+        },
+        {
+          "chapter": 3,
+          "node_id": "REG-03-N04",
+          "instance_id": "REG-03-FAC-MERCHANT",
+          "restock": false,
+          "offers": [
+            {
+              "offer_id": "REG-03-N04-OFFER-ITM-REC-001",
+              "content_id": "ITM-REC-001",
+              "name": "赤莓小药瓶",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 18,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-03-N04-OFFER-ITM-REC-003",
+              "content_id": "ITM-REC-003",
+              "name": "回春温饮",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 22,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-03-N04-OFFER-ITM-REC-004",
+              "content_id": "ITM-REC-004",
+              "name": "澄蓝专注液",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-03-N04-OFFER-ITM-REC-005",
+              "content_id": "ITM-REC-005",
+              "name": "清浊盐水",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-03-N04-OFFER-ITM-THR-001",
+              "content_id": "ITM-THR-001",
+              "name": "黑火药爆弹",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 14,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-03-N04-OFFER-WPN-STF-001",
+              "content_id": "WPN-STF-001",
+              "name": "余烬灯杖",
+              "kind": "weapon",
+              "basic_upgrade_grade": 1,
+              "grade_label": "精制",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 47,
+              "price_formula": "kind_base_weapon32_or_armor28 + ceil(cumulative_basic_forge_cost_for_grade*.5); enchant_result_never_changes_price",
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "owned_destination_and_legal_old_item_drop_point_selected_before_confirm; whole_instance_or_refuse",
+              "delivery_action_s": 0.35,
+              "equipment_generation": {
+                "when": "once_before_run_shop_visibility; stable_OfferID_InstanceID_seed_result",
+                "enchant_rules_ref": "../equipment-v2/enchant-rules.json",
+                "spawn_enchant_chance": 0.4,
+                "spawn_none_chance": 0.6,
+                "enchant_tier_pool": "middle",
+                "package_weights": {
+                  "beneficial": 0.6,
+                  "mixed": 0.3,
+                  "cursed": 0.1
+                },
+                "show_entire_committed_enchantment_before_purchase": true,
+                "view_cancel_return_reload_rerolls": false,
+                "new_weapon_magazine": "v1_initial_once_at_stock_generation; not_regenerated_on_view"
+              }
+            },
+            {
+              "offer_id": "REG-03-N04-OFFER-ARM-ROB-001",
+              "content_id": "ARM-ROB-001",
+              "name": "灰烛法袍",
+              "kind": "armor",
+              "basic_upgrade_grade": 1,
+              "grade_label": "精制",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 43,
+              "price_formula": "kind_base_weapon32_or_armor28 + ceil(cumulative_basic_forge_cost_for_grade*.5); enchant_result_never_changes_price",
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "owned_destination_and_legal_old_item_drop_point_selected_before_confirm; whole_instance_or_refuse",
+              "delivery_action_s": 0.5,
+              "equipment_generation": {
+                "when": "once_before_run_shop_visibility; stable_OfferID_InstanceID_seed_result",
+                "enchant_rules_ref": "../equipment-v2/enchant-rules.json",
+                "spawn_enchant_chance": 0.4,
+                "spawn_none_chance": 0.6,
+                "enchant_tier_pool": "middle",
+                "package_weights": {
+                  "beneficial": 0.6,
+                  "mixed": 0.3,
+                  "cursed": 0.1
+                },
+                "show_entire_committed_enchantment_before_purchase": true,
+                "view_cancel_return_reload_rerolls": false,
+                "new_weapon_magazine": "v1_initial_once_at_stock_generation; not_regenerated_on_view"
+              }
+            }
+          ]
+        },
+        {
+          "chapter": 4,
+          "node_id": "REG-04-N04",
+          "instance_id": "REG-04-FAC-MERCHANT",
+          "restock": false,
+          "offers": [
+            {
+              "offer_id": "REG-04-N04-OFFER-ITM-REC-001",
+              "content_id": "ITM-REC-001",
+              "name": "赤莓小药瓶",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 18,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-04-N04-OFFER-ITM-REC-003",
+              "content_id": "ITM-REC-003",
+              "name": "回春温饮",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 22,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-04-N04-OFFER-ITM-REC-004",
+              "content_id": "ITM-REC-004",
+              "name": "澄蓝专注液",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-04-N04-OFFER-ITM-REC-005",
+              "content_id": "ITM-REC-005",
+              "name": "清浊盐水",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-04-N04-OFFER-ITM-THR-001",
+              "content_id": "ITM-THR-001",
+              "name": "黑火药爆弹",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 14,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-04-N04-OFFER-WPN-RFL-001",
+              "content_id": "WPN-RFL-001",
+              "name": "哨岗栓动步枪",
+              "kind": "weapon",
+              "basic_upgrade_grade": 2,
+              "grade_label": "精良",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 75,
+              "price_formula": "kind_base_weapon32_or_armor28 + ceil(cumulative_basic_forge_cost_for_grade*.5); enchant_result_never_changes_price",
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "owned_destination_and_legal_old_item_drop_point_selected_before_confirm; whole_instance_or_refuse",
+              "delivery_action_s": 0.35,
+              "equipment_generation": {
+                "when": "once_before_run_shop_visibility; stable_OfferID_InstanceID_seed_result",
+                "enchant_rules_ref": "../equipment-v2/enchant-rules.json",
+                "spawn_enchant_chance": 0.4,
+                "spawn_none_chance": 0.6,
+                "enchant_tier_pool": "advanced",
+                "package_weights": {
+                  "beneficial": 0.6,
+                  "mixed": 0.3,
+                  "cursed": 0.1
+                },
+                "show_entire_committed_enchantment_before_purchase": true,
+                "view_cancel_return_reload_rerolls": false,
+                "new_weapon_magazine": "v1_initial_once_at_stock_generation; not_regenerated_on_view"
+              }
+            },
+            {
+              "offer_id": "REG-04-N04-OFFER-ARM-HVY-001",
+              "content_id": "ARM-HVY-001",
+              "name": "门栓板甲",
+              "kind": "armor",
+              "basic_upgrade_grade": 2,
+              "grade_label": "精良",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 71,
+              "price_formula": "kind_base_weapon32_or_armor28 + ceil(cumulative_basic_forge_cost_for_grade*.5); enchant_result_never_changes_price",
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "owned_destination_and_legal_old_item_drop_point_selected_before_confirm; whole_instance_or_refuse",
+              "delivery_action_s": 0.5,
+              "equipment_generation": {
+                "when": "once_before_run_shop_visibility; stable_OfferID_InstanceID_seed_result",
+                "enchant_rules_ref": "../equipment-v2/enchant-rules.json",
+                "spawn_enchant_chance": 0.4,
+                "spawn_none_chance": 0.6,
+                "enchant_tier_pool": "advanced",
+                "package_weights": {
+                  "beneficial": 0.6,
+                  "mixed": 0.3,
+                  "cursed": 0.1
+                },
+                "show_entire_committed_enchantment_before_purchase": true,
+                "view_cancel_return_reload_rerolls": false,
+                "new_weapon_magazine": "v1_initial_once_at_stock_generation; not_regenerated_on_view"
+              }
+            }
+          ]
+        },
+        {
+          "chapter": 5,
+          "node_id": "REG-05-N04",
+          "instance_id": "REG-05-FAC-MERCHANT",
+          "restock": false,
+          "offers": [
+            {
+              "offer_id": "REG-05-N04-OFFER-ITM-REC-001",
+              "content_id": "ITM-REC-001",
+              "name": "赤莓小药瓶",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 18,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-05-N04-OFFER-ITM-REC-003",
+              "content_id": "ITM-REC-003",
+              "name": "回春温饮",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 22,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-05-N04-OFFER-ITM-REC-004",
+              "content_id": "ITM-REC-004",
+              "name": "澄蓝专注液",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-05-N04-OFFER-ITM-REC-005",
+              "content_id": "ITM-REC-005",
+              "name": "清浊盐水",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-05-N04-OFFER-ITM-THR-001",
+              "content_id": "ITM-THR-001",
+              "name": "黑火药爆弹",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 14,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-05-N04-OFFER-WPN-HAL-001",
+              "content_id": "WPN-HAL-001",
+              "name": "巡门长戟",
+              "kind": "weapon",
+              "basic_upgrade_grade": 2,
+              "grade_label": "精良",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 75,
+              "price_formula": "kind_base_weapon32_or_armor28 + ceil(cumulative_basic_forge_cost_for_grade*.5); enchant_result_never_changes_price",
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "owned_destination_and_legal_old_item_drop_point_selected_before_confirm; whole_instance_or_refuse",
+              "delivery_action_s": 0.35,
+              "equipment_generation": {
+                "when": "once_before_run_shop_visibility; stable_OfferID_InstanceID_seed_result",
+                "enchant_rules_ref": "../equipment-v2/enchant-rules.json",
+                "spawn_enchant_chance": 0.4,
+                "spawn_none_chance": 0.6,
+                "enchant_tier_pool": "advanced",
+                "package_weights": {
+                  "beneficial": 0.6,
+                  "mixed": 0.3,
+                  "cursed": 0.1
+                },
+                "show_entire_committed_enchantment_before_purchase": true,
+                "view_cancel_return_reload_rerolls": false,
+                "new_weapon_magazine": "v1_initial_once_at_stock_generation; not_regenerated_on_view"
+              }
+            },
+            {
+              "offer_id": "REG-05-N04-OFFER-ARM-MED-002",
+              "content_id": "ARM-MED-002",
+              "name": "锁肩鳞甲",
+              "kind": "armor",
+              "basic_upgrade_grade": 2,
+              "grade_label": "精良",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 71,
+              "price_formula": "kind_base_weapon32_or_armor28 + ceil(cumulative_basic_forge_cost_for_grade*.5); enchant_result_never_changes_price",
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "owned_destination_and_legal_old_item_drop_point_selected_before_confirm; whole_instance_or_refuse",
+              "delivery_action_s": 0.5,
+              "equipment_generation": {
+                "when": "once_before_run_shop_visibility; stable_OfferID_InstanceID_seed_result",
+                "enchant_rules_ref": "../equipment-v2/enchant-rules.json",
+                "spawn_enchant_chance": 0.4,
+                "spawn_none_chance": 0.6,
+                "enchant_tier_pool": "advanced",
+                "package_weights": {
+                  "beneficial": 0.6,
+                  "mixed": 0.3,
+                  "cursed": 0.1
+                },
+                "show_entire_committed_enchantment_before_purchase": true,
+                "view_cancel_return_reload_rerolls": false,
+                "new_weapon_magazine": "v1_initial_once_at_stock_generation; not_regenerated_on_view"
+              }
+            }
+          ]
+        }
+      ],
+      "fixed_inventory": "same_curated_content_ids_each_run; equipment_native_enchant_seeded_once_per_run_and_shown; depleted_stock_never_restocks",
+      "paid_refresh": false,
+      "selling_buyback_or_disassembly": false
+    },
+    {
+      "id": "FAC-SUPPLY",
+      "name": "补给与医师NPC",
+      "category": "finite_supply_physician",
+      "nodes": [
+        "REG-01-N06",
+        "REG-02-N06",
+        "REG-03-N06",
+        "REG-04-N06",
+        "REG-05-N06"
+      ],
+      "status": "design_only",
+      "authority": "assistant_proposed_untested",
+      "requires": "full_D04_safe_alive_grounded_idle_owned_and_versioned_targets",
+      "mainline_purchase_required": false,
+      "instances": [
+        {
+          "chapter": 1,
+          "node_id": "REG-01-N06",
+          "instance_id": "REG-01-FAC-SUPPLY",
+          "restock": false,
+          "offers": [
+            {
+              "offer_id": "REG-01-N06-OFFER-ITM-REC-001",
+              "content_id": "ITM-REC-001",
+              "name": "赤莓小药瓶",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 18,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-01-N06-OFFER-ITM-REC-004",
+              "content_id": "ITM-REC-004",
+              "name": "澄蓝专注液",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-01-N06-OFFER-ITM-REC-005",
+              "content_id": "ITM-REC-005",
+              "name": "清浊盐水",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-01-N06-OFFER-ITM-THR-001",
+              "content_id": "ITM-THR-001",
+              "name": "黑火药爆弹",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 14,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            }
+          ]
+        },
+        {
+          "chapter": 2,
+          "node_id": "REG-02-N06",
+          "instance_id": "REG-02-FAC-SUPPLY",
+          "restock": false,
+          "offers": [
+            {
+              "offer_id": "REG-02-N06-OFFER-ITM-REC-001",
+              "content_id": "ITM-REC-001",
+              "name": "赤莓小药瓶",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 18,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-02-N06-OFFER-ITM-REC-004",
+              "content_id": "ITM-REC-004",
+              "name": "澄蓝专注液",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-02-N06-OFFER-ITM-REC-005",
+              "content_id": "ITM-REC-005",
+              "name": "清浊盐水",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-02-N06-OFFER-ITM-THR-001",
+              "content_id": "ITM-THR-001",
+              "name": "黑火药爆弹",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 14,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            }
+          ]
+        },
+        {
+          "chapter": 3,
+          "node_id": "REG-03-N06",
+          "instance_id": "REG-03-FAC-SUPPLY",
+          "restock": false,
+          "offers": [
+            {
+              "offer_id": "REG-03-N06-OFFER-ITM-REC-001",
+              "content_id": "ITM-REC-001",
+              "name": "赤莓小药瓶",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 18,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-03-N06-OFFER-ITM-REC-004",
+              "content_id": "ITM-REC-004",
+              "name": "澄蓝专注液",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-03-N06-OFFER-ITM-REC-005",
+              "content_id": "ITM-REC-005",
+              "name": "清浊盐水",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-03-N06-OFFER-ITM-THR-001",
+              "content_id": "ITM-THR-001",
+              "name": "黑火药爆弹",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 14,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            }
+          ]
+        },
+        {
+          "chapter": 4,
+          "node_id": "REG-04-N06",
+          "instance_id": "REG-04-FAC-SUPPLY",
+          "restock": false,
+          "offers": [
+            {
+              "offer_id": "REG-04-N06-OFFER-ITM-REC-001",
+              "content_id": "ITM-REC-001",
+              "name": "赤莓小药瓶",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 18,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-04-N06-OFFER-ITM-REC-004",
+              "content_id": "ITM-REC-004",
+              "name": "澄蓝专注液",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-04-N06-OFFER-ITM-REC-005",
+              "content_id": "ITM-REC-005",
+              "name": "清浊盐水",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-04-N06-OFFER-ITM-THR-001",
+              "content_id": "ITM-THR-001",
+              "name": "黑火药爆弹",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 14,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            }
+          ]
+        },
+        {
+          "chapter": 5,
+          "node_id": "REG-05-N06",
+          "instance_id": "REG-05-FAC-SUPPLY",
+          "restock": false,
+          "offers": [
+            {
+              "offer_id": "REG-05-N06-OFFER-ITM-REC-001",
+              "content_id": "ITM-REC-001",
+              "name": "赤莓小药瓶",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 18,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-05-N06-OFFER-ITM-REC-004",
+              "content_id": "ITM-REC-004",
+              "name": "澄蓝专注液",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-05-N06-OFFER-ITM-REC-005",
+              "content_id": "ITM-REC-005",
+              "name": "清浊盐水",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 12,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            },
+            {
+              "offer_id": "REG-05-N06-OFFER-ITM-THR-001",
+              "content_id": "ITM-THR-001",
+              "name": "黑火药爆弹",
+              "kind": "quick_item",
+              "quantity": 1,
+              "stock_purchases": 1,
+              "price_gold": 14,
+              "ordinary_merchant_nonservice_good": true,
+              "discount_ticket_eligible": true,
+              "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+              "delivery_action_s": 0.25
+            }
+          ]
+        }
+      ],
+      "doctor_role": "ordinary_goods_vendor_with_advice; goods_must_be_carried_and_used_by_D03",
+      "instant_paid_or_free_heal_service": false,
+      "entry_or_repeat_dialogue_refill": false,
+      "unlimited_rest_or_purchase": false,
+      "shares_same_price_table_as_N04": true
+    },
+    {
+      "id": "FAC-CHOICE-WHEEL",
+      "name": "确定性三选一转轮",
+      "category": "deterministic_choice",
+      "nodes": [
+        "REG-03-N04",
+        "REG-05-N04"
+      ],
+      "status": "design_only",
+      "authority": "assistant_proposed_untested",
+      "requires": "full_D04_safe_alive_grounded_idle_owned_and_versioned_targets",
+      "mainline_purchase_required": false,
+      "per_instance_uses": 1,
+      "price_gold": 30,
+      "random": false,
+      "preview_all_exact_bundles": true,
+      "choice_lock_before_payment": true,
+      "capacity_prevalidate_entire_selected_bundle": true,
+      "delivery_action_s": 0.25,
+      "choices": [
+        {
+          "id": "CHOICE-HEAL",
+          "contents": [
+            {
+              "content_id": "ITM-REC-001",
+              "quantity": 2
+            }
+          ],
+          "reference_price_gold": 36
+        },
+        {
+          "id": "CHOICE-RECOVER-CLEANSE",
+          "contents": [
+            {
+              "content_id": "ITM-REC-003",
+              "quantity": 1
+            },
+            {
+              "content_id": "ITM-REC-005",
+              "quantity": 1
+            }
+          ],
+          "reference_price_gold": 34
+        },
+        {
+          "id": "CHOICE-BOMB",
+          "contents": [
+            {
+              "content_id": "ITM-THR-001",
+              "quantity": 2
+            }
+          ],
+          "reference_price_gold": 28
+        }
+      ],
+      "mixed_bundle_inventory_extension": "all_selected_destination_slots_and_legal_old_drop_positions_prevalidated; one_atomic_0.25s_quick_goods_transfer; no_partial_bundle; needs_two_distinct_quick_slots_for_warm_drink_and_salt",
+      "FUN003_applicable": false,
+      "FUN002_applicable": false,
+      "returns_same_committed_choice_on_retry": true
+    },
+    {
+      "id": "FAC-ROULETTE",
+      "name": "有限风险轮盘",
+      "category": "standard_roulette",
+      "nodes": [
+        "REG-02-N04",
+        "REG-04-N04"
+      ],
+      "status": "design_only",
+      "authority": "assistant_proposed_untested",
+      "requires": "full_D04_safe_alive_grounded_idle_owned_and_versioned_targets",
+      "mainline_purchase_required": false,
+      "per_instance_uses": 2,
+      "price_gold": 20,
+      "probability_integer_denominator": 100,
+      "draw": "one_uniform_integer_0_through99_after_confirm_and_prevalidation; saved_rng_cursor_and_OperationID",
+      "outcomes": [
+        {
+          "id": "ROU-GOLD",
+          "roll_min_inclusive": 0,
+          "roll_max_inclusive": 9,
+          "weight": 10,
+          "probability": 0.1,
+          "result": {
+            "kind": "gold",
+            "amount": 40
+          },
+          "reference_price_gold": 40
+        },
+        {
+          "id": "ROU-HEAL",
+          "roll_min_inclusive": 10,
+          "roll_max_inclusive": 39,
+          "weight": 30,
+          "probability": 0.3,
+          "result": {
+            "kind": "item",
+            "content_id": "ITM-REC-001",
+            "quantity": 1
+          },
+          "reference_price_gold": 18
+        },
+        {
+          "id": "ROU-BOMB",
+          "roll_min_inclusive": 40,
+          "roll_max_inclusive": 69,
+          "weight": 30,
+          "probability": 0.3,
+          "result": {
+            "kind": "item",
+            "content_id": "ITM-THR-001",
+            "quantity": 1
+          },
+          "reference_price_gold": 14
+        },
+        {
+          "id": "ROU-EMPTY",
+          "roll_min_inclusive": 70,
+          "roll_max_inclusive": 99,
+          "weight": 30,
+          "probability": 0.3,
+          "result": {
+            "kind": "empty"
+          },
+          "reference_price_gold": 0
+        }
+      ],
+      "coin_output_max_per_use": 40,
+      "coin_output_max_over_all_four_uses": 160,
+      "expected_coin_output_per_use": 4,
+      "expected_consumable_list_price_per_use": 9.6,
+      "expected_combined_reference_per_use": 13.6,
+      "expected_net_list_price_reference_after_fee": -6.4,
+      "list_price_is_not_resale_or_cash_equivalent": true,
+      "negative_result": "empty_or_low_list_price_return; no_HP_tax_new_curse_equipment_damage_or_wallet_debit_beyond_fee",
+      "produces_meta_fragments_or_function_tickets": false,
+      "accepts_FUN003": true,
+      "FUN003_changes_uses_or_weights": false,
+      "FUN002_applicable": false,
+      "inventory_result": "bind_exact_item_to_one_local_facility_reward_tray; never_change_pool_for_inventory_state; committed_gold_results_credit_in_same_transaction",
+      "pending_reward_blocks_next_use": true,
+      "tray": {
+        "capacity_results": 1,
+        "bound_to": "RunID/RoomInstanceID/FacilityInstanceID/OperationID/OutcomeID",
+        "check_empty_before_payment": true,
+        "claim_requires": "full_D04_safety_and_whole_item_capacity;0.25s_quick_pickup",
+        "claim_failure": "keep_same_item_no_fee_no_new_draw",
+        "forfeit": "explicit_confirmation_discards_pending_item_only; no_refund_no_use_reset",
+        "leave_return": "same_local_tray_and_committed_result; not_auto_equipped_or_used; not_free_new_inventory_slot",
+        "run_end": "unclaimed_local_item_ends_with_run; no_conversion_to_gold_or_meta",
+        "leave_region": "show_unclaimed_warning_before_one_way_region_exit; acceptance_discards_this_local_reward_no_refund_no_new_source"
+      }
+    },
+    {
+      "id": "FAC-INTEL-ENTRY",
+      "name": "情报与隐藏入口许可",
+      "category": "intel_and_optional_entry",
+      "nodes": [
+        "REG-01-N04",
+        "REG-02-N04",
+        "REG-03-N04",
+        "REG-04-N04",
+        "REG-05-N04"
+      ],
+      "status": "design_only",
+      "authority": "assistant_proposed_untested",
+      "requires": "full_D04_safe_alive_grounded_idle_owned_and_versioned_targets",
+      "mainline_purchase_required": false,
+      "intel": {
+        "price_gold": 8,
+        "uses_per_chapter": 1,
+        "target": "one_generated_reachable_unrevealed_current_chapter_H01; first_fixed_generation_order",
+        "grants": "map_marker_and_clue_only",
+        "free_ground_clue_alternative_remains": true,
+        "no_target_or_already_revealed": "reject_before_payment_and_do_not_consume_FUN004",
+        "selecting_gold_or_map": "exactly_one_payment_method; never_both",
+        "no_teleport_reward_spawn_or_fragments": true,
+        "FUN004_route_stone": "same_reveal_via_safe_route_stone_costs_one_map_instead_of_gold8; no_entry_fee_waiver"
+      },
+      "entry_tolls": [
+        {
+          "node_id": "REG-01-H01",
+          "name": "赌王密窟",
+          "price_gold": 20,
+          "encounter": "BOS-GOB-001",
+          "required_for_mainline": false
+        },
+        {
+          "node_id": "REG-04-H01",
+          "name": "封存工具库",
+          "price_gold": 35,
+          "encounter": "noncombat_discovery_only_no_enemy_manifest_in_initial_D08",
+          "required_for_mainline": false,
+          "already_account_discovered_quote": "show_fee35_and_no_new_economic_reward_before_payment; skippable",
+          "discovery_reward": "account_first_actual_discovery_event_only_per_root_reward_sources; not_entry_payment; no_repeat_coins_or_fragments"
+        }
+      ],
+      "other_hidden_entries_free": [
+        "REG-02-H01",
+        "REG-03-H01",
+        "REG-05-H01"
+      ],
+      "entry_entitlement": {
+        "key": "RunID/HiddenNodeID",
+        "commit": "gold_and_entry_permission_and_OperationID_once; no_direct_reward_or_meta_credit",
+        "repeat_entry_fee": 0,
+        "return_fee": 0,
+        "entry_requires_full_D04_safety": true,
+        "Boss_entry_also_requires_D06_optional_safety": true,
+        "no_unlimited_restock_or_heal_on_return": true,
+        "FUN001_or_FUN002_or_FUN004_waives_gold_toll": false,
+        "meta_only_after": "REG01_actual_qualifying_optional_Boss_success_or_REG04_first_actual_account_discovery_event_per_reward_sources; never_merely_payment"
+      },
+      "warning": "情报仅标记入口；门票另计；额外战斗或发现未完成就没有对应回报；可始终走免费主线。",
+      "exploration_optional_objects": [
+        {
+          "object_id": "OBJ-REG-02-N04-COMMON-SUPPLY",
+          "node_id": "REG-02-N04",
+          "reward_source_id": "RWD-REG-02-N04-COMMON-SUPPLY",
+          "pool_id": "POOL-COMMON-SUPPLY",
+          "reward_rules_ref": "reward-sources.json",
+          "key_type": "common",
+          "gold_fee": 0,
+          "consume": {
+            "content_id": "ITM-FUN-001",
+            "quantity": 1
+          },
+          "open_limit": 1,
+          "required_for_mainline": false,
+          "placement": "visible_ground_reachable_N04_service_object_with_free_bypass; never_blocks_main_exit",
+          "opening_action_s": 0.25,
+          "category_weights": {
+            "REC": 60,
+            "THR": 25,
+            "TRP": 15
+          },
+          "within_category": "uniform_among_current_run_unlocked_eligible_items",
+          "item_quantity": 1,
+          "produces_keys_tickets_gold_or_meta": false,
+          "prevalidation": [
+            "full_D04_safety",
+            "same_generated_unopened_common_object",
+            "owned_key_quantity>=1",
+            "each_positive_weight_category_has_nonempty_legal_pool",
+            "empty_local_bound_reward_tray"
+          ],
+          "opening_commit": "fix_and_persist_one_source_result_then_atomically_consume_key_mark_open_and_bind_exact_item_to_tray; reveal_after_commit",
+          "result_key": "RunID/ObjectID/RewardSourceID/result_index0",
+          "tray_capacity_results": 1,
+          "no_inventory_space_at_open": "allowed_only_via_bound_local_tray; not_auto_equip_or_drop_free_overflow",
+          "claim": "full_D04_safe_whole_item_capacity_0.25s; failed_claim_keeps_same_item",
+          "duplicate_open_or_delivery_failure": "same_open_record_and_exact_source_result; no_second_key_no_refund_of_committed_key_no_second_draw",
+          "leave_return": "within_same_region_same_box_open_state_and_tray; no_restock_or_new_reward",
+          "same_local_tray_is_extra_carry_slot": false,
+          "leave_region": "show_unclaimed_warning_before_one_way_region_exit; acceptance_discards_this_local_reward_no_key_refund_or_source_reset"
+        },
+        {
+          "object_id": "OBJ-REG-05-N04-COMMON-SUPPLY",
+          "node_id": "REG-05-N04",
+          "reward_source_id": "RWD-REG-05-N04-COMMON-SUPPLY",
+          "pool_id": "POOL-COMMON-SUPPLY",
+          "reward_rules_ref": "reward-sources.json",
+          "key_type": "common",
+          "gold_fee": 0,
+          "consume": {
+            "content_id": "ITM-FUN-001",
+            "quantity": 1
+          },
+          "open_limit": 1,
+          "required_for_mainline": false,
+          "placement": "visible_ground_reachable_N04_service_object_with_free_bypass; never_blocks_main_exit",
+          "opening_action_s": 0.25,
+          "category_weights": {
+            "REC": 60,
+            "THR": 25,
+            "TRP": 15
+          },
+          "within_category": "uniform_among_current_run_unlocked_eligible_items",
+          "item_quantity": 1,
+          "produces_keys_tickets_gold_or_meta": false,
+          "prevalidation": [
+            "full_D04_safety",
+            "same_generated_unopened_common_object",
+            "owned_key_quantity>=1",
+            "each_positive_weight_category_has_nonempty_legal_pool",
+            "empty_local_bound_reward_tray"
+          ],
+          "opening_commit": "fix_and_persist_one_source_result_then_atomically_consume_key_mark_open_and_bind_exact_item_to_tray; reveal_after_commit",
+          "result_key": "RunID/ObjectID/RewardSourceID/result_index0",
+          "tray_capacity_results": 1,
+          "no_inventory_space_at_open": "allowed_only_via_bound_local_tray; not_auto_equip_or_drop_free_overflow",
+          "claim": "full_D04_safe_whole_item_capacity_0.25s; failed_claim_keeps_same_item",
+          "duplicate_open_or_delivery_failure": "same_open_record_and_exact_source_result; no_second_key_no_refund_of_committed_key_no_second_draw",
+          "leave_return": "within_same_region_same_box_open_state_and_tray; no_restock_or_new_reward",
+          "same_local_tray_is_extra_carry_slot": false,
+          "leave_region": "show_unclaimed_warning_before_one_way_region_exit; acceptance_discards_this_local_reward_no_key_refund_or_source_reset"
+        }
+      ]
+    },
+    {
+      "id": "FAC-FORGE",
+      "name": "基础锻造",
+      "category": "basic_equipment_upgrade",
+      "nodes": [
+        "REG-01-N04",
+        "REG-02-N04",
+        "REG-03-N04",
+        "REG-04-N04",
+        "REG-05-N04"
+      ],
+      "status": "design_only",
+      "authority": "assistant_proposed_untested",
+      "requires": "full_D04_safe_alive_grounded_idle_owned_and_versioned_targets",
+      "mainline_purchase_required": false,
+      "state_field": "basic_upgrade_grade",
+      "display_labels": {
+        "0": "素制",
+        "1": "精制",
+        "2": "精良",
+        "3": "卓越"
+      },
+      "same_state_as_D03_basic_upgrade_not_independent_quality_service": true,
+      "step_prices_gold": {
+        "0_to_1": 30,
+        "1_to_2": 55,
+        "2_to_3": 85
+      },
+      "max_grade_by_chapter": [
+        1,
+        1,
+        2,
+        2,
+        3
+      ],
+      "valid_targets": "owned_weapon_slot1_or2_or_body_armor; current_grade_below_chapter_and_global_cap",
+      "success": "deterministic_exact_stat_preview_from_root_grade_rules; retain_InstanceID_enchantment_magazine_HP_focus_CD_and_poise_history",
+      "repeat_limit": "bounded_by_instance_grade3_and_chapter_cap; no_repeat_same_step",
+      "FUN005": "only_legal_0_to_1_gold30_waived; original_eligibility_and_any_service_unlock_still_required; exactly_one_grade_step",
+      "ground_items_mutable": false,
+      "refill_or_duplicate": false
+    },
+    {
+      "id": "FAC-ENCHANT-PROGRESS",
+      "name": "附魔觉醒与升阶",
+      "category": "enchant_progress",
+      "nodes": [
+        "REG-01-N04",
+        "REG-02-N04",
+        "REG-03-N04",
+        "REG-04-N04",
+        "REG-05-N04"
+      ],
+      "status": "design_only",
+      "authority": "assistant_proposed_untested",
+      "requires": "full_D04_safe_alive_grounded_idle_owned_and_versioned_targets",
+      "mainline_purchase_required": false,
+      "rules_ref": "../equipment-v2/enchant-rules.json",
+      "operations": {
+        "awaken": {
+          "name": "觉醒",
+          "requires_package": "none",
+          "cost_gold": 20,
+          "result_tier": 1,
+          "random_package_weights_ref": "package_weights",
+          "can_produce_negative": true
+        },
+        "upgrade": {
+          "name": "升阶",
+          "allowed_from_tiers": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "cost_gold_by_from_tier": {
+            "1": 40,
+            "2": 80,
+            "3": 140,
+            "4": 220
+          },
+          "tier_delta": 1,
+          "preserve_fields": [
+            "package_type",
+            "affix_ids",
+            "original_quantiles"
+          ],
+          "negative_affixes_upgrade_too": true,
+          "prevalidate_all_next_tier_intervals": true,
+          "empty_next_interval_behavior": "reject_before_payment_with_reason_no_affix_substitution_or_clamping",
+          "deterministic_result_comparison_allowed": true
+        }
+      },
+      "package_weights": {
+        "beneficial": 0.6,
+        "mixed": 0.3,
+        "cursed": 0.1
+      },
+      "grade_and_enchant_tier_independent": true,
+      "cap": "enchant_V; no_basic_grade_cap_applied_to_enchant_tier",
+      "awaken_warning": "仅无附魔装备；20金币得到I级整套随机附魔，60%正面/30%混合/10%纯负面。",
+      "upgrade_warning": "同词条整套升阶，原q保留，负词也随阶增大；完整预验下一阶合法区间，不合法拒绝不收费。",
+      "allows_FUN002_FUN005_FUN006": false
+    },
+    {
+      "id": "FAC-ENCHANT-REROLL",
+      "name": "附魔整套重洗",
+      "category": "enchant_reroll",
+      "nodes": [
+        "REG-01-N04",
+        "REG-02-N04",
+        "REG-03-N04",
+        "REG-04-N04",
+        "REG-05-N04"
+      ],
+      "status": "design_only",
+      "authority": "assistant_proposed_untested",
+      "requires": "full_D04_safe_alive_grounded_idle_owned_and_versioned_targets",
+      "mainline_purchase_required": false,
+      "rules_ref": "../equipment-v2/enchant-rules.json",
+      "operation": {
+        "name": "重洗",
+        "allowed_tiers": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "cost_gold_by_tier": {
+          "1": 15,
+          "2": 30,
+          "3": 55,
+          "4": 85,
+          "5": 120
+        },
+        "preserve_tier": true,
+        "reroll_fields": [
+          "package_type",
+          "affix_ids",
+          "magnitudes",
+          "original_quantiles"
+        ],
+        "random_package_weights_ref": "package_weights",
+        "preview_random_result_before_commit": false,
+        "can_get_worse": true
+      },
+      "package_weights": {
+        "beneficial": 0.6,
+        "mixed": 0.3,
+        "cursed": 0.1
+      },
+      "same_shared_tier": true,
+      "warning": "保等级整套重抽，可变差或纯负面；只预览价格/概率不提前看结果。",
+      "rng_and_operation_atomic": true,
+      "committed_result_cannot_refund_or_reroll_on_return": true,
+      "coupon_supported": false
+    },
+    {
+      "id": "FAC-ENCHANT-CLEANSE",
+      "name": "附魔整套洗净",
+      "category": "enchant_cleanse",
+      "nodes": [
+        "REG-01-N04",
+        "REG-02-N04",
+        "REG-03-N04",
+        "REG-04-N04",
+        "REG-05-N04"
+      ],
+      "status": "design_only",
+      "authority": "assistant_proposed_untested",
+      "requires": "full_D04_safe_alive_grounded_idle_owned_and_versioned_targets",
+      "mainline_purchase_required": false,
+      "rules_ref": "../equipment-v2/enchant-rules.json",
+      "operation": {
+        "name": "洗净",
+        "allowed_tiers": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "cost_gold_by_tier": {
+          "1": 10,
+          "2": 20,
+          "3": 35,
+          "4": 55,
+          "5": 80
+        },
+        "result_package": "none",
+        "remove_entire_package": true,
+        "remove_tier_and_affix_quantiles": true,
+        "preserve_intrinsic_traits": true,
+        "selective_negative_removal": false
+      },
+      "warning": "正负所有词条与附魔等级一起移除为none，不是只删坏词；不治疗不补资源。",
+      "cash_may_cleanse_beneficial_package": true,
+      "FUN006": {
+        "allowed_tiers": [
+          1,
+          2
+        ],
+        "requires_at_least_one_negative_affix": true,
+        "waives_entire_legal_cleanse_gold_fee": true,
+        "removes_whole_package": true,
+        "none_pure_beneficial_or_tier3_to5": "reject_without_consuming_ticket"
+      },
+      "FUN002_or_FUN005_supported": false
+    }
+  ],
+  "transaction": {
+    "validation_before_payment": [
+      "full_D04_safe_alive_grounded_idle",
+      "FacilityInstanceID_OperationID_remaining_stock_or_uses",
+      "current_owned_target_and_instance_version",
+      "quote_price_grade_enchant_source_and_data_version",
+      "gold_enough_at_commit_not_old_wallet_equality",
+      "one_explicit_matching_ticket_max",
+      "full_known_bundle_destination_capacity_and_old_item_drop_positions_or_empty_bound_random_reward_tray",
+      "legal_complete_v2_enchant_combinations_or_next_tier_intervals"
+    ],
+    "atomic_commit": [
+      "wallet_debit_and_any_direct_gold_outcome_credit",
+      "coupon_quantity",
+      "stock_or_service_use_counter",
+      "equipment_or_inventory_or_bound_tray_result",
+      "RNG_cursor_if_random",
+      "OperationID_committed_result"
+    ],
+    "failure": "no_gold_ticket_stock_use_or_rng_change; no_automatic_cheaper_substitute",
+    "duplicate_operation": "return_exact_same_commit_no_second_charge_reward_or_draw",
+    "committed_display_failure": "restore_committed_record_not_refund_or_reroll",
+    "coupon_stacking": false,
+    "minimum_merchant_discount_price": 1,
+    "merchant_FUN002_formula": "max(1,ceil(original_gold_price*.8)); only_if_savings_positive",
+    "retail_discount_excludes_services_tolls_and_wheels": true,
+    "sell_buyback_disassembly_exchange_refresh": false,
+    "currency_conversion_gold_to_meta_or_meta_to_gold": false,
+    "all_mainline_and_returns_free": true,
+    "existing_D01_chapter_transition_heal_unchanged": true,
+    "paused_UI_advances_run_clocks": false,
+    "refill_existing_owned_resources_on_facility_open_purchase_grade_change_or_enchant": false,
+    "new_weapon_initial_magazine": "v1_once_at_stock_generation; purchase_only_transfers_this_fixed_instance; does_not_refill_old_weapon_or_character_resources"
+  },
+  "utility_matching": {
+    "ITM-FUN-001": "one_still_reachable_unopened_OBJ-REG02_or05-N04-COMMON-SUPPLY_common_lock; one_key_no_gold; never_gold_tolls_mainline_or_Boss_gate",
+    "ITM-FUN-002": "remaining_ordinary_nonservice_N04_or_N06_offer_with_actual_positive_saving",
+    "ITM-FUN-003": "unlocked_and_reachable_REG02_or04_roulette_with_remaining_uses_and_no_pending_reward",
+    "ITM-FUN-004": "existing_reachable_unrevealed_current_chapter_H01_and_route_stone",
+    "ITM-FUN-005": "unlocked_owned_grade0_target_and_remaining_reachable_basic_forge_with_chapter_cap>=1",
+    "ITM-FUN-006": "owned_enchanted_tierI_orII_with_negative_affix_and_remaining_reachable_cleanse_service"
+  },
+  "utility_source_gate": "D03_meta_unlock_eligibility_and_remaining_matching_service_checked_at_source_generation; revalidate_at_use; no_match_no_consumption_no_silent_replacement",
+  "reward_price_valuation": "shop_list_prices_are_opportunity_reference_only; no_resale_no_cash_conversion_no_guaranteed_personal_value",
+  "known_dependencies": [
+    "D08_root_mainline700_budget_and_equipment_grade_effects",
+    "D09_unlock_conditions_and_talent_costs",
+    "D11_UI_tray_and_price_risk_accessibility",
+    "D13_atomic_persistence_and_committed_rng_records",
+    "D14_full_run_supply_and_economy_playtests"
+  ]
+}

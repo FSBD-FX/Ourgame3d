@@ -1,0 +1,4260 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "source_event": "EV-030",
+  "module": "D-12",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposal_not_individually_user_approved",
+  "counts": {
+    "weapon_family_profiles": 11,
+    "audio_events": 40,
+    "music_regions": 5,
+    "boss_music_profiles": 7,
+    "local_original_packages": 8,
+    "new_generated_or_downloaded_assets": 0
+  },
+  "source_refs": [
+    "../../../AGENTS.md",
+    "../../../README.md",
+    "../equipment-v1/weapons.json",
+    "../player-combat-v1/player-combat-rules.json",
+    "../items-v1/common-rules.json",
+    "../inventory-v1/inventory-rules.json",
+    "../bosses-v1/common-rules.json",
+    "../dungeon-v1/common-rules.json",
+    "../ui-input-v1/input-rules.json",
+    "../ui-input-v1/hud-and-feedback.json"
+  ],
+  "local_asset_audit": {
+    "scope": "read_only_local_files_manifests_zip_members_license_text_and_headers; no_download_generation_conversion_playback_or_engine_execution",
+    "checked_date": "2026-10-14",
+    "path_policy": "read-only map historical E:/codex_game prefix to F:/Ourgame; preserve old source documents unchanged; this is not new engine import proof",
+    "actual_counts": {
+      "original_zip_packages": 8,
+      "zip_total_bytes": 94920296,
+      "extracted_pack_files": 1007,
+      "local_source_ogg_files": 205,
+      "impact_ogg": 130,
+      "rpg_ogg_including_preview": 52,
+      "rpg_individual_Audio_ogg": 51,
+      "rpg_preview_ogg": 1,
+      "music_loop_ogg": 23,
+      "individual_sfx_candidates_excluding_rpg_preview": 181,
+      "wav_sources_under_source_assets": 0,
+      "prototype_2D_character_frames": 64,
+      "prototype_2D_clips": 10,
+      "prototype_2D_item_icons": 5,
+      "first_room_import_report_textures": 64,
+      "historical_import_report_representative_SoundWaves": 3,
+      "confirmed_formal_Chinese_voice_set": 0
+    },
+    "acquisition_manifests": [
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/acquisition-manifest.json",
+        "bytes": 1744,
+        "sha256": "60a07578fa624007876d01ce73315d35f2807e31bab9e935ad643f36db2c15aa"
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/acquisition-manifest.json",
+        "bytes": 11909,
+        "sha256": "5e809f6c827a26b2d31f34165d3e2115d5baa37d8ac620528ff3b11d1bea5704"
+      },
+      {
+        "path": "source-assets/third-party/fonts/noto-sans-cjk-sc/2026-10-10-v1/source-manifest.json",
+        "bytes": 4032,
+        "sha256": "de8a16e3f8ad481ff2d5720688b9ef6588fb8fca7437ab20ef00c5856e41f89f"
+      },
+      {
+        "path": "source-assets/prototype/first-room-v1/manifest.json",
+        "bytes": 7541,
+        "sha256": "9efaf177f21ffae98c24987362461e4d69d323b6cae518e79fe2f7a7504d876e"
+      },
+      {
+        "path": "source-assets/prototype/first-room-v1/source-index.json",
+        "bytes": 14746,
+        "sha256": "8854974823a14e6ace5c90c8b45f546af2aa59074cf72ea067e150011c55585e"
+      },
+      {
+        "path": "source-assets/prototype/first-room-v1/README.md",
+        "bytes": 2961,
+        "sha256": "717844965a0eb815d19b4177ab1dc9a271631e088a3631c26acfa11e87f699cf"
+      },
+      {
+        "path": "source-assets/prototype/first-room-v1/LICENSE-Kenney-MiniDungeon.txt",
+        "bytes": 701,
+        "sha256": "f8b470068a1c043854101c9ff7161d376ba02c36239da3c1dbdfa928b08444b6"
+      }
+    ],
+    "packages": [
+      {
+        "id": "kenney-ui-adventure",
+        "acquisition_manifest": "source-assets/third-party/kenney/2026-10-10/acquisition-manifest.json",
+        "historical_archive_path": "E:\\codex_game\\source-assets\\third-party\\kenney\\2026-10-10\\kenney_ui-pack-adventure.zip",
+        "historical_extract_path": "E:\\codex_game\\source-assets\\third-party\\kenney\\2026-10-10\\kenney-ui-adventure",
+        "archive": {
+          "path": "source-assets/third-party/kenney/2026-10-10/kenney_ui-pack-adventure.zip",
+          "bytes": 577463,
+          "sha256": "982e8ab66842509ee9214f9c2038e594cbe029f19d1dc177fecaad3b41a67ed3"
+        },
+        "archive_hash_matches_manifest": true,
+        "extracted_root": "source-assets/third-party/kenney/2026-10-10/kenney-ui-adventure",
+        "actual_counts": {
+          "zip_entries_including_directories": 398,
+          "zip_file_entries": 393,
+          "extracted_files": 393,
+          "extension_counts": {
+            ".png": 260,
+            ".svg": 128,
+            ".txt": 1,
+            ".url": 2,
+            ".xml": 2
+          }
+        },
+        "all_archive_files_match_extracted_bytes": true,
+        "extracted_inventory_sha256": "4888bd4e1ded50913f3a26e802478d18dbc8613a25ac1e950ade6e5254e96455",
+        "inventory_hash_recipe": "sorted relative POSIX path + NUL + decimal bytes + NUL + lowercase sha256 + LF, UTF8",
+        "license_evidence": [
+          {
+            "path": "source-assets/third-party/kenney/2026-10-10/kenney-ui-adventure/License.txt",
+            "bytes": 713,
+            "sha256": "593b79956190ca70b37ce5d0d1c71dd4b5fb4027d4d1d29a91814e950a36e6bd",
+            "text_read": true,
+            "license_label_observed": "CC0 1.0",
+            "first_nonempty_line": "UI Pack - Adventure (1.1)",
+            "scope": "local_pack_license_text_only_not_current_upstream_legal_opinion"
+          }
+        ],
+        "version_evidence": "local license title only; archive filename is not version authority",
+        "visual_interpretation": "3D_mesh_animation_texture_or_UI_candidate; not_additional_2D_character_animation",
+        "status": "local_files_and_license_text_verified; adoption_listening_runtime_not_verified_here"
+      },
+      {
+        "id": "kenney-impact-sounds",
+        "acquisition_manifest": "source-assets/third-party/kenney/2026-10-10/acquisition-manifest.json",
+        "historical_archive_path": "E:\\codex_game\\source-assets\\third-party\\kenney\\2026-10-10\\kenney_impact-sounds.zip",
+        "historical_extract_path": "E:\\codex_game\\source-assets\\third-party\\kenney\\2026-10-10\\kenney-impact-sounds",
+        "archive": {
+          "path": "source-assets/third-party/kenney/2026-10-10/kenney_impact-sounds.zip",
+          "bytes": 800850,
+          "sha256": "029d734af1582474edf3a694d1b0cebc97c1c152f2f39fa34d4c2bafc5de77f8"
+        },
+        "archive_hash_matches_manifest": true,
+        "extracted_root": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds",
+        "actual_counts": {
+          "zip_entries_including_directories": 134,
+          "zip_file_entries": 133,
+          "extracted_files": 133,
+          "extension_counts": {
+            ".ogg": 130,
+            ".txt": 1,
+            ".url": 2
+          }
+        },
+        "all_archive_files_match_extracted_bytes": true,
+        "extracted_inventory_sha256": "c7c431b899372ab118abbaeb24e06951d797e7e48081bee4f12b1a9c2c82a6b9",
+        "inventory_hash_recipe": "sorted relative POSIX path + NUL + decimal bytes + NUL + lowercase sha256 + LF, UTF8",
+        "license_evidence": [
+          {
+            "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/License.txt",
+            "bytes": 608,
+            "sha256": "b49aa9c56b04528b95913de13e506a0f7c5e807b9925db9bfef86af1f91120db",
+            "text_read": true,
+            "license_label_observed": "CC0 1.0",
+            "first_nonempty_line": "Impact Sounds (1.0)",
+            "scope": "local_pack_license_text_only_not_current_upstream_legal_opinion"
+          }
+        ],
+        "version_evidence": "local license title only; archive filename is not version authority",
+        "visual_interpretation": "3D_mesh_animation_texture_or_UI_candidate; not_additional_2D_character_animation",
+        "status": "local_files_and_license_text_verified; adoption_listening_runtime_not_verified_here"
+      },
+      {
+        "id": "kenney-modular-dungeon-kit",
+        "acquisition_manifest": "source-assets/third-party/preparation-2026-10-10-v1/acquisition-manifest.json",
+        "historical_archive_path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\kenney-modular-dungeon-kit\\kenney_modular-dungeon-kit_1.0.zip",
+        "historical_extract_path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\kenney-modular-dungeon-kit\\extracted",
+        "archive": {
+          "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-modular-dungeon-kit/kenney_modular-dungeon-kit_1.0.zip",
+          "bytes": 6886434,
+          "sha256": "dd0aa6776db8912283cdca60161dee6a8839bbda3558eba2ea501419eb5b4623"
+        },
+        "archive_hash_matches_manifest": true,
+        "extracted_root": "source-assets/third-party/preparation-2026-10-10-v1/kenney-modular-dungeon-kit/extracted",
+        "actual_counts": {
+          "zip_entries_including_directories": 218,
+          "zip_file_entries": 209,
+          "extracted_files": 209,
+          "extension_counts": {
+            ".fbx": 39,
+            ".glb": 39,
+            ".html": 1,
+            ".mtl": 39,
+            ".obj": 39,
+            ".png": 48,
+            ".txt": 1,
+            ".url": 3
+          }
+        },
+        "all_archive_files_match_extracted_bytes": true,
+        "extracted_inventory_sha256": "b3189e32d344697447889c3d84941f3112e3fd734349a5033a5b6d3c8a107bb0",
+        "inventory_hash_recipe": "sorted relative POSIX path + NUL + decimal bytes + NUL + lowercase sha256 + LF, UTF8",
+        "license_evidence": [
+          {
+            "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-modular-dungeon-kit/extracted/License.txt",
+            "bytes": 708,
+            "sha256": "41a49bdd304040502cabcedf73f27a1beeecc548c86f71822f288600d39d2601",
+            "text_read": true,
+            "license_label_observed": "CC0 1.0",
+            "first_nonempty_line": "Modular Dungeon Kit (2.1)",
+            "scope": "local_pack_license_text_only_not_current_upstream_legal_opinion"
+          }
+        ],
+        "version_evidence": "2.1 (package License.txt)",
+        "visual_interpretation": "3D_mesh_animation_texture_or_UI_candidate; not_additional_2D_character_animation",
+        "status": "local_files_and_license_text_verified; adoption_listening_runtime_not_verified_here"
+      },
+      {
+        "id": "kenney-mini-dungeon",
+        "acquisition_manifest": "source-assets/third-party/preparation-2026-10-10-v1/acquisition-manifest.json",
+        "historical_archive_path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\kenney-mini-dungeon\\kenney_mini-dungeon.zip",
+        "historical_extract_path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\kenney-mini-dungeon\\extracted",
+        "archive": {
+          "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-mini-dungeon/kenney_mini-dungeon.zip",
+          "bytes": 1796820,
+          "sha256": "19c4648680cb1d2e8836cade96cbf9781c0c1f45fbc6d2ce41cee8239a3ec4d8"
+        },
+        "archive_hash_matches_manifest": true,
+        "extracted_root": "source-assets/third-party/preparation-2026-10-10-v1/kenney-mini-dungeon/extracted",
+        "actual_counts": {
+          "zip_entries_including_directories": 171,
+          "zip_file_entries": 162,
+          "extracted_files": 162,
+          "extension_counts": {
+            ".fbx": 30,
+            ".glb": 30,
+            ".html": 1,
+            ".mtl": 30,
+            ".obj": 30,
+            ".png": 37,
+            ".txt": 1,
+            ".url": 3
+          }
+        },
+        "all_archive_files_match_extracted_bytes": true,
+        "extracted_inventory_sha256": "a2f6f53145d00bd96eb7b0f5d4a310a5070f56b588fd790b150a530dd0c91071",
+        "inventory_hash_recipe": "sorted relative POSIX path + NUL + decimal bytes + NUL + lowercase sha256 + LF, UTF8",
+        "license_evidence": [
+          {
+            "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-mini-dungeon/extracted/License.txt",
+            "bytes": 701,
+            "sha256": "f8b470068a1c043854101c9ff7161d376ba02c36239da3c1dbdfa928b08444b6",
+            "text_read": true,
+            "license_label_observed": "CC0 1.0",
+            "first_nonempty_line": "Mini Dungeon (2.0)",
+            "scope": "local_pack_license_text_only_not_current_upstream_legal_opinion"
+          }
+        ],
+        "version_evidence": "2.0 (package License.txt)",
+        "visual_interpretation": "3D_mesh_animation_texture_or_UI_candidate; not_additional_2D_character_animation",
+        "status": "local_files_and_license_text_verified; adoption_listening_runtime_not_verified_here"
+      },
+      {
+        "id": "kenney-animated-characters-protagonists",
+        "acquisition_manifest": "source-assets/third-party/preparation-2026-10-10-v1/acquisition-manifest.json",
+        "historical_archive_path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\kenney-animated-characters-protagonists\\kenney_animated-characters-protagonists.zip",
+        "historical_extract_path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\kenney-animated-characters-protagonists\\extracted",
+        "archive": {
+          "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-animated-characters-protagonists/kenney_animated-characters-protagonists.zip",
+          "bytes": 581441,
+          "sha256": "ec3787de70fa2200256848d74201b10f6b6c3126594e9857bf989753312c2b84"
+        },
+        "archive_hash_matches_manifest": true,
+        "extracted_root": "source-assets/third-party/preparation-2026-10-10-v1/kenney-animated-characters-protagonists/extracted",
+        "actual_counts": {
+          "zip_entries_including_directories": 20,
+          "zip_file_entries": 16,
+          "extracted_files": 16,
+          "extension_counts": {
+            ".fbx": 4,
+            ".png": 5,
+            ".svg": 4,
+            ".txt": 1,
+            ".url": 2
+          }
+        },
+        "all_archive_files_match_extracted_bytes": true,
+        "extracted_inventory_sha256": "3d531b1a91b42c599a5d4625350204a0d0eec4d612921ddb67b6fbcfab17fb51",
+        "inventory_hash_recipe": "sorted relative POSIX path + NUL + decimal bytes + NUL + lowercase sha256 + LF, UTF8",
+        "license_evidence": [
+          {
+            "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-animated-characters-protagonists/extracted/License.txt",
+            "bytes": 699,
+            "sha256": "68280323c6dca1f532c71fb248a6f344abed39a574278a2edfa27801aea3d0cd",
+            "text_read": true,
+            "license_label_observed": "CC0 1.0",
+            "first_nonempty_line": "Animated Characters Protagonists (1.1)",
+            "scope": "local_pack_license_text_only_not_current_upstream_legal_opinion"
+          }
+        ],
+        "version_evidence": "1.1 (package License.txt)",
+        "visual_interpretation": "3D_mesh_animation_texture_or_UI_candidate; not_additional_2D_character_animation",
+        "status": "local_files_and_license_text_verified; adoption_listening_runtime_not_verified_here"
+      },
+      {
+        "id": "kenney-rpg-audio",
+        "acquisition_manifest": "source-assets/third-party/preparation-2026-10-10-v1/acquisition-manifest.json",
+        "historical_archive_path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\kenney-rpg-audio\\kenney_rpg-audio.zip",
+        "historical_extract_path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\kenney-rpg-audio\\extracted",
+        "archive": {
+          "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/kenney_rpg-audio.zip",
+          "bytes": 964837,
+          "sha256": "6dbeaf8544da958d8f2adcb4a4a4b76c1ade34a05f8ab9edccd327da7375f38b"
+        },
+        "archive_hash_matches_manifest": true,
+        "extracted_root": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted",
+        "actual_counts": {
+          "zip_entries_including_directories": 56,
+          "zip_file_entries": 55,
+          "extracted_files": 55,
+          "extension_counts": {
+            ".ogg": 52,
+            ".txt": 1,
+            ".url": 2
+          }
+        },
+        "all_archive_files_match_extracted_bytes": true,
+        "extracted_inventory_sha256": "58ba47bcf1a844a09649dd2d6860dc4ddf3ad3eac882c85b702226e5da9c5ac4",
+        "inventory_hash_recipe": "sorted relative POSIX path + NUL + decimal bytes + NUL + lowercase sha256 + LF, UTF8",
+        "license_evidence": [
+          {
+            "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/License.txt",
+            "bytes": 478,
+            "sha256": "5735dfd72cb64cbbceda4ebc00c380c41ca680edb82ff153aa7c9ab97614c539",
+            "text_read": true,
+            "license_label_observed": "CC0 1.0",
+            "first_nonempty_line": "RPG Audio",
+            "scope": "local_pack_license_text_only_not_current_upstream_legal_opinion"
+          }
+        ],
+        "version_evidence": "no version number in package License.txt",
+        "visual_interpretation": "3D_mesh_animation_texture_or_UI_candidate; not_additional_2D_character_animation",
+        "status": "local_files_and_license_text_verified; adoption_listening_runtime_not_verified_here"
+      },
+      {
+        "id": "quaternius-universal-animation-library-2-standard",
+        "acquisition_manifest": "source-assets/third-party/preparation-2026-10-10-v1/acquisition-manifest.json",
+        "historical_archive_path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\quaternius-universal-animation-library-2-standard\\Universal Animation Library 2[Standard].zip",
+        "historical_extract_path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\quaternius-universal-animation-library-2-standard\\extracted",
+        "archive": {
+          "path": "source-assets/third-party/preparation-2026-10-10-v1/quaternius-universal-animation-library-2-standard/Universal Animation Library 2[Standard].zip",
+          "bytes": 18735003,
+          "sha256": "4008ea208a604773a2b2177d965f0f5d3195498b5bf838c3f5785d68e95f2a68"
+        },
+        "archive_hash_matches_manifest": true,
+        "extracted_root": "source-assets/third-party/preparation-2026-10-10-v1/quaternius-universal-animation-library-2-standard/extracted",
+        "actual_counts": {
+          "zip_entries_including_directories": 19,
+          "zip_file_entries": 13,
+          "extracted_files": 13,
+          "extension_counts": {
+            ".blend": 1,
+            ".fbx": 3,
+            ".glb": 3,
+            ".png": 3,
+            ".txt": 3
+          }
+        },
+        "all_archive_files_match_extracted_bytes": true,
+        "extracted_inventory_sha256": "9c90cd7a0fe0836ac281ad065856ac9c4e5cd297d884b5a037ab229dcd64b8fb",
+        "inventory_hash_recipe": "sorted relative POSIX path + NUL + decimal bytes + NUL + lowercase sha256 + LF, UTF8",
+        "license_evidence": [
+          {
+            "path": "source-assets/third-party/preparation-2026-10-10-v1/quaternius-universal-animation-library-2-standard/extracted/Universal Animation Library 2[Standard]/License.txt",
+            "bytes": 332,
+            "sha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061",
+            "text_read": true,
+            "license_label_observed": "CC0 1.0",
+            "first_nonempty_line": "-------------------------------------------------------",
+            "scope": "local_pack_license_text_only_not_current_upstream_legal_opinion"
+          }
+        ],
+        "version_evidence": "Standard; upload ID 17958478, archive hash fixed; full product update version not asserted",
+        "visual_interpretation": "3D_mesh_animation_texture_or_UI_candidate; not_additional_2D_character_animation",
+        "status": "local_files_and_license_text_verified; adoption_listening_runtime_not_verified_here"
+      },
+      {
+        "id": "abstraction-music-loop-bundle-2026-q3",
+        "acquisition_manifest": "source-assets/third-party/preparation-2026-10-10-v1/acquisition-manifest.json",
+        "historical_archive_path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\abstraction-music-loop-bundle-2026-q3\\music-loop-bundle-2026-q3.zip",
+        "historical_extract_path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\abstraction-music-loop-bundle-2026-q3\\extracted",
+        "archive": {
+          "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/music-loop-bundle-2026-q3.zip",
+          "bytes": 64577448,
+          "sha256": "2ee1222f54446b61b9e51e211cea29ef6147491562c682edaf6056f38fe4c93b"
+        },
+        "archive_hash_matches_manifest": true,
+        "extracted_root": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted",
+        "actual_counts": {
+          "zip_entries_including_directories": 26,
+          "zip_file_entries": 26,
+          "extracted_files": 26,
+          "extension_counts": {
+            ".ogg": 23,
+            ".png": 1,
+            ".txt": 2
+          }
+        },
+        "all_archive_files_match_extracted_bytes": true,
+        "extracted_inventory_sha256": "cb9b00f10151c195bd9b91c58e825b9f6ff53084ab95245ce9f8d5de834fcc9c",
+        "inventory_hash_recipe": "sorted relative POSIX path + NUL + decimal bytes + NUL + lowercase sha256 + LF, UTF8",
+        "license_evidence": [
+          {
+            "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/_LICENSE.txt",
+            "bytes": 1138,
+            "sha256": "d02e059adb401d50167b2e04d12ef9236fbcef0b4e3b7157bd5ebfab8a82b8f4",
+            "text_read": true,
+            "license_label_observed": "CC0 1.0",
+            "first_nonempty_line": "===============================",
+            "scope": "local_pack_license_text_only_not_current_upstream_legal_opinion"
+          }
+        ],
+        "version_evidence": "2026 Q3; upload ID 19538393",
+        "visual_interpretation": "3D_mesh_animation_texture_or_UI_candidate; not_additional_2D_character_animation",
+        "status": "local_files_and_license_text_verified; adoption_listening_runtime_not_verified_here"
+      }
+    ],
+    "audio_files": [
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_carpet_000.ogg",
+        "bytes": 6353,
+        "sha256": "b9524658b52a99a20590f8feefc103088637fd13ea8ec35811aee785e1f2f330",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_carpet_001.ogg",
+        "bytes": 6411,
+        "sha256": "9af3c3f76705107339e72036e4053bdca3eaa50ad31c8c929f42ce8d40e5d781",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_carpet_002.ogg",
+        "bytes": 6411,
+        "sha256": "9af3c3f76705107339e72036e4053bdca3eaa50ad31c8c929f42ce8d40e5d781",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_carpet_003.ogg",
+        "bytes": 6301,
+        "sha256": "4ae7454338d57c7d102145919ae653c7d010eb542797c4f25a1c7470be3a7e4c",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_carpet_004.ogg",
+        "bytes": 6301,
+        "sha256": "4ae7454338d57c7d102145919ae653c7d010eb542797c4f25a1c7470be3a7e4c",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_concrete_000.ogg",
+        "bytes": 5808,
+        "sha256": "d7267e183067757c92c169de2a379abea592cfca6b39bb2e8feea15221ad79fe",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_concrete_001.ogg",
+        "bytes": 6308,
+        "sha256": "507a75eb19b897087855a3be3cf11a12d7fa37d143ad535eeebe0b8031c7325d",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_concrete_002.ogg",
+        "bytes": 6255,
+        "sha256": "b21fa546d74941196b25da8a20b7010abd8c05c4fcf93545d1f344e66a664e13",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_concrete_003.ogg",
+        "bytes": 5805,
+        "sha256": "8b513c2f0316324060b9174b8f28df6c2147418c506e6a53b77f18e149a5547b",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_concrete_004.ogg",
+        "bytes": 5912,
+        "sha256": "24dd8db2413e5b81ad181e1205c12a1c7801da5f85715d471b92a4b2f632e45e",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_grass_000.ogg",
+        "bytes": 8290,
+        "sha256": "9d49497777405d78d7cf7f2888e28277f3a23192300cfd1d79d54876b20f479f",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_grass_001.ogg",
+        "bytes": 8313,
+        "sha256": "fb28781bd22b2eefdc14077f1adf5c94d7fe9c3a130194633b55f3e0d39d9f04",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_grass_002.ogg",
+        "bytes": 8278,
+        "sha256": "73a520139f5be716a403bfe9c80e0e94d1e61d8e9de04a354b336392164b53dc",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_grass_003.ogg",
+        "bytes": 8129,
+        "sha256": "0546e1d8ab2def714425701a18bd34c5ee2794b12e858e5b595aabcf38a34137",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_grass_004.ogg",
+        "bytes": 7800,
+        "sha256": "086fd4ab3546a507ea5f5c759a9a10e535c95ade13705c238bc0eeffd7d4e8ba",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_snow_000.ogg",
+        "bytes": 7880,
+        "sha256": "c05fa4a9dc9a7aabc04996466fb589537e49af76de9998d8f9e6270ec92dcef7",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_snow_001.ogg",
+        "bytes": 7794,
+        "sha256": "980fb9a1c9227aed7995067b0357f373053337f2416316db8ea0438418542fb4",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_snow_002.ogg",
+        "bytes": 7694,
+        "sha256": "db52bafdc66304f3b999f2c29227826c65993916e630ac2ffbca17d07b263178",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_snow_003.ogg",
+        "bytes": 7860,
+        "sha256": "68272e3f1cabcabd02d328fd344454d7c04cb58b5a86972fcdd858f845e3d007",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_snow_004.ogg",
+        "bytes": 7630,
+        "sha256": "7fe9ce5f5732aaa0a50ef02bb1ac162c27f6bd85214e86aaea6e13e7a41dbc00",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_wood_000.ogg",
+        "bytes": 5949,
+        "sha256": "5f1c252942a220d658121bd9417448cd19649ded9fff2ff15f6e50899373ce8e",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_wood_001.ogg",
+        "bytes": 5929,
+        "sha256": "e4f68e1c9fd55b4dc8ca89ed2bbab6f200171bc54bdc18aa96b80d8e7336f462",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_wood_002.ogg",
+        "bytes": 5895,
+        "sha256": "9ff095b05cee5eec40b081defe3f0eef7232bb16d4865ce03b9f6dbab875cfdd",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_wood_003.ogg",
+        "bytes": 6207,
+        "sha256": "2a68a083daa9eda08fed0ea5da5280dfbe0de226196c576be02f95259dd139d9",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/footstep_wood_004.ogg",
+        "bytes": 5799,
+        "sha256": "b33e0854e2b3f6b6492e25c25ef8f90447a332f7c6bb25dd02edced9581d3441",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactBell_heavy_000.ogg",
+        "bytes": 13915,
+        "sha256": "94b8bb5f2d43ab65e4bcc32b28562416e9bc2c51d9fd4be1e333660ee52f977f",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactBell_heavy_001.ogg",
+        "bytes": 15577,
+        "sha256": "9df61e3ae9a83dc65e5a1fd3ed19d480876f3b22b963a1b9ef6fa293592dcec4",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactBell_heavy_002.ogg",
+        "bytes": 9252,
+        "sha256": "a4171ed1a4a17fb858a38de1c59b5b42e50d8f046c525706c0e3ac8671f189f5",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactBell_heavy_003.ogg",
+        "bytes": 9429,
+        "sha256": "5572ccdeb3b62373b86fa955355b3a222c36e815f0636ba16165189a21cf2514",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactBell_heavy_004.ogg",
+        "bytes": 6529,
+        "sha256": "49fe4fafa2001bd0d312976796824571ca8429851f285997e1327d17bb34fd00",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGeneric_light_000.ogg",
+        "bytes": 5827,
+        "sha256": "f0e982611e97512fee5f777986b67e8b435434b601f94992ec044f7e89fb5acb",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGeneric_light_001.ogg",
+        "bytes": 5636,
+        "sha256": "c3cd1c073d186ae8fa35788ba94de581f1826e7427a7bb26490b2695fac18efa",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGeneric_light_002.ogg",
+        "bytes": 5795,
+        "sha256": "d0bf60905b59ff630ffe01eb0edeeacd2504eaa8fb6523aeef7d2458b78264d3",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGeneric_light_003.ogg",
+        "bytes": 5792,
+        "sha256": "0e8896706130f6bc88cdf1f0157aaacdbe88dce86cf0330f9136e44eb1209e81",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGeneric_light_004.ogg",
+        "bytes": 5747,
+        "sha256": "f906fa3a37acc4372787b496efcedefa2856045d5ec9456a3bd6c303c0eabb41",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGlass_heavy_000.ogg",
+        "bytes": 7403,
+        "sha256": "b44b39a940e8948e74b9bd3776bff980df43cf220abdaf0d467dc4c43c0244a5",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGlass_heavy_001.ogg",
+        "bytes": 8946,
+        "sha256": "58686e0e562612cc566791844a10e269f8d1921f4766c14ba43976fd0a429f4e",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGlass_heavy_002.ogg",
+        "bytes": 7661,
+        "sha256": "4978654ac840ad519692d5d5ba48a8101cabce13b9a577be73ad589185e5e9ed",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGlass_heavy_003.ogg",
+        "bytes": 6956,
+        "sha256": "aed07b154f24410c17e5262bbef832842fb275d41fe297f721af7501d0e9c23a",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGlass_heavy_004.ogg",
+        "bytes": 8300,
+        "sha256": "c7742b0e33c1733ddaf902aa68464a4f5364e4d4cb6ff11b76a7aa4151a138dd",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGlass_light_000.ogg",
+        "bytes": 6526,
+        "sha256": "d750cf88097d0c3e69920e6e14496e1444e1a9da01aa4cca8f5ec8cb44c57b4f",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGlass_light_001.ogg",
+        "bytes": 6544,
+        "sha256": "05e513fbd42829060eb37855f8c3866722ec5c39a8937c9bfde518cc609effa2",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGlass_light_002.ogg",
+        "bytes": 6562,
+        "sha256": "710db7451bb7857b9140dfe6afe4621ea2188ad65eda3919c569d1bb285b933d",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGlass_light_003.ogg",
+        "bytes": 6618,
+        "sha256": "765290ce32fa108c939a0dbd6fbacbcd05abde622b57b708eb8a64058ef4225a",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGlass_light_004.ogg",
+        "bytes": 6641,
+        "sha256": "f535b7cb7835400d8d28bcf9e1cf047ce3c0eb7a6456bdb1a4a27acbec1ed2cb",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGlass_medium_000.ogg",
+        "bytes": 8400,
+        "sha256": "9252d50bfb85edb17d6073c4a7806e10cdb9de56d3dbfc93a4b9727146d2df6d",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGlass_medium_001.ogg",
+        "bytes": 8605,
+        "sha256": "d3d806cb3012c9ddd87010b30295ccb74d6d8b690077d19e67afd09a9d8feb03",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGlass_medium_002.ogg",
+        "bytes": 8341,
+        "sha256": "48616f22c95589ed9fe55babf0fd012721d7b2ef1b9e85c2ad6408a2cd7c164f",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGlass_medium_003.ogg",
+        "bytes": 8596,
+        "sha256": "dccea1ecc3d942ee5fd217c684632638f6c039c97cd3ae59c75ab15d0c3f0b59",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGlass_medium_004.ogg",
+        "bytes": 8397,
+        "sha256": "853fe77ad46bd0cf106e40e741b039e15b90f73edecd92cde524fbad9e3ebe00",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMetal_heavy_000.ogg",
+        "bytes": 6110,
+        "sha256": "e07045693e4a2b3d165c424e3dab4c781d9ff8880a386880ac89a51315d7f831",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMetal_heavy_001.ogg",
+        "bytes": 7279,
+        "sha256": "83554049f81f4db9209379e103c30bfa63f65c42189a03f300b045c2c82e23ae",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMetal_heavy_002.ogg",
+        "bytes": 5634,
+        "sha256": "b914c8f1eb7c0f34bb165d7c77f4be0351f6be0660c13c53e65424e262e2c093",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMetal_heavy_003.ogg",
+        "bytes": 6209,
+        "sha256": "b0f2ba4dabde9a87eb9c188a19d31e0c2300fd321adeba08d3b9b8aa011d7037",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMetal_heavy_004.ogg",
+        "bytes": 5788,
+        "sha256": "6d65b463c0555dd5be16b8db6d2cbe23a94e07a4637779b8ad17d0db3e500a87",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMetal_light_000.ogg",
+        "bytes": 7651,
+        "sha256": "33b5e6e37c6e9d54e07bf5a89b12c76e879f40c1ea83cdd82714df1d6f9fec6d",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMetal_light_001.ogg",
+        "bytes": 6967,
+        "sha256": "fba69c467ddd85da7b1d82e259f936b876d9ba6a3d6f1b24bdd10468e46bfe08",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMetal_light_002.ogg",
+        "bytes": 6804,
+        "sha256": "25a96f90a9a1f88a531e824e126f0519504625e5635e65a72e4f31611428db29",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMetal_light_003.ogg",
+        "bytes": 9023,
+        "sha256": "92d5db6bfc672d9dc1b4f390b2900504f013187fa36335472554fafefa9050b1",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMetal_light_004.ogg",
+        "bytes": 6675,
+        "sha256": "9b1c35820fba507081261f19ab5f461f69a5e2627a7d91acdb73ca3cfc997979",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMetal_medium_000.ogg",
+        "bytes": 7117,
+        "sha256": "a96f879fec0864a8938e0c745b6996a6c5679c16a234ce31a01cc995e8401003",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMetal_medium_001.ogg",
+        "bytes": 6151,
+        "sha256": "e8a9eaba7c4d27422e4eeb3e6c7100d5d7dc0f83e005efc98c960adcc5265337",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMetal_medium_002.ogg",
+        "bytes": 5857,
+        "sha256": "7e89ce2ca0dbda95ea2b78d4b50791cab35c10d20e9f5ccd45dd0b00e99ff548",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMetal_medium_003.ogg",
+        "bytes": 6964,
+        "sha256": "2a185e2e57211d02c1bdd33b872d6b6a2fe83e6c14f4e56f426a95e717acf08e",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMetal_medium_004.ogg",
+        "bytes": 5744,
+        "sha256": "03e10f800199c7166208e41c11cf4acfac6cc265467f02357da71972bc967295",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMining_000.ogg",
+        "bytes": 12035,
+        "sha256": "36b4ea107222d073c67ca64dde26944975609202d5090b2f2021213c1a7e35cd",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMining_001.ogg",
+        "bytes": 11481,
+        "sha256": "61235a18de3f3d92118235398222dbf51d448f1be70b1c8bc962b10b86f2d9c6",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMining_002.ogg",
+        "bytes": 11235,
+        "sha256": "059558ec751115ca6b1441e00f0adc837c1a3eeb0a066b109e0fd879fc5d0b0c",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMining_003.ogg",
+        "bytes": 12160,
+        "sha256": "4237fa2cd80364ad81cd0af44f67d7497f1c5edcc7bdb02cd22be2ba4580c83d",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMining_004.ogg",
+        "bytes": 11668,
+        "sha256": "8ca3a99d85d845751ad8ce7b40509da58263a62e48cde70e5a30b5ccef4c9a3b",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlank_medium_000.ogg",
+        "bytes": 12016,
+        "sha256": "8403cd7a043f0391574c88c55dd205743725b5363d2407f6de145f201690b68f",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlank_medium_001.ogg",
+        "bytes": 12082,
+        "sha256": "d7c304319f8beac616231b62041fa8da74045b62d7155965516efb9b19303df4",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlank_medium_002.ogg",
+        "bytes": 12313,
+        "sha256": "f6a14da45994229676b4f29e6a35f504b5c2ec2b8166fb1a3b1aa004bc6911ef",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlank_medium_003.ogg",
+        "bytes": 12138,
+        "sha256": "0602a7b3eab5f53484f10fe775ee4204e7a2ba9703c886b302e012f7f6fab8de",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlank_medium_004.ogg",
+        "bytes": 12084,
+        "sha256": "6a51318c1c63821ea757622b57fafbf44c16c28129f6d39406a784260d87c447",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlate_heavy_000.ogg",
+        "bytes": 10032,
+        "sha256": "112d4f93ddcc370b410630f971c0f5d991856102da9c76bc5c5540d388e75aaa",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlate_heavy_001.ogg",
+        "bytes": 8713,
+        "sha256": "142fd6c77f13d25f318265901163f70f8dfe12f87829169a570025be43de7011",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlate_heavy_002.ogg",
+        "bytes": 10188,
+        "sha256": "b0cab75d1befa32b4cf215d8ee7e1c400a39182e8b105963b8e310f825b198a1",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlate_heavy_003.ogg",
+        "bytes": 8490,
+        "sha256": "59775f8979a396c8a793b0a1db206d5bdc651eae808d858e9acaee8ebda5bc6d",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlate_heavy_004.ogg",
+        "bytes": 11092,
+        "sha256": "e31bfec90630155bcc6af541d1d14ae8202c435c52b42e6b6183fdb6ffb248b0",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlate_light_000.ogg",
+        "bytes": 10474,
+        "sha256": "6e797cf8a5bfc52d7ed5eb47c227974c1cf2a674954fec5b539cea7d62c7282c",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlate_light_001.ogg",
+        "bytes": 11730,
+        "sha256": "947915c2eb6ac57ee08fd3a48b297fd108d69abc72076e79882c21cad0eef56e",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlate_light_002.ogg",
+        "bytes": 9932,
+        "sha256": "8ac5869ea434cf0d364872774efe70b2d666a4f02ba35ddfc1e051d336721be8",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlate_light_003.ogg",
+        "bytes": 10626,
+        "sha256": "dbfb7c1d002576696df3e9a43d6639ee3f342068398b5e7b55bc2389d20508a9",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlate_light_004.ogg",
+        "bytes": 11928,
+        "sha256": "9cb33b0c0cce948313f078b60769d2f8e4075472494fc8f8129aa4a23c951897",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlate_medium_000.ogg",
+        "bytes": 10921,
+        "sha256": "b670d30452983369771081319c268475edaaafe782bf4e8d70bd7eef09d8823c",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlate_medium_001.ogg",
+        "bytes": 11491,
+        "sha256": "68ba7701b71ef620f498f3038e832157d71ac8db7ad59424545890b250ceb24e",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlate_medium_002.ogg",
+        "bytes": 10250,
+        "sha256": "68762e1ed49bb59ae6602fad6ce2ebac61958478ddb2668de9106f010cd4b6b0",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlate_medium_003.ogg",
+        "bytes": 11616,
+        "sha256": "964c5fcfb91e7710e2af25c2243c8b7160756b223b0984bacc9eb25bfeea057b",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPlate_medium_004.ogg",
+        "bytes": 10803,
+        "sha256": "f0e8164081190839caff6c2958361b22780ffba5617f77f2d4ee3a4275b318bf",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPunch_heavy_000.ogg",
+        "bytes": 11617,
+        "sha256": "b33a8f14068aec24ec69ba85e5e87fdc41228975f6a1a3e44a6e7d6fc3d9f8d8",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPunch_heavy_001.ogg",
+        "bytes": 10861,
+        "sha256": "f92f5cb6ba4ff2766497292ffd90865654317eeca976f5652e0708dbdcdc0dd9",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPunch_heavy_002.ogg",
+        "bytes": 9025,
+        "sha256": "7993dd4c156b9979ad69f17be5ebe31850b16039a3857f8477141be54dfee1b3",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPunch_heavy_003.ogg",
+        "bytes": 10029,
+        "sha256": "4ab53b26f4ea575120dcc1348526c9e0db2afc6af7a442aa0489bdead2ca80b6",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPunch_heavy_004.ogg",
+        "bytes": 10452,
+        "sha256": "f4c0c3eb8ab6517583b8218ed03f28923d1b687379aab4c1d5a6d4c10cf8e500",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPunch_medium_000.ogg",
+        "bytes": 8800,
+        "sha256": "486988aa2d6440ffc4c62a0e8ccf3c23673ba84424bd4723378d451b7255eb5c",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPunch_medium_001.ogg",
+        "bytes": 8701,
+        "sha256": "e71d23abcc3f10d9d6bc9615b2a431fff70b12333a5fcdd9964457564ace4349",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPunch_medium_002.ogg",
+        "bytes": 10399,
+        "sha256": "6492f9ccbc8d24dcef607bb1b48790b7870961474561f7fe5601e1c73a3018ef",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPunch_medium_003.ogg",
+        "bytes": 9509,
+        "sha256": "2d7c719c05999e0532f4384e1018e04cd916db715140bf16dee2dff3f820e908",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactPunch_medium_004.ogg",
+        "bytes": 10032,
+        "sha256": "4a256878a3afb994ec9a4399336687748e68c7c136872c08c9c797d8c4e2464a",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactSoft_heavy_000.ogg",
+        "bytes": 6570,
+        "sha256": "49e7ca88743fca974bb8676ea138b751cfd8f9033b5e7af8736c2a215d6edbc1",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactSoft_heavy_001.ogg",
+        "bytes": 6689,
+        "sha256": "4d0096364ba9e46119d2ff6df493fdc101bd2e1efae061da5e5f77a53b3fdcb6",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactSoft_heavy_002.ogg",
+        "bytes": 6749,
+        "sha256": "d130ae541951243d3f6ed963d0057450a445ffe117fbf9a084d34eb1635cb563",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactSoft_heavy_003.ogg",
+        "bytes": 6665,
+        "sha256": "d00286a2dc62ee5cb4d42bf56120e7050a855f69e655fc1294410aadd337eba3",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactSoft_heavy_004.ogg",
+        "bytes": 6478,
+        "sha256": "e008f0b6b14f62339c8fe9f9b45cbd6317ba4f66604c4899053b8017020a36f0",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactSoft_medium_000.ogg",
+        "bytes": 5351,
+        "sha256": "7d3ba0bb5e60a11b5d3e558c141303dcf494256675fbf753c0d252d2cf0481e3",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactSoft_medium_001.ogg",
+        "bytes": 5506,
+        "sha256": "7642a4fd43e547afe4f7adfadb3dabb681c0ff512f52c1674bae30a726841faf",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactSoft_medium_002.ogg",
+        "bytes": 5358,
+        "sha256": "5069e3571a77d7f7aae9ef71d0364aa245fb7d64a7c8cc9956f221d03088c089",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactSoft_medium_003.ogg",
+        "bytes": 5392,
+        "sha256": "5c4a1f35fde7e14046931da7bc3d1b23736541b7190ba107e08a379c4ca43cd6",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactSoft_medium_004.ogg",
+        "bytes": 5438,
+        "sha256": "b0a4dea90eed47accf50b768beff1166f2f1486fb139e4d025b2427637624bca",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactTin_medium_000.ogg",
+        "bytes": 6509,
+        "sha256": "f4bbee66ca191ec744b84fc07ac9ed2a6fda955d51cfed8360f12b62815d3cbd",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactTin_medium_001.ogg",
+        "bytes": 6603,
+        "sha256": "84253095543c094d83cd749f42ecfbc96e356b60385f18a192c18eafb25b3cc6",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactTin_medium_002.ogg",
+        "bytes": 6156,
+        "sha256": "c1d2c4f9910d4529581ae56a9a9a01454c4619fbb7d6da7616221d8ec58cc0c4",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactTin_medium_003.ogg",
+        "bytes": 6541,
+        "sha256": "0d18737d93ba7aa0669f751094cbc1671bbebac4fe207783922938ce75e24334",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactTin_medium_004.ogg",
+        "bytes": 6362,
+        "sha256": "fd53e24efec3d5c1cee5a46fee70f97efd4bd01e53ac5d9b5f3b6719dfe9f5aa",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactWood_heavy_000.ogg",
+        "bytes": 6233,
+        "sha256": "15ff82332f342c30e469215539e1cc57e11b221aa2cf7e11e811d313a9927f3d",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactWood_heavy_001.ogg",
+        "bytes": 6239,
+        "sha256": "f1b07a53ac10c615fff9ba470511fdeb722b5902e1a8520759fc20ad6f546015",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactWood_heavy_002.ogg",
+        "bytes": 6146,
+        "sha256": "ce1e06f2a05f2634c645cb72f6a1623e64bc2d92be34917430a61031fb6597d4",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactWood_heavy_003.ogg",
+        "bytes": 6181,
+        "sha256": "af07511902b309b3f6d8f0e1fafbe93869127fb88099ebdc0aa6a00a98dc3cb0",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactWood_heavy_004.ogg",
+        "bytes": 6253,
+        "sha256": "2c647ae6bd29c72ae2523f7e16e325d8d331b75cc99ab4f637c48a0e11c34677",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactWood_light_000.ogg",
+        "bytes": 6343,
+        "sha256": "eb45e35b4bed784d3f120de4afec4b0d6ac09d9e143cce8cfcb7d739e1b1f3c3",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactWood_light_001.ogg",
+        "bytes": 6373,
+        "sha256": "4b76bf3ccc8e60d19188f3165b778a7817786faa6887c55d9049bcbeef3b425f",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactWood_light_002.ogg",
+        "bytes": 6366,
+        "sha256": "b183cf7a5bd783817e0e4b82af34ac6658fa1927049089dadc8b15c2ecc771dc",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactWood_light_003.ogg",
+        "bytes": 6381,
+        "sha256": "cdfbe8af2fe7ff9ee28f337a0a989deee0f327620da456c8413644880e9d0004",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactWood_light_004.ogg",
+        "bytes": 6395,
+        "sha256": "e10009f67ddaeb3a59a3e1129cfc1615d84ba60ab578eae07e7092ac223f099c",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactWood_medium_000.ogg",
+        "bytes": 6575,
+        "sha256": "1723a9fd25103ed41af06054814e84e65f4a772bac86ab2dc927da93d9592ff5",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactWood_medium_001.ogg",
+        "bytes": 6555,
+        "sha256": "15271dbe8e2872dbb0ff1aeb7b12b2d2b92b7c1951c88532b9ab9158c36dfc73",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactWood_medium_002.ogg",
+        "bytes": 6607,
+        "sha256": "3f3f1917428b828f733a963167833c707bf88296ff158e1559c57c5cb813d799",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactWood_medium_003.ogg",
+        "bytes": 6598,
+        "sha256": "635c37cfcd854b187d643d450ff0397798dcc29ae94da32192b814fae6bd854c",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactWood_medium_004.ogg",
+        "bytes": 6481,
+        "sha256": "7ba48f2f99c91c71be420841a91f1e69c0cbc4fe887fcd7213144d67bb87b13a",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/beltHandle1.ogg",
+        "bytes": 10820,
+        "sha256": "2ef665bd8b65dbe669f4560be38a6d8f04a162e618b15a49e3e71b58e558aab0",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/beltHandle2.ogg",
+        "bytes": 15410,
+        "sha256": "f3b692d5c83263c25bce779805b212dbab515d18a603c695fc6a1e8650cf5366",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/bookClose.ogg",
+        "bytes": 9292,
+        "sha256": "81e976532565f4372abd14e83d2684195fa548d0a28d345de221e56052454f32",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/bookFlip1.ogg",
+        "bytes": 18248,
+        "sha256": "fa81ac2fedc8c641661b87e349630a36c9800e795e0c800e029214efdbe26a7d",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/bookFlip2.ogg",
+        "bytes": 12393,
+        "sha256": "3409042acbfaebc24c1a6327dc073e36f9250841712e96c5040da566a97df73c",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/bookFlip3.ogg",
+        "bytes": 9077,
+        "sha256": "c85db5dceb3f1df073e960630277eaa88a5afda0477c1ddd68dad707621767be",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/bookOpen.ogg",
+        "bytes": 8273,
+        "sha256": "953390534377222bee89ac8cd9e60a58fdc037c71a4d7c18c43cd647c7f34ba8",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/bookPlace1.ogg",
+        "bytes": 9901,
+        "sha256": "26f3ce60fbde85b678b0ad7f6624d80535fe540d88232ad1e38e47a96662d977",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/bookPlace2.ogg",
+        "bytes": 11185,
+        "sha256": "831874e8fd142d4d0a03ff009f1f83966338a7878c0f6f38c613ae5b80dd731e",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/bookPlace3.ogg",
+        "bytes": 9570,
+        "sha256": "b1afa711e1cabfe5b2c56e20e20e0f9d82142d067727447fa992ddc43dbdb06e",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/chop.ogg",
+        "bytes": 9370,
+        "sha256": "d00c2b3c9fff07e376145c8c8c45c90e5084ec192f6ce0387db233f7b86f1486",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/cloth1.ogg",
+        "bytes": 16508,
+        "sha256": "ddb93a3671233f95da0e0b10367f082f7eb42fa6caaddcf776410aa8833c747d",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/cloth2.ogg",
+        "bytes": 11787,
+        "sha256": "8a7451193c38bc05483aec25dd193e163a15d44cf7fff04ac7912573231b0201",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/cloth3.ogg",
+        "bytes": 12432,
+        "sha256": "a48632d17a4f1416541d261a32a31612e01267144c407fa3ecab3ff410f0085b",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/cloth4.ogg",
+        "bytes": 11043,
+        "sha256": "e7ab9a6c4466dea874196c61f59bf1da05cfe58748f42fadd695d441a154a99b",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/clothBelt.ogg",
+        "bytes": 21491,
+        "sha256": "f29560a2aea95bbfeb643e1e8f56ec2b6f7e32f32ce4e140645a36db81de3253",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/clothBelt2.ogg",
+        "bytes": 20013,
+        "sha256": "d545b1d9f20e6188140aaf551a96f1e82fe0d15f7ca066fac8b065e1231e0038",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/creak1.ogg",
+        "bytes": 15761,
+        "sha256": "8a346186fd297254248cab8e8117060a52a5cf2a84f603153a762108550ea95e",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/creak2.ogg",
+        "bytes": 19012,
+        "sha256": "8a990afdc03aebb91d528f5385e2f95582dbfa8e2c12c71098ab01be9142294a",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/creak3.ogg",
+        "bytes": 10408,
+        "sha256": "f9638787f95004b9d2d06f8eff8e99d4e594c21b51947daf562856fbcec905d1",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/doorClose_1.ogg",
+        "bytes": 18564,
+        "sha256": "834d29c60a8a8bfb50b158cdb6b7dfa8f02812a408a1ee9703d038dfab0b1aeb",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/doorClose_2.ogg",
+        "bytes": 17598,
+        "sha256": "4aa4fe79836c53cd6d0cb0b22ddc33b9901429463ae1bb75131f072683f63f21",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/doorClose_3.ogg",
+        "bytes": 20889,
+        "sha256": "d0a2540e5e1639bc2fbeef34e76f28e9f9cb8a151736a0ac4c13859994328d0e",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/doorClose_4.ogg",
+        "bytes": 16902,
+        "sha256": "fd21c0e7a9d0317375d2561590f0770dd3380ee35507d064862cb44d6f71595b",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/doorOpen_1.ogg",
+        "bytes": 22848,
+        "sha256": "4ab93bab96522d8eb109ff96dc57cb6765deb02448fe14c10472084be5bb2a0b",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/doorOpen_2.ogg",
+        "bytes": 30280,
+        "sha256": "68962fb0458c9bac59dec3adefa9849703c7c89d34712de03dd0075d095e79e9",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/drawKnife1.ogg",
+        "bytes": 11134,
+        "sha256": "276403e72c3b71c47bc24db3083970c23f8e5551ffa78f436f83483c56f3f0bb",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/drawKnife2.ogg",
+        "bytes": 12395,
+        "sha256": "d5df6a4130cbb016f97b4883769a418917b9629cb4c21717030b186e0c73281a",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/drawKnife3.ogg",
+        "bytes": 12726,
+        "sha256": "a11ae62fb1a628425769d11a9de394980ad8909c31f4c9a4316f226963e21caf",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/dropLeather.ogg",
+        "bytes": 11695,
+        "sha256": "097e1d3b74949b0145fda0519d40b7e0773ab82ec4858727f95be830927e1a45",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/footstep00.ogg",
+        "bytes": 9475,
+        "sha256": "6fe61ef1fc3bcf0e253bf2eb64759db6cb69e2fe452f4d88cc597ecf78a3d601",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/footstep01.ogg",
+        "bytes": 9900,
+        "sha256": "313472dba31fd0c855376069fa368bb5a198c27251cc8398ef464578b7047a4c",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/footstep02.ogg",
+        "bytes": 9528,
+        "sha256": "2d9575b7dead6e1217ca113991fc5229e9b6d998ea0726ebbb277e7398ab888f",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/footstep03.ogg",
+        "bytes": 10559,
+        "sha256": "a86756b9af9f370455ab47844239bb07fd1bee7a113068c91f0fcd9b72703fae",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/footstep04.ogg",
+        "bytes": 11303,
+        "sha256": "fd264d72a7cd622b82abde202f4ed09fa7de95d34c36473ee938ce66cdf39830",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/footstep05.ogg",
+        "bytes": 10288,
+        "sha256": "817957e1f95d97fd36870064c41673895575cde17bccb245f50364c86ed10198",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/footstep06.ogg",
+        "bytes": 9885,
+        "sha256": "6cabfe7ae95d227a84066c6e17014ac31cc7c89b14ef51d7877e98352d4a64fb",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/footstep07.ogg",
+        "bytes": 10264,
+        "sha256": "42924cdbf998d5b3db180a339fd74afc94c570d594a536687e337ef1bdfdb346",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/footstep08.ogg",
+        "bytes": 9242,
+        "sha256": "668f14dc1254d0d0f33025e9c7dbcdf2c2f00462ed0e07fb8f099c1d711c1337",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/footstep09.ogg",
+        "bytes": 9356,
+        "sha256": "9324ebb9b2c5bcd078dcb523c6518d38a9f34081069d511602c2efb14ce06ce2",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/handleCoins.ogg",
+        "bytes": 25394,
+        "sha256": "8a91f969e932df709df80ee124d86a51389eed9b67f22e5e716bc2bbf60d8dab",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/handleCoins2.ogg",
+        "bytes": 13094,
+        "sha256": "4b857968d64f9ac9336a10ffac6694d7547e1f01566ad6857b30bc8db3ee6c32",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/handleSmallLeather.ogg",
+        "bytes": 10492,
+        "sha256": "ae3cbf695aa0a8b98b5a80a835be5a3ccbd5446a24db2235cd4c3cd6fc92ed96",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/handleSmallLeather2.ogg",
+        "bytes": 10028,
+        "sha256": "a66f6db5918ad016c28a9f2768f127a7f39b5fa04481e5a3b4e78ebe2a1c282d",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/knifeSlice.ogg",
+        "bytes": 15532,
+        "sha256": "4cd96dc630bed9840c15f1dd2306da2cc56a4da26a5d3f1a03c5a7265ac5e54f",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/knifeSlice2.ogg",
+        "bytes": 15099,
+        "sha256": "6c2064d0ef988d1ec3d56868e823ea8823a5cac00f2742560052633529407def",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/metalClick.ogg",
+        "bytes": 13615,
+        "sha256": "9851a69d0c613e13bceef08060ecc4148f098ef487927cbebe270d642398a3b3",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/metalLatch.ogg",
+        "bytes": 10208,
+        "sha256": "ba9ba60b172b3ebc131a940f25793cd2e207aca7af73dc80d637277f060f1708",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/metalPot1.ogg",
+        "bytes": 31619,
+        "sha256": "159def979e8e386c2c539f5e99cc30a080eb2dcb6c911fa2e4ccc0785b2522fd",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/metalPot2.ogg",
+        "bytes": 22471,
+        "sha256": "8e1f820d217d380fde10e969d109db34303e3f4d11c3951926eddef813d04ae2",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/metalPot3.ogg",
+        "bytes": 23142,
+        "sha256": "d306e5b848f6843332d0ca19f8f7dfe5796aeb56d8273902b085df463273f1dc",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Preview.ogg",
+        "bytes": 321120,
+        "sha256": "631d554d100779c7896699bb4727807d4ca365ca850dc79216157cf31dae4b6a",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 48000,
+        "listened_in_this_audit": false,
+        "preview_only": true
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 27 - Dusty Memories.ogg",
+        "bytes": 3674754,
+        "sha256": "48c47913e38a7d8f077f7883cc97c5ae96ee1e28f4d8c175261bd6f2383e79c7",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 28 - Batteries Not Included AA.ogg",
+        "bytes": 2500173,
+        "sha256": "b964cb684725c92317c02a5a1ee7b9d1a7f3e421e4742eef8e7c06bcc8cf52b6",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 28 - Batteries Not Included AAA.ogg",
+        "bytes": 2505219,
+        "sha256": "ba06e4393b664193dbf8e32052b594584bf448af30c96905815a852a9b81a35a",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 29 - Heart-Shaped CANDY.ogg",
+        "bytes": 2841519,
+        "sha256": "f8af05f5c2540975ddec8c8a7132149cb12a4c4607ed8c26ce53b19cb252d5dc",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 29 - Heart-Shaped PALPATATIONS.ogg",
+        "bytes": 2697842,
+        "sha256": "65bbea508cf782d976f643f95952fc8421f7fbb318e085ae149cf05969d181df",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 30 - Crushing It ROUGH.ogg",
+        "bytes": 2645497,
+        "sha256": "5a415bcb9cb01d9eed3b8073b62765155ea4438a5d4b728f0699f7ea2fa91a6e",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 30 - Crushing It SMOOV.ogg",
+        "bytes": 2534152,
+        "sha256": "38c84cd8b52b1337260d10185c9918efbdeb7e99f2d068c06ddbe0f053e9716e",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 31 - Forget About Us AMNESIA.ogg",
+        "bytes": 2693508,
+        "sha256": "20723c7030594ff9d444b239d3751fd67f3f67ef6ed7c1b0b8007afbd4633bfb",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 31 - Forget About Us MEMORY GAPS.ogg",
+        "bytes": 2957619,
+        "sha256": "da7a8d7c37c4f3699099ef5752d9dbfbbd1feee137af20b0016b2c298eb7f9ca",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 32 - Washboard Blues.ogg",
+        "bytes": 4650123,
+        "sha256": "5ba58d5561209d5b83fa3c42579fd58676bd285f1b76ad4b6ff1543262b12ea8",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 33 - Forbidden Luxuries HEALTHCARE.ogg",
+        "bytes": 2759772,
+        "sha256": "4e3b4d9dcfd3e887b520618733c5e68d5969c2da2cb8914695bb05ba0d9dba31",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 33 - Forbidden Luxuries HUMAN RIGHTS.ogg",
+        "bytes": 2694974,
+        "sha256": "f6f5485a8acc2bd687f312e106f7e1b9639aee9e344ba88d69a2c5da609a4f3b",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 34 - Piecemeal COLLECTED.ogg",
+        "bytes": 3091059,
+        "sha256": "183b3a5e196b74d13ae20277c2ab991bf52b13a332a01dc0702674f722eacd1a",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 34 - Piecemeal SCATTERED.ogg",
+        "bytes": 2553444,
+        "sha256": "25a9f5dc830eb65be4c652ab60d5cb2ac434866ee8683c89ce8873d3a4638d8b",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 35 - Reverence BEHOLD.ogg",
+        "bytes": 3506529,
+        "sha256": "2de0d0724b5dd47834eca6283bb45150888e5313815e0c3d2cc214619eba1df1",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 35 - Reverence ENDLESS.ogg",
+        "bytes": 4458477,
+        "sha256": "a968cd101e70db04293d11d1c2b4527eb597ca02e3490e5b59b2f33fe52b8c51",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 36 - Unknown Lands CURIOUS CREATURES.ogg",
+        "bytes": 2994211,
+        "sha256": "e18ec8275342402788723efba9330538f44cc7f95117643bb985005b9c92ec38",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 36 - Unknown Lands FINDING HOME.ogg",
+        "bytes": 2562833,
+        "sha256": "91582a8147e235c089390cc91014798d4c87490959a632386250642e417b30cf",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 37 - Schmoovin.ogg",
+        "bytes": 3431981,
+        "sha256": "076d06a68ce9dc8f7d2401afa05e247ad3849ac4d425c3b28f995c15bfdab007",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 38 - Shimmer SCINTELLATE.ogg",
+        "bytes": 4242136,
+        "sha256": "a59958ae64ca52ba8dcdcd7699cbbe68f27220d3f394cc485a09f77d65f4e433",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 38 - Shimmer SPARKLE.ogg",
+        "bytes": 4433392,
+        "sha256": "e4e4cb9dec9cbda43f1b3aeb65d0d1ed636201934313c629709bb3c7fde69b04",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 39 - Homesteading MAKING IT.ogg",
+        "bytes": 3148818,
+        "sha256": "a4aa444c873f0fc3826aa31c5c00dc86433ff9d71a332bebff3dc9b46ee27259",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      },
+      {
+        "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 39 - Homesteading MOVING IN.ogg",
+        "bytes": 2869360,
+        "sha256": "8dd3b514bd84f1a3f475fb346c973f18b453208175578026190d8251f40227d3",
+        "codec_header": "Vorbis",
+        "channels": 2,
+        "sample_rate_hz": 44100,
+        "listened_in_this_audit": false,
+        "preview_only": false
+      }
+    ],
+    "prototype_2D": {
+      "root": "source-assets/prototype/first-room-v1",
+      "manifest": {
+        "path": "source-assets/prototype/first-room-v1/manifest.json",
+        "bytes": 7541,
+        "sha256": "9efaf177f21ffae98c24987362461e4d69d323b6cae518e79fe2f7a7504d876e"
+      },
+      "source_index": {
+        "path": "source-assets/prototype/first-room-v1/source-index.json",
+        "bytes": 14746,
+        "sha256": "8854974823a14e6ace5c90c8b45f546af2aa59074cf72ea067e150011c55585e"
+      },
+      "actual_frame_files": 64,
+      "actual_icon_files": 5,
+      "files": [
+        {
+          "path": "source-assets/prototype/first-room-v1/items/chest.png",
+          "bytes": 75993,
+          "sha256": "22632f7d22ec8914f539d1206085c433600bb15db68ff134d84dc0ab6d00f4dc"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/items/coin.png",
+          "bytes": 62816,
+          "sha256": "d2ecbed15c6160e6dba552e3ba42e14be5d77cf5408b142c0bb7ee2109ba6872"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/items/potion.png",
+          "bytes": 60295,
+          "sha256": "6eef30aafa4d19aad383868607db69fdfc4240c3143a3cd19205c3750b8edc6b"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/items/shield.png",
+          "bytes": 58368,
+          "sha256": "532c3405e9ffc7d7eebaf2ffac7c7236dd9fd5e696326b26de5d03e6206cb78b"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/items/sword.png",
+          "bytes": 49181,
+          "sha256": "64208fbcb6b0fd95bfad3fafad39e4a8cd8159a7d4cab6942f3d9d0bb36b2877"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/attack/human_attack_000.png",
+          "bytes": 56311,
+          "sha256": "570e29fc05adfd41c0d673f96bb54cbc87d43137e5ab0afdd8885f32690250ce"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/attack/human_attack_001.png",
+          "bytes": 55643,
+          "sha256": "8a74f3c0c7202be6d216a5d514bd69c074a44bfa802061752055cbcad717f93b"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/attack/human_attack_002.png",
+          "bytes": 56889,
+          "sha256": "f790a7d8c09d2796140fce7574db2fc0ecad29d14f1a9b88d3c4b03afd88a688"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/attack/human_attack_003.png",
+          "bytes": 53704,
+          "sha256": "954dc1df5f2744fa839fb56842e19b0f1db8421c5c29090f788c762953293992"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/attack/human_attack_004.png",
+          "bytes": 55045,
+          "sha256": "79aa76f800e1a0f3fc874759b95ecd9220d35fc9a825a3a3a8d806b16edd7e51"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/attack/human_attack_005.png",
+          "bytes": 56311,
+          "sha256": "d761c7c98570b95e21483f290a8af96e3c5baccf9086c823822f73d7ab189518"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/death/human_death_000.png",
+          "bytes": 56311,
+          "sha256": "efbb8141d55795d8b69bd1b89574b7ee507f54fe0aa6b7ca0683e3b95b13cc1d"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/death/human_death_001.png",
+          "bytes": 55618,
+          "sha256": "01722e62e2885f444765f4ab681c8a23e4e76c89aec6a75d0fb711db934d2d54"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/death/human_death_002.png",
+          "bytes": 56169,
+          "sha256": "cca137e763482169b39356972b971866a0a16ec185f7406761b21df3c89a2fd9"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/death/human_death_003.png",
+          "bytes": 56112,
+          "sha256": "bd5037930d8b1d6ebf640ffc294b5a24ca9c6ae6b2a822cdd965c916299bb54a"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/death/human_death_004.png",
+          "bytes": 55700,
+          "sha256": "3de225178951755ec65ad7e22d1076ef4c093c9c845059a2859d472b49ec929c"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/death/human_death_005.png",
+          "bytes": 53202,
+          "sha256": "77ffa4d73b6953c47b0027446f6d61c778b580f7b5590e0edf8928ba4a67c76b"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/death/human_death_006.png",
+          "bytes": 52135,
+          "sha256": "78897748c884d1e10379889027980818ffde58f6dba4dffb8e219b02c2914df1"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/death/human_death_007.png",
+          "bytes": 51610,
+          "sha256": "2e409b2e2a19827737e3e2deadab708b610c0037c7868e0bf1f21de80df6de17"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/hurt/human_hurt_000.png",
+          "bytes": 57133,
+          "sha256": "b36f89fa9e0f42aadff0ec1670216733a82cf0fc4fdf57fa775d9734da0982cf"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/hurt/human_hurt_001.png",
+          "bytes": 56752,
+          "sha256": "2876640897bebc7d39ae71c7e87305975bd37b3e9ad4446c30fe824fcba45d68"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/idle/human_idle_000.png",
+          "bytes": 56311,
+          "sha256": "28d2017e67586733a0f9dc391a14d1849a2fe5c8ec7aa22852438d8c70c0b5f2"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/idle/human_idle_001.png",
+          "bytes": 56594,
+          "sha256": "3428e0c7021084ca6c6a32d0c680dc3373d580ea78a8ce7346f153d1b74a67a2"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/idle/human_idle_002.png",
+          "bytes": 56581,
+          "sha256": "7ea1b3f97beb0e72ed8ad162451da686e5401c87894e3241560ed7fcf3283520"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/idle/human_idle_003.png",
+          "bytes": 56620,
+          "sha256": "4d844aea56c049e7eeae1f2b26fbc191da8621a94601c6beb913d62bfd1aaf9f"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/idle/human_idle_004.png",
+          "bytes": 56459,
+          "sha256": "965326b7778bd8f3ec3f011b848dbfd584054502cfc256f91bdf5212d59fab03"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/idle/human_idle_005.png",
+          "bytes": 56539,
+          "sha256": "b966ead4a75d2e626a8843243ac242329a9979092acdfc60f9c739dd093bfcbc"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/idle/human_idle_006.png",
+          "bytes": 56222,
+          "sha256": "69ced8164ba5721b2f8680e0d91cf190168028166ae07d9c936d670ea23e50f8"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/idle/human_idle_007.png",
+          "bytes": 56600,
+          "sha256": "c913361932cff716116999abba388d7398c53798f7843719d751f3e6c41d3e78"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/walk/human_walk_000.png",
+          "bytes": 56311,
+          "sha256": "570e29fc05adfd41c0d673f96bb54cbc87d43137e5ab0afdd8885f32690250ce"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/walk/human_walk_001.png",
+          "bytes": 56067,
+          "sha256": "913413843b4599a88a74533bb2a47cbe879892083de6a69a4093ad47aff5d956"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/walk/human_walk_002.png",
+          "bytes": 55550,
+          "sha256": "2c1dc9f2869c99c419fc291c2f441a979f40ff063ae0f9e44881658a2f0b6967"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/walk/human_walk_003.png",
+          "bytes": 56015,
+          "sha256": "0850e1bfab4aa7869d6238eea54f3992199b5b6a86154ab19f9809981f868c02"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/walk/human_walk_004.png",
+          "bytes": 55832,
+          "sha256": "9159fb899335a9a94d5cc4f1077d3c23f1a5eac1d1e0d1bcd03297119ceb15a1"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/walk/human_walk_005.png",
+          "bytes": 55995,
+          "sha256": "c661238db093d96f28556c828956278213204d0e2b63a883dca7f37dfa36bd87"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/walk/human_walk_006.png",
+          "bytes": 55873,
+          "sha256": "3293114335d373de93ea87e202189bda6485d77030cad9f5d36586d920808f12"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/human/walk/human_walk_007.png",
+          "bytes": 56246,
+          "sha256": "169fa07a3d5f73d66789ed18cf014012bc5d452d5c258f72c3c0d82bf3ceb430"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/attack/orc_attack_000.png",
+          "bytes": 56179,
+          "sha256": "3c63e09c2153e273671182a6491e33d805d7a5c728adbe0dc67cbd93b0c29e39"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/attack/orc_attack_001.png",
+          "bytes": 55608,
+          "sha256": "879a9a9e9be22e3704069b252c4c13feadd750bd0531f6793e792b6c333cd847"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/attack/orc_attack_002.png",
+          "bytes": 56543,
+          "sha256": "bb3c8daffcad7abb4492bfe63435517243632a66cde46cdff5203db3ec44c29f"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/attack/orc_attack_003.png",
+          "bytes": 53595,
+          "sha256": "de669c7bfba18fa6863c133d4b55870f7065420a17a39ae2008a0d06ecac6c7b"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/attack/orc_attack_004.png",
+          "bytes": 54861,
+          "sha256": "e468ca2bd3839d2082c0b3ac784cfc4e43764a3bbd6a130fa2cfa52647d2f4e0"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/attack/orc_attack_005.png",
+          "bytes": 56179,
+          "sha256": "37fa7ae6736d6d986620c6e20257481f3b40cd1f96a8b01e0420e4d143d1713a"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/death/orc_death_000.png",
+          "bytes": 56179,
+          "sha256": "d24f99462e57f43156387e89d7cbf9d0a46479c9147d3ef95a71740774eeab68"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/death/orc_death_001.png",
+          "bytes": 55500,
+          "sha256": "199d5284598b9f2ec9199c0857c3d8a77488a244fb249dc978273a897c2c0760"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/death/orc_death_002.png",
+          "bytes": 56287,
+          "sha256": "c7086ac1ecb5661bf087ce6b82423f9bb88a3729b54ef06d37399732f7a07961"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/death/orc_death_003.png",
+          "bytes": 56237,
+          "sha256": "9a60503a9aa6f3419e3a7517a34b9e08b295f16d73128356b8d960d2f4cc765e"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/death/orc_death_004.png",
+          "bytes": 55417,
+          "sha256": "54a4e61dca81d05ede8f9e855ba751abc17875e171bd9d03a6ec0aa711a04b19"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/death/orc_death_005.png",
+          "bytes": 52903,
+          "sha256": "2452f2df26eb1d972df6071fe58fb5eef172d96a86e11e1925fe897387ecf763"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/death/orc_death_006.png",
+          "bytes": 51855,
+          "sha256": "c86dacf315ae1e17575c79dd5769c32f88aeb8be4c7c55a2c68e4768718e1bde"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/death/orc_death_007.png",
+          "bytes": 51185,
+          "sha256": "d9f115efb39b5dbba983e82adbc9dde8fc4bc82d1362f0b1817d4bd1615cd583"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/hurt/orc_hurt_000.png",
+          "bytes": 56876,
+          "sha256": "a8afd63815b11ea5dd2ba901a85c0590667017dcd936b0aa018305976b3fe6db"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/hurt/orc_hurt_001.png",
+          "bytes": 56469,
+          "sha256": "969bfc680de7d6a9a499c2fa88222fd2aa54829757186c47d92fcb11137c6cea"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/idle/orc_idle_000.png",
+          "bytes": 56179,
+          "sha256": "8216243c2b7cc852eceb1f96e56462b701c058c6026e386a755323f9ae543c3d"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/idle/orc_idle_001.png",
+          "bytes": 56438,
+          "sha256": "b4a5c78e4d52630097ec15607d28131011253b6035fe31282fa02e465568cc4b"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/idle/orc_idle_002.png",
+          "bytes": 56379,
+          "sha256": "61560a32dc8f4a4baef66bbaee9a970b51a427690d74e148deaebc681753d262"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/idle/orc_idle_003.png",
+          "bytes": 56569,
+          "sha256": "5ec7f860b1c34c844c85e9eb4725e995f2b9bca845a5c4a11c144db52e6d1560"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/idle/orc_idle_004.png",
+          "bytes": 56170,
+          "sha256": "ec2d473801b227345a3bb4fcb6cd3a782fa4968573ba2859f9d5457d751f9ade"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/idle/orc_idle_005.png",
+          "bytes": 56484,
+          "sha256": "0de3c07e4dd599a2746adbdd9c3e6f47e8e4ac837d02af99c39b3d7e6b43cdf5"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/idle/orc_idle_006.png",
+          "bytes": 56345,
+          "sha256": "f7beb3dce8d6421e0eb17aa7b65ae7f12aee21d9a1676bbfb145a0723808c83a"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/idle/orc_idle_007.png",
+          "bytes": 56216,
+          "sha256": "bff2e7e6498d1a0d5b27497b6da74b03816db009da86633557db6f0c6d87e1c4"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/walk/orc_walk_000.png",
+          "bytes": 56179,
+          "sha256": "3c63e09c2153e273671182a6491e33d805d7a5c728adbe0dc67cbd93b0c29e39"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/walk/orc_walk_001.png",
+          "bytes": 55990,
+          "sha256": "636252a4f7ba4ab205dd2ffe1a3a030a1db38a3ffc09569e05b826da37643b61"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/walk/orc_walk_002.png",
+          "bytes": 55288,
+          "sha256": "72f56134754e98b3479a19b1fbceb4a3c5495283dc8b5bcae097465bfe7e2958"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/walk/orc_walk_003.png",
+          "bytes": 55880,
+          "sha256": "9494b1106e6f63773cdb0dee0466a79dd5e786dab92e9866fe19c7de6fa2d9e8"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/walk/orc_walk_004.png",
+          "bytes": 55605,
+          "sha256": "a9abab052b86f5bfffdef77c90e83005b0a262c7f59fd9495cfc0866d5584161"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/walk/orc_walk_005.png",
+          "bytes": 55918,
+          "sha256": "2afe6eb1702db44324ae250ba055126e5b3734b403785564349a0e2eaa6b8854"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/walk/orc_walk_006.png",
+          "bytes": 55863,
+          "sha256": "704d709684bc0d6563b6a7108d9d6db11b4845a8e7620b94b6abfba9084b00d9"
+        },
+        {
+          "path": "source-assets/prototype/first-room-v1/sprites/orc/walk/orc_walk_007.png",
+          "bytes": 56038,
+          "sha256": "46685dedc2efb3cfe09c4c8cb76f31d2e8407348ca7168e929dcb84d1c0938d4"
+        }
+      ],
+      "all_manifest_PNG_headers_256_RGBA": true,
+      "all_source_index_output_hashes_match": true,
+      "new_alpha_or_visual_review": false,
+      "prior_quality_report": "source-assets/prototype/first-room-v1/quality-report.json",
+      "hurt_fallback": "both characters use idle pose leaned 9/5 degrees; not original hurt takes",
+      "attack_fallback": "arm swing has no attached weapon; not eleven completed weapon-family animations",
+      "official_manifest_precedence": "manifest.json lists64frames+5icons; preview-manifest.json is historical preview only",
+      "historical_preview_manifest": {
+        "path": "source-assets/prototype/first-room-v1/preview-manifest.json",
+        "bytes": 1326,
+        "sha256": "56cc7f6f06a7e1bf1d27ee23bd8ae31435da9d02c18349c0ba0979d3dbd92e57"
+      },
+      "preview_manifest_missing_paths": [
+        "source-assets/prototype/first-room-v1/sprites/human/idle/human_idle_00.png",
+        "source-assets/prototype/first-room-v1/sprites/orc/idle/orc_idle_00.png"
+      ],
+      "first_room_import_evidence": {
+        "path": "UnrealGame/Saved/Bootstrap/first-room-import.json",
+        "bytes": 19150,
+        "sha256": "6c8c1cc3e4dece5a98337db1681ff353af88823f9d2fedba7ff46e328f26dac2"
+      },
+      "first_room_import_report_success": true,
+      "all64_imported_uasset_files_exist": true,
+      "imported_uasset_inventory_sha256": "c599fc64c5a0a8371b3683eab888114a370f95f2614faa508268a426a8efee2c",
+      "icons_import_status": "5sourceicons_exist; first-room64texture_report_does_not_include_icons; not_claim_all_icons_integrated",
+      "runtime_status": "README_and_archived_2026-10-12_proof_report_64frames_used_in_first_room; no_new_game_run_or_visual_acceptance_in_D12"
+    },
+    "font": {
+      "manifest": {
+        "path": "source-assets/third-party/fonts/noto-sans-cjk-sc/2026-10-10-v1/source-manifest.json",
+        "bytes": 4032,
+        "sha256": "de8a16e3f8ad481ff2d5720688b9ef6588fb8fca7437ab20ef00c5856e41f89f"
+      },
+      "files": [
+        {
+          "path": "source-assets/third-party/fonts/noto-sans-cjk-sc/2026-10-10-v1/NotoSansCJKsc-Regular.otf",
+          "bytes": 16437364,
+          "sha256": "2c76254f6fc379fddfce0a7e84fb5385bb135d3e399294f6eeb6680d0365b74b"
+        },
+        {
+          "path": "source-assets/third-party/fonts/noto-sans-cjk-sc/2026-10-10-v1/LICENSE",
+          "bytes": 4301,
+          "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+        },
+        {
+          "path": "source-assets/third-party/fonts/noto-sans-cjk-sc/2026-10-10-v1/COPYRIGHT.txt",
+          "bytes": 44,
+          "sha256": "6e90fd3d0d7833c890789675674ae9d5f0f135f2fc842247cccffa8f38abb0dd"
+        }
+      ],
+      "all_file_hashes_match_manifest": true,
+      "license": "SIL-OFL-1.1 local LICENSE and COPYRIGHT text read",
+      "redistribution_requirement": "retain copyright and OFL with bundled font; font itself not sold alone; modifications require separate reserved-name/license review",
+      "import_status": "historical FontFace+Font import report exists; local F files checked below; current rendering/package not tested here",
+      "import_assets": [
+        {
+          "path": "UnrealGame/Content/ThirdParty/Fonts/NotoSansCJKsc/FF_NotoSansCJKsc_Regular.uasset",
+          "bytes": 16439155,
+          "sha256": "196d6bc8a4322c32a9726f4d09277dc7952815adc13739514e7cc8c4ee2d8900"
+        },
+        {
+          "path": "UnrealGame/Content/ThirdParty/Fonts/NotoSansCJKsc/F_NotoSansCJKsc_Regular.uasset",
+          "bytes": 2755,
+          "sha256": "3cd35cc810a1526cb0e86a36f4620c2efe8f7a5cfccc0bcccb3f775e77538e80"
+        }
+      ]
+    },
+    "engine_audio_evidence": {
+      "report": {
+        "path": "UnrealGame/Saved/Bootstrap/asset-import-report.json",
+        "bytes": 60158,
+        "sha256": "4ef9752a65a91ef037c061718a423370786a0367b264d19e0f6a6a99057a4014"
+      },
+      "historical_report_has_old_E_paths": true,
+      "representative_assets": [
+        {
+          "id": "impact",
+          "historical_report_class": "SoundWave",
+          "asset_object_path": "/Game/ThirdParty/Kenney/ImpactSounds/ImpactLight/SW_ImpactLight.SW_ImpactLight",
+          "local_uasset": {
+            "path": "UnrealGame/Content/ThirdParty/Kenney/ImpactSounds/ImpactLight/SW_ImpactLight.uasset",
+            "bytes": 15698,
+            "sha256": "9054776e66357a51c2557de2c639847cbf691556fe026bc8a12ef0d6595be4a7"
+          },
+          "source": {
+            "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGeneric_light_000.ogg",
+            "bytes": 5827,
+            "sha256": "f0e982611e97512fee5f777986b67e8b435434b601f94992ec044f7e89fb5acb"
+          },
+          "source_hash_matches_report": true,
+          "new_engine_query_performed": false,
+          "listening_verified": false
+        },
+        {
+          "id": "rpg_draw_knife",
+          "historical_report_class": "SoundWave",
+          "asset_object_path": "/Game/ThirdParty/Kenney/RPGAudio/DrawKnife/SW_DrawKnife.SW_DrawKnife",
+          "local_uasset": {
+            "path": "UnrealGame/Content/ThirdParty/Kenney/RPGAudio/DrawKnife/SW_DrawKnife.uasset",
+            "bytes": 44335,
+            "sha256": "d3f771510a3617e2134cd6b3757aa96150996e46a6aed2834bdf2d11c132c742"
+          },
+          "source": {
+            "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/drawKnife1.ogg",
+            "bytes": 11134,
+            "sha256": "276403e72c3b71c47bc24db3083970c23f8e5551ffa78f436f83483c56f3f0bb"
+          },
+          "source_hash_matches_report": true,
+          "new_engine_query_performed": false,
+          "listening_verified": false
+        },
+        {
+          "id": "music_loop",
+          "historical_report_class": "SoundWave",
+          "asset_object_path": "/Game/ThirdParty/Abstraction/MusicLoopQ3/DustyMemories/SW_DustyMemories.SW_DustyMemories",
+          "local_uasset": {
+            "path": "UnrealGame/Content/ThirdParty/Abstraction/MusicLoopQ3/DustyMemories/SW_DustyMemories.uasset",
+            "bytes": 4610032,
+            "sha256": "bdd3c849d06e0381712d9c3fb7dffe133e82154ebec8d5fd6d20abac5cc793e4"
+          },
+          "source": {
+            "path": "source-assets/third-party/preparation-2026-10-10-v1/abstraction-music-loop-bundle-2026-q3/extracted/Week 27 - Dusty Memories.ogg",
+            "bytes": 3674754,
+            "sha256": "48c47913e38a7d8f077f7883cc97c5ae96ee1e28f4d8c175261bd6f2383e79c7"
+          },
+          "source_hash_matches_report": true,
+          "new_engine_query_performed": false,
+          "listening_verified": false
+        }
+      ],
+      "code_hook": {
+        "file": {
+          "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+          "bytes": 8887,
+          "sha256": "911a7b5b478cd6d427dd4e1962cea98fadf4cc86f5d94e204765f73f788f5c8c"
+        },
+        "observed": "ApplyCombatHit after effective damage calls PlaySound2D on SW_ImpactLight with volume0.45 and enemy/player pitch1.15/0.9; this is a code reference, not hearing proof"
+      },
+      "all205_imported": false,
+      "all205_usable_or_auditioned": false,
+      "new_runtime_or_listening_validation": false
+    },
+    "evidence": [
+      {
+        "path": "README.md",
+        "bytes": 19919,
+        "sha256": "17be968ee06b2520242958e53ef62dd001e531c499ccbb60c4a5fd855462098e",
+        "note": "refreshed_after_D12_root_bookkeeping; historical_runtime_evidence_links_preserved"
+      },
+      {
+        "path": "docs/asset-preparation-2026-10-10.md",
+        "bytes": 31310,
+        "sha256": "f3fbabeba9198f24473e04d13649501a7d2867ae01e36ed544317a97c514c2da"
+      },
+      {
+        "path": "docs/asset-engine-verification-2026-10-10.json",
+        "bytes": 10306,
+        "sha256": "423c23ffc20c2f12975854ad203fa0181802eaadef2c8c1aa427610f9be75d52"
+      },
+      {
+        "path": "docs/asset-path-verification-2026-10-12.json",
+        "bytes": 12184,
+        "sha256": "0d31965e4853d1584f6931e3a449197c7b38de4e4de7c987aa25980fd06aa095"
+      },
+      {
+        "path": "UnrealGame/Saved/Bootstrap/asset-import-report.json",
+        "bytes": 60158,
+        "sha256": "4ef9752a65a91ef037c061718a423370786a0367b264d19e0f6a6a99057a4014"
+      },
+      {
+        "path": "UnrealGame/Saved/Bootstrap/font-import-report.json",
+        "bytes": 2385,
+        "sha256": "0dbc7c6190db43b478edaf63782970135ca1b32cc22fe56e2db5ecf432e56985"
+      },
+      {
+        "path": "UnrealGame/Saved/Bootstrap/first-room-import.json",
+        "bytes": 19150,
+        "sha256": "6c8c1cc3e4dece5a98337db1681ff353af88823f9d2fedba7ff46e328f26dac2"
+      },
+      {
+        "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+        "bytes": 8887,
+        "sha256": "911a7b5b478cd6d427dd4e1962cea98fadf4cc86f5d94e204765f73f788f5c8c"
+      },
+      {
+        "path": "source-assets/prototype/first-room-v1/quality-report.json",
+        "bytes": 20606,
+        "sha256": "3ef1a96f7d41cf4f52d5d233bb91e0088c6bb1f8f82ada1fc0920c668753bdf2"
+      }
+    ],
+    "limitations": [
+      "Archive names and counts are the local fixed copies, not current upstream availability or newest versions.",
+      "Zip member and extracted-file equality is checked; codecs are identified from local Vorbis headers, not decoded or listened.",
+      "RPG Preview.ogg is pack preview and excluded from individual SFX selection.",
+      "205 OGG includes23music and1preview; it is not205finalgameevents.",
+      "3D32+32 character animations and42nonTPose UAL2 actions are historic structure evidence, not new2Dframes.",
+      "No formal Chinese speech collection is evidenced by manifest; actual auditory contents were not listened to.",
+      "Library PNG/SVG include thumbnails/textures/UI candidates, not automatically adopted sprites.",
+      "Local license text provenance is recorded; no current upstream or distribution compliance review is claimed."
+    ],
+    "audio_header_summary": {
+      "identified_Vorbis_files": 205,
+      "channels2_files": 205,
+      "sample_rate44100_files": 153,
+      "sample_rate48000_files": 52,
+      "decode_or_listening_performed": false
+    }
+  },
+  "delivery_standard": {
+    "status": "assistant_proposed_untested_not_UE_capability_or_purchase_promise",
+    "new_editable_audio_master": "PCM WAV48kHz24bit; original_recording_or_editing_sources_retained",
+    "spatial_one_shots": "mono masters; listener/pan based actual XY/grounded source; avoid jump-height-only loudness pumping",
+    "music_and_nonspatial_UI": "stereo music; centered nonspatial UI; keep compatibility mono audition",
+    "existing_ogg": "retain original hashes/license; conversion only in later derived copy if pipeline needs; decoded WAV does not restore lost information or prove native24bit origin",
+    "loop_contract": "provide loop_start/end_sample and click-free tail proof after actual decode/audition; filename_loop not evidence",
+    "naming": "AUD-ID__material__variant__vNNN; metadata links source/hash/license/event and derived edit chain",
+    "adoption": "archive->extracted->format_read->audition->event_mapping->engine_import->runtime_mix->packaged_listening are separate gates",
+    "current_formal_voice": "text first and optional short nonverbal; no complete Mandarin voice acting evidenced or commissioned"
+  },
+  "audio_events": [
+    {
+      "id": "AUD-WPN-PREP",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "accepted attack enters actual windup; one per AcceptedAttackID",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,AcceptedAttackID,prep]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "握持/蓄力材质声；不在鼠标点击但请求被拒时播放",
+      "bus": "combat",
+      "priority_rank": 4,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-WPN-SWING",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "each declared melee SubHitID enters its actual active window",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,AcceptedAttackID,SubHitID,swing]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "家族破风，挥空也有；不依动画帧再次发射",
+      "bus": "combat",
+      "priority_rank": 4,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-WPN-RELEASE",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual non-melee release event: emitted projectile batch, source hitscan shot, instantaneous line or ground-area effect subhit; resource commit only where the original action requires it; never invent a projectile",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,AcceptedAttackID,EmissionBatchID_or_InstantEffectSubHitID,release]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "弩弦/枪击/法术真实放出；同枪齐射只一枪声，连射按真实批次；瞬时线/地面法术不画成新增飞弹",
+      "bus": "combat",
+      "priority_rank": 4,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-WPN-MISS",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "declared melee or instant-effect segment completes with zero accepted target hits; projectile batch completes normal original lifetime without legitimate impact; optional cosmetic only",
+        "not_emit_when": "cancelled_before_release_or_room_exit_cleanup_or_Boss_success_cleanup_or_duplicate_event; cleanup is not a new missed attack",
+        "dedupe_key": "[RunID,AcceptedAttackID,SubHitID_or_EmissionBatchID,miss]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "可选轻收势/擦风，不用受击声冒充命中；批末只一次",
+      "bus": "combat",
+      "priority_rank": 7,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-WPN-EMPTY",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "fresh legal fire request rejected for magazine0",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,InputRequestID,empty]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "空机簧一次；不扣弹不造发射",
+      "bus": "combat",
+      "priority_rank": 6,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-RELOAD-START",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual reload accepted",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,ReloadActionID,start]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "弹匣/弩机准备声，只启动一次",
+      "bus": "combat",
+      "priority_rank": 4,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-RELOAD-COMMIT",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual D02 refill commit",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,ReloadActionID,commit]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "闭锁完成声；提前取消绝不播放",
+      "bus": "combat",
+      "priority_rank": 4,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-RELOAD-CANCEL",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual reload cancellation recorded",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,ReloadActionID,cancel]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "轻止机声；无补弹音",
+      "bus": "combat",
+      "priority_rank": 7,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-FOCUS-LOW",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "fresh staff request rejects insufficient focus",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,InputRequestID,focus]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "短低脉冲，文字解释仍保留",
+      "bus": "combat",
+      "priority_rank": 6,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-WEAPON-SWITCH",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual active weapon switch commits",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,SwitchActionID,commit]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "鞘/带扣/握柄声；备用槽预览不播成功声",
+      "bus": "combat",
+      "priority_rank": 4,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-DAMAGE-DIRECT",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "accepted effective direct damage receipt with actualDamage>0",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,AcceptedAttackID,SubHitID,TargetID,DamageReceiptID]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "唯一接触主声：武器家族×目标材质选择，不与第二通用命中主声叠加",
+      "bus": "combat",
+      "priority_rank": 3,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-DAMAGE-DOT",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual accepted DoT tick receipt; no new weapon strike",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,TargetID,StatusSlotID,TickTimestamp]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "短持续状态声；同目标同tick多个来源合成一反馈并保留真实伤害日志",
+      "bus": "combat",
+      "priority_rank": 5,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-PLAYER-HURT",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual player effective damage after original invulnerability rules",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,PlayerID,DamageReceiptID,hurt]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "短非语言呼吸/受创，低于危险预告；不延长硬直",
+      "bus": "combat",
+      "priority_rank": 2,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-POISE-BREAK",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "authoritative poise-break state actually accepted, not poise damage during protection",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,TargetID,PoiseBreakEventID]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "材质裂响/踉跄声；保护期削韧未触发时不伪报破韧",
+      "bus": "combat",
+      "priority_rank": 2,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-ACTOR-DEATH",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "authoritative terminal death after same-time all damage",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,ActorSpawnID,DeathEventID]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "一次倒地/解体；Boss死声不等于Boss成功/奖励",
+      "bus": "combat",
+      "priority_rank": 2,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-ENEMY-TELL-START",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual accepted enemy or Boss attack enters declared windup",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,AcceptedAttackID,tell_start]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "各职能短预警，配合同步形状/方向；不提前泄露休眠或未来槽",
+      "bus": "warning",
+      "priority_rank": 1,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-ENEMY-LOCK",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual declared50percent windup lock event",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,AcceptedAttackID,lock]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "短确定音色点，严格等于已锁线时刻；不提前锁目标",
+      "bus": "warning",
+      "priority_rank": 1,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-RECOVERY-OPEN",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual declared recovery start after last damaging window closes",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,AcceptedAttackID,recovery_start]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "可选收势/喘息点；仅提示已存在反击窗口，不延长后摇、不保证整个窗口无其他攻击",
+      "bus": "warning",
+      "priority_rank": 2,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-SPAWN-WARN",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "D07 actual slot warning starts after admission/reservation",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,RoomInstanceID,SlotID,WarningAttemptID]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "出生点短声与原1.2s可视预告同步；不为未接纳future先播",
+      "bus": "warning",
+      "priority_rank": 1,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-SPAWN-EMERGE",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "D07 actual entity materializes after position revalidation",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,RoomInstanceID,SlotID,MaterializeEventID]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "显现材质短声；原0.6s显现动作继续，不用声音提前激活",
+      "bus": "warning",
+      "priority_rank": 2,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-DORMANT-AWAKE",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "existing real dormant actor authoritative wake",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,ActorSpawnID,WakeEventID]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "石裂/枝叶/呼吸；近触、受伤或原兜底只同一苏醒事件一次",
+      "bus": "warning",
+      "priority_rank": 2,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-ITEM-START",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "D03 legal item use begins actual windup",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,ItemUseActionID,start]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "瓶塞/抛物握持/陷阱展开准备；尚未治疗或交付",
+      "bus": "combat",
+      "priority_rank": 5,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-ITEM-COMMIT",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "D03 actual item use commits cost and effect or emission",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,ItemUseActionID,commit]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "疗剂/双刃套餐/投掷/陷阱各短声；被取消不播获得或治疗完成声",
+      "bus": "combat",
+      "priority_rank": 4,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-ITEM-CANCEL",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "D03 precommit use cancellation recorded",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,ItemUseActionID,cancel]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "轻止手声可省略；不退款已提交效果或改共享锁",
+      "bus": "combat",
+      "priority_rank": 7,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-INVENTORY-COMMIT",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual D04 ownership transfer/equip/drop commit excluding currency and source-bound claim",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,InventoryOperationID]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "衣料/金属扣/物件落地；预览、仅选槽不播换装成功",
+      "bus": "combat",
+      "priority_rank": 5,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-CURRENCY-CREDIT",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual wallet or bank credit commits, including legitimate Boss auto shards",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[AccountID_if_bank,RunID,RewardSourceID,CreditOperationID]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "币与永久碎片音色分离；同一次批量入账合并，不按预算预发",
+      "bus": "combat",
+      "priority_rank": 5,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-TRANSACTION-COMMIT",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual paid merchant/forge/enchant/roulette/entry operation commits",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,OperationID,commit]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "服务专属短确认；仍由日志显示精确成本，空奖不播中奖币声",
+      "bus": "transaction",
+      "priority_rank": 3,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-TRANSACTION-FAIL",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual current request rejected/cancelled before commit; not unknown operation outcome",
+        "not_emit_when": "operation_outcome_unknown_or_duplicate_failure_revision; unknown_requires_restore_same_record",
+        "dedupe_key": "[UIRequestID,FailureRevision]",
+        "time_domain": "UI_presentation_clock",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "简短中性失败，配文字原因；未知提交仅恢复记录，不暗示未扣款",
+      "bus": "ui",
+      "priority_rank": 3,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-RANDOM-REVEAL",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "already committed fixed outcome is first presented in this session",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,OperationID,reveal_presented]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "金/物/空/附魔结果可辨；回顾同收据不再播完整中奖声",
+      "bus": "transaction",
+      "priority_rank": 4,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-SOURCE-CLAIM",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "source-bound tray exact instance ownership transfer actually commits",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,SourceID,ExactItemInstanceID,ClaimOperationID]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "领取短声；区别开奖，不第二次播获得货币或装备强化声",
+      "bus": "transaction",
+      "priority_rank": 4,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-ROOM-CLEAR",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "D07 complete required manifest transitions once to room_cleared",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,RoomInstanceID,RoomClearEventID]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "短收束；不能在前段/当前波清空时播放，也不宣称完整安全",
+      "bus": "combat",
+      "priority_rank": 4,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-ROUTE-COMMIT",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual legal D04 route transition commits",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,RouteOperationID]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "门材质短声；仍保留player DoT/CD/资源，不是净化提示",
+      "bus": "combat",
+      "priority_rank": 4,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-BOSS-PHASE",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual D06 pending phase cue begins after previous recovery, including final70/35 rules",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,BossSpawnID,PhaseCueEventID]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "与原1.2s可伤可控阶段提示同步；不是新无敌/第二血条",
+      "bus": "warning",
+      "priority_rank": 1,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-BOSS-SUCCESS",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "D06 canonical success commit after same-time damage and player alive",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,RoomInstanceID,BossSpawnID,success]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "一次成功短收束；死亡但双死不播胜利、奖励或结局声",
+      "bus": "transaction",
+      "priority_rank": 2,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-RUN-END",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "D01 actual failed/won/abandoned end commit, distinct terminal theme",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[RunID,RunEndOperationID]",
+        "time_domain": "run_simulation_cursor",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "死亡/胜利/主动结束各短收束；动画或回看不重发",
+      "bus": "transaction",
+      "priority_rank": 1,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-ACCOUNT-GROWTH",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "D09 successful talent/research/reset account transaction",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[AccountID,AccountOperationID]",
+        "time_domain": "UI_presentation_clock",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "购买/研究/退款短声分清；只读和错误凭据不播成功",
+      "bus": "account",
+      "priority_rank": 3,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-UI-NAV",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "fresh UI navigation changes valid focus",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[UIPresentationSessionID,NavigationEventID]",
+        "time_domain": "UI_presentation_clock",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "轻短不抢预告；按住重复限流但不改变焦点规则",
+      "bus": "ui",
+      "priority_rank": 7,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-UI-CONFIRM",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "fresh explicit UI confirmation accepted by current layer, before any gameplay result",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[UIPresentationSessionID,UIInputEventID,confirm]",
+        "time_domain": "UI_presentation_clock",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "中性按键确认，不等同扣款/获得/跳跃",
+      "bus": "ui",
+      "priority_rank": 6,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-UI-BACK",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "actual UI back/pure cancel changes layer",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[UIPresentationSessionID,UIInputEventID,back]",
+        "time_domain": "UI_presentation_clock",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "中性返回，合法/非法East仍按D11；不代替真实闪避反馈",
+      "bus": "ui",
+      "priority_rank": 7,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    },
+    {
+      "id": "AUD-NPC-NONVERBAL",
+      "source_event_contract": {
+        "authority": "D02_D03_D04_D05_D06_D07_D08_D09_D10_existing_committed_event",
+        "emit_when": "optional dialogue line first cosmetically displayed while D10 safe/HUB permits",
+        "not_emit_when": "duplicate_authoritative_event_or_event_never_actually_occurred; presentation_preview_does_not_fabricate_commit",
+        "dedupe_key": "[DialoguePresentationSessionID,LineID,nonverbal]",
+        "time_domain": "UI_presentation_clock",
+        "writes_gameplay_state": false
+      },
+      "sound_direction_zh": "短非语言语气可复用；无完整配音先文本，不伪造中文对白音轨",
+      "bus": "ui",
+      "priority_rank": 6,
+      "asset_status": "design_intent; candidate_reuse_only_after_listening; no_new_asset_or_purchase_committed"
+    }
+  ],
+  "weapon_family_profiles": [
+    {
+      "family_id": "KNF",
+      "name_zh": "小刀",
+      "timbre_zh": "极短细刃破风、皮鞘摩擦、轻点刺；双匕按原两子段分开，不合成重砍",
+      "common_event_ids": [
+        "AUD-WPN-PREP",
+        "AUD-WPN-SWING",
+        "AUD-DAMAGE-DIRECT",
+        "AUD-WPN-MISS"
+      ],
+      "variation_target": "2_to_3_cosmetic_takes_per_reusable_core_after_audition; not_per_weapon_or_per_event_purchase",
+      "material_targets": [
+        "soft_body",
+        "armor_metal",
+        "stone",
+        "wood_root",
+        "mechanism",
+        "ethereal"
+      ],
+      "pitch_variation": "optional_noncritical_max_plus_minus1_semitone; critical_tell_identity_not_randomized",
+      "status": "proposed_untested",
+      "event_routing": "common_event_ids are primary family references, not forced skill types; each actual action routes by its original melee/non-melee/instant/area definition; RFL003 bayonet uses SWING with no gunshot/ammo, STF instant line or ground-area uses actual RELEASE/effect subhit without a new projectile"
+    },
+    {
+      "family_id": "DAO",
+      "name_zh": "大刀",
+      "timbre_zh": "厚刃中低破风、刀身余震；宽扫多目标只一个挥刃主声，接触材质声合成",
+      "common_event_ids": [
+        "AUD-WPN-PREP",
+        "AUD-WPN-SWING",
+        "AUD-DAMAGE-DIRECT",
+        "AUD-WPN-MISS"
+      ],
+      "variation_target": "2_to_3_cosmetic_takes_per_reusable_core_after_audition; not_per_weapon_or_per_event_purchase",
+      "material_targets": [
+        "soft_body",
+        "armor_metal",
+        "stone",
+        "wood_root",
+        "mechanism",
+        "ethereal"
+      ],
+      "pitch_variation": "optional_noncritical_max_plus_minus1_semitone; critical_tell_identity_not_randomized",
+      "status": "proposed_untested",
+      "event_routing": "common_event_ids are primary family references, not forced skill types; each actual action routes by its original melee/non-melee/instant/area definition; RFL003 bayonet uses SWING with no gunshot/ammo, STF instant line or ground-area uses actual RELEASE/effect subhit without a new projectile"
+    },
+    {
+      "family_id": "SWD",
+      "name_zh": "单手剑",
+      "timbre_zh": "中频清晰短金属尾音、均衡挥切，主攻与技以原动作节奏区分",
+      "common_event_ids": [
+        "AUD-WPN-PREP",
+        "AUD-WPN-SWING",
+        "AUD-DAMAGE-DIRECT",
+        "AUD-WPN-MISS"
+      ],
+      "variation_target": "2_to_3_cosmetic_takes_per_reusable_core_after_audition; not_per_weapon_or_per_event_purchase",
+      "material_targets": [
+        "soft_body",
+        "armor_metal",
+        "stone",
+        "wood_root",
+        "mechanism",
+        "ethereal"
+      ],
+      "pitch_variation": "optional_noncritical_max_plus_minus1_semitone; critical_tell_identity_not_randomized",
+      "status": "proposed_untested",
+      "event_routing": "common_event_ids are primary family references, not forced skill types; each actual action routes by its original melee/non-melee/instant/area definition; RFL003 bayonet uses SWING with no gunshot/ammo, STF instant line or ground-area uses actual RELEASE/effect subhit without a new projectile"
+    },
+    {
+      "family_id": "GSW",
+      "name_zh": "重剑",
+      "timbre_zh": "低沉长柄张力、宽厚挥动与低频触点；靠声包络体现承诺，不用加长真实时轴",
+      "common_event_ids": [
+        "AUD-WPN-PREP",
+        "AUD-WPN-SWING",
+        "AUD-DAMAGE-DIRECT",
+        "AUD-WPN-MISS"
+      ],
+      "variation_target": "2_to_3_cosmetic_takes_per_reusable_core_after_audition; not_per_weapon_or_per_event_purchase",
+      "material_targets": [
+        "soft_body",
+        "armor_metal",
+        "stone",
+        "wood_root",
+        "mechanism",
+        "ethereal"
+      ],
+      "pitch_variation": "optional_noncritical_max_plus_minus1_semitone; critical_tell_identity_not_randomized",
+      "status": "proposed_untested",
+      "event_routing": "common_event_ids are primary family references, not forced skill types; each actual action routes by its original melee/non-melee/instant/area definition; RFL003 bayonet uses SWING with no gunshot/ammo, STF instant line or ground-area uses actual RELEASE/effect subhit without a new projectile"
+    },
+    {
+      "family_id": "SPR",
+      "name_zh": "长枪",
+      "timbre_zh": "窄短空气穿刺、木杆握擦、尖端点响；快速戳刺按原子段，回收不加伤害声",
+      "common_event_ids": [
+        "AUD-WPN-PREP",
+        "AUD-WPN-SWING",
+        "AUD-DAMAGE-DIRECT",
+        "AUD-WPN-MISS"
+      ],
+      "variation_target": "2_to_3_cosmetic_takes_per_reusable_core_after_audition; not_per_weapon_or_per_event_purchase",
+      "material_targets": [
+        "soft_body",
+        "armor_metal",
+        "stone",
+        "wood_root",
+        "mechanism",
+        "ethereal"
+      ],
+      "pitch_variation": "optional_noncritical_max_plus_minus1_semitone; critical_tell_identity_not_randomized",
+      "status": "proposed_untested",
+      "event_routing": "common_event_ids are primary family references, not forced skill types; each actual action routes by its original melee/non-melee/instant/area definition; RFL003 bayonet uses SWING with no gunshot/ammo, STF instant line or ground-area uses actual RELEASE/effect subhit without a new projectile"
+    },
+    {
+      "family_id": "HAL",
+      "name_zh": "戟",
+      "timbre_zh": "杆身握转、刃扫与枪尖刺用两种收口；只随实际扫/刺形状选音色",
+      "common_event_ids": [
+        "AUD-WPN-PREP",
+        "AUD-WPN-SWING",
+        "AUD-DAMAGE-DIRECT",
+        "AUD-WPN-MISS"
+      ],
+      "variation_target": "2_to_3_cosmetic_takes_per_reusable_core_after_audition; not_per_weapon_or_per_event_purchase",
+      "material_targets": [
+        "soft_body",
+        "armor_metal",
+        "stone",
+        "wood_root",
+        "mechanism",
+        "ethereal"
+      ],
+      "pitch_variation": "optional_noncritical_max_plus_minus1_semitone; critical_tell_identity_not_randomized",
+      "status": "proposed_untested",
+      "event_routing": "common_event_ids are primary family references, not forced skill types; each actual action routes by its original melee/non-melee/instant/area definition; RFL003 bayonet uses SWING with no gunshot/ammo, STF instant line or ground-area uses actual RELEASE/effect subhit without a new projectile"
+    },
+    {
+      "family_id": "XBW",
+      "name_zh": "弩",
+      "timbre_zh": "弩弦绷断感、弩机卡榫与箭体轻啸；装填闭锁仅实际补弹提交",
+      "common_event_ids": [
+        "AUD-WPN-PREP",
+        "AUD-WPN-RELEASE",
+        "AUD-DAMAGE-DIRECT",
+        "AUD-WPN-MISS"
+      ],
+      "variation_target": "2_to_3_cosmetic_takes_per_reusable_core_after_audition; not_per_weapon_or_per_event_purchase",
+      "material_targets": [
+        "soft_body",
+        "armor_metal",
+        "stone",
+        "wood_root",
+        "mechanism",
+        "ethereal"
+      ],
+      "pitch_variation": "optional_noncritical_max_plus_minus1_semitone; critical_tell_identity_not_randomized",
+      "status": "proposed_untested",
+      "event_routing": "common_event_ids are primary family references, not forced skill types; each actual action routes by its original melee/non-melee/instant/area definition; RFL003 bayonet uses SWING with no gunshot/ammo, STF instant line or ground-area uses actual RELEASE/effect subhit without a new projectile"
+    },
+    {
+      "family_id": "PST",
+      "name_zh": "短铳",
+      "timbre_zh": "短单次火药脉冲、清楚机簧尾音；不添加后坐位移或爆炸范围",
+      "common_event_ids": [
+        "AUD-WPN-PREP",
+        "AUD-WPN-RELEASE",
+        "AUD-DAMAGE-DIRECT",
+        "AUD-WPN-MISS"
+      ],
+      "variation_target": "2_to_3_cosmetic_takes_per_reusable_core_after_audition; not_per_weapon_or_per_event_purchase",
+      "material_targets": [
+        "soft_body",
+        "armor_metal",
+        "stone",
+        "wood_root",
+        "mechanism",
+        "ethereal"
+      ],
+      "pitch_variation": "optional_noncritical_max_plus_minus1_semitone; critical_tell_identity_not_randomized",
+      "status": "proposed_untested",
+      "event_routing": "common_event_ids are primary family references, not forced skill types; each actual action routes by its original melee/non-melee/instant/area definition; RFL003 bayonet uses SWING with no gunshot/ammo, STF instant line or ground-area uses actual RELEASE/effect subhit without a new projectile"
+    },
+    {
+      "family_id": "SGN",
+      "name_zh": "霰弹枪",
+      "timbre_zh": "宽低火药瞬态、散布尾声；一次扳机多弹仅一个枪声，不按弹丸叠爆",
+      "common_event_ids": [
+        "AUD-WPN-PREP",
+        "AUD-WPN-RELEASE",
+        "AUD-DAMAGE-DIRECT",
+        "AUD-WPN-MISS"
+      ],
+      "variation_target": "2_to_3_cosmetic_takes_per_reusable_core_after_audition; not_per_weapon_or_per_event_purchase",
+      "material_targets": [
+        "soft_body",
+        "armor_metal",
+        "stone",
+        "wood_root",
+        "mechanism",
+        "ethereal"
+      ],
+      "pitch_variation": "optional_noncritical_max_plus_minus1_semitone; critical_tell_identity_not_randomized",
+      "status": "proposed_untested",
+      "event_routing": "common_event_ids are primary family references, not forced skill types; each actual action routes by its original melee/non-melee/instant/area definition; RFL003 bayonet uses SWING with no gunshot/ammo, STF instant line or ground-area uses actual RELEASE/effect subhit without a new projectile"
+    },
+    {
+      "family_id": "RFL",
+      "name_zh": "连发枪",
+      "timbre_zh": "薄而清楚的逐发机括/枪口脉冲；按真实EmissionBatch节奏，不自行加速连射",
+      "common_event_ids": [
+        "AUD-WPN-PREP",
+        "AUD-WPN-RELEASE",
+        "AUD-DAMAGE-DIRECT",
+        "AUD-WPN-MISS"
+      ],
+      "variation_target": "2_to_3_cosmetic_takes_per_reusable_core_after_audition; not_per_weapon_or_per_event_purchase",
+      "material_targets": [
+        "soft_body",
+        "armor_metal",
+        "stone",
+        "wood_root",
+        "mechanism",
+        "ethereal"
+      ],
+      "pitch_variation": "optional_noncritical_max_plus_minus1_semitone; critical_tell_identity_not_randomized",
+      "status": "proposed_untested",
+      "event_routing": "common_event_ids are primary family references, not forced skill types; each actual action routes by its original melee/non-melee/instant/area definition; RFL003 bayonet uses SWING with no gunshot/ammo, STF instant line or ground-area uses actual RELEASE/effect subhit without a new projectile"
+    },
+    {
+      "family_id": "STF",
+      "name_zh": "法杖",
+      "timbre_zh": "木杆与清亮非语言谐波、施法短蓄音；法术放出与真实专注提交绑定，不新增咏唱锁",
+      "common_event_ids": [
+        "AUD-WPN-PREP",
+        "AUD-WPN-RELEASE",
+        "AUD-DAMAGE-DIRECT",
+        "AUD-WPN-MISS"
+      ],
+      "variation_target": "2_to_3_cosmetic_takes_per_reusable_core_after_audition; not_per_weapon_or_per_event_purchase",
+      "material_targets": [
+        "soft_body",
+        "armor_metal",
+        "stone",
+        "wood_root",
+        "mechanism",
+        "ethereal"
+      ],
+      "pitch_variation": "optional_noncritical_max_plus_minus1_semitone; critical_tell_identity_not_randomized",
+      "status": "proposed_untested",
+      "event_routing": "common_event_ids are primary family references, not forced skill types; each actual action routes by its original melee/non-melee/instant/area definition; RFL003 bayonet uses SWING with no gunshot/ammo, STF instant line or ground-area uses actual RELEASE/effect subhit without a new projectile"
+    }
+  ],
+  "enemy_warning_palette": {
+    "STN": "石纹张裂和沉闷握盾",
+    "ELF": "弓弦与衣料短吸气",
+    "TRE": "枝干绷紧与根须摩擦",
+    "ROB": "法袍布料与非语言短谐波",
+    "SKL": "骨节轻响与盾碰",
+    "GOB": "轻脚步和短非语言喉音",
+    "MEC": "短机括/校准脉冲",
+    "BST": "呼吸/爪刮/低短吼",
+    "DEM": "干燥余烬与克制低谐波",
+    "rule": "only_actual_accepted_attack_warning; role-specific onset+lock cue paired_with_visuals; no new enemies_or_ability_effects"
+  },
+  "music_regions": [
+    {
+      "id": "MUS-REG-01",
+      "region_id": "REG-01",
+      "name_zh": "裂石外垒",
+      "mood_zh": "稀疏低鼓/石片/空风",
+      "layers": [
+        {
+          "id": "bed",
+          "trigger": "actual_region_and_room_ambience; no hidden enemy forecast"
+        },
+        {
+          "id": "combat",
+          "trigger": "authoritative admitted/active encounter threat; breather with obligations is not room clear"
+        },
+        {
+          "id": "settle",
+          "trigger": "actual_room_cleared; no claim of fullsafe_or_rewards"
+        }
+      ],
+      "main_boss_id": "BOS-STN-001",
+      "boss_music_id": "MUS-BOS-STN-001",
+      "selected_existing_file": null,
+      "existing23loops_policy": "audition_candidates_only; do_not_infer_mood_or_seam_from_filename; no_existing_stems_confirmed",
+      "status": "proposed_untested"
+    },
+    {
+      "id": "MUS-REG-02",
+      "region_id": "REG-02",
+      "name_zh": "荆根庭院",
+      "mood_zh": "木敲、低弦、克制叶响",
+      "layers": [
+        {
+          "id": "bed",
+          "trigger": "actual_region_and_room_ambience; no hidden enemy forecast"
+        },
+        {
+          "id": "combat",
+          "trigger": "authoritative admitted/active encounter threat; breather with obligations is not room clear"
+        },
+        {
+          "id": "settle",
+          "trigger": "actual_room_cleared; no claim of fullsafe_or_rewards"
+        }
+      ],
+      "main_boss_id": "BOS-FOR-001",
+      "boss_music_id": "MUS-BOS-FOR-001",
+      "selected_existing_file": null,
+      "existing23loops_policy": "audition_candidates_only; do_not_infer_mood_or_seam_from_filename; no_existing_stems_confirmed",
+      "status": "proposed_untested"
+    },
+    {
+      "id": "MUS-REG-03",
+      "region_id": "REG-03",
+      "name_zh": "灰烛墓院",
+      "mood_zh": "骨片干音、低声部无词合唱质感",
+      "layers": [
+        {
+          "id": "bed",
+          "trigger": "actual_region_and_room_ambience; no hidden enemy forecast"
+        },
+        {
+          "id": "combat",
+          "trigger": "authoritative admitted/active encounter threat; breather with obligations is not room clear"
+        },
+        {
+          "id": "settle",
+          "trigger": "actual_room_cleared; no claim of fullsafe_or_rewards"
+        }
+      ],
+      "main_boss_id": "BOS-RIT-001",
+      "boss_music_id": "MUS-BOS-RIT-001",
+      "selected_existing_file": null,
+      "existing23loops_policy": "audition_candidates_only; do_not_infer_mood_or_seam_from_filename; no_existing_stems_confirmed",
+      "status": "proposed_untested"
+    },
+    {
+      "id": "MUS-REG-04",
+      "region_id": "REG-04",
+      "name_zh": "熔压工坊",
+      "mood_zh": "机械金属脉冲、蒸汽底色",
+      "layers": [
+        {
+          "id": "bed",
+          "trigger": "actual_region_and_room_ambience; no hidden enemy forecast"
+        },
+        {
+          "id": "combat",
+          "trigger": "authoritative admitted/active encounter threat; breather with obligations is not room clear"
+        },
+        {
+          "id": "settle",
+          "trigger": "actual_room_cleared; no claim of fullsafe_or_rewards"
+        }
+      ],
+      "main_boss_id": "BOS-MEC-001",
+      "boss_music_id": "MUS-BOS-MEC-001",
+      "selected_existing_file": null,
+      "existing23loops_policy": "audition_candidates_only; do_not_infer_mood_or_seam_from_filename; no_existing_stems_confirmed",
+      "status": "proposed_untested"
+    },
+    {
+      "id": "MUS-REG-05",
+      "region_id": "REG-05",
+      "name_zh": "烬誓内庭",
+      "mood_zh": "低弦、余烬颗粒、留城主题变体",
+      "layers": [
+        {
+          "id": "bed",
+          "trigger": "actual_region_and_room_ambience; no hidden enemy forecast"
+        },
+        {
+          "id": "combat",
+          "trigger": "authoritative admitted/active encounter threat; breather with obligations is not room clear"
+        },
+        {
+          "id": "settle",
+          "trigger": "actual_room_cleared; no claim of fullsafe_or_rewards"
+        }
+      ],
+      "main_boss_id": "BOS-DEM-001",
+      "boss_music_id": "MUS-BOS-DEM-001",
+      "selected_existing_file": null,
+      "existing23loops_policy": "audition_candidates_only; do_not_infer_mood_or_seam_from_filename; no_existing_stems_confirmed",
+      "status": "proposed_untested"
+    }
+  ],
+  "music_bosses": [
+    {
+      "id": "MUS-BOS-STN-001",
+      "boss_id": "BOS-STN-001",
+      "mood_zh": "石钟与沉重切分",
+      "entry": "actual_D06_encounter_intro; intro1.5s unchanged",
+      "phase_layer": "actual phase cue begins: one accent only; new sustained phase layer begins only on actual PhaseCommitEvent; queued threshold alone never switches phase music",
+      "resolution": "Boss death alone no victory; qualified success or player terminal drives actual outcome",
+      "optional": false,
+      "assigned_file": null,
+      "status": "proposed_untested"
+    },
+    {
+      "id": "MUS-BOS-FOR-001",
+      "boss_id": "BOS-FOR-001",
+      "mood_zh": "树干脉冲与枝冠摩擦",
+      "entry": "actual_D06_encounter_intro; intro1.5s unchanged",
+      "phase_layer": "actual phase cue begins: one accent only; new sustained phase layer begins only on actual PhaseCommitEvent; queued threshold alone never switches phase music",
+      "resolution": "Boss death alone no victory; qualified success or player terminal drives actual outcome",
+      "optional": false,
+      "assigned_file": null,
+      "status": "proposed_untested"
+    },
+    {
+      "id": "MUS-BOS-RIT-001",
+      "boss_id": "BOS-RIT-001",
+      "mood_zh": "克制仪式节拍与骨钟",
+      "entry": "actual_D06_encounter_intro; intro1.5s unchanged",
+      "phase_layer": "actual phase cue begins: one accent only; new sustained phase layer begins only on actual PhaseCommitEvent; queued threshold alone never switches phase music",
+      "resolution": "Boss death alone no victory; qualified success or player terminal drives actual outcome",
+      "optional": false,
+      "assigned_file": null,
+      "status": "proposed_untested"
+    },
+    {
+      "id": "MUS-BOS-MEC-001",
+      "boss_id": "BOS-MEC-001",
+      "mood_zh": "压机节奏与金属应答",
+      "entry": "actual_D06_encounter_intro; intro1.5s unchanged",
+      "phase_layer": "actual phase cue begins: one accent only; new sustained phase layer begins only on actual PhaseCommitEvent; queued threshold alone never switches phase music",
+      "resolution": "Boss death alone no victory; qualified success or player terminal drives actual outcome",
+      "optional": false,
+      "assigned_file": null,
+      "status": "proposed_untested"
+    },
+    {
+      "id": "MUS-BOS-DEM-001",
+      "boss_id": "BOS-DEM-001",
+      "mood_zh": "誓约主题分层但不遮大招预警",
+      "entry": "actual_D06_encounter_intro; intro1.5s unchanged",
+      "phase_layer": "actual phase cue begins: one accent only; new sustained phase layer begins only on actual PhaseCommitEvent; queued threshold alone never switches phase music",
+      "resolution": "Boss death alone no victory; qualified success or player terminal drives actual outcome",
+      "optional": false,
+      "assigned_file": null,
+      "status": "proposed_untested"
+    },
+    {
+      "id": "MUS-BOS-GOB-001",
+      "boss_id": "BOS-GOB-001",
+      "mood_zh": "短促木片与硬币节奏；不把输金币误作受伤",
+      "entry": "actual optional encounter only; optional no mainline_gate",
+      "phase_layer": "actual phase cue begins: one accent only; new sustained phase layer begins only on actual PhaseCommitEvent; queued threshold alone never switches phase music",
+      "resolution": "same D06 qualified_success_or_player_terminal rules",
+      "optional": true,
+      "assigned_file": null,
+      "status": "proposed_untested"
+    },
+    {
+      "id": "MUS-BOS-BST-001",
+      "boss_id": "BOS-BST-001",
+      "mood_zh": "皮鼓与呼吸节拍；强调冲锋停步窗口",
+      "entry": "actual optional encounter only; optional no mainline_gate",
+      "phase_layer": "actual phase cue begins: one accent only; new sustained phase layer begins only on actual PhaseCommitEvent; queued threshold alone never switches phase music",
+      "resolution": "same D06 qualified_success_or_player_terminal rules",
+      "optional": true,
+      "assigned_file": null,
+      "status": "proposed_untested"
+    }
+  ],
+  "mixing": {
+    "status": "proposed_untested",
+    "buses": [
+      "warning",
+      "combat",
+      "transaction",
+      "ambience",
+      "music",
+      "ui",
+      "account",
+      "optional_voice"
+    ],
+    "priority_low_number_first": [
+      "terminal_and_critical_actual_warning",
+      "player_hurt_poise_break_phase",
+      "accepted_direct_contact_and_committed_transaction",
+      "ordinary_action",
+      "ambience_music_cosmetic_tail"
+    ],
+    "critical_visual_redundancy": "every necessary warning/direction/footprint/timing/counter-open remains visual and readable with allaudio0; auditory feedback is supplemental",
+    "ducking_proposal": {
+      "warning_ducks_music_db": 6,
+      "warning_ducks_noncritical_combat_db": 3,
+      "attack_ms": 20,
+      "release_ms": 180,
+      "changes_game_time_or_damage": false
+    },
+    "concurrency_proposal": {
+      "noncritical_world_one_shot_target_cap": 24,
+      "UI_target_cap": 2,
+      "music_target_layers": 3,
+      "critical_tells": "reserve_priority; coalesce identical same event; no instruction to drop visual tell; future density test required",
+      "target_is_not_measured_performance": true
+    },
+    "impact_density": {
+      "same_attack_same_subhit_same_target": "one_damage_contact_main_voice",
+      "multi_target_one_melee_sweep": "one_swing; aggregate similar material contacts within40ms, max2contact_voices per segment",
+      "shotgun": "one_release per emission batch; pellet contacts aggregate per target/window",
+      "multihit_and_burst": "each legitimate subhit/emission keeps distinct onset; never replicate full layered boom for every pellet or overlap old tail unbounded",
+      "merge_window_ms_proposal": 40,
+      "does_not_merge_damage_or_delete_hit_receipts": true
+    },
+    "cosmetic_variation": "presentation-only deterministic hash of event identity; never consume loot/combat RNG or change hit timing",
+    "master_peak_proposal": "avoid clipping; target true_peak<=-1dBTP for exported previews after real meter test; no measured loudness claim",
+    "audio_controls": "D11 master/effects/music/voice0..100; voice disabled until assets exist; warnings also obey user audio mute while visual equivalents remain",
+    "audio_error": "missing or late cue does not block attack/transaction/route; log asset event; keep visual warning; never replay game action to obtain sound"
+  },
+  "clock_and_lifecycle": {
+    "game_audio_cursor": "uses authoritative run_sim_time; audio scheduling never advances simulation, resources, waves, attack windows or CD",
+    "real_time_selection": "D11 live UI-02/07/08 world continues; navigation sound may play but not pause or duck away required visuals",
+    "pause": "freeze world voices/cue cursors and gameplay music progression with the same singleplayer simulation; optional output-only fade80ms uses audio render time, not advance of cue cursor",
+    "paused_UI": "UI navigation/confirm/back use independent UI clock; no commit/resource/snapshot effects while paused; no world cue catch-up",
+    "resume": "continue still-valid existing voice at saved cursor; do not reschedule already played onset, overdued attack or repeated success/reward cues; UI held-input rules remain D11",
+    "skip_or_instant_dialogue": "stop optional dialogue vocal/typing cosmetics and show requested text; not fast-forward simulation/Boss intro1.5/phase1.2/spawn1.2/emerge0.6/recovery",
+    "no_gameplay_fastforward_added": true,
+    "same_time_terminal": "all existing damage/death resolves first; failure/double-death does not play success; music must follow actual outcome receipt",
+    "across_waves": "same room old projectile/trap/status audio follows still-live existing objects/events; no wave-clear auto purge, CD or status reset",
+    "free_room_exit": "after actual transition cleanup stop room-owned attack/ambience voices; player attached states keep original next_tick/CD/resources and may continue state sound in next room; no cleansing by fade",
+    "boss_success": "stop Boss-owned field attack voices only after canonical success cleanup; player status audio/ticks survive; normal enemy death keeps emitted projectile sound until original expiry/impact",
+    "room_revisit": "same RoomInstanceID and original pending tray/source facts; ambience may restart cosmetic bed, but never replay clear/reward/first-discovery/source reveal success",
+    "hub_new_run": "old gameplay voices dispose on true end; newRun new event namespace only after D09 commit; paused/suspended hub visuals cannot start anotherRun",
+    "music_transition": "cosmetic crossfade350ms proposed; never waits to open gate/commit rewards or lengthens scene; music cursor/seek capability needs later UE test"
+  },
+  "future_checks": [
+    {
+      "id": "AUD-C01",
+      "test": "all8archives_hash_and_license_bundle_path",
+      "status": "local_static_checked_this_audit; release packaging not tested"
+    },
+    {
+      "id": "AUD-C02",
+      "test": "181individualSFX+23music exclude RPG Preview; audition actual pitch dynamics stereo phase and loops",
+      "status": "not_executed"
+    },
+    {
+      "id": "AUD-C03",
+      "test": "11family sound identity while muted visuals still readable; mono/stereo/headphone/speaker listening",
+      "status": "not_executed"
+    },
+    {
+      "id": "AUD-C04",
+      "test": "same accepted attack multi targets/shotgun/burst no duplicate main voice; damage receipts unchanged",
+      "status": "not_executed"
+    },
+    {
+      "id": "AUD-C05",
+      "test": "pause with burning, reload, Boss recovery and pending spawn; UI sounds no game clock advance, resume no catch-up",
+      "status": "not_executed"
+    },
+    {
+      "id": "AUD-C06",
+      "test": "ordinary enemy dies old projectile retains voice; Boss qualified success cleans own field voices only; doubledeath failure",
+      "status": "not_executed"
+    },
+    {
+      "id": "AUD-C07",
+      "test": "free exit carrying DoT retains original tick sound schedule; paid entrance denied under unsafe; no cleanup before commit",
+      "status": "not_executed"
+    },
+    {
+      "id": "AUD-C08",
+      "test": "coin/shard committed pickup vs ground vs Bossauto; source tray reveal/claim/review no duplicate success or credit",
+      "status": "not_executed"
+    },
+    {
+      "id": "AUD-C09",
+      "test": "subtitleoff/audio0/reducedflash preserve danger text footprints direction and legal groundedY counter cues",
+      "status": "not_executed"
+    },
+    {
+      "id": "AUD-C10",
+      "test": "skip story does not shorten battle clock; replay archives no reward or success song replay",
+      "status": "not_executed"
+    },
+    {
+      "id": "AUD-C11",
+      "test": "actual4actor/threat8 density, multiplewarnings, long negativeaffix pages; mixer clipping and intelligibility",
+      "status": "not_executed"
+    },
+    {
+      "id": "AUD-C12",
+      "test": "actual packaged UE build font copyright/license and audio source licenses retained; missing cue fallback",
+      "status": "not_executed"
+    }
+  ]
+}

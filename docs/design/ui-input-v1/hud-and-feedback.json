@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "module": "D-11",
+  "source_event": "EV-029",
+  "status": "design_only",
+  "authority": "assistant_proposal_not_individually_user_approved",
+  "runtime_implemented": false,
+  "clock": "active_run_simulation_seconds_pause_freezes_all",
+  "layout": {
+    "reference_viewport_px": [1280, 720],
+    "safe_margin_px_at_reference": 24,
+    "world_center": "player_feet_depth_lanes_attack_tells_unobstructed",
+    "large_text": "reflow_and_scroll_not_crop_or_reduce_essential_font",
+    "small_viewport_compare": "tabs_current_candidate_final_change_with_persistent_cost_risk_footer",
+    "formal_art_audio_spec": "D-12",
+    "actual_readability_tested": false
+  },
+  "hud_elements": [
+    {"id":"HUD-HP","position":"top_left","visible":"active_run","fields":["current_hp","final_max_hp"],"rules":["always_numeric_and_bar","max_hp_gain_is_not_healing","loss_animation_never_changes_authoritative_hp","critical_hp_no_mandatory_flash"]},
+    {"id":"HUD-RESOURCE","position":"under_hp","visible":"relevant_active_weapon","fields":["magazine_current_and_capacity_or_focus","reload_progress_if_reloading","active_weapon_skill_remaining"],"rules":["no_invented_reserve_ammo_or_stamina","weapon_instance_resource_not_reset_on_switch","skill_unavailable_has_specific_reason"]},
+    {"id":"HUD-WEAPONS","position":"bottom_left","visible":"active_run","fields":["active_weapon_name_family","backup_weapon_or_empty","switch_binding","base_grade","enchant_tier_and_package_sign"],"rules":["active_slot_shape_not_color_only","backup_has_no_current_stat_contribution","grade_0_to_3_separate_from_enchant_I_to_V"]},
+    {"id":"HUD-QUICK","position":"bottom_left_after_weapons","visible":"active_run","fields":["slot_1_binding_item_count","slot_2_binding_item_count","shared_use_lock","item_id_cooldown","dodge_ready_or_remaining"],"rules":["two_distinct_quick_ids","empty_slot_still_shows_binding","zero_cooldown_not_equal_legal_while_airborne_or_busy","remaining_ceil_tenth_no_0_while_positive","no_hold_auto_use"]},
+    {"id":"HUD-WALLET","position":"top_right","visible":"active_run","fields":["run_gold","account_banked_shards","this_run_banked_shards_delta"],"rules":["labels_distinguish_local_and_permanent","account_total_includes_delta_do_not_add_twice","world_drops_not_counted_before_commit","bank_pending_only_if_authoritative_pending_exists"]},
+    {"id":"HUD-ROOM","position":"top_right_below_wallet","visible":"active_run","fields":["region_name","node_label","encounter_state","next_known_free_route"],"rules":["no_hidden_actor_count_positions_or_unrevealed_manifest","wave_empty_not_room_clear","ready_to_organize_requires_full_D04_safe","room_clear_alone_does_not_claim_safe"]},
+    {"id":"HUD-STATUS","position":"left_below_resources","visible":"active_statuses","fields":["status_icon_and_short_name","remaining_duration","positive_negative_or_mixed_tag"],"rules":["burn_slow_shock_keep_distinct_shape_and_text","mixed_tonic_shows_cost_and_benefit_together","long_details_in_inspect","timers_same_simulation_clock"]},
+    {"id":"HUD-TARGET","position":"near_target_with_screen_edge_clamp","visible":"valid_locked_interaction_target","fields":["locked_target_name","interaction_binding","cycle_binding_when_multiple","action_or_block_reason"],"rules":["one_target_only","full_capacity_stays_selectable","invalid_target_no_automatic_fallthrough","label_anchor_not_hide_ground_tell"]},
+    {"id":"HUD-ACTION","position":"bottom_center","visible":"D04_action_pending","fields":["action_name","real_progress","cancel_reason_when_interrupted"],"rules":["ownership_and_price_change_only_at_commit","opening_inspect_freezes_progress","damage_cancel_not_reversed_by_same_tick_heal"]},
+    {"id":"HUD-BOSS","position":"top_center","visible":"actual_boss_encounter","fields":["boss_name","current_and_max_hp","actual_phase","telegraph_text_if_relevant"],"rules":["phase_threshold_not_invulnerability","no_fake_full_hp_refill","narrative_skip_never_shortens_intro_or_phase_tell"]}
+  ],
+  "room_labels": [
+    {"id":"ROOM-COMBAT","label":"战斗中","predicate":"encounter_unfinished_with_active_threat"},
+    {"id":"ROOM-UNFINISHED","label":"遭遇尚未结束","predicate":"no_active_threat_but_future_or_dormant_obligation_remains"},
+    {"id":"ROOM-CLEAR-UNSAFE","label":"房间已清除 · 暂不可整理","predicate":"room_cleared_and_not_full_D04_safe","reason":"show_current_hazard_dot_or_action_reason"},
+    {"id":"ROOM-SAFE","label":"可整理与交易","predicate":"full_D04_safe"},
+    {"id":"ROOM-FAULT","label":"遭遇生成异常","predicate":"D07_explicit_fault","reason":"show_diagnostic_entry_no_fake_clear_or_reward"}
+  ],
+  "map": {
+    "mode": "paused_readonly_discovered_topology",
+    "reveals_hidden_nodes": false,
+    "teleport_or_auto_walk": false,
+    "fields": ["current_node","discovered_nodes","known_connections","visited_facilities","known_route_returnability","known_fee_and_entry_entitlement"],
+    "unknown_route_label": "未探明",
+    "purchase_intel_only_reveals_existing_D08_intel": true,
+    "freeze_all_run_clocks": true,
+    "opening_does_not_autocommit_action_or_grant_safe": true,
+    "close": "consume_and_release_guard_revalidate_resume_no_auto_action"
+  },
+  "global_feedback": {
+    "priority": ["terminal_or_integrity_fault","required_transaction_risk","combat_tell_and_damage","action_failure","target_prompt","lesson","loot_or_story_toast"],
+    "priority_is_presentation_only": true,
+    "combat_tells_never_removed_by_toasts": true,
+    "max_nonmodal_lesson_visible": 1,
+    "toast_queue_limit": 3,
+    "excess_toasts": "coalesce_same_type_preserve_detail_in_current_run_log",
+    "damage_number_mode": "optional_aggregate_per_target_short_window_no_change_to_hits",
+    "modal_stack": "one_owner_nested_panel_returns_to_owner_no_duplicate_global_pause",
+    "tutorial_or_story_autopopup_in_combat": false,
+    "terminal_event_dismisses_stale_selection": true,
+    "read_log_or_toast_grants_reward": false,
+    "logs_are_authoritative_receipt_views_not_receipt_writers": true
+  },
+  "failure_messages": [
+    {"id":"MSG-AIR","text":"落地并停稳后再操作。","source":"ground_idle_guard"},
+    {"id":"MSG-BUSY","text":"当前动作尚未结束。","source":"action_legality"},
+    {"id":"MSG-CAPACITY","text":"需要完整容纳这组物品；请选择可用槽位。","source":"whole_offer_capacity"},
+    {"id":"MSG-DROP","text":"旧物品没有安全落点，暂不能替换。","source":"drop_placement"},
+    {"id":"MSG-TARGET","text":"目标已失效，请重新选择。","source":"target_version_or_range"},
+    {"id":"MSG-GOLD","text":"金币不足。","source":"current_wallet_check"},
+    {"id":"MSG-QUOTE","text":"报价或库存已变化，请重新确认。","source":"quote_stock_coupon_version"},
+    {"id":"MSG-DAMAGE","text":"操作被受伤打断。","source":"latched_effective_damage"},
+    {"id":"MSG-SAFE","text":"仍有危险或持续伤害，暂不能整理与交易。","source":"full_safe_guard"},
+    {"id":"MSG-RUN","text":"尚有未结束的远征，请先继续或结束该局。","source":"D09_unfinished_run"},
+    {"id":"MSG-NOEFFECT","text":"当前没有可生效的提升，本次不会扣费。","source":"facility_specific_effect_guard"},
+    {"id":"MSG-RECEIPT","text":"记录状态待核对，暂不能重复操作。","source":"D13_recovery_contract"}
+  ],
+  "accessibility_settings": [
+    {"id":"SET-UI-SCALE","default":100,"options":[100,125,150],"effect":"reflow_panels_keep_world_tells_visible","mutates_game_rules":false},
+    {"id":"SET-TEXT","default":"standard","options":["standard","large"],"effect":"essential_body_at_least_18_rendered_px_at_target_min_viewport_large_24; titles_at_least_24; never_ellipsize_price_or_bad_affix","mutates_game_rules":false},
+    {"id":"SET-COLOR","default":"shape_text_color","options":["shape_text_color","high_contrast_shape_text"],"effect":"positive_plus_benefit_negative_minus_cost_mixed_dual_label_even_without_color","mutates_game_rules":false},
+    {"id":"SET-SHAKE","default":50,"options":[0,25,50,100],"effect":"cosmetic_camera_shake_only_not_hitstop_or_attack_timing","mutates_game_rules":false},
+    {"id":"SET-FLASH","default":"reduced","options":["reduced","off"],"effect":"cosmetic_fullscreen_flashes_only_keep_static_attack_footprint_and_edge_outline","mutates_game_rules":false},
+    {"id":"SET-HIT-NUMBERS","default":"aggregate","options":["aggregate","individual","off"],"effect":"presentation_only_actual_damage_receipts_unchanged","mutates_game_rules":false},
+    {"id":"SET-VIBRATION","default":50,"options":[0,25,50,100],"effect":"optional_feedback_never_only_warning","mutates_game_rules":false},
+    {"id":"SET-SUBTITLES","default":true,"options":[true,false],"effect":"dialogue_subtitles_only_facility_risks_combat_tells_tutorial_manual_remain","mutates_game_rules":false},
+    {"id":"SET-DIALOGUE","default":"manual_advance","options":["manual_advance","instant_text_manual_advance"],"effect":"fresh_confirm_reveals_line_then_fresh_confirm_advances_skip_has_no_gameplay_effect","mutates_game_rules":false},
+    {"id":"SET-LESSONS","default":"contextual","options":["contextual","off"],"effect":"skip_future_toasts_review_available_no_rewards_or_skill_locks","mutates_game_rules":false},
+    {"id":"SET-AUDIO","default":{"master":80,"effects":80,"music":65,"voice":80},"options":"each_0_to_100","effect":"voice_slider_disabled_until_voice_exists_visual_tells_always_retained","mutates_game_rules":false},
+    {"id":"SET-FOCUS","default":"visible_outline_and_label","options":["visible_outline_and_label"],"effect":"menus_have_deterministic_focus_and_explicit_disabled_reason","mutates_game_rules":false}
+  ],
+  "localization": {
+    "initial_language": "zh-Hans",
+    "font_source": "existing_Noto_Sans_CJK_SC_OFL1.1_asset_pending_formal_packaging_check",
+    "text_keys": "stable_semantic_id_no_text_as_save_id",
+    "input_tokens": "resolve_current_binding_and_context_at_render_time",
+    "numeric_units": ["金币","遗物碎片","秒","厘米","%","百分点"],
+    "negative_attribute_interpretation": "meaning_first_not_numeric_sign; cooldown_minus_is_benefit_vulnerability_plus_is_cost",
+    "text_truncation": "wrap_and_scroll_long_names_never_hide_cost_risk_or_confirm_label",
+    "screen_reader": "semantic_labels_and_focus_order_required_for_future_implementation_no_support_claim_until_tested"
+  },
+  "scope_exclusions": ["no_new_equipment_or_prices","no_touch_or_multiplayer_UI_now","no_purchased_generation","no_formal_art_or_voice_assets","no_actual_controller_readability_or_screen_reader_validation"],
+  "future_validation": ["1280x720_and_1920x1080_at_all_UI_scales","longest_CJK_names_and_negative_affixes","keyboard_only_and_gamepad_only_complete_route","gray_scale_and_muted_audio_tells","controller_disconnect_and_focus_loss","paused_clocks_and_same_time_damage_before_commit","input_remap_all_contexts","D13_receipt_recovery_and_settings_persistence"]
+}

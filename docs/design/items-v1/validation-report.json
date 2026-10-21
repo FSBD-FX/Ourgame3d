@@ -1,0 +1,130 @@
+{
+  "design_date": "2026-10-13",
+  "status": "passed",
+  "checks": 477,
+  "errors": [],
+  "scope": "Design catalogue schema/counts/references, declared timing and cap contracts, arithmetic examples and historical-source preservation only. No UE item runtime, actual collision/input/persistence, random drop statistics, economy, artwork, hand feel or game balance verification.",
+  "item_count": 36,
+  "category_counts": {
+    "REC": 6,
+    "BOO": 6,
+    "THR": 6,
+    "TRP": 4,
+    "PAS": 8,
+    "FUN": 6
+  },
+  "pool_eligibility_counts": {
+    "base_pool": 22,
+    "meta_unlock": 14
+  },
+  "state_contracts": 5,
+  "local_document_links": 75,
+  "future_runtime_scenarios_documented_not_executed": 19,
+  "paper_examples": [
+    {
+      "case": "30 base heal at 80/100 HP with 15pct efficiency",
+      "actual": 20,
+      "expected": 20
+    },
+    {
+      "case": "30 base heal with minus25pct efficiency",
+      "actual": 22.5,
+      "expected": 22.5
+    },
+    {
+      "case": "hot raw five ticks",
+      "actual": 40,
+      "expected": 40
+    },
+    {
+      "case": "hot varying efficiency 0.75 1 1.25 1 0.75",
+      "actual": 38.0,
+      "expected": 38
+    },
+    {
+      "case": "merged weapon bonus 40+10+15 capped once",
+      "actual": 50,
+      "expected": 50
+    },
+    {
+      "case": "action speed 12+12 capped once",
+      "actual": 20,
+      "expected": 20
+    },
+    {
+      "case": "max HP 100 to90 then back100 never heals",
+      "actual": 90,
+      "expected": 90
+    },
+    {
+      "case": "shock Boss target ICD",
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "case": "slow25 Boss half",
+      "actual": 12.5,
+      "expected": 12.5
+    },
+    {
+      "case": "burn6 zero ward and25pct vulnerability three ticks",
+      "actual": 22.5,
+      "expected": 22.5
+    },
+    {
+      "case": "burn2 refreshed to6 at0.8 keeps first tick1",
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "case": "ellipse outer corner is outside",
+      "actual": false,
+      "expected": false
+    },
+    {
+      "case": "ellipse half offsets are inside",
+      "actual": true,
+      "expected": true
+    },
+    {
+      "case": "kill heal2 at25pct efficiency room cap6",
+      "actual": 6.0,
+      "expected": 6
+    },
+    {
+      "case": "merchant price1 rounds to1 and offers no discount",
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "case": "merchant price6 rounds up to5",
+      "actual": 5,
+      "expected": 5
+    },
+    {
+      "case": "expired cost discount initial affordable then lock insufficient",
+      "actual": true,
+      "expected": true
+    }
+  ],
+  "historical_source_sha256": {
+    "equipment-v1/weapons.json": "95757819382832cfa31e6596f3ba90f1e983e83fbd69504da3c99d5ea2a272b4",
+    "equipment-v1/armor.json": "9407e458aef80b9f0d8f0e958b089e7b7a6f4180aef41b7b7df97534fe780e9d",
+    "玩家角色与战斗规则设计.md": "da7d170fc71f67bb5fca06fbf8538d9cdf22b8998254f0033447db4a3219b949",
+    "docs/design/player-combat-v1/player-combat-rules.json": "ab22cd0f131fa8f025ea16db9d1536028526b35c467aeb0008fe2dca59c413ef"
+  },
+  "current_design_sha256": {
+    "道具与状态系统设计.md": "4c7536f4b71bd74563edbb8e393a2bb452ead0fc74db4cfa201c605b710a8bbf",
+    "docs/design/items-v1/common-rules.json": "b5815a10f313b7364b1dde66b0eac9f703104ea260d4e4470094cffe31652e99",
+    "docs/design/items-v1/states.json": "97ee61346d5c6387dc25aa01a75d64fcd12d60b5917d0b7f594d05b25b0c06a3",
+    "docs/design/items-v1/items.json": "09e40ef363ddcd2507efcbdfa4cf388916623e62015dcb41229a62d6badc2bc1",
+    "docs/design/items-v1/consumables.json": "e940715c2d85ff05b8431903ca6bcd7cba9adeed0cebc79c3304253f7ef487eb",
+    "docs/design/items-v1/passives-and-utilities.json": "ec38d990658cc930bf9bb98ca52e2fcd1fecaab9b6fe80cfc40486b2e88eb85a"
+  },
+  "runtime_implemented": false,
+  "final_interface_review": {
+    "checks": 5,
+    "errors": [],
+    "scope": "Two added inventory-interface declarations and unchanged catalogue-source hashes after the full catalogue pass."
+  }
+}

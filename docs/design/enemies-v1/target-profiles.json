@@ -1,0 +1,601 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-13",
+  "source_event": "EV-023",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposed_dimensions",
+  "player_reference": {
+    "body_xy_half_cm": {
+      "half_x_cm": 18,
+      "half_y_cm": 16
+    },
+    "projectile_hurtbox_xy_half_cm": {
+      "half_x_cm": 18,
+      "half_y_cm": 16
+    },
+    "source": "../equipment-v1/00-共同规则.md and ../player-combat-v1/player-combat-rules.json"
+  },
+  "profiles": [
+    {
+      "enemy_id": "ENM-STN-001",
+      "body_xy_half_cm": {
+        "half_x_cm": 24,
+        "half_y_cm": 20
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 24,
+        "half_y_cm": 20
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-STN-002",
+      "body_xy_half_cm": {
+        "half_x_cm": 16,
+        "half_y_cm": 12
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 16,
+        "half_y_cm": 12
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true,
+        "max_actual_z_cm": 40
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-STN-003",
+      "body_xy_half_cm": {
+        "half_x_cm": 40,
+        "half_y_cm": 28
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 40,
+        "half_y_cm": 28
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-STN-004",
+      "body_xy_half_cm": {
+        "half_x_cm": 23,
+        "half_y_cm": 18
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 23,
+        "half_y_cm": 18
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-ELF-001",
+      "body_xy_half_cm": {
+        "half_x_cm": 16,
+        "half_y_cm": 14
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 16,
+        "half_y_cm": 14
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-ELF-002",
+      "body_xy_half_cm": {
+        "half_x_cm": 18,
+        "half_y_cm": 15
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 18,
+        "half_y_cm": 15
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-ELF-003",
+      "body_xy_half_cm": {
+        "half_x_cm": 18,
+        "half_y_cm": 15
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 18,
+        "half_y_cm": 15
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-TRE-001",
+      "body_xy_half_cm": {
+        "half_x_cm": 17,
+        "half_y_cm": 14
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 17,
+        "half_y_cm": 14
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-TRE-002",
+      "body_xy_half_cm": {
+        "half_x_cm": 25,
+        "half_y_cm": 20
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 25,
+        "half_y_cm": 20
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-TRE-003",
+      "body_xy_half_cm": {
+        "half_x_cm": 40,
+        "half_y_cm": 30
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 40,
+        "half_y_cm": 30
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-ROB-001",
+      "body_xy_half_cm": {
+        "half_x_cm": 18,
+        "half_y_cm": 16
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 18,
+        "half_y_cm": 16
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-ROB-002",
+      "body_xy_half_cm": {
+        "half_x_cm": 16,
+        "half_y_cm": 14
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 16,
+        "half_y_cm": 14
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-ROB-003",
+      "body_xy_half_cm": {
+        "half_x_cm": 27,
+        "half_y_cm": 23
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 27,
+        "half_y_cm": 23
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-SKL-001",
+      "body_xy_half_cm": {
+        "half_x_cm": 16,
+        "half_y_cm": 14
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 16,
+        "half_y_cm": 14
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-SKL-002",
+      "body_xy_half_cm": {
+        "half_x_cm": 21,
+        "half_y_cm": 18
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 21,
+        "half_y_cm": 18
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-SKL-003",
+      "body_xy_half_cm": {
+        "half_x_cm": 18,
+        "half_y_cm": 16
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 18,
+        "half_y_cm": 16
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-GOB-001",
+      "body_xy_half_cm": {
+        "half_x_cm": 15,
+        "half_y_cm": 13
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 15,
+        "half_y_cm": 13
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-GOB-002",
+      "body_xy_half_cm": {
+        "half_x_cm": 18,
+        "half_y_cm": 16
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 18,
+        "half_y_cm": 16
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-GOB-003",
+      "body_xy_half_cm": {
+        "half_x_cm": 29,
+        "half_y_cm": 24
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 29,
+        "half_y_cm": 24
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-MEC-001",
+      "body_xy_half_cm": {
+        "half_x_cm": 16,
+        "half_y_cm": 14
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 16,
+        "half_y_cm": 14
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-MEC-002",
+      "body_xy_half_cm": {
+        "half_x_cm": 32,
+        "half_y_cm": 26
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 32,
+        "half_y_cm": 26
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-MEC-003",
+      "body_xy_half_cm": {
+        "half_x_cm": 21,
+        "half_y_cm": 17
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 21,
+        "half_y_cm": 17
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-BST-001",
+      "body_xy_half_cm": {
+        "half_x_cm": 18,
+        "half_y_cm": 14
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 18,
+        "half_y_cm": 14
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-BST-002",
+      "body_xy_half_cm": {
+        "half_x_cm": 36,
+        "half_y_cm": 28
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 36,
+        "half_y_cm": 28
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-BST-003",
+      "body_xy_half_cm": {
+        "half_x_cm": 22,
+        "half_y_cm": 18
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 22,
+        "half_y_cm": 18
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-DEM-001",
+      "body_xy_half_cm": {
+        "half_x_cm": 22,
+        "half_y_cm": 18
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 22,
+        "half_y_cm": 18
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-DEM-002",
+      "body_xy_half_cm": {
+        "half_x_cm": 20,
+        "half_y_cm": 16
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 20,
+        "half_y_cm": 16
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    },
+    {
+      "enemy_id": "ENM-DEM-003",
+      "body_xy_half_cm": {
+        "half_x_cm": 30,
+        "half_y_cm": 24
+      },
+      "projectile_hurtbox_xy_half_cm": {
+        "half_x_cm": 30,
+        "half_y_cm": 24
+      },
+      "hurtbox_initial_values_match_body_but_are_separate_fields": true,
+      "height_rule": "actual_actor_z; attack_specific_center_and_tolerance; no_full_height_sprite_bounds",
+      "ground_body_rule": {
+        "enabled": true
+      },
+      "death_disables_body": true,
+      "melee_hit_geometry": "target_center_no_hurtbox_expansion",
+      "projectile_hit_geometry": "swept_projectile_vs_hurtbox_plus_original_center_hard_bounds"
+    }
+  ],
+  "elite_inheritance": [
+    {
+      "elite_id": "ELT-STN-001",
+      "inherits_profile_from": "ENM-STN-001",
+      "no_size_multiplier": true
+    },
+    {
+      "elite_id": "ELT-ELF-001",
+      "inherits_profile_from": "ENM-ELF-001",
+      "no_size_multiplier": true
+    },
+    {
+      "elite_id": "ELT-TRE-001",
+      "inherits_profile_from": "ENM-TRE-002",
+      "no_size_multiplier": true
+    },
+    {
+      "elite_id": "ELT-ROB-001",
+      "inherits_profile_from": "ENM-ROB-002",
+      "no_size_multiplier": true
+    },
+    {
+      "elite_id": "ELT-SKL-001",
+      "inherits_profile_from": "ENM-SKL-002",
+      "no_size_multiplier": true
+    },
+    {
+      "elite_id": "ELT-GOB-001",
+      "inherits_profile_from": "ENM-GOB-001",
+      "no_size_multiplier": true
+    },
+    {
+      "elite_id": "ELT-MEC-001",
+      "inherits_profile_from": "ENM-MEC-003",
+      "no_size_multiplier": true
+    },
+    {
+      "elite_id": "ELT-BST-001",
+      "inherits_profile_from": "ENM-BST-002",
+      "no_size_multiplier": true
+    },
+    {
+      "elite_id": "ELT-DEM-001",
+      "inherits_profile_from": "ENM-DEM-001",
+      "no_size_multiplier": true
+    }
+  ]
+}

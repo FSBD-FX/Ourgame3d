@@ -1,0 +1,2438 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "source_event": "EV-026",
+  "module": "D-08",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "all_amounts_probabilities_source_nodes_and_pool_routing_assistant_proposed_untested",
+  "source_count": 94,
+  "common_rules_ref": "common-rules.json",
+  "currency_budget": {
+    "new_run_gold": 20,
+    "mainline_room_gold": {
+      "N02": [
+        8,
+        12,
+        16,
+        20,
+        24
+      ],
+      "N03": [
+        20,
+        28,
+        36,
+        44,
+        52
+      ],
+      "N05": [
+        24,
+        32,
+        40,
+        48,
+        56
+      ],
+      "N07": [
+        40,
+        50,
+        60,
+        70,
+        0
+      ]
+    },
+    "ordinary_required_rooms": 15,
+    "one_enemy_teaching_rooms": 5,
+    "combination_or_high_pressure_rooms": 10,
+    "all_ordinary_rooms_have_six_enemies": false,
+    "mainline_gold_by_chapter_excluding_start": [
+      92,
+      122,
+      152,
+      182,
+      132
+    ],
+    "mainline_cumulative_gold_if_all_picked_no_spending": [
+      112,
+      234,
+      386,
+      568,
+      700
+    ],
+    "mainline_gross_all_pickup_total": 700,
+    "mainline_N05_ground_fragments": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "mainline_boss_automatic_fragments": [
+      4,
+      6,
+      8,
+      10,
+      12
+    ],
+    "mainline_repeat_collectible_total": 60,
+    "mainline_first_all_five_bosses_total": 70,
+    "optional_choice_gold_by_chapter": [
+      18,
+      24,
+      30,
+      36,
+      42
+    ],
+    "optional_choice_ground_fragments_by_chapter": [
+      1,
+      1,
+      2,
+      2,
+      3
+    ],
+    "optional_choice_max_rooms_per_chapter": 1,
+    "optional_choice_zero_is_legal": true,
+    "optional_boss_gold": [
+      30,
+      40
+    ],
+    "optional_boss_fragments": [
+      4,
+      5
+    ],
+    "all_optional_gold_gross": 220,
+    "known_hidden_entry_fees": {
+      "REG-01-H01": 20,
+      "REG-04-H01": 35
+    },
+    "all_optional_known_fees": 55,
+    "main_plus_all_optional_gross_gold": 920,
+    "main_plus_all_optional_gold_after_known_entry_fees_before_other_spending": 865,
+    "all_content_repeat_fragments_if_all_ground_picked": 78,
+    "all_content_first_time_fragments_if_all_account_firsts_available": 102,
+    "totals_conditions": "survive_all_required_success_events; actually_pick_every_ground_currency; firsts_unclaimed_where_counted; selected_only_one_B_branch_per_chapter; no_other_purchases_roulette_or_service_credits; not_guaranteed_wallet_or_upgrade_count"
+  },
+  "gold_partition": {
+    "event": "room_manifest_committed_before_first_combat",
+    "eligible_slots": "all_finite_reward_eligible_real_enemy_slots_in_complete_room_manifest_including_preplaced_dormant_and_admitted_later_groups",
+    "excluded_slots": "decorative_props; infinite_summons; unselected_optional_rooms; technical_removal_or_failed_unmaterialized_slot_has_no_death_payout",
+    "weight_ref": "D05_all_capabilities_cost; D07_room_sequences_capability_profiles.cost; include_flying_and_elite_adders",
+    "method": "integer_largest_remainder",
+    "formula": "q_i=room_gold_budget*threat_i/sum(threat); floor each; assign B-sum(floor) extra coins by descending fractional remainder then stable SlotID ascending",
+    "allocate_each_wave_separately": false,
+    "waking_adds_gold": false,
+    "materialization_or_retry_adds_gold": false,
+    "real_death_payout": "spawn_preallocated_ground_gold_once_if_run_active_player_alive_after_same_timestamp_damage_deaths; zero_allocation_spawns_no_object",
+    "wallet_credit": "only_D04_ground_coin_pickup_commit; never_on_enemy_death_or_room_clear",
+    "undelivered_or_unpicked_gold_backfilled": false,
+    "repartition_on_death_script_clear_retry_player_equipment_or_wave_count": false,
+    "save_fields": [
+      "allocation_version",
+      "room_gold_budget",
+      "full_sorted_slot_weights",
+      "exact_integer_slot_allocations",
+      "per_slot_first_true_death_payout_status",
+      "spawned_ground_stack_IDs",
+      "pickup_commits"
+    ]
+  },
+  "pools": {
+    "POOL-GUARANTEED-REC": {
+      "kind": "fixed_item",
+      "item_id": "ITM-REC-001",
+      "count": 1,
+      "base_heal_hp": 30,
+      "current_healing_received_applies_at_use": true,
+      "use_windup_s": 0.5,
+      "use_recovery_s": 0.3,
+      "id_cooldown_s": 8,
+      "quick_shared_lock_s": 2,
+      "grant_is_not_use_or_auto_heal": true
+    },
+    "POOL-EQUIPMENT": {
+      "kind": "hierarchical",
+      "category_weights": {
+        "weapon": 2,
+        "armor": 1
+      },
+      "weapon_family_selection": "uniform_11_families_then_uniform_3_templates",
+      "armor_class_selection": "uniform_4_classes_then_uniform_3_templates",
+      "weapon_families": {
+        "DAO": [
+          "WPN-DAO-001",
+          "WPN-DAO-002",
+          "WPN-DAO-003"
+        ],
+        "GSW": [
+          "WPN-GSW-001",
+          "WPN-GSW-002",
+          "WPN-GSW-003"
+        ],
+        "HAL": [
+          "WPN-HAL-001",
+          "WPN-HAL-002",
+          "WPN-HAL-003"
+        ],
+        "KNF": [
+          "WPN-KNF-001",
+          "WPN-KNF-002",
+          "WPN-KNF-003"
+        ],
+        "PST": [
+          "WPN-PST-001",
+          "WPN-PST-002",
+          "WPN-PST-003"
+        ],
+        "RFL": [
+          "WPN-RFL-001",
+          "WPN-RFL-002",
+          "WPN-RFL-003"
+        ],
+        "SGN": [
+          "WPN-SGN-001",
+          "WPN-SGN-002",
+          "WPN-SGN-003"
+        ],
+        "SPR": [
+          "WPN-SPR-001",
+          "WPN-SPR-002",
+          "WPN-SPR-003"
+        ],
+        "STF": [
+          "WPN-STF-001",
+          "WPN-STF-002",
+          "WPN-STF-003"
+        ],
+        "SWD": [
+          "WPN-SWD-001",
+          "WPN-SWD-002",
+          "WPN-SWD-003"
+        ],
+        "XBW": [
+          "WPN-XBW-001",
+          "WPN-XBW-002",
+          "WPN-XBW-003"
+        ]
+      },
+      "armor_classes": {
+        "HVY": [
+          "ARM-HVY-001",
+          "ARM-HVY-002",
+          "ARM-HVY-003"
+        ],
+        "LGT": [
+          "ARM-LGT-001",
+          "ARM-LGT-002",
+          "ARM-LGT-003"
+        ],
+        "MED": [
+          "ARM-MED-001",
+          "ARM-MED-002",
+          "ARM-MED-003"
+        ],
+        "ROB": [
+          "ARM-ROB-001",
+          "ARM-ROB-002",
+          "ARM-ROB-003"
+        ]
+      },
+      "weapon_template_probability": "(2/3)*(1/11)*(1/3)=2/99",
+      "armor_template_probability": "(1/3)*(1/4)*(1/3)=1/36",
+      "template_routing_override": {
+        "supersedes": "equipment-v1/acquisition_source_suggestions_only",
+        "effective": "all_45_existing_templates_eligible_from_chapter1_in_general_equipment_pool",
+        "old_tag_counts": {
+          "weapon_base": 11,
+          "weapon_chapter1_reward": 12,
+          "weapon_chapter1_elite": 10,
+          "armor_base": 4,
+          "armor_chapter1_reward": 5,
+          "armor_chapter1_elite": 3
+        },
+        "old_source_fields_preserved": true,
+        "does_not_change_template_stats_actions_or_require_new_meta_unlock": true,
+        "template_number_is_power_tier": false
+      },
+      "quality_and_enchantment_rolls": "use_D08_equipment_rules_independently_after_template; no_silent_template_damage_scaling"
+    },
+    "POOL-RELIC": {
+      "kind": "purpose_then_uniform_eligible_item",
+      "category": "PAS",
+      "purpose_groups": [
+        {
+          "purpose": "guard",
+          "weight": 25,
+          "item_ids": [
+            "ITM-PAS-001"
+          ]
+        },
+        {
+          "purpose": "mobility",
+          "weight": 20,
+          "item_ids": [
+            "ITM-PAS-002"
+          ]
+        },
+        {
+          "purpose": "offense",
+          "weight": 20,
+          "item_ids": [
+            "ITM-PAS-003"
+          ]
+        },
+        {
+          "purpose": "ranged",
+          "weight": 15,
+          "item_ids": [
+            "ITM-PAS-004"
+          ]
+        },
+        {
+          "purpose": "healing",
+          "weight": 10,
+          "item_ids": [
+            "ITM-PAS-007"
+          ]
+        },
+        {
+          "purpose": "arcane",
+          "weight": 5,
+          "item_ids": [
+            "ITM-PAS-005"
+          ]
+        },
+        {
+          "purpose": "sustain",
+          "weight": 5,
+          "item_ids": [
+            "ITM-PAS-006",
+            "ITM-PAS-008"
+          ]
+        }
+      ],
+      "always_eligible_base_ids": [
+        "ITM-PAS-001",
+        "ITM-PAS-002",
+        "ITM-PAS-003",
+        "ITM-PAS-004",
+        "ITM-PAS-007"
+      ],
+      "empty_purpose_weight_transfer_to": "guard",
+      "meta_candidates_require_run_start_unlock_snapshot": true,
+      "current_inventory_duplicate_does_not_reroll": true,
+      "full_relic_slots_does_not_autoequip_or_convert_to_gold": true
+    },
+    "POOL-BONUS-ITEM": {
+      "kind": "conditional_category_then_purpose_then_uniform_eligible_item_after_source_presence_success",
+      "max_items_per_room": 1,
+      "category_weights": {
+        "REC": 40,
+        "BOO": 20,
+        "THR": 20,
+        "TRP": 10,
+        "FUN": 10
+      },
+      "excludes_equipment_and_PAS": "equipment_and_relics_have_separate_guarantees",
+      "purpose_groups": {
+        "REC": [
+          {
+            "purpose": "vitality",
+            "weight": 60,
+            "item_ids": [
+              "ITM-REC-001",
+              "ITM-REC-002",
+              "ITM-REC-003",
+              "ITM-REC-006"
+            ]
+          },
+          {
+            "purpose": "focus",
+            "weight": 20,
+            "item_ids": [
+              "ITM-REC-004"
+            ]
+          },
+          {
+            "purpose": "cleanse",
+            "weight": 20,
+            "item_ids": [
+              "ITM-REC-005"
+            ]
+          }
+        ],
+        "BOO": [
+          {
+            "purpose": "offense",
+            "weight": 30,
+            "item_ids": [
+              "ITM-BOO-001",
+              "ITM-BOO-006"
+            ]
+          },
+          {
+            "purpose": "tempo",
+            "weight": 20,
+            "item_ids": [
+              "ITM-BOO-002"
+            ]
+          },
+          {
+            "purpose": "mobility",
+            "weight": 20,
+            "item_ids": [
+              "ITM-BOO-003"
+            ]
+          },
+          {
+            "purpose": "guard",
+            "weight": 20,
+            "item_ids": [
+              "ITM-BOO-004"
+            ]
+          },
+          {
+            "purpose": "arcane",
+            "weight": 10,
+            "item_ids": [
+              "ITM-BOO-005"
+            ]
+          }
+        ],
+        "THR": [
+          {
+            "purpose": "blast",
+            "weight": 40,
+            "item_ids": [
+              "ITM-THR-001",
+              "ITM-THR-005"
+            ]
+          },
+          {
+            "purpose": "burn",
+            "weight": 20,
+            "item_ids": [
+              "ITM-THR-002"
+            ]
+          },
+          {
+            "purpose": "slow",
+            "weight": 20,
+            "item_ids": [
+              "ITM-THR-003"
+            ]
+          },
+          {
+            "purpose": "stagger",
+            "weight": 20,
+            "item_ids": [
+              "ITM-THR-004",
+              "ITM-THR-006"
+            ]
+          }
+        ],
+        "TRP": [
+          {
+            "purpose": "damage",
+            "weight": 50,
+            "item_ids": [
+              "ITM-TRP-001"
+            ]
+          },
+          {
+            "purpose": "burn",
+            "weight": 25,
+            "item_ids": [
+              "ITM-TRP-002"
+            ]
+          },
+          {
+            "purpose": "slow",
+            "weight": 15,
+            "item_ids": [
+              "ITM-TRP-003"
+            ]
+          },
+          {
+            "purpose": "stagger",
+            "weight": 10,
+            "item_ids": [
+              "ITM-TRP-004"
+            ]
+          }
+        ]
+      },
+      "empty_purpose_weight_transfer_to": {
+        "REC": "vitality",
+        "BOO": "offense",
+        "THR": "blast",
+        "TRP": "damage"
+      },
+      "FUN_selection": "uniform_among_run_unlocked_and_actually_matchable_utility_ids_at_source_resolution",
+      "empty_FUN_weight_transfer_to": "REC",
+      "no_matched_FUN_effective_category_weights": {
+        "REC": 50,
+        "BOO": 20,
+        "THR": 20,
+        "TRP": 10,
+        "FUN": 0
+      },
+      "eligible_item_ids_by_category": {
+        "REC": [
+          "ITM-REC-001",
+          "ITM-REC-002",
+          "ITM-REC-003",
+          "ITM-REC-004",
+          "ITM-REC-005",
+          "ITM-REC-006"
+        ],
+        "BOO": [
+          "ITM-BOO-001",
+          "ITM-BOO-002",
+          "ITM-BOO-003",
+          "ITM-BOO-004",
+          "ITM-BOO-005",
+          "ITM-BOO-006"
+        ],
+        "THR": [
+          "ITM-THR-001",
+          "ITM-THR-002",
+          "ITM-THR-003",
+          "ITM-THR-004",
+          "ITM-THR-005",
+          "ITM-THR-006"
+        ],
+        "TRP": [
+          "ITM-TRP-001",
+          "ITM-TRP-002",
+          "ITM-TRP-003",
+          "ITM-TRP-004"
+        ],
+        "FUN": [
+          "ITM-FUN-001",
+          "ITM-FUN-002",
+          "ITM-FUN-003",
+          "ITM-FUN-004",
+          "ITM-FUN-005",
+          "ITM-FUN-006"
+        ]
+      },
+      "run_unlock_filter": "base_pool_always; meta_unlock_only_if_in_run_start_snapshot; do_not_filter_recovery_by_current_missing_HP",
+      "all_locked_tables_safe": "base_REC_and_five_base_PAS_remain",
+      "flat_36_item_pool": false,
+      "one_roll_per_enemy_or_wave": false,
+      "conditional_on_source_presence": true,
+      "does_presence_roll": false,
+      "presence_probability_display_ref": "sources[pool_id=POOL-BONUS-ITEM].probability; source_is_only_executable_Bernoulli"
+    },
+    "POOL-COMMON-SUPPLY": {
+      "kind": "fixed_class_weights_then_uniform_run_unlocked_item",
+      "category_weights": {
+        "REC": 60,
+        "THR": 25,
+        "TRP": 15
+      },
+      "eligible_item_ids_by_category": {
+        "REC": [
+          "ITM-REC-001",
+          "ITM-REC-002",
+          "ITM-REC-003",
+          "ITM-REC-004",
+          "ITM-REC-005",
+          "ITM-REC-006"
+        ],
+        "THR": [
+          "ITM-THR-001",
+          "ITM-THR-002",
+          "ITM-THR-003",
+          "ITM-THR-004",
+          "ITM-THR-005",
+          "ITM-THR-006"
+        ],
+        "TRP": [
+          "ITM-TRP-001",
+          "ITM-TRP-002",
+          "ITM-TRP-003",
+          "ITM-TRP-004"
+        ]
+      },
+      "run_unlock_filter": "base_pool_always; meta_unlock_only_run_start_snapshot",
+      "max_items_per_object": 1,
+      "contains_KEYS_FUN_COINS_FRAGMENTS_EQUIPMENT_or_PAS": false,
+      "if_category_empty": "reject_invalid_content_manifest_before_entry; base_candidates_guarantee_each_class_nonempty",
+      "coin_and_fragment_budget_delta": 0,
+      "current_inventory_capacity_duplicate_ID_or_missing_HP_filters_pool": false,
+      "fixed_before_open_commit_from_saved_seed_and_run_unlock_snapshot": true,
+      "postopen_result_owned_by": "source_tray_until_valid_separate_claim_commit"
+    }
+  },
+  "utility_matching": {
+    "evaluation_at": "first_source_resolution_before_outcome_reveal; save_eligible_ids_and_match_context; no_reroll_if_inventory_or_services_change_later",
+    "ITM-FUN-001": {
+      "requires": [
+        "generated_reachable_unopened_optional_object_key_type_common",
+        "object_not_main_path_story_Boss_gate_or_gold_toll"
+      ],
+      "if_missing": "exclude_item",
+      "actual_object_ids": [
+        "OBJ-REG-02-N04-COMMON-SUPPLY",
+        "OBJ-REG-05-N04-COMMON-SUPPLY"
+      ],
+      "future_free_mainline_reachable_objects_can_match_before_current_chapter": true,
+      "past_unreturnable_or_opened_object_cannot_match": true
+    },
+    "ITM-FUN-002": {
+      "requires": [
+        "reachable_ordinary_merchant_with_unsold_nonservice_item",
+        "20pct_coupon_changes_rounded_price_for_at_least_one_existing_item"
+      ],
+      "if_missing": "exclude_item"
+    },
+    "ITM-FUN-003": {
+      "requires": [
+        "run_start_meta_unlock",
+        "reachable_standard_roulette_accepting_ticket_remaining_uses_positive"
+      ],
+      "if_missing": "exclude_item"
+    },
+    "ITM-FUN-004": {
+      "requires": [
+        "reachable_safe_route_beacon",
+        "existing_reachable_unrevealed_hidden_entrance_in_current_chapter"
+      ],
+      "reveals_not_rewards_or_fee_waiver": true,
+      "if_missing": "exclude_item"
+    },
+    "ITM-FUN-005": {
+      "requires": [
+        "run_start_meta_unlock",
+        "reachable_basic_upgrade_smith",
+        "owned_instance_eligible_0_to_1_and_original_service_conditions"
+      ],
+      "if_missing": "exclude_item"
+    },
+    "ITM-FUN-006": {
+      "requires": [
+        "reachable_enchant_cleanse_facility",
+        "owned_weapon_or_armor_with_at_least_one_negative_affix_and_enchant_tier_I_or_II"
+      ],
+      "if_missing": "exclude_item"
+    },
+    "source_filter_is_not_use_guarantee": true,
+    "use_revalidates_D03_conditions_no_consume_on_failure": true,
+    "unmatched_entire_FUN_category_transfers_to_recovery_not_gold_or_fragments": true
+  },
+  "discovery_contract": {
+    "all_H01": {
+      "once_account_fragments": 2,
+      "requires_actual_reachable_discovery_point_interaction": true,
+      "entry_payment_arrival_map_reveal_or_Boss_death_alone_does_not_grant": true,
+      "discovery_and_first_Boss_success_have_separate_SourceIDs_and_keys": true
+    },
+    "nonboss_pure_discovery_nodes": [
+      "REG-03-H01",
+      "REG-04-H01",
+      "REG-05-H01"
+    ],
+    "pure_discovery_repeat_coin_and_fragment_reward": 0,
+    "H04_before_paid_entry_must_show": "35_gold_entry; first_discovery_claim_status; if_claimed_current_visit_has_no_economic_reward_and_can_be_skipped; actual_exploration_required; no_guaranteed_fragments_from_payment",
+    "H01_boss_nodes_do_not_inherit_ordinary_B_choice_budget_or_N05_guarantees": true
+  },
+  "delivery_and_idempotency": {
+    "ground_currency_pickup": "alive_active_run_grounded_LOS_absdx60_absdy30; same_timestamp_damage_deaths_first; automatic_near_pickup_then_atomic_ground_remove_and_wallet_or_permanent_ledger_credit",
+    "ordinary_clear_grants": "room_is_D07_full_manifest_terminal_not_stage_or_wave_clear; alive_active_run_then_spawn_ground_reward_objects_once; no_auto_pack_or_auto_heal",
+    "Boss_permanent_credit": "D01_D06_all_same_timestamp_damage_deaths_then_player_alive_then_success; guaranteed_and_first_fragments_atomic_before_victory; no_duplicate_ground_fragment_object",
+    "discovery_permanent_credit": "alive_grounded_idle_actual_discovery_interaction_commit_after_same_timestamp_damage_deaths_with_unique_account_DiscoveryID; no_ground_fragment_duplicate",
+    "run_room_reward_key": [
+      "RunID",
+      "RoomInstanceID",
+      "SourceID"
+    ],
+    "per_enemy_gold_key": [
+      "RunID",
+      "RoomInstanceID",
+      "SlotID",
+      "SourceID",
+      "first_true_death"
+    ],
+    "ground_object_key": [
+      "RunID",
+      "RoomInstanceID",
+      "SourceID",
+      "result_index"
+    ],
+    "repeat_callback_or_return": "return_saved_result_or_spawn_reference_without_second_spawn_or_credit",
+    "source_and_pickup_are_separate_transactions": true,
+    "failure_or_missing_ground_point": "only_for_sources_whose_delivery_is_ground: persist_reward_result_and_pending_ground_delivery_same_ID; use_valid_reachable_room_drop_anchor; never_mark_picked_or_credit_wallet_early; no_new_rng_or_duplicate_item; common_box_sources_follow_source_bound_tray_contract_instead",
+    "no_rewards_for": [
+      "wake",
+      "materialization",
+      "spawn_retry",
+      "script_removal",
+      "technical_slot_skip",
+      "unselected_branch",
+      "run_ended_delayed_hit",
+      "simultaneous_player_Boss_death"
+    ],
+    "carry_does_not_imply_heal": {
+      "quick_slots": 2,
+      "REC001_stack_max": 3,
+      "relic_slots": 3,
+      "duplicate_relic_ids_forbidden": true,
+      "overflow": "D04_ground_remains_or_explicit_swap; no_bonus_backpack",
+      "consumption": "actual_D03_use_action_alive_missing_HP_current_efficiency_overheal_discard_no_revive",
+      "five_REC001_nominal_heal_if_all_used": 150,
+      "normal_healing_efficiency_range_only": [
+        0.75,
+        1.25
+      ],
+      "five_REC001_raw_potential_after_efficiency_before_missing_HP_clamp": [
+        112.5,
+        187.5
+      ],
+      "not_actual_guaranteed_heal": true
+    },
+    "common_box_source_bound_delivery": {
+      "source_ids": [
+        "RWD-REG-02-N04-COMMON-SUPPLY",
+        "RWD-REG-05-N04-COMMON-SUPPLY"
+      ],
+      "result_fixed_before_open_commit": true,
+      "unlock_snapshot": "same_run_start_snapshot",
+      "current_inventory_filters_unknown_reward": false,
+      "open_atomic_fields": [
+        "one_key_decrement",
+        "object_opened",
+        "exact_ItemInstanceID_bound_to_unique_source_tray",
+        "OperationRecord"
+      ],
+      "tray_key": [
+        "RunID",
+        "ObjectID",
+        "SourceID",
+        "result_index0"
+      ],
+      "opening_does_not_auto_pack_even_if_space": true,
+      "claim_s": 0.25,
+      "claim_requires_full_D04_safety_and_full_item_capacity": true,
+      "claim_transfers_same_instance_or_legal_D04_stack_merge_atomically": true,
+      "full_inventory": "keep_same_source_bound_result; no_new_backpack_slot_no_ground_duplicate",
+      "delivery_or_load_failure": "restore_same_tray_ItemInstanceID_and_OperationRecord; no_reroll_no_second_item_no_refund_of_valid_open_commit"
+    }
+  },
+  "seed_and_save_interface": {
+    "source_rng_key": [
+      "RunSeed",
+      "RoomInstanceID",
+      "SourceID",
+      "ContentVersion",
+      "RollChannel"
+    ],
+    "channels": [
+      "bonus_presence",
+      "item_category",
+      "item_purpose",
+      "item_id",
+      "equipment_kind",
+      "equipment_family",
+      "equipment_template",
+      "equipment_quality",
+      "enchantment_package"
+    ],
+    "channel_streams_independent": true,
+    "first_resolution_freezes": [
+      "source_claim_or_resolution_state",
+      "bonus_presence_even_if_empty",
+      "eligible_run_unlock_snapshot",
+      "utility_match_context_and_eligible_ids",
+      "category_purpose_template_results",
+      "equipment_instance_attributes_and_all_random_packages",
+      "ground_delivery_state_and_object_IDs",
+      "pickup_transactions",
+      "account_Boss_and_discovery_flags"
+    ],
+    "preview_cancel_leave_room_pause_retry_load_or_wave_changes_reroll": false,
+    "account_flags_snapshot_plus_atomic_live_claim_recheck": true,
+    "D13_persistence_not_implemented": true
+  },
+  "sources": [
+    {
+      "id": "RWD-RUN-START-GOLD",
+      "node_ids": [],
+      "event": "new_run_initialization_once",
+      "delivery": "wallet_gold_initialization",
+      "quantity": 20,
+      "probability": 1,
+      "dedup_scope": "run",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "not_a_heal_or_room_reward": true
+    },
+    {
+      "id": "RWD-REG-01-N02-GOLD",
+      "node_ids": [
+        "REG-01-N02"
+      ],
+      "event": "reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 8,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder",
+      "not_per_enemy_random_roll": true
+    },
+    {
+      "id": "RWD-REG-01-N02-BONUS",
+      "node_ids": [
+        "REG-01-N02"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-REG-01-N03-GOLD",
+      "node_ids": [
+        "REG-01-N03"
+      ],
+      "event": "reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 20,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder",
+      "not_per_enemy_random_roll": true
+    },
+    {
+      "id": "RWD-REG-01-N03-BONUS",
+      "node_ids": [
+        "REG-01-N03"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-REG-01-N05-GOLD",
+      "node_ids": [
+        "REG-01-N05"
+      ],
+      "event": "reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 24,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder",
+      "not_per_enemy_random_roll": true
+    },
+    {
+      "id": "RWD-REG-01-N05-BONUS",
+      "node_ids": [
+        "REG-01-N05"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-REG-01-N02-REC",
+      "node_ids": [
+        "REG-01-N02"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-GUARANTEED-REC",
+      "guarantee": "produce_one_ITM_REC_001_not_auto_heal_or_inventory_insert"
+    },
+    {
+      "id": "RWD-REG-01-N03-EQUIP",
+      "node_ids": [
+        "REG-01-N03"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_equipment_instance",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-EQUIPMENT",
+      "guarantee": "produce_one_instance; not_guaranteed_compatible_or_stronger_than_current"
+    },
+    {
+      "id": "RWD-REG-01-N05-RELIC",
+      "node_ids": [
+        "REG-01-N05"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-RELIC",
+      "guarantee": "produce_one_relic; retain_five_base_pool_candidates"
+    },
+    {
+      "id": "RWD-REG-01-N05-FRAG",
+      "node_ids": [
+        "REG-01-N05"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_meta_fragment_stack",
+      "quantity": 2,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "bank_at": "actual_D04_ground_pickup_commit_not_room_clear"
+    },
+    {
+      "id": "RWD-BOS-STN-001-GOLD",
+      "node_ids": [
+        "REG-01-N07"
+      ],
+      "event": "boss_success_transaction",
+      "delivery": "ground_gold_after_success",
+      "quantity": 40,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-STN-001",
+      "zero_policy": "zero_produces_no_object; final_run_ends_without_local_gold_reward"
+    },
+    {
+      "id": "RWD-BOS-STN-001-FRAG",
+      "node_ids": [
+        "REG-01-N07"
+      ],
+      "event": "boss_success_transaction",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 4,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-STN-001",
+      "commit_before_victory_screen": true
+    },
+    {
+      "id": "RWD-FIRST-BOS-STN-001",
+      "node_ids": [
+        "REG-01-N07"
+      ],
+      "event": "first_account_boss_success_transaction",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 2,
+      "probability": 1,
+      "dedup_scope": "account_boss",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-STN-001",
+      "unique_account_key": [
+        "AccountID",
+        "BOS-STN-001",
+        "first_boss_success"
+      ],
+      "separate_from_discovery": true
+    },
+    {
+      "id": "RWD-REG-01-BCHOICE-GOLD",
+      "node_ids": [
+        "REG-01-B01",
+        "REG-01-B02"
+      ],
+      "event": "selected_optional_room_reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 18,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "choice_group_id": "REG-01-CHOICE-01",
+      "max_selected_nodes": 1,
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder"
+    },
+    {
+      "id": "RWD-REG-01-BCHOICE-FRAG",
+      "node_ids": [
+        "REG-01-B01",
+        "REG-01-B02"
+      ],
+      "event": "selected_optional_full_room_clear_once",
+      "delivery": "ground_meta_fragment_stack",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "choice_group_id": "REG-01-CHOICE-01",
+      "max_selected_nodes": 1,
+      "bank_at": "actual_D04_ground_pickup_commit_not_room_clear"
+    },
+    {
+      "id": "RWD-REG-01-BCHOICE-BONUS",
+      "node_ids": [
+        "REG-01-B01",
+        "REG-01-B02"
+      ],
+      "event": "selected_optional_full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "choice_group_id": "REG-01-CHOICE-01",
+      "max_selected_nodes": 1,
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-DISCOVERY-REG-01-H01",
+      "node_ids": [
+        "REG-01-H01"
+      ],
+      "event": "actual_discovery_point_interaction_commit",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 2,
+      "probability": 1,
+      "dedup_scope": "account_discovery",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "discovery_id": "DISC-REG-01-H01-CORE",
+      "unique_account_key": [
+        "AccountID",
+        "DISC-REG-01-H01-CORE"
+      ],
+      "requires_actual_path_and_alive_grounded_interaction": true,
+      "entrance_arrival_fee_payment_map_reveal_or_boss_kill_alone_awards": false,
+      "once_per_account_not_per_run": true,
+      "claimed_display_required_before_paid_entry": true
+    },
+    {
+      "id": "RWD-REG-02-N02-GOLD",
+      "node_ids": [
+        "REG-02-N02"
+      ],
+      "event": "reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 12,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder",
+      "not_per_enemy_random_roll": true
+    },
+    {
+      "id": "RWD-REG-02-N02-BONUS",
+      "node_ids": [
+        "REG-02-N02"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-REG-02-N03-GOLD",
+      "node_ids": [
+        "REG-02-N03"
+      ],
+      "event": "reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 28,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder",
+      "not_per_enemy_random_roll": true
+    },
+    {
+      "id": "RWD-REG-02-N03-BONUS",
+      "node_ids": [
+        "REG-02-N03"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-REG-02-N05-GOLD",
+      "node_ids": [
+        "REG-02-N05"
+      ],
+      "event": "reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 32,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder",
+      "not_per_enemy_random_roll": true
+    },
+    {
+      "id": "RWD-REG-02-N05-BONUS",
+      "node_ids": [
+        "REG-02-N05"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-REG-02-N02-REC",
+      "node_ids": [
+        "REG-02-N02"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-GUARANTEED-REC",
+      "guarantee": "produce_one_ITM_REC_001_not_auto_heal_or_inventory_insert"
+    },
+    {
+      "id": "RWD-REG-02-N03-EQUIP",
+      "node_ids": [
+        "REG-02-N03"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_equipment_instance",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-EQUIPMENT",
+      "guarantee": "produce_one_instance; not_guaranteed_compatible_or_stronger_than_current"
+    },
+    {
+      "id": "RWD-REG-02-N05-RELIC",
+      "node_ids": [
+        "REG-02-N05"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-RELIC",
+      "guarantee": "produce_one_relic; retain_five_base_pool_candidates"
+    },
+    {
+      "id": "RWD-REG-02-N05-FRAG",
+      "node_ids": [
+        "REG-02-N05"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_meta_fragment_stack",
+      "quantity": 3,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "bank_at": "actual_D04_ground_pickup_commit_not_room_clear"
+    },
+    {
+      "id": "RWD-BOS-FOR-001-GOLD",
+      "node_ids": [
+        "REG-02-N07"
+      ],
+      "event": "boss_success_transaction",
+      "delivery": "ground_gold_after_success",
+      "quantity": 50,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-FOR-001",
+      "zero_policy": "zero_produces_no_object; final_run_ends_without_local_gold_reward"
+    },
+    {
+      "id": "RWD-BOS-FOR-001-FRAG",
+      "node_ids": [
+        "REG-02-N07"
+      ],
+      "event": "boss_success_transaction",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 6,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-FOR-001",
+      "commit_before_victory_screen": true
+    },
+    {
+      "id": "RWD-FIRST-BOS-FOR-001",
+      "node_ids": [
+        "REG-02-N07"
+      ],
+      "event": "first_account_boss_success_transaction",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 2,
+      "probability": 1,
+      "dedup_scope": "account_boss",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-FOR-001",
+      "unique_account_key": [
+        "AccountID",
+        "BOS-FOR-001",
+        "first_boss_success"
+      ],
+      "separate_from_discovery": true
+    },
+    {
+      "id": "RWD-REG-02-BCHOICE-GOLD",
+      "node_ids": [
+        "REG-02-B01",
+        "REG-02-B02"
+      ],
+      "event": "selected_optional_room_reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 24,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "choice_group_id": "REG-02-CHOICE-01",
+      "max_selected_nodes": 1,
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder"
+    },
+    {
+      "id": "RWD-REG-02-BCHOICE-FRAG",
+      "node_ids": [
+        "REG-02-B01",
+        "REG-02-B02"
+      ],
+      "event": "selected_optional_full_room_clear_once",
+      "delivery": "ground_meta_fragment_stack",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "choice_group_id": "REG-02-CHOICE-01",
+      "max_selected_nodes": 1,
+      "bank_at": "actual_D04_ground_pickup_commit_not_room_clear"
+    },
+    {
+      "id": "RWD-REG-02-BCHOICE-BONUS",
+      "node_ids": [
+        "REG-02-B01",
+        "REG-02-B02"
+      ],
+      "event": "selected_optional_full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "choice_group_id": "REG-02-CHOICE-01",
+      "max_selected_nodes": 1,
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-DISCOVERY-REG-02-H01",
+      "node_ids": [
+        "REG-02-H01"
+      ],
+      "event": "actual_discovery_point_interaction_commit",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 2,
+      "probability": 1,
+      "dedup_scope": "account_discovery",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "discovery_id": "DISC-REG-02-H01-CORE",
+      "unique_account_key": [
+        "AccountID",
+        "DISC-REG-02-H01-CORE"
+      ],
+      "requires_actual_path_and_alive_grounded_interaction": true,
+      "entrance_arrival_fee_payment_map_reveal_or_boss_kill_alone_awards": false,
+      "once_per_account_not_per_run": true,
+      "claimed_display_required_before_paid_entry": true
+    },
+    {
+      "id": "RWD-REG-03-N02-GOLD",
+      "node_ids": [
+        "REG-03-N02"
+      ],
+      "event": "reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 16,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder",
+      "not_per_enemy_random_roll": true
+    },
+    {
+      "id": "RWD-REG-03-N02-BONUS",
+      "node_ids": [
+        "REG-03-N02"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-REG-03-N03-GOLD",
+      "node_ids": [
+        "REG-03-N03"
+      ],
+      "event": "reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 36,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder",
+      "not_per_enemy_random_roll": true
+    },
+    {
+      "id": "RWD-REG-03-N03-BONUS",
+      "node_ids": [
+        "REG-03-N03"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-REG-03-N05-GOLD",
+      "node_ids": [
+        "REG-03-N05"
+      ],
+      "event": "reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 40,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder",
+      "not_per_enemy_random_roll": true
+    },
+    {
+      "id": "RWD-REG-03-N05-BONUS",
+      "node_ids": [
+        "REG-03-N05"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-REG-03-N02-REC",
+      "node_ids": [
+        "REG-03-N02"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-GUARANTEED-REC",
+      "guarantee": "produce_one_ITM_REC_001_not_auto_heal_or_inventory_insert"
+    },
+    {
+      "id": "RWD-REG-03-N03-EQUIP",
+      "node_ids": [
+        "REG-03-N03"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_equipment_instance",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-EQUIPMENT",
+      "guarantee": "produce_one_instance; not_guaranteed_compatible_or_stronger_than_current"
+    },
+    {
+      "id": "RWD-REG-03-N05-RELIC",
+      "node_ids": [
+        "REG-03-N05"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-RELIC",
+      "guarantee": "produce_one_relic; retain_five_base_pool_candidates"
+    },
+    {
+      "id": "RWD-REG-03-N05-FRAG",
+      "node_ids": [
+        "REG-03-N05"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_meta_fragment_stack",
+      "quantity": 4,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "bank_at": "actual_D04_ground_pickup_commit_not_room_clear"
+    },
+    {
+      "id": "RWD-BOS-RIT-001-GOLD",
+      "node_ids": [
+        "REG-03-N07"
+      ],
+      "event": "boss_success_transaction",
+      "delivery": "ground_gold_after_success",
+      "quantity": 60,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-RIT-001",
+      "zero_policy": "zero_produces_no_object; final_run_ends_without_local_gold_reward"
+    },
+    {
+      "id": "RWD-BOS-RIT-001-FRAG",
+      "node_ids": [
+        "REG-03-N07"
+      ],
+      "event": "boss_success_transaction",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 8,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-RIT-001",
+      "commit_before_victory_screen": true
+    },
+    {
+      "id": "RWD-FIRST-BOS-RIT-001",
+      "node_ids": [
+        "REG-03-N07"
+      ],
+      "event": "first_account_boss_success_transaction",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 2,
+      "probability": 1,
+      "dedup_scope": "account_boss",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-RIT-001",
+      "unique_account_key": [
+        "AccountID",
+        "BOS-RIT-001",
+        "first_boss_success"
+      ],
+      "separate_from_discovery": true
+    },
+    {
+      "id": "RWD-REG-03-BCHOICE-GOLD",
+      "node_ids": [
+        "REG-03-B01",
+        "REG-03-B02"
+      ],
+      "event": "selected_optional_room_reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 30,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "choice_group_id": "REG-03-CHOICE-01",
+      "max_selected_nodes": 1,
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder"
+    },
+    {
+      "id": "RWD-REG-03-BCHOICE-FRAG",
+      "node_ids": [
+        "REG-03-B01",
+        "REG-03-B02"
+      ],
+      "event": "selected_optional_full_room_clear_once",
+      "delivery": "ground_meta_fragment_stack",
+      "quantity": 2,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "choice_group_id": "REG-03-CHOICE-01",
+      "max_selected_nodes": 1,
+      "bank_at": "actual_D04_ground_pickup_commit_not_room_clear"
+    },
+    {
+      "id": "RWD-REG-03-BCHOICE-BONUS",
+      "node_ids": [
+        "REG-03-B01",
+        "REG-03-B02"
+      ],
+      "event": "selected_optional_full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "choice_group_id": "REG-03-CHOICE-01",
+      "max_selected_nodes": 1,
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-DISCOVERY-REG-03-H01",
+      "node_ids": [
+        "REG-03-H01"
+      ],
+      "event": "actual_discovery_point_interaction_commit",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 2,
+      "probability": 1,
+      "dedup_scope": "account_discovery",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "discovery_id": "DISC-REG-03-H01-CORE",
+      "unique_account_key": [
+        "AccountID",
+        "DISC-REG-03-H01-CORE"
+      ],
+      "requires_actual_path_and_alive_grounded_interaction": true,
+      "entrance_arrival_fee_payment_map_reveal_or_boss_kill_alone_awards": false,
+      "once_per_account_not_per_run": true,
+      "claimed_display_required_before_paid_entry": true
+    },
+    {
+      "id": "RWD-REG-04-N02-GOLD",
+      "node_ids": [
+        "REG-04-N02"
+      ],
+      "event": "reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 20,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder",
+      "not_per_enemy_random_roll": true
+    },
+    {
+      "id": "RWD-REG-04-N02-BONUS",
+      "node_ids": [
+        "REG-04-N02"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-REG-04-N03-GOLD",
+      "node_ids": [
+        "REG-04-N03"
+      ],
+      "event": "reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 44,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder",
+      "not_per_enemy_random_roll": true
+    },
+    {
+      "id": "RWD-REG-04-N03-BONUS",
+      "node_ids": [
+        "REG-04-N03"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-REG-04-N05-GOLD",
+      "node_ids": [
+        "REG-04-N05"
+      ],
+      "event": "reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 48,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder",
+      "not_per_enemy_random_roll": true
+    },
+    {
+      "id": "RWD-REG-04-N05-BONUS",
+      "node_ids": [
+        "REG-04-N05"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-REG-04-N02-REC",
+      "node_ids": [
+        "REG-04-N02"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-GUARANTEED-REC",
+      "guarantee": "produce_one_ITM_REC_001_not_auto_heal_or_inventory_insert"
+    },
+    {
+      "id": "RWD-REG-04-N03-EQUIP",
+      "node_ids": [
+        "REG-04-N03"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_equipment_instance",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-EQUIPMENT",
+      "guarantee": "produce_one_instance; not_guaranteed_compatible_or_stronger_than_current"
+    },
+    {
+      "id": "RWD-REG-04-N05-RELIC",
+      "node_ids": [
+        "REG-04-N05"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-RELIC",
+      "guarantee": "produce_one_relic; retain_five_base_pool_candidates"
+    },
+    {
+      "id": "RWD-REG-04-N05-FRAG",
+      "node_ids": [
+        "REG-04-N05"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_meta_fragment_stack",
+      "quantity": 5,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "bank_at": "actual_D04_ground_pickup_commit_not_room_clear"
+    },
+    {
+      "id": "RWD-BOS-MEC-001-GOLD",
+      "node_ids": [
+        "REG-04-N07"
+      ],
+      "event": "boss_success_transaction",
+      "delivery": "ground_gold_after_success",
+      "quantity": 70,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-MEC-001",
+      "zero_policy": "zero_produces_no_object; final_run_ends_without_local_gold_reward"
+    },
+    {
+      "id": "RWD-BOS-MEC-001-FRAG",
+      "node_ids": [
+        "REG-04-N07"
+      ],
+      "event": "boss_success_transaction",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 10,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-MEC-001",
+      "commit_before_victory_screen": true
+    },
+    {
+      "id": "RWD-FIRST-BOS-MEC-001",
+      "node_ids": [
+        "REG-04-N07"
+      ],
+      "event": "first_account_boss_success_transaction",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 2,
+      "probability": 1,
+      "dedup_scope": "account_boss",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-MEC-001",
+      "unique_account_key": [
+        "AccountID",
+        "BOS-MEC-001",
+        "first_boss_success"
+      ],
+      "separate_from_discovery": true
+    },
+    {
+      "id": "RWD-REG-04-BCHOICE-GOLD",
+      "node_ids": [
+        "REG-04-B01",
+        "REG-04-B02"
+      ],
+      "event": "selected_optional_room_reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 36,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "choice_group_id": "REG-04-CHOICE-01",
+      "max_selected_nodes": 1,
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder"
+    },
+    {
+      "id": "RWD-REG-04-BCHOICE-FRAG",
+      "node_ids": [
+        "REG-04-B01",
+        "REG-04-B02"
+      ],
+      "event": "selected_optional_full_room_clear_once",
+      "delivery": "ground_meta_fragment_stack",
+      "quantity": 2,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "choice_group_id": "REG-04-CHOICE-01",
+      "max_selected_nodes": 1,
+      "bank_at": "actual_D04_ground_pickup_commit_not_room_clear"
+    },
+    {
+      "id": "RWD-REG-04-BCHOICE-BONUS",
+      "node_ids": [
+        "REG-04-B01",
+        "REG-04-B02"
+      ],
+      "event": "selected_optional_full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "choice_group_id": "REG-04-CHOICE-01",
+      "max_selected_nodes": 1,
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-DISCOVERY-REG-04-H01",
+      "node_ids": [
+        "REG-04-H01"
+      ],
+      "event": "actual_discovery_point_interaction_commit",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 2,
+      "probability": 1,
+      "dedup_scope": "account_discovery",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "discovery_id": "DISC-REG-04-H01-CORE",
+      "unique_account_key": [
+        "AccountID",
+        "DISC-REG-04-H01-CORE"
+      ],
+      "requires_actual_path_and_alive_grounded_interaction": true,
+      "entrance_arrival_fee_payment_map_reveal_or_boss_kill_alone_awards": false,
+      "once_per_account_not_per_run": true,
+      "claimed_display_required_before_paid_entry": true
+    },
+    {
+      "id": "RWD-REG-05-N02-GOLD",
+      "node_ids": [
+        "REG-05-N02"
+      ],
+      "event": "reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 24,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder",
+      "not_per_enemy_random_roll": true
+    },
+    {
+      "id": "RWD-REG-05-N02-BONUS",
+      "node_ids": [
+        "REG-05-N02"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-REG-05-N03-GOLD",
+      "node_ids": [
+        "REG-05-N03"
+      ],
+      "event": "reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 52,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder",
+      "not_per_enemy_random_roll": true
+    },
+    {
+      "id": "RWD-REG-05-N03-BONUS",
+      "node_ids": [
+        "REG-05-N03"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-REG-05-N05-GOLD",
+      "node_ids": [
+        "REG-05-N05"
+      ],
+      "event": "reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 56,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder",
+      "not_per_enemy_random_roll": true
+    },
+    {
+      "id": "RWD-REG-05-N05-BONUS",
+      "node_ids": [
+        "REG-05-N05"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-REG-05-N02-REC",
+      "node_ids": [
+        "REG-05-N02"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-GUARANTEED-REC",
+      "guarantee": "produce_one_ITM_REC_001_not_auto_heal_or_inventory_insert"
+    },
+    {
+      "id": "RWD-REG-05-N03-EQUIP",
+      "node_ids": [
+        "REG-05-N03"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_equipment_instance",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-EQUIPMENT",
+      "guarantee": "produce_one_instance; not_guaranteed_compatible_or_stronger_than_current"
+    },
+    {
+      "id": "RWD-REG-05-N05-RELIC",
+      "node_ids": [
+        "REG-05-N05"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-RELIC",
+      "guarantee": "produce_one_relic; retain_five_base_pool_candidates"
+    },
+    {
+      "id": "RWD-REG-05-N05-FRAG",
+      "node_ids": [
+        "REG-05-N05"
+      ],
+      "event": "full_room_clear_once",
+      "delivery": "ground_meta_fragment_stack",
+      "quantity": 6,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "bank_at": "actual_D04_ground_pickup_commit_not_room_clear"
+    },
+    {
+      "id": "RWD-BOS-DEM-001-GOLD",
+      "node_ids": [
+        "REG-05-N07"
+      ],
+      "event": "boss_success_transaction",
+      "delivery": "ground_gold_after_success",
+      "quantity": 0,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-DEM-001",
+      "zero_policy": "zero_produces_no_object; final_run_ends_without_local_gold_reward"
+    },
+    {
+      "id": "RWD-BOS-DEM-001-FRAG",
+      "node_ids": [
+        "REG-05-N07"
+      ],
+      "event": "boss_success_transaction",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 12,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-DEM-001",
+      "commit_before_victory_screen": true
+    },
+    {
+      "id": "RWD-FIRST-BOS-DEM-001",
+      "node_ids": [
+        "REG-05-N07"
+      ],
+      "event": "first_account_boss_success_transaction",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 2,
+      "probability": 1,
+      "dedup_scope": "account_boss",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-DEM-001",
+      "unique_account_key": [
+        "AccountID",
+        "BOS-DEM-001",
+        "first_boss_success"
+      ],
+      "separate_from_discovery": true
+    },
+    {
+      "id": "RWD-REG-05-BCHOICE-GOLD",
+      "node_ids": [
+        "REG-05-B01",
+        "REG-05-B02"
+      ],
+      "event": "selected_optional_room_reward_eligible_slot_first_true_death",
+      "delivery": "preallocated_per_slot_ground_gold",
+      "quantity": 42,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "choice_group_id": "REG-05-CHOICE-01",
+      "max_selected_nodes": 1,
+      "allocation": "whole_finite_manifest_threat_weighted_largest_remainder"
+    },
+    {
+      "id": "RWD-REG-05-BCHOICE-FRAG",
+      "node_ids": [
+        "REG-05-B01",
+        "REG-05-B02"
+      ],
+      "event": "selected_optional_full_room_clear_once",
+      "delivery": "ground_meta_fragment_stack",
+      "quantity": 3,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "choice_group_id": "REG-05-CHOICE-01",
+      "max_selected_nodes": 1,
+      "bank_at": "actual_D04_ground_pickup_commit_not_room_clear"
+    },
+    {
+      "id": "RWD-REG-05-BCHOICE-BONUS",
+      "node_ids": [
+        "REG-05-B01",
+        "REG-05-B02"
+      ],
+      "event": "selected_optional_full_room_clear_once",
+      "delivery": "ground_item_result",
+      "quantity": 1,
+      "probability": 0.15,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "pool_id": "POOL-BONUS-ITEM",
+      "choice_group_id": "REG-05-CHOICE-01",
+      "max_selected_nodes": 1,
+      "not_per_wave_or_enemy": true,
+      "presence_roll_owner": "source_once_per_whole_room"
+    },
+    {
+      "id": "RWD-DISCOVERY-REG-05-H01",
+      "node_ids": [
+        "REG-05-H01"
+      ],
+      "event": "actual_discovery_point_interaction_commit",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 2,
+      "probability": 1,
+      "dedup_scope": "account_discovery",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "discovery_id": "DISC-REG-05-H01-CORE",
+      "unique_account_key": [
+        "AccountID",
+        "DISC-REG-05-H01-CORE"
+      ],
+      "requires_actual_path_and_alive_grounded_interaction": true,
+      "entrance_arrival_fee_payment_map_reveal_or_boss_kill_alone_awards": false,
+      "once_per_account_not_per_run": true,
+      "claimed_display_required_before_paid_entry": true
+    },
+    {
+      "id": "RWD-BOS-GOB-001-GOLD",
+      "node_ids": [
+        "REG-01-H01"
+      ],
+      "event": "optional_boss_success_transaction",
+      "delivery": "ground_gold_after_success",
+      "quantity": 30,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-GOB-001",
+      "does_not_also_apply_ordinary_branch_budget": true
+    },
+    {
+      "id": "RWD-BOS-GOB-001-FRAG",
+      "node_ids": [
+        "REG-01-H01"
+      ],
+      "event": "optional_boss_success_transaction",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 4,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-GOB-001",
+      "does_not_also_apply_ordinary_branch_budget": true
+    },
+    {
+      "id": "RWD-FIRST-BOS-GOB-001",
+      "node_ids": [
+        "REG-01-H01"
+      ],
+      "event": "first_account_boss_success_transaction",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 2,
+      "probability": 1,
+      "dedup_scope": "account_boss",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-GOB-001",
+      "unique_account_key": [
+        "AccountID",
+        "BOS-GOB-001",
+        "first_boss_success"
+      ],
+      "separate_from_discovery": true
+    },
+    {
+      "id": "RWD-BOS-BST-001-GOLD",
+      "node_ids": [
+        "REG-02-H01"
+      ],
+      "event": "optional_boss_success_transaction",
+      "delivery": "ground_gold_after_success",
+      "quantity": 40,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-BST-001",
+      "does_not_also_apply_ordinary_branch_budget": true
+    },
+    {
+      "id": "RWD-BOS-BST-001-FRAG",
+      "node_ids": [
+        "REG-02-H01"
+      ],
+      "event": "optional_boss_success_transaction",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 5,
+      "probability": 1,
+      "dedup_scope": "run_room",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-BST-001",
+      "does_not_also_apply_ordinary_branch_budget": true
+    },
+    {
+      "id": "RWD-FIRST-BOS-BST-001",
+      "node_ids": [
+        "REG-02-H01"
+      ],
+      "event": "first_account_boss_success_transaction",
+      "delivery": "automatic_permanent_fragment_credit",
+      "quantity": 2,
+      "probability": 1,
+      "dedup_scope": "account_boss",
+      "requires_alive_active_run": true,
+      "status": "proposed_untested",
+      "boss_id": "BOS-BST-001",
+      "unique_account_key": [
+        "AccountID",
+        "BOS-BST-001",
+        "first_boss_success"
+      ],
+      "separate_from_discovery": true
+    },
+    {
+      "id": "RWD-REG-02-N04-COMMON-SUPPLY",
+      "node_ids": [
+        "REG-02-N04"
+      ],
+      "event": "optional_common_supply_object_open_commit",
+      "delivery": "source_bound_common_box_result_tray",
+      "quantity": 1,
+      "probability": 1,
+      "pool_id": "POOL-COMMON-SUPPLY",
+      "dedup_scope": "run_room_object",
+      "object_id": "OBJ-REG-02-N04-COMMON-SUPPLY",
+      "requires_alive_active_run": true,
+      "requires_D04_full_safety_and_one_common_key": true,
+      "count_key_consumption_and_open_result_atomically": true,
+      "not_room_arrival_or_free_mainline_reward": true,
+      "status": "proposed_untested",
+      "result_instance_key": [
+        "RunID",
+        "ObjectID",
+        "SourceID",
+        "result_index0"
+      ],
+      "preopen_seeded_result_from_run_unlock_snapshot": true,
+      "current_inventory_does_not_filter_reward_category_or_ID": true,
+      "separate_safe_claim_s": 0.25,
+      "bind_result_even_if_inventory_has_space": true,
+      "ground_duplicate_allowed": false
+    },
+    {
+      "id": "RWD-REG-05-N04-COMMON-SUPPLY",
+      "node_ids": [
+        "REG-05-N04"
+      ],
+      "event": "optional_common_supply_object_open_commit",
+      "delivery": "source_bound_common_box_result_tray",
+      "quantity": 1,
+      "probability": 1,
+      "pool_id": "POOL-COMMON-SUPPLY",
+      "dedup_scope": "run_room_object",
+      "object_id": "OBJ-REG-05-N04-COMMON-SUPPLY",
+      "requires_alive_active_run": true,
+      "requires_D04_full_safety_and_one_common_key": true,
+      "count_key_consumption_and_open_result_atomically": true,
+      "not_room_arrival_or_free_mainline_reward": true,
+      "status": "proposed_untested",
+      "result_instance_key": [
+        "RunID",
+        "ObjectID",
+        "SourceID",
+        "result_index0"
+      ],
+      "preopen_seeded_result_from_run_unlock_snapshot": true,
+      "current_inventory_does_not_filter_reward_category_or_ID": true,
+      "separate_safe_claim_s": 0.25,
+      "bind_result_even_if_inventory_has_space": true,
+      "ground_duplicate_allowed": false
+    }
+  ],
+  "paper_examples": [
+    {
+      "id": "ECON-ALLOC-RSEQ001-20",
+      "reference_template_id": "RSEQ-001",
+      "scope": "arithmetic_example_using_existing_six_slot_template_not_claim_that_every_main_room_uses_six_enemies",
+      "room_gold_budget": 20,
+      "slot_threat_weights": {
+        "RSEQ-001-S01": 2,
+        "RSEQ-001-S02": 2,
+        "RSEQ-001-S03": 3,
+        "RSEQ-001-S04": 2,
+        "RSEQ-001-S05": 4,
+        "RSEQ-001-S06": 2
+      },
+      "total_weight": 15,
+      "floor_sum_before_remainders": 17,
+      "remainder_coin_count": 3,
+      "allocation": {
+        "RSEQ-001-S01": 3,
+        "RSEQ-001-S02": 3,
+        "RSEQ-001-S03": 4,
+        "RSEQ-001-S04": 3,
+        "RSEQ-001-S05": 5,
+        "RSEQ-001-S06": 2
+      },
+      "sum_allocation": 20,
+      "sleep_or_later_wave_does_not_change_allocation": true
+    },
+    {
+      "id": "ECON-MAINLINE-SOURCE-COUNTS",
+      "required_ordinary_rooms": 15,
+      "guaranteed_REC001_objects": 5,
+      "guaranteed_equipment_objects": 5,
+      "guaranteed_relic_objects": 5,
+      "bonus_rolls": 15,
+      "bonus_probability": 0.15,
+      "expected_bonus_objects": 2.25,
+      "max_bonus_objects": 15,
+      "probability_zero_bonus_objects": 0.08735421910125167,
+      "scope": "expectation_not_per_run_guarantee; excludes_optional_and_merchant_sources"
+    },
+    {
+      "id": "ECON-ALL-OPTIONAL-SOURCE-COUNTS",
+      "ordinary_selected_optional_rooms_max": 5,
+      "additional_bonus_rolls_max": 5,
+      "all_ordinary_bonus_rolls_max": 20,
+      "expected_all_ordinary_bonus_objects_if_all_five_optional_selected": 3,
+      "max_all_ordinary_bonus_objects": 20,
+      "scope": "does_not_include_Boss_or_discovery_as_bonus_rolls"
+    }
+  ],
+  "optional_keyed_supply_objects": [
+    {
+      "id": "OBJ-REG-02-N04-COMMON-SUPPLY",
+      "node_id": "REG-02-N04",
+      "source_id": "RWD-REG-02-N04-COMMON-SUPPLY",
+      "key_type": "common",
+      "open_cost_item_id": "ITM-FUN-001",
+      "open_cost_count": 1,
+      "gold_fee": 0,
+      "one_object_per_room": true,
+      "required_for_mainline": false,
+      "blocks_free_passage": false,
+      "generated_and_matching_identity_known_at_new_run": true,
+      "reachable_from_remaining_free_main_route_required": true,
+      "opening_requires_full_D04_safety": true,
+      "open_transaction": "before_open_commit_fix_seeded_result_from_run_unlock_snapshot_without_current_inventory_filter; atomically_consume_one_key_mark_open_bind_exact_ItemInstanceID_to_source_bound_tray_and_OperationRecord; duplicate_returns_same_record_without_second_instance",
+      "reward_content_hidden_until_commit": true,
+      "outcome_fixed_before_opening": true,
+      "already_open_no_consume_no_reward": true,
+      "key_failure_no_open_or_consume": true,
+      "no_gold_fragment_or_equipment_content": true,
+      "status": "proposed_untested",
+      "result_delivery": "source_bound_common_box_result_tray",
+      "tray_key": [
+        "RunID",
+        "ObjectID",
+        "RewardSourceID",
+        "result_index0"
+      ],
+      "same_source_unique_item_instance": true,
+      "opening_spawns_duplicate_ground_item": false,
+      "claim_requires_full_D04_safety": true,
+      "claim_action_s": 0.25,
+      "claim_transaction": "revalidate_full_item_capacity_and_source_tray_instance_ownership; atomic_transfer_same_ItemInstanceID_or_D04_legal_stack_merge_and_record_claim; full_inventory_keeps_source_tray_result; no_reroll_or_ground_duplicate",
+      "claim_even_if_inventory_initially_has_capacity": "bind_source_tray_first_then_separate_0.25s_claim; opening_does_not_auto_insert",
+      "delivery_failure": "restore_same_source_tray_and_exact_ItemInstanceID_from_OperationRecord; no_key_refund_after_valid_open_commit_no_reroll_no_second_ground_spawn"
+    },
+    {
+      "id": "OBJ-REG-05-N04-COMMON-SUPPLY",
+      "node_id": "REG-05-N04",
+      "source_id": "RWD-REG-05-N04-COMMON-SUPPLY",
+      "key_type": "common",
+      "open_cost_item_id": "ITM-FUN-001",
+      "open_cost_count": 1,
+      "gold_fee": 0,
+      "one_object_per_room": true,
+      "required_for_mainline": false,
+      "blocks_free_passage": false,
+      "generated_and_matching_identity_known_at_new_run": true,
+      "reachable_from_remaining_free_main_route_required": true,
+      "opening_requires_full_D04_safety": true,
+      "open_transaction": "before_open_commit_fix_seeded_result_from_run_unlock_snapshot_without_current_inventory_filter; atomically_consume_one_key_mark_open_bind_exact_ItemInstanceID_to_source_bound_tray_and_OperationRecord; duplicate_returns_same_record_without_second_instance",
+      "reward_content_hidden_until_commit": true,
+      "outcome_fixed_before_opening": true,
+      "already_open_no_consume_no_reward": true,
+      "key_failure_no_open_or_consume": true,
+      "no_gold_fragment_or_equipment_content": true,
+      "status": "proposed_untested",
+      "result_delivery": "source_bound_common_box_result_tray",
+      "tray_key": [
+        "RunID",
+        "ObjectID",
+        "RewardSourceID",
+        "result_index0"
+      ],
+      "same_source_unique_item_instance": true,
+      "opening_spawns_duplicate_ground_item": false,
+      "claim_requires_full_D04_safety": true,
+      "claim_action_s": 0.25,
+      "claim_transaction": "revalidate_full_item_capacity_and_source_tray_instance_ownership; atomic_transfer_same_ItemInstanceID_or_D04_legal_stack_merge_and_record_claim; full_inventory_keeps_source_tray_result; no_reroll_or_ground_duplicate",
+      "claim_even_if_inventory_initially_has_capacity": "bind_source_tray_first_then_separate_0.25s_claim; opening_does_not_auto_insert",
+      "delivery_failure": "restore_same_source_tray_and_exact_ItemInstanceID_from_OperationRecord; no_key_refund_after_valid_open_commit_no_reroll_no_second_ground_spawn"
+    }
+  ]
+}

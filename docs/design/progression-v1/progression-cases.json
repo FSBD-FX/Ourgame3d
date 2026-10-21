@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "source_event": "EV-027",
+  "module": "D-09",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "scope": "paper arithmetic and reference ledger model; future UE, persistence, actual playtime and balance untested",
+  "income_case_account_assumptions": "prior wallet0, no refundable talents, no prior research cost, no other income or spend except named; banked means newly credited shards in this scenario, not all accounts current balances",
+  "income_cases": [
+    {"id": "PROG-INCOME-01", "condition": "fail before mainline N05; no optional or other shard source collected", "banked": 0, "affordable_root_ranks": 0},
+    {"id": "PROG-INCOME-02", "condition": "REG01 N05 clear and ground2 picked; player fails at Boss; no other source", "banked": 2, "purchases": ["TAL-VIT:1"], "cost": 2, "remaining": 0, "next_run_max_HP": 104},
+    {"id": "PROG-INCOME-03", "condition": "REG01 mainline N05 picked2 plus Boss success4 plus first Boss2", "banked": 8, "purchases": ["TAL-VIT:1", "UNL-REC-002"], "cost": 8, "remaining": 0},
+    {"id": "PROG-INCOME-04", "condition": "same8; alternate allocation", "banked": 8, "purchases": ["TAL-ATK:1", "TAL-ATK:2"], "cost": 8, "remaining": 0},
+    {"id": "PROG-INCOME-05", "condition": "one full first mainline income70 plus six repeat full income60; all required pickups/successes; arithmetic not playtime promise", "first_income": 70, "repeat_income": 60, "repeat_count": 6, "banked": 430, "all_talent_cost": 280, "all_research_cost": 130, "remaining": 20, "required_runs_or_achievability_claim": false}
+  ],
+  "reference_ledger_sequences": [
+    {
+      "id": "PROG-LEDGER-01",
+      "initial_earned_shards": 21,
+      "steps": [
+        {"op": "buy_talent", "operation_id": "p1", "id": "TAL-VIT", "expected_wallet": 19},
+        {"op": "buy_talent", "operation_id": "p2", "id": "TAL-VIT", "expected_wallet": 13},
+        {"op": "buy_talent", "operation_id": "p3", "id": "TAL-MED", "expected_wallet": 5},
+        {"op": "reset", "operation_id": "r1", "expected_refund": 16, "expected_wallet": 21},
+        {"op": "reset", "operation_id": "r1", "expected_refund": 16, "expected_wallet": 21},
+        {"op": "buy_talent", "operation_id": "p4", "id": "TAL-VIT", "expected_wallet": 19},
+        {"op": "reset", "operation_id": "r2", "expected_refund": 2, "expected_wallet": 21},
+        {"op": "buy_research", "operation_id": "u1", "id": "UNL-REC-002", "expected_wallet": 15},
+        {"op": "buy_research", "operation_id": "u1", "id": "UNL-REC-002", "expected_wallet": 15},
+        {"op": "reset", "operation_id": "r3", "expected_refund": 0, "expected_wallet": 15}
+      ],
+      "expected_research": ["UNL-REC-002"],
+      "expected_talent_ranks": {}
+    }
+  ],
+  "boundary_cases": [
+    {"id": "PROG-EDGE-01", "given": "unresearched parent", "when": "research REC006 before REC002", "expected": "reject_no_charge"},
+    {"id": "PROG-EDGE-02", "given": "TAL-VIT1 only", "when": "buy TAL-MED", "expected": "reject_requires_VIT2"},
+    {"id": "PROG-EDGE-03", "given": "maximum rank owned", "when": "buy next rank", "expected": "reject_no_charge"},
+    {"id": "PROG-EDGE-04", "given": "RUN_ACTIVE or RUN_SUSPENDED", "when": "buy/reset/select_sample/create_new_run", "expected": "reject_even_in_menu; view_allowed"},
+    {"id": "PROG-EDGE-05", "given": "same account_version preview for start and purchase", "when": "both commit", "expected": "one succeeds; other stale rejects; no live talent mutation"},
+    {"id": "PROG-EDGE-06", "given": "actual receipts2+6, wallet5", "when": "reset", "expected_wallet": 13, "expected_refund": 8},
+    {"id": "PROG-EDGE-07", "given": "rank2 earlier paid2+5; current catalog2+6", "when": "reset", "expected_refund": 7, "not_refund": 8},
+    {"id": "PROG-EDGE-08", "given": "owned rank without exactly matching active paid receipt", "when": "reset", "expected": "preserve_state_and_recovery_required; no_estimate"},
+    {"id": "PROG-EDGE-09", "given": "unlocked research and previously purchased sample", "when": "reset all talents", "expected": "research_and_sample_flags_preserved"},
+    {"id": "PROG-EDGE-10", "given": "old unfinished run snapshot with low talents", "when": "continue", "expected": "same_snapshot_HP_focus_gold_CD_RNG_sources; no_start20_or_heal"},
+    {"id": "PROG-EDGE-11", "given": "researched but no sample selection", "when": "start", "expected": "normal_pool_eligibility_only; no_free_item_no_extra_offer"},
+    {"id": "PROG-EDGE-12", "given": "selected sample quote but full bag and no legal replacement", "when": "purchase", "expected": "no_gold_deduction_no_instance_no_permanent_flag"},
+    {"id": "PROG-EDGE-13", "given": "sample purchase committed", "when": "same request retry then player dies", "expected": "one_instance_one_charge; sample_flag_true_after_death"},
+    {"id": "PROG-EDGE-14", "given": "sample quote bound REG01N04 unbought", "when": "visit next N04 then finish run", "expected": "no_reroute; next_run_selection_still_eligible"},
+    {"id": "PROG-EDGE-15", "given": "FUN005 quote bound; player forges last grade0 weapon elsewhere", "when": "attempt sample purchase", "expected": "target_mismatch_reject_same_quote_preserved; no_reroute"},
+    {"id": "PROG-EDGE-16", "given": "FUN003 selected", "when": "REG01 no roulette then REG02 active roulette", "expected": "no_REG01_quote; bind_REG02_once_if_remaining_use"},
+    {"id": "PROG-EDGE-17", "given": "sample claim saved in account but run record uncertain", "when": "reload or new-run request", "expected": "reconcile_same_logical_transaction_before_any_new_run; no_double_grant_or_silent_loss"},
+    {"id": "PROG-EDGE-18", "given": "weapon base grade15 plus affix25 plus relic10 plus talent8", "when": "sum damage_pct", "raw": 58, "expected_final": 50},
+    {"id": "PROG-EDGE-19", "given": "TAL-GRD3 with armor intrinsic ward0", "when": "negative ward affix eligibility", "expected": "talent_does_not_make_originally_invalid_affix_eligible"},
+    {"id": "PROG-EDGE-20", "given": "healing talent6pct and lifesteal raw3HP, budget remaining3", "when": "heal", "expected_actual": 3, "not_actual": 3.18},
+    {"id": "PROG-EDGE-21", "given": "0HP after same-time all damage", "when": "sample or potion action attempts commit", "expected": "death_wins_no_purchase_no_revive"},
+    {"id": "PROG-EDGE-22", "given": "spent sample with live flag true but stale snapshot false", "when": "second concurrent sample commit", "expected": "live_flag_or_version_reject; one_purchase_per_account_unlock"},
+    {"id": "PROG-EDGE-23", "given": "selected sample transferred to first run snapshot and account pending cleared; bought then run ended", "when": "create next run without reselecting", "expected": "new_snapshot_selected_null_no_extra_quote; old_permanent_purchase_flag_stays_true"},
+    {"id": "PROG-EDGE-24", "given": "new-run operation already committed and pending selection cleared", "when": "retry same new-run operation", "expected": "restore_original_RunID_snapshot_selection; do_not_read_cleared_pending_as_original_choice"},
+    {"id": "PROG-EDGE-25", "given": "prior wallet10, this failed run earned0, no other changes", "when": "return to hub", "expected_wallet": 10, "expected": "may_purchase_affordable_nodes_from_prior_savings; zero_income_is_not_zero_balance"}
+  ],
+  "limited_probability_cases": [
+    {"id": "PROG-PROB-01", "item_id": "ITM-BOO-005", "source_presence": 0.15, "category_share": 0.2, "purpose_share": 0.1, "eligible_IDs_in_purpose": 1, "rooms": 15, "per_room": 0.003, "at_least_once": 0.044067175161094374},
+    {"id": "PROG-PROB-02", "item_id": "ITM-TRP-004", "source_presence": 0.15, "category_share": 0.1, "purpose_share": 0.1, "eligible_IDs_in_purpose": 1, "rooms": 15, "per_room": 0.0015, "at_least_once": 0.02226527873743378}
+  ],
+  "probability_scope": "research in immutable run snapshot, unchanged D08 weights,15 mainline room bonus sources completed; theoretical independent seeded draws, exclude optional/key-box/sample and missing rooms; not empirical whole-game rate"
+}

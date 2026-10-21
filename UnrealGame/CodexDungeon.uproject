@@ -1,0 +1,15 @@
+{
+  "FileVersion": 3,
+  "EngineAssociation": "5.5",
+  "Category": "Games",
+  "Description": "Unreal Engine 5.5 infrastructure preparation for the single player dungeon prototype.",
+  "Modules": [
+    { "Name": "CodexDungeon", "Type": "Runtime", "LoadingPhase": "Default" }
+  ],
+  "Plugins": [
+    { "Name": "PythonScriptPlugin", "Enabled": true, "TargetAllowList": ["Editor"] },
+    { "Name": "EditorScriptingUtilities", "Enabled": true, "TargetAllowList": ["Editor"] },
+    { "Name": "EnhancedInput", "Enabled": true },
+    { "Name": "UnrealMCP", "Enabled": true, "TargetAllowList": ["Editor"] }
+  ]
+}

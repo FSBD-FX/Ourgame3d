@@ -1,0 +1,21 @@
+{
+  "design_date":"2026-10-13",
+  "source_event":"EV-022",
+  "status":"design_only",
+  "scope":"Arithmetic and rule examples, not a running inventory implementation or executed runtime tests. Merchant prices are explicit example assumptions.",
+  "runtime_executed":false,
+  "examples":[
+    {"id":"EX-INV-001","type":"merge_stack","input":{"inventory":2,"world":3,"cap":3},"expected":{"taken":1,"inventory":3,"world":2,"total":5}},
+    {"id":"EX-INV-002","type":"replace_partial_ground_stack","input":{"old_inventory":2,"new_world":5,"new_cap":3},"expected":{"new_inventory":3,"new_world_remainder":2,"old_world_stack":2}},
+    {"id":"EX-INV-003","type":"split_drop","input":{"inventory":3,"drop":2},"expected":{"inventory":1,"world_new_stack":2}},
+    {"id":"EX-INV-004","type":"atomic_max_hp_swap","input":{"old_max_hp":125,"current_hp":120,"new_final_max_hp":125},"expected":{"current_hp":120}},
+    {"id":"EX-INV-005","type":"max_hp_down_then_up","input":{"current_hp":95,"new_max_hp":90,"later_max_hp":100},"expected":{"after_down":90,"after_up":90}},
+    {"id":"EX-INV-006","type":"heal_before_equipment_commit","input":{"current_hp":50,"old_max_hp":100,"base_heal":20,"old_efficiency_pct":0,"new_efficiency_pct":25,"new_max_hp":100},"expected":{"hp_after_heal_then_commit":70}},
+    {"id":"EX-INV-007","type":"death_before_heal_or_transfer","input":{"hp":50,"actual_damage":50,"queued_heal":30},"expected":{"hp":0,"transfer_commits":false,"currency_pickup_commits":false}},
+    {"id":"EX-INV-008","type":"whole_purchase_capacity","input":{"existing_same_id":2,"cap":3,"offer_quantity":2,"gold":100,"coupon_quantity":1},"expected":{"accept":false,"gold":100,"coupon_quantity":1,"existing_same_id":2}},
+    {"id":"EX-INV-009","type":"purchase_current_balance","assumption":"Merchant offer price30 is a math assumption, not a configured game price.","input":{"gold_at_preview":100,"gold_auto_picked_before_commit":5,"offer_price":30,"discount_pct":20,"coupon_quantity":1},"expected":{"cost":24,"gold_after":81,"coupon_after":0}},
+    {"id":"EX-INV-010","type":"unique_currency_pickup","input":{"gold":100,"meta_banked":7,"gold_object":5,"meta_object":2,"event_delivery_count":2},"expected":{"gold":105,"meta_banked":9,"active_world_objects":0}},
+    {"id":"EX-INV-011","type":"pickup_rectangle_corner","input":{"dx_cm":80,"dy_cm":40,"los":true},"expected":{"eligible":true,"sort_score":2}},
+    {"id":"EX-INV-012","type":"poise_drop_after_commit","input":{"accumulated_stagger":35,"old_threshold":38,"new_threshold":30,"protection_active":false},"expected":{"inventory_committed":true,"poise_break":true,"accumulated_stagger_after":0}}
+  ]
+}

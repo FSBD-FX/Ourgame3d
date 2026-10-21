@@ -1,0 +1,3685 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "source_event": "EV-025",
+  "module": "D-07",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "region_names_counts_topology_room_roles_and_pools_assistant_proposed_untested; user_authorized_continue_design",
+  "generation_contract": {
+    "method": "validated_preset_combat_layouts_plus_seeded_route_graph_assembly",
+    "not_unconstrained_random_enemy_scatter": true,
+    "seed_fixed_before_run": true,
+    "saved_manifest_fields": [
+      "RunID",
+      "seed",
+      "content_and_generator_version",
+      "region_and_graph_node_edge_IDs",
+      "per_room_layout_selection",
+      "per_room_enemy_SpawnIDs_and_finite_activation_manifest",
+      "branch_choice_and_discovery_records",
+      "same_RoomInstanceIDs",
+      "clear_reward_and_entry_entitlement_records"
+    ],
+    "graph_layout_manifest_change_on_player_equipment_or_talent": false,
+    "real_time_build_scaling": false,
+    "resume_regenerates_graph_or_manifest": false,
+    "failure_policy": "reject_incompatible_assembly_before_entry; use_only_prevalidated_fallback_if_available_else_keep_player_out_and_report_generation_failure; no_new_fee_or_reward",
+    "D13_persistence_implementation_pending": true
+  },
+  "route_contract": {
+    "all_mainline_edges_free": true,
+    "mainline_requires_jump": false,
+    "optional_branch_required_for_mainline": false,
+    "mainline_dependency_graph_acyclic": true,
+    "navigation_return_edges_may_form_cycles": true,
+    "return_replays_enemy_loot_or_stock": false,
+    "branch_or_hidden_can_bypass_mainline_Boss": false,
+    "hidden_unique_mainline_key": false,
+    "paid_hidden_price_defined": false,
+    "paid_hidden_entry_adoption_pending_D08": true,
+    "paid_return_edges": false,
+    "free_main_exit_requires_full_safe_inventory_predicate": false,
+    "free_exit_uses_D04_cleared_alive_ground_idle_route_predicate": true,
+    "paid_or_optional_Boss_entry_full_D04_safety": true,
+    "cross_region_return_route_adopted": false,
+    "cross_region_exit_preview_required_if_loss_or_irreversibility": true,
+    "transition_heal": "D01_once_per_main_chapter_crossing_only; none_on_optional_Boss_or_revisit"
+  },
+  "spatial_contract": {
+    "mainline_free_ground_route_and_reachable_doors": true,
+    "Y_escape_band_required": true,
+    "trigger_covers_all_feasible_Y_domain": true,
+    "airborne_trigger_uses_ground_projection": true,
+    "trigger_progress_does_not_skip_exit_grounded_idle_requirement": true,
+    "body_and_hurtbox_independent": true,
+    "reference_player_body_half_x_y_cm": [
+      18,
+      16
+    ],
+    "reference_largest_ordinary_body_half_x_y_cm": [
+      40,
+      30
+    ],
+    "reference_largest_Boss_body_half_x_y_cm": [
+      56,
+      36
+    ],
+    "corridor_check": "actual_actor_specific_swept_body_clearance_with_tolerance; no_claim_from_visual_opening_width_only",
+    "dynamic_navigation_camera_charge_landing_and_spawn_validation": "pending_runtime_D07_D14; paper_graph_is_not_a_map"
+  },
+  "room_roles": [
+    {
+      "id": "ROOM-ROLE-ENTRY",
+      "name": "入口辨识",
+      "objective": "识别本区危险、阅读出口和分支标识，创建一次到达记录。",
+      "allowed_enemy_policy": "none",
+      "allowed_enemy_detail": "只允许无敌人的入口；不以突然袭击代替读图。",
+      "safety_rules": "不自动治疗、填弹或清状态；正常时间恢复仍按已有规则。",
+      "recommended_template_profile": "开阔入口与完整地面路径",
+      "template_binding": "root_encounter_templates_after_compatibility_validation; no_hard_template_ID_assumed",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ROOM-ROLE-TEACH",
+      "name": "教学战斗",
+      "objective": "单独呈现本区新威胁或新组合前置知识。",
+      "allowed_enemy_policy": "ordinary_intro",
+      "allowed_enemy_detail": "采用既有普通敌人，优先单职能或分离呈现；不以精英/Boss抵充教学。",
+      "safety_rules": "激活与预警必须可见，休眠石像也计入清房并有唤醒兜底。",
+      "recommended_template_profile": "单威胁或错时双威胁的预设教学布局",
+      "template_binding": "root_encounter_templates_after_compatibility_validation; no_hard_template_ID_assumed",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ROOM-ROLE-COMBO",
+      "name": "组合战斗",
+      "objective": "组合已见过的近远、冲锋与支援职能，提供可读优先目标。",
+      "allowed_enemy_policy": "ordinary_combination",
+      "allowed_enemy_detail": "从本区候选池选经过预算和行动配额验证的组合。",
+      "safety_rules": "按全部攻击能力算D05成本；不能把主题类别当战斗职能。",
+      "recommended_template_profile": "保留Y逃生带的普通混编布局",
+      "template_binding": "root_encounter_templates_after_compatibility_validation; no_hard_template_ID_assumed",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ROOM-ROLE-DEEP",
+      "name": "分段深入",
+      "objective": "玩家跨越纵深触发线后进入下一预设小段，形成探索推进。",
+      "allowed_enemy_policy": "bounded_segment_groups",
+      "allowed_enemy_detail": "只用manifest中有限的普通敌人分段，未触发者也是剩余清房条件。",
+      "safety_rules": "跨越检测覆盖全可行Y带；跳跃也以地面投影记录，不能侧绕或跳过漏怪。",
+      "recommended_template_profile": "有限分段与有界启动区布局",
+      "template_binding": "root_encounter_templates_after_compatibility_validation; no_hard_template_ID_assumed",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ROOM-ROLE-REINFORCE",
+      "name": "增援战斗",
+      "objective": "在明确信号与有限轮次中处理后续队列，练习资源规划。",
+      "allowed_enemy_policy": "bounded_manifest_reinforcements",
+      "allowed_enemy_detail": "仅预登记的普通敌/允许精英组，满足在场与攻击配额；不无限生成。",
+      "safety_rules": "增援出口/脚印提前提示，不能在玩家身体内生成；未来组仍计清房。",
+      "recommended_template_profile": "容量预留后放行的有限增援布局",
+      "template_binding": "root_encounter_templates_after_compatibility_validation; no_hard_template_ID_assumed",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ROOM-ROLE-ELITE",
+      "name": "精英战斗",
+      "objective": "应对一种可观察的行为变体，而非仅更大血条。",
+      "allowed_enemy_policy": "ordinary_plus_declared_elite",
+      "allowed_enemy_detail": "仅既有ELT目录，普通精英不继承Boss免控；实际每组服从D05上限。",
+      "safety_rules": "先教基础行为，留明确恢复与撤离路径；不得同时借第二Boss提高难度。",
+      "recommended_template_profile": "一个精英核心加低干扰陪衬布局",
+      "template_binding": "root_encounter_templates_after_compatibility_validation; no_hard_template_ID_assumed",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ROOM-ROLE-SERVICE",
+      "name": "商人与服务",
+      "objective": "让金币在局内补给、强化或附魔之间形成可选支出。",
+      "allowed_enemy_policy": "none",
+      "allowed_enemy_detail": "不放敌人或战斗增援；商人/服务库存、价格、权重交D08。",
+      "safety_rules": "免费穿行；交易另按D04完整安全谓词和原子提交，不买也能继续。",
+      "recommended_template_profile": "无敌人安全服务布局",
+      "template_binding": "root_encounter_templates_after_compatibility_validation; no_hard_template_ID_assumed",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ROOM-ROLE-HIDDEN",
+      "name": "隐藏支路",
+      "objective": "提供可跳过的发现、额外战斗或已设计可选Boss。",
+      "allowed_enemy_policy": "none_or_validated_optional_encounter",
+      "allowed_enemy_detail": "只用本区声明普通池或已绑定的可选Boss；普通/Boss规则分开。",
+      "safety_rules": "可选入场，回程免费；不给主线唯一钥匙/必需剧情旗标；隐藏不等于跳跃必需。",
+      "recommended_template_profile": "一个入口/回程明确的可选发现或独立Boss布局",
+      "template_binding": "root_encounter_templates_after_compatibility_validation; no_hard_template_ID_assumed",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ROOM-ROLE-PREP",
+      "name": "Boss前准备",
+      "objective": "看见下一战提示，在安全窗口整理装备、快捷栏与遗留物。",
+      "allowed_enemy_policy": "none",
+      "allowed_enemy_detail": "不放敌人；可显示明确标注的D08可选服务，不保证出现额外补给。",
+      "safety_rules": "不自动赠送新回血、净化、专注/弹匣/CD重置；整理需D04完整安全，免费通行按普通出口规则。",
+      "recommended_template_profile": "可看清Boss方向的安全整理布局",
+      "template_binding": "root_encounter_templates_after_compatibility_validation; no_hard_template_ID_assumed",
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ROOM-ROLE-BOSS",
+      "name": "主线Boss",
+      "objective": "完成当前区域唯一主线关底，保留独立清场与奖励事务。",
+      "allowed_enemy_policy": "one_bound_mainline_boss",
+      "allowed_enemy_detail": "仅该区绑定BOS，一Boss无普通增援，依据D06既有数据。",
+      "safety_rules": "逐招有免费地面Y反制和可见预警；同点全伤后玩家存活才提交成功，不能由隐藏支路绕过。",
+      "recommended_template_profile": "独立地面Boss场地与入口提示布局",
+      "template_binding": "root_encounter_templates_after_compatibility_validation; no_hard_template_ID_assumed",
+      "status": "assistant_proposed_untested"
+    }
+  ],
+  "regions": [
+    {
+      "id": "REG-01",
+      "order": 1,
+      "name": "裂石外垒",
+      "name_status": "working_title_formal_name_and_story_D10",
+      "mainline_boss_id": "BOS-STN-001",
+      "mainline_boss_name": "裂冠石像统领",
+      "learning_goal": "用清楚轮廓认识休眠、锁线冲锋与低空反击，再练近远混编。",
+      "enemy_candidates": [
+        "ENM-STN-001",
+        "ENM-STN-002",
+        "ENM-STN-003",
+        "ENM-STN-004",
+        "ENM-GOB-001",
+        "ENM-GOB-002",
+        "ENM-SKL-001",
+        "ENM-BST-001"
+      ],
+      "elite_candidates": [
+        "ELT-STN-001",
+        "ELT-GOB-001"
+      ],
+      "enemy_mix_policy": "cross_family_pool_not_one_faction_per_region; valid_manifest_only; numbers_and_enemy_growth_D14",
+      "mainline_node_ids": [
+        "REG-01-N01",
+        "REG-01-N02",
+        "REG-01-N03",
+        "REG-01-N04",
+        "REG-01-N05",
+        "REG-01-N06",
+        "REG-01-N07"
+      ],
+      "entry_node_id": "REG-01-N01",
+      "boss_node_id": "REG-01-N07",
+      "nodes": [
+        {
+          "id": "REG-01-N01",
+          "label": "裂石外垒·入口",
+          "room_role_id": "ROOM-ROLE-ENTRY",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [],
+          "completion_kind": "arrival_record",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-N02",
+          "label": "裂石外垒·教学战斗",
+          "room_role_id": "ROOM-ROLE-TEACH",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-01-N01",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "teaching_focus_enemy_ids": [
+            "ENM-STN-001",
+            "ENM-STN-002"
+          ]
+        },
+        {
+          "id": "REG-01-N03",
+          "label": "裂石外垒·组合战斗",
+          "room_role_id": "ROOM-ROLE-COMBO",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-01-N02",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-N04",
+          "label": "裂石外垒·功能节点",
+          "room_role_id": "ROOM-ROLE-SERVICE",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-01-N03",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "arrival_record",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "service_candidates": [
+            "merchant",
+            "recovery_service"
+          ],
+          "service_choice_source": "seeded_function_assignment_saved_before_run; stock_prices_D08",
+          "free_passage_even_if_no_purchase": true
+        },
+        {
+          "id": "REG-01-N05",
+          "label": "裂石外垒·高压战斗",
+          "room_role_id": "ROOM-ROLE-DEEP",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-01-N04",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-N06",
+          "label": "裂石外垒·Boss前准备",
+          "room_role_id": "ROOM-ROLE-PREP",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-01-N05",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "arrival_record",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "free_heal_or_resource_reset": false,
+          "preparation_policy": "safe_inventory_and_visible_optional_D08_interactions; no_new_free_recovery"
+        },
+        {
+          "id": "REG-01-N07",
+          "label": "裂石外垒·关底Boss",
+          "room_role_id": "ROOM-ROLE-BOSS",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-01-N06",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "boss_success_transaction",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "boss_id": "BOS-STN-001",
+          "ordinary_adds": 0,
+          "bypass_allowed": false
+        },
+        {
+          "id": "REG-01-B01",
+          "label": "巡哨侧廊",
+          "room_role_id": "ROOM-ROLE-COMBO",
+          "route_class": "optional_free_battle_choice",
+          "required_for_region_completion": false,
+          "prerequisites": [
+            {
+              "node_id": "REG-01-N03",
+              "condition": "completed"
+            }
+          ],
+          "choice_group_id": "REG-01-CHOICE-01",
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_under_validated_template_and_D05_caps",
+          "clear_and_return_rule": "same_RoomInstanceID_and_SpawnIDs; no_respawn_no_new_loot",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-B02",
+          "label": "裂冠偏庭",
+          "room_role_id": "ROOM-ROLE-ELITE",
+          "route_class": "optional_free_battle_choice",
+          "required_for_region_completion": false,
+          "prerequisites": [
+            {
+              "node_id": "REG-01-N03",
+              "condition": "completed"
+            }
+          ],
+          "choice_group_id": "REG-01-CHOICE-01",
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_under_validated_template_and_D05_caps",
+          "clear_and_return_rule": "same_RoomInstanceID_and_SpawnIDs; no_respawn_no_new_loot",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-H01",
+          "label": "赌王密窟",
+          "room_role_id": "ROOM-ROLE-HIDDEN",
+          "route_class": "optional_hidden",
+          "required_for_region_completion": false,
+          "prerequisites": [
+            {
+              "node_id": "REG-01-N04",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "optional_boss_success_transaction",
+          "boss_id": "BOS-GOB-001",
+          "ordinary_adds": 0,
+          "enemy_pool": [],
+          "discovery_requirement": "visible_readable_ground_reachable_clue_or_switch; no_specific_random_item_or_mandatory_jump",
+          "unique_mainline_key_or_story_gate": false,
+          "chapter_transition_heal": false,
+          "entry_fee_amount_defined": false,
+          "entry_access": "optional_toll_pending_D08",
+          "entry_paid_policy": "D08_pending; if_adopted_full_D04_safety_and_atomic_once_entry_entitlement; optional_not_required",
+          "return_free": true,
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_HP_and_progress; no_respawn_new_loot_restock_or_new_entry_fee_for_existing_entitlement",
+          "status": "assistant_proposed_untested"
+        }
+      ],
+      "edges": [
+        {
+          "id": "REG-01-E01",
+          "from": "REG-01-N01",
+          "to": "REG-01-N02",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E02",
+          "from": "REG-01-N02",
+          "to": "REG-01-N01",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E03",
+          "from": "REG-01-N02",
+          "to": "REG-01-N03",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E04",
+          "from": "REG-01-N03",
+          "to": "REG-01-N02",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E05",
+          "from": "REG-01-N03",
+          "to": "REG-01-N04",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E06",
+          "from": "REG-01-N04",
+          "to": "REG-01-N03",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E07",
+          "from": "REG-01-N04",
+          "to": "REG-01-N05",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E08",
+          "from": "REG-01-N05",
+          "to": "REG-01-N04",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E09",
+          "from": "REG-01-N05",
+          "to": "REG-01-N06",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E10",
+          "from": "REG-01-N06",
+          "to": "REG-01-N05",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E11",
+          "from": "REG-01-N06",
+          "to": "REG-01-N07",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E12",
+          "from": "REG-01-N07",
+          "to": "REG-01-N06",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E13",
+          "from": "REG-01-N03",
+          "to": "REG-01-B01",
+          "access": "free",
+          "edge_kind": "optional_branch_enter",
+          "conditions": [
+            "run_active",
+            "N03_completed",
+            "REG-01-CHOICE-01_unselected_or_already_selected_this_node",
+            "source_room_exit_predicate_D04_and_root_common",
+            "atomic_choice_commit_on_first_entry"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E14",
+          "from": "REG-01-B01",
+          "to": "REG-01-N03",
+          "access": "free",
+          "edge_kind": "optional_branch_return",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E15",
+          "from": "REG-01-B01",
+          "to": "REG-01-N04",
+          "access": "free",
+          "edge_kind": "optional_branch_merge",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E16",
+          "from": "REG-01-N04",
+          "to": "REG-01-B01",
+          "access": "free",
+          "edge_kind": "selected_cleared_branch_revisit",
+          "conditions": [
+            "run_active",
+            "this_branch_was_selected_and_completed",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E17",
+          "from": "REG-01-N03",
+          "to": "REG-01-B02",
+          "access": "free",
+          "edge_kind": "optional_branch_enter",
+          "conditions": [
+            "run_active",
+            "N03_completed",
+            "REG-01-CHOICE-01_unselected_or_already_selected_this_node",
+            "source_room_exit_predicate_D04_and_root_common",
+            "atomic_choice_commit_on_first_entry"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E18",
+          "from": "REG-01-B02",
+          "to": "REG-01-N03",
+          "access": "free",
+          "edge_kind": "optional_branch_return",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E19",
+          "from": "REG-01-B02",
+          "to": "REG-01-N04",
+          "access": "free",
+          "edge_kind": "optional_branch_merge",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E20",
+          "from": "REG-01-N04",
+          "to": "REG-01-B02",
+          "access": "free",
+          "edge_kind": "selected_cleared_branch_revisit",
+          "conditions": [
+            "run_active",
+            "this_branch_was_selected_and_completed",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E21",
+          "from": "REG-01-N04",
+          "to": "REG-01-H01",
+          "access": "optional_toll_pending_D08",
+          "edge_kind": "optional_hidden_enter",
+          "conditions": [
+            "run_active",
+            "N04_completed",
+            "clue_or_switch_recorded",
+            "full_D04_safety_if_paid_or_Boss_optional_entry",
+            "D08_paid_gate_disabled_until_price_and_transaction_adopted",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E22",
+          "from": "REG-01-H01",
+          "to": "REG-01-N04",
+          "access": "free",
+          "edge_kind": "optional_hidden_return",
+          "conditions": [
+            "run_active",
+            "optional_encounter_clear_or_noncombat_discovery_complete",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-01-E23",
+          "from": "REG-01-N07",
+          "to": "REG-02-N01",
+          "access": "free",
+          "edge_kind": "chapter_exit",
+          "conditions": [
+            "run_active",
+            "bound_mainline_Boss_success_committed",
+            "player_alive_grounded_idle",
+            "D04_one_way_exit_loss_preview_and_confirmation_if_required",
+            "D01_once_cross_chapter_transition_transaction"
+          ],
+          "returnable": false,
+          "returnable_condition": "one_way_cross_region_or_final_settlement",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested",
+          "destinationref": {
+            "kind": "region_entry",
+            "region_id": "REG-02",
+            "node_id": "REG-02-N01"
+          }
+        }
+      ],
+      "optional_choice_groups": [
+        {
+          "id": "REG-01-CHOICE-01",
+          "entry_node_id": "REG-01-N03",
+          "branch_node_ids": [
+            "REG-01-B01",
+            "REG-01-B02"
+          ],
+          "merge_node_id": "REG-01-N04",
+          "selection": "zero_or_one; direct_free_mainline_edge_always_available",
+          "choice_commit": "first_branch_entry_atomic_selects_node; other_branch_disabled_for_this_run",
+          "selected_revisit": "free_no_new_rewards_or_respawn",
+          "required_for_mainline": false
+        }
+      ],
+      "hidden_node_id": "REG-01-H01",
+      "service_passage_is_free": true,
+      "boss_preparation_heal": false,
+      "chapter_exit_heal_policy": "D01_once_only_when_crossing_to_next_main_region; no_heal_in_prep_or_optional_clear",
+      "cross_region_backtracking_adopted": false,
+      "runtime_map_built": false,
+      "status": "assistant_proposed_untested",
+      "elite_teaching_policy": "parent_ordinary_behavior_must_have_been_presented_in_current_or_prior_required_teaching; optional_branch_not_required_to_learn_mainline_elite"
+    },
+    {
+      "id": "REG-02",
+      "order": 2,
+      "name": "荆根庭院",
+      "name_status": "working_title_formal_name_and_story_D10",
+      "mainline_boss_id": "BOS-FOR-001",
+      "mainline_boss_name": "荆冠古树",
+      "learning_goal": "在弓线、短突刺和根枝覆盖间选择优先目标，巩固纵深侧步。",
+      "enemy_candidates": [
+        "ENM-ELF-001",
+        "ENM-ELF-002",
+        "ENM-ELF-003",
+        "ENM-TRE-001",
+        "ENM-TRE-002",
+        "ENM-TRE-003",
+        "ENM-BST-001",
+        "ENM-BST-003",
+        "ENM-STN-002",
+        "ENM-GOB-001",
+        "ENM-BST-002",
+        "ENM-STN-001",
+        "ENM-SKL-001"
+      ],
+      "elite_candidates": [
+        "ELT-ELF-001",
+        "ELT-TRE-001",
+        "ELT-BST-001",
+        "ELT-STN-001"
+      ],
+      "enemy_mix_policy": "cross_family_pool_not_one_faction_per_region; valid_manifest_only; numbers_and_enemy_growth_D14",
+      "mainline_node_ids": [
+        "REG-02-N01",
+        "REG-02-N02",
+        "REG-02-N03",
+        "REG-02-N04",
+        "REG-02-N05",
+        "REG-02-N06",
+        "REG-02-N07"
+      ],
+      "entry_node_id": "REG-02-N01",
+      "boss_node_id": "REG-02-N07",
+      "nodes": [
+        {
+          "id": "REG-02-N01",
+          "label": "荆根庭院·入口",
+          "room_role_id": "ROOM-ROLE-ENTRY",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [],
+          "completion_kind": "arrival_record",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-N02",
+          "label": "荆根庭院·教学战斗",
+          "room_role_id": "ROOM-ROLE-TEACH",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-02-N01",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "teaching_focus_enemy_ids": [
+            "ENM-ELF-001",
+            "ENM-TRE-001"
+          ]
+        },
+        {
+          "id": "REG-02-N03",
+          "label": "荆根庭院·组合战斗",
+          "room_role_id": "ROOM-ROLE-COMBO",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-02-N02",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-N04",
+          "label": "荆根庭院·功能节点",
+          "room_role_id": "ROOM-ROLE-SERVICE",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-02-N03",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "arrival_record",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "service_candidates": [
+            "merchant",
+            "recovery_service"
+          ],
+          "service_choice_source": "seeded_function_assignment_saved_before_run; stock_prices_D08",
+          "free_passage_even_if_no_purchase": true
+        },
+        {
+          "id": "REG-02-N05",
+          "label": "荆根庭院·高压战斗",
+          "room_role_id": "ROOM-ROLE-REINFORCE",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-02-N04",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-N06",
+          "label": "荆根庭院·Boss前准备",
+          "room_role_id": "ROOM-ROLE-PREP",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-02-N05",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "arrival_record",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "free_heal_or_resource_reset": false,
+          "preparation_policy": "safe_inventory_and_visible_optional_D08_interactions; no_new_free_recovery"
+        },
+        {
+          "id": "REG-02-N07",
+          "label": "荆根庭院·关底Boss",
+          "room_role_id": "ROOM-ROLE-BOSS",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-02-N06",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "boss_success_transaction",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "boss_id": "BOS-FOR-001",
+          "ordinary_adds": 0,
+          "bypass_allowed": false
+        },
+        {
+          "id": "REG-02-B01",
+          "label": "根廊深处",
+          "room_role_id": "ROOM-ROLE-DEEP",
+          "route_class": "optional_free_battle_choice",
+          "required_for_region_completion": false,
+          "prerequisites": [
+            {
+              "node_id": "REG-02-N03",
+              "condition": "completed"
+            }
+          ],
+          "choice_group_id": "REG-02-CHOICE-01",
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_under_validated_template_and_D05_caps",
+          "clear_and_return_rule": "same_RoomInstanceID_and_SpawnIDs; no_respawn_no_new_loot",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-B02",
+          "label": "双痕猎径",
+          "room_role_id": "ROOM-ROLE-ELITE",
+          "route_class": "optional_free_battle_choice",
+          "required_for_region_completion": false,
+          "prerequisites": [
+            {
+              "node_id": "REG-02-N03",
+              "condition": "completed"
+            }
+          ],
+          "choice_group_id": "REG-02-CHOICE-01",
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_under_validated_template_and_D05_caps",
+          "clear_and_return_rule": "same_RoomInstanceID_and_SpawnIDs; no_respawn_no_new_loot",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-H01",
+          "label": "断根兽穴",
+          "room_role_id": "ROOM-ROLE-HIDDEN",
+          "route_class": "optional_hidden",
+          "required_for_region_completion": false,
+          "prerequisites": [
+            {
+              "node_id": "REG-02-N04",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "optional_boss_success_transaction",
+          "boss_id": "BOS-BST-001",
+          "ordinary_adds": 0,
+          "enemy_pool": [],
+          "discovery_requirement": "visible_readable_ground_reachable_clue_or_switch; no_specific_random_item_or_mandatory_jump",
+          "unique_mainline_key_or_story_gate": false,
+          "chapter_transition_heal": false,
+          "entry_fee_amount_defined": false,
+          "entry_access": "free",
+          "entry_paid_policy": "D08_pending; if_adopted_full_D04_safety_and_atomic_once_entry_entitlement; optional_not_required",
+          "return_free": true,
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_HP_and_progress; no_respawn_new_loot_restock_or_new_entry_fee_for_existing_entitlement",
+          "status": "assistant_proposed_untested"
+        }
+      ],
+      "edges": [
+        {
+          "id": "REG-02-E01",
+          "from": "REG-02-N01",
+          "to": "REG-02-N02",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E02",
+          "from": "REG-02-N02",
+          "to": "REG-02-N01",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E03",
+          "from": "REG-02-N02",
+          "to": "REG-02-N03",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E04",
+          "from": "REG-02-N03",
+          "to": "REG-02-N02",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E05",
+          "from": "REG-02-N03",
+          "to": "REG-02-N04",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E06",
+          "from": "REG-02-N04",
+          "to": "REG-02-N03",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E07",
+          "from": "REG-02-N04",
+          "to": "REG-02-N05",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E08",
+          "from": "REG-02-N05",
+          "to": "REG-02-N04",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E09",
+          "from": "REG-02-N05",
+          "to": "REG-02-N06",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E10",
+          "from": "REG-02-N06",
+          "to": "REG-02-N05",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E11",
+          "from": "REG-02-N06",
+          "to": "REG-02-N07",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E12",
+          "from": "REG-02-N07",
+          "to": "REG-02-N06",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E13",
+          "from": "REG-02-N03",
+          "to": "REG-02-B01",
+          "access": "free",
+          "edge_kind": "optional_branch_enter",
+          "conditions": [
+            "run_active",
+            "N03_completed",
+            "REG-02-CHOICE-01_unselected_or_already_selected_this_node",
+            "source_room_exit_predicate_D04_and_root_common",
+            "atomic_choice_commit_on_first_entry"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E14",
+          "from": "REG-02-B01",
+          "to": "REG-02-N03",
+          "access": "free",
+          "edge_kind": "optional_branch_return",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E15",
+          "from": "REG-02-B01",
+          "to": "REG-02-N04",
+          "access": "free",
+          "edge_kind": "optional_branch_merge",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E16",
+          "from": "REG-02-N04",
+          "to": "REG-02-B01",
+          "access": "free",
+          "edge_kind": "selected_cleared_branch_revisit",
+          "conditions": [
+            "run_active",
+            "this_branch_was_selected_and_completed",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E17",
+          "from": "REG-02-N03",
+          "to": "REG-02-B02",
+          "access": "free",
+          "edge_kind": "optional_branch_enter",
+          "conditions": [
+            "run_active",
+            "N03_completed",
+            "REG-02-CHOICE-01_unselected_or_already_selected_this_node",
+            "source_room_exit_predicate_D04_and_root_common",
+            "atomic_choice_commit_on_first_entry"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E18",
+          "from": "REG-02-B02",
+          "to": "REG-02-N03",
+          "access": "free",
+          "edge_kind": "optional_branch_return",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E19",
+          "from": "REG-02-B02",
+          "to": "REG-02-N04",
+          "access": "free",
+          "edge_kind": "optional_branch_merge",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E20",
+          "from": "REG-02-N04",
+          "to": "REG-02-B02",
+          "access": "free",
+          "edge_kind": "selected_cleared_branch_revisit",
+          "conditions": [
+            "run_active",
+            "this_branch_was_selected_and_completed",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E21",
+          "from": "REG-02-N04",
+          "to": "REG-02-H01",
+          "access": "free",
+          "edge_kind": "optional_hidden_enter",
+          "conditions": [
+            "run_active",
+            "N04_completed",
+            "clue_or_switch_recorded",
+            "full_D04_safety_if_paid_or_Boss_optional_entry",
+            "free_entry_no_currency_required",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E22",
+          "from": "REG-02-H01",
+          "to": "REG-02-N04",
+          "access": "free",
+          "edge_kind": "optional_hidden_return",
+          "conditions": [
+            "run_active",
+            "optional_encounter_clear_or_noncombat_discovery_complete",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-02-E23",
+          "from": "REG-02-N07",
+          "to": "REG-03-N01",
+          "access": "free",
+          "edge_kind": "chapter_exit",
+          "conditions": [
+            "run_active",
+            "bound_mainline_Boss_success_committed",
+            "player_alive_grounded_idle",
+            "D04_one_way_exit_loss_preview_and_confirmation_if_required",
+            "D01_once_cross_chapter_transition_transaction"
+          ],
+          "returnable": false,
+          "returnable_condition": "one_way_cross_region_or_final_settlement",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested",
+          "destinationref": {
+            "kind": "region_entry",
+            "region_id": "REG-03",
+            "node_id": "REG-03-N01"
+          }
+        }
+      ],
+      "optional_choice_groups": [
+        {
+          "id": "REG-02-CHOICE-01",
+          "entry_node_id": "REG-02-N03",
+          "branch_node_ids": [
+            "REG-02-B01",
+            "REG-02-B02"
+          ],
+          "merge_node_id": "REG-02-N04",
+          "selection": "zero_or_one; direct_free_mainline_edge_always_available",
+          "choice_commit": "first_branch_entry_atomic_selects_node; other_branch_disabled_for_this_run",
+          "selected_revisit": "free_no_new_rewards_or_respawn",
+          "required_for_mainline": false
+        }
+      ],
+      "hidden_node_id": "REG-02-H01",
+      "service_passage_is_free": true,
+      "boss_preparation_heal": false,
+      "chapter_exit_heal_policy": "D01_once_only_when_crossing_to_next_main_region; no_heal_in_prep_or_optional_clear",
+      "cross_region_backtracking_adopted": false,
+      "runtime_map_built": false,
+      "status": "assistant_proposed_untested",
+      "elite_teaching_policy": "parent_ordinary_behavior_must_have_been_presented_in_current_or_prior_required_teaching; optional_branch_not_required_to_learn_mainline_elite"
+    },
+    {
+      "id": "REG-03",
+      "order": 3,
+      "name": "灰烛墓院",
+      "name_status": "working_title_formal_name_and_story_D10",
+      "mainline_boss_id": "BOS-RIT-001",
+      "mainline_boss_name": "白骨司仪",
+      "learning_goal": "将骨盾朝向、法袍护持和高低位法术放入已知战斗节奏。",
+      "enemy_candidates": [
+        "ENM-ROB-001",
+        "ENM-ROB-002",
+        "ENM-ROB-003",
+        "ENM-SKL-001",
+        "ENM-SKL-002",
+        "ENM-SKL-003",
+        "ENM-ELF-003",
+        "ENM-TRE-002",
+        "ENM-STN-004"
+      ],
+      "elite_candidates": [
+        "ELT-ROB-001",
+        "ELT-SKL-001",
+        "ELT-TRE-001"
+      ],
+      "enemy_mix_policy": "cross_family_pool_not_one_faction_per_region; valid_manifest_only; numbers_and_enemy_growth_D14",
+      "mainline_node_ids": [
+        "REG-03-N01",
+        "REG-03-N02",
+        "REG-03-N03",
+        "REG-03-N04",
+        "REG-03-N05",
+        "REG-03-N06",
+        "REG-03-N07"
+      ],
+      "entry_node_id": "REG-03-N01",
+      "boss_node_id": "REG-03-N07",
+      "nodes": [
+        {
+          "id": "REG-03-N01",
+          "label": "灰烛墓院·入口",
+          "room_role_id": "ROOM-ROLE-ENTRY",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [],
+          "completion_kind": "arrival_record",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-N02",
+          "label": "灰烛墓院·教学战斗",
+          "room_role_id": "ROOM-ROLE-TEACH",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-03-N01",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "teaching_focus_enemy_ids": [
+            "ENM-SKL-002",
+            "ENM-ROB-001"
+          ]
+        },
+        {
+          "id": "REG-03-N03",
+          "label": "灰烛墓院·组合战斗",
+          "room_role_id": "ROOM-ROLE-COMBO",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-03-N02",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-N04",
+          "label": "灰烛墓院·功能节点",
+          "room_role_id": "ROOM-ROLE-SERVICE",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-03-N03",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "arrival_record",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "service_candidates": [
+            "enchant_workshop",
+            "merchant"
+          ],
+          "service_choice_source": "seeded_function_assignment_saved_before_run; stock_prices_D08",
+          "free_passage_even_if_no_purchase": true
+        },
+        {
+          "id": "REG-03-N05",
+          "label": "灰烛墓院·高压战斗",
+          "room_role_id": "ROOM-ROLE-ELITE",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-03-N04",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-N06",
+          "label": "灰烛墓院·Boss前准备",
+          "room_role_id": "ROOM-ROLE-PREP",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-03-N05",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "arrival_record",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "free_heal_or_resource_reset": false,
+          "preparation_policy": "safe_inventory_and_visible_optional_D08_interactions; no_new_free_recovery"
+        },
+        {
+          "id": "REG-03-N07",
+          "label": "灰烛墓院·关底Boss",
+          "room_role_id": "ROOM-ROLE-BOSS",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-03-N06",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "boss_success_transaction",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "boss_id": "BOS-RIT-001",
+          "ordinary_adds": 0,
+          "bypass_allowed": false
+        },
+        {
+          "id": "REG-03-B01",
+          "label": "烛影侧厅",
+          "room_role_id": "ROOM-ROLE-COMBO",
+          "route_class": "optional_free_battle_choice",
+          "required_for_region_completion": false,
+          "prerequisites": [
+            {
+              "node_id": "REG-03-N03",
+              "condition": "completed"
+            }
+          ],
+          "choice_group_id": "REG-03-CHOICE-01",
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_under_validated_template_and_D05_caps",
+          "clear_and_return_rule": "same_RoomInstanceID_and_SpawnIDs; no_respawn_no_new_loot",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-B02",
+          "label": "碑间密道",
+          "room_role_id": "ROOM-ROLE-DEEP",
+          "route_class": "optional_free_battle_choice",
+          "required_for_region_completion": false,
+          "prerequisites": [
+            {
+              "node_id": "REG-03-N03",
+              "condition": "completed"
+            }
+          ],
+          "choice_group_id": "REG-03-CHOICE-01",
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_under_validated_template_and_D05_caps",
+          "clear_and_return_rule": "same_RoomInstanceID_and_SpawnIDs; no_respawn_no_new_loot",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-H01",
+          "label": "无名祭室",
+          "room_role_id": "ROOM-ROLE-HIDDEN",
+          "route_class": "optional_hidden",
+          "required_for_region_completion": false,
+          "prerequisites": [
+            {
+              "node_id": "REG-03-N04",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "one_time_discovery_then_any_declared_encounter_clear",
+          "boss_id": null,
+          "ordinary_adds": null,
+          "enemy_pool": "none_or_a_root_validated_optional_region_manifest",
+          "discovery_requirement": "visible_readable_ground_reachable_clue_or_switch; no_specific_random_item_or_mandatory_jump",
+          "unique_mainline_key_or_story_gate": false,
+          "chapter_transition_heal": false,
+          "entry_fee_amount_defined": false,
+          "entry_access": "free",
+          "entry_paid_policy": "D08_pending; if_adopted_full_D04_safety_and_atomic_once_entry_entitlement; optional_not_required",
+          "return_free": true,
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_HP_and_progress; no_respawn_new_loot_restock_or_new_entry_fee_for_existing_entitlement",
+          "status": "assistant_proposed_untested"
+        }
+      ],
+      "edges": [
+        {
+          "id": "REG-03-E01",
+          "from": "REG-03-N01",
+          "to": "REG-03-N02",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E02",
+          "from": "REG-03-N02",
+          "to": "REG-03-N01",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E03",
+          "from": "REG-03-N02",
+          "to": "REG-03-N03",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E04",
+          "from": "REG-03-N03",
+          "to": "REG-03-N02",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E05",
+          "from": "REG-03-N03",
+          "to": "REG-03-N04",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E06",
+          "from": "REG-03-N04",
+          "to": "REG-03-N03",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E07",
+          "from": "REG-03-N04",
+          "to": "REG-03-N05",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E08",
+          "from": "REG-03-N05",
+          "to": "REG-03-N04",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E09",
+          "from": "REG-03-N05",
+          "to": "REG-03-N06",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E10",
+          "from": "REG-03-N06",
+          "to": "REG-03-N05",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E11",
+          "from": "REG-03-N06",
+          "to": "REG-03-N07",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E12",
+          "from": "REG-03-N07",
+          "to": "REG-03-N06",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E13",
+          "from": "REG-03-N03",
+          "to": "REG-03-B01",
+          "access": "free",
+          "edge_kind": "optional_branch_enter",
+          "conditions": [
+            "run_active",
+            "N03_completed",
+            "REG-03-CHOICE-01_unselected_or_already_selected_this_node",
+            "source_room_exit_predicate_D04_and_root_common",
+            "atomic_choice_commit_on_first_entry"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E14",
+          "from": "REG-03-B01",
+          "to": "REG-03-N03",
+          "access": "free",
+          "edge_kind": "optional_branch_return",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E15",
+          "from": "REG-03-B01",
+          "to": "REG-03-N04",
+          "access": "free",
+          "edge_kind": "optional_branch_merge",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E16",
+          "from": "REG-03-N04",
+          "to": "REG-03-B01",
+          "access": "free",
+          "edge_kind": "selected_cleared_branch_revisit",
+          "conditions": [
+            "run_active",
+            "this_branch_was_selected_and_completed",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E17",
+          "from": "REG-03-N03",
+          "to": "REG-03-B02",
+          "access": "free",
+          "edge_kind": "optional_branch_enter",
+          "conditions": [
+            "run_active",
+            "N03_completed",
+            "REG-03-CHOICE-01_unselected_or_already_selected_this_node",
+            "source_room_exit_predicate_D04_and_root_common",
+            "atomic_choice_commit_on_first_entry"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E18",
+          "from": "REG-03-B02",
+          "to": "REG-03-N03",
+          "access": "free",
+          "edge_kind": "optional_branch_return",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E19",
+          "from": "REG-03-B02",
+          "to": "REG-03-N04",
+          "access": "free",
+          "edge_kind": "optional_branch_merge",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E20",
+          "from": "REG-03-N04",
+          "to": "REG-03-B02",
+          "access": "free",
+          "edge_kind": "selected_cleared_branch_revisit",
+          "conditions": [
+            "run_active",
+            "this_branch_was_selected_and_completed",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E21",
+          "from": "REG-03-N04",
+          "to": "REG-03-H01",
+          "access": "free",
+          "edge_kind": "optional_hidden_enter",
+          "conditions": [
+            "run_active",
+            "N04_completed",
+            "clue_or_switch_recorded",
+            "full_D04_safety_if_paid_or_Boss_optional_entry",
+            "free_entry_no_currency_required",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E22",
+          "from": "REG-03-H01",
+          "to": "REG-03-N04",
+          "access": "free",
+          "edge_kind": "optional_hidden_return",
+          "conditions": [
+            "run_active",
+            "optional_encounter_clear_or_noncombat_discovery_complete",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-03-E23",
+          "from": "REG-03-N07",
+          "to": "REG-04-N01",
+          "access": "free",
+          "edge_kind": "chapter_exit",
+          "conditions": [
+            "run_active",
+            "bound_mainline_Boss_success_committed",
+            "player_alive_grounded_idle",
+            "D04_one_way_exit_loss_preview_and_confirmation_if_required",
+            "D01_once_cross_chapter_transition_transaction"
+          ],
+          "returnable": false,
+          "returnable_condition": "one_way_cross_region_or_final_settlement",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested",
+          "destinationref": {
+            "kind": "region_entry",
+            "region_id": "REG-04",
+            "node_id": "REG-04-N01"
+          }
+        }
+      ],
+      "optional_choice_groups": [
+        {
+          "id": "REG-03-CHOICE-01",
+          "entry_node_id": "REG-03-N03",
+          "branch_node_ids": [
+            "REG-03-B01",
+            "REG-03-B02"
+          ],
+          "merge_node_id": "REG-03-N04",
+          "selection": "zero_or_one; direct_free_mainline_edge_always_available",
+          "choice_commit": "first_branch_entry_atomic_selects_node; other_branch_disabled_for_this_run",
+          "selected_revisit": "free_no_new_rewards_or_respawn",
+          "required_for_mainline": false
+        }
+      ],
+      "hidden_node_id": "REG-03-H01",
+      "service_passage_is_free": true,
+      "boss_preparation_heal": false,
+      "chapter_exit_heal_policy": "D01_once_only_when_crossing_to_next_main_region; no_heal_in_prep_or_optional_clear",
+      "cross_region_backtracking_adopted": false,
+      "runtime_map_built": false,
+      "status": "assistant_proposed_untested",
+      "elite_teaching_policy": "parent_ordinary_behavior_must_have_been_presented_in_current_or_prior_required_teaching; optional_branch_not_required_to_learn_mainline_elite"
+    },
+    {
+      "id": "REG-04",
+      "order": 4,
+      "name": "熔压工坊",
+      "name_status": "working_title_formal_name_and_story_D10",
+      "mainline_boss_id": "BOS-MEC-001",
+      "mainline_boss_name": "熔压审判机",
+      "learning_goal": "读取机械校准与信号支援，并在大型锤击、火瓶和冲锋之间管理位置。",
+      "enemy_candidates": [
+        "ENM-MEC-001",
+        "ENM-MEC-002",
+        "ENM-MEC-003",
+        "ENM-GOB-002",
+        "ENM-GOB-003",
+        "ENM-STN-001",
+        "ENM-BST-002",
+        "ENM-ROB-002",
+        "ENM-GOB-001",
+        "ENM-BST-003",
+        "ENM-SKL-001"
+      ],
+      "elite_candidates": [
+        "ELT-MEC-001",
+        "ELT-GOB-001",
+        "ELT-STN-001"
+      ],
+      "enemy_mix_policy": "cross_family_pool_not_one_faction_per_region; valid_manifest_only; numbers_and_enemy_growth_D14",
+      "mainline_node_ids": [
+        "REG-04-N01",
+        "REG-04-N02",
+        "REG-04-N03",
+        "REG-04-N04",
+        "REG-04-N05",
+        "REG-04-N06",
+        "REG-04-N07"
+      ],
+      "entry_node_id": "REG-04-N01",
+      "boss_node_id": "REG-04-N07",
+      "nodes": [
+        {
+          "id": "REG-04-N01",
+          "label": "熔压工坊·入口",
+          "room_role_id": "ROOM-ROLE-ENTRY",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [],
+          "completion_kind": "arrival_record",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-N02",
+          "label": "熔压工坊·教学战斗",
+          "room_role_id": "ROOM-ROLE-TEACH",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-04-N01",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "teaching_focus_enemy_ids": [
+            "ENM-MEC-001",
+            "ENM-MEC-003"
+          ]
+        },
+        {
+          "id": "REG-04-N03",
+          "label": "熔压工坊·组合战斗",
+          "room_role_id": "ROOM-ROLE-COMBO",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-04-N02",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-N04",
+          "label": "熔压工坊·功能节点",
+          "room_role_id": "ROOM-ROLE-SERVICE",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-04-N03",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "arrival_record",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "service_candidates": [
+            "upgrade_workshop",
+            "merchant"
+          ],
+          "service_choice_source": "seeded_function_assignment_saved_before_run; stock_prices_D08",
+          "free_passage_even_if_no_purchase": true
+        },
+        {
+          "id": "REG-04-N05",
+          "label": "熔压工坊·高压战斗",
+          "room_role_id": "ROOM-ROLE-REINFORCE",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-04-N04",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-N06",
+          "label": "熔压工坊·Boss前准备",
+          "room_role_id": "ROOM-ROLE-PREP",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-04-N05",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "arrival_record",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "free_heal_or_resource_reset": false,
+          "preparation_policy": "safe_inventory_and_visible_optional_D08_interactions; no_new_free_recovery"
+        },
+        {
+          "id": "REG-04-N07",
+          "label": "熔压工坊·关底Boss",
+          "room_role_id": "ROOM-ROLE-BOSS",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-04-N06",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "boss_success_transaction",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "boss_id": "BOS-MEC-001",
+          "ordinary_adds": 0,
+          "bypass_allowed": false
+        },
+        {
+          "id": "REG-04-B01",
+          "label": "旧轨检修道",
+          "room_role_id": "ROOM-ROLE-DEEP",
+          "route_class": "optional_free_battle_choice",
+          "required_for_region_completion": false,
+          "prerequisites": [
+            {
+              "node_id": "REG-04-N03",
+              "condition": "completed"
+            }
+          ],
+          "choice_group_id": "REG-04-CHOICE-01",
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_under_validated_template_and_D05_caps",
+          "clear_and_return_rule": "same_RoomInstanceID_and_SpawnIDs; no_respawn_no_new_loot",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-B02",
+          "label": "监令平台",
+          "room_role_id": "ROOM-ROLE-ELITE",
+          "route_class": "optional_free_battle_choice",
+          "required_for_region_completion": false,
+          "prerequisites": [
+            {
+              "node_id": "REG-04-N03",
+              "condition": "completed"
+            }
+          ],
+          "choice_group_id": "REG-04-CHOICE-01",
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_under_validated_template_and_D05_caps",
+          "clear_and_return_rule": "same_RoomInstanceID_and_SpawnIDs; no_respawn_no_new_loot",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-H01",
+          "label": "封存工具库",
+          "room_role_id": "ROOM-ROLE-HIDDEN",
+          "route_class": "optional_hidden",
+          "required_for_region_completion": false,
+          "prerequisites": [
+            {
+              "node_id": "REG-04-N04",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "one_time_discovery_then_any_declared_encounter_clear",
+          "boss_id": null,
+          "ordinary_adds": null,
+          "enemy_pool": "none_or_a_root_validated_optional_region_manifest",
+          "discovery_requirement": "visible_readable_ground_reachable_clue_or_switch; no_specific_random_item_or_mandatory_jump",
+          "unique_mainline_key_or_story_gate": false,
+          "chapter_transition_heal": false,
+          "entry_fee_amount_defined": false,
+          "entry_access": "optional_toll_pending_D08",
+          "entry_paid_policy": "D08_pending; if_adopted_full_D04_safety_and_atomic_once_entry_entitlement; optional_not_required",
+          "return_free": true,
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_HP_and_progress; no_respawn_new_loot_restock_or_new_entry_fee_for_existing_entitlement",
+          "status": "assistant_proposed_untested"
+        }
+      ],
+      "edges": [
+        {
+          "id": "REG-04-E01",
+          "from": "REG-04-N01",
+          "to": "REG-04-N02",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E02",
+          "from": "REG-04-N02",
+          "to": "REG-04-N01",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E03",
+          "from": "REG-04-N02",
+          "to": "REG-04-N03",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E04",
+          "from": "REG-04-N03",
+          "to": "REG-04-N02",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E05",
+          "from": "REG-04-N03",
+          "to": "REG-04-N04",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E06",
+          "from": "REG-04-N04",
+          "to": "REG-04-N03",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E07",
+          "from": "REG-04-N04",
+          "to": "REG-04-N05",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E08",
+          "from": "REG-04-N05",
+          "to": "REG-04-N04",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E09",
+          "from": "REG-04-N05",
+          "to": "REG-04-N06",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E10",
+          "from": "REG-04-N06",
+          "to": "REG-04-N05",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E11",
+          "from": "REG-04-N06",
+          "to": "REG-04-N07",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E12",
+          "from": "REG-04-N07",
+          "to": "REG-04-N06",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E13",
+          "from": "REG-04-N03",
+          "to": "REG-04-B01",
+          "access": "free",
+          "edge_kind": "optional_branch_enter",
+          "conditions": [
+            "run_active",
+            "N03_completed",
+            "REG-04-CHOICE-01_unselected_or_already_selected_this_node",
+            "source_room_exit_predicate_D04_and_root_common",
+            "atomic_choice_commit_on_first_entry"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E14",
+          "from": "REG-04-B01",
+          "to": "REG-04-N03",
+          "access": "free",
+          "edge_kind": "optional_branch_return",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E15",
+          "from": "REG-04-B01",
+          "to": "REG-04-N04",
+          "access": "free",
+          "edge_kind": "optional_branch_merge",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E16",
+          "from": "REG-04-N04",
+          "to": "REG-04-B01",
+          "access": "free",
+          "edge_kind": "selected_cleared_branch_revisit",
+          "conditions": [
+            "run_active",
+            "this_branch_was_selected_and_completed",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E17",
+          "from": "REG-04-N03",
+          "to": "REG-04-B02",
+          "access": "free",
+          "edge_kind": "optional_branch_enter",
+          "conditions": [
+            "run_active",
+            "N03_completed",
+            "REG-04-CHOICE-01_unselected_or_already_selected_this_node",
+            "source_room_exit_predicate_D04_and_root_common",
+            "atomic_choice_commit_on_first_entry"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E18",
+          "from": "REG-04-B02",
+          "to": "REG-04-N03",
+          "access": "free",
+          "edge_kind": "optional_branch_return",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E19",
+          "from": "REG-04-B02",
+          "to": "REG-04-N04",
+          "access": "free",
+          "edge_kind": "optional_branch_merge",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E20",
+          "from": "REG-04-N04",
+          "to": "REG-04-B02",
+          "access": "free",
+          "edge_kind": "selected_cleared_branch_revisit",
+          "conditions": [
+            "run_active",
+            "this_branch_was_selected_and_completed",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E21",
+          "from": "REG-04-N04",
+          "to": "REG-04-H01",
+          "access": "optional_toll_pending_D08",
+          "edge_kind": "optional_hidden_enter",
+          "conditions": [
+            "run_active",
+            "N04_completed",
+            "clue_or_switch_recorded",
+            "full_D04_safety_if_paid_or_Boss_optional_entry",
+            "D08_paid_gate_disabled_until_price_and_transaction_adopted",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E22",
+          "from": "REG-04-H01",
+          "to": "REG-04-N04",
+          "access": "free",
+          "edge_kind": "optional_hidden_return",
+          "conditions": [
+            "run_active",
+            "optional_encounter_clear_or_noncombat_discovery_complete",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-04-E23",
+          "from": "REG-04-N07",
+          "to": "REG-05-N01",
+          "access": "free",
+          "edge_kind": "chapter_exit",
+          "conditions": [
+            "run_active",
+            "bound_mainline_Boss_success_committed",
+            "player_alive_grounded_idle",
+            "D04_one_way_exit_loss_preview_and_confirmation_if_required",
+            "D01_once_cross_chapter_transition_transaction"
+          ],
+          "returnable": false,
+          "returnable_condition": "one_way_cross_region_or_final_settlement",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested",
+          "destinationref": {
+            "kind": "region_entry",
+            "region_id": "REG-05",
+            "node_id": "REG-05-N01"
+          }
+        }
+      ],
+      "optional_choice_groups": [
+        {
+          "id": "REG-04-CHOICE-01",
+          "entry_node_id": "REG-04-N03",
+          "branch_node_ids": [
+            "REG-04-B01",
+            "REG-04-B02"
+          ],
+          "merge_node_id": "REG-04-N04",
+          "selection": "zero_or_one; direct_free_mainline_edge_always_available",
+          "choice_commit": "first_branch_entry_atomic_selects_node; other_branch_disabled_for_this_run",
+          "selected_revisit": "free_no_new_rewards_or_respawn",
+          "required_for_mainline": false
+        }
+      ],
+      "hidden_node_id": "REG-04-H01",
+      "service_passage_is_free": true,
+      "boss_preparation_heal": false,
+      "chapter_exit_heal_policy": "D01_once_only_when_crossing_to_next_main_region; no_heal_in_prep_or_optional_clear",
+      "cross_region_backtracking_adopted": false,
+      "runtime_map_built": false,
+      "status": "assistant_proposed_untested",
+      "elite_teaching_policy": "parent_ordinary_behavior_must_have_been_presented_in_current_or_prior_required_teaching; optional_branch_not_required_to_learn_mainline_elite"
+    },
+    {
+      "id": "REG-05",
+      "order": 5,
+      "name": "烬誓内庭",
+      "name_status": "working_title_formal_name_and_story_D10",
+      "mainline_boss_id": "BOS-DEM-001",
+      "mainline_boss_name": "烬誓领主",
+      "learning_goal": "用成熟打法处理恶魔落印、高低位近战与此前敌人混编，进入终局独立Boss战。",
+      "enemy_candidates": [
+        "ENM-DEM-001",
+        "ENM-DEM-002",
+        "ENM-DEM-003",
+        "ENM-ROB-002",
+        "ENM-SKL-002",
+        "ENM-MEC-001",
+        "ENM-ELF-002",
+        "ENM-TRE-003",
+        "ENM-BST-003",
+        "ENM-MEC-003",
+        "ENM-BST-002"
+      ],
+      "elite_candidates": [
+        "ELT-DEM-001",
+        "ELT-ROB-001",
+        "ELT-MEC-001",
+        "ELT-BST-001"
+      ],
+      "enemy_mix_policy": "cross_family_pool_not_one_faction_per_region; valid_manifest_only; numbers_and_enemy_growth_D14",
+      "mainline_node_ids": [
+        "REG-05-N01",
+        "REG-05-N02",
+        "REG-05-N03",
+        "REG-05-N04",
+        "REG-05-N05",
+        "REG-05-N06",
+        "REG-05-N07"
+      ],
+      "entry_node_id": "REG-05-N01",
+      "boss_node_id": "REG-05-N07",
+      "nodes": [
+        {
+          "id": "REG-05-N01",
+          "label": "烬誓内庭·入口",
+          "room_role_id": "ROOM-ROLE-ENTRY",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [],
+          "completion_kind": "arrival_record",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-N02",
+          "label": "烬誓内庭·教学战斗",
+          "room_role_id": "ROOM-ROLE-TEACH",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-05-N01",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "teaching_focus_enemy_ids": [
+            "ENM-DEM-001",
+            "ENM-DEM-002"
+          ]
+        },
+        {
+          "id": "REG-05-N03",
+          "label": "烬誓内庭·组合战斗",
+          "room_role_id": "ROOM-ROLE-COMBO",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-05-N02",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-N04",
+          "label": "烬誓内庭·功能节点",
+          "room_role_id": "ROOM-ROLE-SERVICE",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-05-N03",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "arrival_record",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "service_candidates": [
+            "merchant",
+            "enchant_workshop"
+          ],
+          "service_choice_source": "seeded_function_assignment_saved_before_run; stock_prices_D08",
+          "free_passage_even_if_no_purchase": true
+        },
+        {
+          "id": "REG-05-N05",
+          "label": "烬誓内庭·高压战斗",
+          "room_role_id": "ROOM-ROLE-ELITE",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-05-N04",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-N06",
+          "label": "烬誓内庭·Boss前准备",
+          "room_role_id": "ROOM-ROLE-PREP",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-05-N05",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "arrival_record",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "free_heal_or_resource_reset": false,
+          "preparation_policy": "safe_inventory_and_visible_optional_D08_interactions; no_new_free_recovery"
+        },
+        {
+          "id": "REG-05-N07",
+          "label": "烬誓内庭·关底Boss",
+          "room_role_id": "ROOM-ROLE-BOSS",
+          "route_class": "mainline",
+          "required_for_region_completion": true,
+          "prerequisites": [
+            {
+              "node_id": "REG-05-N06",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "boss_success_transaction",
+          "enemy_pool": "region_candidates_if_combat; never_all_candidates_at_once",
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_and_progress; no_respawn_no_new_loot_no_restock",
+          "status": "assistant_proposed_untested",
+          "boss_id": "BOS-DEM-001",
+          "ordinary_adds": 0,
+          "bypass_allowed": false
+        },
+        {
+          "id": "REG-05-B01",
+          "label": "余烬回廊",
+          "room_role_id": "ROOM-ROLE-COMBO",
+          "route_class": "optional_free_battle_choice",
+          "required_for_region_completion": false,
+          "prerequisites": [
+            {
+              "node_id": "REG-05-N03",
+              "condition": "completed"
+            }
+          ],
+          "choice_group_id": "REG-05-CHOICE-01",
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_under_validated_template_and_D05_caps",
+          "clear_and_return_rule": "same_RoomInstanceID_and_SpawnIDs; no_respawn_no_new_loot",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-B02",
+          "label": "断誓侧阶",
+          "room_role_id": "ROOM-ROLE-DEEP",
+          "route_class": "optional_free_battle_choice",
+          "required_for_region_completion": false,
+          "prerequisites": [
+            {
+              "node_id": "REG-05-N03",
+              "condition": "completed"
+            }
+          ],
+          "choice_group_id": "REG-05-CHOICE-01",
+          "completion_kind": "encounter_clear",
+          "enemy_pool": "region_candidates_under_validated_template_and_D05_caps",
+          "clear_and_return_rule": "same_RoomInstanceID_and_SpawnIDs; no_respawn_no_new_loot",
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-H01",
+          "label": "熄灯誓室",
+          "room_role_id": "ROOM-ROLE-HIDDEN",
+          "route_class": "optional_hidden",
+          "required_for_region_completion": false,
+          "prerequisites": [
+            {
+              "node_id": "REG-05-N04",
+              "condition": "completed"
+            }
+          ],
+          "completion_kind": "one_time_discovery_then_any_declared_encounter_clear",
+          "boss_id": null,
+          "ordinary_adds": null,
+          "enemy_pool": "none_or_a_root_validated_optional_region_manifest",
+          "discovery_requirement": "visible_readable_ground_reachable_clue_or_switch; no_specific_random_item_or_mandatory_jump",
+          "unique_mainline_key_or_story_gate": false,
+          "chapter_transition_heal": false,
+          "entry_fee_amount_defined": false,
+          "entry_access": "free",
+          "entry_paid_policy": "D08_pending; if_adopted_full_D04_safety_and_atomic_once_entry_entitlement; optional_not_required",
+          "return_free": true,
+          "clear_and_return_rule": "same_RoomInstanceID_manifest_HP_and_progress; no_respawn_new_loot_restock_or_new_entry_fee_for_existing_entitlement",
+          "status": "assistant_proposed_untested"
+        }
+      ],
+      "edges": [
+        {
+          "id": "REG-05-E01",
+          "from": "REG-05-N01",
+          "to": "REG-05-N02",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E02",
+          "from": "REG-05-N02",
+          "to": "REG-05-N01",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E03",
+          "from": "REG-05-N02",
+          "to": "REG-05-N03",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E04",
+          "from": "REG-05-N03",
+          "to": "REG-05-N02",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E05",
+          "from": "REG-05-N03",
+          "to": "REG-05-N04",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E06",
+          "from": "REG-05-N04",
+          "to": "REG-05-N03",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E07",
+          "from": "REG-05-N04",
+          "to": "REG-05-N05",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E08",
+          "from": "REG-05-N05",
+          "to": "REG-05-N04",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E09",
+          "from": "REG-05-N05",
+          "to": "REG-05-N06",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E10",
+          "from": "REG-05-N06",
+          "to": "REG-05-N05",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E11",
+          "from": "REG-05-N06",
+          "to": "REG-05-N07",
+          "access": "free",
+          "edge_kind": "mainline_forward",
+          "conditions": [
+            "run_active",
+            "source_node_completed",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_main_prerequisite_satisfied"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E12",
+          "from": "REG-05-N07",
+          "to": "REG-05-N06",
+          "access": "free",
+          "edge_kind": "cleared_return",
+          "conditions": [
+            "run_active",
+            "source_room_exit_predicate_D04_and_root_common",
+            "destination_previously_visited",
+            "active_Boss_or_combat_lock_not_in_force"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E13",
+          "from": "REG-05-N03",
+          "to": "REG-05-B01",
+          "access": "free",
+          "edge_kind": "optional_branch_enter",
+          "conditions": [
+            "run_active",
+            "N03_completed",
+            "REG-05-CHOICE-01_unselected_or_already_selected_this_node",
+            "source_room_exit_predicate_D04_and_root_common",
+            "atomic_choice_commit_on_first_entry"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E14",
+          "from": "REG-05-B01",
+          "to": "REG-05-N03",
+          "access": "free",
+          "edge_kind": "optional_branch_return",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E15",
+          "from": "REG-05-B01",
+          "to": "REG-05-N04",
+          "access": "free",
+          "edge_kind": "optional_branch_merge",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E16",
+          "from": "REG-05-N04",
+          "to": "REG-05-B01",
+          "access": "free",
+          "edge_kind": "selected_cleared_branch_revisit",
+          "conditions": [
+            "run_active",
+            "this_branch_was_selected_and_completed",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E17",
+          "from": "REG-05-N03",
+          "to": "REG-05-B02",
+          "access": "free",
+          "edge_kind": "optional_branch_enter",
+          "conditions": [
+            "run_active",
+            "N03_completed",
+            "REG-05-CHOICE-01_unselected_or_already_selected_this_node",
+            "source_room_exit_predicate_D04_and_root_common",
+            "atomic_choice_commit_on_first_entry"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E18",
+          "from": "REG-05-B02",
+          "to": "REG-05-N03",
+          "access": "free",
+          "edge_kind": "optional_branch_return",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E19",
+          "from": "REG-05-B02",
+          "to": "REG-05-N04",
+          "access": "free",
+          "edge_kind": "optional_branch_merge",
+          "conditions": [
+            "run_active",
+            "branch_encounter_cleared",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E20",
+          "from": "REG-05-N04",
+          "to": "REG-05-B02",
+          "access": "free",
+          "edge_kind": "selected_cleared_branch_revisit",
+          "conditions": [
+            "run_active",
+            "this_branch_was_selected_and_completed",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E21",
+          "from": "REG-05-N04",
+          "to": "REG-05-H01",
+          "access": "free",
+          "edge_kind": "optional_hidden_enter",
+          "conditions": [
+            "run_active",
+            "N04_completed",
+            "clue_or_switch_recorded",
+            "full_D04_safety_if_paid_or_Boss_optional_entry",
+            "free_entry_no_currency_required",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E22",
+          "from": "REG-05-H01",
+          "to": "REG-05-N04",
+          "access": "free",
+          "edge_kind": "optional_hidden_return",
+          "conditions": [
+            "run_active",
+            "optional_encounter_clear_or_noncombat_discovery_complete",
+            "source_room_exit_predicate_D04_and_root_common"
+          ],
+          "returnable": true,
+          "returnable_condition": "after_current_encounter_is_cleared; no_retreat_through_locked_active_combat",
+          "ground_route_required": true,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested"
+        },
+        {
+          "id": "REG-05-E23",
+          "from": "REG-05-N07",
+          "to": "RUN-VICTORY",
+          "access": "free",
+          "edge_kind": "final_settlement",
+          "conditions": [
+            "final_mainline_Boss_success_committed",
+            "permanent_rewards_and_story_committed_before_victory_screen"
+          ],
+          "returnable": false,
+          "returnable_condition": "one_way_cross_region_or_final_settlement",
+          "ground_route_required": false,
+          "jump_required": false,
+          "fee_amount_defined": false,
+          "status": "assistant_proposed_untested",
+          "destinationref": {
+            "kind": "run_victory_settlement",
+            "event": "D01_D06_successful_final_clear"
+          },
+          "traversal": "automatic_after_success_commit_no_E_or_ground_idle_requirement"
+        }
+      ],
+      "optional_choice_groups": [
+        {
+          "id": "REG-05-CHOICE-01",
+          "entry_node_id": "REG-05-N03",
+          "branch_node_ids": [
+            "REG-05-B01",
+            "REG-05-B02"
+          ],
+          "merge_node_id": "REG-05-N04",
+          "selection": "zero_or_one; direct_free_mainline_edge_always_available",
+          "choice_commit": "first_branch_entry_atomic_selects_node; other_branch_disabled_for_this_run",
+          "selected_revisit": "free_no_new_rewards_or_respawn",
+          "required_for_mainline": false
+        }
+      ],
+      "hidden_node_id": "REG-05-H01",
+      "service_passage_is_free": true,
+      "boss_preparation_heal": false,
+      "chapter_exit_heal_policy": "D01_once_only_when_crossing_to_next_main_region; no_heal_in_prep_or_optional_clear",
+      "cross_region_backtracking_adopted": false,
+      "runtime_map_built": false,
+      "status": "assistant_proposed_untested",
+      "elite_teaching_policy": "parent_ordinary_behavior_must_have_been_presented_in_current_or_prior_required_teaching; optional_branch_not_required_to_learn_mainline_elite"
+    }
+  ],
+  "scope_counts_proposed": {
+    "regions": 5,
+    "mandatory_mainline_nodes_per_region": 7,
+    "mandatory_mainline_nodes_total": 35,
+    "optional_free_battle_candidates": 10,
+    "optional_hidden_candidates": 5,
+    "candidate_node_total": 50,
+    "max_visited_nodes_if_each_region_selects_one_battle_branch_and_hidden": 45,
+    "unique_art_room_count_implied": false,
+    "run_duration_committed": false
+  },
+  "future_dependencies": [
+    "D08 prices_supply_drops_hidden_tickets_and_services",
+    "D09 talent_and_content_unlock_pool_snapshots",
+    "D10 formal_names_story_optional_discovery_flags",
+    "D11 map_choice_exit_confirmation_and_accessibility_UI",
+    "D12 tiles_warning_audio_animation_and_layout_assets",
+    "D13 seed_manifest_branch_choice_idempotency_and_save_recovery",
+    "D14 whole_run_duration_difficulty_and_actual_route_playtest"
+  ]
+}

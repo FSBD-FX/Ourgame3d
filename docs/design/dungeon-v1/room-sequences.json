@@ -1,0 +1,2851 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "source_event": "EV-025",
+  "module": "D-07",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "user_requested_detailed_room_enemy_sequences; all_names_counts_thresholds_timings_compositions_assistant_proposed_untested",
+  "common_rules_ref": "common-rules.json",
+  "enemy_rules_ref": "../enemies-v1/common-rules.json",
+  "enemy_catalog_ref": "../enemies-v1/enemies.json",
+  "scope": {
+    "room_templates": 6,
+    "required_slot_instances": 36,
+    "groups": 16,
+    "all_templates_total_slots_at_most": 8,
+    "per_template_groups_at_most": 3,
+    "per_group_slots_at_most": 3,
+    "no_new_enemy_types": true
+  },
+  "shared_exception_contract": {
+    "entry_orientation_s": 1.0,
+    "entry_orientation": "player_keeps_control_and_resources; enemies_only_start_original_windup_after_orientation_and_intrinsic_wake_ready",
+    "admission_budget": "whole_group_atoms; dormant_emerging_live_and_reserved_unmaterialized_slots_count_once_each; unadmitted_future_manifest_slots_count_only_clear_obligation",
+    "concurrent_caps": {
+      "actors": 4,
+      "threat": 8,
+      "large": 1,
+      "charger": 1,
+      "flying": 1,
+      "support": 1,
+      "projectile_users": 2,
+      "elites": 1
+    },
+    "attack_director_ref": "D05_committed_actions2_charge1_projectile1_support1_live_projectiles2_whole_emission_reservation",
+    "depth": "max_continuous_swept_groundXY_X_progress_latched_once; full_Y_plane_and_airborne_ground_projection; never_reset_on_retreat_or_repeat_crossing",
+    "dependencies": "depth_and_event_latches_persist_until_dependency_complete; no_new_admission_on_player_dead_or_run_terminal",
+    "stage_clear": "not_room_clear_not_D04_safety; keep_same_RoomID_projectiles_player_deployments_DOT_CD_per_room_relic_budgets",
+    "future_entry": {
+      "warning_s": 1.2,
+      "min_materialization_gap_s": 0.8,
+      "emerge_s": 0.6,
+      "initial_anchor_min_player_distance_cm": 350,
+      "materialization_recheck_min_distance_cm": 220,
+      "distance_metric": "ground_XY_euclidean",
+      "requires_walkable_nonoverlap_visible_warning_LOS_free_ground_route": true,
+      "warning_is_only_presentation_no_HP_body_or_loot": true,
+      "materialized_actor_damageable_and_statusable_during_emerge": true,
+      "failed_recheck": "do_not_materialize_or_move_near_player; keep_same_slot_SpawnID_and_unemitted_reservation; wait_retry_backoff1.0_then_reselect_legal_candidate_and_full_1.2s_warning; only_retry_unmaterialized_slots; never_remove_or_respawn_materialized_slots",
+      "fallback": "signal_visible_backup_entry; still_revalidate_all_spacing_visibility_LOS_and_full_warning; no_forced_near_spawn",
+      "dead_during_emerge": "true_terminal_no_later_revive_or_duplicate_reward",
+      "stone_wake": "max(emerge.6,intrinsic_wake); preserve_full_native_wake; no_replacement_ID_HP_or_status_reset",
+      "same_group_anchor_selection": "reserve_distinct_nonoverlapping_body_footprints_across_all_selected_pending_slots_as_well_as_current_actors; do_not_choose_same_empty_point_twice",
+      "emerge_state": "stationary_no_attack; damage_and_status_allowed; earliest_attack_accept=max(emerge_deadline,intrinsic_wake_deadline,entry_orientation_deadline,current_poise_hurt_deadline); then_full_native_windup",
+      "min_warning_start_gap_s": 0.8,
+      "fallback_after_reserved_position_blocked_s": 6.0,
+      "technical_fault_after_reserved_position_blocked_s": 12.0,
+      "fallback_clock_excludes": "unadmitted_queued_waiting_for_dependency_depth_breather_or_budget",
+      "retry_backoff_s": 1.0,
+      "fault_action": "common_rules.technical_fault; visible_diagnostic_pause_no_fake_kill_or_room_clear; identity_HP_reward_and_resources_preserved",
+      "slot_i_earliest_timeline_from_group_admission": "warning_i=A+i*.8_or_later; materialize_i=A+1.2+i*.8_or_later; each_cue_full1.2; global_warning_and_materialization_gaps_each>=.8"
+    },
+    "same_timestamp_order": [
+      "all_due_damage_and_deaths",
+      "latch_all_swept_depth_or_event_triggers",
+      "admit_eligible_whole_groups_if_alive_and_caps_allow",
+      "check_whole_room_manifest_clear"
+    ],
+    "pause": "simulation_clocks_attack_DOT_CD_breather_warning_spawn_gaps_and_fallback_freeze; no_new_trigger_or_spawn_until_resume",
+    "player_death": "damage/deaths_priority; freeze_new_group_admission_materialization_and_room_clear_success; existing_run_failure_D01_D13; no_new_rewards_for_unmaterialized_slots",
+    "room_clear": "all_required_manifest_slots_true_terminal; no_alive_dormant_queued_reserved_unmaterialized_required_obligations; commit_once; no_more_required_spawns; not_Boss_projectile_cleanup",
+    "rewards": "each_true_death_RunID_RoomInstanceID_slotID_once; finite_future_wave_eligible; script_delete_no_reward; D08_amounts_prices_pending"
+  },
+  "capability_profiles": {
+    "ENM-STN-004": {
+      "enemy_id": "ENM-STN-004",
+      "name": "石纹哨像",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-STN-004-A1",
+        "ENM-STN-004-A2"
+      ]
+    },
+    "ENM-STN-002": {
+      "enemy_id": "ENM-STN-002",
+      "name": "灰翼石蝠",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": true,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-STN-002-A1",
+        "ENM-STN-002-A2"
+      ]
+    },
+    "ENM-STN-001": {
+      "enemy_id": "ENM-STN-001",
+      "name": "沉石骑士",
+      "cost": 3,
+      "large": false,
+      "charger": true,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-STN-001-A1",
+        "ENM-STN-001-A2"
+      ]
+    },
+    "ENM-STN-003": {
+      "enemy_id": "ENM-STN-003",
+      "name": "裂岩守卫",
+      "cost": 4,
+      "large": true,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-STN-003-A1",
+        "ENM-STN-003-A2"
+      ]
+    },
+    "ENM-GOB-001": {
+      "enemy_id": "ENM-GOB-001",
+      "name": "碎刃哥布林",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-GOB-001-A1",
+        "ENM-GOB-001-A2"
+      ]
+    },
+    "ENM-GOB-003": {
+      "enemy_id": "ENM-GOB-003",
+      "name": "铁桶蛮兵",
+      "cost": 4,
+      "large": true,
+      "charger": true,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-GOB-003-A1",
+        "ENM-GOB-003-A2"
+      ]
+    },
+    "ENM-GOB-002": {
+      "enemy_id": "ENM-GOB-002",
+      "name": "火瓶哥布林",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-GOB-002-A1",
+        "ENM-GOB-002-A2"
+      ]
+    },
+    "ENM-TRE-001": {
+      "enemy_id": "ENM-TRE-001",
+      "name": "根须幼株",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-TRE-001-A1",
+        "ENM-TRE-001-A2"
+      ]
+    },
+    "ENM-ELF-001": {
+      "enemy_id": "ENM-ELF-001",
+      "name": "苔弓斥候",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-ELF-001-A1",
+        "ENM-ELF-001-A2"
+      ]
+    },
+    "ENM-ELF-002": {
+      "enemy_id": "ENM-ELF-002",
+      "name": "荆刃游侠",
+      "cost": 3,
+      "large": false,
+      "charger": true,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-ELF-002-A1",
+        "ENM-ELF-002-A2"
+      ]
+    },
+    "ENM-TRE-002": {
+      "enemy_id": "ENM-TRE-002",
+      "name": "枯枝长臂",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-TRE-002-A1",
+        "ENM-TRE-002-A2"
+      ]
+    },
+    "ENM-TRE-003": {
+      "enemy_id": "ENM-TRE-003",
+      "name": "古根树卫",
+      "cost": 4,
+      "large": true,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-TRE-003-A1",
+        "ENM-TRE-003-A2"
+      ]
+    },
+    "ENM-SKL-001": {
+      "enemy_id": "ENM-SKL-001",
+      "name": "朽骨短刃",
+      "cost": 1,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-SKL-001-A1",
+        "ENM-SKL-001-A2"
+      ]
+    },
+    "ENM-SKL-003": {
+      "enemy_id": "ENM-SKL-003",
+      "name": "裂弓骸骨",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-SKL-003-A1",
+        "ENM-SKL-003-A2"
+      ]
+    },
+    "ENM-SKL-002": {
+      "enemy_id": "ENM-SKL-002",
+      "name": "骨盾卫",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": true,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-SKL-002-A1",
+        "ENM-SKL-002-A2"
+      ]
+    },
+    "ENM-MEC-001": {
+      "enemy_id": "ENM-MEC-001",
+      "name": "校准巡灯",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ATK-MEC-001-A",
+        "ATK-MEC-001-B"
+      ]
+    },
+    "ENM-MEC-003": {
+      "enemy_id": "ENM-MEC-003",
+      "name": "旗讯使者",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": true,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ATK-MEC-003-A",
+        "ATK-MEC-003-B"
+      ]
+    },
+    "ENM-BST-003": {
+      "enemy_id": "ENM-BST-003",
+      "name": "棘背猞猁",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ATK-BST-003-A",
+        "ATK-BST-003-B"
+      ]
+    },
+    "ENM-MEC-002": {
+      "enemy_id": "ENM-MEC-002",
+      "name": "蒸压锤卫",
+      "cost": 4,
+      "large": true,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ATK-MEC-002-A",
+        "ATK-MEC-002-B"
+      ]
+    },
+    "ELT-STN-001": {
+      "enemy_id": "ELT-STN-001",
+      "name": "裂冠沉石骑士",
+      "cost": 5,
+      "large": false,
+      "charger": true,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": true,
+      "scanned_attack_ids": [
+        "ENM-STN-001-A1",
+        "ENM-STN-001-A2",
+        "ELT-STN-001-A1"
+      ]
+    }
+  },
+  "templates": [
+    {
+      "id": "RSEQ-001",
+      "name": "石廊明哨与休眠蝠",
+      "theme": "STN",
+      "status": "design_only",
+      "runtime_implemented": false,
+      "authority": "assistant_proposed_untested",
+      "geometry": {
+        "half_x_cm": 1400,
+        "half_y_cm": 450,
+        "entry_xy_cm": [
+          -1250,
+          0
+        ],
+        "exit_xy_cm": [
+          1250,
+          0
+        ],
+        "anchors": [
+          {
+            "id": "AN-WN",
+            "x_cm": -1050,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-WS",
+            "x_cm": -1050,
+            "y_cm": -300
+          },
+          {
+            "id": "AN-MN",
+            "x_cm": 0,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-MS",
+            "x_cm": 0,
+            "y_cm": -300
+          },
+          {
+            "id": "AN-EN",
+            "x_cm": 1050,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-ES",
+            "x_cm": 1050,
+            "y_cm": -300
+          }
+        ],
+        "anchor_coordinates_only_not_navmesh_proof": true,
+        "depth_gates_before_main_exit": "at_least_one_free_ground_route; no_required_depth_plane_behind_room_clear_locked_main_exit",
+        "full_width_depth_planes": true
+      },
+      "anchors": [
+        {
+          "id": "AN-WN",
+          "x_cm": -1050,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-WS",
+          "x_cm": -1050,
+          "y_cm": -300
+        },
+        {
+          "id": "AN-MN",
+          "x_cm": 0,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-MS",
+          "x_cm": 0,
+          "y_cm": -300
+        },
+        {
+          "id": "AN-EN",
+          "x_cm": 1050,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-ES",
+          "x_cm": 1050,
+          "y_cm": -300
+        }
+      ],
+      "manifest": {
+        "total_required_slots": 6,
+        "groups": 3,
+        "future_slots_are_only_manifest_records_until_admission": true,
+        "all_slots_required_for_room_clear": true,
+        "no_new_required_slots_after_clear": true,
+        "finite_slot_rewards_once": true
+      },
+      "overlap_allowed": false,
+      "groups": [
+        {
+          "group_id": "RSEQ-001-G1",
+          "dependencies": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-001-S01",
+              "enemy_id": "ENM-STN-004",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "fixed_preplaced",
+                "preferred_anchor_ids": [
+                  "AN-WN"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": true,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": "not_applicable",
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "D05_intrinsic_wake_if_dormant; visible_enemies_also_respect_entry_orientation",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-001-S02",
+              "enemy_id": "ENM-STN-002",
+              "initial_state": "preplaced_dormant",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "fixed_preplaced",
+                "preferred_anchor_ids": [
+                  "AN-WS"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": true,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": "not_applicable",
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "D05_intrinsic_wake_if_dormant; visible_enemies_also_respect_entry_orientation",
+              "pre_emerge_death_terminal_no_respawn": true,
+              "dormancy": {
+                "rules_ref": "../enemies-v1/stone-forest.json#ENM-STN-002",
+                "near_ground_half_x_cm": 180,
+                "near_ground_half_y_cm": 85,
+                "requires_los": true,
+                "real_damage_wakes": true,
+                "counts_current_budget_while_dormant": true,
+                "damage_or_status_immune": false,
+                "wake_warning_s": 0.8,
+                "fallback_after_own_group_combat_s": 12,
+                "fallback_when_other_active_accepted_enemies_dead": true,
+                "fallback_clock_starts_at": "own_group_admitted_and_first_combat; not_room_entry_before_group_admission",
+                "unadmitted_future_groups_can_be_woken": false,
+                "same_HP_status_SpawnID_after_wake": true
+              }
+            }
+          ],
+          "intent": "明哨提供可见远程威胁；石蝠为真实休眠实体，玩家决定先唤还是先杀哨像。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 4,
+            "large": 0,
+            "charger": 0,
+            "flying": 1,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 1.0,
+            "future_entry_warning_s": 0,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false
+        },
+        {
+          "group_id": "RSEQ-001-G2",
+          "dependencies": [
+            {
+              "group_id": "RSEQ-001-G1",
+              "required_state": "terminal"
+            }
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.4,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "full_walkable_y_span": true,
+            "uses_ground_xy_even_airborne": true,
+            "progress": "clamp((max_swept_player_X-entry_X)/(exit_X-entry_X),0,1)",
+            "returning_below_threshold_unlatches": false,
+            "breather_from_latest_terminal_dependency_s": 2.0,
+            "room_elapsed_fixed_spawn": false
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-001-S03",
+              "enemy_id": "ENM-STN-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-MN",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MS",
+                  "AN-EN",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-001-S04",
+              "enemy_id": "ENM-STN-004",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-MS",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-EN",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            }
+          ],
+          "intent": "首段清完且走过40%深入平面，门龛出现骑士与第二哨像。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 5,
+            "large": 0,
+            "charger": 1,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 0,
+            "future_entry_warning_s": 1.2,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false
+        },
+        {
+          "group_id": "RSEQ-001-G3",
+          "dependencies": [
+            {
+              "group_id": "RSEQ-001-G2",
+              "required_state": "terminal"
+            }
+          ],
+          "trigger": {
+            "event": "dependencies_terminal",
+            "latch_once": true,
+            "terminal_group_ids": [
+              "RSEQ-001-G2"
+            ],
+            "breather_s": 2.0,
+            "breather_starts_at": "latest_dependency_terminal_event",
+            "room_elapsed_fixed_spawn": false
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-001-S05",
+              "enemy_id": "ENM-STN-003",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-EN",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-MS",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-001-S06",
+              "enemy_id": "ENM-STN-004",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-ES",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-MS",
+                  "AN-EN"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            }
+          ],
+          "intent": "第二段真正全灭后，裂岩守卫与哨像做末段。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 6,
+            "large": 1,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 0,
+            "future_entry_warning_s": 1.2,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false
+        }
+      ],
+      "example_flow": [
+        {
+          "event": "entry_committed",
+          "action": "G1整组接纳，哨像与休眠蝠立即可受伤/计预算4；玩家1.0s辨认入口，敌不能偷起攻。"
+        },
+        {
+          "event": "player_kills_visible_sentry_before_bat_wakes",
+          "action": "石蝠仍计清房；其他已接纳活动敌全灭触发D05唤醒兜底，仍完整0.8s苏醒，不生成新ID。"
+        },
+        {
+          "event": "player_crosses_depth_0.40_before_G1_terminal",
+          "action": "深入标记锁存，G2仍排队，不漏事件、不提前刷怪。"
+        },
+        {
+          "event": "G1_terminal",
+          "action": "至少等2.0s，再接纳G2并整组预留预算5；完整预告1.2s后依次显现，间隔至少0.8s。"
+        },
+        {
+          "event": "G2_terminal",
+          "action": "至少2.0s喘息后G3同样预告与显现；G3预算6。"
+        },
+        {
+          "event": "all_6_slots_terminal",
+          "action": "才可房清一次；旧弹和状态按共用房清接口处理，不套Boss清弹。"
+        }
+      ],
+      "exception_contract_ref": "shared_exception_contract",
+      "completion": "damage_and_deaths -> swept_trigger_latches -> whole_group_admission -> room_clear_check; all_manifest_slots_terminal and no_living_dormant_queued_reserved_future_obligations",
+      "stage_clear_ui": "前段已清；继续深入或援兵接近；不显示房间已清、不开放安全商店/主出口",
+      "D07_geometry_verified": false,
+      "D14_playtested": false
+    },
+    {
+      "id": "RSEQ-002",
+      "name": "哥布林倒灌两波",
+      "theme": "GOB",
+      "status": "design_only",
+      "runtime_implemented": false,
+      "authority": "assistant_proposed_untested",
+      "geometry": {
+        "half_x_cm": 1400,
+        "half_y_cm": 450,
+        "entry_xy_cm": [
+          -1250,
+          0
+        ],
+        "exit_xy_cm": [
+          1250,
+          0
+        ],
+        "anchors": [
+          {
+            "id": "AN-WN",
+            "x_cm": -1050,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-WS",
+            "x_cm": -1050,
+            "y_cm": -300
+          },
+          {
+            "id": "AN-MN",
+            "x_cm": 0,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-MS",
+            "x_cm": 0,
+            "y_cm": -300
+          },
+          {
+            "id": "AN-EN",
+            "x_cm": 1050,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-ES",
+            "x_cm": 1050,
+            "y_cm": -300
+          }
+        ],
+        "anchor_coordinates_only_not_navmesh_proof": true,
+        "depth_gates_before_main_exit": "at_least_one_free_ground_route; no_required_depth_plane_behind_room_clear_locked_main_exit",
+        "full_width_depth_planes": true
+      },
+      "anchors": [
+        {
+          "id": "AN-WN",
+          "x_cm": -1050,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-WS",
+          "x_cm": -1050,
+          "y_cm": -300
+        },
+        {
+          "id": "AN-MN",
+          "x_cm": 0,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-MS",
+          "x_cm": 0,
+          "y_cm": -300
+        },
+        {
+          "id": "AN-EN",
+          "x_cm": 1050,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-ES",
+          "x_cm": 1050,
+          "y_cm": -300
+        }
+      ],
+      "manifest": {
+        "total_required_slots": 6,
+        "groups": 2,
+        "future_slots_are_only_manifest_records_until_admission": true,
+        "all_slots_required_for_room_clear": true,
+        "no_new_required_slots_after_clear": true,
+        "finite_slot_rewards_once": true
+      },
+      "overlap_allowed": false,
+      "groups": [
+        {
+          "group_id": "RSEQ-002-G1",
+          "dependencies": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-002-S01",
+              "enemy_id": "ENM-GOB-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "fixed_preplaced",
+                "preferred_anchor_ids": [
+                  "AN-WN"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": true,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": "not_applicable",
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "D05_intrinsic_wake_if_dormant; visible_enemies_also_respect_entry_orientation",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-002-S02",
+              "enemy_id": "ENM-GOB-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "fixed_preplaced",
+                "preferred_anchor_ids": [
+                  "AN-WS"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": true,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": "not_applicable",
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "D05_intrinsic_wake_if_dormant; visible_enemies_also_respect_entry_orientation",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-002-S03",
+              "enemy_id": "ENM-GOB-003",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "fixed_preplaced",
+                "preferred_anchor_ids": [
+                  "AN-MN"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": true,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": "not_applicable",
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "D05_intrinsic_wake_if_dormant; visible_enemies_also_respect_entry_orientation",
+              "pre_emerge_death_terminal_no_respawn": true
+            }
+          ],
+          "intent": "两只碎刃实际都有投射，配一只铁桶，首波刚好预算8。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 3,
+            "threat": 8,
+            "large": 1,
+            "charger": 1,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 2,
+            "elites": 0
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 1.0,
+            "future_entry_warning_s": 0,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false
+        },
+        {
+          "group_id": "RSEQ-002-G2",
+          "dependencies": [
+            {
+              "group_id": "RSEQ-002-G1",
+              "required_state": "terminal"
+            }
+          ],
+          "trigger": {
+            "event": "dependencies_terminal",
+            "latch_once": true,
+            "terminal_group_ids": [
+              "RSEQ-002-G1"
+            ],
+            "breather_s": 2.0,
+            "breather_starts_at": "latest_dependency_terminal_event",
+            "room_elapsed_fixed_spawn": false
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-002-S04",
+              "enemy_id": "ENM-GOB-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-WS",
+                  "AN-WN",
+                  "AN-MN",
+                  "AN-MS",
+                  "AN-EN",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-002-S05",
+              "enemy_id": "ENM-GOB-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-MS",
+                  "AN-EN",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-002-S06",
+              "enemy_id": "ENM-GOB-003",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-MS",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-EN",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            }
+          ],
+          "intent": "前波全灭后，入口方向倒灌第二波；以预告明确背后援兵，不用贴身突然出现。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 3,
+            "threat": 8,
+            "large": 1,
+            "charger": 1,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 2,
+            "elites": 0
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 0,
+            "future_entry_warning_s": 1.2,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false
+        }
+      ],
+      "example_flow": [
+        {
+          "event": "entry_committed",
+          "action": "G1三只接纳，actors3/budget8/投射敌2/大型1/冲锋1；不能再混任何必需杂兵。"
+        },
+        {
+          "event": "G1_terminal_at_T",
+          "action": "前段终态成立，主出口仍锁；T+2.0s为G2最早可接纳时点，入口冒烟和脚步提示。"
+        },
+        {
+          "event": "G2_admitted_at_A",
+          "action": "一次预留3只/预算8，三个入口提示最早A/A+0.8/A+1.6依次开始且各足1.2s；第一只最早A+1.2实体化，后两只不早于A+2.0/A+2.8，各自至少0.6s显现。"
+        },
+        {
+          "event": "first_reinforcement_killed_during_emerge",
+          "action": "该slot真死亡终态并奖励一次，不等显现结束复活；剩余两个已预留slot仍需完成，不判房清。"
+        },
+        {
+          "event": "G2_terminal",
+          "action": "全6slot终态后才房清；实际耗时由玩家击杀速度决定。"
+        }
+      ],
+      "exception_contract_ref": "shared_exception_contract",
+      "completion": "damage_and_deaths -> swept_trigger_latches -> whole_group_admission -> room_clear_check; all_manifest_slots_terminal and no_living_dormant_queued_reserved_future_obligations",
+      "stage_clear_ui": "前段已清；继续深入或援兵接近；不显示房间已清、不开放安全商店/主出口",
+      "D07_geometry_verified": false,
+      "D14_playtested": false
+    },
+    {
+      "id": "RSEQ-003",
+      "name": "森林两段深入显现",
+      "theme": "ELF_TRE",
+      "status": "design_only",
+      "runtime_implemented": false,
+      "authority": "assistant_proposed_untested",
+      "geometry": {
+        "half_x_cm": 1800,
+        "half_y_cm": 450,
+        "entry_xy_cm": [
+          -1650,
+          0
+        ],
+        "exit_xy_cm": [
+          1650,
+          0
+        ],
+        "anchors": [
+          {
+            "id": "AN-WN",
+            "x_cm": -1050,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-WS",
+            "x_cm": -1050,
+            "y_cm": -300
+          },
+          {
+            "id": "AN-MN",
+            "x_cm": 0,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-MS",
+            "x_cm": 0,
+            "y_cm": -300
+          },
+          {
+            "id": "AN-EN",
+            "x_cm": 1050,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-ES",
+            "x_cm": 1050,
+            "y_cm": -300
+          }
+        ],
+        "anchor_coordinates_only_not_navmesh_proof": true,
+        "depth_gates_before_main_exit": "at_least_one_free_ground_route; no_required_depth_plane_behind_room_clear_locked_main_exit",
+        "full_width_depth_planes": true
+      },
+      "anchors": [
+        {
+          "id": "AN-WN",
+          "x_cm": -1050,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-WS",
+          "x_cm": -1050,
+          "y_cm": -300
+        },
+        {
+          "id": "AN-MN",
+          "x_cm": 0,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-MS",
+          "x_cm": 0,
+          "y_cm": -300
+        },
+        {
+          "id": "AN-EN",
+          "x_cm": 1050,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-ES",
+          "x_cm": 1050,
+          "y_cm": -300
+        }
+      ],
+      "manifest": {
+        "total_required_slots": 6,
+        "groups": 3,
+        "future_slots_are_only_manifest_records_until_admission": true,
+        "all_slots_required_for_room_clear": true,
+        "no_new_required_slots_after_clear": true,
+        "finite_slot_rewards_once": true
+      },
+      "overlap_allowed": false,
+      "groups": [
+        {
+          "group_id": "RSEQ-003-G1",
+          "dependencies": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-003-S01",
+              "enemy_id": "ENM-TRE-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "fixed_preplaced",
+                "preferred_anchor_ids": [
+                  "AN-WN"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": true,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": "not_applicable",
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "D05_intrinsic_wake_if_dormant; visible_enemies_also_respect_entry_orientation",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-003-S02",
+              "enemy_id": "ENM-ELF-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "fixed_preplaced",
+                "preferred_anchor_ids": [
+                  "AN-WS"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": true,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": "not_applicable",
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "D05_intrinsic_wake_if_dormant; visible_enemies_also_respect_entry_orientation",
+              "pre_emerge_death_terminal_no_respawn": true
+            }
+          ],
+          "intent": "幼株与弓手两条射线，先学避开Y线。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 4,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 2,
+            "elites": 0
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 1.0,
+            "future_entry_warning_s": 0,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false
+        },
+        {
+          "group_id": "RSEQ-003-G2",
+          "dependencies": [
+            {
+              "group_id": "RSEQ-003-G1",
+              "required_state": "terminal"
+            }
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.48,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "full_walkable_y_span": true,
+            "uses_ground_xy_even_airborne": true,
+            "progress": "clamp((max_swept_player_X-entry_X)/(exit_X-entry_X),0,1)",
+            "returning_below_threshold_unlatches": false,
+            "breather_from_latest_terminal_dependency_s": 2.0,
+            "room_elapsed_fixed_spawn": false
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-003-S03",
+              "enemy_id": "ENM-ELF-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-MN",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MS",
+                  "AN-EN",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-003-S04",
+              "enemy_id": "ENM-TRE-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-MS",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-EN",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            }
+          ],
+          "intent": "第一深入平面后，游侠突刺配长臂覆盖。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 5,
+            "large": 0,
+            "charger": 1,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 0,
+            "elites": 0
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 0,
+            "future_entry_warning_s": 1.2,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false
+        },
+        {
+          "group_id": "RSEQ-003-G3",
+          "dependencies": [
+            {
+              "group_id": "RSEQ-003-G2",
+              "required_state": "terminal"
+            }
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.76,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "full_walkable_y_span": true,
+            "uses_ground_xy_even_airborne": true,
+            "progress": "clamp((max_swept_player_X-entry_X)/(exit_X-entry_X),0,1)",
+            "returning_below_threshold_unlatches": false,
+            "breather_from_latest_terminal_dependency_s": 2.0,
+            "room_elapsed_fixed_spawn": false
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-003-S05",
+              "enemy_id": "ENM-TRE-003",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-EN",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-MS",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-003-S06",
+              "enemy_id": "ENM-ELF-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-ES",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-MS",
+                  "AN-EN"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            }
+          ],
+          "intent": "第二深入平面后，树卫与弓手形成末段，不让深处怪预先隔屏开火。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 6,
+            "large": 1,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 0,
+            "future_entry_warning_s": 1.2,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false
+        }
+      ],
+      "example_flow": [
+        {
+          "event": "entry_committed",
+          "action": "G1预算4/投射敌2，先接纳真实前段；未来四只只有manifest记录。"
+        },
+        {
+          "event": "player_clears_G1_without_reaching_depth_0.48",
+          "action": "显示前段已清/继续深入；可自由走过0.48平面，主出口和安全商店不开放。"
+        },
+        {
+          "event": "depth_0.48_latched_and_G1_terminal_plus_2s",
+          "action": "G2首次接纳，预算5/冲锋1，完整预告后显现。若早越线则锁存等依赖；返回不撤销。"
+        },
+        {
+          "event": "player_crosses_0.76_while_G2_alive",
+          "action": "锁存G3深入资格，仍等G2全灭及2.0s；没有自动计时追刷。"
+        },
+        {
+          "event": "G3_admitted",
+          "action": "预算6/大型1/投射敌1；树卫显现和原始前摇互不偷减。"
+        },
+        {
+          "event": "all_slots_terminal",
+          "action": "房清，深度平面重复往返不会制造额外怪。"
+        }
+      ],
+      "exception_contract_ref": "shared_exception_contract",
+      "completion": "damage_and_deaths -> swept_trigger_latches -> whole_group_admission -> room_clear_check; all_manifest_slots_terminal and no_living_dormant_queued_reserved_future_obligations",
+      "stage_clear_ui": "前段已清；继续深入或援兵接近；不显示房间已清、不开放安全商店/主出口",
+      "D07_geometry_verified": false,
+      "D14_playtested": false
+    },
+    {
+      "id": "RSEQ-004",
+      "name": "墓室低压与墓龛骨弓",
+      "theme": "SKL",
+      "status": "design_only",
+      "runtime_implemented": false,
+      "authority": "assistant_proposed_untested",
+      "geometry": {
+        "half_x_cm": 1400,
+        "half_y_cm": 450,
+        "entry_xy_cm": [
+          -1250,
+          0
+        ],
+        "exit_xy_cm": [
+          1250,
+          0
+        ],
+        "anchors": [
+          {
+            "id": "AN-WN",
+            "x_cm": -1050,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-WS",
+            "x_cm": -1050,
+            "y_cm": -300
+          },
+          {
+            "id": "AN-MN",
+            "x_cm": 0,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-MS",
+            "x_cm": 0,
+            "y_cm": -300
+          },
+          {
+            "id": "AN-EN",
+            "x_cm": 1050,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-ES",
+            "x_cm": 1050,
+            "y_cm": -300
+          }
+        ],
+        "anchor_coordinates_only_not_navmesh_proof": true,
+        "depth_gates_before_main_exit": "at_least_one_free_ground_route; no_required_depth_plane_behind_room_clear_locked_main_exit",
+        "full_width_depth_planes": true
+      },
+      "anchors": [
+        {
+          "id": "AN-WN",
+          "x_cm": -1050,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-WS",
+          "x_cm": -1050,
+          "y_cm": -300
+        },
+        {
+          "id": "AN-MN",
+          "x_cm": 0,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-MS",
+          "x_cm": 0,
+          "y_cm": -300
+        },
+        {
+          "id": "AN-EN",
+          "x_cm": 1050,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-ES",
+          "x_cm": 1050,
+          "y_cm": -300
+        }
+      ],
+      "manifest": {
+        "total_required_slots": 6,
+        "groups": 3,
+        "future_slots_are_only_manifest_records_until_admission": true,
+        "all_slots_required_for_room_clear": true,
+        "no_new_required_slots_after_clear": true,
+        "finite_slot_rewards_once": true
+      },
+      "overlap_allowed": false,
+      "groups": [
+        {
+          "group_id": "RSEQ-004-G1",
+          "dependencies": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-004-S01",
+              "enemy_id": "ENM-SKL-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "fixed_preplaced",
+                "preferred_anchor_ids": [
+                  "AN-WN"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": true,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": "not_applicable",
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "D05_intrinsic_wake_if_dormant; visible_enemies_also_respect_entry_orientation",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-004-S02",
+              "enemy_id": "ENM-SKL-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "fixed_preplaced",
+                "preferred_anchor_ids": [
+                  "AN-WS"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": true,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": "not_applicable",
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "D05_intrinsic_wake_if_dormant; visible_enemies_also_respect_entry_orientation",
+              "pre_emerge_death_terminal_no_respawn": true
+            }
+          ],
+          "intent": "双短刃为低压前段，不把低压误标成整房安全。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 2,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 0,
+            "elites": 0
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 1.0,
+            "future_entry_warning_s": 0,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false
+        },
+        {
+          "group_id": "RSEQ-004-G2",
+          "dependencies": [
+            {
+              "group_id": "RSEQ-004-G1",
+              "required_state": "terminal"
+            }
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.5,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "full_walkable_y_span": true,
+            "uses_ground_xy_even_airborne": true,
+            "progress": "clamp((max_swept_player_X-entry_X)/(exit_X-entry_X),0,1)",
+            "returning_below_threshold_unlatches": false,
+            "breather_from_latest_terminal_dependency_s": 2.0,
+            "room_elapsed_fixed_spawn": false
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-004-S03",
+              "enemy_id": "ENM-SKL-003",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-MN",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MS",
+                  "AN-EN",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            }
+          ],
+          "intent": "深入墓龛有碎骨/弓弦提示，骨弓从墓龛完整预告显现，不是隐身无敌弓手先偷射。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 1,
+            "threat": 2,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 0,
+            "future_entry_warning_s": 1.2,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false
+        },
+        {
+          "group_id": "RSEQ-004-G3",
+          "dependencies": [
+            {
+              "group_id": "RSEQ-004-G2",
+              "required_state": "terminal"
+            }
+          ],
+          "trigger": {
+            "event": "dependencies_terminal",
+            "latch_once": true,
+            "terminal_group_ids": [
+              "RSEQ-004-G2"
+            ],
+            "breather_s": 2.0,
+            "breather_starts_at": "latest_dependency_terminal_event",
+            "room_elapsed_fixed_spawn": false
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-004-S04",
+              "enemy_id": "ENM-SKL-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-EN",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-MS",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-004-S05",
+              "enemy_id": "ENM-SKL-003",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-ES",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-MS",
+                  "AN-EN"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-004-S06",
+              "enemy_id": "ENM-SKL-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-MS",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-EN",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            }
+          ],
+          "intent": "隐藏骨弓真死亡后下一波，盾卫也算支援帽。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 3,
+            "threat": 5,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 1,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 0,
+            "future_entry_warning_s": 1.2,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false
+        }
+      ],
+      "example_flow": [
+        {
+          "event": "entry_committed",
+          "action": "G1两短刃actors2/budget2，仅前段低压。"
+        },
+        {
+          "event": "G1_terminal_before_depth_0.50",
+          "action": "尚有墓龛义务，提示继续深入；不清房、不允许全安全整理/付费商店。"
+        },
+        {
+          "event": "depth_0.50_latched_and_G1_terminal_plus_2s",
+          "action": "G2单骨弓预算2；墓龛声光预告1.2s，真实实体出现后至少0.6s不能攻击。"
+        },
+        {
+          "event": "player_kills_G2_before_its_first_attack",
+          "action": "死亡有效，骨弓不因为没射过而复活；G3开始2.0s喘息。"
+        },
+        {
+          "event": "G3_admitted",
+          "action": "盾卫+骨弓+短刃预算5/支援1/投射敌1；三只逐次显现。"
+        },
+        {
+          "event": "G3_terminal",
+          "action": "全部6slot终态才房清，墓龛不再补暗怪。"
+        }
+      ],
+      "exception_contract_ref": "shared_exception_contract",
+      "completion": "damage_and_deaths -> swept_trigger_latches -> whole_group_admission -> room_clear_check; all_manifest_slots_terminal and no_living_dormant_queued_reserved_future_obligations",
+      "stage_clear_ui": "前段已清；继续深入或援兵接近；不显示房间已清、不开放安全商店/主出口",
+      "D07_geometry_verified": false,
+      "D14_playtested": false
+    },
+    {
+      "id": "RSEQ-005",
+      "name": "机械增援的受限重叠",
+      "theme": "MEC_BST_SKL",
+      "status": "design_only",
+      "runtime_implemented": false,
+      "authority": "assistant_proposed_untested",
+      "geometry": {
+        "half_x_cm": 1400,
+        "half_y_cm": 450,
+        "entry_xy_cm": [
+          -1250,
+          0
+        ],
+        "exit_xy_cm": [
+          1250,
+          0
+        ],
+        "anchors": [
+          {
+            "id": "AN-WN",
+            "x_cm": -1050,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-WS",
+            "x_cm": -1050,
+            "y_cm": -300
+          },
+          {
+            "id": "AN-MN",
+            "x_cm": 0,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-MS",
+            "x_cm": 0,
+            "y_cm": -300
+          },
+          {
+            "id": "AN-EN",
+            "x_cm": 1050,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-ES",
+            "x_cm": 1050,
+            "y_cm": -300
+          }
+        ],
+        "anchor_coordinates_only_not_navmesh_proof": true,
+        "depth_gates_before_main_exit": "at_least_one_free_ground_route; no_required_depth_plane_behind_room_clear_locked_main_exit",
+        "full_width_depth_planes": true
+      },
+      "anchors": [
+        {
+          "id": "AN-WN",
+          "x_cm": -1050,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-WS",
+          "x_cm": -1050,
+          "y_cm": -300
+        },
+        {
+          "id": "AN-MN",
+          "x_cm": 0,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-MS",
+          "x_cm": 0,
+          "y_cm": -300
+        },
+        {
+          "id": "AN-EN",
+          "x_cm": 1050,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-ES",
+          "x_cm": 1050,
+          "y_cm": -300
+        }
+      ],
+      "manifest": {
+        "total_required_slots": 6,
+        "groups": 2,
+        "future_slots_are_only_manifest_records_until_admission": true,
+        "all_slots_required_for_room_clear": true,
+        "no_new_required_slots_after_clear": true,
+        "finite_slot_rewards_once": true
+      },
+      "overlap_allowed": true,
+      "groups": [
+        {
+          "group_id": "RSEQ-005-G1",
+          "dependencies": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-005-S01",
+              "enemy_id": "ENM-MEC-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "fixed_preplaced",
+                "preferred_anchor_ids": [
+                  "AN-WN"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": true,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": "not_applicable",
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "D05_intrinsic_wake_if_dormant; visible_enemies_also_respect_entry_orientation",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-005-S02",
+              "enemy_id": "ENM-MEC-003",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "fixed_preplaced",
+                "preferred_anchor_ids": [
+                  "AN-WS"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": true,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": "not_applicable",
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "D05_intrinsic_wake_if_dormant; visible_enemies_also_respect_entry_orientation",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-005-S03",
+              "enemy_id": "ENM-BST-003",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "fixed_preplaced",
+                "preferred_anchor_ids": [
+                  "AN-MN"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": true,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": "not_applicable",
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "D05_intrinsic_wake_if_dormant; visible_enemies_also_respect_entry_orientation",
+              "pre_emerge_death_terminal_no_respawn": true
+            }
+          ],
+          "intent": "巡灯、旗讯、猞猁各cost2，故任何最后一只都能与后组合法重叠。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 3,
+            "threat": 6,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 1,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 1.0,
+            "future_entry_warning_s": 0,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false
+        },
+        {
+          "group_id": "RSEQ-005-G2",
+          "dependencies": [
+            {
+              "group_id": "RSEQ-005-G1",
+              "required_state": "admitted"
+            }
+          ],
+          "trigger": {
+            "event": "dependency_nonterminal_slot_count_at_or_below",
+            "dependency_group_id": "RSEQ-005-G1",
+            "maximum_remaining_count": 1,
+            "latch_once": true,
+            "latch_before_admission": true,
+            "remaining_counts": "all_admitted_visible_dormant_emerging_alive_slots_not_just_attackers",
+            "admission_if_remaining_one": "may_overlap_after_entry_orientation_complete_if_whole_group_caps_pass",
+            "admission_if_remaining_zero": "wait_G1_terminal_plus_2.0s_unless_G2_already_admitted",
+            "already_admitted_warning_not_restarted_when_G1_later_dies": true,
+            "room_elapsed_fixed_spawn": false
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-005-S04",
+              "enemy_id": "ENM-MEC-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-EN",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-MS",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-005-S05",
+              "enemy_id": "ENM-SKL-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-ES",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-MS",
+                  "AN-EN"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-005-S06",
+              "enemy_id": "ENM-SKL-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-MS",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-EN",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            }
+          ],
+          "intent": "前组剩1时可预告重叠蒸锤与两短刃；不是假设旗讯一定最后死。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 3,
+            "threat": 6,
+            "large": 1,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 0,
+            "elites": 0
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 0,
+            "future_entry_warning_s": 1.2,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false,
+          "overlap_proof": [
+            {
+              "survivor_enemy_id": "ENM-MEC-001",
+              "survivor_group": "RSEQ-005-G1",
+              "combined_reserved_cap_usage": {
+                "actors": 4,
+                "threat": 8,
+                "large": 1,
+                "charger": 0,
+                "flying": 0,
+                "support": 0,
+                "projectile_users": 1,
+                "elites": 0
+              }
+            },
+            {
+              "survivor_enemy_id": "ENM-MEC-003",
+              "survivor_group": "RSEQ-005-G1",
+              "combined_reserved_cap_usage": {
+                "actors": 4,
+                "threat": 8,
+                "large": 1,
+                "charger": 0,
+                "flying": 0,
+                "support": 1,
+                "projectile_users": 0,
+                "elites": 0
+              }
+            },
+            {
+              "survivor_enemy_id": "ENM-BST-003",
+              "survivor_group": "RSEQ-005-G1",
+              "combined_reserved_cap_usage": {
+                "actors": 4,
+                "threat": 8,
+                "large": 1,
+                "charger": 0,
+                "flying": 0,
+                "support": 0,
+                "projectile_users": 0,
+                "elites": 0
+              }
+            }
+          ]
+        }
+      ],
+      "example_flow": [
+        {
+          "event": "entry_committed",
+          "action": "G1 actors3/budget6/支援1/投射敌1。"
+        },
+        {
+          "event": "G1_remaining_becomes_one",
+          "action": "锁存援兵资格；整组3只预留后最坏actors4/budget8，给足1.2s预告，不等最后一只一定是谁。"
+        },
+        {
+          "event": "G1_last_dies_after_G2_admission_during_warning",
+          "action": "不撤销或重启已接纳G2的预告；不是房清，因为3个必需slot已有预留或未来显现义务。"
+        },
+        {
+          "event": "G1_instead_goes_from_two_alive_to_zero_same_damage_batch",
+          "action": "先同点全量伤亡，再看trigger；尚未接纳G2必须等G1终态后2.0s，不利用曾经剩1的假中间状态跳喘息。"
+        },
+        {
+          "event": "G2_materializes_sequentially",
+          "action": "预留依次转成实体，不能另加一份预算；旧巡灯弹和旗讯效果按原RoomID继续，死亡来源支援按D05撤自身来源。"
+        },
+        {
+          "event": "G1_and_G2_all_terminal",
+          "action": "6slot全灭才房清；任何一只残留均阻止出口。"
+        }
+      ],
+      "exception_contract_ref": "shared_exception_contract",
+      "completion": "damage_and_deaths -> swept_trigger_latches -> whole_group_admission -> room_clear_check; all_manifest_slots_terminal and no_living_dormant_queued_reserved_future_obligations",
+      "stage_clear_ui": "前段已清；继续深入或援兵接近；不显示房间已清、不开放安全商店/主出口",
+      "D07_geometry_verified": false,
+      "D14_playtested": false
+    },
+    {
+      "id": "RSEQ-006",
+      "name": "精英压轴严格清前波",
+      "theme": "MIXED_ELITE",
+      "status": "design_only",
+      "runtime_implemented": false,
+      "authority": "assistant_proposed_untested",
+      "geometry": {
+        "half_x_cm": 1400,
+        "half_y_cm": 450,
+        "entry_xy_cm": [
+          -1250,
+          0
+        ],
+        "exit_xy_cm": [
+          1250,
+          0
+        ],
+        "anchors": [
+          {
+            "id": "AN-WN",
+            "x_cm": -1050,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-WS",
+            "x_cm": -1050,
+            "y_cm": -300
+          },
+          {
+            "id": "AN-MN",
+            "x_cm": 0,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-MS",
+            "x_cm": 0,
+            "y_cm": -300
+          },
+          {
+            "id": "AN-EN",
+            "x_cm": 1050,
+            "y_cm": 300
+          },
+          {
+            "id": "AN-ES",
+            "x_cm": 1050,
+            "y_cm": -300
+          }
+        ],
+        "anchor_coordinates_only_not_navmesh_proof": true,
+        "depth_gates_before_main_exit": "at_least_one_free_ground_route; no_required_depth_plane_behind_room_clear_locked_main_exit",
+        "full_width_depth_planes": true
+      },
+      "anchors": [
+        {
+          "id": "AN-WN",
+          "x_cm": -1050,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-WS",
+          "x_cm": -1050,
+          "y_cm": -300
+        },
+        {
+          "id": "AN-MN",
+          "x_cm": 0,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-MS",
+          "x_cm": 0,
+          "y_cm": -300
+        },
+        {
+          "id": "AN-EN",
+          "x_cm": 1050,
+          "y_cm": 300
+        },
+        {
+          "id": "AN-ES",
+          "x_cm": 1050,
+          "y_cm": -300
+        }
+      ],
+      "manifest": {
+        "total_required_slots": 6,
+        "groups": 3,
+        "future_slots_are_only_manifest_records_until_admission": true,
+        "all_slots_required_for_room_clear": true,
+        "no_new_required_slots_after_clear": true,
+        "finite_slot_rewards_once": true
+      },
+      "overlap_allowed": false,
+      "groups": [
+        {
+          "group_id": "RSEQ-006-G1",
+          "dependencies": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-006-S01",
+              "enemy_id": "ENM-SKL-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "fixed_preplaced",
+                "preferred_anchor_ids": [
+                  "AN-WN"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": true,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": "not_applicable",
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "D05_intrinsic_wake_if_dormant; visible_enemies_also_respect_entry_orientation",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-006-S02",
+              "enemy_id": "ENM-SKL-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "fixed_preplaced",
+                "preferred_anchor_ids": [
+                  "AN-WS"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": true,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": "not_applicable",
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "D05_intrinsic_wake_if_dormant; visible_enemies_also_respect_entry_orientation",
+              "pre_emerge_death_terminal_no_respawn": true
+            }
+          ],
+          "intent": "双短刃前段。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 2,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 0,
+            "elites": 0
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 1.0,
+            "future_entry_warning_s": 0,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false
+        },
+        {
+          "group_id": "RSEQ-006-G2",
+          "dependencies": [
+            {
+              "group_id": "RSEQ-006-G1",
+              "required_state": "terminal"
+            }
+          ],
+          "trigger": {
+            "event": "dependencies_terminal",
+            "latch_once": true,
+            "terminal_group_ids": [
+              "RSEQ-006-G1"
+            ],
+            "breather_s": 2.0,
+            "breather_starts_at": "latest_dependency_terminal_event",
+            "room_elapsed_fixed_spawn": false
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-006-S03",
+              "enemy_id": "ENM-TRE-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-MN",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MS",
+                  "AN-EN",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-006-S04",
+              "enemy_id": "ENM-ELF-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-MS",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-EN",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            },
+            {
+              "slot_id": "RSEQ-006-S05",
+              "enemy_id": "ENM-TRE-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-EN",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-MS",
+                  "AN-ES"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            }
+          ],
+          "intent": "先清两条投射线和长臂，不能拿只杀远程当整波全灭。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 3,
+            "threat": 6,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 2,
+            "elites": 0
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 0,
+            "future_entry_warning_s": 1.2,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false
+        },
+        {
+          "group_id": "RSEQ-006-G3",
+          "dependencies": [
+            {
+              "group_id": "RSEQ-006-G1",
+              "required_state": "terminal"
+            },
+            {
+              "group_id": "RSEQ-006-G2",
+              "required_state": "terminal"
+            }
+          ],
+          "trigger": {
+            "event": "dependencies_terminal",
+            "latch_once": true,
+            "terminal_group_ids": [
+              "RSEQ-006-G1",
+              "RSEQ-006-G2"
+            ],
+            "breather_s": 2.0,
+            "breather_starts_at": "latest_dependency_terminal_event",
+            "room_elapsed_fixed_spawn": false
+          },
+          "slots": [
+            {
+              "slot_id": "RSEQ-006-S06",
+              "enemy_id": "ELT-STN-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "identity": "RunID/RoomInstanceID/slot_id; same_SpawnID_for_all_retries",
+              "spawn_anchor": {
+                "mode": "telegraphed_entry",
+                "preferred_anchor_ids": [
+                  "AN-ES",
+                  "AN-WN",
+                  "AN-WS",
+                  "AN-MN",
+                  "AN-MS",
+                  "AN-EN"
+                ],
+                "coordinates_ref": "template.anchors",
+                "initial_preplaced_cannot_be_repositioned_or_respawned": false,
+                "candidate_is_not_verified_nav_geometry": true
+              },
+              "manifest_obligation_starts_at": "room_manifest_committed",
+              "current_budget_starts_at": "whole_group_admission",
+              "warning_creates_damageable_actor": false,
+              "materialization_once": true,
+              "damageable_after_materialization": true,
+              "emerge_or_wake_seconds": "max(0.6,intrinsic_wake)",
+              "pre_emerge_death_terminal_no_respawn": true
+            }
+          ],
+          "intent": "只有两个前组全部真终态才压轴精英，严格不重叠。",
+          "whole_group_admission": true,
+          "computed_reserved_cap_usage": {
+            "actors": 1,
+            "threat": 5,
+            "large": 0,
+            "charger": 1,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 0,
+            "elites": 1
+          },
+          "spawn_timing": {
+            "initial_orientation_s": 0,
+            "future_entry_warning_s": 1.2,
+            "future_materialization_min_gap_s": 0.8,
+            "future_emerge_s": 0.6,
+            "stone_emerge_and_wake": "max_not_sum; no_shortening_intrinsic_wake",
+            "no_attack_until_ready_then_full_original_windup": true,
+            "min_warning_start_gap_s": 0.8,
+            "sequential_cues": "slot_i_warning_earliest_A+i*.8; each_full1.2; same_room_global_gap_applies"
+          },
+          "terminal_condition": "all_this_group_required_slots_true_death_terminal; includes_unmaterialized_obligations; no_skipping_deadline",
+          "stage_clear_is_room_clear": false
+        }
+      ],
+      "example_flow": [
+        {
+          "event": "entry_committed",
+          "action": "G1预算2。"
+        },
+        {
+          "event": "G1_terminal_plus_2s",
+          "action": "G2整组预留actors3/budget6/投射敌2，完整预告与依次显现。"
+        },
+        {
+          "event": "G2_ranged_enemies_dead_but_longarm_alive",
+          "action": "长臂仍为必需slot，精英未接纳，不能按远程数归零提前开始压轴。"
+        },
+        {
+          "event": "G1_and_G2_terminal_plus_2s",
+          "action": "G3接纳ELT-STN-001，cost5含基础冲锋3+精英2；1.2s预告，实体化后emerge0.6与固有石像wake0.85取max0.85，不相加也不缩短。"
+        },
+        {
+          "event": "elite_killed_during_wake_or_before_extra_attack",
+          "action": "slot真死亡有效且只奖励一次，不要求精英演完招式、不造第二只补表演。"
+        },
+        {
+          "event": "all_six_terminal",
+          "action": "房清终态锁定，后退越线/重走墓龛/重入房间都不能再刷本房必需怪。"
+        }
+      ],
+      "exception_contract_ref": "shared_exception_contract",
+      "completion": "damage_and_deaths -> swept_trigger_latches -> whole_group_admission -> room_clear_check; all_manifest_slots_terminal and no_living_dormant_queued_reserved_future_obligations",
+      "stage_clear_ui": "前段已清；继续深入或援兵接近；不显示房间已清、不开放安全商店/主出口",
+      "D07_geometry_verified": false,
+      "D14_playtested": false
+    }
+  ]
+}

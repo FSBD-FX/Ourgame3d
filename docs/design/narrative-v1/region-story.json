@@ -1,0 +1,888 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "source_event": "EV-028",
+  "user_message": "ok",
+  "module": "D-10",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "all_world_faction_story_names_text_and_interactions_assistant_proposed; user_ok_authorizes_design_continuation_not_each_detail",
+  "source_preservation": [
+    {
+      "path": "docs/design/dungeon-v1/regions-and-routes.json",
+      "sha256": "105dcac17fc91ed6a4e32acabc3e1b665ea9f9ddddf1ec13baf1aabc1abcd2a1",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/dungeon-v1/common-rules.json",
+      "sha256": "bc8b274b6aa76eb67a159ef4acd400d51fc695655e8b696f94a74489757c9960",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/enemies-v1/enemies.json",
+      "sha256": "d01dd609a95ff9ad182638982a0ac7de864dbbd29f6b03995f9a3625a0c44266",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/bosses-v1/bosses.json",
+      "sha256": "4592953c92856927bfcc4f08f319758571cc8ea37fc95774b043328a0329542f",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/bosses-v1/common-rules.json",
+      "sha256": "4eed5d3221103121ed28c74207c8b4377954b8d8094e008d5dcf8085acfcb66d",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/economy-v1/reward-sources.json",
+      "sha256": "9bd5e424ff2344a70d9fc8cbb25ced3cef1161cdd33092e0fc8998bf01d83369",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/economy-v1/facilities.json",
+      "sha256": "a2ebd6ebff3e283b5708afb88fbc36509405a5fdf88bf73fc5d7bcdbce104b88",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/progression-v1/talents.json",
+      "sha256": "67f12dc215a628d94c41efa2a92e9a3929785036cab86d4cd11ec8dc958fb2f5",
+      "mutated": false
+    }
+  ],
+  "root_refs": {
+    "world": "world-and-story.json",
+    "flow": "story-flow.json",
+    "main_document": "../../../世界观NPC与叙事设计.md"
+  },
+  "world_alignment": {
+    "city": "余烬城",
+    "camp": "灯渡营地",
+    "oath": "留城誓约",
+    "player_role": "自愿执灯客",
+    "temporary_body": "回身灯在营地真身之外形成有触感且会崩解的临时行身",
+    "failure": "current_run_body_and_resources_end; world_not_rewound; already_archived_shards_and_knowledge_remain",
+    "local_currency_and_loot": "this_expedition_contract_imprint_only; no_new_economy_or_cross_run_equipment_retention",
+    "camp_research_training": "narrative_presentation_of_existing_D09_values_not_extra_stat_source"
+  },
+  "scope_counts": {
+    "narrative_factions": 6,
+    "enemy_families": 9,
+    "regions": 5,
+    "mainline_milestones": 5,
+    "hidden_nodes": 5,
+    "existing_mainline_Bosses": 5,
+    "existing_optional_Bosses": 2,
+    "new_Bosses_or_enemies": 0,
+    "new_named_NPCs": 0,
+    "new_reward_sources": 0,
+    "normal_endings": 1
+  },
+  "factions": [
+    {
+      "id": "FACTION-STONE",
+      "name": "石卫署",
+      "families": [
+        "STN"
+      ],
+      "kind": "旧公共防务机构及其战体",
+      "former_public_role": "灾时核验出入、护送城民与守住危险边界。",
+      "present_position": "离城限制未被注销，仍把核销役额当放行前提；公开使命与现行军令已经背离。",
+      "internal_difference": "多数石壳只执行碑令，旧刻痕仍留着送行职责；不能因此说城中所有守卫都自愿支持永久拘留。"
+    },
+    {
+      "id": "FACTION-ROOT",
+      "name": "林庭共同体",
+      "families": [
+        "ELF",
+        "TRE"
+      ],
+      "kind": "森林居民、盟约守林者与根脉生灵的不同立场集合",
+      "former_public_role": "灾时允许借根脉供城，约定灾后返还。",
+      "present_position": "守旧盟条、担心停供后的灾害、保护受损根井和要求返还者并存。",
+      "internal_difference": "精灵有能自主选择的盟约立场，树人多因根脉受损保护领地；同在林庭不等于认同同一政策。"
+    },
+    {
+      "id": "FACTION-RITE",
+      "name": "灰烛司仪会",
+      "families": [
+        "ROB",
+        "SKL"
+      ],
+      "kind": "掌名册与祭仪的组织及被它征役的骨身",
+      "former_public_role": "登记灾时失踪、祭奠死者，并以有限役额维持公共工作。",
+      "present_position": "名册不断把姓名折成可续役额，制度维护者将“城仍运作”当作正当理由。",
+      "internal_difference": "穿法袍是职务而非种族；有主动维护制度者和离开组织的人。骨身是承受役额的对象，不与管理者承担同等责任。"
+    },
+    {
+      "id": "FACTION-WORK",
+      "name": "续签工造局",
+      "families": [
+        "MEC"
+      ],
+      "kind": "工造设备、使者系统与决定续签的管理体系",
+      "former_public_role": "灾时运料、修门、供热和救急劳动。",
+      "present_position": "灾后仍有签署者主动维持征用；有获利、保饭食、怕停炉等不同动机，不能全部归咎失控机器。",
+      "internal_difference": "机械使者执行工单，重锤设备执行关口任务；主动签字者与被迫劳动者不能混成一个“机械种族”。"
+    },
+    {
+      "id": "FACTION-MARGINS",
+      "name": "城隙行会与游群",
+      "families": [
+        "GOB",
+        "BST"
+      ],
+      "kind": "叙事归类而非统一军政阵营",
+      "former_public_role": "城缝中的交易、搬运与野外生态各自存在。",
+      "present_position": "哥布林交易团在禁出制度下互助或逐利；野兽因采根、运输与筑墙失去栖地而守穴。",
+      "internal_difference": "交易团与兽群没有共同统帅或共同政治目标；芬砾是哥布林友善贸易的既有反例，不能把敌对分支当全族天性。"
+    },
+    {
+      "id": "FACTION-EMBER",
+      "name": "烬誓廷",
+      "families": [
+        "DEM"
+      ],
+      "kind": "领主及信奉永留誓词的护廷力量",
+      "former_public_role": "以共同留守抵抗灾难，誓约曾承载真实保护。",
+      "present_position": "把怕城散、怕失去秩序的恐惧变成强留他人的权力，仍有自愿认同者。",
+      "internal_difference": "恶魔战斗单位是烬相/誓卫等敌对分支，不把所有相同外形生命判作天生恶；主线针对强制誓约。"
+    }
+  ],
+  "enemy_family_story": [
+    {
+      "family": "STN",
+      "faction_id": "FACTION-STONE",
+      "origin": "由灾时公共石工造出的骑士、哨像和巡空石蝠；军令碑把出入核验写进战体。",
+      "motivation": [
+        "按未注销的碑令阻止役额离城",
+        "守住昔日护送城民的责任但失去期限判断"
+      ],
+      "contract_relationship": "军令执行型；不等于每块石头像活人一样自愿选择独裁。",
+      "distinction": "敌方石卫的核心反转是拦离城者；石壳持久而程序迟滞，与野兽本能、哥布林逐利不同。",
+      "battle_scope_boundary": "石骑锁线冲锋、石蝠近触唤醒及低位恢复均沿D05；本稿不添加离城追杀AI或新机关攻击。",
+      "not_whole_kind_evil": "石刻送行纹样和旧护送名目保留原公共使命；战斗单位不代表全体石工或守卫。",
+      "mainline_evidence_region": "REG-01"
+    },
+    {
+      "family": "ELF",
+      "faction_id": "FACTION-ROOT",
+      "origin": "曾与城签短期林契的居民与守林战士，保留自主记忆与判断。",
+      "motivation": [
+        "有人相信停供会让灾难重来而守旧盟条",
+        "有人从守契地位获益",
+        "也有人主张按原约返还并离开敌方守关分支"
+      ],
+      "contract_relationship": "有选择的盟约立场，不是一族同时被法术夺心；是否支持续约须按组织与个人区分。",
+      "distinction": "以对盟条的不同解释形成矛盾，与树人的受伤护根不完全相同。",
+      "battle_scope_boundary": "弓线、短突刺与锁点施法保持D05，阵营解释不赋予额外逃跑/谈判或召唤技能。",
+      "not_whole_kind_evil": "芦苇作为既有友善精灵医师，可在营地回应契约代价；不强迫玩家杀完一族。",
+      "mainline_evidence_region": "REG-02"
+    },
+    {
+      "family": "TRE",
+      "faction_id": "FACTION-ROOT",
+      "origin": "林庭根脉长成的幼株、长臂和树卫，灾时作为供城载体被借用。",
+      "motivation": [
+        "保护仍被抽取的根井与生长空间",
+        "对砍采和逼近本能或有意识地抵抗",
+        "部分守关枝体继续承担旧约的防务任务"
+      ],
+      "contract_relationship": "资源与生命被征用型；母根承受合同，不说明每个树人都理解或认同领主。",
+      "distinction": "伤根与领地防卫塑造敌意；击败守关冠枝不等于砍死整片森林唯一生命。",
+      "battle_scope_boundary": "既有枝刺、长臂和大型重击不变；新生守关冠枝只解释两次新run之间的重建，不是战斗召唤。",
+      "not_whole_kind_evil": "树林可以是居民与生境，敌对树人只是本次防线分支。",
+      "mainline_evidence_region": "REG-02"
+    },
+    {
+      "family": "ROB",
+      "faction_id": "FACTION-RITE",
+      "origin": "灾时登记、护持和祭仪职务的穿袍成员，法袍指职责而非种族。",
+      "motivation": [
+        "相信名册不断运行才能保住公共秩序",
+        "主动维护由续役带来的权力或稳定",
+        "用“仍被登记就仍受保护”掩盖抹名后的征用"
+      ],
+      "contract_relationship": "制度维护与受益型；具有代理选择，不能把所有过错归于遥控。",
+      "distinction": "把生命当可续数字的制度语言，与骨身承受的后果形成对照。",
+      "battle_scope_boundary": "法刃、咒术与有限护持沿D05，不新增审判抓取或无限复活。",
+      "not_whole_kind_evil": "纱柯是已离开旧教团的既有学者，提供可审视制度的立场而非新增职业敌人。",
+      "mainline_evidence_region": "REG-03"
+    },
+    {
+      "family": "SKL",
+      "faction_id": "FACTION-RITE",
+      "origin": "死者遗骨与被名册调用的旧动作残痕构成的役身，不等于完整人格无条件复活。",
+      "motivation": [
+        "依役额指令维持守盾/巡守等旧任务",
+        "残留习惯偶尔与现行命令冲突"
+      ],
+      "contract_relationship": "死后被征役型；抹去名字使有限责任被改成可重复役额，主要是受害与被利用的一方。",
+      "distinction": "骨身承担制度代价，穿袍者管理该制度；两类不能统称同意领主的死灵军团。",
+      "battle_scope_boundary": "短刃、骨盾、骨弓规则保持；叙事骨身重组只解释新run间恢复关口，不产生同run复活或额外收益。",
+      "not_whole_kind_evil": "死亡者的姓名和关系应被承认，不因敌方骨骸外形否认其曾是城民。",
+      "mainline_evidence_region": "REG-03"
+    },
+    {
+      "family": "GOB",
+      "faction_id": "FACTION-MARGINS",
+      "origin": "长期从事城缝交易、搬运和修补的不同团体，在禁出制度下获得或失去生计。",
+      "motivation": [
+        "一些团体收路费、出售承诺并从留城债中获利",
+        "一些互相借钱、维持公平交换或帮助外来者"
+      ],
+      "contract_relationship": "间接受益、规避与互助并存；并非全族签过同一种服从契。",
+      "distinction": "敌方哥布林体现利用困境的交易选择，不能以族群身份等同贪婪。",
+      "battle_scope_boundary": "碎刃、火瓶、铁桶与金牙赌王既有招式不改；故事账目不新增赌局、售卖/回购服务或金额。",
+      "not_whole_kind_evil": "既有芬砾商人可与赌王形成对照；主线不要求讨伐整个交易群体。",
+      "mainline_evidence_region": "REG-01"
+    },
+    {
+      "family": "MEC",
+      "faction_id": "FACTION-WORK",
+      "origin": "工造局以灾时图样造出的巡灯、锤卫与旗讯使者，承担真实救急工作后继续被使用。",
+      "motivation": [
+        "执行工单和稳定压力/运输秩序",
+        "使者按续签记录传递指令",
+        "背后署名者因获利或生计恐惧选择继续征用"
+      ],
+      "contract_relationship": "工单执行与人工续签型；战体程序不免除仍在签字的人对制度的责任。",
+      "distinction": "资料证明不是单纯失控事故；必须区分主动续签者、劳役者和机械载体。",
+      "battle_scope_boundary": "校准弹、蒸锤、行军支援与审判机直轨/泄压均沿旧规则，无新过热伤害/工人增援。",
+      "not_whole_kind_evil": "工造技术与洛砧的修造工作本身不邪恶；主线反对强留与无限征役。",
+      "mainline_evidence_region": "REG-04"
+    },
+    {
+      "family": "BST",
+      "faction_id": "FACTION-MARGINS",
+      "origin": "原居林庭和城边的野兽，栖地因采根、道路和围墙缩小。",
+      "motivation": [
+        "守穴、争夺食物与安全路线",
+        "对侵入本次领地的行身作防卫或捕猎反应"
+      ],
+      "contract_relationship": "没有签约的生态受影响者；不是领主故意遥控的又一支军队。",
+      "distinction": "本能、领地和生境压力不同于交易利益与宗教制度；可选探索不自动给玩家道德优越。",
+      "battle_scope_boundary": "扑咬、冲撞、双拍与兽王动作沿D05/D06，不添加幼兽护送/驯服系统。",
+      "not_whole_kind_evil": "野兽敌对作战行为不代表整片自然都应被清除；未进入可选兽穴不妨碍正常结局。",
+      "mainline_evidence_region": "REG-02"
+    },
+    {
+      "family": "DEM",
+      "faction_id": "FACTION-EMBER",
+      "origin": "灾时余火与长久献誓形成烬相/誓卫等战斗分支，护廷者中仍有认同永留的人。",
+      "motivation": [
+        "自愿守住他们理解的共同家园",
+        "害怕誓约断裂后城与关系散尽",
+        "利用护廷地位维持强制秩序"
+      ],
+      "contract_relationship": "誓词实体化与信念认同型；控制存在但不是解释所有选择的唯一原因。",
+      "distinction": "终局冲突是保护与强留的分界，不能简化为恶魔天性或外来魔王侵城。",
+      "battle_scope_boundary": "灰镰、持灯、坠印与领主既有地面招式/阶段规则不变，无新增二形Boss或飞行战。",
+      "not_whole_kind_evil": "解除的是强制誓约，愿留下的居民及相同外形生命仍可留下；不是抹除一类生命。",
+      "mainline_evidence_region": "REG-05"
+    }
+  ],
+  "regions": [
+    {
+      "id": "REG-01",
+      "name": "裂石外垒",
+      "order": 1,
+      "mainline_boss_id": "BOS-STN-001",
+      "mainline_boss_name": "裂冠石像统领",
+      "milestone_id": "M01",
+      "arrival_goal": "穿过外垒，确认这座城为什么连离城路都在核验。",
+      "chapter_finding": "军令把离城者当作待核销役额，石卫仍在拦离城者，而非只挡外敌。",
+      "mainline_environment_clues": [
+        {
+          "node_id": "REG-01-N01",
+          "text": "内侧路标写“离城核验”，送行纹样被封条覆盖。",
+          "required_interaction_for_progress": false,
+          "new_reward_source": false
+        },
+        {
+          "node_id": "REG-01-N03",
+          "text": "通向城外的一面有多层刮擦，旧行路牌仍朝外。",
+          "required_interaction_for_progress": false,
+          "new_reward_source": false
+        },
+        {
+          "node_id": "REG-01-N06",
+          "text": "军令碑公开写役额未核销不得离城，主线已给出这一事实，不依赖赌王账本。",
+          "required_interaction_for_progress": false,
+          "new_reward_source": false
+        }
+      ],
+      "boss_theme": {
+        "battle_carrier_identity": "军令碑驱动的可重塑石壳",
+        "meaning": "军令的目标从护送变成留置。锁线冲阵的不可回头感和石壳轮廓体现旧命令惯性，参数不改。",
+        "changes_combat_data": false,
+        "boss_name_or_skills_changed": false
+      },
+      "success_changes": {
+        "current_run_passage": "本局统领石壳失效、既有N07成功边开放至荆根庭院；没有需要拾取的主线钥匙。",
+        "permanent_knowledge": "关口首先是留置工具；灾时保护仍有旧痕，现行期限却已消失。",
+        "milestone_archive_event": "existing_mainline_boss_success_after_all_due_damage_and_deaths_and_player_survives",
+        "automatic_archive": true,
+        "requires_ground_evidence_pickup_or_hidden_discovery": false,
+        "first_milestone_currency_reward_added": 0,
+        "story_record_is_currency_or_consumable_key": false
+      },
+      "repeat_expedition_logic": "未废止誓约可在下一新run间按军令碑重塑石壳；本run回已清外垒不重建。",
+      "existing_NPC_commentary_hook": "岑灯可据M01解释“保护该有出口”；芬砾可指出付门票与获得离城自由不是一回事。",
+      "same_run_cleared_revisit_respawns_or_refreshes": false,
+      "all_mainline_passage_free": true,
+      "new_jump_or_talent_or_optional_branch_gate": false,
+      "status": "assistant_proposed_untested",
+      "story_fact_id": "STORY-M01",
+      "milestone_id_is_display_short_label_only": true,
+      "persistent_fact_owner": "story-flow.json; no_separate_short_M_flag"
+    },
+    {
+      "id": "REG-02",
+      "name": "荆根庭院",
+      "order": 2,
+      "mainline_boss_id": "BOS-FOR-001",
+      "mainline_boss_name": "荆冠古树",
+      "milestone_id": "M02",
+      "arrival_goal": "沿可达根廊进入林庭，查清供城契约是否真的允许灾后返还。",
+      "chapter_finding": "林契明写灾后返还根脉，抽取却仍延续；精灵立场和树人护根并不一致。",
+      "mainline_environment_clues": [
+        {
+          "node_id": "REG-02-N01",
+          "text": "借根纹路上有旧返还刻记，旁边续用刻记更新得多。",
+          "required_interaction_for_progress": false,
+          "new_reward_source": false
+        },
+        {
+          "node_id": "REG-02-N03",
+          "text": "被截根段仍向城内运送，守林标识与采根标识互相覆盖。",
+          "required_interaction_for_progress": false,
+          "new_reward_source": false
+        },
+        {
+          "node_id": "REG-02-N06",
+          "text": "主路契石保留“灾息归还根脉”的完整条款，是M02主线证据。",
+          "required_interaction_for_progress": false,
+          "new_reward_source": false
+        }
+      ],
+      "boss_theme": {
+        "battle_carrier_identity": "母根生出的守关冠枝，不是森林唯一生命",
+        "meaning": "长枝覆盖和根刺呈现受损根脉对逼近的防卫；战斗对象是一段关口冠枝，胜利不等于杀死整片森林。",
+        "changes_combat_data": false,
+        "boss_name_or_skills_changed": false
+      },
+      "success_changes": {
+        "current_run_passage": "本局守关冠枝失去战斗能力，既有主路径向灰烛墓院开放；不用兽穴线索或特殊道具。",
+        "permanent_knowledge": "旧约确有归还条款；问题不是城从未许诺，而是后来拒绝兑现。",
+        "milestone_archive_event": "existing_mainline_boss_success_after_all_due_damage_and_deaths_and_player_survives",
+        "automatic_archive": true,
+        "requires_ground_evidence_pickup_or_hidden_discovery": false,
+        "first_milestone_currency_reward_added": 0,
+        "story_record_is_currency_or_consumable_key": false
+      },
+      "repeat_expedition_logic": "誓约未断时母根会在两次新run间重新长出守关冠枝；本run不生新波/新奖励。",
+      "existing_NPC_commentary_hook": "芦苇可依据M02分别解释守旧盟条者与护根者，保留精灵居民自主选择。",
+      "same_run_cleared_revisit_respawns_or_refreshes": false,
+      "all_mainline_passage_free": true,
+      "new_jump_or_talent_or_optional_branch_gate": false,
+      "status": "assistant_proposed_untested",
+      "story_fact_id": "STORY-M02",
+      "milestone_id_is_display_short_label_only": true,
+      "persistent_fact_owner": "story-flow.json; no_separate_short_M_flag"
+    },
+    {
+      "id": "REG-03",
+      "name": "灰烛墓院",
+      "order": 3,
+      "mainline_boss_id": "BOS-RIT-001",
+      "mainline_boss_name": "白骨司仪",
+      "milestone_id": "M03",
+      "arrival_goal": "沿主路祭仪区核对名册，确认死者为何被反复调用。",
+      "chapter_finding": "名册将死者姓名抹成可续役额，使有限责任变成可重复征役。",
+      "mainline_environment_clues": [
+        {
+          "node_id": "REG-03-N01",
+          "text": "同一栏姓名越来越短，役额计数越来越整齐。",
+          "required_interaction_for_progress": false,
+          "new_reward_source": false
+        },
+        {
+          "node_id": "REG-03-N03",
+          "text": "骨盾旧记号与名册职位相合，法袍成员仍称之为“留名受护”。",
+          "required_interaction_for_progress": false,
+          "new_reward_source": false
+        },
+        {
+          "node_id": "REG-03-N06",
+          "text": "主路公开抄本显示姓名被归并为无限续用的役额，是M03完整证据。",
+          "required_interaction_for_progress": false,
+          "new_reward_source": false
+        }
+      ],
+      "boss_theme": {
+        "battle_carrier_identity": "由名册役额重组的仪式骨身",
+        "meaning": "骨刃与定点仪式把“姓名变额度”的制度化表现成精准流程；不是临时添加复活攻击来讲故事。",
+        "changes_combat_data": false,
+        "boss_name_or_skills_changed": false
+      },
+      "success_changes": {
+        "current_run_passage": "本局仪式骨身失效，主路前往熔压工坊；不用无名祭室的可选名签开门。",
+        "permanent_knowledge": "抹名不是纪念方式，而是取消责任终点；骨身与司仪管理者的责任不同。",
+        "milestone_archive_event": "existing_mainline_boss_success_after_all_due_damage_and_deaths_and_player_survives",
+        "automatic_archive": true,
+        "requires_ground_evidence_pickup_or_hidden_discovery": false,
+        "first_milestone_currency_reward_added": 0,
+        "story_record_is_currency_or_consumable_key": false
+      },
+      "repeat_expedition_logic": "誓约仍可在新run间以未注销役额重组骨身；本run已清名册节点绝不复活。",
+      "existing_NPC_commentary_hook": "纱柯可在营地承认旧教团的制度责任，回应已知M03而不让玩家重复假装初见。",
+      "same_run_cleared_revisit_respawns_or_refreshes": false,
+      "all_mainline_passage_free": true,
+      "new_jump_or_talent_or_optional_branch_gate": false,
+      "status": "assistant_proposed_untested",
+      "story_fact_id": "STORY-M03",
+      "milestone_id_is_display_short_label_only": true,
+      "persistent_fact_owner": "story-flow.json; no_separate_short_M_flag"
+    },
+    {
+      "id": "REG-04",
+      "name": "熔压工坊",
+      "order": 4,
+      "mainline_boss_id": "BOS-MEC-001",
+      "mainline_boss_name": "熔压审判机",
+      "milestone_id": "M04",
+      "arrival_goal": "进入工造关口，核对灾后工单是谁继续签署的。",
+      "chapter_finding": "新工单证明灾后仍有人主动续签；强留不是无人负责的失控事故。",
+      "mainline_environment_clues": [
+        {
+          "node_id": "REG-04-N01",
+          "text": "灾时标志仍在，工单却有灾后新署押。",
+          "required_interaction_for_progress": false,
+          "new_reward_source": false
+        },
+        {
+          "node_id": "REG-04-N03",
+          "text": "旧停工申请被归档，新的续签页反复展开。",
+          "required_interaction_for_progress": false,
+          "new_reward_source": false
+        },
+        {
+          "node_id": "REG-04-N06",
+          "text": "主路维修/续签公示同时保留日期关系与有效署押，足够确认有人主动维持。",
+          "required_interaction_for_progress": false,
+          "new_reward_source": false
+        }
+      ],
+      "boss_theme": {
+        "battle_carrier_identity": "按封存图样重造的关口机体",
+        "meaning": "校准、直轨与泄压的完整程序对应人为维持的持续工单，不能把责任都推给机器。",
+        "changes_combat_data": false,
+        "boss_name_or_skills_changed": false
+      },
+      "success_changes": {
+        "current_run_passage": "本局审判机关口机体停机，既有主路向烬誓内庭开放；不要求付35进入工具库。",
+        "permanent_knowledge": "续签包含获利与生计恐惧等动机；主动签字不等于所有被征役者自由同意。",
+        "milestone_archive_event": "existing_mainline_boss_success_after_all_due_damage_and_deaths_and_player_survives",
+        "automatic_archive": true,
+        "requires_ground_evidence_pickup_or_hidden_discovery": false,
+        "first_milestone_currency_reward_added": 0,
+        "story_record_is_currency_or_consumable_key": false
+      },
+      "repeat_expedition_logic": "未断誓约可让工坊在两次新run间按封存图样重造关口机体；本run不现场造机/加怪。",
+      "existing_NPC_commentary_hook": "洛砧可据M04谈技术与滥用工单的区别，避免把铁匠职业或工造本身当反派。",
+      "same_run_cleared_revisit_respawns_or_refreshes": false,
+      "all_mainline_passage_free": true,
+      "new_jump_or_talent_or_optional_branch_gate": false,
+      "status": "assistant_proposed_untested",
+      "story_fact_id": "STORY-M04",
+      "milestone_id_is_display_short_label_only": true,
+      "persistent_fact_owner": "story-flow.json; no_separate_short_M_flag"
+    },
+    {
+      "id": "REG-05",
+      "name": "烬誓内庭",
+      "order": 5,
+      "mainline_boss_id": "BOS-DEM-001",
+      "mainline_boss_name": "烬誓领主",
+      "milestone_id": "M05",
+      "arrival_goal": "沿免费主路抵达誓约核心，让保护与强留的分界由领主亲自面对。",
+      "chapter_finding": "领主承认怕城散而不肯放手，把强留当保护；强制条款被解除，愿留者仍能留下。",
+      "mainline_environment_clues": [
+        {
+          "node_id": "REG-05-N01",
+          "text": "廷前告示仍称“共留”，出路却被一人裁定。",
+          "required_interaction_for_progress": false,
+          "new_reward_source": false
+        },
+        {
+          "node_id": "REG-05-N03",
+          "text": "住民留下与离开的普通请求都被合成同一继续役额。",
+          "required_interaction_for_progress": false,
+          "new_reward_source": false
+        },
+        {
+          "node_id": "REG-05-N06",
+          "text": "主路誓文明确由领主保留终止权，拒还自由的依据已完整呈现，不靠熄灯誓室补关键页。",
+          "required_interaction_for_progress": false,
+          "new_reward_source": false
+        }
+      ],
+      "boss_theme": {
+        "battle_carrier_identity": "领主借誓约维持的誓主战体；领主本体仍是持续签誓的责任人，不是无辜受控傀儡",
+        "meaning": "既有高低近斩、锁线投焰与落印体现将一切留在控制范围的习惯；不新增第二Boss或结局战。",
+        "changes_combat_data": false,
+        "boss_name_or_skills_changed": false
+      },
+      "success_changes": {
+        "current_run_passage": "仅D06合法success（同点全量伤害/死亡后玩家存活）由行身灯印自动截断誓源，解除强制留城；按既有自动结算结束本局，不增E/钥匙/资源/阶段/等待。",
+        "permanent_knowledge": "保护可以被自愿接受，也必须允许离开；归档正常结局，未来回响不抹掉这次解除。",
+        "milestone_archive_event": "existing_mainline_boss_success_after_all_due_damage_and_deaths_and_player_survives",
+        "automatic_archive": true,
+        "requires_ground_evidence_pickup_or_hidden_discovery": false,
+        "first_milestone_currency_reward_added": 0,
+        "story_record_is_currency_or_consumable_key": false
+      },
+      "repeat_expedition_logic": "最终双死仅毁当次誓主战体，不提交M05/解放，未断誓约可在新run间重建；本次合法成功断誓后，后续只标回响远征，不恢复现实统治或改写既有结局。",
+      "existing_NPC_commentary_hook": "岑灯可在结算/营地引出正常结局；其他既有NPC只追加对应已知见闻的可选插页。",
+      "same_run_cleared_revisit_respawns_or_refreshes": false,
+      "all_mainline_passage_free": true,
+      "new_jump_or_talent_or_optional_branch_gate": false,
+      "status": "assistant_proposed_untested",
+      "story_fact_id": "STORY-M05",
+      "milestone_id_is_display_short_label_only": true,
+      "persistent_fact_owner": "story-flow.json; no_separate_short_M_flag"
+    }
+  ],
+  "hidden_nodes": [
+    {
+      "id": "REG-01-H01",
+      "name": "赌王密窟",
+      "entry_node_id": "REG-01-N04",
+      "return_node_id": "REG-01-N04",
+      "entry_price_gold_inherited_D08": 20,
+      "entry_optional": true,
+      "return_price_gold": 0,
+      "boss_id": "BOS-GOB-001",
+      "boss_name": "金牙赌王",
+      "combat": "existing_optional_Boss_only",
+      "small_story": "赌王以“付够便能走”的筹码许诺经营密窟。账桌却只核销金币，不核销留城役额；交易既可能维持互助，也可能利用他人的出路焦虑。",
+      "environment_clue": "筹码被磨得很亮，通向出口的脚印却在门边折回；账页中有反复擦去的去向。",
+      "actual_discovery_interaction": {
+        "target_name": "退押账桌",
+        "prompt_text": "核对退押账桌",
+        "duration_s": 0.25,
+        "requires": [
+          "active_run",
+          "player_alive",
+          "grounded_idle_stationary",
+          "full_D04_safe_predicate",
+          "actual_reachable_target_in_range_and_LOS",
+          "same_target_version_at_commit",
+          "existing_optional_Boss_success_committed"
+        ],
+        "commit_event": "actual_discovery_point_interaction_commit",
+        "discovery_id": "DISC-REG-01-H01-CORE",
+        "existing_reward_source_id": "RWD-DISCOVERY-REG-01-H01",
+        "existing_first_discovery_shards": 2,
+        "new_additional_story_shards": 0,
+        "same_event_archives_text_and_original_D08_first_discovery_reward": true,
+        "before_commit_cancel": "D04_movement_damage_valid_dodge_target_invalid_cancel; no_discovery_record_no_new_reward",
+        "same_timestamp_damage_and_death_before_commit": true,
+        "entry_fee_map_reveal_arrival_or_Boss_death_counts_as_discovery": false,
+        "text": "退押栏的金币已经结清，去向栏仍盖着“留城”。几页写着替人垫路费，另几页却用同一批旧筹码反复收取承诺。",
+        "repeat_interaction": "read_existing_text_without_second_discovery_reward_or_new_result",
+        "paid_entry_cancelled_read_refunds_ticket": false
+      },
+      "relation_to_mainline": "补充个人交易与制度禁出的区别；不承担M01军令真相唯一证据。",
+      "epilogue_tag_is_new_reward_or_ending_gate": false,
+      "optional_Boss_victory_separate_from_discovery": true,
+      "optional_Boss_reward_data_changed": false,
+      "available_before_final_mainline_success_only_for_current_run": "REG05_H01_must_be_visited_before_M05_automatic_end; other_regions_follow_D07_one_way_cross_chapter_rules",
+      "paid_first_claim_warning": "show_D08_fee_and_account_first_discovery_claim_status; if_previously_claimed_REG04_has_no_new_economic_reward",
+      "new_reward_source": false,
+      "new_map_node": false,
+      "status": "assistant_proposed_untested",
+      "story_fact_id": "STORY-S01",
+      "story_title_ref": "赌王的旧账",
+      "persistent_fact_owner": "story-flow.json canonical side fact; not_a_second_discovery_or_epilogue_flag",
+      "optional_epilogue_fact_ref": "STORY-S01",
+      "optional_Boss_defeat_fiction": "金牙败后撤回深窟，真实个体未被宣称永久死亡。",
+      "defeat_presentation_boundary": "HP0仍按原D06死亡/成功清战斗；退场只在原演出/离场后叙述，不新增逃跑AI、无敌、半血逃跑或同run重生。"
+    },
+    {
+      "id": "REG-02-H01",
+      "name": "断根兽穴",
+      "entry_node_id": "REG-02-N04",
+      "return_node_id": "REG-02-N04",
+      "entry_price_gold_inherited_D08": 0,
+      "entry_optional": true,
+      "return_price_gold": 0,
+      "boss_id": "BOS-BST-001",
+      "boss_name": "裂鬃兽王",
+      "combat": "existing_optional_Boss_only",
+      "small_story": "兽王守的穴路与食源被采根运输挤压。它并不执行领主的军令，可选遭遇让玩家看到自然受损的具体一角。",
+      "environment_clue": "巢边不是军营：没有旗讯，只有磨损兽径、折断采根环与被围出的旧水口。",
+      "actual_discovery_interaction": {
+        "target_name": "穴边断根刻环",
+        "prompt_text": "检视断根刻环",
+        "duration_s": 0.25,
+        "requires": [
+          "active_run",
+          "player_alive",
+          "grounded_idle_stationary",
+          "full_D04_safe_predicate",
+          "actual_reachable_target_in_range_and_LOS",
+          "same_target_version_at_commit",
+          "existing_optional_Boss_success_committed"
+        ],
+        "commit_event": "actual_discovery_point_interaction_commit",
+        "discovery_id": "DISC-REG-02-H01-CORE",
+        "existing_reward_source_id": "RWD-DISCOVERY-REG-02-H01",
+        "existing_first_discovery_shards": 2,
+        "new_additional_story_shards": 0,
+        "same_event_archives_text_and_original_D08_first_discovery_reward": true,
+        "before_commit_cancel": "D04_movement_damage_valid_dodge_target_invalid_cancel; no_discovery_record_no_new_reward",
+        "same_timestamp_damage_and_death_before_commit": true,
+        "entry_fee_map_reveal_arrival_or_Boss_death_counts_as_discovery": false,
+        "text": "断根上旧刻写着“灾息归林”，新刻却继续计数。穴边的枝条都来自被截断的根井，这片游群争的只是还可回去的地方。",
+        "repeat_interaction": "read_existing_text_without_second_discovery_reward_or_new_result",
+        "paid_entry_cancelled_read_refunds_ticket": false
+      },
+      "relation_to_mainline": "补充生境与契约的代价；主线M02本已自动取得返还条款。",
+      "epilogue_tag_is_new_reward_or_ending_gate": false,
+      "optional_Boss_victory_separate_from_discovery": true,
+      "optional_Boss_reward_data_changed": false,
+      "available_before_final_mainline_success_only_for_current_run": "REG05_H01_must_be_visited_before_M05_automatic_end; other_regions_follow_D07_one_way_cross_chapter_rules",
+      "paid_first_claim_warning": "free_does_not_mean_auto_reward_on_arrival",
+      "new_reward_source": false,
+      "new_map_node": false,
+      "status": "assistant_proposed_untested",
+      "story_fact_id": "STORY-S02",
+      "story_title_ref": "根下的足迹",
+      "persistent_fact_owner": "story-flow.json canonical side fact; not_a_second_discovery_or_epilogue_flag",
+      "optional_epilogue_fact_ref": "STORY-S02",
+      "optional_Boss_defeat_fiction": "兽王败后让出当前巢位，真实个体未被宣称永久死亡。",
+      "defeat_presentation_boundary": "HP0仍按原D06死亡/成功清战斗；退场只在原演出/离场后叙述，不新增逃跑AI、无敌、半血逃跑或同run重生。"
+    },
+    {
+      "id": "REG-03-H01",
+      "name": "无名祭室",
+      "entry_node_id": "REG-03-N04",
+      "return_node_id": "REG-03-N04",
+      "entry_price_gold_inherited_D08": 0,
+      "entry_optional": true,
+      "return_price_gold": 0,
+      "boss_id": null,
+      "boss_name": null,
+      "combat": "noncombat_no_new_enemy_manifest",
+      "small_story": "被抹名的死者仍有可辨认的私人痕迹。主角不靠收集它换一个更真结局，只把制度数字之外的记忆留进灯谱。",
+      "environment_clue": "空灯位的编号完全一致，底座旧刻与折叠名签却各不相同。",
+      "actual_discovery_interaction": {
+        "target_name": "无名灯位下的旧名签",
+        "prompt_text": "辨读旧名签",
+        "duration_s": 0.25,
+        "requires": [
+          "active_run",
+          "player_alive",
+          "grounded_idle_stationary",
+          "full_D04_safe_predicate",
+          "actual_reachable_target_in_range_and_LOS",
+          "same_target_version_at_commit"
+        ],
+        "commit_event": "actual_discovery_point_interaction_commit",
+        "discovery_id": "DISC-REG-03-H01-CORE",
+        "existing_reward_source_id": "RWD-DISCOVERY-REG-03-H01",
+        "existing_first_discovery_shards": 2,
+        "new_additional_story_shards": 0,
+        "same_event_archives_text_and_original_D08_first_discovery_reward": true,
+        "before_commit_cancel": "D04_movement_damage_valid_dodge_target_invalid_cancel; no_discovery_record_no_new_reward",
+        "same_timestamp_damage_and_death_before_commit": true,
+        "entry_fee_map_reveal_arrival_or_Boss_death_counts_as_discovery": false,
+        "text": "役额一栏写得整齐，灯位下的旧名签却留下不同的手迹。名字虽被划去，仍能看出每一格原本指向一个人。",
+        "repeat_interaction": "read_existing_text_without_second_discovery_reward_or_new_result",
+        "paid_entry_cancelled_read_refunds_ticket": false
+      },
+      "relation_to_mainline": "补充人的记忆，不补唯一主线名册页、不新增灵魂物品。",
+      "epilogue_tag_is_new_reward_or_ending_gate": false,
+      "optional_Boss_victory_separate_from_discovery": false,
+      "optional_Boss_reward_data_changed": false,
+      "available_before_final_mainline_success_only_for_current_run": "REG05_H01_must_be_visited_before_M05_automatic_end; other_regions_follow_D07_one_way_cross_chapter_rules",
+      "paid_first_claim_warning": "free_does_not_mean_auto_reward_on_arrival",
+      "new_reward_source": false,
+      "new_map_node": false,
+      "status": "assistant_proposed_untested",
+      "story_fact_id": "STORY-S03",
+      "story_title_ref": "无名者的名字",
+      "persistent_fact_owner": "story-flow.json canonical side fact; not_a_second_discovery_or_epilogue_flag",
+      "optional_epilogue_fact_ref": "STORY-S03"
+    },
+    {
+      "id": "REG-04-H01",
+      "name": "封存工具库",
+      "entry_node_id": "REG-04-N04",
+      "return_node_id": "REG-04-N04",
+      "entry_price_gold_inherited_D08": 35,
+      "entry_optional": true,
+      "return_price_gold": 0,
+      "boss_id": null,
+      "boss_name": null,
+      "combat": "noncombat_no_new_enemy_manifest",
+      "small_story": "续签不是只因恶意，有人怕停炉后失去饭食；这份动机不能替强留他人的制度开脱。隐藏记录补证人情，核心主动续签证据已在免费主路。",
+      "environment_clue": "旧图样边角少有人翻，新续签页却有反复压平的折痕；同案并列停工与续用两种笔迹。",
+      "actual_discovery_interaction": {
+        "target_name": "案台封存维修记录",
+        "prompt_text": "检视封存维修记录",
+        "duration_s": 0.25,
+        "requires": [
+          "active_run",
+          "player_alive",
+          "grounded_idle_stationary",
+          "full_D04_safe_predicate",
+          "actual_reachable_target_in_range_and_LOS",
+          "same_target_version_at_commit"
+        ],
+        "commit_event": "actual_discovery_point_interaction_commit",
+        "discovery_id": "DISC-REG-04-H01-CORE",
+        "existing_reward_source_id": "RWD-DISCOVERY-REG-04-H01",
+        "existing_first_discovery_shards": 2,
+        "new_additional_story_shards": 0,
+        "same_event_archives_text_and_original_D08_first_discovery_reward": true,
+        "before_commit_cancel": "D04_movement_damage_valid_dodge_target_invalid_cancel; no_discovery_record_no_new_reward",
+        "same_timestamp_damage_and_death_before_commit": true,
+        "entry_fee_map_reveal_arrival_or_Boss_death_counts_as_discovery": false,
+        "text": "封存图样边压着一页续签抄本：“停炉以后，我们靠什么吃饭？”旁边还有一份擦去的撤签申请。选择是真实的，受它约束的人却没有都被问过。",
+        "repeat_interaction": "read_existing_text_without_second_discovery_reward_or_new_result",
+        "paid_entry_cancelled_read_refunds_ticket": false
+      },
+      "relation_to_mainline": "补充主动续签的压力与责任；不是揭露反派真相的收费必需证据。",
+      "epilogue_tag_is_new_reward_or_ending_gate": false,
+      "optional_Boss_victory_separate_from_discovery": false,
+      "optional_Boss_reward_data_changed": false,
+      "available_before_final_mainline_success_only_for_current_run": "REG05_H01_must_be_visited_before_M05_automatic_end; other_regions_follow_D07_one_way_cross_chapter_rules",
+      "paid_first_claim_warning": "show_D08_fee_and_account_first_discovery_claim_status; if_previously_claimed_REG04_has_no_new_economic_reward",
+      "new_reward_source": false,
+      "new_map_node": false,
+      "status": "assistant_proposed_untested",
+      "story_fact_id": "STORY-S04",
+      "story_title_ref": "未交出的工具",
+      "persistent_fact_owner": "story-flow.json canonical side fact; not_a_second_discovery_or_epilogue_flag",
+      "optional_epilogue_fact_ref": "STORY-S04"
+    },
+    {
+      "id": "REG-05-H01",
+      "name": "熄灯誓室",
+      "entry_node_id": "REG-05-N04",
+      "return_node_id": "REG-05-N04",
+      "entry_price_gold_inherited_D08": 0,
+      "entry_optional": true,
+      "return_price_gold": 0,
+      "boss_id": null,
+      "boss_name": null,
+      "combat": "noncombat_no_new_enemy_manifest",
+      "small_story": "留下与离开可以同时出于对城的感情。主线正常结局允许两者，可选读到的短笺只形成文案插页。",
+      "environment_clue": "同一灯盆旁放着未点燃的灯芯与已经熄灭的旧芯，不把哪一种画成正确答案。",
+      "actual_discovery_interaction": {
+        "target_name": "熄灯盆旁的两张短笺",
+        "prompt_text": "读两张短笺",
+        "duration_s": 0.25,
+        "requires": [
+          "active_run",
+          "player_alive",
+          "grounded_idle_stationary",
+          "full_D04_safe_predicate",
+          "actual_reachable_target_in_range_and_LOS",
+          "same_target_version_at_commit"
+        ],
+        "commit_event": "actual_discovery_point_interaction_commit",
+        "discovery_id": "DISC-REG-05-H01-CORE",
+        "existing_reward_source_id": "RWD-DISCOVERY-REG-05-H01",
+        "existing_first_discovery_shards": 2,
+        "new_additional_story_shards": 0,
+        "same_event_archives_text_and_original_D08_first_discovery_reward": true,
+        "before_commit_cancel": "D04_movement_damage_valid_dodge_target_invalid_cancel; no_discovery_record_no_new_reward",
+        "same_timestamp_damage_and_death_before_commit": true,
+        "entry_fee_map_reveal_arrival_or_Boss_death_counts_as_discovery": false,
+        "text": "一张写着：“我还想留在这里修好屋顶。”另一张写着：“我想走出去，也想有一天回来。”灯没有替他们作答。",
+        "repeat_interaction": "read_existing_text_without_second_discovery_reward_or_new_result",
+        "paid_entry_cancelled_read_refunds_ticket": false
+      },
+      "relation_to_mainline": "补充自愿选择的私人表达；不触发另一个结局，不要求玩家投票或收齐其他H01。",
+      "epilogue_tag_is_new_reward_or_ending_gate": false,
+      "optional_Boss_victory_separate_from_discovery": false,
+      "optional_Boss_reward_data_changed": false,
+      "available_before_final_mainline_success_only_for_current_run": "REG05_H01_must_be_visited_before_M05_automatic_end; other_regions_follow_D07_one_way_cross_chapter_rules",
+      "paid_first_claim_warning": "free_does_not_mean_auto_reward_on_arrival",
+      "new_reward_source": false,
+      "new_map_node": false,
+      "status": "assistant_proposed_untested",
+      "story_fact_id": "STORY-S05",
+      "story_title_ref": "第一盏熄灯",
+      "persistent_fact_owner": "story-flow.json canonical side fact; not_a_second_discovery_or_epilogue_flag",
+      "optional_epilogue_fact_ref": "STORY-S05"
+    }
+  ],
+  "repeat_checkpoint_contract": {
+    "before_normal_ending": "unrevoked_city_oath_rebuilds_only_the_existing_checkpoint_carriers_between_two_new_runs; not_world_time_reversal_or_same_run_respawn",
+    "carriers": {
+      "BOS-STN-001": "军令碑驱动的可重塑石壳",
+      "BOS-FOR-001": "母根生出的守关冠枝",
+      "BOS-RIT-001": "名册役额重组的仪式骨身",
+      "BOS-MEC-001": "封存图样重造的关口机体"
+    },
+    "current_run_success": "disable_current_carrier_open_existing_passage_auto_archive_current_milestone; does_not_yet_abolish_root_oath",
+    "same_run_revisit": "preserve_cleared_state_spawnIDs_loot_and_no_reconstruction",
+    "new_run_persistent_milestones": "NPCs_acknowledge_known_information; same_run_checkpoint_combat_obligation_not_skipped_by_account_flag",
+    "after_M05_success": "forced_oath_ended_and_normal_ending_archived; subsequent_new_runs_explicitly_recorded_echo_expeditions_not_real_restored_rule",
+    "does_not_change_generation_budget_spawns_actions_or_reward_rules": true,
+    "final_Boss_carrier": {
+      "boss_id": "BOS-DEM-001",
+      "identity": "领主借誓约维持的誓主战体",
+      "lord_responsibility": "本体仍为持续签誓责任人，战体解释不免除其选择责任",
+      "double_death": "carrier_only_destroyed_no_qualifying_success_no_M05_no_world_liberation; new_run_rebuild_possible",
+      "qualifying_success": "surviving_xingshen_lamp_imprint_automatically_severs_existing_oath_at_original_D06_success_commit",
+      "extra_interaction_key_resource_phase_delay_or_judgement": false
+    }
+  },
+  "ending_alignment": {
+    "normal_ending": "forced_oath_abolished; those_who_want_to_leave_may_leave_and_those_who_want_to_stay_may_stay",
+    "M05_commit": "existing_D06_success_transaction_after_damage_deaths_and_player_survives; automatic_archive_and_run_victory_no_E_or_new_delay",
+    "lord_admission_text_proposal": "我怕灯一盏盏熄下去，怕城散了，便把不许离开写成了保护。",
+    "admission_delivery": "automatically_archived_settlement_text_or_root_authored_presentation_after_success; not_extra_invulnerable_phase_or_blocking_combat_monologue",
+    "hidden_insert_rule": "existing_discovery_flags_may_add_short_optional_epilogue_text_only; no_extra_Boss_region_reward_or_true_ending_collection_requirement",
+    "hidden_required_for_normal_ending": false,
+    "no_post_M05_return_to_H01_in_current_run": true,
+    "later_echo_runs_preserve_archived_normal_ending": true,
+    "hidden_inserts_are_understanding_not_rescue_or_freedom_unlock": true,
+    "missing_insert_world_or_resident_penalty": false,
+    "newly_discovered_in_echo": "may_enrich_later_echo_ending_receipt_only; never_rewrite_first_ending_snapshot",
+    "persistent_fact_owner": "story-flow.json canonical STORY-M/STORY-S records only"
+  },
+  "narrative_boundaries": {
+    "enemy_combat_branch_is_not_whole_species_morality": true,
+    "not_all_enemies_mind_controlled": true,
+    "mainline_truth_obtainable_on_free_required_route": true,
+    "M01_to_M05_auto_archive_no_hidden_key": true,
+    "no_story_currency_or_extra_permanent_stat_bonus": true,
+    "no_combat_AI_timing_damage_phase_or_room_topology_changes": true,
+    "no_new_story_summon_respawn_or_loot_source": true,
+    "no_unskippable_story_reading_required_to_commit_success": true,
+    "existing_NPC_names_only": [
+      "岑灯",
+      "芬砾",
+      "洛砧",
+      "纱柯",
+      "芦苇"
+    ],
+    "NPC_IDs_and_dialogue_graphs_owned_by_root_other_agent": true,
+    "world_does_not_forget_player_knowledge_between_failed_runs": true
+  },
+  "future_design_dependencies": [
+    "root_world_and_story_names_and_NPC_ID_alignment",
+    "root_story_flow_atomic_M01_to_M05_and_same_discovery_event_text_commit",
+    "D11_story_archive_accessibility_and_optional_epilogue_UI",
+    "D12_environment_clue_art_and_voice_if_adopted_not_created_here",
+    "D13_persistent_story_flags_and_reward_atomicity",
+    "D14_narrative_pacing_and_player_comprehension_playtest"
+  ]
+}

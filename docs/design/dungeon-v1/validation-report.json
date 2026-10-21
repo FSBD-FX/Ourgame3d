@@ -1,0 +1,256 @@
+{
+  "design_date": "2026-10-14",
+  "source_event": "EV-025",
+  "module": "D-07",
+  "status": "passed",
+  "runtime_implemented": false,
+  "scope": "topology_IDs_caps_reference_event_obligations_arithmetic_and_local_links_only",
+  "UE_navigation_camera_spawn_behavior_balance_verified": false,
+  "counts": {
+    "regions": 5,
+    "main_route_nodes": 35,
+    "optional_battle_candidates": 10,
+    "hidden_candidates": 5,
+    "room_roles": 10,
+    "sequence_templates": 6,
+    "sequence_groups": 16,
+    "example_required_slots": 36
+  },
+  "paper_boundary_cases": 18,
+  "reference_event_traces": [
+    {
+      "case_id": "DCASE-001",
+      "admissions": [
+        {
+          "at": 0,
+          "admit": "RSEQ-001-G1"
+        },
+        {
+          "at": 12,
+          "admit": "RSEQ-001-G2"
+        }
+      ],
+      "final": {
+        "admitted": [
+          "RSEQ-001-G1",
+          "RSEQ-001-G2"
+        ],
+        "clear": false,
+        "max_depth": 0.6
+      }
+    },
+    {
+      "case_id": "DCASE-002",
+      "admissions": [
+        {
+          "at": 0,
+          "admit": "RSEQ-003-G1"
+        }
+      ],
+      "final": {
+        "admitted": [
+          "RSEQ-003-G1"
+        ],
+        "clear": false,
+        "max_depth": 0
+      }
+    },
+    {
+      "case_id": "DCASE-004",
+      "admissions": [
+        {
+          "at": 0,
+          "admit": "RSEQ-002-G1"
+        },
+        {
+          "at": 3,
+          "admit": "RSEQ-002-G2"
+        }
+      ],
+      "final": {
+        "admitted": [
+          "RSEQ-002-G1",
+          "RSEQ-002-G2"
+        ],
+        "clear": false,
+        "max_depth": 0
+      }
+    },
+    {
+      "case_id": "DCASE-006",
+      "admissions": [
+        {
+          "at": 0,
+          "admit": "RSEQ-005-G1"
+        },
+        {
+          "at": 7,
+          "admit": "RSEQ-005-G2"
+        }
+      ],
+      "final": {
+        "admitted": [
+          "RSEQ-005-G1",
+          "RSEQ-005-G2"
+        ],
+        "clear": false,
+        "max_depth": 0
+      }
+    }
+  ],
+  "overlap_any_last_survivor_cases": [
+    {
+      "remaining_id": "ENM-MEC-001",
+      "union_usage": {
+        "actors": 4,
+        "threat": 8,
+        "large": 1,
+        "charger": 0,
+        "flying": 0,
+        "support": 0,
+        "projectile_users": 1,
+        "elites": 0
+      }
+    },
+    {
+      "remaining_id": "ENM-MEC-003",
+      "union_usage": {
+        "actors": 4,
+        "threat": 8,
+        "large": 1,
+        "charger": 0,
+        "flying": 0,
+        "support": 1,
+        "projectile_users": 0,
+        "elites": 0
+      }
+    },
+    {
+      "remaining_id": "ENM-BST-003",
+      "union_usage": {
+        "actors": 4,
+        "threat": 8,
+        "large": 1,
+        "charger": 0,
+        "flying": 0,
+        "support": 0,
+        "projectile_users": 0,
+        "elites": 0
+      }
+    }
+  ],
+  "checks_by_group": {
+    "counts": 3,
+    "identity": 2,
+    "routes": 191,
+    "refs": 360,
+    "capability": 20,
+    "schema": 106,
+    "bindings": 6,
+    "geometry": 172,
+    "dependencies": 6,
+    "budget": 16,
+    "triggers": 24,
+    "timing": 32,
+    "dormancy": 1,
+    "overlap": 3,
+    "event_paper": 26,
+    "boundaries": 10,
+    "history": 38,
+    "provenance": 3,
+    "links": 111
+  },
+  "checks": 1130,
+  "errors": [],
+  "historical_design_sha256": {
+    "玩家角色与战斗规则设计.md": "da7d170fc71f67bb5fca06fbf8538d9cdf22b8998254f0033447db4a3219b949",
+    "docs/design/player-combat-v1/player-combat-rules.json": "ab22cd0f131fa8f025ea16db9d1536028526b35c467aeb0008fe2dca59c413ef",
+    "道具与状态系统设计.md": "4c7536f4b71bd74563edbb8e393a2bb452ead0fc74db4cfa201c605b710a8bbf",
+    "docs/design/items-v1/common-rules.json": "b5815a10f313b7364b1dde66b0eac9f703104ea260d4e4470094cffe31652e99",
+    "docs/design/items-v1/states.json": "97ee61346d5c6387dc25aa01a75d64fcd12d60b5917d0b7f594d05b25b0c06a3",
+    "docs/design/items-v1/items.json": "09e40ef363ddcd2507efcbdfa4cf388916623e62015dcb41229a62d6badc2bc1",
+    "docs/design/items-v1/consumables.json": "e940715c2d85ff05b8431903ca6bcd7cba9adeed0cebc79c3304253f7ef487eb",
+    "docs/design/items-v1/passives-and-utilities.json": "ec38d990658cc930bf9bb98ca52e2fcd1fecaab9b6fe80cfc40486b2e88eb85a",
+    "携带与交互系统设计.md": "b0b4e570b17adedf2b94cea92d52942b36de88c5da58aee71ed6f597bfa90b37",
+    "docs/design/inventory-v1/inventory-rules.json": "7eb6f7da968622a1583b4e63069208513a09e0ef74d12e244c18e20332f08942",
+    "docs/design/inventory-v1/paper-examples.json": "bb0af7a10fcfa6b7725a42045eb048c4f26cb4cd22aace8cda10cebb9c78f156",
+    "docs/design/inventory-v1/01-交互流程与界面状态.md": "4e2d4bd1fe5a12a9f84c4a9a1fe306cb8edfaca5b5d72cfcc21ba62d918ae3f6",
+    "docs/design/inventory-v1/02-边界案例.md": "d0181b8d2c35cc0fa4eabff2bf23787b151332dfef95dd539431e22059e626aa",
+    "敌人分类与普通精英设计.md": "036e34f250fde186a01c8c9e3d2a9f2502d22a85246240a801b31ba9113e7e99",
+    "docs/design/enemies-v1/common-rules.json": "0296b0d87fc1d16ef1f90d15b73aa08544b7e1c5ca173db898cf2d20f93976f5",
+    "docs/design/enemies-v1/encounter-templates.json": "4fe3a6607b46f42b2e1150d5e061e5f024afa988c984205ac1cacbb3031b8ab2",
+    "docs/design/enemies-v1/enemies.json": "d01dd609a95ff9ad182638982a0ac7de864dbbd29f6b03995f9a3625a0c44266",
+    "docs/design/enemies-v1/enemy-projectile-profiles.json": "895f105ba5f2b3707aa642b50c2dbf8cef369dc9e0e0ae70f29a586c38effb6f",
+    "docs/design/enemies-v1/mech-beasts-demons.json": "f6d5475ba13eb1cb93cd626ec32f6bcf976ce8bfbb0db2253401812b2aaaf369",
+    "docs/design/enemies-v1/robes-bones-goblins.json": "7f48ef3d3f8beec832a4e34f75cd14646e26590e83957f70172316302eeb1f53",
+    "docs/design/enemies-v1/stone-forest.json": "5757ef0e4da5830546dff944d1e717c22fbf92e7692229bbadd5b9397aeea0c5",
+    "docs/design/enemies-v1/target-profiles.json": "e5649ff4f5c53f0740126923f2a5a99b73d3e523a2d2dd4dc4e75e60ae85c4e5",
+    "docs/design/enemies-v1/01-石像与森林敌人.md": "b1edd5ba84c19c6b5dda1005fccddacde0dee456dcb2da624af38814ab4b02ca",
+    "docs/design/enemies-v1/02-教团骷髅与哥布林.md": "f75a861ec049449c27dedb7b782bb33757ec2ee5c535597f447eeddaff21853c",
+    "docs/design/enemies-v1/03-机械野兽与恶魔.md": "c2ede5450b75ffab2b489a02428d0b6cbb8cfbf210a575862d40c1bdcc05db67",
+    "Boss与特殊遭遇设计.md": "4083a47d7ce8b21beeb1f972aa2ad5c96b28afedb76572ce29948007f6078fba",
+    "docs/design/bosses-v1/arena-contracts.json": "38c6c1199c8da677dd892403291df1385c6cf9f8bd57173fa318d4a94c11ba69",
+    "docs/design/bosses-v1/bosses.json": "4592953c92856927bfcc4f08f319758571cc8ea37fc95774b043328a0329542f",
+    "docs/design/bosses-v1/common-rules.json": "4eed5d3221103121ed28c74207c8b4377954b8d8094e008d5dcf8085acfcb66d",
+    "docs/design/bosses-v1/final-optional.json": "d25aaf20b03d45ce023cadd7971fec53363d1d9ebfe7445ccad104a103606830",
+    "docs/design/bosses-v1/paper-examples.json": "7c42e061a162cff5ac22d9f2930b3fb9dff2b1ed1774058e0b44b699d126e725",
+    "docs/design/bosses-v1/rites-machine.json": "3c47659c421d0d754ccd7afb2e43db21c645809e4a8d26885e10ec50b90046ab",
+    "docs/design/bosses-v1/stone-forest.json": "2d1d929361b61f30201c65c5dfb578f05e93cce5b1485fd387f23fa9888cd350",
+    "docs/design/bosses-v1/01-石像与森林Boss.md": "29286cad5ab129771b82452dfc09e5353f6dfbf93bdfec9ee0b9ec695d1ab33e",
+    "docs/design/bosses-v1/02-教团与机械Boss.md": "471db443fbe041c632256afe01e9a64ad9cf6096d30352e30fe123c36ceefef2",
+    "docs/design/bosses-v1/03-终局与可选Boss.md": "3e062016aaea84a57b7a3cf4aee846c9add09f66b4d1d467f0210b7194e6c57a",
+    "docs/design/equipment-v1/weapons.json": "95757819382832cfa31e6596f3ba90f1e983e83fbd69504da3c99d5ea2a272b4",
+    "docs/design/equipment-v1/armor.json": "9407e458aef80b9f0d8f0e958b089e7b7a6f4180aef41b7b7df97534fe780e9d"
+  },
+  "review_notes": [
+    "future_manifest_is_clear_obligation_not_invisible_actor",
+    "preplaced_dormant_and_reserved_slots_count_full_budget",
+    "early_depth_latches_before_dependencies_and_retreat_does_not_reset",
+    "partial_overlap_checks_all_possible_surviving_archetypes",
+    "two_to_zero_same_damage_batch_keeps_serial_breather",
+    "spawn_warning_and_birth_global_gaps_both0.8",
+    "6s12s_fallback_clock_only_reserved_position_blocked",
+    "same_RoomID_old_projectiles_deployables_states_and_proc_budgets_keep",
+    "teaching_one_enemy_not_forced_six_slot_template",
+    "all_six_templates_have_explicit_compatible_region_pool",
+    "final_settlement_automatic_not_walk_exit"
+  ],
+  "local_document_links": 111,
+  "current_design_sha256": {
+    "区域房间与遭遇流程设计.md": "de35d0f95b0e146434dfa00a1103fc58c8feaa93d94ee8aa0db43df18e0a4495",
+    "docs/design/dungeon-v1/common-rules.json": "bc8b274b6aa76eb67a159ef4acd400d51fc695655e8b696f94a74489757c9960",
+    "docs/design/dungeon-v1/design-index.json": "bf9398bdefd8e2b6b527704f52f90c73e0177cf4196ea04fc7d3dedd1aa973a3",
+    "docs/design/dungeon-v1/paper-cases.json": "e53340c81deaffcc16056b0bdb0edbc6ba8d8b273cc8db400ffa46fb6b826d03",
+    "docs/design/dungeon-v1/regions-and-routes.json": "105dcac17fc91ed6a4e32acabc3e1b665ea9f9ddddf1ec13baf1aabc1abcd2a1",
+    "docs/design/dungeon-v1/room-sequences.json": "d92f739e2718ec0353f6b5b5ef19d86c00bb5dffb2d057b32dec133563839851",
+    "docs/design/dungeon-v1/01-区域路线与房间职能.md": "5ee08aa95602d0684d7594cf7f9265bb8716b090448f31799a99001348789b04",
+    "docs/design/dungeon-v1/02-房间遭遇时序案例.md": "d351bba623d90a0f036f1ffa39a320fed607f7c16211c856beea161fcd78640f"
+  },
+  "resolved_validation_findings": [
+    {
+      "initial_errors": [
+        {
+          "group": "refs",
+          "error": "REG-03-H01 boss ref"
+        },
+        {
+          "group": "refs",
+          "error": "REG-04-H01 boss ref"
+        },
+        {
+          "group": "refs",
+          "error": "REG-05-H01 boss ref"
+        }
+      ],
+      "resolution": "Boss ID may be null only on explicitly non-Boss optional discovery nodes; no content modification required",
+      "game_design_changed": false
+    }
+  ],
+  "final_recheck": {
+    "checks": 319,
+    "errors": [],
+    "local_document_links": 111,
+    "all_authored_files_unchanged_since_full_check": true,
+    "nullable_reference_semantics_rechecked": true
+  }
+}

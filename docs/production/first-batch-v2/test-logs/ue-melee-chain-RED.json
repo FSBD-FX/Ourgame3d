@@ -1,0 +1,92 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "符朔八道",
+			"instance": "9860F99A426D6DCDEE3A1C9B509CC176",
+			"instanceName": "符朔八道-34856",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (24H2) [10.0.26100.4946] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 3060 Laptop GPU",
+			"cPUModel": "12th Gen Intel(R) Core(TM) i7-12700H",
+			"rAMInGB": 16,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.10.14-13.49.59",
+	"succeeded": 0,
+	"succeededWithWarnings": 0,
+	"failed": 1,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.044560499489307404,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "MeleeChainTiming",
+			"fullTestPath": "CodexDungeon.Content.MeleeChainTiming",
+			"state": "Fail",
+			"deviceInstance": [
+				"9860F99A426D6DCDEE3A1C9B509CC176"
+			],
+			"duration": 0.044560499489307404,
+			"dateTime": "2026.10.14-13.49.59",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Sword first segment retains full .60 second action' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonGameplayTests.cpp",
+					"lineNumber": 103,
+					"timestamp": "2026.10.14-13.49.59"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Ground attack cannot jump away its recovery' to be 0.000000, but it was 46.500000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonGameplayTests.cpp",
+					"lineNumber": 106,
+					"timestamp": "2026.10.14-13.49.59"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Sword second segment lasts .54 seconds' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonGameplayTests.cpp",
+					"lineNumber": 109,
+					"timestamp": "2026.10.14-13.49.59"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Sword third segment lasts .66 seconds' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonGameplayTests.cpp",
+					"lineNumber": 112,
+					"timestamp": "2026.10.14-13.49.59"
+				}
+			],
+			"warnings": 0,
+			"errors": 4,
+			"artifacts": []
+		}
+	]
+}

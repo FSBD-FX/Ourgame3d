@@ -1,0 +1,1228 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "source_event": "EV-029",
+  "module": "D-11",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "all_controller_mapping_deadzone_rebind_and_context_parameters_assistant_proposed_untested; legacy_D02_D03_D04_game_rules_preserved",
+  "source_preservation": [
+    {
+      "path": "docs/design/player-combat-v1/player-combat-rules.json",
+      "sha256": "ab22cd0f131fa8f025ea16db9d1536028526b35c467aeb0008fe2dca59c413ef",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/items-v1/common-rules.json",
+      "sha256": "b5815a10f313b7364b1dde66b0eac9f703104ea260d4e4470094cffe31652e99",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/inventory-v1/inventory-rules.json",
+      "sha256": "7eb6f7da968622a1583b4e63069208513a09e0ef74d12e244c18e20332f08942",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/inventory-v1/01-交互流程与界面状态.md",
+      "sha256": "4e2d4bd1fe5a12a9f84c4a9a1fe306cb8edfaca5b5d72cfcc21ba62d918ae3f6",
+      "mutated": false
+    }
+  ],
+  "actions": [
+    {
+      "id": "move",
+      "name": "地面/空中XY移动",
+      "keyboard": [
+        "KeyW",
+        "KeyA",
+        "KeyS",
+        "KeyD",
+        "ArrowUp",
+        "ArrowLeft",
+        "ArrowDown",
+        "ArrowRight"
+      ],
+      "gamepad": [
+        "LeftStick8Way"
+      ],
+      "trigger": "continuous_normalized_direction",
+      "owner": "world_and_live_movement_handoff",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested",
+      "keyboard_direction_components": {
+        "positive_x": [
+          "KeyD",
+          "ArrowRight"
+        ],
+        "negative_x": [
+          "KeyA",
+          "ArrowLeft"
+        ],
+        "positive_depth_y": [
+          "KeyW",
+          "ArrowUp"
+        ],
+        "negative_depth_y": [
+          "KeyS",
+          "ArrowDown"
+        ]
+      }
+    },
+    {
+      "id": "primary",
+      "name": "主攻",
+      "keyboard": [
+        "KeyJ",
+        "MouseLeft"
+      ],
+      "gamepad": [
+        "West"
+      ],
+      "trigger": "fresh_press",
+      "owner": "world_or_eligible_live_handoff",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested",
+      "only_allowed_buffer": "D02_final0.12s_primary_recovery_one_slot; fresh_press_only; clear_on_UI_or_pause_transition"
+    },
+    {
+      "id": "skill",
+      "name": "武器技",
+      "keyboard": [
+        "KeyK",
+        "MouseRight"
+      ],
+      "gamepad": [
+        "North"
+      ],
+      "trigger": "fresh_press",
+      "owner": "world_or_eligible_live_handoff",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "jump",
+      "name": "跳跃",
+      "keyboard": [
+        "Space"
+      ],
+      "gamepad": [
+        "South"
+      ],
+      "trigger": "fresh_press",
+      "owner": "world_or_non_UI_owned_live_handoff",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "dodge",
+      "name": "闪避",
+      "keyboard": [
+        "ShiftLeft",
+        "ShiftRight"
+      ],
+      "gamepad": [
+        "East"
+      ],
+      "trigger": "fresh_press",
+      "owner": "world_or_eligible_live_handoff",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "reload",
+      "name": "装填/取消装填",
+      "keyboard": [
+        "KeyT"
+      ],
+      "gamepad": [
+        "RB"
+      ],
+      "trigger": "fresh_press",
+      "owner": "world_or_eligible_live_handoff",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested",
+      "semantic_in_world_reload": "cancel_reload; no_refill; original_D02_timing_and_priority"
+    },
+    {
+      "id": "switch_weapon",
+      "name": "切换武器",
+      "keyboard": [
+        "KeyQ"
+      ],
+      "gamepad": [
+        "LB"
+      ],
+      "trigger": "fresh_press",
+      "owner": "world_or_eligible_live_handoff",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "item_slot_1",
+      "name": "快捷道具1",
+      "keyboard": [
+        "Digit1"
+      ],
+      "gamepad": [
+        "LT"
+      ],
+      "trigger": "fresh_press",
+      "owner": "world_or_eligible_live_handoff",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "item_slot_2",
+      "name": "快捷道具2",
+      "keyboard": [
+        "Digit2"
+      ],
+      "gamepad": [
+        "RT"
+      ],
+      "trigger": "fresh_press",
+      "owner": "world_or_eligible_live_handoff",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "interact",
+      "name": "交互",
+      "keyboard": [
+        "KeyE"
+      ],
+      "gamepad": [
+        "DpadUp"
+      ],
+      "trigger": "fresh_press",
+      "owner": "world_only_targeted_request",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "cycle_target",
+      "name": "切换当前交互目标",
+      "keyboard": [
+        "Tab"
+      ],
+      "gamepad": [
+        "DpadRight"
+      ],
+      "trigger": "fresh_press",
+      "owner": "world_only_no_transfer",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "inspect",
+      "name": "检视",
+      "keyboard": [
+        "KeyI"
+      ],
+      "gamepad": [
+        "DpadLeft"
+      ],
+      "trigger": "fresh_press",
+      "owner": "open_or_close_paused_inspection",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "pause",
+      "name": "暂停",
+      "keyboard": [
+        "Escape"
+      ],
+      "gamepad": [
+        "Menu"
+      ],
+      "trigger": "fresh_press",
+      "owner": "context_owned_pause_or_resume",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "map",
+      "name": "地图",
+      "keyboard": [
+        "KeyM"
+      ],
+      "gamepad": [
+        "View"
+      ],
+      "trigger": "fresh_press",
+      "owner": "world_opens_paused_read_only_map",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested",
+      "reveals_unfound_hidden_nodes": false,
+      "read_only_pauses_singleplayer_clock": true
+    },
+    {
+      "id": "ui_confirm",
+      "name": "确认",
+      "keyboard": [
+        "Enter"
+      ],
+      "gamepad": [
+        "South"
+      ],
+      "trigger": "fresh_press",
+      "owner": "top_UI_only_never_world_action",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ui_cancel",
+      "name": "取消/返回",
+      "keyboard": [
+        "Escape"
+      ],
+      "gamepad": [
+        "View",
+        "East"
+      ],
+      "trigger": "fresh_press",
+      "owner": "context_binding_is_authoritative_not_both_buttons_in_every_UI",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested",
+      "context_bindings": {
+        "live_overlay": {
+          "keyboard": [
+            "Escape"
+          ],
+          "gamepad": [
+            "View"
+          ],
+          "semantic_alias": "live_cancel"
+        },
+        "paused_modal": {
+          "keyboard": [
+            "Escape"
+          ],
+          "gamepad": [
+            "East",
+            "View"
+          ],
+          "semantic_alias": "modal_back"
+        },
+        "front_end_or_hub": {
+          "keyboard": [
+            "Escape"
+          ],
+          "gamepad": [
+            "East"
+          ],
+          "semantic_alias": "modal_back"
+        }
+      }
+    },
+    {
+      "id": "ui_nav_up",
+      "name": "界面向上",
+      "keyboard": [
+        "ArrowUp"
+      ],
+      "gamepad": [
+        "DpadUp"
+      ],
+      "trigger": "nav_repeat",
+      "owner": "top_UI_only",
+      "held_autorepeat": true,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ui_nav_down",
+      "name": "界面向下",
+      "keyboard": [
+        "ArrowDown"
+      ],
+      "gamepad": [
+        "DpadDown"
+      ],
+      "trigger": "nav_repeat",
+      "owner": "top_UI_only",
+      "held_autorepeat": true,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ui_nav_left",
+      "name": "界面向左",
+      "keyboard": [
+        "ArrowLeft"
+      ],
+      "gamepad": [
+        "DpadLeft"
+      ],
+      "trigger": "nav_repeat",
+      "owner": "top_UI_only",
+      "held_autorepeat": true,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ui_nav_right",
+      "name": "界面向右",
+      "keyboard": [
+        "ArrowRight"
+      ],
+      "gamepad": [
+        "DpadRight"
+      ],
+      "trigger": "nav_repeat",
+      "owner": "top_UI_only",
+      "held_autorepeat": true,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "ui_focus_next",
+      "name": "下一个界面焦点",
+      "keyboard": [
+        "Tab"
+      ],
+      "gamepad": [],
+      "trigger": "fresh_press",
+      "owner": "top_UI_only_not_world_cycle_target",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested"
+    },
+    {
+      "id": "settlement_continue",
+      "name": "结算操作入口（按键分流）",
+      "keyboard": [
+        "KeyR",
+        "Enter"
+      ],
+      "gamepad": [
+        "South"
+      ],
+      "trigger": "fresh_press",
+      "owner": "settlement_only_no_implicit_new_RunID",
+      "keyboard_semantics": {
+        "KeyR": "restart_review_open_UI_NEW_RUN_only_after_committed_settlement",
+        "Enter": "ui_confirm_activate_explicit_focused_button_default_return_HUB"
+      },
+      "gamepad_semantics": {
+        "South": "ui_confirm_activate_explicit_focused_button_default_return_HUB"
+      },
+      "focused_new_run_button": "open_UI_NEW_RUN_review_only; independent_fresh_confirm_and_D09_checks_required",
+      "held_autorepeat": false,
+      "status": "assistant_proposed_untested"
+    }
+  ],
+  "placeholder_aliases": {
+    "confirm": {
+      "action_id": "ui_confirm",
+      "context": "current_top_UI",
+      "semantic": "resolve_current_context_confirmation; consume_event_without_world_passthrough"
+    },
+    "cancel": {
+      "action_id": "ui_cancel",
+      "context": "current_top_UI",
+      "semantic": "live_overlay_uses_live_cancel; paused_modal_uses_modal_back; consume_event_without_world_passthrough"
+    },
+    "move_depth": {
+      "action_id": "move",
+      "display_component": "depth_y_only_W_S_or_leftstick_up_down"
+    },
+    "live_cancel": {
+      "action_id": "ui_cancel",
+      "context": "live_overlay",
+      "default_keyboard": [
+        "Escape"
+      ],
+      "default_gamepad": [
+        "View"
+      ]
+    },
+    "modal_back": {
+      "action_id": "ui_cancel",
+      "context": "paused_modal",
+      "default_keyboard": [
+        "Escape"
+      ],
+      "default_gamepad": [
+        "East"
+      ]
+    },
+    "cancel_reload": {
+      "action_id": "reload",
+      "context": "world_reload",
+      "semantic": "cancel_existing_reload"
+    }
+  },
+  "controller_position_labels": {
+    "South": "A",
+    "East": "B",
+    "West": "X",
+    "North": "Y",
+    "platform_brand_glyphs": "presentation_only_after_real_device_profile_detection; canonical_positions_are_authority"
+  },
+  "contexts": {
+    "world_grounded_idle": {
+      "clock": "running",
+      "keyboard_move": [
+        "WASD",
+        "ArrowKeys"
+      ],
+      "gamepad_move": "LeftStick8Way",
+      "active_request_priority": [
+        "dodge",
+        "jump",
+        "item_slot_1",
+        "item_slot_2",
+        "skill",
+        "primary",
+        "switch_weapon",
+        "reload",
+        "interact"
+      ],
+      "pause_or_inspection_preempts_new_combat_request": true,
+      "one_active_request_per_logic_step": true,
+      "invalid_interact_never_falls_through_to_exit": true,
+      "world_arrow_or_DpadUp_are_not_UI_events": true
+    },
+    "world_reload": {
+      "clock": "running",
+      "active_request_priority": [
+        "dodge",
+        "switch_weapon",
+        "cancel_reload"
+      ],
+      "reload_binding_resolves_to": "cancel_reload",
+      "primary_or_skill_same_step_after_cancel": "discard_request; requires_new_press_next_step",
+      "reload_complete_same_timestamp_before_new_request": true,
+      "cancel_refills_magazine": false,
+      "empty_cancel_auto_restarts_reload": false
+    },
+    "live_overlay": {
+      "inventory_state_ids": [
+        "UI-02",
+        "UI-07",
+        "UI-08"
+      ],
+      "clock": "running",
+      "gamepad_fixed_UI_owners": {
+        "DpadUp": "ui_nav_up",
+        "DpadDown": "ui_nav_down",
+        "DpadLeft": "ui_nav_left",
+        "DpadRight": "ui_nav_right",
+        "South": "ui_confirm",
+        "View": "live_cancel",
+        "Menu": "pause"
+      },
+      "keyboard_fixed_UI_owners": {
+        "ArrowUp": "ui_nav_up",
+        "ArrowDown": "ui_nav_down",
+        "ArrowLeft": "ui_nav_left",
+        "ArrowRight": "ui_nav_right",
+        "Tab": "ui_focus_next",
+        "Enter": "ui_confirm",
+        "Escape": "live_cancel",
+        "KeyE": "consume_no_confirm_or_second_interact",
+        "MouseLeft": "hit_test_UI_control_or_panel_or_consumed_outside_cancel; never_primary",
+        "MouseRight": "UI_consumed_or_outside_cancel; never_skill"
+      },
+      "pure_cancel_choice": "View_gamepad_or_Escape_keyboard; DpadDown_is_navigation_not_cancel",
+      "default_East": "new_legal_dodge_closes_then_executes_once; illegal_dodge_is_consumed_with_reason_and_keeps_overlay",
+      "default_West_North": "new_legal_primary_or_skill_closes_then_executes_once; no_legal_request_keeps_overlay",
+      "other_world_handoff_actions": [
+        "dodge",
+        "jump",
+        "item_slot_1",
+        "item_slot_2",
+        "skill",
+        "primary",
+        "switch_weapon",
+        "reload"
+      ],
+      "world_handoff_uses_current_binding": "only_controls_not_owned_by_fixed_UI; after_rebind_route_the_mapped_action_not_hardcoded_button_name",
+      "South_confirm_jumps": false,
+      "DpadUp_navigates_and_interacts": false,
+      "DpadRight_navigates_and_cycles_world_target": false,
+      "keyboard_WASD_or_left_stick": "fresh_movement_intent_closes_overlay_then_continuous_world_movement; preheld_requires_release_or_neutral_first",
+      "opened_same_press_is_confirm": false,
+      "event_priority": [
+        "pause_or_inspect_or_map_view_request",
+        "pure_cancel",
+        "fresh_movement_and_highest_legal_world_handoff",
+        "one_UI_navigation_event",
+        "fresh_UI_confirm"
+      ],
+      "navigation_and_confirm_same_step": "navigation_consumes_step; confirm_discarded_requires_new_press; no_new_target_payment_same_step",
+      "pause_request": "cancel_unconfirmed_preview_then_open_paused_menu",
+      "confirm": "revalidate_current_ID_versions_quote_capacity_safety_per_D04; UI_consumes_event",
+      "invalid_world_action_alone": "keep_overlay_show_current_reason; does_not_become_cancel_or_other_action",
+      "already_started_transfer_action": "not_a_preview; UI_close_does_not_cancel_real_action_recovery; D04_movement_damage_legal_dodge_cancel_rules_only",
+      "pointer_outside_click": "pure_cancel_consumes_this_click; never_handoff_same_pointer_press_to_attack_or_skill",
+      "default_inspect_key_I": "cancel_preview_then_open_paused_inspection; DpadLeft_remains_navigation",
+      "default_map_key_M": "cancel_preview_then_open_paused_read_only_map; View_only_cancels_current_live_overlay",
+      "meta_view_requests_after_rebind": "resolve_current_inspect_map_pause_bindings_if_control_not_owned_by_fixed_UI; I_M_are_default_labels_only"
+    },
+    "paused_inspection": {
+      "inventory_state_ids": [
+        "UI-04",
+        "UI-05"
+      ],
+      "clock": "frozen",
+      "gamepad_UI_owners": {
+        "South": "ui_confirm",
+        "East": "modal_back",
+        "View": "ordinary_close_inspect_discard_unconfirmed_plan",
+        "Menu": "ordinary_close_inspect_discard_unconfirmed_plan",
+        "Dpad": "navigation",
+        "LeftStick": "navigation"
+      },
+      "keyboard_UI_owners": {
+        "Enter": "ui_confirm",
+        "Escape": "ordinary_close_inspect_discard_unconfirmed_plan",
+        "KeyI": "ordinary_close_inspect_discard_unconfirmed_plan",
+        "ArrowKeys": "navigation",
+        "WASD": "navigation",
+        "Tab": "ui_focus_next"
+      },
+      "East_dodges": false,
+      "South_jumps": false,
+      "world_movement_or_actions_pass_through": false,
+      "combat_read_only": true,
+      "safe_organization": "select_one_intent_not_apply_inventory; explicit_UI06_resume_execute_only"
+    },
+    "paused_plan_confirm": {
+      "inventory_state_ids": [
+        "UI-06"
+      ],
+      "clock": "frozen",
+      "confirm_control": "fresh_Enter_or_South_on_explicit_return_and_execute_button",
+      "ordinary_back": "Escape_or_East_cancel_intent; View_Menu_I_ordinary_close_without_execute",
+      "on_confirm": "store_one_intent_resume_same_run_revalidate_after_due_damage_expiry_then_real_D04_action",
+      "held_other_gameplay_control_on_close": "cancel_plan; blocked_for_world_until_release_or_neutral",
+      "fresh_gameplay_input_after_resume": "cancel_plan; dispatch_only_one_new_legal_request",
+      "failure": "clear_intent_no_auto_wait_or_retry_no_refund_of_real_elapsed_changes"
+    },
+    "paused_menu": {
+      "clock": "frozen",
+      "gamepad_UI_owners": {
+        "South": "ui_confirm",
+        "East": "modal_back",
+        "View": "modal_back",
+        "Menu": "resume_from_root_menu_only_else_return_one_level",
+        "Dpad": "navigation",
+        "LeftStick": "navigation"
+      },
+      "keyboard_UI_owners": {
+        "Enter": "ui_confirm",
+        "Escape": "modal_back_or_resume_from_root_menu",
+        "ArrowKeys": "navigation",
+        "WASD": "navigation",
+        "Tab": "ui_focus_next"
+      },
+      "East_dodges": false,
+      "South_jumps": false,
+      "closing_resumes_unconfirmed_plan": false,
+      "resume_input_consumed_until_release": true
+    },
+    "paused_map": {
+      "clock": "frozen",
+      "read_only": true,
+      "keyboard_close": [
+        "KeyM",
+        "Escape"
+      ],
+      "gamepad_close": [
+        "View",
+        "East",
+        "Menu"
+      ],
+      "navigation": "Dpad_LeftStick_or_ArrowKeys_WASD_UI_only",
+      "world_target_or_camera_changed": false,
+      "hidden_discovery_revealed_by_map_open": false,
+      "same_input_closes_then_moves_or_opens_other_panel": false
+    },
+    "hub_or_front_end": {
+      "clock": "no_active_run_world_clock",
+      "gamepad_UI_owners": {
+        "South": "ui_confirm",
+        "East": "modal_back",
+        "Dpad": "navigation",
+        "LeftStick": "navigation",
+        "Menu": "menu"
+      },
+      "keyboard_UI_owners": {
+        "Enter": "ui_confirm",
+        "Escape": "modal_back",
+        "ArrowKeys": "navigation",
+        "WASD": "navigation",
+        "Tab": "ui_focus_next"
+      },
+      "purchases_refunds_or_new_run": "explicit_selected_UI_action_and_existing_D09_lifecycle_checks; input_never_bypasses_unfinished_run_lock"
+    },
+    "settlement": {
+      "clock": "run_ended",
+      "keyboard": [
+        "KeyR",
+        "Enter"
+      ],
+      "gamepad": [
+        "South"
+      ],
+      "effect": "resolve_by_physical_binding; KeyR_opens_new_run_review_only; Enter_or_South_activates_current_explicit_focus_default_return_HUB",
+      "keyboard_bindings": {
+        "KeyR": "after_committed_settlement_open_UI_NEW_RUN_review_only_no_create_RunID",
+        "Enter": "activate_current_explicit_focused_button; default_return_HUB; focused_new_run_opens_UI_NEW_RUN_review_only"
+      },
+      "gamepad_bindings": {
+        "South": "activate_current_explicit_focused_button; default_return_HUB; focused_new_run_opens_UI_NEW_RUN_review_only"
+      },
+      "default_focus": "return_HUB",
+      "new_run_review_confirmation": "separate_later_fresh_ui_confirm_after_opening_press_consumed_and_D09_checks_pass",
+      "East_or_Escape": "back_or_close_available_summary_only_no_world_dodge",
+      "same_confirm_starts_next_run": false,
+      "new_run_requires_independent_D09_confirm": true,
+      "KeyR_during_combat": "unbound_no_restart"
+    },
+    "rebind_capture": {
+      "clock": "frozen_or_no_active_run",
+      "Escape_or_East": "cancel_capture_consume_not_assign_or_world_dodge",
+      "first_press_from_opening_capture": "ignored_until_release",
+      "candidate_press": "record_candidate_only_show_conflict_preview; never_execute_world_action",
+      "confirm": "explicit_second_UI_confirmation_apply_whole_validated_binding_set_atomically"
+    },
+    "focus_or_device_pause": {
+      "clock": "frozen",
+      "reason_visible": true,
+      "focus_return_or_device_reconnect_resumes": false,
+      "resume": "fresh_explicit_UI_confirm_after_controls_neutral_or_released",
+      "keeps_real_actions_and_committed_operations": "frozen_at_current_clock; no_rollback_or_refill",
+      "unconfirmed_UI_preview_and_unexecuted_plan": "discard_without_cost"
+    }
+  },
+  "physical_routing": {
+    "one_physical_event_one_context_owner": true,
+    "one_active_world_request_per_step": true,
+    "resolve_context_before_action_priority": true,
+    "D03_ground_priority": [
+      "dodge",
+      "jump",
+      "item_slot_1",
+      "item_slot_2",
+      "skill",
+      "primary",
+      "switch_weapon",
+      "reload",
+      "interact"
+    ],
+    "world_handoff_priority": "same_D03_priority_filtered_by_legal_actions_and_controls_not_UI_owned",
+    "multiple_aliases_same_action_same_step": "collapse_to_one_logical_request",
+    "fresh_press_only_except_move_and_UI_navigation": true,
+    "held_primary_or_item_repeat": false,
+    "primary_buffer": "legacy_D02_one0.12s_end_recovery_slot_only; no_other_new_input_buffers",
+    "entering_or_leaving_UI_or_pause_clears_primary_and_item_buffers": true,
+    "does_not_cancel_already_accepted_attack_or_reset_resource_snapshot": true,
+    "context_change_unarms_controls": "all_currently_down_gameplay_buttons_and_non_neutral_world_axes_require_release_or_neutral_before_next_world_request",
+    "opening_press_or_same_step_extra_press": "never_confirm_newly_opened_context; later_fresh_press_required",
+    "world_handoff_exception": "already_accepted_fresh_handoff_event_executes_once; newly_handed_off_movement_can_remain_continuous_until_release; all_other_held_controls_remain_unarmed",
+    "UI_navigation_repeat": {
+      "initial_delay_s": 0.35,
+      "repeat_interval_s": 0.1,
+      "repeats_confirm_or_cancel": false,
+      "preheld_on_context_entry_repeats": false
+    },
+    "pointer": {
+      "hit_test_top_UI_before_world": true,
+      "click_explicit_confirm_widget": "ui_confirm_consumed_no_primary",
+      "click_option_row": "select_only_no_purchase_or_transfer_same_click",
+      "click_UI_panel_background": "consume_no_world_attack",
+      "click_world_outside_live_panel": "pure_cancel_preview_and_consume_click; no_primary_or_skill_from_same_event; require_release_then_fresh_world_press",
+      "paused_pointer_click_outside_UI": "consume_no_world_action",
+      "hover_changes_world_target_or_commits": false,
+      "scroll_wheel_over_live_UI": "UI_consumes_scroll_and_mouse_buttons; no_primary_or_world_action",
+      "click_right_button_inside_live_UI": "consume_no_skill_no_implicit_paid_action"
+    },
+    "all_new_layers_require_fresh_edge_and_release_preheld_controls": true
+  },
+  "movement": {
+    "world_axes": [
+      "X_left_right",
+      "Y_depth_forward_back"
+    ],
+    "keyboard_up_and_stick_up": "positive_Y_depth_away_from_camera_not_jump_Z",
+    "eight_way": true,
+    "diagonal_normalization": true,
+    "analog_slow_walk": false,
+    "left_stick": {
+      "input_range": [
+        -1,
+        1
+      ],
+      "radial_press_deadzone": 0.22,
+      "radial_release_deadzone": 0.18,
+      "direction_sectors": 8,
+      "sector_degrees": 45,
+      "quantization": "index=floor((atan2(y,x)+pi/8)/(pi/4)) mod8; normalized_sector_direction_full_magnitude",
+      "outside_deadzone_speed_scale": 1,
+      "reentry_neutral_required_on_resume": true,
+      "axis_motion_during_live_UI": "fresh_world_move_handoff_only; Dpad_is_UI_nav",
+      "axis_motion_during_paused_UI": "navigation_only_no_actor_motion"
+    },
+    "opposite_keyboard_components_cancel": true,
+    "no_right_stick_aim_or_camera": true,
+    "right_stick_and_stick_clicks_default": "unbound; no_new_aim_sprint_or_camera_controls",
+    "existing_D02_movement_constraints_dodge_and_jump_unchanged": true,
+    "parameters_runtime_tested": false
+  },
+  "trigger_buttons": {
+    "controls": [
+      "LT",
+      "RT"
+    ],
+    "normalized_press_threshold": 0.55,
+    "normalized_release_threshold": 0.35,
+    "hysteresis": true,
+    "hold_autorepeat": false,
+    "held_at_context_change_unarmed_until_release": true
+  },
+  "rebind": {
+    "editable_world_actions": [
+      "move",
+      "primary",
+      "skill",
+      "jump",
+      "dodge",
+      "reload",
+      "switch_weapon",
+      "item_slot_1",
+      "item_slot_2",
+      "interact",
+      "cycle_target",
+      "inspect",
+      "pause",
+      "map"
+    ],
+    "profiles_per_device_kind": [
+      "keyboard_mouse",
+      "gamepad"
+    ],
+    "fixed_UI_navigation_confirm_cancel_first_draft": true,
+    "fixed_UI_controls_never_silently_overwritten": true,
+    "conflict_detection": "expand_every_active_context_and_alias; same_world_control_for_different_actions_or_hidden_by_live_fixed_UI_is_a_conflict_unless_declared_intentional_default_alias",
+    "intentional_context_aliases": [
+      {
+        "physical": "South",
+        "world_action": "jump",
+        "live_UI_owner": "ui_confirm"
+      },
+      {
+        "physical": "DpadUp",
+        "world_action": "interact",
+        "live_UI_owner": "ui_nav_up"
+      },
+      {
+        "physical": "DpadRight",
+        "world_action": "cycle_target",
+        "live_UI_owner": "ui_nav_right"
+      },
+      {
+        "physical": "DpadLeft",
+        "world_action": "inspect",
+        "live_UI_owner": "ui_nav_left"
+      },
+      {
+        "physical": "View",
+        "world_action": "map",
+        "live_UI_owner": "live_cancel"
+      },
+      {
+        "physical": "ArrowKeys",
+        "world_action": "move",
+        "live_UI_owner": "ui_navigation"
+      },
+      {
+        "physical": "Escape",
+        "world_action": "pause",
+        "live_UI_owner": "live_cancel"
+      },
+      {
+        "physical": "Tab",
+        "world_action": "cycle_target",
+        "live_UI_owner": "ui_focus_next"
+      },
+      {
+        "physical": "MouseLeft",
+        "world_action": "primary",
+        "live_UI_owner": "hit_tested_UI_control_or_panel_consumption"
+      },
+      {
+        "physical": "KeyE",
+        "world_action": "interact",
+        "live_UI_owner": "consume_no_confirm_or_second_interact"
+      },
+      {
+        "physical": "MouseRight",
+        "world_action": "skill",
+        "live_UI_owner": "UI_consumed_or_outside_cancel"
+      }
+    ],
+    "new_combat_binding_shadowed_by_fixed_live_UI": "reject_with_context_and_owner_reason; do_not_accept_because_world_only_looks_unique",
+    "free_live_controls_follow_rebound_world_action": "no_hardcoded_East_always_dodge_after_rebinding; default_East_is_dodge_only_because_current_world_binding_is_dodge",
+    "conflict_resolution": [
+      "cancel_keep_old_profile",
+      "explicit_atomic_swap_preview_if_both_actions_shapes_and_all_context_checks_are_valid"
+    ],
+    "automatic_unbind_last_required_action": false,
+    "last_binding_checks": [
+      "each_essential_world_action_accessible_on_selected_device_kind",
+      "UI_confirm_cancel_and_navigation_accessible",
+      "at_least_one_live_direct_movement_or_dodge_handoff_path",
+      "pure_live_cancel_accessible_even_if_dodge_currently_illegal",
+      "arrow_only_movement_keeps_pure_cancel_then_fresh_movement_route; no_profile_can_remove_all_routes_out_of_live_layer"
+    ],
+    "no_new_tap_hold_chord_or_combo_semantics": true,
+    "apply": "show_old_to_new_rows_then_validate_whole_profile_atomically; failure_keeps_old_profile; clear_input_buffers_and_release_gate_after_apply",
+    "unbind": "only_if_another_legal_binding_for_required_action_remains; preview_then_same_full_validation",
+    "restore_defaults": "explicit_confirmation_restore_whole_selected_device_profile_not_silent_single_unbind",
+    "capture_cancel": [
+      "Escape",
+      "East"
+    ],
+    "OS_reserved_combinations": "not_assignable_in_first_draft; do_not_intercept_OS_shortcuts",
+    "display_prompts": "resolve_current_context_binding_and_alias_after_profile_change; not_hardcoded_A_or_J_in_tutorials",
+    "profile_persistence": "D13_future_versioned_settings_record; no_claim_implemented",
+    "arrow_only_keyboard_live_exit": "Escape_pure_cancel_consumed; release_and_repress_arrow_movement_after_context_change; never_force_keyboard_WASD_to_be_the_only_escape"
+  },
+  "hotplug_and_focus": {
+    "input_devices_single_player": "one_player_slot; keyboard_mouse_and_one_assigned_pad_merge_as_one_event_stream_not_two_players",
+    "last_input_glyph_source": "intentional_new_press_or_leftstick_outside_deadzone_only; hardware_noise_does_not_switch",
+    "glyph_change_debounce_s": 0.15,
+    "glyph_debounce_delays_gameplay_events": false,
+    "new_pad_connection": "show_device_available; do_not_auto_resume_or_create_player_or_world_action",
+    "active_pad_disconnect": "clear_that_device_buttons_axes_and_buffers; if_it_was_current_intent_source_in_active_run_request_visible_auto_pause",
+    "inactive_pad_disconnect": "clear_device_state_notify; no_forced_pause_if_keyboard_mouse_is_current_source",
+    "same_tick_boundary": "resolve_already_due_damage_deaths_existing_action_commits_per_D03_D04_then_system_pause_before_accepting_new_input; no_cancelling_already_due_outcomes",
+    "focus_loss_in_active_singleplayer": "visible_auto_pause_freezes_same_sim_clock; discard_pure_preview_and_unexecuted_plan_not_real_accepted_action",
+    "focus_regain_or_pad_reconnect": "remain_paused; controls_release_or_neutral_then_fresh_explicit_resume",
+    "resume_confirm_consumed": "does_not_jump_attack_dodge_pay_or_execute_unconfirmed_inventory_plan",
+    "committed_transaction_or_real_action": "keep_same_commit_record_or_remaining_action_time; no_roll_back_refill_refund_or_new_draw",
+    "transition_during_device_event": "finish_existing_committed_transition_then_keep_pause_reason_in_destination; never_duplicate_exit_or_create_new_RunID",
+    "future_coop_policy": "not_defined_by_singleplayer_focus_pause"
+  },
+  "paper_input_cases": [
+    {
+      "id": "INP-01",
+      "context": "world_grounded_idle",
+      "input": [
+        "jump",
+        "dodge",
+        "primary"
+      ],
+      "expected": "highest_legal_dodge_only; no_jump_or_attack",
+      "legacy_ref": "D03_priority"
+    },
+    {
+      "id": "INP-02",
+      "context": "live_overlay",
+      "input": [
+        "fresh_DpadUp"
+      ],
+      "expected": "UI_navigation_up_only_no_interact_or_movement"
+    },
+    {
+      "id": "INP-03",
+      "context": "live_overlay",
+      "input": [
+        "fresh_South"
+      ],
+      "expected": "confirm_current_UI_once_no_jump_no_AttackID"
+    },
+    {
+      "id": "INP-04",
+      "context": "live_overlay",
+      "input": [
+        "fresh_East"
+      ],
+      "dodge_legal": true,
+      "expected": "cancel_unconfirmed_preview_then_accept_one_dodge; no_paid_commit"
+    },
+    {
+      "id": "INP-05",
+      "context": "live_overlay",
+      "input": [
+        "fresh_East"
+      ],
+      "dodge_legal": false,
+      "expected": "consume_show_reason_keep_overlay; no_cancel_no_dodge_no_other_implicit_action"
+    },
+    {
+      "id": "INP-06",
+      "context": "live_overlay",
+      "input": [
+        "fresh_West"
+      ],
+      "primary_legal": true,
+      "expected": "close_preview_accept_primary_once; held_West_does_not_autorepeat"
+    },
+    {
+      "id": "INP-07",
+      "context": "live_overlay",
+      "input": [
+        "fresh_North"
+      ],
+      "skill_legal": false,
+      "expected": "keep_preview_show_reason; no_auto_primary_or_free_cancel"
+    },
+    {
+      "id": "INP-08",
+      "context": "live_overlay",
+      "input": [
+        "fresh_View"
+      ],
+      "expected": "pure_cancel_no_map_no_world_action; must_release_View_before_world_map_press"
+    },
+    {
+      "id": "INP-09",
+      "context": "live_overlay",
+      "input": [
+        "DpadUp_opened_interaction_still_held"
+      ],
+      "expected": "no_UI_nav_repeat_until_release; opening_is_not_navigation_or_confirm"
+    },
+    {
+      "id": "INP-10",
+      "context": "paused_menu",
+      "input": [
+        "fresh_East"
+      ],
+      "expected": "one_modal_back_consumed; never_dodge_on_resume"
+    },
+    {
+      "id": "INP-11",
+      "context": "paused_plan_confirm",
+      "input": [
+        "fresh_ordinary_View_close"
+      ],
+      "expected": "discard_plan_resume_no_execution_no_physical_event_passthrough"
+    },
+    {
+      "id": "INP-12",
+      "context": "live_overlay",
+      "input": [
+        "fresh_leftstick_move"
+      ],
+      "expected": "close_preview_then_keep_fresh_movement_vector_continuous; do_not_gate_this_handoff_vector_back_to_zero"
+    },
+    {
+      "id": "INP-13",
+      "context": "live_overlay",
+      "input": [
+        "leftstick_preheld_on_context_entry"
+      ],
+      "expected": "no_movement_or_auto_close_until_neutral_then_new_intent"
+    },
+    {
+      "id": "INP-14",
+      "context": "live_overlay",
+      "input": [
+        "fresh_ArrowRight",
+        "fresh_Enter"
+      ],
+      "expected": "navigate_once; Enter_discarded_requires_next_new_confirm; no_payment_to_new_selection_same_step"
+    },
+    {
+      "id": "INP-15",
+      "context": "live_overlay",
+      "input": [
+        "MouseLeft_click_explicit_confirm_widget"
+      ],
+      "expected": "UI_button_or_scroll_area_consumes_pointer_no_primary; panel_background_consumed; outside_click_pure_cancel_also_no_attack"
+    },
+    {
+      "id": "INP-16",
+      "context": "world_reload",
+      "input": [
+        "fresh_reload",
+        "fresh_primary"
+      ],
+      "expected": "cancel_reload_without_refill; primary_same_step_discard; new_press_later_required"
+    },
+    {
+      "id": "INP-17",
+      "context": "world_grounded_idle",
+      "input": [
+        "fresh_KeyJ",
+        "fresh_MouseLeft"
+      ],
+      "expected": "dedupe_one_primary_request_and_one_AttackID"
+    },
+    {
+      "id": "INP-18",
+      "context": "world_grounded_idle",
+      "input": [
+        "focus_lost"
+      ],
+      "expected": "complete_already_due_tick_events_then_pause; no_refill_or_rollback; regain_does_not_resume"
+    },
+    {
+      "id": "INP-19",
+      "context": "rebind_capture",
+      "input": [
+        "assign_primary_to_View"
+      ],
+      "expected": "reject_fixed_live_cancel_shadow; old_mapping_preserved_no_silent_unbind"
+    },
+    {
+      "id": "INP-20",
+      "context": "rebind_capture",
+      "input": [
+        "swap_primary_West_and_reload_RB"
+      ],
+      "expected": "preview_and_atomically_swap_if_all_context_checks_pass; no_live_gameplay_press"
+    },
+    {
+      "id": "INP-21",
+      "context": "rebind_capture",
+      "input": [
+        "remove_last_live_escape_and_live_cancel_path"
+      ],
+      "expected": "reject_configuration_keep_old_valid_set"
+    },
+    {
+      "id": "INP-22",
+      "context": "world_grounded_idle",
+      "input": [
+        "LT_hold_over_press_threshold"
+      ],
+      "expected": "one_item1_request_no_hold_repeat; next_request_requires_release_below_threshold_then_new_press"
+    },
+    {
+      "id": "INP-23",
+      "context": "focus_or_device_pause",
+      "input": [
+        "reconnect_pad_with_South_held"
+      ],
+      "expected": "still_paused_ignore_held_confirm; neutral_release_then_fresh_resume_required"
+    },
+    {
+      "id": "INP-24",
+      "context": "paused_plan_confirm",
+      "input": [
+        "fresh_execute_confirm",
+        "other_gameplay_key_held"
+      ],
+      "expected": "cancel_plan_no_inventory_commit; held_world_controls_require_release; no_two_actions"
+    },
+    {
+      "id": "INP-25",
+      "context": "live_overlay",
+      "input": [
+        "fresh_MouseLeft_outside_panel"
+      ],
+      "expected": "close_preview_pure_cancel_consume_click; no_primary; MouseUp_then_new_click_required_for_world_attack"
+    },
+    {
+      "id": "INP-26",
+      "context": "live_overlay",
+      "input": [
+        "arrow_only_player_Escape_cancel",
+        "old_arrow_still_held"
+      ],
+      "expected": "no_world_move_until_arrow_release_and_new_press; then_world_arrow_movement_available"
+    },
+    {
+      "id": "INP-27",
+      "context": "settlement",
+      "input": [
+        "fresh_KeyR_after_committed_settlement_opens_review_only",
+        "fresh_Enter_or_South_on_default_return_HUB_focus_returns_HUB",
+        "fresh_Enter_or_South_on_explicit_new_run_focus_opens_review_only"
+      ],
+      "expected": "route_each_variant_by_its_current_context_and_focus; R_is_review_shortcut_not_default_confirm; opening_press_cannot_create_RunID; UI_NEW_RUN_needs_separate_fresh_confirm_and_D09_checks"
+    }
+  ],
+  "future_runtime_checks": [
+    "real_keyboard_mouse_and_gamepad_profiles_after_UI_ownership_resolution",
+    "all_UI02_UI07_UI08_no_pause_and_no_enter_or_South_passthrough",
+    "invalid_default_East_keeps_preview_while_View_pure_cancel_always_works",
+    "direction_key_and_DpadUp_navigation_aliases_no_world_interaction",
+    "West_North_LB_RB_LT_RT_handoff_uses_current_valid_binding_once",
+    "preheld_controls_and_axis_neutral_gate_with_continuous_fresh_movement_exception",
+    "same_step_navigation_confirm_and_open_confirm_no_accidental_payment",
+    "primary_alias_dedup_and_only_legacy0.12s_buffer",
+    "paused_execute_plan_cancel_and_actual_D04_action_after_resume",
+    "conflict_reject_atomic_swap_last_escape_path_and_prompt_update",
+    "disconnect_focus_change_during_attack_transfer_and_committed_payment",
+    "no_rightstick_aim_camera_or_analog_slow_walk",
+    "actual_device_deadzone_trigger_thresholds_UI_nav_repeat_accessibility"
+  ],
+  "runtime_validation_passed": false,
+  "default_mapping_audit": [
+    {
+      "physical": "DpadUp",
+      "world": "interact",
+      "live": "ui_nav_up",
+      "one_event_two_owners": false
+    },
+    {
+      "physical": "DpadRight",
+      "world": "cycle_target",
+      "live": "ui_nav_right",
+      "one_event_two_owners": false
+    },
+    {
+      "physical": "South",
+      "world": "jump",
+      "live": "ui_confirm",
+      "one_event_two_owners": false
+    },
+    {
+      "physical": "East",
+      "world": "dodge",
+      "live": "legal_dodge_handoff_or_consume_keep_layer",
+      "one_event_two_owners": false
+    },
+    {
+      "physical": "West",
+      "world": "primary",
+      "live": "legal_rebound_world_action_handoff",
+      "one_event_two_owners": false
+    },
+    {
+      "physical": "View",
+      "world": "map",
+      "live": "pure_cancel_no_map",
+      "one_event_two_owners": false
+    },
+    {
+      "physical": "ArrowKeys",
+      "world": "move",
+      "live": "UI_navigation; Escape_cancel_then_release_repress_restores_world_movement",
+      "one_event_two_owners": false
+    },
+    {
+      "physical": "MouseLeft",
+      "world": "primary",
+      "live": "UI_hit_or_consumed_outside_cancel_no_attack",
+      "one_event_two_owners": false
+    },
+    {
+      "physical": "MouseRight",
+      "world": "skill",
+      "live": "UI_consumed_or_outside_cancel_no_skill",
+      "one_event_two_owners": false
+    },
+    {
+      "physical": "Escape",
+      "world": "pause",
+      "live": "pure_cancel_no_pause_passthrough",
+      "one_event_two_owners": false
+    },
+    {
+      "physical": "Tab",
+      "world": "cycle_target",
+      "live": "ui_focus_next",
+      "one_event_two_owners": false
+    },
+    {
+      "physical": "KeyR",
+      "world": "unbound",
+      "settlement": "new_run_confirmation_screen_only",
+      "one_event_two_owners": false
+    }
+  ]
+}

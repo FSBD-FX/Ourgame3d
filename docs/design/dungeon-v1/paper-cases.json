@@ -1,0 +1,368 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "source_event": "EV-025",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "scope": "declarative_expected_encounter_boundary_cases; reference_event_evaluation_and_arithmetic_only_not_UE_tests",
+  "cases": [
+    {
+      "id": "DCASE-001",
+      "name": "depth_before_dependency_latches",
+      "template_id": "RSEQ-001",
+      "events": [
+        {
+          "at": 0,
+          "event": "entry"
+        },
+        {
+          "at": 1,
+          "event": "depth",
+          "value": 0.6
+        },
+        {
+          "at": 2,
+          "event": "depth",
+          "value": 0.1
+        },
+        {
+          "at": 10,
+          "event": "kill_group",
+          "group": 1
+        },
+        {
+          "at": 11.9,
+          "event": "evaluate"
+        },
+        {
+          "at": 12,
+          "event": "evaluate"
+        }
+      ],
+      "expected": {
+        "max_depth": 0.6,
+        "G2_admitted_before12": false,
+        "G2_admitted_at12": true,
+        "clear_at12": false
+      }
+    },
+    {
+      "id": "DCASE-002",
+      "name": "first_stage_dead_depth_not_reached",
+      "template_id": "RSEQ-003",
+      "events": [
+        {
+          "at": 0,
+          "event": "entry"
+        },
+        {
+          "at": 4,
+          "event": "kill_group",
+          "group": 1
+        },
+        {
+          "at": 20,
+          "event": "evaluate"
+        }
+      ],
+      "expected": {
+        "state": "awaiting_depth",
+        "G2_admitted": false,
+        "room_clear": false,
+        "fault_timer_for_unadmitted_group": false
+      }
+    },
+    {
+      "id": "DCASE-003",
+      "name": "dormant_last_enemy_no_false_clear",
+      "template_id": "RSEQ-001",
+      "input": {
+        "killed_slot": "RSEQ-001-S01",
+        "surviving_slot": "RSEQ-001-S02",
+        "surviving_state": "dormant"
+      },
+      "expected": {
+        "room_clear": false,
+        "D05_wake_fallback": true,
+        "same_slot_ID": true
+      }
+    },
+    {
+      "id": "DCASE-004",
+      "name": "fast_group_kill_still_has_future_obligation",
+      "template_id": "RSEQ-002",
+      "events": [
+        {
+          "at": 0,
+          "event": "entry"
+        },
+        {
+          "at": 1,
+          "event": "kill_group",
+          "group": 1
+        },
+        {
+          "at": 2.9,
+          "event": "evaluate"
+        },
+        {
+          "at": 3,
+          "event": "evaluate"
+        }
+      ],
+      "expected": {
+        "G2_admitted_before3": false,
+        "G2_admitted_at3": true,
+        "room_clear_before_G2_killed": false
+      }
+    },
+    {
+      "id": "DCASE-005",
+      "name": "any_one_mechanical_survivor",
+      "template_id": "RSEQ-005",
+      "input": {
+        "remaining_possible_ids": [
+          "ENM-MEC-001",
+          "ENM-MEC-003",
+          "ENM-BST-003"
+        ],
+        "next_group_id": "RSEQ-005-G2"
+      },
+      "expected": {
+        "all_three_combinations_fit": true,
+        "actors": 4,
+        "threat": 8
+      }
+    },
+    {
+      "id": "DCASE-006",
+      "name": "two_to_zero_same_batch",
+      "template_id": "RSEQ-005",
+      "events": [
+        {
+          "at": 0,
+          "event": "entry"
+        },
+        {
+          "at": 5,
+          "event": "kill_group",
+          "group": 1
+        },
+        {
+          "at": 6.9,
+          "event": "evaluate"
+        },
+        {
+          "at": 7,
+          "event": "evaluate"
+        }
+      ],
+      "expected": {
+        "G2_admitted_at5": false,
+        "G2_admitted_at7": true,
+        "intermediate_remaining_one_event_created": false
+      }
+    },
+    {
+      "id": "DCASE-007",
+      "name": "last_old_enemy_dies_after_next_reserved",
+      "template_id": "RSEQ-005",
+      "input": {
+        "G1_remaining": 1,
+        "G2_already_admitted": true,
+        "G1_last_dies_during_G2_warning": true
+      },
+      "expected": {
+        "restart_G2_warning": false,
+        "room_clear": false,
+        "new_group_budget_reservation_count": 1
+      }
+    },
+    {
+      "id": "DCASE-008",
+      "name": "reserved_to_actor_not_double_budget",
+      "input": {
+        "reserved_slots": 3,
+        "materialized_slots": 0,
+        "then_materialize": 1
+      },
+      "expected": {
+        "reserved_after": 2,
+        "actors_after": 1,
+        "counted_total": 3
+      }
+    },
+    {
+      "id": "DCASE-009",
+      "name": "spawn_distance_two_checks",
+      "input": {
+        "warning_min_cm": 350,
+        "materialization_min_cm": 220,
+        "initial_distance_cm": 360,
+        "later_distance_cm": 200,
+        "slot_ID": "fixed-slot"
+      },
+      "expected": {
+        "warning_allowed": true,
+        "materialization_allowed": false,
+        "same_slot_retry": true,
+        "free_actor_capacity_duplicated": false
+      }
+    },
+    {
+      "id": "DCASE-010",
+      "name": "partial_group_emerge_kill",
+      "input": {
+        "group_size": 3,
+        "materialized": 1,
+        "dead_during_emerge": 1,
+        "reserved_unmaterialized": 2
+      },
+      "expected": {
+        "remaining_obligations": 2,
+        "death_reward_count": 1,
+        "dead_actor_respawned_on_emerge_end": false,
+        "room_clear": false
+      }
+    },
+    {
+      "id": "DCASE-011",
+      "name": "sequential_warning_and_materialization",
+      "input": {
+        "group_admission_s": 10,
+        "slots": 3,
+        "warning_s": 1.2,
+        "gap_s": 0.8,
+        "emerge_s": 0.6
+      },
+      "expected": {
+        "warning_start_s": [
+          10,
+          10.8,
+          11.6
+        ],
+        "materialization_earliest_s": [
+          11.2,
+          12,
+          12.8
+        ],
+        "ordinary_ready_earliest_s": [
+          11.8,
+          12.6,
+          13.4
+        ],
+        "own_attack_windup_still_required": true
+      }
+    },
+    {
+      "id": "DCASE-012",
+      "name": "pause_freezes_all_sequence_timers",
+      "input": {
+        "warning_remaining_s": 0.7,
+        "paused_wall_time_s": 30
+      },
+      "expected": {
+        "warning_remaining_after_pause_s": 0.7,
+        "new_materializations_during_pause": 0
+      }
+    },
+    {
+      "id": "DCASE-013",
+      "name": "wave_death_keeps_projectile_capacity",
+      "input": {
+        "admitted_actor_count_after_deaths": 0,
+        "live_enemy_projectiles": 2,
+        "projectile_cap": 2,
+        "new_wave_actor_budget_valid": true
+      },
+      "expected": {
+        "wave_actor_admission_can_proceed": true,
+        "new_projectile_group_size1_can_start": false,
+        "old_projectiles_deleted_by_wave_clear": false
+      }
+    },
+    {
+      "id": "DCASE-014",
+      "name": "player_death_priority",
+      "template_id": "RSEQ-002",
+      "input": {
+        "player_dies_same_batch_as_G1_last": true,
+        "G2_not_admitted": true
+      },
+      "expected": {
+        "G2_admissions": 0,
+        "G2_materializations": 0,
+        "room_clear_success": false,
+        "new_rewards_for_future_slots": 0
+      }
+    },
+    {
+      "id": "DCASE-015",
+      "name": "true_room_clear_with_old_projectile",
+      "input": {
+        "all_required_slots_killed": true,
+        "future_obligations": 0,
+        "alive_actors": 0,
+        "old_enemy_projectiles": 1,
+        "player_ground_idle": true,
+        "route_free": true
+      },
+      "expected": {
+        "room_clear": true,
+        "normal_free_exit_allowed": true,
+        "full_safe_inventory_allowed": false,
+        "wave_style_cleanup_deleted_projectile": false
+      }
+    },
+    {
+      "id": "DCASE-016",
+      "name": "technical_retry_does_not_fake_death",
+      "input": {
+        "slot_ID": "fixed-slot",
+        "reward_transactions_before": 1,
+        "dead_slot_count_before": 1,
+        "player_HP": 62,
+        "wallet": 18,
+        "unmaterialized_reservations": 2
+      },
+      "expected": {
+        "reward_transactions_after": 1,
+        "dead_slots_revived": 0,
+        "player_HP": 62,
+        "wallet": 18,
+        "unmaterialized_slots_retried": 2,
+        "synthetic_kill_rewards": 0
+      }
+    },
+    {
+      "id": "DCASE-017",
+      "name": "required_depth_behind_roomclear_gate_rejected",
+      "input": {
+        "required_trigger_gate": "requires_room_clear",
+        "required_trigger_still_pending": true
+      },
+      "expected": {
+        "layout_accepted": false,
+        "cycle_reason": "room_clear_depends_on_future_group_which_depends_on_room_clear"
+      }
+    },
+    {
+      "id": "DCASE-018",
+      "name": "ground_sweep_crossing_not_endpoint_only",
+      "input": {
+        "entry_X": -1250,
+        "exit_X": 1250,
+        "old_ground_X": -100,
+        "new_ground_X": 500,
+        "depth_threshold": 0.5,
+        "jump_Z": 100
+      },
+      "expected": {
+        "crossed": true,
+        "max_depth": 0.7,
+        "jump_bypasses_trigger": false,
+        "retreat_unlatches": false
+      }
+    }
+  ]
+}

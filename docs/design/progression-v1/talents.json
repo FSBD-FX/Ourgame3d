@@ -1,0 +1,1265 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "source_event": "EV-027",
+  "user_message": "ok",
+  "module": "D-09",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "user_ok_authorizes_design_continuation_not_individual_approval; all_talent_names_counts_costs_values_assistant_proposed_untested",
+  "source_preservation": [
+    {
+      "path": "docs/design/player-combat-v1/player-combat-rules.json",
+      "sha256": "ab22cd0f131fa8f025ea16db9d1536028526b35c467aeb0008fe2dca59c413ef",
+      "preserved": true
+    },
+    {
+      "path": "docs/design/equipment-v2/stat-definitions.json",
+      "sha256": "2f8c3fe15aa2dc940f867be118b948e80ae9ae4c654bc70580021ade79d37bc9",
+      "preserved": true
+    },
+    {
+      "path": "docs/design/equipment-v2/enchant-rules.json",
+      "sha256": "520214b7b3b8195f769f7a77c7ecc40baca2039746f7bc73cbe49b4445756a55",
+      "preserved": true
+    },
+    {
+      "path": "docs/design/equipment-v2/affixes.json",
+      "sha256": "e6e3737cb15e64f0782dae0f0652dbac80ebaabf9ee9d97c46bd3e439402c75e",
+      "preserved": true
+    },
+    {
+      "path": "docs/design/items-v1/common-rules.json",
+      "sha256": "b5815a10f313b7364b1dde66b0eac9f703104ea260d4e4470094cffe31652e99",
+      "preserved": true
+    },
+    {
+      "path": "docs/design/items-v1/items.json",
+      "sha256": "09e40ef363ddcd2507efcbdfa4cf388916623e62015dcb41229a62d6badc2bc1",
+      "preserved": true
+    },
+    {
+      "path": "docs/design/economy-v1/equipment-growth.json",
+      "sha256": "4002351b1de27128f1a1db27020cdec8f46ab776bfc285be34742cbee23eedb9",
+      "preserved": true
+    },
+    {
+      "path": "docs/design/economy-v1/common-rules.json",
+      "sha256": "e08960c5fea63655a5f0bbb9f3223f49a3d8a3480c4164c492e19a6004f60f98",
+      "preserved": true
+    },
+    {
+      "path": "docs/design/equipment-v1/weapons.json",
+      "sha256": "95757819382832cfa31e6596f3ba90f1e983e83fbd69504da3c99d5ea2a272b4",
+      "preserved": true
+    },
+    {
+      "path": "docs/design/equipment-v1/armor.json",
+      "sha256": "9407e458aef80b9f0d8f0e958b089e7b7a6f4180aef41b7b7df97534fe780e9d",
+      "preserved": true
+    }
+  ],
+  "root_rules_ref": "hub-rules.json",
+  "scope": {
+    "talent_nodes": 9,
+    "max_total_purchased_ranks": 27,
+    "full_scheduled_cost_shards": 280,
+    "branches": 3,
+    "finite_ranks": true,
+    "all_purchased_talents_cumulative": true,
+    "talent_equipment_slots": 0,
+    "talent_mutex_groups": 0,
+    "infinite_scaling": false,
+    "zero_talent_mainline_win_verified": false,
+    "rank_requirement_to_enter_mainline_regions_or_Bosses": false,
+    "new_equipment_items": 0,
+    "new_item_unlocks_defined_in_this_file": 0
+  },
+  "rank_semantics": {
+    "owned_rank_integer_range": "0..node.max_rank",
+    "value": "owned_rank*per_rank_contribution",
+    "cumulative_rank_rows_are_reference_not_separate_active_sources": true,
+    "do_not_sum_cumulative_rows_for_rank1_plus_rank2_plus_rank3": true,
+    "cost_by_next_rank_is_incremental_not_cumulative": true,
+    "prerequisites": "same_profile_owned_rank_at_least_minimum; all listed requirements; no cycle",
+    "activation": "all purchased node ranks contribute once through immutable current-run talent snapshot; no equip toggle or exclusive branch"
+  },
+  "branches": [
+    {
+      "id": "BRANCH-VIGOR",
+      "name": "生存根基",
+      "talent_ids": [
+        "TAL-VIT",
+        "TAL-GRD",
+        "TAL-MED"
+      ],
+      "rank_total": 9,
+      "cost_total_shards": 96,
+      "exclusive": false
+    },
+    {
+      "id": "BRANCH-MASTERY",
+      "name": "战斗技艺",
+      "talent_ids": [
+        "TAL-ATK",
+        "TAL-BRK",
+        "TAL-CRT"
+      ],
+      "rank_total": 9,
+      "cost_total_shards": 100,
+      "exclusive": false
+    },
+    {
+      "id": "BRANCH-MOBILITY",
+      "name": "行动调度",
+      "talent_ids": [
+        "TAL-MOV",
+        "TAL-FOC",
+        "TAL-RLD"
+      ],
+      "rank_total": 9,
+      "cost_total_shards": 84,
+      "exclusive": false
+    }
+  ],
+  "nodes": [
+    {
+      "id": "TAL-VIT",
+      "name": "根基",
+      "branch_id": "BRANCH-VIGOR",
+      "max_rank": 3,
+      "currency": "permanent_shards",
+      "cost_by_next_rank": [
+        2,
+        6,
+        12
+      ],
+      "max_total_cost_shards": 20,
+      "prerequisites": [],
+      "per_rank_contributions": {
+        "max_health_pct": 4
+      },
+      "rank_rows": [
+        {
+          "rank": 1,
+          "incremental_cost_shards": 2,
+          "cumulative_cost_shards": 2,
+          "contributions": {
+            "max_health_pct": 4
+          }
+        },
+        {
+          "rank": 2,
+          "incremental_cost_shards": 6,
+          "cumulative_cost_shards": 8,
+          "contributions": {
+            "max_health_pct": 8
+          }
+        },
+        {
+          "rank": 3,
+          "incremental_cost_shards": 12,
+          "cumulative_cost_shards": 20,
+          "contributions": {
+            "max_health_pct": 12
+          }
+        }
+      ],
+      "role": "生命上限的容错基础，不治疗现有角色。",
+      "effect_scope": "all_living_player_templates_at_new_run",
+      "boundary": "最终上限继续60–150；新局按合法上限初始化，继续旧局沿原快照。",
+      "activation": "all_purchased_ranks_always_active_in_next_new_run_snapshot; no_talent_equipment_slot",
+      "mutex_group": null,
+      "max_rank_finite": true,
+      "purchase_order_within_node": "owned_rank_to_owned_rank_plus1_only",
+      "refund_rules_ref": "hub-rules.json",
+      "status": "assistant_proposed_untested",
+      "runtime_implemented": false
+    },
+    {
+      "id": "TAL-GRD",
+      "name": "御护",
+      "branch_id": "BRANCH-VIGOR",
+      "max_rank": 3,
+      "currency": "permanent_shards",
+      "cost_by_next_rank": [
+        6,
+        10,
+        16
+      ],
+      "max_total_cost_shards": 32,
+      "prerequisites": [
+        {
+          "talent_id": "TAL-VIT",
+          "minimum_owned_rank": 1
+        }
+      ],
+      "per_rank_contributions": {
+        "armor_flat": 2,
+        "ward_flat": 2
+      },
+      "rank_rows": [
+        {
+          "rank": 1,
+          "incremental_cost_shards": 6,
+          "cumulative_cost_shards": 6,
+          "contributions": {
+            "armor_flat": 2,
+            "ward_flat": 2
+          }
+        },
+        {
+          "rank": 2,
+          "incremental_cost_shards": 10,
+          "cumulative_cost_shards": 16,
+          "contributions": {
+            "armor_flat": 4,
+            "ward_flat": 4
+          }
+        },
+        {
+          "rank": 3,
+          "incremental_cost_shards": 16,
+          "cumulative_cost_shards": 32,
+          "contributions": {
+            "armor_flat": 6,
+            "ward_flat": 6
+          }
+        }
+      ],
+      "role": "无甲也有效的少量物理/魔法保护，不抹掉轻重甲差异。",
+      "effect_scope": "player_defense_with_or_without_body_armor",
+      "boundary": "无甲基值0加天赋后可大于0；仍不让无甲/原防具多抽负护甲或魔抗词。",
+      "activation": "all_purchased_ranks_always_active_in_next_new_run_snapshot; no_talent_equipment_slot",
+      "mutex_group": null,
+      "max_rank_finite": true,
+      "purchase_order_within_node": "owned_rank_to_owned_rank_plus1_only",
+      "refund_rules_ref": "hub-rules.json",
+      "status": "assistant_proposed_untested",
+      "runtime_implemented": false
+    },
+    {
+      "id": "TAL-MED",
+      "name": "药理",
+      "branch_id": "BRANCH-VIGOR",
+      "max_rank": 3,
+      "currency": "permanent_shards",
+      "cost_by_next_rank": [
+        8,
+        14,
+        22
+      ],
+      "max_total_cost_shards": 44,
+      "prerequisites": [
+        {
+          "talent_id": "TAL-VIT",
+          "minimum_owned_rank": 2
+        }
+      ],
+      "per_rank_contributions": {
+        "healing_received_pct": 2
+      },
+      "rank_rows": [
+        {
+          "rank": 1,
+          "incremental_cost_shards": 8,
+          "cumulative_cost_shards": 8,
+          "contributions": {
+            "healing_received_pct": 2
+          }
+        },
+        {
+          "rank": 2,
+          "incremental_cost_shards": 14,
+          "cumulative_cost_shards": 22,
+          "contributions": {
+            "healing_received_pct": 4
+          }
+        },
+        {
+          "rank": 3,
+          "incremental_cost_shards": 22,
+          "cumulative_cost_shards": 44,
+          "contributions": {
+            "healing_received_pct": 6
+          }
+        }
+      ],
+      "role": "提高合法生命恢复效率，不增加免费恢复来源。",
+      "effect_scope": "legal_HP_healing_to_living_player",
+      "boundary": "按实际恢复时当前属性，之后受来源预算/HP缺口约束；不能复活或提高专注恢复。",
+      "activation": "all_purchased_ranks_always_active_in_next_new_run_snapshot; no_talent_equipment_slot",
+      "mutex_group": null,
+      "max_rank_finite": true,
+      "purchase_order_within_node": "owned_rank_to_owned_rank_plus1_only",
+      "refund_rules_ref": "hub-rules.json",
+      "status": "assistant_proposed_untested",
+      "runtime_implemented": false
+    },
+    {
+      "id": "TAL-ATK",
+      "name": "磨砺",
+      "branch_id": "BRANCH-MASTERY",
+      "max_rank": 4,
+      "currency": "permanent_shards",
+      "cost_by_next_rank": [
+        2,
+        6,
+        12,
+        20
+      ],
+      "max_total_cost_shards": 40,
+      "prerequisites": [],
+      "per_rank_contributions": {
+        "damage_pct": 2
+      },
+      "rank_rows": [
+        {
+          "rank": 1,
+          "incremental_cost_shards": 2,
+          "cumulative_cost_shards": 2,
+          "contributions": {
+            "damage_pct": 2
+          }
+        },
+        {
+          "rank": 2,
+          "incremental_cost_shards": 6,
+          "cumulative_cost_shards": 8,
+          "contributions": {
+            "damage_pct": 4
+          }
+        },
+        {
+          "rank": 3,
+          "incremental_cost_shards": 12,
+          "cumulative_cost_shards": 20,
+          "contributions": {
+            "damage_pct": 6
+          }
+        },
+        {
+          "rank": 4,
+          "incremental_cost_shards": 20,
+          "cumulative_cost_shards": 40,
+          "contributions": {
+            "damage_pct": 8
+          }
+        }
+      ],
+      "role": "对各武器同预算的小幅直接伤害成长。",
+      "effect_scope": "active_weapon_primary_and_intrinsic_skill_direct_segments",
+      "boundary": "不放大道具伤害、DoT、固定燃烧或shock_flat；备用武器不叠。",
+      "activation": "all_purchased_ranks_always_active_in_next_new_run_snapshot; no_talent_equipment_slot",
+      "mutex_group": null,
+      "max_rank_finite": true,
+      "purchase_order_within_node": "owned_rank_to_owned_rank_plus1_only",
+      "refund_rules_ref": "hub-rules.json",
+      "status": "assistant_proposed_untested",
+      "runtime_implemented": false
+    },
+    {
+      "id": "TAL-BRK",
+      "name": "破势",
+      "branch_id": "BRANCH-MASTERY",
+      "max_rank": 3,
+      "currency": "permanent_shards",
+      "cost_by_next_rank": [
+        6,
+        10,
+        16
+      ],
+      "max_total_cost_shards": 32,
+      "prerequisites": [
+        {
+          "talent_id": "TAL-ATK",
+          "minimum_owned_rank": 1
+        }
+      ],
+      "per_rank_contributions": {
+        "stagger_pct": 2
+      },
+      "rank_rows": [
+        {
+          "rank": 1,
+          "incremental_cost_shards": 6,
+          "cumulative_cost_shards": 6,
+          "contributions": {
+            "stagger_pct": 2
+          }
+        },
+        {
+          "rank": 2,
+          "incremental_cost_shards": 10,
+          "cumulative_cost_shards": 16,
+          "contributions": {
+            "stagger_pct": 4
+          }
+        },
+        {
+          "rank": 3,
+          "incremental_cost_shards": 16,
+          "cumulative_cost_shards": 32,
+          "contributions": {
+            "stagger_pct": 6
+          }
+        }
+      ],
+      "role": "增加合法武器直接削韧，仍需读敌方韧性窗口。",
+      "effect_scope": "active_weapon_direct_stagger_only",
+      "boundary": "电震额外点数独立且不乘本倍率；目标韧性保护不被绕过。",
+      "activation": "all_purchased_ranks_always_active_in_next_new_run_snapshot; no_talent_equipment_slot",
+      "mutex_group": null,
+      "max_rank_finite": true,
+      "purchase_order_within_node": "owned_rank_to_owned_rank_plus1_only",
+      "refund_rules_ref": "hub-rules.json",
+      "status": "assistant_proposed_untested",
+      "runtime_implemented": false
+    },
+    {
+      "id": "TAL-CRT",
+      "name": "精确",
+      "branch_id": "BRANCH-MASTERY",
+      "max_rank": 2,
+      "currency": "permanent_shards",
+      "cost_by_next_rank": [
+        10,
+        18
+      ],
+      "max_total_cost_shards": 28,
+      "prerequisites": [
+        {
+          "talent_id": "TAL-ATK",
+          "minimum_owned_rank": 2
+        }
+      ],
+      "per_rank_contributions": {
+        "crit_chance_pct": 1
+      },
+      "rank_rows": [
+        {
+          "rank": 1,
+          "incremental_cost_shards": 10,
+          "cumulative_cost_shards": 10,
+          "contributions": {
+            "crit_chance_pct": 1
+          }
+        },
+        {
+          "rank": 2,
+          "incremental_cost_shards": 18,
+          "cumulative_cost_shards": 28,
+          "contributions": {
+            "crit_chance_pct": 2
+          }
+        }
+      ],
+      "role": "轻微提高武器暴击概率，保留攻击共享一次抽签。",
+      "effect_scope": "active_weapon_AttackID_critical_roll_only",
+      "boundary": "最终概率含基础5%封顶20%；不改暴击倍率，不让道具或DoT抽暴击。",
+      "activation": "all_purchased_ranks_always_active_in_next_new_run_snapshot; no_talent_equipment_slot",
+      "mutex_group": null,
+      "max_rank_finite": true,
+      "purchase_order_within_node": "owned_rank_to_owned_rank_plus1_only",
+      "refund_rules_ref": "hub-rules.json",
+      "status": "assistant_proposed_untested",
+      "runtime_implemented": false
+    },
+    {
+      "id": "TAL-MOV",
+      "name": "步法",
+      "branch_id": "BRANCH-MOBILITY",
+      "max_rank": 3,
+      "currency": "permanent_shards",
+      "cost_by_next_rank": [
+        2,
+        6,
+        12
+      ],
+      "max_total_cost_shards": 20,
+      "prerequisites": [],
+      "per_rank_contributions": {
+        "move_speed_pct": 1
+      },
+      "rank_rows": [
+        {
+          "rank": 1,
+          "incremental_cost_shards": 2,
+          "cumulative_cost_shards": 2,
+          "contributions": {
+            "move_speed_pct": 1
+          }
+        },
+        {
+          "rank": 2,
+          "incremental_cost_shards": 6,
+          "cumulative_cost_shards": 8,
+          "contributions": {
+            "move_speed_pct": 2
+          }
+        },
+        {
+          "rank": 3,
+          "incremental_cost_shards": 12,
+          "cumulative_cost_shards": 20,
+          "contributions": {
+            "move_speed_pct": 3
+          }
+        }
+      ],
+      "role": "提高普通XY走位底速，不改变闪避与跳跃高度。",
+      "effect_scope": "player_normal_XY_locomotion_before_action_air_slow_constraints",
+      "boundary": "先同stat合并、再甲条件倍率及待机倍率.65–1.25；闪避185厘米/.4秒/无敌段与跳跃v0/g不改。",
+      "activation": "all_purchased_ranks_always_active_in_next_new_run_snapshot; no_talent_equipment_slot",
+      "mutex_group": null,
+      "max_rank_finite": true,
+      "purchase_order_within_node": "owned_rank_to_owned_rank_plus1_only",
+      "refund_rules_ref": "hub-rules.json",
+      "status": "assistant_proposed_untested",
+      "runtime_implemented": false
+    },
+    {
+      "id": "TAL-FOC",
+      "name": "凝神",
+      "branch_id": "BRANCH-MOBILITY",
+      "max_rank": 3,
+      "currency": "permanent_shards",
+      "cost_by_next_rank": [
+        6,
+        10,
+        16
+      ],
+      "max_total_cost_shards": 32,
+      "prerequisites": [
+        {
+          "talent_id": "TAL-MOV",
+          "minimum_owned_rank": 1
+        }
+      ],
+      "per_rank_contributions": {
+        "focus_regen_pct": 3
+      },
+      "rank_rows": [
+        {
+          "rank": 1,
+          "incremental_cost_shards": 6,
+          "cumulative_cost_shards": 6,
+          "contributions": {
+            "focus_regen_pct": 3
+          }
+        },
+        {
+          "rank": 2,
+          "incremental_cost_shards": 10,
+          "cumulative_cost_shards": 16,
+          "contributions": {
+            "focus_regen_pct": 6
+          }
+        },
+        {
+          "rank": 3,
+          "incremental_cost_shards": 16,
+          "cumulative_cost_shards": 32,
+          "contributions": {
+            "focus_regen_pct": 9
+          }
+        }
+      ],
+      "role": "提高满足等待条件后的专注恢复率。",
+      "effect_scope": "current_armor_or_unarmored_legal_focus_regen_rate",
+      "boundary": "不缩消耗等待、站定条件或成本，不加专注上限，不重置last_spend_time；静脉20替代14再乘合计倍率。",
+      "activation": "all_purchased_ranks_always_active_in_next_new_run_snapshot; no_talent_equipment_slot",
+      "mutex_group": null,
+      "max_rank_finite": true,
+      "purchase_order_within_node": "owned_rank_to_owned_rank_plus1_only",
+      "refund_rules_ref": "hub-rules.json",
+      "status": "assistant_proposed_untested",
+      "runtime_implemented": false
+    },
+    {
+      "id": "TAL-RLD",
+      "name": "机簧",
+      "branch_id": "BRANCH-MOBILITY",
+      "max_rank": 3,
+      "currency": "permanent_shards",
+      "cost_by_next_rank": [
+        6,
+        10,
+        16
+      ],
+      "max_total_cost_shards": 32,
+      "prerequisites": [
+        {
+          "talent_id": "TAL-MOV",
+          "minimum_owned_rank": 1
+        }
+      ],
+      "per_rank_contributions": {
+        "reload_speed_pct": 3
+      },
+      "rank_rows": [
+        {
+          "rank": 1,
+          "incremental_cost_shards": 6,
+          "cumulative_cost_shards": 6,
+          "contributions": {
+            "reload_speed_pct": 3
+          }
+        },
+        {
+          "rank": 2,
+          "incremental_cost_shards": 10,
+          "cumulative_cost_shards": 16,
+          "contributions": {
+            "reload_speed_pct": 6
+          }
+        },
+        {
+          "rank": 3,
+          "incremental_cost_shards": 16,
+          "cumulative_cost_shards": 32,
+          "contributions": {
+            "reload_speed_pct": 9
+          }
+        }
+      ],
+      "role": "改善枪弩真实装填时间，不把近战与法杖改成装填武器。",
+      "effect_scope": "only_families_XBW_PST_SGN_RFL_with_real_reload",
+      "boundary": "按base_reload/(1+clamped_total/100)；不缩主攻/技能后摇、拉栓攻击段或加弹匣，不自动填弹。",
+      "activation": "all_purchased_ranks_always_active_in_next_new_run_snapshot; no_talent_equipment_slot",
+      "mutex_group": null,
+      "max_rank_finite": true,
+      "purchase_order_within_node": "owned_rank_to_owned_rank_plus1_only",
+      "refund_rules_ref": "hub-rules.json",
+      "status": "assistant_proposed_untested",
+      "runtime_implemented": false
+    }
+  ],
+  "max_total_contributions": {
+    "max_health_pct": 12,
+    "armor_flat": 6,
+    "ward_flat": 6,
+    "healing_received_pct": 6,
+    "damage_pct": 8,
+    "stagger_pct": 6,
+    "crit_chance_pct": 2,
+    "move_speed_pct": 3,
+    "focus_regen_pct": 9,
+    "reload_speed_pct": 9
+  },
+  "stat_merge_contract": {
+    "method": "sum_intrinsic_instance_growth_active_equipment_affix_item_relic_and_current_run_talent_contributions_per_stat_then_apply_existing_stat_and_derived_caps_once",
+    "talents_contribute_once_regardless_of_two_weapon_slots": true,
+    "inactive_weapon_affix_or_grade_contributes": false,
+    "caps_inherited_from_D03": {
+      "damage_pct": [
+        -30,
+        50
+      ],
+      "action_speed_pct": [
+        -20,
+        20
+      ],
+      "stagger_pct": [
+        -25,
+        25
+      ],
+      "reach_pct": [
+        -15,
+        15
+      ],
+      "crit_chance_pct_final": [
+        0,
+        20
+      ],
+      "crit_multiplier_final": [
+        1,
+        2
+      ],
+      "skill_cooldown_pct": [
+        -20,
+        25
+      ],
+      "reload_speed_pct": [
+        -25,
+        25
+      ],
+      "focus_cost_pct": [
+        -20,
+        25
+      ],
+      "lifesteal_pct": [
+        0,
+        5
+      ],
+      "armor_flat_final": [
+        0,
+        150
+      ],
+      "ward_flat_final": [
+        0,
+        150
+      ],
+      "poise_flat_final": [
+        30,
+        120
+      ],
+      "max_hp_final": [
+        60,
+        150
+      ],
+      "move_speed_pct": [
+        -25,
+        25
+      ],
+      "normal_move_multiplier_final": [
+        0.65,
+        1.25
+      ],
+      "focus_regen_pct": [
+        -25,
+        25
+      ],
+      "healing_received_pct": [
+        -25,
+        25
+      ],
+      "physical_vulnerability_pct": [
+        0,
+        25
+      ],
+      "magic_vulnerability_pct": [
+        0,
+        25
+      ]
+    },
+    "damage_pct": {
+      "talent_max": 8,
+      "cap": [
+        -30,
+        50
+      ],
+      "applies_to": "active_weapon_primary_and_intrinsic_skill_direct_segments_only",
+      "not_applied_to": [
+        "item_fixed_damage",
+        "DoT",
+        "burn_base_dps",
+        "shock_flat",
+        "environmental_damage"
+      ],
+      "formula": "base_segment*distance_factor*target_ratio*(1+clamp(S_affixes_items_relics+basic_growth_damage_pct+talent_damage_pct,-30,50)/100); crit_mitigation_vulnerability_once_after"
+    },
+    "stagger_pct": {
+      "talent_max": 6,
+      "cap": [
+        -25,
+        25
+      ],
+      "formula": "base_weapon_direct_stagger*(1+clamp(S_active_affixes_items_relics+talent_stagger_pct,-25,25)/100); shock_flat_separate_then_target_rules",
+      "item_stagger_and_shock_scaled": false
+    },
+    "crit_chance_pct": {
+      "base": 5,
+      "talent_max": 2,
+      "final_cap": [
+        0,
+        20
+      ],
+      "formula": "clamp(5+S_active_weapon_affixes_items_relics+talent_crit_chance_pct,0,20)",
+      "one_draw_per_accepted_AttackID_at_40percent_lock": true,
+      "all_subhits_and_targets_share_result": true,
+      "crit_multiplier_unchanged": [
+        1,
+        2
+      ]
+    },
+    "armor_ward": {
+      "talent_max_flat_each": 6,
+      "works_without_body_armor": true,
+      "unarmored_intrinsic_and_growth": 0,
+      "formula_each": "clamp(original_intrinsic_protection+same_instance_growth_flat+S_active_armor_affixes_items_relics+talent_guard_flat,0,150)",
+      "cap": [
+        0,
+        150
+      ],
+      "mitigation": "min(.6,A/(100+A))",
+      "no_second_percentage_mitigation_layer": true,
+      "negative_affix_eligibility_still_original_intrinsic_definition": true,
+      "new_talent_defense_never_expands_negative_roll_interval": true
+    },
+    "max_health_pct": {
+      "talent_max": 12,
+      "percent_budget_cap": [
+        -40,
+        50
+      ],
+      "formula": "100*(1+clamp(S_active_armor_affixes_items_relics+talent_max_health_pct,-40,50)/100)",
+      "final_hp_bounds": [
+        60,
+        150
+      ],
+      "new_run_initialization": "root_D01_D09_legal_new_run_HP; not_heal_a_continued_run",
+      "equipped_source_recalculation": "D04_currentHP=min(previous_actualHP,new_finalMaxHP); no_HP_gain_or_revival_from_cap_change"
+    },
+    "healing_received_pct": {
+      "talent_max": 6,
+      "cap": [
+        -25,
+        25
+      ],
+      "formula": "alive_only_legal_HP_source*(1+clamp(S_current_armor_affixes_items_relics+talent_healing_received_pct,-25,25)/100); then_source_budget_and_HP_missing",
+      "read_at_actual_heal_or_each_HoT_tick": true,
+      "dead_recipient_heal": 0,
+      "dead_consumes_budget": false,
+      "lifesteal_attack_budget_HP": 3,
+      "lifesteal_rolling_1s_budget_HP": 6,
+      "budgets_apply_after_efficiency": true,
+      "focus_healing_increased": false
+    },
+    "move_speed_pct": {
+      "talent_max": 3,
+      "stat_cap": [
+        -25,
+        25
+      ],
+      "formula": "bonus=clamp(S_active_weapon_and_armor_affixes_items_relics+talent_move_speed_pct,-25,25); idle=clamp(current_armor_base_or_conditional_multiplier*(1+bonus/100),.65,1.25); speed=265*idle*existing_action_air_hurt_and_slow_constraints",
+      "idle_derived_multiplier_cap": [
+        0.65,
+        1.25
+      ],
+      "jump_air_XY_multiplier_preserved": 0.8,
+      "dodge_distance_duration_and_iframes_scaled": false,
+      "jump_launch_gravity_apex_scaled": false
+    },
+    "focus_regen_pct": {
+      "talent_max": 9,
+      "cap": [
+        -25,
+        25
+      ],
+      "formula": "current_legal_armor_or_unarmored_regen_base*(1+clamp(S_active_armor_affixes_items_relics+talent_focus_regen_pct,-25,25)/100)",
+      "unarmored_base_rate": 12,
+      "unarmored_delay_s": 1,
+      "standing_trait_base_replaces_not_adds": true,
+      "delay_standing_condition_last_spend_or_max_focus_changed": false,
+      "instant_refill": false
+    },
+    "reload_speed_pct": {
+      "talent_max": 9,
+      "cap": [
+        -25,
+        25
+      ],
+      "eligible_families": [
+        "XBW",
+        "PST",
+        "SGN",
+        "RFL"
+      ],
+      "formula": "base_reload_s/(1+clamp(S_active_weapon_affixes_items_relics+talent_reload_speed_pct,-25,25)/100)",
+      "applies_to_melee_or_STF": false,
+      "attack_timeline_recovery_magazine_and_ammo_unchanged": true
+    },
+    "attack_timing": "D03_whole_attack_timeline_frozen_on_accepted_start; damage_resources_crit_and_other_snapshot_at_40percent_windup_lock",
+    "target_current_defense_and_vulnerability_at_hit": "unchanged_v2_D03",
+    "element_attempts_shared_slots_role_ICDs_target_ICDs_and_poise_protection": "unchanged_v2_D03_D05_D06",
+    "all_unlisted_stats_caps_and_source_restrictions_unchanged": true
+  },
+  "economy_and_unlock_boundary": {
+    "currency": "permanent_shards_outside_run",
+    "no_permanent_gold_or_shard_bonus": true,
+    "no_shop_discount_price_drop_probability_grade_or_enchant_weight_changes": true,
+    "no_additional_inventory_or_relic_or_talent_slots": true,
+    "no_revival_extra_dodge_iframe_jump_height_action_speed": true,
+    "D08_amounts_and_sources_unchanged": true,
+    "D08_700_gold_60_repeat_shards_10_first_main_extra_remain_conditional": true,
+    "special_item_content_unlocks": "other_D09_file_not_a_power_multiplier_here"
+  },
+  "profile_and_refund_interface": {
+    "root_defines_atomic_buy_refund_and_new_run_snapshot": true,
+    "this_file_defines_node_rank_cost_and_stat_data_only": true,
+    "purchase_or_full_reset_not_live_run_stat_edit": true,
+    "free_outside_run_full_talent_reset": "refund_original_actual_paid_shards_for_refunded_ranks_no_new_tax_or_slot_cost",
+    "max_refund_if_all27_ranks_paid_current_schedule": 280,
+    "no_current_catalog_price_revaluation_of_old_paid_records": true,
+    "continue_same_run_uses_its_original_talent_snapshot": true,
+    "refund_does_not_retroactively_edit_started_run_projectiles_resources_or_rewards": true,
+    "transactions_or_persistence_runtime_implemented": false
+  },
+  "paper_examples": [
+    {
+      "id": "TAL-EX-001",
+      "name": "零天赋无甲基线",
+      "kind": "profile",
+      "ranks": {},
+      "total_ranks": 0,
+      "actual_scheduled_cost_shards": 0,
+      "context": {
+        "body_armor": "none",
+        "weapon": "WPN-KNF-001",
+        "basic_upgrade_grade": 0,
+        "enchantment": "none",
+        "items_relics": []
+      },
+      "expected": {
+        "max_hp": 100,
+        "armor": 0,
+        "ward": 0,
+        "healing_received_pct": 0,
+        "weapon_primary_damage": 12,
+        "weapon_primary_stagger": 6,
+        "crit_chance_pct": 5,
+        "crit_multiplier": 1.5,
+        "idle_move_cm_s": 265,
+        "unarmored_focus_regen_per_s": 12,
+        "unarmored_focus_delay_s": 1
+      },
+      "runtime_win_verified": false
+    },
+    {
+      "id": "TAL-EX-002",
+      "name": "部分购买含前置",
+      "kind": "profile",
+      "ranks": {
+        "TAL-VIT": 2,
+        "TAL-GRD": 1,
+        "TAL-MED": 1,
+        "TAL-ATK": 1,
+        "TAL-MOV": 1
+      },
+      "total_ranks": 6,
+      "actual_scheduled_cost_shards": 26,
+      "context": {
+        "body_armor": "none",
+        "weapon": "WPN-KNF-001",
+        "basic_upgrade_grade": 0,
+        "enchantment": "none",
+        "items_relics": []
+      },
+      "expected": {
+        "max_hp": 108,
+        "armor": 2,
+        "ward": 2,
+        "healing_received_pct": 2,
+        "weapon_primary_damage": 12.24,
+        "weapon_primary_stagger": 6,
+        "crit_chance_pct": 5,
+        "idle_move_cm_s": 267.65,
+        "unarmored_focus_regen_per_s": 12
+      }
+    },
+    {
+      "id": "TAL-EX-003",
+      "name": "满天赋无甲基线",
+      "kind": "profile",
+      "ranks": {
+        "TAL-VIT": 3,
+        "TAL-GRD": 3,
+        "TAL-MED": 3,
+        "TAL-ATK": 4,
+        "TAL-BRK": 3,
+        "TAL-CRT": 2,
+        "TAL-MOV": 3,
+        "TAL-FOC": 3,
+        "TAL-RLD": 3
+      },
+      "total_ranks": 27,
+      "actual_scheduled_cost_shards": 280,
+      "context": {
+        "body_armor": "none",
+        "weapon": "WPN-KNF-001",
+        "basic_upgrade_grade": 0,
+        "enchantment": "none",
+        "items_relics": []
+      },
+      "expected": {
+        "max_hp": 112,
+        "armor": 6,
+        "ward": 6,
+        "physical_reduction": 0.05660377358490566,
+        "magic_reduction": 0.05660377358490566,
+        "healing_received_pct": 6,
+        "weapon_primary_damage": 12.96,
+        "weapon_primary_stagger": 6.36,
+        "crit_chance_pct": 7,
+        "crit_multiplier": 1.5,
+        "idle_move_cm_s": 272.95,
+        "unarmored_focus_regen_per_s": 13.08,
+        "unarmored_focus_delay_s": 1
+      },
+      "runtime_win_verified": false
+    },
+    {
+      "id": "TAL-EX-004",
+      "name": "满天赋和合法负词相加",
+      "kind": "negative_stats",
+      "talent_contributions": {
+        "max_health_pct": 12,
+        "healing_received_pct": 6,
+        "damage_pct": 8
+      },
+      "negative_affixes": [
+        {
+          "id": "AFF-N-011",
+          "tier": 5,
+          "signed_value": -20
+        },
+        {
+          "id": "AFF-N-013",
+          "tier": 5,
+          "signed_value": -25
+        },
+        {
+          "id": "AFF-N-001",
+          "tier": 5,
+          "signed_value": -20
+        }
+      ],
+      "context": "independent_legal_cursed_armor_for_health_or_healing_and_independent_cursed_weapon_for_damage; not_one_package_with_two_negatives",
+      "cases_are_separate_legal_gear_states": true,
+      "expected": {
+        "max_hp_with_health_curse": 92,
+        "healing_received_pct_with_healing_curse": -19,
+        "REC001_base30_before_missing_HP_clip": 24.3,
+        "KNF001_grade0_damage_with_damage_curse": 10.56
+      },
+      "warning": "these_defense_health_healing_curses_are_separate_case_contexts_not_one_illegal_two_negative_package"
+    },
+    {
+      "id": "TAL-EX-005",
+      "name": "强化/附魔/天赋同一伤害上限",
+      "kind": "damage_cap",
+      "content_id": "WPN-KNF-001",
+      "base_segment": 12,
+      "talent_damage_pct": 8,
+      "basic_grade3_damage_pct": 15,
+      "affix_damage_pct": 25,
+      "subtotal_pct": 48,
+      "headroom_pct_points": 2,
+      "with_other_legally_active_damage_pct": 15,
+      "raw_sum_with_other_pct": 63,
+      "clamped_pct": 50,
+      "direct_before_other_factors": 18,
+      "inactive_backup_damage_contributes": false,
+      "other_damage_source_id": "ITM-BOO-001"
+    },
+    {
+      "id": "TAL-EX-006",
+      "name": "无甲保护和原始负词资格",
+      "kind": "negative_eligibility",
+      "talent_guard_armor_ward_each": 6,
+      "unarmored_final_armor_ward_each": 6,
+      "content_id": "ARM-LGT-001",
+      "intrinsic_armor": 14,
+      "grade3_growth_armor_flat": 2.1,
+      "armor_before_enchant_with_talent": 22.1,
+      "negative_affix_id": "AFF-N-008",
+      "tier": 4,
+      "tier_interval": [
+        13,
+        16
+      ],
+      "legal_interval_using_original_base": [
+        13,
+        14
+      ],
+      "tier5_interval": [
+        17,
+        20
+      ],
+      "tier5_legal_interval": [],
+      "expected": "neither_guard6_nor_growth2.1_expands_original14_negative_armor_budget"
+    },
+    {
+      "id": "TAL-EX-007",
+      "name": "暴击与削韧分别封顶",
+      "kind": "crit_stagger_cap",
+      "base_crit_pct": 5,
+      "talent_crit_pct": 2,
+      "weapon_affix_crit_pct": 15,
+      "raw_crit_pct": 22,
+      "final_crit_pct": 20,
+      "talent_stagger_pct": 6,
+      "weapon_affix_stagger_pct": 25,
+      "raw_stagger_pct": 31,
+      "final_stagger_pct": 25,
+      "KNF001_base_stagger": 6,
+      "KNF001_final_direct_stagger": 7.5,
+      "eligible_shock_flat": 10,
+      "nominal_direct_plus_independent_shock": 17.5,
+      "one_crit_draw_per_AttackID": true,
+      "shock_not_multiplied_by_stagger_pct": true,
+      "target_poise_protection_and_shock_ICD_still_apply": true
+    },
+    {
+      "id": "TAL-EX-008",
+      "name": "药理不绕吸血来源预算",
+      "kind": "healing_cap",
+      "recipient_alive": true,
+      "actual_eligible_direct_hp_loss": 100,
+      "snapshot_lifesteal_pct": 5,
+      "current_healing_received_pct": 6,
+      "candidate_heal": 5.3,
+      "attack_heal_budget_remaining": 3,
+      "rolling_1s_budget_remaining": 6,
+      "hp_missing": 10,
+      "actual_heal": 3,
+      "dead_recipient_actual_heal": 0,
+      "dead_consumes_budget": false,
+      "expected": "100*.05*1.06=5.3_then_min(3,6,10); source_budget_after_efficiency"
+    },
+    {
+      "id": "TAL-EX-009",
+      "name": "机簧只缩真实装填",
+      "kind": "reload",
+      "content_id": "WPN-XBW-001",
+      "base_reload_s": 1.1,
+      "talent_reload_speed_pct": 9,
+      "talent_only_reload_s": 1.0091743119266054,
+      "with_affix_reload_speed_pct": 25,
+      "raw_sum_pct": 34,
+      "clamped_sum_pct": 25,
+      "capped_reload_s": 0.88,
+      "KNF_and_STF_effective_reload_benefit": 0,
+      "primary_recovery_unchanged_s": 0.48,
+      "XBW_primary_windup_unchanged_s": 0.16,
+      "magazine_capacity_unchanged": 1
+    },
+    {
+      "id": "TAL-EX-010",
+      "name": "凝神不缩等待或重复甲基值",
+      "kind": "focus_regen",
+      "talent_focus_regen_pct": 9,
+      "unarmored_base_rate": 12,
+      "unarmored_rate": 13.08,
+      "unarmored_delay_s": 1,
+      "armor_id": "ARM-ROB-003",
+      "armor_normal_base_rate": 14,
+      "armor_conditional_replacement_base_rate": 20,
+      "normal_rate": 15.26,
+      "conditional_rate": 21.8,
+      "armor_delay_s": 1.4,
+      "standing_condition_s": 0.8,
+      "focus_cap": 100,
+      "changes_last_spend_time": false
+    },
+    {
+      "id": "TAL-EX-011",
+      "name": "步法保留两层移动边界",
+      "kind": "movement",
+      "base_move_cm_s": 265,
+      "talent_move_speed_pct": 3,
+      "other_move_speed_pct": 30,
+      "raw_sum_pct": 33,
+      "clamped_bonus_pct": 25,
+      "armor_id": "ARM-LGT-001",
+      "current_armor_multiplier": 1.08,
+      "raw_idle_multiplier_after_stat_cap": 1.35,
+      "final_idle_multiplier": 1.25,
+      "final_idle_move_cm_s": 331.25,
+      "air_move_constraint": 0.8,
+      "air_XY_speed_with_same_context_cm_s": 265,
+      "dodge_duration_s": 0.4,
+      "dodge_distance_cm": 185,
+      "jump_launch_speed_cm_s": 630,
+      "jump_gravity_cm_s2": 1800,
+      "jump_apex_cm": 110.25,
+      "jump_height_and_dodge_not_scaled": true
+    },
+    {
+      "id": "TAL-EX-012",
+      "name": "护甲与生命治疗余量",
+      "kind": "headroom",
+      "armor_id": "ARM-HVY-001",
+      "base_armor": 85,
+      "grade3_growth_flat": 12.75,
+      "guard_talent_flat": 6,
+      "positive_affix_flat": 25,
+      "final_armor_without_other": 128.75,
+      "armor_headroom_points": 21.25,
+      "full_talent_headroom_without_other": {
+        "damage_pct": 42,
+        "stagger_pct": 19,
+        "crit_chance_pct_final": 13,
+        "max_health_pct": 38,
+        "healing_received_pct": 19,
+        "move_speed_pct": 22,
+        "focus_regen_pct": 16,
+        "reload_speed_pct": 16
+      },
+      "headroom_is_not_guaranteed_usable_for_every_build": true
+    },
+    {
+      "id": "TAL-EX-013",
+      "name": "27rank与全退上限",
+      "kind": "cost",
+      "branch_rank_totals": [
+        9,
+        9,
+        9
+      ],
+      "branch_cost_totals": [
+        96,
+        100,
+        84
+      ],
+      "total_ranks": 27,
+      "full_catalogue_cost_shards": 280,
+      "full_reset_refund_if_all_paid_at_this_catalogue_schedule": 280,
+      "partial_example_paid_and_refund": 26,
+      "refund_policy": "root_full_reset_actual_paid_not_current_price_revaluation; no_new_tax_in_this_file"
+    },
+    {
+      "id": "TAL-EX-014",
+      "name": "百分比与flat共同cap参数边界",
+      "kind": "synthetic_cap_fixture_not_current_build_attainability_claim",
+      "non_talent_max_health_pct": 45,
+      "talent_max_health_pct": 12,
+      "final_max_health_pct": 50,
+      "final_max_hp": 150,
+      "non_talent_healing_received_pct": 23,
+      "talent_healing_received_pct": 6,
+      "final_healing_received_pct": 25,
+      "non_talent_armor_total": 148,
+      "talent_armor_flat": 6,
+      "final_armor": 150,
+      "direct_stat_clamp_once": true
+    },
+    {
+      "id": "TAL-EX-015",
+      "name": "天赋不改物品与收入",
+      "kind": "scope",
+      "full_talents": true,
+      "THR001_base_damage_talent_multiplier": 1,
+      "burn_base6_dps_talent_multiplier": 1,
+      "shock_flat10_talent_multiplier": 1,
+      "D08_main_gross_gold": 700,
+      "D08_repeat_main_fragments": 60,
+      "D08_first_main_extra_fragments": 10,
+      "permanent_economy_multiplier": 1,
+      "extra_inventory_or_talent_slots": 0,
+      "revival_count_granted": 0,
+      "action_speed_pct_granted": 0,
+      "drop_probability_delta": 0,
+      "shop_discount_pct_granted": 0
+    }
+  ],
+  "future_runtime_validation": [
+    "zero_talent_and_full_talent_same_content_complete_run_comparison_not_yet_verified",
+    "per_node_rank_cost_prerequisite_and_full_reset_actual_paid_once",
+    "rank3_reads_cumulative_contribution_once_not_sum1plus2plus3",
+    "unarmored_guard_and_original_negative_affix_eligibility",
+    "maxHP_change_no_heal_0HP_no_revive",
+    "healing_efficiency_before_source_caps_and_each_tick_current_stats",
+    "weapon_damage_stagger_crit_scope_not_item_DoT_or_electric_flat",
+    "all_existing_caps_including_move_two_stage_and_lifesteal_source_budgets",
+    "focus_rate_not_delay_conditional20_replaces14",
+    "reload_families_only_no_attack_recovery_or_magazine_change",
+    "fixed_dodge_and_jump_height_with_MOV_XY_speed_change",
+    "new_run_snapshot_continue_refund_does_not_edit_live_run",
+    "D08_prices_reward_amounts_and_drop_probabilities_remain_constant",
+    "actual_time_to_progress_and_growth_vs_skill_D14_no_fixed_minutes_claim"
+  ],
+  "root_main_design_ref": "../../../局内成长与局外天赋解锁设计.md"
+}

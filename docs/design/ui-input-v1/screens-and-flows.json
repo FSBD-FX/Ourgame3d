@@ -1,0 +1,1488 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "source_event": "EV-029",
+  "module": "D-11",
+  "authority": "assistant_proposed_UI_flow_design_inherits_existing_mechanics",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "counts": {
+    "screens": 26,
+    "facility_profiles": 9,
+    "flows": 10,
+    "future_cases": 22
+  },
+  "root_contract_refs": {
+    "UI_HUD_and_map": "hud-and-feedback.json",
+    "bindings": "input-rules.json",
+    "D04": "../inventory-v1/inventory-rules.json",
+    "D08": "../economy-v1/facilities.json",
+    "D09": "../progression-v1/hub-rules.json",
+    "D10": "../narrative-v1/npcs-and-dialogue.json"
+  },
+  "clock_contract": {
+    "real_time": "world_attacks_DOT_CD_regen_and_movement_continue; UI_selection_not_pause",
+    "paused_simulation": "singleplayer_all_run_sim_clocks_frozen_together; no_ownership_or_stats_commit",
+    "no_run_clock": "no_unfinished_simulation_running; HUB_IDLE_guard_still_required_for_account_mutations",
+    "contextual": "inherit_saved_invoker_clock_with_explicit_contexts; browsing_or_comparison_never_changes_pause_state",
+    "UI_hub_visual_is_not_lifecycle_guard": true
+  },
+  "live_selection_input_contract": {
+    "screens": [
+      "UI-EQUIP-COMPARE",
+      "UI-CARRY-CHOICE",
+      "UI-FACILITIES",
+      "UI-PURCHASE",
+      "UI-SERVICE-CONFIRM",
+      "UI-EXIT",
+      "UI-RANDOM-RESULT",
+      "UI-REWARD-TRAY"
+    ],
+    "confirm": "fresh_{confirm}_only_after_open_press_consumed; default_keyboard_Enter_from_D04_input_table",
+    "cancel": "consume_{cancel}_and_pop_only_no_world_action",
+    "navigate": "only_UI_focus_never_world_movement_target_change_or_weapon_switch",
+    "legal_new_dodge": "close_selection_and_accept_one_dodge_if_legal",
+    "illegal_new_dodge": "keep_selection_and_explain; no_dodge_no_cancel",
+    "other_new_legal_combat": "close_pure_selection_then_D03_priority_accept_one; never_cancel_already_started_UI-ACTION_by_attack_jump",
+    "new_movement": "close_selection_then_move",
+    "on_close": "consume_UI_inputs_clear_attack_item_buffers_and_require_held_gameplay_keys_release_before_next_world_press",
+    "live_cancel_or_gamepad_View": "only_cancel_layer_no_map; input_routing_per_input-rules.json",
+    "available_paused_view_request": "keyboard_M_or_I_or_unshadowed_current_map_inspect_binding_cancels_unconfirmed_preview_then_opens_paused_readonly_view; fixed_UI_owned_controls_never_dual_dispatch",
+    "committed_result_or_tray": "closing_layer_changes_only_presentation; same_committed_result_and_unclaimed_source_tray_preserved; no_undo_redraw_refund_or_claim_by_handoff"
+  },
+  "exit_risk_revision": {
+    "material_changes": [
+      "source_or_destination_route_condition",
+      "fee_or_tool_or_entitlement",
+      "returnability",
+      "leftover_item_currency_or_pending_tray_set_or_quantity",
+      "active_state_kind_or_room_attack_set"
+    ],
+    "natural_countdown_or_same_projectile_position": "live_display_only_not_per_frame_new_confirmation",
+    "new_risk_requires": "new_preview_then_another_fresh_{confirm}; never_accept_changed_fee_by_old_press"
+  },
+  "comparison_contract": {
+    "source_rule_refs": [
+      "../equipment-v1/weapons.json",
+      "../equipment-v1/armor.json",
+      "../equipment-v2/enchant-rules.json",
+      "../economy-v1/equipment-growth.json",
+      "../progression-v1/hub-rules.json"
+    ],
+    "sections": [
+      {
+        "id": "CMP-IDENTITY",
+        "fields": [
+          "准确模板名/当前与候选实例",
+          "当前A/备用B/身体甲/所选目的槽",
+          "basic_upgrade_grade0..3及素制精制精良卓越",
+          "附魔none或I-V/套餐类型/每一正负词"
+        ]
+      },
+      {
+        "id": "CMP-ATTACK",
+        "fields": [
+          "直接伤害类型与每子段数值/几何",
+          "主攻/武器技基础及当前最终前摇/有效/恢复/完整周期；按当前动作速度与合法cap预览并列来源",
+          "射程/纵深/高度/技能几何",
+          "弹匣当前/上限、基础装填时间/当前最终装填时间及来源与cap，或专注成本/恢复等待",
+          "独立武器技剩余CD与共用角色锁",
+          "DoT/状态单列不合为直接DPS"
+        ]
+      },
+      {
+        "id": "CMP-FINAL",
+        "fields": [
+          "基础模板/锻造/当前有效武器甲/天赋/遗物/临时状态来源",
+          "每词条原始方向/极性/数值与法定区间",
+          "来源合计未截顶值/最终封顶值/本次实际变化",
+          "最终HP上限/当前HP/护甲魔抗对应减伤/韧性/移动/动作速度/暴击吸血/治疗专注",
+          "已达cap或不适用原因"
+        ]
+      }
+    ],
+    "single_total_power_score_or_auto_best_arrow": false,
+    "positive_negative_not_numeric_sign_or_color_only": true,
+    "snapshot_pure_readonly": true,
+    "preview_does_not_set_HP_or_focus_magazine_CD_poise": true,
+    "backup_replacement": "candidate_template_compare_separate_from_actual_current_actor_delta; replacing_inactiveB_does_not_apply_B_affixes_or_change_currentA",
+    "final_sources_evaluated_once_on_actual_commit": "preview_no_intermediate_naked_HP_clamp; current=min(oldCurrent,newFinalMax)only_on_commit; max_increase_never_heals",
+    "during_paused_inspect": "same_component_readonly_inside_UI-INSPECT_clock_not_UI-EQUIP-COMPARE_real_time_screen",
+    "values_are_contextual_not_future_damage_promise": "show_current_source_time_context; revalidate_at_real_commit; attack_snapshots_and_D02_D03_timeline_unchanged",
+    "timeline_preview": "show_preview_snapshot_time_and_source_set; distinguish_base_and_current_final_action_or_reload_timeline; never_rescale_an_already_accepted_attack_or_reload"
+  },
+  "screens": [
+    {
+      "id": "UI-HUD",
+      "label": "战斗HUD",
+      "clock": "real_time",
+      "entry": [
+        "active_run_gameplay"
+      ],
+      "fields": [
+        "当前HP/上限",
+        "专注/弹匣当前值",
+        "当前武器与两快捷槽",
+        "共享锁/逐ID冷却",
+        "状态与实际倒计时",
+        "金币与已入账遗物碎片",
+        "遭遇阶段与真正房清",
+        "原世界目标提示"
+      ],
+      "actions": {
+        "{interact}": "only_current_explicit_target",
+        "{inspect}": "UI-INSPECT",
+        "{pause}": "UI-PAUSE",
+        "{map}": "UI-MAP"
+      },
+      "guards": [
+        "D02_D03_gameplay_state_priority",
+        "no_UI_auto_drink_or_automatic_equipment_swap"
+      ],
+      "return_to": [],
+      "failure": "不合法操作只反馈原因，保持当前动作和世界时钟。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-TARGET",
+      "label": "明确交互目标",
+      "clock": "real_time",
+      "entry": [
+        "UI-HUD_valid_D04_target"
+      ],
+      "fields": [
+        "唯一世界高亮/名称/数量",
+        "目标序号",
+        "本次动作名",
+        "距离/遮挡/动作/容量禁用原因"
+      ],
+      "actions": {
+        "{cycle_target}": "cycle_candidate_only_no_transfer",
+        "{interact}": "open_relevant_choice_or_begin_original_direct_pickup"
+      },
+      "guards": [
+        "D04_same_room_grounded_rect80x40_LOS",
+        "item_then_service_then_exit_priority",
+        "target_invalid_no_fallthrough",
+        "fresh_interact_not_same_press_confirm"
+      ],
+      "return_to": [
+        "UI-HUD"
+      ],
+      "failure": "目标消失撤销选择；本次输入不改拿邻物或过门。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-EQUIP-COMPARE",
+      "label": "实时装备比较",
+      "clock": "real_time",
+      "entry": [
+        "UI-TARGET_owned_destination_needed"
+      ],
+      "fields": [
+        "comparison_contract_all_fields",
+        "当前/备用与选定替换槽",
+        "旧物落地预览",
+        "真实动作时长",
+        "当前安全与按键提示"
+      ],
+      "actions": {
+        "{navigate}": "change_destination_only",
+        "{confirm}": "fresh_confirm_then_UI-ACTION",
+        "{cancel}": "cancel_preview",
+        "{move}": "close_then_move",
+        "{dodge}": "only_legal_dodge_closes_then_executes_once"
+      },
+      "guards": [
+        "old_ownership_until_commit",
+        "fullsafe_for_relic_not_general_weapon_pickup",
+        "no_single_power_score",
+        "pure_selection_active_combat_requests_follow_D03"
+      ],
+      "return_to": [
+        "UI-TARGET",
+        "UI-HUD"
+      ],
+      "failure": "无落点/版本/范围/状态错误拒绝，不保留自动执行队列。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-CARRY-CHOICE",
+      "label": "快捷/遗物/功能物去向",
+      "clock": "real_time",
+      "entry": [
+        "UI-TARGET_or_known_purchase_destination"
+      ],
+      "fields": [
+        "两快捷/三遗物/功能物独立计数",
+        "同ID栈上限与实际可收数量",
+        "角色共享锁/逐IDCD/遗物每房预算",
+        "旧栈整包落地",
+        "地面余量或商品整包标志"
+      ],
+      "actions": {
+        "{navigate}": "select_legal_slot_or_quantity",
+        "{confirm}": "return_known_purchase_preview_or_begin_ground_transfer",
+        "{cancel}": "cancel_without_transfer"
+      },
+      "guards": [
+        "D04_no_reserve_backpack",
+        "same_quick_ID_only_existing_stack",
+        "relic_ID_not_double_active",
+        "keyring_caps_and_no_currency_drop",
+        "ground_partial_vs_known_purchase_whole"
+      ],
+      "return_to": [
+        "UI-TARGET",
+        "UI-PURCHASE",
+        "UI-HUD"
+      ],
+      "failure": "满栈仍可读，但不把相同ID放第二快捷槽、不静默吞余量。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-ACTION",
+      "label": "真实交互动作",
+      "clock": "real_time",
+      "entry": [
+        "confirmed_legal_D04_transfer_purchase_or_organize_intent"
+      ],
+      "fields": [
+        "本次拾取/换装/购买动作与进度",
+        "提交前旧装备仍有效",
+        "移动/有效伤害/合法闪避可取消",
+        "物品未取得标记"
+      ],
+      "actions": {
+        "{move}": "cancel_then_move",
+        "{dodge}": "cancel_only_if_dodge_legal",
+        "{inspect}": "UI-INSPECT_freeze_this_existing_timeline"
+      },
+      "guards": [
+        "durations_from_D04_kind",
+        "damage_death_expiry_then_old_equipment_heal_then_commit",
+        "no_other_attack_jump_cancel_after_action_start",
+        "invalid_dodge_does_not_cancel",
+        "no_real_time_or_damage_rollback"
+      ],
+      "return_to": [
+        "UI-HUD",
+        "UI-FEEDBACK"
+      ],
+      "failure": "取消保本次归属/费用，已发生伤害、恢复、计时不回滚；进度不自动重试。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-INSPECT",
+      "label": "I暂停检视",
+      "clock": "paused_simulation",
+      "entry": [
+        "UI-HUD_or_UI-ACTION_or_UI-PAUSE",
+        "live_layer_current_inspect_request_cancels_preview_then_opens_readonly"
+      ],
+      "fields": [
+        "当前/备用武器、甲、两快捷、三遗物、功能物",
+        "comparison_contract_as_readonly_component",
+        "来源原值与最终属性/截顶",
+        "真实暂停与整理禁用原因",
+        "暂停中的动作/状态/CD剩余"
+      ],
+      "actions": {
+        "{navigate}": "inspect_only",
+        "{confirm}": "if_fullsafe_select_one_organize_intent_UI-ORGANIZE",
+        "{cancel}": "resume_without_unconfirmed_plan",
+        "{inspect}": "ordinary_close_no_execute"
+      },
+      "guards": [
+        "all_sim_clocks_frozen_in_singleplayer",
+        "combat_inspect_only",
+        "no_purchase_service_exit_or_free_Q_switch_from_inspect",
+        "safe_plan_count_max1",
+        "opening_from_live_layer_discards_only_unconfirmed_preview_not_committed_result_or_source_tray"
+      ],
+      "return_to": [
+        "UI-HUD",
+        "UI-ACTION",
+        "UI-PAUSE"
+      ],
+      "failure": "战斗中整理按钮显示具体原因且不排队；暂停不提前完成旧动作。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-ORGANIZE",
+      "label": "返回游戏并执行一项整理",
+      "clock": "paused_simulation",
+      "entry": [
+        "UI-INSPECT_full_D04_safe_one_intent"
+      ],
+      "fields": [
+        "一个明确操作/实例/整数数量/旧落点",
+        "预计真实动作时间",
+        "尚未改变库存",
+        "返回游戏 vs 返回游戏并执行分开"
+      ],
+      "actions": {
+        "{confirm}": "explicit_resume_and_execute_one_intent",
+        "{cancel}": "discard_intent_back_to_inspect",
+        "{inspect}": "ordinary_close_discard_unconfirmed_intent"
+      },
+      "guards": [
+        "allowed_intents_swap_drop_remove_only",
+        "resume_first_damage_expiry_then_revalidate_safety_versions_ground_drop",
+        "held_other_gameplay_input_or_fresh_gameplay_input_cancels_intent",
+        "failed_intent_cleared_no_auto_wait_or_retry"
+      ],
+      "return_to": [
+        "UI-INSPECT",
+        "UI-ACTION",
+        "UI-FEEDBACK"
+      ],
+      "failure": "恢复后不安全则清计划，不执行瞬间换装，也不回滚世界变化。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-FACILITIES",
+      "label": "商人/NPC设施页",
+      "clock": "real_time",
+      "entry": [
+        "UI-TARGET_safe_service_explicitly_selected"
+      ],
+      "fields": [
+        "角色与当前服务页",
+        "九FAC_ID服务实际报价/库存/次数",
+        "完整安全逐项原因",
+        "读对白可跳但价格/风险仍在",
+        "D09样品只在原绑定N04"
+      ],
+      "actions": {
+        "{navigate}": "browse_service_or_offer_no_rng",
+        "{confirm}": "UI-PURCHASE_for_known_goods_or_UI-SERVICE-CONFIRM",
+        "{cancel}": "close_service"
+      },
+      "guards": [
+        "full_D04_safety_for_paid_or_tool_services",
+        "no_dialogue_reward_or_stock_refresh",
+        "all9_service_profiles_reference_existing_sources"
+      ],
+      "return_to": [
+        "UI-TARGET",
+        "UI-HUD"
+      ],
+      "failure": "页面失效不换别的服务，不自动购买；源已生成结果不刷新。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-PURCHASE",
+      "label": "已知商品/整包购买确认",
+      "clock": "real_time",
+      "entry": [
+        "UI-FACILITIES_known_stock_choice_wheel_or_D09_sample"
+      ],
+      "fields": [
+        "完整内容/数量/强化grade/附魔与全部坏处",
+        "原价/实际价/选用工具与不选用",
+        "当前余额/库存",
+        "整包全部去向与旧物合法落点",
+        "样品现金另购/账号一次资格"
+      ],
+      "actions": {
+        "{navigate}": "select_all_destinations_or_explicit_tool",
+        "{confirm}": "fresh_confirm_then_UI-ACTION",
+        "{cancel}": "back_no_charge"
+      },
+      "guards": [
+        "whole_known_bundle_fits_or_refuse",
+        "one_matching_tool_max_not_default_selected",
+        "current_gold_enough_not_equal_old_balance",
+        "quote_stock_tool_target_versions_revalidated",
+        "D09_sample_live_account_flag_and_current_match_revalidated",
+        "no_known_purchase_reward_tray_or_free_overflow"
+      ],
+      "return_to": [
+        "UI-FACILITIES",
+        "UI-CARRY-CHOICE",
+        "UI-HUD"
+      ],
+      "failure": "不足/满槽/旧物无落点整单拒绝；报价变动重显，不能擅自换便宜货或拆包。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-SERVICE-CONFIRM",
+      "label": "锻造/附魔/轮盘/探索确认",
+      "clock": "real_time",
+      "entry": [
+        "UI-FACILITIES_valid_service_selected"
+      ],
+      "fields": [
+        "specific_service_profile_fields",
+        "目标当前实例与结果范围",
+        "原费/实际费/最多一工具",
+        "原剩余次数",
+        "确定预览或公开随机概率",
+        "确认前/提交后不同取消后果"
+      ],
+      "actions": {
+        "{confirm}": "fresh_confirm_validated_source_transaction",
+        "{cancel}": "uncommitted_cancel_only"
+      },
+      "guards": [
+        "D08_v2_legality_and_full_D04_safe",
+        "no_random_result_preview_before_payment",
+        "roulette_empty_bound_tray_and_full_original_count",
+        "cash_sample_not_here_use_known_purchase"
+      ],
+      "return_to": [
+        "UI-FACILITIES",
+        "UI-RANDOM-RESULT",
+        "UI-REWARD-TRAY",
+        "UI-HUD"
+      ],
+      "failure": "无合法目标/范围/词条区间/次数则不扣不抽；已提交不得退出退款重抽。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-RANDOM-RESULT",
+      "label": "已提交随机结果",
+      "clock": "real_time",
+      "entry": [
+        "committed_roulette_or_enchant_transaction"
+      ],
+      "fields": [
+        "已扣费用/已用次数",
+        "具体结果与全部正负词",
+        "轮盘空奖/金币/待领道具区别",
+        "本次结果已确定，不可退款重抽"
+      ],
+      "actions": {
+        "{confirm}": "acknowledge_only_then_tray_or_service",
+        "{cancel}": "close_presentation_only_no_undo"
+      },
+      "guards": [
+        "result_determined_and_committed_before_animation",
+        "roulette_gold_credited_once_empty_no_tray",
+        "roulette_item_source_tray_only",
+        "enchant_result_already_on_owned_instance_not_tray",
+        "failure_display_replays_same_record",
+        "interactive_real_time_layer_uses_live_selection_input_contract_no_confirm_jump_or_View_map_passthrough",
+        "legal_world_handoff_only_closes_presentation_does_not_revoke_committed_result_or_claim_item"
+      ],
+      "return_to": [
+        "UI-FACILITIES",
+        "UI-REWARD-TRAY",
+        "UI-HUD"
+      ],
+      "failure": "展示故障恢复同一结果；动画不是重新开奖或重置CD的时段。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-REWARD-TRAY",
+      "label": "源端本地未领奖",
+      "clock": "real_time",
+      "entry": [
+        "committed_roulette_item_or_common_key_box_result"
+      ],
+      "fields": [
+        "原源的一件固定结果/数量",
+        "已付币或已用key/不可退",
+        "当前可接纳槽位/容量",
+        "待领会阻止下一转",
+        "离章未领奖损失提示"
+      ],
+      "actions": {
+        "{confirm}": "claim_whole_item_via_D04_action",
+        "{cancel}": "leave_bound_local_result",
+        "{forfeit}": "explicit_confirmed_discard_no_refund_no_source_reset"
+      },
+      "guards": [
+        "source_capacity1_not_personal_backpack",
+        "full_D04_safe_and_kind_capacity_to_claim",
+        "no_new_draw_or_extra_use_on_failed_claim",
+        "same_result_on_return",
+        "one_way_region_exit_warn_then_explicit_discard",
+        "interactive_real_time_layer_uses_live_selection_input_contract_no_confirm_jump_or_View_map_passthrough",
+        "legal_world_handoff_only_closes_presentation_does_not_revoke_committed_result_or_claim_item"
+      ],
+      "return_to": [
+        "UI-FACILITIES",
+        "UI-ACTION",
+        "UI-HUD"
+      ],
+      "failure": "槽满原奖留托盘；不在地面另生副本，不把未领奖带到下一章。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-EXIT",
+      "label": "普通/付费出口风险确认",
+      "clock": "real_time",
+      "entry": [
+        "UI-TARGET_explicit_exit_and_risk_or_paid_condition"
+      ],
+      "fields": [
+        "目的/可否返回与未知按不可保证",
+        "遗留物/金币/碎片/源端托盘",
+        "房内飞行攻击与部署将清理且不退款",
+        "身上DoT等状态保留",
+        "本次费用/工具/已有入口许可",
+        "风险版本与新按确认"
+      ],
+      "actions": {
+        "{confirm}": "fresh_confirm_current_risk_then_original_exit_commit",
+        "{cancel}": "remain_no_cost_no_cleanup",
+        "{move}": "close_then_move"
+      },
+      "guards": [
+        "ordinary_free_exit_not_fullsafe:roomclear_noalive_groundidle_route",
+        "paid_or_tool_entry_also_full_D04_safe",
+        "same_time_damage_death_precedes_exit",
+        "material_risk_route_cost_change_requires_new_preview_and_press",
+        "no_auto_collect_sell_or_store",
+        "unclaimed_region_tray_warning_required"
+      ],
+      "return_to": [
+        "UI-HUD",
+        "UI-TARGET"
+      ],
+      "failure": "封门/动作/费用/风险变化拒绝或重新预览；失败不扣费、不清部署、不缓冲过门。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-HUB",
+      "label": "营地与成长总览",
+      "clock": "no_run_clock",
+      "entry": [
+        "no_unfinished_run_and_HUB_IDLE"
+      ],
+      "fields": [
+        "已入账遗物碎片",
+        "九天赋与14研究摘要",
+        "样品待选0/1",
+        "新局/档案/设置",
+        "存在未结束局时明确只读/继续"
+      ],
+      "actions": {
+        "{confirm}": "open_selected_hub_page",
+        "{cancel}": "parent_main_menu"
+      },
+      "guards": [
+        "D09_lifecycle_not_visual_location_controls_mutation",
+        "active_or_suspended_run_blocks_purchase_reset_select_newrun"
+      ],
+      "return_to": [
+        "UI-TALENTS",
+        "UI-RESEARCH",
+        "UI-SAMPLE",
+        "UI-NEW-RUN",
+        "UI-NARRATIVE",
+        "UI-SETTINGS",
+        "UI-CONTINUE"
+      ],
+      "failure": "未结束局不能用营地外观绕锁；显示继续或放弃原冒险路径。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-TALENTS",
+      "label": "天赋查看与购买",
+      "clock": "contextual",
+      "entry": [
+        "UI-HUB_or_pause_readonly_progression"
+      ],
+      "fields": [
+        "九TAL原ID/当前阶/上限/下阶实价",
+        "前置与当前/下阶贡献/最终cap",
+        "当前碎片/是否可修改",
+        "全退入口"
+      ],
+      "actions": {
+        "{confirm}": "HUB_IDLE_only_buy_one_exact_rank_or_open_reset",
+        "{cancel}": "back"
+      },
+      "guards": [
+        "D09_current_account_version_price_prerequisites_and_balance",
+        "no_pending_active_suspended_starting_ending_recovery_run",
+        "preview_not_apply_stats_to_active_run"
+      ],
+      "return_to": [
+        "UI-HUB",
+        "UI-TALENT-RESET",
+        "UI-PAUSE"
+      ],
+      "failure": "旧版本/不足不扣，重显原节点；已有局的快照不改。",
+      "status": "design_only",
+      "runtime_implemented": false,
+      "clock_contexts": {
+        "actual_HUB_IDLE": "no_run_clock",
+        "unfinished_run_view_only": "paused_simulation_readonly"
+      }
+    },
+    {
+      "id": "UI-TALENT-RESET",
+      "label": "全退天赋确认",
+      "clock": "contextual",
+      "entry": [
+        "UI-TALENTS_reset_selected"
+      ],
+      "fields": [
+        "全部将归零的阶",
+        "按当前有效实付凭据计算的返还",
+        "研究/样品资格不变",
+        "当前账户版本/可执行原因"
+      ],
+      "actions": {
+        "{confirm}": "HUB_IDLE_exact_receipts_atomic_all_reset",
+        "{cancel}": "UI-TALENTS"
+      },
+      "guards": [
+        "D09_refund_actual_paid_not_current_catalog_or_max280",
+        "missing_duplicate_receipt_no_partial_refund_recovery_required",
+        "research_sample_flags_not_reset"
+      ],
+      "return_to": [
+        "UI-TALENTS",
+        "UI-CONTINUE"
+      ],
+      "failure": "凭据不一致显示恢复受阻，不能猜价/部分全退。",
+      "status": "design_only",
+      "runtime_implemented": false,
+      "clock_contexts": {
+        "actual_HUB_IDLE": "no_run_clock",
+        "unfinished_run_view_only": "paused_simulation_readonly"
+      }
+    },
+    {
+      "id": "UI-RESEARCH",
+      "label": "永久内容研究",
+      "clock": "contextual",
+      "entry": [
+        "UI-HUB_or_pause_readonly_progression"
+      ],
+      "fields": [
+        "14原UNL名称/效果/负面/来源",
+        "碎片价/前置/已研究",
+        "永久不退/不送开局物",
+        "下一新局入池不保证出现"
+      ],
+      "actions": {
+        "{confirm}": "HUB_IDLE_buy_exact_research_once",
+        "{cancel}": "back"
+      },
+      "guards": [
+        "D09_no_talent_Boss_or_unseen_loot_gate",
+        "same_account_version_prerequisites_shards",
+        "research_flag_not_item_inventory",
+        "active_run_source_snapshot_unchanged"
+      ],
+      "return_to": [
+        "UI-HUB",
+        "UI-PAUSE"
+      ],
+      "failure": "已研究不再扣；不足/前置失效不提交，不退已有研究。",
+      "status": "design_only",
+      "runtime_implemented": false,
+      "clock_contexts": {
+        "actual_HUB_IDLE": "no_run_clock",
+        "unfinished_run_view_only": "paused_simulation_readonly"
+      }
+    },
+    {
+      "id": "UI-SAMPLE",
+      "label": "研究样品订购选择",
+      "clock": "no_run_clock",
+      "entry": [
+        "UI-HUB_HUB_IDLE"
+      ],
+      "fields": [
+        "选0或1已研究且样品未购项",
+        "下一新局额外金币价/功能当前匹配规则",
+        "账号每项最多成功购买1件",
+        "首匹配N04报价不转点/不免费送",
+        "新局创建清账号待选，本局快照保留"
+      ],
+      "actions": {
+        "{confirm}": "set_next_run_pending_selection_or_null_only",
+        "{cancel}": "no_pending_change_back"
+      },
+      "guards": [
+        "D09_live_researched_and_permanent_sample_purchased_false",
+        "no_unfinished_run",
+        "selection_cost0_not_grant_item",
+        "old_55_stock_and_weights_unchanged"
+      ],
+      "return_to": [
+        "UI-HUB",
+        "UI-NEW-RUN"
+      ],
+      "failure": "不可选已购/未研究项；不静默改选，不在本屏扣本局金币。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-NEW-RUN",
+      "label": "创建新冒险确认",
+      "clock": "no_run_clock",
+      "entry": [
+        "UI-HUB_HUB_IDLE",
+        "UI-RESULT_restart_review_only_after_committed_end_and_HUB_IDLE"
+      ],
+      "fields": [
+        "冻结天赋/研究与本次样品选择",
+        "固定开局配置来自D09",
+        "本局规则版本",
+        "本次不会继承旧金币装备"
+      ],
+      "actions": {
+        "{confirm}": "single_new_run_commit_then_gameplay",
+        "{cancel}": "back_no_initialization"
+      },
+      "guards": [
+        "D09_one_unfinished_run_per_account",
+        "live_sample_selection_revalidate",
+        "snapshot_and_pending_clear_atomic",
+        "same_start_OperationID_restores_same_RunID",
+        "no_starter_or_gold_duplicate"
+      ],
+      "return_to": [
+        "UI-HUB",
+        "UI-HUD",
+        "UI-CONTINUE"
+      ],
+      "failure": "创建结果不明进入恢复，不能再点新局多领开局物。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-PAUSE",
+      "label": "暂停菜单",
+      "clock": "paused_simulation",
+      "entry": [
+        "UI-HUD_or_UI-ACTION_new_pause"
+      ],
+      "fields": [
+        "暂停状态/当前冒险",
+        "返回/检视/地图/设置/档案",
+        "继续存档能力与实际状态",
+        "放弃冒险明确后果"
+      ],
+      "actions": {
+        "{confirm}": "open_selected_page_only",
+        "{cancel}": "resume_same_timeline",
+        "{pause}": "ordinary_resume_no_organize_execute"
+      },
+      "guards": [
+        "singleplayer_freezes_all_sim_clocks",
+        "UI_close_flushes_buffer_and_requires_release",
+        "save_success_only_authoritative_receipt_D13",
+        "abandon_needs_explicit_D01_confirmation",
+        "narrative_review_requires_full_D04_safety; unsafe_only_short_archive_index_or_disabled_reason"
+      ],
+      "return_to": [
+        "UI-HUD",
+        "UI-ACTION",
+        "UI-INSPECT",
+        "UI-MAP",
+        "UI-SETTINGS",
+        "UI-NARRATIVE",
+        "UI-CONTINUE"
+      ],
+      "failure": "保存未确认不得写已保存；菜单不是结束冒险或解锁局外修改。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-SETTINGS",
+      "label": "设置与输入说明",
+      "clock": "contextual",
+      "entry": [
+        "UI-PAUSE_or_UI-HUB"
+      ],
+      "fields": [
+        "动作名与当前设备字形来自input-rules.json",
+        "设置当前值与生效范围",
+        "返回原上下文"
+      ],
+      "actions": {
+        "{navigate}": "change_settings_focus_only",
+        "{confirm}": "apply_setting_per_root_contract",
+        "{cancel}": "back_to_invoker"
+      },
+      "guards": [
+        "root_input_map_owns_bindings_no_fixed_controller_letters_here",
+        "no_inventory_currency_or_cooldown_effect",
+        "no_combat_clock_resume_under_visible_paused_parent"
+      ],
+      "return_to": [
+        "UI-PAUSE",
+        "UI-HUB"
+      ],
+      "failure": "输入冲突等按root映射规范提示，不执行世界技能。",
+      "status": "design_only",
+      "runtime_implemented": false,
+      "clock_contexts": {
+        "from_pause": "paused_simulation",
+        "from_hub": "no_run_clock"
+      }
+    },
+    {
+      "id": "UI-NARRATIVE",
+      "label": "NPC对白与剧情回顾",
+      "clock": "contextual",
+      "entry": [
+        "safe_service_optional_dialogue_or_HUB_IDLE_archive_or_full_D04_safe_pause_archive"
+      ],
+      "fields": [
+        "STORY主事实与DISC档案/已读分离",
+        "回响/历史标签",
+        "可跳过/直接服务",
+        "事实页风险不被对白遮住"
+      ],
+      "actions": {
+        "{confirm}": "advance_or_skip_text_no_reward",
+        "{cancel}": "back_to_service_or_archive_invoker"
+      },
+      "guards": [
+        "D10_inrun_modal_only_full_D04_safe",
+        "read_or_skip_not_story_success_reward_or_restock",
+        "not_shorten_D06_warning",
+        "post_final_default_liberated_context",
+        "suspended_archive_readonly",
+        "pause_alone_does_not_grant_D04_safety",
+        "unsafe_pause_archive_index_only_no_long_modal_dialogue"
+      ],
+      "return_to": [
+        "UI-FACILITIES",
+        "UI-HUB",
+        "UI-PAUSE"
+      ],
+      "failure": "文字展示异常不重发剧情奖励；服务事实页仍可直接打开。",
+      "status": "design_only",
+      "runtime_implemented": false,
+      "clock_contexts": {
+        "safe_inrun_dialogue": "paused_simulation",
+        "HUB_IDLE": "no_run_clock",
+        "paused_archive": "paused_simulation_readonly"
+      }
+    },
+    {
+      "id": "UI-RESULT",
+      "label": "死亡/胜利/主动结束回顾",
+      "clock": "no_run_clock",
+      "entry": [
+        "D01_D06_run_end_committed"
+      ],
+      "fields": [
+        "成功/失败/主动结束原因",
+        "本局已入账碎片与一次奖励记录",
+        "结束金币清零与本局装备结束",
+        "已自动归档故事/可跳回顾",
+        "返回营地",
+        "明确按钮：返回营地（默认焦点）/审阅新冒险"
+      ],
+      "actions": {
+        "{confirm}": "activate_focused_explicit_button_once; default_return_HUB_after_end_transaction; new_adventure_button_only_open_UI-NEW-RUN_review",
+        "{cancel}": "skip_presentation_only_not_ending_commit",
+        "{restart_review}": "only_committed_result_open_UI-NEW-RUN_review_not_start"
+      },
+      "guards": [
+        "same_time_player_and_Boss_death_is_failure_no_new_Boss_reward",
+        "already_credited_shards_not_second_claim",
+        "victory_only_after_guaranteed_permanent_awards_and_story_commit",
+        "no_claim_button_for_same_credit",
+        "no_live_gameplay_resume_from_result",
+        "result_R_action_from_root_input_context_opens_review_only",
+        "independent_fresh_confirm_and_D09_HUB_IDLE_revalidation_to_create_newrun",
+        "Enter_or_gamepad_confirm_activates_focused_button_only_not_implicit_newrun; default_focus_return_HUB"
+      ],
+      "return_to": [
+        "UI-HUB",
+        "UI-NARRATIVE",
+        "UI-CONTINUE",
+        "UI-NEW-RUN"
+      ],
+      "failure": "结束事务未知先恢复，不先显示虚假胜利/领取。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-CONTINUE",
+      "label": "继续冒险与恢复状态",
+      "clock": "contextual",
+      "entry": [
+        "main_menu_unfinished_run_or_commit_outcome_unknown"
+      ],
+      "fields": [
+        "同一未结束冒险可继续/受阻原因",
+        "实际存档/恢复服务状态",
+        "进度/版本可用性，不伪报保存",
+        "保留当前记录/恢复/明确放弃选项"
+      ],
+      "actions": {
+        "{confirm}": "only_supported_D13_same_run_recovery_or_continue",
+        "{cancel}": "back_preserve_unfinished_lock"
+      },
+      "guards": [
+        "D13_save_resume_contract_pending_not_implemented_claim",
+        "continue_keeps_RunID_snapshot_HP_items_gold_CD_outcomes",
+        "unsupported_or_unknown_record_blocks_new_run_and_hub_mutations",
+        "no_fallback_new_initializer",
+        "abandon_only_D01_explicit_end_transaction"
+      ],
+      "return_to": [
+        "UI-PAUSE",
+        "UI-HUB",
+        "UI-HUD"
+      ],
+      "failure": "恢复失败保留记录与未结束锁，不回滚已结算奖励或新建假存档。",
+      "status": "design_only",
+      "runtime_implemented": false,
+      "clock_contexts": {
+        "suspended_or_technical_recovery": "paused_simulation_or_no_advancing_run_clock",
+        "after_ending_committed": "no_run_clock"
+      }
+    },
+    {
+      "id": "UI-MAP",
+      "label": "已发现路线地图",
+      "clock": "paused_simulation",
+      "entry": [
+        "UI-HUD_world_map_or_UI-PAUSE_map",
+        "live_layer_keyboard_M_or_unshadowed_current_map_binding_cancels_preview_then_opens_paused_map"
+      ],
+      "fields": [
+        "root_map_contract_discovered_topology",
+        "当前位置/已知可返回性/节点状态",
+        "未知支路不揭示"
+      ],
+      "actions": {
+        "{navigate}": "inspect_discovered_nodes_only",
+        "{cancel}": "back_to_invoker"
+      },
+      "guards": [
+        "root_owns_map_contract",
+        "no_teleport_or_automatic_exit",
+        "gamepad_View_or_live_cancel_in_live_layer_only_cancels_no_map; other_available_map_request_per_input-rules.json"
+      ],
+      "return_to": [
+        "UI-HUD",
+        "UI-PAUSE"
+      ],
+      "failure": "已知信息不足明确未知，不承诺可返回或自动花门票。",
+      "status": "design_only",
+      "runtime_implemented": false
+    },
+    {
+      "id": "UI-FEEDBACK",
+      "label": "操作结果与失败反馈",
+      "clock": "contextual",
+      "entry": [
+        "actual_commit_success_or_rejection_or_cancel"
+      ],
+      "fields": [
+        "哪个对象/准确原因",
+        "本次费用/归属是否已提交",
+        "可行下一步",
+        "无获得音效的取消/失败"
+      ],
+      "actions": {},
+      "guards": [
+        "nonmodal_no_focus_steal_no_auto_retry",
+        "result_from_authoritative_commit_not_animation_start",
+        "D04_real_damage_and_time_not_rolled_back",
+        "world_clock_inherits_current_gameplay_not_extra_pause",
+        "inherits_invoker_clock_never_resumes_paused_parent"
+      ],
+      "return_to": [
+        "UI-HUD",
+        "UI-INSPECT",
+        "UI-HUB"
+      ],
+      "failure": "只反馈真实结果，不能将未知事务宣称失败并重复购买。",
+      "status": "design_only",
+      "runtime_implemented": false,
+      "clock_contexts": {
+        "gameplay": "real_time",
+        "paused_parent": "paused_simulation",
+        "HUB_IDLE": "no_run_clock"
+      }
+    }
+  ],
+  "facility_profiles": [
+    {
+      "facility_id": "FAC-MERCHANT",
+      "nodes": [
+        "REG-01-N04",
+        "REG-02-N04",
+        "REG-03-N04",
+        "REG-04-N04",
+        "REG-05-N04"
+      ],
+      "screen_id": "UI-PURCHASE",
+      "source_ref": "../economy-v1/facilities.json#FAC-MERCHANT",
+      "required_fields": [
+        "名称/目标/内容与负面",
+        "原价/实际价/原剩余次数",
+        "可用工具及不默认勾选",
+        "提交后果/失败原因"
+      ],
+      "new_prices_or_probabilities": false
+    },
+    {
+      "facility_id": "FAC-SUPPLY",
+      "nodes": [
+        "REG-01-N06",
+        "REG-02-N06",
+        "REG-03-N06",
+        "REG-04-N06",
+        "REG-05-N06"
+      ],
+      "screen_id": "UI-PURCHASE",
+      "source_ref": "../economy-v1/facilities.json#FAC-SUPPLY",
+      "required_fields": [
+        "名称/目标/内容与负面",
+        "原价/实际价/原剩余次数",
+        "可用工具及不默认勾选",
+        "提交后果/失败原因"
+      ],
+      "new_prices_or_probabilities": false
+    },
+    {
+      "facility_id": "FAC-CHOICE-WHEEL",
+      "nodes": [
+        "REG-03-N04",
+        "REG-05-N04"
+      ],
+      "screen_id": "UI-PURCHASE",
+      "source_ref": "../economy-v1/facilities.json#FAC-CHOICE-WHEEL",
+      "required_fields": [
+        "名称/目标/内容与负面",
+        "原价/实际价/原剩余次数",
+        "可用工具及不默认勾选",
+        "提交后果/失败原因"
+      ],
+      "new_prices_or_probabilities": false
+    },
+    {
+      "facility_id": "FAC-ROULETTE",
+      "nodes": [
+        "REG-02-N04",
+        "REG-04-N04"
+      ],
+      "screen_id": "UI-SERVICE-CONFIRM",
+      "source_ref": "../economy-v1/facilities.json#FAC-ROULETTE",
+      "required_fields": [
+        "名称/目标/内容与负面",
+        "原价/实际价/原剩余次数",
+        "可用工具及不默认勾选",
+        "提交后果/失败原因",
+        "原公开概率与空奖",
+        "代券不加次数",
+        "本地托盘空/未领阻塞",
+        "确认即定结果不可退款重抽"
+      ],
+      "new_prices_or_probabilities": false
+    },
+    {
+      "facility_id": "FAC-INTEL-ENTRY",
+      "nodes": [
+        "REG-01-N04",
+        "REG-02-N04",
+        "REG-03-N04",
+        "REG-04-N04",
+        "REG-05-N04"
+      ],
+      "screen_id": "UI-SERVICE-CONFIRM",
+      "source_ref": "../economy-v1/facilities.json#FAC-INTEL-ENTRY",
+      "required_fields": [
+        "名称/目标/内容与负面",
+        "原价/实际价/原剩余次数",
+        "可用工具及不默认勾选",
+        "提交后果/失败原因",
+        "信息仅标真实入口",
+        "门票不等掉落/主路免费",
+        "已有许可不重复收费/返回免费",
+        "已发现REG04仍收费无新经济收益",
+        "common箱key1且结果源端托盘"
+      ],
+      "new_prices_or_probabilities": false
+    },
+    {
+      "facility_id": "FAC-FORGE",
+      "nodes": [
+        "REG-01-N04",
+        "REG-02-N04",
+        "REG-03-N04",
+        "REG-04-N04",
+        "REG-05-N04"
+      ],
+      "screen_id": "UI-SERVICE-CONFIRM",
+      "source_ref": "../economy-v1/facilities.json#FAC-FORGE",
+      "required_fields": [
+        "名称/目标/内容与负面",
+        "原价/实际价/原剩余次数",
+        "可用工具及不默认勾选",
+        "提交后果/失败原因",
+        "当前grade与章cap",
+        "同来源最终属性比较",
+        "不补资源/不改动作",
+        "FUN005仅合法0→1"
+      ],
+      "new_prices_or_probabilities": false
+    },
+    {
+      "facility_id": "FAC-ENCHANT-PROGRESS",
+      "nodes": [
+        "REG-01-N04",
+        "REG-02-N04",
+        "REG-03-N04",
+        "REG-04-N04",
+        "REG-05-N04"
+      ],
+      "screen_id": "UI-SERVICE-CONFIRM",
+      "source_ref": "../economy-v1/facilities.json#FAC-ENCHANT-PROGRESS",
+      "required_fields": [
+        "名称/目标/内容与负面",
+        "原价/实际价/原剩余次数",
+        "可用工具及不默认勾选",
+        "提交后果/失败原因",
+        "附魔I-V与基础强化grade分开",
+        "正负全套/法定区间",
+        "确定升阶负词也升/整洗可变坏/洗净全删的对应说明"
+      ],
+      "new_prices_or_probabilities": false
+    },
+    {
+      "facility_id": "FAC-ENCHANT-REROLL",
+      "nodes": [
+        "REG-01-N04",
+        "REG-02-N04",
+        "REG-03-N04",
+        "REG-04-N04",
+        "REG-05-N04"
+      ],
+      "screen_id": "UI-SERVICE-CONFIRM",
+      "source_ref": "../economy-v1/facilities.json#FAC-ENCHANT-REROLL",
+      "required_fields": [
+        "名称/目标/内容与负面",
+        "原价/实际价/原剩余次数",
+        "可用工具及不默认勾选",
+        "提交后果/失败原因",
+        "附魔I-V与基础强化grade分开",
+        "正负全套/法定区间",
+        "确定升阶负词也升/整洗可变坏/洗净全删的对应说明"
+      ],
+      "new_prices_or_probabilities": false
+    },
+    {
+      "facility_id": "FAC-ENCHANT-CLEANSE",
+      "nodes": [
+        "REG-01-N04",
+        "REG-02-N04",
+        "REG-03-N04",
+        "REG-04-N04",
+        "REG-05-N04"
+      ],
+      "screen_id": "UI-SERVICE-CONFIRM",
+      "source_ref": "../economy-v1/facilities.json#FAC-ENCHANT-CLEANSE",
+      "required_fields": [
+        "名称/目标/内容与负面",
+        "原价/实际价/原剩余次数",
+        "可用工具及不默认勾选",
+        "提交后果/失败原因",
+        "附魔I-V与基础强化grade分开",
+        "正负全套/法定区间",
+        "确定升阶负词也升/整洗可变坏/洗净全删的对应说明"
+      ],
+      "new_prices_or_probabilities": false
+    }
+  ],
+  "sample_attachment": {
+    "facility_id": "FAC-MERCHANT",
+    "source_ref": "../progression-v1/unlocks.json#research_sample_order",
+    "screen_id": "UI-PURCHASE",
+    "known_exact_offer": true,
+    "cash_only": true,
+    "does_not_become_tenth_facility_or_modify55_stock": true
+  },
+  "flows": [
+    {
+      "id": "UIFLOW-01",
+      "screens": [
+        "UI-HUD",
+        "UI-TARGET",
+        "UI-EQUIP-COMPARE",
+        "UI-ACTION",
+        "UI-FEEDBACK"
+      ],
+      "purpose": "选明确物件→比较去向→新按确认→原动作→一次提交/取消"
+    },
+    {
+      "id": "UIFLOW-02",
+      "screens": [
+        "UI-HUD",
+        "UI-INSPECT",
+        "UI-ORGANIZE",
+        "UI-ACTION",
+        "UI-FEEDBACK"
+      ],
+      "purpose": "I暂停只读→安全单意图→明确恢复执行→重验真动作"
+    },
+    {
+      "id": "UIFLOW-03",
+      "screens": [
+        "UI-TARGET",
+        "UI-FACILITIES",
+        "UI-PURCHASE",
+        "UI-CARRY-CHOICE",
+        "UI-ACTION"
+      ],
+      "purpose": "已知整包全部去向先验再付款"
+    },
+    {
+      "id": "UIFLOW-04",
+      "screens": [
+        "UI-FACILITIES",
+        "UI-SERVICE-CONFIRM",
+        "UI-RANDOM-RESULT",
+        "UI-REWARD-TRAY",
+        "UI-ACTION"
+      ],
+      "purpose": "轮盘提交再显示→未知物源端托盘→合法领取"
+    },
+    {
+      "id": "UIFLOW-05",
+      "screens": [
+        "UI-TARGET",
+        "UI-EXIT",
+        "UI-HUD"
+      ],
+      "purpose": "明确出口→普通/付费不同安全→风险变更重显再确认"
+    },
+    {
+      "id": "UIFLOW-06",
+      "screens": [
+        "UI-HUB",
+        "UI-TALENTS",
+        "UI-TALENT-RESET",
+        "UI-HUB"
+      ],
+      "purpose": "局外付阶/按原实付全退→研究样品不动"
+    },
+    {
+      "id": "UIFLOW-07",
+      "screens": [
+        "UI-HUB",
+        "UI-RESEARCH",
+        "UI-SAMPLE",
+        "UI-NEW-RUN",
+        "UI-HUD"
+      ],
+      "purpose": "研究源资格→可选一项样品→新局冻结且清pending"
+    },
+    {
+      "id": "UIFLOW-08",
+      "screens": [
+        "UI-HUD",
+        "UI-RESULT",
+        "UI-NARRATIVE",
+        "UI-HUB"
+      ],
+      "purpose": "实际结算后回顾，不重复领奖"
+    },
+    {
+      "id": "UIFLOW-09",
+      "screens": [
+        "UI-PAUSE",
+        "UI-SETTINGS",
+        "UI-PAUSE",
+        "UI-CONTINUE"
+      ],
+      "purpose": "设置返回原上下文；存续/保存依实际D13能力"
+    },
+    {
+      "id": "UIFLOW-10",
+      "screens": [
+        "UI-HUD",
+        "UI-MAP",
+        "UI-HUD"
+      ],
+      "purpose": "暂停已发现拓扑，不传送或揭隐藏"
+    }
+  ],
+  "futurecases": [
+    {
+      "id": "UI-C01",
+      "trigger": "目标消失",
+      "screen_id": "UI-TARGET",
+      "expected": "撤销原目标，本次交互不改拿邻物/出口",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C02",
+      "trigger": "打开实时选槽的同次E/确认",
+      "screen_id": "UI-EQUIP-COMPARE",
+      "expected": "打开不算确认，必须释放后新按{confirm}；当前键盘Enter由输入表提供",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C03",
+      "trigger": "实时浮层非法闪避",
+      "screen_id": "UI-EQUIP-COMPARE",
+      "expected": "保留层并显示原因；不能非法闪避取消动作",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C04",
+      "trigger": "拾取开始后主攻/跳跃请求",
+      "screen_id": "UI-ACTION",
+      "expected": "不增加新取消途径，只有D04移动/有效伤害/合法闪避等原取消",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C05",
+      "trigger": "I内比较高HP甲又取消",
+      "screen_id": "UI-INSPECT",
+      "expected": "HP/归属/所有计时不变，不提前截血或回血",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C06",
+      "trigger": "安全整理普通关闭",
+      "screen_id": "UI-ORGANIZE",
+      "expected": "清未确认意图，返回不执行",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C07",
+      "trigger": "恢复整理同点被伤/有新操作",
+      "screen_id": "UI-ORGANIZE",
+      "expected": "伤害死亡先，清计划不自动重试",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C08",
+      "trigger": "已知二件包只能收一件",
+      "screen_id": "UI-PURCHASE",
+      "expected": "整包拒绝，金币券次数都不扣",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C09",
+      "trigger": "轮盘道具奖槽满",
+      "screen_id": "UI-REWARD-TRAY",
+      "expected": "原奖保源端，不能退款重抽/再次转",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C10",
+      "trigger": "清前波仍有未来义务",
+      "screen_id": "UI-FACILITIES",
+      "expected": "非房清不可认完整安全",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C11",
+      "trigger": "带DoT走免费门",
+      "screen_id": "UI-EXIT",
+      "expected": "可按原免费门条件确认；致死伤害优先，状态不净化",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C12",
+      "trigger": "带DoT付门费",
+      "screen_id": "UI-EXIT",
+      "expected": "完整安全失败，不收费不缓存自动过门",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C13",
+      "trigger": "出口预览后新掉落/改价",
+      "screen_id": "UI-EXIT",
+      "expected": "风险版本更新，新展示后新按确认；计时小数自然走不每帧重置",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C14",
+      "trigger": "未结束冒险看营地天赋",
+      "screen_id": "UI-TALENTS",
+      "expected": "只读，不通过UI地点绕HUB_IDLE锁",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C15",
+      "trigger": "研究样品已买后失败",
+      "screen_id": "UI-SAMPLE",
+      "expected": "已购标志保留，下一局无自动选中/重送",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C16",
+      "trigger": "玩家与Boss同点死亡",
+      "screen_id": "UI-RESULT",
+      "expected": "失败，不显示新Boss奖励或胜利领取",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C17",
+      "trigger": "保存没有持久成功回执",
+      "screen_id": "UI-CONTINUE",
+      "expected": "不显示已保存，不新建冒险假冒继续",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C18",
+      "trigger": "跳过故事或重复档案",
+      "screen_id": "UI-NARRATIVE",
+      "expected": "不发奖不重设事实，不跳过付费风险卡",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C19",
+      "trigger": "手柄View或实时取消在选择层触发；另对照键盘M/I暂停只读请求",
+      "screen_id": "UI-EQUIP-COMPARE",
+      "expected": "View/实时取消只关层无地图；M/I按input-rules先关未提交预览再开暂停地图/检视；不透传确认或世界攻击",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C20",
+      "trigger": "比较替换备用武器",
+      "screen_id": "UI-EQUIP-COMPARE",
+      "expected": "当前A最终属性不误加B附魔；另页示切换后估算",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C21",
+      "trigger": "结算后R与确认",
+      "screen_id": "UI-RESULT",
+      "expected": "已提交结算后新按R只打开新局确认；再新按{confirm}且HUB_IDLE/当前资格通过才创建；实时T装填不变，R在战斗中不重开",
+      "runtime_tested": false
+    },
+    {
+      "id": "UI-C22",
+      "trigger": "不安全时暂停打开剧情",
+      "screen_id": "UI-PAUSE",
+      "expected": "暂停不授安全；长剧情回顾禁用或只显示索引，不打开UI-NARRATIVE模态",
+      "runtime_tested": false
+    }
+  ],
+  "no_new_prices_equipment_mechanics_or_paid_assets": true,
+  "source_sha256": {
+    "inventory-v1/inventory-rules.json": "7eb6f7da968622a1583b4e63069208513a09e0ef74d12e244c18e20332f08942",
+    "economy-v1/facilities.json": "a2ebd6ebff3e283b5708afb88fbc36509405a5fdf88bf73fc5d7bcdbce104b88",
+    "progression-v1/hub-rules.json": "edcd7bcaf78d86416dc01ee0b31f9aa3c3477fa2ea80654cd181f1700b9deb40",
+    "narrative-v1/npcs-and-dialogue.json": "4ecd8692883714d628e8f34c8aefe5f92a01645726a8e6d2984d27a358ae9281"
+  },
+  "D13_save_continue_status": "required_future_contract_not_implemented_by_this_design"
+}

@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "source_event": "EV-028",
+  "module": "D-10",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "scope": "documented acceptance cases; validator exercises an abstract story-event model for selected state invariants, not UI or storage",
+  "cases": [
+    {
+      "id": "NAR-01",
+      "given": "零天赋、零研究、没有支路发现，依次合法击败五主Boss",
+      "expected": "得到同一个完整基础结局；不检查消费、支线或未读对白"
+    },
+    {
+      "id": "NAR-02",
+      "given": "取得M01后在第二章失败，再创建新局",
+      "expected": "账号M01保留；本局Boss清单为空、第一关仍需打；NPC承认旧见闻"
+    },
+    {
+      "id": "NAR-03",
+      "given": "主角与最终Boss同点死亡",
+      "expected": "当前无最终成功/新M05/结局回执；此前已入账事实保留"
+    },
+    {
+      "id": "NAR-04",
+      "given": "最终成功已经提交，关闭结局窗口或异常重开",
+      "expected": "恢复原结局记录，首次奖励不重发，world_liberated不撤销"
+    },
+    {
+      "id": "NAR-05",
+      "given": "付隐藏门票、走进入口或买情报但未交互发现点",
+      "expected": "没有STORY-Sxx、没有发现碎片；门票许可按D08保留"
+    },
+    {
+      "id": "NAR-06",
+      "given": "击败金牙赌王但尚未读到可达发现点",
+      "expected": "有独立可选Boss成功/O01及旧Boss奖励；没有S01或发现2碎片"
+    },
+    {
+      "id": "NAR-07",
+      "given": "同一DISC点重复交互、跳过和回顾",
+      "expected": "同一账号故事事实和D08发现奖励各最多一次"
+    },
+    {
+      "id": "NAR-08",
+      "given": "主线正文未读，直接去下一章",
+      "expected": "Boss成功已开本局路；未读状态不阻主线/服务"
+    },
+    {
+      "id": "NAR-09",
+      "given": "已有M01..04，另一局刚进入第一章",
+      "expected": "账号知识不替本局过关，也不初始化四章奖励"
+    },
+    {
+      "id": "NAR-10",
+      "given": "仍有DoT或旧弹时尝试打开NPC长对白",
+      "expected": "按完整D04安全拒绝；普通免费出口仍沿原较宽条件，不能把剧情安全移植成出口新门槛"
+    },
+    {
+      "id": "NAR-11",
+      "given": "查看NPC留声签或反复切换故事阶段",
+      "expected": "库存、轮盘次数、样品绑定、金币/HP/专注/CD都不因文本刷新"
+    },
+    {
+      "id": "NAR-12",
+      "given": "跳过Boss剧情台词",
+      "expected": "不跳掉D06入战1.5秒、阶段1.2秒或原招式预警/收势"
+    },
+    {
+      "id": "NAR-13",
+      "given": "暂停退出到菜单，主角真身设定在营地",
+      "expected": "仍属RUN_SUSPENDED；只能查看，不可买天赋/退款/更改样品/创建另一局"
+    },
+    {
+      "id": "NAR-14",
+      "given": "第一次通关无任何隐藏发现",
+      "expected": "结局有效，现实解誓；无惩罚性伤亡插页或真结局锁"
+    },
+    {
+      "id": "NAR-15",
+      "given": "通关后的新回响局发现以前没见的S04并再次成功",
+      "expected": "本次可有S04插页，第一次结局快照仍无S04；旧首次奖励不重发，真实城不再封锁"
+    },
+    {
+      "id": "NAR-16",
+      "given": "回响局战败或读到领主的旧宣言",
+      "expected": "记录为历史语境；world_liberated仍为true，当前失败不撤销首次通关"
+    },
+    {
+      "id": "NAR-17",
+      "given": "旧档有可信D08成功/发现标志而无D10文本索引",
+      "expected": "只补可推导故事记录；不重发奖励、不猜当时插页集合；D13定义实际迁移"
+    },
+    {
+      "id": "NAR-18",
+      "given": "只有已读正文标志，没有可信Boss成功/发现记录",
+      "expected": "不能反向生成胜绩或领取奖励；保留并交D13恢复判断"
+    },
+    {
+      "id": "NAR-19",
+      "given": "发现交互最后一刻与致命伤同点",
+      "expected": "按伤害/死亡优先不提交发现；不因播放一行文字复活或补发"
+    },
+    {
+      "id": "NAR-20",
+      "given": "胜利后尝试把剩余金币/装备带回营地",
+      "expected": "本局物品结束，不兑换碎片；故事中的回归不增加物品持久权"
+    },
+    {
+      "id": "NAR-21",
+      "given": "新Run叙事语境冻结后继续同一存档",
+      "expected": "延用原语境和展示游标，不再创建新局/新奖励随机结果"
+    },
+    {
+      "id": "NAR-22",
+      "given": "取得S01但不消费任何天赋碎片，或把碎片花光",
+      "expected": "见闻保留，插页资格不受货币余额影响，故事不是可消耗钥匙"
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+{
+  "schema_version": "2.0",
+  "status": "design_only",
+  "design_date": "2026-10-12",
+  "authority": "original_proposal_not_reference_game_specification",
+  "base_equipment_version": "equipment-v1",
+  "equipment_count": {"weapons": 33, "armor": 12, "total": 45},
+  "enchantable": {"all_existing_equipment": true, "future_default": true, "max_tier": 5},
+  "tiers": [
+    {"tier": 1, "label": "I"},
+    {"tier": 2, "label": "II"},
+    {"tier": 3, "label": "III"},
+    {"tier": 4, "label": "IV"},
+    {"tier": 5, "label": "V"}
+  ],
+  "slot_rule": {
+    "slots_per_instance": 1,
+    "slot_contains": "one_package_with_one_shared_tier",
+    "none_has_tier": false,
+    "preserve_content_id_and_intrinsic_traits": true,
+    "does_not_define_item_rarity": true,
+    "negative_affixes_bind_equipment": false,
+    "discard_or_replace_allowed": true
+  },
+  "spawn_enchant_chance": 0.4,
+  "spawn_none_chance": 0.6,
+  "package_weights": {"beneficial": 0.6, "mixed": 0.3, "cursed": 0.1},
+  "package_weights_are_conditional_on_enchanted": true,
+  "unconditional_spawn_probabilities": {"none": 0.6, "beneficial": 0.24, "mixed": 0.12, "cursed": 0.04},
+  "packages": {
+    "beneficial": {"positive_affixes": 1, "negative_affixes": 0},
+    "mixed": {"positive_affixes": 2, "negative_affixes": 1},
+    "cursed": {"positive_affixes": 0, "negative_affixes": 1}
+  },
+  "tier_pools": {
+    "early": {"1": 0.7, "2": 0.25, "3": 0.05, "4": 0.0, "5": 0.0},
+    "middle": {"1": 0.15, "2": 0.4, "3": 0.35, "4": 0.1, "5": 0.0},
+    "advanced": {"1": 0.0, "2": 0.1, "3": 0.4, "4": 0.35, "5": 0.15}
+  },
+  "sign_rule": {
+    "magnitude_is_positive_integer": true,
+    "signed_value_formula": "magnitude * direction",
+    "direction_values": [-1, 1],
+    "polarity_values": ["beneficial", "harmful"],
+    "polarity_is_not_numeric_sign": true,
+    "examples": [
+      {"stat": "skill_cooldown_pct", "polarity": "beneficial", "direction": -1, "meaning": "武器技冷却降低"},
+      {"stat": "focus_cost_pct", "polarity": "beneficial", "direction": -1, "meaning": "专注消耗降低"},
+      {"stat": "physical_vulnerability_pct", "polarity": "harmful", "direction": 1, "meaning": "物理易伤增加"}
+    ],
+    "percent_storage": "percentage_points_as_integer_12_means_12_percent"
+  },
+  "exclusivity": {
+    "duplicate_affix_ids_allowed": false,
+    "max_affixes_per_group": 1,
+    "opposite_affixes_share_group": true,
+    "element_group": "elemental",
+    "element_members": ["burn_dps", "slow_pct", "shock_flat"],
+    "mixed_positive_affixes_are_unordered": true,
+    "stored_affixes_order": "stable_id_sort"
+  },
+  "eligibility": {
+    "weapon_and_armor_pools_separate": true,
+    "move_speed_available_to": ["weapon", "armor"],
+    "reload_families": ["XBW", "PST", "SGN", "RFL"],
+    "focus_cost_families": ["STF"],
+    "reach_excluded_families": ["SGN"],
+    "filter_before_random_sampling": true,
+    "negative_armor_and_ward_max": "item_intrinsic_base_value",
+    "negative_poise_max": "item_intrinsic_poise_bonus_not_character_base_30",
+    "effective_interval": "intersection(tier_closed_integer_interval, item_nonzero_legal_interval)",
+    "empty_interval_behavior": "exclude_candidate",
+    "no_effect_candidates_allowed": false,
+    "temporary_other_equipment_caps_change_candidate_pool": false,
+    "global_caps_still_apply_after_combination": true,
+    "insufficient_package_combinations_behavior": "reject_configuration_or_operation_before_payment_without_silent_fallback",
+    "description": "每个词条仍须通过目录eligible_kinds、eligible_weapon_families与排除条件；类型可用不等于每级数值都有合法区间。"
+  },
+  "generation": {
+    "order": ["validate_definition_and_source", "roll_enchanted", "roll_package", "roll_shared_tier", "enumerate_eligible_complete_combinations", "sample_one_complete_combination", "sample_each_integer_magnitude_and_store_original_q", "commit_instance_once"],
+    "combination_sampling": "uniform_over_eligible_complete_combinations_without_permutation_duplicates",
+    "magnitude_sampling": "uniform_integer_in_effective_closed_interval_using_rejection_sampling",
+    "algorithm_version": "integer_uniform_center_quantile_v1",
+    "quantile": {
+      "meaning": "original_sampled_integer_bucket_midpoint",
+      "numerator_formula": "2 * (magnitude - min) + 1",
+      "denominator_formula": "2 * (max - min + 1)",
+      "storage": "positive_integer_numerator_and_denominator",
+      "range": "0 < q < 1",
+      "upgrade_formula": "new_min + floor(q_numerator * (new_max - new_min + 1) / q_denominator)",
+      "preserve_original_across_all_upgrades": true,
+      "fixed_interval_quantile": {"numerator": 1, "denominator": 2}
+    },
+    "persistent_seed_and_rng_cursor": true,
+    "spawn_on_visibility_or_pickup": false,
+    "stable_spawn_event_id": true,
+    "duplicate_spawn_event_returns_existing_instance": true,
+    "invalid_source_reward_behavior": "retain_pending_reward_and_report_configuration_error_no_silent_reroll"
+  },
+  "operations": {
+    "awaken": {
+      "name": "觉醒",
+      "requires_package": "none",
+      "cost_gold": 20,
+      "result_tier": 1,
+      "random_package_weights_ref": "package_weights",
+      "can_produce_negative": true
+    },
+    "reroll": {
+      "name": "重洗",
+      "allowed_tiers": [1, 2, 3, 4, 5],
+      "cost_gold_by_tier": {"1": 15, "2": 30, "3": 55, "4": 85, "5": 120},
+      "preserve_tier": true,
+      "reroll_fields": ["package_type", "affix_ids", "magnitudes", "original_quantiles"],
+      "random_package_weights_ref": "package_weights",
+      "preview_random_result_before_commit": false,
+      "can_get_worse": true
+    },
+    "upgrade": {
+      "name": "升阶",
+      "allowed_from_tiers": [1, 2, 3, 4],
+      "cost_gold_by_from_tier": {"1": 40, "2": 80, "3": 140, "4": 220},
+      "tier_delta": 1,
+      "preserve_fields": ["package_type", "affix_ids", "original_quantiles"],
+      "negative_affixes_upgrade_too": true,
+      "prevalidate_all_next_tier_intervals": true,
+      "empty_next_interval_behavior": "reject_before_payment_with_reason_no_affix_substitution_or_clamping",
+      "deterministic_result_comparison_allowed": true
+    },
+    "cleanse": {
+      "name": "洗净",
+      "allowed_tiers": [1, 2, 3, 4, 5],
+      "cost_gold_by_tier": {"1": 10, "2": 20, "3": 35, "4": 55, "5": 80},
+      "result_package": "none",
+      "remove_entire_package": true,
+      "remove_tier_and_affix_quantiles": true,
+      "preserve_intrinsic_traits": true,
+      "selective_negative_removal": false
+    }
+  },
+  "workshop": {
+    "requires_room_cleared": true,
+    "requires_player_alive_grounded_idle": true,
+    "blocked_states": ["combat", "attacking", "hurt", "reloading", "jumping", "switching_weapon", "changing_armor"],
+    "target_scope": "owned_weapon_slot_1_or_2_or_body_armor",
+    "ground_items_directly_mutable": false,
+    "inactive_weapon_affixes_apply": false,
+    "transaction_locks_target_ownership": true,
+    "refill_hp": false,
+    "refill_focus": false,
+    "refill_magazine": false,
+    "reset_any_cooldown": false,
+    "reset_existing_enemy_status": false,
+    "max_health_recalculation": "current_hp_only_clamped_down_no_heal_on_increase",
+    "affix_locking_or_transfer": false,
+    "extra_material_costs": false,
+    "pity_system": false
+  },
+  "effect_resolution": {
+    "attack_snapshot_at": "windup_40_percent_lock_point",
+    "lifesteal_rate_uses_attack_snapshot": true,
+    "healing_received_uses_current_recipient_stats_at_restore_time": true,
+    "all_healing_requires_living_recipient": true,
+    "dead_recipient_healing_amount": 0,
+    "dead_recipient_consumes_healing_budget": false,
+    "existing_projectiles_may_damage_after_attacker_death": true,
+    "existing_projectiles_may_revive_attacker_via_lifesteal": false,
+    "element_attempts_per_attack_id": 1,
+    "element_target": "first_legal_enemy_with_positive_direct_hp_damage",
+    "element_attempt_opportunity_consumed_at_first_target": true,
+    "first_target_killed_by_direct_hit": "consume_attack_opportunity_and_ready_role_cooldown_no_corpse_status_no_target_reselection",
+    "element_role_cooldown_not_ready_behavior": "no_effect_no_attempt_on_later_targets",
+    "element_role_cooldown_ready_behavior": "consume_role_cooldown_then_attempt_effect",
+    "element_rejected_by_stronger_status_target_cooldown_or_poise_protection": "no_role_cooldown_refund_no_target_reselection",
+    "intrinsic_skill_effects_grant_extra_enchant_attempts": false
+  },
+  "transaction": {
+    "unique_operation_id": true,
+    "validate_before_payment": ["room_and_player_state", "ownership", "instance_version", "gold", "tier_boundary", "complete_eligible_combination_or_upgrade_intervals", "data_version"],
+    "atomic_fields": ["gold_balance", "instance_enchantment", "instance_version", "rng_cursor", "operation_commit_record"],
+    "rng_consumed_only_after_confirmation_and_validation": true,
+    "retry_same_operation_returns_same_result": true,
+    "duplicate_confirmation_charges_once": true,
+    "failed_uncommitted_operation_preserves_gold_and_old_enchantment": true,
+    "failed_prevalidation_preserves_rng_cursor": true,
+    "committed_operation_after_display_failure": "restore_same_committed_record_no_second_charge_or_roll",
+    "free_random_preview_via_refund": false,
+    "save_and_commit_interface_status": "not_implemented"
+  },
+  "ui": {
+    "sections": ["base_stats", "intrinsic_traits_and_skill", "enchant_tier_and_package", "positive_and_negative_affixes_with_grade_limits", "effective_stats_and_caps"],
+    "polarity_text_and_symbols_required": true,
+    "color_only_meaning_allowed": false,
+    "negative_affixes_may_be_hidden": false,
+    "show_effective_interval_when_base_clips_range": true,
+    "show_inactive_weapon_state": true,
+    "random_operations_show_probability_and_fixed_price_only_before_confirm": true,
+    "reroll_warning": "保等级，整套重抽，可出现纯负面，确认后立即生效",
+    "failure_reason_text_required": true
+  },
+  "persistence": {
+    "status": "future_interface_not_implemented",
+    "required_instance_fields": ["content_id", "instance_id", "instance_version", "enchant_package", "enchant_tier", "affix_ids", "magnitudes", "original_quantile_rationals", "generation_seed", "algorithm_version", "affix_catalog_version", "attribute_rules_version", "weapon_skill_cooldown_deadline"],
+    "snapshot_fields": ["gold", "owned_and_ground_instances", "persistent_rng_state", "committed_operations", "pending_transactions", "shared_character_cooldowns"],
+    "load_existing_results_without_reroll": true,
+    "migration_preserves_original_backup_and_log": true,
+    "unknown_data_behavior": "report_and_preserve_no_silent_affix_removal_or_regeneration",
+    "local_save_edit_proof": false,
+    "future_coop_authority_checks": ["ownership", "gold", "instance_version", "operation_id", "server_rng_and_result"]
+  },
+  "acceptance": {
+    "status": "planned_not_runtime_passed",
+    "equipment_tier_cases": 225,
+    "equipment_tier_package_cases": 675,
+    "scenarios": ["all_45_equipment_at_all_5_tiers", "random_weights_and_zero_weight_boundaries", "integer_magnitude_and_original_q_boundaries", "negative_affix_eligibility", "reroll_failure_rollback_and_retry", "upgrade_negative_values_and_top_tier_rejection", "whole_package_cleanse", "swap_drop_pickup_without_duplication_or_refill", "duplicate_attack_spawn_and_workshop_events", "ui_grade_caps_polarity_and_effective_values", "data_versions_and_singleplayer_save_recovery", "future_coop_interface_authority", "economy_against_complete_run_rewards_and_other_spending"]
+  },
+  "economy": {
+    "costs_status": "proposal_requires_playtesting",
+    "complete_run_reward_basis_available": false,
+    "prototype_enemy_gold": 5,
+    "prototype_room_enemy_count": 3,
+    "prototype_rewards_prove_full_run_affordability": false,
+    "upgrade_time_or_person_days_claimed": false,
+    "tuning_dependency": "complete_run_rewards_shop_competing_costs_and_player_choices"
+  }
+}

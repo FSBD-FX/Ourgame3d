@@ -1,0 +1,941 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "source_event": "EV-026",
+  "module": "D-08",
+  "authority": "assistant_proposal_not_individually_approved",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "parameter_status": "unplaytested",
+  "verification_scope": "ordered_reference_wallet_arithmetic_and_declarative_boundary_cases_only",
+  "ordered_wallets": [
+    {
+      "id": "BUD-001",
+      "name": "确定补给与双装备锻造",
+      "ordinary_pickup_ratio_assumption": 1.0,
+      "measured_probability": false,
+      "events": [
+        {
+          "chapter": 0,
+          "node": "new_run",
+          "kind": "initialize",
+          "amount": 20,
+          "balance": 20
+        },
+        {
+          "chapter": 1,
+          "node": "N02",
+          "kind": "collected_gold",
+          "amount": 8,
+          "balance": 28
+        },
+        {
+          "chapter": 1,
+          "node": "N03",
+          "kind": "collected_gold",
+          "amount": 20,
+          "balance": 48
+        },
+        {
+          "chapter": 1,
+          "node": "N04",
+          "kind": "spend",
+          "service": "REC001_N04",
+          "amount": -18,
+          "balance": 30
+        },
+        {
+          "chapter": 1,
+          "node": "N04",
+          "kind": "spend",
+          "service": "weapon_0_to_1",
+          "amount": -30,
+          "balance": 0
+        },
+        {
+          "chapter": 1,
+          "node": "N05",
+          "kind": "collected_gold",
+          "amount": 24,
+          "balance": 24
+        },
+        {
+          "chapter": 1,
+          "node": "N06",
+          "kind": "spend",
+          "service": "REC001_N06",
+          "amount": -18,
+          "balance": 6
+        },
+        {
+          "chapter": 1,
+          "node": "N07",
+          "kind": "collected_boss_gold",
+          "amount": 40,
+          "balance": 46,
+          "actual_pickup_assumed": true
+        },
+        {
+          "chapter": 2,
+          "node": "N02",
+          "kind": "collected_gold",
+          "amount": 12,
+          "balance": 58
+        },
+        {
+          "chapter": 2,
+          "node": "N03",
+          "kind": "collected_gold",
+          "amount": 28,
+          "balance": 86
+        },
+        {
+          "chapter": 2,
+          "node": "N04",
+          "kind": "spend",
+          "service": "REC001_N04",
+          "amount": -18,
+          "balance": 68
+        },
+        {
+          "chapter": 2,
+          "node": "N04",
+          "kind": "spend",
+          "service": "armor_0_to_1",
+          "amount": -30,
+          "balance": 38
+        },
+        {
+          "chapter": 2,
+          "node": "N05",
+          "kind": "collected_gold",
+          "amount": 32,
+          "balance": 70
+        },
+        {
+          "chapter": 2,
+          "node": "N06",
+          "kind": "spend",
+          "service": "REC001_N06",
+          "amount": -18,
+          "balance": 52
+        },
+        {
+          "chapter": 2,
+          "node": "N07",
+          "kind": "collected_boss_gold",
+          "amount": 50,
+          "balance": 102,
+          "actual_pickup_assumed": true
+        },
+        {
+          "chapter": 3,
+          "node": "N02",
+          "kind": "collected_gold",
+          "amount": 16,
+          "balance": 118
+        },
+        {
+          "chapter": 3,
+          "node": "N03",
+          "kind": "collected_gold",
+          "amount": 36,
+          "balance": 154
+        },
+        {
+          "chapter": 3,
+          "node": "N04",
+          "kind": "spend",
+          "service": "REC001_N04",
+          "amount": -18,
+          "balance": 136
+        },
+        {
+          "chapter": 3,
+          "node": "N04",
+          "kind": "spend",
+          "service": "weapon_1_to_2",
+          "amount": -55,
+          "balance": 81
+        },
+        {
+          "chapter": 3,
+          "node": "N05",
+          "kind": "collected_gold",
+          "amount": 40,
+          "balance": 121
+        },
+        {
+          "chapter": 3,
+          "node": "N06",
+          "kind": "spend",
+          "service": "REC001_N06",
+          "amount": -18,
+          "balance": 103
+        },
+        {
+          "chapter": 3,
+          "node": "N07",
+          "kind": "collected_boss_gold",
+          "amount": 60,
+          "balance": 163,
+          "actual_pickup_assumed": true
+        },
+        {
+          "chapter": 4,
+          "node": "N02",
+          "kind": "collected_gold",
+          "amount": 20,
+          "balance": 183
+        },
+        {
+          "chapter": 4,
+          "node": "N03",
+          "kind": "collected_gold",
+          "amount": 44,
+          "balance": 227
+        },
+        {
+          "chapter": 4,
+          "node": "N04",
+          "kind": "spend",
+          "service": "REC001_N04",
+          "amount": -18,
+          "balance": 209
+        },
+        {
+          "chapter": 4,
+          "node": "N04",
+          "kind": "spend",
+          "service": "armor_1_to_2",
+          "amount": -55,
+          "balance": 154
+        },
+        {
+          "chapter": 4,
+          "node": "N05",
+          "kind": "collected_gold",
+          "amount": 48,
+          "balance": 202
+        },
+        {
+          "chapter": 4,
+          "node": "N06",
+          "kind": "spend",
+          "service": "REC001_N06",
+          "amount": -18,
+          "balance": 184
+        },
+        {
+          "chapter": 4,
+          "node": "N07",
+          "kind": "collected_boss_gold",
+          "amount": 70,
+          "balance": 254,
+          "actual_pickup_assumed": true
+        },
+        {
+          "chapter": 5,
+          "node": "N02",
+          "kind": "collected_gold",
+          "amount": 24,
+          "balance": 278
+        },
+        {
+          "chapter": 5,
+          "node": "N03",
+          "kind": "collected_gold",
+          "amount": 52,
+          "balance": 330
+        },
+        {
+          "chapter": 5,
+          "node": "N04",
+          "kind": "spend",
+          "service": "REC001_N04",
+          "amount": -18,
+          "balance": 312
+        },
+        {
+          "chapter": 5,
+          "node": "N04",
+          "kind": "spend",
+          "service": "weapon_2_to_3",
+          "amount": -85,
+          "balance": 227
+        },
+        {
+          "chapter": 5,
+          "node": "N04",
+          "kind": "spend",
+          "service": "armor_2_to_3",
+          "amount": -85,
+          "balance": 142
+        },
+        {
+          "chapter": 5,
+          "node": "N05",
+          "kind": "collected_gold",
+          "amount": 56,
+          "balance": 198
+        },
+        {
+          "chapter": 5,
+          "node": "N06",
+          "kind": "spend",
+          "service": "REC001_N06",
+          "amount": -18,
+          "balance": 180
+        },
+        {
+          "chapter": 5,
+          "node": "N07",
+          "kind": "collected_boss_gold",
+          "amount": 0,
+          "balance": 180,
+          "actual_pickup_assumed": false
+        }
+      ],
+      "gross_gold": 700,
+      "spent_gold": 520,
+      "pre_end_balance": 180,
+      "post_end_balance": 0,
+      "combat_success_assumed_not_verified": true,
+      "boss_gold_pickup_assumption": "first four main Boss ground gold fully picked; final Boss gold0; success alone is not wallet credit"
+    },
+    {
+      "id": "BUD-002",
+      "name": "普通金币仅拾取75%的压力假设",
+      "ordinary_pickup_ratio_assumption": 0.75,
+      "measured_probability": false,
+      "events": [
+        {
+          "chapter": 0,
+          "node": "new_run",
+          "kind": "initialize",
+          "amount": 20,
+          "balance": 20
+        },
+        {
+          "chapter": 1,
+          "node": "N02",
+          "kind": "collected_gold",
+          "amount": 6,
+          "balance": 26
+        },
+        {
+          "chapter": 1,
+          "node": "N03",
+          "kind": "collected_gold",
+          "amount": 15,
+          "balance": 41
+        },
+        {
+          "chapter": 1,
+          "node": "N04",
+          "kind": "spend",
+          "service": "REC001_N04",
+          "amount": -18,
+          "balance": 23
+        },
+        {
+          "chapter": 1,
+          "node": "N05",
+          "kind": "collected_gold",
+          "amount": 18,
+          "balance": 41
+        },
+        {
+          "chapter": 1,
+          "node": "N06",
+          "kind": "spend",
+          "service": "REC001_N06",
+          "amount": -18,
+          "balance": 23
+        },
+        {
+          "chapter": 1,
+          "node": "N07",
+          "kind": "collected_boss_gold",
+          "amount": 40,
+          "balance": 63,
+          "actual_pickup_assumed": true
+        },
+        {
+          "chapter": 2,
+          "node": "N02",
+          "kind": "collected_gold",
+          "amount": 9,
+          "balance": 72
+        },
+        {
+          "chapter": 2,
+          "node": "N03",
+          "kind": "collected_gold",
+          "amount": 21,
+          "balance": 93
+        },
+        {
+          "chapter": 2,
+          "node": "N04",
+          "kind": "spend",
+          "service": "REC001_N04",
+          "amount": -18,
+          "balance": 75
+        },
+        {
+          "chapter": 2,
+          "node": "N04",
+          "kind": "spend",
+          "service": "weapon_0_to_1",
+          "amount": -30,
+          "balance": 45
+        },
+        {
+          "chapter": 2,
+          "node": "N05",
+          "kind": "collected_gold",
+          "amount": 24,
+          "balance": 69
+        },
+        {
+          "chapter": 2,
+          "node": "N06",
+          "kind": "spend",
+          "service": "REC001_N06",
+          "amount": -18,
+          "balance": 51
+        },
+        {
+          "chapter": 2,
+          "node": "N07",
+          "kind": "collected_boss_gold",
+          "amount": 50,
+          "balance": 101,
+          "actual_pickup_assumed": true
+        },
+        {
+          "chapter": 3,
+          "node": "N02",
+          "kind": "collected_gold",
+          "amount": 12,
+          "balance": 113
+        },
+        {
+          "chapter": 3,
+          "node": "N03",
+          "kind": "collected_gold",
+          "amount": 27,
+          "balance": 140
+        },
+        {
+          "chapter": 3,
+          "node": "N04",
+          "kind": "spend",
+          "service": "REC001_N04",
+          "amount": -18,
+          "balance": 122
+        },
+        {
+          "chapter": 3,
+          "node": "N04",
+          "kind": "spend",
+          "service": "weapon_1_to_2",
+          "amount": -55,
+          "balance": 67
+        },
+        {
+          "chapter": 3,
+          "node": "N05",
+          "kind": "collected_gold",
+          "amount": 30,
+          "balance": 97
+        },
+        {
+          "chapter": 3,
+          "node": "N06",
+          "kind": "spend",
+          "service": "REC001_N06",
+          "amount": -18,
+          "balance": 79
+        },
+        {
+          "chapter": 3,
+          "node": "N07",
+          "kind": "collected_boss_gold",
+          "amount": 60,
+          "balance": 139,
+          "actual_pickup_assumed": true
+        },
+        {
+          "chapter": 4,
+          "node": "N02",
+          "kind": "collected_gold",
+          "amount": 15,
+          "balance": 154
+        },
+        {
+          "chapter": 4,
+          "node": "N03",
+          "kind": "collected_gold",
+          "amount": 33,
+          "balance": 187
+        },
+        {
+          "chapter": 4,
+          "node": "N04",
+          "kind": "spend",
+          "service": "REC001_N04",
+          "amount": -18,
+          "balance": 169
+        },
+        {
+          "chapter": 4,
+          "node": "N04",
+          "kind": "spend",
+          "service": "armor_0_to_1",
+          "amount": -30,
+          "balance": 139
+        },
+        {
+          "chapter": 4,
+          "node": "N05",
+          "kind": "collected_gold",
+          "amount": 36,
+          "balance": 175
+        },
+        {
+          "chapter": 4,
+          "node": "N06",
+          "kind": "spend",
+          "service": "REC001_N06",
+          "amount": -18,
+          "balance": 157
+        },
+        {
+          "chapter": 4,
+          "node": "N07",
+          "kind": "collected_boss_gold",
+          "amount": 70,
+          "balance": 227,
+          "actual_pickup_assumed": true
+        },
+        {
+          "chapter": 5,
+          "node": "N02",
+          "kind": "collected_gold",
+          "amount": 18,
+          "balance": 245
+        },
+        {
+          "chapter": 5,
+          "node": "N03",
+          "kind": "collected_gold",
+          "amount": 39,
+          "balance": 284
+        },
+        {
+          "chapter": 5,
+          "node": "N04",
+          "kind": "spend",
+          "service": "REC001_N04",
+          "amount": -18,
+          "balance": 266
+        },
+        {
+          "chapter": 5,
+          "node": "N04",
+          "kind": "spend",
+          "service": "weapon_2_to_3",
+          "amount": -85,
+          "balance": 181
+        },
+        {
+          "chapter": 5,
+          "node": "N04",
+          "kind": "spend",
+          "service": "armor_1_to_2",
+          "amount": -55,
+          "balance": 126
+        },
+        {
+          "chapter": 5,
+          "node": "N05",
+          "kind": "collected_gold",
+          "amount": 42,
+          "balance": 168
+        },
+        {
+          "chapter": 5,
+          "node": "N06",
+          "kind": "spend",
+          "service": "REC001_N06",
+          "amount": -18,
+          "balance": 150
+        },
+        {
+          "chapter": 5,
+          "node": "N07",
+          "kind": "collected_boss_gold",
+          "amount": 0,
+          "balance": 150,
+          "actual_pickup_assumed": false
+        }
+      ],
+      "gross_gold": 585,
+      "spent_gold": 435,
+      "pre_end_balance": 150,
+      "post_end_balance": 0,
+      "combat_success_assumed_not_verified": true,
+      "boss_gold_pickup_assumption": "first four main Boss ground gold fully picked; final Boss gold0; success alone is not wallet credit"
+    },
+    {
+      "id": "BUD-003",
+      "name": "全程不花钱的免费主路",
+      "ordinary_pickup_ratio_assumption": 1.0,
+      "measured_probability": false,
+      "events": [
+        {
+          "chapter": 0,
+          "node": "new_run",
+          "kind": "initialize",
+          "amount": 20,
+          "balance": 20
+        },
+        {
+          "chapter": 1,
+          "node": "N02",
+          "kind": "collected_gold",
+          "amount": 8,
+          "balance": 28
+        },
+        {
+          "chapter": 1,
+          "node": "N03",
+          "kind": "collected_gold",
+          "amount": 20,
+          "balance": 48
+        },
+        {
+          "chapter": 1,
+          "node": "N05",
+          "kind": "collected_gold",
+          "amount": 24,
+          "balance": 72
+        },
+        {
+          "chapter": 1,
+          "node": "N07",
+          "kind": "collected_boss_gold",
+          "amount": 40,
+          "balance": 112,
+          "actual_pickup_assumed": true
+        },
+        {
+          "chapter": 2,
+          "node": "N02",
+          "kind": "collected_gold",
+          "amount": 12,
+          "balance": 124
+        },
+        {
+          "chapter": 2,
+          "node": "N03",
+          "kind": "collected_gold",
+          "amount": 28,
+          "balance": 152
+        },
+        {
+          "chapter": 2,
+          "node": "N05",
+          "kind": "collected_gold",
+          "amount": 32,
+          "balance": 184
+        },
+        {
+          "chapter": 2,
+          "node": "N07",
+          "kind": "collected_boss_gold",
+          "amount": 50,
+          "balance": 234,
+          "actual_pickup_assumed": true
+        },
+        {
+          "chapter": 3,
+          "node": "N02",
+          "kind": "collected_gold",
+          "amount": 16,
+          "balance": 250
+        },
+        {
+          "chapter": 3,
+          "node": "N03",
+          "kind": "collected_gold",
+          "amount": 36,
+          "balance": 286
+        },
+        {
+          "chapter": 3,
+          "node": "N05",
+          "kind": "collected_gold",
+          "amount": 40,
+          "balance": 326
+        },
+        {
+          "chapter": 3,
+          "node": "N07",
+          "kind": "collected_boss_gold",
+          "amount": 60,
+          "balance": 386,
+          "actual_pickup_assumed": true
+        },
+        {
+          "chapter": 4,
+          "node": "N02",
+          "kind": "collected_gold",
+          "amount": 20,
+          "balance": 406
+        },
+        {
+          "chapter": 4,
+          "node": "N03",
+          "kind": "collected_gold",
+          "amount": 44,
+          "balance": 450
+        },
+        {
+          "chapter": 4,
+          "node": "N05",
+          "kind": "collected_gold",
+          "amount": 48,
+          "balance": 498
+        },
+        {
+          "chapter": 4,
+          "node": "N07",
+          "kind": "collected_boss_gold",
+          "amount": 70,
+          "balance": 568,
+          "actual_pickup_assumed": true
+        },
+        {
+          "chapter": 5,
+          "node": "N02",
+          "kind": "collected_gold",
+          "amount": 24,
+          "balance": 592
+        },
+        {
+          "chapter": 5,
+          "node": "N03",
+          "kind": "collected_gold",
+          "amount": 52,
+          "balance": 644
+        },
+        {
+          "chapter": 5,
+          "node": "N05",
+          "kind": "collected_gold",
+          "amount": 56,
+          "balance": 700
+        },
+        {
+          "chapter": 5,
+          "node": "N07",
+          "kind": "collected_boss_gold",
+          "amount": 0,
+          "balance": 700,
+          "actual_pickup_assumed": false
+        }
+      ],
+      "gross_gold": 700,
+      "spent_gold": 0,
+      "pre_end_balance": 700,
+      "post_end_balance": 0,
+      "combat_success_assumed_not_verified": true,
+      "boss_gold_pickup_assumption": "first four main Boss ground gold fully picked; final Boss gold0; success alone is not wallet credit"
+    }
+  ],
+  "boundary_cases": [
+    {
+      "id": "BUD-004",
+      "name": "基础全部锻满并新觉醒升V不可全包",
+      "weapon_upgrade": 170,
+      "armor_upgrade": 170,
+      "awaken_and_four_tier_upgrades": 500,
+      "desired_spend": 840,
+      "baseline_gross": 700,
+      "shortfall_before_healing": 140
+    },
+    {
+      "id": "BUD-005",
+      "name": "低余额预览不提交",
+      "wallet": 10,
+      "potion_price": 18,
+      "result": "reject_preserve_wallet_stock_and_tool",
+      "main_route_available": true
+    },
+    {
+      "id": "BUD-006",
+      "name": "二章普通轮盘两次都是空奖",
+      "wallet_before": 40,
+      "price": 20,
+      "empty_spins": 2,
+      "wallet_after": 0,
+      "shards": 0,
+      "main_route_available": true,
+      "probability_if_independent_draws": 0.09
+    },
+    {
+      "id": "BUD-007",
+      "name": "功能券参考节省不是现金",
+      "discount_ticket_base_price": 18,
+      "discount_final_price": 15,
+      "saved_gold": 3,
+      "first_forge_ticket_saved": 30,
+      "wheel_ticket_saved": 20,
+      "cleanse_tier1_saved": 10,
+      "cleanse_tier2_saved": 20,
+      "cash_redemption": false
+    },
+    {
+      "id": "BUD-008",
+      "name": "全可选收入上界只对完成且拾全成立",
+      "ordinary_branches_one_each": 150,
+      "optional_bosses": 70,
+      "optional_gross": 220,
+      "main_and_optional_gross": 920,
+      "adopted_hidden_tolls": 55,
+      "after_tolls_before_other_spend": 865,
+      "repeat_optional_shards": 18,
+      "first_hidden_discoveries_extra": 10,
+      "first_optional_bosses_extra": 4,
+      "all_first_run_shards": 102,
+      "optional_completion_and_pickup_assumed": true
+    },
+    {
+      "id": "BUD-009",
+      "name": "基础恢复潜在量不当生命池",
+      "free_potion_units": 5,
+      "base_hp_per_potion": 30,
+      "free_potion_potential_base_hp": 150,
+      "transition_count": 4,
+      "assumed_max_hp": 100,
+      "transition_pct": 20,
+      "transition_potential_hp": 80,
+      "purchased_potion_units": 10,
+      "purchased_potion_potential_base_hp": 300,
+      "healing_requires": "alive, missing HP, capacity, successful use and current healing modifiers"
+    },
+    {
+      "id": "BUD-010",
+      "name": "精良品质坏附魔仍需权衡",
+      "base_damage": 40,
+      "grade2_damage_pct": 10,
+      "harmful_damage_pct": -12,
+      "other_pct": 0,
+      "expected_damage_before_target_and_crit": 39.2
+    },
+    {
+      "id": "BUD-011",
+      "name": "章节支出按已到设施可用性",
+      "first_N04_with_full_pickup": 48,
+      "medicine_plus_initial_forge": 48,
+      "first_N04_with_75pct_ordinary": 41,
+      "shortfall_same_plan": 7,
+      "response": "choose_medicine_then_delay_forge_no_auto_bailout"
+    },
+    {
+      "id": "BUD-012",
+      "name": "随机轮盘价格参考期望",
+      "price": 20,
+      "gold_outcome_amount": 40,
+      "gold_probability": 0.1,
+      "small_potion_probability": 0.3,
+      "bomb_probability": 0.3,
+      "empty_probability": 0.3,
+      "potion_reference_price": 18,
+      "bomb_reference_price": 14,
+      "expected_gold": 4,
+      "expected_consumable_reference_value": 9.6,
+      "total_reference_value": 13.6,
+      "reference_minus_price": -6.4,
+      "expected_net_cash": -16
+    },
+    {
+      "id": "BUD-013",
+      "name": "未来槽和休眠均已分金币",
+      "room_budget": 20,
+      "stable_slot_weights": [
+        2,
+        2,
+        3,
+        2,
+        4,
+        2
+      ],
+      "expected_slot_allocations": [
+        3,
+        3,
+        4,
+        3,
+        5,
+        2
+      ],
+      "wave_grouping_changes_allocation": false,
+      "reward_after_technical_retry": "same_slot_once_no_redistribution"
+    },
+    {
+      "id": "BUD-014",
+      "name": "死亡不补普通未拾碎片",
+      "ordinary_ground_unpicked": 4,
+      "prior_banked_shards": 6,
+      "same_batch_boss_success": false,
+      "expected_banked_shards": 6
+    },
+    {
+      "id": "BUD-015",
+      "name": "护甲强化不是百分比减伤",
+      "base_armor": 85,
+      "grade": 3,
+      "bonus_fraction_per_grade": 0.05,
+      "final_armor_without_other": 97.75,
+      "incoming_ratio_before": 0.5405405405405406,
+      "incoming_ratio_after": 0.5056890012642224,
+      "relative_reduction": 0.06447534766118834
+    },
+    {
+      "id": "BUD-016",
+      "name": "满背包随机物品保存在设施托盘",
+      "wallet_before": 20,
+      "price": 20,
+      "result_item": "ITM-REC-001",
+      "wallet_after": 0,
+      "tray_count": 1,
+      "new_spin_allowed": false,
+      "menu_reopen_rerolls": false
+    },
+    {
+      "id": "BUD-017",
+      "name": "付费门转换失败保留入场权",
+      "wallet_before": 20,
+      "toll": 20,
+      "wallet_after": 0,
+      "same_run_entitlement": true,
+      "retry_toll": 0,
+      "reward_on_payment": 0
+    },
+    {
+      "id": "BUD-018",
+      "name": "其他来源伤害满上限升级不吞钱",
+      "base_damage": 40,
+      "current_total_damage_pct": 50,
+      "candidate_upgrade_add_pct": 5,
+      "cap_pct": 50,
+      "current_final_damage": 60,
+      "candidate_final_damage": 60,
+      "charge": 0,
+      "grade_changed": false
+    }
+  ]
+}

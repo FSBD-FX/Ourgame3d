@@ -1,0 +1,2725 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "module": "D-14",
+  "source_event": "EV-032",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposal_not_individually_user_approved",
+  "scope": "first_authored_mainline_encounter_candidates_for_15_combat_nodes; assistant_proposed_not_geometry_or_fairness_certified",
+  "chapter_scaling_ref": "integration-rules.json#/chapter_scaling",
+  "source_caps_ref": "../dungeon-v1/common-rules.json#/budget",
+  "source_attack_caps_ref": "../enemies-v1/common-rules.json#/encounter",
+  "source_profile_agreement": "all20_preexisting_D07_capability_profiles_match_cost_and_flags; remaining17_derived_by_same_all_attack_scan",
+  "capability_profiles": {
+    "ENM-STN-001": {
+      "enemy_id": "ENM-STN-001",
+      "cost": 3,
+      "large": false,
+      "charger": true,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-STN-001-A1",
+        "ENM-STN-001-A2"
+      ]
+    },
+    "ENM-STN-002": {
+      "enemy_id": "ENM-STN-002",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": true,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-STN-002-A1",
+        "ENM-STN-002-A2"
+      ]
+    },
+    "ENM-STN-003": {
+      "enemy_id": "ENM-STN-003",
+      "cost": 4,
+      "large": true,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-STN-003-A1",
+        "ENM-STN-003-A2"
+      ]
+    },
+    "ENM-STN-004": {
+      "enemy_id": "ENM-STN-004",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-STN-004-A1",
+        "ENM-STN-004-A2"
+      ]
+    },
+    "ENM-ELF-001": {
+      "enemy_id": "ENM-ELF-001",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-ELF-001-A1",
+        "ENM-ELF-001-A2"
+      ]
+    },
+    "ENM-ELF-002": {
+      "enemy_id": "ENM-ELF-002",
+      "cost": 3,
+      "large": false,
+      "charger": true,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-ELF-002-A1",
+        "ENM-ELF-002-A2"
+      ]
+    },
+    "ENM-ELF-003": {
+      "enemy_id": "ENM-ELF-003",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-ELF-003-A1",
+        "ENM-ELF-003-A2"
+      ]
+    },
+    "ENM-TRE-001": {
+      "enemy_id": "ENM-TRE-001",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-TRE-001-A1",
+        "ENM-TRE-001-A2"
+      ]
+    },
+    "ENM-TRE-002": {
+      "enemy_id": "ENM-TRE-002",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-TRE-002-A1",
+        "ENM-TRE-002-A2"
+      ]
+    },
+    "ENM-TRE-003": {
+      "enemy_id": "ENM-TRE-003",
+      "cost": 4,
+      "large": true,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-TRE-003-A1",
+        "ENM-TRE-003-A2"
+      ]
+    },
+    "ENM-ROB-001": {
+      "enemy_id": "ENM-ROB-001",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-ROB-001-A1",
+        "ENM-ROB-001-A2"
+      ]
+    },
+    "ENM-ROB-002": {
+      "enemy_id": "ENM-ROB-002",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-ROB-002-A1",
+        "ENM-ROB-002-A2"
+      ]
+    },
+    "ENM-ROB-003": {
+      "enemy_id": "ENM-ROB-003",
+      "cost": 4,
+      "large": true,
+      "charger": false,
+      "flying": false,
+      "support": true,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-ROB-003-A1",
+        "ENM-ROB-003-A2"
+      ]
+    },
+    "ENM-SKL-001": {
+      "enemy_id": "ENM-SKL-001",
+      "cost": 1,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-SKL-001-A1",
+        "ENM-SKL-001-A2"
+      ]
+    },
+    "ENM-SKL-002": {
+      "enemy_id": "ENM-SKL-002",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": true,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-SKL-002-A1",
+        "ENM-SKL-002-A2"
+      ]
+    },
+    "ENM-SKL-003": {
+      "enemy_id": "ENM-SKL-003",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-SKL-003-A1",
+        "ENM-SKL-003-A2"
+      ]
+    },
+    "ENM-GOB-001": {
+      "enemy_id": "ENM-GOB-001",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-GOB-001-A1",
+        "ENM-GOB-001-A2"
+      ]
+    },
+    "ENM-GOB-002": {
+      "enemy_id": "ENM-GOB-002",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-GOB-002-A1",
+        "ENM-GOB-002-A2"
+      ]
+    },
+    "ENM-GOB-003": {
+      "enemy_id": "ENM-GOB-003",
+      "cost": 4,
+      "large": true,
+      "charger": true,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ENM-GOB-003-A1",
+        "ENM-GOB-003-A2"
+      ]
+    },
+    "ENM-MEC-001": {
+      "enemy_id": "ENM-MEC-001",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ATK-MEC-001-A",
+        "ATK-MEC-001-B"
+      ]
+    },
+    "ENM-MEC-002": {
+      "enemy_id": "ENM-MEC-002",
+      "cost": 4,
+      "large": true,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ATK-MEC-002-A",
+        "ATK-MEC-002-B"
+      ]
+    },
+    "ENM-MEC-003": {
+      "enemy_id": "ENM-MEC-003",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": true,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ATK-MEC-003-A",
+        "ATK-MEC-003-B"
+      ]
+    },
+    "ENM-BST-001": {
+      "enemy_id": "ENM-BST-001",
+      "cost": 3,
+      "large": false,
+      "charger": true,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ATK-BST-001-A",
+        "ATK-BST-001-B"
+      ]
+    },
+    "ENM-BST-002": {
+      "enemy_id": "ENM-BST-002",
+      "cost": 4,
+      "large": true,
+      "charger": true,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ATK-BST-002-A",
+        "ATK-BST-002-B"
+      ]
+    },
+    "ENM-BST-003": {
+      "enemy_id": "ENM-BST-003",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ATK-BST-003-A",
+        "ATK-BST-003-B"
+      ]
+    },
+    "ENM-DEM-001": {
+      "enemy_id": "ENM-DEM-001",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ATK-DEM-001-A",
+        "ATK-DEM-001-B"
+      ]
+    },
+    "ENM-DEM-002": {
+      "enemy_id": "ENM-DEM-002",
+      "cost": 2,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ATK-DEM-002-A",
+        "ATK-DEM-002-B"
+      ]
+    },
+    "ENM-DEM-003": {
+      "enemy_id": "ENM-DEM-003",
+      "cost": 4,
+      "large": true,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": false,
+      "scanned_attack_ids": [
+        "ATK-DEM-003-A",
+        "ATK-DEM-003-B"
+      ]
+    },
+    "ELT-STN-001": {
+      "enemy_id": "ELT-STN-001",
+      "cost": 5,
+      "large": false,
+      "charger": true,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": true,
+      "scanned_attack_ids": [
+        "ENM-STN-001-A1",
+        "ENM-STN-001-A2",
+        "ELT-STN-001-A1"
+      ]
+    },
+    "ELT-ELF-001": {
+      "enemy_id": "ELT-ELF-001",
+      "cost": 4,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": true,
+      "scanned_attack_ids": [
+        "ENM-ELF-001-A2",
+        "ELT-ELF-001-A1"
+      ]
+    },
+    "ELT-TRE-001": {
+      "enemy_id": "ELT-TRE-001",
+      "cost": 4,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": true,
+      "scanned_attack_ids": [
+        "ENM-TRE-002-A1",
+        "ENM-TRE-002-A2",
+        "ELT-TRE-001-A1"
+      ]
+    },
+    "ELT-ROB-001": {
+      "enemy_id": "ELT-ROB-001",
+      "cost": 4,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": true,
+      "scanned_attack_ids": [
+        "ENM-ROB-002-A1",
+        "ENM-ROB-002-A2",
+        "ELT-ROB-001-A1"
+      ]
+    },
+    "ELT-SKL-001": {
+      "enemy_id": "ELT-SKL-001",
+      "cost": 4,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": true,
+      "projectile_users": false,
+      "elites": true,
+      "scanned_attack_ids": [
+        "ENM-SKL-002-A1",
+        "ENM-SKL-002-A2",
+        "ELT-SKL-001-A3"
+      ]
+    },
+    "ELT-GOB-001": {
+      "enemy_id": "ELT-GOB-001",
+      "cost": 4,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": true,
+      "projectile_users": true,
+      "elites": true,
+      "scanned_attack_ids": [
+        "ENM-GOB-001-A1",
+        "ENM-GOB-001-A2",
+        "ELT-GOB-001-A3"
+      ]
+    },
+    "ELT-MEC-001": {
+      "enemy_id": "ELT-MEC-001",
+      "cost": 4,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": true,
+      "projectile_users": true,
+      "elites": true,
+      "scanned_attack_ids": [
+        "ATK-MEC-003-A",
+        "ATK-MEC-003-B",
+        "ATK-ELT-MEC-001-C"
+      ]
+    },
+    "ELT-BST-001": {
+      "enemy_id": "ELT-BST-001",
+      "cost": 6,
+      "large": true,
+      "charger": true,
+      "flying": false,
+      "support": false,
+      "projectile_users": false,
+      "elites": true,
+      "scanned_attack_ids": [
+        "ATK-BST-002-A",
+        "ATK-BST-002-B",
+        "ATK-ELT-BST-001-C"
+      ]
+    },
+    "ELT-DEM-001": {
+      "enemy_id": "ELT-DEM-001",
+      "cost": 4,
+      "large": false,
+      "charger": false,
+      "flying": false,
+      "support": false,
+      "projectile_users": true,
+      "elites": true,
+      "scanned_attack_ids": [
+        "ATK-DEM-001-A",
+        "ATK-DEM-001-B",
+        "ATK-ELT-DEM-001-C"
+      ]
+    }
+  },
+  "recipes": [
+    {
+      "id": "ENC-REG-01-N02",
+      "region_id": "REG-01",
+      "node_id": "REG-01-N02",
+      "role_id": "ROOM-ROLE-TEACH",
+      "source_route_ref": "../dungeon-v1/regions-and-routes.json#/regions/0/nodes/1",
+      "geometry_reference": "../dungeon-v1/room-sequences.json#/templates/0/geometry",
+      "anchor_reference": "../dungeon-v1/room-sequences.json#/templates/0/anchors",
+      "geometry_verified": false,
+      "runtime_playtested": false,
+      "overlap_allowed": false,
+      "finite_slot_count": 1,
+      "groups": [
+        {
+          "group_id": "ENC-REG-01-N02-G1",
+          "dependencies_terminal": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-01-N02-S01",
+              "enemy_id": "ENM-STN-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MN",
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 110.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 1,
+            "threat": 3,
+            "large": 0,
+            "charger": 1,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 0,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 1.0,
+          "future_warning_s": 0.0,
+          "future_emerge_s": 0.0,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        }
+      ],
+      "whole_room_clear": "all_required_slot_and_group_obligations_terminal; not_current_wave_empty",
+      "gold_budget": "D08_fixed_node_source_total; distribute_over_these_stable_SlotIDs_once_by_original_cost; chapter_HP_growth_does_not_add_coins",
+      "route_clear_boundary": "original_D04_free_exit_and_full_safety_distinction"
+    },
+    {
+      "id": "ENC-REG-01-N03",
+      "region_id": "REG-01",
+      "node_id": "REG-01-N03",
+      "role_id": "ROOM-ROLE-COMBO",
+      "source_route_ref": "../dungeon-v1/regions-and-routes.json#/regions/0/nodes/2",
+      "geometry_reference": "../dungeon-v1/room-sequences.json#/templates/0/geometry",
+      "anchor_reference": "../dungeon-v1/room-sequences.json#/templates/0/anchors",
+      "geometry_verified": false,
+      "runtime_playtested": false,
+      "overlap_allowed": false,
+      "finite_slot_count": 3,
+      "groups": [
+        {
+          "group_id": "ENC-REG-01-N03-G1",
+          "dependencies_terminal": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-01-N03-S01",
+              "enemy_id": "ENM-STN-004",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MN",
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 80.0
+            },
+            {
+              "slot_id": "ENC-REG-01-N03-S02",
+              "enemy_id": "ENM-STN-002",
+              "initial_state": "preplaced_dormant",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 55.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 4,
+            "large": 0,
+            "charger": 0,
+            "flying": 1,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 1.0,
+          "future_warning_s": 0.0,
+          "future_emerge_s": 0.0,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        },
+        {
+          "group_id": "ENC-REG-01-N03-G2",
+          "dependencies_terminal": [
+            "ENC-REG-01-N03-G1"
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.4,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "progress": "max_swept_ground_X_from_original_entry_exit; airborne_uses_ground_XY",
+            "unlatch_on_return": false,
+            "full_walkable_y_span": true,
+            "breather_from_latest_required_dependency_terminal_s": 2.0
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-01-N03-S03",
+              "enemy_id": "ENM-STN-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 110.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 1,
+            "threat": 3,
+            "large": 0,
+            "charger": 1,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 0,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 0.0,
+          "future_warning_s": 1.2,
+          "future_emerge_s": 0.6,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        }
+      ],
+      "whole_room_clear": "all_required_slot_and_group_obligations_terminal; not_current_wave_empty",
+      "gold_budget": "D08_fixed_node_source_total; distribute_over_these_stable_SlotIDs_once_by_original_cost; chapter_HP_growth_does_not_add_coins",
+      "route_clear_boundary": "original_D04_free_exit_and_full_safety_distinction"
+    },
+    {
+      "id": "ENC-REG-01-N05",
+      "region_id": "REG-01",
+      "node_id": "REG-01-N05",
+      "role_id": "ROOM-ROLE-DEEP",
+      "source_route_ref": "../dungeon-v1/regions-and-routes.json#/regions/0/nodes/4",
+      "geometry_reference": "../dungeon-v1/room-sequences.json#/templates/0/geometry",
+      "anchor_reference": "../dungeon-v1/room-sequences.json#/templates/0/anchors",
+      "geometry_verified": false,
+      "runtime_playtested": false,
+      "overlap_allowed": false,
+      "finite_slot_count": 6,
+      "groups": [
+        {
+          "group_id": "ENC-REG-01-N05-G1",
+          "dependencies_terminal": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-01-N05-S01",
+              "enemy_id": "ENM-STN-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MN",
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 110.0
+            },
+            {
+              "slot_id": "ENC-REG-01-N05-S02",
+              "enemy_id": "ENM-STN-004",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 80.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 5,
+            "large": 0,
+            "charger": 1,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 1.0,
+          "future_warning_s": 0.0,
+          "future_emerge_s": 0.0,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        },
+        {
+          "group_id": "ENC-REG-01-N05-G2",
+          "dependencies_terminal": [
+            "ENC-REG-01-N05-G1"
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.4,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "progress": "max_swept_ground_X_from_original_entry_exit; airborne_uses_ground_XY",
+            "unlatch_on_return": false,
+            "full_walkable_y_span": true,
+            "breather_from_latest_required_dependency_terminal_s": 2.0
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-01-N05-S03",
+              "enemy_id": "ENM-STN-003",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 185.0
+            },
+            {
+              "slot_id": "ENC-REG-01-N05-S04",
+              "enemy_id": "ENM-STN-004",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 80.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 6,
+            "large": 1,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 0.0,
+          "future_warning_s": 1.2,
+          "future_emerge_s": 0.6,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        },
+        {
+          "group_id": "ENC-REG-01-N05-G3",
+          "dependencies_terminal": [
+            "ENC-REG-01-N05-G1",
+            "ENC-REG-01-N05-G2"
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.7,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "progress": "max_swept_ground_X_from_original_entry_exit; airborne_uses_ground_XY",
+            "unlatch_on_return": false,
+            "full_walkable_y_span": true,
+            "breather_from_latest_required_dependency_terminal_s": 2.0
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-01-N05-S05",
+              "enemy_id": "ENM-STN-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 55.0
+            },
+            {
+              "slot_id": "ENC-REG-01-N05-S06",
+              "enemy_id": "ENM-GOB-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 45.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 4,
+            "large": 0,
+            "charger": 0,
+            "flying": 1,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 0.0,
+          "future_warning_s": 1.2,
+          "future_emerge_s": 0.6,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        }
+      ],
+      "whole_room_clear": "all_required_slot_and_group_obligations_terminal; not_current_wave_empty",
+      "gold_budget": "D08_fixed_node_source_total; distribute_over_these_stable_SlotIDs_once_by_original_cost; chapter_HP_growth_does_not_add_coins",
+      "route_clear_boundary": "original_D04_free_exit_and_full_safety_distinction"
+    },
+    {
+      "id": "ENC-REG-02-N02",
+      "region_id": "REG-02",
+      "node_id": "REG-02-N02",
+      "role_id": "ROOM-ROLE-TEACH",
+      "source_route_ref": "../dungeon-v1/regions-and-routes.json#/regions/1/nodes/1",
+      "geometry_reference": "../dungeon-v1/room-sequences.json#/templates/0/geometry",
+      "anchor_reference": "../dungeon-v1/room-sequences.json#/templates/0/anchors",
+      "geometry_verified": false,
+      "runtime_playtested": false,
+      "overlap_allowed": false,
+      "finite_slot_count": 1,
+      "groups": [
+        {
+          "group_id": "ENC-REG-02-N02-G1",
+          "dependencies_terminal": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-02-N02-S01",
+              "enemy_id": "ENM-ELF-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MN",
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 71.5
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 1,
+            "threat": 2,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 1.0,
+          "future_warning_s": 0.0,
+          "future_emerge_s": 0.0,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        }
+      ],
+      "whole_room_clear": "all_required_slot_and_group_obligations_terminal; not_current_wave_empty",
+      "gold_budget": "D08_fixed_node_source_total; distribute_over_these_stable_SlotIDs_once_by_original_cost; chapter_HP_growth_does_not_add_coins",
+      "route_clear_boundary": "original_D04_free_exit_and_full_safety_distinction"
+    },
+    {
+      "id": "ENC-REG-02-N03",
+      "region_id": "REG-02",
+      "node_id": "REG-02-N03",
+      "role_id": "ROOM-ROLE-COMBO",
+      "source_route_ref": "../dungeon-v1/regions-and-routes.json#/regions/1/nodes/2",
+      "geometry_reference": "../dungeon-v1/room-sequences.json#/templates/0/geometry",
+      "anchor_reference": "../dungeon-v1/room-sequences.json#/templates/0/anchors",
+      "geometry_verified": false,
+      "runtime_playtested": false,
+      "overlap_allowed": false,
+      "finite_slot_count": 4,
+      "groups": [
+        {
+          "group_id": "ENC-REG-02-N03-G1",
+          "dependencies_terminal": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-02-N03-S01",
+              "enemy_id": "ENM-TRE-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MN",
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 66.0
+            },
+            {
+              "slot_id": "ENC-REG-02-N03-S02",
+              "enemy_id": "ENM-ELF-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 71.5
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 4,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 2,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 1.0,
+          "future_warning_s": 0.0,
+          "future_emerge_s": 0.0,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        },
+        {
+          "group_id": "ENC-REG-02-N03-G2",
+          "dependencies_terminal": [
+            "ENC-REG-02-N03-G1"
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.4,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "progress": "max_swept_ground_X_from_original_entry_exit; airborne_uses_ground_XY",
+            "unlatch_on_return": false,
+            "full_walkable_y_span": true,
+            "breather_from_latest_required_dependency_terminal_s": 2.0
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-02-N03-S03",
+              "enemy_id": "ENM-ELF-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 93.5
+            },
+            {
+              "slot_id": "ENC-REG-02-N03-S04",
+              "enemy_id": "ENM-TRE-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 121.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 5,
+            "large": 0,
+            "charger": 1,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 0,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 0.0,
+          "future_warning_s": 1.2,
+          "future_emerge_s": 0.6,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        }
+      ],
+      "whole_room_clear": "all_required_slot_and_group_obligations_terminal; not_current_wave_empty",
+      "gold_budget": "D08_fixed_node_source_total; distribute_over_these_stable_SlotIDs_once_by_original_cost; chapter_HP_growth_does_not_add_coins",
+      "route_clear_boundary": "original_D04_free_exit_and_full_safety_distinction"
+    },
+    {
+      "id": "ENC-REG-02-N05",
+      "region_id": "REG-02",
+      "node_id": "REG-02-N05",
+      "role_id": "ROOM-ROLE-REINFORCE",
+      "source_route_ref": "../dungeon-v1/regions-and-routes.json#/regions/1/nodes/4",
+      "geometry_reference": "../dungeon-v1/room-sequences.json#/templates/0/geometry",
+      "anchor_reference": "../dungeon-v1/room-sequences.json#/templates/0/anchors",
+      "geometry_verified": false,
+      "runtime_playtested": false,
+      "overlap_allowed": false,
+      "finite_slot_count": 6,
+      "groups": [
+        {
+          "group_id": "ENC-REG-02-N05-G1",
+          "dependencies_terminal": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-02-N05-S01",
+              "enemy_id": "ENM-TRE-003",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MN",
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 209.0
+            },
+            {
+              "slot_id": "ENC-REG-02-N05-S02",
+              "enemy_id": "ENM-ELF-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 71.5
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 6,
+            "large": 1,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 1.0,
+          "future_warning_s": 0.0,
+          "future_emerge_s": 0.0,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        },
+        {
+          "group_id": "ENC-REG-02-N05-G2",
+          "dependencies_terminal": [
+            "ENC-REG-02-N05-G1"
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.4,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "progress": "max_swept_ground_X_from_original_entry_exit; airborne_uses_ground_XY",
+            "unlatch_on_return": false,
+            "full_walkable_y_span": true,
+            "breather_from_latest_required_dependency_terminal_s": 2.0
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-02-N05-S03",
+              "enemy_id": "ENM-BST-003",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 104.5
+            },
+            {
+              "slot_id": "ENC-REG-02-N05-S04",
+              "enemy_id": "ENM-TRE-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 121.0
+            },
+            {
+              "slot_id": "ENC-REG-02-N05-S05",
+              "enemy_id": "ENM-ELF-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 93.5
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 3,
+            "threat": 7,
+            "large": 0,
+            "charger": 1,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 0,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 0.0,
+          "future_warning_s": 1.2,
+          "future_emerge_s": 0.6,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        },
+        {
+          "group_id": "ENC-REG-02-N05-G3",
+          "dependencies_terminal": [
+            "ENC-REG-02-N05-G1",
+            "ENC-REG-02-N05-G2"
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.7,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "progress": "max_swept_ground_X_from_original_entry_exit; airborne_uses_ground_XY",
+            "unlatch_on_return": false,
+            "full_walkable_y_span": true,
+            "breather_from_latest_required_dependency_terminal_s": 2.0
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-02-N05-S06",
+              "enemy_id": "ELT-ELF-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 96.525
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 1,
+            "threat": 4,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 1
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 0.0,
+          "future_warning_s": 1.2,
+          "future_emerge_s": 0.6,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        }
+      ],
+      "whole_room_clear": "all_required_slot_and_group_obligations_terminal; not_current_wave_empty",
+      "gold_budget": "D08_fixed_node_source_total; distribute_over_these_stable_SlotIDs_once_by_original_cost; chapter_HP_growth_does_not_add_coins",
+      "route_clear_boundary": "original_D04_free_exit_and_full_safety_distinction"
+    },
+    {
+      "id": "ENC-REG-03-N02",
+      "region_id": "REG-03",
+      "node_id": "REG-03-N02",
+      "role_id": "ROOM-ROLE-TEACH",
+      "source_route_ref": "../dungeon-v1/regions-and-routes.json#/regions/2/nodes/1",
+      "geometry_reference": "../dungeon-v1/room-sequences.json#/templates/0/geometry",
+      "anchor_reference": "../dungeon-v1/room-sequences.json#/templates/0/anchors",
+      "geometry_verified": false,
+      "runtime_playtested": false,
+      "overlap_allowed": false,
+      "finite_slot_count": 1,
+      "groups": [
+        {
+          "group_id": "ENC-REG-03-N02-G1",
+          "dependencies_terminal": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-03-N02-S01",
+              "enemy_id": "ENM-SKL-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MN",
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 60.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 1,
+            "threat": 1,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 0,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 1.0,
+          "future_warning_s": 0.0,
+          "future_emerge_s": 0.0,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        }
+      ],
+      "whole_room_clear": "all_required_slot_and_group_obligations_terminal; not_current_wave_empty",
+      "gold_budget": "D08_fixed_node_source_total; distribute_over_these_stable_SlotIDs_once_by_original_cost; chapter_HP_growth_does_not_add_coins",
+      "route_clear_boundary": "original_D04_free_exit_and_full_safety_distinction"
+    },
+    {
+      "id": "ENC-REG-03-N03",
+      "region_id": "REG-03",
+      "node_id": "REG-03-N03",
+      "role_id": "ROOM-ROLE-COMBO",
+      "source_route_ref": "../dungeon-v1/regions-and-routes.json#/regions/2/nodes/2",
+      "geometry_reference": "../dungeon-v1/room-sequences.json#/templates/0/geometry",
+      "anchor_reference": "../dungeon-v1/room-sequences.json#/templates/0/anchors",
+      "geometry_verified": false,
+      "runtime_playtested": false,
+      "overlap_allowed": false,
+      "finite_slot_count": 4,
+      "groups": [
+        {
+          "group_id": "ENC-REG-03-N03-G1",
+          "dependencies_terminal": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-03-N03-S01",
+              "enemy_id": "ENM-SKL-002",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MN",
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 132.0
+            },
+            {
+              "slot_id": "ENC-REG-03-N03-S02",
+              "enemy_id": "ENM-SKL-003",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 90.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 4,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 1,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 1.0,
+          "future_warning_s": 0.0,
+          "future_emerge_s": 0.0,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        },
+        {
+          "group_id": "ENC-REG-03-N03-G2",
+          "dependencies_terminal": [
+            "ENC-REG-03-N03-G1"
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.4,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "progress": "max_swept_ground_X_from_original_entry_exit; airborne_uses_ground_XY",
+            "unlatch_on_return": false,
+            "full_walkable_y_span": true,
+            "breather_from_latest_required_dependency_terminal_s": 2.0
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-03-N03-S03",
+              "enemy_id": "ENM-ROB-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 96.0
+            },
+            {
+              "slot_id": "ENC-REG-03-N03-S04",
+              "enemy_id": "ENM-ROB-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 72.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 4,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 2,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 0.0,
+          "future_warning_s": 1.2,
+          "future_emerge_s": 0.6,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        }
+      ],
+      "whole_room_clear": "all_required_slot_and_group_obligations_terminal; not_current_wave_empty",
+      "gold_budget": "D08_fixed_node_source_total; distribute_over_these_stable_SlotIDs_once_by_original_cost; chapter_HP_growth_does_not_add_coins",
+      "route_clear_boundary": "original_D04_free_exit_and_full_safety_distinction"
+    },
+    {
+      "id": "ENC-REG-03-N05",
+      "region_id": "REG-03",
+      "node_id": "REG-03-N05",
+      "role_id": "ROOM-ROLE-ELITE",
+      "source_route_ref": "../dungeon-v1/regions-and-routes.json#/regions/2/nodes/4",
+      "geometry_reference": "../dungeon-v1/room-sequences.json#/templates/0/geometry",
+      "anchor_reference": "../dungeon-v1/room-sequences.json#/templates/0/anchors",
+      "geometry_verified": false,
+      "runtime_playtested": false,
+      "overlap_allowed": false,
+      "finite_slot_count": 6,
+      "groups": [
+        {
+          "group_id": "ENC-REG-03-N05-G1",
+          "dependencies_terminal": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-03-N05-S01",
+              "enemy_id": "ENM-ROB-003",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MN",
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 192.0
+            },
+            {
+              "slot_id": "ENC-REG-03-N05-S02",
+              "enemy_id": "ENM-ROB-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 96.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 6,
+            "large": 1,
+            "charger": 0,
+            "flying": 0,
+            "support": 1,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 1.0,
+          "future_warning_s": 0.0,
+          "future_emerge_s": 0.0,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        },
+        {
+          "group_id": "ENC-REG-03-N05-G2",
+          "dependencies_terminal": [
+            "ENC-REG-03-N05-G1"
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.4,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "progress": "max_swept_ground_X_from_original_entry_exit; airborne_uses_ground_XY",
+            "unlatch_on_return": false,
+            "full_walkable_y_span": true,
+            "breather_from_latest_required_dependency_terminal_s": 2.0
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-03-N05-S03",
+              "enemy_id": "ENM-SKL-003",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 90.0
+            },
+            {
+              "slot_id": "ENC-REG-03-N05-S04",
+              "enemy_id": "ENM-ROB-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 72.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 4,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 2,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 0.0,
+          "future_warning_s": 1.2,
+          "future_emerge_s": 0.6,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        },
+        {
+          "group_id": "ENC-REG-03-N05-G3",
+          "dependencies_terminal": [
+            "ENC-REG-03-N05-G1",
+            "ENC-REG-03-N05-G2"
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.7,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "progress": "max_swept_ground_X_from_original_entry_exit; airborne_uses_ground_XY",
+            "unlatch_on_return": false,
+            "full_walkable_y_span": true,
+            "breather_from_latest_required_dependency_terminal_s": 2.0
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-03-N05-S05",
+              "enemy_id": "ELT-SKL-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 178.2
+            },
+            {
+              "slot_id": "ENC-REG-03-N05-S06",
+              "enemy_id": "ENM-SKL-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 60.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 5,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 1,
+            "projectile_users": 0,
+            "elites": 1
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 0.0,
+          "future_warning_s": 1.2,
+          "future_emerge_s": 0.6,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        }
+      ],
+      "whole_room_clear": "all_required_slot_and_group_obligations_terminal; not_current_wave_empty",
+      "gold_budget": "D08_fixed_node_source_total; distribute_over_these_stable_SlotIDs_once_by_original_cost; chapter_HP_growth_does_not_add_coins",
+      "route_clear_boundary": "original_D04_free_exit_and_full_safety_distinction"
+    },
+    {
+      "id": "ENC-REG-04-N02",
+      "region_id": "REG-04",
+      "node_id": "REG-04-N02",
+      "role_id": "ROOM-ROLE-TEACH",
+      "source_route_ref": "../dungeon-v1/regions-and-routes.json#/regions/3/nodes/1",
+      "geometry_reference": "../dungeon-v1/room-sequences.json#/templates/0/geometry",
+      "anchor_reference": "../dungeon-v1/room-sequences.json#/templates/0/anchors",
+      "geometry_verified": false,
+      "runtime_playtested": false,
+      "overlap_allowed": false,
+      "finite_slot_count": 1,
+      "groups": [
+        {
+          "group_id": "ENC-REG-04-N02-G1",
+          "dependencies_terminal": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-04-N02-S01",
+              "enemy_id": "ENM-MEC-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MN",
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 78.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 1,
+            "threat": 2,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 1.0,
+          "future_warning_s": 0.0,
+          "future_emerge_s": 0.0,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        }
+      ],
+      "whole_room_clear": "all_required_slot_and_group_obligations_terminal; not_current_wave_empty",
+      "gold_budget": "D08_fixed_node_source_total; distribute_over_these_stable_SlotIDs_once_by_original_cost; chapter_HP_growth_does_not_add_coins",
+      "route_clear_boundary": "original_D04_free_exit_and_full_safety_distinction"
+    },
+    {
+      "id": "ENC-REG-04-N03",
+      "region_id": "REG-04",
+      "node_id": "REG-04-N03",
+      "role_id": "ROOM-ROLE-COMBO",
+      "source_route_ref": "../dungeon-v1/regions-and-routes.json#/regions/3/nodes/2",
+      "geometry_reference": "../dungeon-v1/room-sequences.json#/templates/0/geometry",
+      "anchor_reference": "../dungeon-v1/room-sequences.json#/templates/0/anchors",
+      "geometry_verified": false,
+      "runtime_playtested": false,
+      "overlap_allowed": false,
+      "finite_slot_count": 4,
+      "groups": [
+        {
+          "group_id": "ENC-REG-04-N03-G1",
+          "dependencies_terminal": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-04-N03-S01",
+              "enemy_id": "ENM-MEC-003",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MN",
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 117.0
+            },
+            {
+              "slot_id": "ENC-REG-04-N03-S02",
+              "enemy_id": "ENM-GOB-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 58.5
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 4,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 1,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 1.0,
+          "future_warning_s": 0.0,
+          "future_emerge_s": 0.0,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        },
+        {
+          "group_id": "ENC-REG-04-N03-G2",
+          "dependencies_terminal": [
+            "ENC-REG-04-N03-G1"
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.4,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "progress": "max_swept_ground_X_from_original_entry_exit; airborne_uses_ground_XY",
+            "unlatch_on_return": false,
+            "full_walkable_y_span": true,
+            "breather_from_latest_required_dependency_terminal_s": 2.0
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-04-N03-S03",
+              "enemy_id": "ENM-MEC-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 234.0
+            },
+            {
+              "slot_id": "ENC-REG-04-N03-S04",
+              "enemy_id": "ENM-SKL-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 65.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 5,
+            "large": 1,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 0,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 0.0,
+          "future_warning_s": 1.2,
+          "future_emerge_s": 0.6,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        }
+      ],
+      "whole_room_clear": "all_required_slot_and_group_obligations_terminal; not_current_wave_empty",
+      "gold_budget": "D08_fixed_node_source_total; distribute_over_these_stable_SlotIDs_once_by_original_cost; chapter_HP_growth_does_not_add_coins",
+      "route_clear_boundary": "original_D04_free_exit_and_full_safety_distinction"
+    },
+    {
+      "id": "ENC-REG-04-N05",
+      "region_id": "REG-04",
+      "node_id": "REG-04-N05",
+      "role_id": "ROOM-ROLE-REINFORCE",
+      "source_route_ref": "../dungeon-v1/regions-and-routes.json#/regions/3/nodes/4",
+      "geometry_reference": "../dungeon-v1/room-sequences.json#/templates/0/geometry",
+      "anchor_reference": "../dungeon-v1/room-sequences.json#/templates/0/anchors",
+      "geometry_verified": false,
+      "runtime_playtested": false,
+      "overlap_allowed": false,
+      "finite_slot_count": 6,
+      "groups": [
+        {
+          "group_id": "ENC-REG-04-N05-G1",
+          "dependencies_terminal": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-04-N05-S01",
+              "enemy_id": "ENM-MEC-003",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MN",
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 117.0
+            },
+            {
+              "slot_id": "ENC-REG-04-N05-S02",
+              "enemy_id": "ENM-MEC-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 78.0
+            },
+            {
+              "slot_id": "ENC-REG-04-N05-S03",
+              "enemy_id": "ENM-GOB-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 58.5
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 3,
+            "threat": 6,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 1,
+            "projectile_users": 2,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 1.0,
+          "future_warning_s": 0.0,
+          "future_emerge_s": 0.0,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        },
+        {
+          "group_id": "ENC-REG-04-N05-G2",
+          "dependencies_terminal": [
+            "ENC-REG-04-N05-G1"
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.4,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "progress": "max_swept_ground_X_from_original_entry_exit; airborne_uses_ground_XY",
+            "unlatch_on_return": false,
+            "full_walkable_y_span": true,
+            "breather_from_latest_required_dependency_terminal_s": 2.0
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-04-N05-S04",
+              "enemy_id": "ENM-MEC-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 234.0
+            },
+            {
+              "slot_id": "ENC-REG-04-N05-S05",
+              "enemy_id": "ENM-GOB-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 104.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 6,
+            "large": 1,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 0.0,
+          "future_warning_s": 1.2,
+          "future_emerge_s": 0.6,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        },
+        {
+          "group_id": "ENC-REG-04-N05-G3",
+          "dependencies_terminal": [
+            "ENC-REG-04-N05-G1",
+            "ENC-REG-04-N05-G2"
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.7,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "progress": "max_swept_ground_X_from_original_entry_exit; airborne_uses_ground_XY",
+            "unlatch_on_return": false,
+            "full_walkable_y_span": true,
+            "breather_from_latest_required_dependency_terminal_s": 2.0
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-04-N05-S06",
+              "enemy_id": "ELT-MEC-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 157.95
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 1,
+            "threat": 4,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 1,
+            "projectile_users": 1,
+            "elites": 1
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 0.0,
+          "future_warning_s": 1.2,
+          "future_emerge_s": 0.6,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        }
+      ],
+      "whole_room_clear": "all_required_slot_and_group_obligations_terminal; not_current_wave_empty",
+      "gold_budget": "D08_fixed_node_source_total; distribute_over_these_stable_SlotIDs_once_by_original_cost; chapter_HP_growth_does_not_add_coins",
+      "route_clear_boundary": "original_D04_free_exit_and_full_safety_distinction"
+    },
+    {
+      "id": "ENC-REG-05-N02",
+      "region_id": "REG-05",
+      "node_id": "REG-05-N02",
+      "role_id": "ROOM-ROLE-TEACH",
+      "source_route_ref": "../dungeon-v1/regions-and-routes.json#/regions/4/nodes/1",
+      "geometry_reference": "../dungeon-v1/room-sequences.json#/templates/0/geometry",
+      "anchor_reference": "../dungeon-v1/room-sequences.json#/templates/0/anchors",
+      "geometry_verified": false,
+      "runtime_playtested": false,
+      "overlap_allowed": false,
+      "finite_slot_count": 1,
+      "groups": [
+        {
+          "group_id": "ENC-REG-05-N02-G1",
+          "dependencies_terminal": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-05-N02-S01",
+              "enemy_id": "ENM-DEM-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MN",
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 147.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 1,
+            "threat": 2,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 0,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 1.0,
+          "future_warning_s": 0.0,
+          "future_emerge_s": 0.0,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        }
+      ],
+      "whole_room_clear": "all_required_slot_and_group_obligations_terminal; not_current_wave_empty",
+      "gold_budget": "D08_fixed_node_source_total; distribute_over_these_stable_SlotIDs_once_by_original_cost; chapter_HP_growth_does_not_add_coins",
+      "route_clear_boundary": "original_D04_free_exit_and_full_safety_distinction"
+    },
+    {
+      "id": "ENC-REG-05-N03",
+      "region_id": "REG-05",
+      "node_id": "REG-05-N03",
+      "role_id": "ROOM-ROLE-COMBO",
+      "source_route_ref": "../dungeon-v1/regions-and-routes.json#/regions/4/nodes/2",
+      "geometry_reference": "../dungeon-v1/room-sequences.json#/templates/0/geometry",
+      "anchor_reference": "../dungeon-v1/room-sequences.json#/templates/0/anchors",
+      "geometry_verified": false,
+      "runtime_playtested": false,
+      "overlap_allowed": false,
+      "finite_slot_count": 4,
+      "groups": [
+        {
+          "group_id": "ENC-REG-05-N03-G1",
+          "dependencies_terminal": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-05-N03-S01",
+              "enemy_id": "ENM-DEM-002",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MN",
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 112.0
+            },
+            {
+              "slot_id": "ENC-REG-05-N03-S02",
+              "enemy_id": "ENM-SKL-002",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 154.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 4,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 1,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 1.0,
+          "future_warning_s": 0.0,
+          "future_emerge_s": 0.0,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        },
+        {
+          "group_id": "ENC-REG-05-N03-G2",
+          "dependencies_terminal": [
+            "ENC-REG-05-N03-G1"
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.4,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "progress": "max_swept_ground_X_from_original_entry_exit; airborne_uses_ground_XY",
+            "unlatch_on_return": false,
+            "full_walkable_y_span": true,
+            "breather_from_latest_required_dependency_terminal_s": 2.0
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-05-N03-S03",
+              "enemy_id": "ENM-DEM-003",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 217.0
+            },
+            {
+              "slot_id": "ENC-REG-05-N03-S04",
+              "enemy_id": "ENM-MEC-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 84.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 6,
+            "large": 1,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 0.0,
+          "future_warning_s": 1.2,
+          "future_emerge_s": 0.6,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        }
+      ],
+      "whole_room_clear": "all_required_slot_and_group_obligations_terminal; not_current_wave_empty",
+      "gold_budget": "D08_fixed_node_source_total; distribute_over_these_stable_SlotIDs_once_by_original_cost; chapter_HP_growth_does_not_add_coins",
+      "route_clear_boundary": "original_D04_free_exit_and_full_safety_distinction"
+    },
+    {
+      "id": "ENC-REG-05-N05",
+      "region_id": "REG-05",
+      "node_id": "REG-05-N05",
+      "role_id": "ROOM-ROLE-ELITE",
+      "source_route_ref": "../dungeon-v1/regions-and-routes.json#/regions/4/nodes/4",
+      "geometry_reference": "../dungeon-v1/room-sequences.json#/templates/0/geometry",
+      "anchor_reference": "../dungeon-v1/room-sequences.json#/templates/0/anchors",
+      "geometry_verified": false,
+      "runtime_playtested": false,
+      "overlap_allowed": false,
+      "finite_slot_count": 7,
+      "groups": [
+        {
+          "group_id": "ENC-REG-05-N05-G1",
+          "dependencies_terminal": [],
+          "trigger": {
+            "event": "room_entry_committed",
+            "latch_once": true
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-05-N05-S01",
+              "enemy_id": "ENM-DEM-001",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MN",
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 147.0
+            },
+            {
+              "slot_id": "ENC-REG-05-N05-S02",
+              "enemy_id": "ENM-DEM-002",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-MS",
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 112.0
+            },
+            {
+              "slot_id": "ENC-REG-05-N05-S03",
+              "enemy_id": "ENM-MEC-003",
+              "initial_state": "visible",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 126.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 3,
+            "threat": 6,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 1,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 1.0,
+          "future_warning_s": 0.0,
+          "future_emerge_s": 0.0,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        },
+        {
+          "group_id": "ENC-REG-05-N05-G2",
+          "dependencies_terminal": [
+            "ENC-REG-05-N05-G1"
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.4,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "progress": "max_swept_ground_X_from_original_entry_exit; airborne_uses_ground_XY",
+            "unlatch_on_return": false,
+            "full_walkable_y_span": true,
+            "breather_from_latest_required_dependency_terminal_s": 2.0
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-05-N05-S04",
+              "enemy_id": "ENM-DEM-003",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 217.0
+            },
+            {
+              "slot_id": "ENC-REG-05-N05-S05",
+              "enemy_id": "ENM-MEC-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 84.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 6,
+            "large": 1,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 1,
+            "elites": 0
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 0.0,
+          "future_warning_s": 1.2,
+          "future_emerge_s": 0.6,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        },
+        {
+          "group_id": "ENC-REG-05-N05-G3",
+          "dependencies_terminal": [
+            "ENC-REG-05-N05-G1",
+            "ENC-REG-05-N05-G2"
+          ],
+          "trigger": {
+            "event": "swept_depth_at_or_above",
+            "threshold_fraction": 0.7,
+            "latch_once": true,
+            "latch_before_dependencies": true,
+            "progress": "max_swept_ground_X_from_original_entry_exit; airborne_uses_ground_XY",
+            "unlatch_on_return": false,
+            "full_walkable_y_span": true,
+            "breather_from_latest_required_dependency_terminal_s": 2.0
+          },
+          "whole_group_admission": true,
+          "slots": [
+            {
+              "slot_id": "ENC-REG-05-N05-S06",
+              "enemy_id": "ELT-DEM-001",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 198.45
+            },
+            {
+              "slot_id": "ENC-REG-05-N05-S07",
+              "enemy_id": "ENM-ROB-002",
+              "initial_state": "future_entry",
+              "required": true,
+              "reward_eligible": true,
+              "anchor_preference": [
+                "AN-EN",
+                "AN-ES",
+                "AN-MN",
+                "AN-MS",
+                "AN-WN",
+                "AN-WS"
+              ],
+              "SpawnID": "RunID/RoomInstanceID/slot_id; retry_keeps_same_identity",
+              "scaled_spawn_max_hp_reference": 84.0
+            }
+          ],
+          "computed_reserved_cap_usage": {
+            "actors": 2,
+            "threat": 6,
+            "large": 0,
+            "charger": 0,
+            "flying": 0,
+            "support": 0,
+            "projectile_users": 2,
+            "elites": 1
+          },
+          "spawn_timing_ref": "../dungeon-v1/common-rules.json#/spawn",
+          "initial_orientation_s": 0.0,
+          "future_warning_s": 1.2,
+          "future_emerge_s": 0.6,
+          "special_wake": "intrinsic_D05_wake_when_dormant; never_shorten_or_add_to_base_emerge_twice",
+          "terminal": "every_required_slot_true_death_with_original_finite_obligations_resolved"
+        }
+      ],
+      "whole_room_clear": "all_required_slot_and_group_obligations_terminal; not_current_wave_empty",
+      "gold_budget": "D08_fixed_node_source_total; distribute_over_these_stable_SlotIDs_once_by_original_cost; chapter_HP_growth_does_not_add_coins",
+      "route_clear_boundary": "original_D04_free_exit_and_full_safety_distinction"
+    }
+  ],
+  "region_summaries": [
+    {
+      "region_id": "REG-01",
+      "combat_node_count": 3,
+      "finite_mainline_enemy_slots": 10,
+      "sum_scaled_spawn_HP_reference": 910.0,
+      "HP_sum_scope": "all_finite_ordinary_and_elite_slots_not_concurrent_pressure_or_actual_TTK; excludes_Boss_armour_and_player_build"
+    },
+    {
+      "region_id": "REG-02",
+      "combat_node_count": 3,
+      "finite_mainline_enemy_slots": 11,
+      "sum_scaled_spawn_HP_reference": 1119.525,
+      "HP_sum_scope": "all_finite_ordinary_and_elite_slots_not_concurrent_pressure_or_actual_TTK; excludes_Boss_armour_and_player_build"
+    },
+    {
+      "region_id": "REG-03",
+      "combat_node_count": 3,
+      "finite_mainline_enemy_slots": 11,
+      "sum_scaled_spawn_HP_reference": 1138.2,
+      "HP_sum_scope": "all_finite_ordinary_and_elite_slots_not_concurrent_pressure_or_actual_TTK; excludes_Boss_armour_and_player_build"
+    },
+    {
+      "region_id": "REG-04",
+      "combat_node_count": 3,
+      "finite_mainline_enemy_slots": 11,
+      "sum_scaled_spawn_HP_reference": 1301.95,
+      "HP_sum_scope": "all_finite_ordinary_and_elite_slots_not_concurrent_pressure_or_actual_TTK; excludes_Boss_armour_and_player_build"
+    },
+    {
+      "region_id": "REG-05",
+      "combat_node_count": 3,
+      "finite_mainline_enemy_slots": 12,
+      "sum_scaled_spawn_HP_reference": 1682.45,
+      "HP_sum_scope": "all_finite_ordinary_and_elite_slots_not_concurrent_pressure_or_actual_TTK; excludes_Boss_armour_and_player_build"
+    }
+  ],
+  "counts": {
+    "recipes": 15,
+    "finite_slots": 55,
+    "groups": 30
+  },
+  "layout_validation_gate": [
+    "exact_body_and_hurtbox_walkable_paths_and_free_depth_trigger_routes",
+    "entry_orientation_initial_enemy_separation_and_no_unwarned_player_spawn_hit",
+    "each_future_anchor_requires_actual350cm_initial_and220cm_recheck_LOS_space_and_camera_warning_readability",
+    "warning_start_and_materialization_global_.8s_gaps; full1.2s_warning_and_.6s_emerge_or_original_intrinsic_wake",
+    "D05_attack_.3s_new_warning_gap_separate_from_D07_spawn_.8s_gap",
+    "sequential_groups_still_keep_old_projectiles_DOT_traps_and_per_room_proc_budgets",
+    "all_standalone_groups_pass_caps_but_actual_simultaneous_action_and_projectile_reservations_still_runtime_required"
+  ],
+  "optional_scope": "D07_original_optional_nodes_and_D08_budgets_remain; only_region_compatible_original_RSEQ_or_complete_new_authored_manifest_can_be_offered; no_invalid_layout_or_incomplete_hidden_map_at_runtime",
+  "no_generation_or_gameplay_implemented": true,
+  "workload_curve_note": "initial_mainline_finite_HP_sum_increases_910_1119.525_1138.2_1301.95_1682.45; coarse_workload_only_not_clear_time_or_difficulty_proof; REG03_high_pressure_first_group_pairs_large_support_with_robed_projectile_unit_to_teach_that_actual_composition"
+}

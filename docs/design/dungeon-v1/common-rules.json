@@ -1,0 +1,269 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "source_event": "EV-025",
+  "module": "D-07",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "user_defined_visible_hidden_wave_and_depth_order; names_counts_coordinates_and_timing_assistant_proposed",
+  "generation": {
+    "method": "seeded_route_graph_plus_authored_validated_room_layout_and_finite_enemy_manifest",
+    "realtime_player_build_scaling": false,
+    "reroll_on_return_reload_or_trigger_retry": false,
+    "required_mainline_is_free": true,
+    "required_platform_jump_or_random_key": false,
+    "ordinary_room_half_xy_cm": [
+      1400,
+      450
+    ],
+    "long_room_half_xy_cm": [
+      1800,
+      450
+    ],
+    "boss_arena_source": "../bosses-v1/arena-contracts.json",
+    "initial_environment_damage_traps_adopted": false,
+    "player_deployed_D03_traps_unchanged": true,
+    "transition_corridor_min_width_cm": 160,
+    "corridors_are_not_combat_spawn_or_clear_lock_locations": true,
+    "layout_navigation_and_camera_verified_in_engine": false,
+    "ordinary_navigation_requires_run_active": true,
+    "final_settlement_edge_is_automatic_event_not_walkable_door": true
+  },
+  "scope": {
+    "proposed_regions": 5,
+    "proposed_main_nodes_per_region": 7,
+    "room_roles": 10,
+    "sequence_templates": 6,
+    "template_required_slots_max": 8,
+    "template_group_max": 3,
+    "group_slot_max": 3,
+    "mandatory_dependency_graph_acyclic": true,
+    "navigation_can_have_free_return_edges": true
+  },
+  "room_state": {
+    "states": [
+      "not_entered",
+      "entry_committed",
+      "orientation",
+      "encounter_running",
+      "awaiting_depth",
+      "wave_breather",
+      "spawn_warning",
+      "room_cleared",
+      "technical_fault",
+      "run_ended"
+    ],
+    "orientation_s": 1.0,
+    "player_keeps_control": true,
+    "orientation_is_not_invulnerability_or_refill": true,
+    "initial_roster_admitted_before_entry_control": true,
+    "initial_visible_min_distance_from_entry_cm": 300,
+    "room_cleared_is_terminal_for_required_encounter": true,
+    "new_required_waves_after_room_clear": false,
+    "return_to_cleared_room_respawns_enemies_or_rewards": false
+  },
+  "manifest": {
+    "finite_and_seeded_before_room_entry": true,
+    "slot_identity": [
+      "RunID",
+      "RoomInstanceID",
+      "SlotID"
+    ],
+    "slot_states": [
+      "planned",
+      "trigger_latched",
+      "queued",
+      "reserved",
+      "warning",
+      "emerging",
+      "dormant",
+      "active",
+      "killed"
+    ],
+    "future_entry_before_materialization_has_actor_HP_body_hurtbox": false,
+    "preplaced_dormant_is_real_damageable_actor": true,
+    "preplaced_dormant_only_in_entry_group": true,
+    "warning_only_is_visual_not_entity_or_wall": true,
+    "emerging_actor_damageable_status_eligible_and_killable": true,
+    "emerge_end_restores_HP_or_revives_dead_slot": false,
+    "all_required_slots_terminal_state": "killed_by_real_damage",
+    "script_removal_or_spawn_failure_counts_as_kill": false,
+    "optional_unselected_rooms_not_part_of_current_room_manifest": true
+  },
+  "frame_order": [
+    "advance_actual_ground_movement_and_collect_continuous_crossings",
+    "all_due_damage_and_deaths; stop_if_player_dead_or_run_ended",
+    "latch_one_time_triggers_and_recompute_group_terminal_states",
+    "evaluate_dependency_and_breather_eligibility",
+    "atomically_reserve_whole_eligible_groups_under_all_roster_caps",
+    "advance_warning_materialization_emerge_and_dormant_wake",
+    "evaluate_entire_room_clear_obligations",
+    "publish_room_UI_and_unique_reward_clear_events"
+  ],
+  "trigger": {
+    "allowed": [
+      "entry_commit",
+      "group_all_killed",
+      "group_remaining_at_most",
+      "depth_cross",
+      "dormant_proximity_or_real_damage"
+    ],
+    "once_per_TriggerID": true,
+    "latches_while_dependencies_pending": true,
+    "depth_uses": "maximum_continuously_swept_ground_X_from_entry_to_exit; independent_of_jump_Z",
+    "depth_normalization": "clamp((max_swept_ground_X-entryX)/(exitX-entryX),0,1)",
+    "retreat_unlatches_or_retriggers": false,
+    "required_depth_zone_covers_full_reachable_Y": true,
+    "required_depth_zone_behind_room_clear_only_gate": false,
+    "stage_gate_may_depend_on_previous_stage_terminal_only": true,
+    "timer_alone_forces_spawn_over_budget": false
+  },
+  "budget": {
+    "actor_cap": 4,
+    "threat_cap": 8,
+    "role_cost": {
+      "small_melee": 1,
+      "medium_melee": 2,
+      "ranged": 2,
+      "support_or_guard": 2,
+      "charger": 3,
+      "large": 4
+    },
+    "cost_method": "highest_applicable_over_all_base_and_elite_actions_plus_flying1_plus_elite2",
+    "roster_caps": {
+      "large": 1,
+      "charger": 1,
+      "flying": 1,
+      "support": 1,
+      "projectile_users": 2,
+      "elites": 1
+    },
+    "counted": [
+      "active",
+      "dormant",
+      "emerging",
+      "unmaterialized_reserved_slots"
+    ],
+    "future_planned_unadmitted_counted_in_roster": false,
+    "future_required_counted_in_room_clear_obligations": true,
+    "reserve_whole_group_atomically": true,
+    "wake_or_emerge_to_active_reserves_actor_again": false,
+    "death_releases_actor_role_and_threat_capacity": true,
+    "death_releases_already_emitted_projectile_capacity": false,
+    "partial_wave_overlap_checks_any_possible_remaining_enemy": true
+  },
+  "spawn": {
+    "serial_wave_breather_s": 2.0,
+    "breather_starts_after_dependency_terminal_death_batch": true,
+    "breather_does_not_prove_full_safety": true,
+    "warning_s": 1.2,
+    "emerge_s": 0.6,
+    "min_materialization_gap_s": 0.8,
+    "min_warning_start_gap_s": 0.8,
+    "warning_anchor_min_player_distance_cm": 350,
+    "materialization_recheck_min_player_distance_cm": 220,
+    "distance_metric": "euclidean_ground_XY",
+    "at_warning_requires": [
+      "reserved_slot_and_stable_anchor_ID",
+      "anchor_inside_legal_layout",
+      "reachable_free_route_and_nonoverlapping_ground",
+      "visible_cue_or_explicit_visible_entry_path_with_direction_cue"
+    ],
+    "at_materialization_rechecks": [
+      "player_alive_run_and_room_active",
+      "same_slot_and_reservation_owner",
+      "distance220_or_more",
+      "no_body_or_wall_overlap",
+      "same_preannounced_anchor_and_legal_ground_path"
+    ],
+    "on_recheck_failure": "cancel_this_cue_without_creating_actor; keep_same_slot_ID_and_owner; retry_only_unmaterialized_slots_after_backoff_with_new_full_cue",
+    "retry_backoff_s": 1.0,
+    "alternate_authored_entry_after_reserved_wait_s": 6.0,
+    "technical_fault_after_reserved_wait_s": 12.0,
+    "no_close_spawn_teleport_invulnerability_or_silent_slot_skip": true,
+    "normal_species_warning_after_emerge": "normal_attack_windup_still_required; stone_wake_and_emerge_use_later_deadline_not_sum_or_early_skip",
+    "first_attack_requires_visible_source_and_full_warning": true,
+    "new_actor_does_not_attack_on_materialization_frame": true,
+    "pending_same_group_body_footprints_reserved_distinct_nonoverlapping": true
+  },
+  "dormancy": {
+    "inherits_D05": true,
+    "near_or_real_damage_can_wake_early": true,
+    "real_damage_can_kill_before_wake": true,
+    "counts_room_clear_and_roster_while_dormant": true,
+    "fallback_after_group_combat_start_s": 12.0,
+    "fallback_when_other_currently_admitted_active_enemies_dead": true,
+    "wake_start_gap_s": 1.0,
+    "fallback_scans_unadmitted_future_groups": false,
+    "wake_resets_HP_status_SpawnID_or_reward": false,
+    "pending_bat_low_recovery_survives_interruption": true
+  },
+  "combat_across_groups": {
+    "same_RoomInstanceID": true,
+    "D05_action_caps_and_projectile_cap_continue": true,
+    "clear_old_enemy_or_player_projectiles_on_wave_end": false,
+    "clear_player_deployables_states_cooldowns_or_room_proc_budgets": false,
+    "refresh_ammo_focus_HP_on_wave_or_depth": false,
+    "apply_Boss_success_cleanup_to_normal_wave_clear": false,
+    "pause_advances_orientation_warnings_spawn_gap_breather_dormancy_or_combat_clock": false
+  },
+  "clear": {
+    "required": [
+      "every_required_manifest_slot_really_killed",
+      "no_live_dormant_or_emerging_actor",
+      "no_queued_reserved_warning_or_future_required_obligation",
+      "no_pending_required_group_or_trigger"
+    ],
+    "last_current_actor_death_alone_is_sufficient": false,
+    "all_due_triggers_and_admission_before_clear_check": true,
+    "room_clear_event_once": true,
+    "unfired_required_depth_trigger": "room_not_cleared; show_go_deeper_route_hint; ensure_free_reachable_trigger_zone",
+    "normal_free_exit": "whole_room_cleared_and_D04_ground_idle_route_permission; old_projectile_or_attached_DoT_is_not_extra_exit_forbid_condition",
+    "full_safe_inventory_or_paid_service": "whole_room_cleared_plus_D04_no_live_enemy_projectile_hazard_or_DoT_and_ground_idle",
+    "combat_pickup_and_potion_permissions": "D04 unchanged; do_not_ban_all_interaction_between_waves",
+    "successful_Boss_room_clear": "D06 settlement_authoritative"
+  },
+  "reward": {
+    "finite_predeclared_reinforcements_reward_eligible": true,
+    "one_death_transaction_per_slot_ID": true,
+    "waking_or_emerging_or_retrying_rewards": false,
+    "clearing_script_or_cancelled_spawn_rewards": false,
+    "unlimited_future_summons_default_reward_eligible": false,
+    "prices_drop_weights_and_per_room_supply_D08_pending": true
+  },
+  "technical_fault": {
+    "normal_generation_must_reject_layout_without_valid_fallback_entry_before_entry": true,
+    "midfight_unrecoverable_spawn": "visible_diagnostic_pause; offer_same_seed_repair_retry_or_end_run; never_fake_kill_or_success",
+    "retry_preserves": [
+      "RoomID_and_SlotIDs",
+      "completed_deaths_and_reward_transactions",
+      "player_HP_wallet_inventory_states_remaining_times_and_cooldowns",
+      "surviving_enemy_HP_status_and_cooldowns",
+      "latched_triggers_dependencies_depth_and_remaining_slots"
+    ],
+    "repair_boundary": "explicit_technical_reload_only; unresolved_actors_safe_reposition_with_full_entry_warning; cancel_unemitted_actions_and_room_bound_live_attacks_without_refund; do_not_revive_completed_slots",
+    "persistence_and_atomic_repair_requires_D13": true
+  },
+  "persistence": {
+    "midcombat_save_adopted": false,
+    "if_D13_adopts_required": [
+      "route_seed_choice_locks_and_selected_layout",
+      "room_state_and_same_manifest_slot_IDs",
+      "each_actor_HP_status_and_death_reward_record",
+      "trigger_latches_max_swept_depth_group_dependencies",
+      "reservation_owner_and_per_role_cap_usage",
+      "anchor_candidate_ID_retry_count_warning_emerge_gap_breather_remaining",
+      "D05_attack_and_live_projectile_capacity",
+      "D04_inventory_and_D03_states_next_tick_and_room_proc_budgets"
+    ],
+    "continue_rerolls_refills_or_replays_reward": false
+  },
+  "future_dependencies": [
+    "D08 facility_prices_loot_quality_and_supply",
+    "D09 unlock_nodes_and_growth",
+    "D10 final_region_and_faction_story",
+    "D11/12 warning_UI_camera_environment_art_and_audio",
+    "D13 persistence_and_fault_repair",
+    "D14 full_run_difficulty_and_runtime_geometry"
+  ]
+}

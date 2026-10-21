@@ -1,0 +1,417 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "module": "D-12",
+  "source_event": "EV-030",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposal_not_individually_user_approved",
+  "format_profiles": [
+    {
+      "id": "FMT-ACTOR",
+      "source": "layered_editable_art_plus_transparent_RGBA8_PNG_export",
+      "default_canvas_px": [
+        512,
+        512
+      ],
+      "ground_pivot_px": [
+        256,
+        440
+      ],
+      "crop": "same_logical_canvas_per_clip; atlas_trim_must_preserve_original_rect_pivot_and_socket_offsets",
+      "sampling": "painted_art_filter_and_alpha_edges_verified_at_game_scale; not_automatically_pixel_art_nearest"
+    },
+    {
+      "id": "FMT-LONG-WEAPON",
+      "source": "separate_rigid_or_deformed_weapon_layer_with_hand_sockets",
+      "default_canvas_px": [
+        1024,
+        512
+      ],
+      "ground_pivot_px": null,
+      "pivot_rule": "record_handle_primary_secondary_tip_muzzle_per_pose_not_copy_actor_ground_pivot",
+      "crop": "author_actual_bounds_without_clipping_long_spear_halberd_or_gun_flash"
+    },
+    {
+      "id": "FMT-BOSS",
+      "source": "layered_actor_export",
+      "default_canvas_px": [
+        1024,
+        1024
+      ],
+      "ground_pivot_px": [
+        512,
+        880
+      ],
+      "crop": "same_pivot_contract; final_size_set_by_source_body_and_attack_readability_not_sheet_dimensions"
+    },
+    {
+      "id": "FMT-ICON",
+      "source": "one_catalogue_identity_per_WPN_ARM_ITEM_ID",
+      "default_canvas_px": [
+        256,
+        256
+      ],
+      "safe_inset_px": 24,
+      "crop": "negative_affix_and_stack_count_are_UI_overlays_not_baked_numbers",
+      "readability": "distinguish_family_shape_when_small; tint_not_only_item_identity"
+    },
+    {
+      "id": "FMT-ENV",
+      "source": "layered_painting_with_collision_walkable_and_occluder_masks_separate",
+      "default_canvas_px": null,
+      "crop": "room_specific_bounds_and_overlap_padding; no_single_flat_image_used_as_collision",
+      "depth_layers": [
+        "back",
+        "walkable_floor",
+        "ground_props",
+        "upper_occluder",
+        "front"
+      ]
+    },
+    {
+      "id": "FMT-FX",
+      "source": "transparent_PNG_or_parameterized_simple_shape_contract",
+      "default_canvas_px": null,
+      "crop": "protected_warning_geometry_generated_from_same_gameplay_definition; decorative_texture_does_not_author_damage"
+    },
+    {
+      "id": "FMT-AUDIO",
+      "source": "editable_session_if_available_and_lossless_WAV_masters",
+      "sample_rate_hz_proposed": 48000,
+      "bits_proposed": 24,
+      "channels": "mono_point_source_stereo_music_or_UI_as_needed",
+      "runtime_encoding": "choose_and_measure_in_engine_after_audition; source_OGG_candidates_not_relabelled_lossless_recordings"
+    }
+  ],
+  "manifest_contract": {
+    "required_fields": [
+      "asset_id",
+      "asset_version",
+      "asset_kind",
+      "catalogue_or_event_ids",
+      "source_path",
+      "export_path",
+      "source_author_or_generation_method",
+      "source_license_evidence_path",
+      "source_sha256",
+      "export_sha256",
+      "status",
+      "logical_canvas_and_pivot",
+      "socket_or_marker_table_if_relevant",
+      "rule_version",
+      "review_evidence_path_or_null"
+    ],
+    "status_values": [
+      "candidate_downloaded",
+      "prototype_imported",
+      "draft_exported",
+      "technical_checked",
+      "style_reviewed",
+      "runtime_checked",
+      "accepted_for_named_scope",
+      "superseded"
+    ],
+    "missing_final_files": "manifest_plan_has_no_fake_existing_export_path; asset_status_missing_until_created",
+    "name_pattern": "kind_catalogue-or-event-id_action_facing_version; stable_ID_separate_from_display_name",
+    "versioning": "new_version_folder_for_changes; keep_sources_and_prior_exports_and_license_files",
+    "alpha": "transparent_exports_required; no_baked_checkerboard; edge_color_dilation_and_padding_recorded; alpha_blend_mode_verified_in_runtime",
+    "atlas": "planned_max_2048_square_pages; record_trim_rect_rotation_and_padding; source_sheets_not_assumed_equal_GPU_pages",
+    "atlas_rotation": "off_initially_for_predictable_socket_and_flip_mapping",
+    "atlas_padding_px_proposed": 4,
+    "mirror": "mirror_about_logical_ground_or_grip_pivot; transform_socket_and_tip_positions; no_naive_width_flip_if_trimmed",
+    "left_specific_export": "required_when_letters_cannot_mirror_or_hand_mechanism_depth_layer_breaks; never_flip_gameplay_lock_or_hit_geometry_twice"
+  },
+  "coverage_targets": [
+    {
+      "id": "COV-HERO",
+      "semantic_count": 1,
+      "unit": "base_player_visual_rig",
+      "scope": "D02_free_equipment_adventurer_not_new_classes",
+      "source": "../player-combat-v1/player-combat-rules.json"
+    },
+    {
+      "id": "COV-HERO-ACTIONS",
+      "semantic_count": 17,
+      "unit": "shared_pose_channels",
+      "channels": [
+        "idle",
+        "walk",
+        "air_rise",
+        "air_apex",
+        "air_fall",
+        "land_visual",
+        "dodge",
+        "hurt",
+        "death",
+        "switch_weapon",
+        "equip_weapon",
+        "equip_armor",
+        "reload_family_owned",
+        "drink",
+        "throw",
+        "place",
+        "interact"
+      ],
+      "note": "air_phases_and_land_visual_do_not_add_action_lock; damage_without_poise_break_does_not_play_full_stun; reload_handwork_owned_by_actual_weapon_family; service_signs_need_no_locomotion"
+    },
+    {
+      "id": "COV-WEAPONS",
+      "semantic_count": 33,
+      "unit": "weapon_identities",
+      "source": "../equipment-v1/weapons.json",
+      "motion_bindings": 66,
+      "note": "one_primary_and_one_secondary_binding_per_weapon; shared_pose_library_with_variant_overrides_not_66_necessarily_unique_frame_sets"
+    },
+    {
+      "id": "COV-ARMOR",
+      "semantic_count": 12,
+      "unit": "armor_identities_in_four_shape_groups",
+      "source": "../equipment-v1/armor.json",
+      "note": "body_layers_follow_shared_actions; armor_pose_corrections_for_two_hand_grip_and_air_primary; no_extra_helmet_or_shield_slot"
+    },
+    {
+      "id": "COV-ITEMS",
+      "semantic_count": 36,
+      "unit": "item_identities",
+      "source": "../items-v1/items.json",
+      "note": "shared_drink_throw_place_and_passive_UI; effect_variants_only_for_actual_rules"
+    },
+    {
+      "id": "COV-ICONS",
+      "semantic_count": 81,
+      "unit": "catalogue_identity_bindings",
+      "formula": "33_weapons+12_armor+36_items",
+      "note": "identity_coverage_not_promise_of_81_separately_painted_files; reuse_requires_small_size_distinction"
+    },
+    {
+      "id": "COV-ENEMIES",
+      "semantic_count": 28,
+      "unit": "base_enemy_profiles",
+      "source": "../enemies-v1/enemies.json",
+      "note": "body_plan_reuse_possible_but_attacks_and_silhouettes_still_validated"
+    },
+    {
+      "id": "COV-ELITES",
+      "semantic_count": 9,
+      "unit": "elite_visual_overrides",
+      "source": "../enemies-v1/enemies.json",
+      "note": "not_nine_free_palette_swaps; show_actual_added_or_replaced_attack_and_status_shape"
+    },
+    {
+      "id": "COV-BOSSES",
+      "semantic_count": 7,
+      "unit": "boss_profiles",
+      "source": "../bosses-v1/bosses.json",
+      "note": "existing_five_main_and_two_optional_no_new_bosses"
+    },
+    {
+      "id": "COV-ENEMY-ATTACKS",
+      "semantic_count": 92,
+      "unit": "unique_hostile_attack_cue_bindings",
+      "formula": "65_D05+27_D06",
+      "note": "inherited_elite_attacks_reference_base_cues; no_new_hit_windows"
+    },
+    {
+      "id": "COV-REGIONS",
+      "semantic_count": 5,
+      "unit": "region_environment_kits",
+      "source": "../dungeon-v1/regions-and-routes.json",
+      "note": "not_every_node_a_unique_fullscreen_painting; reusable_floor_edges_props_and_foregrounds"
+    },
+    {
+      "id": "COV-NPCS",
+      "semantic_count": 5,
+      "unit": "service_portrait_and_sign_identities",
+      "source": "../narrative-v1/npcs-and-dialogue.json",
+      "note": "static_service_presentations_no_new_walk_attack_or_rescue_AI"
+    },
+    {
+      "id": "COV-UI",
+      "semantic_count": 26,
+      "unit": "D11_screen_coverage",
+      "source": "../ui-input-v1/screens-and-flows.json",
+      "note": "reuse_cards_buttons_tabs_panels; 26_screens_not_26_full_background_images"
+    },
+    {
+      "id": "COV-ENDING",
+      "semantic_count": 4,
+      "unit": "normal_ending_base_panel_layouts",
+      "optional_text_inserts": 5,
+      "source": "../narrative-v1/story-flow.json",
+      "note": "text_first_small_shared_illustration_budget_to_be_reviewed; no_cinematic_or_full_voice_commitment"
+    }
+  ],
+  "combination_cost_model": {
+    "weapon_armor_identity_pairs": 396,
+    "formula": "33*12",
+    "left_right_standing_pair_checks": 792,
+    "formula_facing": "33*12*2",
+    "what_count_means": "identity_pair_validation_not_art_file_count_or_person_hours",
+    "additional_dimensions": [
+      "ground_primary",
+      "air_primary",
+      "ground_secondary",
+      "attack_speed_bounds",
+      "reach_bounds",
+      "weapon_switch_commit",
+      "armor_change_commit",
+      "foreground_depth_overlap"
+    ],
+    "mitigation": "shared_body_and_family_pose_sources; separate_weapon_and_armor_layers; automated_contact_sheet_and_runtime_sweep_then_manual_review_of_failures; do_not_prebake_all_cross_products"
+  },
+  "memory_estimate_examples": [
+    {
+      "id": "MEM-512-12",
+      "frames": 12,
+      "width": 512,
+      "height": 512,
+      "bytes_per_pixel": 4,
+      "layers": 1,
+      "raw_rgba_bytes": 12582912,
+      "raw_mib": 12,
+      "assumption": "no_padding_no_atlas_waste_no_mips_uncompressed; not_disk_PNG_or_measured_UE_VRAM"
+    },
+    {
+      "id": "MEM-1024-12",
+      "frames": 12,
+      "width": 1024,
+      "height": 1024,
+      "bytes_per_pixel": 4,
+      "layers": 1,
+      "raw_rgba_bytes": 50331648,
+      "raw_mib": 48,
+      "assumption": "same_idealized_raw_model; doubling_width_and_height_quadruples_cost"
+    },
+    {
+      "id": "MEM-396-12",
+      "frames": 12,
+      "width": 512,
+      "height": 512,
+      "bytes_per_pixel": 4,
+      "layers": 396,
+      "raw_rgba_bytes": 4982833152,
+      "raw_mib": 4752,
+      "assumption": "counterfactual_prebaking_one12frame_clip_for_each_weapon_armor_pair; illustrates_reuse_cost_only_not_actual_plan"
+    }
+  ],
+  "cost_policy": {
+    "paid_generation_this_round": false,
+    "spent_this_round": 0,
+    "budget_currency": null,
+    "total_production_cost_known": false,
+    "schedule_estimated": false,
+    "missing_inputs": [
+      "approved_style_sample",
+      "measured_minutes_per_accepted_clip",
+      "actual_retry_rate",
+      "export_and_QA_time",
+      "final_audio_reuse_rate",
+      "paid_service_quote_if_used"
+    ],
+    "later_estimate": "approved_units*measured_unit_effort_plus_integration_and_review; money_only_from_actual_quotes_not_token_or_frame_guess",
+    "generation": "use_asset_gen_when_visual_generation_is_requested; confirm_first_paid_spend_per_project_instruction; no_generation_called_by_this_design_module",
+    "license_status": "use_local_evidence_and_named_scope; tool_license_does_not_cover_downloaded_assets; missing_evidence_stays_candidate_not_release_ready"
+  },
+  "production_batches": [
+    {
+      "id": "ART-P0",
+      "name": "风格与空间样本",
+      "start_after": "overall_design_review_and_authorized_production_step",
+      "scope": [
+        "one_hero_four_armor_shape_tests",
+        "one_room_layer_and_foreground_test",
+        "three_family_moves_heavy_blade_spear_crossbow",
+        "stone_knight_and_bat_depth_test"
+      ],
+      "finish_gate": "style_review_plus_running_ground_shadow_tell_and_attack_timing_proof",
+      "bulk_assets_allowed_before_gate": false
+    },
+    {
+      "id": "ART-P1",
+      "name": "首区代表片段",
+      "depends_on": "ART-P0",
+      "scope": [
+        "complete_common_player_actions_needed_for_slice",
+        "first_region_existing_encounter_representatives",
+        "one_existing_Boss",
+        "pickup_trade_failure_and_success_audio",
+        "D11_reusable_UI_components"
+      ],
+      "finish_gate": "both_input_devices_actual_loop_and_reduced_fx_muted_pass; clarify_subset_not_full_catalogue"
+    },
+    {
+      "id": "ART-P2",
+      "name": "全武器与装备覆盖",
+      "depends_on": "ART-P1",
+      "scope": [
+        "all33_weapon_identity_and66_move_bindings",
+        "12_armor_and36_item_identity_bindings",
+        "family_audio_and_real_element_effects"
+      ],
+      "finish_gate": "396_pair_coverage_plan_and_actual_grip_layer_geometry_review; extreme_speed_and_range_source_bounds"
+    },
+    {
+      "id": "ART-P3",
+      "name": "全区域与敌人覆盖",
+      "depends_on": "ART-P1",
+      "scope": [
+        "28_base_and9_elite_profiles",
+        "seven_existing_Bosses",
+        "five_environment_and_music_region_sets",
+        "92_hostile_attack_cue_bindings"
+      ],
+      "finish_gate": "D07_dynamic_spawn_visibility_D06_escape_space_and_D14_load_testing"
+    },
+    {
+      "id": "ART-P4",
+      "name": "整体表现与发布整理",
+      "depends_on": [
+        "ART-P2",
+        "ART-P3"
+      ],
+      "scope": [
+        "NPC_portraits_and_story_layouts",
+        "complete_UI_readability",
+        "mixing_memory_and_packaging",
+        "license_evidence_and_manifest_recheck"
+      ],
+      "finish_gate": "recorded_running_review_and_named_scope_acceptance; no_blanket_release_claim_from_asset_import"
+    }
+  ],
+  "proof_retention": {
+    "root": "F:/Ourgame/过程图稿与视频",
+    "readme": "../../../过程图稿与视频/README.md",
+    "folder_pattern": "YYYY-MM-DD_topic_vNNN",
+    "entries": [
+      "originals",
+      "presentation_copies",
+      "source_version_status_index",
+      "file_hashes",
+      "actual_run_or_generation_metadata"
+    ],
+    "before_showing_media": true,
+    "overwrite_prior_versions": false,
+    "this_round_media_created": false
+  },
+  "future_acceptance": [
+    "no_canvas_cropping_at_longest_reach",
+    "feet_and_shadow_stable_on_jump_and_mirror",
+    "animation_absolute_time_under_speed_buffs_expiring",
+    "all_actual_attack_windows_and_multi_shots_match_feedback",
+    "DoT_and_cooldowns_not_held_by_hit_accent",
+    "warning_visible_at_low_fx_and_high_text_scale",
+    "actual_runtime_texture_and_audio_profile",
+    "license_and_attribution_packaging_match_chosen_assets"
+  ],
+  "coordinate_export_contract": {
+    "image_px": "untrimmed logical canvas; origin top_left; +u right; +v down; pixel-edge continuous coordinates",
+    "rig_local": "origin at owned main pivot; +u right; +v up; unit cm; actual source_pixels_per_cm recorded in asset manifest",
+    "pivot_ownership": "actor_and_armor_layers use ground_root; independent weapons use grip_primary; emitters use parent-local transform; no foot markers required on standalone weapons",
+    "local_to_untrimmed_px": "u=pivot_x+local_u*scale; v=pivot_y-local_v*scale",
+    "untrimmed_to_trimmed_px": "trimmed_u=u-trim_offset_x; trimmed_v=v-trim_offset_y; preserve logical canvas and original pivot",
+    "left_facing": "mirror rig_local_u about owned pivot before pixel conversion; do not mirror pivot again; explicit left-art/rig variants override naive reflection and must provide complete matching marker table",
+    "parent_transform": "child grip local transformed to parent hand socket once, then root world X/Y/Z and shared viewport projection; image-pixel v is never world ground Y",
+    "source_dimensions": "512 or1024 are proposed canvases not collision dimensions; source pixel/cm measured and recorded at asset intake"
+  }
+}

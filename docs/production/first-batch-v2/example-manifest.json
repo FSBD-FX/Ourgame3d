@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "profile": "first-unit-v2",
+  "status": "template_unfulfilled",
+  "placeholder": true,
+  "runtime_complete": false,
+  "units": [
+    "WPN-SWD-001",
+    "ARM-LGT-001",
+    "ENM-STN-001"
+  ],
+  "note": "Unfulfilled authoring template. No generated art, real image hashes or runtime evidence. Expected validator rejection.",
+  "provenance": {
+    "TODO_SOURCE": {
+      "origin": "generated",
+      "license": "unknown",
+      "provider": null,
+      "model": null,
+      "prompt_path": null,
+      "prompt_sha256": null,
+      "source_path": null,
+      "source_sha256": null,
+      "license_evidence_path": null,
+      "license_evidence_sha256": null
+    }
+  },
+  "actors": [
+    {
+      "role": "player",
+      "canvas_px": [
+        512,
+        512
+      ],
+      "ground_pivot_px": [
+        256,
+        440
+      ],
+      "required_layers": [
+        "body_far",
+        "armor",
+        "weapon",
+        "body_near"
+      ],
+      "facings": {
+        "right": {
+          "source_facing": "right",
+          "baked_mirror_count": 0,
+          "runtime_mirror_count": 0
+        },
+        "left": {
+          "source_facing": "right",
+          "baked_mirror_count": 0,
+          "runtime_mirror_count": 1
+        }
+      },
+      "actions": [
+        {
+          "id": "idle",
+          "duration_s": null,
+          "geometry_kind": "none",
+          "phases": [],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "walk",
+          "duration_s": null,
+          "geometry_kind": "none",
+          "phases": [],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "jump",
+          "duration_s": null,
+          "geometry_kind": "none",
+          "phases": [],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "fall",
+          "duration_s": null,
+          "geometry_kind": "none",
+          "phases": [],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "land",
+          "duration_s": null,
+          "geometry_kind": "none",
+          "phases": [],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "dodge",
+          "duration_s": null,
+          "geometry_kind": "none",
+          "phases": [],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "hurt",
+          "duration_s": null,
+          "geometry_kind": "none",
+          "phases": [],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "death",
+          "duration_s": null,
+          "geometry_kind": "none",
+          "phases": [],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "primary_1",
+          "duration_s": 0.6,
+          "geometry_kind": "melee",
+          "phases": [
+            {
+              "id": "windup",
+              "start_s": 0,
+              "end_s": 0.17
+            },
+            {
+              "id": "active",
+              "start_s": 0.17,
+              "end_s": 0.29
+            },
+            {
+              "id": "recovery",
+              "start_s": 0.29,
+              "end_s": 0.6
+            }
+          ],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "primary_2",
+          "duration_s": 0.54,
+          "geometry_kind": "melee",
+          "phases": [
+            {
+              "id": "windup",
+              "start_s": 0,
+              "end_s": 0.15
+            },
+            {
+              "id": "active",
+              "start_s": 0.15,
+              "end_s": 0.27
+            },
+            {
+              "id": "recovery",
+              "start_s": 0.27,
+              "end_s": 0.54
+            }
+          ],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "primary_3",
+          "duration_s": 0.66,
+          "geometry_kind": "melee",
+          "phases": [
+            {
+              "id": "windup",
+              "start_s": 0,
+              "end_s": 0.22
+            },
+            {
+              "id": "active",
+              "start_s": 0.22,
+              "end_s": 0.34
+            },
+            {
+              "id": "recovery",
+              "start_s": 0.34,
+              "end_s": 0.66
+            }
+          ],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "air_primary_1",
+          "duration_s": 0.6,
+          "geometry_kind": "melee",
+          "phases": [
+            {
+              "id": "windup",
+              "start_s": 0,
+              "end_s": 0.17
+            },
+            {
+              "id": "active",
+              "start_s": 0.17,
+              "end_s": 0.29
+            },
+            {
+              "id": "recovery",
+              "start_s": 0.29,
+              "end_s": 0.6
+            }
+          ],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "secondary",
+          "duration_s": 0.68,
+          "geometry_kind": "melee",
+          "phases": [
+            {
+              "id": "windup",
+              "start_s": 0,
+              "end_s": 0.2
+            },
+            {
+              "id": "active",
+              "start_s": 0.2,
+              "end_s": 0.3
+            },
+            {
+              "id": "recovery",
+              "start_s": 0.3,
+              "end_s": 0.68
+            }
+          ],
+          "frame_count": null,
+          "frames": []
+        }
+      ],
+      "weapon_id": "WPN-SWD-001",
+      "armor_id": "ARM-LGT-001",
+      "weapon_compatible_armors": [
+        "ARM-LGT-001"
+      ],
+      "armor_compatible_weapons": [
+        "WPN-SWD-001"
+      ]
+    },
+    {
+      "role": "stone_knight",
+      "canvas_px": [
+        512,
+        512
+      ],
+      "ground_pivot_px": [
+        256,
+        440
+      ],
+      "required_layers": [
+        "body",
+        "shield"
+      ],
+      "facings": {
+        "right": {
+          "source_facing": "right",
+          "baked_mirror_count": 0,
+          "runtime_mirror_count": 0
+        },
+        "left": {
+          "source_facing": "right",
+          "baked_mirror_count": 0,
+          "runtime_mirror_count": 1
+        }
+      },
+      "actions": [
+        {
+          "id": "dormant",
+          "duration_s": null,
+          "geometry_kind": "none",
+          "phases": [],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "wake",
+          "duration_s": null,
+          "geometry_kind": "none",
+          "phases": [],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "idle",
+          "duration_s": null,
+          "geometry_kind": "none",
+          "phases": [],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "walk",
+          "duration_s": null,
+          "geometry_kind": "none",
+          "phases": [],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "charge",
+          "duration_s": 3.3,
+          "geometry_kind": "body",
+          "phases": [
+            {
+              "id": "windup",
+              "start_s": 0,
+              "end_s": 0.9
+            },
+            {
+              "id": "active",
+              "start_s": 0.9,
+              "end_s": 1.7
+            },
+            {
+              "id": "recovery",
+              "start_s": 1.7,
+              "end_s": 3.3
+            }
+          ],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "shield_bash",
+          "duration_s": 1.72,
+          "geometry_kind": "melee",
+          "phases": [
+            {
+              "id": "windup",
+              "start_s": 0,
+              "end_s": 0.7
+            },
+            {
+              "id": "active",
+              "start_s": 0.7,
+              "end_s": 0.82
+            },
+            {
+              "id": "recovery",
+              "start_s": 0.82,
+              "end_s": 1.72
+            }
+          ],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "recovery",
+          "duration_s": null,
+          "geometry_kind": "none",
+          "phases": [],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "hurt",
+          "duration_s": null,
+          "geometry_kind": "none",
+          "phases": [],
+          "frame_count": null,
+          "frames": []
+        },
+        {
+          "id": "death",
+          "duration_s": null,
+          "geometry_kind": "none",
+          "phases": [],
+          "frame_count": null,
+          "frames": []
+        }
+      ],
+      "enemy_id": "ENM-STN-001"
+    }
+  ]
+}

@@ -1,0 +1,5884 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "module": "D-14",
+  "source_event": "EV-032",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposal_not_individually_approved",
+  "parameter_status": "unplaytested",
+  "scope": "只复核既有经济/恢复/成长预算与边界；不改旧收益、药产出、概率、天赋价格，不实现玩法/存档。",
+  "reference_builder": "build_economy_reference.py",
+  "source_refs": [
+    {
+      "id": "SRC-D01-HEAL",
+      "path": "整体框架与单局循环设计.md",
+      "json_pointer": null,
+      "sha256": "448cb6a0032c0425e353145ecf762534f630b7b5b8db7302054db5ae9b13ff65",
+      "purpose": "主线跨章一次当前MaxHP20%恢复，存活/治疗效率/缺血截断"
+    },
+    {
+      "id": "SRC-D03-POTION",
+      "path": "docs/design/items-v1/items.json",
+      "json_pointer": "/items",
+      "sha256": "09e40ef363ddcd2507efcbdfa4cf388916623e62015dcb41229a62d6badc2bc1",
+      "purpose": "ITM-REC-001基础30HP、stack3、8sCD，实际使用与过量舍弃"
+    },
+    {
+      "id": "SRC-D03-CAPS",
+      "path": "docs/design/items-v1/common-rules.json",
+      "json_pointer": "/stat_merge",
+      "sha256": "b5815a10f313b7364b1dde66b0eac9f703104ea260d4e4470094cffe31652e99",
+      "purpose": "治疗效率[-25,25]%与最大HP60..150，不因产出绕过封顶"
+    },
+    {
+      "id": "SRC-D04-PICKUP",
+      "path": "docs/design/inventory-v1/inventory-rules.json",
+      "json_pointer": "/currency_pickup",
+      "sha256": "7eb6f7da968622a1583b4e63069208513a09e0ef74d12e244c18e20332f08942",
+      "purpose": "真实存活拾取才入账，结算不再加一次"
+    },
+    {
+      "id": "SRC-D04-EXIT",
+      "path": "docs/design/inventory-v1/inventory-rules.json",
+      "json_pointer": "/exit",
+      "sha256": "7eb6f7da968622a1583b4e63069208513a09e0ef74d12e244c18e20332f08942",
+      "purpose": "普通免费出口不要求收费交易完整安全；过场不清DoT/CD"
+    },
+    {
+      "id": "SRC-D07-ROUTE",
+      "path": "docs/design/dungeon-v1/regions-and-routes.json",
+      "json_pointer": "/regions",
+      "sha256": "105dcac17fc91ed6a4e32acabc3e1b665ea9f9ddddf1ec13baf1aabc1abcd2a1",
+      "purpose": "五区35主节点、免费主路、每章只选一免费战斗支路"
+    },
+    {
+      "id": "SRC-D07-CONTRACT",
+      "path": "docs/design/dungeon-v1/regions-and-routes.json",
+      "json_pointer": "/route_contract",
+      "sha256": "105dcac17fc91ed6a4e32acabc3e1b665ea9f9ddddf1ec13baf1aabc1abcd2a1",
+      "purpose": "免费通行、无必需随机钥匙/隐藏路、只有四次主线跨章恢复"
+    },
+    {
+      "id": "SRC-D08-BUDGET",
+      "path": "docs/design/economy-v1/reward-sources.json",
+      "json_pointer": "/currency_budget",
+      "sha256": "9bd5e424ff2344a70d9fc8cbb25ced3cef1161cdd33092e0fc8998bf01d83369",
+      "purpose": "旧预算汇总，另从sources独立重算核对"
+    },
+    {
+      "id": "SRC-D08-SOURCES",
+      "path": "docs/design/economy-v1/reward-sources.json",
+      "json_pointer": "/sources",
+      "sha256": "9bd5e424ff2344a70d9fc8cbb25ced3cef1161cdd33092e0fc8998bf01d83369",
+      "purpose": "既有金币/碎片/保证药/首次奖励来源，不新增收益"
+    },
+    {
+      "id": "SRC-D08-PARTITION",
+      "path": "docs/design/economy-v1/reward-sources.json",
+      "json_pointer": "/gold_partition",
+      "sha256": "9bd5e424ff2344a70d9fc8cbb25ced3cef1161cdd33092e0fc8998bf01d83369",
+      "purpose": "全部有限manifest总金币只分一次，不按波次另发"
+    },
+    {
+      "id": "SRC-D08-DELIVERY",
+      "path": "docs/design/economy-v1/reward-sources.json",
+      "json_pointer": "/delivery_and_idempotency",
+      "sha256": "9bd5e424ff2344a70d9fc8cbb25ced3cef1161cdd33092e0fc8998bf01d83369",
+      "purpose": "来源落地、领取与永久入账区别"
+    },
+    {
+      "id": "SRC-D08-FACILITIES",
+      "path": "docs/design/economy-v1/facilities.json",
+      "json_pointer": "/facilities",
+      "sha256": "a2ebd6ebff3e283b5708afb88fbc36509405a5fdf88bf73fc5d7bcdbce104b88",
+      "purpose": "原55报价/九设施/有限库存/轮盘次数/门票价格"
+    },
+    {
+      "id": "SRC-D08-GROWTH",
+      "path": "docs/design/economy-v1/equipment-growth.json",
+      "json_pointer": null,
+      "sha256": "4002351b1de27128f1a1db27020cdec8f46ab776bfc285be34742cbee23eedb9",
+      "purpose": "基础强化步费、章cap与共享属性封顶"
+    },
+    {
+      "id": "SRC-D08-OLD-CASES",
+      "path": "docs/design/economy-v1/budget-scenarios.json",
+      "json_pointer": "/ordered_wallets",
+      "sha256": "2ea5fbd96c48f0199088c0250d3769e51bafe0b1476c6cf1426ead470c542ca2",
+      "purpose": "旧BUD-001/002/003按事件重新核账；补足已持甲假设"
+    },
+    {
+      "id": "SRC-V2-COST",
+      "path": "docs/design/equipment-v2/enchant-rules.json",
+      "json_pointer": "/operations",
+      "sha256": "520214b7b3b8195f769f7a77c7ecc40baca2039746f7bc73cbe49b4445756a55",
+      "purpose": "觉醒/重洗/升阶/洗净原费，不把随机投入当确定增益"
+    },
+    {
+      "id": "SRC-D09-TALENTS",
+      "path": "docs/design/progression-v1/talents.json",
+      "json_pointer": "/nodes",
+      "sha256": "67f12dc215a628d94c41efa2a92e9a3929785036cab86d4cd11ec8dc958fb2f5",
+      "purpose": "九天赋27等级逐级实付合计280"
+    },
+    {
+      "id": "SRC-D09-RESEARCH",
+      "path": "docs/design/progression-v1/unlocks.json",
+      "json_pointer": "/unlocks",
+      "sha256": "0ec649fdeb8d820d3e008508f1ddd79858b3b6456e93170aa9875eefd3e99ab0",
+      "purpose": "14研究原价合计130及样品现金价格"
+    },
+    {
+      "id": "SRC-D09-HUB",
+      "path": "docs/design/progression-v1/hub-rules.json",
+      "json_pointer": "/new_run",
+      "sha256": "edcd7bcaf78d86416dc01ee0b31f9aa3c3477fa2ea80654cd181f1700b9deb40",
+      "purpose": "20金币起始一次、冻结成长/样品、继续不重置"
+    },
+    {
+      "id": "SRC-D09-REFUND",
+      "path": "docs/design/progression-v1/hub-rules.json",
+      "json_pointer": "/talent_reset",
+      "sha256": "edcd7bcaf78d86416dc01ee0b31f9aa3c3477fa2ea80654cd181f1700b9deb40",
+      "purpose": "原实付退款不算新earned，研究和样品已购不重置"
+    },
+    {
+      "id": "SRC-D09-SAMPLE",
+      "path": "docs/design/progression-v1/unlocks.json",
+      "json_pointer": "/research_sample_order",
+      "sha256": "0ec649fdeb8d820d3e008508f1ddd79858b3b6456e93170aa9875eefd3e99ab0",
+      "purpose": "每研究账号一次现金样品、首匹配N04，不增加主线收入"
+    },
+    {
+      "id": "SRC-D10-END",
+      "path": "docs/design/narrative-v1/story-flow.json",
+      "json_pointer": "/ending",
+      "sha256": "92bfcb6dcc79924d2e0bcd22a3d9dc80e256708619a415e577308f632d7bb661",
+      "purpose": "普通结局无金币/天赋/支线门槛，终局不重复奖励"
+    },
+    {
+      "id": "SRC-D13-COMMIT",
+      "path": "docs/design/save-data-v1/save-rules.json",
+      "json_pointer": "/single_root_authority",
+      "sha256": "0e08f2dff76918012baf344840ded958af9f6badb66f61a9d5541f521ccc6968",
+      "purpose": "账号与Run完整同代恢复，续局/故障不能复制收益"
+    }
+  ],
+  "independent_check": {
+    "facts": "从D07五区35主节点、D08 sources/设施与D09逐级价格重算，未以汇总自证；现有数值皆设计值。",
+    "reasoning": "预算按事件先后验证可支付，产出/拾取/携带/实际使用/治疗分开；以当前样品和首次资格决定永久收益。",
+    "risks": "资金可支付不证明战斗可通或强化最优；缺少运行承伤、时长、饮用窗口与掉落实测，不能给每小时效率、保证回血或固定几局升满。"
+  },
+  "baseline": {
+    "start_once_gold": 20,
+    "ordinary_ground_gold": 460,
+    "first_four_Boss_ground_gold": 220,
+    "gross_gold_if_all_picked": 700,
+    "ordinary_ground_shards_if_picked": 20,
+    "Boss_direct_shards": 40,
+    "repeat_shards": 60,
+    "five_main_Boss_first_extra_if_unclaimed": 10,
+    "first_full_mainline_shards_if_all_eligible": 70,
+    "all_optional_gross_gold_if_one_B_each_and_both_optional_Bosses": 220,
+    "main_and_all_optional_gold_gross": 920,
+    "known_optional_tolls_total": 55,
+    "fixed_free_small_potions_produced": 5,
+    "fixed_paid_small_potion_units": 10,
+    "paid_small_potions_total_gold": 180,
+    "mainline_chapter_crossings": 4,
+    "new_sources_or_rewards_added": 0,
+    "conditions": [
+      "所有必需战斗合法成功且玩家存活；普通/前四Boss地面币与N05碎片实际全拾。",
+      "不含消费、支路、轮盘金币或旧账号余额；首次额外只查当前账号未领键。",
+      "最终Boss金币0；终局先直接入永久奖励再结束Run，剩余局内币不是结算兑换。"
+    ]
+  },
+  "chapter_rows": [
+    {
+      "chapter": 1,
+      "region_id": "REG-01",
+      "mainline_node_ids": [
+        "REG-01-N01",
+        "REG-01-N02",
+        "REG-01-N03",
+        "REG-01-N04",
+        "REG-01-N05",
+        "REG-01-N06",
+        "REG-01-N07"
+      ],
+      "mainline_boss_id": "BOS-STN-001",
+      "ordinary_ground_gold_by_node": {
+        "N02": 8,
+        "N03": 20,
+        "N05": 24
+      },
+      "ordinary_ground_gold": 52,
+      "boss_ground_gold_if_actually_picked": 40,
+      "gold_excluding_start": 92,
+      "ordinary_ground_shards_if_picked": 2,
+      "boss_direct_shards_on_qualified_success": 4,
+      "first_boss_extra_if_unclaimed": 2,
+      "repeat_shards_if_ground_picked_and_success": 6,
+      "free_small_potion_produced_at_N02": 1,
+      "paid_small_potion_stock_units": 2,
+      "paid_small_potion_total_gold": 36,
+      "transition_after_main_Boss_count": 1
+    },
+    {
+      "chapter": 2,
+      "region_id": "REG-02",
+      "mainline_node_ids": [
+        "REG-02-N01",
+        "REG-02-N02",
+        "REG-02-N03",
+        "REG-02-N04",
+        "REG-02-N05",
+        "REG-02-N06",
+        "REG-02-N07"
+      ],
+      "mainline_boss_id": "BOS-FOR-001",
+      "ordinary_ground_gold_by_node": {
+        "N02": 12,
+        "N03": 28,
+        "N05": 32
+      },
+      "ordinary_ground_gold": 72,
+      "boss_ground_gold_if_actually_picked": 50,
+      "gold_excluding_start": 122,
+      "ordinary_ground_shards_if_picked": 3,
+      "boss_direct_shards_on_qualified_success": 6,
+      "first_boss_extra_if_unclaimed": 2,
+      "repeat_shards_if_ground_picked_and_success": 9,
+      "free_small_potion_produced_at_N02": 1,
+      "paid_small_potion_stock_units": 2,
+      "paid_small_potion_total_gold": 36,
+      "transition_after_main_Boss_count": 1
+    },
+    {
+      "chapter": 3,
+      "region_id": "REG-03",
+      "mainline_node_ids": [
+        "REG-03-N01",
+        "REG-03-N02",
+        "REG-03-N03",
+        "REG-03-N04",
+        "REG-03-N05",
+        "REG-03-N06",
+        "REG-03-N07"
+      ],
+      "mainline_boss_id": "BOS-RIT-001",
+      "ordinary_ground_gold_by_node": {
+        "N02": 16,
+        "N03": 36,
+        "N05": 40
+      },
+      "ordinary_ground_gold": 92,
+      "boss_ground_gold_if_actually_picked": 60,
+      "gold_excluding_start": 152,
+      "ordinary_ground_shards_if_picked": 4,
+      "boss_direct_shards_on_qualified_success": 8,
+      "first_boss_extra_if_unclaimed": 2,
+      "repeat_shards_if_ground_picked_and_success": 12,
+      "free_small_potion_produced_at_N02": 1,
+      "paid_small_potion_stock_units": 2,
+      "paid_small_potion_total_gold": 36,
+      "transition_after_main_Boss_count": 1
+    },
+    {
+      "chapter": 4,
+      "region_id": "REG-04",
+      "mainline_node_ids": [
+        "REG-04-N01",
+        "REG-04-N02",
+        "REG-04-N03",
+        "REG-04-N04",
+        "REG-04-N05",
+        "REG-04-N06",
+        "REG-04-N07"
+      ],
+      "mainline_boss_id": "BOS-MEC-001",
+      "ordinary_ground_gold_by_node": {
+        "N02": 20,
+        "N03": 44,
+        "N05": 48
+      },
+      "ordinary_ground_gold": 112,
+      "boss_ground_gold_if_actually_picked": 70,
+      "gold_excluding_start": 182,
+      "ordinary_ground_shards_if_picked": 5,
+      "boss_direct_shards_on_qualified_success": 10,
+      "first_boss_extra_if_unclaimed": 2,
+      "repeat_shards_if_ground_picked_and_success": 15,
+      "free_small_potion_produced_at_N02": 1,
+      "paid_small_potion_stock_units": 2,
+      "paid_small_potion_total_gold": 36,
+      "transition_after_main_Boss_count": 1
+    },
+    {
+      "chapter": 5,
+      "region_id": "REG-05",
+      "mainline_node_ids": [
+        "REG-05-N01",
+        "REG-05-N02",
+        "REG-05-N03",
+        "REG-05-N04",
+        "REG-05-N05",
+        "REG-05-N06",
+        "REG-05-N07"
+      ],
+      "mainline_boss_id": "BOS-DEM-001",
+      "ordinary_ground_gold_by_node": {
+        "N02": 24,
+        "N03": 52,
+        "N05": 56
+      },
+      "ordinary_ground_gold": 132,
+      "boss_ground_gold_if_actually_picked": 0,
+      "gold_excluding_start": 132,
+      "ordinary_ground_shards_if_picked": 6,
+      "boss_direct_shards_on_qualified_success": 12,
+      "first_boss_extra_if_unclaimed": 2,
+      "repeat_shards_if_ground_picked_and_success": 18,
+      "free_small_potion_produced_at_N02": 1,
+      "paid_small_potion_stock_units": 2,
+      "paid_small_potion_total_gold": 36,
+      "transition_after_main_Boss_count": 0
+    }
+  ],
+  "prior_budget_cases_recomputed": [
+    {
+      "scenario_id": "BUD-001",
+      "ordered_balance_checks_pass": true,
+      "gross_gold": 700,
+      "spent_gold": 520,
+      "pre_end_balance": 180,
+      "additional_ownership_assumption": "BUD-001/BUD-002若锻造甲，必须已合法取得相应初始甲；未计购甲费用不能当成保证掉甲。"
+    },
+    {
+      "scenario_id": "BUD-002",
+      "ordered_balance_checks_pass": true,
+      "gross_gold": 585,
+      "spent_gold": 435,
+      "pre_end_balance": 150,
+      "additional_ownership_assumption": "BUD-001/BUD-002若锻造甲，必须已合法取得相应初始甲；未计购甲费用不能当成保证掉甲。"
+    },
+    {
+      "scenario_id": "BUD-003",
+      "ordered_balance_checks_pass": true,
+      "gross_gold": 700,
+      "spent_gold": 0,
+      "pre_end_balance": 700,
+      "additional_ownership_assumption": null
+    }
+  ],
+  "ordered_full_run_plans": [
+    {
+      "id": "PLAN-SUPPLY",
+      "name": "保守补给：十瓶固定小药",
+      "kind": "ordered_paper_wallet_not_playtest",
+      "assumptions": [
+        "每个所列战斗真实清完且玩家存活；全部所列地面金币/碎片实际拾取；Boss成功不自动等于拾金币。",
+        "所有购买均在原完整安全/报价/实例版本与整包容量动作满足时；药及时合法使用或明确丢弃腾出stack3，不能因满包先扣费。",
+        "不依赖随机额外掉落、售卖、无限刷新、功能券折扣或专注/弹匣付费恢复。",
+        "首次总数是所有所列账号首次尚可领取时的上限式情景；已领则对应first_delta为0，金币轨迹不变。"
+      ],
+      "extra_plan_assumption": null,
+      "gross_gold_including_start": 700,
+      "spent_gold": 180,
+      "pre_end_gold": 520,
+      "post_end_gold": 0,
+      "repeat_shards": 60,
+      "extra_if_all_account_firsts_available": 10,
+      "earned_shards_if_all_firsts_available": 70,
+      "fixed_small_potions_produced": 5,
+      "paid_small_potions_bought": 10,
+      "additional_small_potions_from_choice": 0,
+      "sample_content_if_bought": null,
+      "mainline_nodes_covered": [
+        "REG-01-N01",
+        "REG-01-N02",
+        "REG-01-N03",
+        "REG-01-N04",
+        "REG-01-N05",
+        "REG-01-N06",
+        "REG-01-N07",
+        "REG-02-N01",
+        "REG-02-N02",
+        "REG-02-N03",
+        "REG-02-N04",
+        "REG-02-N05",
+        "REG-02-N06",
+        "REG-02-N07",
+        "REG-03-N01",
+        "REG-03-N02",
+        "REG-03-N03",
+        "REG-03-N04",
+        "REG-03-N05",
+        "REG-03-N06",
+        "REG-03-N07",
+        "REG-04-N01",
+        "REG-04-N02",
+        "REG-04-N03",
+        "REG-04-N04",
+        "REG-04-N05",
+        "REG-04-N06",
+        "REG-04-N07",
+        "REG-05-N01",
+        "REG-05-N02",
+        "REG-05-N03",
+        "REG-05-N04",
+        "REG-05-N05",
+        "REG-05-N06",
+        "REG-05-N07"
+      ],
+      "chapter_end_snapshots": [
+        {
+          "chapter": 1,
+          "gold_before_end_of_run_destruction": 76,
+          "repeat_shards_earned": 6,
+          "earned_with_all_available_firsts": 8
+        },
+        {
+          "chapter": 2,
+          "gold_before_end_of_run_destruction": 162,
+          "repeat_shards_earned": 15,
+          "earned_with_all_available_firsts": 19
+        },
+        {
+          "chapter": 3,
+          "gold_before_end_of_run_destruction": 278,
+          "repeat_shards_earned": 27,
+          "earned_with_all_available_firsts": 33
+        },
+        {
+          "chapter": 4,
+          "gold_before_end_of_run_destruction": 424,
+          "repeat_shards_earned": 42,
+          "earned_with_all_available_firsts": 50
+        },
+        {
+          "chapter": 5,
+          "gold_before_end_of_run_destruction": 520,
+          "repeat_shards_earned": 60,
+          "earned_with_all_available_firsts": 70
+        }
+      ],
+      "purchases": [
+        {
+          "node_id": "REG-01-N04",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-01-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-01-N06",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-01-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-02-N04",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-02-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-02-N06",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-02-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-03-N04",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-03-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-03-N06",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-03-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-04-N04",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-04-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-04-N06",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-04-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-05-N04",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-05-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-05-N06",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-05-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        }
+      ],
+      "events": [
+        {
+          "ordinal": 0,
+          "node_id": "new_run",
+          "kind": "initialize_once",
+          "gold_delta": 20,
+          "gold_before": 0,
+          "gold_after": 20,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "source_id": "D09_deterministic_starter",
+          "initialization_count": 1
+        },
+        {
+          "ordinal": 1,
+          "node_id": "REG-01-N01",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 20,
+          "gold_after": 20,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 2,
+          "node_id": "REG-01-N02",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 20,
+          "gold_after": 20,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 3,
+          "node_id": "REG-01-N02",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 8,
+          "gold_before": 20,
+          "gold_after": 28,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "source_id": "RWD-REG-01-N02-GOLD"
+        },
+        {
+          "ordinal": 4,
+          "node_id": "REG-01-N02",
+          "kind": "free_small_potion_produced_not_healed",
+          "gold_delta": 0,
+          "gold_before": 28,
+          "gold_after": 28,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "source_id": "RWD-REG-01-N02-REC",
+          "quantity": 1
+        },
+        {
+          "ordinal": 5,
+          "node_id": "REG-01-N03",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 28,
+          "gold_after": 28,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 6,
+          "node_id": "REG-01-N03",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 20,
+          "gold_before": 28,
+          "gold_after": 48,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "source_id": "RWD-REG-01-N03-GOLD"
+        },
+        {
+          "ordinal": 7,
+          "node_id": "REG-01-N04",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 48,
+          "gold_after": 48,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 8,
+          "node_id": "REG-01-N04",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 48,
+          "gold_after": 30,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-01-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 9,
+          "node_id": "REG-01-N05",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 30,
+          "gold_after": 30,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 10,
+          "node_id": "REG-01-N05",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 24,
+          "gold_before": 30,
+          "gold_after": 54,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "source_id": "RWD-REG-01-N05-GOLD"
+        },
+        {
+          "ordinal": 11,
+          "node_id": "REG-01-N05",
+          "kind": "actual_ground_shard_pickup_assumed",
+          "gold_delta": 0,
+          "gold_before": 54,
+          "gold_after": 54,
+          "repeat_shards_delta": 2,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 2,
+          "source_id": "RWD-REG-01-N05-FRAG"
+        },
+        {
+          "ordinal": 12,
+          "node_id": "REG-01-N06",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 54,
+          "gold_after": 54,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 2,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 13,
+          "node_id": "REG-01-N06",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 54,
+          "gold_after": 36,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 2,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-01-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 14,
+          "node_id": "REG-01-N07",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 36,
+          "gold_after": 36,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 2,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 15,
+          "node_id": "REG-01-N07",
+          "kind": "qualified_Boss_success_then_actual_ground_gold_pickup",
+          "gold_delta": 40,
+          "gold_before": 36,
+          "gold_after": 76,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 2,
+          "source_id": "RWD-BOS-STN-001-GOLD"
+        },
+        {
+          "ordinal": 16,
+          "node_id": "REG-01-N07",
+          "kind": "qualified_Boss_direct_shards",
+          "gold_delta": 0,
+          "gold_before": 76,
+          "gold_after": 76,
+          "repeat_shards_delta": 4,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "source_ids": [
+            "RWD-BOS-STN-001-FRAG",
+            "RWD-FIRST-BOS-STN-001"
+          ]
+        },
+        {
+          "ordinal": 17,
+          "node_id": "REG-02-N01",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 76,
+          "gold_after": 76,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 18,
+          "node_id": "REG-02-N02",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 76,
+          "gold_after": 76,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 19,
+          "node_id": "REG-02-N02",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 12,
+          "gold_before": 76,
+          "gold_after": 88,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "source_id": "RWD-REG-02-N02-GOLD"
+        },
+        {
+          "ordinal": 20,
+          "node_id": "REG-02-N02",
+          "kind": "free_small_potion_produced_not_healed",
+          "gold_delta": 0,
+          "gold_before": 88,
+          "gold_after": 88,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "source_id": "RWD-REG-02-N02-REC",
+          "quantity": 1
+        },
+        {
+          "ordinal": 21,
+          "node_id": "REG-02-N03",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 88,
+          "gold_after": 88,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 22,
+          "node_id": "REG-02-N03",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 28,
+          "gold_before": 88,
+          "gold_after": 116,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "source_id": "RWD-REG-02-N03-GOLD"
+        },
+        {
+          "ordinal": 23,
+          "node_id": "REG-02-N04",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 116,
+          "gold_after": 116,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 24,
+          "node_id": "REG-02-N04",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 116,
+          "gold_after": 98,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-02-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 25,
+          "node_id": "REG-02-N05",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 98,
+          "gold_after": 98,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 26,
+          "node_id": "REG-02-N05",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 32,
+          "gold_before": 98,
+          "gold_after": 130,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "source_id": "RWD-REG-02-N05-GOLD"
+        },
+        {
+          "ordinal": 27,
+          "node_id": "REG-02-N05",
+          "kind": "actual_ground_shard_pickup_assumed",
+          "gold_delta": 0,
+          "gold_before": 130,
+          "gold_after": 130,
+          "repeat_shards_delta": 3,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 11,
+          "source_id": "RWD-REG-02-N05-FRAG"
+        },
+        {
+          "ordinal": 28,
+          "node_id": "REG-02-N06",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 130,
+          "gold_after": 130,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 11,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 29,
+          "node_id": "REG-02-N06",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 130,
+          "gold_after": 112,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 11,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-02-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 30,
+          "node_id": "REG-02-N07",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 112,
+          "gold_after": 112,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 11,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 31,
+          "node_id": "REG-02-N07",
+          "kind": "qualified_Boss_success_then_actual_ground_gold_pickup",
+          "gold_delta": 50,
+          "gold_before": 112,
+          "gold_after": 162,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 11,
+          "source_id": "RWD-BOS-FOR-001-GOLD"
+        },
+        {
+          "ordinal": 32,
+          "node_id": "REG-02-N07",
+          "kind": "qualified_Boss_direct_shards",
+          "gold_delta": 0,
+          "gold_before": 162,
+          "gold_after": 162,
+          "repeat_shards_delta": 6,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "source_ids": [
+            "RWD-BOS-FOR-001-FRAG",
+            "RWD-FIRST-BOS-FOR-001"
+          ]
+        },
+        {
+          "ordinal": 33,
+          "node_id": "REG-03-N01",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 162,
+          "gold_after": 162,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 34,
+          "node_id": "REG-03-N02",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 162,
+          "gold_after": 162,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 35,
+          "node_id": "REG-03-N02",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 16,
+          "gold_before": 162,
+          "gold_after": 178,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "source_id": "RWD-REG-03-N02-GOLD"
+        },
+        {
+          "ordinal": 36,
+          "node_id": "REG-03-N02",
+          "kind": "free_small_potion_produced_not_healed",
+          "gold_delta": 0,
+          "gold_before": 178,
+          "gold_after": 178,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "source_id": "RWD-REG-03-N02-REC",
+          "quantity": 1
+        },
+        {
+          "ordinal": 37,
+          "node_id": "REG-03-N03",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 178,
+          "gold_after": 178,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 38,
+          "node_id": "REG-03-N03",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 36,
+          "gold_before": 178,
+          "gold_after": 214,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "source_id": "RWD-REG-03-N03-GOLD"
+        },
+        {
+          "ordinal": 39,
+          "node_id": "REG-03-N04",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 214,
+          "gold_after": 214,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 40,
+          "node_id": "REG-03-N04",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 214,
+          "gold_after": 196,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-03-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 41,
+          "node_id": "REG-03-N05",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 196,
+          "gold_after": 196,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 42,
+          "node_id": "REG-03-N05",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 40,
+          "gold_before": 196,
+          "gold_after": 236,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "source_id": "RWD-REG-03-N05-GOLD"
+        },
+        {
+          "ordinal": 43,
+          "node_id": "REG-03-N05",
+          "kind": "actual_ground_shard_pickup_assumed",
+          "gold_delta": 0,
+          "gold_before": 236,
+          "gold_after": 236,
+          "repeat_shards_delta": 4,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 23,
+          "source_id": "RWD-REG-03-N05-FRAG"
+        },
+        {
+          "ordinal": 44,
+          "node_id": "REG-03-N06",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 236,
+          "gold_after": 236,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 23,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 45,
+          "node_id": "REG-03-N06",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 236,
+          "gold_after": 218,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 23,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-03-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 46,
+          "node_id": "REG-03-N07",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 218,
+          "gold_after": 218,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 23,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 47,
+          "node_id": "REG-03-N07",
+          "kind": "qualified_Boss_success_then_actual_ground_gold_pickup",
+          "gold_delta": 60,
+          "gold_before": 218,
+          "gold_after": 278,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 23,
+          "source_id": "RWD-BOS-RIT-001-GOLD"
+        },
+        {
+          "ordinal": 48,
+          "node_id": "REG-03-N07",
+          "kind": "qualified_Boss_direct_shards",
+          "gold_delta": 0,
+          "gold_before": 278,
+          "gold_after": 278,
+          "repeat_shards_delta": 8,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "source_ids": [
+            "RWD-BOS-RIT-001-FRAG",
+            "RWD-FIRST-BOS-RIT-001"
+          ]
+        },
+        {
+          "ordinal": 49,
+          "node_id": "REG-04-N01",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 278,
+          "gold_after": 278,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 50,
+          "node_id": "REG-04-N02",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 278,
+          "gold_after": 278,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 51,
+          "node_id": "REG-04-N02",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 20,
+          "gold_before": 278,
+          "gold_after": 298,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "source_id": "RWD-REG-04-N02-GOLD"
+        },
+        {
+          "ordinal": 52,
+          "node_id": "REG-04-N02",
+          "kind": "free_small_potion_produced_not_healed",
+          "gold_delta": 0,
+          "gold_before": 298,
+          "gold_after": 298,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "source_id": "RWD-REG-04-N02-REC",
+          "quantity": 1
+        },
+        {
+          "ordinal": 53,
+          "node_id": "REG-04-N03",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 298,
+          "gold_after": 298,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 54,
+          "node_id": "REG-04-N03",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 44,
+          "gold_before": 298,
+          "gold_after": 342,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "source_id": "RWD-REG-04-N03-GOLD"
+        },
+        {
+          "ordinal": 55,
+          "node_id": "REG-04-N04",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 342,
+          "gold_after": 342,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 56,
+          "node_id": "REG-04-N04",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 342,
+          "gold_after": 324,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-04-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 57,
+          "node_id": "REG-04-N05",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 324,
+          "gold_after": 324,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 58,
+          "node_id": "REG-04-N05",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 48,
+          "gold_before": 324,
+          "gold_after": 372,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "source_id": "RWD-REG-04-N05-GOLD"
+        },
+        {
+          "ordinal": 59,
+          "node_id": "REG-04-N05",
+          "kind": "actual_ground_shard_pickup_assumed",
+          "gold_delta": 0,
+          "gold_before": 372,
+          "gold_after": 372,
+          "repeat_shards_delta": 5,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "source_id": "RWD-REG-04-N05-FRAG"
+        },
+        {
+          "ordinal": 60,
+          "node_id": "REG-04-N06",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 372,
+          "gold_after": 372,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 61,
+          "node_id": "REG-04-N06",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 372,
+          "gold_after": 354,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-04-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 62,
+          "node_id": "REG-04-N07",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 354,
+          "gold_after": 354,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 63,
+          "node_id": "REG-04-N07",
+          "kind": "qualified_Boss_success_then_actual_ground_gold_pickup",
+          "gold_delta": 70,
+          "gold_before": 354,
+          "gold_after": 424,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "source_id": "RWD-BOS-MEC-001-GOLD"
+        },
+        {
+          "ordinal": 64,
+          "node_id": "REG-04-N07",
+          "kind": "qualified_Boss_direct_shards",
+          "gold_delta": 0,
+          "gold_before": 424,
+          "gold_after": 424,
+          "repeat_shards_delta": 10,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "source_ids": [
+            "RWD-BOS-MEC-001-FRAG",
+            "RWD-FIRST-BOS-MEC-001"
+          ]
+        },
+        {
+          "ordinal": 65,
+          "node_id": "REG-05-N01",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 424,
+          "gold_after": 424,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 66,
+          "node_id": "REG-05-N02",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 424,
+          "gold_after": 424,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 67,
+          "node_id": "REG-05-N02",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 24,
+          "gold_before": 424,
+          "gold_after": 448,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "source_id": "RWD-REG-05-N02-GOLD"
+        },
+        {
+          "ordinal": 68,
+          "node_id": "REG-05-N02",
+          "kind": "free_small_potion_produced_not_healed",
+          "gold_delta": 0,
+          "gold_before": 448,
+          "gold_after": 448,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "source_id": "RWD-REG-05-N02-REC",
+          "quantity": 1
+        },
+        {
+          "ordinal": 69,
+          "node_id": "REG-05-N03",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 448,
+          "gold_after": 448,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 70,
+          "node_id": "REG-05-N03",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 52,
+          "gold_before": 448,
+          "gold_after": 500,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "source_id": "RWD-REG-05-N03-GOLD"
+        },
+        {
+          "ordinal": 71,
+          "node_id": "REG-05-N04",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 500,
+          "gold_after": 500,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 72,
+          "node_id": "REG-05-N04",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 500,
+          "gold_after": 482,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-05-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 73,
+          "node_id": "REG-05-N05",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 482,
+          "gold_after": 482,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 74,
+          "node_id": "REG-05-N05",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 56,
+          "gold_before": 482,
+          "gold_after": 538,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "source_id": "RWD-REG-05-N05-GOLD"
+        },
+        {
+          "ordinal": 75,
+          "node_id": "REG-05-N05",
+          "kind": "actual_ground_shard_pickup_assumed",
+          "gold_delta": 0,
+          "gold_before": 538,
+          "gold_after": 538,
+          "repeat_shards_delta": 6,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 56,
+          "source_id": "RWD-REG-05-N05-FRAG"
+        },
+        {
+          "ordinal": 76,
+          "node_id": "REG-05-N06",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 538,
+          "gold_after": 538,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 56,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 77,
+          "node_id": "REG-05-N06",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 538,
+          "gold_after": 520,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 56,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-05-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 78,
+          "node_id": "REG-05-N07",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 520,
+          "gold_after": 520,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 56,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 79,
+          "node_id": "REG-05-N07",
+          "kind": "qualified_Boss_direct_shards",
+          "gold_delta": 0,
+          "gold_before": 520,
+          "gold_after": 520,
+          "repeat_shards_delta": 12,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 70,
+          "source_ids": [
+            "RWD-BOS-DEM-001-FRAG",
+            "RWD-FIRST-BOS-DEM-001"
+          ]
+        },
+        {
+          "ordinal": 80,
+          "node_id": "REG-05-N07",
+          "kind": "victory_terminal_local_gold_ends",
+          "gold_delta": -520,
+          "gold_before": 520,
+          "gold_after": 0,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 70,
+          "no_shard_second_credit": true
+        }
+      ],
+      "source_ref_ids": [
+        "SRC-D07-ROUTE",
+        "SRC-D08-SOURCES",
+        "SRC-D08-FACILITIES",
+        "SRC-D09-HUB",
+        "SRC-D09-SAMPLE",
+        "SRC-V2-COST"
+      ]
+    },
+    {
+      "id": "PLAN-EQUIP",
+      "name": "装备投入：固定剑与已明价商人甲",
+      "kind": "ordered_paper_wallet_not_playtest",
+      "assumptions": [
+        "每个所列战斗真实清完且玩家存活；全部所列地面金币/碎片实际拾取；Boss成功不自动等于拾金币。",
+        "所有购买均在原完整安全/报价/实例版本与整包容量动作满足时；药及时合法使用或明确丢弃腾出stack3，不能因满包先扣费。",
+        "不依赖随机额外掉落、售卖、无限刷新、功能券折扣或专注/弹匣付费恢复。",
+        "首次总数是所有所列账号首次尚可领取时的上限式情景；已领则对应first_delta为0，金币轨迹不变。"
+      ],
+      "extra_plan_assumption": null,
+      "gross_gold_including_start": 700,
+      "spent_gold": 568,
+      "pre_end_gold": 132,
+      "post_end_gold": 0,
+      "repeat_shards": 60,
+      "extra_if_all_account_firsts_available": 10,
+      "earned_shards_if_all_firsts_available": 70,
+      "fixed_small_potions_produced": 5,
+      "paid_small_potions_bought": 10,
+      "additional_small_potions_from_choice": 0,
+      "sample_content_if_bought": null,
+      "mainline_nodes_covered": [
+        "REG-01-N01",
+        "REG-01-N02",
+        "REG-01-N03",
+        "REG-01-N04",
+        "REG-01-N05",
+        "REG-01-N06",
+        "REG-01-N07",
+        "REG-02-N01",
+        "REG-02-N02",
+        "REG-02-N03",
+        "REG-02-N04",
+        "REG-02-N05",
+        "REG-02-N06",
+        "REG-02-N07",
+        "REG-03-N01",
+        "REG-03-N02",
+        "REG-03-N03",
+        "REG-03-N04",
+        "REG-03-N05",
+        "REG-03-N06",
+        "REG-03-N07",
+        "REG-04-N01",
+        "REG-04-N02",
+        "REG-04-N03",
+        "REG-04-N04",
+        "REG-04-N05",
+        "REG-04-N06",
+        "REG-04-N07",
+        "REG-05-N01",
+        "REG-05-N02",
+        "REG-05-N03",
+        "REG-05-N04",
+        "REG-05-N05",
+        "REG-05-N06",
+        "REG-05-N07"
+      ],
+      "chapter_end_snapshots": [
+        {
+          "chapter": 1,
+          "gold_before_end_of_run_destruction": 46,
+          "repeat_shards_earned": 6,
+          "earned_with_all_available_firsts": 8
+        },
+        {
+          "chapter": 2,
+          "gold_before_end_of_run_destruction": 89,
+          "repeat_shards_earned": 15,
+          "earned_with_all_available_firsts": 19
+        },
+        {
+          "chapter": 3,
+          "gold_before_end_of_run_destruction": 95,
+          "repeat_shards_earned": 27,
+          "earned_with_all_available_firsts": 33
+        },
+        {
+          "chapter": 4,
+          "gold_before_end_of_run_destruction": 206,
+          "repeat_shards_earned": 42,
+          "earned_with_all_available_firsts": 50
+        },
+        {
+          "chapter": 5,
+          "gold_before_end_of_run_destruction": 132,
+          "repeat_shards_earned": 60,
+          "earned_with_all_available_firsts": 70
+        }
+      ],
+      "purchases": [
+        {
+          "node_id": "REG-01-N04",
+          "service_id": "basic_forge",
+          "gold": 30,
+          "target": "starting_WPN-SWD-001",
+          "from_grade": 0,
+          "to_grade": 1
+        },
+        {
+          "node_id": "REG-01-N04",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-01-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-01-N06",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-01-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-02-N04",
+          "service_id": "known_merchant_armor",
+          "gold": 43,
+          "offer_id": "REG-02-N04-OFFER-ARM-MED-001",
+          "target": "ARM-MED-001",
+          "purchased_grade": 1,
+          "natural_enchant_not_assumed_beneficial": true
+        },
+        {
+          "node_id": "REG-02-N04",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-02-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-02-N06",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-02-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-03-N04",
+          "service_id": "basic_forge",
+          "gold": 55,
+          "target": "starting_WPN-SWD-001",
+          "from_grade": 1,
+          "to_grade": 2
+        },
+        {
+          "node_id": "REG-03-N04",
+          "service_id": "basic_forge",
+          "gold": 55,
+          "target": "bought_ARM-MED-001",
+          "from_grade": 1,
+          "to_grade": 2
+        },
+        {
+          "node_id": "REG-03-N04",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-03-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-03-N06",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-03-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-04-N04",
+          "service_id": "enchant_awaken",
+          "gold": 20,
+          "target": "starting_WPN-SWD-001",
+          "random_improvement_guaranteed": false
+        },
+        {
+          "node_id": "REG-04-N04",
+          "service_id": "enchant_reroll_I",
+          "gold": 15,
+          "target": "starting_WPN-SWD-001",
+          "random_improvement_guaranteed": false
+        },
+        {
+          "node_id": "REG-04-N04",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-04-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-04-N06",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-04-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-05-N04",
+          "service_id": "basic_forge",
+          "gold": 85,
+          "target": "starting_WPN-SWD-001",
+          "from_grade": 2,
+          "to_grade": 3
+        },
+        {
+          "node_id": "REG-05-N04",
+          "service_id": "basic_forge",
+          "gold": 85,
+          "target": "bought_ARM-MED-001",
+          "from_grade": 2,
+          "to_grade": 3
+        },
+        {
+          "node_id": "REG-05-N04",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-05-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-05-N06",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-05-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        }
+      ],
+      "events": [
+        {
+          "ordinal": 0,
+          "node_id": "new_run",
+          "kind": "initialize_once",
+          "gold_delta": 20,
+          "gold_before": 0,
+          "gold_after": 20,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "source_id": "D09_deterministic_starter",
+          "initialization_count": 1
+        },
+        {
+          "ordinal": 1,
+          "node_id": "REG-01-N01",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 20,
+          "gold_after": 20,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 2,
+          "node_id": "REG-01-N02",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 20,
+          "gold_after": 20,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 3,
+          "node_id": "REG-01-N02",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 8,
+          "gold_before": 20,
+          "gold_after": 28,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "source_id": "RWD-REG-01-N02-GOLD"
+        },
+        {
+          "ordinal": 4,
+          "node_id": "REG-01-N02",
+          "kind": "free_small_potion_produced_not_healed",
+          "gold_delta": 0,
+          "gold_before": 28,
+          "gold_after": 28,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "source_id": "RWD-REG-01-N02-REC",
+          "quantity": 1
+        },
+        {
+          "ordinal": 5,
+          "node_id": "REG-01-N03",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 28,
+          "gold_after": 28,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 6,
+          "node_id": "REG-01-N03",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 20,
+          "gold_before": 28,
+          "gold_after": 48,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "source_id": "RWD-REG-01-N03-GOLD"
+        },
+        {
+          "ordinal": 7,
+          "node_id": "REG-01-N04",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 48,
+          "gold_after": 48,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 8,
+          "node_id": "REG-01-N04",
+          "kind": "spend",
+          "gold_delta": -30,
+          "gold_before": 48,
+          "gold_after": 18,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "service_id": "basic_forge",
+          "target": "starting_WPN-SWD-001",
+          "from_grade": 0,
+          "to_grade": 1
+        },
+        {
+          "ordinal": 9,
+          "node_id": "REG-01-N04",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 18,
+          "gold_after": 0,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-01-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 10,
+          "node_id": "REG-01-N05",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 0,
+          "gold_after": 0,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 11,
+          "node_id": "REG-01-N05",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 24,
+          "gold_before": 0,
+          "gold_after": 24,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "source_id": "RWD-REG-01-N05-GOLD"
+        },
+        {
+          "ordinal": 12,
+          "node_id": "REG-01-N05",
+          "kind": "actual_ground_shard_pickup_assumed",
+          "gold_delta": 0,
+          "gold_before": 24,
+          "gold_after": 24,
+          "repeat_shards_delta": 2,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 2,
+          "source_id": "RWD-REG-01-N05-FRAG"
+        },
+        {
+          "ordinal": 13,
+          "node_id": "REG-01-N06",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 24,
+          "gold_after": 24,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 2,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 14,
+          "node_id": "REG-01-N06",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 24,
+          "gold_after": 6,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 2,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-01-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 15,
+          "node_id": "REG-01-N07",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 6,
+          "gold_after": 6,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 2,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 16,
+          "node_id": "REG-01-N07",
+          "kind": "qualified_Boss_success_then_actual_ground_gold_pickup",
+          "gold_delta": 40,
+          "gold_before": 6,
+          "gold_after": 46,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 2,
+          "source_id": "RWD-BOS-STN-001-GOLD"
+        },
+        {
+          "ordinal": 17,
+          "node_id": "REG-01-N07",
+          "kind": "qualified_Boss_direct_shards",
+          "gold_delta": 0,
+          "gold_before": 46,
+          "gold_after": 46,
+          "repeat_shards_delta": 4,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "source_ids": [
+            "RWD-BOS-STN-001-FRAG",
+            "RWD-FIRST-BOS-STN-001"
+          ]
+        },
+        {
+          "ordinal": 18,
+          "node_id": "REG-02-N01",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 46,
+          "gold_after": 46,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 19,
+          "node_id": "REG-02-N02",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 46,
+          "gold_after": 46,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 20,
+          "node_id": "REG-02-N02",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 12,
+          "gold_before": 46,
+          "gold_after": 58,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "source_id": "RWD-REG-02-N02-GOLD"
+        },
+        {
+          "ordinal": 21,
+          "node_id": "REG-02-N02",
+          "kind": "free_small_potion_produced_not_healed",
+          "gold_delta": 0,
+          "gold_before": 58,
+          "gold_after": 58,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "source_id": "RWD-REG-02-N02-REC",
+          "quantity": 1
+        },
+        {
+          "ordinal": 22,
+          "node_id": "REG-02-N03",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 58,
+          "gold_after": 58,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 23,
+          "node_id": "REG-02-N03",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 28,
+          "gold_before": 58,
+          "gold_after": 86,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "source_id": "RWD-REG-02-N03-GOLD"
+        },
+        {
+          "ordinal": 24,
+          "node_id": "REG-02-N04",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 86,
+          "gold_after": 86,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 25,
+          "node_id": "REG-02-N04",
+          "kind": "spend",
+          "gold_delta": -43,
+          "gold_before": 86,
+          "gold_after": 43,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "service_id": "known_merchant_armor",
+          "offer_id": "REG-02-N04-OFFER-ARM-MED-001",
+          "target": "ARM-MED-001",
+          "purchased_grade": 1,
+          "natural_enchant_not_assumed_beneficial": true
+        },
+        {
+          "ordinal": 26,
+          "node_id": "REG-02-N04",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 43,
+          "gold_after": 25,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-02-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 27,
+          "node_id": "REG-02-N05",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 25,
+          "gold_after": 25,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 28,
+          "node_id": "REG-02-N05",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 32,
+          "gold_before": 25,
+          "gold_after": 57,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 8,
+          "source_id": "RWD-REG-02-N05-GOLD"
+        },
+        {
+          "ordinal": 29,
+          "node_id": "REG-02-N05",
+          "kind": "actual_ground_shard_pickup_assumed",
+          "gold_delta": 0,
+          "gold_before": 57,
+          "gold_after": 57,
+          "repeat_shards_delta": 3,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 11,
+          "source_id": "RWD-REG-02-N05-FRAG"
+        },
+        {
+          "ordinal": 30,
+          "node_id": "REG-02-N06",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 57,
+          "gold_after": 57,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 11,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 31,
+          "node_id": "REG-02-N06",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 57,
+          "gold_after": 39,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 11,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-02-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 32,
+          "node_id": "REG-02-N07",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 39,
+          "gold_after": 39,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 11,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 33,
+          "node_id": "REG-02-N07",
+          "kind": "qualified_Boss_success_then_actual_ground_gold_pickup",
+          "gold_delta": 50,
+          "gold_before": 39,
+          "gold_after": 89,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 11,
+          "source_id": "RWD-BOS-FOR-001-GOLD"
+        },
+        {
+          "ordinal": 34,
+          "node_id": "REG-02-N07",
+          "kind": "qualified_Boss_direct_shards",
+          "gold_delta": 0,
+          "gold_before": 89,
+          "gold_after": 89,
+          "repeat_shards_delta": 6,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "source_ids": [
+            "RWD-BOS-FOR-001-FRAG",
+            "RWD-FIRST-BOS-FOR-001"
+          ]
+        },
+        {
+          "ordinal": 35,
+          "node_id": "REG-03-N01",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 89,
+          "gold_after": 89,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 36,
+          "node_id": "REG-03-N02",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 89,
+          "gold_after": 89,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 37,
+          "node_id": "REG-03-N02",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 16,
+          "gold_before": 89,
+          "gold_after": 105,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "source_id": "RWD-REG-03-N02-GOLD"
+        },
+        {
+          "ordinal": 38,
+          "node_id": "REG-03-N02",
+          "kind": "free_small_potion_produced_not_healed",
+          "gold_delta": 0,
+          "gold_before": 105,
+          "gold_after": 105,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "source_id": "RWD-REG-03-N02-REC",
+          "quantity": 1
+        },
+        {
+          "ordinal": 39,
+          "node_id": "REG-03-N03",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 105,
+          "gold_after": 105,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 40,
+          "node_id": "REG-03-N03",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 36,
+          "gold_before": 105,
+          "gold_after": 141,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "source_id": "RWD-REG-03-N03-GOLD"
+        },
+        {
+          "ordinal": 41,
+          "node_id": "REG-03-N04",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 141,
+          "gold_after": 141,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 42,
+          "node_id": "REG-03-N04",
+          "kind": "spend",
+          "gold_delta": -55,
+          "gold_before": 141,
+          "gold_after": 86,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "service_id": "basic_forge",
+          "target": "starting_WPN-SWD-001",
+          "from_grade": 1,
+          "to_grade": 2
+        },
+        {
+          "ordinal": 43,
+          "node_id": "REG-03-N04",
+          "kind": "spend",
+          "gold_delta": -55,
+          "gold_before": 86,
+          "gold_after": 31,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "service_id": "basic_forge",
+          "target": "bought_ARM-MED-001",
+          "from_grade": 1,
+          "to_grade": 2
+        },
+        {
+          "ordinal": 44,
+          "node_id": "REG-03-N04",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 31,
+          "gold_after": 13,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-03-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 45,
+          "node_id": "REG-03-N05",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 13,
+          "gold_after": 13,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 46,
+          "node_id": "REG-03-N05",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 40,
+          "gold_before": 13,
+          "gold_after": 53,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 19,
+          "source_id": "RWD-REG-03-N05-GOLD"
+        },
+        {
+          "ordinal": 47,
+          "node_id": "REG-03-N05",
+          "kind": "actual_ground_shard_pickup_assumed",
+          "gold_delta": 0,
+          "gold_before": 53,
+          "gold_after": 53,
+          "repeat_shards_delta": 4,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 23,
+          "source_id": "RWD-REG-03-N05-FRAG"
+        },
+        {
+          "ordinal": 48,
+          "node_id": "REG-03-N06",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 53,
+          "gold_after": 53,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 23,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 49,
+          "node_id": "REG-03-N06",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 53,
+          "gold_after": 35,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 23,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-03-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 50,
+          "node_id": "REG-03-N07",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 35,
+          "gold_after": 35,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 23,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 51,
+          "node_id": "REG-03-N07",
+          "kind": "qualified_Boss_success_then_actual_ground_gold_pickup",
+          "gold_delta": 60,
+          "gold_before": 35,
+          "gold_after": 95,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 23,
+          "source_id": "RWD-BOS-RIT-001-GOLD"
+        },
+        {
+          "ordinal": 52,
+          "node_id": "REG-03-N07",
+          "kind": "qualified_Boss_direct_shards",
+          "gold_delta": 0,
+          "gold_before": 95,
+          "gold_after": 95,
+          "repeat_shards_delta": 8,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "source_ids": [
+            "RWD-BOS-RIT-001-FRAG",
+            "RWD-FIRST-BOS-RIT-001"
+          ]
+        },
+        {
+          "ordinal": 53,
+          "node_id": "REG-04-N01",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 95,
+          "gold_after": 95,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 54,
+          "node_id": "REG-04-N02",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 95,
+          "gold_after": 95,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 55,
+          "node_id": "REG-04-N02",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 20,
+          "gold_before": 95,
+          "gold_after": 115,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "source_id": "RWD-REG-04-N02-GOLD"
+        },
+        {
+          "ordinal": 56,
+          "node_id": "REG-04-N02",
+          "kind": "free_small_potion_produced_not_healed",
+          "gold_delta": 0,
+          "gold_before": 115,
+          "gold_after": 115,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "source_id": "RWD-REG-04-N02-REC",
+          "quantity": 1
+        },
+        {
+          "ordinal": 57,
+          "node_id": "REG-04-N03",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 115,
+          "gold_after": 115,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 58,
+          "node_id": "REG-04-N03",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 44,
+          "gold_before": 115,
+          "gold_after": 159,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "source_id": "RWD-REG-04-N03-GOLD"
+        },
+        {
+          "ordinal": 59,
+          "node_id": "REG-04-N04",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 159,
+          "gold_after": 159,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 60,
+          "node_id": "REG-04-N04",
+          "kind": "spend",
+          "gold_delta": -20,
+          "gold_before": 159,
+          "gold_after": 139,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "service_id": "enchant_awaken",
+          "target": "starting_WPN-SWD-001",
+          "random_improvement_guaranteed": false
+        },
+        {
+          "ordinal": 61,
+          "node_id": "REG-04-N04",
+          "kind": "spend",
+          "gold_delta": -15,
+          "gold_before": 139,
+          "gold_after": 124,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "service_id": "enchant_reroll_I",
+          "target": "starting_WPN-SWD-001",
+          "random_improvement_guaranteed": false
+        },
+        {
+          "ordinal": 62,
+          "node_id": "REG-04-N04",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 124,
+          "gold_after": 106,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-04-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 63,
+          "node_id": "REG-04-N05",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 106,
+          "gold_after": 106,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 64,
+          "node_id": "REG-04-N05",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 48,
+          "gold_before": 106,
+          "gold_after": 154,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 33,
+          "source_id": "RWD-REG-04-N05-GOLD"
+        },
+        {
+          "ordinal": 65,
+          "node_id": "REG-04-N05",
+          "kind": "actual_ground_shard_pickup_assumed",
+          "gold_delta": 0,
+          "gold_before": 154,
+          "gold_after": 154,
+          "repeat_shards_delta": 5,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "source_id": "RWD-REG-04-N05-FRAG"
+        },
+        {
+          "ordinal": 66,
+          "node_id": "REG-04-N06",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 154,
+          "gold_after": 154,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 67,
+          "node_id": "REG-04-N06",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 154,
+          "gold_after": 136,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-04-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 68,
+          "node_id": "REG-04-N07",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 136,
+          "gold_after": 136,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 69,
+          "node_id": "REG-04-N07",
+          "kind": "qualified_Boss_success_then_actual_ground_gold_pickup",
+          "gold_delta": 70,
+          "gold_before": 136,
+          "gold_after": 206,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "source_id": "RWD-BOS-MEC-001-GOLD"
+        },
+        {
+          "ordinal": 70,
+          "node_id": "REG-04-N07",
+          "kind": "qualified_Boss_direct_shards",
+          "gold_delta": 0,
+          "gold_before": 206,
+          "gold_after": 206,
+          "repeat_shards_delta": 10,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "source_ids": [
+            "RWD-BOS-MEC-001-FRAG",
+            "RWD-FIRST-BOS-MEC-001"
+          ]
+        },
+        {
+          "ordinal": 71,
+          "node_id": "REG-05-N01",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 206,
+          "gold_after": 206,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 72,
+          "node_id": "REG-05-N02",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 206,
+          "gold_after": 206,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 73,
+          "node_id": "REG-05-N02",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 24,
+          "gold_before": 206,
+          "gold_after": 230,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "source_id": "RWD-REG-05-N02-GOLD"
+        },
+        {
+          "ordinal": 74,
+          "node_id": "REG-05-N02",
+          "kind": "free_small_potion_produced_not_healed",
+          "gold_delta": 0,
+          "gold_before": 230,
+          "gold_after": 230,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "source_id": "RWD-REG-05-N02-REC",
+          "quantity": 1
+        },
+        {
+          "ordinal": 75,
+          "node_id": "REG-05-N03",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 230,
+          "gold_after": 230,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 76,
+          "node_id": "REG-05-N03",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 52,
+          "gold_before": 230,
+          "gold_after": 282,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "source_id": "RWD-REG-05-N03-GOLD"
+        },
+        {
+          "ordinal": 77,
+          "node_id": "REG-05-N04",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 282,
+          "gold_after": 282,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 78,
+          "node_id": "REG-05-N04",
+          "kind": "spend",
+          "gold_delta": -85,
+          "gold_before": 282,
+          "gold_after": 197,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "service_id": "basic_forge",
+          "target": "starting_WPN-SWD-001",
+          "from_grade": 2,
+          "to_grade": 3
+        },
+        {
+          "ordinal": 79,
+          "node_id": "REG-05-N04",
+          "kind": "spend",
+          "gold_delta": -85,
+          "gold_before": 197,
+          "gold_after": 112,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "service_id": "basic_forge",
+          "target": "bought_ARM-MED-001",
+          "from_grade": 2,
+          "to_grade": 3
+        },
+        {
+          "ordinal": 80,
+          "node_id": "REG-05-N04",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 112,
+          "gold_after": 94,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-05-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 81,
+          "node_id": "REG-05-N05",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 94,
+          "gold_after": 94,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 82,
+          "node_id": "REG-05-N05",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 56,
+          "gold_before": 94,
+          "gold_after": 150,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 50,
+          "source_id": "RWD-REG-05-N05-GOLD"
+        },
+        {
+          "ordinal": 83,
+          "node_id": "REG-05-N05",
+          "kind": "actual_ground_shard_pickup_assumed",
+          "gold_delta": 0,
+          "gold_before": 150,
+          "gold_after": 150,
+          "repeat_shards_delta": 6,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 56,
+          "source_id": "RWD-REG-05-N05-FRAG"
+        },
+        {
+          "ordinal": 84,
+          "node_id": "REG-05-N06",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 150,
+          "gold_after": 150,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 56,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 85,
+          "node_id": "REG-05-N06",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 150,
+          "gold_after": 132,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 56,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-05-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 86,
+          "node_id": "REG-05-N07",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 132,
+          "gold_after": 132,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 56,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 87,
+          "node_id": "REG-05-N07",
+          "kind": "qualified_Boss_direct_shards",
+          "gold_delta": 0,
+          "gold_before": 132,
+          "gold_after": 132,
+          "repeat_shards_delta": 12,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 70,
+          "source_ids": [
+            "RWD-BOS-DEM-001-FRAG",
+            "RWD-FIRST-BOS-DEM-001"
+          ]
+        },
+        {
+          "ordinal": 88,
+          "node_id": "REG-05-N07",
+          "kind": "victory_terminal_local_gold_ends",
+          "gold_delta": -132,
+          "gold_before": 132,
+          "gold_after": 0,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 70,
+          "no_shard_second_credit": true
+        }
+      ],
+      "source_ref_ids": [
+        "SRC-D07-ROUTE",
+        "SRC-D08-SOURCES",
+        "SRC-D08-FACILITIES",
+        "SRC-D09-HUB",
+        "SRC-D09-SAMPLE",
+        "SRC-V2-COST"
+      ]
+    },
+    {
+      "id": "PLAN-EXPLORE",
+      "name": "可选探索：五支路/五隐藏加有限设施",
+      "kind": "ordered_paper_wallet_not_playtest",
+      "assumptions": [
+        "每个所列战斗真实清完且玩家存活；全部所列地面金币/碎片实际拾取；Boss成功不自动等于拾金币。",
+        "所有购买均在原完整安全/报价/实例版本与整包容量动作满足时；药及时合法使用或明确丢弃腾出stack3，不能因满包先扣费。",
+        "不依赖随机额外掉落、售卖、无限刷新、功能券折扣或专注/弹匣付费恢复。",
+        "首次总数是所有所列账号首次尚可领取时的上限式情景；已领则对应first_delta为0，金币轨迹不变。"
+      ],
+      "extra_plan_assumption": "预先已研究UNL-REC-002且样品未购；历史6碎片研究费用不冒充本局免费所得。选择每章一个B01、不选B02；5隐藏均可跳过，本例选择全探索。",
+      "gross_gold_including_start": 920,
+      "spent_gold": 408,
+      "pre_end_gold": 512,
+      "post_end_gold": 0,
+      "repeat_shards": 78,
+      "extra_if_all_account_firsts_available": 24,
+      "earned_shards_if_all_firsts_available": 102,
+      "fixed_small_potions_produced": 5,
+      "paid_small_potions_bought": 10,
+      "additional_small_potions_from_choice": 4,
+      "sample_content_if_bought": "ITM-REC-002",
+      "mainline_nodes_covered": [
+        "REG-01-N01",
+        "REG-01-N02",
+        "REG-01-N03",
+        "REG-01-N04",
+        "REG-01-N05",
+        "REG-01-N06",
+        "REG-01-N07",
+        "REG-02-N01",
+        "REG-02-N02",
+        "REG-02-N03",
+        "REG-02-N04",
+        "REG-02-N05",
+        "REG-02-N06",
+        "REG-02-N07",
+        "REG-03-N01",
+        "REG-03-N02",
+        "REG-03-N03",
+        "REG-03-N04",
+        "REG-03-N05",
+        "REG-03-N06",
+        "REG-03-N07",
+        "REG-04-N01",
+        "REG-04-N02",
+        "REG-04-N03",
+        "REG-04-N04",
+        "REG-04-N05",
+        "REG-04-N06",
+        "REG-04-N07",
+        "REG-05-N01",
+        "REG-05-N02",
+        "REG-05-N03",
+        "REG-05-N04",
+        "REG-05-N05",
+        "REG-05-N06",
+        "REG-05-N07"
+      ],
+      "chapter_end_snapshots": [
+        {
+          "chapter": 1,
+          "gold_before_end_of_run_destruction": 63,
+          "repeat_shards_earned": 11,
+          "earned_with_all_available_firsts": 17
+        },
+        {
+          "chapter": 2,
+          "gold_before_end_of_run_destruction": 185,
+          "repeat_shards_earned": 26,
+          "earned_with_all_available_firsts": 38
+        },
+        {
+          "chapter": 3,
+          "gold_before_end_of_run_destruction": 293,
+          "repeat_shards_earned": 40,
+          "earned_with_all_available_firsts": 56
+        },
+        {
+          "chapter": 4,
+          "gold_before_end_of_run_destruction": 412,
+          "repeat_shards_earned": 57,
+          "earned_with_all_available_firsts": 77
+        },
+        {
+          "chapter": 5,
+          "gold_before_end_of_run_destruction": 512,
+          "repeat_shards_earned": 78,
+          "earned_with_all_available_firsts": 102
+        }
+      ],
+      "purchases": [
+        {
+          "node_id": "REG-01-N04",
+          "service_id": "research_sample_cash",
+          "gold": 33,
+          "unlock_id": "UNL-REC-002",
+          "quantity": 1,
+          "eligibility": "previously_researched_and_not_previously_sample_purchased; two_quick_slot_capacity_assumed"
+        },
+        {
+          "node_id": "REG-01-N04",
+          "service_id": "optional_intelligence",
+          "gold": 8,
+          "eligibility": "current_H01_unrevealed_generated_reachable; paid_before_free_clue_discovery"
+        },
+        {
+          "node_id": "REG-01-N04",
+          "service_id": "optional_hidden_entry_entitlement",
+          "gold": 20,
+          "destination_node_id": "REG-01-H01"
+        },
+        {
+          "node_id": "REG-01-N04",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-01-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-01-N06",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-01-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-02-N04",
+          "service_id": "optional_intelligence",
+          "gold": 8,
+          "eligibility": "current_H01_unrevealed_generated_reachable; paid_before_free_clue_discovery"
+        },
+        {
+          "node_id": "REG-02-N04",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-02-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-02-N04",
+          "service_id": "roulette_one_use",
+          "gold": 20,
+          "outcome_assumption": "ROU-EMPTY",
+          "outcome_is_paper_example_not_guarantee_or_measured_frequency": true
+        },
+        {
+          "node_id": "REG-02-N06",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-02-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-03-N04",
+          "service_id": "optional_intelligence",
+          "gold": 8,
+          "eligibility": "current_H01_unrevealed_generated_reachable; paid_before_free_clue_discovery"
+        },
+        {
+          "node_id": "REG-03-N04",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-03-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-03-N04",
+          "service_id": "deterministic_choice_wheel",
+          "gold": 30,
+          "choice_id": "CHOICE-HEAL",
+          "quantity": 2,
+          "capacity_assumption": "whole_two_potion_bundle_fits_stack3_after_prior_legal_use_or_explicit_drop"
+        },
+        {
+          "node_id": "REG-03-N06",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-03-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-04-N04",
+          "service_id": "optional_intelligence",
+          "gold": 8,
+          "eligibility": "current_H01_unrevealed_generated_reachable; paid_before_free_clue_discovery"
+        },
+        {
+          "node_id": "REG-04-N04",
+          "service_id": "optional_hidden_entry_entitlement",
+          "gold": 35,
+          "destination_node_id": "REG-04-H01"
+        },
+        {
+          "node_id": "REG-04-N04",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-04-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-04-N04",
+          "service_id": "roulette_one_use",
+          "gold": 20,
+          "outcome_assumption": "ROU-EMPTY",
+          "outcome_is_paper_example_not_guarantee_or_measured_frequency": true
+        },
+        {
+          "node_id": "REG-04-N06",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-04-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-05-N04",
+          "service_id": "optional_intelligence",
+          "gold": 8,
+          "eligibility": "current_H01_unrevealed_generated_reachable; paid_before_free_clue_discovery"
+        },
+        {
+          "node_id": "REG-05-N04",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-05-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "node_id": "REG-05-N04",
+          "service_id": "deterministic_choice_wheel",
+          "gold": 30,
+          "choice_id": "CHOICE-HEAL",
+          "quantity": 2,
+          "capacity_assumption": "whole_two_potion_bundle_fits_stack3_after_prior_legal_use_or_explicit_drop"
+        },
+        {
+          "node_id": "REG-05-N06",
+          "service_id": "buy_small_potion",
+          "gold": 18,
+          "offer_id": "REG-05-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        }
+      ],
+      "events": [
+        {
+          "ordinal": 0,
+          "node_id": "new_run",
+          "kind": "initialize_once",
+          "gold_delta": 20,
+          "gold_before": 0,
+          "gold_after": 20,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "source_id": "D09_deterministic_starter",
+          "initialization_count": 1
+        },
+        {
+          "ordinal": 1,
+          "node_id": "REG-01-N01",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 20,
+          "gold_after": 20,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 2,
+          "node_id": "REG-01-N02",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 20,
+          "gold_after": 20,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 3,
+          "node_id": "REG-01-N02",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 8,
+          "gold_before": 20,
+          "gold_after": 28,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "source_id": "RWD-REG-01-N02-GOLD"
+        },
+        {
+          "ordinal": 4,
+          "node_id": "REG-01-N02",
+          "kind": "free_small_potion_produced_not_healed",
+          "gold_delta": 0,
+          "gold_before": 28,
+          "gold_after": 28,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "source_id": "RWD-REG-01-N02-REC",
+          "quantity": 1
+        },
+        {
+          "ordinal": 5,
+          "node_id": "REG-01-N03",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 28,
+          "gold_after": 28,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 6,
+          "node_id": "REG-01-N03",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 20,
+          "gold_before": 28,
+          "gold_after": 48,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 0,
+          "source_id": "RWD-REG-01-N03-GOLD"
+        },
+        {
+          "ordinal": 7,
+          "node_id": "REG-01-B01",
+          "kind": "selected_single_B_branch_clear_and_actual_pickups",
+          "gold_delta": 18,
+          "gold_before": 48,
+          "gold_after": 66,
+          "repeat_shards_delta": 1,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 1,
+          "source_ids": [
+            "RWD-REG-01-BCHOICE-GOLD",
+            "RWD-REG-01-BCHOICE-FRAG"
+          ],
+          "other_B_branch_selected": false
+        },
+        {
+          "ordinal": 8,
+          "node_id": "REG-01-N04",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 66,
+          "gold_after": 66,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 1,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 9,
+          "node_id": "REG-01-N04",
+          "kind": "spend",
+          "gold_delta": -33,
+          "gold_before": 66,
+          "gold_after": 33,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 1,
+          "service_id": "research_sample_cash",
+          "unlock_id": "UNL-REC-002",
+          "quantity": 1,
+          "eligibility": "previously_researched_and_not_previously_sample_purchased; two_quick_slot_capacity_assumed"
+        },
+        {
+          "ordinal": 10,
+          "node_id": "REG-01-N04",
+          "kind": "spend",
+          "gold_delta": -8,
+          "gold_before": 33,
+          "gold_after": 25,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 1,
+          "service_id": "optional_intelligence",
+          "eligibility": "current_H01_unrevealed_generated_reachable; paid_before_free_clue_discovery"
+        },
+        {
+          "ordinal": 11,
+          "node_id": "REG-01-N04",
+          "kind": "spend",
+          "gold_delta": -20,
+          "gold_before": 25,
+          "gold_after": 5,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 1,
+          "service_id": "optional_hidden_entry_entitlement",
+          "destination_node_id": "REG-01-H01"
+        },
+        {
+          "ordinal": 12,
+          "node_id": "REG-01-H01",
+          "kind": "optional_Boss_success_and_actual_ground_gold_pickup",
+          "gold_delta": 30,
+          "gold_before": 5,
+          "gold_after": 35,
+          "repeat_shards_delta": 4,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 7,
+          "source_ids": [
+            "RWD-BOS-GOB-001-GOLD",
+            "RWD-BOS-GOB-001-FRAG",
+            "RWD-FIRST-BOS-GOB-001"
+          ]
+        },
+        {
+          "ordinal": 13,
+          "node_id": "REG-01-H01",
+          "kind": "actual_safe_discovery_interaction",
+          "gold_delta": 0,
+          "gold_before": 35,
+          "gold_after": 35,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 9,
+          "source_id": "RWD-DISCOVERY-REG-01-H01",
+          "account_discovery_unclaimed_assumption": true
+        },
+        {
+          "ordinal": 14,
+          "node_id": "REG-01-N04",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 35,
+          "gold_after": 17,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 9,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-01-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 15,
+          "node_id": "REG-01-N05",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 17,
+          "gold_after": 17,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 9,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 16,
+          "node_id": "REG-01-N05",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 24,
+          "gold_before": 17,
+          "gold_after": 41,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 9,
+          "source_id": "RWD-REG-01-N05-GOLD"
+        },
+        {
+          "ordinal": 17,
+          "node_id": "REG-01-N05",
+          "kind": "actual_ground_shard_pickup_assumed",
+          "gold_delta": 0,
+          "gold_before": 41,
+          "gold_after": 41,
+          "repeat_shards_delta": 2,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 11,
+          "source_id": "RWD-REG-01-N05-FRAG"
+        },
+        {
+          "ordinal": 18,
+          "node_id": "REG-01-N06",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 41,
+          "gold_after": 41,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 11,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 19,
+          "node_id": "REG-01-N06",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 41,
+          "gold_after": 23,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 11,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-01-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 20,
+          "node_id": "REG-01-N07",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 23,
+          "gold_after": 23,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 11,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 21,
+          "node_id": "REG-01-N07",
+          "kind": "qualified_Boss_success_then_actual_ground_gold_pickup",
+          "gold_delta": 40,
+          "gold_before": 23,
+          "gold_after": 63,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 11,
+          "source_id": "RWD-BOS-STN-001-GOLD"
+        },
+        {
+          "ordinal": 22,
+          "node_id": "REG-01-N07",
+          "kind": "qualified_Boss_direct_shards",
+          "gold_delta": 0,
+          "gold_before": 63,
+          "gold_after": 63,
+          "repeat_shards_delta": 4,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 17,
+          "source_ids": [
+            "RWD-BOS-STN-001-FRAG",
+            "RWD-FIRST-BOS-STN-001"
+          ]
+        },
+        {
+          "ordinal": 23,
+          "node_id": "REG-02-N01",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 63,
+          "gold_after": 63,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 17,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 24,
+          "node_id": "REG-02-N02",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 63,
+          "gold_after": 63,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 17,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 25,
+          "node_id": "REG-02-N02",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 12,
+          "gold_before": 63,
+          "gold_after": 75,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 17,
+          "source_id": "RWD-REG-02-N02-GOLD"
+        },
+        {
+          "ordinal": 26,
+          "node_id": "REG-02-N02",
+          "kind": "free_small_potion_produced_not_healed",
+          "gold_delta": 0,
+          "gold_before": 75,
+          "gold_after": 75,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 17,
+          "source_id": "RWD-REG-02-N02-REC",
+          "quantity": 1
+        },
+        {
+          "ordinal": 27,
+          "node_id": "REG-02-N03",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 75,
+          "gold_after": 75,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 17,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 28,
+          "node_id": "REG-02-N03",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 28,
+          "gold_before": 75,
+          "gold_after": 103,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 17,
+          "source_id": "RWD-REG-02-N03-GOLD"
+        },
+        {
+          "ordinal": 29,
+          "node_id": "REG-02-B01",
+          "kind": "selected_single_B_branch_clear_and_actual_pickups",
+          "gold_delta": 24,
+          "gold_before": 103,
+          "gold_after": 127,
+          "repeat_shards_delta": 1,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 18,
+          "source_ids": [
+            "RWD-REG-02-BCHOICE-GOLD",
+            "RWD-REG-02-BCHOICE-FRAG"
+          ],
+          "other_B_branch_selected": false
+        },
+        {
+          "ordinal": 30,
+          "node_id": "REG-02-N04",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 127,
+          "gold_after": 127,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 18,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 31,
+          "node_id": "REG-02-N04",
+          "kind": "spend",
+          "gold_delta": -8,
+          "gold_before": 127,
+          "gold_after": 119,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 18,
+          "service_id": "optional_intelligence",
+          "eligibility": "current_H01_unrevealed_generated_reachable; paid_before_free_clue_discovery"
+        },
+        {
+          "ordinal": 32,
+          "node_id": "REG-02-H01",
+          "kind": "optional_Boss_success_and_actual_ground_gold_pickup",
+          "gold_delta": 40,
+          "gold_before": 119,
+          "gold_after": 159,
+          "repeat_shards_delta": 5,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 25,
+          "source_ids": [
+            "RWD-BOS-BST-001-GOLD",
+            "RWD-BOS-BST-001-FRAG",
+            "RWD-FIRST-BOS-BST-001"
+          ]
+        },
+        {
+          "ordinal": 33,
+          "node_id": "REG-02-H01",
+          "kind": "actual_safe_discovery_interaction",
+          "gold_delta": 0,
+          "gold_before": 159,
+          "gold_after": 159,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 27,
+          "source_id": "RWD-DISCOVERY-REG-02-H01",
+          "account_discovery_unclaimed_assumption": true
+        },
+        {
+          "ordinal": 34,
+          "node_id": "REG-02-N04",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 159,
+          "gold_after": 141,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 27,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-02-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 35,
+          "node_id": "REG-02-N04",
+          "kind": "spend",
+          "gold_delta": -20,
+          "gold_before": 141,
+          "gold_after": 121,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 27,
+          "service_id": "roulette_one_use",
+          "outcome_assumption": "ROU-EMPTY",
+          "outcome_is_paper_example_not_guarantee_or_measured_frequency": true
+        },
+        {
+          "ordinal": 36,
+          "node_id": "REG-02-N05",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 121,
+          "gold_after": 121,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 27,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 37,
+          "node_id": "REG-02-N05",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 32,
+          "gold_before": 121,
+          "gold_after": 153,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 27,
+          "source_id": "RWD-REG-02-N05-GOLD"
+        },
+        {
+          "ordinal": 38,
+          "node_id": "REG-02-N05",
+          "kind": "actual_ground_shard_pickup_assumed",
+          "gold_delta": 0,
+          "gold_before": 153,
+          "gold_after": 153,
+          "repeat_shards_delta": 3,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 30,
+          "source_id": "RWD-REG-02-N05-FRAG"
+        },
+        {
+          "ordinal": 39,
+          "node_id": "REG-02-N06",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 153,
+          "gold_after": 153,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 30,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 40,
+          "node_id": "REG-02-N06",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 153,
+          "gold_after": 135,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 30,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-02-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 41,
+          "node_id": "REG-02-N07",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 135,
+          "gold_after": 135,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 30,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 42,
+          "node_id": "REG-02-N07",
+          "kind": "qualified_Boss_success_then_actual_ground_gold_pickup",
+          "gold_delta": 50,
+          "gold_before": 135,
+          "gold_after": 185,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 30,
+          "source_id": "RWD-BOS-FOR-001-GOLD"
+        },
+        {
+          "ordinal": 43,
+          "node_id": "REG-02-N07",
+          "kind": "qualified_Boss_direct_shards",
+          "gold_delta": 0,
+          "gold_before": 185,
+          "gold_after": 185,
+          "repeat_shards_delta": 6,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "source_ids": [
+            "RWD-BOS-FOR-001-FRAG",
+            "RWD-FIRST-BOS-FOR-001"
+          ]
+        },
+        {
+          "ordinal": 44,
+          "node_id": "REG-03-N01",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 185,
+          "gold_after": 185,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 45,
+          "node_id": "REG-03-N02",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 185,
+          "gold_after": 185,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 46,
+          "node_id": "REG-03-N02",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 16,
+          "gold_before": 185,
+          "gold_after": 201,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "source_id": "RWD-REG-03-N02-GOLD"
+        },
+        {
+          "ordinal": 47,
+          "node_id": "REG-03-N02",
+          "kind": "free_small_potion_produced_not_healed",
+          "gold_delta": 0,
+          "gold_before": 201,
+          "gold_after": 201,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "source_id": "RWD-REG-03-N02-REC",
+          "quantity": 1
+        },
+        {
+          "ordinal": 48,
+          "node_id": "REG-03-N03",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 201,
+          "gold_after": 201,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 49,
+          "node_id": "REG-03-N03",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 36,
+          "gold_before": 201,
+          "gold_after": 237,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 38,
+          "source_id": "RWD-REG-03-N03-GOLD"
+        },
+        {
+          "ordinal": 50,
+          "node_id": "REG-03-B01",
+          "kind": "selected_single_B_branch_clear_and_actual_pickups",
+          "gold_delta": 30,
+          "gold_before": 237,
+          "gold_after": 267,
+          "repeat_shards_delta": 2,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 40,
+          "source_ids": [
+            "RWD-REG-03-BCHOICE-GOLD",
+            "RWD-REG-03-BCHOICE-FRAG"
+          ],
+          "other_B_branch_selected": false
+        },
+        {
+          "ordinal": 51,
+          "node_id": "REG-03-N04",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 267,
+          "gold_after": 267,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 40,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 52,
+          "node_id": "REG-03-N04",
+          "kind": "spend",
+          "gold_delta": -8,
+          "gold_before": 267,
+          "gold_after": 259,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 40,
+          "service_id": "optional_intelligence",
+          "eligibility": "current_H01_unrevealed_generated_reachable; paid_before_free_clue_discovery"
+        },
+        {
+          "ordinal": 53,
+          "node_id": "REG-03-H01",
+          "kind": "actual_safe_discovery_interaction",
+          "gold_delta": 0,
+          "gold_before": 259,
+          "gold_after": 259,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 42,
+          "source_id": "RWD-DISCOVERY-REG-03-H01",
+          "account_discovery_unclaimed_assumption": true
+        },
+        {
+          "ordinal": 54,
+          "node_id": "REG-03-N04",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 259,
+          "gold_after": 241,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 42,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-03-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 55,
+          "node_id": "REG-03-N04",
+          "kind": "spend",
+          "gold_delta": -30,
+          "gold_before": 241,
+          "gold_after": 211,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 42,
+          "service_id": "deterministic_choice_wheel",
+          "choice_id": "CHOICE-HEAL",
+          "quantity": 2,
+          "capacity_assumption": "whole_two_potion_bundle_fits_stack3_after_prior_legal_use_or_explicit_drop"
+        },
+        {
+          "ordinal": 56,
+          "node_id": "REG-03-N05",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 211,
+          "gold_after": 211,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 42,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 57,
+          "node_id": "REG-03-N05",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 40,
+          "gold_before": 211,
+          "gold_after": 251,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 42,
+          "source_id": "RWD-REG-03-N05-GOLD"
+        },
+        {
+          "ordinal": 58,
+          "node_id": "REG-03-N05",
+          "kind": "actual_ground_shard_pickup_assumed",
+          "gold_delta": 0,
+          "gold_before": 251,
+          "gold_after": 251,
+          "repeat_shards_delta": 4,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 46,
+          "source_id": "RWD-REG-03-N05-FRAG"
+        },
+        {
+          "ordinal": 59,
+          "node_id": "REG-03-N06",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 251,
+          "gold_after": 251,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 46,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 60,
+          "node_id": "REG-03-N06",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 251,
+          "gold_after": 233,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 46,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-03-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 61,
+          "node_id": "REG-03-N07",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 233,
+          "gold_after": 233,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 46,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 62,
+          "node_id": "REG-03-N07",
+          "kind": "qualified_Boss_success_then_actual_ground_gold_pickup",
+          "gold_delta": 60,
+          "gold_before": 233,
+          "gold_after": 293,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 46,
+          "source_id": "RWD-BOS-RIT-001-GOLD"
+        },
+        {
+          "ordinal": 63,
+          "node_id": "REG-03-N07",
+          "kind": "qualified_Boss_direct_shards",
+          "gold_delta": 0,
+          "gold_before": 293,
+          "gold_after": 293,
+          "repeat_shards_delta": 8,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 56,
+          "source_ids": [
+            "RWD-BOS-RIT-001-FRAG",
+            "RWD-FIRST-BOS-RIT-001"
+          ]
+        },
+        {
+          "ordinal": 64,
+          "node_id": "REG-04-N01",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 293,
+          "gold_after": 293,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 56,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 65,
+          "node_id": "REG-04-N02",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 293,
+          "gold_after": 293,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 56,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 66,
+          "node_id": "REG-04-N02",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 20,
+          "gold_before": 293,
+          "gold_after": 313,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 56,
+          "source_id": "RWD-REG-04-N02-GOLD"
+        },
+        {
+          "ordinal": 67,
+          "node_id": "REG-04-N02",
+          "kind": "free_small_potion_produced_not_healed",
+          "gold_delta": 0,
+          "gold_before": 313,
+          "gold_after": 313,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 56,
+          "source_id": "RWD-REG-04-N02-REC",
+          "quantity": 1
+        },
+        {
+          "ordinal": 68,
+          "node_id": "REG-04-N03",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 313,
+          "gold_after": 313,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 56,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 69,
+          "node_id": "REG-04-N03",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 44,
+          "gold_before": 313,
+          "gold_after": 357,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 56,
+          "source_id": "RWD-REG-04-N03-GOLD"
+        },
+        {
+          "ordinal": 70,
+          "node_id": "REG-04-B01",
+          "kind": "selected_single_B_branch_clear_and_actual_pickups",
+          "gold_delta": 36,
+          "gold_before": 357,
+          "gold_after": 393,
+          "repeat_shards_delta": 2,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 58,
+          "source_ids": [
+            "RWD-REG-04-BCHOICE-GOLD",
+            "RWD-REG-04-BCHOICE-FRAG"
+          ],
+          "other_B_branch_selected": false
+        },
+        {
+          "ordinal": 71,
+          "node_id": "REG-04-N04",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 393,
+          "gold_after": 393,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 58,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 72,
+          "node_id": "REG-04-N04",
+          "kind": "spend",
+          "gold_delta": -8,
+          "gold_before": 393,
+          "gold_after": 385,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 58,
+          "service_id": "optional_intelligence",
+          "eligibility": "current_H01_unrevealed_generated_reachable; paid_before_free_clue_discovery"
+        },
+        {
+          "ordinal": 73,
+          "node_id": "REG-04-N04",
+          "kind": "spend",
+          "gold_delta": -35,
+          "gold_before": 385,
+          "gold_after": 350,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 58,
+          "service_id": "optional_hidden_entry_entitlement",
+          "destination_node_id": "REG-04-H01"
+        },
+        {
+          "ordinal": 74,
+          "node_id": "REG-04-H01",
+          "kind": "actual_safe_discovery_interaction",
+          "gold_delta": 0,
+          "gold_before": 350,
+          "gold_after": 350,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 60,
+          "source_id": "RWD-DISCOVERY-REG-04-H01",
+          "account_discovery_unclaimed_assumption": true
+        },
+        {
+          "ordinal": 75,
+          "node_id": "REG-04-N04",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 350,
+          "gold_after": 332,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 60,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-04-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 76,
+          "node_id": "REG-04-N04",
+          "kind": "spend",
+          "gold_delta": -20,
+          "gold_before": 332,
+          "gold_after": 312,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 60,
+          "service_id": "roulette_one_use",
+          "outcome_assumption": "ROU-EMPTY",
+          "outcome_is_paper_example_not_guarantee_or_measured_frequency": true
+        },
+        {
+          "ordinal": 77,
+          "node_id": "REG-04-N05",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 312,
+          "gold_after": 312,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 60,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 78,
+          "node_id": "REG-04-N05",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 48,
+          "gold_before": 312,
+          "gold_after": 360,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 60,
+          "source_id": "RWD-REG-04-N05-GOLD"
+        },
+        {
+          "ordinal": 79,
+          "node_id": "REG-04-N05",
+          "kind": "actual_ground_shard_pickup_assumed",
+          "gold_delta": 0,
+          "gold_before": 360,
+          "gold_after": 360,
+          "repeat_shards_delta": 5,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 65,
+          "source_id": "RWD-REG-04-N05-FRAG"
+        },
+        {
+          "ordinal": 80,
+          "node_id": "REG-04-N06",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 360,
+          "gold_after": 360,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 65,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 81,
+          "node_id": "REG-04-N06",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 360,
+          "gold_after": 342,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 65,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-04-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 82,
+          "node_id": "REG-04-N07",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 342,
+          "gold_after": 342,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 65,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 83,
+          "node_id": "REG-04-N07",
+          "kind": "qualified_Boss_success_then_actual_ground_gold_pickup",
+          "gold_delta": 70,
+          "gold_before": 342,
+          "gold_after": 412,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 65,
+          "source_id": "RWD-BOS-MEC-001-GOLD"
+        },
+        {
+          "ordinal": 84,
+          "node_id": "REG-04-N07",
+          "kind": "qualified_Boss_direct_shards",
+          "gold_delta": 0,
+          "gold_before": 412,
+          "gold_after": 412,
+          "repeat_shards_delta": 10,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 77,
+          "source_ids": [
+            "RWD-BOS-MEC-001-FRAG",
+            "RWD-FIRST-BOS-MEC-001"
+          ]
+        },
+        {
+          "ordinal": 85,
+          "node_id": "REG-05-N01",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 412,
+          "gold_after": 412,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 77,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 86,
+          "node_id": "REG-05-N02",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 412,
+          "gold_after": 412,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 77,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 87,
+          "node_id": "REG-05-N02",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 24,
+          "gold_before": 412,
+          "gold_after": 436,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 77,
+          "source_id": "RWD-REG-05-N02-GOLD"
+        },
+        {
+          "ordinal": 88,
+          "node_id": "REG-05-N02",
+          "kind": "free_small_potion_produced_not_healed",
+          "gold_delta": 0,
+          "gold_before": 436,
+          "gold_after": 436,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 77,
+          "source_id": "RWD-REG-05-N02-REC",
+          "quantity": 1
+        },
+        {
+          "ordinal": 89,
+          "node_id": "REG-05-N03",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 436,
+          "gold_after": 436,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 77,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 90,
+          "node_id": "REG-05-N03",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 52,
+          "gold_before": 436,
+          "gold_after": 488,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 77,
+          "source_id": "RWD-REG-05-N03-GOLD"
+        },
+        {
+          "ordinal": 91,
+          "node_id": "REG-05-B01",
+          "kind": "selected_single_B_branch_clear_and_actual_pickups",
+          "gold_delta": 42,
+          "gold_before": 488,
+          "gold_after": 530,
+          "repeat_shards_delta": 3,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 80,
+          "source_ids": [
+            "RWD-REG-05-BCHOICE-GOLD",
+            "RWD-REG-05-BCHOICE-FRAG"
+          ],
+          "other_B_branch_selected": false
+        },
+        {
+          "ordinal": 92,
+          "node_id": "REG-05-N04",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 530,
+          "gold_after": 530,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 80,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 93,
+          "node_id": "REG-05-N04",
+          "kind": "spend",
+          "gold_delta": -8,
+          "gold_before": 530,
+          "gold_after": 522,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 80,
+          "service_id": "optional_intelligence",
+          "eligibility": "current_H01_unrevealed_generated_reachable; paid_before_free_clue_discovery"
+        },
+        {
+          "ordinal": 94,
+          "node_id": "REG-05-H01",
+          "kind": "actual_safe_discovery_interaction",
+          "gold_delta": 0,
+          "gold_before": 522,
+          "gold_after": 522,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 82,
+          "source_id": "RWD-DISCOVERY-REG-05-H01",
+          "account_discovery_unclaimed_assumption": true
+        },
+        {
+          "ordinal": 95,
+          "node_id": "REG-05-N04",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 522,
+          "gold_after": 504,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 82,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-05-N04-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 96,
+          "node_id": "REG-05-N04",
+          "kind": "spend",
+          "gold_delta": -30,
+          "gold_before": 504,
+          "gold_after": 474,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 82,
+          "service_id": "deterministic_choice_wheel",
+          "choice_id": "CHOICE-HEAL",
+          "quantity": 2,
+          "capacity_assumption": "whole_two_potion_bundle_fits_stack3_after_prior_legal_use_or_explicit_drop"
+        },
+        {
+          "ordinal": 97,
+          "node_id": "REG-05-N05",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 474,
+          "gold_after": 474,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 82,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 98,
+          "node_id": "REG-05-N05",
+          "kind": "actual_ground_gold_pickup_assumed",
+          "gold_delta": 56,
+          "gold_before": 474,
+          "gold_after": 530,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 82,
+          "source_id": "RWD-REG-05-N05-GOLD"
+        },
+        {
+          "ordinal": 99,
+          "node_id": "REG-05-N05",
+          "kind": "actual_ground_shard_pickup_assumed",
+          "gold_delta": 0,
+          "gold_before": 530,
+          "gold_after": 530,
+          "repeat_shards_delta": 6,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 88,
+          "source_id": "RWD-REG-05-N05-FRAG"
+        },
+        {
+          "ordinal": 100,
+          "node_id": "REG-05-N06",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 530,
+          "gold_after": 530,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 88,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 101,
+          "node_id": "REG-05-N06",
+          "kind": "spend",
+          "gold_delta": -18,
+          "gold_before": 530,
+          "gold_after": 512,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 88,
+          "service_id": "buy_small_potion",
+          "offer_id": "REG-05-N06-OFFER-ITM-REC-001",
+          "quantity": 1
+        },
+        {
+          "ordinal": 102,
+          "node_id": "REG-05-N07",
+          "kind": "mainline_arrival",
+          "gold_delta": 0,
+          "gold_before": 512,
+          "gold_after": 512,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 88,
+          "required_fee_gold": 0
+        },
+        {
+          "ordinal": 103,
+          "node_id": "REG-05-N07",
+          "kind": "qualified_Boss_direct_shards",
+          "gold_delta": 0,
+          "gold_before": 512,
+          "gold_after": 512,
+          "repeat_shards_delta": 12,
+          "first_shards_delta": 2,
+          "run_earned_shards_if_all_firsts_available": 102,
+          "source_ids": [
+            "RWD-BOS-DEM-001-FRAG",
+            "RWD-FIRST-BOS-DEM-001"
+          ]
+        },
+        {
+          "ordinal": 104,
+          "node_id": "REG-05-N07",
+          "kind": "victory_terminal_local_gold_ends",
+          "gold_delta": -512,
+          "gold_before": 512,
+          "gold_after": 0,
+          "repeat_shards_delta": 0,
+          "first_shards_delta": 0,
+          "run_earned_shards_if_all_firsts_available": 102,
+          "no_shard_second_credit": true
+        }
+      ],
+      "source_ref_ids": [
+        "SRC-D07-ROUTE",
+        "SRC-D08-SOURCES",
+        "SRC-D08-FACILITIES",
+        "SRC-D09-HUB",
+        "SRC-D09-SAMPLE",
+        "SRC-V2-COST"
+      ]
+    }
+  ],
+  "zero_wallet_mainline": {
+    "kind": "structural_affordability_only",
+    "all_mainline_forward_and_chapter_edges_free": true,
+    "required_mainline_nodes": 35,
+    "required_random_key_toll_purchase_or_research": false,
+    "example_actual_zero_wallet_checkpoint": "PLAN-EQUIP REG-01-N04买18小药并锻30后余额0，仍可免费走N05/N06/主Boss；只有可选消费需等新拾取。",
+    "starting20_is_removed_or_replaced_with0": false,
+    "claim": "零金币不造成主路通行/普通结局经济锁；零天赋或零消费实战通关仍未验证。",
+    "source_ref_ids": [
+      "SRC-D07-CONTRACT",
+      "SRC-D04-EXIT",
+      "SRC-D10-END"
+    ]
+  },
+  "recovery_and_HP": {
+    "formula_potion": "alive ? min(30*(1+clamp(healing_received_pct,-25,25)/100), current_missing_HP) : 0；且必须先合法携带/动作/提交。",
+    "formula_transition": "合法主线跨章且alive ? min(current_MaxHP*.20*(1+clamp(healing_received_pct,-25,25)/100),current_missing_HP) : 0；每条主线跨章一次，共四次。",
+    "not_sources": [
+      "N01入口满血刷新",
+      "N06到达或NPC对白即时治疗",
+      "可选Boss胜利跨章恢复",
+      "返回旧房/暂停/离线/CD重置",
+      "锻造/附魔/换甲抬最大HP直接补血"
+    ],
+    "nominal_limits_not_guarantees": {
+      "free5_small_potions_base_HP": 150,
+      "free5_if_all_used_efficiency075_to125_before_missing_HP": [
+        112.5,
+        187.5
+      ],
+      "all15_fixed_small_potions_base_HP": 450,
+      "all15_efficiency075_to125_before_missing_HP": [
+        337.5,
+        562.5
+      ],
+      "four_transitions_fixed_maxHP100_eff1_before_missing_HP": 80,
+      "zero_actual_healing_is_possible_if_unpicked_unused_or_no_legal_window": true
+    },
+    "chapter_damage_curve_boundary": "后章普通/精英伤害若按D14曲线增加，不增加D08药产出；实际损血还依赖减伤/闪避/命中/时间。HP模型用显式扣HP输入，不把该输入说成章伤害实测。",
+    "HP_cases": [
+      {
+        "id": "HP-A",
+        "name": "均匀低承伤：药量充足也有过量损耗",
+        "kind": "explicit_HP_input_sensitivity_not_enemy_simulation",
+        "max_HP": 100,
+        "healing_received_pct": 0,
+        "initial_HP": 100,
+        "assumed_damage_by_chapter_N02_N03_N05_Boss": [
+          [
+            10,
+            25,
+            30,
+            35
+          ],
+          [
+            10,
+            25,
+            30,
+            35
+          ],
+          [
+            10,
+            25,
+            30,
+            35
+          ],
+          [
+            10,
+            25,
+            30,
+            35
+          ],
+          [
+            10,
+            25,
+            30,
+            35
+          ]
+        ],
+        "assumptions": [
+          "损血输入是人为指定的实际HP扣除（已含减伤、章乘数与打法后果），不是敌人原始伤害、击中次数或实测。若采用D14后章伤害曲线，不再次乘本表；仍须重新实测承伤。",
+          "每次所列损血先判死亡；只有活着才用药/跨章恢复。三次用药分别来自本章N02保证产出、N04已买、N06已买。",
+          "假定药均实际拾取/携带且每次使用满足动作、缺血、相隔至少8活跃模拟秒和安全窗口；无DoT/其他治疗/吸血/药理/装备词条介入。",
+          "输入为单个聚合损血事件；实战同点多发、时间分布、无法安全饮用或未拾药可以更坏，不能由总量证明存活。"
+        ],
+        "survives_under_only_these_assumptions": true,
+        "final_HP": 65.0,
+        "actual_HP_lost_until_terminal": 500.0,
+        "actual_total_heal": 465.0,
+        "potion_overheal_discarded": 65.0,
+        "events": [
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N02",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 10,
+            "actual_HP_lost_until_zero": 10,
+            "HP_before": 100.0,
+            "HP_after": 90.0
+          },
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N02_after_clear",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 10.0,
+            "overheal_discarded": 20.0,
+            "HP_before": 90.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N03",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 25,
+            "actual_HP_lost_until_zero": 25,
+            "HP_before": 100.0,
+            "HP_after": 75.0
+          },
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N04_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 25.0,
+            "overheal_discarded": 5.0,
+            "HP_before": 75.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N05",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 30,
+            "actual_HP_lost_until_zero": 30,
+            "HP_before": 100.0,
+            "HP_after": 70.0
+          },
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N06_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 70.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N07",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 35,
+            "actual_HP_lost_until_zero": 35,
+            "HP_before": 100.0,
+            "HP_after": 65.0
+          },
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N07_to_next_chapter",
+            "kind": "once_transition_heal",
+            "nominal_after_efficiency": 20,
+            "actual_heal": 20.0,
+            "HP_before": 65.0,
+            "HP_after": 85.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N02",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 10,
+            "actual_HP_lost_until_zero": 10,
+            "HP_before": 85.0,
+            "HP_after": 75.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N02_after_clear",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 25.0,
+            "overheal_discarded": 5.0,
+            "HP_before": 75.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N03",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 25,
+            "actual_HP_lost_until_zero": 25,
+            "HP_before": 100.0,
+            "HP_after": 75.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N04_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 25.0,
+            "overheal_discarded": 5.0,
+            "HP_before": 75.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N05",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 30,
+            "actual_HP_lost_until_zero": 30,
+            "HP_before": 100.0,
+            "HP_after": 70.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N06_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 70.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N07",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 35,
+            "actual_HP_lost_until_zero": 35,
+            "HP_before": 100.0,
+            "HP_after": 65.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N07_to_next_chapter",
+            "kind": "once_transition_heal",
+            "nominal_after_efficiency": 20,
+            "actual_heal": 20.0,
+            "HP_before": 65.0,
+            "HP_after": 85.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N02",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 10,
+            "actual_HP_lost_until_zero": 10,
+            "HP_before": 85.0,
+            "HP_after": 75.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N02_after_clear",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 25.0,
+            "overheal_discarded": 5.0,
+            "HP_before": 75.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N03",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 25,
+            "actual_HP_lost_until_zero": 25,
+            "HP_before": 100.0,
+            "HP_after": 75.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N04_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 25.0,
+            "overheal_discarded": 5.0,
+            "HP_before": 75.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N05",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 30,
+            "actual_HP_lost_until_zero": 30,
+            "HP_before": 100.0,
+            "HP_after": 70.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N06_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 70.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N07",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 35,
+            "actual_HP_lost_until_zero": 35,
+            "HP_before": 100.0,
+            "HP_after": 65.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N07_to_next_chapter",
+            "kind": "once_transition_heal",
+            "nominal_after_efficiency": 20,
+            "actual_heal": 20.0,
+            "HP_before": 65.0,
+            "HP_after": 85.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N02",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 10,
+            "actual_HP_lost_until_zero": 10,
+            "HP_before": 85.0,
+            "HP_after": 75.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N02_after_clear",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 25.0,
+            "overheal_discarded": 5.0,
+            "HP_before": 75.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N03",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 25,
+            "actual_HP_lost_until_zero": 25,
+            "HP_before": 100.0,
+            "HP_after": 75.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N04_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 25.0,
+            "overheal_discarded": 5.0,
+            "HP_before": 75.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N05",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 30,
+            "actual_HP_lost_until_zero": 30,
+            "HP_before": 100.0,
+            "HP_after": 70.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N06_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 70.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N07",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 35,
+            "actual_HP_lost_until_zero": 35,
+            "HP_before": 100.0,
+            "HP_after": 65.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N07_to_next_chapter",
+            "kind": "once_transition_heal",
+            "nominal_after_efficiency": 20,
+            "actual_heal": 20.0,
+            "HP_before": 65.0,
+            "HP_after": 85.0
+          },
+          {
+            "chapter": 5,
+            "node_id": "REG-05-N02",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 10,
+            "actual_HP_lost_until_zero": 10,
+            "HP_before": 85.0,
+            "HP_after": 75.0
+          },
+          {
+            "chapter": 5,
+            "node_id": "REG-05-N02_after_clear",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 25.0,
+            "overheal_discarded": 5.0,
+            "HP_before": 75.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 5,
+            "node_id": "REG-05-N03",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 25,
+            "actual_HP_lost_until_zero": 25,
+            "HP_before": 100.0,
+            "HP_after": 75.0
+          },
+          {
+            "chapter": 5,
+            "node_id": "REG-05-N04_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 25.0,
+            "overheal_discarded": 5.0,
+            "HP_before": 75.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 5,
+            "node_id": "REG-05-N05",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 30,
+            "actual_HP_lost_until_zero": 30,
+            "HP_before": 100.0,
+            "HP_after": 70.0
+          },
+          {
+            "chapter": 5,
+            "node_id": "REG-05-N06_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 70.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 5,
+            "node_id": "REG-05-N07",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 35,
+            "actual_HP_lost_until_zero": 35,
+            "HP_before": 100.0,
+            "HP_after": 65.0
+          }
+        ],
+        "source_ref_ids": [
+          "SRC-D01-HEAL",
+          "SRC-D03-POTION",
+          "SRC-D03-CAPS",
+          "SRC-D08-FACILITIES"
+        ]
+      },
+      {
+        "id": "HP-B",
+        "name": "后章压力增加：买齐固定补给仍可能在终局归零",
+        "kind": "explicit_HP_input_sensitivity_not_enemy_simulation",
+        "max_HP": 100,
+        "healing_received_pct": 0,
+        "initial_HP": 100,
+        "assumed_damage_by_chapter_N02_N03_N05_Boss": [
+          [
+            10,
+            25,
+            30,
+            35
+          ],
+          [
+            12,
+            27,
+            32,
+            40
+          ],
+          [
+            14,
+            29,
+            34,
+            45
+          ],
+          [
+            16,
+            31,
+            36,
+            50
+          ],
+          [
+            18,
+            33,
+            38,
+            55
+          ]
+        ],
+        "assumptions": [
+          "损血输入是人为指定的实际HP扣除（已含减伤、章乘数与打法后果），不是敌人原始伤害、击中次数或实测。若采用D14后章伤害曲线，不再次乘本表；仍须重新实测承伤。",
+          "每次所列损血先判死亡；只有活着才用药/跨章恢复。三次用药分别来自本章N02保证产出、N04已买、N06已买。",
+          "假定药均实际拾取/携带且每次使用满足动作、缺血、相隔至少8活跃模拟秒和安全窗口；无DoT/其他治疗/吸血/药理/装备词条介入。",
+          "输入为单个聚合损血事件；实战同点多发、时间分布、无法安全饮用或未拾药可以更坏，不能由总量证明存活。"
+        ],
+        "survives_under_only_these_assumptions": false,
+        "final_HP": 0.0,
+        "actual_HP_lost_until_terminal": 599.0,
+        "actual_total_heal": 499.0,
+        "potion_overheal_discarded": 31.0,
+        "events": [
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N02",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 10,
+            "actual_HP_lost_until_zero": 10,
+            "HP_before": 100.0,
+            "HP_after": 90.0
+          },
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N02_after_clear",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 10.0,
+            "overheal_discarded": 20.0,
+            "HP_before": 90.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N03",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 25,
+            "actual_HP_lost_until_zero": 25,
+            "HP_before": 100.0,
+            "HP_after": 75.0
+          },
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N04_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 25.0,
+            "overheal_discarded": 5.0,
+            "HP_before": 75.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N05",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 30,
+            "actual_HP_lost_until_zero": 30,
+            "HP_before": 100.0,
+            "HP_after": 70.0
+          },
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N06_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 70.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N07",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 35,
+            "actual_HP_lost_until_zero": 35,
+            "HP_before": 100.0,
+            "HP_after": 65.0
+          },
+          {
+            "chapter": 1,
+            "node_id": "REG-01-N07_to_next_chapter",
+            "kind": "once_transition_heal",
+            "nominal_after_efficiency": 20,
+            "actual_heal": 20.0,
+            "HP_before": 65.0,
+            "HP_after": 85.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N02",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 12,
+            "actual_HP_lost_until_zero": 12,
+            "HP_before": 85.0,
+            "HP_after": 73.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N02_after_clear",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 27.0,
+            "overheal_discarded": 3.0,
+            "HP_before": 73.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N03",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 27,
+            "actual_HP_lost_until_zero": 27,
+            "HP_before": 100.0,
+            "HP_after": 73.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N04_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 27.0,
+            "overheal_discarded": 3.0,
+            "HP_before": 73.0,
+            "HP_after": 100.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N05",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 32,
+            "actual_HP_lost_until_zero": 32,
+            "HP_before": 100.0,
+            "HP_after": 68.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N06_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 68.0,
+            "HP_after": 98.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N07",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 40,
+            "actual_HP_lost_until_zero": 40,
+            "HP_before": 98.0,
+            "HP_after": 58.0
+          },
+          {
+            "chapter": 2,
+            "node_id": "REG-02-N07_to_next_chapter",
+            "kind": "once_transition_heal",
+            "nominal_after_efficiency": 20,
+            "actual_heal": 20.0,
+            "HP_before": 58.0,
+            "HP_after": 78.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N02",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 14,
+            "actual_HP_lost_until_zero": 14,
+            "HP_before": 78.0,
+            "HP_after": 64.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N02_after_clear",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 64.0,
+            "HP_after": 94.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N03",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 29,
+            "actual_HP_lost_until_zero": 29,
+            "HP_before": 94.0,
+            "HP_after": 65.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N04_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 65.0,
+            "HP_after": 95.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N05",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 34,
+            "actual_HP_lost_until_zero": 34,
+            "HP_before": 95.0,
+            "HP_after": 61.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N06_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 61.0,
+            "HP_after": 91.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N07",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 45,
+            "actual_HP_lost_until_zero": 45,
+            "HP_before": 91.0,
+            "HP_after": 46.0
+          },
+          {
+            "chapter": 3,
+            "node_id": "REG-03-N07_to_next_chapter",
+            "kind": "once_transition_heal",
+            "nominal_after_efficiency": 20,
+            "actual_heal": 20.0,
+            "HP_before": 46.0,
+            "HP_after": 66.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N02",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 16,
+            "actual_HP_lost_until_zero": 16,
+            "HP_before": 66.0,
+            "HP_after": 50.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N02_after_clear",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 50.0,
+            "HP_after": 80.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N03",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 31,
+            "actual_HP_lost_until_zero": 31,
+            "HP_before": 80.0,
+            "HP_after": 49.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N04_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 49.0,
+            "HP_after": 79.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N05",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 36,
+            "actual_HP_lost_until_zero": 36,
+            "HP_before": 79.0,
+            "HP_after": 43.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N06_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 43.0,
+            "HP_after": 73.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N07",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 50,
+            "actual_HP_lost_until_zero": 50,
+            "HP_before": 73.0,
+            "HP_after": 23.0
+          },
+          {
+            "chapter": 4,
+            "node_id": "REG-04-N07_to_next_chapter",
+            "kind": "once_transition_heal",
+            "nominal_after_efficiency": 20,
+            "actual_heal": 20.0,
+            "HP_before": 23.0,
+            "HP_after": 43.0
+          },
+          {
+            "chapter": 5,
+            "node_id": "REG-05-N02",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 18,
+            "actual_HP_lost_until_zero": 18,
+            "HP_before": 43.0,
+            "HP_after": 25.0
+          },
+          {
+            "chapter": 5,
+            "node_id": "REG-05-N02_after_clear",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 25.0,
+            "HP_after": 55.0
+          },
+          {
+            "chapter": 5,
+            "node_id": "REG-05-N03",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 33,
+            "actual_HP_lost_until_zero": 33,
+            "HP_before": 55.0,
+            "HP_after": 22.0
+          },
+          {
+            "chapter": 5,
+            "node_id": "REG-05-N04_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 22.0,
+            "HP_after": 52.0
+          },
+          {
+            "chapter": 5,
+            "node_id": "REG-05-N05",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 38,
+            "actual_HP_lost_until_zero": 38,
+            "HP_before": 52.0,
+            "HP_after": 14.0
+          },
+          {
+            "chapter": 5,
+            "node_id": "REG-05-N06_after_purchase",
+            "kind": "one_legal_small_potion_used",
+            "nominal_after_efficiency": 30,
+            "actual_heal": 30,
+            "overheal_discarded": 0,
+            "HP_before": 14.0,
+            "HP_after": 44.0
+          },
+          {
+            "chapter": 5,
+            "node_id": "REG-05-N07",
+            "kind": "assumed_postmitigation_HP_loss",
+            "assumed_incoming_HP_loss": 55,
+            "actual_HP_lost_until_zero": 44.0,
+            "HP_before": 44.0,
+            "HP_after": 0.0
+          }
+        ],
+        "source_ref_ids": [
+          "SRC-D01-HEAL",
+          "SRC-D03-POTION",
+          "SRC-D03-CAPS",
+          "SRC-D08-FACILITIES"
+        ]
+      }
+    ]
+  },
+  "failure_abandon_continue_cases": [
+    {
+      "id": "FAIL-BOSS-1",
+      "death_point": "REG-01-N07_before_qualified_success",
+      "assumptions": "此前主路金币/碎片拾全且Boss合法成功；本章N05已清。可选支路与旧账号余额不计；本章Boss死亡/双死都不成功。",
+      "repeat_shards_retained_if_current_N05_picked": 2,
+      "repeat_shards_retained_if_current_N05_unpicked": 0,
+      "extra_if_each_prior_Boss_first_unclaimed": 0,
+      "retained_if_current_N05_picked_and_prior_firsts_available": 2,
+      "current_Boss_new_shards": 0,
+      "gold_and_local_items_after_end": 0,
+      "source_ref_ids": [
+        "SRC-D04-PICKUP",
+        "SRC-D08-SOURCES",
+        "SRC-D13-COMMIT"
+      ]
+    },
+    {
+      "id": "FAIL-BOSS-2",
+      "death_point": "REG-02-N07_before_qualified_success",
+      "assumptions": "此前主路金币/碎片拾全且Boss合法成功；本章N05已清。可选支路与旧账号余额不计；本章Boss死亡/双死都不成功。",
+      "repeat_shards_retained_if_current_N05_picked": 9,
+      "repeat_shards_retained_if_current_N05_unpicked": 6,
+      "extra_if_each_prior_Boss_first_unclaimed": 2,
+      "retained_if_current_N05_picked_and_prior_firsts_available": 11,
+      "current_Boss_new_shards": 0,
+      "gold_and_local_items_after_end": 0,
+      "source_ref_ids": [
+        "SRC-D04-PICKUP",
+        "SRC-D08-SOURCES",
+        "SRC-D13-COMMIT"
+      ]
+    },
+    {
+      "id": "FAIL-BOSS-3",
+      "death_point": "REG-03-N07_before_qualified_success",
+      "assumptions": "此前主路金币/碎片拾全且Boss合法成功；本章N05已清。可选支路与旧账号余额不计；本章Boss死亡/双死都不成功。",
+      "repeat_shards_retained_if_current_N05_picked": 19,
+      "repeat_shards_retained_if_current_N05_unpicked": 15,
+      "extra_if_each_prior_Boss_first_unclaimed": 4,
+      "retained_if_current_N05_picked_and_prior_firsts_available": 23,
+      "current_Boss_new_shards": 0,
+      "gold_and_local_items_after_end": 0,
+      "source_ref_ids": [
+        "SRC-D04-PICKUP",
+        "SRC-D08-SOURCES",
+        "SRC-D13-COMMIT"
+      ]
+    },
+    {
+      "id": "FAIL-BOSS-4",
+      "death_point": "REG-04-N07_before_qualified_success",
+      "assumptions": "此前主路金币/碎片拾全且Boss合法成功；本章N05已清。可选支路与旧账号余额不计；本章Boss死亡/双死都不成功。",
+      "repeat_shards_retained_if_current_N05_picked": 32,
+      "repeat_shards_retained_if_current_N05_unpicked": 27,
+      "extra_if_each_prior_Boss_first_unclaimed": 6,
+      "retained_if_current_N05_picked_and_prior_firsts_available": 38,
+      "current_Boss_new_shards": 0,
+      "gold_and_local_items_after_end": 0,
+      "source_ref_ids": [
+        "SRC-D04-PICKUP",
+        "SRC-D08-SOURCES",
+        "SRC-D13-COMMIT"
+      ]
+    },
+    {
+      "id": "FAIL-BOSS-5",
+      "death_point": "REG-05-N07_before_qualified_success",
+      "assumptions": "此前主路金币/碎片拾全且Boss合法成功；本章N05已清。可选支路与旧账号余额不计；本章Boss死亡/双死都不成功。",
+      "repeat_shards_retained_if_current_N05_picked": 48,
+      "repeat_shards_retained_if_current_N05_unpicked": 42,
+      "extra_if_each_prior_Boss_first_unclaimed": 8,
+      "retained_if_current_N05_picked_and_prior_firsts_available": 56,
+      "current_Boss_new_shards": 0,
+      "gold_and_local_items_after_end": 0,
+      "source_ref_ids": [
+        "SRC-D04-PICKUP",
+        "SRC-D08-SOURCES",
+        "SRC-D13-COMMIT"
+      ]
+    },
+    {
+      "id": "FAIL-ABANDON-AFTER-CH3",
+      "assumptions": "前三章主路碎片拾全、三Boss合法成功后明确放弃。",
+      "repeat_shards_retained": 27,
+      "extra_if_three_firsts_available": 6,
+      "new_abandon_award": 0,
+      "gold_and_local_items_after_end": 0,
+      "source_ref_ids": [
+        "SRC-D04-PICKUP",
+        "SRC-D08-SOURCES",
+        "SRC-D13-COMMIT"
+      ]
+    },
+    {
+      "id": "CONTINUE-SAME-RUN",
+      "assumptions": "PLAN-EQUIP第三章Boss后最后完整代被正常保存。",
+      "saved_gold": 95,
+      "saved_repeat_shards": 27,
+      "continue_gold": 95,
+      "new_start_gold_award": 0,
+      "new_free_potion_or_transition_heal_from_load": 0,
+      "rule": "同Run沿原余额/物品/解锁快照/时间/随机与样品标志；未结束局不能局外改天赋或另开局。",
+      "source_ref_ids": [
+        "SRC-D09-HUB",
+        "SRC-D13-COMMIT"
+      ]
+    },
+    {
+      "id": "CONTINUE-FAILED-PUBLISH",
+      "assumptions": "最后完整代在本次碎片拾取前；新候选未发布就异常退出。",
+      "rule": "只能恢复最后完整已发布账号+Run；可能回退未发布收入/动作，不能拼接较新余额。5秒请求不是零损或绝对5秒保证。",
+      "source_ref_ids": [
+        "SRC-D13-COMMIT",
+        "SRC-D04-PICKUP"
+      ]
+    },
+    {
+      "id": "SAMPLE-BOUGHT-THEN-DEAD",
+      "assumptions": "已在合法N04现金买样品整代发布，再死亡。",
+      "rule": "局内物品结束，账号该研究样品已购保持true；无金币/研究碎片退款，不重获一次样品资格。没买结束则资格仍false但下局须重选。",
+      "source_ref_ids": [
+        "SRC-D09-SAMPLE",
+        "SRC-D13-COMMIT"
+      ]
+    }
+  ],
+  "progression": {
+    "talent_nodes": 9,
+    "talent_ranks": 27,
+    "talent_all_cost_shards": 280,
+    "research_nodes": 14,
+    "research_all_cost_shards": 130,
+    "combined_catalog_cost_shards": 410,
+    "talent_cost_rows": [
+      {
+        "id": "TAL-VIT",
+        "cost_by_next_rank": [
+          2,
+          6,
+          12
+        ],
+        "total": 20,
+        "prerequisites": []
+      },
+      {
+        "id": "TAL-GRD",
+        "cost_by_next_rank": [
+          6,
+          10,
+          16
+        ],
+        "total": 32,
+        "prerequisites": [
+          {
+            "talent_id": "TAL-VIT",
+            "minimum_owned_rank": 1
+          }
+        ]
+      },
+      {
+        "id": "TAL-MED",
+        "cost_by_next_rank": [
+          8,
+          14,
+          22
+        ],
+        "total": 44,
+        "prerequisites": [
+          {
+            "talent_id": "TAL-VIT",
+            "minimum_owned_rank": 2
+          }
+        ]
+      },
+      {
+        "id": "TAL-ATK",
+        "cost_by_next_rank": [
+          2,
+          6,
+          12,
+          20
+        ],
+        "total": 40,
+        "prerequisites": []
+      },
+      {
+        "id": "TAL-BRK",
+        "cost_by_next_rank": [
+          6,
+          10,
+          16
+        ],
+        "total": 32,
+        "prerequisites": [
+          {
+            "talent_id": "TAL-ATK",
+            "minimum_owned_rank": 1
+          }
+        ]
+      },
+      {
+        "id": "TAL-CRT",
+        "cost_by_next_rank": [
+          10,
+          18
+        ],
+        "total": 28,
+        "prerequisites": [
+          {
+            "talent_id": "TAL-ATK",
+            "minimum_owned_rank": 2
+          }
+        ]
+      },
+      {
+        "id": "TAL-MOV",
+        "cost_by_next_rank": [
+          2,
+          6,
+          12
+        ],
+        "total": 20,
+        "prerequisites": []
+      },
+      {
+        "id": "TAL-FOC",
+        "cost_by_next_rank": [
+          6,
+          10,
+          16
+        ],
+        "total": 32,
+        "prerequisites": [
+          {
+            "talent_id": "TAL-MOV",
+            "minimum_owned_rank": 1
+          }
+        ]
+      },
+      {
+        "id": "TAL-RLD",
+        "cost_by_next_rank": [
+          6,
+          10,
+          16
+        ],
+        "total": 32,
+        "prerequisites": [
+          {
+            "talent_id": "TAL-MOV",
+            "minimum_owned_rank": 1
+          }
+        ]
+      }
+    ],
+    "research_cost_rows": [
+      {
+        "id": "UNL-REC-002",
+        "cost_shards": 6,
+        "prerequisite_unlock_ids": [],
+        "sample_cash_gold": 33
+      },
+      {
+        "id": "UNL-REC-006",
+        "cost_shards": 10,
+        "prerequisite_unlock_ids": [
+          "UNL-REC-002"
+        ],
+        "sample_cash_gold": 19
+      },
+      {
+        "id": "UNL-BOO-005",
+        "cost_shards": 8,
+        "prerequisite_unlock_ids": [],
+        "sample_cash_gold": 16
+      },
+      {
+        "id": "UNL-BOO-006",
+        "cost_shards": 8,
+        "prerequisite_unlock_ids": [],
+        "sample_cash_gold": 16
+      },
+      {
+        "id": "UNL-THR-004",
+        "cost_shards": 8,
+        "prerequisite_unlock_ids": [],
+        "sample_cash_gold": 16
+      },
+      {
+        "id": "UNL-THR-006",
+        "cost_shards": 10,
+        "prerequisite_unlock_ids": [
+          "UNL-THR-004"
+        ],
+        "sample_cash_gold": 18
+      },
+      {
+        "id": "UNL-THR-005",
+        "cost_shards": 8,
+        "prerequisite_unlock_ids": [],
+        "sample_cash_gold": 18
+      },
+      {
+        "id": "UNL-TRP-003",
+        "cost_shards": 8,
+        "prerequisite_unlock_ids": [],
+        "sample_cash_gold": 16
+      },
+      {
+        "id": "UNL-TRP-004",
+        "cost_shards": 10,
+        "prerequisite_unlock_ids": [
+          "UNL-TRP-003"
+        ],
+        "sample_cash_gold": 18
+      },
+      {
+        "id": "UNL-PAS-005",
+        "cost_shards": 12,
+        "prerequisite_unlock_ids": [],
+        "sample_cash_gold": 40
+      },
+      {
+        "id": "UNL-PAS-006",
+        "cost_shards": 12,
+        "prerequisite_unlock_ids": [],
+        "sample_cash_gold": 40
+      },
+      {
+        "id": "UNL-PAS-008",
+        "cost_shards": 16,
+        "prerequisite_unlock_ids": [
+          "UNL-PAS-006"
+        ],
+        "sample_cash_gold": 40
+      },
+      {
+        "id": "UNL-FUN-003",
+        "cost_shards": 8,
+        "prerequisite_unlock_ids": [],
+        "sample_cash_gold": 18
+      },
+      {
+        "id": "UNL-FUN-005",
+        "cost_shards": 6,
+        "prerequisite_unlock_ids": [],
+        "sample_cash_gold": 27
+      }
+    ],
+    "early_example": "第一章主路普通碎片2已拾且Boss首次合法成功4+2，新增8可局外买根基一级2＋UNL-REC-002研究6；若Boss未成功仅已拾2，不算8。",
+    "no_fixed_run_count_or_duration_claim": true,
+    "earnings_equation": "当前余额=旧余额+本次实际已入账奖励-实际购买+有效原实付退款；只退款不增加earned_total或新永久财富。",
+    "sample_boundary": "研究是解锁资格而非赠物；每研究现金样品账号最多成功买一次，死亡/退款天赋不恢复，未购买不得把报价当已持物。样品不增加700金币或60重复主线碎片。",
+    "active_run_lock": "暂停/继续/故障仍锁局外购买/全退/样品选择/新局；只新Run读取新成长快照。"
+  },
+  "opportunity_cost": [
+    {
+      "id": "COST-START48",
+      "comparison": "第一章首次N04拾全时只有48币：18小药+30初锻恰0；20觉醒+30初锻需50，不能同刻全买。",
+      "numbers": {
+        "available": 48,
+        "small_plus_forge": 48,
+        "awaken_plus_forge": 50
+      }
+    },
+    {
+      "id": "COST-DUALFORGE",
+      "comparison": "已有两件+0双装备全锻+3需340；本审计固定买+1甲43后，剑0→3为170、甲1→3为140，买甲与锻造总353。原免费掉甲不是保证。",
+      "numbers": {
+        "dual0to3": 340,
+        "fixed_armor_purchase_and_sword_armor_forge": 353
+      }
+    },
+    {
+      "id": "COST-ENCHANT",
+      "comparison": "觉醒20+I→V四次升阶480=500；与已有两件+0双锻340共840，超过700且未含药180。升阶需合法区间，随机包不保证收益。",
+      "numbers": {
+        "awaken": 20,
+        "all_upgrade": 480,
+        "awaken_to_V": 500,
+        "dual_forge_plus_to_V": 840,
+        "with10_potions": 1020
+      }
+    },
+    {
+      "id": "COST-OPTIONAL",
+      "comparison": "所有支路/可选Boss额外地面币220需额外战斗和实际拾取；两门票55，净增最多式165未含情报/其他消费。第四章35门票已发现后无新经济收益，仍可跳过。",
+      "numbers": {
+        "extra_gold": 220,
+        "tolls": 55,
+        "net_before_other_spends": 165
+      }
+    },
+    {
+      "id": "COST-RANDOM",
+      "comparison": "轮盘一次20，10%出40币、30%小药、30%炸弹、30%empty；金币输出期望4不等每转返4，物品标价不当现金。确定转轮30是明确整包而非增加主线收入。",
+      "numbers": {
+        "roulette_fee": 20,
+        "expected_gold_output": 4,
+        "choice_fee": 30
+      }
+    },
+    {
+      "id": "COST-SAMPLE",
+      "comparison": "UNL-REC-002先付研究6碎片，之后可选样品再付33金币；不是研究后免费大药。功能样品票可节省原一次服务2/3币，但不增服务次数、不可无限重复、不变成碎片收益。",
+      "numbers": {
+        "research": 6,
+        "large_potion_sample_gold": 33
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": "ECON-F01",
+      "severity": "assumption_gap",
+      "fact": "旧BUD-001/002列甲强化但未列购甲；N03固定产装备不等固定产甲。",
+      "minimal_revision": "在D14审计/主稿补已合法取得相应甲的条件；本轮固定已知商人43币甲方案给出可支付替代，不改旧收益/概率。"
+    },
+    {
+      "id": "ECON-F02",
+      "severity": "runtime_validation_required",
+      "fact": "固定5免费+10付费药是产出/报价，不是实际治疗；同点死亡、满包、未拾、8sCD和动作窗口都能减少用量。",
+      "minimal_revision": "D14以可检查HP假设/未来承伤与饮用窗口验收表述；不凭总药量提高章伤害或宣称保证通关。"
+    },
+    {
+      "id": "ECON-F03",
+      "severity": "boundary",
+      "fact": "每小时碎片/几局买满缺少实测时长和成功率。",
+      "minimal_revision": "仅列280/130/410与已入账公式，不给固定刷取局数/时长承诺。"
+    }
+  ],
+  "verification": {
+    "kind": "reference_arithmetic_and_source_identity_only",
+    "source_hashes_captured": true,
+    "all35_main_nodes_covered_per_plan": true,
+    "all_event_gold_balances_nonnegative": true,
+    "start20_exactly_once_per_plan": true,
+    "three_prior_D08_ordered_wallets_recomputed": true,
+    "three_new_full_run_plans_recomputed": true,
+    "two_explicit_HP_input_cases_recomputed": true,
+    "gameplay_simulation_or_runtime_playtest": false,
+    "claims_not_verified": [
+      "零天赋/零消费实际通关",
+      "章节通过率/平均局时",
+      "药实际可拾/可饮/实际治疗分布",
+      "设施选择最优/金币闲置率",
+      "实际存档故障恢复与D14章伤害曲线"
+    ]
+  }
+}

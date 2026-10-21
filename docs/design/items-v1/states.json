@@ -1,0 +1,14 @@
+{
+  "schema_version":"1.0",
+  "design_date":"2026-10-13",
+  "source_event":"EV-021",
+  "status":"design_only",
+  "runtime_implemented":false,
+  "states":[
+    {"id":"burn","name":"燃烧","kind":"dot","magnitude_cap":6,"unit":"magic_damage_per_s","duration_s":3,"tick_interval_s":1,"first_tick_delay_s":1,"stack":"stronger_replace_equal_refresh_weaker_ignore","refresh_preserves_next_tick":true,"tick_at_expiry_inclusive":true,"target_defense_read":"at_each_tick","crits_lifesteals_or_staggers":false,"blocked_by_direct_iframes":false,"cleansable":true},
+    {"id":"slow","name":"寒缓","kind":"movement_debuff","magnitude_cap":25,"unit":"percent","duration_s":2,"boss_magnitude_multiplier":0.5,"stack":"stronger_replace_equal_refresh_weaker_ignore","affects_attack_speed":false,"affects_dodge":false,"cleansable":true},
+    {"id":"shock","name":"电震","kind":"instant_additional_stagger","magnitude_cap":10,"unit":"points","duration_s":0,"target_icd_s":2,"boss_target_icd_s":4,"stack":"same_attack_take_max_intrinsic_or_affix","blocked_by_poise_protection":true,"refused_extends_icd":false,"forces_stun":false,"cleansable":false},
+    {"id":"regen_hp","name":"生命续回","kind":"hot","magnitude_and_duration":"per_item","stack":"refuse_reapply_while_active","efficiency_read":"current_at_each_tick","first_tick":"after_one_full_interval","overheal":"discard","persists_across_rooms":true,"revives":false,"cleansable":false},
+    {"id":"temporary_tonic","name":"药剂套餐","kind":"bound_stat_bundle","magnitude_and_duration":"per_item","stack":"refuse_any_tonic_while_active","positive_negative_bound":true,"partial_cleanse":false,"persists_across_rooms":true,"cleansable":false}
+  ]
+}

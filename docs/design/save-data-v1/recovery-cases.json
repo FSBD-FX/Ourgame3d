@@ -1,0 +1,382 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "module": "D-13",
+  "source_event": "EV-031",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposal_not_individually_user_approved",
+  "scope": "future_runtime_crash_io_input_migration_acceptance; abstract_reference_vectors_are_not_disk_or_UE_tests",
+  "future_cases": [
+    {
+      "id": "SAVECASE-01",
+      "setup": "多段攻击首击后暂停退出，第二段未发",
+      "expected": "保持同AttackID、锁定属性、首击记录与原剩余schedule；继续不重复首击、不免除实际第二击",
+      "evidence_required": "录屏+事件序列+保存前后状态",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-02",
+      "setup": "攻击前摇39%与41%各保存",
+      "expected": "未锁/已锁属性分别恢复，绝对时轴不重起；到40%只发生一次属性锁定",
+      "evidence_required": "锁定快照与事件trace",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-03",
+      "setup": "带燃烧next_tick、寒缓、专注恢复等待与CD离线一小时",
+      "expected": "离线不进仿真时间；继续沿同deadline，无回血/提前tick/净化/CD刷新",
+      "evidence_required": "状态时间差与离线时间对照",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-04",
+      "setup": "跳跃最高点、空中主攻已用、闪避无敌段中断进程",
+      "expected": "精确位置/高度/速度/本离地主攻额度和无敌剩余恢复，无免费第二次空攻或新无敌",
+      "evidence_required": "输入录屏及状态dump",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-05",
+      "setup": "普通怪死亡后其旧弹仍飞行",
+      "expected": "保留已死owner tombstone及旧弹剩余轨迹/寿命/命中记录，死亡不清弹",
+      "evidence_required": "重载前后敌弹事件",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-06",
+      "setup": "石蝠受伤中断下降或尚未完成低位窗口",
+      "expected": "继续下降义务；实际合法Z20后完整原低位剩余窗口，不提前飞走或复活",
+      "evidence_required": "敌状态与Ztrace",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-07",
+      "setup": "石骑锁线冲锋/失手后摇中保存",
+      "expected": "锁后不重瞄，不缩后摇、不返还CD、不把位置重放到起点",
+      "evidence_required": "锁线与行动时间trace",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-08",
+      "setup": "未来组已预留且一个入口正预告，深入触发已锁存",
+      "expected": "同Room/Group/Slot/SpawnID、配额和余时；不重新扫线取消触发、不重抽、不增收益",
+      "evidence_required": "manifest/预留/入口trace",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-09",
+      "setup": "出生重验失败后6秒备用/12秒故障边界读档",
+      "expected": "沿剩余重试时钟和原备用选项，继续本身不提供免费换位/清怪",
+      "evidence_required": "失败记录与时钟",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-10",
+      "setup": "当前批清但future义务或旧弹/DoT仍在",
+      "expected": "不误判整房clear或完整安全；原普通免费出口条件仍可独立成立",
+      "evidence_required": "房间义务和交互UI",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-11",
+      "setup": "Boss跨阈值提示、破韧保护/电震ICD中读档",
+      "expected": "pending/latest阶段、提示余时和控制时钟保留；无回血锁血重清CD",
+      "evidence_required": "Boss阶段控制trace",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-12",
+      "setup": "Boss与玩家同点死亡，强制保存中断",
+      "expected": "只恢复失败终态；不因Boss尸体补过关/首次/剧情奖励",
+      "evidence_required": "候选及提交receipt",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-13",
+      "setup": "金币或碎片拾取已发布但确认响应丢失",
+      "expected": "同源不重出，账号/局内金额与奖励凭据同代；重请求返回原结果",
+      "evidence_required": "事件ID和完整bundle",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-14",
+      "setup": "样品购买扣局内金币/交付/永久flag提交任一阶段断电模拟",
+      "expected": "只得到全旧或全新同代，不出现只扣钱/只拿样品/可再次购买",
+      "evidence_required": "故障注入+磁盘代与归属",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-15",
+      "setup": "装备替换/消耗品提交/药物治疗预算使用后读档",
+      "expected": "唯一归属、数量、原来源治疗剩额及HP保持，不双装备、不回血或返还已用消耗",
+      "evidence_required": "实例图/来源预算",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-16",
+      "setup": "附魔、轮盘或箱结果已揭示再退出/开面板",
+      "expected": "同来源/使用ordinal/InstanceRevision结果与RNG游标不变；改OperationID也不能重抽同一次",
+      "evidence_required": "抽样和提交日志",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-17",
+      "setup": "全退天赋后丢响应；再购买同等级并再次退款",
+      "expected": "各实际实付凭据各退一次；旧退款墓碑保留，不按新价格猜退款",
+      "evidence_required": "碎片守恒与票据",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-18",
+      "setup": "创建新局后丢响应，pending样品已清空",
+      "expected": "恢复原RunID和原冻结快照，起始武器/20币只初始化一次；不创建第二局",
+      "evidence_required": "新局事务receipt",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-19",
+      "setup": "最终通关已提交，结算页未显示时重启",
+      "expected": "回到已有终局记录；不重发碎片或重新生成终Boss；展示不改事实",
+      "evidence_required": "终局+账号事实+UI",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-20",
+      "setup": "跨房或跨章恢复保存中崩溃",
+      "expected": "房间/路线锁/消费门票/20%等原合法过渡恢复及其凭据同代，只处理一次；旧攻击清理按D04",
+      "evidence_required": "迁移事务+HP/库存",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-21",
+      "setup": "写满磁盘、只读目录或hash校验失败",
+      "expected": "明确故障暂停，取消手动交易不撤真实伤害；强制奖励/死亡不得取消；保存失败不宣称已保存",
+      "evidence_required": "写失败屏幕及状态对比",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-22",
+      "setup": "最高published代bundle损坏但旧代可用",
+      "expected": "进入恢复说明，不自动混合；显式整代恢复显示账号与本局回退影响",
+      "evidence_required": "双代文件/恢复审计",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-23",
+      "setup": "未知较新schema或缺旧content规则，旧代能兼容",
+      "expected": "保原件并阻止覆盖，不偷偷选旧兼容代；迁移必须先复制验证",
+      "evidence_required": "版本界面与原件hash",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-24",
+      "setup": "只改变屏幕投影Y手性；另一测试真正改变世界坐标",
+      "expected": "前者不盲目取反世界Y；后者完整变换实体/速度/瞄线/区域/入口并重验，不仅改玩家位置",
+      "evidence_required": "迁移前后坐标对照",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-25",
+      "setup": "输入键/手柄扳机一直按着直到继续",
+      "expected": "恢复先暂停/松开输入，再接纳新意图；不穿透确认攻击跳跃购买",
+      "evidence_required": "实机键鼠手柄录屏",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-26",
+      "setup": "保存于暂停整理一个未执行意图/设施预览",
+      "expected": "未提交intent作废，回到安全查看并重新确认，不自动真动作扣费；已提交结果从receipt还原",
+      "evidence_required": "UI/库存操作trace",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-27",
+      "setup": "D07显式故障修复再读档",
+      "expected": "修复OperationID一次，保同seed/已死槽及既得奖励；按既有修复清理范围，普通继续不得走修复分支",
+      "evidence_required": "修复前后清单",
+      "runtime_tested": false
+    },
+    {
+      "id": "SAVECASE-28",
+      "setup": "两个进程写同ProfileID；或未来合作请求重复/跨owner",
+      "expected": "单人写入序列只有一权威；第二写者拒绝/只读，不覆盖；合作规则尚待专项设计不能默认共享",
+      "evidence_required": "双进程测试/未来专项验收",
+      "runtime_tested": false
+    }
+  ],
+  "commit_reference_vectors": [
+    {
+      "id": "PUB-01",
+      "crash_after": "complete_event_batch",
+      "expected_generation": 1
+    },
+    {
+      "id": "PUB-02",
+      "crash_after": "stage_full_candidate",
+      "expected_generation": 1
+    },
+    {
+      "id": "PUB-03",
+      "crash_after": "validate_candidate",
+      "expected_generation": 1
+    },
+    {
+      "id": "PUB-04",
+      "crash_after": "write_inactive_temporary_bundle",
+      "expected_generation": 1
+    },
+    {
+      "id": "PUB-05",
+      "crash_after": "verify_and_install_inactive_bundle",
+      "expected_generation": 1
+    },
+    {
+      "id": "PUB-06",
+      "crash_after": "publish_new_marker",
+      "expected_generation": 2
+    },
+    {
+      "id": "PUB-07",
+      "crash_after": "acknowledge_and_install_result",
+      "expected_generation": 2
+    }
+  ],
+  "load_reference_vectors": [
+    {
+      "id": "LOAD-01",
+      "markers": [
+        {
+          "generation": 1,
+          "marker_valid": true,
+          "bundle_valid": true,
+          "supported": true
+        }
+      ],
+      "expected": "LOAD_1"
+    },
+    {
+      "id": "LOAD-02",
+      "markers": [
+        {
+          "generation": 1,
+          "marker_valid": true,
+          "bundle_valid": true,
+          "supported": true
+        },
+        {
+          "generation": 2,
+          "marker_valid": true,
+          "bundle_valid": true,
+          "supported": true
+        }
+      ],
+      "expected": "LOAD_2"
+    },
+    {
+      "id": "LOAD-03",
+      "markers": [
+        {
+          "generation": 1,
+          "marker_valid": true,
+          "bundle_valid": true,
+          "supported": true
+        },
+        {
+          "generation": 2,
+          "marker_valid": true,
+          "bundle_valid": false,
+          "supported": true
+        }
+      ],
+      "expected": "RECOVERY_REQUIRED"
+    },
+    {
+      "id": "LOAD-04",
+      "markers": [
+        {
+          "generation": 1,
+          "marker_valid": true,
+          "bundle_valid": true,
+          "supported": true
+        },
+        {
+          "generation": 2,
+          "marker_valid": true,
+          "bundle_valid": true,
+          "supported": false
+        }
+      ],
+      "expected": "VERSION_BLOCKED"
+    },
+    {
+      "id": "LOAD-05",
+      "markers": [
+        {
+          "generation": 1,
+          "marker_valid": true,
+          "bundle_valid": true,
+          "supported": true
+        },
+        {
+          "generation": null,
+          "marker_valid": false,
+          "bundle_valid": false,
+          "supported": true
+        }
+      ],
+      "expected": "RECOVERY_REQUIRED"
+    },
+    {
+      "id": "LOAD-06",
+      "markers": [
+        {
+          "generation": 2,
+          "marker_valid": true,
+          "bundle_valid": true,
+          "supported": true,
+          "digest": "a"
+        },
+        {
+          "generation": 2,
+          "marker_valid": true,
+          "bundle_valid": true,
+          "supported": true,
+          "digest": "b"
+        }
+      ],
+      "expected": "RECOVERY_REQUIRED"
+    }
+  ],
+  "transaction_reference_scenarios": [
+    {
+      "id": "TXREF-01",
+      "kind": "matching_retry",
+      "expected_balance": 6,
+      "expected_item_count": 1,
+      "expected": "same_result"
+    },
+    {
+      "id": "TXREF-02",
+      "kind": "changed_payload_retry",
+      "expected_balance": 6,
+      "expected_item_count": 1,
+      "expected": "reject_digest_conflict"
+    },
+    {
+      "id": "TXREF-03",
+      "kind": "new_operation_same_reward_source",
+      "expected_account_shards": 13,
+      "expected": "source_already_consumed"
+    },
+    {
+      "id": "TXREF-04",
+      "kind": "cancel_manual_keep_real_damage_and_mandatory_reward",
+      "expected_HP": 35,
+      "expected_balance": 10,
+      "expected_account_shards": 13,
+      "expected": "rebuild_and_publish_mandatory_remainder"
+    }
+  ]
+}

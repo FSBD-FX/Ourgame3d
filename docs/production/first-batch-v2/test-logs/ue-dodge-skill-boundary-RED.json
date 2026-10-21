@@ -1,0 +1,1063 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "符朔八道",
+			"instance": "6DF7AD4E4B6A10B5FC5D6AA8F4C02849",
+			"instanceName": "符朔八道-33516",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (24H2) [10.0.26100.4946] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 3060 Laptop GPU",
+			"cPUModel": "12th Gen Intel(R) Core(TM) i7-12700H",
+			"rAMInGB": 16,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.10.14-18.49.38",
+	"succeeded": 22,
+	"succeededWithWarnings": 0,
+	"failed": 6,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.58970600366592407,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "DepthFacingAndHeight",
+			"fullTestPath": "CodexDungeon.Combat.DepthFacingAndHeight",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.015842597931623459,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ExpiredIframesDoNotConsumeReceipt",
+			"fullTestPath": "CodexDungeon.Content.ArmorAdmission.ExpiredIframesDoNotConsumeReceipt",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.017473697662353516,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MovementCancelsPendingArmor",
+			"fullTestPath": "CodexDungeon.Content.ArmorAdmission.MovementCancelsPendingArmor",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.016644500195980072,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "RoomTransitionPreservesFocusAndIframes",
+			"fullTestPath": "CodexDungeon.Content.ArmorAdmission.RoomTransitionPreservesFocusAndIframes",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.016611397266387939,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "AllDueHitsResolve",
+			"fullTestPath": "CodexDungeon.Content.DamageBatch.AllDueHitsResolve",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.016576997935771942,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "LowFpsAirWindowUsesMotionTime",
+			"fullTestPath": "CodexDungeon.Content.DamageBatch.LowFpsAirWindowUsesMotionTime",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.01709810271859169,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "PreexistingIframesStillBlock",
+			"fullTestPath": "CodexDungeon.Content.DamageBatch.PreexistingIframesStillBlock",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.016851000487804413,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "CompositeCancelAndActionExclusion",
+			"fullTestPath": "CodexDungeon.Content.DodgeAdapter.CompositeCancelAndActionExclusion",
+			"state": "Fail",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.07354070246219635,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Legal dodge atomically replaces uncommitted armor action' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 132,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Successful dodge cancels pending equip time' to be 0.000000, but it was 0.250000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 133,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Canceled armor cannot later commit' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 133,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Initial dodge establishes cooldown' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 137,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Fresh dodge accepts after complete primary' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 164,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Only accepted dodge clears ground primary chain' to be false.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 164,
+					"timestamp": "2026.10.14-18.49.37"
+				}
+			],
+			"warnings": 0,
+			"errors": 6,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "DirectIntervalsAndResolvedInterrupt",
+			"fullTestPath": "CodexDungeon.Content.DodgeAdapter.DirectIntervalsAndResolvedInterrupt",
+			"state": "Fail",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.027967397123575211,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Damage-boundary dodge accepted' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 183,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Nonbreaking direct HP loss does not cancel dodge' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 186,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Damage-boundary dodge accepted' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 183,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Actual direct contact respects inside/outside dodge interval' to be 100.000000, but it was 99.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 186,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Nonbreaking direct HP loss does not cancel dodge' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 186,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Damage-boundary dodge accepted' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 183,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Actual direct contact respects inside/outside dodge interval' to be 100.000000, but it was 99.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 186,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Nonbreaking direct HP loss does not cancel dodge' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 186,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Damage-boundary dodge accepted' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 183,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Nonbreaking direct HP loss does not cancel dodge' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 186,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Historical exact .06 endpoint is protected' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 192,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'True early break records interruption without refunding cooldown' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 200,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Actual death closes dodge and preserves its cooldown' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 207,
+					"timestamp": "2026.10.14-18.49.37"
+				}
+			],
+			"warnings": 0,
+			"errors": 13,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "FixedMotionAndIdlePositionHandoff",
+			"fullTestPath": "CodexDungeon.Content.DodgeAdapter.FixedMotionAndIdlePositionHandoff",
+			"state": "Fail",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.065914198756217957,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Fresh grounded dodge starts with every armor' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 69,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Every armor keeps fixed185cm dodge distance' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 71,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Full dodge ends at.4 and keeps start+1.2 cooldown' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 74,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Fresh grounded dodge starts with every armor' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 69,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Every armor keeps fixed185cm dodge distance' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 71,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Full dodge ends at.4 and keeps start+1.2 cooldown' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 74,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Fresh grounded dodge starts with every armor' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 69,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Every armor keeps fixed185cm dodge distance' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 71,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Full dodge ends at.4 and keeps start+1.2 cooldown' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 74,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Fresh grounded dodge starts with every armor' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 69,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Every armor keeps fixed185cm dodge distance' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 71,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Full dodge ends at.4 and keeps start+1.2 cooldown' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 74,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Fresh grounded dodge starts with every armor' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 69,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Every armor keeps fixed185cm dodge distance' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 71,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Full dodge ends at.4 and keeps start+1.2 cooldown' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 74,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Diagonal normalized path has185 total length' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 80,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'No-input dodge uses its start facing' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 85,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Resolved idle position is handed off with a real dedicated receipt' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 94,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Dodge accepts the resolved new actor origin' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 95,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'First dodge starts at26.5 rather than reconstructing at zero' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 97,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Post-dodge idle movement changes position without washing cooldown' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 101,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Next dodge reuses the same persistent kernel' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 104,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Second action freezes latest handed-off origin and monotonic IDs' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 104,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Real player18+stone24 body stops dodge at58' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 112,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Body block retains original full action and CD' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 112,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Registered world wall stops swept dodge at27' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 118,
+					"timestamp": "2026.10.14-18.49.37"
+				}
+			],
+			"warnings": 0,
+			"errors": 26,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "StoneTimedWindowResumesAfterProtection",
+			"fullTestPath": "CodexDungeon.Content.DodgeAdapter.StoneTimedWindowResumesAfterProtection",
+			"state": "Fail",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.016240999102592468,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'First real legal hit is protection end, not geometric entry' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 248,
+					"timestamp": "2026.10.14-18.49.37"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Real A2 geometry cannot hit through a fully protected window' to be 0, but it was 1.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonDodgeAdapterTests.cpp",
+					"lineNumber": 243,
+					"timestamp": "2026.10.14-18.49.37"
+				}
+			],
+			"warnings": 0,
+			"errors": 2,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ChargeQueryHasNoSideEffects",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightDriver.ChargeQueryHasNoSideEffects",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.016900599002838135,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "DormancyAndResolvedDamage",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightDriver.DormancyAndResolvedDamage",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.016858696937561035,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MovingTargetContinuousContact",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightDriver.MovingTargetContinuousContact",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.015843499451875687,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ShieldPoiseResumeAndReward",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightDriver.ShieldPoiseResumeAndReward",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.017749100923538208,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "StaticWallAndBodyStops",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightDriver.StaticWallAndBodyStops",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.017203498631715775,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "SkillRespectsFullRecoveryAndClearsOnlyAcceptedChain",
+			"fullTestPath": "CodexDungeon.Content.WeaponActionsAdapter.SkillRespectsFullRecoveryAndClearsOnlyAcceptedChain",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.016888901591300964,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "SwordSecondaryRealWindowAndBlockedStep",
+			"fullTestPath": "CodexDungeon.Content.WeaponActionsAdapter.SwordSecondaryRealWindowAndBlockedStep",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.01784379780292511,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "LastWindowBatchLOSBecomesClear",
+			"fullTestPath": "CodexDungeon.Content.WeaponSkillBoundaryReview.LastWindowBatchLOSBecomesClear",
+			"state": "Fail",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.017555400729179382,
+			"dateTime": "2026.10.14-18.49.37",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "Actual last batch [0.296000137925,0.301000137813], LOS clear before 0.296838712349, active end 0.300000000000, playerY 0.662500",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.14-18.49.38"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Skill hits a target whose real LOS becomes clear in the remaining legal final window' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonSkillBoundaryReviewTests.cpp",
+					"lineNumber": 216,
+					"timestamp": "2026.10.14-18.49.38"
+				}
+			],
+			"warnings": 0,
+			"errors": 1,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "RealPoiseContactBeforeEmissionSameBatch",
+			"fullTestPath": "CodexDungeon.Content.WeaponSkillBoundaryReview.RealPoiseContactBeforeEmissionSameBatch",
+			"state": "Fail",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.017120599746704102,
+			"dateTime": "2026.10.14-18.49.38",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "Real contact=1.550000000000, skill emission=1.551000293158, batch=[1.549000031315,1.554000031203]",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.14-18.49.38"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Earlier actual poise break prevents future .20 forward-step emission' to be false.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonSkillBoundaryReviewTests.cpp",
+					"lineNumber": 167,
+					"timestamp": "2026.10.14-18.49.38"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Earlier actual poise break leaves actor at pre-emission position' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonSkillBoundaryReviewTests.cpp",
+					"lineNumber": 168,
+					"timestamp": "2026.10.14-18.49.38"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Earlier actual poise break prevents future skill damage to knight' to be 110.000000, but it was 87.931030 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonSkillBoundaryReviewTests.cpp",
+					"lineNumber": 169,
+					"timestamp": "2026.10.14-18.49.38"
+				}
+			],
+			"warnings": 0,
+			"errors": 3,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ArmorSwapAndStats",
+			"fullTestPath": "CodexDungeon.Content.ArmorSwapAndStats",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.017065200954675674,
+			"dateTime": "2026.10.14-18.49.38",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "DeathPresentationAfterTerminalFreeze",
+			"fullTestPath": "CodexDungeon.Content.DeathPresentationAfterTerminalFreeze",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.016280896961688995,
+			"dateTime": "2026.10.14-18.49.38",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "HitAndPickupCannotSkipRecovery",
+			"fullTestPath": "CodexDungeon.Content.HitAndPickupCannotSkipRecovery",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.017126701772212982,
+			"dateTime": "2026.10.14-18.49.38",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MeleeChainTiming",
+			"fullTestPath": "CodexDungeon.Content.MeleeChainTiming",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.016656901687383652,
+			"dateTime": "2026.10.14-18.49.38",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "SpearNearestAndDedup",
+			"fullTestPath": "CodexDungeon.Content.SpearNearestAndDedup",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.017388898879289627,
+			"dateTime": "2026.10.14-18.49.38",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "StoneFeedbackGameIntegration",
+			"fullTestPath": "CodexDungeon.Content.StoneFeedbackGameIntegration",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.016572300344705582,
+			"dateTime": "2026.10.14-18.49.38",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "StoneKnightGameIntegration",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightGameIntegration",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.016927897930145264,
+			"dateTime": "2026.10.14-18.49.38",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "PickupCapAndSingleReward",
+			"fullTestPath": "CodexDungeon.Gameplay.PickupCapAndSingleReward",
+			"state": "Success",
+			"deviceInstance": [
+				"6DF7AD4E4B6A10B5FC5D6AA8F4C02849"
+			],
+			"duration": 0.01696159690618515,
+			"dateTime": "2026.10.14-18.49.38",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		}
+	]
+}

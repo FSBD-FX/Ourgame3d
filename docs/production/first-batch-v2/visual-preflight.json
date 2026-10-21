@@ -1,0 +1,296 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-14T14:21:21.280134+00:00",
+  "date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "scope": [
+    "WPN-SWD-001",
+    "ARM-LGT-001",
+    "ENM-STN-001"
+  ],
+  "status": "preflight_and_offline_atlas_tool_verified_no_final_art",
+  "engine_executed": false,
+  "blender_executed": false,
+  "generation_api_calls": 0,
+  "paid_usd": 0,
+  "paid_generation_authorized": false,
+  "asset_gen_runtime": {
+    "entry": "F:\\Ourgame\\tools\\scripts\\Invoke-AssetGen.ps1",
+    "python": "F:\\Ourgame\\tools\\runtime\\asset-gen\\Scripts\\python.exe",
+    "python_version": "3.12.14",
+    "help_exit_code": 0,
+    "locked_modules_present": [
+      "requests",
+      "xai_sdk",
+      "google.genai",
+      "PIL",
+      "numpy",
+      "rembg",
+      "pymatting",
+      "onnxruntime"
+    ],
+    "default_birefnet_cached": false,
+    "ffmpeg_on_PATH": false,
+    "magick_on_PATH": false,
+    "live_provider_auth_or_generation_tested": false,
+    "configured_gemini_model": "gemini-3.1-flash-image-preview",
+    "configured_model_official_shutdown_date": "2026-06-25",
+    "generation_cli_ready": false
+  },
+  "key_presence_only": {
+    "GEMINI_API_KEY": {
+      "Process": false,
+      "User": false,
+      "Machine": false
+    },
+    "GOOGLE_API_KEY": {
+      "Process": false,
+      "User": false,
+      "Machine": false
+    },
+    "XAI_API_KEY": {
+      "Process": false,
+      "User": false,
+      "Machine": false
+    },
+    "TRIPO3D_API_KEY": {
+      "Process": false,
+      "User": false,
+      "Machine": false
+    }
+  },
+  "garden": {
+    "mode_check_exit_code": 0,
+    "mode": "B-or-C",
+    "enabled": false,
+    "OPENAI_API_KEY_present": false,
+    "project_dotenv_exists": false,
+    "project_gateway_env_exists": false,
+    "user_gateway_env_exists": false
+  },
+  "host_native": {
+    "tool": "image_gen.imagegen",
+    "tool_available": true,
+    "external_key_required": false,
+    "called": false,
+    "billing_or_quota_verified": false,
+    "explicit_asset_gen_mode": false,
+    "interpretation": "Keep asset-gen preparation/QA/manifest guidance, explicitly substitute host generation backend; gpt-image-2 Mode B separately documents this route. Do not call it a working external CLI or free generation."
+  },
+  "existing_visuals": {
+    "prototype_character_frames": 64,
+    "prototype_item_icons": 5,
+    "real_png_files_decoded": 69,
+    "mode": "RGBA",
+    "canvas_px": [
+      256,
+      256
+    ],
+    "purpose": "prototype and reusable offline pipeline only",
+    "formal_LGT001_and_STN001_visuals_present": false,
+    "prototype_hurt_uses_idle_lean_fallback": true
+  },
+  "sample_batch": {
+    "purpose": "style references only, not full production frames/layers",
+    "base_images": 3,
+    "maximum_extra_corrections": 1,
+    "maximum_requests": 4,
+    "slots": [
+      {
+        "id": "P01",
+        "content": "original hero wearing LGT001, right facing, separate weapon later"
+      },
+      {
+        "id": "P02",
+        "content": "isolated SWD001 sword matching accepted style"
+      },
+      {
+        "id": "P03",
+        "content": "STN001 stone knight and thick shield matching accepted style"
+      }
+    ],
+    "run_order": "review P01 before P02/P03; one failed correction stops the batch",
+    "proposed_external_backend": "gemini-nano-banana-2.1",
+    "output_image_size": "1K",
+    "base_image_output_usd": 0.1008,
+    "four_image_output_usd": 0.1344,
+    "proposed_tax_exclusive_ceiling_usd": 0.3,
+    "conditional_maximum_usage_usd": 0.270336,
+    "ceiling_prerequisites": [
+      "provider model and account availability verified",
+      "maximum 4 actual HTTP generation attempts, no automatic retries",
+      "input <=4096 total tokens per attempt verified before send",
+      "output <=2048 total tokens per attempt explicitly limited",
+      "no grounding or other paid tools",
+      "unknown usage or timeout stops further submission",
+      "actual usage ledger and remaining-budget gate before each attempt"
+    ],
+    "enforceable_in_current_cli": false,
+    "host_native_cost_covered_by_this_ceiling": false,
+    "whole_unit_production_cost_known": false,
+    "grok_alternative": {
+      "four_attempt_max_with_one_input_and_output_each_usd": 0.088,
+      "proposed_tax_exclusive_ceiling_usd": 0.1,
+      "current_key_available": false
+    }
+  },
+  "atlas_validation": {
+    "script": "F:\\Ourgame\\tools\\scripts\\validate-content-atlas.py",
+    "schema": "F:\\Ourgame\\docs\\production\\first-batch-v2\\atlas-schema.md",
+    "example_status": "template_unfulfilled",
+    "example_actual_frames": 0,
+    "red_runs": [
+      {
+        "tests": 29,
+        "expected_failures": 27,
+        "errors": 0,
+        "implementation": "real API skeleton; no import error"
+      },
+      {
+        "tests": 31,
+        "expected_failures": 2,
+        "errors": 0,
+        "added_cases": [
+          "phase coverage",
+          "null units structured rejection"
+        ]
+      },
+      {
+        "tests": 32,
+        "expected_failures": 1,
+        "errors": 0,
+        "added_cases": [
+          "air primary layer binding"
+        ]
+      },
+      {
+        "tests": 34,
+        "expected_failures": 2,
+        "errors": 0,
+        "added_cases": [
+          "generated prompt/backend provenance",
+          "unknown emission geometry typo"
+        ]
+      },
+      {
+        "tests": 35,
+        "expected_failures": 1,
+        "errors": 0,
+        "added_cases": [
+          "known prototype folder cannot be relabelled formal"
+        ]
+      }
+    ],
+    "green_full_python_suite": {
+      "command": [
+        "F:\\Ourgame\\tools\\runtime\\asset-gen\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "F:\\Ourgame\\tools\\scripts\\tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "tests": 39,
+      "log": "test_actual_png_canvas_mismatch_rejected (test_content_atlas.ContentAtlasTests.test_actual_png_canvas_mismatch_rejected) ... ok\ntest_air_primary_requires_its_own_layer_frame_binding (test_content_atlas.ContentAtlasTests.test_air_primary_requires_its_own_layer_frame_binding) ... ok\ntest_all_combat_frames_stuck_in_windup_rejected (test_content_atlas.ContentAtlasTests.test_all_combat_frames_stuck_in_windup_rejected) ... ok\ntest_complete_real_png_contract_passes_without_runtime_claim (test_content_atlas.ContentAtlasTests.test_complete_real_png_contract_passes_without_runtime_claim) ... ok\ntest_corrupt_png_with_matching_hash_rejected (test_content_atlas.ContentAtlasTests.test_corrupt_png_with_matching_hash_rejected) ... ok\ntest_double_mirror_on_facing_rejected (test_content_atlas.ContentAtlasTests.test_double_mirror_on_facing_rejected) ... ok\ntest_emission_requires_emitter_marker (test_content_atlas.ContentAtlasTests.test_emission_requires_emitter_marker) ... ok\ntest_empty_transparent_rgba_rejected (test_content_atlas.ContentAtlasTests.test_empty_transparent_rgba_rejected) ... ok\ntest_extra_weapon_layer_mirror_rejected (test_content_atlas.ContentAtlasTests.test_extra_weapon_layer_mirror_rejected) ... ok\ntest_frame_ground_pivot_drift_rejected (test_content_atlas.ContentAtlasTests.test_frame_ground_pivot_drift_rejected) ... ok\ntest_fully_opaque_rgba_rejected (test_content_atlas.ContentAtlasTests.test_fully_opaque_rgba_rejected) ... ok\ntest_generated_source_requires_backend_and_prompt_provenance (test_content_atlas.ContentAtlasTests.test_generated_source_requires_backend_and_prompt_provenance) ... ok\ntest_grip_detached_from_hand_rejected (test_content_atlas.ContentAtlasTests.test_grip_detached_from_hand_rejected) ... ok\ntest_known_prototype_directory_cannot_be_relabelled_formal (test_content_atlas.ContentAtlasTests.test_known_prototype_directory_cannot_be_relabelled_formal) ... ok\ntest_license_evidence_hash_mismatch_rejected (test_content_atlas.ContentAtlasTests.test_license_evidence_hash_mismatch_rejected) ... ok\ntest_missing_grip_marker_rejected (test_content_atlas.ContentAtlasTests.test_missing_grip_marker_rejected) ... ok\ntest_missing_left_facing_rejected (test_content_atlas.ContentAtlasTests.test_missing_left_facing_rejected) ... ok\ntest_missing_provenance_rejected (test_content_atlas.ContentAtlasTests.test_missing_provenance_rejected) ... ok\ntest_missing_real_file_rejected (test_content_atlas.ContentAtlasTests.test_missing_real_file_rejected) ... ok\ntest_missing_required_combo_action_rejected (test_content_atlas.ContentAtlasTests.test_missing_required_combo_action_rejected) ... ok\ntest_missing_required_frame_rejected (test_content_atlas.ContentAtlasTests.test_missing_required_frame_rejected) ... ok\ntest_nonmonotonic_frame_time_rejected (test_content_atlas.ContentAtlasTests.test_nonmonotonic_frame_time_rejected) ... ok\ntest_null_units_report_rejection_instead_of_crashing (test_content_atlas.ContentAtlasTests.test_null_units_report_rejection_instead_of_crashing) ... ok\ntest_one_frame_missing_armor_layer_rejected (test_content_atlas.ContentAtlasTests.test_one_frame_missing_armor_layer_rejected) ... ok\ntest_phase_relative_time_reset_rejected (test_content_atlas.ContentAtlasTests.test_phase_relative_time_reset_rejected) ... ok\ntest_placeholder_layer_cannot_pass_formal_gate (test_content_atlas.ContentAtlasTests.test_placeholder_layer_cannot_pass_formal_gate) ... ok\ntest_png_hash_mismatch_rejected (test_content_atlas.ContentAtlasTests.test_png_hash_mismatch_rejected) ... ok\ntest_rgb_png_rejected (test_content_atlas.ContentAtlasTests.test_rgb_png_rejected) ... ok\ntest_source_combat_duration_mismatch_rejected (test_content_atlas.ContentAtlasTests.test_source_combat_duration_mismatch_rejected) ... ok\ntest_source_path_cannot_escape_root (test_content_atlas.ContentAtlasTests.test_source_path_cannot_escape_root) ... ok\ntest_template_manifest_cannot_pass_formal_gate (test_content_atlas.ContentAtlasTests.test_template_manifest_cannot_pass_formal_gate) ... ok\ntest_unknown_geometry_kind_cannot_bypass_emitter_rule (test_content_atlas.ContentAtlasTests.test_unknown_geometry_kind_cannot_bypass_emitter_rule) ... ok\ntest_unknown_license_rejected (test_content_atlas.ContentAtlasTests.test_unknown_license_rejected) ... ok\ntest_validator_does_not_repair_or_rewrite_inputs (test_content_atlas.ContentAtlasTests.test_validator_does_not_repair_or_rewrite_inputs) ... ok\ntest_weapon_armor_incompatible_rejected (test_content_atlas.ContentAtlasTests.test_weapon_armor_incompatible_rejected) ... ok\ntest_existing_output_is_refused_without_changing_any_file (test_first_content_sfx.FirstContentSfxTests.test_existing_output_is_refused_without_changing_any_file) ... ok\ntest_fixed_seed_reproduces_bytes_and_variants_differ (test_first_content_sfx.FirstContentSfxTests.test_fixed_seed_reproduces_bytes_and_variants_differ) ... ok\ntest_manifest_matches_real_pcm_and_keeps_audition_pending (test_first_content_sfx.FirstContentSfxTests.test_manifest_matches_real_pcm_and_keeps_audition_pending) ... ok\ntest_outputs_decode_with_headroom_and_faded_edges (test_first_content_sfx.FirstContentSfxTests.test_outputs_decode_with_headroom_and_faded_edges) ... ok\n\n----------------------------------------------------------------------\nRan 39 tests in 9.507s\n\nOK\n"
+    },
+    "atlas_tests": 35,
+    "additional_audio_tests": 4,
+    "positive_cli": {
+      "exit_code": 0,
+      "synthetic_png_files_decoded": 1,
+      "frame_layer_records_checked": 210,
+      "runtime_status": "not_evaluated"
+    },
+    "template_cli": {
+      "exit_code": 1,
+      "passed": false,
+      "error_codes": [
+        "FILE_MISSING",
+        "FRAME_COUNT",
+        "FRAME_PHASE_COVERAGE",
+        "LICENSE",
+        "PHASE_TIMELINE",
+        "PLACEHOLDER",
+        "PROVENANCE_GENERATION",
+        "STATUS"
+      ]
+    },
+    "runtime_acceptance_claimed": false
+  },
+  "sources": [
+    {
+      "path": "F:\\Ourgame\\.agents\\skills\\asset-gen\\SKILL.md",
+      "sha256": "bd9000d482828a132ea10e8908a9f1563f3466944255ee469bbce3ab2b9f8219"
+    },
+    {
+      "path": "F:\\Ourgame\\.agents\\skills\\asset-gen\\tools\\asset_gen.py",
+      "sha256": "ba1b4817b851525a98964ceca8a923f296fed3d645c24170e39f7e7f7e8a0f67"
+    },
+    {
+      "path": "F:\\Ourgame\\tools\\scripts\\Invoke-AssetGen.ps1",
+      "sha256": "30bbea01f712965a69ce41bc678d72c654415e6cdcfffc855abfe8f45f8091dd"
+    },
+    {
+      "path": "F:\\Ourgame\\tools\\scripts\\asset-gen-requirements.lock.txt",
+      "sha256": "e746bfcdba4c878bfc72b388dab1021b87589956af94d54481f0ac33a03c7c37"
+    },
+    {
+      "path": "F:\\Ourgame\\source-assets\\prototype\\first-room-v1\\manifest.json",
+      "sha256": "9efaf177f21ffae98c24987362461e4d69d323b6cae518e79fe2f7a7504d876e"
+    },
+    {
+      "path": "F:\\Ourgame\\docs\\production\\first-batch-v2\\combo-spec.md",
+      "sha256": "7a630740ccae1e9da7e6effb374f6d63252960f41ed4b998f98a83e0822eea82"
+    },
+    {
+      "path": "F:\\Ourgame\\docs\\design\\enemies-v1\\enemies.json",
+      "sha256": "d01dd609a95ff9ad182638982a0ac7de864dbbd29f6b03995f9a3625a0c44266"
+    },
+    {
+      "path": "F:\\Ourgame\\tools\\scripts\\validate-content-atlas.py",
+      "sha256": "7f0657200d1a28cd5cfd6d5a0c2244ba6d3d21df2986b7ba7c374c2f73d19788"
+    },
+    {
+      "path": "F:\\Ourgame\\tools\\scripts\\tests\\test_content_atlas.py",
+      "sha256": "32218932b0d3ae451331d9a1b2193aa1a65d45fa01401ecd66b55d50ab60086b"
+    },
+    {
+      "path": "F:\\Ourgame\\docs\\production\\first-batch-v2\\example-manifest.json",
+      "sha256": "2a50ee98a7a2bd0f2cf68e4cc2268ae7789b7d8c4a54e7f04235e8eefde3fb4b"
+    }
+  ],
+  "official_sources": [
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "checked_date": "2026-10-14",
+      "relevant_model": "gemini-nano-banana-2.1",
+      "input_usd_per_million": 1.5,
+      "image_output_usd_per_million": 30,
+      "image_1k_tokens": 1120
+    },
+    {
+      "url": "https://ai.google.dev/gemini-api/docs/deprecations",
+      "checked_date": "2026-10-14",
+      "relevant_model": "gemini-3.1-flash-image-preview",
+      "shutdown_date": "2026-06-25"
+    },
+    {
+      "url": "https://docs.x.ai/developers/models/grok-imagine-image",
+      "checked_date": "2026-10-14",
+      "output_image_usd": 0.02,
+      "input_image_usd": 0.002
+    }
+  ],
+  "boundaries": [
+    "No images generated or shown",
+    "No environment/dependency installation or persistent config change",
+    "No source artwork rewritten",
+    "No Editor/Blender launch, import or runtime verification",
+    "Atlas pass verifies declared art data only; visual quality, provenance truth, actual runtime mirroring and gameplay acceptance remain separate"
+  ]
+}

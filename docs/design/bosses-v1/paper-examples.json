@@ -1,0 +1,234 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-13",
+  "source_event": "EV-024",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "scope": "declarative_expected_boundary_cases; arithmetic_recomputed_in_validation; not_gameplay_tests",
+  "cases": [
+    {
+      "id": "BCASE-001",
+      "name": "skip_intermediate_phase",
+      "input": {
+        "boss_id": "BOS-DEM-001",
+        "max_hp": 1800,
+        "old_hp": 1800,
+        "new_hp": 600,
+        "current_action_recovery_remaining_s": 0.8
+      },
+      "expected": {
+        "hp_stays": 600,
+        "pending_phase": 3,
+        "phase2_cue_count": 0,
+        "transition_after_recovery_s": 0.8,
+        "cue_s": 1.2,
+        "heal": 0
+      }
+    },
+    {
+      "id": "BCASE-002",
+      "name": "cross_during_phase_cue",
+      "input": {
+        "boss_id": "BOS-DEM-001",
+        "max_hp": 1800,
+        "hp_before": 1200,
+        "hp_after": 600,
+        "cue_elapsed_s": 0.4,
+        "cue_duration_s": 1.2
+      },
+      "expected": {
+        "destination_phase": 3,
+        "cue_remaining_s": 0.8,
+        "cue_restarted": false
+      }
+    },
+    {
+      "id": "BCASE-003",
+      "name": "simultaneous_death",
+      "input": {
+        "player_hp": 20,
+        "boss_hp": 30,
+        "due_boss_damage_to_player": 28,
+        "due_player_damage_to_boss": 40,
+        "prior_banked_meta": 12
+      },
+      "expected": {
+        "player_dead": true,
+        "boss_dead": true,
+        "result": "failure",
+        "new_boss_reward_commits": 0,
+        "prior_banked_meta": 12
+      }
+    },
+    {
+      "id": "BCASE-004",
+      "name": "success_after_due_damage",
+      "input": {
+        "player_hp": 100,
+        "boss_hp": 30,
+        "due_boss_damage_to_player": 28,
+        "due_player_damage_to_boss": 40,
+        "remaining_boss_projectiles": 1
+      },
+      "expected": {
+        "player_hp": 72,
+        "success_commits": 1,
+        "remaining_boss_projectiles_after_commit": 0,
+        "same_timestamp_damage_cancelled": false
+      }
+    },
+    {
+      "id": "BCASE-005",
+      "name": "double_projectile_interrupted",
+      "input": {
+        "capacity": 2,
+        "group_reserved": 2,
+        "emitted_before_interrupt": 1
+      },
+      "expected": {
+        "live_after_interrupt": 1,
+        "reserved_after_interrupt": 0,
+        "free_after_interrupt": 1,
+        "free_after_last_despawn": 2
+      }
+    },
+    {
+      "id": "BCASE-006",
+      "name": "lowest_move_carried_slow",
+      "input": {
+        "base": 265,
+        "final_idle_floor": 0.65,
+        "carried_slow": 0.25,
+        "reaction_s": 0.15,
+        "post_lock_s": 1.0
+      },
+      "expected": {
+        "speed": 129.1875,
+        "available_walk_cm": 109.809375,
+        "scope": "open_ground_idle_only"
+      }
+    },
+    {
+      "id": "BCASE-007",
+      "name": "negative_shortest_reach_vs_largest_body",
+      "input": {
+        "base_melee_cm": 88,
+        "reach_pct": -15,
+        "boss_half_x_cm": 56,
+        "player_half_x_cm": 18
+      },
+      "expected": {
+        "range_cm": 74.8,
+        "contact_cm": 74,
+        "positive_reach_margin_cm": 0.8,
+        "navigation_not_proven": true
+      }
+    },
+    {
+      "id": "BCASE-008",
+      "name": "boss_slow_once",
+      "input": {
+        "raw_slow_pct": 25,
+        "boss_multiplier": 0.5,
+        "base_move": 190
+      },
+      "expected": {
+        "slow_pct": 12.5,
+        "move": 166.25,
+        "attack_timing_changed": false
+      }
+    },
+    {
+      "id": "BCASE-009",
+      "name": "boss_burn_not_half",
+      "input": {
+        "raw_tick": 6,
+        "ward": 15,
+        "tick_count": 3,
+        "vulnerability_pct": 0
+      },
+      "expected": {
+        "tick_damage": 5.217391304347826,
+        "three_tick_damage": 15.65217391304348,
+        "crits_or_staggers": false
+      }
+    },
+    {
+      "id": "BCASE-010",
+      "name": "boss_shock_refusal_keeps_deadline",
+      "input": {
+        "last_accepted_s": 12,
+        "boss_icd_s": 4,
+        "refused_during_protection_s": 14,
+        "next_accepted_s": 16
+      },
+      "expected": {
+        "deadline_after_refusal_s": 16,
+        "deadline_after_next_accept_s": 20
+      }
+    },
+    {
+      "id": "BCASE-011",
+      "name": "push_damage_without_displacement",
+      "input": {
+        "raw_physical_damage": 20,
+        "armor": 50,
+        "stagger": 14,
+        "requested_push_cm": 40,
+        "poise_protection": false
+      },
+      "expected": {
+        "damage": 13.333333333333334,
+        "stagger": 14,
+        "actual_push_cm": 0
+      }
+    },
+    {
+      "id": "BCASE-012",
+      "name": "poise_break_during_recovery",
+      "input": {
+        "original_recovery_ends_s": 10,
+        "break_at_s": 9.9,
+        "stun_s": 0.25,
+        "full_recovery_s": 2
+      },
+      "expected": {
+        "next_action_earliest_s": 10.15,
+        "recovery_restarted_from_zero": false
+      }
+    },
+    {
+      "id": "BCASE-013",
+      "name": "optional_clear_no_main_transition_heal",
+      "input": {
+        "boss_id": "BOS-GOB-001",
+        "alive_player_hp": 60,
+        "max_hp": 100,
+        "main_transition_committed": false
+      },
+      "expected": {
+        "player_hp": 60,
+        "main_progress_advanced": false,
+        "optional_reward_transactions": 1,
+        "free_return": true
+      }
+    },
+    {
+      "id": "BCASE-014",
+      "name": "resolved_attack_cleanup_preserves_state",
+      "input": {
+        "boss_world_projectiles": 1,
+        "player_burn_next_tick_s": 20,
+        "player_burn_expiry_s": 22,
+        "weapon_cd_end_s": 24
+      },
+      "expected": {
+        "boss_world_projectiles": 0,
+        "player_burn_next_tick_s": 20,
+        "player_burn_expiry_s": 22,
+        "weapon_cd_end_s": 24,
+        "D04_full_safety_until_dot_end": false
+      }
+    }
+  ]
+}

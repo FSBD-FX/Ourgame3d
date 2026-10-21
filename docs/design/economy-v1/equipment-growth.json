@@ -1,0 +1,2077 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "source_event": "EV-026",
+  "module": "D-08",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "user_continue_authorizes_design_progress; all_quality_names_probabilities_prices_and_growth_assistant_proposed_untested",
+  "source_preservation": [
+    {
+      "path": "docs/design/equipment-v1/weapons.json",
+      "sha256": "95757819382832cfa31e6596f3ba90f1e983e83fbd69504da3c99d5ea2a272b4",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/equipment-v1/armor.json",
+      "sha256": "9407e458aef80b9f0d8f0e958b089e7b7a6f4180aef41b7b7df97534fe780e9d",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/equipment-v2/enchant-rules.json",
+      "sha256": "520214b7b3b8195f769f7a77c7ecc40baca2039746f7bc73cbe49b4445756a55",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/equipment-v2/stat-definitions.json",
+      "sha256": "2f8c3fe15aa2dc940f867be118b948e80ae9ae4c654bc70580021ade79d37bc9",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/equipment-v2/affixes.json",
+      "sha256": "e6e3737cb15e64f0782dae0f0652dbac80ebaabf9ee9d97c46bd3e439402c75e",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/items-v1/common-rules.json",
+      "sha256": "b5815a10f313b7364b1dde66b0eac9f703104ea260d4e4470094cffe31652e99",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/items-v1/items.json",
+      "sha256": "09e40ef363ddcd2507efcbdfa4cf388916623e62015dcb41229a62d6badc2bc1",
+      "mutated": false
+    },
+    {
+      "path": "docs/design/inventory-v1/inventory-rules.json",
+      "sha256": "7eb6f7da968622a1583b4e63069208513a09e0ef74d12e244c18e20332f08942",
+      "mutated": false
+    }
+  ],
+  "scope": {
+    "existing_weapons": 33,
+    "existing_armor": 12,
+    "existing_equipment": 45,
+    "new_equipment_definitions": 0,
+    "new_meta_unlock_nodes": 0,
+    "new_separate_quality_multiplier": false,
+    "new_extra_affix_slots": false
+  },
+  "quality_semantics": {
+    "quality_grade_is_basic_upgrade_level": true,
+    "quality_label_is_derived_from_grade": true,
+    "separate_rarity_grade_stat_or_multiplier": false,
+    "default_legacy_instance_grade": 0,
+    "grade_range": [
+      0,
+      3
+    ],
+    "grade3_natural_drop_enabled": false,
+    "grade_and_enchant_tier_package_magnitude_independent": true,
+    "higher_grade_guarantees_better_total_build": false,
+    "grade0_can_have_tierV": true,
+    "grade3_can_have_none_or_cursed": true,
+    "old_v1_acquisition_strings": "assistant_source_suggestions_not_hard_meta_unlocks; D08_new_source_pools_override_them_only_explicitly; preserve_old_files",
+    "ITM_FUN005_legacy_quality_wording": "D03_excluded_separate_weapon_quality_upgrade; D08_adopts_no_separate_quality_process; FUN005_still_waives_only_original_basic_0_to_1_service_displayed_as_grade0_to1",
+    "canonical_instance_field": "basic_upgrade_grade"
+  },
+  "grades": [
+    {
+      "grade": 0,
+      "label": "素制",
+      "display_suffix": "+0",
+      "weapon_damage_pct_contribution": 0,
+      "armor_intrinsic_protection_ratio_bonus": 0.0,
+      "independent_quality_multiplier": false,
+      "enchantment_tier_or_polarity_implied": false
+    },
+    {
+      "grade": 1,
+      "label": "精制",
+      "display_suffix": "+1",
+      "weapon_damage_pct_contribution": 5,
+      "armor_intrinsic_protection_ratio_bonus": 0.05,
+      "independent_quality_multiplier": false,
+      "enchantment_tier_or_polarity_implied": false
+    },
+    {
+      "grade": 2,
+      "label": "精良",
+      "display_suffix": "+2",
+      "weapon_damage_pct_contribution": 10,
+      "armor_intrinsic_protection_ratio_bonus": 0.1,
+      "independent_quality_multiplier": false,
+      "enchantment_tier_or_polarity_implied": false
+    },
+    {
+      "grade": 3,
+      "label": "卓越",
+      "display_suffix": "+3",
+      "weapon_damage_pct_contribution": 15,
+      "armor_intrinsic_protection_ratio_bonus": 0.15,
+      "independent_quality_multiplier": false,
+      "enchantment_tier_or_polarity_implied": false
+    }
+  ],
+  "chapter_profiles": [
+    {
+      "chapter": 1,
+      "workshop_grade_cap": 1,
+      "natural_drop_grade_cap": 0,
+      "natural_grade_weights": {
+        "0": 1,
+        "1": 0,
+        "2": 0,
+        "3": 0
+      },
+      "enchant_tier_pool": "early",
+      "enchant_tier_weights": {
+        "1": 0.7,
+        "2": 0.25,
+        "3": 0.05,
+        "4": 0.0,
+        "5": 0.0
+      },
+      "enchant_operation_chapter_tier_gate": false,
+      "source_pool_binding": "D08_source_catalogue_may_override_old_acquisition_suggestions_explicitly_not_mutate_v1"
+    },
+    {
+      "chapter": 2,
+      "workshop_grade_cap": 1,
+      "natural_drop_grade_cap": 1,
+      "natural_grade_weights": {
+        "0": 0.7,
+        "1": 0.3,
+        "2": 0,
+        "3": 0
+      },
+      "enchant_tier_pool": "middle",
+      "enchant_tier_weights": {
+        "1": 0.15,
+        "2": 0.4,
+        "3": 0.35,
+        "4": 0.1,
+        "5": 0.0
+      },
+      "enchant_operation_chapter_tier_gate": false,
+      "source_pool_binding": "D08_source_catalogue_may_override_old_acquisition_suggestions_explicitly_not_mutate_v1"
+    },
+    {
+      "chapter": 3,
+      "workshop_grade_cap": 2,
+      "natural_drop_grade_cap": 1,
+      "natural_grade_weights": {
+        "0": 0.4,
+        "1": 0.6,
+        "2": 0,
+        "3": 0
+      },
+      "enchant_tier_pool": "middle",
+      "enchant_tier_weights": {
+        "1": 0.15,
+        "2": 0.4,
+        "3": 0.35,
+        "4": 0.1,
+        "5": 0.0
+      },
+      "enchant_operation_chapter_tier_gate": false,
+      "source_pool_binding": "D08_source_catalogue_may_override_old_acquisition_suggestions_explicitly_not_mutate_v1"
+    },
+    {
+      "chapter": 4,
+      "workshop_grade_cap": 2,
+      "natural_drop_grade_cap": 2,
+      "natural_grade_weights": {
+        "0": 0.2,
+        "1": 0.5,
+        "2": 0.3,
+        "3": 0
+      },
+      "enchant_tier_pool": "advanced",
+      "enchant_tier_weights": {
+        "1": 0.0,
+        "2": 0.1,
+        "3": 0.4,
+        "4": 0.35,
+        "5": 0.15
+      },
+      "enchant_operation_chapter_tier_gate": false,
+      "source_pool_binding": "D08_source_catalogue_may_override_old_acquisition_suggestions_explicitly_not_mutate_v1"
+    },
+    {
+      "chapter": 5,
+      "workshop_grade_cap": 3,
+      "natural_drop_grade_cap": 2,
+      "natural_grade_weights": {
+        "0": 0.1,
+        "1": 0.4,
+        "2": 0.5,
+        "3": 0
+      },
+      "enchant_tier_pool": "advanced",
+      "enchant_tier_weights": {
+        "1": 0.0,
+        "2": 0.1,
+        "3": 0.4,
+        "4": 0.35,
+        "5": 0.15
+      },
+      "enchant_operation_chapter_tier_gate": false,
+      "source_pool_binding": "D08_source_catalogue_may_override_old_acquisition_suggestions_explicitly_not_mutate_v1"
+    }
+  ],
+  "stat_merge": {
+    "extension": "append_basic_growth_contribution_to_D03_sum_then_clamp_once; no_old_source_mutation",
+    "weapon": {
+      "stat": "damage_pct",
+      "contribution_by_grade": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "cap_pct": [
+        -30,
+        50
+      ],
+      "formula": "D=base_segment*distance_factor*target_ratio*(1+clamp(S_active_weapon_affixes+S_items_relics+growth_damage_pct+future_approved_sources,-30,50)/100); crit_target_mitigation_vulnerability_once_after",
+      "applies_to": [
+        "primary_direct_segments",
+        "intrinsic_weapon_skill_direct_segments"
+      ],
+      "does_not_modify": [
+        "action_timeline",
+        "action_speed",
+        "reach",
+        "depth",
+        "height",
+        "stagger",
+        "intrinsic_pattern",
+        "subhit_count",
+        "projectile_speed",
+        "magazine_or_reload",
+        "focus_cost",
+        "fixed_item_damage",
+        "burn_or_other_fixed_element_values"
+      ],
+      "inactive_weapon_growth_contributes": false,
+      "per_segment_then_sum": true
+    },
+    "armor": {
+      "intrinsic_reference_is_original_definition": true,
+      "per_grade_ratio_of_intrinsic": 0.05,
+      "armor_growth_formula": "growth_armor_flat=original_intrinsic_armor*0.05*grade",
+      "ward_growth_formula": "growth_ward_flat=original_intrinsic_ward*0.05*grade",
+      "final_armor_formula": "clamp(original_intrinsic_armor+growth_armor_flat+S_active_armor_affixes_items_relics_future_approved_sources,0,150)",
+      "final_ward_formula": "clamp(original_intrinsic_ward+growth_ward_flat+S_active_armor_affixes_items_relics_future_approved_sources,0,150)",
+      "protection_cap": [
+        0,
+        150
+      ],
+      "mitigation_formula": "min(0.6,protection/(100+protection))",
+      "float_internal_no_ceil_or_integer_rounding": true,
+      "original_zero_growth": 0,
+      "does_not_modify": [
+        "poise_bonus",
+        "move_multiplier",
+        "focus_regen_rate_or_delay",
+        "healing_received",
+        "max_hp",
+        "intrinsic_traits",
+        "body_or_hurtbox_size"
+      ],
+      "no_second_percentage_mitigation_layer": true
+    },
+    "all_other_D03_and_v2_caps_preserved": true,
+    "D09_talent_exact_contributions_complete": false
+  },
+  "basic_upgrade": {
+    "service": "basic_equipment_upgrade",
+    "grades_allowed": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "one_step_only": true,
+    "cost_gold_by_from_grade": {
+      "0": 30,
+      "1": 55,
+      "2": 85
+    },
+    "cumulative_cost_from_grade0": {
+      "0": 0,
+      "1": 30,
+      "2": 85,
+      "3": 170
+    },
+    "success_probability": 1,
+    "failure_or_destruction_roll": false,
+    "extra_material_costs": false,
+    "changes_same_instance_grade": true,
+    "creates_new_equipment_instance": false,
+    "downgrade_or_refund": false,
+    "grade_or_enchant_transfer": false,
+    "target_scope": "owned_weapon_slot1_or2_or_body_armor; not_ground_instances",
+    "maximum_from_chapter": [
+      1,
+      1,
+      2,
+      2,
+      3
+    ],
+    "already_legitimate_higher_grade_instance": "retain_grade_and_stats; no_chapter_downscale; further_upgrade_requires_new_target_grade_within_service_cap",
+    "no_effect_policy": {
+      "compare_at_confirm_and_commit": true,
+      "compare_final_affected_stats_after_all_current_sources_and_caps": true,
+      "weapon_stats_compared": [
+        "damage_pct_final"
+      ],
+      "armor_stats_compared": [
+        "armor_final",
+        "ward_final"
+      ],
+      "inactive_weapon_comparison": "pure_simulation_as_active_target_excluding_current_active_weapon_affixes_and_growth; preserve_current_armor_items_relics_tonics",
+      "all_final_stats_unchanged": "reject_NO_EFFECTIVE_GROWTH_NOW_before_gold_coupon_RNG_or_instance_version_change",
+      "some_final_stats_increase": "show_each_actual_delta_and_partial_cap_warning_fixed_step_fee_then_explicit_confirmation",
+      "temporary_buff_causes_cap": "wait_expiry_or_change_legal_sources_then_request_new_quote; no_auto_wait_or_auto_commit",
+      "future_benefit_investment_while_fully_capped_adopted": false,
+      "refund_later_due_to_subsequent_cap_or_equipment_change": false
+    },
+    "coupon": {
+      "item_id": "ITM-FUN-005",
+      "valid_from_grade": 0,
+      "valid_to_grade": 1,
+      "waives_gold_fee": 30,
+      "consume_count": 1,
+      "payment_modes": [
+        "gold",
+        "ITM_FUN005_explicit_selected"
+      ],
+      "other_eligibility_unchanged": true,
+      "all_ineffective_upgrade_consumes_coupon": false,
+      "works_on_1_to_2_or_2_to_3_or_enchant": false,
+      "failure_consumes_coupon": false,
+      "price_discount_coupon_FUN002_applies": false
+    }
+  },
+  "enchant_compatibility": {
+    "rules_reference": "../equipment-v2/enchant-rules.json",
+    "source_original_sha256": "520214b7b3b8195f769f7a77c7ecc40baca2039746f7bc73cbe49b4445756a55",
+    "spawn_enchanted_chance": 0.4,
+    "spawn_none_chance": 0.6,
+    "package_weights_conditional": {
+      "beneficial": 0.6,
+      "mixed": 0.3,
+      "cursed": 0.1
+    },
+    "package_weights_unconditional": {
+      "none": 0.6,
+      "beneficial": 0.24,
+      "mixed": 0.12,
+      "cursed": 0.04
+    },
+    "tiers": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "pool_by_chapter": {
+      "1": "early",
+      "2": "middle",
+      "3": "middle",
+      "4": "advanced",
+      "5": "advanced"
+    },
+    "tier_pools": {
+      "early": {
+        "1": 0.7,
+        "2": 0.25,
+        "3": 0.05,
+        "4": 0.0,
+        "5": 0.0
+      },
+      "middle": {
+        "1": 0.15,
+        "2": 0.4,
+        "3": 0.35,
+        "4": 0.1,
+        "5": 0.0
+      },
+      "advanced": {
+        "1": 0.0,
+        "2": 0.1,
+        "3": 0.4,
+        "4": 0.35,
+        "5": 0.15
+      }
+    },
+    "chapter_gate_for_awaken_upgrade_reroll_cleanse": false,
+    "operations": {
+      "awaken": {
+        "name": "觉醒",
+        "requires_package": "none",
+        "cost_gold": 20,
+        "result_tier": 1,
+        "random_package_weights_ref": "package_weights",
+        "can_produce_negative": true
+      },
+      "reroll": {
+        "name": "重洗",
+        "allowed_tiers": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "cost_gold_by_tier": {
+          "1": 15,
+          "2": 30,
+          "3": 55,
+          "4": 85,
+          "5": 120
+        },
+        "preserve_tier": true,
+        "reroll_fields": [
+          "package_type",
+          "affix_ids",
+          "magnitudes",
+          "original_quantiles"
+        ],
+        "random_package_weights_ref": "package_weights",
+        "preview_random_result_before_commit": false,
+        "can_get_worse": true
+      },
+      "upgrade": {
+        "name": "升阶",
+        "allowed_from_tiers": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "cost_gold_by_from_tier": {
+          "1": 40,
+          "2": 80,
+          "3": 140,
+          "4": 220
+        },
+        "tier_delta": 1,
+        "preserve_fields": [
+          "package_type",
+          "affix_ids",
+          "original_quantiles"
+        ],
+        "negative_affixes_upgrade_too": true,
+        "prevalidate_all_next_tier_intervals": true,
+        "empty_next_interval_behavior": "reject_before_payment_with_reason_no_affix_substitution_or_clamping",
+        "deterministic_result_comparison_allowed": true
+      },
+      "cleanse": {
+        "name": "洗净",
+        "allowed_tiers": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "cost_gold_by_tier": {
+          "1": 10,
+          "2": 20,
+          "3": 35,
+          "4": 55,
+          "5": 80
+        },
+        "result_package": "none",
+        "remove_entire_package": true,
+        "remove_tier_and_affix_quantiles": true,
+        "preserve_intrinsic_traits": true,
+        "selective_negative_removal": false
+      }
+    },
+    "early_high_tier_policy": "source_weights_control_natural_frequency; paid_legal_upgrades_not_chapter_gated; compete_with_supply_and_basic_growth; no_claim_affordability_or_balance",
+    "grade_upgrade_preserves_package_tier_affixes_magnitudes_original_q": true,
+    "enchant_operations_preserve_basic_upgrade_grade": true,
+    "eligibility_intrinsic_fields": [
+      "original_armor",
+      "original_ward",
+      "original_poise_bonus",
+      "original_weapon_family",
+      "original_action_range_and_costs"
+    ],
+    "strengthened_defenses_change_negative_eligibility": false,
+    "temporary_sources_change_affix_candidate_pool": false,
+    "global_cap_does_not_delete_legal_affix": true,
+    "upgrade_negative_affixes_too": true,
+    "no_silent_affix_substitution_on_invalid_next_interval": true
+  },
+  "generation_contract": {
+    "source_order": "source_entry_and_content_selection_then_grade_then_v2_enchanted_package_tier_affix_generation_once; no_pickup_or_visibility_roll",
+    "grade_draw_independent_of_enchanted_package_tier_and_polarity": true,
+    "only_use_source_specific_grade_profile_if_explicitly_defined": true,
+    "natural_defaults_apply_to": "ordinary_natural_equipment_sources_assigned_by_D08_source_catalogue; scripted_start_and_debug_instances_must_declare_grade_not_assume_drop_roll",
+    "persistent_seed_and_rng_cursor": true,
+    "stable_equipment_spawn_event": true,
+    "retry_same_spawn_returns_same_instance_and_grade": true,
+    "basic_upgrade_uses_RNG": false,
+    "grade_roll_repeats_on_view_drop_pickup_save_resume": false,
+    "invalid_source_preserves_pending_reward_and_reports_not_silent_reroll": true
+  },
+  "transaction": {
+    "unique_key": "OperationID",
+    "quote_fields": [
+      "target_instance_ID_and_version",
+      "content_definition_and_attribute_rule_versions",
+      "current_grade_and_proposed_grade",
+      "chapter_service_cap",
+      "normal_price_and_selected_gold_or_coupon_mode",
+      "actual_final_stat_deltas_and_cap_warnings",
+      "service_version_and_coupon_stack_version_if_used"
+    ],
+    "checks_at_start_and_commit": [
+      "active_run",
+      "alive_grounded_idle_stationary",
+      "D04_full_safe_predicate",
+      "owned_target_in_legal_slot",
+      "instance_version_and_data_versions_match",
+      "matching_service_and_chapter_cap",
+      "target_grade_equals_current_grade_plus1_and_at_most3",
+      "selected_payment_available_current_wallet_not_strict_old_wallet_version",
+      "some_affected_final_stat_increases_under_current_sources",
+      "coupon_matches_0_to1_if_selected"
+    ],
+    "atomic_fields": [
+      "gold_balance_or_coupon_count_version",
+      "same_equipment_instance_grade_and_version",
+      "operation_commit_record",
+      "final_equipped_stat_sources_recalculated_once"
+    ],
+    "instance_version_delta_on_commit": 1,
+    "failed_prevalidation_changes_any_atomic_field": false,
+    "duplicate_confirm_or_retry_returns_committed_record": true,
+    "committed_display_failure": "read_same_record_no_second_fee_or_grade_change",
+    "quote_changed_requires_new_preview_and_confirmation": true,
+    "basic_upgrade_spends_RNG": false,
+    "damage_expiry_and_real_state_changes_before_commit": "D03_D04_event_order; cancel_does_not_rewind_real_damage_regen_or_time",
+    "pause_plan": "intent_only; resume_and_revalidate_before_real_execution; no_hidden_queue"
+  },
+  "preserve_runtime_state_contract": {
+    "same_instance_ID": true,
+    "same_content_ID": true,
+    "preserve_magazine_focus_HP_skill_and_shared_cooldowns": true,
+    "preserve_character_element_ICDs_and_target_states": true,
+    "heal_refill_cleanse_or_cooldown_reset": false,
+    "weapon_timeline_frozen_at": "D03_accepted_attack_start",
+    "new_attack_damage_and_other_snapshot_at": "40_percent_windup_lock",
+    "existing_attack_or_projectile_keeps_locked_old_growth_and_affixes": true,
+    "victim_protection_after_commit": "new_armor_ward_apply_at_actual_hit_or_burn_tick_time",
+    "max_hp_sources_recalculated_once": "D04_currentHP=min(previous_actualHP,new_finalMaxHP); grade_itself_adds_no_maxHP",
+    "inactive_target_quote_triggers_real_switch_or_conditional_traits": false
+  },
+  "instance_fields": {
+    "stored": [
+      "content_id",
+      "instance_id",
+      "instance_version",
+      "basic_upgrade_grade",
+      "basic_growth_rules_version",
+      "grade_source_kind_and_spawn_or_operation_ID",
+      "enchant_package_and_tier",
+      "affix_ids_magnitudes_original_q_rationals",
+      "intrinsic_definition_hash",
+      "magazine_remaining",
+      "weapon_skill_cooldown_deadline",
+      "generation_seed_algorithm_versions"
+    ],
+    "derived_not_separately_rolled": [
+      "quality_label",
+      "growth_damage_pct",
+      "growth_armor_flat",
+      "growth_ward_flat",
+      "final_current_effective_stats"
+    ],
+    "migration": "new_D13_version_explicitly_maps_legacy_no_grade_to0_preserve_backups_and_log; unknown_nonmatching_versions_fail_with_preserved_state_no_silent_regeneration",
+    "save_interface_status": "design_pending_D13_not_implemented"
+  },
+  "equipment_applicability": [
+    {
+      "content_id": "WPN-KNF-001",
+      "name": "折巷短刃",
+      "kind": "weapon",
+      "family": "KNF",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-KNF-001",
+      "intrinsic_damage_total": 12,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "基础池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-KNF-002",
+      "name": "燕尾双匕",
+      "kind": "weapon",
+      "family": "KNF",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-KNF-002",
+      "intrinsic_damage_total": 20,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-KNF-003",
+      "name": "破缝锥刃",
+      "kind": "weapon",
+      "family": "KNF",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-KNF-003",
+      "intrinsic_damage_total": 14,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章精英池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-DAO-001",
+      "name": "断梁大刀",
+      "kind": "weapon",
+      "family": "DAO",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-DAO-001",
+      "intrinsic_damage_total": 34,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "基础池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-DAO-002",
+      "name": "折肘短斩刀",
+      "kind": "weapon",
+      "family": "DAO",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-DAO-002",
+      "intrinsic_damage_total": 26,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-DAO-003",
+      "name": "铸潮阔刀",
+      "kind": "weapon",
+      "family": "DAO",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-DAO-003",
+      "intrinsic_damage_total": 42,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章精英池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-SWD-001",
+      "name": "尺衡军剑",
+      "kind": "weapon",
+      "family": "SWD",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-SWD-001",
+      "intrinsic_damage_total": 26,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "基础池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-SWD-002",
+      "name": "银线刺剑",
+      "kind": "weapon",
+      "family": "SWD",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-SWD-002",
+      "intrinsic_damage_total": 23,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-SWD-003",
+      "name": "折锋弯剑",
+      "kind": "weapon",
+      "family": "SWD",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-SWD-003",
+      "intrinsic_damage_total": 30,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章精英池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-GSW-001",
+      "name": "裂碑重剑",
+      "kind": "weapon",
+      "family": "GSW",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-GSW-001",
+      "intrinsic_damage_total": 46,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "基础池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-GSW-002",
+      "name": "远誓长锋",
+      "kind": "weapon",
+      "family": "GSW",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-GSW-002",
+      "intrinsic_damage_total": 40,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-GSW-003",
+      "name": "双脊钝剑",
+      "kind": "weapon",
+      "family": "GSW",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-GSW-003",
+      "intrinsic_damage_total": 48,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章精英池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-SPR-001",
+      "name": "疾雨短枪",
+      "kind": "weapon",
+      "family": "SPR",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-SPR-001",
+      "intrinsic_damage_total": 21,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "基础池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-SPR-002",
+      "name": "守门长矛",
+      "kind": "weapon",
+      "family": "SPR",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-SPR-002",
+      "intrinsic_damage_total": 28,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-SPR-003",
+      "name": "逐阵棘枪",
+      "kind": "weapon",
+      "family": "SPR",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-SPR-003",
+      "intrinsic_damage_total": 25,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章精英池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-HAL-001",
+      "name": "巡门长戟",
+      "kind": "weapon",
+      "family": "HAL",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-HAL-001",
+      "intrinsic_damage_total": 36,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "基础池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-HAL-002",
+      "name": "倒钩战戟",
+      "kind": "weapon",
+      "family": "HAL",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-HAL-002",
+      "intrinsic_damage_total": 32,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-HAL-003",
+      "name": "半握月戟",
+      "kind": "weapon",
+      "family": "HAL",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-HAL-003",
+      "intrinsic_damage_total": 28,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章精英池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-XBW-001",
+      "name": "栓机猎弩",
+      "kind": "weapon",
+      "family": "XBW",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-XBW-001",
+      "intrinsic_damage_total": 34,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "基础池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-XBW-002",
+      "name": "转轮袖弩",
+      "kind": "weapon",
+      "family": "XBW",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-XBW-002",
+      "intrinsic_damage_total": 18,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-XBW-003",
+      "name": "绞盘重弩",
+      "kind": "weapon",
+      "family": "XBW",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-XBW-003",
+      "intrinsic_damage_total": 52,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章精英池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-PST-001",
+      "name": "旧港转轮短铳",
+      "kind": "weapon",
+      "family": "PST",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-PST-001",
+      "intrinsic_damage_total": 23,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "基础池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-PST-002",
+      "name": "双管礼仪铳",
+      "kind": "weapon",
+      "family": "PST",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-PST-002",
+      "intrinsic_damage_total": 28,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-PST-003",
+      "name": "冷铁单发决斗铳",
+      "kind": "weapon",
+      "family": "PST",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-PST-003",
+      "intrinsic_damage_total": 36,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章精英池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-SGN-001",
+      "name": "矿工短喷",
+      "kind": "weapon",
+      "family": "SGN",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-SGN-001",
+      "intrinsic_damage_total": 42,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "基础池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-SGN-002",
+      "name": "长管收束猎铳",
+      "kind": "weapon",
+      "family": "SGN",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-SGN-002",
+      "intrinsic_damage_total": 36,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-SGN-003",
+      "name": "鼓腹扫荡铳",
+      "kind": "weapon",
+      "family": "SGN",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-SGN-003",
+      "intrinsic_damage_total": 40,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章精英池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-RFL-001",
+      "name": "哨岗栓动步枪",
+      "kind": "weapon",
+      "family": "RFL",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-RFL-001",
+      "intrinsic_damage_total": 43,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "基础池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-RFL-002",
+      "name": "铜胆三连铳",
+      "kind": "weapon",
+      "family": "RFL",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-RFL-002",
+      "intrinsic_damage_total": 39,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-RFL-003",
+      "name": "带刺卡宾枪",
+      "kind": "weapon",
+      "family": "RFL",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-RFL-003",
+      "intrinsic_damage_total": 24,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-STF-001",
+      "name": "余烬灯杖",
+      "kind": "weapon",
+      "family": "STF",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-STF-001",
+      "intrinsic_damage_total": 24,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "基础池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-STF-002",
+      "name": "霜脊刻杖",
+      "kind": "weapon",
+      "family": "STF",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-STF-002",
+      "intrinsic_damage_total": 22,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "WPN-STF-003",
+      "name": "鸣针导杖",
+      "kind": "weapon",
+      "family": "STF",
+      "intrinsic_reference": "../equipment-v1/weapons.json#WPN-STF-003",
+      "intrinsic_damage_total": 20,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_damage_pct": [
+        0,
+        5,
+        10,
+        15
+      ],
+      "old_acquisition_suggestion": "第一章精英池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "ARM-LGT-001",
+      "name": "行路短衣",
+      "kind": "armor",
+      "family": "LGT",
+      "intrinsic_reference": "../equipment-v1/armor.json#ARM-LGT-001",
+      "intrinsic_armor": 14,
+      "intrinsic_ward": 12,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_growth_flat": {
+        "0": {
+          "armor_flat": 0.0,
+          "ward_flat": 0.0
+        },
+        "1": {
+          "armor_flat": 0.7,
+          "ward_flat": 0.6
+        },
+        "2": {
+          "armor_flat": 1.4,
+          "ward_flat": 1.2
+        },
+        "3": {
+          "armor_flat": 2.1,
+          "ward_flat": 1.8
+        }
+      },
+      "old_acquisition_suggestion": "基础池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "ARM-LGT-002",
+      "name": "折风短甲",
+      "kind": "armor",
+      "family": "LGT",
+      "intrinsic_reference": "../equipment-v1/armor.json#ARM-LGT-002",
+      "intrinsic_armor": 22,
+      "intrinsic_ward": 6,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_growth_flat": {
+        "0": {
+          "armor_flat": 0.0,
+          "ward_flat": 0.0
+        },
+        "1": {
+          "armor_flat": 1.1,
+          "ward_flat": 0.3
+        },
+        "2": {
+          "armor_flat": 2.2,
+          "ward_flat": 0.6
+        },
+        "3": {
+          "armor_flat": 3.3,
+          "ward_flat": 0.9
+        }
+      },
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "ARM-LGT-003",
+      "name": "铜扣游射衣",
+      "kind": "armor",
+      "family": "LGT",
+      "intrinsic_reference": "../equipment-v1/armor.json#ARM-LGT-003",
+      "intrinsic_armor": 10,
+      "intrinsic_ward": 20,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_growth_flat": {
+        "0": {
+          "armor_flat": 0.0,
+          "ward_flat": 0.0
+        },
+        "1": {
+          "armor_flat": 0.5,
+          "ward_flat": 1.0
+        },
+        "2": {
+          "armor_flat": 1.0,
+          "ward_flat": 2.0
+        },
+        "3": {
+          "armor_flat": 1.5,
+          "ward_flat": 3.0
+        }
+      },
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "ARM-MED-001",
+      "name": "巡路环甲",
+      "kind": "armor",
+      "family": "MED",
+      "intrinsic_reference": "../equipment-v1/armor.json#ARM-MED-001",
+      "intrinsic_armor": 32,
+      "intrinsic_ward": 18,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_growth_flat": {
+        "0": {
+          "armor_flat": 0.0,
+          "ward_flat": 0.0
+        },
+        "1": {
+          "armor_flat": 1.6,
+          "ward_flat": 0.9
+        },
+        "2": {
+          "armor_flat": 3.2,
+          "ward_flat": 1.8
+        },
+        "3": {
+          "armor_flat": 4.8,
+          "ward_flat": 2.7
+        }
+      },
+      "old_acquisition_suggestion": "基础池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "ARM-MED-002",
+      "name": "锁肩鳞甲",
+      "kind": "armor",
+      "family": "MED",
+      "intrinsic_reference": "../equipment-v1/armor.json#ARM-MED-002",
+      "intrinsic_armor": 38,
+      "intrinsic_ward": 8,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_growth_flat": {
+        "0": {
+          "armor_flat": 0.0,
+          "ward_flat": 0.0
+        },
+        "1": {
+          "armor_flat": 1.9,
+          "ward_flat": 0.4
+        },
+        "2": {
+          "armor_flat": 3.8,
+          "ward_flat": 0.8
+        },
+        "3": {
+          "armor_flat": 5.7,
+          "ward_flat": 1.2
+        }
+      },
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "ARM-MED-003",
+      "name": "灰盐护纹甲",
+      "kind": "armor",
+      "family": "MED",
+      "intrinsic_reference": "../equipment-v1/armor.json#ARM-MED-003",
+      "intrinsic_armor": 26,
+      "intrinsic_ward": 36,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_growth_flat": {
+        "0": {
+          "armor_flat": 0.0,
+          "ward_flat": 0.0
+        },
+        "1": {
+          "armor_flat": 1.3,
+          "ward_flat": 1.8
+        },
+        "2": {
+          "armor_flat": 2.6,
+          "ward_flat": 3.6
+        },
+        "3": {
+          "armor_flat": 3.9,
+          "ward_flat": 5.4
+        }
+      },
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "ARM-HVY-001",
+      "name": "门栓板甲",
+      "kind": "armor",
+      "family": "HVY",
+      "intrinsic_reference": "../equipment-v1/armor.json#ARM-HVY-001",
+      "intrinsic_armor": 85,
+      "intrinsic_ward": 12,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_growth_flat": {
+        "0": {
+          "armor_flat": 0.0,
+          "ward_flat": 0.0
+        },
+        "1": {
+          "armor_flat": 4.25,
+          "ward_flat": 0.6
+        },
+        "2": {
+          "armor_flat": 8.5,
+          "ward_flat": 1.2
+        },
+        "3": {
+          "armor_flat": 12.75,
+          "ward_flat": 1.8
+        }
+      },
+      "old_acquisition_suggestion": "基础池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "ARM-HVY-002",
+      "name": "沉锚铆甲",
+      "kind": "armor",
+      "family": "HVY",
+      "intrinsic_reference": "../equipment-v1/armor.json#ARM-HVY-002",
+      "intrinsic_armor": 65,
+      "intrinsic_ward": 6,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_growth_flat": {
+        "0": {
+          "armor_flat": 0.0,
+          "ward_flat": 0.0
+        },
+        "1": {
+          "armor_flat": 3.25,
+          "ward_flat": 0.3
+        },
+        "2": {
+          "armor_flat": 6.5,
+          "ward_flat": 0.6
+        },
+        "3": {
+          "armor_flat": 9.75,
+          "ward_flat": 0.9
+        }
+      },
+      "old_acquisition_suggestion": "第一章精英池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "ARM-HVY-003",
+      "name": "封釉重甲",
+      "kind": "armor",
+      "family": "HVY",
+      "intrinsic_reference": "../equipment-v1/armor.json#ARM-HVY-003",
+      "intrinsic_armor": 60,
+      "intrinsic_ward": 40,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_growth_flat": {
+        "0": {
+          "armor_flat": 0.0,
+          "ward_flat": 0.0
+        },
+        "1": {
+          "armor_flat": 3.0,
+          "ward_flat": 2.0
+        },
+        "2": {
+          "armor_flat": 6.0,
+          "ward_flat": 4.0
+        },
+        "3": {
+          "armor_flat": 9.0,
+          "ward_flat": 6.0
+        }
+      },
+      "old_acquisition_suggestion": "第一章精英池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "ARM-ROB-001",
+      "name": "灰烛法袍",
+      "kind": "armor",
+      "family": "ROB",
+      "intrinsic_reference": "../equipment-v1/armor.json#ARM-ROB-001",
+      "intrinsic_armor": 6,
+      "intrinsic_ward": 50,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_growth_flat": {
+        "0": {
+          "armor_flat": 0.0,
+          "ward_flat": 0.0
+        },
+        "1": {
+          "armor_flat": 0.3,
+          "ward_flat": 2.5
+        },
+        "2": {
+          "armor_flat": 0.6,
+          "ward_flat": 5.0
+        },
+        "3": {
+          "armor_flat": 0.9,
+          "ward_flat": 7.5
+        }
+      },
+      "old_acquisition_suggestion": "基础池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "ARM-ROB-002",
+      "name": "断章短袍",
+      "kind": "armor",
+      "family": "ROB",
+      "intrinsic_reference": "../equipment-v1/armor.json#ARM-ROB-002",
+      "intrinsic_armor": 10,
+      "intrinsic_ward": 42,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_growth_flat": {
+        "0": {
+          "armor_flat": 0.0,
+          "ward_flat": 0.0
+        },
+        "1": {
+          "armor_flat": 0.5,
+          "ward_flat": 2.1
+        },
+        "2": {
+          "armor_flat": 1.0,
+          "ward_flat": 4.2
+        },
+        "3": {
+          "armor_flat": 1.5,
+          "ward_flat": 6.3
+        }
+      },
+      "old_acquisition_suggestion": "第一章奖励池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    },
+    {
+      "content_id": "ARM-ROB-003",
+      "name": "静脉长袍",
+      "kind": "armor",
+      "family": "ROB",
+      "intrinsic_reference": "../equipment-v1/armor.json#ARM-ROB-003",
+      "intrinsic_armor": 8,
+      "intrinsic_ward": 70,
+      "grades_allowed": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "grade_growth_flat": {
+        "0": {
+          "armor_flat": 0.0,
+          "ward_flat": 0.0
+        },
+        "1": {
+          "armor_flat": 0.4,
+          "ward_flat": 3.5
+        },
+        "2": {
+          "armor_flat": 0.8,
+          "ward_flat": 7.0
+        },
+        "3": {
+          "armor_flat": 1.2,
+          "ward_flat": 10.5
+        }
+      },
+      "old_acquisition_suggestion": "第一章精英池",
+      "old_acquisition_is_unlock_requirement": false,
+      "new_content_or_meta_unlock_added": false
+    }
+  ],
+  "paper_examples": [
+    {
+      "id": "GROW-EX-001",
+      "purpose": "current_weapon_grade_and_affix_share_one_budget",
+      "content_id": "WPN-KNF-001",
+      "kind": "weapon_formula",
+      "grade": 1,
+      "base_segment": 12,
+      "other_damage_pct": 10,
+      "growth_damage_pct": 5,
+      "raw_sum_pct": 15,
+      "clamped_sum_pct": 15,
+      "direct_before_crit_mitigation_vulnerability": 13.8,
+      "expected": "12*(1+clamp(10+5,-30,50)/100)=13.8; timeline_reach_stagger_unchanged"
+    },
+    {
+      "id": "GROW-EX-002",
+      "purpose": "negative_enchant_survives_quality_growth",
+      "content_id": "WPN-KNF-001",
+      "kind": "weapon_formula",
+      "grade": 3,
+      "base_segment": 12,
+      "other_damage_pct": -20,
+      "growth_damage_pct": 15,
+      "raw_sum_pct": -5,
+      "clamped_sum_pct": -5,
+      "direct_before_crit_mitigation_vulnerability": 11.4,
+      "expected": "12*.95=11.4; quality_does_not_cleanse_or_reroll_negative"
+    },
+    {
+      "id": "GROW-EX-003",
+      "purpose": "each_explicit_subhit_gets_same_single_budget",
+      "content_id": "WPN-KNF-002",
+      "kind": "weapon_subhits",
+      "grade": 2,
+      "base_segments": [
+        10,
+        10
+      ],
+      "other_damage_pct": 0,
+      "growth_damage_pct": 10,
+      "final_segments_before_other_factors": [
+        11,
+        11
+      ],
+      "nominal_total": 22,
+      "expected": "each10*1.10; do_not_apply_grade_again_to_22"
+    },
+    {
+      "id": "GROW-EX-004",
+      "purpose": "float_armor_growth_no_round_up",
+      "content_id": "ARM-HVY-001",
+      "kind": "armor_formula",
+      "grade": 3,
+      "intrinsic_armor": 85,
+      "intrinsic_ward": 12,
+      "growth_armor_flat": 12.75,
+      "growth_ward_flat": 1.8,
+      "other_armor_flat": 0,
+      "other_ward_flat": 0,
+      "final_armor": 97.75,
+      "final_ward": 13.8,
+      "physical_reduction": 0.4943109987357775,
+      "magic_reduction": 0.12126537785588754,
+      "expected": "grade3 adds intrinsic*.15 as flat; no separate mitigation multiplier"
+    },
+    {
+      "id": "GROW-EX-005",
+      "purpose": "upgraded_protection_does_not_expand_negative_affix_pool",
+      "content_id": "ARM-LGT-001",
+      "kind": "negative_eligibility",
+      "grade": 3,
+      "intrinsic_armor": 14,
+      "growth_armor_flat": 2.1,
+      "pre_affix_armor": 16.1,
+      "affix_id": "AFF-N-008",
+      "tier": 4,
+      "tier_interval": [
+        13,
+        16
+      ],
+      "legal_interval_using_original_intrinsic": [
+        13,
+        14
+      ],
+      "excluded_magnitudes": [
+        15,
+        16
+      ],
+      "next_tier": 5,
+      "next_tier_interval": [
+        17,
+        20
+      ],
+      "next_tier_legal_interval": [],
+      "next_enchant_upgrade_result": "reject_before_payment_keep_old_package_and_original_q"
+    },
+    {
+      "id": "GROW-EX-006",
+      "purpose": "partial_cap_effect_still_costs_fixed_step_fee",
+      "content_id": "WPN-KNF-001",
+      "kind": "upgrade_quote",
+      "fixture_kind": "cap_boundary_input_fixture_not_new_equipment",
+      "from_grade": 0,
+      "to_grade": 1,
+      "other_damage_pct": 48,
+      "old_effective_damage_pct": 48,
+      "new_effective_damage_pct": 50,
+      "effective_increase_pct_points": 2,
+      "gold_cost": 30,
+      "accept": true,
+      "warning": "nominal_grade_gain5_only2_effective; fixed30_after_explicit_confirmation"
+    },
+    {
+      "id": "GROW-EX-007",
+      "purpose": "all_affected_final_stats_capped_refuse_no_cost",
+      "content_id": "WPN-KNF-001",
+      "kind": "upgrade_quote",
+      "fixture_kind": "cap_boundary_input_fixture_not_new_equipment",
+      "from_grade": 0,
+      "to_grade": 1,
+      "other_damage_pct": 50,
+      "old_effective_damage_pct": 50,
+      "new_effective_damage_pct": 50,
+      "effective_increase_pct_points": 0,
+      "quoted_gold_fee": 30,
+      "actual_gold_spent": 0,
+      "coupon_spent": 0,
+      "instance_version_delta": 0,
+      "accept": false,
+      "failure_code": "NO_EFFECTIVE_GROWTH_NOW"
+    },
+    {
+      "id": "GROW-EX-008",
+      "purpose": "original_zero_stays_zero",
+      "kind": "generic_formula_boundary_fixture_not_a_46th_equipment_definition",
+      "grade": 3,
+      "intrinsic_armor": 0,
+      "intrinsic_ward": 0,
+      "growth_armor_flat": 0,
+      "growth_ward_flat": 0,
+      "expected": "0*.15=0; no ceil or invented minimum point"
+    },
+    {
+      "id": "GROW-EX-009",
+      "purpose": "armor_one_channel_capped_other_improves",
+      "content_id": "ARM-HVY-001",
+      "kind": "armor_upgrade_quote",
+      "fixture_kind": "synthetic_cap_inputs_not_claim_current_build_attainability",
+      "from_grade": 0,
+      "to_grade": 1,
+      "intrinsic_armor": 85,
+      "intrinsic_ward": 12,
+      "other_armor_flat": 100,
+      "other_ward_flat": 0,
+      "old_final_armor": 150,
+      "new_final_armor": 150,
+      "old_final_ward": 12,
+      "new_final_ward": 12.6,
+      "gold_cost": 30,
+      "accept": true,
+      "warning": "armor0_gain; ward+.6_only; fixed30_requires_explicit_confirmation"
+    },
+    {
+      "id": "GROW-EX-010",
+      "purpose": "FUN005_waives_only_0_to_1_fee",
+      "content_id": "WPN-KNF-001",
+      "kind": "coupon_quote",
+      "chapter": 1,
+      "from_grade": 0,
+      "to_grade": 1,
+      "coupon_id": "ITM-FUN-005",
+      "coupon_before": 1,
+      "coupon_after": 0,
+      "gold_before": 0,
+      "gold_after": 0,
+      "nominal_fee_waived": 30,
+      "instance_id_changed": false,
+      "instance_version_delta": 1,
+      "accept": true,
+      "requires_effective_growth_and_service_and_safety": true
+    },
+    {
+      "id": "GROW-EX-011",
+      "purpose": "natural_quality_and_enchant_are_independent",
+      "kind": "probability",
+      "chapter": 5,
+      "grade": 2,
+      "grade_probability": 0.5,
+      "package": "none",
+      "package_unconditional_probability": 0.6,
+      "joint_probability": 0.3,
+      "expected": ".5*.6=.3; grade2_cursed=.5*.04=.02"
+    },
+    {
+      "id": "GROW-EX-012",
+      "purpose": "no_chapter_enchant_tier_gate_does_not_mean_free_V",
+      "kind": "price_path",
+      "from_package": "none",
+      "awaken_cost": 20,
+      "upgrade_costs": [
+        40,
+        80,
+        140,
+        220
+      ],
+      "total_gold_if_each_operation_legal": 500,
+      "success_tier": 5,
+      "allowed_in_chapter": 1,
+      "guaranteed_affordable_in_chapter1": false,
+      "negative_affixes_upgrade_too": true,
+      "expected": "20+40+80+140+220=500; each step must have legal original-base interval and adequate current wallet"
+    },
+    {
+      "id": "GROW-EX-013",
+      "purpose": "cost_and_cap_steps",
+      "kind": "grade_cost",
+      "step_costs": [
+        30,
+        55,
+        85
+      ],
+      "cumulative_gold_from_grade0": [
+        0,
+        30,
+        85,
+        170
+      ],
+      "region_workshop_caps": [
+        1,
+        1,
+        2,
+        2,
+        3
+      ],
+      "natural_caps": [
+        0,
+        1,
+        1,
+        2,
+        2
+      ],
+      "expected": "grade3 natural weight0 allchapters; complete basic upgrade170, not enchantV cost"
+    },
+    {
+      "id": "GROW-EX-014",
+      "purpose": "backup_preview_without_real_switch",
+      "content_id": "WPN-KNF-001",
+      "kind": "inactive_weapon_quote",
+      "target_slot": "owned_inactive_weapon",
+      "evaluation": "simulate_target_as_active_and_remove_old_active_weapon_contributions_keep_armor_relics_tonics",
+      "real_active_weapon_changes": false,
+      "real_attack_or_shared_cooldown_changes": false,
+      "payment_blocked_if_simulated_growth_all_capped": true,
+      "fixture_kind": "preview_math_input_fixture",
+      "old_real_active_weapon_damage_contribution": 40,
+      "retained_nonweapon_damage_pct": 20,
+      "target_weapon_affix_damage_pct": 0,
+      "target_from_grade": 0,
+      "target_to_grade": 1,
+      "hypothetical_old_final_damage_pct": 20,
+      "hypothetical_new_final_damage_pct": 25,
+      "gold_cost": 30,
+      "accept": true,
+      "expected": "exclude_old_weapon40; target_old20_new25_not_old_real_build_cap50; no_real_switch"
+    }
+  ],
+  "future_runtime_cases": [
+    "all45_equipment_each_0_to1_to2_to3_formula_and_cap_check",
+    "weapon_multi_segment_primary_skill_shotgun_penetration_no_double_growth",
+    "inactive_weapon_quote_does_not_switch_or_add_old_active_contribution",
+    "full_cap_reject_no_gold_coupon_version_RNG_change",
+    "partial_cap_actual_delta_fixed_fee_confirm",
+    "armor_float_growth_zero_base_and_original_negative_interval",
+    "old_projectile_keeps_grade_snapshot_after_upgrade",
+    "armor_burn_tick_uses_current_protection_without_cleanse",
+    "FUN005_0_to1_only_and_duplicate_confirm_once",
+    "upgraded_grade_does_not_reset_HP_focus_magazine_skill_or_shared_ICDs",
+    "invalid_or_changed_quote_cancels_no_autowait",
+    "save_retry_same_instance_and_committed_operation",
+    "natural_grade_and_enchant_joint_distribution_not_equated_with_quality",
+    "complete_run_reward_competition_and_early_enchantV_affordability_D14"
+  ],
+  "runtime_balance_evidence": false
+}

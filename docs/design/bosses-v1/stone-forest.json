@@ -1,0 +1,655 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-13",
+  "source_event": "EV-024",
+  "module": "D-06",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "tuning_status": "proposed_untested",
+  "authority": "assistant_proposal_not_individually_user_approved",
+  "common_rules_ref": "common-rules.json",
+  "bosses": [
+    {
+      "id": "BOS-STN-001",
+      "name": "裂冠石像统领",
+      "family": "STN",
+      "suggested_chapter": 1,
+      "role": "诱导直线冲阵、辨认横斩和脚下地震的地面首领",
+      "size": "boss_ground_large",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 650,
+        "armor": 35,
+        "ward": 15,
+        "poise": 120,
+        "move_cm_s": 170
+      },
+      "body": {
+        "half_x_cm": 48,
+        "half_y_cm": 30,
+        "ground_z_cm": 0
+      },
+      "hurtbox": {
+        "half_x_cm": 48,
+        "half_y_cm": 30,
+        "reference_z_cm": 0,
+        "independent_from_body": true
+      },
+      "activation": {
+        "type": "boss_room_gate_committed_once",
+        "intro_warning_s": 1.5,
+        "damageable_during_intro": true,
+        "attack_requires_intro_and_hurt_complete": true,
+        "no_hp_reset_on_activation_or_leash": true,
+        "counts_for_clear_before_activation": true,
+        "spawn_or_reward_identity_changes_on_wake": false
+      },
+      "attacks": [
+        {
+          "id": "BOS-STN-001-A1",
+          "name": "裂冠冲阵",
+          "type": "charge",
+          "windup_s": 1.2,
+          "active_s": 0.9,
+          "recovery_s": 2.2,
+          "cooldown_s": 4.8,
+          "damage": 28,
+          "damage_type": "physical",
+          "stagger": 28,
+          "lock_fraction": 0.5,
+          "shape": {
+            "type": "swept_charge",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "front_reach_cm": 90,
+            "half_y_cm": 38,
+            "path_speed_cm_s": 600,
+            "path_max_cm": 540,
+            "target_geometry": "target_center_in_front_strip_then_actual_height"
+          },
+          "accept_range": {
+            "origin": "boss_center",
+            "min_forward_x_cm": 200,
+            "max_forward_x_cm": 620,
+            "max_abs_y_cm": 50,
+            "requires_los": true
+          },
+          "movement": {
+            "type": "fixed_facing_x_sweep",
+            "speed_cm_s": 600,
+            "max_distance_cm": 540,
+            "moves_y": false,
+            "tracks_after_lock": false,
+            "stop_on_wall_body_or_valid_hit": true,
+            "damage_check_precedes_same_time_body_stop": true,
+            "full_recovery_after_early_stop_s": 2.2,
+            "no_body_overlap_or_teleport": true
+          },
+          "max_hits_per_target_per_attack": 1,
+          "telegraph": "冠裂亮起、盾锋落地；全长窄带从起手出现，0.60s锁定朝向和Y，之后不会转弯。",
+          "counter": "在0.60s锁线后步行离开38cm半宽的Y带；冲空、命中或撞墙都停在落点，完整2.20s不移动、不转身恢复。",
+          "ground_y_escape": {
+            "requires_consumable_or_dodge_or_jump": false,
+            "max_center_y_needed_from_locked_line_cm": 39,
+            "available_post_lock_s": 0.6,
+            "stress_move_cm_s": 129.1875,
+            "stress_speed_formula": "265*0.65*0.75",
+            "reaction_allowance_s": 0.15,
+            "additional_escape_margin_cm": 1,
+            "usable_walk_s": 0.45,
+            "stress_walk_distance_cm": 58.134375,
+            "scope": "open_flat_walkable_ground_arithmetic_only_not_edge_or_geometry_playtest"
+          },
+          "phase_ids": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "BOS-STN-001-A2",
+          "name": "破盾横斩",
+          "type": "melee",
+          "windup_s": 1.4,
+          "active_s": 0.18,
+          "recovery_s": 1.9,
+          "cooldown_s": 4.0,
+          "damage": 24,
+          "damage_type": "physical",
+          "stagger": 24,
+          "lock_fraction": 0.5,
+          "shape": {
+            "type": "forward_rectangle",
+            "origin": "boss_center_locked_at_half_windup",
+            "x_min_cm": 0,
+            "x_max_cm": 195,
+            "half_y_cm": 65,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "target_geometry": "target_center"
+          },
+          "accept_range": {
+            "origin": "boss_center",
+            "min_forward_x_cm": 66,
+            "max_forward_x_cm": 195,
+            "max_abs_y_cm": 65,
+            "requires_los": true
+          },
+          "max_hits_per_target_per_attack": 1,
+          "telegraph": "重刃横收于身侧，扇形挥刃视觉只作表现；实际195×130cm矩形边界画在地面，0.70s锁定。",
+          "counter": "锁定后向Y带外步行，或从195cm射程外诱空；1.90s恢复期间可返回近身反击，挥刃特效不能扩大命中范围。",
+          "ground_y_escape": {
+            "requires_consumable_or_dodge_or_jump": false,
+            "max_center_y_needed_from_locked_line_cm": 66,
+            "available_post_lock_s": 0.7,
+            "stress_move_cm_s": 129.1875,
+            "stress_speed_formula": "265*0.65*0.75",
+            "reaction_allowance_s": 0.15,
+            "additional_escape_margin_cm": 1,
+            "usable_walk_s": 0.55,
+            "stress_walk_distance_cm": 71.053125,
+            "scope": "open_flat_walkable_ground_arithmetic_only_not_edge_or_geometry_playtest"
+          },
+          "phase_ids": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "BOS-STN-001-A3",
+          "name": "震殿跺足",
+          "type": "area",
+          "windup_s": 2.0,
+          "active_s": 0.15,
+          "recovery_s": 2.1,
+          "cooldown_s": 4.8,
+          "damage": 26,
+          "damage_type": "physical",
+          "stagger": 30,
+          "lock_fraction": 0.5,
+          "shape": {
+            "type": "ellipse",
+            "origin": "boss_center_locked_at_half_windup",
+            "radius_x_cm": 250,
+            "radius_y_cm": 100,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "target_geometry": "target_center",
+            "exact_test": "(dx/250)^2+(dy/100)^2<=1"
+          },
+          "accept_range": {
+            "origin": "boss_center",
+            "max_abs_x_cm": 250,
+            "max_abs_y_cm": 100,
+            "requires_los": true
+          },
+          "max_hits_per_target_per_attack": 1,
+          "telegraph": "双脚裂缝同步发光，地面显示完整250×100cm半径椭圆；1.00s固定中心，落脚只产生一次伤害。",
+          "counter": "从左右近身位置朝Y方向走出椭圆，最坏从中心线离开到|Y|101cm；冲击后2.10s原地恢复，无残留伤害地毯。",
+          "ground_y_escape": {
+            "requires_consumable_or_dodge_or_jump": false,
+            "max_center_y_needed_from_locked_line_cm": 101,
+            "available_post_lock_s": 1.0,
+            "stress_move_cm_s": 129.1875,
+            "stress_speed_formula": "265*0.65*0.75",
+            "reaction_allowance_s": 0.15,
+            "additional_escape_margin_cm": 1,
+            "usable_walk_s": 0.85,
+            "stress_walk_distance_cm": 109.809375,
+            "scope": "open_flat_walkable_ground_arithmetic_only_not_edge_or_geometry_playtest"
+          },
+          "phase_ids": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "BOS-STN-001-A4",
+          "name": "冠盾踏印",
+          "type": "area",
+          "windup_s": 1.8,
+          "active_s": 0.2,
+          "recovery_s": 2.1,
+          "cooldown_s": 4.6,
+          "damage": 30,
+          "damage_type": "physical",
+          "stagger": 28,
+          "lock_fraction": 0.5,
+          "shape": {
+            "type": "ellipse",
+            "origin": "boss_center_locked_at_half_windup_plus_facing_offset",
+            "forward_offset_cm": 110,
+            "y_offset_cm": 0,
+            "radius_x_cm": 135,
+            "radius_y_cm": 85,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "target_geometry": "target_center",
+            "exact_test": "((dx-110*facing)/135)^2+(dy/85)^2<=1"
+          },
+          "accept_range": {
+            "origin": "boss_center",
+            "min_forward_x_cm": 66,
+            "max_forward_x_cm": 235,
+            "max_abs_y_cm": 85,
+            "requires_los": true
+          },
+          "max_hits_per_target_per_attack": 1,
+          "telegraph": "盾面冠纹向前投出椭圆脚印，0.90s锁定中心与朝向；这是盾击落印，不提供未声明的守盾减伤。",
+          "counter": "按地面印向Y外侧离开85cm半宽，或保持在身后；命中后印立即消失，Boss完整2.10s原地停顿。",
+          "ground_y_escape": {
+            "requires_consumable_or_dodge_or_jump": false,
+            "max_center_y_needed_from_locked_line_cm": 86,
+            "available_post_lock_s": 0.9,
+            "stress_move_cm_s": 129.1875,
+            "stress_speed_formula": "265*0.65*0.75",
+            "reaction_allowance_s": 0.15,
+            "additional_escape_margin_cm": 1,
+            "usable_walk_s": 0.75,
+            "stress_walk_distance_cm": 96.890625,
+            "scope": "open_flat_walkable_ground_arithmetic_only_not_edge_or_geometry_playtest"
+          },
+          "phase_ids": [
+            2
+          ]
+        }
+      ],
+      "phases": [
+        {
+          "id": 1,
+          "hp_fraction_above": 0.5,
+          "attack_ids": [
+            "BOS-STN-001-A1",
+            "BOS-STN-001-A2",
+            "BOS-STN-001-A3"
+          ]
+        },
+        {
+          "id": 2,
+          "hp_fraction_at_or_below": 0.5,
+          "attack_ids": [
+            "BOS-STN-001-A1",
+            "BOS-STN-001-A2",
+            "BOS-STN-001-A3",
+            "BOS-STN-001-A4"
+          ],
+          "transition_warning_s": 1.2,
+          "attack_speed_or_damage_multiplier": 1.0
+        }
+      ],
+      "phase_transition": {
+        "queue_on_threshold_crossing": true,
+        "commit_after_current_mandatory_recovery": true,
+        "damageable_and_controllable": true,
+        "hp_refill": false,
+        "invulnerability": false,
+        "clear_cooldowns": false,
+        "same_time_thresholds_take_final_phase": true,
+        "warning_and_hurt_clocks_do_not_erase_each_other": true,
+        "new_attack_requires_warning_and_hurt_complete": true,
+        "presentation": "冠裂扩散、持盾姿态变低；血条50%处刻度与第二阶段图标亮起。"
+      },
+      "behavior": {
+        "movement": "只在待机追近，朝目标地面位置行走，不倒退放风筝；攻击全过程及完整后摇不移动、不转身，只有A1的active按声明直冲。",
+        "attack_choice": "按common筛phase、CD、LOS、可见预警、接纳范围、完整投射容量与近期历史，再以本局种子权重选合法候选。X200—620且|Y|<=50可选A1；近身从A2/A3选，二阶段加入A4。有其他合法招时不连续选同招，任一招最多连续两次，连续冲锋最多一次；仅同招合法且已达上限时先有界重定位或等待其他招CD。无合法招先行走对齐Y至50内再接近，不隔墙出招或瞬移。",
+        "interrupt": "死亡停止源动作和未发段；同点已到期伤害仍全量结算，玩家存活且Boss成功提交后才清本Boss剩余场上攻击，失败按本局结束清理。破韧按common的0.25s/保护3s；前摇或active破韧取消未来伤害、不返CD，硬直后执行完整声明恢复；恢复中破韧不重启恢复，下一动作取原恢复截止与硬直结束较晚者。已施加到角色的状态、next_tick、CD及资源不由Boss攻击清理删除。",
+        "phase_pending_priority": "生命结算与死亡优先；存活则记录待切阶段，当前攻击的命中/中断与后摇照常完成，再显示1.20s切换提示。",
+        "no_player_build_scaling_or_contact_damage": true
+      },
+      "counterplay": "核心是读直线与椭圆，沿Y避开后回到X66—88cm短刀可接近区；不要求闪避、跳跃、消耗品、特定随机武器或元素。650HP和甲抗是首轮试调值，不是通关耗时依据。",
+      "combination_risk": "单Boss房不混入普通敌人；不得用柱子、边缘或场景道具堵住完整Y逃逸。根竞技场约束只作纸面建议，D-07必须验证可达性、Y宽度、出生点和镜头。",
+      "asset_notes": [
+        "一套地面石像骨架及重刃/盾分件",
+        "待机/走/1.5s出场/冲阵前摇-冲刺-停步/横斩/地震/盾踏/受击-破韧/死亡",
+        "一阶段冠纹暗、二阶段冠裂亮的材质变体，非第二血条",
+        "各招尺寸一致的地面警示、地震一次波纹、盾踏印",
+        "冲阵锁线音、石刃蓄势音、单次落震音；无装饰接触伤害"
+      ],
+      "reward": {
+        "rule_ref": "common-rules.json#settlement",
+        "amount_or_weight_assigned": false
+      },
+      "status": "design_only"
+    },
+    {
+      "id": "BOS-FOR-001",
+      "name": "荆冠古树",
+      "family": "FOR",
+      "suggested_chapter": 2,
+      "role": "长枝覆盖、锁点根刺和慢种弹的地面森林首领",
+      "size": "boss_ground_large",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 900,
+        "armor": 25,
+        "ward": 30,
+        "poise": 140,
+        "move_cm_s": 150
+      },
+      "body": {
+        "half_x_cm": 54,
+        "half_y_cm": 34,
+        "ground_z_cm": 0
+      },
+      "hurtbox": {
+        "half_x_cm": 54,
+        "half_y_cm": 34,
+        "reference_z_cm": 0,
+        "independent_from_body": true
+      },
+      "activation": {
+        "type": "boss_room_gate_committed_once",
+        "intro_warning_s": 1.5,
+        "damageable_during_intro": true,
+        "attack_requires_intro_and_hurt_complete": true,
+        "no_hp_reset_on_activation_or_leash": true,
+        "counts_for_clear_before_activation": true,
+        "spawn_or_reward_identity_changes_on_wake": false
+      },
+      "attacks": [
+        {
+          "id": "BOS-FOR-001-A1",
+          "name": "荆枝横扫",
+          "type": "melee",
+          "windup_s": 1.7,
+          "active_s": 0.2,
+          "recovery_s": 2.0,
+          "cooldown_s": 4.4,
+          "damage": 26,
+          "damage_type": "physical",
+          "stagger": 28,
+          "lock_fraction": 0.5,
+          "shape": {
+            "type": "forward_rectangle",
+            "origin": "boss_center_locked_at_half_windup",
+            "x_min_cm": 0,
+            "x_max_cm": 270,
+            "half_y_cm": 78,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "target_geometry": "target_center"
+          },
+          "accept_range": {
+            "origin": "boss_center",
+            "min_forward_x_cm": 72,
+            "max_forward_x_cm": 270,
+            "max_abs_y_cm": 78,
+            "requires_los": true
+          },
+          "max_hits_per_target_per_attack": 1,
+          "telegraph": "长枝抬向一侧，根部270×156cm矩形带完整显现；0.85s锁定朝向，枝梢视觉不越出伤害带。",
+          "counter": "地面Y走出78cm半宽即可；古树不会边扫边追身，2.00s原地后摇让近战返回X72—88cm区域。",
+          "ground_y_escape": {
+            "requires_consumable_or_dodge_or_jump": false,
+            "max_center_y_needed_from_locked_line_cm": 79,
+            "available_post_lock_s": 0.85,
+            "stress_move_cm_s": 129.1875,
+            "stress_speed_formula": "265*0.65*0.75",
+            "reaction_allowance_s": 0.15,
+            "additional_escape_margin_cm": 1,
+            "usable_walk_s": 0.7,
+            "stress_walk_distance_cm": 90.43125,
+            "scope": "open_flat_walkable_ground_arithmetic_only_not_edge_or_geometry_playtest"
+          },
+          "phase_ids": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "BOS-FOR-001-A2",
+          "name": "锁足根印",
+          "type": "area",
+          "windup_s": 1.6,
+          "active_s": 0.15,
+          "recovery_s": 2.0,
+          "cooldown_s": 4.3,
+          "damage": 24,
+          "damage_type": "physical",
+          "stagger": 24,
+          "lock_fraction": 0.5,
+          "shape": {
+            "type": "ellipse",
+            "origin": "locked_player_ground_center",
+            "radius_x_cm": 120,
+            "radius_y_cm": 75,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "target_geometry": "target_center",
+            "exact_test": "(dx/120)^2+(dy/75)^2<=1",
+            "persistent_damage_after_active": false
+          },
+          "accept_range": {
+            "origin": "boss_center",
+            "max_abs_x_cm": 520,
+            "max_abs_y_cm": 260,
+            "requires_los": true,
+            "requires_target_ground_point_in_same_walkable_arena": true
+          },
+          "max_hits_per_target_per_attack": 1,
+          "telegraph": "根尖先向目标延伸，0.80s锁定玩家地面点并留下完整120×75cm半径椭圆；根印不能在锁定后追人。",
+          "counter": "锁印后沿Y走出75cm半宽；根刺只有0.15s一次判定，不定身、不留下地毯，2.00s恢复时古树不走位。",
+          "ground_y_escape": {
+            "requires_consumable_or_dodge_or_jump": false,
+            "max_center_y_needed_from_locked_line_cm": 76,
+            "available_post_lock_s": 0.8,
+            "stress_move_cm_s": 129.1875,
+            "stress_speed_formula": "265*0.65*0.75",
+            "reaction_allowance_s": 0.15,
+            "additional_escape_margin_cm": 1,
+            "usable_walk_s": 0.65,
+            "stress_walk_distance_cm": 83.971875,
+            "scope": "open_flat_walkable_ground_arithmetic_only_not_edge_or_geometry_playtest"
+          },
+          "phase_ids": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "BOS-FOR-001-A3",
+          "name": "空荚种弹",
+          "type": "projectile",
+          "windup_s": 1.1,
+          "active_s": 0.1,
+          "recovery_s": 2.0,
+          "cooldown_s": 3.6,
+          "damage": 22,
+          "damage_type": "magic",
+          "stagger": 20,
+          "lock_fraction": 0.5,
+          "shape": {
+            "type": "straight_projectile_sweep",
+            "height_center_cm": 28,
+            "height_tolerance_cm": 65,
+            "projectile_half_x_cm": 12,
+            "projectile_half_y_cm": 10,
+            "fixed_corridor_half_y_cm": 26,
+            "range_min_forward_x_cm": 0,
+            "range_max_forward_x_cm": 630,
+            "target_geometry": "continuous_projectile_vs_independent_hurtbox_then_target_center_original_range_and_corridor",
+            "range_and_corridor_origin": "actual_emission_muzzle",
+            "heading": "locked_facing_x_no_y_homing"
+          },
+          "accept_range": {
+            "origin": "boss_center",
+            "min_forward_x_cm": 100,
+            "max_forward_x_cm": 650,
+            "max_abs_y_cm": 26,
+            "requires_los": true
+          },
+          "projectile": {
+            "count": 1,
+            "emission_offset_active_s": 0,
+            "muzzle_forward_offset_cm": 70,
+            "muzzle_y_offset_cm": 0,
+            "actual_emission_z_cm": 28,
+            "speed_cm_s": 420,
+            "max_distance_cm": 630,
+            "lifetime_s": 1.5,
+            "half_x_cm": 12,
+            "half_y_cm": 10,
+            "continuous_sweep": true,
+            "ignores_owner_body": true,
+            "allied_body_blocks_without_damage": true,
+            "stops_on_wall_or_first_blocking_body": true,
+            "room_bound": true,
+            "homing": false,
+            "explodes_or_persists_after_contact": false
+          },
+          "max_hits_per_target_per_attack": 1,
+          "telegraph": "枝荚张开并发亮，Y窄带从枪口延至630cm，0.55s锁朝；种弹保持420cm/s直线速度，不临近加速。",
+          "counter": "锁线后步行离开枪口Y±26cm硬界，种弹不能拐弯或穿墙；2.00s原地后摇大于弹体1.50s寿命，结束前不会接第二招。",
+          "ground_y_escape": {
+            "requires_consumable_or_dodge_or_jump": false,
+            "max_center_y_needed_from_locked_line_cm": 27,
+            "available_post_lock_s": 0.55,
+            "stress_move_cm_s": 129.1875,
+            "stress_speed_formula": "265*0.65*0.75",
+            "reaction_allowance_s": 0.15,
+            "additional_escape_margin_cm": 1,
+            "usable_walk_s": 0.4,
+            "stress_walk_distance_cm": 51.675,
+            "scope": "open_flat_walkable_ground_arithmetic_only_not_edge_or_geometry_playtest"
+          },
+          "phase_ids": [
+            1,
+            2
+          ]
+        },
+        {
+          "id": "BOS-FOR-001-A4",
+          "name": "双冠根刺",
+          "type": "area",
+          "windup_s": 1.4,
+          "active_s": 0.5,
+          "recovery_s": 2.2,
+          "cooldown_s": 4.6,
+          "damage": 44,
+          "damage_type": "physical",
+          "stagger": 40,
+          "lock_fraction": 0.5,
+          "damage_semantics": "nominal_total_of_two_explicit_subhits_not_an_additional_hit",
+          "shape": {
+            "type": "two_locked_ellipses",
+            "origin": "locked_player_ground_center",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "target_geometry": "target_center",
+            "centers_locked_at_half_windup": true,
+            "radius_x_cm": 90,
+            "radius_y_cm": 60,
+            "second_center_forward_x_offset_cm": 140,
+            "second_center_y_offset_cm": 0,
+            "no_tracking_or_new_lock_between_subhits": true,
+            "persistent_damage_after_active": false
+          },
+          "accept_range": {
+            "origin": "boss_center",
+            "max_abs_x_cm": 500,
+            "max_abs_y_cm": 240,
+            "requires_los": true,
+            "requires_both_mark_centers_in_same_walkable_arena": true,
+            "invalid_mark_cancels_whole_attack_before_accept": true
+          },
+          "subhits": [
+            {
+              "id": "root_near",
+              "active_start_s": 0,
+              "active_end_exclusive_s": 0.15,
+              "damage": 22,
+              "stagger": 20,
+              "forward_x_offset_cm": 0,
+              "y_offset_cm": 0,
+              "max_hits_per_target": 1
+            },
+            {
+              "id": "root_far",
+              "active_start_s": 0.35,
+              "active_end_exclusive_s": 0.5,
+              "damage": 22,
+              "stagger": 20,
+              "forward_x_offset_cm": 140,
+              "y_offset_cm": 0,
+              "max_hits_per_target": 1
+            }
+          ],
+          "max_hits_per_target_per_attack": 2,
+          "telegraph": "0.70s将两个90×60cm半径根印同时固定并编号一、二；第二印在锁定朝向的X前方140cm，0.35s后生效，不二次锁人。",
+          "counter": "两个印都在同一条Y带，锁定后朝任一Y外侧离开60cm半宽便可同时避开；两个子段共用AttackID、各自只命中一次，不能把44总伤害再加在任一子段。",
+          "ground_y_escape": {
+            "requires_consumable_or_dodge_or_jump": false,
+            "max_center_y_needed_from_locked_line_cm": 61,
+            "available_post_lock_s": 0.7,
+            "stress_move_cm_s": 129.1875,
+            "stress_speed_formula": "265*0.65*0.75",
+            "reaction_allowance_s": 0.15,
+            "additional_escape_margin_cm": 1,
+            "usable_walk_s": 0.55,
+            "stress_walk_distance_cm": 71.053125,
+            "scope": "open_flat_walkable_ground_arithmetic_only_not_edge_or_geometry_playtest"
+          },
+          "phase_ids": [
+            2
+          ]
+        }
+      ],
+      "phases": [
+        {
+          "id": 1,
+          "hp_fraction_above": 0.5,
+          "attack_ids": [
+            "BOS-FOR-001-A1",
+            "BOS-FOR-001-A2",
+            "BOS-FOR-001-A3"
+          ]
+        },
+        {
+          "id": 2,
+          "hp_fraction_at_or_below": 0.5,
+          "attack_ids": [
+            "BOS-FOR-001-A1",
+            "BOS-FOR-001-A2",
+            "BOS-FOR-001-A3",
+            "BOS-FOR-001-A4"
+          ],
+          "transition_warning_s": 1.2,
+          "attack_speed_or_damage_multiplier": 1.0
+        }
+      ],
+      "phase_transition": {
+        "queue_on_threshold_crossing": true,
+        "commit_after_current_mandatory_recovery": true,
+        "damageable_and_controllable": true,
+        "hp_refill": false,
+        "invulnerability": false,
+        "clear_cooldowns": false,
+        "same_time_thresholds_take_final_phase": true,
+        "warning_and_hurt_clocks_do_not_erase_each_other": true,
+        "new_attack_requires_warning_and_hurt_complete": true,
+        "presentation": "荆冠分叉成双根纹，1.20s提示期间可受伤；只增双点根刺，不新增隐含伤害倍率。"
+      },
+      "behavior": {
+        "movement": "待机按150cm/s走近目标，优先将X距离缩至270内，不主动持续拉远；非待机不平移不转身。长枝视觉伸展不改变54×34cm身体与独立受击体。",
+        "attack_choice": "按common筛phase、CD、LOS、可见预警、接纳范围、合法印点、完整投射容量与近期历史，再以本局种子权重选合法候选。近身优先A1/A2候选；目标暂离270cm时可A2，且|Y|<=26时可A3；二阶段合法双点可A4。有其他合法招时不连续选同招，任一招最多连续两次；仅同招合法且已达上限时先有界重定位或等待其他招CD。连续锁点/种弹最多两次后须待机接近至270内，禁止一边后退一边锁点。",
+        "invalid_telegraph_point": "若锁定后点位不再属于有效同房地面则取消该伤害，不把印平移到另一个玩家位置；CD和完整后摇保留。静态场地应在D-07避免此情况。",
+        "interrupt": "死亡停止源动作和未发段；同点已到期伤害仍全量结算，玩家存活且Boss成功提交后才清本Boss剩余场上攻击，失败按本局结束清理。破韧按common的0.25s/保护3s；前摇或active破韧取消未来伤害、不返CD，硬直后执行完整声明恢复；恢复中破韧不重启恢复，下一动作取原恢复截止与硬直结束较晚者。已施加到角色的状态、next_tick、CD及资源不由Boss攻击清理删除。",
+        "phase_pending_priority": "同点先死亡判定；存活跨50%排队，攻击及后摇完成后才进入1.20s提示；提示与受控计时互不抹除。",
+        "no_player_build_scaling_or_contact_damage": true
+      },
+      "counterplay": "长枝与种弹是固定带，根印是锁玩家地面点，先识别警示是否跟到锁定。所有招可地面Y步行处理；近战在每招2.00—2.20s恢复中返回X72—88cm接近区。900HP、30魔抗不自动代表偏袒物理构筑，须用各武器实际输出试调。",
+      "combination_risk": "本初稿不召树苗/小怪、不留持续地毯。两个根印同时完整显示，根纹/种弹不得混淆命中时间或靠前景树叶遮挡；场边需保留至少一侧合法Y出口。",
+      "asset_notes": [
+        "一套地面树人骨架，冠/长枝/种荚为分件，不额外扩身体",
+        "待机/根步走/出场/枝扫/单根印/种荚吐弹/双根印/受击-破韧/死亡",
+        "二阶段双冠纹和荚光变体，非第二生命",
+        "单根椭圆与双根编号提示、只在active出现的根刺、可辨慢种弹",
+        "种荚张开、根印锁定、子段一/二分离音；音效缺失不影响地面视觉反制"
+      ],
+      "reward": {
+        "rule_ref": "common-rules.json#settlement",
+        "amount_or_weight_assigned": false
+      },
+      "status": "design_only"
+    }
+  ]
+}

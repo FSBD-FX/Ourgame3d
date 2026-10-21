@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "source_event": "EV-025",
+  "module": "D-07",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "source_files": [
+    "common-rules.json",
+    "regions-and-routes.json",
+    "room-sequences.json",
+    "paper-cases.json"
+  ],
+  "counts_proposed": {
+    "regions": 5,
+    "main_route_nodes": 35,
+    "optional_battle_candidates": 10,
+    "hidden_candidates": 5,
+    "room_roles": 10,
+    "sequence_templates": 6,
+    "sequence_groups": 16,
+    "example_required_slots": 36
+  },
+  "template_region_bindings": [
+    {
+      "template_id": "RSEQ-001",
+      "compatible_region_ids": [
+        "REG-01"
+      ],
+      "all_enemy_ids": [
+        "ENM-STN-001",
+        "ENM-STN-002",
+        "ENM-STN-003",
+        "ENM-STN-004"
+      ],
+      "is_example_not_forced_for_every_room": true
+    },
+    {
+      "template_id": "RSEQ-002",
+      "compatible_region_ids": [
+        "REG-04"
+      ],
+      "all_enemy_ids": [
+        "ENM-GOB-001",
+        "ENM-GOB-002",
+        "ENM-GOB-003"
+      ],
+      "is_example_not_forced_for_every_room": true
+    },
+    {
+      "template_id": "RSEQ-003",
+      "compatible_region_ids": [
+        "REG-02"
+      ],
+      "all_enemy_ids": [
+        "ENM-ELF-001",
+        "ENM-ELF-002",
+        "ENM-TRE-001",
+        "ENM-TRE-002",
+        "ENM-TRE-003"
+      ],
+      "is_example_not_forced_for_every_room": true
+    },
+    {
+      "template_id": "RSEQ-004",
+      "compatible_region_ids": [
+        "REG-03"
+      ],
+      "all_enemy_ids": [
+        "ENM-SKL-001",
+        "ENM-SKL-002",
+        "ENM-SKL-003"
+      ],
+      "is_example_not_forced_for_every_room": true
+    },
+    {
+      "template_id": "RSEQ-005",
+      "compatible_region_ids": [
+        "REG-04"
+      ],
+      "all_enemy_ids": [
+        "ENM-BST-003",
+        "ENM-MEC-001",
+        "ENM-MEC-002",
+        "ENM-MEC-003",
+        "ENM-SKL-001"
+      ],
+      "is_example_not_forced_for_every_room": true
+    },
+    {
+      "template_id": "RSEQ-006",
+      "compatible_region_ids": [
+        "REG-02"
+      ],
+      "all_enemy_ids": [
+        "ELT-STN-001",
+        "ENM-ELF-001",
+        "ENM-SKL-001",
+        "ENM-TRE-001",
+        "ENM-TRE-002"
+      ],
+      "is_example_not_forced_for_every_room": true
+    }
+  ],
+  "teaching_manifest_contract": {
+    "actor_count": 1,
+    "threat_cap": 4,
+    "enemy": "one_current_region_base_candidate_whose_basic_behavior_is_not_yet_shown_on_mandatory_path",
+    "elite": false,
+    "group_count": 1,
+    "unannounced_followup_required_group": false,
+    "initial_state": "visible_or_species_intrinsic_preplaced_dormant",
+    "clearing": "same_whole_manifest_rule; no_forced_six_enemy_tutorial",
+    "stage_time_clock": "orientation_and_species_warning_then_original_actions",
+    "runtime_verified": false
+  },
+  "empty_safe_role_contract": {
+    "roles": [
+      "ROOM-ROLE-ENTRY",
+      "ROOM-ROLE-SERVICE",
+      "ROOM-ROLE-PREP"
+    ],
+    "required_enemy_slots": 0,
+    "clear_record": "arrival_after_room_manifest_committed_and_same_timestamp_death_priority",
+    "full_safety": "D04 still checks attached_DoT_projectile_and_ground_idle; empty_room_is_not_automatic_cleanse"
+  },
+  "same_layout_with_different_enemy_manifest": "only_if_full_action_geometry_footprint_visibility_caps_and_reaction_routes_revalidated; no_silent_arbitrary_substitution",
+  "not_completed_by_this_index": [
+    "built_UE_maps_navmesh_camera_or_spawn_runtime",
+    "drop_rates_prices_and_run_duration",
+    "final_launch_counts_art_or_paid_assets"
+  ],
+  "trigger_event_aliases": {
+    "room_entry_committed": "entry_commit",
+    "dependencies_terminal": "group_all_killed",
+    "dependency_nonterminal_slot_count_at_or_below": "group_remaining_at_most",
+    "swept_depth_at_or_above": "depth_cross"
+  }
+}

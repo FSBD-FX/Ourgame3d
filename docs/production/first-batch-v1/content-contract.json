@@ -1,0 +1,1212 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "source_events": [
+    "EV-033",
+    "EV-034"
+  ],
+  "requirement": "REQ-018",
+  "status": "scope_and_completion_contract_added; production_not_completed",
+  "runtime_implemented_this_turn": false,
+  "authority": "user_requires_first_batch_equipment_and_enemies_complete_and_integrated; exact_selected_catalogue_is_assistant_proposal_inherited_from_D14",
+  "scope_change": {
+    "old": "D14_five_weapons_including_starter_and_four_armor_were_representative_technical_fixture_scope; first_region_named_enemies_andBoss_in_slice",
+    "new": "all_selected5weapons4armor5base_enemies_and1Boss_are_complete_first_batch_production_and_real_slice_integration_deliverables",
+    "exact_counts_user_explicitly_named": false,
+    "priority": "complete_selected_content_units_before_main_investment_in_full_first_region_presentation_and_expansion; minimal_runtime_test_scenes_allowed_and_required",
+    "full_catalogue_long_term_preserved": true,
+    "first_batch_is_not_all33weapons12armor37enemies7Bosses": true,
+    "supersedes_only": [
+      "D14_first_production_slice_representative_weapon_and_armor_testbench_only_scope",
+      "D14_stage_G02_representative_content_acceptance_level"
+    ],
+    "preserves": "D01..D14_actions_stats_economy_full_catalogue_and_save_contracts_except_explicit_DEV_pack_source_selection_overrides; original_documents_immutable"
+  },
+  "counts": {
+    "weapons": 5,
+    "armor": 4,
+    "ordinary_enemies": 5,
+    "Bosses": 1,
+    "content_units": 15,
+    "weapon_primary_secondary_entries": 10,
+    "ordinary_enemy_attacks": 10,
+    "Boss_attacks": 4,
+    "weapon_armor_pairs": 20,
+    "left_right_standing_pair_checks": 40,
+    "support_item_dependencies": 15
+  },
+  "completion_contract": [
+    {
+      "id": "DONE-VISUAL",
+      "name": "正式视觉",
+      "requires": "editable_source_provenance_export_manifest_icon_right_left_depth_and_equipment_layers; actual_accepted_style_not_just_placeholder",
+      "proof": "archived_source_and_runtime_visual_review"
+    },
+    {
+      "id": "DONE-MOTION",
+      "name": "完整动作",
+      "requires": "every_original_primary_secondary_or_attack_and_idle_walk_air_hurt_death_as_applicable; source_phase_grip_and_weapon_emitter_positions_correct",
+      "proof": "same_event_trace_with_running_motion"
+    },
+    {
+      "id": "DONE-RULES",
+      "name": "真实规则",
+      "requires": "original_stats_damage_geometry_cost_CDs_control_properties_and_cancel_boundaries; no_silent_new_mechanics",
+      "proof": "edge_case_runtime_events_and_boundary_tests"
+    },
+    {
+      "id": "DONE-FEEDBACK",
+      "name": "声音特效预告",
+      "requires": "actual_event_driven_prep_emission_hit_miss_break_death; accessible_mute_reducedFX; audio_selected_auditioned_and_mixed",
+      "proof": "reviewed_audio_visual_recording_and_settings_variants"
+    },
+    {
+      "id": "DONE-UI",
+      "name": "界面与操作",
+      "requires": "real_name_icon_properties_positive_negative_affixes_resources_CDs_comparison_and_valid_keyboard_mouse_gamepad_intents",
+      "proof": "player_operated_UI_and_input_proof"
+    },
+    {
+      "id": "DONE-ACQUIRE",
+      "name": "真实场景接入",
+      "requires": "lawful_availability_declared_build_drop_shop_pickup_replace_and_enemy_roster_sources; no_testbench_only_completion_or_all_gear_free_at_start",
+      "proof": "ordinary_slice_run_acquisition_and_encounter_record"
+    },
+    {
+      "id": "DONE-PERSIST",
+      "name": "实例和继续",
+      "requires": "unique_owned_instance_results_inventory_enemy_HP_action_phase_DOT_dead_owner_projectiles_and_rewards_continue_exactly_with_D13_same_bundle",
+      "proof": "save_resume_and_duplicate_request_interruption_proof"
+    },
+    {
+      "id": "DONE-RUN",
+      "name": "实跑验收",
+      "requires": "normal_input_playable_proof_not_clean_build_only; stable_no_mandatory_contract_breaks; defects_and_remaining_limits_named",
+      "proof": "dated_recording_review_event_report_and_acceptance_index"
+    }
+  ],
+  "weapons": [
+    {
+      "id": "WPN-SWD-001",
+      "name": "尺衡军剑",
+      "family": "SWD",
+      "source_ref": "docs/design/equipment-v1/weapons.json#/6",
+      "primary_complete": false,
+      "secondary": {
+        "name": "进身斜斩",
+        "complete": false
+      },
+      "formal_run_integration_required": true,
+      "enchant_upgrade_and_persistence_required": true,
+      "presentation_ref": "docs/design/presentation-v1/weapon-motion.json",
+      "completion_check_ids": [
+        "DONE-VISUAL",
+        "DONE-MOTION",
+        "DONE-RULES",
+        "DONE-FEEDBACK",
+        "DONE-UI",
+        "DONE-ACQUIRE",
+        "DONE-PERSIST",
+        "DONE-RUN"
+      ],
+      "runtime_proof": null
+    },
+    {
+      "id": "WPN-GSW-001",
+      "name": "裂碑重剑",
+      "family": "GSW",
+      "source_ref": "docs/design/equipment-v1/weapons.json#/9",
+      "primary_complete": false,
+      "secondary": {
+        "name": "落碑重压",
+        "complete": false
+      },
+      "formal_run_integration_required": true,
+      "enchant_upgrade_and_persistence_required": true,
+      "presentation_ref": "docs/design/presentation-v1/weapon-motion.json",
+      "completion_check_ids": [
+        "DONE-VISUAL",
+        "DONE-MOTION",
+        "DONE-RULES",
+        "DONE-FEEDBACK",
+        "DONE-UI",
+        "DONE-ACQUIRE",
+        "DONE-PERSIST",
+        "DONE-RUN"
+      ],
+      "runtime_proof": null
+    },
+    {
+      "id": "WPN-SPR-001",
+      "name": "疾雨短枪",
+      "family": "SPR",
+      "source_ref": "docs/design/equipment-v1/weapons.json#/12",
+      "primary_complete": false,
+      "secondary": {
+        "name": "迅雷三刺",
+        "complete": false
+      },
+      "formal_run_integration_required": true,
+      "enchant_upgrade_and_persistence_required": true,
+      "presentation_ref": "docs/design/presentation-v1/weapon-motion.json",
+      "completion_check_ids": [
+        "DONE-VISUAL",
+        "DONE-MOTION",
+        "DONE-RULES",
+        "DONE-FEEDBACK",
+        "DONE-UI",
+        "DONE-ACQUIRE",
+        "DONE-PERSIST",
+        "DONE-RUN"
+      ],
+      "runtime_proof": null
+    },
+    {
+      "id": "WPN-XBW-001",
+      "name": "栓机猎弩",
+      "family": "XBW",
+      "source_ref": "docs/design/equipment-v1/weapons.json#/18",
+      "primary_complete": false,
+      "secondary": {
+        "name": "贯甲弩矢",
+        "complete": false
+      },
+      "formal_run_integration_required": true,
+      "enchant_upgrade_and_persistence_required": true,
+      "presentation_ref": "docs/design/presentation-v1/weapon-motion.json",
+      "completion_check_ids": [
+        "DONE-VISUAL",
+        "DONE-MOTION",
+        "DONE-RULES",
+        "DONE-FEEDBACK",
+        "DONE-UI",
+        "DONE-ACQUIRE",
+        "DONE-PERSIST",
+        "DONE-RUN"
+      ],
+      "runtime_proof": null
+    },
+    {
+      "id": "WPN-STF-001",
+      "name": "余烬灯杖",
+      "family": "STF",
+      "source_ref": "docs/design/equipment-v1/weapons.json#/30",
+      "primary_complete": false,
+      "secondary": {
+        "name": "铺炭火线",
+        "complete": false
+      },
+      "formal_run_integration_required": true,
+      "enchant_upgrade_and_persistence_required": true,
+      "presentation_ref": "docs/design/presentation-v1/weapon-motion.json",
+      "completion_check_ids": [
+        "DONE-VISUAL",
+        "DONE-MOTION",
+        "DONE-RULES",
+        "DONE-FEEDBACK",
+        "DONE-UI",
+        "DONE-ACQUIRE",
+        "DONE-PERSIST",
+        "DONE-RUN"
+      ],
+      "runtime_proof": null
+    }
+  ],
+  "armor": [
+    {
+      "id": "ARM-LGT-001",
+      "name": "行路短衣",
+      "type": "LGT",
+      "source_ref": "docs/design/equipment-v1/armor.json#/0",
+      "intrinsic_trait_complete": false,
+      "compatible_weapon_ids": [
+        "WPN-SWD-001",
+        "WPN-GSW-001",
+        "WPN-SPR-001",
+        "WPN-XBW-001",
+        "WPN-STF-001"
+      ],
+      "formal_run_integration_required": true,
+      "enchant_upgrade_and_persistence_required": true,
+      "completion_check_ids": [
+        "DONE-VISUAL",
+        "DONE-MOTION",
+        "DONE-RULES",
+        "DONE-FEEDBACK",
+        "DONE-UI",
+        "DONE-ACQUIRE",
+        "DONE-PERSIST",
+        "DONE-RUN"
+      ],
+      "runtime_proof": null
+    },
+    {
+      "id": "ARM-MED-001",
+      "name": "巡路环甲",
+      "type": "MED",
+      "source_ref": "docs/design/equipment-v1/armor.json#/3",
+      "intrinsic_trait_complete": false,
+      "compatible_weapon_ids": [
+        "WPN-SWD-001",
+        "WPN-GSW-001",
+        "WPN-SPR-001",
+        "WPN-XBW-001",
+        "WPN-STF-001"
+      ],
+      "formal_run_integration_required": true,
+      "enchant_upgrade_and_persistence_required": true,
+      "completion_check_ids": [
+        "DONE-VISUAL",
+        "DONE-MOTION",
+        "DONE-RULES",
+        "DONE-FEEDBACK",
+        "DONE-UI",
+        "DONE-ACQUIRE",
+        "DONE-PERSIST",
+        "DONE-RUN"
+      ],
+      "runtime_proof": null
+    },
+    {
+      "id": "ARM-HVY-001",
+      "name": "门栓板甲",
+      "type": "HVY",
+      "source_ref": "docs/design/equipment-v1/armor.json#/6",
+      "intrinsic_trait_complete": false,
+      "compatible_weapon_ids": [
+        "WPN-SWD-001",
+        "WPN-GSW-001",
+        "WPN-SPR-001",
+        "WPN-XBW-001",
+        "WPN-STF-001"
+      ],
+      "formal_run_integration_required": true,
+      "enchant_upgrade_and_persistence_required": true,
+      "completion_check_ids": [
+        "DONE-VISUAL",
+        "DONE-MOTION",
+        "DONE-RULES",
+        "DONE-FEEDBACK",
+        "DONE-UI",
+        "DONE-ACQUIRE",
+        "DONE-PERSIST",
+        "DONE-RUN"
+      ],
+      "runtime_proof": null
+    },
+    {
+      "id": "ARM-ROB-001",
+      "name": "灰烛法袍",
+      "type": "ROB",
+      "source_ref": "docs/design/equipment-v1/armor.json#/9",
+      "intrinsic_trait_complete": false,
+      "compatible_weapon_ids": [
+        "WPN-SWD-001",
+        "WPN-GSW-001",
+        "WPN-SPR-001",
+        "WPN-XBW-001",
+        "WPN-STF-001"
+      ],
+      "formal_run_integration_required": true,
+      "enchant_upgrade_and_persistence_required": true,
+      "completion_check_ids": [
+        "DONE-VISUAL",
+        "DONE-MOTION",
+        "DONE-RULES",
+        "DONE-FEEDBACK",
+        "DONE-UI",
+        "DONE-ACQUIRE",
+        "DONE-PERSIST",
+        "DONE-RUN"
+      ],
+      "runtime_proof": null
+    }
+  ],
+  "ordinary_enemies": [
+    {
+      "id": "ENM-STN-001",
+      "name": "沉石骑士",
+      "source_ref": "docs/design/enemies-v1/enemies.json#/enemies/0",
+      "all_required_attacks": [
+        {
+          "id": "ENM-STN-001-A1",
+          "name": "盾锋冲阵",
+          "complete": false
+        },
+        {
+          "id": "ENM-STN-001-A2",
+          "name": "盾沿横撞",
+          "complete": false
+        }
+      ],
+      "AI_activation_recovery_control_death_reward_and_old_projectiles_complete": false,
+      "first_region_manifest_required": true,
+      "completion_check_ids": [
+        "DONE-VISUAL",
+        "DONE-MOTION",
+        "DONE-RULES",
+        "DONE-FEEDBACK",
+        "DONE-UI",
+        "DONE-ACQUIRE",
+        "DONE-PERSIST",
+        "DONE-RUN"
+      ],
+      "runtime_proof": null
+    },
+    {
+      "id": "ENM-STN-002",
+      "name": "灰翼石蝠",
+      "source_ref": "docs/design/enemies-v1/enemies.json#/enemies/1",
+      "all_required_attacks": [
+        {
+          "id": "ENM-STN-002-A1",
+          "name": "低掠啄击",
+          "complete": false
+        },
+        {
+          "id": "ENM-STN-002-A2",
+          "name": "落翼横拍",
+          "complete": false
+        }
+      ],
+      "AI_activation_recovery_control_death_reward_and_old_projectiles_complete": false,
+      "first_region_manifest_required": true,
+      "completion_check_ids": [
+        "DONE-VISUAL",
+        "DONE-MOTION",
+        "DONE-RULES",
+        "DONE-FEEDBACK",
+        "DONE-UI",
+        "DONE-ACQUIRE",
+        "DONE-PERSIST",
+        "DONE-RUN"
+      ],
+      "runtime_proof": null
+    },
+    {
+      "id": "ENM-STN-003",
+      "name": "裂岩守卫",
+      "source_ref": "docs/design/enemies-v1/enemies.json#/enemies/2",
+      "all_required_attacks": [
+        {
+          "id": "ENM-STN-003-A1",
+          "name": "石斧横抡",
+          "complete": false
+        },
+        {
+          "id": "ENM-STN-003-A2",
+          "name": "裂地顿足",
+          "complete": false
+        }
+      ],
+      "AI_activation_recovery_control_death_reward_and_old_projectiles_complete": false,
+      "first_region_manifest_required": true,
+      "completion_check_ids": [
+        "DONE-VISUAL",
+        "DONE-MOTION",
+        "DONE-RULES",
+        "DONE-FEEDBACK",
+        "DONE-UI",
+        "DONE-ACQUIRE",
+        "DONE-PERSIST",
+        "DONE-RUN"
+      ],
+      "runtime_proof": null
+    },
+    {
+      "id": "ENM-STN-004",
+      "name": "石纹哨像",
+      "source_ref": "docs/design/enemies-v1/enemies.json#/enemies/3",
+      "all_required_attacks": [
+        {
+          "id": "ENM-STN-004-A1",
+          "name": "刻纹石矢",
+          "complete": false
+        },
+        {
+          "id": "ENM-STN-004-A2",
+          "name": "碎纹掌击",
+          "complete": false
+        }
+      ],
+      "AI_activation_recovery_control_death_reward_and_old_projectiles_complete": false,
+      "first_region_manifest_required": true,
+      "completion_check_ids": [
+        "DONE-VISUAL",
+        "DONE-MOTION",
+        "DONE-RULES",
+        "DONE-FEEDBACK",
+        "DONE-UI",
+        "DONE-ACQUIRE",
+        "DONE-PERSIST",
+        "DONE-RUN"
+      ],
+      "runtime_proof": null
+    },
+    {
+      "id": "ENM-GOB-001",
+      "name": "碎刃哥布林",
+      "source_ref": "docs/design/enemies-v1/enemies.json#/enemies/16",
+      "all_required_attacks": [
+        {
+          "id": "ENM-GOB-001-A1",
+          "name": "碎刃捅刺",
+          "complete": false
+        },
+        {
+          "id": "ENM-GOB-001-A2",
+          "name": "掷路石",
+          "complete": false
+        }
+      ],
+      "AI_activation_recovery_control_death_reward_and_old_projectiles_complete": false,
+      "first_region_manifest_required": true,
+      "completion_check_ids": [
+        "DONE-VISUAL",
+        "DONE-MOTION",
+        "DONE-RULES",
+        "DONE-FEEDBACK",
+        "DONE-UI",
+        "DONE-ACQUIRE",
+        "DONE-PERSIST",
+        "DONE-RUN"
+      ],
+      "runtime_proof": null
+    }
+  ],
+  "bosses": [
+    {
+      "id": "BOS-STN-001",
+      "name": "裂冠石像统领",
+      "source_ref": "docs/design/bosses-v1/bosses.json#/bosses/0",
+      "all_required_attacks": [
+        {
+          "id": "BOS-STN-001-A1",
+          "name": "裂冠冲阵",
+          "complete": false
+        },
+        {
+          "id": "BOS-STN-001-A2",
+          "name": "破盾横斩",
+          "complete": false
+        },
+        {
+          "id": "BOS-STN-001-A3",
+          "name": "震殿跺足",
+          "complete": false
+        },
+        {
+          "id": "BOS-STN-001-A4",
+          "name": "冠盾踏印",
+          "complete": false
+        }
+      ],
+      "all_authored_phases_control_and_qualified_success_required": true,
+      "completion_check_ids": [
+        "DONE-VISUAL",
+        "DONE-MOTION",
+        "DONE-RULES",
+        "DONE-FEEDBACK",
+        "DONE-UI",
+        "DONE-ACQUIRE",
+        "DONE-PERSIST",
+        "DONE-RUN"
+      ],
+      "runtime_proof": null
+    }
+  ],
+  "shared_required_systems": {
+    "equipment": "same22attribute_sources_caps_and_selected9instance_affix_eligibility; I..V_positive_mixed_negative_generation_limits_and_exact_quantile_rules; original_chapter_access_and_forge_caps_not_unlocked_by_completion",
+    "actions": "D02/D03_once_air_primary_start_frozen_time40percent_other_properties_and_full_recovery; no_added_block_combo_or_execute",
+    "ownership": "two_weapon_slots_one_body_slot_unique_InstanceID_magazine_focus_last_spend_and_skill_CD_no_reset_on_switch",
+    "enemy": "D05_all_attacks_joint_caps_independent_body_hurtbox_and_control; normal_dead_projectiles_persist; no_hidden_contact_damage",
+    "Boss": "D06_original_four_attacks_two_phases_and_same_point_death_before_qualified_success; own_attack_cleanup_only",
+    "UI": "D11_items_names_icons_comparison_affix_signs_and_context_consumption; no_click_preview_equip",
+    "storage": "D13_whole_profile_bundle_and_cursors_canonical_state_no_offline_growth_or_reward_replay"
+  },
+  "source_integration_policy": {
+    "formal_start": "unchanged_D09_SWD001_grade0_unenchanted_no_armor_gold20_once; rest_obtained_only_via_declared_legal_sources",
+    "testbench": "retained_for_repeatable_all9gear_and_all6enemy_checks_but_not_only_delivery; isolated_fixture_cannot_pay_profile_rewards",
+    "availability": "build_content_availability_and_stable_pack_version_must_be_declared_before_normal_slice_play; never_spawn_missing_assets_or_substitute_names_silently",
+    "source_audit_status": "source_identity_and_fixed_first_region_dependency_audited; runtime_pack_build_gate_not_implemented",
+    "probability_truth": "full_catalogue_source_pools_unchanged; any_development_pack_filter_or_offer_subset_must_be_explicit_new_rules_version_and_report_changed_selection_probabilities_not_full_game_balance",
+    "no_extra_rewards_or_free_gear": true,
+    "development_pack": {
+      "id": "DEV-REG01-PACK-v1",
+      "status": "assistant_proposed_development_content_variant_not_implemented_or_balance_accepted",
+      "separate_profile_and_RulesVersion": true,
+      "formal_full_catalogue_version_modified": false,
+      "no_cross_profile_progress_promotion": true,
+      "frozen_fields": [
+        "content_pack_id",
+        "content_pack_version",
+        "available_definition_ids",
+        "actual_eligible_candidate_sets",
+        "source_and_offer_overrides",
+        "RNG_algorithm_and_cursors",
+        "resolved_results",
+        "rules_digest"
+      ],
+      "equipment_pool": {
+        "source_pool": "POOL-EQUIPMENT",
+        "category_weights": {
+          "weapon": 2,
+          "armor": 1
+        },
+        "available_weapon_ids": [
+          "WPN-SWD-001",
+          "WPN-GSW-001",
+          "WPN-SPR-001",
+          "WPN-XBW-001",
+          "WPN-STF-001"
+        ],
+        "available_armor_ids": [
+          "ARM-LGT-001",
+          "ARM-MED-001",
+          "ARM-HVY-001",
+          "ARM-ROB-001"
+        ],
+        "weapon_family_selection": "uniform_among5_available_families_one_selected_template_each",
+        "armor_class_selection": "uniform_among4_classes_one_selected_template_each",
+        "per_weapon_probability": {
+          "numerator": 2,
+          "denominator": 15
+        },
+        "per_armor_probability": {
+          "numerator": 1,
+          "denominator": 12
+        },
+        "source_presence_count_grade_enchantment_and_gold_unchanged": true,
+        "N03_guaranteed_count": 1,
+        "chapter1_natural_grade": 0,
+        "chapter1_forge_cap": 1,
+        "original_full_pool_probability_of_these9": {
+          "numerator": 7,
+          "denominator": 33
+        },
+        "full45_template_distribution_preserved_in_original_source": true,
+        "probabilities_changed_in_dev_pack": true,
+        "no_retry_sampling_until_implemented_ID": true
+      },
+      "merchant": {
+        "original_instance_id": "REG-01-FAC-MERCHANT",
+        "active_development_instance_id": "DEV-REG01-v1-FAC-MERCHANT",
+        "offers": [
+          {
+            "offer_id": "REG-01-N04-OFFER-ITM-REC-001",
+            "content_id": "ITM-REC-001",
+            "name": "赤莓小药瓶",
+            "kind": "quick_item",
+            "quantity": 1,
+            "stock_purchases": 1,
+            "price_gold": 18,
+            "ordinary_merchant_nonservice_good": true,
+            "discount_ticket_eligible": true,
+            "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+            "delivery_action_s": 0.25
+          },
+          {
+            "offer_id": "REG-01-N04-OFFER-ITM-REC-003",
+            "content_id": "ITM-REC-003",
+            "name": "回春温饮",
+            "kind": "quick_item",
+            "quantity": 1,
+            "stock_purchases": 1,
+            "price_gold": 22,
+            "ordinary_merchant_nonservice_good": true,
+            "discount_ticket_eligible": true,
+            "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+            "delivery_action_s": 0.25
+          },
+          {
+            "offer_id": "REG-01-N04-OFFER-ITM-REC-004",
+            "content_id": "ITM-REC-004",
+            "name": "澄蓝专注液",
+            "kind": "quick_item",
+            "quantity": 1,
+            "stock_purchases": 1,
+            "price_gold": 12,
+            "ordinary_merchant_nonservice_good": true,
+            "discount_ticket_eligible": true,
+            "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+            "delivery_action_s": 0.25
+          },
+          {
+            "offer_id": "REG-01-N04-OFFER-ITM-REC-005",
+            "content_id": "ITM-REC-005",
+            "name": "清浊盐水",
+            "kind": "quick_item",
+            "quantity": 1,
+            "stock_purchases": 1,
+            "price_gold": 12,
+            "ordinary_merchant_nonservice_good": true,
+            "discount_ticket_eligible": true,
+            "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+            "delivery_action_s": 0.25
+          },
+          {
+            "offer_id": "REG-01-N04-OFFER-ITM-THR-001",
+            "content_id": "ITM-THR-001",
+            "name": "黑火药爆弹",
+            "kind": "quick_item",
+            "quantity": 1,
+            "stock_purchases": 1,
+            "price_gold": 14,
+            "ordinary_merchant_nonservice_good": true,
+            "discount_ticket_eligible": true,
+            "capacity_rule": "whole_offer_to_D04_quick_slots_or_refuse",
+            "delivery_action_s": 0.25
+          },
+          {
+            "offer_id": "DEV-REG01-v1-N04-OFFER-WPN-GSW-001",
+            "content_id": "WPN-GSW-001",
+            "name": "裂碑重剑",
+            "kind": "weapon",
+            "basic_upgrade_grade": 0,
+            "grade_label": "素制",
+            "quantity": 1,
+            "stock_purchases": 1,
+            "price_gold": 32,
+            "price_formula": "kind_base_weapon32_or_armor28 + ceil(cumulative_basic_forge_cost_for_grade*.5); enchant_result_never_changes_price",
+            "ordinary_merchant_nonservice_good": true,
+            "discount_ticket_eligible": true,
+            "capacity_rule": "owned_destination_and_legal_old_item_drop_point_selected_before_confirm; whole_instance_or_refuse",
+            "delivery_action_s": 0.35,
+            "equipment_generation": {
+              "when": "once_before_run_shop_visibility; stable_OfferID_InstanceID_seed_result",
+              "enchant_rules_ref": "../equipment-v2/enchant-rules.json",
+              "spawn_enchant_chance": 0.4,
+              "spawn_none_chance": 0.6,
+              "enchant_tier_pool": "early",
+              "package_weights": {
+                "beneficial": 0.6,
+                "mixed": 0.3,
+                "cursed": 0.1
+              },
+              "show_entire_committed_enchantment_before_purchase": true,
+              "view_cancel_return_reload_rerolls": false,
+              "new_weapon_magazine": "v1_initial_once_at_stock_generation; not_regenerated_on_view"
+            },
+            "development_override_of_offer_id": "REG-01-N04-OFFER-WPN-KNF-001",
+            "override_reason": "selected_complete_first_batch_weapon_at_original_weapon_kind_base32_price_and_same_stock_grade; old_full_content_offer_unchanged"
+          },
+          {
+            "offer_id": "REG-01-N04-OFFER-ARM-LGT-001",
+            "content_id": "ARM-LGT-001",
+            "name": "行路短衣",
+            "kind": "armor",
+            "basic_upgrade_grade": 0,
+            "grade_label": "素制",
+            "quantity": 1,
+            "stock_purchases": 1,
+            "price_gold": 28,
+            "price_formula": "kind_base_weapon32_or_armor28 + ceil(cumulative_basic_forge_cost_for_grade*.5); enchant_result_never_changes_price",
+            "ordinary_merchant_nonservice_good": true,
+            "discount_ticket_eligible": true,
+            "capacity_rule": "owned_destination_and_legal_old_item_drop_point_selected_before_confirm; whole_instance_or_refuse",
+            "delivery_action_s": 0.5,
+            "equipment_generation": {
+              "when": "once_before_run_shop_visibility; stable_OfferID_InstanceID_seed_result",
+              "enchant_rules_ref": "../equipment-v2/enchant-rules.json",
+              "spawn_enchant_chance": 0.4,
+              "spawn_none_chance": 0.6,
+              "enchant_tier_pool": "early",
+              "package_weights": {
+                "beneficial": 0.6,
+                "mixed": 0.3,
+                "cursed": 0.1
+              },
+              "show_entire_committed_enchantment_before_purchase": true,
+              "view_cancel_return_reload_rerolls": false,
+              "new_weapon_magazine": "v1_initial_once_at_stock_generation; not_regenerated_on_view"
+            }
+          }
+        ],
+        "original_fixed_weapon_offer": "KNF001_32_gold",
+        "development_fixed_weapon_offer": "GSW001_32_gold",
+        "same_slot_count_prices_stock_grade_and_generation_rules": true,
+        "no_extra9item_shop": true
+      },
+      "bonus_item_pool": {
+        "source_pool": "POOL-BONUS-ITEM",
+        "source_presence_probability_unchanged": true,
+        "category_weights": {
+          "REC": 40,
+          "BOO": 20,
+          "THR": 20,
+          "TRP": 10,
+          "FUN": 10
+        },
+        "purpose_groups_after_explicit_pack_filter": {
+          "REC": [
+            {
+              "purpose": "vitality",
+              "weight": 60,
+              "item_ids": [
+                "ITM-REC-001",
+                "ITM-REC-002",
+                "ITM-REC-003"
+              ]
+            },
+            {
+              "purpose": "focus",
+              "weight": 20,
+              "item_ids": [
+                "ITM-REC-004"
+              ]
+            },
+            {
+              "purpose": "cleanse",
+              "weight": 20,
+              "item_ids": [
+                "ITM-REC-005"
+              ]
+            }
+          ],
+          "BOO": [
+            {
+              "purpose": "offense",
+              "weight": 30,
+              "item_ids": [
+                "ITM-BOO-001"
+              ]
+            },
+            {
+              "purpose": "tempo",
+              "weight": 20,
+              "item_ids": []
+            },
+            {
+              "purpose": "mobility",
+              "weight": 20,
+              "item_ids": []
+            },
+            {
+              "purpose": "guard",
+              "weight": 20,
+              "item_ids": []
+            },
+            {
+              "purpose": "arcane",
+              "weight": 10,
+              "item_ids": []
+            }
+          ],
+          "THR": [
+            {
+              "purpose": "blast",
+              "weight": 40,
+              "item_ids": [
+                "ITM-THR-001"
+              ]
+            },
+            {
+              "purpose": "burn",
+              "weight": 20,
+              "item_ids": [
+                "ITM-THR-002"
+              ]
+            },
+            {
+              "purpose": "slow",
+              "weight": 20,
+              "item_ids": []
+            },
+            {
+              "purpose": "stagger",
+              "weight": 20,
+              "item_ids": []
+            }
+          ],
+          "TRP": [
+            {
+              "purpose": "damage",
+              "weight": 50,
+              "item_ids": [
+                "ITM-TRP-001"
+              ]
+            },
+            {
+              "purpose": "burn",
+              "weight": 25,
+              "item_ids": []
+            },
+            {
+              "purpose": "slow",
+              "weight": 15,
+              "item_ids": []
+            },
+            {
+              "purpose": "stagger",
+              "weight": 10,
+              "item_ids": []
+            }
+          ]
+        },
+        "empty_purpose_transfer_to": {
+          "REC": "vitality",
+          "BOO": "offense",
+          "THR": "blast",
+          "TRP": "damage"
+        },
+        "FUN_available_ids": [
+          "ITM-FUN-002"
+        ],
+        "FUN_requires_real_matchable_remaining_merchant_offer": true,
+        "empty_FUN_transfer_to": "REC",
+        "meta_eligibility_still_requires_run_snapshot": true,
+        "within_purpose_eligible_items_uniform_after_pack_and_unlock_filter": true,
+        "purpose_fallback_in_DEV_applies_to_unavailable_as_well_as_locked_items": true,
+        "result_template_distribution_changed_explicitly": true
+      },
+      "relic_pool": {
+        "source_pool": "POOL-RELIC",
+        "base_ids": [
+          "ITM-PAS-001",
+          "ITM-PAS-002",
+          "ITM-PAS-003",
+          "ITM-PAS-004",
+          "ITM-PAS-007"
+        ],
+        "original_base5_retained": true,
+        "other_unavailable_purpose_weight_to_guard_in_DEV_only": true,
+        "normal_meta_unlock_flags_not_removed": true
+      },
+      "optional_routes": {
+        "unimplemented_optional_B_or_H_encounters_not_offered": true,
+        "REG01_H01_optional_Boss_GOB_not_in_pack": true,
+        "no_toll_charge_discovery_or_Boss_reward_for_unavailable_route": true,
+        "mainline_free_route_unblocked": true
+      },
+      "upgrade_and_affix_testing": {
+        "same_original_prices_caps_and_validity": true,
+        "all_I_to_V_computation_and_good_bad_mixed_packages_implemented_for_selected9": true,
+        "first_chapter_legitimate_tiers_not_unlocked_by_testbench": true,
+        "advanced_tiers_tested_only_in_isolated_fixtures_until_legit_content_support": true
+      },
+      "new_pack_version": "future_new_Run_only; old_Run_keeps_same_availability_and_results; missing_saved_definition_blocks_resume_without_substitution",
+      "proof_scope": "normal_playable_development_slice_is_not_full45_equipment_economy_or_final_balance; seeded_QA_runs_can_cover_each_real_source_without_claiming_frequency"
+    }
+  },
+  "production_stages": [
+    {
+      "id": "FB-00",
+      "name": "共享基础与规格核对",
+      "dependencies": [],
+      "deliverable": "unified_XY_Z_projection_input_event_clock_attributes_instances_and_minimal_isolated_validation_scene; art_sample_and_paid_generation_cost_if_needed",
+      "definition_of_done": "small_scene_can_exercise_real_intents_source_geometry_and_event_ids; sample_style_review_before_bulk",
+      "completed": false
+    },
+    {
+      "id": "FB-01",
+      "name": "首件闭环",
+      "dependencies": [
+        "FB-00"
+      ],
+      "deliverable_ids": [
+        "WPN-SWD-001",
+        "ARM-LGT-001",
+        "ENM-STN-001"
+      ],
+      "definition_of_done": "full_primary_secondary_armor_trait_two_enemy_attacks_and_real_pickup_equip_feedback_save_resume_proof; no_template_only_pass",
+      "completed": false
+    },
+    {
+      "id": "FB-02",
+      "name": "其余装备完整制作",
+      "dependencies": [
+        "FB-01"
+      ],
+      "deliverable_ids": [
+        "WPN-GSW-001",
+        "WPN-SPR-001",
+        "WPN-XBW-001",
+        "WPN-STF-001",
+        "ARM-MED-001",
+        "ARM-HVY-001",
+        "ARM-ROB-001"
+      ],
+      "definition_of_done": "all5weapons10primary_secondary_entries_and4armor_rules_visuals_audio_UI_affixes_upgrade_instances_complete;20weapon_armor_pairs_checked",
+      "completed": false
+    },
+    {
+      "id": "FB-03",
+      "name": "其余首批普通敌人",
+      "dependencies": [
+        "FB-01"
+      ],
+      "deliverable_ids": [
+        "ENM-STN-002",
+        "ENM-STN-003",
+        "ENM-STN-004",
+        "ENM-GOB-001"
+      ],
+      "definition_of_done": "all5enemies10original_attacks_activation_control_old_projectile_and_finite_drop_contracts_complete",
+      "completed": false
+    },
+    {
+      "id": "FB-04",
+      "name": "石像Boss完整制作",
+      "dependencies": [
+        "FB-02",
+        "FB-03"
+      ],
+      "deliverable_ids": [
+        "BOS-STN-001"
+      ],
+      "definition_of_done": "four_attacks_two_phases_control_responses_legal_victory_and_double_death; actual_minimal_arena_and_save_midphase",
+      "completed": false
+    },
+    {
+      "id": "FB-05A",
+      "name": "必要配套道具与开发包验收",
+      "dependencies": [
+        "FB-02",
+        "FB-03",
+        "FB-04"
+      ],
+      "deliverable_ids": [
+        "ITM-REC-001",
+        "ITM-REC-004",
+        "ITM-THR-002",
+        "ITM-TRP-001",
+        "ITM-PAS-001",
+        "ITM-FUN-002",
+        "ITM-REC-002",
+        "ITM-REC-003",
+        "ITM-REC-005",
+        "ITM-THR-001",
+        "ITM-BOO-001",
+        "ITM-PAS-002",
+        "ITM-PAS-003",
+        "ITM-PAS-004",
+        "ITM-PAS-007"
+      ],
+      "definition_of_done": "15existing_support_items_complete_as_used_by_declared_pack; fixed_offers_and_relic_guarantee_nonempty_BOO_source_pool_and_original_meta_eligibility_valid; no_missing_ID_at_build",
+      "completed": false
+    },
+    {
+      "id": "FB-05",
+      "name": "首批真实来源接入与验收",
+      "dependencies": [
+        "FB-05A"
+      ],
+      "deliverable": "declared_content_pack_availability_original_source_eligibility_drop_shop_pickup_switch_forge_enchant_save_and_normal_input_proof_for_each_unit",
+      "definition_of_done": "all15units_have_8applicable_completion_checks_with_evidence; acquisition_not_free_start_or_testbench_only; unavailable_ID_build_gate_pass",
+      "completed": false
+    },
+    {
+      "id": "FB-06",
+      "name": "首区七节点集成",
+      "dependencies": [
+        "FB-05"
+      ],
+      "deliverable": "REG01N01..N07_with_original_D14_finite_manifest_then_true_transition_to_REG02N01_shell_and_scope_pause",
+      "definition_of_done": "full_content_units_reused_in_real_room_sequence; no_fake_final_win_or_new_rewards; reviewed_proof_recording",
+      "completed": false
+    }
+  ],
+  "asset_policy": {
+    "first_style_sample_before_bulk": true,
+    "visual_generation_skill": "asset-gen",
+    "first_paid_generation_requires_user_confirmed_specific_spend": true,
+    "paid_generation_this_turn": false,
+    "draft_and_proof_retention": "F:/Ourgame/过程图稿与视频/YYYY-MM-DD_topic_vNNN; originals_and_presentation_and_source_version_status_index",
+    "no_final_asset_created_this_turn": true
+  },
+  "source_freeze": [
+    {
+      "path": "docs/design/equipment-v1/weapons.json",
+      "sha256": "95757819382832cfa31e6596f3ba90f1e983e83fbd69504da3c99d5ea2a272b4"
+    },
+    {
+      "path": "docs/design/equipment-v1/armor.json",
+      "sha256": "9407e458aef80b9f0d8f0e958b089e7b7a6f4180aef41b7b7df97534fe780e9d"
+    },
+    {
+      "path": "docs/design/equipment-v2/stat-definitions.json",
+      "sha256": "2f8c3fe15aa2dc940f867be118b948e80ae9ae4c654bc70580021ade79d37bc9"
+    },
+    {
+      "path": "docs/design/equipment-v2/enchant-rules.json",
+      "sha256": "520214b7b3b8195f769f7a77c7ecc40baca2039746f7bc73cbe49b4445756a55"
+    },
+    {
+      "path": "docs/design/equipment-v2/equipment-profiles.json",
+      "sha256": "1cace928f0f08c3f9afb3e093e1070785f59cd50a6210882a45d8d1b7597f85a"
+    },
+    {
+      "path": "docs/design/enemies-v1/enemies.json",
+      "sha256": "d01dd609a95ff9ad182638982a0ac7de864dbbd29f6b03995f9a3625a0c44266"
+    },
+    {
+      "path": "docs/design/bosses-v1/bosses.json",
+      "sha256": "4592953c92856927bfcc4f08f319758571cc8ea37fc95774b043328a0329542f"
+    },
+    {
+      "path": "docs/design/balance-v1/system-acceptance.json",
+      "sha256": "23fb98277255470c2dbba6052d2bcc3bc63fa3b301f32e0a9d1ce3e366f92a99"
+    },
+    {
+      "path": "docs/design/balance-v1/encounter-deck.json",
+      "sha256": "c0606cef7dd5febcf1e489d2b6b92e77c6a787abcf8dfd487e495cee202d0e6c"
+    },
+    {
+      "path": "docs/design/presentation-v1/weapon-motion.json",
+      "sha256": "de7442fe4ff9f3cf18f4357a9a8001437e6ecd83f30c3571e1a522e92b6b4fdd"
+    },
+    {
+      "path": "docs/design/presentation-v1/visual-rules.json",
+      "sha256": "7dcb1373f3d7da66575cd2255365dea67dfe9daf411d20986dae80342a705003"
+    },
+    {
+      "path": "docs/design/save-data-v1/save-rules.json",
+      "sha256": "0e08f2dff76918012baf344840ded958af9f6badb66f61a9d5541f521ccc6968"
+    },
+    {
+      "path": "docs/design/items-v1/items.json",
+      "sha256": "09e40ef363ddcd2507efcbdfa4cf388916623e62015dcb41229a62d6badc2bc1"
+    },
+    {
+      "path": "docs/design/economy-v1/reward-sources.json",
+      "sha256": "9bd5e424ff2344a70d9fc8cbb25ced3cef1161cdd33092e0fc8998bf01d83369"
+    },
+    {
+      "path": "docs/design/economy-v1/facilities.json",
+      "sha256": "a2ebd6ebff3e283b5708afb88fbc36509405a5fdf88bf73fc5d7bcdbce104b88"
+    }
+  ],
+  "implementation_status": {
+    "scope_documented": true,
+    "all_content_completed": false,
+    "game_source_changed_this_turn": false,
+    "engine_run_this_turn": false,
+    "visual_audio_generation_this_turn": false,
+    "accepted_runtime_evidence": [],
+    "support_item_dependencies_complete": false
+  },
+  "overview": "../../../首批装备与敌人完整制作清单.md",
+  "support_item_dependencies": [
+    {
+      "id": "ITM-REC-001",
+      "name": "赤莓小药瓶",
+      "source_ref": "docs/design/items-v1/items.json#/items/0",
+      "reason": "existing_D14_subset",
+      "complete": false,
+      "source_rule": "original_effect_cost_quantity_qualification_and_transaction_contract; no_free_grant_or_new_research"
+    },
+    {
+      "id": "ITM-REC-004",
+      "name": "澄蓝专注液",
+      "source_ref": "docs/design/items-v1/items.json#/items/3",
+      "reason": "existing_D14_subset",
+      "complete": false,
+      "source_rule": "original_effect_cost_quantity_qualification_and_transaction_contract; no_free_grant_or_new_research"
+    },
+    {
+      "id": "ITM-THR-002",
+      "name": "燃油陶罐",
+      "source_ref": "docs/design/items-v1/items.json#/items/13",
+      "reason": "existing_D14_subset",
+      "complete": false,
+      "source_rule": "original_effect_cost_quantity_qualification_and_transaction_contract; no_free_grant_or_new_research"
+    },
+    {
+      "id": "ITM-TRP-001",
+      "name": "折叠钉板",
+      "source_ref": "docs/design/items-v1/items.json#/items/18",
+      "reason": "existing_D14_subset",
+      "complete": false,
+      "source_rule": "original_effect_cost_quantity_qualification_and_transaction_contract; no_free_grant_or_new_research"
+    },
+    {
+      "id": "ITM-PAS-001",
+      "name": "铆铁护环",
+      "source_ref": "docs/design/items-v1/items.json#/items/22",
+      "reason": "existing_D14_subset",
+      "complete": false,
+      "source_rule": "original_effect_cost_quantity_qualification_and_transaction_contract; no_free_grant_or_new_research"
+    },
+    {
+      "id": "ITM-FUN-002",
+      "name": "行商折价票",
+      "source_ref": "docs/design/items-v1/items.json#/items/31",
+      "reason": "existing_D14_subset",
+      "complete": false,
+      "source_rule": "original_effect_cost_quantity_qualification_and_transaction_contract; no_free_grant_or_new_research"
+    },
+    {
+      "id": "ITM-REC-002",
+      "name": "浓缩红药瓶",
+      "source_ref": "docs/design/items-v1/items.json#/items/1",
+      "reason": "existing_D14_subset",
+      "complete": false,
+      "source_rule": "original_effect_cost_quantity_qualification_and_transaction_contract; no_free_grant_or_new_research"
+    },
+    {
+      "id": "ITM-REC-003",
+      "name": "回春温饮",
+      "source_ref": "docs/design/items-v1/items.json#/items/2",
+      "reason": "N04_original_fixed_offer_required",
+      "complete": false,
+      "source_rule": "original_effect_cost_quantity_qualification_and_transaction_contract; no_free_grant_or_new_research"
+    },
+    {
+      "id": "ITM-REC-005",
+      "name": "清浊盐水",
+      "source_ref": "docs/design/items-v1/items.json#/items/4",
+      "reason": "N04_original_fixed_offer_required",
+      "complete": false,
+      "source_rule": "original_effect_cost_quantity_qualification_and_transaction_contract; no_free_grant_or_new_research"
+    },
+    {
+      "id": "ITM-THR-001",
+      "name": "黑火药爆弹",
+      "source_ref": "docs/design/items-v1/items.json#/items/12",
+      "reason": "N04_original_fixed_offer_required",
+      "complete": false,
+      "source_rule": "original_effect_cost_quantity_qualification_and_transaction_contract; no_free_grant_or_new_research"
+    },
+    {
+      "id": "ITM-BOO-001",
+      "name": "战吼烈酿",
+      "source_ref": "docs/design/items-v1/items.json#/items/6",
+      "reason": "nonempty_original_bonus_or_five_base_relic_pool_dependency",
+      "complete": false,
+      "source_rule": "original_effect_cost_quantity_qualification_and_transaction_contract; no_free_grant_or_new_research"
+    },
+    {
+      "id": "ITM-PAS-002",
+      "name": "游猎羽饰",
+      "source_ref": "docs/design/items-v1/items.json#/items/23",
+      "reason": "nonempty_original_bonus_or_five_base_relic_pool_dependency",
+      "complete": false,
+      "source_rule": "original_effect_cost_quantity_qualification_and_transaction_contract; no_free_grant_or_new_research"
+    },
+    {
+      "id": "ITM-PAS-003",
+      "name": "磨砺石像",
+      "source_ref": "docs/design/items-v1/items.json#/items/24",
+      "reason": "nonempty_original_bonus_or_five_base_relic_pool_dependency",
+      "complete": false,
+      "source_rule": "original_effect_cost_quantity_qualification_and_transaction_contract; no_free_grant_or_new_research"
+    },
+    {
+      "id": "ITM-PAS-004",
+      "name": "机簧勋章",
+      "source_ref": "docs/design/items-v1/items.json#/items/25",
+      "reason": "nonempty_original_bonus_or_five_base_relic_pool_dependency",
+      "complete": false,
+      "source_rule": "original_effect_cost_quantity_qualification_and_transaction_contract; no_free_grant_or_new_research"
+    },
+    {
+      "id": "ITM-PAS-007",
+      "name": "医者结绳",
+      "source_ref": "docs/design/items-v1/items.json#/items/28",
+      "reason": "nonempty_original_bonus_or_five_base_relic_pool_dependency",
+      "complete": false,
+      "source_rule": "original_effect_cost_quantity_qualification_and_transaction_contract; no_free_grant_or_new_research"
+    }
+  ]
+}

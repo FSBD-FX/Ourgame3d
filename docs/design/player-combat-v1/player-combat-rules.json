@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-13",
+  "status": "design_only",
+  "module": "D-02",
+  "source_event": "EV-020",
+  "authority": "assistant_proposal_not_individually_user_approved",
+  "clock": "active_run_simulation_seconds_pause_freezes_all",
+  "actor_template": "universal_adventurer_no_weapon_class_lock",
+  "weapon_slots": 2,
+  "body_armor_slots": 1,
+  "new_global_stamina": false,
+  "universal_block_or_parry": false,
+  "baseline": {"max_hp":100,"move_cm_s":265,"poise":30,"focus":100,"focus_regen_per_s":12,"focus_delay_s":1,"crit_chance_pct":5,"crit_multiplier":1.5},
+  "locomotion_states": ["grounded","airborne"],
+  "action_states": ["idle","primary","skill","dodge","reload","switch_weapon","equip_weapon","equip_armor","hurt","dead"],
+  "movement": {"normalize_diagonal":true,"y_only_keeps_facing":true,"pass_through_bodies_or_walls":false,"standard_body_half_x_cm":18,"standard_body_half_y_cm":16,"body_collision_separate_from_hurtbox":true},
+  "jump": {
+    "allowed_actions":["idle"],"requires_grounded":true,"launch_speed_cm_s":630,"gravity_cm_s2":1800,"flat_flight_s":0.7,"apex_height_cm":110.25,"air_move_multiplier":0.8,"double_jump":false,"grants_invulnerability":false,"height_tolerance_cm":65,
+    "air_primary_limit_per_takeoff":1,"air_slot_consumed_at":"accepted_start_after_initial_resource_validation","cancel_refunds_air_slot":false,"failed_start_consumes_air_slot":false,"air_skill":false,"air_reload":false,"air_dodge":false,
+    "air_primary_uses_existing_full_timeline_damage_and_cost":true,"landing_cancels_or_restarts_action":false,"landing_resets_attack_id_or_subhit_dedup":false,"projectile_height_from_actual_emission":true,"implicit_downward_autoaim":false
+  },
+  "dodge": {
+    "duration_s":0.4,"distance_cm":185,"linear_speed_cm_s":462.5,"iframes_start_s":0.06,"iframes_end_exclusive_s":0.2,"cooldown_s":1.2,"cooldown_starts_at":"accepted_start","direction_locked_at_start":true,"no_input_direction":"facing",
+    "allowed_actions":["idle","reload","equip_weapon","equip_armor"],"requires_grounded":true,"cancels_reload_without_refill":true,"cancels_uncommitted_equip_preserving_ownership":true,"cancels_attack_or_skill":false,"can_be_freely_cancelled":false,"collision_sweep":true,"blocked_distance_refunds_cooldown":false,
+    "scaled_by_move_action_speed_or_skill_cooldown":false,"removes_existing_status":false,"blocks_existing_dot_ticks":false,"grants_hit_iframe_extension":false,"can_be_interrupted_by_poise_break_outside_iframes":true,"remaining_iframes_end_when_dodge_action_is_interrupted":true,"interruption_resets_cooldown_or_independent_hurt_iframes":false
+  },
+  "attack": {"lock_fraction_of_windup":0.4,"primary_reverse_cancel_before_lock":true,"ground_jump_or_dodge_cancel":false,"primary_buffer_s":0.12,"primary_buffer_acceptance":"last_0.12_seconds_of_current_primary_recovery_only","buffer_slots":1,"buffer_rejected_at_execution_is_cleared":true,"held_primary_autorepeat":false,"resource_reservation":"whole_trigger_at_lock","emission_cost":"actual_emitted_only","unemitted_reservation_released_on_interrupt":true,"crit_draws_per_attack_id":1,"skill_ground_only":true,"projectile_origin":"current_muzzle_position_and_height_per_actual_emission","projectile_heading":"locked_facing_plus_intrinsic_spread_no_y_tracking","legacy_same_y_line":"overridden_by_per_emission_parallel_lines_if_actor_moves_y"},
+  "hurt": {"direct_damage_iframes_s":0.65,"poise_break_stun_s":0.4,"poise_protection_s":1,"poise_decay_delay_s":1,"poise_decay_per_s":20,"life_damage_without_break_interrupts_action":false,"same_accepted_attack_subhits_extend_damage_iframes":false,"each_subhit_checks_dodge":true,"dot_blocked_by_direct_iframes":false,"dot_staggers_or_creates_iframes":false,"landing_clears_hurt":false,"separate_knockdown_or_getup_iframes":false,"iframe_combination":"union_of_actual_intervals_not_duration_sum"},
+  "equipment": {"switch_s":0.35,"weapon_equip_s":0.35,"armor_equip_s":0.5,"switch_dodge_cancel":false,"uncommitted_equip_cancel":"movement_damage_or_valid_dodge_preserves_old_ownership","preserve_instance_magazine_and_skill_cooldown":true,"preserve_character_dodge_and_element_cooldown":true},
+  "armor_trait_interop": {"attack_records_started_airborne_at_accepted_start":true,"ARM-LGT-002_ground_primary_uses_start_locomotion":true,"air_started_attack_qualifies_after_landing":false,"dodge_start_clears_ARM-LGT-002_and_ARM-LGT-003_speed_buffs":true,"dodge_start_clears_ARM-ROB-003_stationary_timer_even_if_blocked":true,"dodge_triggers_melee_end_or_reload_end_traits":false,"dodge_resets_trait_cooldowns":false},
+  "input": {"ground_idle_priority":["dodge","jump","skill","primary","switch_weapon","reload","interact"],"reload_priority":["dodge","switch_weapon","cancel_reload"],"completed_reload_before_new_action_at_same_time":true,"active_transitions_per_step":1,"pause_preempts_active_input":true,"pause_clear_buffers_on_resume":true,"item_keys_only_reserved":["1","2"]},
+  "controls": {"move":"WASD/arrows","jump":"Space","primary":"J/MouseLeft","skill":"K/MouseRight","dodge":"Shift","reload":"T","switch_weapon":"Q","interact":"E","inspect":"I","pause":"Esc","restart_after_settlement":"R"},
+  "future_dependencies":["D-03 item usage","D-04 inventory","D-05 crowd and body collision","D-07 room clearance","D-08/09 talent and upgrade stat merge","D-11 controller/remapping","D-12 aerial animation production","D-13 consistent simulation-clock persistence"],
+  "runtime_implemented": false
+}

@@ -1,0 +1,21 @@
+from pathlib import Path
+import hashlib,json,shutil
+from PIL import Image
+R=Path('F:/Ourgame');S=R/'过程图稿与视频/2026-10-17_软皮轻甲左右第一刀试装_v001';A=R/'过程图稿与视频/2026-10-17_软皮轻甲首刀实景播放复核_v001';assert not A.exists();(A/'原件').mkdir(parents=True);(A/'展示副本').mkdir()
+def pin(p):
+ b=p.read_bytes();return dict(path=p.as_posix(),bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
+files=[S/'展示副本/leather-primary1-trial-silent.mp4']+sorted((S/'展示副本').glob('leather-primary1-*-phase-*.png'))+[S/'原件/MovieFrame00039.png',S/'原件/MovieFrame00076.png',S/'原件/runtime-report.json',S/'原件/independent-leather-primary1-verification-v001.json']
+rows=[]
+for i,p in enumerate(files):
+ q=A/'原件'/f'{i:02d}-{p.name}';shutil.copy2(p,q);assert p.read_bytes()==q.read_bytes();rows.append(dict(source=pin(p),retained=q.relative_to(A).as_posix()))
+video=S/'展示副本/leather-primary1-trial-silent.mp4';shutil.copy2(video,A/'展示副本'/video.name)
+sheet=Image.new('RGB',(1440,320));crops=sorted((S/'展示副本').glob('leather-primary1-*-phase-*.png'));assert len(crops)==12
+for i,p in enumerate(crops):
+ im=Image.open(p).convert('RGB');assert im.size==(240,160);sheet.paste(im,((i%6)*240,(i//6)*160))
+sheet.save(A/'展示副本/native-primary1-twelve-crops-unscaled.png')
+poster=S/'原件/MovieFrame00076.png';shutil.copy2(poster,A/'展示副本/native-whole-right.png')
+review=dict(snapshot='source-assets/production/backups/v125-p1-157G',Root_viewed_actual_twelve_native_crops=True,Root_viewed_two_native_whole_frames=True,Root_viewed_all12_static_composites_after_E297=True,source_corrected_to_actual_Body159v003=True,review='Warm leather chest/cap reads more distinctly from gray cloth at72px. Helmet and amber eye aperture remain visible. Near hand remains foreground; far shoulder intentionally partly occluded. Current samples permit continued trial; grasp, Ready transitions, full matching combo2/3 and other states still NEEDS_WORK. No full unit or human final style acceptance.',body_max_px=72,weapon_scale=.5,traditional_HUD_hidden=True,world_pickup_marker_placeholders_remain=True,formal_complete_units=0,browser_video_review_pending=True)
+(A/'原件/root-native-art-review-v001.json').write_text(json.dumps(review,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+html='''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>软皮轻甲 · 首刀试装</title><style>body{margin:0;background:#11191d;color:#e8e4da;font:16px/1.6 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1280px;margin:28px auto;padding:0 20px}h1{font-size:26px;margin-bottom:4px}p{color:#aeb8b9;margin-top:0}button{padding:9px 24px;border:1px solid #b8894e;background:#34291d;color:#ffe1af;border-radius:5px;cursor:pointer}video{display:block;width:100%;background:#10191e;margin-top:16px}#state{margin-left:16px;color:#c7b28e}.strip{overflow:auto;margin-top:20px}.strip img{display:block;width:1440px;height:320px;max-width:none}.note{margin-top:16px}</style><main><h1>软皮轻甲 · 首刀试装</h1><p>怪诞钟盔、小比例角色，胸衣与双肩分层。当前仅待机和首刀，新版完整连招仍在制作。</p><button id="play">播放实录</button><span id="state">左右首刀 · 静音实景</span><video id="movie" controls muted playsinline preload="metadata" poster="展示副本/native-whole-right.png" src="展示副本/leather-primary1-trial-silent.mp4"></video><p class="note">原比例截取：上排向左，下排向右，各六个动作阶段。</p><div class="strip"><img src="展示副本/native-primary1-twelve-crops-unscaled.png" alt="左右各六帧原比例首刀实景"></div><p class="note">下一步：第二、第三段同款连招，再推进走跑、换装、受击与死亡动作。现有默认完整试玩继续保留旧动作外观。</p></main><script>const v=document.getElementById('movie'),s=document.getElementById('state');document.getElementById('play').onclick=()=>{v.currentTime=0;v.play();s.textContent='播放中 · 左右首刀实景'};v.onended=()=>s.textContent='播放结束 · 仅待机与首刀试装';</script></html>'''
+(A/'review-player.html').write_text(html,encoding='utf-8')
+(A/'source-version-status-index.json').write_text(json.dumps(dict(files=rows,status='Native Primary1 trial12crops and2whole views Root-reviewed; browser fullplay pending. Exact media copies and unscaled contact sheet; no game pixels altered.',formal_complete_units=0),ensure_ascii=False,indent=2)+'\n',encoding='utf-8');(A/'README.md').write_text('v125首刀实景复核。原件、逐字节视频展示副本、12张不缩放原比例裁图拼排均保留；浏览器播放前E301保全。已审静帧不代表整套动作通过，第二三段同款与其余状态继续制作。\n',encoding='utf-8');print(json.dumps(dict(archive=A.as_posix(),review_player=(A/'review-player.html').as_posix()),ensure_ascii=False))

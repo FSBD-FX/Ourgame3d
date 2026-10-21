@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "source_event": "EV-026",
+  "module": "D-08",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "overview": "../../../品质掉落与局内经济设计.md",
+  "sources": [
+    "common-rules.json",
+    "equipment-growth.json",
+    "facilities.json",
+    "reward-sources.json",
+    "budget-scenarios.json"
+  ],
+  "reading_order": [
+    "01-品质与基础强化.md",
+    "03-掉落与补给预算.md",
+    "02-设施价格与风险.md"
+  ],
+  "counts": {
+    "existing_equipment_templates": 45,
+    "existing_item_templates": 36,
+    "basic_upgrade_grades": 4,
+    "independent_enchant_tiers": 5,
+    "facility_categories": 9,
+    "ordinary_shop_offer_rows": 55,
+    "reward_sources": 94,
+    "optional_keyed_supply_objects": 2,
+    "ordered_wallet_scenarios": 3,
+    "root_boundary_cases": 15,
+    "growth_paper_examples": 14,
+    "reward_paper_examples": 3
+  },
+  "validation": "validation-report.json",
+  "validation_command": "python -X utf8 docs/design/economy-v1/validate_design.py",
+  "scope_limit": "design source compatibility and reference arithmetic, no UE behavior or balance validation",
+  "next_module": "D-09 talents_and_content_unlocks"
+}

@@ -1,0 +1,1207 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-13",
+  "module": "D-03",
+  "source_event": "EV-021",
+  "authority": "assistant_proposal_not_individual_user_approval",
+  "status": "design_only",
+  "numerical_status": "proposed_untested",
+  "runtime_implemented": false,
+  "shared_rule_reference": "../../../道具与状态系统设计.md",
+  "scope": "22_consumables_only_sources_candidate_no_prices_or_drop_rates",
+  "item_categories": {
+    "REC": 6,
+    "BOO": 6,
+    "THR": 6,
+    "TRP": 4
+  },
+  "use_profiles": {
+    "drink": {
+      "windup_s": 0.5,
+      "recovery_s": 0.3
+    },
+    "throw": {
+      "windup_s": 0.25,
+      "recovery_s": 0.35
+    },
+    "place": {
+      "windup_s": 0.45,
+      "recovery_s": 0.35
+    }
+  },
+  "commit_policy": "at_windup_end_revalidate_then_consume_one_and_start_id_cooldown",
+  "character_shared_use_lock_s": 2,
+  "cooldown_clock": "active_run_simulation_seconds",
+  "duration_clock": "active_run_simulation_seconds",
+  "temporary_tonic_policy": "one_whole_package_reject_new_until_expiry_no_refresh_no_partial_negative_cleanse",
+  "items": [
+    {
+      "id": "ITM-REC-001",
+      "name": "赤莓小药瓶",
+      "category": "REC",
+      "role": "快速补一段生命缺口",
+      "unlock": "base_pool",
+      "carry": "quick",
+      "stack_max": 3,
+      "use_profile": "drink",
+      "cooldown_s": 8,
+      "effects": [
+        {
+          "type": "heal_hp",
+          "amount": 30,
+          "target": "self",
+          "timing": "at_commit",
+          "healing_received": "current_at_effect",
+          "overheal": "discard",
+          "dead_target": "no_effect"
+        }
+      ],
+      "rule": "开始和提交均要求存活且当前HP低于上限；提交时回复30基础HP，经当前治疗效率后截断。",
+      "tradeoff": "占用一次饮用窗口；少量缺血时过量部分损失，不能靠过量暂存护盾。",
+      "source_candidates": [
+        "普通宝箱",
+        "商人",
+        "恢复房互动"
+      ],
+      "asset_notes": "小红瓶与明确30HP文字；饮用动作、提交亮点，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-REC-002",
+      "name": "浓缩红药瓶",
+      "category": "REC",
+      "role": "低血时一次大额恢复",
+      "unlock": "meta_unlock",
+      "carry": "quick",
+      "stack_max": 1,
+      "use_profile": "drink",
+      "cooldown_s": 12,
+      "effects": [
+        {
+          "type": "heal_hp",
+          "amount": 55,
+          "target": "self",
+          "timing": "at_commit",
+          "healing_received": "current_at_effect",
+          "overheal": "discard",
+          "dead_target": "no_effect"
+        }
+      ],
+      "rule": "存活且缺血才合法；提交回复55基础HP，经当前治疗效率后截断。",
+      "tradeoff": "单槽只能带1瓶；更适合较深缺口，仍不提供无敌或复活。",
+      "source_candidates": [
+        "大宝箱",
+        "高阶商人",
+        "救援NPC回报"
+      ],
+      "asset_notes": "宽瓶与双条容量纹样，不只靠颜色区分，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-REC-003",
+      "name": "回春温饮",
+      "category": "REC",
+      "role": "清出空间后逐步恢复",
+      "unlock": "base_pool",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "drink",
+      "cooldown_s": 12,
+      "effects": [
+        {
+          "type": "heal_over_time",
+          "total_hp": 40,
+          "amount_per_tick": 8,
+          "duration_s": 5,
+          "tick_interval_s": 1,
+          "ticks": 5,
+          "first_tick_delay_s": 1,
+          "target": "self",
+          "group": "regen_hp",
+          "timing": "start_at_commit",
+          "healing_received": "current_at_each_tick",
+          "stacking": "reject_if_regen_hp_active",
+          "overheal": "discard",
+          "persistence": "across_rooms_with_remaining_simulation_time",
+          "cleanup": "death_or_run_end"
+        }
+      ],
+      "rule": "开始/提交要求缺血且没有regen_hp；提交不立刻回血，从提交后1、2、3、4、5秒各回8基础HP。每跳独立读取当前治疗效率；过量跳损失，不把未用量顺延。",
+      "tradeoff": "总量高于小药但需要存活5秒；受伤不退还饮品、不加速跳数；过门不刷新时间。",
+      "source_candidates": [
+        "普通宝箱",
+        "篝火旁NPC",
+        "商人"
+      ],
+      "asset_notes": "带叶标暖色杯；HUD显示5跳进度，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-REC-004",
+      "name": "澄蓝专注液",
+      "category": "REC",
+      "role": "法杖战斗的即时专注补给",
+      "unlock": "base_pool",
+      "carry": "quick",
+      "stack_max": 3,
+      "use_profile": "drink",
+      "cooldown_s": 8,
+      "effects": [
+        {
+          "type": "restore_focus",
+          "amount": 45,
+          "target": "self",
+          "timing": "at_commit",
+          "cap": 100,
+          "overfill": "discard",
+          "healing_received": "not_applied",
+          "last_focus_spend_timer": "unchanged"
+        }
+      ],
+      "rule": "开始和提交要求专注低于100；提交加45，超出100舍弃；不改变最后实际专注消耗时刻或被动恢复等待。",
+      "tradeoff": "不是弹药且不装填枪弩；专注已满拒绝使用；占用战斗中的饮用窗口。",
+      "source_candidates": [
+        "法术宝箱",
+        "商人",
+        "法师NPC互动"
+      ],
+      "asset_notes": "蓝瓶加螺旋专注符号，明确45专注，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-REC-005",
+      "name": "清浊盐水",
+      "category": "REC",
+      "role": "解除已生效的持续燃烧或寒缓",
+      "unlock": "base_pool",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "drink",
+      "cooldown_s": 10,
+      "effects": [
+        {
+          "type": "cleanse",
+          "statuses": [
+            "burn",
+            "slow"
+          ],
+          "target": "self",
+          "timing": "at_commit",
+          "remove_count": "all_current_instances_in_shared_target_slots",
+          "future_immunity_s": 0,
+          "excluded": [
+            "shock_instant_stagger",
+            "negative_enchantments",
+            "temporary_tonic_negative_stats",
+            "poise_damage",
+            "cooldowns"
+          ]
+        }
+      ],
+      "rule": "开始/提交时至少有burn或slow；提交一次清除这两类当前状态；不阻止之后重新被挂状态。",
+      "tradeoff": "不回血、不回专注；电震是瞬时削韧，不能净化已累计削韧；不能洗掉坏附魔或增益药代价。",
+      "source_candidates": [
+        "杂货商人",
+        "药师NPC",
+        "状态主题支路宝箱"
+      ],
+      "asset_notes": "盐粒小包与火/足迹划除图示，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-REC-006",
+      "name": "赤蓝调和剂",
+      "category": "REC",
+      "role": "生命与专注均紧张时的一次折中补给",
+      "unlock": "meta_unlock",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "drink",
+      "cooldown_s": 12,
+      "effects": [
+        {
+          "type": "heal_hp",
+          "amount": 20,
+          "target": "self",
+          "timing": "at_commit",
+          "healing_received": "current_at_effect",
+          "overheal": "discard",
+          "dead_target": "no_effect"
+        },
+        {
+          "type": "restore_focus",
+          "amount": 25,
+          "target": "self",
+          "timing": "at_commit",
+          "cap": 100,
+          "overfill": "discard",
+          "healing_received": "not_applied",
+          "last_focus_spend_timer": "unchanged"
+        }
+      ],
+      "rule": "只要生命或专注至少一项有合法恢复空间即可开始/提交；两个效果独立截断，只有HP部分受治疗效率。",
+      "tradeoff": "单项回复均弱于专用药；两项都满且无其他效果时拒绝不扣。",
+      "source_candidates": [
+        "混合宝箱",
+        "高阶商人",
+        "药师支线回报"
+      ],
+      "asset_notes": "双色但用HP/专注双标及数值区分，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-BOO-001",
+      "name": "战吼烈酿",
+      "category": "BOO",
+      "role": "短时间用更高输出换更高近身风险",
+      "unlock": "base_pool",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "drink",
+      "cooldown_s": 18,
+      "effects": [
+        {
+          "type": "stat_modifier",
+          "stat": "damage_pct",
+          "value": 15,
+          "duration_s": 12,
+          "group": "temporary_tonic",
+          "target": "self",
+          "timing": "at_commit",
+          "stacking": "reject_if_any_tonic_active",
+          "cap_policy": "merge_into_existing_v2_final_caps"
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "physical_vulnerability_pct",
+          "value": 10,
+          "duration_s": 12,
+          "group": "temporary_tonic",
+          "target": "self",
+          "timing": "at_commit",
+          "stacking": "reject_if_any_tonic_active",
+          "cap_policy": "merge_into_existing_v2_final_caps"
+        }
+      ],
+      "rule": "所有效果同一提交开始、同一截止；全局temporary_tonic只容1包，已有任意包则拒绝新用、不覆盖/刷新。提交前试算：至少一个正面实际改善且全部列出负面均实际恶化，否则拒绝不扣；所有属性汇入v2现有最终上限，不另乘一层。死亡/局末清理，跨房保留剩余时长。",
+      "tradeoff": "12秒伤害+15%，同时物理易伤+10%；不能单独净化代价。",
+      "source_candidates": [
+        "战斗宝箱",
+        "商人",
+        "斗士NPC互动"
+      ],
+      "asset_notes": "酒壶带刀与破盾双符；正负倒计时共用，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-BOO-002",
+      "name": "疾手药剂",
+      "category": "BOO",
+      "role": "快速武器衔接与更短攻击承诺",
+      "unlock": "base_pool",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "drink",
+      "cooldown_s": 18,
+      "effects": [
+        {
+          "type": "stat_modifier",
+          "stat": "action_speed_pct",
+          "value": 12,
+          "duration_s": 12,
+          "group": "temporary_tonic",
+          "target": "self",
+          "timing": "at_commit",
+          "stacking": "reject_if_any_tonic_active",
+          "cap_policy": "merge_into_existing_v2_final_caps"
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "physical_vulnerability_pct",
+          "value": 15,
+          "duration_s": 12,
+          "group": "temporary_tonic",
+          "target": "self",
+          "timing": "at_commit",
+          "stacking": "reject_if_any_tonic_active",
+          "cap_policy": "merge_into_existing_v2_final_caps"
+        }
+      ],
+      "rule": "所有效果同一提交开始、同一截止；全局temporary_tonic只容1包，已有任意包则拒绝新用、不覆盖/刷新。提交前试算：至少一个正面实际改善且全部列出负面均实际恶化，否则拒绝不扣；所有属性汇入v2现有最终上限，不另乘一层。死亡/局末清理，跨房保留剩余时长。",
+      "tradeoff": "12秒动作速度+12%，同时物理易伤+15%；不缩短饮用、闪避、装填或独立技CD。",
+      "source_candidates": [
+        "敏捷主题宝箱",
+        "商人",
+        "训练师互动"
+      ],
+      "asset_notes": "手掌风纹瓶；不能暗示所有动作都加速，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-BOO-003",
+      "name": "游风清露",
+      "category": "BOO",
+      "role": "牺牲输出换普通走位空间",
+      "unlock": "base_pool",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "drink",
+      "cooldown_s": 18,
+      "effects": [
+        {
+          "type": "stat_modifier",
+          "stat": "move_speed_pct",
+          "value": 15,
+          "duration_s": 12,
+          "group": "temporary_tonic",
+          "target": "self",
+          "timing": "at_commit",
+          "stacking": "reject_if_any_tonic_active",
+          "cap_policy": "merge_into_existing_v2_final_caps"
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "damage_pct",
+          "value": -10,
+          "duration_s": 12,
+          "group": "temporary_tonic",
+          "target": "self",
+          "timing": "at_commit",
+          "stacking": "reject_if_any_tonic_active",
+          "cap_policy": "merge_into_existing_v2_final_caps"
+        }
+      ],
+      "rule": "所有效果同一提交开始、同一截止；全局temporary_tonic只容1包，已有任意包则拒绝新用、不覆盖/刷新。提交前试算：至少一个正面实际改善且全部列出负面均实际恶化，否则拒绝不扣；所有属性汇入v2现有最终上限，不另乘一层。死亡/局末清理，跨房保留剩余时长。",
+      "tradeoff": "12秒正常移动加成+15%，直接伤害加成-10%；遵守正常移动总倍率上限，不延长闪避距离或跳高。",
+      "source_candidates": [
+        "探索宝箱",
+        "商人",
+        "游侠NPC互动"
+      ],
+      "asset_notes": "靴子与下向刀纹图标，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-BOO-004",
+      "name": "坚壁药剂",
+      "category": "BOO",
+      "role": "在已有防具之外短时提高双类保护",
+      "unlock": "base_pool",
+      "carry": "quick",
+      "stack_max": 1,
+      "use_profile": "drink",
+      "cooldown_s": 22,
+      "effects": [
+        {
+          "type": "stat_modifier",
+          "stat": "armor_flat",
+          "value": 25,
+          "duration_s": 15,
+          "group": "temporary_tonic",
+          "target": "self",
+          "timing": "at_commit",
+          "stacking": "reject_if_any_tonic_active",
+          "cap_policy": "merge_into_existing_v2_final_caps"
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "ward_flat",
+          "value": 15,
+          "duration_s": 15,
+          "group": "temporary_tonic",
+          "target": "self",
+          "timing": "at_commit",
+          "stacking": "reject_if_any_tonic_active",
+          "cap_policy": "merge_into_existing_v2_final_caps"
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "move_speed_pct",
+          "value": -15,
+          "duration_s": 15,
+          "group": "temporary_tonic",
+          "target": "self",
+          "timing": "at_commit",
+          "stacking": "reject_if_any_tonic_active",
+          "cap_policy": "merge_into_existing_v2_final_caps"
+        }
+      ],
+      "rule": "所有效果同一提交开始、同一截止；全局temporary_tonic只容1包，已有任意包则拒绝新用、不覆盖/刷新。提交前试算：至少一个正面实际改善且全部列出负面均实际恶化，否则拒绝不扣；所有属性汇入v2现有最终上限，不另乘一层。死亡/局末清理，跨房保留剩余时长。",
+      "tradeoff": "15秒护甲+25点、魔抗+15点，同时正常移动加成-15%；没有闪避减益或免费受击免疫。",
+      "source_candidates": [
+        "防御宝箱",
+        "高阶商人",
+        "守卫NPC互动"
+      ],
+      "asset_notes": "石纹扁瓶与护甲/魔抗/慢靴三标，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-BOO-005",
+      "name": "凝神苦饮",
+      "category": "BOO",
+      "role": "法杖较长交战窗口的专注效率",
+      "unlock": "meta_unlock",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "drink",
+      "cooldown_s": 22,
+      "effects": [
+        {
+          "type": "stat_modifier",
+          "stat": "focus_regen_pct",
+          "value": 25,
+          "duration_s": 15,
+          "group": "temporary_tonic",
+          "target": "self",
+          "timing": "at_commit",
+          "stacking": "reject_if_any_tonic_active",
+          "cap_policy": "merge_into_existing_v2_final_caps"
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "focus_cost_pct",
+          "value": -15,
+          "duration_s": 15,
+          "group": "temporary_tonic",
+          "target": "self",
+          "timing": "at_commit",
+          "stacking": "reject_if_any_tonic_active",
+          "cap_policy": "merge_into_existing_v2_final_caps"
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "magic_vulnerability_pct",
+          "value": 15,
+          "duration_s": 15,
+          "group": "temporary_tonic",
+          "target": "self",
+          "timing": "at_commit",
+          "stacking": "reject_if_any_tonic_active",
+          "cap_policy": "merge_into_existing_v2_final_caps"
+        }
+      ],
+      "rule": "所有效果同一提交开始、同一截止；全局temporary_tonic只容1包，已有任意包则拒绝新用、不覆盖/刷新。提交前试算：至少一个正面实际改善且全部列出负面均实际恶化，否则拒绝不扣；所有属性汇入v2现有最终上限，不另乘一层。死亡/局末清理，跨房保留剩余时长。专注消耗加成只在当前法杖成本上生效；普通武器不因此获得伤害或弹药收益，专注恢复率仍按共用专注池。",
+      "tradeoff": "15秒专注恢复率+25%、专注成本-15%，同时魔法易伤+15%；不取消恢复延迟或把成本降为0。",
+      "source_candidates": [
+        "法术支路宝箱",
+        "高阶商人",
+        "法师NPC回报"
+      ],
+      "asset_notes": "苦草杯与专注/惧术双提示，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-BOO-006",
+      "name": "破阵酊",
+      "category": "BOO",
+      "role": "用较慢动作换高削韧抓破绽",
+      "unlock": "meta_unlock",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "drink",
+      "cooldown_s": 18,
+      "effects": [
+        {
+          "type": "stat_modifier",
+          "stat": "stagger_pct",
+          "value": 20,
+          "duration_s": 12,
+          "group": "temporary_tonic",
+          "target": "self",
+          "timing": "at_commit",
+          "stacking": "reject_if_any_tonic_active",
+          "cap_policy": "merge_into_existing_v2_final_caps"
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "action_speed_pct",
+          "value": -10,
+          "duration_s": 12,
+          "group": "temporary_tonic",
+          "target": "self",
+          "timing": "at_commit",
+          "stacking": "reject_if_any_tonic_active",
+          "cap_policy": "merge_into_existing_v2_final_caps"
+        }
+      ],
+      "rule": "所有效果同一提交开始、同一截止；全局temporary_tonic只容1包，已有任意包则拒绝新用、不覆盖/刷新。提交前试算：至少一个正面实际改善且全部列出负面均实际恶化，否则拒绝不扣；所有属性汇入v2现有最终上限，不另乘一层。死亡/局末清理，跨房保留剩余时长。",
+      "tradeoff": "12秒直接削韧+20%，动作速度-10%；不放大电震固定额外削韧，也不能越过目标破韧保护。",
+      "source_candidates": [
+        "重武器主题宝箱",
+        "商人",
+        "破阵NPC挑战回报"
+      ],
+      "asset_notes": "铁钉药瓶与碎盾/慢手标记，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-THR-001",
+      "name": "黑火药爆弹",
+      "category": "THR",
+      "role": "处理聚集杂兵的普通范围伤害",
+      "unlock": "base_pool",
+      "carry": "quick",
+      "stack_max": 3,
+      "use_profile": "throw",
+      "cooldown_s": 6,
+      "effects": [
+        {
+          "type": "damage",
+          "damage_type": "physical",
+          "amount": 32,
+          "stagger": 16,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 100,
+            "radius_y_cm": 38,
+            "height_tolerance_cm": 65
+          },
+          "delay_s": 0.45,
+          "target": "enemy",
+          "max_targets": 6,
+          "target_order": "distance_to_effect_center_then_instance_id",
+          "timing": "throw_arrival",
+          "repeat_hits": false,
+          "damage_scaling": "item_fixed_target_mitigation_and_vulnerability_only",
+          "crit": false,
+          "lifesteal": false,
+          "weapon_enchantment": false,
+          "friendly_fire": false,
+          "self_damage": false
+        }
+      ],
+      "rule": "地面待机启动；提交后从当时脚底向Facing固定X240cm、Y不变的合法落点投出，遇墙/边界夹到墙前可落点；0.45秒飞行后在落点结算一次，不沿途扫伤、不自动追敌。目标须满足范围/高度，按距中心再实例ID取上限。道具固定攻击不暴击/吸血/触发武器附魔，不吃装备输出/攻速/射程。",
+      "tradeoff": "每目标32物理伤害/16削韧，最多6个；落点固定且有飞行延迟，跑散可全空；无友伤与自爆伤。",
+      "source_candidates": [
+        "战斗宝箱",
+        "商人",
+        "火药桶旁拾取点"
+      ],
+      "asset_notes": "圆弹与清晰落点圆影、爆炸边界提示，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-THR-002",
+      "name": "燃油陶罐",
+      "category": "THR",
+      "role": "以小直伤换完整燃烧收益",
+      "unlock": "base_pool",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "throw",
+      "cooldown_s": 8,
+      "effects": [
+        {
+          "type": "damage",
+          "damage_type": "magic",
+          "amount": 14,
+          "stagger": 6,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 85,
+            "radius_y_cm": 35,
+            "height_tolerance_cm": 65
+          },
+          "delay_s": 0.45,
+          "target": "enemy",
+          "max_targets": 6,
+          "target_order": "distance_to_effect_center_then_instance_id",
+          "timing": "throw_arrival",
+          "repeat_hits": false,
+          "damage_scaling": "item_fixed_target_mitigation_and_vulnerability_only",
+          "crit": false,
+          "lifesteal": false,
+          "weapon_enchantment": false,
+          "friendly_fire": false,
+          "self_damage": false
+        },
+        {
+          "type": "status",
+          "status": "burn",
+          "magnitude": 4,
+          "duration_s": 3,
+          "target": "enemy",
+          "max_targets": 6,
+          "timing": "after_this_item_positive_direct_hp_damage",
+          "requires_target_alive": true,
+          "uses_weapon_affix_character_trigger_cooldown": false,
+          "shared_target_slot": true,
+          "stronger_replaces_equal_refreshes_weaker_rejected": true,
+          "damage_type": "magic",
+          "tick_interval_s": 1,
+          "ticks": 3,
+          "magnitude_unit": "damage_per_s",
+          "max_magnitude": 6,
+          "crit": false,
+          "lifesteal": false,
+          "stagger": 0,
+          "tick_schedule": "fresh_application_first_tick_after_1s_refresh_preserves_existing_next_tick_no_immediate_extra_tick"
+        }
+      ],
+      "rule": "地面待机启动；提交后从当时脚底向Facing固定X240cm、Y不变的合法落点投出，遇墙/边界夹到墙前可落点；0.45秒飞行后在落点结算一次，不沿途扫伤、不自动追敌。目标须满足范围/高度，按距中心再实例ID取上限。道具固定攻击不暴击/吸血/触发武器附魔，不吃装备输出/攻速/射程。先结算本罐直伤，对仍存活且真实HP损失>0目标施加共享燃烧槽；不生成残留地火。",
+      "tradeoff": "每目标14魔法直伤/6削韧，再4魔法伤害每秒×3；已有更强燃烧时不覆盖或刷新。",
+      "source_candidates": [
+        "元素宝箱",
+        "商人",
+        "炼金NPC互动"
+      ],
+      "asset_notes": "油罐与短爆燃动作；不画持续地火误导，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-THR-003",
+      "name": "寒雾瓶",
+      "category": "THR",
+      "role": "控制走位而非冻结敌人",
+      "unlock": "base_pool",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "throw",
+      "cooldown_s": 8,
+      "effects": [
+        {
+          "type": "damage",
+          "damage_type": "magic",
+          "amount": 12,
+          "stagger": 6,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 110,
+            "radius_y_cm": 42,
+            "height_tolerance_cm": 65
+          },
+          "delay_s": 0.45,
+          "target": "enemy",
+          "max_targets": 6,
+          "target_order": "distance_to_effect_center_then_instance_id",
+          "timing": "throw_arrival",
+          "repeat_hits": false,
+          "damage_scaling": "item_fixed_target_mitigation_and_vulnerability_only",
+          "crit": false,
+          "lifesteal": false,
+          "weapon_enchantment": false,
+          "friendly_fire": false,
+          "self_damage": false
+        },
+        {
+          "type": "status",
+          "status": "slow",
+          "magnitude": 20,
+          "duration_s": 2,
+          "target": "enemy",
+          "max_targets": 6,
+          "timing": "after_this_item_positive_direct_hp_damage",
+          "requires_target_alive": true,
+          "uses_weapon_affix_character_trigger_cooldown": false,
+          "shared_target_slot": true,
+          "stronger_replaces_equal_refreshes_weaker_rejected": true,
+          "magnitude_unit": "move_speed_percent",
+          "boss_multiplier": 0.5,
+          "max_magnitude": 25,
+          "affects_action_speed": false,
+          "freeze": false
+        }
+      ],
+      "rule": "地面待机启动；提交后从当时脚底向Facing固定X240cm、Y不变的合法落点投出，遇墙/边界夹到墙前可落点；0.45秒飞行后在落点结算一次，不沿途扫伤、不自动追敌。目标须满足范围/高度，按距中心再实例ID取上限。道具固定攻击不暴击/吸血/触发武器附魔，不吃装备输出/攻速/射程。直伤后仅对存活且真实扣血目标施加20%移动减速2秒；Boss为10%，不减攻击动画速度。",
+      "tradeoff": "伤害较低；不是冻结、无强制硬直、无残留雾场；更强寒缓不被较弱条目刷新。",
+      "source_candidates": [
+        "元素宝箱",
+        "商人",
+        "冰窖支路回报"
+      ],
+      "asset_notes": "瓶碎短雾与足迹减速符，避免持续遮挡，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-THR-004",
+      "name": "电痕脉冲罐",
+      "category": "THR",
+      "role": "配合武器累积削韧的群体电震",
+      "unlock": "meta_unlock",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "throw",
+      "cooldown_s": 10,
+      "effects": [
+        {
+          "type": "damage",
+          "damage_type": "magic",
+          "amount": 12,
+          "stagger": 4,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 90,
+            "radius_y_cm": 36,
+            "height_tolerance_cm": 65
+          },
+          "delay_s": 0.45,
+          "target": "enemy",
+          "max_targets": 4,
+          "target_order": "distance_to_effect_center_then_instance_id",
+          "timing": "throw_arrival",
+          "repeat_hits": false,
+          "damage_scaling": "item_fixed_target_mitigation_and_vulnerability_only",
+          "crit": false,
+          "lifesteal": false,
+          "weapon_enchantment": false,
+          "friendly_fire": false,
+          "self_damage": false
+        },
+        {
+          "type": "status",
+          "status": "shock",
+          "magnitude": 8,
+          "duration_s": 0,
+          "target": "enemy",
+          "max_targets": 4,
+          "timing": "after_this_item_positive_direct_hp_damage",
+          "requires_target_alive": true,
+          "uses_weapon_affix_character_trigger_cooldown": false,
+          "shared_target_slot": true,
+          "stronger_replaces_equal_refreshes_weaker_rejected": false,
+          "magnitude_unit": "extra_stagger_points",
+          "max_magnitude": 10,
+          "target_icd_s": 2,
+          "boss_target_icd_s": 4,
+          "respects_poise_protection": true,
+          "forced_stun": false,
+          "max_same_attack_with_other_shock": true
+        }
+      ],
+      "rule": "地面待机启动；提交后从当时脚底向Facing固定X240cm、Y不变的合法落点投出，遇墙/边界夹到墙前可落点；0.45秒飞行后在落点结算一次，不沿途扫伤、不自动追敌。目标须满足范围/高度，按距中心再实例ID取上限。道具固定攻击不暴击/吸血/触发武器附魔，不吃装备输出/攻速/射程。直伤后对存活且真实扣血目标尝试8点额外削韧；服从目标电震敌2s/Boss4s冷却和破韧保护。",
+      "tradeoff": "每目标仅12魔法直伤/4基础削韧；电震不能强制眩晕，与同次其他电震取最大不相加；最多4目标。",
+      "source_candidates": [
+        "雷电支路宝箱",
+        "高阶商人",
+        "技师NPC回报"
+      ],
+      "asset_notes": "线圈罐、一次电弧及削韧反馈，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-THR-005",
+      "name": "锥钉投弹",
+      "category": "THR",
+      "role": "精确落点的单体爆发",
+      "unlock": "meta_unlock",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "throw",
+      "cooldown_s": 8,
+      "effects": [
+        {
+          "type": "damage",
+          "damage_type": "physical",
+          "amount": 60,
+          "stagger": 28,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 35,
+            "radius_y_cm": 18,
+            "height_tolerance_cm": 65
+          },
+          "delay_s": 0.45,
+          "target": "enemy",
+          "max_targets": 1,
+          "target_order": "distance_to_effect_center_then_instance_id",
+          "timing": "throw_arrival",
+          "repeat_hits": false,
+          "damage_scaling": "item_fixed_target_mitigation_and_vulnerability_only",
+          "crit": false,
+          "lifesteal": false,
+          "weapon_enchantment": false,
+          "friendly_fire": false,
+          "self_damage": false
+        }
+      ],
+      "rule": "地面待机启动；提交后从当时脚底向Facing固定X240cm、Y不变的合法落点投出，遇墙/边界夹到墙前可落点；0.45秒飞行后在落点结算一次，不沿途扫伤、不自动追敌。目标须满足范围/高度，按距中心再实例ID取上限。道具固定攻击不暴击/吸血/触发武器附魔，不吃装备输出/攻速/射程。",
+      "tradeoff": "60物理伤害/28削韧只打最近1个，范围小；不穿甲、不自动指定精英或Boss，落点可被杂兵占据。",
+      "source_candidates": [
+        "精英宝箱",
+        "高阶商人",
+        "猎人NPC挑战回报"
+      ],
+      "asset_notes": "尖头钉弹与窄落点标记，命中保持单目标，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-THR-006",
+      "name": "震荡响罐",
+      "category": "THR",
+      "role": "低伤害但较高固定削韧",
+      "unlock": "meta_unlock",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "throw",
+      "cooldown_s": 10,
+      "effects": [
+        {
+          "type": "damage",
+          "damage_type": "physical",
+          "amount": 22,
+          "stagger": 34,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 75,
+            "radius_y_cm": 32,
+            "height_tolerance_cm": 65
+          },
+          "delay_s": 0.45,
+          "target": "enemy",
+          "max_targets": 4,
+          "target_order": "distance_to_effect_center_then_instance_id",
+          "timing": "throw_arrival",
+          "repeat_hits": false,
+          "damage_scaling": "item_fixed_target_mitigation_and_vulnerability_only",
+          "crit": false,
+          "lifesteal": false,
+          "weapon_enchantment": false,
+          "friendly_fire": false,
+          "self_damage": false
+        }
+      ],
+      "rule": "地面待机启动；提交后从当时脚底向Facing固定X240cm、Y不变的合法落点投出，遇墙/边界夹到墙前可落点；0.45秒飞行后在落点结算一次，不沿途扫伤、不自动追敌。目标须满足范围/高度，按距中心再实例ID取上限。道具固定攻击不暴击/吸血/触发武器附魔，不吃装备输出/攻速/射程。",
+      "tradeoff": "22物理伤害/34削韧最多4目标；不击飞、不推拉、不穿韧性保护；Boss大阈值使单罐不保证破韧。",
+      "source_candidates": [
+        "控制主题宝箱",
+        "商人",
+        "铁匠NPC互动"
+      ],
+      "asset_notes": "带共振环金属罐和碎盾反馈，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-TRP-001",
+      "name": "折叠钉板",
+      "category": "TRP",
+      "role": "诱导近战追击者踩中伤害陷阱",
+      "unlock": "base_pool",
+      "carry": "quick",
+      "stack_max": 3,
+      "use_profile": "place",
+      "cooldown_s": 6,
+      "effects": [
+        {
+          "type": "damage",
+          "damage_type": "physical",
+          "amount": 36,
+          "stagger": 18,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 65,
+            "radius_y_cm": 30,
+            "height_tolerance_cm": 65
+          },
+          "delay_s": 0,
+          "target": "enemy",
+          "max_targets": 3,
+          "target_order": "distance_to_effect_center_then_instance_id",
+          "timing": "trap_trigger",
+          "repeat_hits": false,
+          "damage_scaling": "item_fixed_target_mitigation_and_vulnerability_only",
+          "crit": false,
+          "lifesteal": false,
+          "weapon_enchantment": false,
+          "friendly_fire": false,
+          "self_damage": false,
+          "deployment": {
+            "offset_forward_cm": 40,
+            "arming_delay_s": 0.5,
+            "lifetime_s": 20,
+            "lifetime_from": "commit",
+            "per_actor_deployed_cap": 2,
+            "trigger_shape": {
+              "type": "ellipse",
+              "radius_x_cm": 40,
+              "radius_y_cm": 24,
+              "height_tolerance_cm": 65
+            },
+            "trigger_target": "alive_enemy",
+            "single_trigger": true,
+            "cleanup": [
+              "room_clear",
+              "leave_room",
+              "owner_death",
+              "run_end"
+            ],
+            "expiry_wins_tie": true
+          }
+        }
+      ],
+      "rule": "提交时在当前脚底Facing前40cm的合法位置部署；无合法位置或角色已有2个已部署陷阱则开始/提交拒绝，不挤掉旧陷阱。提交后0.50秒武装，存留20秒；存活敌人进入或武装时已位于探测区便触发一次，立刻移除陷阱并在同点结算一次效果。各自探测椭圆X40/Y24cm、高度容差65cm；不会触发其他陷阱。清房、离房、死亡或本局结束清除部署物，不退款；到期与触发同点先到期，不能给第20秒临界免费触发。",
+      "tradeoff": "触发后每目标36物理伤害/18削韧，最多3个；敌人不进探测区就不会造成伤害；没有脚伤持续状态。",
+      "source_candidates": [
+        "陷阱宝箱",
+        "商人",
+        "猎人NPC互动"
+      ],
+      "asset_notes": "可折叠钉板、己方识别边线与武装亮点，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-TRP-002",
+      "name": "火绳诱罐",
+      "category": "TRP",
+      "role": "将追击路线转换成燃烧消耗",
+      "unlock": "base_pool",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "place",
+      "cooldown_s": 8,
+      "effects": [
+        {
+          "type": "damage",
+          "damage_type": "magic",
+          "amount": 10,
+          "stagger": 4,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 85,
+            "radius_y_cm": 35,
+            "height_tolerance_cm": 65
+          },
+          "delay_s": 0,
+          "target": "enemy",
+          "max_targets": 4,
+          "target_order": "distance_to_effect_center_then_instance_id",
+          "timing": "trap_trigger",
+          "repeat_hits": false,
+          "damage_scaling": "item_fixed_target_mitigation_and_vulnerability_only",
+          "crit": false,
+          "lifesteal": false,
+          "weapon_enchantment": false,
+          "friendly_fire": false,
+          "self_damage": false,
+          "deployment": {
+            "offset_forward_cm": 40,
+            "arming_delay_s": 0.5,
+            "lifetime_s": 20,
+            "lifetime_from": "commit",
+            "per_actor_deployed_cap": 2,
+            "trigger_shape": {
+              "type": "ellipse",
+              "radius_x_cm": 40,
+              "radius_y_cm": 24,
+              "height_tolerance_cm": 65
+            },
+            "trigger_target": "alive_enemy",
+            "single_trigger": true,
+            "cleanup": [
+              "room_clear",
+              "leave_room",
+              "owner_death",
+              "run_end"
+            ],
+            "expiry_wins_tie": true
+          }
+        },
+        {
+          "type": "status",
+          "status": "burn",
+          "magnitude": 4,
+          "duration_s": 3,
+          "target": "enemy",
+          "max_targets": 4,
+          "timing": "after_this_item_positive_direct_hp_damage",
+          "requires_target_alive": true,
+          "uses_weapon_affix_character_trigger_cooldown": false,
+          "shared_target_slot": true,
+          "stronger_replaces_equal_refreshes_weaker_rejected": true,
+          "damage_type": "magic",
+          "tick_interval_s": 1,
+          "ticks": 3,
+          "magnitude_unit": "damage_per_s",
+          "max_magnitude": 6,
+          "crit": false,
+          "lifesteal": false,
+          "stagger": 0,
+          "tick_schedule": "fresh_application_first_tick_after_1s_refresh_preserves_existing_next_tick_no_immediate_extra_tick"
+        }
+      ],
+      "rule": "提交时在当前脚底Facing前40cm的合法位置部署；无合法位置或角色已有2个已部署陷阱则开始/提交拒绝，不挤掉旧陷阱。提交后0.50秒武装，存留20秒；存活敌人进入或武装时已位于探测区便触发一次，立刻移除陷阱并在同点结算一次效果。各自探测椭圆X40/Y24cm、高度容差65cm；不会触发其他陷阱。清房、离房、死亡或本局结束清除部署物，不退款；到期与触发同点先到期，不能给第20秒临界免费触发。触发直伤后对仍存活且真实扣血目标施加共享燃烧槽，不留下持续地火。",
+      "tradeoff": "每目标10魔法直伤/4削韧，再4/s燃烧3秒；多个相同燃烧不叠伤害，不能无限引爆连锁。",
+      "source_candidates": [
+        "元素陷阱宝箱",
+        "商人",
+        "炼金NPC回报"
+      ],
+      "asset_notes": "短火绳罐、清楚的一次性爆燃，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-TRP-003",
+      "name": "霜纹踏印",
+      "category": "TRP",
+      "role": "用最强初稿寒缓暂时拉开追击",
+      "unlock": "meta_unlock",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "place",
+      "cooldown_s": 8,
+      "effects": [
+        {
+          "type": "damage",
+          "damage_type": "magic",
+          "amount": 10,
+          "stagger": 4,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 95,
+            "radius_y_cm": 38,
+            "height_tolerance_cm": 65
+          },
+          "delay_s": 0,
+          "target": "enemy",
+          "max_targets": 4,
+          "target_order": "distance_to_effect_center_then_instance_id",
+          "timing": "trap_trigger",
+          "repeat_hits": false,
+          "damage_scaling": "item_fixed_target_mitigation_and_vulnerability_only",
+          "crit": false,
+          "lifesteal": false,
+          "weapon_enchantment": false,
+          "friendly_fire": false,
+          "self_damage": false,
+          "deployment": {
+            "offset_forward_cm": 40,
+            "arming_delay_s": 0.5,
+            "lifetime_s": 20,
+            "lifetime_from": "commit",
+            "per_actor_deployed_cap": 2,
+            "trigger_shape": {
+              "type": "ellipse",
+              "radius_x_cm": 40,
+              "radius_y_cm": 24,
+              "height_tolerance_cm": 65
+            },
+            "trigger_target": "alive_enemy",
+            "single_trigger": true,
+            "cleanup": [
+              "room_clear",
+              "leave_room",
+              "owner_death",
+              "run_end"
+            ],
+            "expiry_wins_tie": true
+          }
+        },
+        {
+          "type": "status",
+          "status": "slow",
+          "magnitude": 25,
+          "duration_s": 2,
+          "target": "enemy",
+          "max_targets": 4,
+          "timing": "after_this_item_positive_direct_hp_damage",
+          "requires_target_alive": true,
+          "uses_weapon_affix_character_trigger_cooldown": false,
+          "shared_target_slot": true,
+          "stronger_replaces_equal_refreshes_weaker_rejected": true,
+          "magnitude_unit": "move_speed_percent",
+          "boss_multiplier": 0.5,
+          "max_magnitude": 25,
+          "affects_action_speed": false,
+          "freeze": false
+        }
+      ],
+      "rule": "提交时在当前脚底Facing前40cm的合法位置部署；无合法位置或角色已有2个已部署陷阱则开始/提交拒绝，不挤掉旧陷阱。提交后0.50秒武装，存留20秒；存活敌人进入或武装时已位于探测区便触发一次，立刻移除陷阱并在同点结算一次效果。各自探测椭圆X40/Y24cm、高度容差65cm；不会触发其他陷阱。清房、离房、死亡或本局结束清除部署物，不退款；到期与触发同点先到期，不能给第20秒临界免费触发。触发直伤后对存活且真实扣血目标减移动25%共2秒，Boss12.5%；不冻结或留永久冰面。",
+      "tradeoff": "每目标仅10魔法直伤/4削韧；比寒雾瓶强的减速需要敌人主动踩印，无法扔到远处。",
+      "source_candidates": [
+        "冰系支路宝箱",
+        "高阶商人",
+        "符师NPC回报"
+      ],
+      "asset_notes": "脚底霜符与己方边线，不依赖全地面涂色，未生成资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-TRP-004",
+      "name": "接地电桩",
+      "category": "TRP",
+      "role": "保护追击路线上的削韧窗口",
+      "unlock": "meta_unlock",
+      "carry": "quick",
+      "stack_max": 2,
+      "use_profile": "place",
+      "cooldown_s": 10,
+      "effects": [
+        {
+          "type": "damage",
+          "damage_type": "magic",
+          "amount": 10,
+          "stagger": 4,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 70,
+            "radius_y_cm": 30,
+            "height_tolerance_cm": 65
+          },
+          "delay_s": 0,
+          "target": "enemy",
+          "max_targets": 3,
+          "target_order": "distance_to_effect_center_then_instance_id",
+          "timing": "trap_trigger",
+          "repeat_hits": false,
+          "damage_scaling": "item_fixed_target_mitigation_and_vulnerability_only",
+          "crit": false,
+          "lifesteal": false,
+          "weapon_enchantment": false,
+          "friendly_fire": false,
+          "self_damage": false,
+          "deployment": {
+            "offset_forward_cm": 40,
+            "arming_delay_s": 0.5,
+            "lifetime_s": 20,
+            "lifetime_from": "commit",
+            "per_actor_deployed_cap": 2,
+            "trigger_shape": {
+              "type": "ellipse",
+              "radius_x_cm": 40,
+              "radius_y_cm": 24,
+              "height_tolerance_cm": 65
+            },
+            "trigger_target": "alive_enemy",
+            "single_trigger": true,
+            "cleanup": [
+              "room_clear",
+              "leave_room",
+              "owner_death",
+              "run_end"
+            ],
+            "expiry_wins_tie": true
+          }
+        },
+        {
+          "type": "status",
+          "status": "shock",
+          "magnitude": 10,
+          "duration_s": 0,
+          "target": "enemy",
+          "max_targets": 3,
+          "timing": "after_this_item_positive_direct_hp_damage",
+          "requires_target_alive": true,
+          "uses_weapon_affix_character_trigger_cooldown": false,
+          "shared_target_slot": true,
+          "stronger_replaces_equal_refreshes_weaker_rejected": false,
+          "magnitude_unit": "extra_stagger_points",
+          "max_magnitude": 10,
+          "target_icd_s": 2,
+          "boss_target_icd_s": 4,
+          "respects_poise_protection": true,
+          "forced_stun": false,
+          "max_same_attack_with_other_shock": true
+        }
+      ],
+      "rule": "提交时在当前脚底Facing前40cm的合法位置部署；无合法位置或角色已有2个已部署陷阱则开始/提交拒绝，不挤掉旧陷阱。提交后0.50秒武装，存留20秒；存活敌人进入或武装时已位于探测区便触发一次，立刻移除陷阱并在同点结算一次效果。各自探测椭圆X40/Y24cm、高度容差65cm；不会触发其他陷阱。清房、离房、死亡或本局结束清除部署物，不退款；到期与触发同点先到期，不能给第20秒临界免费触发。触发直伤后对存活且真实扣血目标尝试10点额外削韧；服从目标电震敌2s/Boss4s冷却和保护。",
+      "tradeoff": "每目标10魔法直伤/4基础削韧，最多3个；保护或目标ICD中只剩直伤，不强制眩晕或击退。",
+      "source_candidates": [
+        "雷电陷阱宝箱",
+        "高阶商人",
+        "技师NPC回报"
+      ],
+      "asset_notes": "矮桩及接地线、一次电脉冲，未生成资产。",
+      "status": "design_only"
+    }
+  ]
+}

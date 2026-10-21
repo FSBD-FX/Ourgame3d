@@ -1,0 +1,20 @@
+Transient stone feedback journal; no audio listening, GPU or gameplay acceptance.
+DungeonStoneFeedbackStandalone.cpp
+Stone feedback checks=24 failures=16
+FAIL spawn initializes empty stream
+FAIL real wake accepted
+FAIL wake creates one feedback record
+FAIL duplicate batch is harmless
+FAIL duplicate cannot repeat audio or VFX
+FAIL non-feedback movement still advances cursor
+FAIL movement does not flood effects journal
+FAIL foreign batch cannot consume event IDs
+FAIL invalid batch leaves prior output intact
+FAIL real contact and death records accepted
+FAIL each actual feedback event appears once
+FAIL long fights retain bounded latest 64 cues
+FAIL restore can initialize at saved next ID
+FAIL old saved events cannot replay on restore
+FAIL actual production wake batch is consumable
+FAIL actual .85 wake warning receives exactly one record
+EXIT_CODE=1

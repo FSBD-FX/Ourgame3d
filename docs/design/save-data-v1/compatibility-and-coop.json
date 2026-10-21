@@ -1,0 +1,714 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "module": "D-13",
+  "source_event": "EV-031",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "runtime_validation_passed": false,
+  "user_individually_approved": false,
+  "authority": "assistant_proposal_not_individually_user_approved",
+  "scope": {
+    "primary": "single_player_profile_bundle_migration_and_future_coop_interface_boundaries",
+    "io_authority": "save-rules.json",
+    "bundle": "one_ProfileID_account_plus_zero_or_one_activeRun_plus_settings_read_markers_and_operation_journal_in_one_GenerationID",
+    "network_implementation": false,
+    "paid_generation": false,
+    "source_files_read_only": true
+  },
+  "premise_audit": {
+    "facts": [
+      "项目方向已确认UE5+Blender、二维角色与分层场景的2.5D、首版单人、合作以后考虑；当前先完成整体设计。",
+      "D09冻结未结束局成长快照且暂停/恢复态继续锁住局外购买、退款、样品选择与第二局；D10账号事实、当前Run成功、文本已读独立。",
+      "本轮静态检查UnrealGame/Source与Config，未见正式Profile/Run序列化与SaveGame加载保存入口；已见DungeonProbe的runtime-report.json输出和StartPlay调用RestartRun。该结论不等于已检查全部二进制资产或实际启动行为。",
+      "源码HUD正Y向屏幕下、groundY升序；源码W/Up输入为负Y。D11/D12正式契约W/Up为正Y远处、投影向上并按负groundY排序，尚未改代码。"
+    ],
+    "reasoning": [
+      "D13采用精确中途续局，包含Boss战；因此旧D07与D06尚未采用的false明确由本设计覆盖，不能只保存房间入口或退出时净化状态。",
+      "同一份Profile根bundle是迁移、发布、恢复的单位；否则永久样品已买与局内扣款/交付可能出现跨代分裂。",
+      "显示投影符号不证明存储世界轴已变；先认定世界语义再决定坐标转换。",
+      "合作预留应隔离身份、归属和输入意图，以免以后把单人对象下标当永久身份；当前仍只有一个本地判定权威。"
+    ],
+    "risks": [
+      "没有已证实的正式旧存档格式，不能承诺现有原型进度可导入或虚构迁移样本。",
+      "未知规则/ID/坏凭据不能通过当前价格、清空状态或较低兼容代补猜；保留原件并进入恢复流程。",
+      "冻结旧Run规则需要保留可执行旧规则与内容映射，增加包体、维护和回归成本；不能只留版本字符串。",
+      "未来合作人数、平台、拓扑、暂停/掉线/成长等未决，预留字段不等于已设计或已实现联网。"
+    ]
+  },
+  "version_contract": {
+    "document_schema": "本文件顶层schema_version仅是设计JSON格式；下面三个名字是未来存档bundle头字段，其值集合待实际实现固定。",
+    "schema_version": "存储结构与字段类型；版本路由必须逐对登记可验证迁移，不以build_id代替。",
+    "content_rules_version": "精确内容/价格/状态/动作/掉落/房间规则清单及digest；activeRun保持其冻结版本，账号实付凭据保留各自price_rules_version。",
+    "coordinate_version": "持久化世界位置、向量、坐标空间和房间基准的解释；渲染投影/深度排序变化本身不等于世界轴变化。",
+    "build_id": "诊断构建身份，不能证明上述三种版本兼容。",
+    "independent": true,
+    "compare": "read_compatibility_matrix_for_all_three_versions; newer_build_or_larger_schema_number_is_not_sufficient",
+    "accepted_legacy_versions": "none_claimed_from_observed_prototype; runtime_format_importers_must_be_registered_after_real_fixture_and_source_evidence_exist",
+    "unrecognized_header": "preserve_bytes_and_markers_read_only_RECOVERY_REQUIRED; no_automatic_fallback_or_overwrite"
+  },
+  "historical_precedence": [
+    {
+      "source_ref": "SRC-D07",
+      "pointer": "/persistence/midcombat_save_adopted",
+      "historical_value": false,
+      "decision": "D13_adopts_exact_midcombat_save_and_resume",
+      "source_mutated": false
+    },
+    {
+      "source_ref": "SRC-D06",
+      "pointer": "/persistence/save_during_boss_fight_adopted",
+      "historical_value": false,
+      "decision": "D13_adopts_exact_Boss_fight_save_and_resume",
+      "source_mutated": false
+    }
+  ],
+  "migration_policy": {
+    "identity": "ProfileID_GenerationID_parent_generation_and_exact_source_hash_are_verified_before_any_transform; never_import_into_another_profile_implicitly",
+    "registration": "explicit_source_schema_content_coordinate_tuple_to_target_tuple_with_MigrationID_transform_version_reference_map_and_pre_post_invariants; no_guessing_wildcard_or_unreviewed_down_migration",
+    "unit": "entire_same_generation_bundle; no_merge_of_new_account_old_Run_or_old_settings",
+    "immutable_source": "archive_exact_original_bundle_all_available_markers_and_diagnostics_before_candidate; migration_archive_not_part_of_rolling_A_B_reuse; keep_original_unless_separate_explicit_retention_action",
+    "target": "copy_to_new_generation_not_in_place; root_save_rules_commit_pipeline_is_only_publish_path; record_source_hash_versions_GenerationID_MigrationID_and_result",
+    "highest_published": "inspect_highest_trustworthy_published_marker_first; unknown_new_schema_or_bad_latest_published_bundle_never_silently_falls_back_to_older_playable_generation",
+    "staging_vs_corruption": "known_unpublished_temporary_or_stale_inactive_marker_mismatch_is_quarantined_per_IO_contract; highest_trustworthy_published_marker_referring_to_bad_bundle_is_RECOVERY_REQUIRED",
+    "activeRun": "lossless_representation_migration_may_preserve_same_RunID_frozen_rules_snapshot_and_full_exact_state; content_rules_upgrade_is_not_silent_and_does_not_swap_in_current_talents_prices_actions_or_manifest; missing_executable_frozen_rules_blocks_resume",
+    "new_rules": "new_content_rules_may_be_selected_only_for_a_later_new_Run_after_verified_terminal_resolution_and_D09_HUB_IDLE_lock_checks; cannot_end_or_reset_old_Run_as_migration_side_effect",
+    "unknown_id_or_missing_rules": "RECOVERY_REQUIRED_preserve_original; no_delete_substitute_reroll_refund_by_current_price_or_zero_default; explicit_complete_known_ID_rename_map_allowed_only_if_semantics_and_all_references_preserved",
+    "receipt_conservation": "verify_earned_shards_total_equals_balance_plus_unrefunded_actual_talent_payments_plus_actual_research_payments_under_D09; each_owned_rank_has_exactly_one_active_receipt; migration_never_infers_actual_paid_from_current_catalog",
+    "state_preservation": "retain_negative_affixes_and_original_intrinsic_eligibility_current_HP_focus_ammo_statuses_next_tick_CDs_healing_budgets_attack_emission_hits_projectiles_spawn_latches_reservations_rng_and_claims; do_not_sanitize_into_a_new_run",
+    "reward_preservation": "preserve_source_consumption_and_operation_receipts; no_auto_claim_of_historical_earned_unclaimed_or_inferred_rewards",
+    "story_projection": "only_trusted_prior_Boss_or_discovery_success_evidence_may_map_D10_story_facts_without_any_wallet_reward_or_current_Run_success_mutation; known_final_success_sets_STORY-M05_and_world_liberated_together; historical_first_ending_and_side_snapshot_remain_unknown_if_no_receipt",
+    "presentation": "seen_flags_and_cursors_never_prove_story_or_tutorial_action_success; replay_skip_or_pending_presentation_recovery_does_not_emit_gameplay_rewards",
+    "settings": "mapping_version_validated_against_D11_full_context_conflicts_and_escape_paths; known_incompatible_binding_repair_requires_explicit_preview_of_supported_default_or_mapping_in_new_full_bundle; unknown_bundle_schema_is_not_repaired_by_resetting_settings",
+    "offline": "UTC_dates_are_audit_only; no_time_based_growth_heal_status_expiry_or_recharge_during_migration_or_offline",
+    "recovery": "only_verified_whole_bundle_backup_restore_with_explicit_loss_disclosure_of_run_time_account_shards_unlocks_samples_story_and_settings; restore_as_new_generation_with_audit; no_automatic_reward_reconciliation_against_damaged_future_head",
+    "unresolved": "keep_unfinished_run_lock; explicit_technical_end_can_preserve_only_verified_permanent_progress_under_root_recovery_policy_without_new_rewards; separate_new_profile_must_not_overwrite_old_files",
+    "cryptography_limit": "integrity_hash_detects_corruption_design_only; not_authentication_cloud_sync_or_local_tamper_prevention"
+  },
+  "migration_steps": [
+    {
+      "id": "MIG-01",
+      "action": "lock_and_inventory",
+      "rule": "single_profile_writer; inventory_both_A_B_markers_bundles_and_migration_archives; establish_highest_trustworthy_published_generation"
+    },
+    {
+      "id": "MIG-02",
+      "action": "preserve_source",
+      "rule": "bounded_header_inspection_and_exact_bytes_integrity; immutable_full_original_archive_with_source_hash; failure_no_overwrite"
+    },
+    {
+      "id": "MIG-03",
+      "action": "resolve_compatibility",
+      "rule": "lookup_all_three_versions_and_known_migration_route; verify_frozen_rules_manifest_and_complete_ID_map; unavailable_route_RECOVERY_REQUIRED"
+    },
+    {
+      "id": "MIG-04",
+      "action": "copy_transform",
+      "rule": "build_full_new_candidate_only; preserve_same_ProfileID_RunID_receipts_owner_links_frozen_rules_and_active_simulation_time; no_runtime_initializers"
+    },
+    {
+      "id": "MIG-05",
+      "action": "validate_cross_scope",
+      "rule": "check_account_run_active_lock_references_currency_conservation_receipt_uniqueness_world_inventory_tray_consumption_exclusive_ownership_story_domains_rng_and_event_cursors"
+    },
+    {
+      "id": "MIG-06",
+      "action": "validate_space",
+      "rule": "classify_render_only_versus_world_semantics_change; if_actual_transform_apply_to_every_position_vector_locked_line_room_frame_and_attack_geometry_then_revalidate_D04_D05_D06_D07_bounds"
+    },
+    {
+      "id": "MIG-07",
+      "action": "validate_continuation",
+      "rule": "paired_source_target_fixture_has_same_next_due_events_costs_claims_and_random_results_under_frozen_rules; pause_and_offline_change_nothing"
+    },
+    {
+      "id": "MIG-08",
+      "action": "review_result",
+      "rule": "show_source_target_versions_same_RunID_preservation_and_any_explicit_backup_loss_before_migration_recovery_confirmation; cancellation_keeps_original_as_authority"
+    },
+    {
+      "id": "MIG-09",
+      "action": "publish_whole_root",
+      "rule": "use_save_rules_COMMIT_01_to_07_no_second_publish_algorithm; new_monotone_generation_and_migration_receipt; only_success_after_marker_and_ACK"
+    },
+    {
+      "id": "MIG-10",
+      "action": "retry_or_restore",
+      "rule": "same_MigrationID_and_request_digest_returns_same_result_after_lost_ACK; published_bad_candidate_requires_explicit_full_bundle_recovery_never_partial_rollback"
+    }
+  ],
+  "validation_invariants": [
+    "one_ProfileID_one_generation_across_account_activeRun_settings_journal",
+    "account_active_run_id_matches_activeRun_RunID_or_both_absent_only_after_verified_terminal_receipt",
+    "RUN_STARTING_RUN_ACTIVE_RUN_SUSPENDED_RUN_ENDING_RECOVERY_REQUIRED_do_not_permit_hub_growth_mutation_or_second_Run",
+    "Run_progression_snapshot_and_narrative_context_immutable_for_same_RunID",
+    "each_live_InstanceID_exactly_one_legal_owner_and_counts_are_integers; consumed_source_not_live_again",
+    "wallet_and_actual_paid_receipts_conserve_verified_currency; duplicate_operation_same_digest_returns_old_result",
+    "story_fact_run_success_seen_marker_and_tutorial_action_evidence_are_separate",
+    "timers_schedule_cursors_attack_hit_receipts_spawn_reservations_RNG_results_continue_exactly",
+    "all_ID_references_known_under_their_frozen_version_or_block; negative_affixes_not_removed",
+    "no_generation_mix_no_automatic_latest_corrupt_or_unknown_head_fallback"
+  ],
+  "coordinate_migration": {
+    "observed": {
+      "legacy_HUD": "u=640+X*0.65; v=510+Y*0.48; elevation=Z*0.70; ascending_actor_ground_Y",
+      "legacy_input": "W_Up_negative_Y; S_Down_positive_Y",
+      "formal": "W_Up_positive_Y_away; v=510-(Y-CameraY)*0.48-Z*0.70; negative_ground_Y_then_stable_actor_ID",
+      "formal_status": "paper_contract_unimplemented"
+    },
+    "no_real_legacy_save_tag_claimed": true,
+    "render_only": {
+      "condition": "stored_world_axes_and_room_semantics_unchanged; only_input_screen_projection_or_draw_sort_adapter_changes",
+      "position_transform": "identity",
+      "rule": "adapt_D11_input_D12_projection_depth_sort_shadows_tells_and_target_markers_together; do_not_negate_saved_Y_to_make_picture_match",
+      "acceptance": "same_world_pairs_keep_distances_hit_results_collision_reachability_and_locked_target_geometry; positive_Y_renders_up_and_far_actor_draws_first; jump_does_not_change_depth"
+    },
+    "actual_world_axis_change": {
+      "condition": "a_real_source_serialized_coordinate_contract_requires_different_world_basis_units_origin_or_room_local_frame",
+      "registration": "explicit_invertible_old_to_new_transform_and_direction_rules_per_coordinate_space; not_an_assumed_Y_sign_flip",
+      "transform_all": [
+        "player_enemy_and_interactive_actor_ground_positions_and_independent_jump_heights_as_applicable",
+        "velocity_acceleration_facing_and_aim_direction_vectors",
+        "attack_locked_origin_direction_line_sweep_endpoints_and_segment_geometry",
+        "live_projectile_centers_previous_sweep_positions_velocities_and_target_tracks",
+        "traps_deployables_AOE_shapes_ground_drop_points_and_reward_trays",
+        "room_local_world_transforms_entry_exit_spawn_anchors_fallback_paths_trigger_regions_and_max_swept_depth_basis",
+        "camera_ground_anchor_target_prompts_shadow_and_warning_geometry_references"
+      ],
+      "validate_all": [
+        "finite_values_units_and_round_trip_tolerance_explicit",
+        "ground_XY_distance_and_Z_height_semantics_preserved",
+        "body_hurtbox_collision_bounds_and_melee_center_tests_D05_D06",
+        "locked_attack_geometry_and_swept_projectile_tests",
+        "spawn_distance_route_LOS_and_no_overlap_D07",
+        "D04_drop_reachability_interaction_radius_and_exit_permissions",
+        "every_reference_uses_new_space_no_mixed_axes"
+      ],
+      "invalid_target": "RECOVERY_REQUIRED_preserve_original; no_free_teleport_automatic_safe_room_respawn_heal_or_status_clear"
+    },
+    "technical_repair": "explicit_D07_fault_repair_is_separate_recorded_operation_per_save_rules; normal_load_or_migration_cannot_use_repair_to_cancel_live_attacks"
+  },
+  "migration_cases": [
+    {
+      "id": "MGC-01",
+      "scenario": "旧结构有已登记无损升级，局处于Boss前摇",
+      "expected": "新代保持同RunID、冻结规则、前摇相位、锁线/资源和事件游标；暂停恢复后接续，不重新入场/无敌/领奖。",
+      "covers": [
+        "schema",
+        "exact_resume"
+      ]
+    },
+    {
+      "id": "MGC-02",
+      "scenario": "最新版可信published marker指向校验失败bundle，较低A代完整",
+      "expected": "RECOVERY_REQUIRED；保留两代与marker，明确较旧整代的模拟时间和永久进度损失，选择后整bundle恢复；不能自动较低代继续。",
+      "covers": [
+        "published_corruption",
+        "whole_backup"
+      ]
+    },
+    {
+      "id": "MGC-03",
+      "scenario": "临时写入完成但没有新published marker，旧权威代仍完整",
+      "expected": "只按根IO契约隔离未发布临时文件；继续旧权威代，不能把看似完整的临时JSON提升为成功事务。",
+      "covers": [
+        "unpublished",
+        "commit_boundary"
+      ]
+    },
+    {
+      "id": "MGC-04",
+      "scenario": "最高已发布代使用未知较新schema，较低代可解析",
+      "expected": "阻止自动载入较低代并写新进度；原件只读，提示用兼容构建或未来登记迁移，不能覆盖新进度。",
+      "covers": [
+        "unknown_schema",
+        "no_silent_downgrade"
+      ]
+    },
+    {
+      "id": "MGC-05",
+      "scenario": "未结束局缺少旧content_rules或其某武器/负词ID未知",
+      "expected": "保留局与未结束锁进入恢复；不能以当前天赋/价格替换、删负词、退当前价或改成新局。",
+      "covers": [
+        "missing_rules",
+        "unknown_ID",
+        "D09"
+      ]
+    },
+    {
+      "id": "MGC-06",
+      "scenario": "天赋拥有rank2但只有rank1的实付凭据",
+      "expected": "整代校验失败，不猜rank2历史付款、不部分退款；保留证据并阻止账号编辑和新局。",
+      "covers": [
+        "receipt_coverage",
+        "refund"
+      ]
+    },
+    {
+      "id": "MGC-07",
+      "scenario": "研究样品账号标记已买，局内扣款/实例交付或已售offer记录缺一",
+      "expected": "同bundle跨域事务无完整证据即恢复；不能补送、重复扣钱、重开offer或仅回退局内部分。",
+      "covers": [
+        "cross_scope",
+        "sample"
+      ]
+    },
+    {
+      "id": "MGC-08",
+      "scenario": "旧可信Boss成功凭据存在，只有文本已读、账号故事事实尚未投影",
+      "expected": "映射可信成功到账号事实，不再次付奖励；已读与新Run过关保持独立；终Boss事实与world_liberated同改；无首结局凭据则历史插页仍未知。",
+      "covers": [
+        "D10",
+        "no_reaward"
+      ]
+    },
+    {
+      "id": "MGC-09",
+      "scenario": "只看过终章对白而无可信终Boss成功事件",
+      "expected": "不能推断解誓、首通、当前Run结束或补发首次碎片；已读仅作为表现记录保存。",
+      "covers": [
+        "story_evidence",
+        "no_inference"
+      ]
+    },
+    {
+      "id": "MGC-10",
+      "scenario": "旧表现投影+Y朝下变成正式+Y朝上，存储世界轴未变",
+      "expected": "保存位置/锁线/弹道采用恒等变换；联调输入/投影/排序；不盲目Y取反，跳高仍不改地面深度。",
+      "covers": [
+        "render_only",
+        "D12"
+      ]
+    },
+    {
+      "id": "MGC-11",
+      "scenario": "经真实格式证明世界坐标基改变，房间/弹道仍用旧基",
+      "expected": "完整变换所有空间并复验界限/LOS/出生/命中；任何混合或越界都拒绝发布，不能自动安全传送清状态。",
+      "covers": [
+        "world_transform",
+        "bounds"
+      ]
+    },
+    {
+      "id": "MGC-12",
+      "scenario": "保存时燃烧next_tick将至、恢复CD未结束，离线一日",
+      "expected": "账号与Run同代，精确保留模拟时间/next_tick/CD/当前HP；离线不治疗、不到期、不补播已过事件。",
+      "covers": [
+        "offline",
+        "timers"
+      ]
+    },
+    {
+      "id": "MGC-13",
+      "scenario": "迁移published成功但进程在确认前退出，重试相同MigrationID",
+      "expected": "查已提交记录返回同一新代；不迁移第二次、不再领历史奖、不二次清空样品选择。",
+      "covers": [
+        "idempotency",
+        "lost_ACK"
+      ]
+    },
+    {
+      "id": "MGC-14",
+      "scenario": "相同OperationID却请求摘要不同或同GenerationID不同hash",
+      "expected": "冲突保留两份并阻止覆盖，不任选较晚文件或合并余额/库存。",
+      "covers": [
+        "conflict",
+        "identity"
+      ]
+    },
+    {
+      "id": "MGC-15",
+      "scenario": "D11重绑格式已知但迁移后缺全部有效取消/移动通路",
+      "expected": "不静默覆盖原映射；提出明确修正预览，用户确认后新全bundle发布；未知schema仍先阻止迁移。",
+      "covers": [
+        "settings",
+        "D11"
+      ]
+    },
+    {
+      "id": "MGC-16",
+      "scenario": "只能找到诊断runtime-report.json或原型当前内存字段",
+      "expected": "不作为正式旧存档导入；不能由房号/报告passed恢复钱包与完整局；明确无真实旧存档样本。",
+      "covers": [
+        "prototype_evidence",
+        "no_fake_save"
+      ]
+    }
+  ],
+  "coop_boundary": {
+    "status": "future_interface_concepts_only_not_a_multiplayer_schema_or_implementation",
+    "current_singleplayer": {
+      "participant_count": 1,
+      "authority": "one_local_authoritative_resolver",
+      "ProfileID": "local_profile_identity_not_platform_account_or_auth_token",
+      "pause": "D11_visible_pause_freezes_single_run_clock; focus_return_or_device_reconnect_does_not_auto_resume",
+      "wallet": "D08_run_gold_and_D09_profile_shards_keep_existing_single_player_scope; no_shared_wallet_added",
+      "pickup": "D04_unique_source_consumption_and_one_legal_instance_owner; no_item_replication",
+      "input": "keyboard_mouse_and_one_assigned_pad_merge_into_one_player_intent_stream_not_second_player",
+      "unfinished": "one_unfinished_Run_per_ProfileID_including_suspended_or_recovery; coop_reservations_do_not_release_lock"
+    },
+    "reserved_concepts": [
+      {
+        "name": "ParticipantID",
+        "meaning": "stable_gameplay_participant_identity_scoped_to_RunID; independent_of_controller_index_actor_pointer_or_platform_display_name",
+        "singleplayer": "one_identity_links_existing_player_actor_and_requests; no_extra_participants_or_guest_progress"
+      },
+      {
+        "name": "AuthorityID",
+        "meaning": "identity_of_resolver_authorized_to_accept_intents_and_publish_operation_results; independent_of_rendering_or_input_device",
+        "singleplayer": "only_local_resolver; not_a_decision_on_host_server_topology_or_handoff"
+      },
+      {
+        "name": "OwnerScope",
+        "meaning": "explicit_scope_and_owner_ID_for_profile_permanent_data_run_wallet_actor_inventory_and_world_source; owner_links_must_reference_known_same_bundle_IDs",
+        "singleplayer": "preserves_existing_Profile_Run_Instance_source_exclusive_ownership; does_not_create_trade_or_shared_wallet"
+      },
+      {
+        "name": "RequestID_OperationID_EventID",
+        "meaning": "stable_request_digest_and_receipt_links_for_intent_once_commit_once_reward_once; distinct_subhit_event_IDs_preserve_actual_multi_hit_rules",
+        "singleplayer": "same_duplicate_request_returns_same_result_changed_payload_rejects; no_network_retry_protocol_implied"
+      }
+    ],
+    "intent_contract": {
+      "input": "physical_device_to_D11_context_owned_intent_then_authoritative_game_rule_resolution_then_committed_receipt_then_presentation",
+      "fields_reserved": [
+        "RunID",
+        "ParticipantID",
+        "RequestID",
+        "intent_kind",
+        "target_stable_ID_or_null",
+        "known_source_destination_quote_versions_as_applicable"
+      ],
+      "no_client_authority": "intent_cannot_directly_set_HP_gold_owned_instances_hit_success_reward_or_RNG_outcome",
+      "validation": "current_singleplayer_context_range_LOS_safety_frozen_rules_and_source_state_remain_authoritative",
+      "not_decided": [
+        "transport",
+        "delivery_order_and_reliability",
+        "network_clock",
+        "prediction_or_rollback",
+        "replication_frequency",
+        "host_migration",
+        "late_join_snapshot",
+        "disconnect_resume"
+      ]
+    },
+    "no_implicit_mechanics": [
+      "no_shared_wallet",
+      "no_automatic_equal_loot_split",
+      "no_revive_or_downstate",
+      "no_friendly_fire_change",
+      "no_pause_vote_or_all_players_pause_policy",
+      "no_remote_profile_merge_or_cloud_save",
+      "no_guest_permanent_rewards",
+      "no_late_join_or_drop_in_out",
+      "no_network_snapshot_reuse_of_local_suspend",
+      "no_extra_player_slots_UI_or_platform_account_binding"
+    ],
+    "rollout": "freeze_solo_design_first_then_separate_coop_requirements_authorization_and_prototype; current_writer_and_loader_reject_unknown_participant_topology_instead_of_assuming_it",
+    "security_boundary": "stable_ID_and_hash_do_not_authenticate_remote_players; trust_authentication_platform_privacy_and_abuse_controls_require_later_design"
+  },
+  "coop_questions": [
+    {
+      "id": "COOP-Q01",
+      "topic": "人数与参与方式",
+      "question": "合作支持多少人，是否本地同屏、线上或两者？",
+      "not_decided": true,
+      "solo_guard": "当前只有1名本地玩家。",
+      "cost": "人数改变镜头可读性、房间面积、出生/敌人容量、装备界面和测试组合。"
+    },
+    {
+      "id": "COOP-Q02",
+      "topic": "权威与拓扑",
+      "question": "由哪一层权威判定战斗、经济和保存，是否允许权威转移？",
+      "not_decided": true,
+      "solo_guard": "当前单一本地权威。",
+      "cost": "连接/托管、运行维护、延迟与故障恢复成本随方案变化；未选择网络框架或平台。"
+    },
+    {
+      "id": "COOP-Q03",
+      "topic": "同屏镜头与分散",
+      "question": "玩家分散、跨纵深或一人靠近出口时镜头和可达边界如何处理？",
+      "not_decided": true,
+      "solo_guard": "D12镜头与D07出生约束按单人复验。",
+      "cost": "镜头/场地重做、提示可读性与多人走位测试，不能只放大视野。"
+    },
+    {
+      "id": "COOP-Q04",
+      "topic": "局内钱与设施",
+      "question": "金币与优惠券归谁，能否共享/转让，设施扣款的授权范围是什么？",
+      "not_decided": true,
+      "solo_guard": "现有Run钱包与唯一消耗不变。",
+      "cost": "跨玩家收支、竞争购买、取消与重复请求事务矩阵。"
+    },
+    {
+      "id": "COOP-Q05",
+      "topic": "拾取与装备归属",
+      "question": "掉落为公共抢拾、专属、分配还是投票；可否交易/赠送？",
+      "not_decided": true,
+      "solo_guard": "D04每实例仅一个合法持有者，拾取一次。",
+      "cost": "所有权争用、背包容量、地面掉落和跨玩家转移原子性；不会默认复制奖励。"
+    },
+    {
+      "id": "COOP-Q06",
+      "topic": "永久成长与客人",
+      "question": "各Profile天赋/研究怎样入局，客人是否保留碎片、样品与研究？",
+      "not_decided": true,
+      "solo_guard": "D09冻结单Profile快照及未结束锁保持。",
+      "cost": "跨账号授权与提交、离线账号、退款价格凭据及差异平衡。"
+    },
+    {
+      "id": "COOP-Q07",
+      "topic": "死亡与失败",
+      "question": "是否倒地/复活，一人死亡能否继续，何时本局结束？",
+      "not_decided": true,
+      "solo_guard": "沿用当前玩家死亡、Boss同点伤害后存活要求。",
+      "cost": "新增死亡状态机、奖励资格和残局/退出测试；不能预设复活机制。"
+    },
+    {
+      "id": "COOP-Q08",
+      "topic": "暂停与焦点",
+      "question": "菜单、失焦、控制器断开和剧情阅读能否暂停整个合作局？",
+      "not_decided": true,
+      "solo_guard": "D11单人暂停完整冻结，不推导投票或线上不停。",
+      "cost": "多时钟、输入消费和危险中菜单交互重设计。"
+    },
+    {
+      "id": "COOP-Q09",
+      "topic": "退出与跨房",
+      "question": "谁能选路/付门票/确认丢弃物与跨关，其他玩家在攻击或DoT中如何处理？",
+      "not_decided": true,
+      "solo_guard": "D04普通免费出口与付费完整安全条件不改。",
+      "cost": "跨玩家一致提交、边界/迟到请求和房间资源清理。"
+    },
+    {
+      "id": "COOP-Q10",
+      "topic": "中途加入与离开",
+      "question": "是否允许后加入、退出、重连，加入者出现位置和已有结果如何确定？",
+      "not_decided": true,
+      "solo_guard": "本地精确续局不自动成为联机快照。",
+      "cost": "快照授权、内容版本一致性、断线库存与重放/抢领风险测试。"
+    },
+    {
+      "id": "COOP-Q11",
+      "topic": "保存与恢复",
+      "question": "谁持有合作局，离线客人能否继续，恢复是否要求所有人同代？",
+      "not_decided": true,
+      "solo_guard": "单Profile整bundle A/B设计保持。",
+      "cost": "跨账号保存协议、冲突恢复和权威丢失处理；不能默认为共享存档。"
+    },
+    {
+      "id": "COOP-Q12",
+      "topic": "命中与延迟",
+      "question": "是否友伤/身体阻挡，远端输入迟到时怎样保证真实命中与预告？",
+      "not_decided": true,
+      "solo_guard": "D02/D05/D06当前命中和友军挡弹规则不变。",
+      "cost": "动作时序、预测/回滚候选比较及高延迟可读性验收；未选技术。"
+    },
+    {
+      "id": "COOP-Q13",
+      "topic": "奖励与故事资格",
+      "question": "Boss成功、首奖、发现与结局分别按玩家还是队伍判定？",
+      "not_decided": true,
+      "solo_guard": "D10账号事实/Run成功/已读分离；奖励唯一事件保持。",
+      "cost": "掉线/死亡/晚加入的参与资格和账号事实跨域事务。"
+    },
+    {
+      "id": "COOP-Q14",
+      "topic": "难度与内容预算",
+      "question": "是否随人数缩放HP/敌数/掉落，房间容量与资源怎样重新预算？",
+      "not_decided": true,
+      "solo_guard": "不自动翻倍收益/敌人，也不预设倍率。",
+      "cost": "D05-D08重平衡、武器/状态组合与设备性能测试。"
+    },
+    {
+      "id": "COOP-Q15",
+      "topic": "商业平台与权限",
+      "question": "目标平台、帐号、邀请/匹配、跨平台、地区与隐私范围是什么？",
+      "not_decided": true,
+      "solo_guard": "ProfileID不等于平台账号，当前无商业平台承诺。",
+      "cost": "平台接入/审批、用户数据、在线服务费用与运营支持；具体费用无真实报价。"
+    },
+    {
+      "id": "COOP-Q16",
+      "topic": "验收与发布范围",
+      "question": "合作是否独立里程碑，目标设备、体验指标和维护投入怎样接受？",
+      "not_decided": true,
+      "solo_guard": "先验证单人存档与D14整局，不把接口预留记完成。",
+      "cost": "多人组合、长局存档、异常注入、兼容版本与后续维护工时需单独排期估算。"
+    }
+  ],
+  "source_refs": [
+    {
+      "id": "SRC-DIRECTION",
+      "path": "docs/2.5d-direction-2026-10-11.md",
+      "anchor": "已确认与设计基线",
+      "sha256": "1bc2a62eaa505d9c3987c0e36b5c13ee7940a66725feeb7e0955bba6efe5e9f4",
+      "supports": "UE5_Blender_2_5D_singleplayer_first_future_coop",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D04",
+      "path": "docs/design/inventory-v1/inventory-rules.json",
+      "pointers": [
+        "/currency_pickup",
+        "/event_order",
+        "/transfer",
+        "/transaction",
+        "/exit"
+      ],
+      "sha256": "7eb6f7da968622a1583b4e63069208513a09e0ef74d12e244c18e20332f08942",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D06",
+      "path": "docs/design/bosses-v1/common-rules.json",
+      "pointers": [
+        "/persistence/save_during_boss_fight_adopted"
+      ],
+      "sha256": "4eed5d3221103121ed28c74207c8b4377954b8d8094e008d5dcf8085acfcb66d",
+      "supports": "historical_Boss_save_not_yet_adopted_false_and_full_state_requirements",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D07",
+      "path": "docs/design/dungeon-v1/common-rules.json",
+      "pointers": [
+        "/persistence",
+        "/technical_fault"
+      ],
+      "sha256": "bc8b274b6aa76eb67a159ef4acd400d51fc695655e8b696f94a74489757c9960",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D08",
+      "path": "docs/design/economy-v1/common-rules.json",
+      "pointers": [
+        "/transactions"
+      ],
+      "sha256": "e08960c5fea63655a5f0bbb9f3223f49a3d8a3480c4164c492e19a6004f60f98",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D09",
+      "path": "docs/design/progression-v1/hub-rules.json",
+      "pointers": [
+        "/lifecycle",
+        "/talent_reset",
+        "/new_run",
+        "/sample_cross_scope_transaction"
+      ],
+      "sha256": "edcd7bcaf78d86416dc01ee0b31f9aa3c3477fa2ea80654cd181f1700b9deb40",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D10",
+      "path": "docs/design/narrative-v1/story-flow.json",
+      "pointers": [
+        "/state_domains",
+        "/fact_transaction",
+        "/new_run_context",
+        "/ending"
+      ],
+      "sha256": "92bfcb6dcc79924d2e0bcd22a3d9dc80e256708619a415e577308f632d7bb661",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D11",
+      "path": "docs/design/ui-input-v1/input-rules.json",
+      "pointers": [
+        "/movement",
+        "/rebind",
+        "/hotplug_and_focus",
+        "/contexts"
+      ],
+      "sha256": "693a1ce332da2249a1c608bccc4fde5ad604ae0134abf0d550074947f3ef88f8",
+      "mutated": false
+    },
+    {
+      "id": "SRC-D12",
+      "path": "docs/design/presentation-v1/visual-rules.json",
+      "pointers": [
+        "/spatial_contract",
+        "/animation_clock_contract"
+      ],
+      "sha256": "7dcb1373f3d7da66575cd2255365dea67dfe9daf411d20986dae80342a705003",
+      "mutated": false
+    },
+    {
+      "id": "SRC-CODE-START",
+      "path": "UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "lines": [
+        20,
+        25,
+        51,
+        71
+      ],
+      "sha256": "9c0cd2c3aef11a202b46b81e85395bc2f5a2405a7f337ba1216e82debde07229",
+      "supports": "StartPlay_calls_RestartRun_reset_prototype_state",
+      "mutated": false
+    },
+    {
+      "id": "SRC-CODE-HUD",
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "lines": [
+        35,
+        271
+      ],
+      "sha256": "207828a928401417e4dfad8110dc1f399b91883578aa40d0c2e8649863539ac4",
+      "supports": "positive_Y_down_projection_ascending_ground_Y_sort",
+      "mutated": false
+    },
+    {
+      "id": "SRC-CODE-INPUT",
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "lines": [
+        176
+      ],
+      "sha256": "911a7b5b478cd6d427dd4e1962cea98fadf4cc86f5d94e204765f73f788f5c8c",
+      "supports": "W_Up_negative_Y_S_Down_positive_Y",
+      "mutated": false
+    },
+    {
+      "id": "SRC-CODE-REPORT",
+      "path": "UnrealGame/Source/CodexDungeon/DungeonProbe.cpp",
+      "lines": [
+        100,
+        113
+      ],
+      "sha256": "d4c55ce5f8a77c508e9c278886fa97cab571e2c5f61472d8c7b574820f79ad32",
+      "supports": "JSON_is_runtime_proof_report_not_resume_format",
+      "mutated": false
+    }
+  ],
+  "evidence_limits": {
+    "inspection": "read_only_rg_and_source_text_2026_10_14; Source_and_Config_not_all_binary_assets",
+    "searched_tokens": [
+      "USaveGame",
+      "SaveGameToSlot",
+      "LoadGameFromSlot",
+      "SaveConfig",
+      "LoadConfig",
+      "ProfileID",
+      "active_run_id",
+      "Checkpoint"
+    ],
+    "actual_formal_save_fixture": false,
+    "engine_run_this_turn": false,
+    "migration_implementation": false,
+    "migration_crash_injection_tested": false,
+    "network_or_platform_research_this_turn": false,
+    "counts": "16_migration_cases_and16_coop_questions_are_assistant_design_coverage_not_runtime_pass_count"
+  },
+  "future_acceptance": [
+    "real_supported_legacy_save_fixtures_with_registered_transform_routes",
+    "full_bundle_crash_before_after_marker_lost_ACK_and_corruption_injection",
+    "exact_active_Boss_attack_projectile_DoT_spawn_and_RNG_continuation",
+    "D09_snapshot_lock_price_receipt_and_sample_cross_scope_conservation",
+    "D10_fact_Run_seen_and_ending_history_integrity",
+    "D11_rebind_pause_release_gate_under_restore",
+    "D12_input_projection_sort_and_actual_world_transform_space_proofs",
+    "D14_save_size_latency_legacy_rule_retention_cost_and_full_solo_run_playtest",
+    "separate_user_review_of_coop_questions_before_coop_scope_or_build"
+  ]
+}

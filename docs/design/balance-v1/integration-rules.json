@@ -1,0 +1,296 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "module": "D-14",
+  "source_event": "EV-032",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposal_not_individually_user_approved",
+  "intent": "complete_initial_design_and_cross_system_paper_audit_before_authorized_production; not_balance_or_runtime_certification",
+  "difficulty_policy": {
+    "initial_difficulty_modes": 1,
+    "mode_name": "standard_candidate",
+    "no_hidden_player_strength_scaling": true,
+    "fixed_chapter_growth_only": true,
+    "no_required_talents_research_rare_drop_paid_branch_or_consumable_for_mainline_access": true,
+    "zero_talent_clear": "runtime_validation_target_not_proved",
+    "post_launch_difficulty_modes": "deferred_until_standard_baseline_and_measured_playtests",
+    "player_skill_or_completion_time_assumed": false
+  },
+  "chapter_scaling": {
+    "status": "new_D14_assistant_proposal_untested",
+    "source_gap": "../dungeon-v1/regions-and-routes.json#/regions/0/enemy_mix_policy",
+    "rows": [
+      {
+        "region_id": "REG-01",
+        "chapter": 1,
+        "ordinary_and_elite_hp_multiplier": 1.0,
+        "ordinary_and_elite_direct_damage_multiplier": 1.0,
+        "Boss_multiplier": 1.0
+      },
+      {
+        "region_id": "REG-02",
+        "chapter": 2,
+        "ordinary_and_elite_hp_multiplier": 1.1,
+        "ordinary_and_elite_direct_damage_multiplier": 1.04,
+        "Boss_multiplier": 1.0
+      },
+      {
+        "region_id": "REG-03",
+        "chapter": 3,
+        "ordinary_and_elite_hp_multiplier": 1.2,
+        "ordinary_and_elite_direct_damage_multiplier": 1.08,
+        "Boss_multiplier": 1.0
+      },
+      {
+        "region_id": "REG-04",
+        "chapter": 4,
+        "ordinary_and_elite_hp_multiplier": 1.3,
+        "ordinary_and_elite_direct_damage_multiplier": 1.12,
+        "Boss_multiplier": 1.0
+      },
+      {
+        "region_id": "REG-05",
+        "chapter": 5,
+        "ordinary_and_elite_hp_multiplier": 1.4,
+        "ordinary_and_elite_direct_damage_multiplier": 1.16,
+        "Boss_multiplier": 1.0
+      }
+    ],
+    "formula": "base_definition -> original_elite_HP_and_direct_damage_multiplier_once_if_elite -> chapter_HP_and_direct_damage_multiplier_once; retain_float_values_no_repeated_rounding",
+    "freeze": "resolved_recipe_chapter_and_scaled_spawn_max_HP_attack_damage_profile_are_fixed_with_manifest_RulesVersion_and_saved_under_D13; enter_return_resume_or_phase_does_not_scale_again",
+    "applies_to": [
+      "ordinary_enemy_max_HP",
+      "elite_max_HP",
+      "ordinary_and_elite_direct_attack_base_damage_before_target_mitigation"
+    ],
+    "does_not_scale": [
+      "Boss_authored_HP_or_damage",
+      "armor",
+      "ward",
+      "poise",
+      "walk_or_charge_or_projectile_speed",
+      "windup_active_recovery_cooldown",
+      "body_or_hurtbox_or_attack_geometry",
+      "fixed_DoT_element_magnitude_duration_control_ICD",
+      "support_magnitude_or_duration",
+      "loot_gold_shards_or_shop_prices"
+    ],
+    "health_during_life": "derived_spawn_max_HP_is_not_a_heal; no_HP_recalc_on_chapter_exit_resume_or_save_migration",
+    "ranges": "D05_stats_proposed_ranges_are_unscaled_base_design_ranges_not_post_chapter_or_elite_hard_HP_caps",
+    "same_budget_more_pressure": "D07_actor4_threat8_caps_unchanged; chapter_growth_increases_health_and_damage_burden_without_claiming_budget_is_fairness_proof",
+    "retune_policy": "change_named_values_only_in_new_version_after_review_of_measured_results; no_auto_adaptation"
+  },
+  "difficulty_layers": [
+    {
+      "id": "DIFF-01",
+      "layer": "recognition",
+      "rule": "N02_one_enemy_minimal_teach; no_hidden_second_unit_or_tutorial_reward"
+    },
+    {
+      "id": "DIFF-02",
+      "layer": "composition",
+      "rule": "N03_complementary_roles_with_seeded_finite_fixed_manifest; worst_case_capability_scan_not_label_only"
+    },
+    {
+      "id": "DIFF-03",
+      "layer": "sequence",
+      "rule": "N05_three_finite_groups_with_terminal_dependency_and_depth_latch; no_overlapping_groups_in_initial_D14_mainline_deck"
+    },
+    {
+      "id": "DIFF-04",
+      "layer": "chapter_stats",
+      "rule": "only_explicit_HP_and_direct_damage_rows; no_shorter_warning_or_larger_collision"
+    },
+    {
+      "id": "DIFF-05",
+      "layer": "Boss",
+      "rule": "D06_authored_mainline_Boss650_900_1150_1450_1800HP_and_original_attack_pools; no_additional_chapter_multiplier"
+    },
+    {
+      "id": "DIFF-06",
+      "layer": "optional_risk",
+      "rule": "D07_D08_existing_branch_and_hidden_encounters_prices_rewards_only; skip_does_not_block_mainline"
+    }
+  ],
+  "mainline_manifest_authority": {
+    "file": "encounter-deck.json",
+    "coverage": "15_combat_nodes_N02_N03_N05_in5regions; entry_service_prep_andBoss_keep_D07_roles",
+    "initial_candidates_per_node": 1,
+    "randomness": "one_initial_authored_candidate_does_not_claim_large_procedural_variety; RunSeed_selects_only_available_validated_candidate_and_layout; save_exact_choices_before_entry",
+    "old_six_templates": "retained_as_reference_or_region_compatible_optional_candidates; new_deck_does_not_overwrite_old_RSEQ_IDs_or_counts",
+    "geometry": "D07_RSEQ001_anchor_grid_is_only_a_reference_layout; every_actual_room_needs_navigation_camera_spawn_and_weapon_path_validation",
+    "optional_room_fallback": "if_no_complete_validated_manifest_or_geometry_for_optional_candidate_do_not_offer_it_as_playable; never_silent_skip_required_mainline_obligations",
+    "reward_budget": "fixed_D08_source_budget_per_room_distributed_over_complete_D14_finite_manifest; no_gold_per_new_wave_or_unbudgeted_elite_bonus"
+  },
+  "scoped_authorities": [
+    {
+      "id": "AUTH-01",
+      "topic": "weapon_identity_and_base_actions",
+      "sources": [
+        "../equipment-v1/weapons.json",
+        "../equipment-v1/armor.json"
+      ],
+      "rule": "keep_33_12_original_definitions; later_scoped_extensions_below_only"
+    },
+    {
+      "id": "AUTH-02",
+      "topic": "attributes_affixes_caps",
+      "sources": [
+        "../equipment-v2/stat-definitions.json",
+        "../equipment-v2/enchant-rules.json"
+      ],
+      "rule": "same_final_source_sum_and_cap; no_D14_secondary_percent_reduction_or_new_bonus_bucket"
+    },
+    {
+      "id": "AUTH-03",
+      "topic": "player_actions",
+      "sources": [
+        "../player-combat-v1/player-combat-rules.json"
+      ],
+      "rule": "D02_air_primary_once_dodge_and_per_emission_origin_override_only_old_corresponding_weapon_ground_restrictions"
+    },
+    {
+      "id": "AUTH-04",
+      "topic": "attack_time_and_status",
+      "sources": [
+        "../items-v1/common-rules.json",
+        "../items-v1/states.json"
+      ],
+      "rule": "D03_start_freezes_time_axis_other_properties40percent; next_tick_and_actual_heal_budgets_preserved"
+    },
+    {
+      "id": "AUTH-05",
+      "topic": "inventory_and_event_order",
+      "sources": [
+        "../inventory-v1/inventory-rules.json"
+      ],
+      "rule": "damage_deaths_before_legal_healing_inventory_commits; source_destination_and_final_caps_once"
+    },
+    {
+      "id": "AUTH-06",
+      "topic": "ordinary_and_elite",
+      "sources": [
+        "../enemies-v1/common-rules.json",
+        "../enemies-v1/enemies.json"
+      ],
+      "rule": "D05_all_inherited_capabilities_AI_warning_control_and_projectile_capacity; D14_only_adds_fixed_chapter_HP_direct_damage"
+    },
+    {
+      "id": "AUTH-07",
+      "topic": "Boss",
+      "sources": [
+        "../bosses-v1/common-rules.json",
+        "../bosses-v1/bosses.json"
+      ],
+      "rule": "D06_specific_resistance_phase_and_qualified_success; ordinary_elites_do_not_inherit_Boss_profile"
+    },
+    {
+      "id": "AUTH-08",
+      "topic": "encounter",
+      "sources": [
+        "../dungeon-v1/common-rules.json"
+      ],
+      "rule": "finite_future_obligations_whole_group_reservation_depth_latch_and_spawn_revalidation; wave_clear_room_clear_full_safety_distinct"
+    },
+    {
+      "id": "AUTH-09",
+      "topic": "quality_economy",
+      "sources": [
+        "../economy-v1/common-rules.json",
+        "../economy-v1/equipment-growth.json"
+      ],
+      "rule": "D08_grade_forge_contributions_and_fixed_sources_override_old_acquisition_summaries_only"
+    },
+    {
+      "id": "AUTH-10",
+      "topic": "progression",
+      "sources": [
+        "../progression-v1/hub-rules.json",
+        "../progression-v1/talents.json",
+        "../progression-v1/unlocks.json"
+      ],
+      "rule": "D09_snapshot_start_once_hub_lock_same_caps_actual_receipts_and_one_paid_sample"
+    },
+    {
+      "id": "AUTH-11",
+      "topic": "story_and_UI",
+      "sources": [
+        "../narrative-v1/story-flow.json",
+        "../ui-input-v1/input-rules.json"
+      ],
+      "rule": "D10_fact_run_read_domains_independent; D11_context_consumption_and_real_pause_not_free_equip"
+    },
+    {
+      "id": "AUTH-12",
+      "topic": "presentation_and_storage",
+      "sources": [
+        "../presentation-v1/visual-rules.json",
+        "../save-data-v1/save-rules.json"
+      ],
+      "rule": "D12_render_no_damage_clock_authority; D13_exact_same_generation_resume_overrides_old_Boss_and_room_save_not_adopted_flags"
+    }
+  ],
+  "risk_register": [
+    {
+      "id": "RISK-01",
+      "priority": "must_verify_before_accepting_combat",
+      "risk": "shortest_KNF_reach_under_negative15percent_has_only_.8cm_front_contact_margin_against_largest_Boss",
+      "evidence": "combat-baselines.json geometry_examples; no_source_value_changed",
+      "next": "runtime_sweep_contact_and_reach_all_facings_depth_edges_armor_and_negative_reach; if_impossible_minimally_adjust_Boss_contact_or_source_reach_in_new_version"
+    },
+    {
+      "id": "RISK-02",
+      "priority": "must_verify_before_accepting_difficulty",
+      "risk": "ordinary_chapter_HP_and_damage_growth_may_make_zero_talent_or_bad_affix_runs_excessive; recovery_is_finite",
+      "next": "zero_partial_full_talent_and_no_luck_baselines_actual_clear_attempts_and_damage_taken; do_not_claim_all_clear_from_ideal_DPS"
+    },
+    {
+      "id": "RISK-03",
+      "priority": "known_assumption_corrected_in_D14",
+      "risk": "D08_BUD001_armor_forge_assumes_existing_legal_grade0_armor_but_does_not_price_purchase_or_guarantee_drop",
+      "next": "label_original_conditional; reference_sword_only_budget_needs_no_random_armor"
+    },
+    {
+      "id": "RISK-04",
+      "priority": "implementation_gate",
+      "risk": "old_HUD_Y_and_input_adapter_differ_from_D11_D12; spawn_and_attack_visibility_not_yet_tested",
+      "next": "unified_input_projection_sort_shadow_tell_and_room_geometry_proof"
+    },
+    {
+      "id": "RISK-05",
+      "priority": "implementation_gate",
+      "risk": "documented_save_atomicity_and_exact_action_reconstruction_are_not_real_IO_proof",
+      "next": "D13_crash_injection_same_root_recovery_and_write_latency_tests"
+    },
+    {
+      "id": "RISK-06",
+      "priority": "production_gate",
+      "risk": "formal_art_style_not_accepted_and_33x12_combinations_multiply_pose_work",
+      "next": "D12_shared_layers_sample_and_runtime_review_before_bulk; no_schedule_or_budget_invented"
+    }
+  ],
+  "acceptance_terms": {
+    "document_coverage": "D01..14_initial_design_drafts_present_after_this_module; not_individual_user_acceptance",
+    "static_audit": "source_identity_arithmetic_dependencies_caps_and_reference_case_consistency_only",
+    "runtime_balance": "not_tested_or_certified",
+    "production_gate": "whole_design_and_first_slice_scope_presented_for_review_then_user_followup_authorizes_next_stage; no_gameplay_or_asset_production_this_turn",
+    "all_content_finished": false
+  },
+  "telemetry_plan": {
+    "status": "future_runtime_measurement_not_installed",
+    "sample_policy": "report_actual_participants_attempts_builds_devices_and_recorded_exclusions; no_invented_sample_size_or_success_rate",
+    "per_attempt": [
+      "RunID_build_rules_seed_talent_snapshot_equipment_items",
+      "chapter_node_manifest_group_event_cursors",
+      "damage_source_warning_visible_lock_first_hit_and_recovery",
+      "gold_earned_picked_spent_declined_and_heal_actual_vs_overheal",
+      "weapon_actual_emissions_misses_hits_resource_downtime_deaths",
+      "save_latency_errors_restore_point_and_frame_times"
+    ],
+    "comparison": "report_distributions_and_context; do_not_rank_weapons_from_single_ideal_DPS_number",
+    "privacy": "local_debug_capture_scope_set_at_implementation; no_automatic_cloud_upload"
+  },
+  "next_stage": "overall_design_review_and_production_plan_for_named_first_slice; design_remaining_risks_have_runtime_test_owners_not_false_passes"
+}

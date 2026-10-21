@@ -1,0 +1,689 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-13",
+  "source_event": "EV-023",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposed_examples_not_final_chapter_assignment",
+  "rules_file": "common-rules.json",
+  "budget_rule": "maximum_applicable_role_over_all_base_and_elite_attacks_plus_flying_1_plus_elite_2",
+  "templates": [
+    {
+      "id": "ENC-001",
+      "name": "石骑单体教学",
+      "kind": "intro",
+      "members": [
+        {
+          "id": "ENM-STN-001",
+          "base_id": "ENM-STN-001",
+          "name": "沉石骑士",
+          "cost": 3,
+          "large": false,
+          "charger": true,
+          "flying": false,
+          "support": false,
+          "projectile_users": false,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-STN-001-A1",
+            "ENM-STN-001-A2"
+          ]
+        }
+      ],
+      "computed_actor_count": 1,
+      "computed_threat_total": 3,
+      "computed_roster_cap_usage": {
+        "large": 0,
+        "charger": 1,
+        "flying": 0,
+        "support": 0,
+        "projectile_users": 0,
+        "elites": 0
+      },
+      "counterplay_goal": "识别苏醒、锁线与冲空1.60s；至少保留一条Y绕行带。",
+      "forbidden_extension": "不得把冲锋朝向全Y封路。",
+      "geometry_still_requires_D07_verification": true,
+      "runtime_playtested": false
+    },
+    {
+      "id": "ENC-002",
+      "name": "石蝠单体教学",
+      "kind": "intro",
+      "members": [
+        {
+          "id": "ENM-STN-002",
+          "base_id": "ENM-STN-002",
+          "name": "灰翼石蝠",
+          "cost": 2,
+          "large": false,
+          "charger": false,
+          "flying": true,
+          "support": false,
+          "projectile_users": false,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-STN-002-A1",
+            "ENM-STN-002-A2"
+          ]
+        }
+      ],
+      "computed_actor_count": 1,
+      "computed_threat_total": 2,
+      "computed_roster_cap_usage": {
+        "large": 0,
+        "charger": 0,
+        "flying": 1,
+        "support": 0,
+        "projectile_users": 0,
+        "elites": 0
+      },
+      "counterplay_goal": "体验近触激活、跳跃高度和实际低位1.80s反击。",
+      "forbidden_extension": "不得没有可达低位点或隔墙休眠。",
+      "geometry_still_requires_D07_verification": true,
+      "runtime_playtested": false
+    },
+    {
+      "id": "ENC-003",
+      "name": "石像高低组合",
+      "kind": "standard",
+      "members": [
+        {
+          "id": "ENM-STN-001",
+          "base_id": "ENM-STN-001",
+          "name": "沉石骑士",
+          "cost": 3,
+          "large": false,
+          "charger": true,
+          "flying": false,
+          "support": false,
+          "projectile_users": false,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-STN-001-A1",
+            "ENM-STN-001-A2"
+          ]
+        },
+        {
+          "id": "ENM-STN-002",
+          "base_id": "ENM-STN-002",
+          "name": "灰翼石蝠",
+          "cost": 2,
+          "large": false,
+          "charger": false,
+          "flying": true,
+          "support": false,
+          "projectile_users": false,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-STN-002-A1",
+            "ENM-STN-002-A2"
+          ]
+        }
+      ],
+      "computed_actor_count": 2,
+      "computed_threat_total": 5,
+      "computed_roster_cap_usage": {
+        "large": 0,
+        "charger": 1,
+        "flying": 1,
+        "support": 0,
+        "projectile_users": 0,
+        "elites": 0
+      },
+      "counterplay_goal": "一条冲锋线加低位俯冲；错开预警，保证蝠恢复点可接近。",
+      "forbidden_extension": "骑士不在蝠低位点把玩家夹墙。",
+      "geometry_still_requires_D07_verification": true,
+      "runtime_playtested": false
+    },
+    {
+      "id": "ENC-004",
+      "name": "枝刃与幼株",
+      "kind": "standard",
+      "members": [
+        {
+          "id": "ENM-ELF-002",
+          "base_id": "ENM-ELF-002",
+          "name": "荆刃游侠",
+          "cost": 3,
+          "large": false,
+          "charger": true,
+          "flying": false,
+          "support": false,
+          "projectile_users": false,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-ELF-002-A1",
+            "ENM-ELF-002-A2"
+          ]
+        },
+        {
+          "id": "ENM-TRE-001",
+          "base_id": "ENM-TRE-001",
+          "name": "根须幼株",
+          "cost": 2,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": false,
+          "projectile_users": true,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-TRE-001-A1",
+            "ENM-TRE-001-A2"
+          ]
+        }
+      ],
+      "computed_actor_count": 2,
+      "computed_threat_total": 5,
+      "computed_roster_cap_usage": {
+        "large": 0,
+        "charger": 1,
+        "flying": 0,
+        "support": 0,
+        "projectile_users": 1,
+        "elites": 0
+      },
+      "counterplay_goal": "短突刺和慢弹交替，先换Y躲线再近身。",
+      "forbidden_extension": "短突刺同样占冲锋名额，不能再加冲锋单位。",
+      "geometry_still_requires_D07_verification": true,
+      "runtime_playtested": false
+    },
+    {
+      "id": "ENC-005",
+      "name": "弓手与树卫",
+      "kind": "standard",
+      "members": [
+        {
+          "id": "ENM-ELF-001",
+          "base_id": "ENM-ELF-001",
+          "name": "苔弓斥候",
+          "cost": 2,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": false,
+          "projectile_users": true,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-ELF-001-A1",
+            "ENM-ELF-001-A2"
+          ]
+        },
+        {
+          "id": "ENM-TRE-003",
+          "base_id": "ENM-TRE-003",
+          "name": "古根树卫",
+          "cost": 4,
+          "large": true,
+          "charger": false,
+          "flying": false,
+          "support": false,
+          "projectile_users": false,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-TRE-003-A1",
+            "ENM-TRE-003-A2"
+          ]
+        }
+      ],
+      "computed_actor_count": 2,
+      "computed_threat_total": 6,
+      "computed_roster_cap_usage": {
+        "large": 1,
+        "charger": 0,
+        "flying": 0,
+        "support": 0,
+        "projectile_users": 1,
+        "elites": 0
+      },
+      "counterplay_goal": "以大型身体遮挡箭线，诱重击后打后摇。",
+      "forbidden_extension": "大型体不得堵住唯一接近弓手的路径。",
+      "geometry_still_requires_D07_verification": true,
+      "runtime_playtested": false
+    },
+    {
+      "id": "ENC-006",
+      "name": "咒师与骨盾",
+      "kind": "standard",
+      "members": [
+        {
+          "id": "ENM-ROB-002",
+          "base_id": "ENM-ROB-002",
+          "name": "灰袍咒术师",
+          "cost": 2,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": false,
+          "projectile_users": true,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-ROB-002-A1",
+            "ENM-ROB-002-A2"
+          ]
+        },
+        {
+          "id": "ENM-SKL-002",
+          "base_id": "ENM-SKL-002",
+          "name": "骨盾卫",
+          "cost": 2,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": true,
+          "projectile_users": false,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-SKL-002-A1",
+            "ENM-SKL-002-A2"
+          ]
+        },
+        {
+          "id": "ENM-SKL-001",
+          "base_id": "ENM-SKL-001",
+          "name": "朽骨短刃",
+          "cost": 1,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": false,
+          "projectile_users": false,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-SKL-001-A1",
+            "ENM-SKL-001-A2"
+          ]
+        }
+      ],
+      "computed_actor_count": 3,
+      "computed_threat_total": 5,
+      "computed_roster_cap_usage": {
+        "large": 0,
+        "charger": 0,
+        "flying": 0,
+        "support": 1,
+        "projectile_users": 1,
+        "elites": 0
+      },
+      "counterplay_goal": "地面躲高位印、守盾时绕侧或等开放，再处理小短刃。",
+      "forbidden_extension": "盾已占支援/防御名额，不再加钟袍护持。",
+      "geometry_still_requires_D07_verification": true,
+      "runtime_playtested": false
+    },
+    {
+      "id": "ENC-007",
+      "name": "哥布林混编",
+      "kind": "standard",
+      "members": [
+        {
+          "id": "ENM-GOB-001",
+          "base_id": "ENM-GOB-001",
+          "name": "碎刃哥布林",
+          "cost": 2,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": false,
+          "projectile_users": true,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-GOB-001-A1",
+            "ENM-GOB-001-A2"
+          ]
+        },
+        {
+          "id": "ENM-GOB-002",
+          "base_id": "ENM-GOB-002",
+          "name": "火瓶哥布林",
+          "cost": 2,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": false,
+          "projectile_users": true,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-GOB-002-A1",
+            "ENM-GOB-002-A2"
+          ]
+        },
+        {
+          "id": "ENM-GOB-003",
+          "base_id": "ENM-GOB-003",
+          "name": "铁桶蛮兵",
+          "cost": 4,
+          "large": true,
+          "charger": true,
+          "flying": false,
+          "support": false,
+          "projectile_users": false,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-GOB-003-A1",
+            "ENM-GOB-003-A2"
+          ]
+        }
+      ],
+      "computed_actor_count": 3,
+      "computed_threat_total": 8,
+      "computed_roster_cap_usage": {
+        "large": 1,
+        "charger": 1,
+        "flying": 0,
+        "support": 0,
+        "projectile_users": 2,
+        "elites": 0
+      },
+      "counterplay_goal": "识别石块/火罐/桶冲，射击不能同时起手，冲锋留侧路。",
+      "forbidden_extension": "两投射者已满上限，不能再加射手或无提示持续火地毯。",
+      "geometry_still_requires_D07_verification": true,
+      "runtime_playtested": false
+    },
+    {
+      "id": "ENC-008",
+      "name": "巡灯讯号与小獾",
+      "kind": "standard",
+      "members": [
+        {
+          "id": "ENM-MEC-001",
+          "base_id": "ENM-MEC-001",
+          "name": "校准巡灯",
+          "cost": 2,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": false,
+          "projectile_users": true,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ATK-MEC-001-A",
+            "ATK-MEC-001-B"
+          ]
+        },
+        {
+          "id": "ENM-MEC-003",
+          "base_id": "ENM-MEC-003",
+          "name": "旗讯使者",
+          "cost": 2,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": true,
+          "projectile_users": false,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ATK-MEC-003-A",
+            "ATK-MEC-003-B"
+          ]
+        },
+        {
+          "id": "ENM-BST-001",
+          "base_id": "ENM-BST-001",
+          "name": "钩爪獾",
+          "cost": 3,
+          "large": false,
+          "charger": true,
+          "flying": false,
+          "support": false,
+          "projectile_users": false,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ATK-BST-001-A",
+            "ATK-BST-001-B"
+          ]
+        }
+      ],
+      "computed_actor_count": 3,
+      "computed_threat_total": 7,
+      "computed_roster_cap_usage": {
+        "large": 0,
+        "charger": 1,
+        "flying": 0,
+        "support": 1,
+        "projectile_users": 1,
+        "elites": 0
+      },
+      "counterplay_goal": "先击支援或用实体遮弹；讯号只加走速，扑咬预警不变。",
+      "forbidden_extension": "不额外加第二冲锋/支援；没有实际增益目标时拒绝支援起手。",
+      "geometry_still_requires_D07_verification": true,
+      "runtime_playtested": false
+    },
+    {
+      "id": "ENC-009",
+      "name": "恶魔高低与落点",
+      "kind": "standard",
+      "members": [
+        {
+          "id": "ENM-DEM-001",
+          "base_id": "ENM-DEM-001",
+          "name": "灰镰使",
+          "cost": 2,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": false,
+          "projectile_users": false,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ATK-DEM-001-A",
+            "ATK-DEM-001-B"
+          ]
+        },
+        {
+          "id": "ENM-DEM-002",
+          "base_id": "ENM-DEM-002",
+          "name": "烬眼持灯者",
+          "cost": 2,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": false,
+          "projectile_users": true,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ATK-DEM-002-A",
+            "ATK-DEM-002-B"
+          ]
+        },
+        {
+          "id": "ENM-DEM-003",
+          "base_id": "ENM-DEM-003",
+          "name": "坠印魔",
+          "cost": 4,
+          "large": true,
+          "charger": false,
+          "flying": false,
+          "support": false,
+          "projectile_users": false,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ATK-DEM-003-A",
+            "ATK-DEM-003-B"
+          ]
+        }
+      ],
+      "computed_actor_count": 3,
+      "computed_threat_total": 8,
+      "computed_roster_cap_usage": {
+        "large": 1,
+        "charger": 0,
+        "flying": 0,
+        "support": 0,
+        "projectile_users": 1,
+        "elites": 0
+      },
+      "counterplay_goal": "低扫可跳/高钩可留地，慢弹和落圈要交替留一条Y路线。",
+      "forbidden_extension": "不能同时用大身体、落圈与低扫封死所有合法移动。",
+      "geometry_still_requires_D07_verification": true,
+      "runtime_playtested": false
+    },
+    {
+      "id": "ENC-010",
+      "name": "裂冠骑士精英",
+      "kind": "standard",
+      "members": [
+        {
+          "id": "ELT-STN-001",
+          "base_id": "ENM-STN-001",
+          "name": "裂冠沉石骑士",
+          "cost": 5,
+          "large": false,
+          "charger": true,
+          "flying": false,
+          "support": false,
+          "projectile_users": false,
+          "elites": true,
+          "scanned_attack_ids": [
+            "ENM-STN-001-A1",
+            "ENM-STN-001-A2",
+            "ELT-STN-001-A1"
+          ]
+        },
+        {
+          "id": "ENM-SKL-001",
+          "base_id": "ENM-SKL-001",
+          "name": "朽骨短刃",
+          "cost": 1,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": false,
+          "projectile_users": false,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-SKL-001-A1",
+            "ENM-SKL-001-A2"
+          ]
+        }
+      ],
+      "computed_actor_count": 2,
+      "computed_threat_total": 6,
+      "computed_roster_cap_usage": {
+        "large": 0,
+        "charger": 1,
+        "flying": 0,
+        "support": 0,
+        "projectile_users": 0,
+        "elites": 1
+      },
+      "counterplay_goal": "保留原冲空恢复，区分直线冲锋与前向盾踏。",
+      "forbidden_extension": "不连招取消原冲锋后摇，不能再加大型或冲锋线。",
+      "geometry_still_requires_D07_verification": true,
+      "runtime_playtested": false
+    },
+    {
+      "id": "ENC-011",
+      "name": "双痕弓手精英",
+      "kind": "standard",
+      "members": [
+        {
+          "id": "ELT-ELF-001",
+          "base_id": "ENM-ELF-001",
+          "name": "双痕苔弓手",
+          "cost": 4,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": false,
+          "projectile_users": true,
+          "elites": true,
+          "scanned_attack_ids": [
+            "ENM-ELF-001-A1",
+            "ENM-ELF-001-A2",
+            "ELT-ELF-001-A1"
+          ]
+        },
+        {
+          "id": "ENM-TRE-001",
+          "base_id": "ENM-TRE-001",
+          "name": "根须幼株",
+          "cost": 2,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": false,
+          "projectile_users": true,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ENM-TRE-001-A1",
+            "ENM-TRE-001-A2"
+          ]
+        }
+      ],
+      "computed_actor_count": 2,
+      "computed_threat_total": 6,
+      "computed_roster_cap_usage": {
+        "large": 0,
+        "charger": 0,
+        "flying": 0,
+        "support": 0,
+        "projectile_users": 2,
+        "elites": 1
+      },
+      "counterplay_goal": "双箭仍固定平行，接近长收势；幼株投射需等待整组容量。",
+      "forbidden_extension": "两箭预留2弹容量，未清弹时不得再放幼株弹挤满场。",
+      "geometry_still_requires_D07_verification": true,
+      "runtime_playtested": false
+    },
+    {
+      "id": "ENC-012",
+      "name": "监令者与猞猁",
+      "kind": "standard",
+      "members": [
+        {
+          "id": "ELT-MEC-001",
+          "base_id": "ENM-MEC-003",
+          "name": "旗讯监令者",
+          "cost": 4,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": true,
+          "projectile_users": true,
+          "elites": true,
+          "scanned_attack_ids": [
+            "ATK-MEC-003-A",
+            "ATK-MEC-003-B",
+            "ATK-ELT-MEC-001-C"
+          ]
+        },
+        {
+          "id": "ENM-BST-003",
+          "base_id": "ENM-BST-003",
+          "name": "棘背猞猁",
+          "cost": 2,
+          "large": false,
+          "charger": false,
+          "flying": false,
+          "support": false,
+          "projectile_users": false,
+          "elites": false,
+          "scanned_attack_ids": [
+            "ATK-BST-003-A",
+            "ATK-BST-003-B"
+          ]
+        }
+      ],
+      "computed_actor_count": 2,
+      "computed_threat_total": 6,
+      "computed_roster_cap_usage": {
+        "large": 0,
+        "charger": 0,
+        "flying": 0,
+        "support": 1,
+        "projectile_users": 1,
+        "elites": 1
+      },
+      "counterplay_goal": "优先切断走速讯号，注意精英额外电针与猞猁双拍。",
+      "forbidden_extension": "额外电针必须计投射职能，支援/电针不在同一步连放。",
+      "geometry_still_requires_D07_verification": true,
+      "runtime_playtested": false
+    }
+  ],
+  "excluded_automatic_claims": [
+    "budget_pass_is_not_geometry_safety",
+    "not_drop_probability_or_chapter_spawn_weight",
+    "not_final_launch_enemy_count",
+    "not_AI_or_balance_implementation"
+  ]
+}

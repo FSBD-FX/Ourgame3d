@@ -1,0 +1,1216 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "status": "analysis_and_mapping_proposal_only_not_listening_or_runtime_accepted",
+  "scope": "17 immutable candidate WAVs, selected existing CC0 materials, in-memory stress sums; no new sound files, UE execution, external API or game code edits",
+  "source_refs": [
+    {
+      "path": "source-assets/production/audio-v001/manifest.json",
+      "sha256": "a2ebc87a2671f58ed12d1bb03616601dc5d8ae26f8d00ae6b2a7e200c1274e62"
+    },
+    {
+      "path": "tools/scripts/audit-first-content-sfx.py",
+      "sha256": "6d1b816480fa20673729ce7a49ee50c8f3c189479b300861abe7d420be2c5ee4"
+    },
+    {
+      "path": "docs/production/first-batch-v2/combo-spec.md",
+      "sha256": "7a630740ccae1e9da7e6effb374f6d63252960f41ed4b998f98a83e0822eea82"
+    },
+    {
+      "path": "docs/design/presentation-v1/audio-and-assets.json",
+      "sha256": "467f5895c96db5482f7b5c61ea1f6590d85bec2a8a6a7ae8f515c70a2fc82dbc"
+    },
+    {
+      "path": "docs/design/enemies-v1/enemies.json",
+      "sha256": "d01dd609a95ff9ad182638982a0ac7de864dbbd29f6b03995f9a3625a0c44266"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "sha256": "1edf622bb2f4aeb3aca79e83afb6aa4e756ca5ac1a2b9e6d3d3b92c7dc39d976"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonStoneKnight.h",
+      "sha256": "1c5a68131a52dc0cfcf02a684d178488cc8f61f54d13d39799e0cb69b634758b"
+    }
+  ],
+  "playback_capability_check": {
+    "native_windows_player": "System.Media.SoundPlayer",
+    "actual_local_WAV_Load_completed": true,
+    "Play_or_PlaySync_invoked": false,
+    "agent_auditory_observation_tool_available": false,
+    "external_audio_services_used": false,
+    "auditioned_files": [],
+    "auditioned_count": 0,
+    "note_zh": "本机可以加载播放用WAV，但当前工具不能把本地播放声音返回给代理听辨；未播放/未听过，不能标试听完成。"
+  },
+  "candidate_count": 17,
+  "all_candidate_hashes_match_manifest": true,
+  "numeric_metrics": [
+    {
+      "id": "AUD-SWD-WHOOSH-01",
+      "path": "source-assets/production/audio-v001/AUD-SWD-WHOOSH-01__v001.wav",
+      "sha256": "6b02b1e1c2e34684151202bef53f092ba9b2350ff578ba3dbb8096fbb17f8a09",
+      "family": "sword_light",
+      "duration_s": 0.19,
+      "sample_peak_dbfs": -6.375529,
+      "rms_dbfs": -20.357724,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 0.0,
+      "tail1ms_peak_linear": 0.0,
+      "max_adjacent_sample_delta_linear": 0.3233642578125,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.08755469305311446,
+      "cumulative_energy_time_s": {
+        "1": 0.026771,
+        "10": 0.050042,
+        "50": 0.086188,
+        "90": 0.12775,
+        "99": 0.155042
+      },
+      "power_spectral_centroid_hz": 5327.733547569954,
+      "dc_mean_linear": 2.2754334566885964e-06,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-GSW-WHOOSH-01",
+      "path": "source-assets/production/audio-v001/AUD-GSW-WHOOSH-01__v001.wav",
+      "sha256": "b89901ea83c8f2f28a5a4ba9dfa2c280ffa5e4da715f50f8155bf09dfd1b194a",
+      "family": "greatsword_heavy",
+      "duration_s": 0.34,
+      "sample_peak_dbfs": -5.514503,
+      "rms_dbfs": -19.943538,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 0.0,
+      "tail1ms_peak_linear": 0.0,
+      "max_adjacent_sample_delta_linear": 0.169342041015625,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.16291340794985093,
+      "cumulative_energy_time_s": {
+        "1": 0.049104,
+        "10": 0.094167,
+        "50": 0.163458,
+        "90": 0.232667,
+        "99": 0.277479
+      },
+      "power_spectral_centroid_hz": 1938.7620159309208,
+      "dc_mean_linear": 1.2773625990923714e-05,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-SPR-THRUST-01",
+      "path": "source-assets/production/audio-v001/AUD-SPR-THRUST-01__v001.wav",
+      "sha256": "aaca86e4a4635670f80b5d7fbc439d9554848d83e4f8e6640dbdc3a6fe4bc110",
+      "family": "spear_thrust",
+      "duration_s": 0.075,
+      "sample_peak_dbfs": -6.936103,
+      "rms_dbfs": -18.157245,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 6.103515625e-05,
+      "tail1ms_peak_linear": 0.0,
+      "max_adjacent_sample_delta_linear": 0.466705322265625,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.03577606809570324,
+      "cumulative_energy_time_s": {
+        "1": 0.011083,
+        "10": 0.021104,
+        "50": 0.035583,
+        "90": 0.050563,
+        "99": 0.059937
+      },
+      "power_spectral_centroid_hz": 6713.934428380698,
+      "dc_mean_linear": -2.4329291449652778e-06,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-SWD-WHOOSH-02",
+      "path": "source-assets/production/audio-v001/AUD-SWD-WHOOSH-02__v001.wav",
+      "sha256": "c9becad05f048714bd5d3a02aeec3ba2758976bbb232431478b0001ce09453f9",
+      "family": "sword_light",
+      "duration_s": 0.21,
+      "sample_peak_dbfs": -6.375529,
+      "rms_dbfs": -20.126655,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 0.0,
+      "tail1ms_peak_linear": 0.0,
+      "max_adjacent_sample_delta_linear": 0.308441162109375,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.09768194930108468,
+      "cumulative_energy_time_s": {
+        "1": 0.029875,
+        "10": 0.055646,
+        "50": 0.096687,
+        "90": 0.141021,
+        "99": 0.17125
+      },
+      "power_spectral_centroid_hz": 5430.019325434627,
+      "dc_mean_linear": 1.8589080326140873e-06,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-GSW-WHOOSH-02",
+      "path": "source-assets/production/audio-v001/AUD-GSW-WHOOSH-02__v001.wav",
+      "sha256": "452afcaf972f94df9e4e9268ba07618325bb104891cac441c0067e8fa6cde98f",
+      "family": "greatsword_heavy",
+      "duration_s": 0.38,
+      "sample_peak_dbfs": -5.514503,
+      "rms_dbfs": -20.166293,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 0.0,
+      "tail1ms_peak_linear": 0.0,
+      "max_adjacent_sample_delta_linear": 0.178375244140625,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.17961375189777395,
+      "cumulative_energy_time_s": {
+        "1": 0.052729,
+        "10": 0.103583,
+        "50": 0.177521,
+        "90": 0.258667,
+        "99": 0.312979
+      },
+      "power_spectral_centroid_hz": 2239.5672977188633,
+      "dc_mean_linear": -9.165312114514802e-06,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-SPR-THRUST-02",
+      "path": "source-assets/production/audio-v001/AUD-SPR-THRUST-02__v001.wav",
+      "sha256": "5b260c8b000366d7daf4c76d72d4d474dcd71d278dd9d60a09f66860976312ae",
+      "family": "spear_thrust",
+      "duration_s": 0.085,
+      "sample_peak_dbfs": -6.936103,
+      "rms_dbfs": -18.328557,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 6.103515625e-05,
+      "tail1ms_peak_linear": 0.0,
+      "max_adjacent_sample_delta_linear": 0.4246826171875,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.03980116720442497,
+      "cumulative_energy_time_s": {
+        "1": 0.012729,
+        "10": 0.023333,
+        "50": 0.039271,
+        "90": 0.057104,
+        "99": 0.068375
+      },
+      "power_spectral_centroid_hz": 6216.652041231012,
+      "dc_mean_linear": -1.1728324142156863e-05,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-SWD-WHOOSH-03",
+      "path": "source-assets/production/audio-v001/AUD-SWD-WHOOSH-03__v001.wav",
+      "sha256": "4b61b6c26505d5a0db6396dce7b1792f428ccb4a89de8a847abb00d6a57a6304",
+      "family": "sword_light",
+      "duration_s": 0.23,
+      "sample_peak_dbfs": -6.375529,
+      "rms_dbfs": -18.960144,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 0.0,
+      "tail1ms_peak_linear": 0.0,
+      "max_adjacent_sample_delta_linear": 0.390472412109375,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.10810926228027515,
+      "cumulative_energy_time_s": {
+        "1": 0.033333,
+        "10": 0.061708,
+        "50": 0.107521,
+        "90": 0.155312,
+        "99": 0.188396
+      },
+      "power_spectral_centroid_hz": 5872.734610636526,
+      "dc_mean_linear": -1.5286431796308876e-06,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-GSW-WHOOSH-03",
+      "path": "source-assets/production/audio-v001/AUD-GSW-WHOOSH-03__v001.wav",
+      "sha256": "59d8b53e2ec61bc4ba05a599c3cd3519c3184ced4aa7e6af6c0b1f6ae534cf52",
+      "family": "greatsword_heavy",
+      "duration_s": 0.42,
+      "sample_peak_dbfs": -5.514503,
+      "rms_dbfs": -19.402072,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 0.0,
+      "tail1ms_peak_linear": 0.0,
+      "max_adjacent_sample_delta_linear": 0.2030029296875,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.19916052054314806,
+      "cumulative_energy_time_s": {
+        "1": 0.063917,
+        "10": 0.112958,
+        "50": 0.20025,
+        "90": 0.285875,
+        "99": 0.341187
+      },
+      "power_spectral_centroid_hz": 2330.033788109437,
+      "dc_mean_linear": -4.900069463820685e-06,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-SPR-THRUST-03",
+      "path": "source-assets/production/audio-v001/AUD-SPR-THRUST-03__v001.wav",
+      "sha256": "6be2d5e77b0b4874b20a28f635e09449dab82473d42e822e1ddaf8417bfe7e41",
+      "family": "spear_thrust",
+      "duration_s": 0.09,
+      "sample_peak_dbfs": -6.936103,
+      "rms_dbfs": -18.35415,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 3.0517578125e-05,
+      "tail1ms_peak_linear": 0.0,
+      "max_adjacent_sample_delta_linear": 0.457977294921875,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.04171271600527174,
+      "cumulative_energy_time_s": {
+        "1": 0.012896,
+        "10": 0.023792,
+        "50": 0.041667,
+        "90": 0.059583,
+        "99": 0.072
+      },
+      "power_spectral_centroid_hz": 6867.829566213771,
+      "dc_mean_linear": -9.748670789930555e-07,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-XBW-RELEASE-01",
+      "path": "source-assets/production/audio-v001/AUD-XBW-RELEASE-01__v001.wav",
+      "sha256": "58c4533ea780873e0b088e630e160504137fa0b24b94f31c1f5e94cad6ac1543",
+      "family": "crossbow_release",
+      "duration_s": 0.2,
+      "sample_peak_dbfs": -6.0206,
+      "rms_dbfs": -23.246183,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 0.01678466796875,
+      "tail1ms_peak_linear": 3.0517578125e-05,
+      "max_adjacent_sample_delta_linear": 0.122589111328125,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.016013056426834517,
+      "cumulative_energy_time_s": {
+        "1": 0.003438,
+        "10": 0.006313,
+        "50": 0.012604,
+        "90": 0.030125,
+        "99": 0.05775
+      },
+      "power_spectral_centroid_hz": 341.8719372225651,
+      "dc_mean_linear": -0.0022370179494222006,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-FIRE-LAUNCH-01",
+      "path": "source-assets/production/audio-v001/AUD-FIRE-LAUNCH-01__v001.wav",
+      "sha256": "3ea568f3a53d7c214db83890760802d63815bd226b7a1069b86a80d656c4c8fd",
+      "family": "fire_launch",
+      "duration_s": 0.3,
+      "sample_peak_dbfs": -6.375529,
+      "rms_dbfs": -19.057126,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 0.000244140625,
+      "tail1ms_peak_linear": 6.103515625e-05,
+      "max_adjacent_sample_delta_linear": 0.316253662109375,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.13589202917338553,
+      "cumulative_energy_time_s": {
+        "1": 0.019958,
+        "10": 0.059875,
+        "50": 0.131646,
+        "90": 0.216708,
+        "99": 0.265292
+      },
+      "power_spectral_centroid_hz": 4221.692474585395,
+      "dc_mean_linear": -6.23427497016059e-05,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-FIRE-BURN-SHORT-01",
+      "path": "source-assets/production/audio-v001/AUD-FIRE-BURN-SHORT-01__v001.wav",
+      "sha256": "54a9b50193a1e3e9fb837988a20ff5f2760678bc4937f403361aab874effec78",
+      "family": "fire_burn_short",
+      "duration_s": 0.48,
+      "sample_peak_dbfs": -7.958933,
+      "rms_dbfs": -20.323866,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 0.000152587890625,
+      "tail1ms_peak_linear": 3.0517578125e-05,
+      "max_adjacent_sample_delta_linear": 0.274078369140625,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.23427398288285597,
+      "cumulative_energy_time_s": {
+        "1": 0.040333,
+        "10": 0.104396,
+        "50": 0.232542,
+        "90": 0.364875,
+        "99": 0.434542
+      },
+      "power_spectral_centroid_hz": 4973.280080377347,
+      "dc_mean_linear": 4.339218139648437e-06,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-STONE-AWAKE-01",
+      "path": "source-assets/production/audio-v001/AUD-STONE-AWAKE-01__v001.wav",
+      "sha256": "b91f927fc4efc585907c45be369113fc907eea2ae8e6197d3ba8a8fb525611f1",
+      "family": "stone_awake",
+      "duration_s": 0.65,
+      "sample_peak_dbfs": -6.0206,
+      "rms_dbfs": -24.200911,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 0.0111083984375,
+      "tail1ms_peak_linear": 3.0517578125e-05,
+      "max_adjacent_sample_delta_linear": 0.203704833984375,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.07303088818417992,
+      "cumulative_energy_time_s": {
+        "1": 0.005146,
+        "10": 0.010771,
+        "50": 0.050896,
+        "90": 0.163896,
+        "99": 0.326083
+      },
+      "power_spectral_centroid_hz": 1314.9929502827351,
+      "dc_mean_linear": -0.000528408930851863,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-STONE-WING-01",
+      "path": "source-assets/production/audio-v001/AUD-STONE-WING-01__v001.wav",
+      "sha256": "91f020a1b95a6f1d5aaef7e9ec2ddeee4b2dff676eaab9305693e3920332858d",
+      "family": "stone_wing",
+      "duration_s": 0.28,
+      "sample_peak_dbfs": -6.558584,
+      "rms_dbfs": -20.100723,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 0.0,
+      "tail1ms_peak_linear": 0.0,
+      "max_adjacent_sample_delta_linear": 0.225250244140625,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.13285991272667186,
+      "cumulative_energy_time_s": {
+        "1": 0.041333,
+        "10": 0.076167,
+        "50": 0.132146,
+        "90": 0.18925,
+        "99": 0.229146
+      },
+      "power_spectral_centroid_hz": 3277.911217390411,
+      "dc_mean_linear": -4.643485659644717e-06,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-STONE-ARMOR-SCRAPE-01",
+      "path": "source-assets/production/audio-v001/AUD-STONE-ARMOR-SCRAPE-01__v001.wav",
+      "sha256": "8af7b393a18e4753b2f7eeefafde9cb27c3a9b5558ee03a18426f45b1025846e",
+      "family": "stone_armor_scrape",
+      "duration_s": 0.32,
+      "sample_peak_dbfs": -6.745005,
+      "rms_dbfs": -23.816606,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 0.01318359375,
+      "tail1ms_peak_linear": 0.0,
+      "max_adjacent_sample_delta_linear": 0.402801513671875,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.03682358036810722,
+      "cumulative_energy_time_s": {
+        "1": 0.004437,
+        "10": 0.008688,
+        "50": 0.026958,
+        "90": 0.079187,
+        "99": 0.157417
+      },
+      "power_spectral_centroid_hz": 4717.206370654378,
+      "dc_mean_linear": -0.00014370282491048177,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-STONE-CHARGE-BRAKE-01",
+      "path": "source-assets/production/audio-v001/AUD-STONE-CHARGE-BRAKE-01__v001.wav",
+      "sha256": "667c5da9523e0c274bc1526767f22803bf7d6613d47ae69b0f4ae5a46be8c04a",
+      "family": "stone_charge_brake",
+      "duration_s": 0.34,
+      "sample_peak_dbfs": -5.680117,
+      "rms_dbfs": -22.66314,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 0.01019287109375,
+      "tail1ms_peak_linear": 6.103515625e-05,
+      "max_adjacent_sample_delta_linear": 0.187286376953125,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.0411643490488876,
+      "cumulative_energy_time_s": {
+        "1": 0.004333,
+        "10": 0.008812,
+        "50": 0.029208,
+        "90": 0.088354,
+        "99": 0.176958
+      },
+      "power_spectral_centroid_hz": 691.2086427265211,
+      "dc_mean_linear": -0.0020937676523246017,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    },
+    {
+      "id": "AUD-STONE-FRACTURE-01",
+      "path": "source-assets/production/audio-v001/AUD-STONE-FRACTURE-01__v001.wav",
+      "sha256": "9524cd2ce97251324e0df852bcaafe8167966201e80d3f3f059920575b64e107",
+      "family": "stone_fracture",
+      "duration_s": 0.5,
+      "sample_peak_dbfs": -5.514503,
+      "rms_dbfs": -23.420128,
+      "clipped_sample_count": 0,
+      "first_sample": 0.0,
+      "last_sample": 0.0,
+      "head1ms_peak_linear": 0.02032470703125,
+      "tail1ms_peak_linear": 3.0517578125e-05,
+      "max_adjacent_sample_delta_linear": 0.421142578125,
+      "raw_end_to_start_delta_linear": 0.0,
+      "energy_centroid_s": 0.05427645487131825,
+      "cumulative_energy_time_s": {
+        "1": 0.004708,
+        "10": 0.010313,
+        "50": 0.039354,
+        "90": 0.116417,
+        "99": 0.236021
+      },
+      "power_spectral_centroid_hz": 3852.6518074271535,
+      "dc_mean_linear": -0.00041093063354492187,
+      "analysis_only_not_click_or_loudness_acceptance": true,
+      "auditioned": false,
+      "loop_approved": false,
+      "semantic_loop_policy": "finite authoritative event one-shot only; zero sample boundary is not a sustained-loop contract"
+    }
+  ],
+  "selected_CC0_materials": [
+    {
+      "id": "CC0-GENERIC-IMPACT",
+      "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactGeneric_light_000.ogg",
+      "sha256": "f0e982611e97512fee5f777986b67e8b435434b601f94992ec044f7e89fb5acb",
+      "license": "local_package_CC0",
+      "auditioned": false,
+      "original_rate_hz": 44100,
+      "original_channels": 2,
+      "original_sample_peak_dbfs": -1.244922,
+      "model_conversion": "in-memory mean stereo to mono and linear interpolation to48kHz; not an exported asset or exact UE resampler"
+    },
+    {
+      "id": "CC0-STONE-CONTACT",
+      "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactMining_000.ogg",
+      "sha256": "36b4ea107222d073c67ca64dde26944975609202d5090b2f2021213c1a7e35cd",
+      "license": "local_package_CC0",
+      "auditioned": false,
+      "original_rate_hz": 44100,
+      "original_channels": 2,
+      "original_sample_peak_dbfs": -1.060718,
+      "model_conversion": "in-memory mean stereo to mono and linear interpolation to48kHz; not an exported asset or exact UE resampler"
+    },
+    {
+      "id": "CC0-SOFT-CONTACT",
+      "path": "source-assets/third-party/kenney/2026-10-10/kenney-impact-sounds/Audio/impactSoft_medium_000.ogg",
+      "sha256": "7d3ba0bb5e60a11b5d3e558c141303dcf494256675fbf753c0d252d2cf0481e3",
+      "license": "local_package_CC0",
+      "auditioned": false,
+      "original_rate_hz": 44100,
+      "original_channels": 2,
+      "original_sample_peak_dbfs": -0.961127,
+      "model_conversion": "in-memory mean stereo to mono and linear interpolation to48kHz; not an exported asset or exact UE resampler"
+    },
+    {
+      "id": "CC0-CLOTH",
+      "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/cloth2.ogg",
+      "sha256": "8a7451193c38bc05483aec25dd193e163a15d44cf7fff04ac7912573231b0201",
+      "license": "local_package_CC0",
+      "auditioned": false,
+      "original_rate_hz": 48000,
+      "original_channels": 2,
+      "original_sample_peak_dbfs": -7.938069,
+      "model_conversion": "in-memory mean stereo to mono and linear interpolation to48kHz; not an exported asset or exact UE resampler"
+    },
+    {
+      "id": "CC0-PREP",
+      "path": "source-assets/third-party/preparation-2026-10-10-v1/kenney-rpg-audio/extracted/Audio/drawKnife1.ogg",
+      "sha256": "276403e72c3b71c47bc24db3083970c23f8e5551ffa78f436f83483c56f3f0bb",
+      "license": "local_package_CC0",
+      "auditioned": false,
+      "original_rate_hz": 48000,
+      "original_channels": 2,
+      "original_sample_peak_dbfs": -24.283525,
+      "model_conversion": "in-memory mean stereo to mono and linear interpolation to48kHz; not an exported asset or exact UE resampler"
+    }
+  ],
+  "metrics_limits": {
+    "power_spectral_centroid": "numeric power centroid, not perceived brightness/naturalness",
+    "max_adjacent_delta": "noise legitimately has fast internal changes; not a click detector",
+    "edge_zero": "finite faded edges only; all17 remain non-looping by event semantics",
+    "stress_sum": "deterministic aligned PCM float addition in memory, no limiter, reverb, buses or codec; not actual UE output",
+    "sample_peak": "dBFS only; no BS1770 true-peak or LUFS claim"
+  },
+  "overlap_scenarios": [
+    {
+      "id": "duplicate_heavy_full_gain",
+      "scope": "Exact duplicate event worst case; should be prevented by identity dedupe, not accepted as normal combat.",
+      "schedule": [
+        {
+          "cue": "AUD-GSW-WHOOSH-01",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-GSW-WHOOSH-01",
+          "start_s": 0,
+          "gain": 1
+        }
+      ],
+      "measured_float_sum_sample_peak_dbfs": 0.506097,
+      "over_fullscale_sample_count": 2,
+      "maximum_overlapping_finite_voices": 2,
+      "conservative_all_peaks_sum_dbfs": 0.506097,
+      "audio_output_created": false,
+      "not_runtime_mix_evidence": true
+    },
+    {
+      "id": "all17_full_gain_same_time",
+      "scope": "Deliberately implausible stress case showing individual headroom is not summing headroom.",
+      "schedule": [
+        {
+          "cue": "AUD-SWD-WHOOSH-01",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-GSW-WHOOSH-01",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-SPR-THRUST-01",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-SWD-WHOOSH-02",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-GSW-WHOOSH-02",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-SPR-THRUST-02",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-SWD-WHOOSH-03",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-GSW-WHOOSH-03",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-SPR-THRUST-03",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-XBW-RELEASE-01",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-FIRE-LAUNCH-01",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-FIRE-BURN-SHORT-01",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-STONE-AWAKE-01",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-STONE-WING-01",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-STONE-ARMOR-SCRAPE-01",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-STONE-CHARGE-BRAKE-01",
+          "start_s": 0,
+          "gain": 1
+        },
+        {
+          "cue": "AUD-STONE-FRACTURE-01",
+          "start_s": 0,
+          "gain": 1
+        }
+      ],
+      "measured_float_sum_sample_peak_dbfs": 6.329932,
+      "over_fullscale_sample_count": 124,
+      "maximum_overlapping_finite_voices": 17,
+      "conservative_all_peaks_sum_dbfs": 18.318341,
+      "audio_output_created": false,
+      "not_runtime_mix_evidence": true
+    },
+    {
+      "id": "sword_ground_chain_base",
+      "scope": "v2 unmodified consecutive base timeline; no target contact, no statement of runtime acceptance.",
+      "schedule": [
+        {
+          "cue": "AUD-SWD-WHOOSH-01",
+          "start_s": 0.17,
+          "gain": 0.25
+        },
+        {
+          "cue": "AUD-SWD-WHOOSH-02",
+          "start_s": 0.75,
+          "gain": 0.25
+        },
+        {
+          "cue": "AUD-SWD-WHOOSH-03",
+          "start_s": 1.36,
+          "gain": 0.25
+        }
+      ],
+      "measured_float_sum_sample_peak_dbfs": -18.416729,
+      "over_fullscale_sample_count": 0,
+      "maximum_overlapping_finite_voices": 1,
+      "conservative_all_peaks_sum_dbfs": -8.874303,
+      "audio_output_created": false,
+      "not_runtime_mix_evidence": true
+    },
+    {
+      "id": "spear_secondary_base_three_subhits",
+      "scope": "The original spear skill has three SubHitIDs inside one AttackID; different from ordinary combo AttackIDs.",
+      "schedule": [
+        {
+          "cue": "AUD-SPR-THRUST-01",
+          "start_s": 0.18,
+          "gain": 0.25
+        },
+        {
+          "cue": "AUD-SPR-THRUST-02",
+          "start_s": 0.28,
+          "gain": 0.25
+        },
+        {
+          "cue": "AUD-SPR-THRUST-03",
+          "start_s": 0.38,
+          "gain": 0.25
+        }
+      ],
+      "measured_float_sum_sample_peak_dbfs": -18.977303,
+      "over_fullscale_sample_count": 0,
+      "maximum_overlapping_finite_voices": 1,
+      "conservative_all_peaks_sum_dbfs": -9.434878,
+      "audio_output_created": false,
+      "not_runtime_mix_evidence": true
+    },
+    {
+      "id": "sword_and_one_generic_contact_current_scalars",
+      "scope": "Static-code scalar check using historical source lineage; mono interpolation omits UE pitch/spatial/bus processing and is not actual runtime WAV.",
+      "schedule": [
+        {
+          "cue": "AUD-SWD-WHOOSH-01",
+          "start_s": 0,
+          "gain": 0.25
+        },
+        {
+          "cue": "CC0-GENERIC-IMPACT",
+          "start_s": 0,
+          "gain": 0.45
+        }
+      ],
+      "measured_float_sum_sample_peak_dbfs": -8.196634,
+      "over_fullscale_sample_count": 0,
+      "maximum_overlapping_finite_voices": 2,
+      "conservative_all_peaks_sum_dbfs": -5.862254,
+      "audio_output_created": false,
+      "not_runtime_mix_evidence": true
+    },
+    {
+      "id": "wake_sword_two_stone_contacts_budget_scalars",
+      "scope": "Proposed first-unit numeric density check; not a recommended simultaneous event sequence or exported mix.",
+      "schedule": [
+        {
+          "cue": "AUD-STONE-AWAKE-01",
+          "start_s": 0,
+          "gain": 0.18
+        },
+        {
+          "cue": "AUD-SWD-WHOOSH-01",
+          "start_s": 0,
+          "gain": 0.25
+        },
+        {
+          "cue": "CC0-STONE-CONTACT",
+          "start_s": 0,
+          "gain": 0.15
+        },
+        {
+          "cue": "CC0-STONE-CONTACT",
+          "start_s": 0.04,
+          "gain": 0.15
+        }
+      ],
+      "measured_float_sum_sample_peak_dbfs": -14.549798,
+      "over_fullscale_sample_count": 0,
+      "maximum_overlapping_finite_voices": 4,
+      "conservative_all_peaks_sum_dbfs": -6.459498,
+      "audio_output_created": false,
+      "not_runtime_mix_evidence": true
+    }
+  ],
+  "unit_event_maps": {
+    "WPN-SWD-001": [
+      {
+        "D12_event_id": "AUD-WPN-PREP",
+        "authority_source": "DungeonContentCombat::Started",
+        "candidate_ids_or_paths": [
+          "CC0-PREP"
+        ],
+        "emit_when": "Accepted action starts; once per AttackID",
+        "suggested_linear_gain": 0.18,
+        "note_zh": "drawKnife1峰值很低且0.400s长；仅材质候选，未确认适合作170/150/220ms前摇，不应盲目抬总线。",
+        "status": "material_candidate_gap",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": "AUD-WPN-SWING",
+        "authority_source": "DungeonContentCombat::ActiveWindow",
+        "candidate_ids_or_paths": [
+          "AUD-SWD-WHOOSH-01",
+          "AUD-SWD-WHOOSH-02",
+          "AUD-SWD-WHOOSH-03"
+        ],
+        "emit_when": "Ground combo stage1/2/3 respectively; once per real AttackID/SubhitID",
+        "suggested_linear_gain": 0.25,
+        "note_zh": "基础时轴击出在0.17/0.75/1.36s；实际使用已接纳最终时轴。空挥也有声，不能由命中或动画帧再发。",
+        "status": "candidate_pending_audition",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": "AUD-WPN-SWING",
+        "authority_source": "WPN-SWD-001 secondary accepted active window",
+        "candidate_ids_or_paths": [
+          "AUD-SWD-WHOOSH-02"
+        ],
+        "emit_when": "One actual secondary active window; unmodified onset0.20s",
+        "suggested_linear_gain": 0.25,
+        "note_zh": "进身斜斩暂选第二段材料；不加位移/范围/额外伤害，正式技与普攻音色仍待听感区分。",
+        "status": "candidate_pending_audition",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": "AUD-WPN-SWING",
+        "authority_source": "Airborne primary actual first active window",
+        "candidate_ids_or_paths": [
+          "AUD-SWD-WHOOSH-01"
+        ],
+        "emit_when": "One first-stage attack per original airborne allowance",
+        "suggested_linear_gain": 0.25,
+        "note_zh": "空中不连续接三段，不因落地补播第二次；仍用真实AttackID去重。",
+        "status": "candidate_pending_audition",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": "AUD-DAMAGE-DIRECT",
+        "authority_source": "Accepted effective damage receipt on target",
+        "candidate_ids_or_paths": [
+          "CC0-STONE-CONTACT",
+          "CC0-SOFT-CONTACT"
+        ],
+        "emit_when": "actualDamage>0; choose exactly one target-material main contact",
+        "suggested_linear_gain": 0.15,
+        "note_zh": "打石骑选石体、软体选软体；同段多目标40ms聚合最多2声，不能合并伤害收据。当前代码通用ImpactLight仍只是原型。",
+        "status": "candidate_pending_audition",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": "AUD-WPN-MISS",
+        "authority_source": "Original attack segment ends with no accepted hits",
+        "candidate_ids_or_paths": [],
+        "emit_when": "Optional cosmetic only",
+        "suggested_linear_gain": 0,
+        "note_zh": "建议静音，不能播碎裂/撞击假装命中；退出清理不是落空。",
+        "status": "intentional_optional_silence",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": "AUD-WEAPON-SWITCH",
+        "authority_source": "Actual inventory/switch commit",
+        "candidate_ids_or_paths": [
+          "CC0-CLOTH"
+        ],
+        "emit_when": "Ownership/active weapon change committed",
+        "suggested_linear_gain": 0.08,
+        "note_zh": "布料是换装材料，尚未定稿鞘/扣音；槽位预览不成功。",
+        "status": "material_candidate_gap",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      }
+    ],
+    "ARM-LGT-001": [
+      {
+        "D12_event_id": "AUD-INVENTORY-COMMIT",
+        "authority_source": "D04 actual equip/drop/ownership commit",
+        "candidate_ids_or_paths": [
+          "CC0-CLOTH"
+        ],
+        "emit_when": "Actual LGT001 equip commit only",
+        "suggested_linear_gain": 0.08,
+        "note_zh": "行路短衣轻步为常驻属性，保持静音；不能新造proc或换装回资源声。",
+        "status": "candidate_pending_audition",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": "AUD-PLAYER-HURT",
+        "authority_source": "Accepted effective player damage after invulnerability",
+        "candidate_ids_or_paths": [
+          "CC0-SOFT-CONTACT"
+        ],
+        "emit_when": "Actual hurt receipt, not every incoming collision",
+        "suggested_linear_gain": 0.15,
+        "note_zh": "只有接触材料，没有非语言呼吸成品；若已播主接触则不再叠同一软体声。",
+        "status": "nonverbal_gap_no_duplicate_contact",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      }
+    ],
+    "ENM-STN-001": [
+      {
+        "D12_event_id": "AUD-DORMANT-AWAKE",
+        "authority_source": "DungeonStoneKnight::WakeStarted",
+        "candidate_ids_or_paths": [
+          "AUD-STONE-AWAKE-01"
+        ],
+        "emit_when": "One actual wake event; warning lasts0.85s",
+        "suggested_linear_gain": 0.18,
+        "note_zh": "声长0.65s，尾部静段不缩短0.85s可视苏醒；真实受伤/近触/兜底共用同WakeEventID。",
+        "status": "candidate_pending_audition",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": null,
+        "authority_source": "DungeonStoneKnight::WakeCompleted",
+        "candidate_ids_or_paths": [],
+        "emit_when": "Original wake completed",
+        "suggested_linear_gain": 0,
+        "note_zh": "不再播苏醒、攻击或掉落成功。",
+        "status": "intentional_silence",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": "AUD-ENEMY-TELL-START",
+        "authority_source": "DungeonStoneKnight::AttackStarted",
+        "candidate_ids_or_paths": [
+          "AUD-STONE-ARMOR-SCRAPE-01"
+        ],
+        "emit_when": "A1/A2 real windup begins",
+        "suggested_linear_gain": 0.2,
+        "note_zh": "0.32s刮擦仅材质；A1锁点0.45s/A2锁点0.35s，不能把开始音当锁定。",
+        "status": "material_candidate_gap",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": "AUD-ENEMY-LOCK",
+        "authority_source": "DungeonStoneKnight::AimLocked",
+        "candidate_ids_or_paths": [],
+        "emit_when": "Exactly A1 start+0.45s or A2 start+0.35s",
+        "suggested_linear_gain": 0.2,
+        "note_zh": "仍缺独立稳定短锁线音，不能用死亡碎裂或刹停冒充；视觉锁线必须可读。",
+        "status": "missing_critical_cue",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": null,
+        "authority_source": "DungeonStoneKnight::ChargeStarted",
+        "candidate_ids_or_paths": [
+          "AUD-STONE-ARMOR-SCRAPE-01"
+        ],
+        "emit_when": "Actual A1 charge starts at base0.90s; once",
+        "suggested_linear_gain": 0.18,
+        "note_zh": "可暂用有限运动材料；不能按高频Movement或动画帧重复触发，不声明循环。",
+        "status": "material_candidate_gap",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": null,
+        "authority_source": "DungeonStoneKnight::Movement",
+        "candidate_ids_or_paths": [],
+        "emit_when": "Numerous authoritative movement updates",
+        "suggested_linear_gain": 0,
+        "note_zh": "此高频事件禁止默认一条一声。脚步/持续运动另需明确展示钩子。",
+        "status": "intentional_silence_hook_pending",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": "AUD-WPN-SWING",
+        "authority_source": "DungeonStoneKnight::ActiveWindow for Shield",
+        "candidate_ids_or_paths": [
+          "AUD-STONE-ARMOR-SCRAPE-01"
+        ],
+        "emit_when": "Actual A2 shield sweep at base0.70s; once",
+        "suggested_linear_gain": 0.18,
+        "note_zh": "只能作为盾体运动材料，不拿石翼音当盾撞成品；真实玩家命中另走接触声。",
+        "status": "material_candidate_gap",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": "AUD-DAMAGE-DIRECT",
+        "authority_source": "DungeonStoneKnight::Hit then accepted player damage receipt",
+        "candidate_ids_or_paths": [
+          "CC0-SOFT-CONTACT"
+        ],
+        "emit_when": "Only effective target damage; target armor may change material selection",
+        "suggested_linear_gain": 0.15,
+        "note_zh": "撞墙/碰盟友不产生玩家伤害音；轻甲没有新增格挡/反伤。",
+        "status": "candidate_pending_audition",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": null,
+        "authority_source": "DungeonStoneKnight::ChargeStopped",
+        "candidate_ids_or_paths": [
+          "AUD-STONE-CHARGE-BRAKE-01"
+        ],
+        "emit_when": "One actual early stop or normal end; wall/body/valid-hit facts kept separate",
+        "suggested_linear_gain": 0.18,
+        "note_zh": "刹停声不是命中或收益；停止先前运动尾声后播，不能同点同时叠整条刮擦和刹停。",
+        "status": "candidate_pending_audition",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": "AUD-RECOVERY-OPEN",
+        "authority_source": "DungeonStoneKnight::RecoveryStarted",
+        "candidate_ids_or_paths": [],
+        "emit_when": "Only true recovery starts",
+        "suggested_linear_gain": 0,
+        "note_zh": "可静音；A1完整1.60s/A2完整0.90s反击窗口不受声长影响。",
+        "status": "intentional_optional_silence",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": "AUD-DAMAGE-DIRECT",
+        "authority_source": "DungeonStoneKnight::Damaged with accepted effective loss",
+        "candidate_ids_or_paths": [
+          "CC0-STONE-CONTACT"
+        ],
+        "emit_when": "Stone target actualDamage>0; one main contact",
+        "suggested_linear_gain": 0.15,
+        "note_zh": "不套额外通用ImpactLight，不以每次削韧伪报破韧。",
+        "status": "candidate_pending_audition",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": "AUD-POISE-BREAK",
+        "authority_source": "DungeonStoneKnight::PoiseBroken",
+        "candidate_ids_or_paths": [
+          "AUD-STONE-FRACTURE-01"
+        ],
+        "emit_when": "Actual accepted break, not poise damage during protection",
+        "suggested_linear_gain": 0.18,
+        "note_zh": "碎裂仅共享材质；死亡和破韧尚未做出稳定区别，完整声包仍有缺口。",
+        "status": "material_candidate_gap",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      },
+      {
+        "D12_event_id": "AUD-ACTOR-DEATH",
+        "authority_source": "DungeonStoneKnight::Died",
+        "candidate_ids_or_paths": [
+          "AUD-STONE-FRACTURE-01"
+        ],
+        "emit_when": "Authoritative terminal death after same-time damage",
+        "suggested_linear_gain": 0.18,
+        "note_zh": "同点死亡优先声部并取消破韧尾声，不叠两遍同文件；不等于奖励/清房/Boss胜利。",
+        "status": "material_candidate_gap",
+        "auditioned": false,
+        "runtime_mapping_accepted": false
+      }
+    ]
+  },
+  "unit_only_voice_budget_proposal": {
+    "scope": "one military-sword player plus one stone knight listening slice; music/ambience absent; not a replacement for whole-game D12 caps",
+    "groups": [
+      {
+        "group": "critical_warning",
+        "max_voices": 2,
+        "max_linear_gain": 0.2,
+        "assumed_max_source_sample_peak": 0.53,
+        "policy": "highest; reserve source identity; stable distinct cue still missing"
+      },
+      {
+        "group": "player_swing",
+        "max_voices": 1,
+        "max_linear_gain": 0.25,
+        "assumed_max_source_sample_peak": 0.48,
+        "policy": "one per AttackID/Subhit; cosmetics cannot consume combat RNG"
+      },
+      {
+        "group": "main_contacts",
+        "max_voices": 2,
+        "max_linear_gain": 0.15,
+        "assumed_max_source_sample_peak": 0.9,
+        "policy": "40ms similar-material grouping; never merge damage receipts"
+      },
+      {
+        "group": "stone_motion",
+        "max_voices": 1,
+        "max_linear_gain": 0.18,
+        "assumed_max_source_sample_peak": 0.53,
+        "policy": "per actor one; stop/fade previous movement before brake/wake tail"
+      },
+      {
+        "group": "hurt_break_death",
+        "max_voices": 1,
+        "max_linear_gain": 0.18,
+        "assumed_max_source_sample_peak": 0.53,
+        "policy": "per actor terminal death > true poise break > hurt; no duplicate fracture"
+      },
+      {
+        "group": "ui_commit",
+        "max_voices": 1,
+        "max_linear_gain": 0.08,
+        "assumed_max_source_sample_peak": 0.9,
+        "policy": "neutral/equip cosmetic; success only actual receipt"
+      }
+    ],
+    "maximum_voices": 8,
+    "conservative_sum_sample_peak_linear": 0.8648,
+    "conservative_sum_sample_peak_dbfs": -1.261686,
+    "assumptions": "source peaks/gains/concurrency caps actually enforced; no EQ boost, additional actors, music or postmix gain; not true-peak safety or perception acceptance",
+    "ducking": "D12 proposed warnings duck music6dB and noncritical combat3dB with20ms attack/180ms release; future audition test required",
+    "engine_implemented_or_tested": false
+  },
+  "runtime_static_snapshot": {
+    "player_combo": "DungeonFighter ActiveWindow chooses stage-specific SWD/GSW/SPR asset and PlaySound2D gain0.25",
+    "contact": "historical generic ImpactLight PlaySound2D gain0.45; pitch1.15 for enemies/0.9 for player; target-material routing not proven complete",
+    "lineage": "historical E-root bootstrap report maps SW_ImpactLight to impactGeneric_light_000.ogg; local raw file audited, current UAsset decoding not performed",
+    "stone_kernel": "WakeStarted/AimLocked/ChargeStarted/ChargeStopped/etc source events exist in pure kernel; this does not prove live UE actor audio routing",
+    "audition_and_runtime_acceptance": false
+  },
+  "remaining_gaps": [
+    "stable critical enemy lock cue",
+    "distinct final poise-break versus death signatures",
+    "auditioned final preparatory/equip/nonverbal cues",
+    "actual spatial panning and voice-handle lifecycle integration",
+    "actual event-dedupe, pause/continue cursor, cancel/death/room-exit lifecycle listening tests",
+    "sample-true-peak/output codec/multi-actor mix verification"
+  ],
+  "lifecycle": [
+    "No replay of already consumed onset on save/resume or low-FPS catch-up.",
+    "Motion voices end with real ChargeStopped/death/room cleanup; no loops per Movement update.",
+    "Ordinary death does not stop already emitted projectiles; same-time damage resolves before reward/success.",
+    "Warning identity may not randomize; cosmetic variants use presentation identity hash, not combat/loot RNG.",
+    "All warning audio obeys mute while its visual direction/shape/timing remains readable."
+  ]
+}

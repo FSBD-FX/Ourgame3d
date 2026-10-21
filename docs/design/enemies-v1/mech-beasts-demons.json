@@ -1,0 +1,1268 @@
+{
+  "design_date": "2026-10-13",
+  "source_event": "EV-023",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "numerical_values_status": "placeholder_until_playtested",
+  "proposal_notice": "所有名字、每类数量、数值及招式为助手建议；用户明确机械使者、野兽、恶魔类别及近远大小职能方向。",
+  "mechanical_messenger_interpretation": "机械造物/传令支援单位，正式身份与阵营待D-10。",
+  "combat_common_reference": "../../../玩家角色与战斗规则设计.md",
+  "state_common_reference": "../../../道具与状态系统设计.md",
+  "elite_stat_rule": "hp=parent*1.35保留浮点，每招/每子命中直接伤害乘1.15一次；削韧/状态不乘，poise=parent+10，armor/ward/move和预警不变。",
+  "global_exclusions": [
+    "contact_damage",
+    "enemy_critical_hits",
+    "species_element_immunity",
+    "new_poison_bleed_fear_charm_freeze",
+    "resurrection",
+    "infinite_summons",
+    "shield_rules"
+  ],
+  "enemies": [
+    {
+      "id": "ENM-MEC-001",
+      "name": "校准巡灯",
+      "family": "MEC",
+      "role": "小型直线远程／迫使换线",
+      "size": "small",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 60,
+        "armor": 20,
+        "ward": 5,
+        "poise": 25,
+        "move_cm_s": 180
+      },
+      "body": {
+        "half_x_cm": 16,
+        "half_y_cm": 14
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-MEC-001-A",
+          "name": "校准光钉",
+          "type": "projectile",
+          "windup_s": 0.85,
+          "active_s": 0.1,
+          "recovery_s": 0.7,
+          "cooldown_s": 2.2,
+          "damage": 16,
+          "damage_type": "magic",
+          "stagger": 10,
+          "shape": {
+            "type": "projectile_swept_rectangle",
+            "speed_cm_s": 500,
+            "max_distance_cm": 520,
+            "lifetime_s": 1.04,
+            "half_x_cm": 6,
+            "half_y_cm": 10,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "spawn_forward_cm": 20,
+            "spawn_height_mode": "actual_actor_height_plus_height_center",
+            "direction": "locked_facing_x",
+            "stops_at_wall_or_closed_door": true,
+            "stops_at_first_body_including_ally": true,
+            "ally_damage": false,
+            "homing": false,
+            "ignore_owner_body": true,
+            "center_hard_bounds_test": true,
+            "center_hard_bounds_meaning": "See enemy-projectile-profiles.json actual emission origin, [0,max_distance] X and fixed corridor_half_y; current tiny projectile box is not the center gate.",
+            "hurtbox_sweep": true,
+            "hurtbox_sweep_meaning": "在硬界内，对独立hurtbox作连续弹体精检；不以当前弹体小框包含目标中心作为接触条件。",
+            "first_contact_order": "连续扫掠定位首个阻挡身体/墙或独立hurtbox接触；合法敌对hurtbox接触先检查硬界/实际高度/无敌并结算或拒绝，再消散；友军同法挡弹但无伤，墙/门直接截断，忽略owner；同点按稳定碰撞优先序，不穿过拒绝接触继续找后排。"
+          },
+          "telegraph": "透镜亮、虚瞄线跟随；0.425s锁定后变实线并停止跟Y，短脉冲声后只发一枚。",
+          "counter": "沿Y换线或实体掩体截断；靠近利用0.70s后摇。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "projectile_count": 1,
+          "emission_offsets_s": [
+            0
+          ],
+          "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+          "projectile_geometry_profile_id": "ATK-MEC-001-A"
+        },
+        {
+          "id": "ATK-MEC-001-B",
+          "name": "探杆拍击",
+          "type": "melee",
+          "windup_s": 0.6,
+          "active_s": 0.12,
+          "recovery_s": 0.65,
+          "cooldown_s": 1.8,
+          "damage": 12,
+          "damage_type": "physical",
+          "stagger": 10,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 85,
+            "half_y_cm": 30,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "探杆后收与卡齿声；0.30s锁朝向。",
+          "counter": "后退85cm前向范围或绕背。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          240,
+          420
+        ],
+        "selection": "距离240..520且瞄线清楚优先光钉；前向85内可拍击；其他情况普通移动。",
+        "positioning": "射后普通步退最多100cm，遇阻停止；锁定后队友挡线则打空，不穿友军。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "看瞄线换Y或贴近打短招破绽；不需要远程武器。",
+      "combination_risk": "冲锋在场须留Y逃生通道；巡灯与其他远程同用唯一远程名额。",
+      "asset_notes": "小透镜造物：待机、校准、发射、探杆、后摇、破韧、死亡。窄亮芯带实边，不只靠颜色。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-MEC-002",
+      "name": "蒸压锤卫",
+      "family": "MEC",
+      "role": "大型近战／重击破绽",
+      "size": "large",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 180,
+        "armor": 50,
+        "ward": 10,
+        "poise": 80,
+        "move_cm_s": 160
+      },
+      "body": {
+        "half_x_cm": 32,
+        "half_y_cm": 26
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-MEC-002-A",
+          "name": "蒸锤砸落",
+          "type": "melee",
+          "windup_s": 1.15,
+          "active_s": 0.18,
+          "recovery_s": 1.05,
+          "cooldown_s": 2.9,
+          "damage": 26,
+          "damage_type": "physical",
+          "stagger": 24,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 165,
+            "half_y_cm": 45,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "锤头高举、压力表三格递亮；0.575s锁朝向，落锤框显示宽度。",
+          "counter": "走出前向框或绕背，砸空后完整反击；不追踪转身。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        },
+        {
+          "id": "ATK-MEC-002-B",
+          "name": "近身泄压",
+          "type": "area",
+          "windup_s": 0.8,
+          "active_s": 0.15,
+          "recovery_s": 0.95,
+          "cooldown_s": 2.5,
+          "damage": 14,
+          "damage_type": "magic",
+          "stagger": 10,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 110,
+            "radius_y_cm": 60,
+            "anchor": "self_at_lock",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "胸阀展开、脚下椭圆边亮、连续嘶声；0.40s固定中心。",
+          "counter": "走出椭圆或按实际高度躲地面中心；余烟不伤害。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "area_pulses": 1,
+          "visual_duration_s": 0.3
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          100,
+          150
+        ],
+        "selection": "前向165内优先蒸锤；自身110×60椭圆内且锤未就绪可泄压；其他时候慢速接近。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "高护甲增加投入，但退出路径免费；普通快刀、重击或魔法都可抓破绽。",
+      "combination_risk": "不与另一大身体堵死全部Y通路；身体不附带接触伤。",
+      "asset_notes": "锤头、压力表、胸阀形成不同提示；泄压余烟与有效伤害窗分离。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-MEC-003",
+      "name": "旗讯使者",
+      "family": "MEC",
+      "role": "中型支援／提高友军走位压力",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 90,
+        "armor": 25,
+        "ward": 20,
+        "poise": 40,
+        "move_cm_s": 200
+      },
+      "body": {
+        "half_x_cm": 21,
+        "half_y_cm": 17
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-MEC-003-A",
+          "name": "行军讯号",
+          "type": "support",
+          "windup_s": 0.9,
+          "active_s": 0.1,
+          "recovery_s": 0.7,
+          "cooldown_s": 8,
+          "damage": 0,
+          "damage_type": "none",
+          "stagger": 0,
+          "shape": {
+            "type": "ally_circle",
+            "radius_cm": 300,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "line_of_sight_required": true,
+            "max_targets": 2
+          },
+          "telegraph": "旗杆展开、顶部指令图标、候选虚连线；0.45s锁候选，提交时实线确认。",
+          "counter": "先击败使者或趁站定靠近；不缩短友军攻击预警。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "support": {
+            "group": "enemy_move_support",
+            "stat": "normal_move_pct",
+            "magnitude_pct": 10,
+            "duration_s": 4,
+            "max_targets": 2,
+            "include_self": false,
+            "initial_target_sort": "distance_then_stable_entity_id",
+            "eligible": "alive_active_non_boss_allies_without_equal_or_stronger_enemy_move_support_source_and_with_actual_move_gain",
+            "lock_candidates_at_fraction": 0.5,
+            "revalidate_range_los_alive_at_commit": true,
+            "no_replacement_target_on_failed_commit": true,
+            "stacking": "same_group_strongest_only_no_stack_no_refresh",
+            "expires_on": "original_expiry_or_caster_death_or_recipient_death_or_room_end",
+            "does_not_change": [
+              "attack_timing",
+              "charge_speed",
+              "projectile_speed",
+              "cooldowns",
+              "hp",
+              "armor",
+              "ward",
+              "poise"
+            ],
+            "source_registry": "record_each_caster_source_and_original_expiry; strongest_only; remove_dead_source_then_recompute; no_duration_refresh"
+          },
+          "accept_requires": "至少1名合法友军，否则拒绝起招；接受后候选离开则无效果且CD照走。"
+        },
+        {
+          "id": "ATK-MEC-003-B",
+          "name": "旗杆横拨",
+          "type": "melee",
+          "windup_s": 0.65,
+          "active_s": 0.14,
+          "recovery_s": 0.75,
+          "cooldown_s": 2.1,
+          "damage": 14,
+          "damage_type": "physical",
+          "stagger": 12,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 105,
+            "half_y_cm": 45,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "旗杆横放，手臂反侧拉开；0.325s锁朝向。",
+          "counter": "后退或绕背，横拨结束再进身。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          180,
+          280
+        ],
+        "selection": "有未受同组讯号友军且支援就绪时优先讯号；无目标只移动或近身横拨，不空放循环。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "可以先切支援，也能清前排；不会无限治疗、加速叠层或重置CD。",
+      "combination_risk": "同房最多1个旗讯支援实体；支援占总攻击名额，不占弹体远程名额。",
+      "asset_notes": "机械旗杆/指令环；成功目标显示来源与剩余时间，施法者死连线和加速撤销，无新召唤。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-BST-001",
+      "name": "钩爪獾",
+      "family": "BST",
+      "role": "小型近战／试探扑咬",
+      "size": "small",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 55,
+        "armor": 5,
+        "ward": 0,
+        "poise": 25,
+        "move_cm_s": 250
+      },
+      "body": {
+        "half_x_cm": 18,
+        "half_y_cm": 14
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-BST-001-A",
+          "name": "短促咬击",
+          "type": "melee",
+          "windup_s": 0.55,
+          "active_s": 0.12,
+          "recovery_s": 0.55,
+          "cooldown_s": 1.6,
+          "damage": 12,
+          "damage_type": "physical",
+          "stagger": 8,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 75,
+            "half_y_cm": 27,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "缩颈露齿、前爪停住；0.275s锁朝向后低吼。",
+          "counter": "保持75cm外，咬空后进身；无每帧贴身伤害。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        },
+        {
+          "id": "ATK-BST-001-B",
+          "name": "贴地扑咬",
+          "type": "charge",
+          "windup_s": 0.8,
+          "active_s": 0.28,
+          "recovery_s": 1.5,
+          "cooldown_s": 2.9,
+          "damage": 16,
+          "damage_type": "physical",
+          "stagger": 14,
+          "shape": {
+            "type": "body_swept_rectangle",
+            "speed_cm_s": 650,
+            "duration_s": 0.28,
+            "max_displacement_cm": 182.00000000000003,
+            "half_x_cm": 40,
+            "half_y_cm": 36,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "stops_at_wall_or_closed_door": true,
+            "stops_at_first_body_including_ally": true,
+            "stops_on_invulnerable_player_contact": true,
+            "homing": false,
+            "target_center_test": true,
+            "contact_order": "连续扫掠中先在该时点检查伤害几何/高度/无敌，再执行身体阻挡停下；无敌拒绝仍截停，实体触碰不必造成伤害。"
+          },
+          "telegraph": "压后腿、前方182cm窄道；0.40s锁左右与Y，蓄力声后直扑。",
+          "counter": "沿Y退出窄道或退出位移终点，冲空/碰墙/接触停止后完整1.50s反击。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "charge_contact": "路径扫掠；第一次玩家接触无论成功或无敌拒绝均停并进入后摇，不穿任何身体。"
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          65,
+          170
+        ],
+        "selection": "75内优先短咬；对齐、90..182距离且扑击就绪可扑；其他时候普通移动接近。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "小血量易清，但仍有完整扑咬代价；走位、实际高度或闪避皆可反制。",
+      "combination_risk": "成对出现时同房仍仅1冲锋，另一只需等攻击名额；不在玩家脚下生成。",
+      "asset_notes": "低矮獾体型；露齿、压腿、扑空趴地不同于普通跑动，无毒/出血。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-BST-002",
+      "name": "崖牙巨兽",
+      "family": "BST",
+      "role": "大型冲锋／直线占道",
+      "size": "large",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 190,
+        "armor": 25,
+        "ward": 5,
+        "poise": 90,
+        "move_cm_s": 170
+      },
+      "body": {
+        "half_x_cm": 36,
+        "half_y_cm": 28
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-BST-002-A",
+          "name": "崖牙直撞",
+          "type": "charge",
+          "windup_s": 0.95,
+          "active_s": 0.55,
+          "recovery_s": 1.5,
+          "cooldown_s": 3.4,
+          "damage": 24,
+          "damage_type": "physical",
+          "stagger": 26,
+          "shape": {
+            "type": "body_swept_rectangle",
+            "speed_cm_s": 620,
+            "duration_s": 0.55,
+            "max_displacement_cm": 341,
+            "half_x_cm": 60,
+            "half_y_cm": 46,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "stops_at_wall_or_closed_door": true,
+            "stops_at_first_body_including_ally": true,
+            "stops_on_invulnerable_player_contact": true,
+            "homing": false,
+            "target_center_test": true,
+            "contact_order": "连续扫掠中先在该时点检查伤害几何/高度/无敌，再执行身体阻挡停下；无敌拒绝仍截停，实体触碰不必造成伤害。"
+          },
+          "telegraph": "刨地两次、低头露角、前方341cm占道框；0.475s锁左右与Y，不转弯。",
+          "counter": "沿Y退出占道，避开实体身体后从侧背打完整1.50s疲顿。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "charge_contact": "首次玩家接触或墙/门/存活身体阻挡即停并进后摇；有效期提前终止，不补剩余冲刺。"
+        },
+        {
+          "id": "ATK-BST-002-B",
+          "name": "低头横顶",
+          "type": "melee",
+          "windup_s": 0.85,
+          "active_s": 0.16,
+          "recovery_s": 0.95,
+          "cooldown_s": 2.4,
+          "damage": 20,
+          "damage_type": "physical",
+          "stagger": 22,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 135,
+            "half_y_cm": 55,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "前蹄撑开、头向一侧拉；短宽地面框，0.425s锁左右。",
+          "counter": "退出前向框或绕背，无格挡/特定武器要求。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          130,
+          260
+        ],
+        "selection": "对齐且160..341距离可直撞；前向135内可横顶；盲区只普通转位，不追加全周接触伤。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "大体积、长距离、重承诺；仍可破韧、挂共享元素或按40cm推拉，遇墙截断。",
+      "combination_risk": "禁止无侧向逃生带的窄廊；冲锋1、总预警2，远程不能封死其换线空间。",
+      "asset_notes": "大肩角兽；刨地、直冲、冲空喘息、横顶区分；撞墙只反馈停止，无额外伤害。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-BST-003",
+      "name": "棘背猞猁",
+      "family": "BST",
+      "role": "中型侧翼近战／双拍节奏",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 95,
+        "armor": 10,
+        "ward": 0,
+        "poise": 40,
+        "move_cm_s": 260
+      },
+      "body": {
+        "half_x_cm": 22,
+        "half_y_cm": 18
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-BST-003-A",
+          "name": "交替双爪",
+          "type": "melee",
+          "windup_s": 0.7,
+          "active_s": 0.32,
+          "recovery_s": 0.8,
+          "cooldown_s": 2.2,
+          "damage": 9,
+          "damage_type": "physical",
+          "stagger": 8,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 105,
+            "half_y_cm": 33,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "双爪交叉抬起，0.35s锁左右；预警双拍，第一爪后仍有第二爪。",
+          "counter": "退出两爪共同区域再反击，不要求每0.18s连闪。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "damage_unit": "per_subhit",
+          "hits": [
+            {
+              "subhit_id": "claw_1",
+              "offset_s": 0,
+              "duration_s": 0.1,
+              "damage": 9,
+              "stagger": 8
+            },
+            {
+              "subhit_id": "claw_2",
+              "offset_s": 0.18,
+              "duration_s": 0.1,
+              "damage": 9,
+              "stagger": 8
+            }
+          ],
+          "attack_id_rule": "一轮AttackID、两独立子命中，各对子目标只试一次。已接纳首爪的第二爪沿受伤无敌例外但仍检查闪避；首爪拒绝不允许次爪绕过其他AttackID的受伤无敌。"
+        },
+        {
+          "id": "ATK-BST-003-B",
+          "name": "收身突抓",
+          "type": "melee",
+          "windup_s": 0.85,
+          "active_s": 0.14,
+          "recovery_s": 0.75,
+          "cooldown_s": 2.1,
+          "damage": 18,
+          "damage_type": "physical",
+          "stagger": 16,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 135,
+            "half_y_cm": 28,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "肩背高拱、单爪回收、窄长地面框；0.425s锁左右与Y，身体不传送。",
+          "counter": "沿Y退出窄线或退出135cm前向，再打后摇。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          90,
+          140
+        ],
+        "selection": "105内可双爪；105..135对齐可突抓；冷却时找侧翼。",
+        "positioning": "待机每次最多0.30s侧向普通移动，速度260；遇阻停，无无敌/自动绕背，出招后不横移追人。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "读双拍和单长抓，走位保留免费解法；棘刺只作轮廓，无接触反伤。",
+      "combination_risk": "双爪前摇至两个有效窗结束共占一个名额，第二爪间隙不释放；进入后摇才释放名额，后摇仍须完整完成。",
+      "asset_notes": "中型猫科，双爪两声节拍、单长抓高拱、侧步独立姿态；无出血。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-DEM-001",
+      "name": "灰镰使",
+      "family": "DEM",
+      "role": "中型近战／低高位识别",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 105,
+        "armor": 15,
+        "ward": 35,
+        "poise": 50,
+        "move_cm_s": 210
+      },
+      "body": {
+        "half_x_cm": 22,
+        "half_y_cm": 18
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-DEM-001-A",
+          "name": "低弧镰扫",
+          "type": "melee",
+          "windup_s": 0.8,
+          "active_s": 0.16,
+          "recovery_s": 0.85,
+          "cooldown_s": 2.2,
+          "damage": 20,
+          "damage_type": "physical",
+          "stagger": 20,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 155,
+            "half_y_cm": 42,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "镰刃压低、地面弧轮廓、低音刮擦；0.40s锁朝向。",
+          "counter": "走出范围或按实际高度跳过低中心，扫空后反击。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        },
+        {
+          "id": "ATK-DEM-001-B",
+          "name": "高位钩镰",
+          "type": "melee",
+          "windup_s": 0.9,
+          "active_s": 0.16,
+          "recovery_s": 1.05,
+          "cooldown_s": 2.5,
+          "damage": 22,
+          "damage_type": "physical",
+          "stagger": 22,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 155,
+            "half_y_cm": 42,
+            "height_center_cm": 80,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "镰柄举肩，80cm高处短横标和高音破风；0.45s锁朝向，地面非伤害区。",
+          "counter": "保持地面可躲；盲跳可能进入高度，退出X/Y范围亦有效。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "height_warning": "中心Z80/容差65，地面中心Z0不合法；跳起Z15..145可命中，不是全高度必中。"
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          120,
+          150
+        ],
+        "selection": "可进攻时低弧→高钩交替，须CD和空间合法；轮到高钩而玩家在地面也不改为地面必中。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "高低提示决定跳或留地，走位始终可行；不即时读输入变招。",
+      "combination_risk": "其他敌人不能同时封死高钩所有地面安全区域。",
+      "asset_notes": "镰刃低压/过肩姿态与不同声部，不仅换颜色；恶魔不自动免燃烧。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-DEM-002",
+      "name": "烬眼持灯者",
+      "family": "DEM",
+      "role": "中型慢弹远程／约束路线",
+      "size": "medium",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 80,
+        "armor": 0,
+        "ward": 40,
+        "poise": 30,
+        "move_cm_s": 190
+      },
+      "body": {
+        "half_x_cm": 20,
+        "half_y_cm": 16
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-DEM-002-A",
+          "name": "缓行烬球",
+          "type": "projectile",
+          "windup_s": 0.95,
+          "active_s": 0.1,
+          "recovery_s": 0.9,
+          "cooldown_s": 2.6,
+          "damage": 18,
+          "damage_type": "magic",
+          "stagger": 10,
+          "shape": {
+            "type": "projectile_swept_rectangle",
+            "speed_cm_s": 280,
+            "max_distance_cm": 560,
+            "lifetime_s": 2,
+            "half_x_cm": 6,
+            "half_y_cm": 16,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "spawn_forward_cm": 20,
+            "spawn_height_mode": "actual_actor_height_plus_height_center",
+            "direction": "locked_facing_x",
+            "stops_at_wall_or_closed_door": true,
+            "stops_at_first_body_including_ally": true,
+            "ally_damage": false,
+            "homing": false,
+            "ignore_owner_body": true,
+            "center_hard_bounds_test": true,
+            "center_hard_bounds_meaning": "See enemy-projectile-profiles.json actual emission origin, [0,max_distance] X and fixed corridor_half_y; current tiny projectile box is not the center gate.",
+            "hurtbox_sweep": true,
+            "hurtbox_sweep_meaning": "在硬界内，对独立hurtbox作连续弹体精检；不以当前弹体小框包含目标中心作为接触条件。",
+            "first_contact_order": "连续扫掠定位首个阻挡身体/墙或独立hurtbox接触；合法敌对hurtbox接触先检查硬界/实际高度/无敌并结算或拒绝，再消散；友军同法挡弹但无伤，墙/门直接截断，忽略owner；同点按稳定碰撞优先序，不穿过拒绝接触继续找后排。"
+          },
+          "telegraph": "提灯拉开、灯芯膨胀；0.475s锁左右/Y后固定瞄线，只吐一球。",
+          "counter": "沿Y绕慢弹或借墙截断；近身打0.90s后摇。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "projectile_count": 1,
+          "emission_offsets_s": [
+            0
+          ],
+          "on_positive_surviving_hit": {
+            "state": "burn",
+            "magnitude_dps": 2,
+            "duration_s": 3,
+            "first_tick_after_s": 1,
+            "tick_interval_s": 1,
+            "shares_target_slot": true
+          },
+          "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+          "projectile_geometry_profile_id": "ATK-DEM-002-A"
+        },
+        {
+          "id": "ATK-DEM-002-B",
+          "name": "灯壳回摆",
+          "type": "melee",
+          "windup_s": 0.65,
+          "active_s": 0.14,
+          "recovery_s": 0.75,
+          "cooldown_s": 2,
+          "damage": 13,
+          "damage_type": "physical",
+          "stagger": 12,
+          "shape": {
+            "type": "forward_rectangle",
+            "min_x_cm": 0,
+            "max_x_cm": 95,
+            "half_y_cm": 40,
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "axis": "locked_facing_x",
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "灯收背后、肩扭转；0.325s锁朝向。",
+          "counter": "后退或绕背，不追身补击。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          260,
+          430
+        ],
+        "selection": "240..560对齐且射线清晰优先烬球，前向95内可回摆，其他时候普通调线。",
+        "positioning": "射后普通后退最多80cm，遇墙停；无传送/离地无敌。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "慢弹易看清，但无视路线会中18直伤+低强度燃烧；近战可逼墙打短招。",
+      "combination_risk": "弹在飞时占唯一远程名额，最长2s；同阵营挡弹也消散，无弹墙堆叠。",
+      "asset_notes": "地面持灯者；慢弹实边、共用燃烧图标，火尾只表现无追加伤害地毯。",
+      "reward_eligible": true,
+      "status": "design_only"
+    },
+    {
+      "id": "ENM-DEM-003",
+      "name": "坠印魔",
+      "family": "DEM",
+      "role": "大型范围法术／锁落点与近身圈",
+      "size": "large",
+      "locomotion": "ground",
+      "stats": {
+        "hp": 155,
+        "armor": 30,
+        "ward": 45,
+        "poise": 70,
+        "move_cm_s": 170
+      },
+      "body": {
+        "half_x_cm": 30,
+        "half_y_cm": 24
+      },
+      "activation": {
+        "type": "sight",
+        "line_of_sight_required": true,
+        "no_respawn_or_hp_reset_on_reacquire": true,
+        "sight_half_x_cm": 650,
+        "sight_half_y_cm": 250
+      },
+      "attacks": [
+        {
+          "id": "ATK-DEM-003-A",
+          "name": "坠印落点",
+          "type": "area",
+          "windup_s": 0.95,
+          "active_s": 0.12,
+          "recovery_s": 1,
+          "cooldown_s": 2.7,
+          "damage": 24,
+          "damage_type": "magic",
+          "stagger": 18,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 100,
+            "radius_y_cm": 55,
+            "anchor": "target_ground_at_lock",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "双手结印；候选空心圈，0.475s锁玩家当时地面XY并闭圈，余0.475s不再追。",
+          "counter": "退出100×55椭圆或到墙另一侧，法后靠近；无需抗魔装。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "target_point": {
+            "max_range_cm": 440,
+            "requires_line_of_sight_at_accept_and_lock": true,
+            "no_valid_lock_behavior": "锁定点目标已死亡/超距/遮挡则空放，CD不退、正常后摇。",
+            "lock_follows_after_lock": false,
+            "caster_movement_after_accept": "none"
+          },
+          "area_pulses": 1
+        },
+        {
+          "id": "ATK-DEM-003-B",
+          "name": "近身震踏",
+          "type": "area",
+          "windup_s": 0.8,
+          "active_s": 0.12,
+          "recovery_s": 0.95,
+          "cooldown_s": 2.2,
+          "damage": 18,
+          "damage_type": "physical",
+          "stagger": 20,
+          "shape": {
+            "type": "ellipse",
+            "radius_x_cm": 95,
+            "radius_y_cm": 60,
+            "anchor": "self_at_lock",
+            "height_center_cm": 0,
+            "height_tolerance_cm": 65,
+            "target_center_test": true,
+            "line_of_sight_required": true
+          },
+          "telegraph": "前脚抬起、紧贴自身小椭圆；0.40s定中心，无远端落点标。",
+          "counter": "退出自身圈或跳过实际低位中心，落足后反击。",
+          "lock_at_windup_fraction": 0.5,
+          "movement_during_windup": "none",
+          "movement_during_recovery": "none",
+          "one_attempt_per_player_per_subhit": true,
+          "cooldown_starts": "accepted_attack",
+          "refund_on_interrupt": false,
+          "crit_enabled": false,
+          "area_pulses": 1
+        }
+      ],
+      "behavior": {
+        "preferred_distance_cm": [
+          180,
+          330
+        ],
+        "selection": "150..440且LOS合法优先落点；玩家进自身95×60圈且落点未就绪可震踏；不瞬移至落点、不召唤。",
+        "shared_attack_permission_required": true
+      },
+      "counterplay": "区别远点与脚下圈，决定逼近或短退；大体型仍可破韧打断。",
+      "combination_risk": "不得与冲锋同时封死所有Y出口；单次法术仅1落点，余光不持续伤害。",
+      "asset_notes": "大型结印者：候选圈→锁圈→单击→余光，天空表现不是全高度判定。",
+      "reward_eligible": true,
+      "status": "design_only"
+    }
+  ],
+  "elite_variants": [
+    {
+      "id": "ELT-MEC-001",
+      "name": "旗讯监令者",
+      "family": "MEC",
+      "parent_id": "ENM-MEC-003",
+      "stat_multipliers": {
+        "hp": 1.35,
+        "damage": 1.15
+      },
+      "poise_bonus": 10,
+      "behavior_change": "继承讯号/横拨；讯号仍最多2且不叠不续。额外电针与支援共享名额，不同一步支援后射击。",
+      "extra_attack": {
+        "id": "ATK-ELT-MEC-001-C",
+        "name": "监令电针",
+        "type": "projectile",
+        "windup_s": 1.1,
+        "active_s": 0.1,
+        "recovery_s": 0.9,
+        "cooldown_s": 3,
+        "damage": 20,
+        "damage_type": "magic",
+        "stagger": 12,
+        "shape": {
+          "type": "projectile_swept_rectangle",
+          "speed_cm_s": 440,
+          "max_distance_cm": 484,
+          "lifetime_s": 1.1,
+          "half_x_cm": 6,
+          "half_y_cm": 10,
+          "height_center_cm": 0,
+          "height_tolerance_cm": 65,
+          "spawn_forward_cm": 20,
+          "spawn_height_mode": "actual_actor_height_plus_height_center",
+          "direction": "locked_facing_x",
+          "stops_at_wall_or_closed_door": true,
+          "stops_at_first_body_including_ally": true,
+          "ally_damage": false,
+          "homing": false,
+          "ignore_owner_body": true,
+          "center_hard_bounds_test": true,
+          "center_hard_bounds_meaning": "See enemy-projectile-profiles.json actual emission origin, [0,max_distance] X and fixed corridor_half_y; current tiny projectile box is not the center gate.",
+          "hurtbox_sweep": true,
+          "hurtbox_sweep_meaning": "在硬界内，对独立hurtbox作连续弹体精检；不以当前弹体小框包含目标中心作为接触条件。",
+          "first_contact_order": "连续扫掠定位首个阻挡身体/墙或独立hurtbox接触；合法敌对hurtbox接触先检查硬界/实际高度/无敌并结算或拒绝，再消散；友军同法挡弹但无伤，墙/门直接截断，忽略owner；同点按稳定碰撞优先序，不穿过拒绝接触继续找后排。"
+        },
+        "telegraph": "旗顶直立、针端三次点亮、固定瞄线；0.55s锁左右/Y。",
+        "counter": "换Y或借墙，针出后近身；同房仅1远程实体。",
+        "lock_at_windup_fraction": 0.5,
+        "movement_during_windup": "none",
+        "movement_during_recovery": "none",
+        "one_attempt_per_player_per_subhit": true,
+        "cooldown_starts": "accepted_attack",
+        "refund_on_interrupt": false,
+        "crit_enabled": false,
+        "projectile_count": 1,
+        "emission_offsets_s": [
+          0
+        ],
+        "on_positive_surviving_hit": {
+          "state": "shock",
+          "magnitude_stagger": 6,
+          "target_internal_cooldown_s": 2,
+          "blocked_during_poise_protection": true
+        },
+        "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+        "projectile_geometry_profile_id": "ATK-ELT-MEC-001-C"
+      },
+      "telegraph_not_shortened": true,
+      "extra_attack_damage_is_base_before_elite_multiplier": true,
+      "control_profile": "普通敌人：0.40s破韧硬直、1.0s破韧保护；共享元素与40cm推拉，非Boss免控。",
+      "status": "design_only"
+    },
+    {
+      "id": "ELT-BST-001",
+      "name": "裂岩巨牙",
+      "family": "BST",
+      "parent_id": "ENM-BST-002",
+      "stat_multipliers": {
+        "hp": 1.35,
+        "damage": 1.15
+      },
+      "poise_bonus": 10,
+      "behavior_change": "继承直撞/横顶及至少1.50s直撞恢复，不缩短任何反击窗口，无撞墙反弹/二次追踪/无敌；新增宽震地同样先预警，结束有1.15s反击。",
+      "extra_attack": {
+        "id": "ATK-ELT-BST-001-C",
+        "name": "震地低吼",
+        "type": "area",
+        "windup_s": 0.95,
+        "active_s": 0.18,
+        "recovery_s": 1.15,
+        "cooldown_s": 2.9,
+        "damage": 18,
+        "damage_type": "physical",
+        "stagger": 20,
+        "shape": {
+          "type": "ellipse",
+          "radius_x_cm": 140,
+          "radius_y_cm": 75,
+          "anchor": "self_at_lock",
+          "height_center_cm": 0,
+          "height_tolerance_cm": 65,
+          "target_center_test": true,
+          "line_of_sight_required": true
+        },
+        "telegraph": "四足撑稳、吸气、脚下140×75椭圆；0.475s定中心。",
+        "counter": "走出或跳过低位中心，后摇1.15s反击；无恐惧/持续减速。",
+        "lock_at_windup_fraction": 0.5,
+        "movement_during_windup": "none",
+        "movement_during_recovery": "none",
+        "one_attempt_per_player_per_subhit": true,
+        "cooldown_starts": "accepted_attack",
+        "refund_on_interrupt": false,
+        "crit_enabled": false,
+        "area_pulses": 1
+      },
+      "telegraph_not_shortened": true,
+      "extra_attack_damage_is_base_before_elite_multiplier": true,
+      "control_profile": "普通敌人：0.40s破韧硬直、1.0s破韧保护；共享元素与40cm推拉，非Boss免控。",
+      "status": "design_only"
+    },
+    {
+      "id": "ELT-DEM-001",
+      "name": "双弧镰使",
+      "family": "DEM",
+      "parent_id": "ENM-DEM-001",
+      "stat_multipliers": {
+        "hp": 1.35,
+        "damage": 1.15
+      },
+      "poise_bonus": 10,
+      "behavior_change": "继承低弧/高钩高度；两次近战间最多插一次缓弧，无后摇取消。无远程名额则等待或合法近战，不变瞬时斩。",
+      "extra_attack": {
+        "id": "ATK-ELT-DEM-001-C",
+        "name": "横镰缓弧",
+        "type": "projectile",
+        "windup_s": 0.9,
+        "active_s": 0.1,
+        "recovery_s": 0.95,
+        "cooldown_s": 2.7,
+        "damage": 18,
+        "damage_type": "magic",
+        "stagger": 16,
+        "shape": {
+          "type": "projectile_swept_rectangle",
+          "speed_cm_s": 360,
+          "max_distance_cm": 450,
+          "lifetime_s": 1.25,
+          "half_x_cm": 6,
+          "half_y_cm": 16,
+          "height_center_cm": 0,
+          "height_tolerance_cm": 65,
+          "spawn_forward_cm": 20,
+          "spawn_height_mode": "actual_actor_height_plus_height_center",
+          "direction": "locked_facing_x",
+          "stops_at_wall_or_closed_door": true,
+          "stops_at_first_body_including_ally": true,
+          "ally_damage": false,
+          "homing": false,
+          "ignore_owner_body": true,
+          "center_hard_bounds_test": true,
+          "center_hard_bounds_meaning": "See enemy-projectile-profiles.json actual emission origin, [0,max_distance] X and fixed corridor_half_y; current tiny projectile box is not the center gate.",
+          "hurtbox_sweep": true,
+          "hurtbox_sweep_meaning": "在硬界内，对独立hurtbox作连续弹体精检；不以当前弹体小框包含目标中心作为接触条件。",
+          "first_contact_order": "连续扫掠定位首个阻挡身体/墙或独立hurtbox接触；合法敌对hurtbox接触先检查硬界/实际高度/无敌并结算或拒绝，再消散；友军同法挡弹但无伤，墙/门直接截断，忽略owner；同点按稳定碰撞优先序，不穿过拒绝接触继续找后排。"
+        },
+        "telegraph": "镰刃平举停住，前向虚线锁后出单枚慢刃；0.45s锁左右/Y。",
+        "counter": "换Y、墙截或等0.95s后摇近身，无回程/追踪。",
+        "lock_at_windup_fraction": 0.5,
+        "movement_during_windup": "none",
+        "movement_during_recovery": "none",
+        "one_attempt_per_player_per_subhit": true,
+        "cooldown_starts": "accepted_attack",
+        "refund_on_interrupt": false,
+        "crit_enabled": false,
+        "projectile_count": 1,
+        "emission_offsets_s": [
+          0
+        ],
+        "projectile_geometry_profile_file": "enemy-projectile-profiles.json",
+        "projectile_geometry_profile_id": "ATK-ELT-DEM-001-C"
+      },
+      "telegraph_not_shortened": true,
+      "extra_attack_damage_is_base_before_elite_multiplier": true,
+      "control_profile": "普通敌人：0.40s破韧硬直、1.0s破韧保护；共享元素与40cm推拉，非Boss免控。",
+      "status": "design_only"
+    }
+  ]
+}

@@ -1,0 +1,1789 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "source_event": "EV-029",
+  "module": "D-11",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "all_lesson_counts_text_trigger_policy_and_presentation_proposals_assistant_untested; underlying_gameplay_sources_preserved",
+  "counts": {
+    "general_lessons": 30,
+    "regional_threat_lessons": 10,
+    "total_lessons": 40,
+    "region_lesson_groups": 5,
+    "new_enemies_items_rewards_rooms_or_invulnerability": 0
+  },
+  "source_refs": {
+    "player": "../player-combat-v1/player-combat-rules.json",
+    "items": "../items-v1/common-rules.json",
+    "inventory": "../inventory-v1/inventory-rules.json",
+    "D07_teaching": "../dungeon-v1/design-index.json#teaching_manifest_contract",
+    "routes": "../dungeon-v1/regions-and-routes.json",
+    "ordinary_enemies": "../enemies-v1/enemies.json",
+    "boss": "../bosses-v1/common-rules.json",
+    "economy": "../economy-v1/reward-sources.json",
+    "growth": "../progression-v1/hub-rules.json",
+    "narrative": "../narrative-v1/story-flow.json"
+  },
+  "policy": {
+    "all_lessons_skippable_and_reviewable": true,
+    "lesson_completion_required_for_movement_combat_exit_shop_story_or_ending": false,
+    "tutorial_specific_enemies_rooms_items_awards_currency_discounts_or_damage_protection": false,
+    "first_run_only_forced_sequence": false,
+    "missing_item_weapon_state_service_or_skill_opportunity": "do_not_spawn_or_give_it; leave_lesson_unpracticed_but_reviewable; no_progress_penalty",
+    "teaching_changes_D07_manifest_or_wave_timing": false,
+    "new_required_trigger_or_exit_key": false,
+    "learning_spending_or_consuming_required": false,
+    "long_explanation_auto_opens_pause": false,
+    "live_hints": "nonmodal_no_input_capture_no_pause_no_timescale_no_action_cancel; only_current_verified_context",
+    "manual_long_review": "player_opens_inspect_or_help; same_single_player_pause_clock; close_requires_fresh_released_input_per_D11_input_rules; no_hidden_resume_action",
+    "zero_enemy_entry_does_not_cleanse_DOT": true
+  },
+  "presentation": {
+    "active_hint_cap": 1,
+    "automatic_hint_instances_per_lesson_per_RunID_cap": 1,
+    "caps_are_UI_proposals_not_minutes_or_gameplay_progress": true,
+    "default_automatic_timeout_s": null,
+    "must_wait_timer_to_continue_or_skip": false,
+    "context_invalid": "hide_or_archive_stale_hint_without_consuming_gameplay_input; do_not_queue_it_to_obscure_new_threat",
+    "priority": "death_or_result_and_actual_attack_spawn_status_or_transaction_feedback_before_tutorial; hide_or_defer_hint_when_it_would_cover_source_warning",
+    "auto_hint_chain": "next_eligible_unique_context_only; no_forced_read_all_queue",
+    "dismiss": "optional_help_preference_or_existing_UI_skip_when_in_UI; nonmodal_hint_does_not_steal_pause_dodge_or_interact",
+    "accessibility": "text_plus_reason_or_shape; no_color_only_state; current_device_bindings_and_readable_action_labels",
+    "enemy_warning_visibility_cannot_be_disabled_by_skip_tutorial": true,
+    "repeat_failed_operation": "one_context_hint_then_normal_authoritative_reason; no_repeating_modal_nag"
+  },
+  "state_domains": {
+    "account_cosmetic": [
+      "tutorial_hint_preferences",
+      "shown_lesson_ids",
+      "skipped_lesson_ids",
+      "reviewed_lesson_ids",
+      "practice_evidence_by_lesson_with_version",
+      "observed_mechanism_evidence_by_lesson_not_action_mastery"
+    ],
+    "run_cosmetic": [
+      "auto_hint_shown_by_lesson_this_RunID",
+      "current_hint_id",
+      "unique_pending_valid_hint_context"
+    ],
+    "authoritative_gameplay": "existing_run_room_story_inventory_currency_service_and_success_state_unchanged",
+    "view_or_skip_can_write_gameplay_fact": false,
+    "practice": "record_only_authoritative_observed_actions_or_effects; never_fabricate_an_attack_pickup_purchase_or_kill",
+    "completion_labels": {
+      "unseen": "未查看",
+      "seen": "已查看说明",
+      "skipped": "已跳过提示",
+      "practiced": "已实践：显示实际证据类型，不表示熟练度或过关资格",
+      "mechanism_observed": "已观察该机制：来自实际战斗事件，不等于已学会操作",
+      "knowledge_reference": "知识说明仅记录已看/已跳/已复习，不设操作学会标记"
+    },
+    "reset_tutorial_history": "cosmetic_only; does_not_reset_bosses_story_source_rewards_inventory_prices_or_seed",
+    "pause_and_continue": "save_cosmetic_cursor_without_replaying_actions; do_not_advance_D07_clocks_DOT_CD_or_regen"
+  },
+  "action_alias_contract": {
+    "render": "resolve_{action}_placeholder_to_current_binding_glyph_plus_accessible_label_in_current_input_context; never_literal_default_AB",
+    "unbound": "show_action_name_and_unbound_status_with_settings_entry; do_not_generate_impossible_press_prompt",
+    "device_change_or_rebind": "refresh_display_only; no_action_or_lesson_practice_event",
+    "semantic_aliases": [
+      "move",
+      "move_depth",
+      "primary",
+      "skill",
+      "jump",
+      "dodge",
+      "reload",
+      "switch_weapon",
+      "interact",
+      "cycle_target",
+      "inspect",
+      "pause",
+      "item_slot_1",
+      "item_slot_2",
+      "ui_confirm",
+      "ui_cancel"
+    ],
+    "mapping_owner": "D11_input_bindings; aliases_for_composite_movement_may_render_multiple_bound_actions"
+  },
+  "lessons": [
+    {
+      "id": "TUT-01-START",
+      "trigger": {
+        "event": "first_new_run_ready",
+        "conditions": [
+          "starter_initialization_committed_once",
+          "not_a_continue_or_room_entry_initializer"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "本局金币和装备随远征结束；已入账碎片留在营地。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "knowledge_reference_only",
+        "read_or_preview_evidence": "seen_or_reviewed_only; no_action_mastery_mark"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "run_flow",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "新局固定一把单手剑、第二武器和甲槽空，金币20。教程不另送药、装备、遗物或碎片；继续存档和进入下一房不会重复初始化。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-02-MOVE",
+      "trigger": {
+        "event": "first_REG01_N01_ground_idle_opportunity",
+        "conditions": [
+          "actual_room_manifest_has_no_enemies",
+          "player_alive_run_active",
+          "not_automatic_cleanse"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "用{move}左右移动，用{move_depth}调整地面前后位置。",
+      "action_refs": [
+        "move",
+        "move_depth"
+      ],
+      "completion": {
+        "practice_evidence_event": "legal_ground_movement_in_X_and_Y_observed",
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "actual_action_practice_only"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "basics",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "这是2.5D地面移动：前后纵深和跳跃高度分别判断。对角速度归一；不以人物贴图重叠判定命中。没有必须走完的练习格或出口开关。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-03-PRIMARY",
+      "trigger": {
+        "event": "first_actual_hostile_visible_or_player_requests_weapon_help",
+        "conditions": [
+          "current_owned_weapon_exists",
+          "no_tutorial_target_spawned"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "先对齐纵深，再用{primary}主攻；出招和收势都要走完。",
+      "action_refs": [
+        "primary"
+      ],
+      "completion": {
+        "practice_evidence_event": "accepted_primary_action_finished_without_cancellation",
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "actual_action_practice_only"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "basics",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "每次主攻都有完整前摇、有效和恢复；主攻不能靠跳跃或闪避随意取消。练习不要求命中或杀敌，不改实际伤害、无敌或敌人行为。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-04-DODGE",
+      "trigger": {
+        "event": "first_actual_enemy_attack_warning_or_first_dodge_rejection",
+        "conditions": [
+          "existing_warning_not_generated_by_tutorial"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "地面用{dodge}闪避；正在攻击时不能靠闪避取消后摇。",
+      "action_refs": [
+        "dodge"
+      ],
+      "completion": {
+        "practice_evidence_event": "legal_ground_dodge_action_accepted_and_finished",
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "actual_action_practice_only"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "basics",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "闪避有固定距离、冷却和有限无敌窗；撞墙不会退款或延长无敌，不穿身体、不清燃烧，空中不能闪避。普通Y走位也是读招方式，教程不要求消耗一次闪避才能过门。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-05-JUMP",
+      "trigger": {
+        "event": "first_safe_entry_jump_help_or_first_actual_jump",
+        "conditions": [
+          "grounded_idle_before_jump_if_action_requested",
+          "no_main_path_jump_requirement"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "用{jump}起跳。跳跃不无敌；一次离地最多接一次主攻。",
+      "action_refs": [
+        "jump",
+        "primary"
+      ],
+      "completion": {
+        "practice_evidence_event": "legal_jump_landed; optional_air_primary_evidence_recorded_separately",
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "actual_action_practice_only"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "basics",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "跳跃高度Z与地面XY独立；空中只有一次合法主攻机会，不新增空中武器技、装填或闪避。落地不取消已接纳攻击的剩余动作。没有必须跳过去的教程门。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-06-SPACE",
+      "trigger": {
+        "event": "first_verified_depth_or_height_miss_reason",
+        "conditions": [
+          "combat_feedback_has_actual_geometry_reason",
+          "do_not_infer_reason_from_image_overlap_or_any_miss"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "看脚下位置和高度；图像碰在一起，也可能没进入攻击范围。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": "weapon_hit_with_legal_actual_depth_and_height_observed",
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "actual_action_practice_only"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "combat",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "只在真实几何诊断知道原因时给具体提示；普通挥空不能一律误报纵深错误。受击体、身体、地面纵深与实际高度保持原规则。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-07-SKILL",
+      "trigger": {
+        "event": "first_current_weapon_skill_description_opened_or_skill_resource_rejection",
+        "conditions": [
+          "current_weapon_has_defined_intrinsic_skill",
+          "no_requirement_to_pay_or_consume_for_lesson"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "用{skill}地面武器技；先看本招冷却和整轮资源需求。",
+      "action_refs": [
+        "skill"
+      ],
+      "completion": {
+        "practice_evidence_event": "intrinsic_weapon_skill_actual_emission_or_effect_commit",
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "actual_action_practice_only"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "basics",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "武器技须地面合法待机与资源/CD允许。多发技能按整轮预算接纳，未发部分依原中断规则；拒绝不是教程卡关，也不送专注或弹药。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-08-SWITCH",
+      "trigger": {
+        "event": "first_second_owned_weapon_slot_committed",
+        "conditions": [
+          "both_owned_weapon_slots_nonempty"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "已有两把武器时，用{switch_weapon}切换；弹匣和冷却随原实例保留。",
+      "action_refs": [
+        "switch_weapon"
+      ],
+      "completion": {
+        "practice_evidence_event": "weapon_switch_commit_to_other_owned_instance",
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "actual_action_practice_only"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "equipment",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "没有第二把武器就不强制展示操作考核。换武器不会把原枪补满或清技能CD；当前武器与备用武器的属性贡献不同，备用附魔不叠到当前攻击。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-09-RELOAD",
+      "trigger": {
+        "event": "first_current_magazine_weapon_low_or_empty_or_reload_rejection",
+        "conditions": [
+          "current_weapon_family_in_XBW_PST_SGN_RFL",
+          "magazine_capacity_positive"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "看弹匣，用{reload}装填；射击收势和装填是两段动作。",
+      "action_refs": [
+        "reload"
+      ],
+      "completion": {
+        "practice_evidence_event": "actual_reload_completed_and_magazine_refill_committed",
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "actual_action_practice_only"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "equipment",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "仅真实获得并装备弹匣武器后提示。中断装填不补弹、取消不保留进度；多发主攻可能要求至少一组弹药。枪弩备弹无额外购买费用，但仍需完成原装填动作。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-10-FOCUS",
+      "trigger": {
+        "event": "first_staff_equipped_or_verified_insufficient_focus",
+        "conditions": [
+          "current_weapon_family_STF"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "专注不足就先走位等恢复；换装、重洗不会把专注补满。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": "legal_staff_cast_actual_resource_and_emission_commit; waiting_or_reading_alone_not_practice",
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "actual_action_practice_only"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "equipment",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "专注自然恢复沿当前来源与最后消耗计时；法袍/天赋影响合法恢复率，不凭教程消除等待。未获得法杖时不强制学习施法，不发额外法杖。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-11-PICKUP",
+      "trigger": {
+        "event": "first_settled_ground_carry_item_in_D04_candidate_range",
+        "conditions": [
+          "actual_candidate_highlight_has_stable_ID"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "用{cycle_target}切换高亮，再用{interact}拾取；失败不会自动变成进门。",
+      "action_refs": [
+        "cycle_target",
+        "interact"
+      ],
+      "completion": {
+        "practice_evidence_event": "valid_target_cycle_or_inventory_transfer_commit",
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "actual_action_practice_only"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "inventory",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "携带物、设施、出口有不同优先级，选择锁定对象ID；满容量对象仍可查看原因。同一次交互不能因拾取失败落到出口。金币和碎片另按原近距自动收集，不替代物品拾取。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-12-CAPACITY",
+      "trigger": {
+        "event": "first_inventory_capacity_or_duplicate_ID_rejection",
+        "conditions": [
+          "authoritative_rejection_reason_available"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "槽满先选替换；同种快捷道具只补原栈，不占第二槽。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": "legal_inventory_transfer_after_real_capacity_issue_committed; preview_only_is_seen",
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "actual_action_practice_only"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "inventory",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "两个快捷槽、三个不同遗物槽，没有备用背包。地面可部分补栈，商品整包接纳或拒绝；替换前显示旧物落点，不能把地面剩余物说成已携带。拒绝不会吞钱或自动卖旧物。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-13-ITEM",
+      "trigger": {
+        "event": "first_quick_item_owned_in_slot",
+        "conditions": [
+          "actual_ownership_committed",
+          "do_not_require_use_when_effect_illegal_or_no_benefit"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "用{item_slot_1}/{item_slot_2}使用对应道具；先站稳，再看效果条件。",
+      "action_refs": [
+        "item_slot_1",
+        "item_slot_2"
+      ],
+      "completion": {
+        "practice_evidence_event": "D03_item_use_effect_and_count_commit",
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "actual_action_practice_only"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "items",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "道具从地面待机使用，前摇可因移动/实际伤害等取消；提交后按原恢复与共享锁。药瓶拾到不立即治疗，满血/死亡/容量与实际疗效均仍检查。教程不强迫喝药或掷物。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-14-STATUS",
+      "trigger": {
+        "event": "first_actual_burn_slow_or_shared_shock_feedback",
+        "conditions": [
+          "actual_status_applied_not_scripted_tutorial_damage"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "燃烧会继续跳伤，寒缓影响走位；闪避不会清掉已有状态。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": "actual_legal_cleanse_commit_if_item_owned; status_expiry_or_reading_alone_not_practice",
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "actual_action_practice_only"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "items",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "只有确实持有可用净化道具时才提供对应使用入口；没有则说明原状态期限与走位。玩家无需为了教学承受伤害，状态与next_tick不因提示、暂停或跨波重置。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-15-RELIC",
+      "trigger": {
+        "event": "first_actual_ground_relic_or_relic_preview",
+        "conditions": [
+          "actual_PAS_source_exists"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "遗物的好处和代价一起生效；更换遗物需要完整安全。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": "actual_relic_inventory_commit; compare_preview_only_is_seen",
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "actual_action_practice_only"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "equipment",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "保证遗物产出不保证有空槽；同ID不能叠占多个槽。最大HP降低只截断当前HP，移除不补回；不要把暂停查看当作战斗瞬换。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-16-INSPECT",
+      "trigger": {
+        "event": "first_player_inspect_or_pause_help_requested",
+        "conditions": [
+          "player_initiated_only"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "用{inspect}暂停查看；战斗中只读，安全整理要返回游戏执行。",
+      "action_refs": [
+        "inspect"
+      ],
+      "completion": {
+        "practice_evidence_event": "player_opened_and_closed_actual_D04_inspect_panel; tutorial_review_alone_not_practice",
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "actual_action_practice_only"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "inventory",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "完整安全时可预览一个整理意图，再明确返回游戏执行真实动作；普通关闭不执行。恢复后先伤害/到期再重验，失败就取消，旧按键不会自动拾取/闪避。教程本身不强制暂停。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-17-FUTURE",
+      "trigger": {
+        "event": "current_group_terminal_but_required_manifest_incomplete",
+        "conditions": [
+          "D07_authoritative_required_obligation_pending",
+          "use_depth_text_only_if_required_depth_trigger_pending_and_free_reachable_route_exists; otherwise_use_waiting_group_text"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "前段已清，整房还有后续；留意当前路线和增援提示。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "mechanism_observation_only",
+        "observation_evidence_event": "actual_required_depth_trigger_latched_or_future_group_admitted",
+        "observing_sets_action_practice": false
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "room_flow",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "当前没有活怪不等于整房已清。2秒波间间隔不是安全整理资格；先伤害/死亡、再触发与接纳、最后检查清房。提示不会提前接纳、暂停下一波或把未来清单当隐形无敌敌人。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested",
+      "text_variants": {
+        "required_depth_trigger_pending_and_free_reachable_route": "前段已清，按可达方向继续深入。",
+        "queued_or_reserved_future_group_waiting_without_depth_trigger": "前段已清，仍有后续增援；留意出生预告。"
+      }
+    },
+    {
+      "id": "TUT-18-CURRENCY",
+      "trigger": {
+        "event": "first_actual_coin_pickup_or_fragment_credit_notice",
+        "conditions": [
+          "authoritative_pickup_or_credit_receipt_exists"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "金币用于本局；普通碎片实际拾取后才永久入账。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "knowledge_reference_only",
+        "read_or_preview_evidence": "seen_or_reviewed_only; no_action_mastery_mark"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "economy",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "普通地面碎片不是清房自动入账，Boss保证碎片另在合法成功事件自动入账。没捡就结束本局不会补领；教程不发钱、不把未拾物显示成钱包余额。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-19-MERCHANT",
+      "trigger": {
+        "event": "first_actual_N04_merchant_offer_or_service_preview",
+        "conditions": [
+          "existing_FAC_MERCHANT_or_service_not_new_tutorial_facility"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "先看价格、数量和去向；商品整件装得下才付款。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "knowledge_reference_only",
+        "read_or_preview_evidence": "seen_or_reviewed_only; no_action_mastery_mark"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "economy",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "免费主路不要求购买。已知商品全包接纳或拒绝；钥匙箱/轮盘未知奖按原源端托盘保存。交易须完整安全，教程不赠折扣、免单、库存刷新或新服务次数。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-20-ENCHANT",
+      "trigger": {
+        "event": "first_owned_equipment_negative_enchant_preview",
+        "conditions": [
+          "actual_negative_affix_package_exists"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "附魔可以有坏词。可免费替换装备；洗净会把整套好坏词都移除。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "knowledge_reference_only",
+        "read_or_preview_evidence": "seen_or_reviewed_only; no_action_mastery_mark"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "equipment",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "免费替换指无金币诅咒锁，仍要满足拾取/装备动作与容量时机。洗净与重洗不同，费用/阶级/券限制依原定义；暂停提示不偷偷去掉负词或治疗。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-21-FORGE",
+      "trigger": {
+        "event": "first_actual_basic_forge_or_grade_enchant_comparison",
+        "conditions": [
+          "existing_instance_and_quote_preview"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "基础强化和附魔分开看；强化不会补血、补弹或重洗词条。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "knowledge_reference_only",
+        "read_or_preview_evidence": "seen_or_reviewed_only; no_action_mastery_mark"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "equipment",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "基础强化grade0—3与附魔I—V是不同字段；只合并到原属性预算一次封顶。预览具体实例、章节cap和工费，没有必须强化才能通主路的教程检查。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-22-ROULETTE",
+      "trigger": {
+        "event": "first_actual_FAC_ROULETTE_risk_preview",
+        "conditions": [
+          "existing_wheel_instance_remaining_or_disabled_reason_visible"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "轮盘有空奖；确认才扣费占次数，代投券也不改变概率。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "knowledge_reference_only",
+        "read_or_preview_evidence": "seen_or_reviewed_only; no_action_mastery_mark"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "economy",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "这是说明机会而非强制转一次。既有轮盘20金币、两次上限与空奖概率看服务当前UI；未知物奖待领时保持同托盘，不再转、不按容量重抽。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-23-HIDDEN",
+      "trigger": {
+        "event": "first_actual_hidden_entry_quote_or_discovery_point",
+        "conditions": [
+          "existing_H01_route_and_actual_source_context"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "门票买通行，不是发现奖励；先看本次回报和首次领取状态。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "knowledge_reference_only",
+        "read_or_preview_evidence": "seen_or_reviewed_only; no_action_mastery_mark"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "story",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "进门/付费/揭图/Boss击杀不替代真实发现交互。H04已领首次后本次无经济回报要明示；H01/H02可选Boss的重复基础奖与发现首次奖分开。支路不是主线或真结局门槛。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-24-HUB",
+      "trigger": {
+        "event": "first_HUB_IDLE_progression_page_opened_or_player_requests_growth_help",
+        "conditions": [
+          "actual_D09_lifecycle_and_current_balance_displayed"
+        ]
+      },
+      "mode": "hub_optional_hint",
+      "text_zh": "碎片可买天赋或研究；天赋全退原实付，研究永久不退款。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "knowledge_reference_only",
+        "read_or_preview_evidence": "seen_or_reviewed_only; no_action_mastery_mark"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "progression",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "实际账户余额与本次新增收入分开；早失败可能没有新增碎片。有未结束/暂停待续的RunID只能查看，不可购买、重置、改样品或再开一局。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-25-SAMPLE",
+      "trigger": {
+        "event": "first_research_source_page_or_sample_selector_opened_in_HUB_or_readonly_growth_view",
+        "conditions": [
+          "actual_research_owned_or_preview_requested",
+          "no_free_item_or_quote_from_lesson"
+        ]
+      },
+      "mode": "hub_optional_hint",
+      "text_zh": "研究只让道具进入合法来源；样品另付金币，成功购买才占一次资格。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "knowledge_reference_only",
+        "read_or_preview_evidence": "seen_or_reviewed_only; no_action_mastery_mark"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "progression",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "普通掉落不保指定ID。样品每新局可选0或1、首匹配N04绑定后不转点、账号每研究成功买一次，失败/取消不占资格；本课不改自然概率或赠样品。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-26-STORY",
+      "trigger": {
+        "event": "existing_Boss_success_story_fact_committed_or_player_journal_request",
+        "conditions": [
+          "authoritative_story_fact_receipt_already_committed"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "剧情已归档。正文可跳、可回顾，不影响这次合法过关。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "knowledge_reference_only",
+        "read_or_preview_evidence": "seen_or_reviewed_only; no_action_mastery_mark"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "story",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "账号事实、文本已看和本局Boss完成是独立记录。回顾不重领奖，隐藏故事不锁正常结局；首通后的回响是叙事语境，继续原局不会改成新局。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-27-EXIT",
+      "trigger": {
+        "event": "first_existing_exit_risk_confirmation_or_leave_with_uncollected_source",
+        "conditions": [
+          "existing_D04_route_permission_and_current_risk_version"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "离开不会自动收走地上物；先看能否返回和遗留风险。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "knowledge_reference_only",
+        "read_or_preview_evidence": "seen_or_reviewed_only; no_action_mastery_mark"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "room_flow",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "跨章可能不可返回，留下物品/攻击会依原规则处理。普通免费出口不额外要求无燃烧/无旧弹，但同点致死优先，状态不被净化；收费/工具入口仍需完整安全。教程不改出口条件。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-28-FAILURE",
+      "trigger": {
+        "event": "run_failure_terminal_receipt_then_hub_review",
+        "conditions": [
+          "run_ending_transaction_completed",
+          "not_death_frame_or_run_suspended"
+        ]
+      },
+      "mode": "hub_optional_hint",
+      "text_zh": "本局金币和装备结束；已经入账的碎片与见闻保留。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "knowledge_reference_only",
+        "read_or_preview_evidence": "seen_or_reviewed_only; no_action_mastery_mark"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "run_flow",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "未拾地面碎片不补发，Boss与玩家同点死没有新Boss成功奖。回顾显示当前余额与本次新增收入，不能把零新增说成账户必然没钱；不按死亡次数送低保。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-29-CONTINUE",
+      "trigger": {
+        "event": "unfinished_run_detected_in_menu_or_hub_view",
+        "conditions": [
+          "RUN_ACTIVE_or_SUSPENDED_or_STARTING_or_ENDING_or_RECOVERY_REQUIRED"
+        ]
+      },
+      "mode": "hub_optional_hint",
+      "text_zh": "还有未结束远征：继续原局，或明确结束；现在只能查看成长。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "knowledge_reference_only",
+        "read_or_preview_evidence": "seen_or_reviewed_only; no_action_mastery_mark"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "run_flow",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "保存退出不算归营新局，不重复20金币、满血、随机奖励或样品。先完成旧局终态或恢复事务，才可局外改天赋/研究/样品和新建RunID。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-30-BOSS",
+      "trigger": {
+        "event": "first_existing_Boss_intro_or_phase_cue_visible",
+        "conditions": [
+          "D06_actual_warning_already_scheduled"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "看完整预警，等收势再反击；跳过台词不会跳过战斗提示。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "knowledge_reference_only",
+        "read_or_preview_evidence": "seen_or_reviewed_only; no_action_mastery_mark"
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "combat",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "Boss阶段提示不补血、不清CD，保持可受伤/可控制；各招按声明高度和范围。教程不延长或缩短入战/阶段/攻击/恢复，也不把普通精英改用Boss抗性。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-R01-STN-CHARGE",
+      "trigger": {
+        "event": "actual_enemy_relevant_attack_or_state_first_observed",
+        "region_id": "REG-01",
+        "enemy_id": "ENM-STN-001",
+        "conditions": [
+          "actual_generated_and_admitted_or_real_preplaced_enemy_exists",
+          "only_its_existing_actions_not_lesson_created_wave",
+          "prompt_if_context_still_valid_and_not_suppressed"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "敌人锁线后沿地面前后方向避开，冲空再反击。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "mechanism_observation_only",
+        "observation_evidence_event": "charge_resolved_without_player_hit_and_player_outside_locked_Y_band",
+        "observing_sets_action_practice": false
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "regional_threats",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "沉石骑士锁线后不追Y，冲空/撞墙完成原恢复。读条不是强制闪避考试，不增冲锋次数。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-R01-STN-BAT",
+      "trigger": {
+        "event": "actual_enemy_relevant_attack_or_state_first_observed",
+        "region_id": "REG-01",
+        "enemy_id": "ENM-STN-002",
+        "conditions": [
+          "actual_generated_and_admitted_or_real_preplaced_enemy_exists",
+          "only_its_existing_actions_not_lesson_created_wave",
+          "prompt_if_context_still_valid_and_not_suppressed"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "石蝠会近身苏醒；等它回到低空恢复，再靠近攻击。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "mechanism_observation_only",
+        "observation_evidence_event": "bat_actual_low_recovery_observed_or_legal_low_height_weapon_hit",
+        "observing_sets_action_practice": false
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "regional_threats",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "真实休眠可受伤且计清房；高空命中按实际高度，低空恢复必须实际抵达合法点。教程不为此强制跳起或发远程武器。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-R02-ELF",
+      "trigger": {
+        "event": "actual_enemy_relevant_attack_or_state_first_observed",
+        "region_id": "REG-02",
+        "enemy_id": "ENM-ELF-001",
+        "conditions": [
+          "actual_generated_and_admitted_or_real_preplaced_enemy_exists",
+          "only_its_existing_actions_not_lesson_created_wave",
+          "prompt_if_context_still_valid_and_not_suppressed"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "弓手射线锁定后不会追你；错开地面前后位置再接近。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "mechanism_observation_only",
+        "observation_evidence_event": "locked_arrow_resolved_without_player_hit_after_Y_reposition",
+        "observing_sets_action_practice": false
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "regional_threats",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "苔弓斥候锁线，箭受墙体/身体阻挡；射后原恢复可接近。不把当前画面横线当全部纵深必中。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-R02-TRE",
+      "trigger": {
+        "event": "actual_enemy_relevant_attack_or_state_first_observed",
+        "region_id": "REG-02",
+        "enemy_id": "ENM-TRE-001",
+        "conditions": [
+          "actual_generated_and_admitted_or_real_preplaced_enemy_exists",
+          "only_its_existing_actions_not_lesson_created_wave",
+          "prompt_if_context_still_valid_and_not_suppressed"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "根须直戳覆盖窄，侧移能避开；别把幼株当静态装饰。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "mechanism_observation_only",
+        "observation_evidence_event": "root_thrust_or_seed_attack_resolved_and_counter_window_observed",
+        "observing_sets_action_practice": false
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "regional_threats",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "根须幼株有直戳和种子弹，身体不产生未声明触碰伤；仍按实际出现招给提示，不给它新增束缚。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-R03-SKL",
+      "trigger": {
+        "event": "actual_enemy_relevant_attack_or_state_first_observed",
+        "region_id": "REG-03",
+        "enemy_id": "ENM-SKL-002",
+        "conditions": [
+          "actual_generated_and_admitted_or_real_preplaced_enemy_exists",
+          "only_its_existing_actions_not_lesson_created_wave",
+          "prompt_if_context_still_valid_and_not_suppressed"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "骨盾只护正面，不是无敌；绕侧或等守盾后的开放窗。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "mechanism_observation_only",
+        "observation_evidence_event": "directional_guard_window_and_open_recovery_observed",
+        "observing_sets_action_practice": false
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "regional_threats",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "骨盾卫守盾给定向甲抗，不反弹、不使普通武器无效；任何武器仍可合法伤血。教程不要求买穿甲装备。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-R03-ROB",
+      "trigger": {
+        "event": "actual_enemy_relevant_attack_or_state_first_observed",
+        "region_id": "REG-03",
+        "enemy_id": "ENM-ROB-001",
+        "conditions": [
+          "actual_generated_and_admitted_or_real_preplaced_enemy_exists",
+          "only_its_existing_actions_not_lesson_created_wave",
+          "prompt_if_context_still_valid_and_not_suppressed"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "法袍侍从也会近身挥刃；先辨动作，再沿地面前后位置避开。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "mechanism_observation_only",
+        "observation_evidence_event": "actual_blade_or_fire_orb_resolved_and_recovery_observed",
+        "observing_sets_action_practice": false
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "regional_threats",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "烛袍侍从不是全程法术炮台；烛刃与火珠各有预警，火珠不因视觉颜色获得额外状态。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-R04-MEC-SHOT",
+      "trigger": {
+        "event": "actual_enemy_relevant_attack_or_state_first_observed",
+        "region_id": "REG-04",
+        "enemy_id": "ENM-MEC-001",
+        "conditions": [
+          "actual_generated_and_admitted_or_real_preplaced_enemy_exists",
+          "only_its_existing_actions_not_lesson_created_wave",
+          "prompt_if_context_still_valid_and_not_suppressed"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "校准线锁定后不拐弯；侧移，或让真实掩体挡住光钉。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "mechanism_observation_only",
+        "observation_evidence_event": "calibration_projectile_resolved_without_player_hit_after_Y_reposition",
+        "observing_sets_action_practice": false
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "regional_threats",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "校准巡灯直弹与身体/受击体精检，预警光线本身不伤人；墙体和友军阻挡依原规则。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-R04-MEC-SUPPORT",
+      "trigger": {
+        "event": "actual_enemy_relevant_attack_or_state_first_observed",
+        "region_id": "REG-04",
+        "enemy_id": "ENM-MEC-003",
+        "conditions": [
+          "actual_generated_and_admitted_or_real_preplaced_enemy_exists",
+          "only_its_existing_actions_not_lesson_created_wave",
+          "prompt_if_context_still_valid_and_not_suppressed",
+          "actual_support_has_eligible_real_ally_and_effect_committed_for_buff_lesson; otherwise_review_only"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "旗讯只提高友军普通走位；攻击预警不会因此变短。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "mechanism_observation_only",
+        "observation_evidence_event": "actual_eligible_ally_move_support_applied_or_support_source_death_removed_buff",
+        "observing_sets_action_practice": false
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "regional_threats",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "单敌N02的旗讯使者若无合法友军，不为教学补一个敌人，也不伪报加速已生效。效果课只在原N03/N05等已有合法组合实际生效时给；单敌可只认识旗杆挥击。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-R05-DEM-HIGH",
+      "trigger": {
+        "event": "actual_enemy_relevant_attack_or_state_first_observed",
+        "region_id": "REG-05",
+        "enemy_id": "ENM-DEM-001",
+        "conditions": [
+          "actual_generated_and_admitted_or_real_preplaced_enemy_exists",
+          "only_its_existing_actions_not_lesson_created_wave",
+          "prompt_if_context_still_valid_and_not_suppressed"
+        ],
+        "attack_id": "ATK-DEM-001-B"
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "看镰刀高低姿态，别盲跳进高位钩镰；地面侧移也能避开。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "mechanism_observation_only",
+        "observation_evidence_event": "high_hook_resolved_without_player_hit_while_grounded_or_outside_Y",
+        "observing_sets_action_practice": false
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "regional_threats",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "灰镰使高低招按实际高度区分，地面不等于永远免伤；低扫仍可打地面。教程不新增对空变招，不读取跳键改招。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    },
+    {
+      "id": "TUT-R05-DEM-ORB",
+      "trigger": {
+        "event": "actual_enemy_relevant_attack_or_state_first_observed",
+        "region_id": "REG-05",
+        "enemy_id": "ENM-DEM-002",
+        "conditions": [
+          "actual_generated_and_admitted_or_real_preplaced_enemy_exists",
+          "only_its_existing_actions_not_lesson_created_wave",
+          "prompt_if_context_still_valid_and_not_suppressed"
+        ]
+      },
+      "mode": "nonmodal_context_hint",
+      "text_zh": "慢球不会追踪；沿地面前后绕开，别只盯着持灯者。",
+      "action_refs": [],
+      "completion": {
+        "practice_evidence_event": null,
+        "read_or_skip_marks_practice": false,
+        "practice_is_mastery_or_progress_gate": false,
+        "missing_opportunity_leaves_unpracticed_without_penalty": true,
+        "kind": "mechanism_observation_only",
+        "observation_evidence_event": "slow_orb_resolved_or_expired_after_valid_Y_reposition",
+        "observing_sets_action_practice": false
+      },
+      "skip": {
+        "allowed": true,
+        "method": "player_help_settings_or_existing_UI_skip_control; nonmodal_hint_does_not_capture_world_input",
+        "no_gameplay_or_reward_effect": true,
+        "skipped_is_not_practice_complete": true
+      },
+      "review": {
+        "entry": "player_requested_help_or_inspect_tutorial_index",
+        "category": "regional_threats",
+        "mode": "player_requested_paused_review_in_run_or_readonly_hub_help",
+        "detail_zh": "烬眼持灯者旧弹在来源死亡后仍按原RoomID飞行，死亡不自动清弹；跨波不清资源/状态，整房安全仍查实际危险。",
+        "current_bindings_resolved_on_every_view": true,
+        "does_not_execute_lesson_action_or_commit_gameplay_state": true
+      },
+      "status": "proposed_untested"
+    }
+  ],
+  "region_lessons": [
+    {
+      "region_id": "REG-01",
+      "region_name": "裂石外垒",
+      "arrival_node_id": "REG-01-N01",
+      "teaching_node_id": "REG-01-N02",
+      "enemy_ids": [
+        "ENM-STN-001",
+        "ENM-STN-002"
+      ],
+      "lesson_ids": [
+        "TUT-R01-STN-CHARGE",
+        "TUT-R01-STN-BAT"
+      ],
+      "D07_N02_manifest": {
+        "actor_count": 1,
+        "group_count": 1,
+        "threat_cap": 4,
+        "elite": false,
+        "chosen_enemy": "one_actual_current_region_base_candidate_not_both_focus_enemies",
+        "unannounced_followup_required_group": false
+      },
+      "N01": "readable_optional_preview_or_help_link; no_enemies_no_auto_heal",
+      "N02": "show_only_lesson_for_the_actual_selected_single_enemy; not_both_candidates_as_two_spawns",
+      "other_enemy_lesson": "only_if_that_enemy_later_exists_in_original_compatible_mandatory_manifest_or_player_opens_review; never_spawn_to_complete_tutorial",
+      "completion_does_not_open_exit": true
+    },
+    {
+      "region_id": "REG-02",
+      "region_name": "荆根庭院",
+      "arrival_node_id": "REG-02-N01",
+      "teaching_node_id": "REG-02-N02",
+      "enemy_ids": [
+        "ENM-ELF-001",
+        "ENM-TRE-001"
+      ],
+      "lesson_ids": [
+        "TUT-R02-ELF",
+        "TUT-R02-TRE"
+      ],
+      "D07_N02_manifest": {
+        "actor_count": 1,
+        "group_count": 1,
+        "threat_cap": 4,
+        "elite": false,
+        "chosen_enemy": "one_actual_current_region_base_candidate_not_both_focus_enemies",
+        "unannounced_followup_required_group": false
+      },
+      "N01": "readable_optional_preview_or_help_link; no_enemies_no_auto_heal",
+      "N02": "show_only_lesson_for_the_actual_selected_single_enemy; not_both_candidates_as_two_spawns",
+      "other_enemy_lesson": "only_if_that_enemy_later_exists_in_original_compatible_mandatory_manifest_or_player_opens_review; never_spawn_to_complete_tutorial",
+      "completion_does_not_open_exit": true
+    },
+    {
+      "region_id": "REG-03",
+      "region_name": "灰烛墓院",
+      "arrival_node_id": "REG-03-N01",
+      "teaching_node_id": "REG-03-N02",
+      "enemy_ids": [
+        "ENM-SKL-002",
+        "ENM-ROB-001"
+      ],
+      "lesson_ids": [
+        "TUT-R03-SKL",
+        "TUT-R03-ROB"
+      ],
+      "D07_N02_manifest": {
+        "actor_count": 1,
+        "group_count": 1,
+        "threat_cap": 4,
+        "elite": false,
+        "chosen_enemy": "one_actual_current_region_base_candidate_not_both_focus_enemies",
+        "unannounced_followup_required_group": false
+      },
+      "N01": "readable_optional_preview_or_help_link; no_enemies_no_auto_heal",
+      "N02": "show_only_lesson_for_the_actual_selected_single_enemy; not_both_candidates_as_two_spawns",
+      "other_enemy_lesson": "only_if_that_enemy_later_exists_in_original_compatible_mandatory_manifest_or_player_opens_review; never_spawn_to_complete_tutorial",
+      "completion_does_not_open_exit": true
+    },
+    {
+      "region_id": "REG-04",
+      "region_name": "熔压工坊",
+      "arrival_node_id": "REG-04-N01",
+      "teaching_node_id": "REG-04-N02",
+      "enemy_ids": [
+        "ENM-MEC-001",
+        "ENM-MEC-003"
+      ],
+      "lesson_ids": [
+        "TUT-R04-MEC-SHOT",
+        "TUT-R04-MEC-SUPPORT"
+      ],
+      "D07_N02_manifest": {
+        "actor_count": 1,
+        "group_count": 1,
+        "threat_cap": 4,
+        "elite": false,
+        "chosen_enemy": "one_actual_current_region_base_candidate_not_both_focus_enemies",
+        "unannounced_followup_required_group": false
+      },
+      "N01": "readable_optional_preview_or_help_link; no_enemies_no_auto_heal",
+      "N02": "show_only_lesson_for_the_actual_selected_single_enemy; not_both_candidates_as_two_spawns",
+      "other_enemy_lesson": "only_if_that_enemy_later_exists_in_original_compatible_mandatory_manifest_or_player_opens_review; never_spawn_to_complete_tutorial",
+      "completion_does_not_open_exit": true
+    },
+    {
+      "region_id": "REG-05",
+      "region_name": "烬誓内庭",
+      "arrival_node_id": "REG-05-N01",
+      "teaching_node_id": "REG-05-N02",
+      "enemy_ids": [
+        "ENM-DEM-001",
+        "ENM-DEM-002"
+      ],
+      "lesson_ids": [
+        "TUT-R05-DEM-HIGH",
+        "TUT-R05-DEM-ORB"
+      ],
+      "D07_N02_manifest": {
+        "actor_count": 1,
+        "group_count": 1,
+        "threat_cap": 4,
+        "elite": false,
+        "chosen_enemy": "one_actual_current_region_base_candidate_not_both_focus_enemies",
+        "unannounced_followup_required_group": false
+      },
+      "N01": "readable_optional_preview_or_help_link; no_enemies_no_auto_heal",
+      "N02": "show_only_lesson_for_the_actual_selected_single_enemy; not_both_candidates_as_two_spawns",
+      "other_enemy_lesson": "only_if_that_enemy_later_exists_in_original_compatible_mandatory_manifest_or_player_opens_review; never_spawn_to_complete_tutorial",
+      "completion_does_not_open_exit": true
+    }
+  ],
+  "future_acceptance_cases": [
+    {
+      "id": "TUT-CASE-01",
+      "given": "skip every lesson",
+      "expected": "same_manifest_and_free_main_path_same_rewards_same_ending_eligibility"
+    },
+    {
+      "id": "TUT-CASE-02",
+      "given": "single_enemy_N02_selects_STN001",
+      "expected": "no_extra_STN002_added; bat_lesson_only_review_or_existing_later_encounter"
+    },
+    {
+      "id": "TUT-CASE-03",
+      "given": "single_MEC003_N02_with_no_allies",
+      "expected": "no_fake_support_effect_or_second_actor; support_effect_lesson_not_practiced"
+    },
+    {
+      "id": "TUT-CASE-04",
+      "given": "no_second_weapon_magazine_weapon_or_quick_item_obtained",
+      "expected": "no_forced_switch_reload_use_gate_or_free_item"
+    },
+    {
+      "id": "TUT-CASE-05",
+      "given": "wave_done_but_future_required_slots_remain",
+      "expected": "not_room_clear_not_full_safe; next_wave_clocks_continue_unmodified"
+    },
+    {
+      "id": "TUT-CASE-06",
+      "given": "critical_attack_warning_arrives_during_hint",
+      "expected": "warning_has_priority_hint_never_hides_warning_or_captures_dodge"
+    },
+    {
+      "id": "TUT-CASE-07",
+      "given": "manually_pause_review_then_close_with_game_key_held",
+      "expected": "same_run_clock_no_free_heal_no_automatic_world_action_from_old_key"
+    },
+    {
+      "id": "TUT-CASE-08",
+      "given": "same_lesson_read_skipped_then_reviewed",
+      "expected": "no_actual_practice_without_real_event_no_story_fact_or_reward"
+    },
+    {
+      "id": "TUT-CASE-09",
+      "given": "rebind_or_switch_to_gamepad",
+      "expected": "all_hint_placeholders_update_without_fixed_AB_or_executing_actions"
+    },
+    {
+      "id": "TUT-CASE-10",
+      "given": "fail_before_N05_with_no_new_shards",
+      "expected": "show_no_new_income_and_actual_prior_wallet_separately_not_force_zero_account"
+    },
+    {
+      "id": "TUT-CASE-11",
+      "given": "read_BAD_affix_or_roulette_lesson_then_cancel",
+      "expected": "no_cleanse_spin_cost_coupon_stock_or_instance_mutation"
+    },
+    {
+      "id": "TUT-CASE-12",
+      "given": "Boss_success_or_discovery_story_already_committed_then_skip_hint",
+      "expected": "facts_preserved_no_duplicate_reward_no_warning_shortening"
+    },
+    {
+      "id": "TUT-CASE-13",
+      "given": "suspended_run_hub_help",
+      "expected": "view_only_no_talent_reset_research_sample_selection_or_new_RunID"
+    }
+  ],
+  "verification_scope": "structure_and_source_reference_review_only; no_playable_teaching_readability_input_controller_or_learning_outcome_test"
+}

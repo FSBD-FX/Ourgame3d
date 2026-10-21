@@ -1,0 +1,816 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-13",
+  "source_event": "EV-024",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposed_arena_constraints",
+  "stress_scope": "open_ground_idle_player; 265*.65*.75; reaction.15; margin1; not_actual_player_reaction_or_cornered_path_proof",
+  "arenas": [
+    {
+      "boss_id": "BOS-STN-001",
+      "suggested_arena_half_cm": {
+        "x": 1000,
+        "y": 450
+      },
+      "first_test_obstacle_count": 0,
+      "boss_body_xy_half_cm": {
+        "half_x_cm": 48,
+        "half_y_cm": 30
+      },
+      "boss_hurtbox_xy_half_cm": {
+        "half_x_cm": 48,
+        "half_y_cm": 30
+      },
+      "legal_front_contact_distance_cm": 66,
+      "shortest_negative_reach_cm": 74.8,
+      "open_ground_front_reach_margin_cm": 8.799999999999997,
+      "proposed_spawn": {
+        "boss_xy": [
+          0,
+          0
+        ],
+        "player_xy": [
+          -650,
+          0
+        ],
+        "D07_spawn_and_door_sweep_pending": true
+      },
+      "boss_as_wall_requires_free_side_route": true,
+      "unvalidated_not_a_finished_room": true,
+      "attacks": [
+        {
+          "attack_id": "BOS-STN-001-A1",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 39,
+            "first_hit_minus_lock_s": 0.6,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 58.13437499999999,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-STN-001-A2",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 66,
+            "first_hit_minus_lock_s": 0.7,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 71.053125,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-STN-001-A3",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 101,
+            "first_hit_minus_lock_s": 1.0,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 109.809375,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-STN-001-A4",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 86,
+            "first_hit_minus_lock_s": 0.9,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 96.890625,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        }
+      ]
+    },
+    {
+      "boss_id": "BOS-FOR-001",
+      "suggested_arena_half_cm": {
+        "x": 1000,
+        "y": 450
+      },
+      "first_test_obstacle_count": 0,
+      "boss_body_xy_half_cm": {
+        "half_x_cm": 54,
+        "half_y_cm": 34
+      },
+      "boss_hurtbox_xy_half_cm": {
+        "half_x_cm": 54,
+        "half_y_cm": 34
+      },
+      "legal_front_contact_distance_cm": 72,
+      "shortest_negative_reach_cm": 74.8,
+      "open_ground_front_reach_margin_cm": 2.799999999999997,
+      "proposed_spawn": {
+        "boss_xy": [
+          0,
+          0
+        ],
+        "player_xy": [
+          -650,
+          0
+        ],
+        "D07_spawn_and_door_sweep_pending": true
+      },
+      "boss_as_wall_requires_free_side_route": true,
+      "unvalidated_not_a_finished_room": true,
+      "attacks": [
+        {
+          "attack_id": "BOS-FOR-001-A1",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 79,
+            "first_hit_minus_lock_s": 0.85,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 90.43124999999999,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-FOR-001-A2",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 76,
+            "first_hit_minus_lock_s": 0.8,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 83.971875,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-FOR-001-A3",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 27,
+            "first_hit_minus_lock_s": 0.55,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 51.675000000000004,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-FOR-001-A4",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 61,
+            "first_hit_minus_lock_s": 0.7,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 71.053125,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        }
+      ]
+    },
+    {
+      "boss_id": "BOS-RIT-001",
+      "suggested_arena_half_cm": {
+        "x": 1000,
+        "y": 450
+      },
+      "first_test_obstacle_count": 0,
+      "boss_body_xy_half_cm": {
+        "half_x_cm": 44,
+        "half_y_cm": 28
+      },
+      "boss_hurtbox_xy_half_cm": {
+        "half_x_cm": 44,
+        "half_y_cm": 28
+      },
+      "legal_front_contact_distance_cm": 62,
+      "shortest_negative_reach_cm": 74.8,
+      "open_ground_front_reach_margin_cm": 12.799999999999997,
+      "proposed_spawn": {
+        "boss_xy": [
+          0,
+          0
+        ],
+        "player_xy": [
+          -650,
+          0
+        ],
+        "D07_spawn_and_door_sweep_pending": true
+      },
+      "boss_as_wall_requires_free_side_route": true,
+      "unvalidated_not_a_finished_room": true,
+      "attacks": [
+        {
+          "attack_id": "BOS-RIT-001-A1",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 55,
+            "first_hit_minus_lock_s": 0.6,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 58.13437499999999,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-RIT-001-A2",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 55,
+            "first_hit_minus_lock_s": 0.6,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 58.13437499999999,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-RIT-001-A3",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 24,
+            "first_hit_minus_lock_s": 0.6,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 58.13437499999999,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-RIT-001-A4",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 65,
+            "first_hit_minus_lock_s": 0.7,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 71.053125,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        }
+      ]
+    },
+    {
+      "boss_id": "BOS-MEC-001",
+      "suggested_arena_half_cm": {
+        "x": 1000,
+        "y": 450
+      },
+      "first_test_obstacle_count": 0,
+      "boss_body_xy_half_cm": {
+        "half_x_cm": 56,
+        "half_y_cm": 36
+      },
+      "boss_hurtbox_xy_half_cm": {
+        "half_x_cm": 56,
+        "half_y_cm": 36
+      },
+      "legal_front_contact_distance_cm": 74,
+      "shortest_negative_reach_cm": 74.8,
+      "open_ground_front_reach_margin_cm": 0.7999999999999972,
+      "proposed_spawn": {
+        "boss_xy": [
+          0,
+          0
+        ],
+        "player_xy": [
+          -650,
+          0
+        ],
+        "D07_spawn_and_door_sweep_pending": true
+      },
+      "boss_as_wall_requires_free_side_route": true,
+      "unvalidated_not_a_finished_room": true,
+      "attacks": [
+        {
+          "attack_id": "BOS-MEC-001-A1",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 26,
+            "first_hit_minus_lock_s": 0.6,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 58.13437499999999,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-MEC-001-A2",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 60,
+            "first_hit_minus_lock_s": 0.65,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 64.59375,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-MEC-001-A3",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 52,
+            "first_hit_minus_lock_s": 0.675,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 67.8234375,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-MEC-001-A4",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 65,
+            "first_hit_minus_lock_s": 0.7,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 71.053125,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        }
+      ]
+    },
+    {
+      "boss_id": "BOS-DEM-001",
+      "suggested_arena_half_cm": {
+        "x": 1000,
+        "y": 450
+      },
+      "first_test_obstacle_count": 0,
+      "boss_body_xy_half_cm": {
+        "half_x_cm": 52,
+        "half_y_cm": 32
+      },
+      "boss_hurtbox_xy_half_cm": {
+        "half_x_cm": 52,
+        "half_y_cm": 32
+      },
+      "legal_front_contact_distance_cm": 70,
+      "shortest_negative_reach_cm": 74.8,
+      "open_ground_front_reach_margin_cm": 4.799999999999997,
+      "proposed_spawn": {
+        "boss_xy": [
+          0,
+          0
+        ],
+        "player_xy": [
+          -650,
+          0
+        ],
+        "D07_spawn_and_door_sweep_pending": true
+      },
+      "boss_as_wall_requires_free_side_route": true,
+      "unvalidated_not_a_finished_room": true,
+      "attacks": [
+        {
+          "attack_id": "BOS-DEM-001-A1",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 63,
+            "first_hit_minus_lock_s": 0.7,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 71.053125,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-DEM-001-A2",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 25,
+            "first_hit_minus_lock_s": 0.55,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 51.675000000000004,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-DEM-001-A3",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 31,
+            "first_hit_minus_lock_s": 0.575,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 54.904687499999994,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-DEM-001-A4",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 66,
+            "first_hit_minus_lock_s": 0.7,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 71.053125,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-DEM-001-A5",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 56,
+            "first_hit_minus_lock_s": 0.65,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 64.59375,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        }
+      ]
+    },
+    {
+      "boss_id": "BOS-GOB-001",
+      "suggested_arena_half_cm": {
+        "x": 1000,
+        "y": 450
+      },
+      "first_test_obstacle_count": 0,
+      "boss_body_xy_half_cm": {
+        "half_x_cm": 38,
+        "half_y_cm": 26
+      },
+      "boss_hurtbox_xy_half_cm": {
+        "half_x_cm": 38,
+        "half_y_cm": 26
+      },
+      "legal_front_contact_distance_cm": 56,
+      "shortest_negative_reach_cm": 74.8,
+      "open_ground_front_reach_margin_cm": 18.799999999999997,
+      "proposed_spawn": {
+        "boss_xy": [
+          0,
+          0
+        ],
+        "player_xy": [
+          -650,
+          0
+        ],
+        "D07_spawn_and_door_sweep_pending": true
+      },
+      "boss_as_wall_requires_free_side_route": true,
+      "unvalidated_not_a_finished_room": true,
+      "attacks": [
+        {
+          "attack_id": "BOS-GOB-001-A1",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 23,
+            "first_hit_minus_lock_s": 0.5,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 45.215624999999996,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-GOB-001-A2",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 29,
+            "first_hit_minus_lock_s": 0.55,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 51.675000000000004,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-GOB-001-A3",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 23,
+            "first_hit_minus_lock_s": 0.6,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 58.13437499999999,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        }
+      ]
+    },
+    {
+      "boss_id": "BOS-BST-001",
+      "suggested_arena_half_cm": {
+        "x": 1000,
+        "y": 450
+      },
+      "first_test_obstacle_count": 0,
+      "boss_body_xy_half_cm": {
+        "half_x_cm": 50,
+        "half_y_cm": 32
+      },
+      "boss_hurtbox_xy_half_cm": {
+        "half_x_cm": 50,
+        "half_y_cm": 32
+      },
+      "legal_front_contact_distance_cm": 68,
+      "shortest_negative_reach_cm": 74.8,
+      "open_ground_front_reach_margin_cm": 6.799999999999997,
+      "proposed_spawn": {
+        "boss_xy": [
+          0,
+          0
+        ],
+        "player_xy": [
+          -650,
+          0
+        ],
+        "D07_spawn_and_door_sweep_pending": true
+      },
+      "boss_as_wall_requires_free_side_route": true,
+      "unvalidated_not_a_finished_room": true,
+      "attacks": [
+        {
+          "attack_id": "BOS-BST-001-A1",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 31,
+            "first_hit_minus_lock_s": 0.5,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 45.215624999999996,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-BST-001-A2",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 71,
+            "first_hit_minus_lock_s": 0.75,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 77.5125,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        },
+        {
+          "attack_id": "BOS-BST-001-A3",
+          "open_ground_centerline_walk_probe": {
+            "needed_y_cm": 86,
+            "first_hit_minus_lock_s": 0.85,
+            "reaction_s": 0.15,
+            "stress_speed_cm_s": 129.1875,
+            "walk_cm_after_reaction": 90.43124999999999,
+            "extra_margin_cm": 1,
+            "strict_paper_condition": true
+          },
+          "D07_runtime_required": [
+            "lock_interior_left_right_top_bottom_and_each_corner",
+            "body_blocking_and_swept_contact",
+            "reachable_free_route_with_player_half_width16",
+            "camera_source_and_full_warning_visible",
+            "residual_projectile_plus_current_attack_union",
+            "cannot_change_damage_shape_to_make_navigation_pass"
+          ],
+          "geometry_verified_in_engine": false
+        }
+      ]
+    }
+  ]
+}

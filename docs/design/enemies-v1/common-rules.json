@@ -1,0 +1,232 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-13",
+  "source_event": "EV-023",
+  "module": "D-05",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "user_defined_families_and_two_stone_behaviors_assistant_proposed_details",
+  "families": {
+    "STN": 4,
+    "ELF": 3,
+    "TRE": 3,
+    "ROB": 3,
+    "SKL": 3,
+    "GOB": 3,
+    "MEC": 3,
+    "BST": 3,
+    "DEM": 3
+  },
+  "elite_per_family": 1,
+  "stats_proposed_ranges": {
+    "small_hp": [
+      40,
+      70
+    ],
+    "medium_hp": [
+      70,
+      120
+    ],
+    "large_hp": [
+      140,
+      200
+    ],
+    "armor": [
+      0,
+      60
+    ],
+    "ward": [
+      0,
+      50
+    ],
+    "poise": [
+      20,
+      90
+    ],
+    "walk_cm_s": [
+      160,
+      260
+    ]
+  },
+  "behavior": {
+    "default_sight_half_x_cm": 650,
+    "default_sight_half_y_cm": 250,
+    "requires_los": true,
+    "teleport_to_unreachable_player": false,
+    "leash_heals_or_resets_reward": false,
+    "scales_to_player_build_realtime": false,
+    "contact_damage": false,
+    "enemy_random_crit": false
+  },
+  "attack": {
+    "min_windup_s": 0.55,
+    "min_charge_or_projectile_windup_s": 0.75,
+    "aim_lock_fraction": 0.5,
+    "tracks_after_lock": false,
+    "cooldown_starts_at": "accepted_start",
+    "min_start_to_start_cooldown": "windup+active+recovery+0.30",
+    "interruption_refunds_cooldown": false,
+    "implicit_multihit": false,
+    "default_height_center_cm": 0,
+    "geometry_requires_exact_shape": true,
+    "enemy_uses_player_magazine_or_focus_rules": false,
+    "default_height_tolerance_cm": 65,
+    "explicit_per_attack_height_tolerance_overrides_default": true,
+    "melee_and_area_geometry": "target_ground_center_exact_shape_then_actual_height_and_los"
+  },
+  "charge": {
+    "continuous_collision_sweep": true,
+    "max_distance": "speed*active_time",
+    "stop_on_wall_body_or_valid_hit": true,
+    "per_attack_target_hit_limit": 1,
+    "min_miss_or_wall_recovery_s": 1.5,
+    "turn_or_teleport_to_reach_locked_target": false,
+    "same_time_order": "attack_geometry_height_invulnerability_then_body_stop; glancing_body_stop_may_deal_no_damage"
+  },
+  "projectile": {
+    "continuous_sweep": true,
+    "actual_emission_height": true,
+    "allied_body_blocks_without_friendly_damage": true,
+    "wall_or_first_blocking_body_stops": true,
+    "explicit_lob_can_cross_body_not_wall": true,
+    "lob_impact_has_independent_los": true,
+    "bound_to_room_ID": true,
+    "ignore_owner_body": true,
+    "hit_geometry": "continuous_projectile_vs_independent_hurtbox; target_center_still_must_pass_original_range_and_depth_hard_bounds",
+    "first_contact_order": "earliest_wall_or_body_contact; check_height_invulnerability_and_team_then_consume; allies_block_without_damage",
+    "geometry_profiles_file": "enemy-projectile-profiles.json",
+    "center_hard_bound_definition": "straight only: actual_emission_origin_and_locked_direction; x in [0,max_distance_cm]; abs(y-line_y)<=profile_fixed_corridor_half_y_cm; exact projectile_vs_hurtbox still required; allied bodies block even if not valid damage targets; lob impact uses own ellipse_height_LOS"
+  },
+  "dormancy": {
+    "counts_toward_room_clear": true,
+    "damage_and_status_immune": false,
+    "wakes_on_near_los_or_real_damage": true,
+    "min_wake_warning_s": 0.7,
+    "fallback_after_combat_s": 12,
+    "fallback_when_other_active_enemies_dead": true,
+    "min_wake_start_gap_s": 1,
+    "wake_spawns_new_ID_or_heals": false,
+    "decorative_statues_count_as_enemy": false
+  },
+  "flying": {
+    "suggested_hover_z_cm": 90,
+    "low_z_cm": 20,
+    "min_low_recovery_s": 1.8,
+    "every_attack_cycle_returns_low": true,
+    "elite_or_chapter_can_shorten_low_window": false,
+    "high_air_body_blocks_ground": false,
+    "low_landing_requires_reachable_nonoverlapping_point": true,
+    "damage_geometry_tracks_actual_actor_height": true,
+    "ground_body_enabled_at_or_below_z_cm": 40,
+    "pending_low_recovery": "accepted_attack_sets_flag; interruption_keeps_flag; clear_only_after_actual_legal_z20_arrival_and_1.8s; death_terminates"
+  },
+  "control": {
+    "poise_break_stun_s": 0.4,
+    "protection_s": 1,
+    "decay_delay_s": 1,
+    "decay_per_s": 20,
+    "normal_elites_use_boss_resistance": false,
+    "burn_dps_cap": 6,
+    "burn_duration_s": 3,
+    "slow_pct_cap": 25,
+    "slow_duration_s": 2,
+    "shock_flat_cap": 10,
+    "shock_target_icd_s": 2,
+    "push_pull_cm_cap": 40,
+    "automatic_race_element_immunity": false
+  },
+  "guard": {
+    "front_armor_bonus": 40,
+    "front_ward_bonus": 20,
+    "extra_percent_mitigation_layer": false,
+    "final_defense_cap": 150,
+    "final_mitigation_cap": 0.6,
+    "max_active_s": 0.9,
+    "min_open_recovery_s": 1.5,
+    "reflects_projectiles": false,
+    "requires_specific_random_weapon_to_beat": false,
+    "front_direct_hits_only": true,
+    "dot_uses_directional_guard_bonus": false
+  },
+  "support": {
+    "target_cap": 2,
+    "same_group_stacks": false,
+    "strongest_source_wins": true,
+    "source_death_removes_own_buff": true,
+    "can_shorten_attack_warning_or_speed_up_attack": false,
+    "infinite_heal_revive_or_summon": false,
+    "source_expiry_registry": true,
+    "weaker_sources_suppressed_not_deleted": true,
+    "canonical_groups": {
+      "normal_move_pct": "enemy_move_support",
+      "armor_and_ward_package": "enemy_guard_support"
+    },
+    "refresh_permission": "per_attack_definition; updating_one_source_does_not_refresh_other_sources",
+    "allied_target_condition_excludes_self_directional_guard": true
+  },
+  "elite_defaults": {
+    "hp_multiplier": 1.35,
+    "direct_damage_multiplier": 1.15,
+    "poise_bonus": 10,
+    "element_magnitude_scaled": false,
+    "telegraph_or_base_counter_window_shortened": false,
+    "body_size_silently_changed": false,
+    "requires_behavior_change": true
+  },
+  "encounter": {
+    "standard_actor_cap": 4,
+    "standard_threat_budget": 8,
+    "intro_actor_cap": 2,
+    "intro_budget": 4,
+    "role_cost": {
+      "small_melee": 1,
+      "medium_melee": 2,
+      "ranged": 2,
+      "support": 2,
+      "charger": 3,
+      "large": 4
+    },
+    "use_max_role_cost_then_add": {
+      "flying": 1,
+      "elite": 2
+    },
+    "roster_caps": {
+      "large": 1,
+      "charger": 1,
+      "flying": 1,
+      "support": 1,
+      "projectile_users": 2,
+      "elites": 1
+    },
+    "committed_windup_or_active_cap": 2,
+    "committed_charge_cap": 1,
+    "committed_projectile_cap": 1,
+    "committed_support_cap": 1,
+    "min_new_warning_gap_s": 0.3,
+    "recovery_releases_action_slot_but_remains_mandatory": true,
+    "budget_alone_proves_room_safe": false,
+    "capability_scan": "all_inherited_base_attacks_plus_elite_extra_or_override_attacks; do_not_use_primary_role_only",
+    "support_cap_includes_directional_guard": true,
+    "live_enemy_projectile_cap": 2,
+    "projectile_capacity_reservation": "reserve_whole_emission_group_on_accept; at_interrupt_death_action_end_release_all_unemitted_reservations_immediately; emitted_projectiles_keep_capacity_until_despawn; room_end_clears_all; no_partial_emission_or_deleting_old_projectiles"
+  },
+  "reward": {
+    "unique_death_key": [
+      "RunID",
+      "RoomInstanceID",
+      "SpawnID"
+    ],
+    "infinite_summon_defaults_reward_eligible": false,
+    "clearing_script_rewards": false,
+    "drop_amounts_prices_and_weights_complete": false
+  },
+  "future_dependencies": [
+    "D-06 Boss distinct rules",
+    "D-07 geometry_navigation_spawn_and_room_activation",
+    "D-08 drop_economy",
+    "D-10 enemy_factions_story",
+    "D-11/12 visible_warnings_art_animation_audio",
+    "D-13 AI_state_save_and_reward_idempotency",
+    "D-14 complete_difficulty_curve_and_playtest"
+  ]
+}

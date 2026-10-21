@@ -1,0 +1,805 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "module": "D-14",
+  "source_event": "EV-032",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposal_not_individually_user_approved",
+  "scope": "conditional_paper_walkthroughs_and_future_runtime_acceptance; no_full_game_simulation_or_playtest",
+  "mainline_checkpoints": [
+    {
+      "node_id": "REG-01-N01",
+      "region_id": "REG-01",
+      "completion_kind": "arrival_record",
+      "requires": [],
+      "encounter_id": null,
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-01-N02",
+      "region_id": "REG-01",
+      "completion_kind": "encounter_clear",
+      "requires": [
+        {
+          "node_id": "REG-01-N01",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": "ENC-REG-01-N02",
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-01-N03",
+      "region_id": "REG-01",
+      "completion_kind": "encounter_clear",
+      "requires": [
+        {
+          "node_id": "REG-01-N02",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": "ENC-REG-01-N03",
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-01-N04",
+      "region_id": "REG-01",
+      "completion_kind": "arrival_record",
+      "requires": [
+        {
+          "node_id": "REG-01-N03",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": null,
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-01-N05",
+      "region_id": "REG-01",
+      "completion_kind": "encounter_clear",
+      "requires": [
+        {
+          "node_id": "REG-01-N04",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": "ENC-REG-01-N05",
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-01-N06",
+      "region_id": "REG-01",
+      "completion_kind": "arrival_record",
+      "requires": [
+        {
+          "node_id": "REG-01-N05",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": null,
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-01-N07",
+      "region_id": "REG-01",
+      "completion_kind": "boss_success_transaction",
+      "requires": [
+        {
+          "node_id": "REG-01-N06",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": null,
+      "Boss_id": "BOS-STN-001",
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-02-N01",
+      "region_id": "REG-02",
+      "completion_kind": "arrival_record",
+      "requires": [],
+      "encounter_id": null,
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-02-N02",
+      "region_id": "REG-02",
+      "completion_kind": "encounter_clear",
+      "requires": [
+        {
+          "node_id": "REG-02-N01",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": "ENC-REG-02-N02",
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-02-N03",
+      "region_id": "REG-02",
+      "completion_kind": "encounter_clear",
+      "requires": [
+        {
+          "node_id": "REG-02-N02",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": "ENC-REG-02-N03",
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-02-N04",
+      "region_id": "REG-02",
+      "completion_kind": "arrival_record",
+      "requires": [
+        {
+          "node_id": "REG-02-N03",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": null,
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-02-N05",
+      "region_id": "REG-02",
+      "completion_kind": "encounter_clear",
+      "requires": [
+        {
+          "node_id": "REG-02-N04",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": "ENC-REG-02-N05",
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-02-N06",
+      "region_id": "REG-02",
+      "completion_kind": "arrival_record",
+      "requires": [
+        {
+          "node_id": "REG-02-N05",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": null,
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-02-N07",
+      "region_id": "REG-02",
+      "completion_kind": "boss_success_transaction",
+      "requires": [
+        {
+          "node_id": "REG-02-N06",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": null,
+      "Boss_id": "BOS-FOR-001",
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-03-N01",
+      "region_id": "REG-03",
+      "completion_kind": "arrival_record",
+      "requires": [],
+      "encounter_id": null,
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-03-N02",
+      "region_id": "REG-03",
+      "completion_kind": "encounter_clear",
+      "requires": [
+        {
+          "node_id": "REG-03-N01",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": "ENC-REG-03-N02",
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-03-N03",
+      "region_id": "REG-03",
+      "completion_kind": "encounter_clear",
+      "requires": [
+        {
+          "node_id": "REG-03-N02",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": "ENC-REG-03-N03",
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-03-N04",
+      "region_id": "REG-03",
+      "completion_kind": "arrival_record",
+      "requires": [
+        {
+          "node_id": "REG-03-N03",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": null,
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-03-N05",
+      "region_id": "REG-03",
+      "completion_kind": "encounter_clear",
+      "requires": [
+        {
+          "node_id": "REG-03-N04",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": "ENC-REG-03-N05",
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-03-N06",
+      "region_id": "REG-03",
+      "completion_kind": "arrival_record",
+      "requires": [
+        {
+          "node_id": "REG-03-N05",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": null,
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-03-N07",
+      "region_id": "REG-03",
+      "completion_kind": "boss_success_transaction",
+      "requires": [
+        {
+          "node_id": "REG-03-N06",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": null,
+      "Boss_id": "BOS-RIT-001",
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-04-N01",
+      "region_id": "REG-04",
+      "completion_kind": "arrival_record",
+      "requires": [],
+      "encounter_id": null,
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-04-N02",
+      "region_id": "REG-04",
+      "completion_kind": "encounter_clear",
+      "requires": [
+        {
+          "node_id": "REG-04-N01",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": "ENC-REG-04-N02",
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-04-N03",
+      "region_id": "REG-04",
+      "completion_kind": "encounter_clear",
+      "requires": [
+        {
+          "node_id": "REG-04-N02",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": "ENC-REG-04-N03",
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-04-N04",
+      "region_id": "REG-04",
+      "completion_kind": "arrival_record",
+      "requires": [
+        {
+          "node_id": "REG-04-N03",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": null,
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-04-N05",
+      "region_id": "REG-04",
+      "completion_kind": "encounter_clear",
+      "requires": [
+        {
+          "node_id": "REG-04-N04",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": "ENC-REG-04-N05",
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-04-N06",
+      "region_id": "REG-04",
+      "completion_kind": "arrival_record",
+      "requires": [
+        {
+          "node_id": "REG-04-N05",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": null,
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-04-N07",
+      "region_id": "REG-04",
+      "completion_kind": "boss_success_transaction",
+      "requires": [
+        {
+          "node_id": "REG-04-N06",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": null,
+      "Boss_id": "BOS-MEC-001",
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-05-N01",
+      "region_id": "REG-05",
+      "completion_kind": "arrival_record",
+      "requires": [],
+      "encounter_id": null,
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-05-N02",
+      "region_id": "REG-05",
+      "completion_kind": "encounter_clear",
+      "requires": [
+        {
+          "node_id": "REG-05-N01",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": "ENC-REG-05-N02",
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-05-N03",
+      "region_id": "REG-05",
+      "completion_kind": "encounter_clear",
+      "requires": [
+        {
+          "node_id": "REG-05-N02",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": "ENC-REG-05-N03",
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-05-N04",
+      "region_id": "REG-05",
+      "completion_kind": "arrival_record",
+      "requires": [
+        {
+          "node_id": "REG-05-N03",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": null,
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-05-N05",
+      "region_id": "REG-05",
+      "completion_kind": "encounter_clear",
+      "requires": [
+        {
+          "node_id": "REG-05-N04",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": "ENC-REG-05-N05",
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-05-N06",
+      "region_id": "REG-05",
+      "completion_kind": "arrival_record",
+      "requires": [
+        {
+          "node_id": "REG-05-N05",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": null,
+      "Boss_id": null,
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    },
+    {
+      "node_id": "REG-05-N07",
+      "region_id": "REG-05",
+      "completion_kind": "boss_success_transaction",
+      "requires": [
+        {
+          "node_id": "REG-05-N06",
+          "condition": "completed"
+        }
+      ],
+      "encounter_id": null,
+      "Boss_id": "BOS-DEM-001",
+      "outcome_condition": "only_after_real_node_completion_event; survival_and_combat_success_are_assumptions_not_simulated",
+      "required_gold_to_access_or_continue": 0,
+      "completion_still_required": true
+    }
+  ],
+  "conditional_end_to_end_flows": [
+    {
+      "id": "FLOW-01",
+      "name": "零天赋免费主路完整胜利纸面路径",
+      "profile": "legal_zero_talent_snapshot_no_research_required; deterministic_starter_SWD001_grade0_unenchanted_gold20_once",
+      "route": "35_mainline_checkpoints_in_order; no_optional_purchase_or_branch_required",
+      "steps": [
+        "commit_new_RunID_and_frozen_snapshot_once",
+        "enter_REG01N01; no_start_reward_replay",
+        "resolve15_authored_encounters_only_if_player_survives_real_D05_combat; inventory_and_gold_pickup_remain_optional",
+        "service_nodes_free_passage_even_at_zero_balance; prep_nodes_no_free_heal",
+        "qualified_mainline_Boss_success_M01..M04_commits_existing_awards_and_story_once; legal_chapter_transition_only_once",
+        "qualified_final_Boss_success_with_player_alive_commits_M05_world_liberated_and_original_permanent_awards_then_terminal_result",
+        "display_already_banked_rewards; active_run_null_only_after_terminal_bundle; hub_mutations_now_allowed",
+        "next_RunID_starts_from_first_region_with_new_frozen_snapshot_and_no_old_inventory_gold"
+      ],
+      "assertions": [
+        "no_talent_or_specific_drop_or_paid_entry_is_route_gate",
+        "survival_is_not_proved_by_route_connectivity",
+        "zero_gold_route_does_not_mean_free_facilities",
+        "same_point_double_death_uses_FLOW05_instead"
+      ],
+      "runtime_tested": false
+    },
+    {
+      "id": "FLOW-02",
+      "name": "研究样品已买后第三章死亡",
+      "profile": "valid_researched_selected_sample_snapshot; enough_original_gold_at_bound_offer; not_the_zero_research_FLOW01_profile",
+      "steps": [
+        "same_first_qualifying_N04_offer_binding",
+        "commit_cash_cost_item_delivery_sold_stock_and_permanent_sample_purchased_once",
+        "commit_M01_M02_and_earned_shards_only_after_actual_success_or_pickup",
+        "die_at_REG03N05_after_all_same_time_damage; no_future_rewards_or_postmortem_healing",
+        "terminal_bundle_discards_run_gold_equipment_temporary_states_but_keeps_already_banked_shards_M01_M02_and_sample_flag",
+        "hub_can_spend_only_actual_balance; same_sample_repurchase_forbidden; new_run_no_previous_item"
+      ],
+      "assertions": [
+        "item_discard_or_death_is_not_sample_refund",
+        "unpicked_ground_shards_not_permanent_income",
+        "not_a_failure_earnings_rate_or_guaranteed_growth_time"
+      ],
+      "runtime_tested": false
+    },
+    {
+      "id": "FLOW-03",
+      "name": "主动结束与保存退出分开",
+      "steps": [
+        "pause_run; viewing_hub_does_not_release_active_run",
+        "save_and_exit_keeps_same_RunID_and_hub_purchase_lock",
+        "explicit_abandon_confirmation_includes_lost_run_gold_inventory_and_unclaimed_loot",
+        "commit_one_terminal_abandon_result_preserving_only_previously_earned_permanent_facts_no_new_Boss_or_clear_awards",
+        "same_abandon_OperationID_retry_returns_existing_result"
+      ],
+      "assertions": [
+        "menu_navigation_is_not_abandon",
+        "no_gold_to_shard_conversion",
+        "abandon_not_free_heal_teleport_back_to_same_run"
+      ],
+      "runtime_tested": false
+    },
+    {
+      "id": "FLOW-04",
+      "name": "深入触发未接纳时保存继续",
+      "steps": [
+        "in_N05_cross_.7_depth_while_prior_group_not_terminal; latch_trigger_once",
+        "future_G3_remains_obligation_without_invisible_enemy_or_budget_until_whole_group_admission",
+        "save_latest_complete_same_root_with_latch_dependencies_statuses_DOT_old_projectile_and_RNG",
+        "restore_in_pause_same_run; clear_held_inputs; no_offline_clock_progress",
+        "after_prior_groups_true_death_and_breather_eligibility_reserve_whole_G3_with_original_SlotIDs",
+        "full_warning_then_revalidate_anchor; fail_retry_same_identity_not_new_reward",
+        "all_obligations_terminal_then_room_clear; full_safety_still_checks_old_projectiles_and_DOT"
+      ],
+      "assertions": [
+        "no_retrigger_to_get_second_batch",
+        "no_room_clear_while_unadmitted_required_G3_exists",
+        "continuing_not_D07_fault_repair"
+      ],
+      "runtime_tested": false
+    },
+    {
+      "id": "FLOW-05",
+      "name": "终Boss与玩家同点死亡",
+      "steps": [
+        "resolve_all_same_time_damage_before_any_heal_or_success",
+        "player_death_terminal_wins; no_M05_world_liberated_or_current_final_Boss_award",
+        "persist_failure_same_generation_account_and_run; previous_legitimate_progress_kept",
+        "present_failure; no_delayed_old_projectile_new_awards_after_run_end",
+        "resume_or_retry_terminal_request_returns_failure_not_new_success"
+      ],
+      "assertions": [
+        "Boss_death_animation_is_not_success",
+        "read_text_or_play_victory_music_cannot_change_facts",
+        "no_lifesteal_revive"
+      ],
+      "runtime_tested": false
+    },
+    {
+      "id": "FLOW-06",
+      "name": "坏档或保存失败不绕过成长锁",
+      "steps": [
+        "required_save_fails_or_latest_published_bundle_corrupt",
+        "keep_RECOVERY_REQUIRED_or_SAVE_FAILED_TECHNICAL_PAUSE_with_unfinished_claim",
+        "retry_same_candidate_only_after_marker_check; no_new_random_result_or_payload_sameID",
+        "verified_whole_backup_recovery_only_with_explicit_time_and_permanent_progress_loss; never_new_account_old_room_mix",
+        "if_run_unrecoverable_follow_explicit_D13_terminal_resolution_preserve_only_verified_permanent_progress",
+        "only_after_resolved_terminal_and_active_run_null_may_hub_edit_or_new_Run"
+      ],
+      "assertions": [
+        "unknown_new_rules_not_silent_downgrade",
+        "no_guess_paid_receipts_or_zero_overwrite",
+        "no_claim_zero_loss_under_storage_failure"
+      ],
+      "runtime_tested": false
+    }
+  ],
+  "future_acceptance": [
+    {
+      "id": "INT-01",
+      "scenario": "all33weapons_x7Bosses",
+      "expected": "legal_hit_distance_and_depth_actual_collision_and_escape_under_reach_speed_bounds; .8cm_front_margin_is_priority",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-02",
+      "scenario": "low_HP60_plus_vulnerability_and_ordinary_chapter5_damage",
+      "expected": "verify_readable_danger_and_failure_causes_without_claiming_every_bad_build_has_same_difficulty",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-03",
+      "scenario": "zero_partial_full_talents_same_validated_layouts",
+      "expected": "route_requires_no_talent; compare_attempts_costs_and_actual_time_without_inventing_participant_results",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-04",
+      "scenario": "33weapons_x12armor_x2facings",
+      "expected": "grip_source_owner_stats_and_silhouette_correct; layers_no_collision_growth",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-05",
+      "scenario": "staff_spam_or_full_empty_magazine",
+      "expected": "actual_resource_reservation_emission_regen_wait_reload_and_interrupt_no_extra_damage_or_refunds",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-06",
+      "scenario": "SGNnear_middle_far_targets",
+      "expected": "aggregate_per_actual_pellet_hit_with_same_AttackID; no_nominal_all_pellets_at_max_range_assumption",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-07",
+      "scenario": "stone_knight_and_bat",
+      "expected": "actual_lock_recovery_or_legal_low_Z_obligation_complete_even_after_interruption",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-08",
+      "scenario": "all15mainline_deck_scenes",
+      "expected": "roster_and_all_attack_action_caps_old_bullets_depth_latches_spawn_distances_camera_paths_and_no_required_trigger_behind_clear_gate",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-09",
+      "scenario": "ordinary_death_and_pending_wave",
+      "expected": "old_projectile_capacity_retained_and_required_future_prevents_false_clear",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-10",
+      "scenario": "zero_gold_and_no_random_armor_run",
+      "expected": "free_main_route_and_explicit_conditional_gear_budget; no_forced_purchase_or_fake_armor_grant",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-11",
+      "scenario": "healing_output_larger_than_missing_HP_or_dead_player",
+      "expected": "source_remaining_budget_and_actual_heal_only_no_stored_overheal_or_revive",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-12",
+      "scenario": "same_random_source_differentOperationID_or_save_retry",
+      "expected": "one_result_and_source_consume; no_free_reroll_or_extra_earned_shards",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-13",
+      "scenario": "sample_cross_scope_purchase_then_death",
+      "expected": "account_flag_and_run_item_gold_stock_same_bundle_no_refund_or_rebuy",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-14",
+      "scenario": "talent_reset_price_version_migration",
+      "expected": "actual_paid_unrefunded_receipts_only_and_earned_shards_conserved",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-15",
+      "scenario": "UIconfirm_device_switch_rebind_pause_equip",
+      "expected": "no_input_piercing_free_equip_time_or_new_world_action_before_inventory_publication",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-16",
+      "scenario": "mute_gray_high_contrast_no_shake_lowFX",
+      "expected": "all_real_damage_and_spawn_warnings_readable_without_revealing_future_enemies",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-17",
+      "scenario": "local_hit_accent_and_low_render_rate",
+      "expected": "source_damage_DOT_CD_emissions_continue_no_stale_new_attack_replay",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-18",
+      "scenario": "save_during_Boss_phase_DOT_air_attack_projectiles",
+      "expected": "exact_same_clock_cursor_and_locks_no_offline_growth_or_world_reset",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-19",
+      "scenario": "cross_chapter_transition_once",
+      "expected": "ordinary_attack_cleanup_and_legal_recovery_receipt_once_player_statuses_preserved",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-20",
+      "scenario": "legal_success_vs_final_doubledeath_and_optional_story",
+      "expected": "correct_permanent_fact_award_and_single_normal_ending_without_optional_gate",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-21",
+      "scenario": "first_slice_end_after_REG01Boss",
+      "expected": "real_cross_chapter_to_REG02N01_shell_then_development_scope_pause; no_full_game_win_or_second_chapter_award",
+      "runtime_tested": false
+    },
+    {
+      "id": "INT-22",
+      "scenario": "save_IO_asset_size_and_frame_pacing",
+      "expected": "measure_target_device_actual_latency_memory_FPS_load_and_long_session_stability; no_paper_performance_claim",
+      "runtime_tested": false
+    }
+  ],
+  "source_refs": [
+    "../dungeon-v1/regions-and-routes.json",
+    "../inventory-v1/inventory-rules.json",
+    "../progression-v1/hub-rules.json",
+    "../narrative-v1/story-flow.json",
+    "../save-data-v1/save-rules.json"
+  ],
+  "no_empirical_completion_rate_clear_time_or_budget_claim": true
+}

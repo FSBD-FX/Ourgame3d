@@ -1,0 +1,92 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "符朔八道",
+			"instance": "12F42A0549AD2C93AC7344935D0ACDBD",
+			"instanceName": "符朔八道-52988",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (24H2) [10.0.26100.4946] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 3060 Laptop GPU",
+			"cPUModel": "12th Gen Intel(R) Core(TM) i7-12700H",
+			"rAMInGB": 16,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.10.14-14.22.19",
+	"succeeded": 0,
+	"succeededWithWarnings": 0,
+	"failed": 1,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.049531098455190659,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "HitAndPickupCannotSkipRecovery",
+			"fullTestPath": "CodexDungeon.Content.HitAndPickupCannotSkipRecovery",
+			"state": "Fail",
+			"deviceInstance": [
+				"12F42A0549AD2C93AC7344935D0ACDBD"
+			],
+			"duration": 0.049531098455190659,
+			"dateTime": "2026.10.14-14.22.19",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "LogStreaming: FlushAsyncLoading(334): 1 QueuedPackages, 0 AsyncPackages",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.14-14.22.19"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'A nonbreaking hit preserves full attack action' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonGameplayTests.cpp",
+					"lineNumber": 159,
+					"timestamp": "2026.10.14-14.22.19"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Active primary cannot consume weapon pickup' to be false.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonGameplayTests.cpp",
+					"lineNumber": 163,
+					"timestamp": "2026.10.14-14.22.19"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Active primary retains its weapon: The two values are not equal.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonGameplayTests.cpp",
+					"lineNumber": 163,
+					"timestamp": "2026.10.14-14.22.19"
+				}
+			],
+			"warnings": 0,
+			"errors": 3,
+			"artifacts": []
+		}
+	]
+}

@@ -1,0 +1,308 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "符朔八道",
+			"instance": "F1993C3D4451808189A5A385975BEE6B",
+			"instanceName": "符朔八道-51160",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (24H2) [10.0.26100.4946] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 3060 Laptop GPU",
+			"cPUModel": "12th Gen Intel(R) Core(TM) i7-12700H",
+			"rAMInGB": 16,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.10.14-15.16.33",
+	"succeeded": 0,
+	"succeededWithWarnings": 0,
+	"failed": 1,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.071667894721031189,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "ArmorSwapAndStats",
+			"fullTestPath": "CodexDungeon.Content.ArmorSwapAndStats",
+			"state": "Fail",
+			"deviceInstance": [
+				"F1993C3D4451808189A5A385975BEE6B"
+			],
+			"duration": 0.071667894721031189,
+			"dateTime": "2026.10.14-15.16.33",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'QA inventory adapter can request light armor' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 16,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Armor change cannot overlap an attack' to be 0.000000, but it was 0.600000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 21,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "LogStreaming: FlushAsyncLoading(334): 1 QueuedPackages, 0 AsyncPackages",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Armor commits only after full half second: The two values are not equal.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 22,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Light armor actual movement is 286.2' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 24,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Actual movement uses equipped armor' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 25,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Armor14 mitigates 11.4 physical damage to 10' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 28,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Heavy armor change begins' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 29,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Real damage cancels uncommitted armor swap: The two values are not equal.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 33,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Armor change accepted while idle' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 41,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Armor poise profile applied' to be 40.000000, but it was 30.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 44,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Armor ward profile applied' to be 18.000000, but it was 0.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 40,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Armor change accepted while idle' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 41,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Armor movement profile applied' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 43,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Armor poise profile applied' to be 70.000000, but it was 30.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 44,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Armor ward profile applied' to be 12.000000, but it was 0.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 40,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Armor change accepted while idle' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 41,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Armor ward profile applied' to be 50.000000, but it was 0.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 46,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Actual focus consumption accepted' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 48,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Actual focus is deducted' to be 50.000000, but it was 100.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 49,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Robe does not bypass one second regen delay' to be 50.000000, but it was 100.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 51,
+					"timestamp": "2026.10.14-15.16.33"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Robe regenerates16/s, replacing12/s' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorTests.cpp",
+					"lineNumber": 53,
+					"timestamp": "2026.10.14-15.16.33"
+				}
+			],
+			"warnings": 0,
+			"errors": 21,
+			"artifacts": []
+		}
+	]
+}

@@ -1,0 +1,92 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "符朔八道",
+			"instance": "CB5D6F194BCA209FC83D56BA82C203E7",
+			"instanceName": "符朔八道-20744",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (24H2) [10.0.26100.4946] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 3060 Laptop GPU",
+			"cPUModel": "12th Gen Intel(R) Core(TM) i7-12700H",
+			"rAMInGB": 16,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.10.14-14.14.21",
+	"succeeded": 0,
+	"succeededWithWarnings": 0,
+	"failed": 1,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.056427199393510818,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "SpearNearestAndDedup",
+			"fullTestPath": "CodexDungeon.Content.SpearNearestAndDedup",
+			"state": "Fail",
+			"deviceInstance": [
+				"CB5D6F194BCA209FC83D56BA82C203E7"
+			],
+			"duration": 0.056427199393510818,
+			"dateTime": "2026.10.14-14.14.21",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "LogStreaming: FlushAsyncLoading(334): 1 QueuedPackages, 0 AsyncPackages",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.14-14.14.21"
+				},
+				{
+					"event":
+					{
+						"type": "Warning",
+						"message": "LogStreaming: LoadPackage: SkipPackage: /Game/Production/FirstBatch/v001/Audio/SW_AUD_SPR_WHOOSH_01_v001 (0x3A21E86CA5623F0F) - The package to load does not exist on disk or in the loader",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.14-14.14.21"
+				},
+				{
+					"event":
+					{
+						"type": "Warning",
+						"message": "LogUObjectGlobals: 寻找对象“SoundBase /Game/Production/FirstBatch/v001/Audio/SW_AUD_SPR_WHOOSH_01_v001.SW_AUD_SPR_WHOOSH_01_v001”失败",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.14-14.14.21"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Spear does not pierce a second target' to be 100.000000, but it was 79.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonGameplayTests.cpp",
+					"lineNumber": 138,
+					"timestamp": "2026.10.14-14.14.21"
+				}
+			],
+			"warnings": 2,
+			"errors": 1,
+			"artifacts": []
+		}
+	]
+}

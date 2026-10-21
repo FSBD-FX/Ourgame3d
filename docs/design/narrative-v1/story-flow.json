@@ -1,0 +1,380 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "source_event": "EV-028",
+  "module": "D-10",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "all_story_names_cast_dialogue_structure_and_presentation_are_assistant_proposals_not_individual_user_approvals",
+  "world_ref": "world-and-story.json",
+  "state_domains": {
+    "account": [
+      "story_fact_ids",
+      "boss_first_success_keys_D08",
+      "discovery_keys_D08",
+      "world_liberated",
+      "first_ending_receipt",
+      "ending_run_receipts",
+      "presentation_seen_ids"
+    ],
+    "run": [
+      "run_mainline_success_BossIDs",
+      "run_optional_success_BossIDs",
+      "narrative_context",
+      "pending_story_presentation_ids",
+      "current_dialogue_cursor",
+      "reward_commit_keys_D08"
+    ],
+    "separation": "facts_are_not_read_flags; account_facts_do_not_complete_new_run_nodes; seen_flags_do_not_award_or_change_world"
+  },
+  "prologue": {
+    "id": "STORY-P00",
+    "availability": "initial_hub_story_entry; free and skippable; not prerequisite to services or new run",
+    "text": "城里还有人想出来。我们会守着灯，你去找出是谁把城门锁成了誓言。",
+    "new_reward": false
+  },
+  "main_facts": [
+    {
+      "id": "STORY-M01",
+      "region_id": "REG-01",
+      "node_id": "REG-01-N07",
+      "boss_id": "BOS-STN-001",
+      "title": "城门朝向",
+      "journal_text": "城卫执行的不是拒敌令，而是不许居民离城的留城令。",
+      "event": "existing_qualifying_Boss_success_commit",
+      "event_key": [
+        "RunID",
+        "RoomInstanceID",
+        "BossSpawnID"
+      ],
+      "account_scope": "add_once_union_preserved_on_death",
+      "run_scope": "commit_only_this_run_Boss_success",
+      "requires_dialogue_or_collectible": false,
+      "required_currency": 0,
+      "reward_owner": "D08_existing_Boss_sources_only",
+      "success_event_key_owner": "D06 common-rules.json settlement.key; no parallel story event key"
+    },
+    {
+      "id": "STORY-M02",
+      "region_id": "REG-02",
+      "node_id": "REG-02-N07",
+      "boss_id": "BOS-FOR-001",
+      "title": "未归还的林契",
+      "journal_text": "林庭的供养承诺本有结束与返还条款，灾后征用却仍在继续。",
+      "event": "existing_qualifying_Boss_success_commit",
+      "event_key": [
+        "RunID",
+        "RoomInstanceID",
+        "BossSpawnID"
+      ],
+      "account_scope": "add_once_union_preserved_on_death",
+      "run_scope": "commit_only_this_run_Boss_success",
+      "requires_dialogue_or_collectible": false,
+      "required_currency": 0,
+      "reward_owner": "D08_existing_Boss_sources_only",
+      "success_event_key_owner": "D06 common-rules.json settlement.key; no parallel story event key"
+    },
+    {
+      "id": "STORY-M03",
+      "region_id": "REG-03",
+      "node_id": "REG-03-N07",
+      "boss_id": "BOS-RIT-001",
+      "title": "名字与役额",
+      "journal_text": "祭仪把逝者姓名改写成可以无限续用的役额，安息也被延期。",
+      "event": "existing_qualifying_Boss_success_commit",
+      "event_key": [
+        "RunID",
+        "RoomInstanceID",
+        "BossSpawnID"
+      ],
+      "account_scope": "add_once_union_preserved_on_death",
+      "run_scope": "commit_only_this_run_Boss_success",
+      "requires_dialogue_or_collectible": false,
+      "required_currency": 0,
+      "reward_owner": "D08_existing_Boss_sources_only",
+      "success_event_key_owner": "D06 common-rules.json settlement.key; no parallel story event key"
+    },
+    {
+      "id": "STORY-M04",
+      "region_id": "REG-04",
+      "node_id": "REG-04-N07",
+      "boss_id": "BOS-MEC-001",
+      "title": "仍在续签",
+      "journal_text": "灾后工造记录仍有主动续签与重发，封城不是无人负责的故障。",
+      "event": "existing_qualifying_Boss_success_commit",
+      "event_key": [
+        "RunID",
+        "RoomInstanceID",
+        "BossSpawnID"
+      ],
+      "account_scope": "add_once_union_preserved_on_death",
+      "run_scope": "commit_only_this_run_Boss_success",
+      "requires_dialogue_or_collectible": false,
+      "required_currency": 0,
+      "reward_owner": "D08_existing_Boss_sources_only",
+      "success_event_key_owner": "D06 common-rules.json settlement.key; no parallel story event key"
+    },
+    {
+      "id": "STORY-M05",
+      "region_id": "REG-05",
+      "node_id": "REG-05-N07",
+      "boss_id": "BOS-DEM-001",
+      "title": "开门以后",
+      "journal_text": "维持强留的誓约已解除，居民终于能够自己选择留下或离开。",
+      "event": "existing_qualifying_Boss_success_commit",
+      "event_key": [
+        "RunID",
+        "RoomInstanceID",
+        "BossSpawnID"
+      ],
+      "account_scope": "add_once_union_preserved_on_death",
+      "run_scope": "commit_only_this_run_Boss_success",
+      "requires_dialogue_or_collectible": false,
+      "required_currency": 0,
+      "reward_owner": "D08_existing_Boss_sources_only",
+      "success_event_key_owner": "D06 common-rules.json settlement.key; no parallel story event key"
+    }
+  ],
+  "side_facts": [
+    {
+      "id": "STORY-S01",
+      "node_id": "REG-01-H01",
+      "discovery_id": "DISC-REG-01-H01-CORE",
+      "reward_source_id": "RWD-DISCOVERY-REG-01-H01",
+      "title": "赌王的旧账",
+      "event": "existing_actual_discovery_point_interaction_commit",
+      "interaction_seconds": 0.25,
+      "requires": [
+        "alive",
+        "run_active",
+        "grounded_idle",
+        "full_D04_safety",
+        "actual_ground_reachable_point",
+        "complete_interaction"
+      ],
+      "entry_fee_or_arrival_or_map_reveal_or_Boss_kill_is_discovery": false,
+      "account_scope": "same_discovery_event_union_once",
+      "additional_shards": 0,
+      "required_for_mainline_or_normal_ending": false,
+      "optional_ending_insert": "那张旧账没有让欠账者更有钱，却第一次让他们知道，可以不再签下一页。"
+    },
+    {
+      "id": "STORY-S02",
+      "node_id": "REG-02-H01",
+      "discovery_id": "DISC-REG-02-H01-CORE",
+      "reward_source_id": "RWD-DISCOVERY-REG-02-H01",
+      "title": "根下的足迹",
+      "event": "existing_actual_discovery_point_interaction_commit",
+      "interaction_seconds": 0.25,
+      "requires": [
+        "alive",
+        "run_active",
+        "grounded_idle",
+        "full_D04_safety",
+        "actual_ground_reachable_point",
+        "complete_interaction"
+      ],
+      "entry_fee_or_arrival_or_map_reveal_or_Boss_kill_is_discovery": false,
+      "account_scope": "same_discovery_event_union_once",
+      "additional_shards": 0,
+      "required_for_mainline_or_normal_ending": false,
+      "optional_ending_insert": "树根间出现了向林外延伸的足迹。没有人再把整个巢穴写成城里的财产。"
+    },
+    {
+      "id": "STORY-S03",
+      "node_id": "REG-03-H01",
+      "discovery_id": "DISC-REG-03-H01-CORE",
+      "reward_source_id": "RWD-DISCOVERY-REG-03-H01",
+      "title": "无名者的名字",
+      "event": "existing_actual_discovery_point_interaction_commit",
+      "interaction_seconds": 0.25,
+      "requires": [
+        "alive",
+        "run_active",
+        "grounded_idle",
+        "full_D04_safety",
+        "actual_ground_reachable_point",
+        "complete_interaction"
+      ],
+      "entry_fee_or_arrival_or_map_reveal_or_Boss_kill_is_discovery": false,
+      "account_scope": "same_discovery_event_union_once",
+      "additional_shards": 0,
+      "required_for_mainline_or_normal_ending": false,
+      "optional_ending_insert": "旧祭室的名字重新被念出。空出的不是新的役额，是一段终于结束的服役。"
+    },
+    {
+      "id": "STORY-S04",
+      "node_id": "REG-04-H01",
+      "discovery_id": "DISC-REG-04-H01-CORE",
+      "reward_source_id": "RWD-DISCOVERY-REG-04-H01",
+      "title": "未交出的工具",
+      "event": "existing_actual_discovery_point_interaction_commit",
+      "interaction_seconds": 0.25,
+      "requires": [
+        "alive",
+        "run_active",
+        "grounded_idle",
+        "full_D04_safety",
+        "actual_ground_reachable_point",
+        "complete_interaction"
+      ],
+      "entry_fee_or_arrival_or_map_reveal_or_Boss_kill_is_discovery": false,
+      "account_scope": "same_discovery_event_union_once",
+      "additional_shards": 0,
+      "required_for_mainline_or_normal_ending": false,
+      "optional_ending_insert": "封存的工具被搬上工作台。工匠开始自己决定，下一件东西要造来做什么。"
+    },
+    {
+      "id": "STORY-S05",
+      "node_id": "REG-05-H01",
+      "discovery_id": "DISC-REG-05-H01-CORE",
+      "reward_source_id": "RWD-DISCOVERY-REG-05-H01",
+      "title": "第一盏熄灯",
+      "event": "existing_actual_discovery_point_interaction_commit",
+      "interaction_seconds": 0.25,
+      "requires": [
+        "alive",
+        "run_active",
+        "grounded_idle",
+        "full_D04_safety",
+        "actual_ground_reachable_point",
+        "complete_interaction"
+      ],
+      "entry_fee_or_arrival_or_map_reveal_or_Boss_kill_is_discovery": false,
+      "account_scope": "same_discovery_event_union_once",
+      "additional_shards": 0,
+      "required_for_mainline_or_normal_ending": false,
+      "optional_ending_insert": "那盏早该熄下的灯终于暗了。留下的人点起新灯，这一次没有人替他们立誓。"
+    }
+  ],
+  "optional_boss_facts": [
+    {
+      "id": "STORY-O01",
+      "boss_id": "BOS-GOB-001",
+      "node_id": "REG-01-H01",
+      "text": "金牙赌王的本次战斗已结束；密窟里的发现物还需实际交互。",
+      "event": "existing_qualifying_Boss_success_commit",
+      "event_key": [
+        "RunID",
+        "RoomInstanceID",
+        "BossSpawnID"
+      ],
+      "account_scope": "add_once_union",
+      "requires_dialogue_or_discovery": false,
+      "additional_reward": false,
+      "reward_owner": "D08_existing_optional_Boss_sources_only"
+    },
+    {
+      "id": "STORY-O02",
+      "boss_id": "BOS-BST-001",
+      "node_id": "REG-02-H01",
+      "text": "裂鬃兽王的本次战斗已结束；兽穴里的发现物还需实际交互。",
+      "event": "existing_qualifying_Boss_success_commit",
+      "event_key": [
+        "RunID",
+        "RoomInstanceID",
+        "BossSpawnID"
+      ],
+      "account_scope": "add_once_union",
+      "requires_dialogue_or_discovery": false,
+      "additional_reward": false,
+      "reward_owner": "D08_existing_optional_Boss_sources_only"
+    }
+  ],
+  "success_pipeline": [
+    "settle_all_same_timestamp_damage_and_deaths_D06",
+    "if_player_dead_reject_Boss_success_story_and_ending; earlier_committed_facts_remain",
+    "commit_existing_Boss_success_rewards_and_story_fact_once",
+    "final_Boss_also_commit_world_liberated_and_ending_receipt_before_screen",
+    "cleanup_successful_Boss_owned_damage_D06",
+    "queue_presentation; do_not_wait_for_dialogue_to_complete_success"
+  ],
+  "fact_transaction": {
+    "damage_before_discovery_commit": true,
+    "reward_and_story_same_logical_event": true,
+    "repeat_existing_event": "return original receipt; no new reward or duplicate fact",
+    "skipping_or_viewing": "only presentation_seen/cursor; cannot mutate fact/wallet/loot/CD/room/OfferID",
+    "missing_presentation_after_commit": "recover pending journal/ending receipt, not a new success",
+    "untrusted_or_missing_success_evidence": "do_not_infer_from_dialogue_seen_or_location; D13 recovery decision",
+    "legacy_projection": "trusted D08/D06 account Boss success/discovery records may backfill mapped story facts without recrediting rewards. Trusted final Boss success additionally sets STORY-M05 and world_liberated together; unknown historical ending/side snapshot remains unknown, never synthesized as a first ending receipt.",
+    "liberation_consistency": "STORY-M05 and world_liberated must agree after projection; mismatch with trusted success records enters RECOVERY_REQUIRED until D13 reconciliation, never silently reclose city or start live expedition."
+  },
+  "presentation": {
+    "camp": "free optional journal and NPC reactions; services never blocked by unread lines",
+    "in_run_modal": "player initiated only when full D04 safety, same existing pause clock, closes if invalid; no cleanse/refill",
+    "nonmodal": "brief unobtrusive objective, no input capture, no simulation pause or enemy timing shift",
+    "Boss_intro_or_phase": "D06 introduction1.5s and phase1.2s protected tell times remain; dialogue skip does not skip gameplay tells",
+    "priority": [
+      "death_or_terminal_result",
+      "optional_ending_screen_if_final_success",
+      "latest_main_story_notice",
+      "player_requested_service_or_journal"
+    ],
+    "NPC_reaction_selection": "world_liberated then highest committed M01..04 then initial; optional per-topic facts available in journal; do not force chronological backlog",
+    "repeated_failure": "acknowledge furthest confirmed progress; no new accusation or punishment for failure count",
+    "exact_timing_layout_and_accessibility": "D11/D12; no reading-speed promise"
+  },
+  "new_run_context": {
+    "snapshot_at": "D09 atomic new_run creation",
+    "value_before_world_liberated": "live_expedition",
+    "value_after_world_liberated": "recorded_echo_expedition",
+    "immutable_for_same_RunID": true,
+    "continue_is_not_new_run": true,
+    "hub_while_suspended": "view-only progression per D09; story fiction never unlocks purchases/reset or another run",
+    "historical_lines_in_echo": "label historical reconstruction; never retract real liberation or repeat first rewards"
+  },
+  "ending": {
+    "id": "END-OPEN-GATE",
+    "name": "开门以后",
+    "condition": "current_run_BOS-DEM-001_qualifying_success_committed_and_player_alive_after_same_timestamp_damage",
+    "requires_hidden_facts": [],
+    "requires_optional_Bosses": [],
+    "requires_talent_ranks": 0,
+    "requires_research_count": 0,
+    "requires_gold": 0,
+    "normal_ending_count": 1,
+    "condition_is_current_run_not_account_M05": true,
+    "automatic_before_run_end": true,
+    "extra_reward": false,
+    "fact": "world_liberated=true; STORY-M05 union; remains_true_during_future_echoes",
+    "base_panels": [
+      "最后的誓印熄灭时，城墙没有倒下。",
+      "第一个走出城门的人停了很久。守卫没有再举起武器。他回头招了招手，后面的人才慢慢跟上。",
+      "也有人搬回桌椅，把店门重新撑起来。他们说要留下。这一次，名册没有替他们回答。",
+      "营地的灯还亮着。岑灯翻到空白的一页，没有写“全员留城”。她写下：“今日，城门已开。”"
+    ],
+    "insert_selection": "at_this_success_commit snapshot already_known_account STORY-S01..05 in fixed order; optional texts only",
+    "missing_insert": "omit_without_bad_ending_or_new_victim_consequence",
+    "receipt_fields": [
+      "RunID",
+      "EndingID",
+      "narrative_context",
+      "story_version",
+      "snapshot_side_fact_ids",
+      "success_event_key"
+    ],
+    "first_receipt": "set_once; retain historical snapshot",
+    "later_receipts": "one per successful echo RunID may include newly acquired side facts; never rewrite first receipt or regrant first rewards",
+    "skipping": "display can close immediately after commit; return summary, journal allows replay; no stat/time/award effects",
+    "success_event_key_fields": [
+      "RunID",
+      "RoomInstanceID",
+      "BossSpawnID"
+    ]
+  },
+  "no_new_quest_system": {
+    "mandatory_item_handins": 0,
+    "affinity_scores": 0,
+    "rescue_locks": 0,
+    "escorts": 0,
+    "new_achievement_rewards": 0,
+    "world_failure_timers": 0
+  },
+  "future_validation": [
+    "D11 skip/review/UI without unread gate",
+    "D12 dialogue and tells readable together",
+    "D13 story/reward/ending journal atomic persistence and old-save migration",
+    "D14 full free route reaches base ending independent of optional purchases"
+  ]
+}

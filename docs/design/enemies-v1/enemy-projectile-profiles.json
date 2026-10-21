@@ -1,0 +1,308 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-13",
+  "source_event": "EV-023",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposed_enemy_outgoing_projectile_geometry; existing_player_weapons_unchanged",
+  "profiles": [
+    {
+      "attack_id": "ENM-STN-004-A1",
+      "kind": "straight",
+      "origin": "each_actual_emission_muzzle_xy_z_plus_explicit_line_offset",
+      "axis": "locked_facing_x_no_y_tracking",
+      "center_hard_x_cm": [
+        0,
+        650
+      ],
+      "fixed_corridor_half_y_cm": 22,
+      "corridor_initial_rationale": "projectile_half_y_plus_reference_player_hurtbox_half_y16; fixed_per_attack_not_scaled_for_target",
+      "line_y_offsets_cm": [
+        0
+      ],
+      "projectile_half_y_cm": 6,
+      "exact_hit_geometry": "continuous_projectile_vs_independent_target_hurtbox; center_range_and_corridor_gate_do_not_replace_sweep",
+      "first_contact": "earliest_wall_or_actual_body; legal_enemy_damage_or_invulnerability_rejection_then_consume; ally_blocks_no_damage; ignore_owner",
+      "ally_block_requires_player_damage_hard_bounds": false,
+      "actual_height_required": true
+    },
+    {
+      "attack_id": "ENM-ELF-001-A1",
+      "kind": "straight",
+      "origin": "each_actual_emission_muzzle_xy_z_plus_explicit_line_offset",
+      "axis": "locked_facing_x_no_y_tracking",
+      "center_hard_x_cm": [
+        0,
+        680
+      ],
+      "fixed_corridor_half_y_cm": 21,
+      "corridor_initial_rationale": "projectile_half_y_plus_reference_player_hurtbox_half_y16; fixed_per_attack_not_scaled_for_target",
+      "line_y_offsets_cm": [
+        0
+      ],
+      "projectile_half_y_cm": 5,
+      "exact_hit_geometry": "continuous_projectile_vs_independent_target_hurtbox; center_range_and_corridor_gate_do_not_replace_sweep",
+      "first_contact": "earliest_wall_or_actual_body; legal_enemy_damage_or_invulnerability_rejection_then_consume; ally_blocks_no_damage; ignore_owner",
+      "ally_block_requires_player_damage_hard_bounds": false,
+      "actual_height_required": true
+    },
+    {
+      "attack_id": "ENM-ELF-003-A2",
+      "kind": "straight",
+      "origin": "each_actual_emission_muzzle_xy_z_plus_explicit_line_offset",
+      "axis": "locked_facing_x_no_y_tracking",
+      "center_hard_x_cm": [
+        0,
+        560
+      ],
+      "fixed_corridor_half_y_cm": 26,
+      "corridor_initial_rationale": "projectile_half_y_plus_reference_player_hurtbox_half_y16; fixed_per_attack_not_scaled_for_target",
+      "line_y_offsets_cm": [
+        0
+      ],
+      "projectile_half_y_cm": 10,
+      "exact_hit_geometry": "continuous_projectile_vs_independent_target_hurtbox; center_range_and_corridor_gate_do_not_replace_sweep",
+      "first_contact": "earliest_wall_or_actual_body; legal_enemy_damage_or_invulnerability_rejection_then_consume; ally_blocks_no_damage; ignore_owner",
+      "ally_block_requires_player_damage_hard_bounds": false,
+      "actual_height_required": true
+    },
+    {
+      "attack_id": "ENM-TRE-001-A2",
+      "kind": "straight",
+      "origin": "each_actual_emission_muzzle_xy_z_plus_explicit_line_offset",
+      "axis": "locked_facing_x_no_y_tracking",
+      "center_hard_x_cm": [
+        0,
+        420
+      ],
+      "fixed_corridor_half_y_cm": 23,
+      "corridor_initial_rationale": "projectile_half_y_plus_reference_player_hurtbox_half_y16; fixed_per_attack_not_scaled_for_target",
+      "line_y_offsets_cm": [
+        0
+      ],
+      "projectile_half_y_cm": 7,
+      "exact_hit_geometry": "continuous_projectile_vs_independent_target_hurtbox; center_range_and_corridor_gate_do_not_replace_sweep",
+      "first_contact": "earliest_wall_or_actual_body; legal_enemy_damage_or_invulnerability_rejection_then_consume; ally_blocks_no_damage; ignore_owner",
+      "ally_block_requires_player_damage_hard_bounds": false,
+      "actual_height_required": true
+    },
+    {
+      "attack_id": "ELT-ELF-001-A1",
+      "kind": "straight",
+      "origin": "each_actual_emission_muzzle_xy_z_plus_explicit_line_offset",
+      "axis": "locked_facing_x_no_y_tracking",
+      "center_hard_x_cm": [
+        0,
+        680
+      ],
+      "fixed_corridor_half_y_cm": 21,
+      "corridor_initial_rationale": "projectile_half_y_plus_reference_player_hurtbox_half_y16; fixed_per_attack_not_scaled_for_target",
+      "line_y_offsets_cm": [
+        -32,
+        32
+      ],
+      "projectile_half_y_cm": 5,
+      "exact_hit_geometry": "continuous_projectile_vs_independent_target_hurtbox; center_range_and_corridor_gate_do_not_replace_sweep",
+      "first_contact": "earliest_wall_or_actual_body; legal_enemy_damage_or_invulnerability_rejection_then_consume; ally_blocks_no_damage; ignore_owner",
+      "ally_block_requires_player_damage_hard_bounds": false,
+      "actual_height_required": true
+    },
+    {
+      "attack_id": "ENM-ROB-001-A2",
+      "kind": "straight",
+      "origin": "each_actual_emission_muzzle_xy_z_plus_explicit_line_offset",
+      "axis": "locked_facing_x_no_y_tracking",
+      "center_hard_x_cm": [
+        0,
+        430
+      ],
+      "fixed_corridor_half_y_cm": 26,
+      "corridor_initial_rationale": "projectile_half_y_plus_reference_player_hurtbox_half_y16; fixed_per_attack_not_scaled_for_target",
+      "line_y_offsets_cm": [
+        0
+      ],
+      "projectile_half_y_cm": 10,
+      "exact_hit_geometry": "continuous_projectile_vs_independent_target_hurtbox; center_range_and_corridor_gate_do_not_replace_sweep",
+      "first_contact": "earliest_wall_or_actual_body; legal_enemy_damage_or_invulnerability_rejection_then_consume; ally_blocks_no_damage; ignore_owner",
+      "ally_block_requires_player_damage_hard_bounds": false,
+      "actual_height_required": true
+    },
+    {
+      "attack_id": "ENM-ROB-002-A1",
+      "kind": "straight",
+      "origin": "each_actual_emission_muzzle_xy_z_plus_explicit_line_offset",
+      "axis": "locked_facing_x_no_y_tracking",
+      "center_hard_x_cm": [
+        0,
+        620
+      ],
+      "fixed_corridor_half_y_cm": 25,
+      "corridor_initial_rationale": "projectile_half_y_plus_reference_player_hurtbox_half_y16; fixed_per_attack_not_scaled_for_target",
+      "line_y_offsets_cm": [
+        0
+      ],
+      "projectile_half_y_cm": 9,
+      "exact_hit_geometry": "continuous_projectile_vs_independent_target_hurtbox; center_range_and_corridor_gate_do_not_replace_sweep",
+      "first_contact": "earliest_wall_or_actual_body; legal_enemy_damage_or_invulnerability_rejection_then_consume; ally_blocks_no_damage; ignore_owner",
+      "ally_block_requires_player_damage_hard_bounds": false,
+      "actual_height_required": true
+    },
+    {
+      "attack_id": "ENM-SKL-003-A1",
+      "kind": "straight",
+      "origin": "each_actual_emission_muzzle_xy_z_plus_explicit_line_offset",
+      "axis": "locked_facing_x_no_y_tracking",
+      "center_hard_x_cm": [
+        0,
+        650
+      ],
+      "fixed_corridor_half_y_cm": 24,
+      "corridor_initial_rationale": "projectile_half_y_plus_reference_player_hurtbox_half_y16; fixed_per_attack_not_scaled_for_target",
+      "line_y_offsets_cm": [
+        0
+      ],
+      "projectile_half_y_cm": 8,
+      "exact_hit_geometry": "continuous_projectile_vs_independent_target_hurtbox; center_range_and_corridor_gate_do_not_replace_sweep",
+      "first_contact": "earliest_wall_or_actual_body; legal_enemy_damage_or_invulnerability_rejection_then_consume; ally_blocks_no_damage; ignore_owner",
+      "ally_block_requires_player_damage_hard_bounds": false,
+      "actual_height_required": true
+    },
+    {
+      "attack_id": "ENM-GOB-001-A2",
+      "kind": "straight",
+      "origin": "each_actual_emission_muzzle_xy_z_plus_explicit_line_offset",
+      "axis": "locked_facing_x_no_y_tracking",
+      "center_hard_x_cm": [
+        0,
+        360
+      ],
+      "fixed_corridor_half_y_cm": 26,
+      "corridor_initial_rationale": "projectile_half_y_plus_reference_player_hurtbox_half_y16; fixed_per_attack_not_scaled_for_target",
+      "line_y_offsets_cm": [
+        0
+      ],
+      "projectile_half_y_cm": 10,
+      "exact_hit_geometry": "continuous_projectile_vs_independent_target_hurtbox; center_range_and_corridor_gate_do_not_replace_sweep",
+      "first_contact": "earliest_wall_or_actual_body; legal_enemy_damage_or_invulnerability_rejection_then_consume; ally_blocks_no_damage; ignore_owner",
+      "ally_block_requires_player_damage_hard_bounds": false,
+      "actual_height_required": true
+    },
+    {
+      "attack_id": "ENM-GOB-002-A1",
+      "kind": "lob",
+      "flight_max_distance_cm": 360,
+      "flight_sweep": "wall_only_body_pass_explicit",
+      "impact_geometry": {
+        "type": "ellipse",
+        "radius_x_cm": 110,
+        "radius_y_cm": 65,
+        "forward_offset_cm": 0,
+        "height_center_cm": 0,
+        "height_tolerance_cm": 65,
+        "requires_effect_center_los": true
+      },
+      "impact_hard_bounds": "impact_ellipse_center_height_and_LOS; flight_range_not_reused_as_blast_radius"
+    },
+    {
+      "attack_id": "ELT-ROB-001-A1",
+      "kind": "straight",
+      "origin": "each_actual_emission_muzzle_xy_z_plus_explicit_line_offset",
+      "axis": "locked_facing_x_no_y_tracking",
+      "center_hard_x_cm": [
+        0,
+        620
+      ],
+      "fixed_corridor_half_y_cm": 25,
+      "corridor_initial_rationale": "projectile_half_y_plus_reference_player_hurtbox_half_y16; fixed_per_attack_not_scaled_for_target",
+      "line_y_offsets_cm": [
+        -35,
+        35
+      ],
+      "projectile_half_y_cm": 9,
+      "exact_hit_geometry": "continuous_projectile_vs_independent_target_hurtbox; center_range_and_corridor_gate_do_not_replace_sweep",
+      "first_contact": "earliest_wall_or_actual_body; legal_enemy_damage_or_invulnerability_rejection_then_consume; ally_blocks_no_damage; ignore_owner",
+      "ally_block_requires_player_damage_hard_bounds": false,
+      "actual_height_required": true
+    },
+    {
+      "attack_id": "ATK-MEC-001-A",
+      "kind": "straight",
+      "origin": "each_actual_emission_muzzle_xy_z_plus_explicit_line_offset",
+      "axis": "locked_facing_x_no_y_tracking",
+      "center_hard_x_cm": [
+        0,
+        520
+      ],
+      "fixed_corridor_half_y_cm": 26,
+      "corridor_initial_rationale": "projectile_half_y_plus_reference_player_hurtbox_half_y16; fixed_per_attack_not_scaled_for_target",
+      "line_y_offsets_cm": [
+        0
+      ],
+      "projectile_half_y_cm": 10,
+      "exact_hit_geometry": "continuous_projectile_vs_independent_target_hurtbox; center_range_and_corridor_gate_do_not_replace_sweep",
+      "first_contact": "earliest_wall_or_actual_body; legal_enemy_damage_or_invulnerability_rejection_then_consume; ally_blocks_no_damage; ignore_owner",
+      "ally_block_requires_player_damage_hard_bounds": false,
+      "actual_height_required": true
+    },
+    {
+      "attack_id": "ATK-DEM-002-A",
+      "kind": "straight",
+      "origin": "each_actual_emission_muzzle_xy_z_plus_explicit_line_offset",
+      "axis": "locked_facing_x_no_y_tracking",
+      "center_hard_x_cm": [
+        0,
+        560
+      ],
+      "fixed_corridor_half_y_cm": 32,
+      "corridor_initial_rationale": "projectile_half_y_plus_reference_player_hurtbox_half_y16; fixed_per_attack_not_scaled_for_target",
+      "line_y_offsets_cm": [
+        0
+      ],
+      "projectile_half_y_cm": 16,
+      "exact_hit_geometry": "continuous_projectile_vs_independent_target_hurtbox; center_range_and_corridor_gate_do_not_replace_sweep",
+      "first_contact": "earliest_wall_or_actual_body; legal_enemy_damage_or_invulnerability_rejection_then_consume; ally_blocks_no_damage; ignore_owner",
+      "ally_block_requires_player_damage_hard_bounds": false,
+      "actual_height_required": true
+    },
+    {
+      "attack_id": "ATK-ELT-MEC-001-C",
+      "kind": "straight",
+      "origin": "each_actual_emission_muzzle_xy_z_plus_explicit_line_offset",
+      "axis": "locked_facing_x_no_y_tracking",
+      "center_hard_x_cm": [
+        0,
+        484
+      ],
+      "fixed_corridor_half_y_cm": 26,
+      "corridor_initial_rationale": "projectile_half_y_plus_reference_player_hurtbox_half_y16; fixed_per_attack_not_scaled_for_target",
+      "line_y_offsets_cm": [
+        0
+      ],
+      "projectile_half_y_cm": 10,
+      "exact_hit_geometry": "continuous_projectile_vs_independent_target_hurtbox; center_range_and_corridor_gate_do_not_replace_sweep",
+      "first_contact": "earliest_wall_or_actual_body; legal_enemy_damage_or_invulnerability_rejection_then_consume; ally_blocks_no_damage; ignore_owner",
+      "ally_block_requires_player_damage_hard_bounds": false,
+      "actual_height_required": true
+    },
+    {
+      "attack_id": "ATK-ELT-DEM-001-C",
+      "kind": "straight",
+      "origin": "each_actual_emission_muzzle_xy_z_plus_explicit_line_offset",
+      "axis": "locked_facing_x_no_y_tracking",
+      "center_hard_x_cm": [
+        0,
+        450
+      ],
+      "fixed_corridor_half_y_cm": 32,
+      "corridor_initial_rationale": "projectile_half_y_plus_reference_player_hurtbox_half_y16; fixed_per_attack_not_scaled_for_target",
+      "line_y_offsets_cm": [
+        0
+      ],
+      "projectile_half_y_cm": 16,
+      "exact_hit_geometry": "continuous_projectile_vs_independent_target_hurtbox; center_range_and_corridor_gate_do_not_replace_sweep",
+      "first_contact": "earliest_wall_or_actual_body; legal_enemy_damage_or_invulnerability_rejection_then_consume; ally_blocks_no_damage; ignore_owner",
+      "ally_block_requires_player_damage_hard_bounds": false,
+      "actual_height_required": true
+    }
+  ]
+}

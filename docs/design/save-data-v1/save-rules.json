@@ -1,0 +1,258 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "timezone": "Asia/Shanghai",
+  "module": "D-13",
+  "source_event": "EV-031",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "authority": "assistant_proposal_not_individually_user_approved",
+  "intent": {
+    "user_direction": "single_player_first_future_coop; complete_overall_design_before_production",
+    "this_module": "resume_an_unfinished_run_without_resetting_encounter_inventory_random_results_or_account_receipts",
+    "local_profile_scope": "one_default_local_profile_in_first_release_design; ProfileID_is_required_data_identity_not_a_commitment_to_multiple_slot_UI",
+    "cloud_sync_cross_device_or_cheat_prevention_implemented": false
+  },
+  "precedence": [
+    {
+      "source": "../dungeon-v1/common-rules.json#/persistence/midcombat_save_adopted",
+      "old": false,
+      "D13_decision": true,
+      "scope": "adopt_exact_midcombat_suspend_and_resume_design; old_D07_false_was_not_yet_adopted; preserve_historical_source"
+    },
+    {
+      "source": "../bosses-v1/common-rules.json#/persistence/save_during_boss_fight_adopted",
+      "old": false,
+      "D13_decision": true,
+      "scope": "adopt_exact_Boss_fight_suspend_resume_on_completed_event_batch; phase_HP_pending_threshold_attacks_and_control_timers_preserved; old_source_unchanged"
+    },
+    {
+      "source": "../progression-v1/hub-rules.json#/lifecycle",
+      "rule": "unfinished_run_locks_hub_mutations_even_if_menu_suspended_or_recovery"
+    },
+    {
+      "source": "../inventory-v1/inventory-rules.json#/event_order",
+      "rule": "save_full_completed_same_time_batch; never_insert_save_between_damage_deaths_and_legitimate_healing_or_inventory_commits"
+    },
+    {
+      "source": "../presentation-v1/visual-rules.json#/spatial_contract/legacy_migration",
+      "rule": "schema_content_and_coordinate_versions_independent; render_projection_change_alone_is_not_world_coordinate_negation"
+    }
+  ],
+  "single_root_authority": {
+    "bundle_scope": [
+      "ProfileID_and_versions",
+      "account_permanent_progress_and_receipts",
+      "zero_or_one_active_RunID_and_complete_run_state",
+      "operation_journal_and_reward_consumption_facts",
+      "presentation_preferences_and_read_markers"
+    ],
+    "no_mixing_generations": true,
+    "one_writer": "single_profile_write_lease; second_process_read_only_or_refused; no_last_writer_wins_merge",
+    "runtime_visibility": "new_semantic_results_published_after_durable_generation_ack; not_a_secondary_external_account_store",
+    "derived_cache": "final_attributes_and_presentation_caches_rebuild_from_same_rules_and_canonical_sources; do_not_clamp_saved_HP_again_as_if_new_equip",
+    "instance_uniqueness": "each_live_InstanceID_exactly_one_inventory_ground_tray_or_consumed_owner; dead_source_tombstone_preserves_attack_ownership",
+    "no_live_run_hub_progression_edit": true,
+    "active_run_account_awards": "D08_D09_D10_legal_permanent_shards_first_rewards_story_facts_and_sample_purchased_flags_may_commit_with_active_Run_in_same_bundle; only_D09_hub_purchase_reset_selection_and_new_Run_creation_are_locked",
+    "first_profile_bootstrap": "only_when_no_committed_profile_and_no_unresolved_existing_save_evidence; initialize_zero_earned_currency_ranks_research_flags_and_no_activeRun_with_default_settings_in_first_complete_generation; corrupt_existing_profile_never_treated_as_first_launch"
+  },
+  "time_contract": {
+    "clock": "authoritative_active_run_simulation_time; no_wall_clock_progress",
+    "representation": "round_trip_authoritative_numeric_time_and_event_schedule_cursor; JSON_number_writer_must_preserve_runtime_double_precision; do_not_round_to_UI_seconds",
+    "tick_meaning": "complete_simulation_event_batch_boundary; this_design_does_not_select_a_new_engine_fixed_tick_rate",
+    "pause": "freeze_run_time_actions_projectiles_DOT_CDs_spawn_warnings_and_game_audio; UI_navigation_can_use_UI_clock",
+    "offline": "no_healing_focus_regen_status_expiry_CD_recharge_spawn_or_music_progress",
+    "expired_at_boundary": "all_due_same_time_events_resolved_before_snapshot; restore_does_not_redeliver_past_events",
+    "resume": "construct_validated_world_in_pause; clear_physical_input_and_held_action_buffer; explicit_continue_and_release_before_new_gameplay_edges; no_bonus_iframes_or_free_action_cancel",
+    "restore_actions": "exact_attack_phase_locked_properties_emitted_subhit_receipts_remaining_events_and_resource_state; same_attack_ID_later_real_subhit_exception_retained"
+  },
+  "save_triggers": [
+    {
+      "id": "SAVE-PROFILE",
+      "when": "first_explicit_default_profile_bootstrap_without_existing_save_evidence",
+      "policy": "mandatory_initial_complete_root_before_hub_mutations_or_run_creation; never_zero_overwrite_corrupt_profile"
+    },
+    {
+      "id": "SAVE-START",
+      "when": "create_new_run_and_consume_pending_sample_selection",
+      "policy": "mandatory_before_entering_run"
+    },
+    {
+      "id": "SAVE-SUSPEND",
+      "when": "pause_menu_save_and_exit",
+      "policy": "mandatory_latest_complete_tick_before_leave; fail_keeps_unfinished_run"
+    },
+    {
+      "id": "SAVE-AUTO",
+      "when": "every_5_active_simulation_seconds",
+      "policy": "request_at_next_complete_tick; timing_target_not_a_maximum_loss_guarantee"
+    },
+    {
+      "id": "SAVE-ECON",
+      "when": "currency_pickup_equipment_inventory_consumable_commit_purchase_forge_enchant_wheel_or_paid_entry",
+      "policy": "mandatory_same_root_commit_before_success_receipt_or_random_reveal"
+    },
+    {
+      "id": "SAVE-FACT",
+      "when": "Boss_success_first_reward_discovery_permanent_fact_or_shard_award",
+      "policy": "mandatory_award_consumption_account_and_run_together"
+    },
+    {
+      "id": "SAVE-ROOM",
+      "when": "room_entry_admission_and_route_room_exit_or_chapter_transition",
+      "policy": "mandatory_single_resolved_transition_no_mid_transition_half_save"
+    },
+    {
+      "id": "SAVE-HUB",
+      "when": "talent_research_reset_selection_or_profile_setting_commit",
+      "policy": "serialize_same_profile_and_revalidate_hub_lock"
+    },
+    {
+      "id": "SAVE-END",
+      "when": "death_abandon_final_success_terminal_result",
+      "policy": "mandatory_terminal_receipt_release_active_run_and_end_scope_together"
+    },
+    {
+      "id": "SAVE-REPAIR",
+      "when": "explicit_D07_technical_repair",
+      "policy": "mandatory_repair_candidate_and_same_seed_slot_records_together; never_normal_resume_shortcut"
+    },
+    {
+      "id": "SAVE-MIGRATE",
+      "when": "approved_compatible_schema_or_content_coordinate_migration",
+      "policy": "new_generation_after_copy_validation_keep_original_recovery_archive"
+    }
+  ],
+  "autosave": {
+    "interval_active_sim_s": 5,
+    "interval_is_proposal": true,
+    "offline_clock_used": false,
+    "capture": "at_complete_tick_with_profile_write_serialization; simulation_temporarily_stops_while_serial_commit_publishes",
+    "latency": "no_numeric_budget_without_target_machine_measurement; visible_stall_and_write_cost_require_D14_runtime_test",
+    "coalesce": "same_tick_multiple_requests_one_full_generation_with_all_operation_results; never_drop_mandatory_semantic_commits",
+    "crash_loss": "only_last_verified_published_whole_generation_is_recoverable; report_its_recorded_run_time; time_since_last_commit_may_exceed5s_on_failure_or_delay",
+    "limits": "voluntary_local_save_restore_or_forced_exit_can_roll_back_unsaved_combat; no_anti_save_scum_or_hardware_power_loss_guarantee"
+  },
+  "physical_storage_proposal": {
+    "path": "UnrealGame/Saved/SaveGames/Profiles/<ProfileID>/",
+    "files": [
+      "slot-A.bundle.json",
+      "slot-A.commit.json",
+      "slot-B.bundle.json",
+      "slot-B.commit.json",
+      "temporary/<GenerationID>/*",
+      "recovery/<dated_reason_generation>/*",
+      "migration/<dated_source_target>/*"
+    ],
+    "created_by_this_design": false,
+    "scope": "two_rolling_committed_generations_plus_explicit_recovery_migration_archives; source_assets_and_design_JSON_never_overwritten_by_play",
+    "bundle_header": [
+      "ProfileID",
+      "GenerationID",
+      "parent_generation",
+      "schema_version",
+      "content_rules_version",
+      "coordinate_version",
+      "build_id",
+      "run_sim_time_or_null",
+      "payload"
+    ],
+    "commit_marker": [
+      "ProfileID",
+      "GenerationID",
+      "bundle_byte_length",
+      "bundle_sha256",
+      "marker_integrity_digest",
+      "parent_generation"
+    ],
+    "hash_meaning": "corruption_detection_not_authentication_or_tamper_resistance",
+    "numeric_validation": "finite_numbers_nonnegative_currency_legal_counts_known_IDs_no_duplicate_keys_and_no_NaN; parser_limits_measured_with_full_content",
+    "deterministic_encoding": "stable_UTF8_serialization_key_order_and_exact_bytes_hash; do_not_hash_reformatted_JSON",
+    "platform_requirement": "implementation_must_verify_target_filesystem_atomic_publish_flush_order_and_interruption_behaviour; this_document_does_not_claim_the_primitive_has_been_tested"
+  },
+  "commit_pipeline": [
+    {
+      "id": "COMMIT-01",
+      "phase": "complete_event_batch",
+      "rule": "resolve_all_same_time_damage_deaths_healing_interaction_outcomes_in_existing_order; do_not_snapshot_half_event"
+    },
+    {
+      "id": "COMMIT-02",
+      "phase": "stage_full_candidate",
+      "rule": "capture_complete_root_after_current_real_damage_and_elapsed_time; new_financial_reward_or_transition_deltas_and_result_receipts_are_one_candidate; stable_request_digest_and_generation; new_active_requests_and_other_actions_depending_on_staged_inventory_commit_remain_candidate_only_through_end_of_batch; no_attack_cost_emission_or_damage_in_live_world_before_publication; cancelling_manual_transaction_discards_its_dependent_new_requests_without_replaying_them_on_old_gear"
+    },
+    {
+      "id": "COMMIT-03",
+      "phase": "validate_candidate",
+      "rule": "ownership_currency_receipt_reward_RNG_encounter_and_version_invariants; reject_partial_invalid_state"
+    },
+    {
+      "id": "COMMIT-04",
+      "phase": "write_inactive_temporary_bundle",
+      "rule": "retain_active_published_slot; write_whole_candidate_and_integrity_metadata; no_success_or_random_reveal"
+    },
+    {
+      "id": "COMMIT-05",
+      "phase": "verify_and_install_inactive_bundle",
+      "rule": "finish_target_persistence_barrier_and_readback_hash; inactive_old_marker_is_not_new_commit"
+    },
+    {
+      "id": "COMMIT-06",
+      "phase": "publish_new_marker",
+      "rule": "only_after_bundle_durable_validation_atomically_publish_matching_marker; this_is_logical_durable_commit_point"
+    },
+    {
+      "id": "COMMIT-07",
+      "phase": "acknowledge_and_install_result",
+      "rule": "install_same_candidate_authoritative_runtime_result_then_return_existing_receipt_once; if_process_dies_before_ACK_loader_still_recovers_committed_result"
+    }
+  ],
+  "write_failure": {
+    "visible_state": "SAVE_FAILED_TECHNICAL_PAUSE; run_is_unfinished; no_world_clock_progress_or_second_writer",
+    "retry": "same_operation_payload_generation_candidate_and_RNG_result; inspect_marker_first_in_case_publish_succeeded_but_ACK_was_lost",
+    "cancel_cancellable_operation": "only_before_marker_publication; remove_only_uncommitted_manual_transaction_effects_and_rebuild_same_tick_candidate_preserving_actual_damage_elapsed_time_legitimate_healing_and_all_due_mandatory_pickups_rewards_or_terminal_results; mandatory_remainder_still_must_publish_before_resume",
+    "noncancellable": "death_Boss_qualified_award_room_transition_or_repair_commit_cannot_cancel_into_alive_or_unearned_old_state",
+    "quit_without_successful_save": "explicit_loss_message_and_last_durable_generation_time; preserve_original_and_pending_diagnostics; cannot_say_saved_or_release_account_lock_by_menu_navigation",
+    "disk_full_or_permissions": "offer_retry_change_valid_local_destination_via_explicit_profile_move_or_exit_with_known_loss; no_new_payment_or_permission_flow_in_this_design",
+    "background_error": "no_silent_resume_writes_after_failed_required_save"
+  },
+  "load_pipeline": [
+    "acquire_exclusive_profile_write_authority_or_inspect_read_only",
+    "inspect_both_marker_integrity_and_generation_identity_ignore_only_known_unpublished_temp_files",
+    "select_highest_trustworthy_published_generation_not_highest_compatible_generation",
+    "verify_exact_bundle_bytes_and_same_ProfileID_generation_parent_versions",
+    "validate_schema_content_coordinate_and_cross_scope_invariants_before_instantiating",
+    "if_supported_build_whole_world_and_logical_receipts_with_world_clock_paused",
+    "rebuild_only_derived_properties_visuals_and_UI; do_not_run_begin_play_reward_new_run_or_rng_initializer_again",
+    "display_recorded_run_time_room_and_last_save_reason; clear_gameplay_input",
+    "explicit_resume_after_input_release_starts_same_run_clock"
+  ],
+  "recovery_policy": {
+    "unpublished_files": "ignore_or_quarantine_known_temporary_or_marker_mismatched_older_inactive_bundle; do_not_promote_because_its_JSON_looks_valid",
+    "highest_published_bundle_corrupt": "RECOVERY_REQUIRED; no_automatic_lower_generation_load; offer_verified_full_backup_recovery_with_time_and_permanent_progress_loss_disclosure",
+    "unknown_or_malformed_marker": "cannot_prove_highest_generation; require_explicit_recovery_preserving_originals",
+    "unsupported_new_version": "block_automatic_fallback_to_old_compatible_generation_that_would_erase_new_progress",
+    "same_generation_different_digest": "conflict; preserve_both_no_silent_merge",
+    "whole_backup_restore": "same_generation_account_run_settings_and_receipts_together; create_new_generation_greater_than_observed_head_with_restored_from_audit_not_mix_current_account_with_old_world",
+    "no_usable_run": "keep_original_unfinished_lock_and_verified_account_data_in_recovery; after_explicit_end_unrecoverable_run_action_create_terminal_record_preserving_only_verified_permanent_progress_no_new_rewards; no_new_run_before_resolution",
+    "no_usable_account": "do_not_guess_or_zero_overwrite; keep_damaged_files_and_offer_separate_new_profile_only_explicitly",
+    "no_menu_reward_replay": true,
+    "backup_is_local_not_cloud": true
+  },
+  "technical_room_repair": {
+    "source": "../dungeon-v1/common-rules.json#/technical_fault",
+    "normal_continue_repairs": false,
+    "explicit_only": true,
+    "same_seed_RoomID_SlotIDs_manifest_and_consumed_rewards": true,
+    "preserve": "player_and_survivor_HP_inventory_currency_status_remaining_times_cooldowns_trigger_latches_and_reservations",
+    "allowed_D07_cleanup": "only_explicit_fault_repair_cancels_unemitted_actions_and_room_bound_live_attacks_without_refund; unresolved_live_actors_reposition_with_full_entry_warning; completed_slots_never_revive",
+    "additional_safety": "if_saved_active_pose_has_no_recoverable_resume_policy_request_recovery_instead_of_silently_idling; no_pose_repair_can_heal_or_clear_DOT",
+    "persistent_once": "RepairOperationID_and_new_generation_record_no_new_sources_or_repeat_rewards"
+  },
+  "scope_limits": [
+    "no_product_SaveGame_implementation_or_actual_user_save_files_this_turn",
+    "no_paid_assets_or_new_UI_gameplay_or_network_work",
+    "no_guaranteed_zero_loss_under_power_or_storage_failure",
+    "D14_must_measure_commit_latency_size_recovery_cost_and_run_full_crash_injection_tests"
+  ]
+}

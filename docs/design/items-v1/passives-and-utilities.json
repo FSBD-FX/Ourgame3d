@@ -1,0 +1,575 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-13",
+  "requirement_event": "EV-021",
+  "module": "D-03",
+  "status": "design_only",
+  "parameter_status": "proposed_untested",
+  "scope": "原创助手方案。局内被动遗物与功能工具；不是局外遗物碎片。未制作、未逐项获用户确认。",
+  "global_rules": {
+    "relic_slots": 3,
+    "one_active_copy_per_id": true,
+    "relic_enchantable": false,
+    "relic_merge_or_upgrade": false,
+    "relic_equip": "仅清房后的安全地面站定E交互0.50s；提交前移动、受伤或合法闪避取消，保留旧归属与地面物。战斗和暂停面板内不能换。",
+    "stat_aggregation": "当前武器、身体甲的附魔、有效遗物及临时增益先在同stat相加，再按装备v2同一最终上限计算；不另乘一层。备用武器和背包/地面遗物不贡献。",
+    "stat_change_no_resource_gain": "装卸不治疗、不回专注、不补弹、不刷新闪避/技能/附魔/遗物触发冷却；HP上限变化仅current=min(old,newMax)，累计削韧和破韧保护保留。",
+    "relic_trigger_memory": "角色本局以relicID保存CD截止和各RoomID预算，装卸、换武器、重新进房不清零；本局模拟时钟推进，暂停冻结。",
+    "keyring": "功能工具独立随身栏，不占三遗物槽或快捷槽；各ID按stack_max封顶，不自动卖出/转钱/转收集物。",
+    "utility_transaction": "安全地面匹配设施：展示工具、原服务、结果/风险和剩余费用，确认后同一事务扣一次工具并提交一次服务。任何校验失败保留工具和原对象；事务去重、随机结果和同局继续遵循D-01。",
+    "utility_nonstacking": "同一次服务最多用一件本目录功能工具，不与同类券叠用，不通过退出重抽或退款反复领取。",
+    "utility_source_gate": "按当局已解锁且确有可匹配对象的来源过滤；D-07/08若不采用该设施/工序则不投放对应工具。没有匹配对象时不占稀缺奖励格。",
+    "meta_unlock": "仅使此ID有资格加入来源池；不保证出现，不每局赠送，不代表D-09解锁费用/树已完成。",
+    "pricing_status": "本目录无商店售价、出售与转换；D-08再核定来源权重/价值/金币经济。",
+    "runtime_implemented": false
+  },
+  "items": [
+    {
+      "id": "ITM-PAS-001",
+      "name": "铆铁护环",
+      "category": "PAS",
+      "role": "抗物理与抗破韧，适合需要完整出招窗口的近战",
+      "unlock": "base_pool",
+      "carry": "relic",
+      "stack_max": 1,
+      "use_profile": "passive",
+      "cooldown_s": 0,
+      "effects": [
+        {
+          "type": "stat_modifier",
+          "stat": "armor_flat",
+          "value": 10,
+          "group": "armor_flat",
+          "duration_s": null
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "poise_flat",
+          "value": 8,
+          "group": "poise_flat",
+          "duration_s": null
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "move_speed_pct",
+          "value": -5,
+          "group": "move_speed_pct",
+          "duration_s": null
+        }
+      ],
+      "rule": "不降低魔法伤害；只增加阈值，不清零累计削韧。普通移动受负移速，闪避与跳高保持D-02规则。",
+      "tradeoff": "普通走位变慢；护甲/韧性接近封顶时收益降低，不能把额外韧性当免伤。",
+      "source_candidates": [
+        "普通战斗奖励",
+        "护卫主题宝箱",
+        "商人遗物栏"
+      ],
+      "asset_notes": "厚铁环与三枚外露铆钉；图标需能与身体甲和货币区分，暂无制作资产。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-PAS-002",
+      "name": "游猎羽饰",
+      "category": "PAS",
+      "role": "换取更快普通走位，靠距离和纵深避伤",
+      "unlock": "base_pool",
+      "carry": "relic",
+      "stack_max": 1,
+      "use_profile": "passive",
+      "cooldown_s": 0,
+      "effects": [
+        {
+          "type": "stat_modifier",
+          "stat": "move_speed_pct",
+          "value": 8,
+          "group": "move_speed_pct",
+          "duration_s": null
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "stagger_pct",
+          "value": -8,
+          "group": "stagger_pct",
+          "duration_s": null
+        }
+      ],
+      "rule": "出招/装填仍在派生正常速度后乘动作限制；不增加闪避距离、跳高、攻击速度或射程。",
+      "tradeoff": "更难靠直接削韧打开敌人破绽；电震固定削韧不被此减益改写。",
+      "source_candidates": [
+        "普通战斗奖励",
+        "游猎主题宝箱",
+        "商人遗物栏"
+      ],
+      "asset_notes": "系绳单羽与小骨珠，读形强调轻巧；不以颜色作为唯一身份。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-PAS-003",
+      "name": "磨砺石像",
+      "category": "PAS",
+      "role": "提高单轮直接伤害，承受更长出招承诺",
+      "unlock": "base_pool",
+      "carry": "relic",
+      "stack_max": 1,
+      "use_profile": "passive",
+      "cooldown_s": 0,
+      "effects": [
+        {
+          "type": "stat_modifier",
+          "stat": "damage_pct",
+          "value": 10,
+          "group": "damage_pct",
+          "duration_s": null
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "action_speed_pct",
+          "value": -6,
+          "group": "action_speed_pct",
+          "duration_s": null
+        }
+      ],
+      "rule": "直接伤害统一加算，DoT不受益；动作速度同时调整完整前摇/有效窗/后摇和子窗口，不修改武器技冷却或装填时长。",
+      "tradeoff": "挥空和被围攻的风险增加。无其他修正时理论连续直接DPS倍率为1.10×0.94=1.034，不把+10%单轮伤害宣传成+10%DPS。",
+      "source_candidates": [
+        "精英战斗奖励候选",
+        "锻造主题宝箱",
+        "商人遗物栏"
+      ],
+      "asset_notes": "有磨痕的紧握石拳；面板同时显示伤害与动作速度两项。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-PAS-004",
+      "name": "机簧勋章",
+      "category": "PAS",
+      "role": "缩短弹匣武器装填空档，适合持续射击路线",
+      "unlock": "base_pool",
+      "carry": "relic",
+      "stack_max": 1,
+      "use_profile": "passive",
+      "cooldown_s": 0,
+      "effects": [
+        {
+          "type": "stat_modifier",
+          "stat": "reload_speed_pct",
+          "value": 15,
+          "group": "reload_speed_pct",
+          "duration_s": null
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "damage_pct",
+          "value": -6,
+          "group": "damage_pct",
+          "duration_s": null
+        }
+      ],
+      "rule": "装填增益仅XBW/PST/SGN/RFL，时间为原时长÷1.15（无其他修正）；不缩短射击后摇/拉栓，不加弹匣，不影响法杖专注。直接伤害减益对当前所有武器生效。",
+      "tradeoff": "单发更弱；改用近战/法杖时仍有伤害代价而无装填收益，面板明确不适用。",
+      "source_candidates": [
+        "军械主题宝箱",
+        "普通战斗奖励",
+        "商人遗物栏"
+      ],
+      "asset_notes": "勋章内可见弹簧和弹匣轮廓，避免误读为提高射速。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-PAS-005",
+      "name": "回声棱镜",
+      "category": "PAS",
+      "role": "更快恢复专注，以治疗承受能力换施法续航",
+      "unlock": "meta_unlock",
+      "carry": "relic",
+      "stack_max": 1,
+      "use_profile": "passive",
+      "cooldown_s": 0,
+      "effects": [
+        {
+          "type": "stat_modifier",
+          "stat": "focus_regen_pct",
+          "value": 15,
+          "group": "focus_regen_pct",
+          "duration_s": null
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "healing_received_pct",
+          "value": -10,
+          "group": "healing_received_pct",
+          "duration_s": null
+        }
+      ],
+      "rule": "不改变专注上限100、最后消耗时刻、恢复等待或施法成本；无甲基础恢复率12/s变为13.8/s（无其他修正），装备/取下不立即回专注。",
+      "tradeoff": "药水、合法吸血和其他HP治疗效率降低，不能与伤害减免混称。",
+      "source_candidates": [
+        "解锁后的秘术主题宝箱",
+        "解锁后的商人遗物栏",
+        "解锁后的精英奖励候选"
+      ],
+      "asset_notes": "有裂缝的棱镜与双重光环，具体特效待D-12；无需常驻满屏发光。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-PAS-006",
+      "name": "薄血契印",
+      "category": "PAS",
+      "role": "直接伤害续航，换取更低最大生命容错",
+      "unlock": "meta_unlock",
+      "carry": "relic",
+      "stack_max": 1,
+      "use_profile": "passive",
+      "cooldown_s": 0,
+      "effects": [
+        {
+          "type": "stat_modifier",
+          "stat": "lifesteal_pct",
+          "value": 2,
+          "group": "lifesteal_pct",
+          "duration_s": null
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "max_health_pct",
+          "value": -10,
+          "group": "max_health_pct",
+          "duration_s": null
+        }
+      ],
+      "rule": "吸血与装备来源合计封顶5%，保留治疗效率后每attack ID最多3HP/滚动1s最多6HP；只计合法敌人实际直接HP损失，不含过量伤害/DoT/道具/自伤/物件。受治疗者须存活。无其他修正时最大HP90。",
+      "tradeoff": "装备时超出新上限的当前HP会截断；取下不补回被截断HP。面对高爆发仍危险，吸血不能复活。",
+      "source_candidates": [
+        "解锁后的契约主题宝箱",
+        "解锁后的高风险支路奖励",
+        "解锁后的商人遗物栏"
+      ],
+      "asset_notes": "刻着细血纹的断裂印章；区分被动吸血与可使用回血药。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-PAS-007",
+      "name": "医者结绳",
+      "category": "PAS",
+      "role": "提高已有合法治疗收益，承担更高魔法承伤",
+      "unlock": "base_pool",
+      "carry": "relic",
+      "stack_max": 1,
+      "use_profile": "passive",
+      "cooldown_s": 0,
+      "effects": [
+        {
+          "type": "stat_modifier",
+          "stat": "healing_received_pct",
+          "value": 15,
+          "group": "healing_received_pct",
+          "duration_s": null
+        },
+        {
+          "type": "stat_modifier",
+          "stat": "magic_vulnerability_pct",
+          "value": 8,
+          "group": "magic_vulnerability_pct",
+          "duration_s": null
+        }
+      ],
+      "rule": "不自带治疗；有合法HP恢复时按即时治疗效率参与一次计算，仍受来源预算/HP上限。魔法易伤在魔抗之后结算，也影响燃烧每跳，不放大寒缓或电震。",
+      "tradeoff": "没有治疗来源时好处暂不生效；魔法直伤/燃烧威胁增加。不能在战斗中换上只吃药再换下。",
+      "source_candidates": [
+        "补给主题宝箱",
+        "普通战斗奖励",
+        "商人遗物栏"
+      ],
+      "asset_notes": "绷带结绳包着空药瓶，面板显示无自动回血。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-PAS-008",
+      "name": "肃清徽章",
+      "category": "PAS",
+      "role": "在真实战斗推进中取得少量续航，适合连续清杂兵",
+      "unlock": "meta_unlock",
+      "carry": "relic",
+      "stack_max": 1,
+      "use_profile": "passive",
+      "cooldown_s": 8,
+      "effects": [
+        {
+          "type": "event_heal",
+          "event": "reward_eligible_enemy_first_death_by_player_weapon_direct_damage",
+          "base_heal_hp": 2,
+          "attack_lock_requires_relic_equipped": true,
+          "death_resolution_requires_relic_equipped": true,
+          "requires_owner_alive": true,
+          "requires_run_active": true,
+          "requires_enemy_reward_eligible": true,
+          "dedup_key": [
+            "RunID",
+            "EnemySpawnID",
+            "first_real_death"
+          ],
+          "cooldown_key": [
+            "RunID",
+            "PlayerID",
+            "ITM-PAS-008"
+          ],
+          "cooldown_s": 8,
+          "cooldown_starts_on_eligible_event_even_at_full_hp": true,
+          "room_budget_key": [
+            "RunID",
+            "PlayerID",
+            "RoomID",
+            "ITM-PAS-008"
+          ],
+          "room_actual_heal_cap_hp_after_efficiency": 6,
+          "formula": "min(2*(1+current_healing_received_pct/100),room_budget_remaining_hp,current_missing_hp)",
+          "exclusions": [
+            "DoT",
+            "道具直伤或持续伤害",
+            "陷阱",
+            "友军/环境击杀",
+            "召唤与无限增援",
+            "复活或复制产生的重复死亡",
+            "物件",
+            "脚本清除",
+            "自伤",
+            "死亡/本局结束后的击杀"
+          ]
+        }
+      ],
+      "rule": "只在唯一真实敌人死亡结算后检查，不按命中/丸数/子段触发。需本轮攻击锁定快照具有此遗物且结算时仍有效；旧弹可沿锁定快照合法结算。符合资格且CD就绪先启动角色同ID CD再治疗；满血不储存，CD未好或预算耗尽不排队。预算按治疗效率后的实际回复消耗，进出同房/换遗物不刷新。",
+      "tradeoff": "对没有可计资格杂兵的Boss阶段不能提供持续治疗；一房最多6HP且占一个遗物槽。奖励资格标记需D-05/07明确，未配置者默认不触发。",
+      "source_candidates": [
+        "解锁后的精英奖励候选",
+        "解锁后的征伐主题宝箱",
+        "解锁后的商人遗物栏"
+      ],
+      "asset_notes": "三道刻痕的旧徽章；提示显示当前房剩余实际治疗预算与CD，不承诺已有运行UI。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-FUN-001",
+      "name": "通用钥匙",
+      "category": "FUN",
+      "role": "为可选宝箱/支路门保留一次开锁机会",
+      "unlock": "base_pool",
+      "carry": "keyring",
+      "stack_max": 3,
+      "use_profile": "interact",
+      "cooldown_s": 0,
+      "effects": [
+        {
+          "type": "utility",
+          "utility": "unlock_optional_keyed_object",
+          "target": "未开启且key_type=common的可选宝箱或支路门",
+          "consume_count": 1,
+          "requires_safe_grounded_interaction": true,
+          "does_not_unlock": [
+            "唯一主线路径",
+            "剧情锁",
+            "Boss封门",
+            "非common锁",
+            "金币收费入口"
+          ]
+        }
+      ],
+      "rule": "唯一主路与主线Boss推进不能要求此钥匙；不代替金币收费、不跳过房间战斗。开启同一对象重复E不再消费或再产奖励；不匹配/已开/交互失败不扣。",
+      "tradeoff": "使用在当前支路就失去留给后续可选箱的机会；最多携带3把，不能卖出/换成局外收集物。",
+      "source_candidates": [
+        "已配置common锁的章节战斗奖励",
+        "支路奖励",
+        "商人功能栏候选"
+      ],
+      "asset_notes": "圆柄单齿钥匙，需数量提示与目标锁型标识；剧情旗标不用此图标冒充可消耗物。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-FUN-002",
+      "name": "行商折价票",
+      "category": "FUN",
+      "role": "降低一次已明确商品的金币支出",
+      "unlock": "base_pool",
+      "carry": "keyring",
+      "stack_max": 2,
+      "use_profile": "interact",
+      "cooldown_s": 0,
+      "effects": [
+        {
+          "type": "utility",
+          "utility": "discount_one_merchant_item",
+          "target": "普通商人当前已生成且可购买的一件非服务商品",
+          "discount_pct": 20,
+          "cost_formula": "max(1,ceil(original_gold_price*0.80))",
+          "consume_count": 1,
+          "requires_discount_to_change_price": true,
+          "requires_safe_grounded_interaction": true,
+          "not_applicable": [
+            "轮盘",
+            "工坊",
+            "隐藏地图收费",
+            "天赋/局外解锁",
+            "金币或收集物兑换",
+            "已售出商品"
+          ]
+        }
+      ],
+      "rule": "不刷新商品/品质/附魔/数量；预览原价和折后价并主动选用。取整后不省钱则不能用且不扣票，金币不足也不扣。一次购买只一票，商品与金币、票在同一事务提交。",
+      "tradeoff": "最多2票且不找零，不可免费拿走商品；保存给贵商品仍需规划实际金币。",
+      "source_candidates": [
+        "存在匹配普通商人的章节奖励",
+        "一次性NPC交互奖励候选",
+        "支路宝箱"
+      ],
+      "asset_notes": "剪角票根加商车印，显示20%为参数初稿；具体来源与价值待D-08。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-FUN-003",
+      "name": "轮盘代投券",
+      "category": "FUN",
+      "role": "省下一次普通轮盘参与费用，接受原有结果风险",
+      "unlock": "meta_unlock",
+      "carry": "keyring",
+      "stack_max": 1,
+      "use_profile": "interact",
+      "cooldown_s": 0,
+      "effects": [
+        {
+          "type": "utility",
+          "utility": "waive_one_standard_roulette_gold_fee",
+          "target": "允许代投券且剩余普通次数大于0的轮盘",
+          "consume_count": 1,
+          "paid_spin_equivalent_uses": 1,
+          "changes_reward_weights": false,
+          "changes_reward_tier": false,
+          "requires_safe_grounded_interaction": true,
+          "not_applicable": [
+            "指定大奖",
+            "重抽既有结果",
+            "额外轮盘次数",
+            "高级专场",
+            "局外收集物奖励"
+          ]
+        }
+      ],
+      "rule": "只代付一次合法普通费用；原本次数限制与全部正负结果照常，消费一次剩余服务次数。先持久确定事务/随机结果再展示，不退出重抽、不预览结果后退券、不变成可提现金币。",
+      "tradeoff": "不保证正收益或装备；原轮盘若允许空结果/代价结果，仍适用。没有采用普通轮盘或没有匹配次数的来源不投放。",
+      "source_candidates": [
+        "解锁后且存在匹配轮盘的支路奖励",
+        "解锁后的一次性NPC奖励候选"
+      ],
+      "asset_notes": "印着轮盘缺口的单张代投券，避免使用钻石/付费筹码视觉；本设计无真实付费。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-FUN-004",
+      "name": "旧道勘察图",
+      "category": "FUN",
+      "role": "获知一处本章真实存在的隐藏支路入口，仍需承担进入成本和战斗",
+      "unlock": "base_pool",
+      "carry": "keyring",
+      "stack_max": 1,
+      "use_profile": "interact",
+      "cooldown_s": 0,
+      "effects": [
+        {
+          "type": "utility",
+          "utility": "reveal_one_existing_optional_entrance",
+          "target": "当前章节安全路线碑及一处仍可到达、未揭示的已生成隐藏支路入口",
+          "consume_count": 1,
+          "selection": "从固定生成顺序选首个匹配入口，不进行奖励重抽",
+          "reveal_persists_for_run": true,
+          "waives_entry_cost": false,
+          "grants_rewards": false,
+          "requires_safe_grounded_interaction": true
+        }
+      ],
+      "rule": "只新增地图标记和线索，不生成新房、不传送、不揭示未生成奖励、不替代开锁/收费/剧情资格。无符合入口时交互拒绝且不消耗。用过的入口标记随本局保存，退出不变成另一入口。",
+      "tradeoff": "信息价值，不直接增加战力；路线碑/隐藏入口若D-07不采用则不入池。已全部揭示或本章无可达隐藏支路的来源不投放。",
+      "source_candidates": [
+        "本章存在未揭示支路的探索奖励",
+        "勘察NPC一次性奖励候选"
+      ],
+      "asset_notes": "折叠地图加空心入口符号；地图标记须文字/形状区分未进入与已通关。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-FUN-005",
+      "name": "铁匠初锻工票",
+      "category": "FUN",
+      "role": "为当前选定装备代付一次入门强化工序费用",
+      "unlock": "meta_unlock",
+      "carry": "keyring",
+      "stack_max": 1,
+      "use_profile": "interact",
+      "cooldown_s": 0,
+      "effects": [
+        {
+          "type": "utility",
+          "utility": "waive_first_basic_upgrade_gold_fee",
+          "target": "匹配铁匠的合法基础强化0→1武器/身体甲实例",
+          "consume_count": 1,
+          "upgrade_steps": 1,
+          "requires_original_service_eligibility": true,
+          "waives_only_gold_fee": true,
+          "requires_safe_grounded_interaction": true,
+          "not_applicable": [
+            "已强化装备",
+            "越过章节等级上限",
+            "未解锁工序",
+            "武器品质升阶",
+            "附魔觉醒/升阶/重洗",
+            "复制或领取新装备"
+          ]
+        }
+      ],
+      "rule": "0→1是D-08待定服务接口，不在本轮确定强化幅度。只代付原入门工序金币费，其余合法性/必要成本保持；不存在该工序就不投放。原实例ID、弹匣、专注、HP、武器/角色CD与附魔保留，强化不立即补资源。",
+      "tradeoff": "不能免费做到最高级；已全部强化的持有装备不匹配，但不自动吞票或自动替换成其他奖。提前奖励过滤不代替使用时重新校验。",
+      "source_candidates": [
+        "解锁后且有匹配铁匠的支路奖励",
+        "解锁后的铁匠NPC一次性奖励候选"
+      ],
+      "asset_notes": "带一锤印的工票，显示“首次基础强化”而非“最高级强化”；工序待D-08确认。",
+      "status": "design_only"
+    },
+    {
+      "id": "ITM-FUN-006",
+      "name": "浅纹洗净券",
+      "category": "FUN",
+      "role": "移除一套低阶含负词附魔，接受同时失去正词的代价",
+      "unlock": "base_pool",
+      "carry": "keyring",
+      "stack_max": 1,
+      "use_profile": "interact",
+      "cooldown_s": 0,
+      "effects": [
+        {
+          "type": "utility",
+          "utility": "waive_low_tier_enchant_cleanse_gold_fee",
+          "target": "安全附魔台与含至少一负词、等级I或II的合法武器/甲实例",
+          "consume_count": 1,
+          "eligible_enchant_tiers": [
+            1,
+            2
+          ],
+          "requires_negative_affix": true,
+          "removes_whole_enchant_package": true,
+          "grants_new_affixes": false,
+          "requires_safe_grounded_interaction": true
+        }
+      ],
+      "rule": "沿v2整套洗净：移除正负所有词条，结果none无等级；不是只删坏词，也不是重洗。确认前显示全部失去词条和派生属性变化。无附魔、纯正面或III–V均拒绝且不消费。",
+      "tradeoff": "混合方案的好词也会丢失；高级坏附魔不能用此券。洗净不治疗、不补弹、不回专注、不刷新任何冷却。",
+      "source_candidates": [
+        "存在匹配附魔台与低阶含负词装备候选的章节奖励",
+        "工坊NPC一次性奖励候选",
+        "探索宝箱"
+      ],
+      "asset_notes": "橡皮印般的浅纹票根，I/II限制与“整套移除”用文字提示，不只用红绿。",
+      "status": "design_only"
+    }
+  ],
+  "source_event": "EV-021",
+  "authority": "assistant_proposal_not_individually_user_approved",
+  "runtime_implemented": false
+}

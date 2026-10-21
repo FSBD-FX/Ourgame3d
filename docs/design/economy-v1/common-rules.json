@@ -1,0 +1,167 @@
+{
+  "schema_version": "1.0",
+  "design_date": "2026-10-14",
+  "source_event": "EV-026",
+  "module": "D-08",
+  "authority": "assistant_proposal_not_individually_approved",
+  "status": "design_only",
+  "runtime_implemented": false,
+  "parameter_status": "unplaytested",
+  "source_precedence": {
+    "preserve_old_source_files": true,
+    "overrides": [
+      "equipment-v1 acquisition source suggestions only through reward-sources.json",
+      "equipment-v1 no basic upgrades through equipment-growth.json",
+      "D03 independent weapon quality-upgrade exclusion: no separate operation adopted; FUN005 remains basic upgrade 0->1",
+      "D07 candidate H01 tolls adopted REG01=20 REG04=35, always optional"
+    ],
+    "inherits": [
+      "D01 currencies and end-run",
+      "D03 items, caps and functions",
+      "D04 inventory atomicity and distinct safety predicates",
+      "D05 reward eligibility",
+      "D06 Boss death/success order",
+      "D07 finite manifests and no wave-reset",
+      "equipment-v2 enchant prices, eligibility, algorithm, shared caps"
+    ]
+  },
+  "currencies": {
+    "gold": {
+      "initial_once_per_run": 20,
+      "scope": "current_run",
+      "loss_on_end": "all_remaining",
+      "direct_permanent_conversion": false,
+      "debt_allowed": false
+    },
+    "shards": {
+      "scope": "permanent_account",
+      "ordinary_credit": "actual_living_pickup_only",
+      "boss_credit": "successful_unique_boss_transaction_before_transition_or_end",
+      "retain_credited_on_death": true,
+      "settlement_second_credit": false,
+      "not_dropped_by_paid_random_wheel": true,
+      "talent_spend": "D09_future_outside_run_only"
+    }
+  },
+  "room_budget": {
+    "budget_chosen": "route_node_before_finite_manifest_allocation",
+    "weights": "D05 max_role_cost_including_elite_extra_actions_plus_flying_and_elite_modifiers",
+    "allocation": "floor(B*w_i/sum(w)); distribute residual one each descending fractional remainder then ascending stable SlotID",
+    "never_redistribute_after_start": true,
+    "includes": [
+      "visible",
+      "real_dormant",
+      "future_required_slots"
+    ],
+    "real_death_only": true,
+    "reward_eligibility_not_same_as_PAS008_weapon_only_healing": true,
+    "currency_collection": "D04",
+    "wave_resets_budget": false,
+    "enemy_count_independent_item_rolls": false,
+    "bonus_presence_probability_owner": "reward source once per whole room; conditional pool does not reroll presence"
+  },
+  "rng": {
+    "persisted_run_seed_and_algorithm_version": true,
+    "streams": [
+      "route",
+      "reward_source",
+      "shop_stock",
+      "enchantment",
+      "wheel_facility_operation"
+    ],
+    "key": "RunID+SourceID+RollOrdinal+RulesVersion",
+    "retry_returns_same_resolved_result": true,
+    "unresolved_invalid_configuration": "retain_pending_source_and_report_no_free_reroll_or_silent_result_loss",
+    "no_current_hp_wallet_talent_power_dynamic_weights": true,
+    "unlock_snapshot": "at_run_creation",
+    "source_capacity_and_eligibility_filters": "persist qualified set when source resolves; transaction revalidates only usability/ownership, never rerolls shown result"
+  },
+  "transactions": {
+    "requires": "D04_full_safe_for_all_paid_or_tool_services",
+    "ordinary_free_exit": "D04_free_exit_predicate_no_gold_or_paid_fullsafe_requirement",
+    "frame_priority": "all_due_damage_and_death_then_legal_healing_then_inventory_or_facility_commit",
+    "operation_key": "RunID+FacilityInstanceID+OperationID",
+    "precommit": [
+      "alive_run_active_ground_idle_fullsafe",
+      "owned_target_and_version",
+      "source_stock_and_version",
+      "quoted_rule_version",
+      "current_wallet_enough",
+      "valid_capacity_or_single_reward_tray_reserved",
+      "service_boundaries",
+      "tool_eligibility_if_selected"
+    ],
+    "gold_requires_equal_old_balance": false,
+    "max_one_function_tool": true,
+    "atomic": [
+      "gold",
+      "tool_count",
+      "target_instance",
+      "stock_or_use_counter",
+      "resolved_rng_result_and_cursor",
+      "source_reward_or_tray",
+      "operation_record"
+    ],
+    "before_commit_cancel": "no_cost_no_use_no_tool_no_rng_change",
+    "after_commit_presentation_failure": "replay_original_record_no_refund_or_reroll",
+    "save_runtime_status": "D13_not_implemented"
+  },
+  "reward_tray": {
+    "only_for": "committed_unknown_wheel_item_outcome_or_keyed_common_supply_object_result",
+    "capacity_per_facility": 1,
+    "pending_blocks_new_spin": true,
+    "not_personal_inventory": true,
+    "claimed_via": "full D04 safety and item-kind capacity/action for facility-bound result; no extra personal inventory",
+    "leave_and_return": "same_existing_reward_no_stock_refresh",
+    "leave_region": "show_unclaimed_warning; accepting discards_local_run_reward_with_no_refund",
+    "end_run": "discard_local_reward",
+    "duplicate_claim": "same_existing_claim_record",
+    "common_box_role": "source_bound_one_time_result; opening consumes one key atomically; same result even if ground placement or inventory claim deferred",
+    "explicit_forfeit": "discard pending local item after confirmation; never refund currency/key or restore consumed source use"
+  },
+  "finite_supplies": {
+    "guaranteed_free_REC001_per_chapter": 1,
+    "paid_REC001_price": 18,
+    "paid_REC001_units_N04": 1,
+    "paid_REC001_units_N06": 1,
+    "cross_main_chapter_heal": "20% current MaxHP times current healing_received; alive once; never refill_focus_ammo_CD",
+    "entry_refill": false,
+    "shop_restock": false,
+    "selling_salvage_buyback": false,
+    "unlimited_ammo_charge_or_focus_fee": false,
+    "guaranteed_drop_not_guaranteed_actual_healing": true
+  },
+  "baseline_conditions": [
+    "five chapters completed alive",
+    "all ordinary route gold/shards and all ground gold from the first four main Bosses actually picked up",
+    "exclude optional branches/hidden rewards",
+    "exclude wheel gold and all spending",
+    "no extra meta economy bonuses adopted until D09"
+  ],
+  "baseline_totals": {
+    "start_gold": 20,
+    "ordinary_gold": 460,
+    "boss_gold": 220,
+    "gross_gold": 700,
+    "ordinary_shards": 20,
+    "boss_shards": 40,
+    "repeat_shards": 60,
+    "first_main_boss_extra": 10,
+    "first_main_run_shards": 70,
+    "free_small_potions": 5,
+    "fixed_paid_small_potions": 10
+  },
+  "value_language": {
+    "consumable_reference_value": "posted_merchant_price_only_not_cash_redemption_or_actual_utility",
+    "repeat_income_per_hour": "unknown_no_playtime_data",
+    "all_clear_no_spending_balance_is_not_expected_player_wallet": true,
+    "drop_probability_frequency_is_not_combat_balance": true
+  },
+  "future_validation": [
+    "D09 talents and unlock costs with these fragment sources",
+    "D11 stock, grade, affix, price and outcome interfaces",
+    "D12 reward and facility presentation assets",
+    "D13 durable operation and payout atomicity",
+    "D14 actual duration, damage, supplies, purchases, idle coins and farming efficiency"
+  ]
+}

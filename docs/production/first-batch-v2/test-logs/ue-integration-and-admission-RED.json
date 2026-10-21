@@ -1,0 +1,393 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "符朔八道",
+			"instance": "6970EBE44944816030699891874CE59E",
+			"instanceName": "符朔八道-27332",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (24H2) [10.0.26100.4946] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 3060 Laptop GPU",
+			"cPUModel": "12th Gen Intel(R) Core(TM) i7-12700H",
+			"rAMInGB": 16,
+			"renderMode": "SM6",
+			"rHI": "",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2026.10.14-15.49.15",
+	"succeeded": 14,
+	"succeededWithWarnings": 0,
+	"failed": 4,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.34403738379478455,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "DepthFacingAndHeight",
+			"fullTestPath": "CodexDungeon.Combat.DepthFacingAndHeight",
+			"state": "Success",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.0014025010168552399,
+			"dateTime": "2026.10.14-15.49.14",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ExpiredIframesDoNotConsumeReceipt",
+			"fullTestPath": "CodexDungeon.Content.ArmorAdmission.ExpiredIframesDoNotConsumeReceipt",
+			"state": "Fail",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.066753804683685303,
+			"dateTime": "2026.10.14-15.49.14",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "LogStreaming: FlushAsyncLoading(334): 1 QueuedPackages, 0 AsyncPackages",
+						"context": "log",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2026.10.14-15.49.14"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Denied contact at .17 must not spend receipt: same window may hit once after old iframes expire' to be 73.000000, but it was 99.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorAdmissionReviewTests.cpp",
+					"lineNumber": 70,
+					"timestamp": "2026.10.14-15.49.14"
+				}
+			],
+			"warnings": 0,
+			"errors": 1,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MovementCancelsPendingArmor",
+			"fullTestPath": "CodexDungeon.Content.ArmorAdmission.MovementCancelsPendingArmor",
+			"state": "Fail",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.016612198203802109,
+			"dateTime": "2026.10.14-15.49.14",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Movement cancels remaining armor action' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorAdmissionReviewTests.cpp",
+					"lineNumber": 84,
+					"timestamp": "2026.10.14-15.49.14"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Canceled change never later equips its pending armor: The two values are not equal.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorAdmissionReviewTests.cpp",
+					"lineNumber": 85,
+					"timestamp": "2026.10.14-15.49.14"
+				}
+			],
+			"warnings": 0,
+			"errors": 2,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "RoomTransitionPreservesFocusAndIframes",
+			"fullTestPath": "CodexDungeon.Content.ArmorAdmission.RoomTransitionPreservesFocusAndIframes",
+			"state": "Fail",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.016744401305913925,
+			"dateTime": "2026.10.14-15.49.14",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Ordinary room exit does not give prototype25 HP healing' to be 60.000000, but it was 85.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorAdmissionReviewTests.cpp",
+					"lineNumber": 107,
+					"timestamp": "2026.10.14-15.49.14"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Ordinary room exit does not refill focus' to be 50.000000, but it was 100.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorAdmissionReviewTests.cpp",
+					"lineNumber": 108,
+					"timestamp": "2026.10.14-15.49.14"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Ordinary room exit does not clear existing hurt iframe deadline' to be false.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorAdmissionReviewTests.cpp",
+					"lineNumber": 109,
+					"timestamp": "2026.10.14-15.49.14"
+				},
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Preserved last consumption deadline prevents early focus regen after exit' to be 50.000000, but it was 100.000000 and outside tolerance 0.000100.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonArmorAdmissionReviewTests.cpp",
+					"lineNumber": 111,
+					"timestamp": "2026.10.14-15.49.14"
+				}
+			],
+			"warnings": 0,
+			"errors": 4,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "AllDueHitsResolve",
+			"fullTestPath": "CodexDungeon.Content.DamageBatch.AllDueHitsResolve",
+			"state": "Success",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.017041802406311035,
+			"dateTime": "2026.10.14-15.49.14",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "LowFpsAirWindowUsesMotionTime",
+			"fullTestPath": "CodexDungeon.Content.DamageBatch.LowFpsAirWindowUsesMotionTime",
+			"state": "Success",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.01648770272731781,
+			"dateTime": "2026.10.14-15.49.14",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "PreexistingIframesStillBlock",
+			"fullTestPath": "CodexDungeon.Content.DamageBatch.PreexistingIframesStillBlock",
+			"state": "Success",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.016498498618602753,
+			"dateTime": "2026.10.14-15.49.14",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ChargeQueryHasNoSideEffects",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightDriver.ChargeQueryHasNoSideEffects",
+			"state": "Success",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.01654139906167984,
+			"dateTime": "2026.10.14-15.49.14",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "DormancyAndResolvedDamage",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightDriver.DormancyAndResolvedDamage",
+			"state": "Success",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.016634996980428696,
+			"dateTime": "2026.10.14-15.49.15",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MovingTargetContinuousContact",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightDriver.MovingTargetContinuousContact",
+			"state": "Success",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.016556002199649811,
+			"dateTime": "2026.10.14-15.49.15",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ShieldPoiseResumeAndReward",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightDriver.ShieldPoiseResumeAndReward",
+			"state": "Success",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.01660430058836937,
+			"dateTime": "2026.10.14-15.49.15",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "StaticWallAndBodyStops",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightDriver.StaticWallAndBodyStops",
+			"state": "Success",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.025624100118875504,
+			"dateTime": "2026.10.14-15.49.15",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "ArmorSwapAndStats",
+			"fullTestPath": "CodexDungeon.Content.ArmorSwapAndStats",
+			"state": "Success",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.01703060045838356,
+			"dateTime": "2026.10.14-15.49.15",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "HitAndPickupCannotSkipRecovery",
+			"fullTestPath": "CodexDungeon.Content.HitAndPickupCannotSkipRecovery",
+			"state": "Success",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.016876399517059326,
+			"dateTime": "2026.10.14-15.49.15",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "MeleeChainTiming",
+			"fullTestPath": "CodexDungeon.Content.MeleeChainTiming",
+			"state": "Success",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.016942199319601059,
+			"dateTime": "2026.10.14-15.49.15",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "SpearNearestAndDedup",
+			"fullTestPath": "CodexDungeon.Content.SpearNearestAndDedup",
+			"state": "Success",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.016557499766349792,
+			"dateTime": "2026.10.14-15.49.15",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "StoneKnightGameIntegration",
+			"fullTestPath": "CodexDungeon.Content.StoneKnightGameIntegration",
+			"state": "Fail",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.016626596450805664,
+			"dateTime": "2026.10.14-15.49.15",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Error",
+						"message": "Expected 'Stone content config attaches real driver' to be true.",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\Tests\\DungeonStoneKnightIntegrationTests.cpp",
+					"lineNumber": 25,
+					"timestamp": "2026.10.14-15.49.15"
+				}
+			],
+			"warnings": 0,
+			"errors": 1,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "PickupCapAndSingleReward",
+			"fullTestPath": "CodexDungeon.Gameplay.PickupCapAndSingleReward",
+			"state": "Success",
+			"deviceInstance": [
+				"6970EBE44944816030699891874CE59E"
+			],
+			"duration": 0.016502398997545242,
+			"dateTime": "2026.10.14-15.49.15",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		}
+	]
+}

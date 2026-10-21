@@ -1,0 +1,201 @@
+{
+  "design_date": "2026-10-13",
+  "status": "passed",
+  "checks": 286,
+  "errors": [],
+  "scope": "Design rule declarations, continuity with 81 existing definitions, flow/state/case structure, 12 arithmetic examples, local references and historical-source hashes only. Not a running inventory, real input/collision/persistence, transaction/crash test, economy, UI usability, controller or game balance verification.",
+  "existing_weapon_count": 33,
+  "existing_armor_count": 12,
+  "existing_item_count": 36,
+  "flow_count": 16,
+  "ui_state_count": 11,
+  "future_runtime_cases_documented_not_executed": 24,
+  "paper_example_count": 12,
+  "paper_examples": [
+    {
+      "id": "EX-INV-001",
+      "actual": {
+        "taken": 1,
+        "inventory": 3,
+        "world": 2,
+        "total": 5
+      },
+      "expected": {
+        "taken": 1,
+        "inventory": 3,
+        "world": 2,
+        "total": 5
+      }
+    },
+    {
+      "id": "EX-INV-002",
+      "actual": {
+        "new_inventory": 3,
+        "new_world_remainder": 2,
+        "old_world_stack": 2
+      },
+      "expected": {
+        "new_inventory": 3,
+        "new_world_remainder": 2,
+        "old_world_stack": 2
+      }
+    },
+    {
+      "id": "EX-INV-003",
+      "actual": {
+        "inventory": 1,
+        "world_new_stack": 2
+      },
+      "expected": {
+        "inventory": 1,
+        "world_new_stack": 2
+      }
+    },
+    {
+      "id": "EX-INV-004",
+      "actual": {
+        "current_hp": 120
+      },
+      "expected": {
+        "current_hp": 120
+      }
+    },
+    {
+      "id": "EX-INV-005",
+      "actual": {
+        "after_down": 90,
+        "after_up": 90
+      },
+      "expected": {
+        "after_down": 90,
+        "after_up": 90
+      }
+    },
+    {
+      "id": "EX-INV-006",
+      "actual": {
+        "hp_after_heal_then_commit": 70.0
+      },
+      "expected": {
+        "hp_after_heal_then_commit": 70
+      }
+    },
+    {
+      "id": "EX-INV-007",
+      "actual": {
+        "hp": 0,
+        "transfer_commits": false,
+        "currency_pickup_commits": false
+      },
+      "expected": {
+        "hp": 0,
+        "transfer_commits": false,
+        "currency_pickup_commits": false
+      }
+    },
+    {
+      "id": "EX-INV-008",
+      "actual": {
+        "accept": false,
+        "gold": 100,
+        "coupon_quantity": 1,
+        "existing_same_id": 2
+      },
+      "expected": {
+        "accept": false,
+        "gold": 100,
+        "coupon_quantity": 1,
+        "existing_same_id": 2
+      }
+    },
+    {
+      "id": "EX-INV-009",
+      "actual": {
+        "cost": 24,
+        "gold_after": 81,
+        "coupon_after": 0
+      },
+      "expected": {
+        "cost": 24,
+        "gold_after": 81,
+        "coupon_after": 0
+      }
+    },
+    {
+      "id": "EX-INV-010",
+      "actual": {
+        "gold": 105,
+        "meta_banked": 9,
+        "active_world_objects": 0
+      },
+      "expected": {
+        "gold": 105,
+        "meta_banked": 9,
+        "active_world_objects": 0
+      }
+    },
+    {
+      "id": "EX-INV-011",
+      "actual": {
+        "eligible": true,
+        "sort_score": 2.0
+      },
+      "expected": {
+        "eligible": true,
+        "sort_score": 2
+      }
+    },
+    {
+      "id": "EX-INV-012",
+      "actual": {
+        "inventory_committed": true,
+        "poise_break": true,
+        "accumulated_stagger_after": 0
+      },
+      "expected": {
+        "inventory_committed": true,
+        "poise_break": true,
+        "accumulated_stagger_after": 0
+      }
+    }
+  ],
+  "local_document_links": 86,
+  "historical_source_sha256": {
+    "道具与状态系统设计.md": "4c7536f4b71bd74563edbb8e393a2bb452ead0fc74db4cfa201c605b710a8bbf",
+    "docs/design/items-v1/common-rules.json": "b5815a10f313b7364b1dde66b0eac9f703104ea260d4e4470094cffe31652e99",
+    "docs/design/items-v1/states.json": "97ee61346d5c6387dc25aa01a75d64fcd12d60b5917d0b7f594d05b25b0c06a3",
+    "docs/design/items-v1/items.json": "09e40ef363ddcd2507efcbdfa4cf388916623e62015dcb41229a62d6badc2bc1",
+    "docs/design/items-v1/consumables.json": "e940715c2d85ff05b8431903ca6bcd7cba9adeed0cebc79c3304253f7ef487eb",
+    "docs/design/items-v1/passives-and-utilities.json": "ec38d990658cc930bf9bb98ca52e2fcd1fecaab9b6fe80cfc40486b2e88eb85a",
+    "玩家角色与战斗规则设计.md": "da7d170fc71f67bb5fca06fbf8538d9cdf22b8998254f0033447db4a3219b949",
+    "docs/design/player-combat-v1/player-combat-rules.json": "ab22cd0f131fa8f025ea16db9d1536028526b35c467aeb0008fe2dca59c413ef",
+    "docs/design/equipment-v1/weapons.json": "95757819382832cfa31e6596f3ba90f1e983e83fbd69504da3c99d5ea2a272b4",
+    "docs/design/equipment-v1/armor.json": "9407e458aef80b9f0d8f0e958b089e7b7a6f4180aef41b7b7df97534fe780e9d"
+  },
+  "current_design_sha256": {
+    "携带与交互系统设计.md": "b0b4e570b17adedf2b94cea92d52942b36de88c5da58aee71ed6f597bfa90b37",
+    "docs/design/inventory-v1/inventory-rules.json": "7eb6f7da968622a1583b4e63069208513a09e0ef74d12e244c18e20332f08942",
+    "docs/design/inventory-v1/paper-examples.json": "bb0af7a10fcfa6b7725a42045eb048c4f26cb4cd22aace8cda10cebb9c78f156",
+    "docs/design/inventory-v1/01-交互流程与界面状态.md": "4e2d4bd1fe5a12a9f84c4a9a1fe306cb8edfaca5b5d72cfcc21ba62d918ae3f6",
+    "docs/design/inventory-v1/02-边界案例.md": "d0181b8d2c35cc0fa4eabff2bf23787b151332dfef95dd539431e22059e626aa"
+  },
+  "runtime_implemented": false,
+  "ui_state_ids": [
+    "UI-00",
+    "UI-01",
+    "UI-02",
+    "UI-03",
+    "UI-04",
+    "UI-05",
+    "UI-06",
+    "UI-07",
+    "UI-08",
+    "UI-09",
+    "UI-10"
+  ],
+  "final_recheck": {
+    "checks": 17,
+    "errors": [],
+    "validator_correction": "UI ID extraction accepts the Chinese name in the same table cell. All previously checked design inputs and historical sources remain byte-identical."
+  }
+}

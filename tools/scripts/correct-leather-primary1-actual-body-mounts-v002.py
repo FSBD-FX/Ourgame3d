@@ -1,0 +1,11 @@
+from pathlib import Path
+import json,hashlib
+R=Path('F:/Ourgame');D=R/'source-assets/production/fairytale-lgt-readability-v003';B=D/'primary1-visible-mounts-v001'
+def pin(p):
+ b=p.read_bytes();return dict(path=p.as_posix(),bytes=len(b),sha256=hashlib.sha256(b).hexdigest())
+p=B/'all18-mounts-v001.json';assert pin(p)['sha256']=='7c10015a52bba6f681d2b42facdc827757b6a6604bb4b00ffc2d97d025c68125';v=json.loads(p.read_text(encoding='utf-8-sig'))
+targets={'Chest':[(268,266),(269,266),(270,266),(270,275),(267,266),(268,266)],'NearShoulder':[(207,265),(220,249),(245,260),(242,273),(207,265),(207,265)],'FarShoulder':[(294,253),(294,253),(299,260),(294,264),(294,253),(294,253)]}
+for r in v['rows']:
+ i=r['frame'];body=R/f'source-assets/production/fairytale-sword-v001/run-primary1-v003/curated/frame-{i}.png';r['body']=pin(body);r['B_body_design_source_px']=targets[r['component']][i];aa=r['A_source_px'];bb=r['B_body_design_source_px'];r['integer_delta_xy']=[bb[0]-aa[0],bb[1]-aa[1]];r['B_role']='Root artist proposal against actually viewed CURRENT Body159v003 and retained runtime FOURlayers; no measured bones or hidden attachment points';r['B_design_uncertainty_px']=8 if i in [1,2,3] else 3
+v.update(schema='primary1-actual18-visible-feature-mounts-v002',supersedes_wrong_body_reference=pin(p),source_feature_review='F:/Ourgame/过程图稿与视频/2026-10-17_软皮第一刀实际修正版身体对位_v003',E_feature_retention='E:/OurGame/Knight/过程图稿与视频/2026-10-17-OurgameUE-leather-primary1-actual-body-v296/source-size-SHA256.json',root_actually_viewed_all_six_actual_Body159v003_and_runtime_NearArm_layers=True,root_actually_viewed_all_six_new_Chest_and_Body159=False,previous_v001_body_reference_invalid_for_runtime=True,fit_accepted=False,imported=False)
+out=B/'all18-mounts-v002.json';assert not out.exists();out.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');f=B/'mounts-freeze-v002.json';assert not f.exists();f.write_text(json.dumps(dict(files=[pin(out),pin(p)],all_actual_body_version='run-primary1-v003',runtime_body_layers_must_remain_byte_exact=True,fit_accepted=False),ensure_ascii=False,indent=2)+'\n',encoding='utf-8');print(json.dumps(dict(mounts=pin(out),freeze=pin(f)),ensure_ascii=False))

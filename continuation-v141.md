@@ -1,0 +1,26 @@
+# v141 Guard Move7 continuation — goal active
+
+F:/Ourgame UE5.5.4 (G:/UE_5.5). Current actual Source283 / Production1371 / full200 strict GREEN. Latest build `UnrealGame/Saved/Bootstrap/build-editor-20261018-225000.log` exit0. Latest report `UnrealGame/Saved/Automation/FirstRoom-20261018-225323/index.json`. Frozen snapshot `source-assets/production/backups/v141-GuardMove7-Observer200G-v003/compiled-source-manifest.json` SHA71efa450e6aea3d5107554ac524166c824ee253211452001662dad3facb62553,2135pins415copies/twoSHA0. No Source changes after this freeze.
+
+Actual Guard Move uses Rest252/Near250/Far251 seven imported components, accepted native distance C128, fixed own-hip IK, atomic7 resources and one mirror. Old196 tests and old1364 assets unchanged; old six-raster Move gate not relaxed. Other states remain Stomp50. Formal0/15, combinations0/20. Root alone actual Source/Content/tools/E/ledger/UE writes; workers NEW candidates/Fmedia only. No image generation in v141, no external API; original automatic authorization persists.
+
+Implementation chronology and immutable receipts are under `docs/production/first-batch-v2/evidence/GuardMove7-v141-v001`: stage0-admission-v001 (273→278), independent fourth (278→279), one-byte valid-birth fixture repair, exact four semantic RED snapshot, production-admission-v001 (279→281), observer final `observer-compile-repair-v003/admission-receipt-v003.json` SHA56963df17a32dfd931f4e94511d6a5cb008b3e953be5ce44cce0624daffef2b0 (logical281→283). Original observer compile failure R.ToSharedRef preserved; final source freeze610a78c82ccd41fbaa2abaa3713ef7346fb98c5ba0e8c1ca15f2817f34e8ce42. Production freezee15f9477fd93cbec4dfed2dd6f1783cc0346273649dbe5a11bb80ed3255c65df. Runtime trial approval d78bcbca8cd47caa781ee9a1bdcc1c25c5f9a3036be5d72dc2a2dcceb57feb9e is bounded, not final.
+
+Tool contract `Move7-native-observer-candidate-v001/tool-contract-fix-v002` freezee2189f7d63824c26ead5ea39427ac8a1cb345d3174f79e7b2d82fe4d7c6a7f2a fixes typed fourth-test closure ONLY. Original477d2ac… original tool/source freezes untouched. Root helper successfully ran full actual283/1371/200 preflight for both sides and created `root-native-prereg-v003/Root-Move7-{left,right}-prereg-v001.json`:18d12d49…92cc3 /203ed0d0…2c9b8.
+
+## Native first run failed independent numeric-type validation
+
+`过程图稿与视频/2026-10-18_裂岩守卫Move7真实追随128与自然入战试样_left_v001`, PID61140 exit0, actual native flow passed,448 frames. StraightX128.00070405006966 distance,25 unique qualifying Move draws, six windows63, actual adjacent Move→Windup indices365/366 and Recovery→Ready443/444,3Ready callbacks. Independent checker failed verify_rig line51. Session remains failed_preserved / independentfalse; never rewrite as PASS.
+
+Media worker JSON-only diagnosis: expected numpy.float64 rejected by near() strict type(int,float). First pivot[220,258] vs[220.0,258.0] identical.59 actualMove observations×7: max pivot0/scale0/rotation8.88e-16/artAnchor5.68e-14/screenAnchor1.14e-13, all original tolerances unchanged. Native Source/host/profile need no edit. New tool repair must use numeric Real excludingbool, samefinite/tol; only NEW `proof-geometry-repair-v003`, supplemental proof_geometry_repair_freeze_pin/checker_pin. Preserve old e218 +oldchecker d70b9114c0430d2ebdd6f2ff43662cad52790d6ed327f5efe6821ce1beacce16 lineage. Fresh left_v002/right_v002 and NEW preregs required, not old archive reclassification.
+
+E574 first run ALL originals retained before Root View: `E:/OurGame/Knight/过程图稿与视频/2026-10-18-本项目E574-裂岩守卫Move7左向首次几何核验失败原件-v001`,456files1660800150B, exactZIP499978342B/twoSHA0. Root viewed raw307,313,320,329,365,366,443,444: armored body visible replacinggray; knees/boots overlap, old combat torso shape jump remains. No full video yet. NextE575. E root README unchanged. Free E10.27GiB/F34.70GiB around15:02UTC.
+
+## Active next steps
+
+- Media worker `/root/guard_move_media_v141` owns new proof-geometry repair then media candidate. Only selected actualPNG+metadata copied to review media; complete PNG stays originalF/E ZIP once. Full original callback timing VFR/entireframe decode, no retime/pixel fit. Wait NEW freeze before Root rerun.
+- `/root/guard_move_production_v141` owns NEW Move7-manual-checkpoint-candidate-v001/v012. Preserve ALL v011/Dodge/Death/Hurt/Stomp gates, exact historical1364+new7, fiveSource chain. Requires both actual independent receipts and Root visualreview; currently no manual adoption. Old v011 rejects actual changed Source.
+- Root must run fresh repaired bothside native sequentially, preserve failures; E retention before View. Then actual six windows, adjacent joins, full silent video playback and Root visualreview. Only then adopt v012/CMDs/update README/progress/requirement ledger.
+- README/progress currently interimStage0v141 and needs update to final actual checkpoint, not claim currentnativepassed.
+- CUA restored documentation, browser2/tab4 `guardRoomReviewTab` remains old v140 player; use new retainedplayer URL after newmedia. No new browser visual yet.
+- Keep all prior versions/failures. No delete/move/reset/commit/cleanup; no goal complete. Source counts/tests alone are not finished art. Guard Hurt/Stun native joins, Y/reversal/contact/rotatedlegoutline/audio and remaining equipment/enemies open.
