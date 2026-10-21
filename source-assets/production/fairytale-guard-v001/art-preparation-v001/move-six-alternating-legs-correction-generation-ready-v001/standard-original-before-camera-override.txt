@@ -1,0 +1,60 @@
+Create a single horizontal sprite strip for the game character `ENM-STN-003-fixed-heavyaxe-armed-v001` in the state `right_move`.
+
+If this is a pre-idle/simple run, the attached base image may be used as the canonical character design. In direction-anchor mode, do not use base images for final action rows; accepted idle/direction anchors own row identity. Use the attached accepted idle/direction anchor as the canonical character design for this row. If a state anchor is attached for a non-locomotion state, treat it as approved state vocabulary only. Use the attached layout guide image only for frame count, slot spacing, centering, and safe padding. If an additional generated row strip is attached, use it only as a motion reference, never as a replacement identity source. Do not simply copy the still reference pose. Generate distinct animation poses that create a readable cycle or action.
+
+Character: ENM-STN-003-fixed-heavyaxe-armed-v001.
+Style contract: OnlyattachedacceptedArmedReady209owns thewholeGuard+fixedheavyaxeidentity, same shallow elevatedthreequarter view facingRIGHT. Squatstonehelmet/smallambereyes/sparseoliveforegroundshouldermoss/coarseink/broadwarmgreystoneplanes, SAME singleheadedstoneaxe/straightwoodshaft/stonebuttcap dimensionsandratio. Bothlivingfists FULLYCLOSED onONEcontinuousshaft throughout: mossNEARshoulder→foregroundneararm→LOWBUTTwardgrip, FARarm→HIGHHEADwardgrip. No handexchange/regrip/drop/shorteningaxe or changingheadshape. Axe heldquiet lowinfront, headRIGHT clearfeet/eyes; bothhands/axe movecoherently asoneheavyheldobject, no armcounterswing. No206/207neutral/standalone208/bad211references. Keepbody/axeconstantdensity, fullconnectedcompleteposeswith48safearea; no text/grid/scenery/dust/impactarcs/blur/shadows/loosechips. Stoneplatesnotrubber, lowdetailnotgrains/pixeldots/vectorgloss. .
+
+Use this prompt as an authoritative sprite-production spec. Do not expand it into a polished illustration, painterly character image, anime key art, 3D render, vector mascot, glossy app icon, realistic portrait, or marketing artwork.
+
+Animation action: SIX consecutive full-body fixed-axe WALK poses, one complete alternating-two-leg cycle. Use only the attached accepted ArmedReady209 for character/stone/axe identity. Same shallow elevated three-quarter side view, facing SCREEN RIGHT throughout; do not mirror the character or turn its body between frames. Both hands remain closed on the same continuous axe shaft: moss foreground NEAR arm always buttward, FAR arm always headward. Keep axe quiet, low in front, same head shape, haft length and ratio; no arm counter-swing.
+CRITICAL PHYSICAL LEG OWNERSHIP: NEAR is the leg attached to the visibly LEFT/foreground hip below the moss-shoulder side of the belt, not whichever boot is screen-right. FAR is the leg attached to the recessed RIGHT hip. Trace each actual stone thigh continuously through its knee/shin into its own boot. The two legs MUST exchange front/back positions across the cycle. Do not draw the same screen-right leg leading in all six frames. Keep both thigh-knee-ankle chains readable by stone plate continuity and natural occlusion, without labels or added colors on the finished Guard.
+The extra colored stick-figure production guide defines LEG PHASE ONLY: RED = physical NEAR leg; BLUE = physical FAR leg. RED is forward RIGHT in frame0, BLUE is forward RIGHT in frame3. Guide colors/gray head/arms are diagrams only; do not copy them onto the final stone character. Both hands continue holding the axe rather than copying diagram arm swing.
+Frame0 NEAR/RED leg attached to LEFT foreground hip extends diagonally across the lower body to the leading SCREEN-RIGHT boot, heel/full sole touching ground. FAR/BLUE leg attached to RIGHT recessed hip trails diagonally back to the SCREEN-LEFT boot, rear toe pushing. NEAR thigh/knee/shin is foreground where the chains cross. This is the first contact.
+Frame1 NEAR/RED remains the loaded stance leg while the FAR/BLUE rear boot lifts and swings forward. Preserve frame0 physical hip ownership, no hand or weapon change.
+Frame2 FAR/BLUE passes forward under the body toward its next right-front contact; NEAR/RED pushes behind. Show the swinging FAR chain and the planted/pushing NEAR chain clearly, not both lower legs as one boot.
+Frame3 OPPOSITE CONTACT: FAR/BLUE leg attached to RIGHT recessed hip now leads to the SCREEN-RIGHT grounded boot; NEAR/RED leg attached to LEFT foreground hip trails to SCREEN-LEFT rear toe. This MUST visibly exchange the physical legs versus frame0, not repeat frame0 with small knee changes. Do not change facing or swap hip identities.
+Frame4 FAR/BLUE is the loaded stance leg, NEAR/RED rear boot lifts and swings forward. This is the opposite physical-leg phase to frame1.
+Frame5 NEAR/RED passes forward under the body toward the next frame0 contact, FAR/BLUE pushes behind. This is the opposite physical-leg phase to frame2. End joins frame0 without a whole-body reset or jump.
+Heavy short grounded walk, stocky upright torso and small natural load compression. At least one foot supports ground in every pose; no running, charge lean, jump or simultaneous airborne feet. Body/axe density and camera stay coherent across all6. All6 complete connected silhouettes inside their invisible standard slots with48px equivalent safe padding. Solid magenta #FF00FF background; no labels, grids, colored limb marks, motion arcs, dust, shadow, scene, extra figures or loose fragments. Broad warm-gray/tan stone slabs, sparse olive moss, thick ink; no grain/no pixel dots.
+Runtime presentation phase is actual accepted collision-resolved traveled path modulo128world, six equal path partitions, opposite contacts at0/64world, proposed64world audio step interval. This is design tuning, not physical stride/foot-lock proof or speed*time. Native speed160 and all gameplay remain unchanged..
+
+Anchor lock:
+- Accepted idle/direction anchors own character identity, outfit details, colors, face design, asymmetric markings, and side-specific accessories for final action rows.
+- Base character images and original character sheets are pre-idle sources only. Do not reinterpret or reintroduce base-character details inside a direction-anchor action row.
+- This row owns motion only. Spend the variation budget on limb contacts, arm counter-swing, body height, torso lean, head bob, hair bounce, and loop continuity.
+- Do not redesign or reinterpret identity details while animating. Keep face, hair shape, markings, palette, outline weight, body proportions, outfit, props, and silhouette copied from the approved anchors.
+- Preserve side-specific features exactly as the approved anchors show them. Do not solve hairpin side, earring side, logos, handed props, scars, one-sided markings, asymmetric clothing, or lighting cues from scratch inside the row.
+- When generating a paired left/right row, use the paired row reference only for timing, scale, and animation intensity. Rotate the body, feet, shoulders, face angle, and gaze to the target facing, but keep identity details attached according to the accepted target-direction anchor.
+- For cyclic locomotion, do not let a single running/walking pose anchor determine every frame's leg phase. Use multi-pose motion references and the layout phase guide for foot contacts.
+- Prefer a subtler animation over any change that mutates the character identity.
+
+
+State-specific requirements:
+- Lock the whole row to pure side profile view facing camera-right. Do not average it into a different facing.
+- Derive identity from the attached accepted direction anchor for this facing, not from any base character image.
+
+
+Transparency and artifact rules:
+- Prefer pose, expression, and silhouette changes over decorative effects.
+- Effects are allowed only when state-relevant, opaque, hard-edged, sprite-like, fully inside the same frame slot, and physically touching or overlapping the character silhouette.
+- Do not draw detached effects: floating stars, loose sparkles, floating punctuation, floating icons, separated smoke clouds, loose dust, disconnected outline bits, or stray pixels.
+- Do not draw wave marks, motion arcs, speed lines, action streaks, afterimages, blur, smears, halos, glows, auras, floor patches, cast shadows, contact shadows, drop shadows, oval floor shadows, landing marks, or impact bursts.
+- Do not include text, labels, frame numbers, visible grids, guide marks, speech bubbles, thought bubbles, UI panels, code snippets, scenery, checkerboard transparency, white backgrounds, or black backgrounds.
+- Reject any pose that is cropped, overlaps another pose, crosses into a neighboring frame slot, or creates a separate disconnected component that is not attached to the character.
+
+Layout requirements:
+- Exactly 6 full-body frames, left to right, in one horizontal row.
+- The attached layout guide shows the 6 frame boxes, inner safe area, and optional motion phase hints for this row. Follow its slot count, spacing, centering, padding, and phase timing.
+- Do not reproduce the layout guide itself: no visible boxes, guide lines, center marks, labels, stick figures, guide colors, or guide background may appear in the output.
+- Treat the image as 6 equal-width invisible 512x512 frame slots. Fill every slot: each requested slot must contain exactly one complete full-body pose.
+- Spread the 6 poses evenly across the whole image width. Do not leave any requested slot blank or create large empty gaps between poses.
+- Center one complete pose in each slot. No pose may cross into the neighboring slot.
+- Use a perfectly flat pure magenta #FF00FF chroma-key background across the whole image.
+- Do not use #FF00FF, pure magenta, or chroma-adjacent colors in the character, highlights, props, shadows, or effects.
+- Keep the rendering faithful to the attached reference sprite: same outline weight, same palette, same detail level — do not restyle it.
+- Keep every frame self-contained with at least 48 px horizontal and 48 px vertical safe padding. No character body part should be clipped by the frame slot.
+- Avoid motion blur. Use clear pose changes readable at 512x512.
+- Preserve the same silhouette, face, proportions, palette, material, and props across every frame.
+
+Output only the sprite strip image.

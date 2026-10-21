@@ -1,0 +1,128 @@
+--- original/tooling/capture-Move7-native-v001.ps1
++++ tool-contract-fix-v002/tooling/capture-Move7-native-v001.ps1
+@@ -8,7 +8,8 @@
+ )
+ $ErrorActionPreference='Stop'
+ $workspace='F:\Ourgame'
+-$candidate=Split-Path $PSScriptRoot -Parent
++$derivative=Split-Path $PSScriptRoot -Parent
++$candidate=Split-Path $derivative -Parent
+ $python=Join-Path $workspace 'tools\runtime\asset-gen\Scripts\python.exe'
+ $checker=Join-Path $PSScriptRoot 'verify-Move7-native-v001.py'
+ $snapshotDirectory=if([IO.Path]::IsPathRooted($Snapshot)){[IO.Path]::GetFullPath($Snapshot)}else{[IO.Path]::GetFullPath((Join-Path $workspace $Snapshot))}
+@@ -26,7 +27,7 @@
+ [IO.Directory]::CreateDirectory($original)|Out-Null
+ [IO.Directory]::CreateDirectory((Join-Path $archive '展示副本'))|Out-Null
+ $indexPath=Join-Path $archive 'index.json'
+-$index=[ordered]@{schema='guard-Move7-native-session-v001';status='capture_started';snapshot=$snapshotDirectory;snapshot_manifest_sha256=(Get-FileHash -LiteralPath $manifestPath -Algorithm SHA256).Hash.ToLowerInvariant();root_prereg=$rootPreregPath;root_prereg_sha256=(Get-FileHash -LiteralPath $rootPreregPath -Algorithm SHA256).Hash.ToLowerInvariant();candidate_freeze_sha256=(Get-FileHash -LiteralPath (Join-Path $candidate 'Move7-native-observer-freeze-v001.json') -Algorithm SHA256).Hash.ToLowerInvariant();requested_approach_side=$ApproachSide;process_id=$null;exit_code=$null;native_reported_passed=$null;independent_passed=$false;diagnostic_Knight_Bat=$true;player_or_Guard_public_damage=$false;audio_recorded=$false;visual_reviewed=$false;formal_complete_units=0;E_before_view=$true}
++$index=[ordered]@{schema='guard-Move7-native-session-v001';status='capture_started';snapshot=$snapshotDirectory;snapshot_manifest_sha256=(Get-FileHash -LiteralPath $manifestPath -Algorithm SHA256).Hash.ToLowerInvariant();root_prereg=$rootPreregPath;root_prereg_sha256=(Get-FileHash -LiteralPath $rootPreregPath -Algorithm SHA256).Hash.ToLowerInvariant();candidate_freeze_sha256=(Get-FileHash -LiteralPath (Join-Path $candidate 'Move7-native-observer-freeze-v001.json') -Algorithm SHA256).Hash.ToLowerInvariant();tool_contract_fix_freeze_sha256=(Get-FileHash -LiteralPath (Join-Path $derivative 'Move7-tool-contract-fix-freeze-v002.json') -Algorithm SHA256).Hash.ToLowerInvariant();tool_contract_fix_checker_sha256=(Get-FileHash -LiteralPath $checker -Algorithm SHA256).Hash.ToLowerInvariant();requested_approach_side=$ApproachSide;process_id=$null;exit_code=$null;native_reported_passed=$null;independent_passed=$false;diagnostic_Knight_Bat=$true;player_or_Guard_public_damage=$false;audio_recorded=$false;visual_reviewed=$false;formal_complete_units=0;E_before_view=$true}
+ $index|ConvertTo-Json -Depth 10|Set-Content -LiteralPath $indexPath -Encoding utf8
+ $art=@('-DungeonCandidateSprites','-DungeonFairytaleSwordBodyPreview','-DungeonFairytaleSwordBodyV002Preview','-DungeonFairytaleSwordArmorPrimary1Preview','-DungeonFairytaleSwordPrimary2Preview','-DungeonFairytaleSwordPrimary2BodyPreview','-DungeonFairytaleSwordPrimary2ArmorPreview','-DungeonFairytaleSwordPrimary3ArmorPreview','-DungeonFairytaleLeatherReadyPreview','-DungeonFairytaleLeatherPrimary1Preview','-DungeonFairytaleLeatherPrimary2Preview','-DungeonFairytaleLeatherPrimary3Preview','-DungeonFairytaleSwordEquipmentBoundPreview','-DungeonFairytaleSwordWalkPreview','-DungeonFairytaleGuardFullPreview','-DungeonFairytaleSwordHurtPreview','-DungeonFairytaleSwordDeathPreview','-DungeonFairytaleGuardStompPreview','-DungeonFairytaleSwordDodgePreview','-DungeonFairytaleGuardMoveRigPreview')
+ $arguments=@(('"{0}"' -f (Join-Path $workspace 'UnrealGame\CodexDungeon.uproject')),'/Game/Maps/FirstRoom?DungeonFirstBatchGuardRoom','-game','-windowed','-ResX=1280','-ResY=720','-NoSplash','-NoLiveCoding','-nop4','-unattended','-DungeonGuardMoveProofV001','-DungeonContentProof','-DungeonFastLosslessCapture','-DungeonAsyncLosslessCapture',('-DungeonGuardMoveApproachSide={0}' -f $ApproachSide),('-DungeonContentProofDir="{0}"' -f $original),'-ExecCmds="t.MaxFPS 30,r.ScreenshotDelegate 1"',('-abslog="{0}"' -f (Join-Path $archive 'runtime.log')))+$art
+--- original/tooling/fill-Move7-native-prereg-v001.py
++++ tool-contract-fix-v002/tooling/fill-Move7-native-prereg-v001.py
+@@ -9,7 +9,7 @@
+  snapshot=path(q.snapshot);cm=snapshot/'compiled-source-manifest.json';m=read(cm);template=read(C/'Root-Move7-native-prereg-TEMPLATE-v001.json');results=[]
+  # Validate in memory before creating any output, using the same public gate.
+  for side in[-1,1]:
+-  d=dict(template);d['source_extension_chain']=[dict(x)for x in template['source_extension_chain']];d.update(is_template=False,RootApproved=True,pre_registered_before_capture=True,approval_method='Root CLI --approve-prereg',approach_side=side,expected_source_files=m['source_files'],compiled_manifest_pin=fact(cm),candidate_freeze_pin=fact(C/'Move7-native-observer-freeze-v001.json'),source_probe_freeze_pin=fact(SOURCE_FREEZE),runtime_trial_approval_pin=fact(q.runtime_approval))
++  d=dict(template);d['source_extension_chain']=[dict(x)for x in template['source_extension_chain']];d.update(is_template=False,RootApproved=True,pre_registered_before_capture=True,approval_method='Root CLI --approve-prereg',approach_side=side,expected_source_files=m['source_files'],compiled_manifest_pin=fact(cm),candidate_freeze_pin=fact(C/'Move7-native-observer-freeze-v001.json'),source_probe_freeze_pin=fact(SOURCE_FREEZE),runtime_trial_approval_pin=fact(q.runtime_approval),tool_contract_fix_freeze_pin=fact(DERIVATIVE_FREEZE),tool_contract_fix_checker_pin=fact(D/'tooling/verify-Move7-native-v001.py'))
+   d['source_extension_chain'][3]['receipt_pin']=fact(q.production_admission);d['source_extension_chain'][4]['receipt_pin']=fact(q.observer_admission);results.append((side,d))
+  # Temporary NEW candidate-only files are not written. Gate read() is narrowly
+  # adapted for the future output path; all other path reads stay real read-only.
+--- original/tooling/move7_native_contract_v001.py
++++ tool-contract-fix-v002/tooling/move7_native_contract_v001.py
+@@ -1,10 +1,12 @@
+ """Bounded Move7 source/import/trial gates. Read-only; never starts UE."""
+ from pathlib import Path
+ import hashlib,json,math,runpy,sys
+-ROOT=Path('F:/Ourgame').resolve();C=Path(__file__).resolve().parent.parent
++ROOT=Path('F:/Ourgame').resolve();C=ROOT/'source-assets/production/fairytale-guard-v001/Move7-native-observer-candidate-v001'
++D=Path(__file__).resolve().parent.parent
++DERIVATIVE_FREEZE=D/'Move7-tool-contract-fix-freeze-v002.json'
+ P='UnrealGame/Source/CodexDungeon/'
+-SOURCE_ROOT=C/'source-boundary-fix-v002'
+-SOURCE_FREEZE=SOURCE_ROOT/'Move7-observer-source-freeze-v002.json'
++SOURCE_ROOT=C/'source-compile-fix-v003'
++SOURCE_FREEZE=SOURCE_ROOT/'Move7-observer-source-freeze-v003.json'
+ PROFILE_SHA='03156e971171f597ca504e9c0176d5a2fdf3c31c09b3eddae2995e2245193b51'
+ SNAPSHOT_SHA='a16a6a151ca0f6895c80ce108221bb3bed8f9c267c8016d142c18ed74f84cd94'
+ PROFILE_ID='GuardMoveRig252_250_251_AuthorOwnHipC128_v001'
+@@ -34,6 +36,8 @@
+ def equalpin(a,b):return path(a['path'])==path(b['path'])and(a['bytes'],a['sha256'])==(b['bytes'],b['sha256'])
+ def frozen(v):
+  p=path(v)
++ if read(p).get('schema')=='Guard-Move7-body-hip-root-added-semantic-test-freeze-v001':
++  fourth_test_closure(read(p));return
+  for x in read(p)['files']:
+   q=Path(x['path']);q=q if q.is_absolute()else p.parent/q
+   if not q.exists():q=ROOT/x['path']
+@@ -41,6 +45,26 @@
+ def keyed(rows):
+  d={path(x['path']).relative_to(ROOT).as_posix():dict(x,path=path(x['path']).relative_to(ROOT).as_posix())for x in rows};need(len(d)==len(rows),'Duplicate source membership');return d
+ def bytes_equal(a,b):return(a['bytes'],a['sha256'])==(b['bytes'],b['sha256'])
++def fourth_test_closure(d):
++ # This one historical schema is a named closure, not files[]. Historical
++ # beforepins describe Stage0 278; changed files are checked against that
++ # exact admitted map, never incorrectly compared to current production.
++ need(d['schema']=='Guard-Move7-body-hip-root-added-semantic-test-freeze-v001'and d['test_name']=='CodexDungeon.Content.FairytaleGuardMoveRigV001.BodyHipAttachmentAndActualSourceRoot','Only exact fourth-test named closure is supported')
++ source=pin(d['test_source']);need(source.name=='DungeonFairytaleGuardMoveRigBodyHipRootV001Tests.cpp'and path(d['proposed_actual_path'])==ROOT/FOURTH,'Typed fourth-test source identity differs')
++ fixed=read(C/'read-only-input-pins-v001.json')['inputs'];stage=read(pin(fixed['actual_stage0_receipt']));fourth=read(pin(fixed['actual_fourth_test_receipt']))
++ need(bytes_equal(d['test_source'],fourth['added_source']),'Actual fourth-test admission differs from frozen candidate source')
++ need(equalpin(d['stage0_v001_freeze'],stage['candidate_freeze']),'Typed fourth-test Stage0 closure differs');frozen(pin(d['stage0_v001_freeze']))
++ before=read(pin(d['exact_beforepins']));need(before['schema']=='Guard-Move7-body-hip-root-added-test-exact-beforepins-v001'and before['actual_source_count']==278 and path(before['actual_source_root'])==ROOT/'UnrealGame/Source','Exact historical278 before closure required')
++ baseline=read(pin(fixed['base_compiled_manifest']));expected=keyed([x for x in baseline['files']if x['path'].startswith('UnrealGame/Source/')]);need(len(expected)==stage['previous_Source_count']==273,'Typed closure baseline differs')
++ rows=keyed(stage['admitted']);need(set(rows)==STAGE|INTERFACE and set(rows)-set(expected)==STAGE and stage['Source_count']==278,'Typed closure Stage0 extension differs');expected.update(rows)
++ need(keyed(before['actual_source_files'])==expected and len(expected)==278 and expected[P+'Tests/DungeonFairytaleGuardMoveRigV001Tests.cpp']['sha256']==d['frozen_three_test_sha256'],'Historical278 exact map/frozen three-test source differs')
++ engine=Path('G:/UE_5.5/Engine/Source').resolve();allowed={engine/n for n in ['Runtime/Engine/Private/HUD.cpp','Runtime/Engine/Private/UserInterface/CanvasItem.cpp','Runtime/Core/Public/Math/RotationTranslationMatrix.h']}
++ backends=d['independent_backend_sources'];actual={Path(x['path']).resolve()for x in backends};need(len(backends)==3 and actual==allowed,'Only three explicitly frozen UE backend source paths are permitted')
++ for x in backends:
++  backend=Path(x['path']).resolve();need(backend.is_absolute()and backend.is_relative_to(engine),'Backend outside exact engine source scope');h=hashlib.sha256()
++  with backend.open('rb')as f:
++   for b in iter(lambda:f.read(1024*1024),b''):h.update(b)
++  need((backend.stat().st_size,h.hexdigest())==(x['bytes'],x['sha256']),'Independent actual engine source pin changed: '+str(backend))
+ def strict_suite(suite,names):
+  need(set(x['fullTestPath']for x in suite['tests'])==names and len(suite['tests'])==len(names),'Exact old196 plus four registered targets required')
+  need(suite['succeeded']==len(names)and all(type(suite[k])is int and suite[k]==0 for k in ['failed','succeededWithWarnings','notRun','inProcess']),'Full200 strict counters required')
+@@ -78,6 +102,7 @@
+ def preflight(snapshot,prereg):
+  p=read(prereg);need(p['schema']=='GuardMove7-Root-native-prereg-v001'and p['is_template']is False and p['RootApproved']is True and p['pre_registered_before_capture']is True and p['FinalAccepted']is False,'Actual pre-capture Root prereg required; template rejects')
+  need(type(p['approach_side'])is int and p['approach_side']in[-1,1],'Explicit actual facing/side required')
++ frozen(DERIVATIVE_FREEZE);need(equalpin(p['tool_contract_fix_freeze_pin'],fact(DERIVATIVE_FREEZE))and equalpin(p['tool_contract_fix_checker_pin'],fact(D/'tooling/verify-Move7-native-v001.py')),'Explicit derivative tool freeze/checker binding differs')
+  frozen(C/'Move7-native-observer-freeze-v001.json');frozen(SOURCE_FREEZE)
+  need(equalpin(p['candidate_freeze_pin'],fact(C/'Move7-native-observer-freeze-v001.json'))and equalpin(p['source_probe_freeze_pin'],fact(SOURCE_FREEZE)),'Different observer candidate/source freeze')
+  fixed=read(C/'read-only-input-pins-v001.json')['inputs']
+--- original/tooling/verify-Move7-native-pixels-v001.py
++++ tool-contract-fix-v002/tooling/verify-Move7-native-pixels-v001.py
+@@ -12,7 +12,7 @@
+ args=parser.parse_args()
+ archive=Path(args.archive).resolve()
+ original=archive/'原件'
+-protocol=json.loads((Path(__file__).resolve().parent.parent/'proof-protocol-v001.json').read_text(encoding='utf-8-sig'))
++protocol=json.loads((Path('F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-native-observer-candidate-v001/proof-protocol-v001.json')).read_text(encoding='utf-8-sig'))
+ report=json.loads((original/'runtime-report.json').read_text(encoding='utf-8-sig'))
+ assert report['schema']==protocol['runtime_report_schema'] and report['scenario']==protocol['scenario']
+ metadata=json.loads((original/'native-lossless-capture.json').read_text(encoding='utf-8-sig'))
+--- original/tooling/verify-Move7-native-v001.py
++++ tool-contract-fix-v002/tooling/verify-Move7-native-v001.py
+@@ -56,6 +56,7 @@
+ def verify(archive,p,profile,trial,prereg):
+  r=read(archive/'原件/runtime-report.json');index=read(archive/'index.json');need(r['schema']=='guard-Move7-native-observer-v001'and r['scenario']=='NormalWASDLeadActualGuardMove128CombatReady'and r['passed']is True and r['flow_complete']is True,'Actual original Move7 native trial failed')
+  need(index['schema']=='guard-Move7-native-session-v001'and index['process_id']==int(r['process_id'])and index['exit_code']==0 and index['native_reported_passed']is True and index['snapshot_manifest_sha256']==p['compiled_manifest_pin']['sha256']and path(index['root_prereg'])==prereg and index['root_prereg_sha256']==fact(prereg)['sha256']and index['candidate_freeze_sha256']==p['candidate_freeze_pin']['sha256'],'Native session/PID/CM/prereg differs')
++ need(index['tool_contract_fix_freeze_sha256']==p['tool_contract_fix_freeze_pin']['sha256']and index['tool_contract_fix_checker_sha256']==p['tool_contract_fix_checker_pin']['sha256'],'Native session derivative tool binding differs')
+  side=p['approach_side'];need(r['requested_approach_side']==r['actual_approach_side']==index['requested_approach_side']==side and r['restart_serial']=='1','Normal startup/real requested side differs')
+  for k in ['player_or_Guard_public_damage_used','HP_poise_clock_actor_writes','AI_toggle_used','historical_Sweep_requeried','wallclock_gait_used','raster_Move6_frames_claimed','Guard_Hurt_Stun_native_covered','audio_recorded','visual_reviewed']:need(r[k]is False,'Trial scope changed: '+k)
+  need(r['silent_video']is True and r['formal_complete_units']==0 and r['guard_final_HP']==185 and r['guard_incoming_count']==0,'Living Guard185/no incoming/silent limited trial differs')
+@@ -108,9 +109,9 @@
+  for loss,hit in zip(losses,hits):
+   a=hit['action'];need(loss['event']==hit['event']and loss['target']==hit['target']==r['player_entity']and loss['attack']==a['attack_id']and loss['at']==hit['at']and a['active_at']<=loss['at']<a['active_end']and sum(x['attack']==loss['attack']and x['target']==loss['target']and x['at']==loss['at']for x in receipts)==1,'Actual locked contact/receipt differs');need(near(loss['actual_HP_loss'],min(hp,a['damage']/1.14),1e-4),'Actual single Armor14 mitigation differs');hp=max(0,hp-loss['actual_HP_loss'])
+  need(near(obs[-1]['player_HP'],hp,1e-4),'Final hero HP differs from real Guard receipts')
+- subprocess.run([sys.executable,'-B','-X','utf8',str(C/'tooling/verify-Move7-native-pixels-v001.py'),'--archive',str(archive)],check=True,capture_output=True,text=True)
+- optical=runpy.run_path(str(C/'tooling/verify-Move7-source-pixels-v001.py'))['verify_source_pixels'](archive,profile,qual)
+- return dict(schema='guard-Move7-independent-native-v001',passed=True,process_id=int(r['process_id']),native_report_pin=fact(archive/'原件/runtime-report.json'),actual_facing=side,accepted_cycle_distance=r['last_distance']-r['first_distance'],six_distance_window_mask=mask,unique_Move_draws=len(qual),original_combat_attack_id=aid,actual_adjacent_joins=edges,actual_guard_confirmed_hits=len(losses),actual64distance_footsteps=len(feet),complete7GPU_and_submitted_floatquads=True,original_clock_and_source_projection=True,native_PNG_CRC_FIFO_verified=True,optical_source_projection=optical,Hurt_Stun_native_covered=False,historical_block_cause_verified=False,footlock=False,audio_recorded=False,visual_reviewed=False,FinalAccepted=False)
++ subprocess.run([sys.executable,'-B','-X','utf8',str(D/'tooling/verify-Move7-native-pixels-v001.py'),'--archive',str(archive)],check=True,capture_output=True,text=True)
++ optical=runpy.run_path(str(D/'tooling/verify-Move7-source-pixels-v001.py'))['verify_source_pixels'](archive,profile,qual)
++ return dict(tool_contract_fix_freeze_pin=p['tool_contract_fix_freeze_pin'],tool_contract_fix_checker_pin=p['tool_contract_fix_checker_pin'],schema='guard-Move7-independent-native-v001',passed=True,process_id=int(r['process_id']),native_report_pin=fact(archive/'原件/runtime-report.json'),actual_facing=side,accepted_cycle_distance=r['last_distance']-r['first_distance'],six_distance_window_mask=mask,unique_Move_draws=len(qual),original_combat_attack_id=aid,actual_adjacent_joins=edges,actual_guard_confirmed_hits=len(losses),actual64distance_footsteps=len(feet),complete7GPU_and_submitted_floatquads=True,original_clock_and_source_projection=True,native_PNG_CRC_FIFO_verified=True,optical_source_projection=optical,Hurt_Stun_native_covered=False,historical_block_cause_verified=False,footlock=False,audio_recorded=False,visual_reviewed=False,FinalAccepted=False)
+ def main():
+  a=argparse.ArgumentParser();a.add_argument('--snapshot',required=True);a.add_argument('--root-prereg',required=True);a.add_argument('--archive');a.add_argument('--source-only',action='store_true');a.add_argument('--write-receipt',action='store_true');q=a.parse_args();prereg=path(q.root_prereg);m,p,profile,_,trial=preflight(path(q.snapshot),prereg)
+  if q.source_only:print(json.dumps(dict(compiled_inputs_verified=True,strict_registry=200,production_files=1371,source_files=m['source_files'],Move7_sources=7,approach_side=p['approach_side'],UE_started=False)));return

@@ -1,0 +1,11 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.h
+@@ -135,6 +135,8 @@
+     bool bUseFairytaleGuardFullPreview=false;
+     bool bUseFairytaleGuardStompPreview=false;
+     bool bUseFairytaleGuardMoveRigPreview=false;
++    void LoadFairytaleGuardMoveRigTrial();
++    bool DrawFairytaleGuardMoveRigBody(ADungeonFighter* Fighter);
+     uint64 FairytaleGuardMoveRigDrawSerial=0;
+     TArray<FDungeonFairytaleGuardMoveRigDrawV001> FairytaleGuardMoveRigDraws;
+     uint64 FairytaleGuardFullDrawSerial=0;

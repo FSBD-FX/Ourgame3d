@@ -1,0 +1,101 @@
+{
+  "schema": "native167-far-primary1-extraction-rejected-v2",
+  "created_local": "2026-10-16T12:25:01.151717+08:00",
+  "native_request": 167,
+  "raw": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/run-farshoulder-primary1-v002/raw/armor_shoulder_far_sword_primary1.png",
+    "bytes": 1309984,
+    "sha256": "c51acdb26481672b9022882ab8ead56f09c3b8b6ce10526b75f09b1a7141d3a9"
+  },
+  "request_restored_to_original": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/run-farshoulder-primary1-v002/sprite-request.json",
+    "bytes": 1442,
+    "sha256": "7d31b18cb52cecfbb5164c546dff1b94136bbbddbdcbe03a1491ce27a2f6150a"
+  },
+  "command": [
+    "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "F:/Ourgame/tools/scripts/extract-sprite-shared-row-scale.py",
+    "--run-dir",
+    "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/run-farshoulder-primary1-v002"
+  ],
+  "tool": {
+    "path": "F:/Ourgame/tools/scripts/extract-sprite-shared-row-scale.py",
+    "bytes": 8626,
+    "sha256": "2d7464dc2e8dd962a7d4dc170c0a7401d09cf1a626415309b4921b7d89d88aa3"
+  },
+  "native_extractor": {
+    "path": "C:/Users/22499/.codex/skills/sprite-gen/sprite_gen/frames/extract.py",
+    "bytes": 174274,
+    "sha256": "f2a7902f01069668340d14217bd05c777f5c01853284102e211aba1013a45539"
+  },
+  "native_extractor_auto_write_source_lines": [
+    2604,
+    2616
+  ],
+  "exit_code": 1,
+  "log": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/farshoulder-extraction-v002/extract-shared-row-v001.log",
+    "bytes": 1336,
+    "sha256": "56be4ee5b9b7208ce863380a6e85d9e426a415f0ba8d842650f787eae496f7fb"
+  },
+  "actual_extractor_result": {
+    "ok": false,
+    "engine": "component-row",
+    "engine_revision": "77d7af445dc3",
+    "extract_args": {},
+    "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-primary1-v001\\run-farshoulder-primary1-v002",
+    "cell": {
+      "shape": "square",
+      "width": 512,
+      "height": 512,
+      "safe_margin_x": 241,
+      "safe_margin_y": 242
+    },
+    "chroma_key": {
+      "name": "green",
+      "hex": "#00FF00",
+      "rgb": [
+        0,
+        255,
+        0
+      ],
+      "selection": "manual"
+    },
+    "errors": [
+      "armor_shoulder_far_sword_primary1: frame 02 is empty or too sparse (495 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)"
+    ],
+    "warnings": []
+  },
+  "known_failed_frame": 2,
+  "known_failed_used_pixels": 495,
+  "character_floor": 512,
+  "compose_export_preview_invoked": false,
+  "native_auto_write_preserved": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/farshoulder-extraction-v002/sprite-request-native-auto-write-v001.json",
+    "bytes": 1539,
+    "sha256": "3e3a4a659fc8514828087d8a4bf56b6a6be5ce49fc99c72113d89aac79eff210"
+  },
+  "native_auto_write_diff": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/farshoulder-extraction-v002/native-auto-write-request-diff-v001.patch",
+    "bytes": 312,
+    "sha256": "d159cc85fba69c1bc91b9c0233f4b98574a074f4c3f660bcb177f373b23f698b"
+  },
+  "request_auto_write_rolled_back_byte_exact": true,
+  "root_original_request_chroma_was_absent": true,
+  "raw_independent_observation": "Retained167 raw viewed afterE177; no166 large front central disc; topstrap rivet visible. Not a full identity/fit/pose acceptance.",
+  "actual_component_A": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "new_outputs_explicitly_viewed": false,
+  "QA_or_recipe_or_helper_relaxed": false,
+  "native_or_import_or_ue_called": false,
+  "formal_complete_units": 0
+}

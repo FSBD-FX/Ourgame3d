@@ -1,0 +1,70 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -1324,8 +1324,65 @@
+ 
+ bool ADungeonFighter::QueryCompletedGuardMove(FDungeonGuardMoveSample& Out) const
+ {
+-    (void)Out; // Stage0 semantic RED: no fabricated witness or caller mutation.
+-    return false;
++    // This is a completed native-owner read. No AI step, sweep, clock, cache,
++    // event insertion, feedback consumption, persistence or movement occurs.
++    namespace G=DungeonStoneGuard;namespace F=DungeonFairytaleGuardFullV003;
++    const auto* Game=GetWorld()?GetWorld()->GetAuthGameMode<ADungeonGameMode>():nullptr;
++    if(!IsInGameThread()||!Game||!StoneGuard||StoneKnight||StoneBat||!bEnemy||bDead
++        ||Game->PlayerFighter==this||Game->bWaitingForStart||Game->bGameOver||Game->IsRunInstallGated()
++        ||Game->bRunTickActive||Game->bSimulationBatch||Game->bSimulatingMotion||!Game->PendingDamage.IsEmpty()
++        ||bResolvingContentWindow||bSuppressOrdinaryMovement||!RootComponent||RootComponent->GetAttachParent()
++        ||EnemyContentId!=TEXT("ENM-STN-003")||!bHasAxe||WeaponId!=TEXT("enemy_stone_guard_twohand_axe")||!ArmorId.IsEmpty()
++        ||JumpHeight!=0.f||JumpVelocity!=0.f)return false;
++    const auto Transform=GetActorTransform();
++    if(Transform.ContainsNaN()||Transform.GetTranslation().Z!=0.||Transform.GetRotation()!=FQuat::Identity
++        ||Transform.GetScale3D()!=FVector::OneVector)return false;
++    const auto& V=Game->GetEquipmentView();const auto& W=Game->GetWeaponWorldState();
++    const uint64 Id=Game->FindWorldEntityId(this);const double Now=Game->GetSimulationTime();
++    if(!V.Bound||!V.RunGuid.IsValid()||!V.RoomInstanceId||!Id||Id==V.OwnerId||Id!=GetRuntimeEntityId()
++        ||Game->FindWorldFighter(Id)!=this||!Game->Enemies.Contains(this)
++        ||W.RunGuid!=V.RunGuid||W.RoomInstanceId!=V.RoomInstanceId||W.Time!=Now||!FMath::IsFinite(Now)||Now<0.)return false;
++    int32 Bindings=0;
++    for(const auto& B:W.ActorBindings)if(B.EntityId==Id)
++    {if(B.RoomInstanceId!=V.RoomInstanceId||B.ContentId!=EnemyContentId)return false;++Bindings;}
++    if(Bindings!=1)return false;
++    const auto& S=StoneGuard->State();const auto Position=GetGroundPosition();
++    if(S.EntityId!=Id||!FMath::IsFinite(S.InitialTime)||S.InitialTime<0.||S.Time!=Now||S.Time<S.InitialTime
++        ||LastGuardSyncTime!=S.Time||S.Phase!=G::EPhase::Idle||S.Action.InProgress
++        ||!FMath::IsFinite(S.HP)||S.HP<=0.||!FMath::IsFinite(Health)||Health!=float(S.HP)
++        ||MaxHealth!=float(G::FGuardKernel::Definition().HP)||S.Position.Z!=0.
++        ||!FMath::IsFinite(S.Position.X)||!FMath::IsFinite(S.Position.Y)
++        ||!FMath::IsFinite(Position.X)||!FMath::IsFinite(Position.Y)
++        ||!NativeOwnerPositionProjection(Position,S.Position.X,S.Position.Y)
++        ||(S.Facing!=1&&S.Facing!=-1)||Facing!=float(S.Facing))return false;
++    const G::FEvent* Current=nullptr;double Total=0.,CurrentDistance=0.;
++    for(const auto& E:S.Issued)
++    {
++        if(!E.EventId||E.EventId>=S.NextEventId||E.EntityId!=Id||!FMath::IsFinite(E.AtTime)
++            ||E.AtTime<S.InitialTime||E.AtTime>S.Time)return false;
++        if(E.Kind!=G::EEventKind::Movement)continue;
++        for(double N:{E.From.X,E.From.Y,E.From.Z,E.To.X,E.To.Y,E.To.Z})if(!FMath::IsFinite(N))return false;
++        if(E.From.Z!=0.||E.To.Z!=0.)return false;
++        const double Length=std::hypot(E.To.X-E.From.X,E.To.Y-E.From.Y);
++        if(!FMath::IsFinite(Length)||Length<0.)return false;
++        Total+=Length;if(!FMath::IsFinite(Total))return false;
++        if(E.AtTime==S.Time&&Length>0.){Current=&E;CurrentDistance=Length;}
++    }
++    if(!Current||Current->To.X!=S.Position.X||Current->To.Y!=S.Position.Y)return false;
++    const auto Selection=F::SelectFull(S);
++    if(!Selection.Valid||Selection.Clip!=F::EClip::Move||Selection.Phase!=G::EPhase::Idle
++        ||Selection.EntityId!=Id||Selection.Facing!=S.Facing||Selection.SampleTime!=Now
++        ||Selection.SourceEventId!=Current->EventId||Selection.AcceptedDistance!=Total)return false;
++    FDungeonGuardMoveSample Candidate;
++    Candidate.Valid=true;Candidate.BlockKnown=false; // Original Movement has no historical sweep stop/fraction.
++    Candidate.EntityId=Candidate.AcceptedPathOwnerId=Id;Candidate.RunGuid=V.RunGuid;
++    Candidate.RoomInstanceId=V.RoomInstanceId;Candidate.PresentationEpoch=Game->GetRunPresentationEpoch();
++    Candidate.EnemyContentId=EnemyContentId;Candidate.SampleTime=S.Time;Candidate.MovementAtTime=Current->AtTime;
++    Candidate.MovementEventId=Current->EventId;Candidate.AcceptedDistance=Total;Candidate.CurrentAcceptedDistance=CurrentDistance;
++    Candidate.GroundPosition=Position;Candidate.MovementFrom={Current->From.X,Current->From.Y};Candidate.MovementTo={Current->To.X,Current->To.Y};
++    Candidate.MovementDirection=(Candidate.MovementTo-Candidate.MovementFrom)/CurrentDistance;
++    Candidate.Facing=S.Facing;Candidate.NativeSelection=Selection;
++    Out=MoveTemp(Candidate);return true;
+ }
+ 
+ bool ADungeonFighter::QueryDodgePresentation(FDungeonDodgePresentationSample& Out) const

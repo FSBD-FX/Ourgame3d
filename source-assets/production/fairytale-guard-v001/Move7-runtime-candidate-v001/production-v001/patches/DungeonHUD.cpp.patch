@@ -1,0 +1,35 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+@@ -279,6 +279,7 @@
+     LoadGuardFeedbackSounds();
+     LoadFairytaleGuardTrial();
+     LoadFairytaleGuardFullTrial();
++    LoadFairytaleGuardMoveRigTrial();
+     FlushRenderingCommands();
+     if(FParse::Param(FCommandLine::Get(),TEXT("DungeonRunSaveProof"))
+         ||FParse::Param(FCommandLine::Get(),TEXT("DungeonRunRestoreProof")))
+@@ -322,7 +323,7 @@
+     WorldWeaponEffects.Reset();WorldWeaponAudioRequests.Reset();WorldWeaponRun=Saved.RunGuid;
+     WorldWeaponCursor=Saved.WorldHistoryThrough;
+     ActionAudioRun=Saved.RunGuid;ActionAudioCursor=Saved.NextActionSequence-1;bActionAudioAttached=true;
+-    ActionAudioPlayRequests.Reset();ActionAudioPlayReceipts.Reset();MeleeTrails.Reset();ActorQuads.Reset();
++    ActionAudioPlayRequests.Reset();ActionAudioPlayReceipts.Reset();MeleeTrails.Reset();ActorQuads.Reset();FairytaleGuardMoveRigDraws.Reset();
+     if(auto* Game=GetWorld()?GetWorld()->GetAuthGameMode<ADungeonGameMode>():nullptr)
+     {
+         ResetGuardFeedback(Game);
+@@ -1078,6 +1079,7 @@
+     if(F->GetStoneGuardDriver())
+     {
+         RenderedNativeGuardEntityIds.Add(F->GetRuntimeEntityId()); // Same actual DrawFighter invocation; no art/gameplay mutation.
++        if(bUseFairytaleGuardMoveRigPreview&&DrawFairytaleGuardMoveRigBody(F))return;
+         if(bUseFairytaleGuardFullPreview)
+         {if(DrawFairytaleGuardFullBody(F))return;}
+         else if(DrawFairytaleGuardBody(F))return;
+@@ -1641,6 +1643,7 @@
+ 
+ void ADungeonHUD::DrawHUD()
+ {
++    FairytaleGuardMoveRigDraws.Reset(); // Every callback, including no-Canvas and early lookdev paths.
+     Super::DrawHUD(); if(!Canvas) return;
+     CombatRangeDebugLineCount=0;
+     ++CombatRangeProofFrame;

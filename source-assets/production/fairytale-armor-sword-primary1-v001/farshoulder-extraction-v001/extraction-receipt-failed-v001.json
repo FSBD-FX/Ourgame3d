@@ -1,0 +1,101 @@
+{
+  "schema": "native159-primary1-armor-six-extraction-rejected-v1",
+  "created_local": "2026-10-16T12:21:17.730544+08:00",
+  "native_request": 166,
+  "component": "FarShoulder",
+  "raw": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/run-farshoulder-primary1-v001/raw/armor_shoulder_far_sword_primary1.png",
+    "bytes": 1301735,
+    "sha256": "6a9598024760b022525e667bf773061b8079cd16ed0d6748a88e812da82241cd"
+  },
+  "generation_receipt": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/generation-control-v001/generation-receipt166-v001.json",
+    "bytes": 7745,
+    "sha256": "1b69b0e9f00365fc01f9abcb51897ad8afc1c8c598d371d3358dcc9c23ad2089"
+  },
+  "request": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/run-farshoulder-primary1-v001/sprite-request.json",
+    "bytes": 1539,
+    "sha256": "b4f5e684ca3fda16295c8a7da9056eb08dad845977017d82049f97e5a91d32af"
+  },
+  "failed_command": {
+    "argv": [
+      "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "F:\\Ourgame\\tools\\scripts\\extract-sprite-shared-row-scale.py",
+      "--run-dir",
+      "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-primary1-v001\\run-farshoulder-primary1-v001"
+    ],
+    "tool": {
+      "path": "F:/Ourgame/tools/scripts/extract-sprite-shared-row-scale.py",
+      "bytes": 8626,
+      "sha256": "2d7464dc2e8dd962a7d4dc170c0a7401d09cf1a626415309b4921b7d89d88aa3"
+    },
+    "exit_code": 1,
+    "log": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/farshoulder-extraction-v001/extract-shared-row-v001.log",
+      "bytes": 2456,
+      "sha256": "0f7071f0da936ae982a48eb690d67449f53b0771752bd9404e74e26f3a889636"
+    }
+  },
+  "actual_extractor_result": {
+    "ok": false,
+    "engine": "component-row",
+    "engine_revision": "77d7af445dc3",
+    "extract_args": {},
+    "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-primary1-v001\\run-farshoulder-primary1-v001",
+    "cell": {
+      "shape": "square",
+      "width": 512,
+      "height": 512,
+      "safe_margin_x": 241,
+      "safe_margin_y": 242
+    },
+    "chroma_key": {
+      "name": "green",
+      "hex": "#00FF00",
+      "rgb": [
+        0,
+        255,
+        0
+      ],
+      "selection": "manual"
+    },
+    "errors": [
+      "armor_shoulder_far_sword_primary1: frame 00 is empty or too sparse (444 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)",
+      "armor_shoulder_far_sword_primary1: frame 01 is empty or too sparse (507 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)",
+      "armor_shoulder_far_sword_primary1: frame 02 is empty or too sparse (379 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)",
+      "armor_shoulder_far_sword_primary1: frame 03 is empty or too sparse (391 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)",
+      "armor_shoulder_far_sword_primary1: frame 04 is empty or too sparse (502 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)",
+      "armor_shoulder_far_sword_primary1: frame 05 is empty or too sparse (475 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)"
+    ],
+    "warnings": []
+  },
+  "actual_used_pixel_counts": [
+    444,
+    507,
+    379,
+    391,
+    502,
+    475
+  ],
+  "required_character_profile_floor": 512,
+  "standard_pipeline_accepted": false,
+  "compose_export_preview_invoked": false,
+  "raw_topstrap_plus_new_front_central_disc_observed": true,
+  "same_ready_item_identity_passed": false,
+  "actual_component_A": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "request_or_QA_or_helper_changed": false,
+  "new_outputs_explicitly_viewed": false,
+  "native_or_import_or_ue_called": false,
+  "formal_complete_units": 0
+}

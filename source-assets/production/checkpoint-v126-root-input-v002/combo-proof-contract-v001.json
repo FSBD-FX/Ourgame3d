@@ -1,0 +1,323 @@
+{
+  "schema": "leather-combo-runtime-proof-contract-v001",
+  "template_only": false,
+  "scope": "Ready/P1/P2/P3 matching leather, normal two-facing six-attack proof only",
+  "base_snapshot_manifest": {
+    "path": "source-assets/production/backups/v125-p1-157G/compiled-source-manifest.json",
+    "bytes": 380701,
+    "sha256": "fcdc47d2268dc13b75c1d7e27a1794e4a130bbd8314fa1df2b4a7e80aa4e8c6d"
+  },
+  "native_source_freeze": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/leather-combo-source-v001/source-freeze-v001.json",
+    "bytes": 5794,
+    "sha256": "de124ef6dc023d6e001ccbf92c1f185f83406e39d1d6a16c93ccf592ab2be85c"
+  },
+  "production": {
+    "baseline_count": 1115,
+    "new_packages": 36,
+    "expected_total": 1151
+  },
+  "current_automation": {
+    "report": {
+      "path": "UnrealGame/Saved/Automation/FirstRoom-20261017-043640/index.json",
+      "bytes": 367612,
+      "sha256": "cde5eeddfb62560c00edb2adf9e879b7f4736d1517493097beac228678498135"
+    },
+    "expected_count": 161,
+    "full_test_paths": [
+      "CodexDungeon.Combat.DepthFacingAndHeight",
+      "CodexDungeon.Content.ActionAudioIntegration.FourArmorMaterialsRequireRealCommitAndCancelIsSilent",
+      "CodexDungeon.Content.ActionAudioIntegration.FreshRRunReusesNumericIdsWithoutOldAudioOrDeadlineLeak",
+      "CodexDungeon.Content.ActionAudioIntegration.InsertThenFreshTCancelNeverCompletesOldDeadline",
+      "CodexDungeon.Content.ActionAudioIntegration.QRoundTripKeepsInstanceHistoryWithoutReplayingOldSounds",
+      "CodexDungeon.Content.ActionAudioIntegration.RealReloadCueBoundariesManualAutoBothFacingsAndSpeed",
+      "CodexDungeon.Content.ActionAudioIntegration.RealShieldPoiseOrDeathPreemptsExactDrawAndInsertSoundBoundary",
+      "CodexDungeon.Content.ActionAudioIntegration.RebuiltHUDSeedsRecentHistoryButPlaysFutureReloadStages",
+      "CodexDungeon.Content.ArmorAdmission.ExpiredIframesDoNotConsumeReceipt",
+      "CodexDungeon.Content.ArmorAdmission.MovementCancelsPendingArmor",
+      "CodexDungeon.Content.ArmorAdmission.RoomTransitionPreservesFocusAndIframes",
+      "CodexDungeon.Content.ArmorSwapAndStats",
+      "CodexDungeon.Content.BodyContactReview.RealChargeRoundoffAllowsTangentAndEscapeButBlocksInward",
+      "CodexDungeon.Content.DamageBatch.AllDueHitsResolve",
+      "CodexDungeon.Content.DamageBatch.LowFpsAirWindowUsesMotionTime",
+      "CodexDungeon.Content.DamageBatch.PreexistingIframesStillBlock",
+      "CodexDungeon.Content.DeathPresentationAfterTerminalFreeze",
+      "CodexDungeon.Content.DodgeAdapter.CompositeCancelAndActionExclusion",
+      "CodexDungeon.Content.DodgeAdapter.DirectIntervalsAndResolvedInterrupt",
+      "CodexDungeon.Content.DodgeAdapter.FixedMotionAndIdlePositionHandoff",
+      "CodexDungeon.Content.DodgeAdapter.StoneTimedWindowResumesAfterProtection",
+      "CodexDungeon.Content.EquipmentAdapter.CritDrawFollowsRealLocks",
+      "CodexDungeon.Content.EquipmentAdapter.FailedAdmissionPreservesDomains",
+      "CodexDungeon.Content.EquipmentAdapter.FinalHPAndContinuousFocus",
+      "CodexDungeon.Content.EquipmentAdapter.InstanceCooldownSurvivesTransfers",
+      "CodexDungeon.Content.EquipmentAdapter.LegalAndFailedDodgeAdmission",
+      "CodexDungeon.Content.EquipmentAdapter.RealPickupTimelinesAndStats",
+      "CodexDungeon.Content.EquipmentAdapter.SamePointDamageAndDeathBeforeCommit",
+      "CodexDungeon.Content.EquipmentAdapter.SameTemplateAndBackupReplacement",
+      "CodexDungeon.Content.EquipmentAdapter.WallBlockedMovementCancels",
+      "CodexDungeon.Content.FairytaleEquipmentBinding.CommittedNoArmorLightCancelReplaceAndRetake",
+      "CodexDungeon.Content.FairytaleEquipmentBinding.InstalledAwaitExplicitContinueRetainsCommittedSkin",
+      "CodexDungeon.Content.FairytaleEquipmentBinding.RealGradedCursedOwnershipAndAtomicBadReadbacks",
+      "CodexDungeon.Content.FighterOwnerSnapshot.BatBirthAnchorMovedAndTerminalPresentation",
+      "CodexDungeon.Content.FighterOwnerSnapshot.CrossbowEmissionReloadAndFrozenOrigin",
+      "CodexDungeon.Content.FighterOwnerSnapshot.InvalidCandidateIsAtomic",
+      "CodexDungeon.Content.FighterOwnerSnapshot.KnightActionsHitsAndClaimedDeath",
+      "CodexDungeon.Content.FighterOwnerSnapshot.PlayerAcceptedActionsAndProtection",
+      "CodexDungeon.Content.HitAndPickupCannotSkipRecovery",
+      "CodexDungeon.Content.ManualWeaponPreview.RealSourceEnterPickupAndRestart",
+      "CodexDungeon.Content.MeleeAudioJournal.NormalPrimaryThreeFamiliesEachStageOnce",
+      "CodexDungeon.Content.MeleeAudioJournal.NormalSkillsRealIndependentSubhitsOnce",
+      "CodexDungeon.Content.MeleeAudioJournal.RealPreActivePoiseCancelIsSilentThenFreshPrimaryOnce",
+      "CodexDungeon.Content.MeleeChainTiming",
+      "CodexDungeon.Content.NativeGeometry.NativeDebuggerDrawOnlyAndForeignBlockers",
+      "CodexDungeon.Content.RangedWeaponsAdapter.AirEmissionUsesActualHeightWithoutDownAim",
+      "CodexDungeon.Content.RangedWeaponsAdapter.AirPrimaryCancellationDoesNotRefundToken",
+      "CodexDungeon.Content.RangedWeaponsAdapter.ControllerAliasesHeldEdgesAndManualT",
+      "CodexDungeon.Content.RangedWeaponsAdapter.CrossbowPrimaryTimelineWorldAndReload",
+      "CodexDungeon.Content.RangedWeaponsAdapter.CrossbowSkillNearestTwoAndPhysicalDefense",
+      "CodexDungeon.Content.RangedWeaponsAdapter.FailedResourceReloadAndAirSkillPreserveDomains",
+      "CodexDungeon.Content.RangedWeaponsAdapter.FirelineFixedBurnIgnoresDirectMultipliersAndIframes",
+      "CodexDungeon.Content.RangedWeaponsAdapter.FirelineFullWindowLateEntryLOSAndGroundHeight",
+      "CodexDungeon.Content.RangedWeaponsAdapter.FractionalContactsUseActualMuzzleAndCausalTime",
+      "CodexDungeon.Content.RangedWeaponsAdapter.ProjectileWallsCenterBoundsAndHeight",
+      "CodexDungeon.Content.RangedWeaponsAdapter.ReloadCancellationNoRefillAndFreshRestart",
+      "CodexDungeon.Content.RangedWeaponsAdapter.SamePointPoiseOrDeathPreventsUnemittedCost",
+      "CodexDungeon.Content.RangedWeaponsAdapter.SpearSkillNearestOnePerIndependentSubhit",
+      "CodexDungeon.Content.RangedWeaponsAdapter.StaffPrimaryMagicFocusAndNoImplicitBurn",
+      "CodexDungeon.Content.RoomCoinAllocation.ExactIntegerAndZeroBoundaries",
+      "CodexDungeon.Content.RoomCoinAllocation.LiteralLargestRemainderAndCanonicalOrder",
+      "CodexDungeon.Content.RoomCoinAllocation.RejectionIsAtomic",
+      "CodexDungeon.Content.RunAggregate.CrossRoomOwners",
+      "CodexDungeon.Content.RunCapture.AcceptedMeleePickupAndReload",
+      "CodexDungeon.Content.RunCapture.DeadActorsAndCrossRoomRewards",
+      "CodexDungeon.Content.RunCapture.ExactExplorationAndReadOnlyCapture",
+      "CodexDungeon.Content.RunCapture.WholeCandidateRejectionIsAtomic",
+      "CodexDungeon.Content.RunCodec.AcceptedEquipmentReloadAndLargeRng",
+      "CodexDungeon.Content.RunCodec.CanonicalCrossRoomHistoryAndNativeBits",
+      "CodexDungeon.Content.RunCodec.MalformedAndSemanticFailureIsAtomic",
+      "CodexDungeon.Content.RunCodec.MandatoryStoreDecodeAndHeaderClock",
+      "CodexDungeon.Content.RunExploration.ActualRouteAndRoomHistory",
+      "CodexDungeon.Content.RunExploration.ExactRestoreAndAtomicRejection",
+      "CodexDungeon.Content.RunInstall.AcceptedReloadNativeAndPausedInstall",
+      "CodexDungeon.Content.RunInstall.CrossRoomDeadAndRetiredHistory",
+      "CodexDungeon.Content.RunInstall.HeldInputsRequireNeutralAndFreshContinue",
+      "CodexDungeon.Content.RunInstall.StagingFailureKeepsOriginalRun",
+      "CodexDungeon.Content.RunOwnerSnapshot.EquipmentInvalidCandidateKeepsOwner",
+      "CodexDungeon.Content.RunOwnerSnapshot.EquipmentPendingActionsAndDeepValues",
+      "CodexDungeon.Content.RunOwnerSnapshot.EquipmentRuntimeReceiptsCritAndCancellation",
+      "CodexDungeon.Content.RunOwnerSnapshot.ExplorationExactMemoryAndContinuation",
+      "CodexDungeon.Content.RunOwnerSnapshot.ExplorationInvalidRestoreIsAtomic",
+      "CodexDungeon.Content.RunOwnerSnapshot.SceneCrossReferenceRejectionIsAtomic",
+      "CodexDungeon.Content.RunOwnerSnapshot.SceneHistoryAndPendingInteraction",
+      "CodexDungeon.Content.RunPristine.NativeInitLoginStartPlayNoRunAndClosedInputs",
+      "CodexDungeon.Content.RunPristine.RefusesExistingOrContaminatedTargetAndRollsBackClosed",
+      "CodexDungeon.Content.RunPristine.SealedReloadInstallsWithoutNewRunAndContinuesOriginalDeadline",
+      "CodexDungeon.Content.RunRewards.BoundCoinCollectionAndRetry",
+      "CodexDungeon.Content.RunRewards.DeathSourcesAndDuplicateNotification",
+      "CodexDungeon.Content.RunRewards.RoomRetirementAndValidatedHistory",
+      "CodexDungeon.Content.RunSaveAdapter.CommitFaultPublicationAndFreshDisk",
+      "CodexDungeon.Content.RunSaveAdapter.FreshDiskPrepareInstallAndOriginalReloadContinuation",
+      "CodexDungeon.Content.RunSaveAdapter.NewestSemanticHeadNamespaceAndPreparedOutputsAtomic",
+      "CodexDungeon.Content.RunSaveAdapter.TypedCandidateHeaderBindingsAndAtomicValidation",
+      "CodexDungeon.Content.SaveGenerationStore.ByteRoundTripAndGenerationIdentity",
+      "CodexDungeon.Content.SaveGenerationStore.CorruptionRequiresExplicitRecovery",
+      "CodexDungeon.Content.SaveGenerationStore.EveryCommitBoundaryRetainsPublishedBytes",
+      "CodexDungeon.Content.SaveGenerationStore.ExclusiveWriterAndLostAcknowledgement",
+      "CodexDungeon.Content.SaveGenerationStore.UnknownHeadAndExplicitWholeBackupRecovery",
+      "CodexDungeon.Content.SaveGenerationStore.WholePayloadValidatorAndVersionGates",
+      "CodexDungeon.Content.SceneAdmissionReview.BoundSourceSelectionConsumesFreshEBeforeDoor",
+      "CodexDungeon.Content.SceneAdmissionReview.GroundPermissionCancelAndFreshEnterConsumeOneConfirmation",
+      "CodexDungeon.Content.SceneAdmissionReview.LegalDodgeOutranksPendingExitConfirmation",
+      "CodexDungeon.Content.SceneAdmissionReview.RealExitKeepsSpentFocusAbsoluteCooldownAndRoomObjectHistory",
+      "CodexDungeon.Content.SceneExplorationIntegration.BoundExitUsesActualAnchorAndKeepsRoomScope",
+      "CodexDungeon.Content.SceneExplorationIntegration.RealLayoutBlocksAndGroundBypass",
+      "CodexDungeon.Content.SceneExplorationIntegration.SurveyRequiresFreshInteractionAndNeverPays",
+      "CodexDungeon.Content.SpearNearestAndDedup",
+      "CodexDungeon.Content.StoneBatAdmissionReview.ActualHighHeightRejectsGroundAndAcceptsJump",
+      "CodexDungeon.Content.StoneBatAdmissionReview.ActualLowCounterKillClaimsRewardOnce",
+      "CodexDungeon.Content.StoneBatAdmissionReview.DormantLOSAndFullWake",
+      "CodexDungeon.Content.StoneBatAdmissionReview.FullAnchoredLowRecoveryAndRealWingHeight",
+      "CodexDungeon.Content.StoneBatAdmissionReview.PeckActualZ65BoundaryAndSingleContact",
+      "CodexDungeon.Content.StoneBatAdmissionReview.SamePointPlayerPoiseOrDeathPreemptsBatWindow",
+      "CodexDungeon.Content.StoneBatGameIntegration.CentralLongFrameMatchesSplitMotionAndSingleHit",
+      "CodexDungeon.Content.StoneBatGameIntegration.LockedEndpointWorldWallCannotFakeLowArrival",
+      "CodexDungeon.Content.StoneBatGameIntegration.MixedChargeCannotBlockBeforeActualBatZ40",
+      "CodexDungeon.Content.StoneBatGameIntegration.RealPoiseBreakKeepsUnfinishedLowObligation",
+      "CodexDungeon.Content.StoneBatGameIntegration.RunIdentityInitialConfigurationAndDefense",
+      "CodexDungeon.Content.StoneFeedbackGameIntegration",
+      "CodexDungeon.Content.StoneGuardKernel.AtomicClockDeathAndObligations",
+      "CodexDungeon.Content.StoneGuardKernel.GeometryAndCancellation",
+      "CodexDungeon.Content.StoneGuardKernel.MovementFirstEntryPartitionAndZeroReceipts",
+      "CodexDungeon.Content.StoneGuardKernel.WakeAndAuthoredSchedules",
+      "CodexDungeon.Content.StoneGuardNative.IdentityDefenseAndSingleResolvedHPMirror",
+      "CodexDungeon.Content.StoneGuardNative.NativeWideSweepBodyBlockingAndUnrewardedDeath",
+      "CodexDungeon.Content.StoneGuardNative.RealClockAxeStompLockAndPoiseCancellation",
+      "CodexDungeon.Content.StoneGuardOwner.NativePolicyHistoriesAndAtomicRestore",
+      "CodexDungeon.Content.StoneGuardOwner.RootV2ExactCodecAndLegacyV1Bytes",
+      "CodexDungeon.Content.StoneGuardOwner.StagedInstallContinuationAndDeathObserver",
+      "CodexDungeon.Content.StoneGuardOwner.V1DiskBoundaryRejectsRealV2Atomically",
+      "CodexDungeon.Content.StoneGuardRestore.ClosedWindowsSameCursorDeathAndIndependentObligations",
+      "CodexDungeon.Content.StoneGuardRestore.CorruptionAtomicityPolicyAndDeepOwnership",
+      "CodexDungeon.Content.StoneGuardRestore.RealStagesAndFutureContinuation",
+      "CodexDungeon.Content.StoneKnightDriver.ChargeQueryHasNoSideEffects",
+      "CodexDungeon.Content.StoneKnightDriver.DormancyAndResolvedDamage",
+      "CodexDungeon.Content.StoneKnightDriver.MovingTargetContinuousContact",
+      "CodexDungeon.Content.StoneKnightDriver.ShieldPoiseResumeAndReward",
+      "CodexDungeon.Content.StoneKnightDriver.StaticWallAndBodyStops",
+      "CodexDungeon.Content.StoneKnightGameIntegration",
+      "CodexDungeon.Content.StoneKnightProgress.IdleRoundedEndpointAdvances",
+      "CodexDungeon.Content.WeaponActionsAdapter.SkillRespectsFullRecoveryAndClearsOnlyAcceptedChain",
+      "CodexDungeon.Content.WeaponActionsAdapter.SwordSecondaryRealWindowAndBlockedStep",
+      "CodexDungeon.Content.WeaponPoseSocketIntegration.ClockAndPendingReloadNeverCommitFromPose",
+      "CodexDungeon.Content.WeaponPoseSocketIntegration.EmptyAndSwitchCannotRetainAnotherInstanceSocket",
+      "CodexDungeon.Content.WeaponPoseSocketIntegration.PrimaryUsesCurrentActorAndAcceptedPhase",
+      "CodexDungeon.Content.WeaponPoseSocketIntegration.RealReloadLifecycleSurvivesSwitchAndCancellation",
+      "CodexDungeon.Content.WeaponPoseSocketReview.ExactLaunchWallBodyTieStopsAtWall",
+      "CodexDungeon.Content.WeaponPoseSocketReview.NativeLaunchCannotSkipNearContactOrExtendActorRange",
+      "CodexDungeon.Content.WeaponPoseSocketReview.NativePrimaryEmissionSamplesEndpointAndMirrorsOnce",
+      "CodexDungeon.Content.WeaponPoseSocketReview.OldBurnDeathBeforeNewEmissionCannotBlockLiveRearTarget",
+      "CodexDungeon.Content.WeaponPoseSocketReview.PublicComponentOverrideAndAuthoredReturnRemainReal",
+      "CodexDungeon.Content.WeaponPoseSocketReview.RealJumpCombatHeightStaysSeparateFromPresentation",
+      "CodexDungeon.Content.WeaponSkillBoundaryReview.LastWindowBatchLOSBecomesClear",
+      "CodexDungeon.Content.WeaponSkillBoundaryReview.RealPoiseContactBeforeEmissionSameBatch",
+      "CodexDungeon.Content.WorldOwnerSnapshot.BurnTickPhaseReceiptsAndStoppedHistory",
+      "CodexDungeon.Content.WorldOwnerSnapshot.CrossReferenceAndNumericRejectionIsAtomic",
+      "CodexDungeon.Content.WorldOwnerSnapshot.LiveFlightFrozenSocketsAndDeepValues",
+      "CodexDungeon.FirstRoom.XBWPrimaryBodyAcceptedClock",
+      "CodexDungeon.FirstRoom.XBWReloadBodyAcceptedClock",
+      "CodexDungeon.Gameplay.PickupCapAndSingleReward"
+    ]
+  },
+  "additional_source_pins": [
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 109885,
+      "sha256": "ca53e66373f1d64451954ebc270c5ee248f6f4454b80e2376065c5cfe7f49eba"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.h",
+      "bytes": 11237,
+      "sha256": "851df65709e3a8152c1f7eb697b15ff44de6558adb2150088afd3c34443f6269"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonFighterSnapshot.h",
+      "bytes": 4274,
+      "sha256": "cc24277441340744544fc3f81dcfd7dac39680cba8d7e9de970685026384986d"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": 113356,
+      "sha256": "71bf46c754b0d3f19d2b09731f93ada60a83204ad89180e71f2cd8075e89da62"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonRunAggregate.cpp",
+      "bytes": 21389,
+      "sha256": "b8d4998ae97e5ce79e52e3cbe598ad3b580285c6cf8eeaf8d4e9d690b0b7b29b"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonRunInstaller.cpp",
+      "bytes": 17006,
+      "sha256": "f85b036035f6879aef0fa602425da857dddf9f40f9d60825f29deb018710727d"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonRunRewards.cpp",
+      "bytes": 20949,
+      "sha256": "4e3ba1db1947506426c76d0647d867ce3708ec89d481e60e8c63ccf2c53a50cb"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonRunSaveAdapter.cpp",
+      "bytes": 18250,
+      "sha256": "c91fc05216452e7b8f3eb16483dbab0863a11b24123b17a29f162a4516c98c51"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonRunSnapshot.h",
+      "bytes": 2990,
+      "sha256": "34f9d5fbdf07e07c6e79aba725438146d76bb5e511f9e7826510fe1398f45771"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonRunSnapshotCodec.cpp",
+      "bytes": 73394,
+      "sha256": "b61ae478cdd31912c8145dd95a91fa25f0f71c2a2b694aceec5a2437e2687f1b"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp",
+      "bytes": 21268,
+      "sha256": "da61c077b1f8a35972810165cf5ed534f55d2383661f3b1397afe1b649e5cdf9"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.h",
+      "bytes": 2106,
+      "sha256": "37d66f6ce81bae8bcf5174daa753020f9172f485d1c3a5a2ed1845b7535f95ca"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonStoneGuardOwnerValue.h",
+      "bytes": 5130,
+      "sha256": "52975d12a667a33747fe1fca168460f82627384a0e014d730d2a9704f13062de"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/Tests/DungeonStoneGuardOwnerSaveBoundaryTests.cpp",
+      "bytes": 9782,
+      "sha256": "ebc70882993bc869bb3abb59a4f7023e0b99e51af0d3ea741519e387a6ee2cf1"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/Tests/DungeonStoneGuardOwnerTests.cpp",
+      "bytes": 19560,
+      "sha256": "1296e2baf7a26f3d6f8dd5d161217ddba45cf729daef14139853581fd1eef6d7"
+    },
+    {
+      "path": "UnrealGame/Source/CodexDungeon/Tests/StoneGuardOwnerFixture_v002.h",
+      "bytes": 12485,
+      "sha256": "29cd3a74cc863178e0ed553774eb962471e362839ae865b6220ca84966034145"
+    }
+  ],
+  "imports": {
+    "Ready": {
+      "path": "UnrealGame/Saved/Bootstrap/leather-ready-v001-import-20261016-164451-394112.json",
+      "bytes": 13281,
+      "sha256": "ae0efff25cf32c7c14bd7275b052bc5d648298087cd430f8128916d10d6e3f1b"
+    },
+    "Primary1": {
+      "path": "UnrealGame/Saved/Bootstrap/leather-primary1-v002-v001-import-20261016-180837-920536.json",
+      "bytes": 31689,
+      "sha256": "96113a6ffb18e3503a02ac6a3800d22ff86485073a479e2ed56abc683373ac5e"
+    },
+    "Primary2": {
+      "path": "UnrealGame/Saved/Bootstrap/leather-primary2-combo-v001-import-20261016-194453-924659.json",
+      "bytes": 31388,
+      "sha256": "4f7fc1aa80c96648c4dec84b84c217302412aa3be66b81e1988914e53256ec70"
+    },
+    "Primary3": {
+      "path": "UnrealGame/Saved/Bootstrap/leather-primary3-combo-v001-import-20261016-194456-196483.json",
+      "bytes": 31388,
+      "sha256": "158a6f3d75a501a5c9295eb5c699efed13e9313f2024bf322a009d6029e4048b"
+    }
+  },
+  "assemblies": {
+    "Ready": {
+      "path": "source-assets/production/fairytale-lgt-readability-v003/ready-integer-assembly-v001/assembly-freeze-v001.json",
+      "bytes": 6634,
+      "sha256": "804ec889a031fd0cffec806ce5764eb701fa4be0c20dc767b9ed797f13aaa682"
+    },
+    "Primary1": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-integer-assembly-v002/assembly-freeze-v002.json",
+      "bytes": 26577,
+      "sha256": "8f3d1b818bb3e036b11bf175cfda6695d29d5e151fb5966808134b43e4c2d5c8"
+    },
+    "Primary2": {
+      "path": "source-assets/production/fairytale-lgt-readability-v003/primary2-integer-assembly-v001/assembly-freeze-v001.json",
+      "bytes": 14507,
+      "sha256": "4f8a569da416b048e143c61538ae92aaaf3732bd23ac3f92f1ebc02bb0a36e0e"
+    },
+    "Primary3": {
+      "path": "source-assets/production/fairytale-lgt-readability-v003/primary3-integer-assembly-v001/assembly-freeze-v001.json",
+      "bytes": 14510,
+      "sha256": "6345f549bcc8a8e0978949a2ed74f6bafe053b75fe3cb11456b9baca45ceb50f"
+    }
+  },
+  "joint_import_proof": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/combo-import-v001/joint-import-proof-v001.json",
+    "bytes": 2170,
+    "sha256": "4716d1c7f1914f327ea5c47023eec8f78a67db75d349924997c30932d283516b"
+  },
+  "formal_complete_units": 0
+}

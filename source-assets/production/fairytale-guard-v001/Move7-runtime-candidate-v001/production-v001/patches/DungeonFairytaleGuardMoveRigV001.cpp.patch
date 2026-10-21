@@ -1,0 +1,184 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardMoveRigV001.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardMoveRigV001.cpp
+@@ -1,11 +1,175 @@
+ #include "DungeonFairytaleGuardMoveRigV001.h"
++#include <cmath>
++#include "DungeonFairytaleGuardMoveRigDataV001.inl"
++
+ namespace DungeonFairytaleGuardMoveRigV001
+ {
++namespace
++{
++constexpr double MovePi=3.14159265358979323846;
++bool Finite(FVector2D V){return std::isfinite(V.X)&&std::isfinite(V.Y);}
++bool Reject(FString& Diagnostic,const TCHAR* Why){Diagnostic=Why;return false;}
++
++bool SameProfile(const FProfile& A,const FProfile& B)
++{
++ if(A.ProfileId!=B.ProfileId||A.ProfileSHA256!=B.ProfileSHA256||A.SourceSnapshotSHA256!=B.SourceSnapshotSHA256
++  ||A.RegistrationEvidenceSHA256!=B.RegistrationEvidenceSHA256||A.TrialApprovalRecord!=B.TrialApprovalRecord
++  ||A.SourceClosureVerified!=B.SourceClosureVerified||A.TrialAllowed!=B.TrialAllowed||A.FinalAccepted!=B.FinalAccepted
++  ||A.CanvasSize!=B.CanvasSize||A.NearBranch!=B.NearBranch||A.FarBranch!=B.FarBranch
++  ||A.StandingExtent!=B.StandingExtent||A.TargetBodyHeight!=B.TargetBodyHeight||A.CycleWorld!=B.CycleWorld
++  ||A.HalfCycleWorld!=B.HalfCycleWorld||A.FootHalfStance!=B.FootHalfStance||A.SwingLift!=B.SwingLift
++  ||A.BodyBob!=B.BodyBob||A.SourceGround!=B.SourceGround||A.Sources.Num()!=B.Sources.Num()||A.LayerOrder!=B.LayerOrder)return false;
++ for(int32 I=0;I<A.Sources.Num();++I)
++ {
++  const auto& X=A.Sources[I];const auto& Y=B.Sources[I];
++  if(X.Component!=Y.Component||X.TexturePath!=Y.TexturePath||X.SourceSHA256!=Y.SourceSHA256
++   ||X.SourceRGBASHA256!=Y.SourceRGBASHA256||X.NativeBatchId!=Y.NativeBatchId
++   ||X.ComponentToRestScale!=Y.ComponentToRestScale||X.Markers.Num()!=Y.Markers.Num())return false;
++  for(int32 J=0;J<X.Markers.Num();++J)
++   if(X.Markers[J].Name!=Y.Markers[J].Name||X.Markers[J].Point!=Y.Markers[J].Point
++    ||X.Markers[J].SurfaceRGBA!=Y.Markers[J].SurfaceRGBA)return false;
++ }
++ return true;
++}
++FVector2D Rotate(FVector2D P,double A)
++{const double C=std::cos(A),S=std::sin(A);return {C*P.X-S*P.Y,S*P.X+C*P.Y};}
++double Angle(FVector2D P){return std::atan2(P.Y,P.X);}
++struct FCanonicalPart
++{FVector2D Pivot,Anchor;double Angle=0.;};
++
++// HUD::DrawTexture passes these floats into a positive-size Canvas tile. Its
++// four unrotated CPU vertex coordinates are also rounded to float. A positive
++// metadata size alone cannot prove that Left/Right or Top/Bottom are distinct.
++bool UsableCanvasQuad(const FSubmittedQuad& Q)
++{
++ const float Right=float(double(Q.X)+double(Q.Width)),Bottom=float(double(Q.Y)+double(Q.Height));
++ if(!std::isfinite(Q.X)||!std::isfinite(Q.Y)||!std::isfinite(Q.Width)||!std::isfinite(Q.Height)
++  ||!std::isfinite(Q.RotationDegrees)||!Finite(Q.RotationPivotUV)||Q.Width<=0.f||Q.Height<=0.f
++  ||!std::isfinite(Right)||!std::isfinite(Bottom)||Right<=Q.X||Bottom<=Q.Y)return false;
++ const FVector2D Anchor(double(Q.Width)*Q.RotationPivotUV.X,double(Q.Height)*Q.RotationPivotUV.Y);
++ for(FVector2D P:{FVector2D(Q.X,Q.Y),FVector2D(Right,Q.Y),FVector2D(Right,Bottom),FVector2D(Q.X,Bottom)})
++ {
++  const auto V=FVector2D(Q.X,Q.Y)+Anchor+Rotate(P-FVector2D(Q.X,Q.Y)-Anchor,double(Q.RotationDegrees)*MovePi/180.);
++  if(!Finite(V)||!std::isfinite(float(V.X))||!std::isfinite(float(V.Y)))return false;
++ }
++ return true;
++}
++bool ValidMoveSample(const FDungeonGuardMoveSample& S)
++{
++ namespace F=DungeonFairytaleGuardFullV003;const auto& N=S.NativeSelection;
++ if(!S.Valid||S.BlockKnown||!S.EntityId||S.EntityId!=S.AcceptedPathOwnerId||!S.RunGuid.IsValid()
++  ||!S.RoomInstanceId||!S.MovementEventId||S.EnemyContentId!=TEXT("ENM-STN-003")
++  ||(S.Facing!=1&&S.Facing!=-1)||!std::isfinite(S.SampleTime)||S.SampleTime<0.
++  ||S.MovementAtTime!=S.SampleTime||!std::isfinite(S.AcceptedDistance)||S.AcceptedDistance<=0.
++  ||!std::isfinite(S.CurrentAcceptedDistance)||S.CurrentAcceptedDistance<=0.||S.CurrentAcceptedDistance>S.AcceptedDistance
++  ||!Finite(S.GroundPosition)||!Finite(S.MovementFrom)||!Finite(S.MovementTo)||!Finite(S.MovementDirection)
++  ||!N.Valid||N.TerminalPresentation||N.DeathAfterglow||N.Clip!=F::EClip::Move||N.Phase!=DungeonStoneGuard::EPhase::Idle
++  ||N.EntityId!=S.EntityId||N.SourceEventId!=S.MovementEventId||N.Facing!=S.Facing||N.SampleTime!=S.SampleTime
++  ||N.AcceptedDistance!=S.AcceptedDistance||N.IntervalStart!=S.SampleTime||N.IntervalEnd!=S.SampleTime
++  ||N.Frame<0||N.Frame>=F::RequiredFrames(F::EClip::Move))return false;
++ const FVector2D Delta=S.MovementTo-S.MovementFrom;
++ const double Length=std::hypot(Delta.X,Delta.Y);
++ return Length==S.CurrentAcceptedDistance&&S.MovementDirection==Delta/Length
++  &&FVector(S.MovementTo.X,S.MovementTo.Y,0.).Equals(FVector(S.GroundPosition.X,S.GroundPosition.Y,0.))
++  &&N.DistancePhase==std::fmod(S.AcceptedDistance,128.)/128.;
++}
++}
++
+ const FProfile& Profile()
+-{static const FProfile Stub;return Stub;}
+-bool Solve(const FSolveInput&,const FProfile&,FRigSolution&,FString& Diagnostic)
+-{Diagnostic=TEXT("Stage0: frozen Move7 profile and fixed solver not implemented");return false;}
+-bool PlanFromSample(const FDungeonGuardMoveSample&,const FProfile&,const TArray<FResidentTexture>&,
+- const FDrawContext&,FDrawPlan&,FString& Diagnostic)
+-{Diagnostic=TEXT("Stage0: atomic seven-resource Move7 plan not implemented");return false;}
++{static const FProfile P=MakeMoveProfile();return P;}
++
++bool Solve(const FSolveInput& Input,const FProfile& Source,FRigSolution& Out,FString& Diagnostic)
++{
++ if(!SameProfile(Source,Profile())||!Source.SourceClosureVerified||!Source.TrialAllowed||Source.FinalAccepted
++  ||Source.TrialApprovalRecord.IsEmpty())return Reject(Diagnostic,TEXT("Move7 frozen profile or bounded trial approval differs"));
++ if(!Input.EntityId||Input.AcceptedPathOwnerId!=Input.EntityId||!std::isfinite(Input.AcceptedDistance)||Input.AcceptedDistance<0.
++  ||(Input.Facing!=1&&Input.Facing!=-1)||!Finite(Input.Context.GroundScreen)||!std::isfinite(Input.Context.UIScale)
++  ||Input.Context.UIScale<=0.||Input.Context.JumpHeight!=0.)return Reject(Diagnostic,TEXT("Move7 owner, accepted path, facing or flat screen domain invalid"));
++ const double D=Source.TargetBodyHeight/Source.StandingExtent,UI=Input.Context.UIScale;
++ FRigSolution Candidate;Candidate.Facing=Input.Facing;Candidate.AcceptedDistance=Input.AcceptedDistance;
++ Candidate.ProfileId=Source.ProfileId;Candidate.ProfileSHA256=Source.ProfileSHA256;Candidate.SourceSnapshotSHA256=Source.SourceSnapshotSHA256;
++ Candidate.CyclePosition=std::fmod(Input.AcceptedDistance,Source.CycleWorld);
++ Candidate.Half=Candidate.CyclePosition>=Source.HalfCycleWorld?1:0;
++ Candidate.U=(Candidate.CyclePosition-Source.HalfCycleWorld*Candidate.Half)/Source.HalfCycleWorld;
++ const double BobSin=std::sin(2.*MovePi*Candidate.CyclePosition/Source.CycleWorld);
++ Candidate.BodyRise=Source.BodyBob*BobSin*BobSin;Candidate.ReflectionCount=Input.Facing<0?1:0;
++ FCanonicalPart Canonical[7];const auto& Body=Source.Sources[0];
++ Canonical[0].Pivot=Body.Markers[0].Point;
++ Canonical[0].Anchor=Canonical[0].Pivot-Source.SourceGround-FVector2D(0.,Candidate.BodyRise/D);
++ for(int32 Side=0;Side<2;++Side)
++ {
++  const bool Near=Side==0;const int32 Base=Near?1:4;
++  const auto& Thigh=Source.Sources[Base];const auto& Shin=Source.Sources[Base+1];const auto& Foot=Source.Sources[Base+2];
++  const FVector2D H0=Body.Markers[Near?2:3].Point-Source.SourceGround;
++  const FVector2D H=H0-FVector2D(0.,Candidate.BodyRise/D);
++  const FVector2D ThighAxis=Thigh.Markers[1].Point-Thigh.Markers[0].Point;
++  const FVector2D ShinAxis=Shin.Markers[1].Point-Shin.Markers[0].Point;
++  const double Kit=Thigh.ComponentToRestScale,L1=ThighAxis.Size()*Kit,L2=ShinAxis.Size()*Kit;
++  const double FootAngle=-Angle(Foot.Markers[2].Point-Foot.Markers[1].Point);
++  const FVector2D Midsole=Rotate((Foot.Markers[1].Point+Foot.Markers[2].Point)*.5-Foot.Markers[0].Point,FootAngle)*Kit;
++  // Frozen original alpha>=128 core offsets. Opaque heel/toe markers sit above
++  // these sole rows; they must not be normalized to ground or retuned per pose.
++  const double CoreSole=Near?60.839999999999996:72.69764651497574;
++  const bool Stance=(Candidate.Half==0)==Near;
++  const double X=Stance?Source.FootHalfStance-2.*Source.FootHalfStance*Candidate.U:-Source.FootHalfStance+2.*Source.FootHalfStance*Candidate.U;
++  const double SwingSin=std::sin(MovePi*Candidate.U),Lift=Stance?0.:Source.SwingLift*SwingSin*SwingSin;
++  const FVector2D T(H0.X+X/D-Midsole.X,-CoreSole-Lift/D),V=T-H;
++  const double Length=V.Size();
++  if(!std::isfinite(Length)||!(FMath::Abs(L1-L2)<Length&&Length<L1+L2))
++   return Reject(Diagnostic,TEXT("Move7 fixed chain unreachable; stretch and clamp are prohibited"));
++  const FVector2D Unit=V/Length;const double A=(L1*L1-L2*L2+Length*Length)/(2.*Length),Rad=L1*L1-A*A;
++  if(!std::isfinite(Rad)||Rad<0.)return Reject(Diagnostic,TEXT("Move7 fixed chain radicand invalid"));
++  const int32 Branch=Near?Source.NearBranch:Source.FarBranch;
++  const FVector2D K=H+A*Unit+double(Branch)*std::sqrt(Rad)*FVector2D(-Unit.Y,Unit.X);
++  if(!Finite(K)||FMath::Abs((K-H).Size()-L1)>=1.e-9||FMath::Abs((T-K).Size()-L2)>=1.e-9)
++   return Reject(Diagnostic,TEXT("Move7 fixed chain length changed"));
++  Canonical[Base]={Thigh.Markers[0].Point,H,Angle(K-H)-Angle(ThighAxis)};
++  Canonical[Base+1]={Shin.Markers[0].Point,K,Angle(T-K)-Angle(ShinAxis)};
++  Canonical[Base+2]={Foot.Markers[0].Point,T,FootAngle};
++ }
++ for(EComponent Component:Source.LayerOrder)
++ {
++  const int32 I=int32(Component);const auto& S=Source.Sources[I];const auto& C=Canonical[I];
++  const double Scale=D*S.ComponentToRestScale*UI,Size=double(Source.CanvasSize)*Scale;
++  if(!std::isfinite(Scale)||Scale<=0.||!std::isfinite(float(Scale))||float(Scale)<=0.f||!std::isfinite(Size))
++   return Reject(Diagnostic,TEXT("Move7 fixed scale is outside float Canvas domain"));
++  FPartPose Part;Part.Component=Component;Part.TexturePath=S.TexturePath;Part.SourceSHA256=S.SourceSHA256;
++  Part.SourceRGBASHA256=S.SourceRGBASHA256;Part.NativeBatchId=S.NativeBatchId;Part.ComponentToRestScale=S.ComponentToRestScale;
++  Part.SourcePivot=C.Pivot;Part.ArtAnchorFromGround=C.Anchor;Part.SourceRotationRadians=C.Angle;
++  Part.ScreenAnchor=Input.Context.GroundScreen+FVector2D(double(Input.Facing)*D*C.Anchor.X*UI,D*C.Anchor.Y*UI);
++  auto& Q=Part.Quad;Q.RotationPivotUV=C.Pivot/double(Source.CanvasSize);double Degrees=C.Angle*180./MovePi;
++  if(Input.Facing<0){Q.RotationPivotUV.X=1.-Q.RotationPivotUV.X;Degrees=-Degrees;Q.U=1.f;Q.UL=-1.f;}
++  const FVector2D Top=Part.ScreenAnchor-FVector2D(Size*Q.RotationPivotUV.X,Size*Q.RotationPivotUV.Y);
++  if(!Finite(Top)||!Finite(Part.ScreenAnchor))return Reject(Diagnostic,TEXT("Move7 screen anchor nonfinite"));
++  Q.X=float(Top.X);Q.Y=float(Top.Y);Q.Width=Q.Height=float(Size);Q.RotationDegrees=float(Degrees);
++  if(!UsableCanvasQuad(Q))return Reject(Diagnostic,TEXT("Move7 actual float Canvas corners nonfinite or collapsed"));
++  Candidate.Parts.Add(MoveTemp(Part));
++ }
++ if(Candidate.Parts.Num()!=7)return Reject(Diagnostic,TEXT("Move7 incomplete fixed layer order"));
++ Candidate.Valid=true;Out=MoveTemp(Candidate);Diagnostic.Reset();return true;
+ }
++
++bool PlanFromSample(const FDungeonGuardMoveSample& Sample,const FProfile& Source,const TArray<FResidentTexture>& Residents,
++ const FDrawContext& Context,FDrawPlan& Out,FString& Diagnostic)
++{
++ if(!ValidMoveSample(Sample))return Reject(Diagnostic,TEXT("Move7 requires the current completed positive Guard Move sample"));
++ if(!SameProfile(Source,Profile())||Residents.Num()!=7)return Reject(Diagnostic,TEXT("Move7 exact profile and seven resident owners required"));
++ for(const auto& S:Source.Sources)
++ {
++  const FResidentTexture* Found=nullptr;
++  for(const auto& R:Residents)if(R.Component==S.Component)
++  {if(Found)return Reject(Diagnostic,TEXT("Move7 duplicate resident component"));Found=&R;}
++  if(!Found||Found->TexturePath!=S.TexturePath||Found->ClassName!=TEXT("Texture2D")||Found->Width!=512||Found->Height!=512
++   ||!Found->ResourceReady||Found->PendingInitialization||Found->SourceSHA256!=S.SourceSHA256||Found->SourceRGBASHA256!=S.SourceRGBASHA256)
++   return Reject(Diagnostic,TEXT("Move7 complete Texture2D512 source provenance/residency gate failed"));
++ }
++ FSolveInput Input;Input.EntityId=Sample.EntityId;Input.AcceptedPathOwnerId=Sample.AcceptedPathOwnerId;
++ Input.AcceptedDistance=Sample.AcceptedDistance;Input.Facing=Sample.Facing;Input.Context=Context;
++ FDrawPlan Candidate;if(!Solve(Input,Source,Candidate.Rig,Diagnostic))return false;
++ const FLinearColor Tint=Sample.NativeSelection.MaterialHit?FLinearColor(1.45f,.85f,.62f,1.f):FLinearColor::White;
++ for(auto& Part:Candidate.Rig.Parts)Part.Quad.Tint=Tint;
++ Candidate.Sample=Sample;Candidate.Residents=Residents;Candidate.RequiredResources=7;Candidate.WholebodyIncludesAxe=true;
++ Candidate.IndependentAxeLayers=0;Candidate.TrialApprovalRecord=Source.TrialApprovalRecord;
++ Candidate.Valid=true;Out=MoveTemp(Candidate);Diagnostic.Reset();return true;
++}
++}

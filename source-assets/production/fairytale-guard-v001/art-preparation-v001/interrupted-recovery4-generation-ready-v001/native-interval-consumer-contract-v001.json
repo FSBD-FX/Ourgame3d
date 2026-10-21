@@ -1,0 +1,29 @@
+{
+  "kernel_proof": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/interrupted-recovery-kernel-witness-v001/actual-kernel-interval-proof-v001.json",
+    "bytes": 3903,
+    "sha256": "8c21e039ccf6659778c0a75e405c11cd3d2631cba5c8c31cef00924c2c02883d"
+  },
+  "selector": "S.Phase==Recovery && S.Action.Interrupted && S.Action.CompletedAt<0 && S.Time>=S.StunUntil && S.Time<S.OccupiedUntil",
+  "higher_priority": "Dead and Stunned states win; neverdisplaythisrowwhileStunned, Waking orafteractualcompletedattack.",
+  "row_phase": "u=clamp((S.Time-S.StunUntil)/(S.OccupiedUntil-S.StunUntil),0,1); index=min(3,floor(u*4)); validonlypositiveinterval",
+  "source_samples_normalized": [
+    0,
+    0.25,
+    0.5,
+    0.75
+  ],
+  "SG_preview_only": {
+    "fps": 10,
+    "uniform_frame_ms": 100,
+    "total_ms": 400
+  },
+  "native_deadline_not_created": true,
+  "actual_witness_durations_seconds": [
+    1.4,
+    1.85,
+    0
+  ],
+  "Root_runtime_consumer_not_written_by_worker": true,
+  "join_motion_limit": "Stunnedlast→Recovery0 andRecovery3→Ready actualUEreviewpending; notclaimedzeroPop."
+}

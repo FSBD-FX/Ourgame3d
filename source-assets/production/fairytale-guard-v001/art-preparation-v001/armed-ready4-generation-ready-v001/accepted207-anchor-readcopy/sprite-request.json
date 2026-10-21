@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fairytale-guard-body-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "Camera contract: SAME shallow elevated three-quarter side view as locked206, screen-right; no pure90-degree profile. Four distinct quiet alert-idle BODY-ONLY poses facing RIGHT. Feet planted at one common sole line, no steps or travel. Small heavy torso load settle only; stone is not rubber. Same two closed stone fists held low near the belly with same hand gap; thumbs wrap closed fingers in every frame. No axe/shaft/blade/item, no open palm. Keep helmet eye window/moss identity and original short limbs. Frame0 neutral, frame1 tiny knee/shoulder weight compression, frame2 gentle opposite shoulder settle, frame3 returns near frame0 for a clean loop. No dust, shadows, glows, text, detached effects or extra bodies.",
+      "durations_ms": [
+        250,
+        250,
+        250,
+        250
+      ]
+    }
+  },
+  "style": "Match locked206 stone Guard silhouette, slab helmet, small recessed amber eyes, shoulder moss, broad warm-grey stone planes and coarse irregular black ink exactly. Body-only, no axe. Avoid adding small chips/speckles or photoreal grain; retain a few large readable planes per plate. Not pixel art, no grids/dots/vector gloss.",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

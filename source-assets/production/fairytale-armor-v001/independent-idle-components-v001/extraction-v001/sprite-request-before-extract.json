@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-armor-trial-a-front-idle-v001",
+    "description": "Armor-only connected front chest panels; canonical131 is sole identity/pose authority, not generated body output.",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 217,
+    "safe_margin_y": 226
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "armor_front_idle": {
+      "frames": 4,
+      "fps": 6,
+      "loop": true,
+      "action": "Exactly four separated connected armor-only chest panels corresponding in order to the four canonical131 idle poses. Same rigid compact breastplate; only its attached short flexible straps respond subtly to the matching torso. No body/head/arms/hands/legs/boots, no disconnected shoulder or bracer pieces. This row is an independent front component only, not an assembled hero.",
+      "durations_ms": [
+        167,
+        167,
+        167,
+        167
+      ]
+    }
+  },
+  "style": "Canonical131 grotesque dark-fairytale cartoon ink, matte broad painted values. Reference146 chest construction only, slightly cooler desaturated neutral-grey plate than the tan helmet; no green/teal materials.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": false,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

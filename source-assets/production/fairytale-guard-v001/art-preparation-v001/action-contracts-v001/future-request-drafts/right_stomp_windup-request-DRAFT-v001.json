@@ -1,0 +1,36 @@
+{
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48
+  },
+  "states": {
+    "right_stomp_windup": {
+      "frames": 6,
+      "fps": 6,
+      "loop": false,
+      "action": "frame0 at0ms: Two feet planted, body compresses; axe heldquiet; frame1 at150ms: Shift heavy load onto support foot; closedgrips; frame2 at300ms: Raise stompfoot visually; root remainsgroundZ0; frame3 at450ms: Exactlock.45: ownXY center fixed; full ellipse persists; frame4 at600ms: Stompfoot lifted high visually, no jump or earlyshock; frame5 at750ms: Prepare impact, bodystationary, no extra damage/shards. All frames preserve same acceptedidleidentity/camera. Fistsclosed unlessactualdeath; noaxe/shaft, dust, shadow, detachedFX, labels/grid."
+    }
+  },
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    }
+  },
+  "style": "Match accepted Guard RIGHT idle anchor exactly: shallow elevated three-quarter camera, wide short stone slabs, coarse black ink, small ambereye window, one sparse moss shoulder, few broad warmgreyplanes. BODY ONLY, closedtwofists, no weapon/FX. Do not turnpureprofile, addtinytexture, or resemble chargingStoneKnight.",
+  "motion_phase_guides": false,
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

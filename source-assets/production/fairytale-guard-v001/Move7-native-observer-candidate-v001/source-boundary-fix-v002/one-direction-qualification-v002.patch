@@ -1,0 +1,11 @@
+--- new-source/DungeonGuardMoveProbeV001.cpp
++++ new-source/DungeonGuardMoveProbeV001.cpp
+@@ -120,7 +120,7 @@
+    if(!Need(Q.Valid&&!Q.BlockKnown&&Q.EntityId==GuardId&&Q.AcceptedPathOwnerId==GuardId&&Q.RunGuid==Run&&Q.RoomInstanceId==RoomId&&Q.PresentationEpoch==Epoch&&Q.SampleTime==S.Time&&Q.MovementAtTime==S.Time&&Q.CurrentAcceptedDistance>0.&&Actual.Valid==Q.Valid&&Actual.BlockKnown==Q.BlockKnown&&Actual.EntityId==Q.EntityId&&Actual.AcceptedPathOwnerId==Q.AcceptedPathOwnerId&&Actual.RunGuid==Q.RunGuid&&Actual.RoomInstanceId==Q.RoomInstanceId&&Actual.PresentationEpoch==Q.PresentationEpoch&&Actual.EnemyContentId==Q.EnemyContentId&&Actual.MovementFrom==Q.MovementFrom&&Actual.MovementTo==Q.MovementTo&&Actual.MovementDirection==Q.MovementDirection&&Actual.MovementAtTime==Q.MovementAtTime&&Actual.MovementEventId==Q.MovementEventId&&Actual.SampleTime==Q.SampleTime&&Actual.AcceptedDistance==Q.AcceptedDistance&&Actual.CurrentAcceptedDistance==Q.CurrentAcceptedDistance&&Actual.GroundPosition==Q.GroundPosition&&Actual.Facing==Q.Facing&&D->Plan.Rig.AcceptedDistance==Q.AcceptedDistance&&D->Plan.Rig.Facing==Q.Facing,TEXT("SAME current owner/run/room/epoch/native distance sample differs from actual renderer plan")))return O;
+    for(const auto& T:D->Plan.Residents)if(!Need(T.ClassName==TEXT("Texture2D")&&T.Width==512&&T.Height==512&&T.ResourceReady&&!T.PendingInitialization,TEXT("Actual complete seven cache resources failed")))return O;
+    for(const auto& T:D->Parts)if(!Need(T.Submitted,TEXT("Move7 Plan was not really submitted")))return O;
+-   const auto Delta=P->GetGroundPosition()-E->GetGroundPosition();const bool Straight=Q.Facing==ApproachSide&&Q.MovementDirection.X==ApproachSide&&Q.MovementDirection.Y==0.&&Delta.X*ApproachSide>=80.;
++   const auto Delta=P->GetGroundPosition()-E->GetGroundPosition();const bool Straight=Q.Facing==ApproachSide&&(Q.MovementTo.X-Q.MovementFrom.X)*ApproachSide>0.&&Q.MovementTo.Y==Q.MovementFrom.Y&&Delta.X*ApproachSide>=80.;
+    if(Phase==8&&Straight&&Q.MovementEventId>LastMoveEvent&&D->DrawId>LastMoveDraw)
+    {
+     if(!MovePinned){MovePinned=true;FirstDistance=Q.AcceptedDistance;FirstMoveTime=Q.SampleTime;}

@@ -1,0 +1,499 @@
+{
+  "schema": "native171-armor-primary2-standard-extraction-trial-v1",
+  "created_local": "2026-10-16T17:41:17.315796+08:00",
+  "component": "FarShoulder",
+  "native_request": 174,
+  "native_receipt": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/generation-control-v001/generation-receipt174-v001.json",
+    "bytes": 9393,
+    "sha256": "180ea9992a3172d105c83e70bb5611b3c85269f73169224720821e4a221e7c79"
+  },
+  "raw": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-farshoulder-primary2-v001/raw/armor_shoulder_far_sword_primary2.png",
+    "bytes": 1317800,
+    "sha256": "9021e7fcf5f71935f83973264d999ade54fa18557a5f2da4c9a7fb3161e97160"
+  },
+  "approved_handoff": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/primary2-macro-native-handoff-approved-v002.json",
+    "bytes": 56305,
+    "sha256": "0342bbf095edec2d5d973bc28ed33f54a141827bf4c5d126238d9124043d5148"
+  },
+  "original40_input_freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/input-freeze-v001.json",
+    "bytes": 15361,
+    "sha256": "2f02f4dafd67f6bf14b22ac18627e9c2dc1e9a93308df477f19331edadc1dbcc"
+  },
+  "request_before": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/farshoulder-extraction-v001/sprite-request-before-extraction-exact.json",
+    "bytes": 1580,
+    "sha256": "5df5f10b0e4595a6aa1eb0135dfba6f158ed4f112fad6b9e4cdb2e2d8f6908fb"
+  },
+  "request_after": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-farshoulder-primary2-v001/sprite-request.json",
+    "bytes": 1580,
+    "sha256": "5df5f10b0e4595a6aa1eb0135dfba6f158ed4f112fad6b9e4cdb2e2d8f6908fb"
+  },
+  "request_exact_unchanged": true,
+  "request_auto_changed": false,
+  "frozen_preparation_mismatches": [],
+  "commands": [
+    {
+      "name": "extract-shared-row",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "F:\\Ourgame\\tools\\scripts\\extract-sprite-shared-row-scale.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-primary2-v001\\run-farshoulder-primary2-v001"
+      ],
+      "tool": {
+        "path": "F:/Ourgame/tools/scripts/extract-sprite-shared-row-scale.py",
+        "bytes": 8626,
+        "sha256": "2d7464dc2e8dd962a7d4dc170c0a7401d09cf1a626415309b4921b7d89d88aa3"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/farshoulder-extraction-v001/extract-shared-row.log",
+        "bytes": 2445,
+        "sha256": "4ced0a35f02b87b43b9aaf0530f92d96fed3c7f21beeb4b5467fcaef3b989c51"
+      }
+    },
+    {
+      "name": "compose-atlas",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\compose_sprite_atlas.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-primary2-v001\\run-farshoulder-primary2-v001"
+      ],
+      "tool": {
+        "path": "C:/Users/22499/.codex/skills/sprite-gen/scripts/compose_sprite_atlas.py",
+        "bytes": 481,
+        "sha256": "a7475830b99720b69bc645423a2f9aee40d03dad0e7d589ad4756526648a61aa"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/farshoulder-extraction-v001/compose-atlas.log",
+        "bytes": 301,
+        "sha256": "7a9eedbb7d76b41d6ff56f1993c6256fef2549f0f6606d7db519259135e56f5e"
+      }
+    },
+    {
+      "name": "export-curated",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\export_curated_pngs.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-primary2-v001\\run-farshoulder-primary2-v001",
+        "--state",
+        "armor_shoulder_far_sword_primary2"
+      ],
+      "tool": {
+        "path": "C:/Users/22499/.codex/skills/sprite-gen/scripts/export_curated_pngs.py",
+        "bytes": 477,
+        "sha256": "dcf7910f44a3f43006a43379c0464c88ed7cc3213e3a8062edd59b9009960e1e"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/farshoulder-extraction-v001/export-curated.log",
+        "bytes": 1102,
+        "sha256": "ac51ecbdf4251961be6f735775c8d0db7b59ece7431937f0a80a2befd46b3f40"
+      }
+    },
+    {
+      "name": "preview",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\preview_animation.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-primary2-v001\\run-farshoulder-primary2-v001"
+      ],
+      "tool": {
+        "path": "C:/Users/22499/.codex/skills/sprite-gen/scripts/preview_animation.py",
+        "bytes": 459,
+        "sha256": "ff4aa5d1bcfae4731a09732da96d24f540707b834df5cba85b910f88df016496"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/farshoulder-extraction-v001/preview.log",
+        "bytes": 325,
+        "sha256": "b0c1372bcb9014dbc2322d0cc5617eab5f01a108c55f3d8a3e4b69e9eab9f5cf"
+      }
+    }
+  ],
+  "frames": [
+    {
+      "frame": 0,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-farshoulder-primary2-v001/curated/frame-0.png",
+        "bytes": 3545,
+        "sha256": "aed6708a15dacd91f9cc989b2d59a941a263d489635a55caafca6cb5af0316d0"
+      },
+      "source_canvas": [
+        512,
+        512
+      ],
+      "alpha_bbox_diagnostic_only": [
+        240,
+        244,
+        272,
+        271
+      ],
+      "alpha_bbox_size_diagnostic_only": [
+        32,
+        27
+      ],
+      "actual_component_feature_A": null,
+      "actual_facing": null,
+      "semantic_or_bone_measurement": false,
+      "new_output_viewed": false
+    },
+    {
+      "frame": 1,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-farshoulder-primary2-v001/curated/frame-1.png",
+        "bytes": 3636,
+        "sha256": "a8c129dc146184dd43f929faa7651db9500c2a48467effa327d186433e23d5d6"
+      },
+      "source_canvas": [
+        512,
+        512
+      ],
+      "alpha_bbox_diagnostic_only": [
+        240,
+        243,
+        272,
+        271
+      ],
+      "alpha_bbox_size_diagnostic_only": [
+        32,
+        28
+      ],
+      "actual_component_feature_A": null,
+      "actual_facing": null,
+      "semantic_or_bone_measurement": false,
+      "new_output_viewed": false
+    },
+    {
+      "frame": 2,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-farshoulder-primary2-v001/curated/frame-2.png",
+        "bytes": 3587,
+        "sha256": "5e10137e44ec61ee196aeea0cdc10e102545886a6c59843ba62aa39026c24491"
+      },
+      "source_canvas": [
+        512,
+        512
+      ],
+      "alpha_bbox_diagnostic_only": [
+        240,
+        243,
+        271,
+        271
+      ],
+      "alpha_bbox_size_diagnostic_only": [
+        31,
+        28
+      ],
+      "actual_component_feature_A": null,
+      "actual_facing": null,
+      "semantic_or_bone_measurement": false,
+      "new_output_viewed": false
+    },
+    {
+      "frame": 3,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-farshoulder-primary2-v001/curated/frame-3.png",
+        "bytes": 3640,
+        "sha256": "0ccb1809bd766641784bbc0d80ba5658da23534c64e4fff47837e56654c9562c"
+      },
+      "source_canvas": [
+        512,
+        512
+      ],
+      "alpha_bbox_diagnostic_only": [
+        240,
+        242,
+        271,
+        271
+      ],
+      "alpha_bbox_size_diagnostic_only": [
+        31,
+        29
+      ],
+      "actual_component_feature_A": null,
+      "actual_facing": null,
+      "semantic_or_bone_measurement": false,
+      "new_output_viewed": false
+    },
+    {
+      "frame": 4,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-farshoulder-primary2-v001/curated/frame-4.png",
+        "bytes": 3586,
+        "sha256": "f4532e8d886896f13165d5a715decd614cf5e9f1486b615771591cdb4934ecb9"
+      },
+      "source_canvas": [
+        512,
+        512
+      ],
+      "alpha_bbox_diagnostic_only": [
+        240,
+        243,
+        271,
+        271
+      ],
+      "alpha_bbox_size_diagnostic_only": [
+        31,
+        28
+      ],
+      "actual_component_feature_A": null,
+      "actual_facing": null,
+      "semantic_or_bone_measurement": false,
+      "new_output_viewed": false
+    },
+    {
+      "frame": 5,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-farshoulder-primary2-v001/curated/frame-5.png",
+        "bytes": 3538,
+        "sha256": "225a63ea2b7ff8a734ec16adbae735dffa6ef23a39cedecdc064812934ed912b"
+      },
+      "source_canvas": [
+        512,
+        512
+      ],
+      "alpha_bbox_diagnostic_only": [
+        240,
+        244,
+        272,
+        271
+      ],
+      "alpha_bbox_size_diagnostic_only": [
+        32,
+        27
+      ],
+      "actual_component_feature_A": null,
+      "actual_facing": null,
+      "semantic_or_bone_measurement": false,
+      "new_output_viewed": false
+    }
+  ],
+  "metadata": {
+    "frames_manifest": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-farshoulder-primary2-v001/frames/frames-manifest.json",
+      "bytes": 7040,
+      "sha256": "315a5651688392348f3207e1c4a75516eb8e43107e9447d68da662887ae0a172"
+    },
+    "atlas_report": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-farshoulder-primary2-v001/sprite-sheet-alpha.report.json",
+      "bytes": 2374,
+      "sha256": "eface62f1505495b0610fe778cbce54a865480f7248f0f4bf29060f8afcaf8fe"
+    },
+    "QA_errors": [],
+    "QA_warnings": [],
+    "shared_row_ratio": 0.13559322033898305,
+    "shared_row_fit": {
+      "policy": "one_raw_component_max_extent_scale_for_entire_row",
+      "scale": 0.13559322033898305,
+      "source_max_extent": [
+        236,
+        213
+      ],
+      "horizontal_registration": "bbox_center",
+      "per_frame_scale_normalization": false,
+      "frame_records": [
+        {
+          "frame": 0,
+          "source_component_size": [
+            236,
+            199
+          ],
+          "shared_scale": 0.13559322033898305,
+          "resampled_size": [
+            32,
+            27
+          ],
+          "placement_xy": [
+            240,
+            244
+          ],
+          "alpha_bbox_px": [
+            240,
+            244,
+            272,
+            271
+          ]
+        },
+        {
+          "frame": 1,
+          "source_component_size": [
+            234,
+            204
+          ],
+          "shared_scale": 0.13559322033898305,
+          "resampled_size": [
+            32,
+            28
+          ],
+          "placement_xy": [
+            240,
+            243
+          ],
+          "alpha_bbox_px": [
+            240,
+            243,
+            272,
+            271
+          ]
+        },
+        {
+          "frame": 2,
+          "source_component_size": [
+            230,
+            205
+          ],
+          "shared_scale": 0.13559322033898305,
+          "resampled_size": [
+            31,
+            28
+          ],
+          "placement_xy": [
+            240,
+            243
+          ],
+          "alpha_bbox_px": [
+            240,
+            243,
+            271,
+            271
+          ]
+        },
+        {
+          "frame": 3,
+          "source_component_size": [
+            230,
+            213
+          ],
+          "shared_scale": 0.13559322033898305,
+          "resampled_size": [
+            31,
+            29
+          ],
+          "placement_xy": [
+            240,
+            242
+          ],
+          "alpha_bbox_px": [
+            240,
+            242,
+            271,
+            271
+          ]
+        },
+        {
+          "frame": 4,
+          "source_component_size": [
+            230,
+            203
+          ],
+          "shared_scale": 0.13559322033898305,
+          "resampled_size": [
+            31,
+            28
+          ],
+          "placement_xy": [
+            240,
+            243
+          ],
+          "alpha_bbox_px": [
+            240,
+            243,
+            271,
+            271
+          ]
+        },
+        {
+          "frame": 5,
+          "source_component_size": [
+            234,
+            198
+          ],
+          "shared_scale": 0.13559322033898305,
+          "resampled_size": [
+            32,
+            27
+          ],
+          "placement_xy": [
+            240,
+            244
+          ],
+          "alpha_bbox_px": [
+            240,
+            244,
+            272,
+            271
+          ]
+        }
+      ],
+      "raw_component_RGBA_sha256": [
+        "9f355fffde5239343f5c45f333e3ac27ffa124579ddfc041296f099393ea5157",
+        "949266721ae148ac87892d219d40cad8e282d3d1a5c2b611f9a1186f536bf2b6",
+        "8464f3f62e0151b9fb391a08d63826c00e1af00b6da6955f7a21fe5bcbb090af",
+        "a5911e92917aea3d04bf288ac4285fab898eb266ca1558cc8c1eedc9619e99c6",
+        "4e83e554e0a1857e945bdec641f3a49d792b4bdf87a963146c1a83af5265ffba",
+        "3988897f75b2036d1a23b8725d19662382cf272bf14f488f10f21d0f163b1fa1"
+      ]
+    },
+    "unique_source_pngs": 6,
+    "actual_atlas_durations_ms": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "actual_gif_durations_ms": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "timing_contract_passed": false
+  },
+  "failure": null,
+  "shape_pipeline_passed": true,
+  "future_actual_component_A": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "feature_contract_not_yet_verified": "actual small top-strap rivet center, NOT centralboss",
+  "fit_window_design_only": [
+    32,
+    30
+  ],
+  "new_outputs_viewed": false,
+  "registration_or_motion_accepted": false,
+  "timing_contract_passed": false,
+  "native_called": false,
+  "UE_import_called": false,
+  "formal_complete_units": 0
+}

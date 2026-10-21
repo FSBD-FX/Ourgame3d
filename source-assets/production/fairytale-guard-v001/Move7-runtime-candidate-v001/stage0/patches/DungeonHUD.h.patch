@@ -1,0 +1,29 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.h
+@@ -14,6 +14,7 @@
+ #include "DungeonFairytaleSwordDodgeDrawState.h"
+ #include "DungeonFairytaleGuardDrawState.h"
+ #include "DungeonFairytaleGuardFullDrawStateV003.h"
++#include "DungeonFairytaleGuardMoveDrawStateV001.h"
+ #include "DungeonHUD.generated.h"
+ 
+ class UTexture2D;
+@@ -89,6 +90,8 @@
+     const TArray<FDungeonFairytaleGuardDraw>& GetFairytaleGuardDraws() const { return FairytaleGuardDraws; }
+     const TArray<FDungeonFairytaleGuardFullDrawV003>& GetFairytaleGuardFullDraws() const { return FairytaleGuardFullDraws; }
+     bool IsFairytaleGuardStompPreviewEnabled() const { return bUseFairytaleGuardStompPreview; }
++    const TArray<FDungeonFairytaleGuardMoveRigDrawV001>& GetFairytaleGuardMoveRigDraws() const { return FairytaleGuardMoveRigDraws; }
++    bool IsFairytaleGuardMoveRigPreviewEnabled() const { return bUseFairytaleGuardMoveRigPreview; }
+ private:
+     UPROPERTY() TObjectPtr<UFont> ChineseFont;
+     UPROPERTY() TMap<FString,TObjectPtr<UTexture2D>> Frames;
+@@ -131,6 +134,9 @@
+     uint64 RestoredRunPresentationEpoch=0;
+     bool bUseFairytaleGuardFullPreview=false;
+     bool bUseFairytaleGuardStompPreview=false;
++    bool bUseFairytaleGuardMoveRigPreview=false;
++    uint64 FairytaleGuardMoveRigDrawSerial=0;
++    TArray<FDungeonFairytaleGuardMoveRigDrawV001> FairytaleGuardMoveRigDraws;
+     uint64 FairytaleGuardFullDrawSerial=0;
+     TArray<FDungeonFairytaleGuardFullDrawV003> FairytaleGuardFullDraws;
+     void LoadFairytaleGuardFullTrial();

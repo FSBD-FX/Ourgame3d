@@ -1,0 +1,36 @@
+{
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48
+  },
+  "states": {
+    "right_axe_windup": {
+      "frames": 6,
+      "fps": 6,
+      "loop": false,
+      "action": "frame0 at0ms: Low planted axe-ready fists; later axe tip may visually graze ground, no actor travel; frame1 at167ms: Begin gathering axe across torso, weightback; frame2 at333ms: Raise both closedhands; body may aim beforelock; frame3 at500ms: Exactlock.50: facing freezes to A.Facing; broad high tell pose; frame4 at667ms: Hold locked raisedaxe anticipation, no followaim; frame5 at833ms: Maximum planted windup just before active; no earlydamage. All frames preserve same acceptedidleidentity/camera. Fistsclosed unlessactualdeath; noaxe/shaft, dust, shadow, detachedFX, labels/grid."
+    }
+  },
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    }
+  },
+  "style": "Match accepted Guard RIGHT idle anchor exactly: shallow elevated three-quarter camera, wide short stone slabs, coarse black ink, small ambereye window, one sparse moss shoulder, few broad warmgreyplanes. BODY ONLY, closedtwofists, no weapon/FX. Do not turnpureprofile, addtinytexture, or resemble chargingStoneKnight.",
+  "motion_phase_guides": false,
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

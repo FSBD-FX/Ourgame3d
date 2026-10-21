@@ -1,0 +1,45 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.cpp
+@@ -134,8 +134,20 @@
+     for(const auto& Path:D.DrawStack){Stack.Add(MakeShared<FJsonValueString>(Path));HasArmor|=Path.Contains(TEXT("Shoulder"))||Path.Contains(TEXT("Chest"));}
+     R->SetArrayField(TEXT("draw_stack"),Stack);R->SetBoolField(TEXT("draw_stack_has_armor"),HasArmor);
+     const bool NoArmor=Inventory->Armor==0,Light=LightId&&Inventory->Armor==LightId,Medium=MediumId&&Inventory->Armor==MediumId;
+     R->SetStringField(TEXT("expected_armor_mode"),NoArmor?TEXT("no_armor"):Light?TEXT("light_armor"):Medium?TEXT("unsupported_medium"):TEXT("unexpected"));
++    // This expectation is derived from committed native owners, not future
++    // DrawState flags or the production resolver. Pending target does not equip.
++    const bool ActualPickup=V.Action.Active&&(V.Action.Kind==EDungeonEquipmentActionKind::PickupArmor
++        ||V.Action.Kind==EDungeonEquipmentActionKind::PickupWeapon);
++    const auto& ActualMelee=P->GetMeleeCombatState();
++    const bool RetainPending=ActualPickup&&(NoArmor||Light)&&!P->bDead&&ActualMelee.Grounded
++        &&P->JumpHeight==0.f&&P->GetVerticalVelocity()==0.f&&!ActualMelee.Action.Active
++        &&!P->GetWeaponSkillAction().Active&&P->GetDodgeState().Phase==DungeonDodge::EPhase::Idle
++        &&((V.Action.Kind==EDungeonEquipmentActionKind::PickupArmor&&P->AnimationName==TEXT("equip_armor"))
++            ||(V.Action.Kind==EDungeonEquipmentActionKind::PickupWeapon&&P->AnimationName==TEXT("equip_weapon")));
++    R->SetBoolField(TEXT("committed_gear_placeholder_expected"),RetainPending);
++    R->SetNumberField(TEXT("pending_equipment_kind"),int32(V.Action.Kind));
+     if(!D.Active||!D.TextureReady)Mismatch(TEXT("draw_inactive_or_resource_not_ready"),Observation);
+     if(!FMath::IsNearlyEqual(D.CanvasSize,DungeonFairytaleSwordBodyV001::CanvasSize,1.e-9)||H->GetInterfaceVisible()||H->GetRenderedTextDrawCalls()!=0)Mismatch(TEXT("source_canvas_or_UIoff_contract_changed"),Observation);
+     if(!FMath::IsNearlyEqual(D.SimulationTime,G->GetSimulationTime(),1.e-9))Mismatch(TEXT("draw_and_committed_owner_clock_differ"),Observation);
+     if(Inventory->RunId!=V.RunAlias||Inventory->OwnerId!=V.OwnerId||Inventory->Revision!=V.Revision||Inventory->ActiveSlot!=V.ActiveSlot||Inventory->Armor!=V.Slots[2].InstanceId)
+@@ -150,9 +162,20 @@
+         Mismatch(TEXT("actual_light_missing_current_matching_stack"),Observation);
+     if((NoArmor||Light)&&D.Supported&&(D.WeaponPath.IsEmpty()||D.InstanceId!=SwordId))Mismatch(TEXT("supported_actual_sword_missing_or_wrong_instance"),Observation);
+     if(Medium&&(D.Supported||D.ArmorDrawn||HasArmor||!D.WeaponPath.IsEmpty()))Mismatch(TEXT("unsupported_medium_is_falsely_drawn_as_sword_or_light"),Observation);
+     if(!NoArmor&&!Light&&!Medium)Mismatch(TEXT("unexpected_actual_armor_instance"),Observation);
+-    if((NoArmor||Light)&&!D.Supported&&(D.ArmorDrawn||HasArmor||!D.WeaponPath.IsEmpty()))Mismatch(TEXT("unsupported_pose_leaks_weapon_or_armor"),Observation);
++    if(RetainPending)
++    {
++        if(D.Supported)Mismatch(TEXT("pending_pickup_falsely_claims_supported_action_pose"),Observation);
++        if(D.Clip!=TEXT("sword_ready_idle")||D.Frame!=0||D.WeaponPath.IsEmpty()||D.InstanceId!=SwordId)
++            Mismatch(TEXT("pending_pickup_loses_committed_sword_Ready0_placeholder"),Observation);
++        if(Light&&(!D.ArmorDrawn||!HasArmor||!D.ArmorReady||D.DrawStack.Num()!=7))
++            Mismatch(TEXT("pending_pickup_loses_committed_light_Ready0_placeholder"),Observation);
++        if(NoArmor&&(D.ArmorDrawn||HasArmor||D.DrawStack.Num()!=3))
++            Mismatch(TEXT("pending_no_armor_placeholder_substitutes_armor_or_wrong_stack"),Observation);
++    }
++    if((NoArmor||Light)&&!D.Supported&&!RetainPending&&(D.ArmorDrawn||HasArmor||!D.WeaponPath.IsEmpty()))
++        Mismatch(TEXT("unsupported_pose_leaks_weapon_or_armor"),Observation);
+     if(!V.Action.Active&&!V.NeedsSlotSelection&&P->AnimationName==TEXT("idle")&&D.Clip==TEXT("sword_ready_idle")&&Step>=0&&Step<14)++ReadySeen[Step];
+     if(Step==6&&Light&&D.Supported&&D.Stage>=0&&D.Stage<3&&D.Frame>=0&&D.Frame<6)
+     {++StageFrames[D.Stage];StageMasks[D.Stage]|=1<<D.Frame;}
+     Observations.Add(MakeShared<FJsonValueObject>(R));

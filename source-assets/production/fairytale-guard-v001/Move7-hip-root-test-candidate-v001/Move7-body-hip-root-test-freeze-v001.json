@@ -1,0 +1,111 @@
+{
+  "schema": "Guard-Move7-body-hip-root-added-semantic-test-freeze-v001",
+  "utc": "2026-10-18T14:12:21.326040+00:00",
+  "candidate_only": true,
+  "production_implementation_allowed": false,
+  "actual_Source_Content_tools_ledger_E_modified": false,
+  "UE_build_run_performed": false,
+  "semantic_RED_observed": false,
+  "test_name": "CodexDungeon.Content.FairytaleGuardMoveRigV001.BodyHipAttachmentAndActualSourceRoot",
+  "test_source": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-hip-root-test-candidate-v001/new/Tests/DungeonFairytaleGuardMoveRigBodyHipRootV001Tests.cpp",
+    "bytes": 9524,
+    "sha256": "ecdcdf1f1ca3919dfb91b59353104c3fff6c0541fb3b7951ef73cfbf9ffd6323"
+  },
+  "proposed_actual_path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/Tests/DungeonFairytaleGuardMoveRigBodyHipRootV001Tests.cpp",
+  "exact_beforepins": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-hip-root-test-candidate-v001/exact-beforepins-v001.json",
+    "bytes": 60055,
+    "sha256": "c1e15c7efc256ff94c867ae8bd1a51b1214448aadfa2922169021d35bbe8951e"
+  },
+  "stage0_v001_freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/Move7-stage0-freeze-v001.json",
+    "bytes": 11133,
+    "sha256": "54a884790301980c0cac59cffc435dd16c0337b7a4e9d86ea7f6e609ad956c37"
+  },
+  "frozen_three_test_sha256": "74c08cf8a94cb2712e6274088b65abe2c2e24a6b66467a5e0769f413f1d0704f",
+  "actual_source_verification_passes": [
+    {
+      "pass_id": 1,
+      "actual_source_count": 278,
+      "differences": 0
+    },
+    {
+      "pass_id": 2,
+      "actual_source_count": 278,
+      "differences": 0
+    }
+  ],
+  "expected_after_root_admission": {
+    "source_count": 279,
+    "registered_tests": 200,
+    "old_passes": 196,
+    "new_stage0_semantic_failures": 4,
+    "new_group_error_prefix": "TARGET Stage0 RED:",
+    "errors_in_this_new_group": 1
+  },
+  "preparation_geometry_checks": {
+    "source": "frozen host output with independent actual-Canvas CPU float corner reconstruction; no UE execution",
+    "cases": 40,
+    "distance_samples": [
+      2,
+      24,
+      32,
+      48,
+      64,
+      72,
+      96,
+      120,
+      128,
+      134
+    ],
+    "facings": [
+      1,
+      -1
+    ],
+    "ui_scales": [
+      1,
+      1.25
+    ],
+    "root_hip_core_crown_and_original_marker_max_error_px": 5.4400410414098174e-05,
+    "translated_body_mutation_detected_error_px": 1.000034809158823,
+    "detached_near_thigh_mutation_detected_error_px": 1.0000110220029435
+  },
+  "independent_backend_sources": [
+    {
+      "path": "G:/UE_5.5/Engine/Source/Runtime/Engine/Private/HUD.cpp",
+      "bytes": 38696,
+      "sha256": "6ed38158c2a423585d88e21a5f892cbb77b7f19f89f6cf3bf55d53ff1c783a99"
+    },
+    {
+      "path": "G:/UE_5.5/Engine/Source/Runtime/Engine/Private/UserInterface/CanvasItem.cpp",
+      "bytes": 62352,
+      "sha256": "6c3271ee48161ac91a9130bf78ad2b7992b3b2ade3ee868638085cacf6044721"
+    },
+    {
+      "path": "G:/UE_5.5/Engine/Source/Runtime/Core/Public/Math/RotationTranslationMatrix.h",
+      "bytes": 2751,
+      "sha256": "58c290ad61620556e1ffbc69bdac2ae7a09d484ec0a6894dceeeb572ea707e88"
+    }
+  ],
+  "known_frozen_host_limit": {
+    "profile_sha256": "03156e971171f597ca504e9c0176d5a2fdf3c31c09b3eddae2995e2245193b51",
+    "solver_sha256": "7fb7ee2df01021917a62c764a21f15916f8ab2e09173d7b7a07b4e192c34815a",
+    "finite_ground": [
+      1e+20,
+      1e+20
+    ],
+    "host_plan_is_valid": true,
+    "UE5_5_4_unrotated_float_vertex_spans": [
+      0,
+      0
+    ],
+    "required_production_behavior": "reject entire plan while preserving Out if actual float right<=left or bottom<=top; stricter backend domain without changing frozen host/profile"
+  },
+  "boundaries": [
+    "Only this independent new test source and two JSON records added under assigned new candidate directory",
+    "Existing frozen three-test source and all actual278Source bytes unchanged in two verification passes",
+    "No UE/native compilation or test run by this agent; actual semantic RED remains Root work",
+    "No runtime integration, source-profile changes, image/media View, import, generation, or acceptance claim"
+  ]
+}

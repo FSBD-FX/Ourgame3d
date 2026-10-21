@@ -1,0 +1,87 @@
+{
+  "schema": "Guard207-extra-absolute-alpha-check-diagnostic-v001",
+  "preserved_failure": {
+    "script": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/extract-curate-idle4-v001.py",
+      "bytes": 7907,
+      "sha256": "0e1dcfb8f609027212f966b55391d2a59d2e56c58007e6f1d1e8f0b584e90a6f"
+    },
+    "line": 45,
+    "assertion": "pure_magenta_any_alpha == 0",
+    "actual_result": "failed on frame1 after all standard pipeline commands had exit0",
+    "standard_QA_was_not_relaxed": true
+  },
+  "keyed_raw": {
+    "pure_magenta_any_alpha": 0,
+    "pure_magenta_core128": 0,
+    "magenta_pixels_xy_rgba": []
+  },
+  "components_before_shared_fit": [
+    {
+      "pure_magenta_any_alpha": 0,
+      "pure_magenta_core128": 0,
+      "magenta_pixels_xy_rgba": []
+    },
+    {
+      "pure_magenta_any_alpha": 0,
+      "pure_magenta_core128": 0,
+      "magenta_pixels_xy_rgba": []
+    },
+    {
+      "pure_magenta_any_alpha": 0,
+      "pure_magenta_core128": 0,
+      "magenta_pixels_xy_rgba": []
+    },
+    {
+      "pure_magenta_any_alpha": 0,
+      "pure_magenta_core128": 0,
+      "magenta_pixels_xy_rgba": []
+    }
+  ],
+  "fitted_frames": [
+    {
+      "pure_magenta_any_alpha": 0,
+      "pure_magenta_core128": 0,
+      "magenta_pixels_xy_rgba": []
+    },
+    {
+      "pure_magenta_any_alpha": 1,
+      "pure_magenta_core128": 0,
+      "magenta_pixels_xy_rgba": [
+        [
+          127,
+          363,
+          [
+            255,
+            0,
+            255,
+            1
+          ]
+        ]
+      ]
+    },
+    {
+      "pure_magenta_any_alpha": 1,
+      "pure_magenta_core128": 0,
+      "magenta_pixels_xy_rgba": [
+        [
+          158,
+          136,
+          [
+            255,
+            0,
+            255,
+            1
+          ]
+        ]
+      ]
+    },
+    {
+      "pure_magenta_any_alpha": 0,
+      "pure_magenta_core128": 0,
+      "magenta_pixels_xy_rgba": []
+    }
+  ],
+  "inference": "The exact magenta low-alpha pixels first occur after the existing LANCZOS shared fit. This is an edge diagnostic, not missing core material. No repaint, erasure or re-generation was performed.",
+  "Root_scope_decision": "Root explicitly accepts SG QA0/motion no warnings/core128magenta0 as a production candidate; any-alpha1 diagnostic remains recorded, pending actual transparent review."
+}

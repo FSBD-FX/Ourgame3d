@@ -1,0 +1,15 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -1322,6 +1322,12 @@
+     }
+ }
+ 
++bool ADungeonFighter::QueryCompletedGuardMove(FDungeonGuardMoveSample& Out) const
++{
++    (void)Out; // Stage0 semantic RED: no fabricated witness or caller mutation.
++    return false;
++}
++
+ bool ADungeonFighter::QueryDodgePresentation(FDungeonDodgePresentationSample& Out) const
+ {
+     // Published actual owner/action facts stay readable while Continue is closed.

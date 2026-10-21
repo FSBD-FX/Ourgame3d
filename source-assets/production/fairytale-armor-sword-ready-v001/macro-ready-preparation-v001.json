@@ -1,0 +1,625 @@
+{
+  "schema": "fairytale-lgt-sword-ready-macro-preparation-v1",
+  "created_local": "2026-10-16T09:33:13.904810+08:00",
+  "armor_id": "ARM-LGT-001",
+  "rows": [
+    {
+      "component": "Chest",
+      "state": "armor_lgt_chest_sword_ready",
+      "run_dir": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v001/run-chest-ready-v001",
+      "raw_output_path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v001/run-chest-ready-v001/raw/armor_lgt_chest_sword_ready.png",
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v001/prompts/chest-draft-v001.txt",
+        "bytes": 2471,
+        "sha256": "212dc8577cc492a57ca5ef38f18c2b6a9149045b64d492adadaa362a9c00a4a0"
+      },
+      "reference_images_in_order": [
+        {
+          "role": "sole_identity131",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/curated/frame-0.png",
+            "bytes": 117257,
+            "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718"
+          }
+        },
+        {
+          "role": "actual155_four_ready_poses",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v001/qa/sword_ready_idle-contact.png",
+            "bytes": 401599,
+            "sha256": "d7bf13133e3cff55f25a61221e93ef0aabbb00db32cb15a245d794f106420c95"
+          }
+        },
+        {
+          "role": "147_iron_palette_only_not_geometry",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-idle-components-v001/registration-proposed-v001/armor-front/frame-0.png",
+            "bytes": 10879,
+            "sha256": "c0ad8d83c40fd409b3a048a4658e706c8ece359d17b1419cd10e25b7cf5c39d7"
+          }
+        },
+        {
+          "role": "original_local_envelope_only_not_body_mount",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v001/guides/chest-extraction-envelope-v001.png",
+            "bytes": 17441,
+            "sha256": "5c6e605e895220eda4355b992e8e3392a81a184768233e454735512410eb08f0"
+          }
+        },
+        {
+          "role": "standard_count_layout_only",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v001/run-chest-ready-v001/references/layout-guides/armor_lgt_chest_sword_ready.png",
+            "bytes": 4502,
+            "sha256": "0b9eed6515514ca9e59d92fba7e52833c220ef70447de97ccf3d1d6592748487"
+          }
+        }
+      ],
+      "frame_count": 4,
+      "durations_ms": [
+        167,
+        167,
+        167,
+        167
+      ],
+      "fit_window_px": [
+        104,
+        80
+      ],
+      "approx_display_envelope_px": [
+        18.0,
+        13.846153846153847
+      ],
+      "target_mounts": [
+        {
+          "frame": 0,
+          "A": null,
+          "meaning": "Authoring socket requires an actual visible body seam/contour measurement; no hidden joint precision implied."
+        },
+        {
+          "frame": 1,
+          "A": null,
+          "meaning": "Authoring socket requires an actual visible body seam/contour measurement; no hidden joint precision implied."
+        },
+        {
+          "frame": 2,
+          "A": null,
+          "meaning": "Authoring socket requires an actual visible body seam/contour measurement; no hidden joint precision implied."
+        },
+        {
+          "frame": 3,
+          "A": null,
+          "meaning": "Authoring socket requires an actual visible body seam/contour measurement; no hidden joint precision implied."
+        }
+      ],
+      "generation_ready": false,
+      "blockers": [
+        "Actual155 visible collar/waist/shoulder landmarks not measured",
+        "Exact source-owned near-arm/near-hand partition not produced/reviewed"
+      ],
+      "standard_prepare_command": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\prepare_sprite_run.py",
+        "--out-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-ready-v001\\run-chest-ready-v001",
+        "--character-id",
+        "fairytale-lgt-sword-ready-chest-v001",
+        "--base-image",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-idle-v002\\curated\\frame-0.png",
+        "--description",
+        "Four genuinely distinct isolated connected ARM-LGT-001 Chest components, matching actual native155 SwordReady0..3; no body pixels, weapon or other armor component.",
+        "--style",
+        "Canonical131 grotesque hand-inked construction; matte cool-gray broad iron planes and charcoal rim from147 palette. Component-only light armor; do not alter body/helmet scale.",
+        "--cell-size",
+        "512",
+        "--chroma-key",
+        "#00FF00",
+        "--request",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-ready-v001\\requests\\chest-numeric-input-v001.json"
+      ],
+      "standard_prepare_exit_code": 0,
+      "new_guides_viewed": false
+    },
+    {
+      "component": "NearShoulder",
+      "state": "armor_lgt_shoulder_near_sword_ready",
+      "run_dir": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v001/run-nearshoulder-ready-v001",
+      "raw_output_path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v001/run-nearshoulder-ready-v001/raw/armor_lgt_shoulder_near_sword_ready.png",
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v001/prompts/nearshoulder-draft-v001.txt",
+        "bytes": 2484,
+        "sha256": "d0be9fe5b4d22e1fa2fa03b083e8df2df3112f6b9414a53b0a194680a59372ad"
+      },
+      "reference_images_in_order": [
+        {
+          "role": "sole_identity131",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/curated/frame-0.png",
+            "bytes": 117257,
+            "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718"
+          }
+        },
+        {
+          "role": "actual155_four_ready_poses",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v001/qa/sword_ready_idle-contact.png",
+            "bytes": 401599,
+            "sha256": "d7bf13133e3cff55f25a61221e93ef0aabbb00db32cb15a245d794f106420c95"
+          }
+        },
+        {
+          "role": "147_iron_palette_only_not_geometry",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-idle-components-v001/registration-proposed-v001/armor-front/frame-0.png",
+            "bytes": 10879,
+            "sha256": "c0ad8d83c40fd409b3a048a4658e706c8ece359d17b1419cd10e25b7cf5c39d7"
+          }
+        },
+        {
+          "role": "original_local_envelope_only_not_body_mount",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v001/guides/nearshoulder-extraction-envelope-v001.png",
+            "bytes": 17721,
+            "sha256": "1216f489b2efcdc70f6ed41cbde6824165f3dbb9e992a03e82a41258e86d1f63"
+          }
+        },
+        {
+          "role": "standard_count_layout_only",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v001/run-nearshoulder-ready-v001/references/layout-guides/armor_lgt_shoulder_near_sword_ready.png",
+            "bytes": 4479,
+            "sha256": "7d1fcb212d8175c69f73818483c7fed61a3f876a4902b3495e8e58daf0555861"
+          }
+        }
+      ],
+      "frame_count": 4,
+      "durations_ms": [
+        167,
+        167,
+        167,
+        167
+      ],
+      "fit_window_px": [
+        64,
+        48
+      ],
+      "approx_display_envelope_px": [
+        11.076923076923077,
+        8.307692307692308
+      ],
+      "target_mounts": [
+        {
+          "frame": 0,
+          "A": null,
+          "meaning": "Authoring socket requires an actual visible body seam/contour measurement; no hidden joint precision implied."
+        },
+        {
+          "frame": 1,
+          "A": null,
+          "meaning": "Authoring socket requires an actual visible body seam/contour measurement; no hidden joint precision implied."
+        },
+        {
+          "frame": 2,
+          "A": null,
+          "meaning": "Authoring socket requires an actual visible body seam/contour measurement; no hidden joint precision implied."
+        },
+        {
+          "frame": 3,
+          "A": null,
+          "meaning": "Authoring socket requires an actual visible body seam/contour measurement; no hidden joint precision implied."
+        }
+      ],
+      "generation_ready": false,
+      "blockers": [
+        "Actual155 visible collar/waist/shoulder landmarks not measured",
+        "Exact source-owned near-arm/near-hand partition not produced/reviewed"
+      ],
+      "standard_prepare_command": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\prepare_sprite_run.py",
+        "--out-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-ready-v001\\run-nearshoulder-ready-v001",
+        "--character-id",
+        "fairytale-lgt-sword-ready-nearshoulder-v001",
+        "--base-image",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-idle-v002\\curated\\frame-0.png",
+        "--description",
+        "Four genuinely distinct isolated connected ARM-LGT-001 NearShoulder components, matching actual native155 SwordReady0..3; no body pixels, weapon or other armor component.",
+        "--style",
+        "Canonical131 grotesque hand-inked construction; matte cool-gray broad iron planes and charcoal rim from147 palette. Component-only light armor; do not alter body/helmet scale.",
+        "--cell-size",
+        "512",
+        "--chroma-key",
+        "#00FF00",
+        "--request",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-ready-v001\\requests\\nearshoulder-numeric-input-v001.json"
+      ],
+      "standard_prepare_exit_code": 0,
+      "new_guides_viewed": false
+    },
+    {
+      "component": "FarShoulder",
+      "state": "armor_lgt_shoulder_far_sword_ready",
+      "run_dir": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v001/run-farshoulder-ready-v001",
+      "raw_output_path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v001/run-farshoulder-ready-v001/raw/armor_lgt_shoulder_far_sword_ready.png",
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v001/prompts/farshoulder-draft-v001.txt",
+        "bytes": 2482,
+        "sha256": "5e2ba5f4e8afd7647aca5b23e89ed4aab39658412b872a172bafda8204a5ec41"
+      },
+      "reference_images_in_order": [
+        {
+          "role": "sole_identity131",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/curated/frame-0.png",
+            "bytes": 117257,
+            "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718"
+          }
+        },
+        {
+          "role": "actual155_four_ready_poses",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v001/qa/sword_ready_idle-contact.png",
+            "bytes": 401599,
+            "sha256": "d7bf13133e3cff55f25a61221e93ef0aabbb00db32cb15a245d794f106420c95"
+          }
+        },
+        {
+          "role": "147_iron_palette_only_not_geometry",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-idle-components-v001/registration-proposed-v001/armor-front/frame-0.png",
+            "bytes": 10879,
+            "sha256": "c0ad8d83c40fd409b3a048a4658e706c8ece359d17b1419cd10e25b7cf5c39d7"
+          }
+        },
+        {
+          "role": "original_local_envelope_only_not_body_mount",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v001/guides/farshoulder-extraction-envelope-v001.png",
+            "bytes": 17432,
+            "sha256": "0451477a7223af920978d3b27687ba1866349b397b126a6cf8838d35fb36af6e"
+          }
+        },
+        {
+          "role": "standard_count_layout_only",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v001/run-farshoulder-ready-v001/references/layout-guides/armor_lgt_shoulder_far_sword_ready.png",
+            "bytes": 4476,
+            "sha256": "f3c49f00d7dff31983361631e16f250085aa5b6674449314ddf1e5d553e3d349"
+          }
+        }
+      ],
+      "frame_count": 4,
+      "durations_ms": [
+        167,
+        167,
+        167,
+        167
+      ],
+      "fit_window_px": [
+        40,
+        44
+      ],
+      "approx_display_envelope_px": [
+        6.923076923076923,
+        7.615384615384615
+      ],
+      "target_mounts": [
+        {
+          "frame": 0,
+          "A": null,
+          "meaning": "Authoring socket requires an actual visible body seam/contour measurement; no hidden joint precision implied."
+        },
+        {
+          "frame": 1,
+          "A": null,
+          "meaning": "Authoring socket requires an actual visible body seam/contour measurement; no hidden joint precision implied."
+        },
+        {
+          "frame": 2,
+          "A": null,
+          "meaning": "Authoring socket requires an actual visible body seam/contour measurement; no hidden joint precision implied."
+        },
+        {
+          "frame": 3,
+          "A": null,
+          "meaning": "Authoring socket requires an actual visible body seam/contour measurement; no hidden joint precision implied."
+        }
+      ],
+      "generation_ready": false,
+      "blockers": [
+        "Actual155 visible collar/waist/shoulder landmarks not measured",
+        "Exact source-owned near-arm/near-hand partition not produced/reviewed"
+      ],
+      "standard_prepare_command": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\prepare_sprite_run.py",
+        "--out-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-ready-v001\\run-farshoulder-ready-v001",
+        "--character-id",
+        "fairytale-lgt-sword-ready-farshoulder-v001",
+        "--base-image",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-idle-v002\\curated\\frame-0.png",
+        "--description",
+        "Four genuinely distinct isolated connected ARM-LGT-001 FarShoulder components, matching actual native155 SwordReady0..3; no body pixels, weapon or other armor component.",
+        "--style",
+        "Canonical131 grotesque hand-inked construction; matte cool-gray broad iron planes and charcoal rim from147 palette. Component-only light armor; do not alter body/helmet scale.",
+        "--cell-size",
+        "512",
+        "--chroma-key",
+        "#00FF00",
+        "--request",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-ready-v001\\requests\\farshoulder-numeric-input-v001.json"
+      ],
+      "standard_prepare_exit_code": 0,
+      "new_guides_viewed": false
+    }
+  ],
+  "source_landmark_requirements": [
+    {
+      "frame": 0,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v001/curated/frame-0.png",
+        "bytes": 112802,
+        "sha256": "7b747dd4bdbfa326653661583afc0b79a3baf9927eea65d931b96ecc78d6130f"
+      },
+      "collar_visible_edge_px": null,
+      "waist_upper_seam_px": null,
+      "near_shoulder_visible_mount_px": null,
+      "far_shoulder_visible_mount_px": null,
+      "near_arm_cloth_boundary": null,
+      "near_cuff_hand_boundary": null,
+      "inspection_ROIs_only": {
+        "collar": [
+          205,
+          222,
+          309,
+          260
+        ],
+        "waist": [
+          217,
+          300,
+          303,
+          327
+        ],
+        "near_shoulder": [
+          170,
+          232,
+          228,
+          270
+        ],
+        "far_shoulder": [
+          285,
+          238,
+          330,
+          287
+        ],
+        "near_arm_hand": [
+          160,
+          232,
+          285,
+          315
+        ]
+      },
+      "ROI_status": "Inspection bounds only, never a semantic mask/accepted collision region/precise joint.",
+      "source_root_display_px": [
+        256,
+        464
+      ],
+      "display_root_is_exact_two_foot_center": false
+    },
+    {
+      "frame": 1,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v001/curated/frame-1.png",
+        "bytes": 113355,
+        "sha256": "04c48e214cfd693dab4afacb7f2bb3abca7ab22e717e982a1d394e5174449be1"
+      },
+      "collar_visible_edge_px": null,
+      "waist_upper_seam_px": null,
+      "near_shoulder_visible_mount_px": null,
+      "far_shoulder_visible_mount_px": null,
+      "near_arm_cloth_boundary": null,
+      "near_cuff_hand_boundary": null,
+      "inspection_ROIs_only": {
+        "collar": [
+          205,
+          222,
+          309,
+          260
+        ],
+        "waist": [
+          217,
+          300,
+          303,
+          327
+        ],
+        "near_shoulder": [
+          170,
+          232,
+          228,
+          270
+        ],
+        "far_shoulder": [
+          285,
+          238,
+          330,
+          287
+        ],
+        "near_arm_hand": [
+          160,
+          232,
+          285,
+          315
+        ]
+      },
+      "ROI_status": "Inspection bounds only, never a semantic mask/accepted collision region/precise joint.",
+      "source_root_display_px": [
+        256,
+        464
+      ],
+      "display_root_is_exact_two_foot_center": false
+    },
+    {
+      "frame": 2,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v001/curated/frame-2.png",
+        "bytes": 113455,
+        "sha256": "fd00251555fb2254206f5d8e981a564b28b18d42d19af8b52ca294fb048ba972"
+      },
+      "collar_visible_edge_px": null,
+      "waist_upper_seam_px": null,
+      "near_shoulder_visible_mount_px": null,
+      "far_shoulder_visible_mount_px": null,
+      "near_arm_cloth_boundary": null,
+      "near_cuff_hand_boundary": null,
+      "inspection_ROIs_only": {
+        "collar": [
+          205,
+          222,
+          309,
+          260
+        ],
+        "waist": [
+          217,
+          300,
+          303,
+          327
+        ],
+        "near_shoulder": [
+          170,
+          232,
+          228,
+          270
+        ],
+        "far_shoulder": [
+          285,
+          238,
+          330,
+          287
+        ],
+        "near_arm_hand": [
+          160,
+          232,
+          285,
+          315
+        ]
+      },
+      "ROI_status": "Inspection bounds only, never a semantic mask/accepted collision region/precise joint.",
+      "source_root_display_px": [
+        256,
+        464
+      ],
+      "display_root_is_exact_two_foot_center": false
+    },
+    {
+      "frame": 3,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v001/curated/frame-3.png",
+        "bytes": 112938,
+        "sha256": "86e8c702e1455bf6fde682f0cd384d5e0f41ba7e0935af6b5cb0704b4e3970d6"
+      },
+      "collar_visible_edge_px": null,
+      "waist_upper_seam_px": null,
+      "near_shoulder_visible_mount_px": null,
+      "far_shoulder_visible_mount_px": null,
+      "near_arm_cloth_boundary": null,
+      "near_cuff_hand_boundary": null,
+      "inspection_ROIs_only": {
+        "collar": [
+          205,
+          222,
+          309,
+          260
+        ],
+        "waist": [
+          217,
+          300,
+          303,
+          327
+        ],
+        "near_shoulder": [
+          170,
+          232,
+          228,
+          270
+        ],
+        "far_shoulder": [
+          285,
+          238,
+          330,
+          287
+        ],
+        "near_arm_hand": [
+          160,
+          232,
+          285,
+          315
+        ]
+      },
+      "ROI_status": "Inspection bounds only, never a semantic mask/accepted collision region/precise joint.",
+      "source_root_display_px": [
+        256,
+        464
+      ],
+      "display_root_is_exact_two_foot_center": false
+    }
+  ],
+  "existing_ready_hand_estimates": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/ready-measurement-v001/ready-marker-proposal-v001.json",
+    "bytes": 17996,
+    "sha256": "f0e8a250eaea3b2315ea9c9cf86eab0514ba4f6a0b53a14cc322aedcda8c4f7d"
+  },
+  "previous_semantic_contract": {
+    "path": "F:/Ourgame/docs/production/first-batch-v2/fairytale-armor-component-contract-v003.md",
+    "bytes": 8486,
+    "sha256": "a69f3bf251705751d06c1974270a98b9d6322f7757c2ea745ccecece2ba55906"
+  },
+  "near_arm_partition_plan": {
+    "method": "Manual binary pixel ownership from each actual155RGBA. No repaint/warp/recolor, no old mask. NearHand subset of NearArm; split BodyRest / NearArmWithoutHand / NearHand. Every source coordinate assigned once, originalRGBA copied unchanged.",
+    "required_proofs": [
+      "Source SHA and ownership mask SHA",
+      "Binary disjoint ownership and coverage",
+      "Reconstruct source by selecting its owned originalRGBA at every coordinate and compare all bytes",
+      "Rendered premultipliedRGBA/alpha reconstruction and real armor/weapon stack separately reviewed",
+      "Uncertain shoulder/cuff ink/AA edges recorded; no hidden anatomy invented"
+    ],
+    "partition_produced": false,
+    "semantic_mask_accepted": false,
+    "candidate_layer_order": [
+      "body_rest",
+      "far_shoulder_visible_geometry",
+      "chest",
+      "near_arm_without_hand",
+      "near_shoulder",
+      "weapon",
+      "near_hand"
+    ],
+    "layer_order_is_accepted": false,
+    "risks": [
+      "Far cap needs truly visible pixels; wholebody must not hide it then call it rendered",
+      "Near cap must not be erased by replaying an opaque full sleeve after it",
+      "Across-chest forearm must cover plate naturally without copying chest/helmet pixels into arm mask",
+      "NearHand remains an approximate/uncertain anatomy candidate until actual source ownership and thumb review"
+    ]
+  },
+  "future_armor_boundaries": {
+    "ARM-LGT-001": "Partial rigid chest, exposed cloth and short caps; this draft only Ready4.",
+    "ARM-MED-001": "Own coverage/overlap silhouette and every state; not light recolor.",
+    "ARM-HVY-001": "Own bulk, articulation/weight and every state; never enlarge whole hero to fake armor mass.",
+    "ARM-ROB-001": "Own fabric drape/hem movement and every state, keeping actual foot clearance; not plate recolor."
+  },
+  "generated": false,
+  "ue_or_import_called": false,
+  "new_guides_viewed": false,
+  "formal_complete_units": 0
+}

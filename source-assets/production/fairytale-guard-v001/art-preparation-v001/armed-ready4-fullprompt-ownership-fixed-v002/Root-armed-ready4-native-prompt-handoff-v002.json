@@ -1,0 +1,35 @@
+{
+  "schema": "GuardReady4-native-prompt-ownership-correction-v002",
+  "supersedes_prompt": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/armed-ready4-generation-ready-v001/run-guard-right-armed-ready-v001/prompts/right/idle.txt",
+    "bytes": 7916,
+    "sha256": "212304c6073ceeb4c2dda984fb9e7478421dafe06871511f28dc51cdfff97f1f"
+  },
+  "preserved_v001": true,
+  "new_prompt": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/armed-ready4-fullprompt-ownership-fixed-v002/root-native-armed-ready4-fullprompt-v002.txt",
+    "bytes": 8248,
+    "sha256": "7be74ebd0b85dc9a9beeae00c5ce4333db0d3ab3558c482c25fc304af8156129"
+  },
+  "references": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/armed-ready4-fullprompt-ownership-fixed-v002/native-helper-references-ready-v002.json",
+    "bytes": 1686,
+    "sha256": "08fd6aad4ae3d94dd7ef729e7032cc63387446ec767f3d4a0d7a253350b7f25a"
+  },
+  "standard_run_unchanged": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/armed-ready4-generation-ready-v001/run-guard-right-armed-ready-v001",
+  "output": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/armed-ready4-generation-ready-v001/run-guard-right-armed-ready-v001/raw/right/idle.png",
+  "only_changes": [
+    {
+      "before": "- This row is the CANONICAL DIRECTION ANCHOR for this facing: derive identity from the attached base image, change only the facing/orientation, and keep poses minimal (subtle breathing) so a single frame can be cropped as the anchor.",
+      "after": "- This row creates the NEW FIXED-EQUIPMENT ARMED DIRECTION IDENTITY for this facing: preserve accepted207 body identity and add the SAME accepted208 heavyaxe in a genuinely generated two-hand closed grip. Empty207 side-fist positions are not binding: change arm/hand pose to hold the continuous shaft naturally. Keep the shallow three-quarter facing and four small distinct heavy-weight settles; a single accepted equipped frame will become the future anchor."
+    },
+    {
+      "before": "- This row owns motion only. Spend the variation budget on limb contacts, arm counter-swing, body height, torso lean, head bob, hair bounce, and loop continuity.",
+      "after": "- This equipped-identity row owns the newly established two-hand weapon pose and subtle weight-settle motion. Body material, head/torso/limb proportions and fixed208 weapon proportions remain locked; do not redesign them. Later armed action rows will own motion only."
+    }
+  ],
+  "reason": "Generic directionanchor changeonlyfacing and motiononly clauses conflicted with creating truefixed208equippedidentity fromneutral207. No camera,framecount,guide,scale,timing,referencepixels,skilltool ornativegameplaychanged.",
+  "raw_already_exists": false,
+  "generation_calls": 0,
+  "retention": "References are exactv001links and must be Eretained byRoot beforeuse; no newvisualmedia created."
+}

@@ -1,0 +1,95 @@
+{
+  "schema": "retain-gear-production-candidate-input-v001",
+  "actual_RED_report_read": true,
+  "actual_native": {
+    "passed": false,
+    "reason": "",
+    "flow_complete": true,
+    "observations": 141,
+    "masks": [
+      63,
+      63,
+      63
+    ],
+    "mismatches": [
+      {
+        "phase": "light_pending_cancel",
+        "reason": "pending_pickup_loses_committed_sword_Ready0_placeholder",
+        "first_observation": 5
+      },
+      {
+        "phase": "light_pending_cancel",
+        "reason": "pending_no_armor_placeholder_substitutes_armor_or_wrong_stack",
+        "first_observation": 5
+      },
+      {
+        "phase": "light_pickup_commit",
+        "reason": "pending_pickup_loses_committed_sword_Ready0_placeholder",
+        "first_observation": 21
+      },
+      {
+        "phase": "light_pickup_commit",
+        "reason": "pending_no_armor_placeholder_substitutes_armor_or_wrong_stack",
+        "first_observation": 21
+      },
+      {
+        "phase": "medium_commit",
+        "reason": "pending_pickup_loses_committed_sword_Ready0_placeholder",
+        "first_observation": 100
+      },
+      {
+        "phase": "medium_commit",
+        "reason": "pending_pickup_loses_committed_light_Ready0_placeholder",
+        "first_observation": 100
+      }
+    ]
+  },
+  "inputs": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+      "bytes": 17839,
+      "sha256": "c4da47163370c138f1b3d6d1ea9e6fbf837382738282504317fc07edd8c4854f"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordDrawState.h",
+      "bytes": 1489,
+      "sha256": "b8802577f0d8979da19a0e70dbd781fc41a01efd17e3ba177c0df5f5196b54a7"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.cpp",
+      "bytes": 25798,
+      "sha256": "3eb9dc3e2b8213d831a20e0ce94c9140fa99b1ab081abf2f8cb7a61ef6e993ba"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordEquipmentBinding.cpp",
+      "bytes": 9554,
+      "sha256": "6c167a9da61040ce58333c6824e5c3992de856ba9ceb6f6ed900898c855dfc3a"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPrimary3V001.inl",
+      "bytes": 4467,
+      "sha256": "6749343b607b21ae5d7d1b8d1bf959b67324d13b85c7f6b37f70097088116054"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPrimary3V002.inl",
+      "bytes": 1683,
+      "sha256": "27eb40a9672d47d55b720f93e00277d4ddd34e8d416199283dc7d209ed2762e6"
+    },
+    {
+      "path": "F:/Ourgame/过程图稿与视频/2026-10-16_军剑真实换装绑定_v003-pendingRED/原件/runtime-report.json",
+      "bytes": 395329,
+      "sha256": "fff32236421d4248da3e15b0259a43f0de54278580d21af91b208ae160e5e113"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-equipment-retain-gear-v001/test-v001/stage0-freeze-v001.json",
+      "bytes": 1654,
+      "sha256": "098e096568a7a358b68842a74009d1441fefe7e0bdb4baa1a048822837c48566"
+    }
+  ],
+  "production_candidate_compiled": false,
+  "production_candidate_run": false,
+  "actual_Source_written": false,
+  "probe_or_expectations_changed": false,
+  "once_same_Resolve_controls_skin": true,
+  "weapon_scale_UV_axis_actual_sword_hand_draw_suffix_identical": true
+}

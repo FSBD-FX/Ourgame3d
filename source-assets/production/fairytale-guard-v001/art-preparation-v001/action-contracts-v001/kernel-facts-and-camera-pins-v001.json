@@ -1,0 +1,191 @@
+{
+  "schema": "Guard003-actual-kernel-to-art-facts-v001",
+  "created_local": "2026-10-18T09:55:10.416936+08:00",
+  "sources": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.h",
+      "bytes": 5894,
+      "sha256": "6c71de106f3d728aec593d1528331714442e6756878cf49af3d04f48e68eb9de"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.cpp",
+      "bytes": 42213,
+      "sha256": "6198551820b8e01ace25ce061169a671e342cc60bab6f6dc800df767d77b1d9f"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.h",
+      "bytes": 2106,
+      "sha256": "37d66f6ce81bae8bcf5174daa753020f9172f485d1c3a5a2ed1845b7535f95ca"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp",
+      "bytes": 21268,
+      "sha256": "da61c077b1f8a35972810165cf5ed534f55d2383661f3b1397afe1b649e5cdf9"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 117982,
+      "sha256": "f56fdd077078cce6d2eaef8074ca654509c8425a7062be2e7e8db1c8e518bbaf"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": 114437,
+      "sha256": "e3b5950cb3cbcab31c8e3ad5d8bc628ee5a0bb4797fdfd641b73fd53e10097e0"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonPresentationScale.h",
+      "bytes": 374,
+      "sha256": "367d0159a19aef6fccdb51af18b6961df027020a91332c510f2fed13bfad4d7e"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+      "bytes": 21881,
+      "sha256": "3acf17c11275c62a693309e5eef9546d977fbbace021839d7c76b0112cb38143"
+    },
+    {
+      "path": "F:/Ourgame/docs/design/enemies-v1/stone-forest.json",
+      "bytes": 54295,
+      "sha256": "5757ef0e4da5830546dff944d1e717c22fbf92e7692229bbadd5b9397aeea0c5"
+    },
+    {
+      "path": "F:/Ourgame/docs/design/enemies-v1/01-石像与森林敌人.md",
+      "bytes": 21835,
+      "sha256": "b1edd5ba84c19c6b5dda1005fccddacde0dee456dcb2da624af38814ab4b02ca"
+    },
+    {
+      "path": "F:/Ourgame/docs/production/first-batch-v2/runtime-review-walk-guard-v127.md",
+      "bytes": 3868,
+      "sha256": "10a1faefd369966ffb0b357205047a9ef807cc3a178fdc8e7dcdfa5e21f02af4"
+    }
+  ],
+  "definition": {
+    "ContentId": "ENM-STN-003",
+    "HP": 185,
+    "Armor": 60,
+    "Ward": 15,
+    "Poise": 85,
+    "MoveSpeedWorldPerSecond": 160,
+    "BodyHalfWorld": [
+      40,
+      28
+    ],
+    "HurtHalfWorld": [
+      40,
+      28
+    ],
+    "WakeEllipseWorld": [
+      235,
+      110
+    ],
+    "WakeWarningSeconds": 1,
+    "VisibleChaseBoundsWorld": [
+      650,
+      250
+    ],
+    "ExtremelyClosePolicyWorld": 70,
+    "ExtremelyClose_role": "Explicit FPolicy default/NativeOwnersaved proposal, not numeric original design fact."
+  },
+  "kernel_enum_phases": [
+    "Dormant",
+    "Waking",
+    "Idle",
+    "Windup",
+    "Active",
+    "Recovery",
+    "Stunned",
+    "Dead"
+  ],
+  "not_kernel_phases": {
+    "Move": "Idle+actual accepted movement; no fixed kernel gait period.",
+    "Hurt": "Positive damage materialfeedback; not a kernel phase. Placeholder mapsStunned to hurtlabel but legalstun requirespoisebreak."
+  },
+  "attacks": {
+    "AxeSweep": {
+      "id": "ENM-STN-003-A1",
+      "windup_s": 1,
+      "lock_fromStart_s": 0.5,
+      "active_s": 0.2,
+      "recovery_s": 1.4,
+      "cooldown_fromStart_s": 3.1,
+      "damage": 24,
+      "stagger": 30,
+      "forwardXworld": [
+        0,
+        180
+      ],
+      "halfYworld": 65,
+      "heightToleranceWorld": 65
+    },
+    "Stomp": {
+      "id": "ENM-STN-003-A2",
+      "windup_s": 0.9,
+      "lock_fromStart_s": 0.45,
+      "active_s": 0.15,
+      "recovery_s": 1.5,
+      "cooldown_fromStart_s": 3,
+      "damage": 18,
+      "stagger": 25,
+      "ellipseWorld": [
+        160,
+        90
+      ],
+      "heightToleranceWorld": 65
+    }
+  },
+  "shared_rules": [
+    "Both actions stationary throughout Windup/Active/Recovery, actorXY never moves to suit a picture.",
+    "AimLockAxe may retarget facing at.50 then frozen; Stomp center locks ownXY at.45, not player position.",
+    "RecoveryEnd releases action; separate IdleReadyAt=RecoveryEnd+.3 prohibits immediate nextattack.",
+    "Actual damage keeps phase/action unless death or legalpoisebreak; no permanentstoneknifeparry/fireimmune art implication.",
+    "Poisebreak=.4stun,1s poiseprotection; interrupted windows close without replay, original OccupiedUntil/cooldown/IdleReady stay.",
+    "Wake mayqueue at nearby LOS/positiveactualdamage/12s combatfallback/otheraccepted enemiesclear; W.CanBeginWake governs admission. Never attack before realWakeCompleted.",
+    "Death wins before unissuedActiveWindow at sameboundary; GroundBodyDisabled immediately, not after deathclip.",
+    "NativeDriver applies real LOS/height/admission and onehit receipt perattack/target; visual effects do not create gameplay damage."
+  ],
+  "source_line_evidence": {
+    "definition": "DungeonStoneGuard.h:FDefinition",
+    "attacks": "DungeonStoneGuard.cpp477-480",
+    "selector": "500-512",
+    "wake": "528-556",
+    "lock_active_recovery": "569-598",
+    "movement": "602-645",
+    "damage_stun_death": "654-691",
+    "action_deadlines": "728-742",
+    "hit_admission": "750-765",
+    "phase_to_placeholder": "DungeonFighter.cpp1953-1981",
+    "placeholder_and_camera": "DungeonHUD.cpp308,1009-1057",
+    "accepted_damage_flash": "DungeonGameMode.cpp1575-1595"
+  },
+  "visual_size_candidate": {
+    "hero_visible_height_px": 72,
+    "hero_source512_foreground_height_px": 416,
+    "hero_canvas_px": 88.61538461538461,
+    "Guard_visible_height_px_candidate": 100.8,
+    "height_ratio": 1.4,
+    "Guard_source206_raw_foreground_extent_px": [
+      841,
+      1040
+    ],
+    "proposed_shared512_safe48_scale": 0.4,
+    "Guard512_extent_proposal": [
+      336,
+      416
+    ],
+    "Guard_render_canvas_px_proposal": 124.06153846153846,
+    "Guard_visible_width_px_proposal": 81.514,
+    "ground_projection_screen_x_per_world": 0.65,
+    "ground_projection_screen_y_per_world": -0.38,
+    "Guard_collision_width_depth_px": [
+      52,
+      21.28
+    ],
+    "Hero_collision_width_depth_px": [
+      23.4,
+      12.16
+    ],
+    "old_guard_placeholder_height_px": 82,
+    "size_role": "ART CANDIDATE only. Formal definition fixes world collision, not visual bodyheight. No source/definition/camera changed, no measured foot root/footlock claimed."
+  },
+  "new_API_calls": 0,
+  "actual_Source_UE_tools_ledger_README_modified": false
+}

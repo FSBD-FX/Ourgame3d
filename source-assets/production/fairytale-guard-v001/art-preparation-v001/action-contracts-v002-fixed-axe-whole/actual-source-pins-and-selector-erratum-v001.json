@@ -1,0 +1,83 @@
+{
+  "schema": "Guard-fixed-axe-plan-v002-selector-status-erratum-v001",
+  "source_recheck": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.h",
+      "old_sha256": "6c71de106f3d728aec593d1528331714442e6756878cf49af3d04f48e68eb9de",
+      "actual_sha256": "6c71de106f3d728aec593d1528331714442e6756878cf49af3d04f48e68eb9de",
+      "byte_equal": true
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.cpp",
+      "old_sha256": "6198551820b8e01ace25ce061169a671e342cc60bab6f6dc800df767d77b1d9f",
+      "actual_sha256": "6198551820b8e01ace25ce061169a671e342cc60bab6f6dc800df767d77b1d9f",
+      "byte_equal": true
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.h",
+      "old_sha256": "37d66f6ce81bae8bcf5174daa753020f9172f485d1c3a5a2ed1845b7535f95ca",
+      "actual_sha256": "37d66f6ce81bae8bcf5174daa753020f9172f485d1c3a5a2ed1845b7535f95ca",
+      "byte_equal": true
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp",
+      "old_sha256": "da61c077b1f8a35972810165cf5ed534f55d2383661f3b1397afe1b649e5cdf9",
+      "actual_sha256": "da61c077b1f8a35972810165cf5ed534f55d2383661f3b1397afe1b649e5cdf9",
+      "byte_equal": true
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "old_sha256": "f56fdd077078cce6d2eaef8074ca654509c8425a7062be2e7e8db1c8e518bbaf",
+      "actual_sha256": "475dec845f8092faf7bae6c3c8ef6f689ed26bfe7b5758bfcb8140e4600d48f3",
+      "byte_equal": false
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "old_sha256": "e3b5950cb3cbcab31c8e3ad5d8bc628ee5a0bb4797fdfd641b73fd53e10097e0",
+      "actual_sha256": "895292a40f24d70a96d4d5fe02400d5da8a95628a980711a0af48d14c120142a",
+      "byte_equal": false
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonPresentationScale.h",
+      "old_sha256": "367d0159a19aef6fccdb51af18b6961df027020a91332c510f2fed13bfad4d7e",
+      "actual_sha256": "367d0159a19aef6fccdb51af18b6961df027020a91332c510f2fed13bfad4d7e",
+      "byte_equal": true
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+      "old_sha256": "3acf17c11275c62a693309e5eef9546d977fbbace021839d7c76b0112cb38143",
+      "actual_sha256": "3acf17c11275c62a693309e5eef9546d977fbbace021839d7c76b0112cb38143",
+      "byte_equal": true
+    },
+    {
+      "path": "F:/Ourgame/docs/design/enemies-v1/stone-forest.json",
+      "old_sha256": "5757ef0e4da5830546dff944d1e717c22fbf92e7692229bbadd5b9397aeea0c5",
+      "actual_sha256": "5757ef0e4da5830546dff944d1e717c22fbf92e7692229bbadd5b9397aeea0c5",
+      "byte_equal": true
+    },
+    {
+      "path": "F:/Ourgame/docs/design/enemies-v1/01-石像与森林敌人.md",
+      "old_sha256": "b1edd5ba84c19c6b5dda1005fccddacde0dee456dcb2da624af38814ab4b02ca",
+      "actual_sha256": "b1edd5ba84c19c6b5dda1005fccddacde0dee456dcb2da624af38814ab4b02ca",
+      "byte_equal": true
+    },
+    {
+      "path": "F:/Ourgame/docs/production/first-batch-v2/runtime-review-walk-guard-v127.md",
+      "old_sha256": "10a1faefd369966ffb0b357205047a9ef807cc3a178fdc8e7dcdfa5e21f02af4",
+      "actual_sha256": "10a1faefd369966ffb0b357205047a9ef807cc3a178fdc8e7dcdfa5e21f02af4",
+      "byte_equal": true
+    }
+  ],
+  "errata": [
+    {
+      "path": "armed_rows[right_armed_ready].kernel_selector",
+      "replace_with": "Guard kernel S.Phase==Idle and ADungeonFighter::bMoving==false; bMoving is presentation actualpositiondelta at SyncStoneGuardState, not a member of kernelS.",
+      "actual_location": "DungeonFighter.cpp1958/1971"
+    },
+    {
+      "path": "armed_rows[right_armed_ready].status",
+      "replace_with": "Ready4 standardprepared inarmed-ready4-generation-ready-v001, pendingRootnative209. Earlier inheritedstatus about207body-onlyinput applies onlyto preservedneutralstudy and is superseded."
+    }
+  ],
+  "source_statement": "Kernelphase/timing definitions remain sourceverified; plan selectors are descriptions, not compilable kernelfield API."
+}

@@ -1,0 +1,50 @@
+{
+  "request_number": 147,
+  "asset": "fairytale-four-idle-front-chest-independent-components-v001",
+  "status": "reserved_before_single_native_call",
+  "source_event": "EV-048",
+  "authorization_events": [
+    "EV-040",
+    "EV-041"
+  ],
+  "window_number": 7,
+  "requested_utc": "2026-10-15T21:04:16.064980+00:00",
+  "prompt_path": "F:\\Ourgame\\source-assets\\production\\fairytale-armor-v001\\independent-idle-components-v001\\prompts\\147-four-idle-front-chest-v001.txt",
+  "prompt": "Create ONE horizontal component-row strip containing exactly FOUR independent connected chest-armor pieces, left to right. This is native147, a production-layer candidate for the four existing idle poses. It is NOT four dressed characters and NOT a full-body replacement.\n\nREFERENCE OWNERSHIP: canonical131-idle-0 is the sole hero/style identity. The canonical131 four-pose contact gives the exact pose order0,1,2,3 and collar/waist relationship for each piece; never generate its body pixels. Reference146 is ONLY a material/construction reference for its compact curved breastplate and short connected straps. Ignore its helmet, anatomy, body proportions, pose, raw alpha border and framing. The two technical guides give counts/attachment shape; their blue fill, labels, markers, borders and arrows must not appear in the result.\n\nOUTPUT ONLY THE ARMOR: each of the four items is one small curved front breastplate with two short straps visibly attached to it. Keep every item one connected component. Its upper notch fits beneath the existing dark collar; its short lower edge stops above the existing belt. Right-facing three-quarter view: respect the wider near side at image-left and compressed far side at image-right. Match each corresponding131 torso pose, with only subtle flexible-strap tension change through the four breathing poses; the same metal plate remains rigid and keeps its design/volume. The source idle timing stays4x167ms, but do not draw timing labels. Do not duplicate one image into four slots or introduce a different armor design in a later slot.\n\nDESIGN: preserve146's compact, rounded, slightly crooked handmade breastplate construction; do not turn it into heavy square plate, a door-bar beam or another outfit. Use slightly cooler DESATURATED NEUTRAL GREY metal than146's warm tan helmet, with two or three broad matte painted values, a readable dark ink rim and restrained pale-grey upper highlight. Keep the playful grotesque dark-fairytale drawing of131. Short dark-leather straps may connect to the chest piece; no green/teal materials, tiny engraving, busy rivets or realistic surface noise. The final chest panel will be only about13.5x10.4px on a72px hero, so its broad shape and collar/waist separation must do the work.\n\nNO helmet, eyes, neck, charcoal shirt, sleeves, shoulders/pauldrons, arms, skin, gloves, fingers, belt/buckle, hips, legs, boots, cape, skirt, weapon or shield. No whole hero, mannequin, ghost body or body-colored silhouette. No independent detached straps, floating rivets or extra components. No alternate views, turnarounds, scenery, floor, shadow, glow, white halo, checkerboard, typography or UI. These four components must be genuinely separate armor art, never146's full-body pixels copied into a layer.\n\nBACKGROUND/LAYOUT: perfectly flat solid chroma GREEN #00FF00, fully opaque RGB-style background and opaque armor interiors. Exactly four well-separated objects in one horizontal row, generous green gaps and border on every side; no overlap and no extra items. Keep all four objects at the SAME drawing scale. They may be drawn large enough for clean ink and later deterministically reduced together; the numeric fit window78x60 is a final component limit, not an instruction to fill512px with a chest plate or to draw guide boxes. Extraction will use one shared component scale for the whole row, never per-frame body normalization.\n\nSUCCESS BOUNDARY: produce only the four front chest pieces. Back/near armor, forearms, shins, weapon occlusion, complete four-armors, walk/action frames and runtime acceptance are separate work. Do not add their pixels to make this row look complete.\n",
+  "prompt_file_sha256": "8b848d949fe67a2475bbe48033819f2a47ecb1d02c303263d48591c4f284c255",
+  "submitted_prompt_utf8_sha256": "3e17f675eaa222132a6b1038fdb3905491d4c1537603ce5552bcd4988f8edc14",
+  "reference_images": [
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-armor-v001\\independent-idle-components-v001\\references\\canonical131-idle-0.png",
+      "role": "sole canonical identity/style; no129 or146 body identity",
+      "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718"
+    },
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-armor-v001\\independent-idle-components-v001\\references\\canonical131-idle-four-pose-contact.png",
+      "role": "exact four131 body poses0..3; pose/mount reference only, body pixels forbidden in armor output",
+      "sha256": "d720eca9b34139616e6c7d7d6a0f411304ce8e628d3f4fd7bb3e5009edc985ad"
+    },
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-armor-v001\\independent-idle-components-v001\\references\\146-material-only.png",
+      "role": "breastplate construction/material only; forbid its anatomy/helmet/body/alpha/framing",
+      "sha256": "c36745a38f1d2be6279a1fe34d33ece92817fd7ae4ccb46a03380c8e3bb51837"
+    },
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-armor-v001\\independent-idle-components-v001\\run-front-idle-v001\\references\\layout-guides\\armor_front_idle.png",
+      "role": "sprite-gen numeric four-slot layout only; never render its labels/boxes",
+      "sha256": "8bd063ec0137f0b55e8950948199967b0ed3b26e0dd86cf3c3ff18df4dc3efa0"
+    },
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-armor-v001\\independent-idle-components-v001\\guides\\four-idle-chest-shape-and-mount-v001.png",
+      "role": "original technical connected shape/mount design; blue/markers/text are not material",
+      "sha256": "6e5bc7509bc295f4efc7c3f6f99ca7c665de62c3812c36cca4fd0709e1531662"
+    }
+  ],
+  "transparent_background": false,
+  "backend": "image_gen.imagegen",
+  "host_fee_usd": null,
+  "external_api_calls": 0,
+  "source_directory": "F:\\Ourgame\\source-assets\\production\\fairytale-armor-v001\\independent-idle-components-v001",
+  "raw_destination_planned": "F:\\Ourgame\\source-assets\\production\\fairytale-armor-v001\\independent-idle-components-v001\\run-front-idle-v001\\raw\\armor_front_idle.png",
+  "scope": "4 independent connected front chest pieces, original167ms idle4; nobody/fullarmor/runtimeacceptance"
+}

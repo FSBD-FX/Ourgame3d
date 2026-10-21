@@ -1,0 +1,858 @@
+{
+  "schema": "Guard003-complete-fixed-axe-whole-action-assets-PLAN-v002",
+  "kernel_facts": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/action-contracts-v001/kernel-facts-and-camera-pins-v001.json",
+    "bytes": 6588,
+    "sha256": "39a167cea3ccaa06d0b5a9240bbb3bebbf9263fa477a19bcefc2cf71bd49e9b1"
+  },
+  "ordinary_hurt_overlay": {
+    "state": "hurt_material_overlay",
+    "frames": 4,
+    "durations_ms": [
+      55,
+      55,
+      55,
+      55
+    ],
+    "span_ms": 220,
+    "kernel_phase": null,
+    "trigger": "Positive actual EEventKind::Damaged/ActualHPLoss receipt; once per nativeevent; current HitFlash=.22 is presentation feedback.",
+    "role": "Local tint/crack-chip material overlay, not fullbody pose override. Does not cancel validWindup/Active or setStunned.",
+    "subject": "effect",
+    "bone_grip_points": null,
+    "no_new_damage_window": true
+  },
+  "bodyfree_effect_rows": [
+    {
+      "name": "axe_sweep_cue",
+      "frames": 4,
+      "durations_ms": [
+        50,
+        50,
+        50,
+        50
+      ],
+      "source_event": "ActiveWindow(AxeSweep),once per AttackId/EventId",
+      "lifetime_ms": 200,
+      "stop": "ActiveEnd or actual WindowClosure/Death whicheverfirst",
+      "bodyfree": true,
+      "shape": "Sparse opaque curvedink/motion cue near blade path only; not a new hitbox. ActualHit impact separate."
+    },
+    {
+      "name": "stomp_contact_cue",
+      "frames": 4,
+      "durations_ms": [
+        40,
+        35,
+        40,
+        35
+      ],
+      "source_event": "ActiveWindow(Stomp),once perAttackId/EventId",
+      "lifetime_ms": 150,
+      "stop": "ActiveEnd or actualclosure/death",
+      "bodyfree": true,
+      "shape": "Local groundcontact crack/dust only, no flyingdamagingstones, persistentarea or extra shockdamage."
+    },
+    {
+      "name": "accepted_hit_chips",
+      "frames": 4,
+      "durations_ms": [
+        55,
+        55,
+        55,
+        55
+      ],
+      "source_event": "Actual positive Damaged forGuard material feedback; actualHit(target) forweaponcontact only",
+      "lifetime_ms": 220,
+      "bodyfree": true,
+      "shape": "Few broad opaque chips, not photoreal debris/no body silhouette. No hit VFX on whiff."
+    },
+    {
+      "name": "poise_break_cue",
+      "frames": 4,
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "source_event": "PoiseBroken once perEventId",
+      "lifetime_ms": 400,
+      "bodyfree": true,
+      "shape": "Brief broad crackmark/eye dip, no stun stars or additional invulnerability."
+    }
+  ],
+  "weapon": {
+    "fixed_identity_native208": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/heavyaxe-reference-ready-v001/raw/guard-heavyaxe-identity.png",
+      "bytes": 1428507,
+      "sha256": "9cff2c33ad3d3b7f03dfe50eef71807a0bac6cdd2795aa414dc0d4b16303f632"
+    },
+    "standard_independent_prop_index": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/heavyaxe-extraction-v001/axe208-curated-source-index-v001.json",
+      "bytes": 2327,
+      "sha256": "f17462cc73001a8aed89cd38cc46845a9f6138afd10ccd4db64b03562b3478da"
+    },
+    "body_rows_contain_same_fixed_weapon": true,
+    "identity": "Single asymmetric stone head, continuous straight wood haft, two bare wood zones separated by wrap, stone buttcap; keep one identity/proportion across all rows. Low-detail broad planes.",
+    "reference_flow": "FirstArmedReady uses accepted curated207Idle0 body identity +208prop +prepared numericguide. AfterArmedReady0 is accepted, all armed actionrows use acceptedArmedReady identity, paired/basisrow as required and guide. Neverreattach206base.",
+    "actual_independent_prop_visible_axis_grip_ranges": null,
+    "measurement_role": "Artist visible shaft/wood zones only, not bone coordinates; useful for source audit/future prop use, not mandatory runtime per-frame handrig.",
+    "death_detach": "Optional body-free detached axe effect, triggered only after actualDeath. No collision/damage/rewarddelay; keep finaldeathrow whole unless Rootchoosesactualseparateeffect."
+  },
+  "ownership_plan": {
+    "frame_output": "One complete RGBA body+fixedaxe sprite per frame. No5body+2weapon exclusive layers required. Alpha supports one complete silhouette; real generated hand/shaft occlusion stays baked.",
+    "runtime_stack": "Native groundshadow/telegraph → complete Guard+axe sprite → authorized localFX. Deathdetach only if separatelyaccepted.",
+    "fixed_scale": "Register all body actions to acceptedArmedReady crown/sole/body landmark density, one shared scale per row; compare basis raw body size before accept. Never per-frame normalize, localredraw or warp. Axe remains proportional to Guard within generated poses.",
+    "actual_visible_markers_required": [
+      "display ground pivot / sole contact candidate",
+      "crown / torso comparison landmarks",
+      "visible closed-fist shaft passage check"
+    ],
+    "no_hidden_coordinates_inferred": true,
+    "canonical_body_size_candidate_px": 100.8,
+    "hero_visible_height_px": 72,
+    "ratio_candidate": 1.4,
+    "size_status": "Artist candidate only, Root camera/native presentation review required. Formal collision40×28halfworld and speed160 unchanged."
+  },
+  "direction_contract": {
+    "canonical": "RIGHT, same shallow elevated three-quarter side view as206, not pure90profile",
+    "left": "Runtime mirror entire accepted whole RGBA sprite and attached FX about explicit display pivot; both hands and axe mirror together. No independent near/far swap, no left regeneration by default.",
+    "locked_facing": "Useactual A.Facing afterlock; no facingchase inlastwindup/active/recovery.",
+    "marking": "Moss, stone plates, axe head and both grip occlusions follow the whole mirrored source.",
+    "QA": "Rootactualnative A/D or enemyfacing bothdirections, allwake/attack activeboundaries/interrupt/death; nativephase/HP/receipts/runtimevideo beforeacceptance."
+  },
+  "timing_contract": {
+    "installed_SG_compose": "compose_atlas.py216-227 currently writes uniform round1000/fps, ignoring manualstates.durations_ms. Do not change tool or mislabel preview asnativeclock.",
+    "prepare": "normalize_states.py499-520 dropsdurations; recordstandardpreparedbeforemanual artisttiming additions.",
+    "native_runtime": "Dedicatedimmutable art profile maps eachkernel phaseand realdeadline to UVframe. Follow rowindexes0..1 active and2..5 recovery exclusively.",
+    "standard_preview": "Label uniformSGpreviewtiming separately (Wake6@6fps1002ms !=1000ms; Follow rowuniformfps is not exactNativeMapping). No hiddenretime to claimmotionpass.",
+    "asset_pose_samples": "durations_NATIVE_ART_MAPPING fixedbeforegeneration, not adjusted to rescuebad motion. Nativegameplaytime/deadlines stayunchanged."
+  },
+  "production_gate_order": [
+    "207neutralcurated4 E→actualtransparent/motionreview→RootinternalIdle0bodyidentitylock",
+    "208independentstandardprop E→actualtransparentreview/visibleaxiswoodzoneaudit",
+    "ArmedReady4 standardprepare with accepted207Idle0+208identity+guide, same shallow elevated3/4camera; Rootserialnativeonly",
+    "ArmedReady rawretain→View→sharedcomponentextract/inspect/compose/curated4/motionreview→RootacceptedArmedReady0",
+    "Wake6 andAxeWindup6/Follow6 with acceptedArmedReady0, guide and actual pairedrows;206base removed",
+    "Move6/StompWindup6/Follow6/Stunned4/Death6/Dormant1/InterruptedRecovery4, all fixedaxe wholeposes",
+    "Actualfull6/4/1closedhandshaft, sameidentity/density/camera/ground, realphase mapping beforeRootimport",
+    "Rootonly UE/native verify bothfacing/sameinstance/worldclock/telegraph/activeclosures/poise/ordinaryhurt/death/reward and realvideo"
+  ],
+  "budget_scope": {
+    "baseline_README_v127_native_count": 205,
+    "baseline_window_used": 13,
+    "baseline_window_capacity": 24,
+    "baseline_remaining": 11,
+    "Root206_after_baseline": "confirmedgenerated; Rootserial ledgerowns currentcount",
+    "firstpass_minimum": "Identity2061 +neutral2071 +fixed208prop1 +11armedrow calls +FX asneeded, beforecorrections. Baseline11remaining doesnot covercompleteplan; Rootserialledger/currentwindow is truth.",
+    "window_policy": "User/Rootauthorized automaticnewwindow remains; no externalAPI. Rootserialreserve/retain only, thisworker no generation orledgeredits.",
+    "built_in_cost": "unknown; never claimfree or quoteexternalAPIpricing asnativecharge."
+  },
+  "status": "v002completefixed-equipmentproductionplan only. Kerneltimes unchanged. No acceptedArmedReady/nativeaction/footlock claim.",
+  "supersedes": {
+    "plan": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/action-contracts-v001/complete-Guard003-body-weapon-FX-action-contract-v001.json",
+      "bytes": 25800,
+      "sha256": "99fbbb92cf217db094aa536e415746a8ab8b28d9a02684a98719ab034baf1880"
+    },
+    "preserved": true,
+    "authority": "Root explicit fixed enemy equipment decision2026-10-18. No SG/asset-gen fixed-enemy-prop mandatory split rule was established. STN001 BakedStoneEquipment is a relevant existing project precedent.",
+    "correction": "The v001 hand/weapon rig was a proposed production strategy, not a skill requirement. It is withdrawn for this fixed-axe enemy. Hero modular armor/weapon workflow is unchanged."
+  },
+  "armed_rows": [
+    {
+      "state": "right_dormant",
+      "frames": 1,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        1000
+      ],
+      "sample_start_ms": [
+        0
+      ],
+      "span_ms": 1000,
+      "loop": true,
+      "kernel_selector": "S.Phase==Dormant",
+      "clock_authority": "Indefinite static statue;1s is preview hold only, not activation time.",
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "sample_start_ms": 0,
+          "pose": "Both feet planted; axe-ready closedfists; amber windows unlit. No breathing/rocking, no attack threat effect."
+        }
+      ],
+      "all_visible_near_far_fists_closed": true,
+      "runtime_mirror_left": true,
+      "actual_source_markers": null,
+      "accepted": false,
+      "status": "needed; not native generated",
+      "kernel_span": "indefinite until real WakeStarted; still damageable and blocksgroundbody",
+      "full_body_plus_same_fixed_208_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "weapon_pose_gate": "Every visible hand closes around the SAME actual continuous shaft; near/far occlusion is baked in the generated pose. Do not paste208 onto neutral207 fists, draw fingers, infer bones or use per-frame weapon scale to rescue mismatched anatomy."
+    },
+    {
+      "state": "right_wake",
+      "frames": 6,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        167,
+        166,
+        167,
+        167,
+        166,
+        167
+      ],
+      "sample_start_ms": [
+        0,
+        167,
+        333,
+        500,
+        667,
+        833
+      ],
+      "span_ms": 1000,
+      "loop": false,
+      "kernel_selector": "S.Phase==Waking, unless Stunned/Dead takes priority",
+      "clock_authority": "S.Time-S.WakeStartedAt;clamp at WakeEnd-WakeStartedAt=1.0s",
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "sample_start_ms": 0,
+          "pose": "Dormant form first; shoulders remain low, eyes dark"
+        },
+        {
+          "frame": 1,
+          "sample_start_ms": 167,
+          "pose": "First faint amber eye-window light, plates begin unlock"
+        },
+        {
+          "frame": 2,
+          "sample_start_ms": 333,
+          "pose": "Chest and near shoulder lift slightly, feet planted"
+        },
+        {
+          "frame": 3,
+          "sample_start_ms": 500,
+          "pose": "Halfway weight up, both stone fists tighten but stayclosed"
+        },
+        {
+          "frame": 4,
+          "sample_start_ms": 667,
+          "pose": "Head clears shoulders, planted ready stance"
+        },
+        {
+          "frame": 5,
+          "sample_start_ms": 833,
+          "pose": "Arrive near acceptedIdle frame0, no attack beforeWakeCompleted"
+        }
+      ],
+      "all_visible_near_far_fists_closed": true,
+      "runtime_mirror_left": true,
+      "actual_source_markers": null,
+      "accepted": false,
+      "kernel_span_ms": 1000,
+      "full_body_plus_same_fixed_208_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "weapon_pose_gate": "Every visible hand closes around the SAME actual continuous shaft; near/far occlusion is baked in the generated pose. Do not paste208 onto neutral207 fists, draw fingers, infer bones or use per-frame weapon scale to rescue mismatched anatomy."
+    },
+    {
+      "state": "right_armed_ready",
+      "frames": 4,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        250,
+        250,
+        250,
+        250
+      ],
+      "sample_start_ms": [
+        0,
+        250,
+        500,
+        750
+      ],
+      "span_ms": 1000,
+      "loop": true,
+      "kernel_selector": "S.Phase==Idle && !S.bMoving, including actual extra300ms IdleReady gate",
+      "clock_authority": "Artist250ms×4 idle loop; not a gameplay deadline.",
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "sample_start_ms": 0,
+          "pose": "Quiet two-hand heavyaxe ready across low front of body. One continuous shaft through both closed fists; head up/right, clear feet."
+        },
+        {
+          "frame": 1,
+          "sample_start_ms": 250,
+          "pose": "Small heavy knees/shoulders settle with both hands staying on same continuous shaft. No shuffle."
+        },
+        {
+          "frame": 2,
+          "sample_start_ms": 500,
+          "pose": "Gentle opposite load settle, preserve same axe proportions and grip order."
+        },
+        {
+          "frame": 3,
+          "sample_start_ms": 750,
+          "pose": "Return close to frame0, clean closed loop."
+        }
+      ],
+      "all_visible_near_far_fists_closed": true,
+      "runtime_mirror_left": true,
+      "actual_source_markers": null,
+      "accepted": false,
+      "status": "standardprepared v001; camera-only correctedv002 ready forRoot207",
+      "kernel_span": "indefinite;IdleReadyAt and cooldown remain gameplay gates",
+      "full_body_plus_same_fixed_208_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "weapon_pose_gate": "Every visible hand closes around the SAME actual continuous shaft; near/far occlusion is baked in the generated pose. Do not paste208 onto neutral207 fists, draw fingers, infer bones or use per-frame weapon scale to rescue mismatched anatomy."
+    },
+    {
+      "state": "right_move",
+      "frames": 6,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "sample_start_ms": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500
+      ],
+      "span_ms": 600,
+      "loop": true,
+      "kernel_selector": "S.Phase==Idle with positive accepted collision-resolved locomotion only",
+      "clock_authority": "Proposed art cycle600ms/96world distance at formal160world/s; consume actual accepted movement, not intent or wall time. This is design tuning, not measured stride/footlock.",
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "sample_start_ms": 0,
+          "pose": "Near foot contact; far pushes; no run lean"
+        },
+        {
+          "frame": 1,
+          "sample_start_ms": 100,
+          "pose": "Weight compression over near planted sole"
+        },
+        {
+          "frame": 2,
+          "sample_start_ms": 200,
+          "pose": "Far foot passes under broadbody, short step"
+        },
+        {
+          "frame": 3,
+          "sample_start_ms": 300,
+          "pose": "Far foot contact; near pushes"
+        },
+        {
+          "frame": 4,
+          "sample_start_ms": 400,
+          "pose": "Weight compression over far planted sole"
+        },
+        {
+          "frame": 5,
+          "sample_start_ms": 500,
+          "pose": "Near foot passes into nextcontact; no wholebody reset"
+        }
+      ],
+      "all_visible_near_far_fists_closed": true,
+      "runtime_mirror_left": true,
+      "actual_source_markers": null,
+      "accepted": false,
+      "experimental": true,
+      "kernel_span": "Idle locomotion has no fixed clip deadline; stops at wall/body/attack-range entry",
+      "cycle_distance_world_ART_CANDIDATE": 96,
+      "full_body_plus_same_fixed_208_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "weapon_pose_gate": "Every visible hand closes around the SAME actual continuous shaft; near/far occlusion is baked in the generated pose. Do not paste208 onto neutral207 fists, draw fingers, infer bones or use per-frame weapon scale to rescue mismatched anatomy."
+    },
+    {
+      "state": "right_axe_windup",
+      "frames": 6,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        167,
+        166,
+        167,
+        167,
+        166,
+        167
+      ],
+      "sample_start_ms": [
+        0,
+        167,
+        333,
+        500,
+        667,
+        833
+      ],
+      "span_ms": 1000,
+      "loop": false,
+      "kernel_selector": "S.Phase==Windup && A.Kind==AxeSweep",
+      "clock_authority": "S.Time-A.Start;A.LockAt=A.Start+.50;A.ActiveAt=A.Start+1.00",
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "sample_start_ms": 0,
+          "pose": "Low planted axe-ready fists; later axe tip may visually graze ground, no actor travel"
+        },
+        {
+          "frame": 1,
+          "sample_start_ms": 167,
+          "pose": "Begin gathering axe across torso, weightback"
+        },
+        {
+          "frame": 2,
+          "sample_start_ms": 333,
+          "pose": "Raise both closedhands; body may aim beforelock"
+        },
+        {
+          "frame": 3,
+          "sample_start_ms": 500,
+          "pose": "Exactlock.50: facing freezes to A.Facing; broad high tell pose"
+        },
+        {
+          "frame": 4,
+          "sample_start_ms": 667,
+          "pose": "Hold locked raisedaxe anticipation, no followaim"
+        },
+        {
+          "frame": 5,
+          "sample_start_ms": 833,
+          "pose": "Maximum planted windup just before active; no earlydamage"
+        }
+      ],
+      "all_visible_near_far_fists_closed": true,
+      "runtime_mirror_left": true,
+      "actual_source_markers": null,
+      "accepted": false,
+      "kernel_span_ms": 1000,
+      "aim_lock_frame": 3,
+      "aim_lock_sample_ms": 500,
+      "full_body_plus_same_fixed_208_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "weapon_pose_gate": "Every visible hand closes around the SAME actual continuous shaft; near/far occlusion is baked in the generated pose. Do not paste208 onto neutral207 fists, draw fingers, infer bones or use per-frame weapon scale to rescue mismatched anatomy."
+    },
+    {
+      "state": "right_axe_follow",
+      "frames": 6,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        100,
+        100,
+        300,
+        350,
+        350,
+        400
+      ],
+      "sample_start_ms": [
+        0,
+        100,
+        200,
+        500,
+        850,
+        1200
+      ],
+      "span_ms": 1600,
+      "loop": false,
+      "kernel_selector": "S.Phase==Active/Recovery && A.Kind==AxeSweep && !A.Interrupted",
+      "clock_authority": "S.Time-A.ActiveAt;Active[0,200ms),Recovery[200,1600ms). Never use nominal SGfps to extendActive.",
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "sample_start_ms": 0,
+          "pose": "ACTIVE0: strong axe sweep starts; actorXY planted, handsclosed"
+        },
+        {
+          "frame": 1,
+          "sample_start_ms": 100,
+          "pose": "ACTIVE1: sweep followthrough before.20 exclusiveend"
+        },
+        {
+          "frame": 2,
+          "sample_start_ms": 200,
+          "pose": "RECOVERY0 exactActiveEnd: low followthrough; windowclosed"
+        },
+        {
+          "frame": 3,
+          "sample_start_ms": 500,
+          "pose": "RECOVERY1: heavy axe settles, long punish opportunity"
+        },
+        {
+          "frame": 4,
+          "sample_start_ms": 850,
+          "pose": "RECOVERY2: retrieve axe and torso, keepfeet"
+        },
+        {
+          "frame": 5,
+          "sample_start_ms": 1200,
+          "pose": "RECOVERY3: return nearIdle; hold only until originalRecoveryEnd"
+        }
+      ],
+      "all_visible_near_far_fists_closed": true,
+      "runtime_mirror_left": true,
+      "actual_source_markers": null,
+      "accepted": false,
+      "kernel_span_ms": 1600,
+      "phase_frame_map": {
+        "Active": [
+          0,
+          1
+        ],
+        "Recovery": [
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "attack_total_ms": 2600,
+      "post_recovery_IdleReady_gap_ms": 300,
+      "cooldown_from_attackStart_ms": 3100,
+      "full_body_plus_same_fixed_208_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "weapon_pose_gate": "Every visible hand closes around the SAME actual continuous shaft; near/far occlusion is baked in the generated pose. Do not paste208 onto neutral207 fists, draw fingers, infer bones or use per-frame weapon scale to rescue mismatched anatomy."
+    },
+    {
+      "state": "right_stomp_windup",
+      "frames": 6,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        150,
+        150,
+        150,
+        150,
+        150,
+        150
+      ],
+      "sample_start_ms": [
+        0,
+        150,
+        300,
+        450,
+        600,
+        750
+      ],
+      "span_ms": 900,
+      "loop": false,
+      "kernel_selector": "S.Phase==Windup && A.Kind==Stomp",
+      "clock_authority": "S.Time-A.Start;A.LockAt=A.Start+.45;A.ActiveAt=A.Start+.90",
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "sample_start_ms": 0,
+          "pose": "Two feet planted, body compresses; axe heldquiet"
+        },
+        {
+          "frame": 1,
+          "sample_start_ms": 150,
+          "pose": "Shift heavy load onto support foot; closedgrips"
+        },
+        {
+          "frame": 2,
+          "sample_start_ms": 300,
+          "pose": "Raise stompfoot visually; root remainsgroundZ0"
+        },
+        {
+          "frame": 3,
+          "sample_start_ms": 450,
+          "pose": "Exactlock.45: ownXY center fixed; full ellipse persists"
+        },
+        {
+          "frame": 4,
+          "sample_start_ms": 600,
+          "pose": "Stompfoot lifted high visually, no jump or earlyshock"
+        },
+        {
+          "frame": 5,
+          "sample_start_ms": 750,
+          "pose": "Prepare impact, bodystationary, no extra damage/shards"
+        }
+      ],
+      "all_visible_near_far_fists_closed": true,
+      "runtime_mirror_left": true,
+      "actual_source_markers": null,
+      "accepted": false,
+      "kernel_span_ms": 900,
+      "aim_lock_frame": 3,
+      "aim_lock_sample_ms": 450,
+      "full_body_plus_same_fixed_208_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "weapon_pose_gate": "Every visible hand closes around the SAME actual continuous shaft; near/far occlusion is baked in the generated pose. Do not paste208 onto neutral207 fists, draw fingers, infer bones or use per-frame weapon scale to rescue mismatched anatomy."
+    },
+    {
+      "state": "right_stomp_follow",
+      "frames": 6,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        75,
+        75,
+        350,
+        350,
+        400,
+        400
+      ],
+      "sample_start_ms": [
+        0,
+        75,
+        150,
+        500,
+        850,
+        1250
+      ],
+      "span_ms": 1650,
+      "loop": false,
+      "kernel_selector": "S.Phase==Active/Recovery && A.Kind==Stomp && !A.Interrupted",
+      "clock_authority": "S.Time-A.ActiveAt;Active[0,150ms),Recovery[150,1650ms).",
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "sample_start_ms": 0,
+          "pose": "ACTIVE0: stomp foot hits ground at ActiveAt; one local impactcue only"
+        },
+        {
+          "frame": 1,
+          "sample_start_ms": 75,
+          "pose": "ACTIVE1: compressed plantedimpact, no second stomp"
+        },
+        {
+          "frame": 2,
+          "sample_start_ms": 150,
+          "pose": "RECOVERY0 exactActiveEnd: shockwindow closes, fullweightlow"
+        },
+        {
+          "frame": 3,
+          "sample_start_ms": 500,
+          "pose": "RECOVERY1: slowly recover stance; no residualdamage"
+        },
+        {
+          "frame": 4,
+          "sample_start_ms": 850,
+          "pose": "RECOVERY2: lift torso, axequiet, long punish opportunity"
+        },
+        {
+          "frame": 5,
+          "sample_start_ms": 1250,
+          "pose": "RECOVERY3: regain acceptedIdle; no chase beforeowned interval ends"
+        }
+      ],
+      "all_visible_near_far_fists_closed": true,
+      "runtime_mirror_left": true,
+      "actual_source_markers": null,
+      "accepted": false,
+      "kernel_span_ms": 1650,
+      "phase_frame_map": {
+        "Active": [
+          0,
+          1
+        ],
+        "Recovery": [
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "attack_total_ms": 2550,
+      "post_recovery_IdleReady_gap_ms": 300,
+      "cooldown_from_attackStart_ms": 3000,
+      "full_body_plus_same_fixed_208_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "weapon_pose_gate": "Every visible hand closes around the SAME actual continuous shaft; near/far occlusion is baked in the generated pose. Do not paste208 onto neutral207 fists, draw fingers, infer bones or use per-frame weapon scale to rescue mismatched anatomy."
+    },
+    {
+      "state": "right_stunned",
+      "frames": 4,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "sample_start_ms": [
+        0,
+        100,
+        200,
+        300
+      ],
+      "span_ms": 400,
+      "loop": false,
+      "kernel_selector": "S.Phase==Stunned; requires legal accumulatedpoise>=85",
+      "clock_authority": "S.Time-(S.StunUntil-.4),exact400ms;protection1s is not extra stun.",
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "sample_start_ms": 0,
+          "pose": "Acceptedpoisebreak reaction; close any owned activeFX at closure"
+        },
+        {
+          "frame": 1,
+          "sample_start_ms": 100,
+          "pose": "Shoulders/head recoil locally, feetstationary"
+        },
+        {
+          "frame": 2,
+          "sample_start_ms": 200,
+          "pose": "Heavy slumped hold; no attack/rubber stretch"
+        },
+        {
+          "frame": 3,
+          "sample_start_ms": 300,
+          "pose": "Recover toward state selected by originalkernel deadlines"
+        }
+      ],
+      "all_visible_near_far_fists_closed": true,
+      "runtime_mirror_left": true,
+      "actual_source_markers": null,
+      "accepted": false,
+      "kernel_span_ms": 400,
+      "poise_protection_ms": 1000,
+      "ordinary_Hurt_does_not_select_this": true,
+      "full_body_plus_same_fixed_208_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "weapon_pose_gate": "Every visible hand closes around the SAME actual continuous shaft; near/far occlusion is baked in the generated pose. Do not paste208 onto neutral207 fists, draw fingers, infer bones or use per-frame weapon scale to rescue mismatched anatomy."
+    },
+    {
+      "state": "right_death",
+      "frames": 6,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        100,
+        100,
+        150,
+        200,
+        200,
+        250
+      ],
+      "sample_start_ms": [
+        0,
+        100,
+        200,
+        350,
+        550,
+        750
+      ],
+      "span_ms": 1000,
+      "loop": false,
+      "kernel_selector": "S.Phase==Dead",
+      "clock_authority": "From actual Died event timestamp. Visual1s proposal then lastframehold; gameplay death/body disable is immediate.",
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "sample_start_ms": 0,
+          "pose": "Lethal hit confirmed, amber eyes switch off"
+        },
+        {
+          "frame": 1,
+          "sample_start_ms": 100,
+          "pose": "Knees yield locally, fists may loosen onlyafteractualdeath"
+        },
+        {
+          "frame": 2,
+          "sample_start_ms": 200,
+          "pose": "Stonebody collapses within localfootprint; no groundactor travel"
+        },
+        {
+          "frame": 3,
+          "sample_start_ms": 350,
+          "pose": "Connected rubble settles; separateaxe mayfall visually, not a lootitem"
+        },
+        {
+          "frame": 4,
+          "sample_start_ms": 550,
+          "pose": "Final connected stonepile, no detachedbody components in bodyrow"
+        },
+        {
+          "frame": 5,
+          "sample_start_ms": 750,
+          "pose": "Deadstatue/rubble resting hold until native ownerretires"
+        }
+      ],
+      "all_visible_near_far_fists_closed": true,
+      "runtime_mirror_left": true,
+      "actual_source_markers": null,
+      "accepted": false,
+      "artist_span_ms": 1000,
+      "kernel_span": "Dead indefinite;GroundBodyEnabledfalse immediately;reward/roomclear independent of clip",
+      "dead_hand_open_allowed": true,
+      "full_body_plus_same_fixed_208_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "weapon_pose_gate": "Every visible hand closes around the SAME actual continuous shaft; near/far occlusion is baked in the generated pose. Do not paste208 onto neutral207 fists, draw fingers, infer bones or use per-frame weapon scale to rescue mismatched anatomy."
+    },
+    {
+      "state": "right_interrupted_recovery",
+      "frames": 4,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "sample_start_ms": [
+        0,
+        100,
+        200,
+        300
+      ],
+      "span_ms": 400,
+      "loop": false,
+      "kernel_selector": "S.Phase==Recovery && A.Interrupted && A.CompletedAt<0",
+      "clock_authority": "Variable remaining original OccupiedUntil after StunUntil. Normalize remaining presentation interval; do not create new attack/recovery deadline.",
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "sample_start_ms": 0,
+          "pose": "Safe post-stun lowstance, no sweep or stomp activepose"
+        },
+        {
+          "frame": 1,
+          "sample_start_ms": 100,
+          "pose": "Settle heldaxe, handsclosed"
+        },
+        {
+          "frame": 2,
+          "sample_start_ms": 200,
+          "pose": "Return shoulders towardIdle"
+        },
+        {
+          "frame": 3,
+          "sample_start_ms": 300,
+          "pose": "NearIdlehold until originalOccupiedUntil; then normalIdleReady gate"
+        }
+      ],
+      "all_visible_near_far_fists_closed": true,
+      "runtime_mirror_left": true,
+      "actual_source_markers": null,
+      "accepted": false,
+      "preview_span_ms_ONLY": 400,
+      "kernel_span": "variable;may be absent if original attack completes duringStunned",
+      "forbid_replay_active_frames": true,
+      "full_body_plus_same_fixed_208_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "weapon_pose_gate": "Every visible hand closes around the SAME actual continuous shaft; near/far occlusion is baked in the generated pose. Do not paste208 onto neutral207 fists, draw fingers, infer bones or use per-frame weapon scale to rescue mismatched anatomy."
+    }
+  ],
+  "armed_unique_frame_count": 55,
+  "separate_existing_neutral_body_identity": {
+    "native207_source_index": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/idle4-extraction-v001/idle207-four-curated-source-index-v001.json",
+      "bytes": 9095,
+      "sha256": "7a33a8772fd037c18af47c4f921899c27ed63e9ddd18b292247cc318c067c257"
+    },
+    "frames": 4,
+    "role": "Body identity and unarmed-neutral/dormant study only, NOT armedReady. Final armed dormant uses a valid fixed-axe whole pose.",
+    "not_part_of_55_armed_frames": true
+  }
+}

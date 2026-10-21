@@ -1,0 +1,60 @@
+{
+  "schema": "root-primary1-hidden-registration-design-v2",
+  "author": "root",
+  "source_body_request": 159,
+  "source_visible_measurements_unchanged": true,
+  "future_actual_component_A_still_unknown": true,
+  "hidden_body_target_measurement_remains_null": true,
+  "trial_targets": [
+    {
+      "component": "Chest",
+      "phase": 2,
+      "trial_body_A": [
+        268,
+        270
+      ],
+      "source_px_uncertainty": 8,
+      "kind": "Root design choice behind crossing forearm; not observed cloth/rivet/bone"
+    },
+    {
+      "component": "Chest",
+      "phase": 3,
+      "trial_body_A": [
+        269,
+        276
+      ],
+      "source_px_uncertainty": 8,
+      "kind": "Root design choice at lowered torso/front-arm area; not observed hidden joint"
+    },
+    {
+      "component": "FarShoulder",
+      "phase": 2,
+      "trial_body_A": [
+        308,
+        268
+      ],
+      "source_px_uncertainty": 10,
+      "kind": "Root back-shoulder design choice behind crossing near arm; not an observed rivet"
+    }
+  ],
+  "registration_policy": "After native extraction, measure actual visible component boss/washer/topstrap features. Integer translation only into separately labelled trial body targets. Review all poses in real layer stack before accepting fit.",
+  "layer_stack": [
+    "BodyRest",
+    "FarShoulder",
+    "Chest",
+    "NearArmWithoutHand",
+    "NearShoulder",
+    "HelmetForeground",
+    "independentSword",
+    "NearHand"
+  ],
+  "helmet_layer_policy": "Exact original159 helmet/eyes/topknob/ink+AA pixels, exclusive owner, no new painting; draw before sword and after caps. This does not legitimize a wrong cap shape.",
+  "root_viewed_existing_E168_guides": 3,
+  "root_viewed_actual159_original512_phases": [
+    2,
+    3
+  ],
+  "generation_ready_is_input_review_only": true,
+  "full_motion_or_equipment_accepted": false,
+  "formal_complete_units": 0
+}

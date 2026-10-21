@@ -1,0 +1,36 @@
+{
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48
+  },
+  "states": {
+    "right_axe_follow": {
+      "frames": 6,
+      "fps": 6,
+      "loop": false,
+      "action": "frame0 at0ms: ACTIVE0: strong axe sweep starts; actorXY planted, handsclosed; frame1 at100ms: ACTIVE1: sweep followthrough before.20 exclusiveend; frame2 at200ms: RECOVERY0 exactActiveEnd: low followthrough; windowclosed; frame3 at500ms: RECOVERY1: heavy axe settles, long punish opportunity; frame4 at850ms: RECOVERY2: retrieve axe and torso, keepfeet; frame5 at1200ms: RECOVERY3: return nearIdle; hold only until originalRecoveryEnd. All frames preserve same acceptedidleidentity/camera. Fistsclosed unlessactualdeath; noaxe/shaft, dust, shadow, detachedFX, labels/grid."
+    }
+  },
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    }
+  },
+  "style": "Match accepted Guard RIGHT idle anchor exactly: shallow elevated three-quarter camera, wide short stone slabs, coarse black ink, small ambereye window, one sparse moss shoulder, few broad warmgreyplanes. BODY ONLY, closedtwofists, no weapon/FX. Do not turnpureprofile, addtinytexture, or resemble chargingStoneKnight.",
+  "motion_phase_guides": false,
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

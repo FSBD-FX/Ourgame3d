@@ -1,0 +1,13 @@
+--- before-original-request
++++ after-native-default-chroma-auto-write
+@@ -51,5 +51,10 @@
+     "ground_frames": false,
+     "segmentation": "components",
+     "shared_row_scale": true
++  },
++  "chroma": {
++    "mode": "rgb",
++    "unmix_reach": 4,
++    "spill_max_fraction": 0.005
+   }
+ }

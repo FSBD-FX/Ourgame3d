@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fixed-heavyaxe-armed-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedArmedReady209existing4poses, exactrawcopy, doNOTgenerateorcharge."
+    },
+    "right_move": {
+      "frames": 6,
+      "fps": 8,
+      "loop": true,
+      "action": "SIX consecutive full-body fixed-axe WALK poses, one complete alternating-two-leg cycle. Use only the attached accepted ArmedReady209 for character/stone/axe identity. Same shallow elevated three-quarter side view, facing SCREEN RIGHT throughout; do not mirror the character or turn its body between frames. Both hands remain closed on the same continuous axe shaft: moss foreground NEAR arm always buttward, FAR arm always headward. Keep axe quiet, low in front, same head shape, haft length and ratio; no arm counter-swing.\nCRITICAL PHYSICAL LEG OWNERSHIP: NEAR is the leg attached to the visibly LEFT/foreground hip below the moss-shoulder side of the belt, not whichever boot is screen-right. FAR is the leg attached to the recessed RIGHT hip. Trace each actual stone thigh continuously through its knee/shin into its own boot. The two legs MUST exchange front/back positions across the cycle. Do not draw the same screen-right leg leading in all six frames. Keep both thigh-knee-ankle chains readable by stone plate continuity and natural occlusion, without labels or added colors on the finished Guard.\nThe extra colored stick-figure production guide defines LEG PHASE ONLY: RED = physical NEAR leg; BLUE = physical FAR leg. RED is forward RIGHT in frame0, BLUE is forward RIGHT in frame3. Guide colors/gray head/arms are diagrams only; do not copy them onto the final stone character. Both hands continue holding the axe rather than copying diagram arm swing.\nFrame0 NEAR/RED leg attached to LEFT foreground hip extends diagonally across the lower body to the leading SCREEN-RIGHT boot, heel/full sole touching ground. FAR/BLUE leg attached to RIGHT recessed hip trails diagonally back to the SCREEN-LEFT boot, rear toe pushing. NEAR thigh/knee/shin is foreground where the chains cross. This is the first contact.\nFrame1 NEAR/RED remains the loaded stance leg while the FAR/BLUE rear boot lifts and swings forward. Preserve frame0 physical hip ownership, no hand or weapon change.\nFrame2 FAR/BLUE passes forward under the body toward its next right-front contact; NEAR/RED pushes behind. Show the swinging FAR chain and the planted/pushing NEAR chain clearly, not both lower legs as one boot.\nFrame3 OPPOSITE CONTACT: FAR/BLUE leg attached to RIGHT recessed hip now leads to the SCREEN-RIGHT grounded boot; NEAR/RED leg attached to LEFT foreground hip trails to SCREEN-LEFT rear toe. This MUST visibly exchange the physical legs versus frame0, not repeat frame0 with small knee changes. Do not change facing or swap hip identities.\nFrame4 FAR/BLUE is the loaded stance leg, NEAR/RED rear boot lifts and swings forward. This is the opposite physical-leg phase to frame1.\nFrame5 NEAR/RED passes forward under the body toward the next frame0 contact, FAR/BLUE pushes behind. This is the opposite physical-leg phase to frame2. End joins frame0 without a whole-body reset or jump.\nHeavy short grounded walk, stocky upright torso and small natural load compression. At least one foot supports ground in every pose; no running, charge lean, jump or simultaneous airborne feet. Body/axe density and camera stay coherent across all6. All6 complete connected silhouettes inside their invisible standard slots with48px equivalent safe padding. Solid magenta #FF00FF background; no labels, grids, colored limb marks, motion arcs, dust, shadow, scene, extra figures or loose fragments. Broad warm-gray/tan stone slabs, sparse olive moss, thick ink; no grain/no pixel dots.\nRuntime presentation phase is actual accepted collision-resolved traveled path modulo128world, six equal path partitions, opposite contacts at0/64world, proposed64world audio step interval. This is design tuning, not physical stride/foot-lock proof or speed*time. Native speed160 and all gameplay remain unchanged."
+    }
+  },
+  "style": "OnlyattachedacceptedArmedReady209owns thewholeGuard+fixedheavyaxeidentity, same shallow elevatedthreequarter view facingRIGHT. Squatstonehelmet/smallambereyes/sparseoliveforegroundshouldermoss/coarseink/broadwarmgreystoneplanes, SAME singleheadedstoneaxe/straightwoodshaft/stonebuttcap dimensionsandratio. Bothlivingfists FULLYCLOSED onONEcontinuousshaft throughout: mossNEARshoulder→foregroundneararm→LOWBUTTwardgrip, FARarm→HIGHHEADwardgrip. No handexchange/regrip/drop/shorteningaxe or changingheadshape. Axe heldquiet lowinfront, headRIGHT clearfeet/eyes; bothhands/axe movecoherently asoneheavyheldobject, no armcounterswing. No206/207neutral/standalone208/bad211references. Keepbody/axeconstantdensity, fullconnectedcompleteposeswith48safearea; no text/grid/scenery/dust/impactarcs/blur/shadows/loosechips. Stoneplatesnotrubber, lowdetailnotgrains/pixeldots/vectorgloss. ",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

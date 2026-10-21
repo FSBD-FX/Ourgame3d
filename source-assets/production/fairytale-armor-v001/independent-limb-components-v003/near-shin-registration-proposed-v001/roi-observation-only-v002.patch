@@ -1,0 +1,20 @@
+--- register-wide-component-v001.py
++++ register-wide-shin-v002.py
+@@ -9,7 +9,7 @@
+ parser=argparse.ArgumentParser();parser.add_argument('--component',choices=['near-bracer','near-shin'],required=True)
+ key=parser.parse_args().component
+ row=json.loads((ROOT/f'handoffs/{key}-native-input-v001.json').read_text(encoding='utf-8'))['rows'][0]
+-run=Path(row['run_dir']);OUT=ROOT/f'{key}-registration-proposed-v001';assert not OUT.exists()
++run=Path(row['run_dir']);OUT=ROOT/f'{key}-registration-proposed-v002';assert not OUT.exists()
+ OUT.mkdir();(OUT/'registered').mkdir();(OUT/'rivet-source-crops').mkdir()
+ def desc(p):
+  p=Path(p);b=p.read_bytes();return {'path':p.as_posix(),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()}
+@@ -32,7 +32,7 @@
+ fit=manifest['rows'][0]['shared_row_fit'];raw=Path(row['raw_output_path'])
+ keyed=native.remove_chroma_background(Image.open(raw),(0,255,0),96.,180.,18.,unmix_reach=4,spill_max_fraction=.005)
+ pieces=native.extract_component_images(keyed,4);assert len(pieces)==4
+-roi_fraction=(.57,.22,.90,.80) if key=='near-bracer' else (.52,.08,.90,.49)
++roi_fraction=(.57,.22,.90,.80) if key=='near-bracer' else (.52,.08,.98,.55)
+ frames=[]
+ for i,piece in enumerate(pieces):
+  assert hashlib.sha256(piece.tobytes()).hexdigest()==fit['raw_component_RGBA_sha256'][i]

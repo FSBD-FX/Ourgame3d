@@ -1,0 +1,957 @@
+{
+  "schema": "Guard003-consistent-native-phase57-action-contract-v005",
+  "date": "2026-10-18",
+  "authority": "Root explicit correction2026-10-18: all executable/recommended timing and distance fields consistent; preservev004, do not modify kernel or source pixels.",
+  "kernel_facts": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/action-contracts-v001/kernel-facts-and-camera-pins-v001.json",
+    "bytes": 6588,
+    "sha256": "39a167cea3ccaa06d0b5a9240bbb3bebbf9263fa477a19bcefc2cf71bd49e9b1"
+  },
+  "canonical_equipped_identity": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/armed-ready4-extraction-v001/run-ready209-shared-HD-v001/curated/frame-0.png",
+    "bytes": 229229,
+    "sha256": "54df5fe718a98e1568513193dbde479aff6fd393d623755feb77813cacb4e804"
+  },
+  "timing_contract": {
+    "native_runtime": "Independent immutable body rows per kernel phase: AxeActive0..3 over200ms and AxeRecovery0..3 over1400ms; StompWindup0..5 over900ms, StompActive0..1 over150ms and StompRecovery0..3 over1500ms. Actual native event/time/deadline authority only.",
+    "Move": "Distance128world actual accepted path;6equal path partitions, opposite contact0/3,64world proposed step interval. No duration runtime fallback.",
+    "InterruptedRecovery": "Actual positive remaining original [StunUntil,OccupiedUntil);4normalized partitions, never fixed400ms.",
+    "Death": "1000ms visual pose sequence from actual Died timestamp with100ms maximum afterglow and zero gameplay delay.",
+    "SG_preview": "Uniform round1000/fps only, clearly separate from native mapping; no tool changes or frame retiming to repair source motion."
+  },
+  "native_attack_deadlines_ms": {
+    "AxeSweep": {
+      "windup": 1000,
+      "lock_from_start": 500,
+      "active": 200,
+      "recovery": 1400,
+      "occupied_total_from_start": 2600,
+      "post_recovery_IdleReady_gap": 300,
+      "cooldown_from_start": 3100
+    },
+    "Stomp": {
+      "windup": 900,
+      "lock_from_start": 450,
+      "active": 150,
+      "recovery": 1500,
+      "occupied_total_from_start": 2550,
+      "post_recovery_IdleReady_gap": 300,
+      "cooldown_from_start": 3000
+    }
+  },
+  "state_priority": "Actual Dead and Stunned override art; never let InterruptedRecovery override Stunned. Kernel phase/kind/actual movement chooses row; source pose does not drive gameplay.",
+  "armed_rows": [
+    {
+      "state": "right_dormant",
+      "frames": 1,
+      "full_body_plus_same_fixed_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "runtime_mirror_left": true,
+      "source_pose_candidate_is_not_runtime_acceptance": true,
+      "kernel_phase": "Dormant",
+      "kernel_selector": "S.Phase==Dormant",
+      "kernel_span": "Indefinite until actual WakeStarted",
+      "clock_authority": "Legal single static alias of Wake210 frame0; no animation or activation timer.",
+      "loop": false,
+      "preview_only": {
+        "hold_ms": 1000,
+        "not_native_deadline": true
+      },
+      "source_alias": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/dormant-alias-wake210-frame0-v001/dormant-state-source-alias-v001.json",
+        "bytes": 1957,
+        "sha256": "e914055c638b84f4b5a87fb2fe7f9f5ec123a3f4e934a882e2c562cb436dbe36"
+      },
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "pose": "Both feet planted; axe-ready closedfists; amber windows unlit. No breathing/rocking, no attack threat effect."
+        }
+      ]
+    },
+    {
+      "state": "right_wake",
+      "frames": 6,
+      "full_body_plus_same_fixed_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "runtime_mirror_left": true,
+      "source_pose_candidate_is_not_runtime_acceptance": true,
+      "kernel_phase": "Waking",
+      "attack_kind": null,
+      "kernel_selector": "S.Phase==Waking unless Dead/Stunned owns priority",
+      "clock_authority": "Actual S.Time-WakeStartedAt, original1000ms WakeEnd",
+      "kernel_span_ms": 1000,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        167,
+        166,
+        167,
+        167,
+        166,
+        167
+      ],
+      "sample_start_ms": [
+        0,
+        167,
+        333,
+        500,
+        667,
+        833
+      ],
+      "phase_frame_map": {
+        "Waking": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "loop": false,
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "pose": "Dormant form first; shoulders remain low, eyes dark",
+          "sample_start_ms": 0
+        },
+        {
+          "frame": 1,
+          "pose": "First faint amber eye-window light, plates begin unlock",
+          "sample_start_ms": 167
+        },
+        {
+          "frame": 2,
+          "pose": "Chest and near shoulder lift slightly, feet planted",
+          "sample_start_ms": 333
+        },
+        {
+          "frame": 3,
+          "pose": "Halfway weight up, both stone fists tighten but stayclosed",
+          "sample_start_ms": 500
+        },
+        {
+          "frame": 4,
+          "pose": "Head clears shoulders, planted ready stance",
+          "sample_start_ms": 667
+        },
+        {
+          "frame": 5,
+          "pose": "Arrive near acceptedIdle frame0, no attack beforeWakeCompleted",
+          "sample_start_ms": 833
+        }
+      ],
+      "all_visible_living_fists_closed": true
+    },
+    {
+      "state": "right_armed_ready",
+      "frames": 4,
+      "full_body_plus_same_fixed_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "runtime_mirror_left": true,
+      "source_pose_candidate_is_not_runtime_acceptance": true,
+      "kernel_phase": "Idle",
+      "kernel_selector": "S.Phase==Idle and no positive accepted collision-resolved locomotion",
+      "kernel_span": "Indefinite artist idle; actual IdleReadyAt/cooldown gates are separate",
+      "clock_authority": "Artist quiet loop only, never a gameplay deadline",
+      "artist_loop_durations_ms": [
+        250,
+        250,
+        250,
+        250
+      ],
+      "artist_loop_span_ms": 1000,
+      "loop": true,
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "pose": "Quiet two-hand heavyaxe ready across low front of body. One continuous shaft through both closed fists; head up/right, clear feet.",
+          "sample_start_ms": 0
+        },
+        {
+          "frame": 1,
+          "pose": "Small heavy knees/shoulders settle with both hands staying on same continuous shaft. No shuffle.",
+          "sample_start_ms": 250
+        },
+        {
+          "frame": 2,
+          "pose": "Gentle opposite load settle, preserve same axe proportions and grip order.",
+          "sample_start_ms": 500
+        },
+        {
+          "frame": 3,
+          "pose": "Return close to frame0, clean closed loop.",
+          "sample_start_ms": 750
+        }
+      ]
+    },
+    {
+      "state": "right_move",
+      "frames": 6,
+      "full_body_plus_same_fixed_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "runtime_mirror_left": true,
+      "source_pose_candidate_is_not_runtime_acceptance": true,
+      "kernel_phase": "Idle",
+      "kernel_selector": "S.Phase==Idle with positive actual accepted collision-resolved locomotion",
+      "clock_authority": "Accumulate actual accepted collision-resolved traveled path only; no input speed*time, global clock or bMoving-only credit",
+      "cycle_distance_world_ART_CANDIDATE": 128,
+      "distance_frame_boundaries_world": [
+        0.0,
+        21.333333333333332,
+        42.666666666666664,
+        64.0,
+        85.33333333333333,
+        106.66666666666667,
+        128.0
+      ],
+      "contact_frames": {
+        "near": 0,
+        "far": 3
+      },
+      "loop": true,
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "pose": "Near foot contact; far pushes; no run lean",
+          "sample_start_normalized_fraction": 0.0
+        },
+        {
+          "frame": 1,
+          "pose": "Weight compression over near planted sole",
+          "sample_start_normalized_fraction": 0.16666666666666666
+        },
+        {
+          "frame": 2,
+          "pose": "Far foot passes under broadbody, short step",
+          "sample_start_normalized_fraction": 0.3333333333333333
+        },
+        {
+          "frame": 3,
+          "pose": "Far foot contact; near pushes",
+          "sample_start_normalized_fraction": 0.5
+        },
+        {
+          "frame": 4,
+          "pose": "Weight compression over far planted sole",
+          "sample_start_normalized_fraction": 0.6666666666666666
+        },
+        {
+          "frame": 5,
+          "pose": "Near foot passes into nextcontact; no wholebody reset",
+          "sample_start_normalized_fraction": 0.8333333333333334
+        }
+      ],
+      "preview_at_formal_speed160_ONLY": {
+        "cycle_ms": 800,
+        "not_native_timer_or_stride_proof": true
+      },
+      "SG_uniform_preview_ONLY": {
+        "frames": 6,
+        "frame_ms": 125,
+        "span_ms": 750,
+        "not_native_timer": true
+      },
+      "audio_pairing": {
+        "proposed_actual_path_distance_world_per_step": 64,
+        "first_step_after_movement": 64,
+        "next_step_at_total_distance": 128,
+        "no_immediate_extra_start_sound": true,
+        "no_credit": "No actual path delta, collision blocked movement, wake, attack, stun, dead never advance phase or step credit."
+      },
+      "source_status": "221 technically extracted, six-phase opposite-leg semantics NOT accepted; actual View trace after E388 pending at this contract freeze."
+    },
+    {
+      "state": "right_axe_windup",
+      "frames": 6,
+      "full_body_plus_same_fixed_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "runtime_mirror_left": true,
+      "source_pose_candidate_is_not_runtime_acceptance": true,
+      "kernel_phase": "Windup",
+      "attack_kind": "AxeSweep",
+      "kernel_selector": "S.Phase==Windup && A.Kind==AxeSweep",
+      "clock_authority": "Actual S.Time-A.Start, original1000ms; lockedFacing from500ms",
+      "kernel_span_ms": 1000,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        167,
+        166,
+        167,
+        167,
+        166,
+        167
+      ],
+      "sample_start_ms": [
+        0,
+        167,
+        333,
+        500,
+        667,
+        833
+      ],
+      "phase_frame_map": {
+        "Windup": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "loop": false,
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "pose": "Low planted axe-ready fists; later axe tip may visually graze ground, no actor travel",
+          "sample_start_ms": 0
+        },
+        {
+          "frame": 1,
+          "pose": "Begin gathering axe across torso, weightback",
+          "sample_start_ms": 167
+        },
+        {
+          "frame": 2,
+          "pose": "Raise both closedhands; body may aim beforelock",
+          "sample_start_ms": 333
+        },
+        {
+          "frame": 3,
+          "pose": "Exactlock.50: facing freezes to A.Facing; broad high tell pose",
+          "sample_start_ms": 500
+        },
+        {
+          "frame": 4,
+          "pose": "Hold locked raisedaxe anticipation, no followaim",
+          "sample_start_ms": 667
+        },
+        {
+          "frame": 5,
+          "pose": "Maximum planted windup just before active; no earlydamage",
+          "sample_start_ms": 833
+        }
+      ],
+      "all_visible_living_fists_closed": true,
+      "aim_lock_ms": 500,
+      "aim_lock_frame": 3
+    },
+    {
+      "state": "right_axe_active",
+      "frames": 4,
+      "full_body_plus_same_fixed_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "runtime_mirror_left": true,
+      "source_pose_candidate_is_not_runtime_acceptance": true,
+      "kernel_phase": "Active",
+      "attack_kind": "AxeSweep",
+      "kernel_selector": "S.Phase==Active && A.Kind==AxeSweep && !A.Interrupted",
+      "clock_authority": "Actual S.Time-A.ActiveAt, original200ms only; never consume Recovery frame indices",
+      "kernel_span_ms": 200,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        50,
+        50,
+        50,
+        50
+      ],
+      "sample_start_ms": [
+        0,
+        50,
+        100,
+        150
+      ],
+      "phase_frame_map": {
+        "Active": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "loop": false,
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "pose": "ReleaseheldUPPER-RIGHTintoONEforwarddownwardsweep; plantfeet, noactorXYlunge.",
+          "sample_start_ms": 0
+        },
+        {
+          "frame": 1,
+          "pose": "Sameonesweepforwardrightatwaist/chestheight, nearbutt/farheadclosed.",
+          "sample_start_ms": 50
+        },
+        {
+          "frame": 2,
+          "pose": "Lowforwardrightfollowthrough, nosecondhit/stomp.",
+          "sample_start_ms": 100
+        },
+        {
+          "frame": 3,
+          "pose": "EndsameonesweepinLOWFORWARDHELDAXE+TIREDTORSO forRecovery0join.",
+          "sample_start_ms": 150
+        }
+      ],
+      "all_visible_living_fists_closed": true
+    },
+    {
+      "state": "right_axe_recovery",
+      "frames": 4,
+      "full_body_plus_same_fixed_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "runtime_mirror_left": true,
+      "source_pose_candidate_is_not_runtime_acceptance": true,
+      "kernel_phase": "Recovery",
+      "attack_kind": "AxeSweep",
+      "kernel_selector": "S.Phase==Recovery && A.Kind==AxeSweep && !A.Interrupted",
+      "clock_authority": "Actual S.Time-A.ActiveEnd, original1400ms RecoveryEnd;300ms IdleReady gap separately owned",
+      "kernel_span_ms": 1400,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        350,
+        350,
+        350,
+        350
+      ],
+      "sample_start_ms": [
+        0,
+        350,
+        700,
+        1050
+      ],
+      "phase_frame_map": {
+        "Recovery": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "loop": false,
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "pose": "ExactActiveEnd lowforwardheldaxe/tiredtorso, noreswing.",
+          "sample_start_ms": 0
+        },
+        {
+          "frame": 1,
+          "pose": "Heavylowsettle andpunishopportunity.",
+          "sample_start_ms": 350
+        },
+        {
+          "frame": 2,
+          "pose": "Quiettwohandretrievetowardbelly, nohighwinduptell.",
+          "sample_start_ms": 700
+        },
+        {
+          "frame": 3,
+          "pose": "NearReady209holduntiloriginalend, actual300msIdleReady/cooldownseparate.",
+          "sample_start_ms": 1050
+        }
+      ],
+      "all_visible_living_fists_closed": true
+    },
+    {
+      "state": "right_stomp_windup",
+      "frames": 6,
+      "full_body_plus_same_fixed_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "runtime_mirror_left": true,
+      "source_pose_candidate_is_not_runtime_acceptance": true,
+      "kernel_phase": "Windup",
+      "attack_kind": "Stomp",
+      "kernel_selector": "S.Phase==Windup && A.Kind==Stomp",
+      "clock_authority": "Actual S.Time-A.Start, original900ms; ownXY/aim lock450ms",
+      "kernel_span_ms": 900,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        150,
+        150,
+        150,
+        150,
+        150,
+        150
+      ],
+      "sample_start_ms": [
+        0,
+        150,
+        300,
+        450,
+        600,
+        750
+      ],
+      "phase_frame_map": {
+        "Windup": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      "loop": false,
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "pose": "Two feet planted, body compresses; axe heldquiet",
+          "sample_start_ms": 0
+        },
+        {
+          "frame": 1,
+          "pose": "Shift heavy load onto support foot; closedgrips",
+          "sample_start_ms": 150
+        },
+        {
+          "frame": 2,
+          "pose": "Raise stompfoot visually; root remainsgroundZ0",
+          "sample_start_ms": 300
+        },
+        {
+          "frame": 3,
+          "pose": "Exactlock.45: ownXY center fixed; full ellipse persists",
+          "sample_start_ms": 450
+        },
+        {
+          "frame": 4,
+          "pose": "Stompfoot lifted high visually, no jump or earlyshock",
+          "sample_start_ms": 600
+        },
+        {
+          "frame": 5,
+          "pose": "Prepare impact, bodystationary, no extra damage/shards",
+          "sample_start_ms": 750
+        }
+      ],
+      "all_visible_living_fists_closed": true,
+      "aim_lock_ms": 450,
+      "aim_lock_frame": 3,
+      "leg_side_status": "222 source appears FAR lift/NEAR support contrary to original near-lift prompt; actual transparent trace after E388 pending. Original prompt not declared passed. Root authorized visual variant only after independent confirmation."
+    },
+    {
+      "state": "right_stomp_active",
+      "frames": 2,
+      "full_body_plus_same_fixed_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "runtime_mirror_left": true,
+      "source_pose_candidate_is_not_runtime_acceptance": true,
+      "kernel_phase": "Active",
+      "attack_kind": "Stomp",
+      "kernel_selector": "S.Phase==Active && A.Kind==Stomp && !A.Interrupted",
+      "clock_authority": "Actual S.Time-A.ActiveAt, original150ms only; one physical stomp contact at ActiveAt",
+      "kernel_span_ms": 150,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        75,
+        75
+      ],
+      "sample_start_ms": [
+        0,
+        75
+      ],
+      "phase_frame_map": {
+        "Active": [
+          0,
+          1
+        ]
+      },
+      "loop": false,
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "pose": "ONEraisedfootcontactsgroundatactualActiveAt, axeheldquiet/twofistsclosed.",
+          "sample_start_ms": 0
+        },
+        {
+          "frame": 1,
+          "pose": "Compressedplantedimpact, nosecondstomp orRootmove.",
+          "sample_start_ms": 75
+        }
+      ],
+      "all_visible_living_fists_closed": true
+    },
+    {
+      "state": "right_stomp_recovery",
+      "frames": 4,
+      "full_body_plus_same_fixed_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "runtime_mirror_left": true,
+      "source_pose_candidate_is_not_runtime_acceptance": true,
+      "kernel_phase": "Recovery",
+      "attack_kind": "Stomp",
+      "kernel_selector": "S.Phase==Recovery && A.Kind==Stomp && !A.Interrupted",
+      "clock_authority": "Actual S.Time-A.ActiveEnd, original1500ms RecoveryEnd; samples0/375/750/1125; no new deadline",
+      "kernel_span_ms": 1500,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        375,
+        375,
+        375,
+        375
+      ],
+      "sample_start_ms": [
+        0,
+        375,
+        750,
+        1125
+      ],
+      "phase_frame_map": {
+        "Recovery": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "loop": false,
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "pose": "ExactActiveEnd fullweightlow, shockwindowclosed.",
+          "sample_start_ms": 0
+        },
+        {
+          "frame": 1,
+          "pose": "Heavyquietregainstance, noresidualdamage.",
+          "sample_start_ms": 375
+        },
+        {
+          "frame": 2,
+          "pose": "Torsoandaxequietretrieve, punishopportunity.",
+          "sample_start_ms": 750
+        },
+        {
+          "frame": 3,
+          "pose": "NearReadyholduntiloriginalRecoveryEnd, noearlychase.",
+          "sample_start_ms": 1125
+        }
+      ],
+      "all_visible_living_fists_closed": true
+    },
+    {
+      "state": "right_stunned",
+      "frames": 4,
+      "full_body_plus_same_fixed_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "runtime_mirror_left": true,
+      "source_pose_candidate_is_not_runtime_acceptance": true,
+      "kernel_phase": "Stunned",
+      "attack_kind": null,
+      "kernel_selector": "S.Phase==Stunned after actual accumulated legal poise>=85",
+      "clock_authority": "Actual S.Time-(StunUntil-0.4),400ms only;1000ms protection is separate",
+      "kernel_span_ms": 400,
+      "durations_ms_NATIVE_ART_MAPPING": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "sample_start_ms": [
+        0,
+        100,
+        200,
+        300
+      ],
+      "phase_frame_map": {
+        "Stunned": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "loop": false,
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "pose": "Acceptedpoisebreak reaction; close any owned activeFX at closure",
+          "sample_start_ms": 0
+        },
+        {
+          "frame": 1,
+          "pose": "Shoulders/head recoil locally, feetstationary",
+          "sample_start_ms": 100
+        },
+        {
+          "frame": 2,
+          "pose": "Heavy slumped hold; no attack/rubber stretch",
+          "sample_start_ms": 200
+        },
+        {
+          "frame": 3,
+          "pose": "Recover toward state selected by originalkernel deadlines",
+          "sample_start_ms": 300
+        }
+      ],
+      "all_visible_living_fists_closed": true,
+      "poise_protection_ms": 1000,
+      "ordinary_Damaged_does_not_select": true
+    },
+    {
+      "state": "right_death",
+      "frames": 6,
+      "full_body_plus_same_fixed_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "runtime_mirror_left": true,
+      "source_pose_candidate_is_not_runtime_acceptance": true,
+      "kernel_phase": "Dead",
+      "kernel_selector": "S.Phase==Dead",
+      "kernel_span": "Indefinite; all gameplay death effects immediate at actual Died",
+      "clock_authority": "Visual frame clock from original actual Died event timestamp, never reset on restore or replay afterglow",
+      "artist_durations_ms": [
+        100,
+        100,
+        150,
+        200,
+        200,
+        250
+      ],
+      "artist_sample_start_ms": [
+        0,
+        100,
+        200,
+        350,
+        550,
+        750
+      ],
+      "artist_span_ms": 1000,
+      "loop": false,
+      "last_frame_hold": true,
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "pose": "Actual lethal Died confirmed; residual amber eye afterglow permitted only until100ms, no gameplay delay.",
+          "sample_start_ms": 0
+        },
+        {
+          "frame": 1,
+          "pose": "Knees yield locally, fists may loosen onlyafteractualdeath",
+          "sample_start_ms": 100
+        },
+        {
+          "frame": 2,
+          "pose": "Stonebody collapses within localfootprint; no groundactor travel",
+          "sample_start_ms": 200
+        },
+        {
+          "frame": 3,
+          "pose": "Connectedrubble settles; sameaxe rests againstbody/rubble inwholeframe. A fullydetachedaxe would be separateoptionalharmlessdeathFX, not loot.",
+          "sample_start_ms": 350
+        },
+        {
+          "frame": 4,
+          "pose": "Final connected stonepile, no detachedbody components in bodyrow",
+          "sample_start_ms": 550
+        },
+        {
+          "frame": 5,
+          "pose": "Deadstatue/rubble resting hold until native ownerretires",
+          "sample_start_ms": 750
+        }
+      ],
+      "eye_afterglow_ms": 100,
+      "eye_rule": "Only Death0[0,100ms) after actual Died may retain residual amber; frame1/100ms onward OFF.",
+      "gameplay_death_delay_ms": 0,
+      "gameplay_authority": "Actual Died immediately HP0/Dead, ground body off, attack-window closure and reward eligibility per native kernel. Afterglow/1000ms art grants no life, damage, collision, invulnerability or reward delay.",
+      "visual_amendment": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/accepted213-214-body-registration-and-death-spec-v002/Death214-visual-spec-amendment-v002.json",
+        "bytes": 3687,
+        "sha256": "accb5ffc810c621b714f5d5df8e62e03724b36566470d3145c4c3805d67c1c0e"
+      },
+      "all_visible_living_fists_closed": false,
+      "dead_hand_release_allowed": true
+    },
+    {
+      "state": "right_interrupted_recovery",
+      "frames": 4,
+      "full_body_plus_same_fixed_axe": true,
+      "one_transparent_sprite_per_frame": true,
+      "runtime_hand_rig_required": false,
+      "runtime_mirror_left": true,
+      "source_pose_candidate_is_not_runtime_acceptance": true,
+      "kernel_phase": "Recovery",
+      "kernel_selector": "S.Phase==Recovery && A.Interrupted && A.CompletedAt<0 && S.Time>=S.StunUntil && S.Time<S.OccupiedUntil && S.OccupiedUntil>S.StunUntil; Dead/Stunned always higher priority",
+      "kernel_span": "Variable actual positive remaining original [StunUntil,OccupiedUntil), may be absent",
+      "clock_authority": "Normalize actual remaining original interval; no fixed400ms or new RecoveryEnd/OccupiedUntil",
+      "normalized_frame_boundaries": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ],
+      "frame_formula": "u=clamp((Time-StunUntil)/(OccupiedUntil-StunUntil),0,1); while interval owns phase use min(3,floor(4*u)); absent/expired interval consumes no row",
+      "loop": false,
+      "poses_by_frame": [
+        {
+          "frame": 0,
+          "pose": "Safe post-stun lowstance, no sweep or stomp activepose",
+          "sample_start_normalized_fraction": 0
+        },
+        {
+          "frame": 1,
+          "pose": "Settle heldaxe, handsclosed",
+          "sample_start_normalized_fraction": 0.25
+        },
+        {
+          "frame": 2,
+          "pose": "Return shoulders towardIdle",
+          "sample_start_normalized_fraction": 0.5
+        },
+        {
+          "frame": 3,
+          "pose": "NearIdlehold until originalOccupiedUntil; then normalIdleReady gate",
+          "sample_start_normalized_fraction": 0.75
+        }
+      ],
+      "preview_only": {
+        "durations_ms": [
+          100,
+          100,
+          100,
+          100
+        ],
+        "span_ms": 400,
+        "not_native_timer": true
+      },
+      "forbid_replay_active_frames": true,
+      "actual_kernel_interval_witness": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/interrupted-recovery-kernel-witness-v001/actual-kernel-interval-proof-v001.json",
+        "bytes": 3903,
+        "sha256": "8c21e039ccf6659778c0a75e405c11cd3d2631cba5c8c31cef00924c2c02883d"
+      },
+      "source_status": "Native217/E384 all4 source-pose reviewed, row415 basis/perframe pivots are registration proposal only."
+    }
+  ],
+  "planned_state_rows": 13,
+  "planned_state_frame_entries": 57,
+  "maximum_unique_RGBA_before_further_aliases": 56,
+  "ownership_plan": {
+    "frame_output": "One complete RGBA body+fixedaxe sprite per frame. No5body+2weapon exclusive layers required. Alpha supports one complete silhouette; real generated hand/shaft occlusion stays baked.",
+    "runtime_stack": "Native groundshadow/telegraph → complete Guard+axe sprite → authorized localFX. Deathdetach only if separatelyaccepted.",
+    "fixed_scale": "Register all body actions to acceptedArmedReady crown/sole/body landmark density, one shared scale per row; compare basis raw body size before accept. Never per-frame normalize, localredraw or warp. Axe remains proportional to Guard within generated poses.",
+    "actual_visible_markers_required": [
+      "display ground pivot / sole contact candidate",
+      "crown / torso comparison landmarks",
+      "visible closed-fist shaft passage check"
+    ],
+    "no_hidden_coordinates_inferred": true,
+    "canonical_body_size_candidate_px": 100.8,
+    "hero_visible_height_px": 72,
+    "ratio_candidate": 1.4,
+    "size_status": "Artist candidate only, Root camera/native presentation review required. Formal collision40×28halfworld and speed160 unchanged.",
+    "crown_sole_registration": "One row standing-equivalent BODY density referenced to100.8px candidate, never normalize each pose to same actual crown-sole height. Natural compression, foot lift and Death collapse remain; axe alpha never defines height. Ground metadata/trials separate.",
+    "display_canvas_strategy": "Use measured rowbasis/bodyheight and explicit canvas-to-world/display registration. Expandwidecanvas asneeded foraxeextents; one shared geometric scale perrow, no perframe normalize or axe/body warps. Profile entries carry crown/sole markers and displaypivot audit. Do not claim footlock.",
+    "ground_metadata_rule": "Eachrowfixedstanding-equivalentbodydensity; perframevisiblepairedfootreference or explicitartistgroundreference metadata compensatesasymmetricwholealpha centering. No perframeheightscale. OccludedDeathfeetmustnotbeinventedfrompilecontactCOM; postcollapsegroundpointsproposalonlyuntiltrial."
+  },
+  "direction_contract": {
+    "canonical": "RIGHT, same shallow elevated three-quarter side view as accepted equippedReady209;206 is archived, not current identityref",
+    "left": "MirrorwholeacceptedGuard+fixedaxe aboutactualperframeartistgroundpivot; sameONErowbodydensity. Never256alphacenterbydefault. GroundregistrationtrialmustbelockedbyRoot, sourceposeacceptancealoneinsufficient.",
+    "locked_facing": "Useactual A.Facing afterlock; no facingchase inlastwindup/active/recovery.",
+    "marking": "Moss, stone plates, axe head and both grip occlusions follow the whole mirrored source.",
+    "QA": "Rootactualnative A/D or enemyfacing bothdirections, allwake/attack activeboundaries/interrupt/death; nativephase/HP/receipts/runtimevideo beforeacceptance."
+  },
+  "ordinary_Damaged_overlay": {
+    "state": "hurt_material_overlay",
+    "frames": 4,
+    "durations_ms": [
+      55,
+      55,
+      55,
+      55
+    ],
+    "span_ms": 220,
+    "kernel_phase": null,
+    "trigger": "Positive actual EEventKind::Damaged/ActualHPLoss receipt; once per nativeevent; current HitFlash=.22 is presentation feedback.",
+    "role": "Local tint/crack-chip material overlay, not fullbody pose override. Does not cancel validWindup/Active or setStunned.",
+    "subject": "effect",
+    "bone_grip_points": null,
+    "no_new_damage_window": true
+  },
+  "bodyfree_effect_rows": [
+    {
+      "name": "axe_sweep_cue",
+      "frames": 4,
+      "durations_ms": [
+        50,
+        50,
+        50,
+        50
+      ],
+      "source_event": "ActiveWindow(AxeSweep),once per AttackId/EventId",
+      "lifetime_ms": 200,
+      "stop": "ActiveEnd or actual WindowClosure/Death whicheverfirst",
+      "bodyfree": true,
+      "shape": "Sparse opaque curvedink/motion cue near blade path only; not a new hitbox. ActualHit impact separate."
+    },
+    {
+      "name": "stomp_contact_cue",
+      "frames": 4,
+      "durations_ms": [
+        40,
+        35,
+        40,
+        35
+      ],
+      "source_event": "ActiveWindow(Stomp),once perAttackId/EventId",
+      "lifetime_ms": 150,
+      "stop": "ActiveEnd or actualclosure/death",
+      "bodyfree": true,
+      "shape": "Local groundcontact crack/dust only, no flyingdamagingstones, persistentarea or extra shockdamage."
+    },
+    {
+      "name": "accepted_hit_chips",
+      "frames": 4,
+      "durations_ms": [
+        55,
+        55,
+        55,
+        55
+      ],
+      "source_event": "Actual positive Damaged forGuard material feedback; actualHit(target) forweaponcontact only",
+      "lifetime_ms": 220,
+      "bodyfree": true,
+      "shape": "Few broad opaque chips, not photoreal debris/no body silhouette. No hit VFX on whiff."
+    },
+    {
+      "name": "poise_break_cue",
+      "frames": 4,
+      "durations_ms": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "source_event": "PoiseBroken once perEventId",
+      "lifetime_ms": 400,
+      "bodyfree": true,
+      "shape": "Brief broad crackmark/eye dip, no stun stars or additional invulnerability."
+    }
+  ],
+  "art_status": "Source art candidates and registration proposals only. Move221 and Stomp222 semantics pending independent actual trace; no runtime or final acceptance declared.",
+  "source_layout_decision": "Rootallowscompleteindependentcomponentposecandidatesfrom215/216despitenominalequalwidthslotviolations. RawstripsremainfailedlayoutQA, cannotbedirectacceptedatlases. Onlycomplete512curated/QA/noforeignparts/actualcontinuitycanbeadmitted; no slotcut/paint/erasure.",
+  "historical_unconsumed": {
+    "consumed_by_runtime_or_new_generation": false,
+    "v004_preserved": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/action-contracts-v004-split-native-phases57/complete-Guard003-split-native-phase57-action-contract-v004.json",
+      "bytes": 42636,
+      "sha256": "57aac2113ecba85f409fe0e23cde14dd9b6f184bda5a5777d51a920bf1c0698f"
+    },
+    "superseded_fields": [
+      "Move old96world field conflicts with current128; never consume96.",
+      "Old combined Axe phase1600ms and Active0..1/Recovery2..5 maps are superseded by independent4+4 rows200/1400.",
+      "Old combined Stomp1650ms and Active0..1/Recovery2..5 maps are superseded by independent2+4 rows150/1500.",
+      "Prepared old StompRecovery350/350/400/400 sampling is superseded by v005375/375/375/375. Future generation-ready sidecar must use375 samples before nativecall.",
+      "OldFollow naming/first-pass budget are history only, not current selectors or timing.",
+      "Death root coordinate proofv002 contains incidental600ms art wording; authoritative Death amendment and thisv005 use1000ms total visual sequence/100ms afterglow, zero gameplay delay. Root coordinate pivots are unaffected."
+    ]
+  },
+  "all_actual_Source_Content_tools_ledger_kernel_and_pixels_unchanged": true
+}

@@ -1,0 +1,499 @@
+{
+  "schema": "native171-armor-primary2-standard-extraction-trial-v1",
+  "created_local": "2026-10-16T17:41:09.760694+08:00",
+  "component": "Chest",
+  "native_request": 172,
+  "native_receipt": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/generation-control-v001/generation-receipt172-v001.json",
+    "bytes": 9145,
+    "sha256": "3a0cc5962bdc29a38f714145ecb7740d189483adefb5cf3240d2f37628cb514a"
+  },
+  "raw": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-chest-primary2-v001/raw/armor_chest_sword_primary2.png",
+    "bytes": 1322738,
+    "sha256": "b59072f8ca8a000eb62ebbb65ae8314a80d160c1e6f35e613db0e8246202e58f"
+  },
+  "approved_handoff": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/primary2-macro-native-handoff-approved-v002.json",
+    "bytes": 56305,
+    "sha256": "0342bbf095edec2d5d973bc28ed33f54a141827bf4c5d126238d9124043d5148"
+  },
+  "original40_input_freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/input-freeze-v001.json",
+    "bytes": 15361,
+    "sha256": "2f02f4dafd67f6bf14b22ac18627e9c2dc1e9a93308df477f19331edadc1dbcc"
+  },
+  "request_before": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/chest-extraction-v001/sprite-request-before-extraction-exact.json",
+    "bytes": 1555,
+    "sha256": "d10e611be6fb4f4617ad82d17e7213da97daedecb3f00a63d6a1507cb23d5773"
+  },
+  "request_after": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-chest-primary2-v001/sprite-request.json",
+    "bytes": 1555,
+    "sha256": "d10e611be6fb4f4617ad82d17e7213da97daedecb3f00a63d6a1507cb23d5773"
+  },
+  "request_exact_unchanged": true,
+  "request_auto_changed": false,
+  "frozen_preparation_mismatches": [],
+  "commands": [
+    {
+      "name": "extract-shared-row",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "F:\\Ourgame\\tools\\scripts\\extract-sprite-shared-row-scale.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-primary2-v001\\run-chest-primary2-v001"
+      ],
+      "tool": {
+        "path": "F:/Ourgame/tools/scripts/extract-sprite-shared-row-scale.py",
+        "bytes": 8626,
+        "sha256": "2d7464dc2e8dd962a7d4dc170c0a7401d09cf1a626415309b4921b7d89d88aa3"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/chest-extraction-v001/extract-shared-row.log",
+        "bytes": 2425,
+        "sha256": "de4207b0aad588581fd80e48355942796fe81a714a301112669913b25782cffe"
+      }
+    },
+    {
+      "name": "compose-atlas",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\compose_sprite_atlas.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-primary2-v001\\run-chest-primary2-v001"
+      ],
+      "tool": {
+        "path": "C:/Users/22499/.codex/skills/sprite-gen/scripts/compose_sprite_atlas.py",
+        "bytes": 481,
+        "sha256": "a7475830b99720b69bc645423a2f9aee40d03dad0e7d589ad4756526648a61aa"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/chest-extraction-v001/compose-atlas.log",
+        "bytes": 289,
+        "sha256": "b68288b9d40bd26ead310b90a5376609fce6578f3c6e2f8920bca7ca0fff8b1e"
+      }
+    },
+    {
+      "name": "export-curated",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\export_curated_pngs.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-primary2-v001\\run-chest-primary2-v001",
+        "--state",
+        "armor_chest_sword_primary2"
+      ],
+      "tool": {
+        "path": "C:/Users/22499/.codex/skills/sprite-gen/scripts/export_curated_pngs.py",
+        "bytes": 477,
+        "sha256": "dcf7910f44a3f43006a43379c0464c88ed7cc3213e3a8062edd59b9009960e1e"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/chest-extraction-v001/export-curated.log",
+        "bytes": 1060,
+        "sha256": "31fcdc117d80c238a63dd9d3eb36c1c411690a2566b4c4568ab45f49c08bf532"
+      }
+    },
+    {
+      "name": "preview",
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\preview_animation.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-armor-sword-primary2-v001\\run-chest-primary2-v001"
+      ],
+      "tool": {
+        "path": "C:/Users/22499/.codex/skills/sprite-gen/scripts/preview_animation.py",
+        "bytes": 459,
+        "sha256": "ff4aa5d1bcfae4731a09732da96d24f540707b834df5cba85b910f88df016496"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/chest-extraction-v001/preview.log",
+        "bytes": 312,
+        "sha256": "4e419c806dd4eb2a532dcf529819b668ea7ed0afc6e8edae7bc2f6e31fb9e486"
+      }
+    }
+  ],
+  "frames": [
+    {
+      "frame": 0,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-chest-primary2-v001/curated/frame-0.png",
+        "bytes": 9561,
+        "sha256": "8cf1ba72d7e28d853e4be6c7ed1fa2e7df2cc5e4d7f1fbe9e868eaf6cbca310f"
+      },
+      "source_canvas": [
+        512,
+        512
+      ],
+      "alpha_bbox_diagnostic_only": [
+        224,
+        231,
+        288,
+        281
+      ],
+      "alpha_bbox_size_diagnostic_only": [
+        64,
+        50
+      ],
+      "actual_component_feature_A": null,
+      "actual_facing": null,
+      "semantic_or_bone_measurement": false,
+      "new_output_viewed": false
+    },
+    {
+      "frame": 1,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-chest-primary2-v001/curated/frame-1.png",
+        "bytes": 9445,
+        "sha256": "d34967fcdfe57bd04160b39b202b2300b9d0b47c1d43f8ddac989b70932f11b6"
+      },
+      "source_canvas": [
+        512,
+        512
+      ],
+      "alpha_bbox_diagnostic_only": [
+        225,
+        231,
+        287,
+        281
+      ],
+      "alpha_bbox_size_diagnostic_only": [
+        62,
+        50
+      ],
+      "actual_component_feature_A": null,
+      "actual_facing": null,
+      "semantic_or_bone_measurement": false,
+      "new_output_viewed": false
+    },
+    {
+      "frame": 2,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-chest-primary2-v001/curated/frame-2.png",
+        "bytes": 9352,
+        "sha256": "293219bd830d7ae1eff641cf28e4c7eed3c3f639d9de6340509996a4ea5835d9"
+      },
+      "source_canvas": [
+        512,
+        512
+      ],
+      "alpha_bbox_diagnostic_only": [
+        225,
+        231,
+        287,
+        281
+      ],
+      "alpha_bbox_size_diagnostic_only": [
+        62,
+        50
+      ],
+      "actual_component_feature_A": null,
+      "actual_facing": null,
+      "semantic_or_bone_measurement": false,
+      "new_output_viewed": false
+    },
+    {
+      "frame": 3,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-chest-primary2-v001/curated/frame-3.png",
+        "bytes": 8891,
+        "sha256": "ae6acfe00e909aced377e458ca8ce0cb0a802a0a66c8293f757d2793abc2d14a"
+      },
+      "source_canvas": [
+        512,
+        512
+      ],
+      "alpha_bbox_diagnostic_only": [
+        227,
+        231,
+        284,
+        281
+      ],
+      "alpha_bbox_size_diagnostic_only": [
+        57,
+        50
+      ],
+      "actual_component_feature_A": null,
+      "actual_facing": null,
+      "semantic_or_bone_measurement": false,
+      "new_output_viewed": false
+    },
+    {
+      "frame": 4,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-chest-primary2-v001/curated/frame-4.png",
+        "bytes": 9508,
+        "sha256": "3e1bd38f1bffc3c16b46f9d602535d49e3a657692b5495e124fbc59fa293285e"
+      },
+      "source_canvas": [
+        512,
+        512
+      ],
+      "alpha_bbox_diagnostic_only": [
+        224,
+        231,
+        287,
+        281
+      ],
+      "alpha_bbox_size_diagnostic_only": [
+        63,
+        50
+      ],
+      "actual_component_feature_A": null,
+      "actual_facing": null,
+      "semantic_or_bone_measurement": false,
+      "new_output_viewed": false
+    },
+    {
+      "frame": 5,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-chest-primary2-v001/curated/frame-5.png",
+        "bytes": 9572,
+        "sha256": "0bfb947b295b2019e92aa013a811e7866b9abdd8af733bc0e9b847f8547a379a"
+      },
+      "source_canvas": [
+        512,
+        512
+      ],
+      "alpha_bbox_diagnostic_only": [
+        224,
+        231,
+        288,
+        281
+      ],
+      "alpha_bbox_size_diagnostic_only": [
+        64,
+        50
+      ],
+      "actual_component_feature_A": null,
+      "actual_facing": null,
+      "semantic_or_bone_measurement": false,
+      "new_output_viewed": false
+    }
+  ],
+  "metadata": {
+    "frames_manifest": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-chest-primary2-v001/frames/frames-manifest.json",
+      "bytes": 6977,
+      "sha256": "5b64b6eacb3455f09bd65d4d257205714bf509112b1da7057da25842e771362f"
+    },
+    "atlas_report": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-chest-primary2-v001/sprite-sheet-alpha.report.json",
+      "bytes": 2324,
+      "sha256": "ae72bf5dada10cedaf19c706175bcfddf8c10f669fdb811758aeebaad3ee3fb1"
+    },
+    "QA_errors": [],
+    "QA_warnings": [],
+    "shared_row_ratio": 0.273224043715847,
+    "shared_row_fit": {
+      "policy": "one_raw_component_max_extent_scale_for_entire_row",
+      "scale": 0.273224043715847,
+      "source_max_extent": [
+        233,
+        183
+      ],
+      "horizontal_registration": "bbox_center",
+      "per_frame_scale_normalization": false,
+      "frame_records": [
+        {
+          "frame": 0,
+          "source_component_size": [
+            233,
+            182
+          ],
+          "shared_scale": 0.273224043715847,
+          "resampled_size": [
+            64,
+            50
+          ],
+          "placement_xy": [
+            224,
+            231
+          ],
+          "alpha_bbox_px": [
+            224,
+            231,
+            288,
+            281
+          ]
+        },
+        {
+          "frame": 1,
+          "source_component_size": [
+            227,
+            183
+          ],
+          "shared_scale": 0.273224043715847,
+          "resampled_size": [
+            62,
+            50
+          ],
+          "placement_xy": [
+            225,
+            231
+          ],
+          "alpha_bbox_px": [
+            225,
+            231,
+            287,
+            281
+          ]
+        },
+        {
+          "frame": 2,
+          "source_component_size": [
+            227,
+            183
+          ],
+          "shared_scale": 0.273224043715847,
+          "resampled_size": [
+            62,
+            50
+          ],
+          "placement_xy": [
+            225,
+            231
+          ],
+          "alpha_bbox_px": [
+            225,
+            231,
+            287,
+            281
+          ]
+        },
+        {
+          "frame": 3,
+          "source_component_size": [
+            209,
+            183
+          ],
+          "shared_scale": 0.273224043715847,
+          "resampled_size": [
+            57,
+            50
+          ],
+          "placement_xy": [
+            227,
+            231
+          ],
+          "alpha_bbox_px": [
+            227,
+            231,
+            284,
+            281
+          ]
+        },
+        {
+          "frame": 4,
+          "source_component_size": [
+            230,
+            183
+          ],
+          "shared_scale": 0.273224043715847,
+          "resampled_size": [
+            63,
+            50
+          ],
+          "placement_xy": [
+            224,
+            231
+          ],
+          "alpha_bbox_px": [
+            224,
+            231,
+            287,
+            281
+          ]
+        },
+        {
+          "frame": 5,
+          "source_component_size": [
+            233,
+            183
+          ],
+          "shared_scale": 0.273224043715847,
+          "resampled_size": [
+            64,
+            50
+          ],
+          "placement_xy": [
+            224,
+            231
+          ],
+          "alpha_bbox_px": [
+            224,
+            231,
+            288,
+            281
+          ]
+        }
+      ],
+      "raw_component_RGBA_sha256": [
+        "8923a5f2a413e90f0eb09fd1274d95c05e732296f18af10d8aeb5d2c43bf915d",
+        "04db790060fcdea3a10a1f85ee9619b8911101c5cabeb33f27fd6316da645881",
+        "6f02461a0879dde53e247706278716994f27cd12eb9914abbbae24a056b9d9d8",
+        "733ed7668fd557f0cf3719b1c2bf4c76ca28f9d6406d9d14c426056ad1f1c58e",
+        "b048079a6d319c16188b531ecddb2c9a78a40d306651a34860185bed4f0d530c",
+        "7560490a79b2d2329c42aab11d7d67c8a60212359b3a68a343a850a59cceed87"
+      ]
+    },
+    "unique_source_pngs": 6,
+    "actual_atlas_durations_ms": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "actual_gif_durations_ms": [
+      100,
+      100,
+      100,
+      100,
+      100,
+      100
+    ],
+    "timing_contract_passed": false
+  },
+  "failure": null,
+  "shape_pipeline_passed": true,
+  "future_actual_component_A": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "feature_contract_not_yet_verified": "actual central raised round chest boss",
+  "fit_window_design_only": [
+    70,
+    50
+  ],
+  "new_outputs_viewed": false,
+  "registration_or_motion_accepted": false,
+  "timing_contract_passed": false,
+  "native_called": false,
+  "UE_import_called": false,
+  "formal_complete_units": 0
+}

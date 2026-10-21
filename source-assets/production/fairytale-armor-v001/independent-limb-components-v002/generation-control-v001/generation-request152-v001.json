@@ -1,0 +1,70 @@
+{
+  "request_number": 152,
+  "asset": "fairytale-NearShin-four-idle-v001",
+  "component": "NearShin",
+  "status": "requested_pending",
+  "source_event": "EV-048",
+  "authorization_events": [
+    "EV-040",
+    "EV-041"
+  ],
+  "window_number": 7,
+  "requested_utc": "2026-10-15T23:23:21.235836+00:00",
+  "prompt_path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/prompts/near-shin-four-idle-v001.txt",
+  "prompt": "Create ONE production component-row strip containing exactly FOUR separate connected NEAR LOWER LEG ARMOR PLATES, left to right for canonical131 idle poses0,1,2,3. Only the metal plate for this ONE anatomical side and body segment. No dressed hero, full arm, leg, glove or boot.\n\nSTRICT FIVE-REFERENCE ROLES:\n1. canonical131 idle0 is the ONLY character and style identity. Its warm bell helmet, common body proportions and right-facing three-quarter depth are fixed context; none of the body is output.\n2. canonical131 four-idle contact owns matching pose order0,1,2,3. Follow the corresponding visible cloth limb and cuff angle. Its limbs move very little: retain rigid plate volume and do not invent large motion to fake four different poses.\n3. actual147 chest +149 near shoulder +150 far shoulder composite is ONLY the existing desaturated grey iron, broad charcoal ink and compact handmade construction reference. Ignore its character/body and already-worn pieces as output; no chest or shoulder pixels in this row.\n4. standard four-slot layout owns total count4 and clear separation.\n5. NEW original technical diagram owns plate silhouette direction and the single red primary mount A. Tan is only a schematic protected leather/hand/boot zone, NOT a measured semantic mask. Blue is a direction hint, NOT a second attachment. All guide colors, red dot, labels, border, axis and tan objects vanish from final output.\n\nANATOMY/DEPTH: The NEAR leg is the image-LEFT leg. Its visible cloth lower-leg panel slopes slightly down-left into a DIAGONAL brown boot rim. Make a short, broad tapered greave over the CLOTH section only, below the knee and ABOVE that brown rim. The tip ends before the boot leather; no knee disk, boot cuff, foot, toe, sole or detached strap.\n\nPLATE DESIGN: a compact slightly crooked dark-fairytale cartoon iron plate, matching the already-generated chest and shoulders. One broad mid-grey metal face, a strong charcoal outside rim and at most one restrained pale edge. Keep large shapes useful at a72px body; no tiny engraving, chains, spikes or detached straps. Include ONE simple physically connected round mounting rivet within the plate, at the red-A guide position relative to the plate. The actual rivet center can be measured after extraction. The final fitted plate stays within36x34 source pixels on the unchanged512 body canvas; do not turn the plate into a full-body416px sprite. Do not draw a separate technical marker or counting dot.\n\nFOUR GENUINE PIECES: make the same rigid armor for each matching actual idle pose with coherent perspective and local cloth attachment. These are four native rendered component frames, not a pasted clone row, not a left/right mirror set, and not anatomy relabelled to pass. Near and far are separate genuine depth-specific designs. No recolored old armor, body crop, baked clothing or filled mannequin. Each frame is exactly ONE connected plate, so the whole row has FOUR connected components; use no fake bridge joining separate parts.\n\nOUTPUT: flat fully opaque GREEN #00FF00 background, opaque metal interiors and clean cartoon ink edges. Four isolated objects on a single horizontal row, ample green gutters and outer padding. Use ONE common source drawing scale across all four; later extraction applies ONE shared row scale with Lanczos, never individual per-frame normalization. No floor, drop shadow, glow, halo, checkerboard, alpha preview, UI, words, labels, numbers or alternate camera views. Do not draw timing text; original timing remains4x167ms.\n\nABSOLUTE EXCLUSIONS: no helmet, head, face, neck, torso, chest, shoulder cap, shirt/sleeve or skin, opposite limb plate, glove cuff, hand, thumb, fingers, belt, knee disk, leather boot rim, foot, toe, sole, weapon or shield. Crop-free isolated armor is the output; technical supports are invisible.\n\nSTATUS: this is only this four-idle component row. No full armor, walk, attacks, weapon socket, exact hand-occluder or final motion acceptance is implied. Future near-arm/near-hand separation must use actual131 pixels, never old masks.\n",
+  "prompt_file_sha256": "6083c0c520e4d0da5794230a1313da09a35d939c377ef86671b837927f2938d8",
+  "reference_images": [
+    {
+      "role": "sole_identity",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/curated/frame-0.png",
+        "bytes": 117257,
+        "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718"
+      }
+    },
+    {
+      "role": "four_idle_pose_order_only",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/qa/idle-contact.png",
+        "bytes": 416256,
+        "sha256": "d720eca9b34139616e6c7d7d6a0f411304ce8e628d3f4fd7bb3e5009edc985ad"
+      }
+    },
+    {
+      "role": "actual147_149_150_material_construction_only",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v001/far150-registration-proposed-v001/composite-preview/frame-0.png",
+        "bytes": 121999,
+        "sha256": "1f230084977281bffe5dee294297d43fbfe7f38b23996bc8d81acde11cb3981b"
+      }
+    },
+    {
+      "role": "standard_four_component_count_layout",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/run-near-shin-idle-v001/references/layout-guides/armor_shin_near_idle.png",
+        "bytes": 4478,
+        "sha256": "65e278177d7592b58adec3b1a9f9adc7303464ac05504e897b652318b4b56f82"
+      }
+    },
+    {
+      "role": "original_primary_mount_clearance_schematic_not_mask",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/guides/near-shin-primary-mount-and-clearance-v001.png",
+        "bytes": 31746,
+        "sha256": "d35ec440f9e2fdf13b30c3d1021ad95c86c77e936d0db0bdbbd295daa2662cd3"
+      }
+    }
+  ],
+  "transparent_background": false,
+  "backend": "image_gen.imagegen",
+  "external_api_calls": 0,
+  "host_fee_usd": null,
+  "raw_destination_planned": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/run-near-shin-idle-v001/raw/armor_shin_near_idle.png",
+  "source_handoff": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/handoffs/near-shin-native-input-v001.json",
+    "bytes": 11142,
+    "sha256": "7afa52a3caa2f232e33e70bc576b10b17f29ef3b8e91f176818d084bdfc3f19b"
+  },
+  "scope": "Independent four-frame near limb idle trial only",
+  "formal_complete_units": 0
+}

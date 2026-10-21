@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fixed-heavyaxe-armed-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedArmedReady209existing4poses, originalrawexactcopy, doNOTgenerate/charge.",
+      "durations_ms": [
+        250,
+        250,
+        250,
+        250
+      ]
+    },
+    "right_axe_recovery": {
+      "frames": 4,
+      "fps": 3,
+      "loop": false,
+      "action": "OnlyattachedacceptedArmedReady209owns GuardBODYANDfixedAXEidentity, same shallow elevatedthreequarter side view facingRIGHT. SAME squat slabhelmet/smallrecessedambereyes/sparseolivemoss/coarseink, broadwarmgrey/tanstoneplanes, SAME singleheadedheavyaxe/straightcontinuouswoodhaft/stonebuttcap lengthsandproportions. Actual212lastwindup ifattached is MOTIONSTART vocabulary only, nevercompetingidentity. DoNOTattach206/207neutral/standalone208/bad211. Bothlivingfists stayfullyCLOSED onONEcontinuousstraightshaft: frommossforegroundnearshouldertracebigneararm toLOWER BUTTwardgrip; fararm toHIGHER HEADwardgrip. Neverexchangehands/regrip/shortenhaft/changeheadsize. AxeheadstaysRIGHT ofbuttthroughallposes, never180leftflip. Sameplantedfootlocations/commonsolelineandactorXY; torso/knees mayload/turnlocally but no lungestep/dash/jump/actorfakeadvance. Fullbody+weapononeselfcontainedconnectedpose perframe, no text/grid/arcs/streaks/afterimages/blur/dust/shadow/scenery/separateFX. Clearposechanges, notstaticcopies, notrubberstone. FOUR AXE RECOVERY poses represent the1400ms punishablebackswingaftermath, sample0/350/700/1050ms measuredfromactualActiveEnd; eachheld350ms. ThisrowisRECOVERYONLY, not anotherActive/windup/sweep. Frame0 exactActiveEnd: LOW FORWARD HELD AXE atRIGHT +TIRED FORWARD TORSO, continuesActive3posturewithoutanotherstrike, closednearbutt/farheadgripsandplantfeet. Frame1 at350ms: heavyaxe settleslowforwardright, shoulders/kneesslumped, clearlongpunishopportunity, no weaponthreat/step. Frame2 at700ms: slowlyretrieveSAMEaxedirectlytowardbelly withbothhandsmovingcoherently; no overheadraise, no extra sweepingarc or headflip. Frame3 at1050ms: arriveclosetoacceptedArmedReady209frame0quietlowready andholdthroughoriginalRecoveryEnd1400ms. DoNOTbeginchase/attackbeforeactualownintervalends. AfterendnativeIdleReadyextra300msgate/cooldownremainunchanged; these arenotdrawn asadditionalRecoveryframes. NormalRecoveryonly: ifActionInterrupted,use separateinterruptedrecoveryprofile, nottheseattackafterstrokeposes. No newgameplaytime/damage/collisiontranslation. Fourdistinctheavysettles, bodyandaxefixed, fullconnecteduncroppedposes.",
+      "durations_ms": [
+        350,
+        350,
+        350,
+        350
+      ]
+    }
+  },
+  "style": "OnlyattachedacceptedArmedReady209owns GuardBODYANDfixedAXEidentity, same shallow elevatedthreequarter side view facingRIGHT. SAME squat slabhelmet/smallrecessedambereyes/sparseolivemoss/coarseink, broadwarmgrey/tanstoneplanes, SAME singleheadedheavyaxe/straightcontinuouswoodhaft/stonebuttcap lengthsandproportions. Actual212lastwindup ifattached is MOTIONSTART vocabulary only, nevercompetingidentity. DoNOTattach206/207neutral/standalone208/bad211. Bothlivingfists stayfullyCLOSED onONEcontinuousstraightshaft: frommossforegroundnearshouldertracebigneararm toLOWER BUTTwardgrip; fararm toHIGHER HEADwardgrip. Neverexchangehands/regrip/shortenhaft/changeheadsize. AxeheadstaysRIGHT ofbuttthroughallposes, never180leftflip. Sameplantedfootlocations/commonsolelineandactorXY; torso/knees mayload/turnlocally but no lungestep/dash/jump/actorfakeadvance. Fullbody+weapononeselfcontainedconnectedpose perframe, no text/grid/arcs/streaks/afterimages/blur/dust/shadow/scenery/separateFX. Clearposechanges, notstaticcopies, notrubberstone. ",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

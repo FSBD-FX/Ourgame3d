@@ -1,0 +1,117 @@
+{
+  "schema": "Guard223-standard-QA-plus-independent-source-rejection-proof-v002",
+  "standard_commands": [
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\move223-extraction-v001\\shared-HD-fit-existing-exact.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\move223-extraction-v001\\run-move223-shared-HD-v001",
+        "--min-used-pixels",
+        "512"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move223-extraction-v001/logs/extract.log",
+        "bytes": 3673,
+        "sha256": "0c878197c19830cc3fa0dca6739770d50e518f1960b941a845d948b117b04bf8"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\inspect_sprite_run.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\move223-extraction-v001\\run-move223-shared-HD-v001",
+        "--states",
+        "right_idle,right_move",
+        "--report",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\move223-extraction-v001\\run-move223-shared-HD-v001\\inspect-report.json"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move223-extraction-v001/logs/inspect.log",
+        "bytes": 420,
+        "sha256": "b1c0a9128fec7f0f6e58815876721ccea680542cbb11babd7a4699d6ca95472c"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\compose_sprite_atlas.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\move223-extraction-v001\\run-move223-shared-HD-v001",
+        "--min-used-pixels",
+        "512"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move223-extraction-v001/logs/compose.log",
+        "bytes": 359,
+        "sha256": "3ab5118a86343f08629e32e9155a8d2a930f12868706245a3f0681945ab2c071"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\export_curated_pngs.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\move223-extraction-v001\\run-move223-shared-HD-v001",
+        "--state",
+        "right_move",
+        "--selected-only"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move223-extraction-v001/logs/export-curated.log",
+        "bytes": 1305,
+        "sha256": "3d72f7058fe3bb761bb3dfe00507d82101e87733e04c166f75d24c5ebfa17e75"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\preview_animation.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\move223-extraction-v001\\run-move223-shared-HD-v001"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move223-extraction-v001/logs/preview.log",
+        "bytes": 468,
+        "sha256": "b8ec0caa87d5d6881da2624a9a7ca1049408dc537b19f60ee176619a573ee1b5"
+      }
+    }
+  ],
+  "standard_commands_pass": true,
+  "source_admission_pass": false,
+  "original_full_session_exit_code": 1,
+  "source_failure": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move223-extraction-v001/source-boundary-extra-check-failure-v001.json",
+    "bytes": 4074,
+    "sha256": "6f8f73d821a2bb34826fbdcbfd9b6cf6ac4e370275ac86c356a00aca23b4b480"
+  },
+  "diagnostic_source_index": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move223-extraction-v001/move223-six-curated-source-index-SOURCE-REJECTED-v002.json",
+    "bytes": 13089,
+    "sha256": "b16825afde66a1c46a5ad582479efba0f634b2f7a0c5fff118f213f0a35fd13f"
+  },
+  "native_calls": 0,
+  "source_modified": false,
+  "new_transparent_View": false
+}

@@ -1,0 +1,862 @@
+{
+  "schema": "fairytale-near-limb-integer-rivet-registration-v1",
+  "created_local": "2026-10-16T07:28:15.266076+08:00",
+  "algorithm": "Re-use pinned native chroma/component extraction and verify every rawRGBA hash against shared-fit manifest. Inside fixed per-component relative ROI find threshold luma<60 opaque connected dark round outline; reject ROI-touching or nonround/small features. Unique rivet ring bbox midpoint maps through actual integer Lanczos output dimensions; round-half-up then pure integer translation to fixed body garment-design A. No point selected based on body fit.",
+  "feature": "Actual round rivet OUTLINE center, not potentially off-center black dot; no B residual or whole-plate center fallback.",
+  "native_extractor_sha256": "f2a7902f01069668340d14217bd05c777f5c01853284102e211aba1013a45539",
+  "new_outputs_viewed": false,
+  "registration_visual_status": "Proposed; machine feature localization pending post-E visual check.",
+  "entries": [
+    {
+      "component": "NearBracer",
+      "raw": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/run-near-bracer-idle-v001/raw/armor_bracer_near_idle.png",
+        "bytes": 1303864,
+        "sha256": "093b17fa122060e439556fe5f85a6c5a4ad42f339c3f916a27f7915262116306"
+      },
+      "frames_manifest": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/run-near-bracer-idle-v001/frames/frames-manifest.json",
+        "bytes": 5200,
+        "sha256": "a09415008eef97a10d4775c92f12b8efd668f19207554d9f163cc508fd350565"
+      },
+      "shared_scale": 0.09302325581395349,
+      "QA_errors": [],
+      "QA_warnings": [],
+      "durations_ms": [
+        167,
+        167,
+        167,
+        167
+      ],
+      "frames": [
+        {
+          "frame": 0,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/run-near-bracer-idle-v001/curated/frame-0.png",
+            "bytes": 3552,
+            "sha256": "f18c7073a9ddc145cb4f057fa774e2eaee11ea3ae5e885861a977be81c22885c"
+          },
+          "native_component_size_px": [
+            355,
+            309
+          ],
+          "native_component_RGBA_sha256": "4b8445b1394d109b8820287180214041b1e0f26d6a829878a3cb091b6c3624dc",
+          "rivet_roi_component_px": [
+            63,
+            71,
+            166,
+            210
+          ],
+          "dark_ring_candidates": [
+            {
+              "count": 900,
+              "bbox": [
+                29,
+                48,
+                86,
+                105
+              ],
+              "bbox_component_px": [
+                92,
+                119,
+                149,
+                176
+              ]
+            }
+          ],
+          "actual_ring_center_component_px": [
+            120.0,
+            147.0
+          ],
+          "mapped_ring_center_frame_px": [
+            250.3619718309859,
+            254.86569579288027
+          ],
+          "A_measured_integer_px": [
+            250,
+            255
+          ],
+          "A_target_body_design_px": [
+            187,
+            283
+          ],
+          "integer_translation_px": [
+            -63,
+            28
+          ],
+          "quantization_error_px": [
+            -0.3619718309859081,
+            0.13430420711972602
+          ],
+          "confidence": "Actual isolated connected round outline, not the deliberately off-center dark dot or external plate bbox; integer quantization <=0.5px, semantic center ambiguity about1px.",
+          "registered": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/armor-near-bracer/frame-0.png",
+            "bytes": 3553,
+            "sha256": "885704a552bbbc4fcbb8e33cde2e4103ada448ca7f3ac1a0a3fb63b63f51ccb3"
+          },
+          "registered_alpha_bbox_px": [
+            177,
+            270,
+            209,
+            298
+          ],
+          "cropped_RGBA_byte_identical": true,
+          "clipped": false,
+          "rivet_diagnostic_crop": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/rivet-source-crops/near-bracer-frame-0.png",
+            "bytes": 8353,
+            "sha256": "134fae8403ca3a0db3f3c31e6d1d1890474b95e2f7c13ac1b3e725b54a9d269c"
+          }
+        },
+        {
+          "frame": 1,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/run-near-bracer-idle-v001/curated/frame-1.png",
+            "bytes": 3568,
+            "sha256": "e2d27fc42ffb13d0b933f5e80ca7b331d6e5568e16383e94e5ddef6fcc6972d0"
+          },
+          "native_component_size_px": [
+            352,
+            308
+          ],
+          "native_component_RGBA_sha256": "d58c65261b38ece1724ca214710b244e4a8738ae5c451eab6600c5e6304f9cdb",
+          "rivet_roi_component_px": [
+            63,
+            70,
+            165,
+            209
+          ],
+          "dark_ring_candidates": [
+            {
+              "count": 928,
+              "bbox": [
+                26,
+                49,
+                80,
+                106
+              ],
+              "bbox_component_px": [
+                89,
+                119,
+                143,
+                176
+              ]
+            }
+          ],
+          "actual_ring_center_component_px": [
+            115.5,
+            147.0
+          ],
+          "mapped_ring_center_frame_px": [
+            250.04545454545453,
+            254.9090909090909
+          ],
+          "A_measured_integer_px": [
+            250,
+            255
+          ],
+          "A_target_body_design_px": [
+            187,
+            283
+          ],
+          "integer_translation_px": [
+            -63,
+            28
+          ],
+          "quantization_error_px": [
+            -0.045454545454532536,
+            0.09090909090909349
+          ],
+          "confidence": "Actual isolated connected round outline, not the deliberately off-center dark dot or external plate bbox; integer quantization <=0.5px, semantic center ambiguity about1px.",
+          "registered": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/armor-near-bracer/frame-1.png",
+            "bytes": 3569,
+            "sha256": "9616bdcf71137e29bdd1ab61d643674f8de6e29f2c671db485609a32befa7239"
+          },
+          "registered_alpha_bbox_px": [
+            177,
+            270,
+            209,
+            298
+          ],
+          "cropped_RGBA_byte_identical": true,
+          "clipped": false,
+          "rivet_diagnostic_crop": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/rivet-source-crops/near-bracer-frame-1.png",
+            "bytes": 8140,
+            "sha256": "bdebf9ed20761c7ef430d4baa69196a1b38f2ca0327e903d5d0ef966c936b06a"
+          }
+        },
+        {
+          "frame": 2,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/run-near-bracer-idle-v001/curated/frame-2.png",
+            "bytes": 3580,
+            "sha256": "4de441aef2eeda835cbeb0f3f3be73895d80c8144e0f4c7156ba12087451f2a8"
+          },
+          "native_component_size_px": [
+            348,
+            306
+          ],
+          "native_component_RGBA_sha256": "bc194a186c22771e8831648874e651929ae4768c9443367504241902387b39c8",
+          "rivet_roi_component_px": [
+            62,
+            70,
+            163,
+            208
+          ],
+          "dark_ring_candidates": [
+            {
+              "count": 964,
+              "bbox": [
+                26,
+                49,
+                82,
+                106
+              ],
+              "bbox_component_px": [
+                88,
+                119,
+                144,
+                176
+              ]
+            }
+          ],
+          "actual_ring_center_component_px": [
+            115.5,
+            147.0
+          ],
+          "mapped_ring_center_frame_px": [
+            250.16666666666666,
+            254.9967320261438
+          ],
+          "A_measured_integer_px": [
+            250,
+            255
+          ],
+          "A_target_body_design_px": [
+            187,
+            283
+          ],
+          "integer_translation_px": [
+            -63,
+            28
+          ],
+          "quantization_error_px": [
+            -0.1666666666666572,
+            0.0032679738561967042
+          ],
+          "confidence": "Actual isolated connected round outline, not the deliberately off-center dark dot or external plate bbox; integer quantization <=0.5px, semantic center ambiguity about1px.",
+          "registered": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/armor-near-bracer/frame-2.png",
+            "bytes": 3582,
+            "sha256": "d5373c3550edfe4f34f1f52cc3ddecd965c1d719c8991b16099daa159b7e7460"
+          },
+          "registered_alpha_bbox_px": [
+            177,
+            270,
+            209,
+            298
+          ],
+          "cropped_RGBA_byte_identical": true,
+          "clipped": false,
+          "rivet_diagnostic_crop": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/rivet-source-crops/near-bracer-frame-2.png",
+            "bytes": 8264,
+            "sha256": "20a04c58f05a7120c7b726d0e7345e6ba6780d8b3452c394b4d7c2f6edd4d6c7"
+          }
+        },
+        {
+          "frame": 3,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/run-near-bracer-idle-v001/curated/frame-3.png",
+            "bytes": 3514,
+            "sha256": "a39773c8e20b1125554bcb0745d2de9278886fc66eda7f6cac9715e834b64f7d"
+          },
+          "native_component_size_px": [
+            344,
+            299
+          ],
+          "native_component_RGBA_sha256": "bea1f2aa952d47b0f06b5667c1ac2cc22adcc04086497fe911574274e5cd73ae",
+          "rivet_roi_component_px": [
+            61,
+            68,
+            161,
+            203
+          ],
+          "dark_ring_candidates": [
+            {
+              "count": 984,
+              "bbox": [
+                22,
+                51,
+                80,
+                108
+              ],
+              "bbox_component_px": [
+                83,
+                119,
+                141,
+                176
+              ]
+            }
+          ],
+          "actual_ring_center_component_px": [
+            111.5,
+            147.0
+          ],
+          "mapped_ring_center_frame_px": [
+            249.59302325581396,
+            255.81939799331104
+          ],
+          "A_measured_integer_px": [
+            250,
+            256
+          ],
+          "A_target_body_design_px": [
+            187,
+            283
+          ],
+          "integer_translation_px": [
+            -63,
+            27
+          ],
+          "quantization_error_px": [
+            0.40697674418603924,
+            0.18060200668895732
+          ],
+          "confidence": "Actual isolated connected round outline, not the deliberately off-center dark dot or external plate bbox; integer quantization <=0.5px, semantic center ambiguity about1px.",
+          "registered": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/armor-near-bracer/frame-3.png",
+            "bytes": 3514,
+            "sha256": "25cc087c76e0d7642fd53c4e6a8492b94fa8eb80d2bc1fbea84d3ab663a058fc"
+          },
+          "registered_alpha_bbox_px": [
+            177,
+            270,
+            208,
+            297
+          ],
+          "cropped_RGBA_byte_identical": true,
+          "clipped": false,
+          "rivet_diagnostic_crop": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/rivet-source-crops/near-bracer-frame-3.png",
+            "bytes": 8498,
+            "sha256": "283be0eca8cf79eb7eb0a826f9f4c9a80d4854ff756f7c4f56bc370257d69738"
+          }
+        }
+      ]
+    },
+    {
+      "component": "NearShin",
+      "raw": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/run-near-shin-idle-v001/raw/armor_shin_near_idle.png",
+        "bytes": 1246244,
+        "sha256": "efbaf09d0469db09f56ce6f0d526ed57a46ea445702801b792d51a812bec0204"
+      },
+      "frames_manifest": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/run-near-shin-idle-v001/frames/frames-manifest.json",
+        "bytes": 5188,
+        "sha256": "33f4843c891a723ae3717095e3e685689c837ea351b1c02a02095c044cc1058a"
+      },
+      "shared_scale": 0.14166666666666666,
+      "QA_errors": [],
+      "QA_warnings": [],
+      "durations_ms": [
+        167,
+        167,
+        167,
+        167
+      ],
+      "frames": [
+        {
+          "frame": 0,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/run-near-shin-idle-v001/curated/frame-0.png",
+            "bytes": 3961,
+            "sha256": "c039d87b3ece47e4b99c274d1ed1dd60a5c893755c0c20c77b5ea3b492e52cb1"
+          },
+          "native_component_size_px": [
+            223,
+            247
+          ],
+          "native_component_RGBA_sha256": "cecf845ddd8cbb9dddfb4acdc10889fe61513e9f58a7cd7a67df47fa03507b64",
+          "rivet_roi_component_px": [
+            22,
+            29,
+            95,
+            118
+          ],
+          "dark_ring_candidates": [
+            {
+              "count": 623,
+              "bbox": [
+                15,
+                28,
+                57,
+                73
+              ],
+              "bbox_component_px": [
+                37,
+                57,
+                79,
+                102
+              ]
+            }
+          ],
+          "actual_ring_center_component_px": [
+            57.5,
+            79.0
+          ],
+          "mapped_ring_center_frame_px": [
+            248.30269058295966,
+            249.44331983805668
+          ],
+          "A_measured_integer_px": [
+            248,
+            249
+          ],
+          "A_target_body_design_px": [
+            219,
+            367
+          ],
+          "integer_translation_px": [
+            -29,
+            118
+          ],
+          "quantization_error_px": [
+            -0.3026905829596558,
+            -0.44331983805668074
+          ],
+          "confidence": "Actual isolated connected round outline, not the deliberately off-center dark dot or external plate bbox; integer quantization <=0.5px, semantic center ambiguity about1px.",
+          "registered": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/armor-near-shin/frame-0.png",
+            "bytes": 3943,
+            "sha256": "a504979be28138dd6a370e4dd292a8f36acc533da447ee750e109920846196ff"
+          },
+          "registered_alpha_bbox_px": [
+            212,
+            357,
+            242,
+            391
+          ],
+          "cropped_RGBA_byte_identical": true,
+          "clipped": false,
+          "rivet_diagnostic_crop": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/rivet-source-crops/near-shin-frame-0.png",
+            "bytes": 5818,
+            "sha256": "0fa9cb2f70900d1fa155abb03dc0d0af0b0b83be9ff9547d46685cdadab4ed7c"
+          }
+        },
+        {
+          "frame": 1,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/run-near-shin-idle-v001/curated/frame-1.png",
+            "bytes": 3973,
+            "sha256": "f4f7c423864c66311a009bac63bbeb2202873c670735e0fd32714249446d2632"
+          },
+          "native_component_size_px": [
+            223,
+            247
+          ],
+          "native_component_RGBA_sha256": "beaaa3a27d12861710c846beefd94f6f07c5cd4819384d6f734ff13443bcd33d",
+          "rivet_roi_component_px": [
+            22,
+            29,
+            95,
+            118
+          ],
+          "dark_ring_candidates": [
+            {
+              "count": 657,
+              "bbox": [
+                14,
+                28,
+                58,
+                74
+              ],
+              "bbox_component_px": [
+                36,
+                57,
+                80,
+                103
+              ]
+            }
+          ],
+          "actual_ring_center_component_px": [
+            57.5,
+            79.5
+          ],
+          "mapped_ring_center_frame_px": [
+            248.30269058295966,
+            249.51214574898785
+          ],
+          "A_measured_integer_px": [
+            248,
+            250
+          ],
+          "A_target_body_design_px": [
+            219,
+            367
+          ],
+          "integer_translation_px": [
+            -29,
+            117
+          ],
+          "quantization_error_px": [
+            -0.3026905829596558,
+            0.48785425101215196
+          ],
+          "confidence": "Actual isolated connected round outline, not the deliberately off-center dark dot or external plate bbox; integer quantization <=0.5px, semantic center ambiguity about1px.",
+          "registered": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/armor-near-shin/frame-1.png",
+            "bytes": 3961,
+            "sha256": "65e87d9919417154250fb97823d428af1156a507da95f61674e5a1165a08bf25"
+          },
+          "registered_alpha_bbox_px": [
+            212,
+            356,
+            242,
+            390
+          ],
+          "cropped_RGBA_byte_identical": true,
+          "clipped": false,
+          "rivet_diagnostic_crop": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/rivet-source-crops/near-shin-frame-1.png",
+            "bytes": 6122,
+            "sha256": "b33bd134c0d96529544896e5d02be4745e910d2ee2d908af152754f331ab8c68"
+          }
+        },
+        {
+          "frame": 2,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/run-near-shin-idle-v001/curated/frame-2.png",
+            "bytes": 4051,
+            "sha256": "207111116715f944b81144312682085a89c40353329a143b794fe4ed62ff47b1"
+          },
+          "native_component_size_px": [
+            225,
+            248
+          ],
+          "native_component_RGBA_sha256": "a15d93770d8c20af77fa38730eba7be28ecdeddb4d068c5907f3d626e0e2bafb",
+          "rivet_roi_component_px": [
+            22,
+            29,
+            96,
+            119
+          ],
+          "dark_ring_candidates": [
+            {
+              "count": 631,
+              "bbox": [
+                15,
+                28,
+                59,
+                74
+              ],
+              "bbox_component_px": [
+                37,
+                57,
+                81,
+                103
+              ]
+            }
+          ],
+          "actual_ring_center_component_px": [
+            58.5,
+            79.5
+          ],
+          "mapped_ring_center_frame_px": [
+            247.6288888888889,
+            249.46774193548387
+          ],
+          "A_measured_integer_px": [
+            248,
+            249
+          ],
+          "A_target_body_design_px": [
+            219,
+            367
+          ],
+          "integer_translation_px": [
+            -29,
+            118
+          ],
+          "quantization_error_px": [
+            0.3711111111111052,
+            -0.4677419354838719
+          ],
+          "confidence": "Actual isolated connected round outline, not the deliberately off-center dark dot or external plate bbox; integer quantization <=0.5px, semantic center ambiguity about1px.",
+          "registered": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/armor-near-shin/frame-2.png",
+            "bytes": 4038,
+            "sha256": "47448a73e59a06aba549af727e5c1bd32294b28c0751bd13c8c11a5a144ac9ed"
+          },
+          "registered_alpha_bbox_px": [
+            211,
+            357,
+            242,
+            391
+          ],
+          "cropped_RGBA_byte_identical": true,
+          "clipped": false,
+          "rivet_diagnostic_crop": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/rivet-source-crops/near-shin-frame-2.png",
+            "bytes": 6171,
+            "sha256": "8aeb4e11648ddd3776f21d058aced65c745896750ca86f574dab3f63cef8618d"
+          }
+        },
+        {
+          "frame": 3,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/run-near-shin-idle-v001/curated/frame-3.png",
+            "bytes": 4051,
+            "sha256": "9568aa9435b9e56c0bc5895842700afff92ab6bc037fa91a23356719d0edf993"
+          },
+          "native_component_size_px": [
+            226,
+            246
+          ],
+          "native_component_RGBA_sha256": "9fa2ab0ae82b7f065507dc683dcbd55e6910ff32fc3f6b3524f1986081957be6",
+          "rivet_roi_component_px": [
+            22,
+            29,
+            97,
+            118
+          ],
+          "dark_ring_candidates": [
+            {
+              "count": 634,
+              "bbox": [
+                17,
+                28,
+                59,
+                73
+              ],
+              "bbox_component_px": [
+                39,
+                57,
+                81,
+                102
+              ]
+            }
+          ],
+          "actual_ring_center_component_px": [
+            59.5,
+            79.0
+          ],
+          "mapped_ring_center_frame_px": [
+            247.73008849557522,
+            249.4878048780488
+          ],
+          "A_measured_integer_px": [
+            248,
+            249
+          ],
+          "A_target_body_design_px": [
+            219,
+            367
+          ],
+          "integer_translation_px": [
+            -29,
+            118
+          ],
+          "quantization_error_px": [
+            0.2699115044247833,
+            -0.4878048780487916
+          ],
+          "confidence": "Actual isolated connected round outline, not the deliberately off-center dark dot or external plate bbox; integer quantization <=0.5px, semantic center ambiguity about1px.",
+          "registered": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/armor-near-shin/frame-3.png",
+            "bytes": 4042,
+            "sha256": "e9aaa9db0b19f4c7faf4a52953d4d525b0cf2448cac2d5e0b4162533801593ca"
+          },
+          "registered_alpha_bbox_px": [
+            211,
+            357,
+            242,
+            391
+          ],
+          "cropped_RGBA_byte_identical": true,
+          "clipped": false,
+          "rivet_diagnostic_crop": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/rivet-source-crops/near-shin-frame-3.png",
+            "bytes": 6012,
+            "sha256": "b057507b1df1e18991213124b892217bf992fe472fcfebc6a7e2a03201e4b2b5"
+          }
+        }
+      ]
+    }
+  ],
+  "composites": [
+    {
+      "frame": 0,
+      "prior_full_set": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v001/far150-registration-proposed-v001/composite-preview/frame-0.png",
+        "bytes": 121999,
+        "sha256": "1f230084977281bffe5dee294297d43fbfe7f38b23996bc8d81acde11cb3981b"
+      },
+      "body": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/curated/frame-0.png",
+        "bytes": 117257,
+        "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718"
+      },
+      "far_shoulder": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v001/far150-registration-proposed-v001/armor-far/frame-0.png",
+        "bytes": 3714,
+        "sha256": "989b61f4715065312494b326193803b13d13907d18b16125d0033ca72a9f7745"
+      },
+      "chest": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-idle-components-v001/registration-proposed-v001/armor-front/frame-0.png",
+        "bytes": 10879,
+        "sha256": "c0ad8d83c40fd409b3a048a4658e706c8ece359d17b1419cd10e25b7cf5c39d7"
+      },
+      "near_shoulder": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v001/near149-registration-proposed-v001/armor-near/frame-0.png",
+        "bytes": 6551,
+        "sha256": "18097b74c67520db3516b118d657b8dc977026c0e09c683fd34510ac9a268ca8"
+      },
+      "new_composite": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/composite-preview/frame-0.png",
+        "bytes": 124022,
+        "sha256": "ee7f14a4081d49ad7619913ba9040e4ce35cfe2e6f214999265b949747e78eb1"
+      },
+      "layer_order": [
+        "whole131",
+        "far150",
+        "chest147",
+        "near149",
+        "near_bracer151",
+        "near_shin152"
+      ]
+    },
+    {
+      "frame": 1,
+      "prior_full_set": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v001/far150-registration-proposed-v001/composite-preview/frame-1.png",
+        "bytes": 121184,
+        "sha256": "f805b8ff72f099b64bb33b12cea206e3196a9790fc3d5794a2c1ef982d0edc07"
+      },
+      "body": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/curated/frame-1.png",
+        "bytes": 116206,
+        "sha256": "7bedc3d428f8b1e008d0627d671660b0fd3a68c61c6593872e800d0f19e395a3"
+      },
+      "far_shoulder": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v001/far150-registration-proposed-v001/armor-far/frame-1.png",
+        "bytes": 3688,
+        "sha256": "c9a7b253e34a2866a7f61784c87ad7f549f915447e8b761d701f4c4a060efc17"
+      },
+      "chest": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-idle-components-v001/registration-proposed-v001/armor-front/frame-1.png",
+        "bytes": 10800,
+        "sha256": "e5f9ddac4c8df008156004bdb4c23ab34e83bf7723cd25e57cd59b9d15a09bbd"
+      },
+      "near_shoulder": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v001/near149-registration-proposed-v001/armor-near/frame-1.png",
+        "bytes": 6511,
+        "sha256": "546a3c5b77e42cb3b4c914ec76a4339d6c67247c299960f049698d465086aa2b"
+      },
+      "new_composite": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/composite-preview/frame-1.png",
+        "bytes": 123302,
+        "sha256": "19a133e7ea7c45b016c8c5a538f6d74575a3d4a50c8ca91140748851d17881e8"
+      },
+      "layer_order": [
+        "whole131",
+        "far150",
+        "chest147",
+        "near149",
+        "near_bracer151",
+        "near_shin152"
+      ]
+    },
+    {
+      "frame": 2,
+      "prior_full_set": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v001/far150-registration-proposed-v001/composite-preview/frame-2.png",
+        "bytes": 122206,
+        "sha256": "2d55b74e80a23dccf93c9eb2b90ca61510e929cb544bd55dd12a108f86617a99"
+      },
+      "body": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/curated/frame-2.png",
+        "bytes": 117409,
+        "sha256": "5d3d6c88289f2aa6347c98869082e551ed2918a86725376af75fbd698f412bbb"
+      },
+      "far_shoulder": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v001/far150-registration-proposed-v001/armor-far/frame-2.png",
+        "bytes": 3709,
+        "sha256": "1a210547aeebecbb9f40ec2ea2b02c80fd4745270882cbc6ea66ad0e2c0bea39"
+      },
+      "chest": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-idle-components-v001/registration-proposed-v001/armor-front/frame-2.png",
+        "bytes": 10877,
+        "sha256": "83922000b614def75ab300a406b3c7456c05344e51e334b0a5ed2f690552ccfa"
+      },
+      "near_shoulder": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v001/near149-registration-proposed-v001/armor-near/frame-2.png",
+        "bytes": 6549,
+        "sha256": "fdeca229b665b15dd1b2d02ac1ee3e9e30611ef745b24be2862edd3cd2a51a9a"
+      },
+      "new_composite": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/composite-preview/frame-2.png",
+        "bytes": 124245,
+        "sha256": "a871f84ecba62799de3495bea5355e9cfd66ac5ea0290fe163c03c55f0a952d5"
+      },
+      "layer_order": [
+        "whole131",
+        "far150",
+        "chest147",
+        "near149",
+        "near_bracer151",
+        "near_shin152"
+      ]
+    },
+    {
+      "frame": 3,
+      "prior_full_set": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v001/far150-registration-proposed-v001/composite-preview/frame-3.png",
+        "bytes": 122065,
+        "sha256": "908a2831ee445cc701c8232355fd71d827a4efb2d333163f6d70f95f2d2b1c54"
+      },
+      "body": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/curated/frame-3.png",
+        "bytes": 117264,
+        "sha256": "c27bfb46301397c627f7346a8890a84358ad1e0465f9fa3cc238e8600cedfe4c"
+      },
+      "far_shoulder": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v001/far150-registration-proposed-v001/armor-far/frame-3.png",
+        "bytes": 3709,
+        "sha256": "be1464f0c8f0d3ff987ee231b2d9faa1ba60d01856f39c87f960f9a1c715c739"
+      },
+      "chest": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-idle-components-v001/registration-proposed-v001/armor-front/frame-3.png",
+        "bytes": 10718,
+        "sha256": "094b9d3ab7de2112af3273cdb09aaab2a4bd008fc7a28d693976b5394455f979"
+      },
+      "near_shoulder": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v001/near149-registration-proposed-v001/armor-near/frame-3.png",
+        "bytes": 6550,
+        "sha256": "d5f535856b361e505963bc7a370c35fd4da408993f5f1820c991164beb17e73f"
+      },
+      "new_composite": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-v001/independent-limb-components-v002/near-limbs-registration-proposed-v001/composite-preview/frame-3.png",
+        "bytes": 124091,
+        "sha256": "3e80bc484ce7eb8f00a83c435347687f7e858bd3c9d8c8d54b9507ab89b7b462"
+      },
+      "layer_order": [
+        "whole131",
+        "far150",
+        "chest147",
+        "near149",
+        "near_bracer151",
+        "near_shin152"
+      ]
+    }
+  ],
+  "actual_semantic_mask_exists": false,
+  "zero_collision_accepted": false,
+  "motion_accepted": false,
+  "runtime_imported": false,
+  "formal_complete_units": 0
+}

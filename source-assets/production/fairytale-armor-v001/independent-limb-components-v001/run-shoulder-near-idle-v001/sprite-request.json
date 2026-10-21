@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-armor-trial-a-shoulder-near-idle-v001",
+    "description": "Exactly four distinct isolated connected near-side shoulder armor caps in canonical131 idle pose order0,1,2,3. Armor-only rigid small pauldron; one physically attached mounting rivet per cap. No body, shirt, arm, hand, chest, detached strap or opposite shoulder. Near/image-left is the wider front deltoid; far/image-right is the compressed deeper shoulder. Do not flip a near cap to make a far cap.",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 228,
+    "safe_margin_y": 234
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "armor_shoulder_near_idle": {
+      "frames": 4,
+      "fps": 6,
+      "loop": true,
+      "action": "Exactly four distinct isolated connected near-side shoulder armor caps in canonical131 idle pose order0,1,2,3. Armor-only rigid small pauldron; one physically attached mounting rivet per cap. No body, shirt, arm, hand, chest, detached strap or opposite shoulder. Near/image-left is the wider front deltoid; far/image-right is the compressed deeper shoulder. Do not flip a near cap to make a far cap.",
+      "durations_ms": [
+        167,
+        167,
+        167,
+        167
+      ]
+    }
+  },
+  "style": "Canonical131 cartoon grotesque dark-fairytale ink; compact handmade146 pauldrons, matte desaturated neutral-grey147 chest palette with broad values and dark rim, no green/teal material.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": false,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

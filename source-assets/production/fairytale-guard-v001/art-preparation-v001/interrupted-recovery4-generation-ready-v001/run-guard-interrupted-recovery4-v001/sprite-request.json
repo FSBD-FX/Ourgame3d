@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fixed-heavyaxe-armed-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "CARRIED acceptedArmedReady209fourexistingframes, rawexactcopy, doNOTgenerateorcharge."
+    },
+    "right_interrupted_recovery": {
+      "frames": 4,
+      "fps": 10,
+      "loop": false,
+      "action": "FOUR distinct SAFE INTERRUPTED-RECOVERY fullbody+samefixedaxe poses. Identity solelyattachedacceptedArmedReady209, same shallow elevatedthreequarter side view facingRIGHT. This row is AFTER realStunned hasended, while the originalinterruptedattack stillownsitsremainingtime; it is NOT astunoverride or anotherattack. Bothstonefists fullyCLOSED aroundONEcontinuousstraightwoodshaft, nearphysicalarmfrommossforegroundshoulder remainsLOWBUTTwardgrip, fararmremainsHIGHHEADwardgrip. Body/axe/headshape/haftlength fixed, neverregrip/openlivinghands/handexchange. Axe staysquiet lowinfront, headRIGHT clearfeetandeyes; neverraiseoverhead aswindup. Feet planted atcommonsoleline, no actortranslation/shuffle/jump. Fourposes slowlyregainstability afterbeingstaggered, notfourduplicates. Frame0 lowpost-stun load with softenedknees/shoulders, bothgripsheldfirmbutarmsstilltired. Frame1 firstsmall knee/chest recovery, axe andbothhandstravelasoneheldobject. Frame2 straightenstoneupperbodygently, lowquietaxedoesnotbecomethreat/swing, no haste. Frame3 regainnearacceptedArmedReady0 andhold untiltheoriginalOccupiedUntil; no earlychase/attack, no newtimer. These are normalizedsamples0%,25%,50%,75% ofACTUAL remaining[StunUntil,OccupiedUntil), not anewfixed400msgameplayphase. If actualremaininginterval isabsent thisrowisneverplayed. No activesweep/stomp/contact/windup/impact/reward/dust/arcs/blur/shadow/loosechips/text/grid/scenery. Broadwarmgreyplanes/coarseink/sparseolivemoss, fewlargechips, allcompleteconnectedposesinside48safepadding. Do not repaintanysourcepixelsorbringbad211posebasis."
+    }
+  },
+  "style": "ExactlyacceptedArmedReady209wholebody+fixedaxe identity, squat slabhelmet/smallambereyes/warmstone/sparseoliveforegroundshouldermoss/coarseink, samecontinuousheavyaxesingleheadandbuttcap. No206/207neutral/standalone208/bad211references. Recoveryonlylocalbodypose, no photorealgrain/pixeldots/vectorgloss.",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

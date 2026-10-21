@@ -1,0 +1,20 @@
+--- UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
++++ UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+@@ -21,6 +21,7 @@
+ #include "DungeonHeroDeathProbeV001.h"
+ #include "DungeonGuardStompProbeV001.h"
+ #include "DungeonHeroDodgeProbeV001.h"
++#include "DungeonGuardMoveProbeV001.h"
+ #include "DungeonGuardArtDeathProbeV005.h"
+ #include "DungeonRunContinueProbe.h"
+ #include "DungeonGuardRunContinueProbe.h"
+@@ -289,7 +290,8 @@
+     if (FParse::Param(FCommandLine::Get(),TEXT("DungeonContentProof")))
+     {
+         InstallFastLosslessProofScreenshots();
+-        if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroDodgeProofV001")))GetWorld()->SpawnActor<ADungeonHeroDodgeProbeV001>();
++        if(FParse::Param(FCommandLine::Get(),TEXT("DungeonGuardMoveProofV001")))GetWorld()->SpawnActor<ADungeonGuardMoveProbeV001>();
++        else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroDodgeProofV001")))GetWorld()->SpawnActor<ADungeonHeroDodgeProbeV001>();
+         else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonGuardStompProofV001")))GetWorld()->SpawnActor<ADungeonGuardStompProbeV001>();
+         else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroDeathProofV001")))GetWorld()->SpawnActor<ADungeonHeroDeathProbeV001>();
+         else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroHurtProofV001")))GetWorld()->SpawnActor<ADungeonHeroHurtProbeV001>();

@@ -1,0 +1,207 @@
+{
+  "schema": "Guard-Move-LegRig-isolated-seven-part-source-plan-v001",
+  "Root_adoption": "Root adopted only source preparation and isolated genuine2D skeletal/IK contact pilot, not runtime integration or generation by this worker.",
+  "canonical_identity": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/armed-ready4-extraction-v001/run-ready209-shared-HD-v001/curated/frame-0.png",
+    "bytes": 229229,
+    "sha256": "54df5fe718a98e1568513193dbde479aff6fd393d623755feb77813cacb4e804"
+  },
+  "parts": [
+    {
+      "part": "bodyrest_fixedaxe",
+      "group": "rest1",
+      "source_role_index": 0,
+      "actual_curated_source_pin": null,
+      "source_RGBA_canvas_px": null,
+      "source_alpha_bbox": null,
+      "author_marker_status": "UNMEASURED/UNAUTHORED, must remainnull until actualcomponent source/E/View and explicit2Dartist declaration; not recovered hidden anatomy.",
+      "artist_markers": {
+        "root": null,
+        "crown": null,
+        "near_hip_socket": null,
+        "far_hip_socket": null
+      },
+      "parent_socket": null,
+      "source_length_px": null,
+      "fixed_art_unit_conversion": null,
+      "overlap_seam_masks": null
+    },
+    {
+      "part": "near_thigh",
+      "group": "near3kit",
+      "source_role_index": 0,
+      "actual_curated_source_pin": null,
+      "source_RGBA_canvas_px": null,
+      "source_alpha_bbox": null,
+      "author_marker_status": "UNMEASURED/UNAUTHORED, must remainnull until actualcomponent source/E/View and explicit2Dartist declaration; not recovered hidden anatomy.",
+      "artist_markers": {
+        "hip": null,
+        "knee": null
+      },
+      "parent_socket": "near_hip_socket",
+      "source_length_px": null,
+      "fixed_art_unit_conversion": null,
+      "overlap_seam_masks": null
+    },
+    {
+      "part": "near_shin",
+      "group": "near3kit",
+      "source_role_index": 1,
+      "actual_curated_source_pin": null,
+      "source_RGBA_canvas_px": null,
+      "source_alpha_bbox": null,
+      "author_marker_status": "UNMEASURED/UNAUTHORED, must remainnull until actualcomponent source/E/View and explicit2Dartist declaration; not recovered hidden anatomy.",
+      "artist_markers": {
+        "knee": null,
+        "ankle": null
+      },
+      "parent_socket": "near_thigh.knee",
+      "source_length_px": null,
+      "fixed_art_unit_conversion": null,
+      "overlap_seam_masks": null
+    },
+    {
+      "part": "near_foot",
+      "group": "near3kit",
+      "source_role_index": 2,
+      "actual_curated_source_pin": null,
+      "source_RGBA_canvas_px": null,
+      "source_alpha_bbox": null,
+      "author_marker_status": "UNMEASURED/UNAUTHORED, must remainnull until actualcomponent source/E/View and explicit2Dartist declaration; not recovered hidden anatomy.",
+      "artist_markers": {
+        "ankle": null,
+        "heel": null,
+        "toe": null
+      },
+      "parent_socket": "near_shin.ankle",
+      "source_length_px": null,
+      "fixed_art_unit_conversion": null,
+      "overlap_seam_masks": null
+    },
+    {
+      "part": "far_thigh",
+      "group": "far3kit",
+      "source_role_index": 0,
+      "actual_curated_source_pin": null,
+      "source_RGBA_canvas_px": null,
+      "source_alpha_bbox": null,
+      "author_marker_status": "UNMEASURED/UNAUTHORED, must remainnull until actualcomponent source/E/View and explicit2Dartist declaration; not recovered hidden anatomy.",
+      "artist_markers": {
+        "hip": null,
+        "knee": null
+      },
+      "parent_socket": "far_hip_socket",
+      "source_length_px": null,
+      "fixed_art_unit_conversion": null,
+      "overlap_seam_masks": null
+    },
+    {
+      "part": "far_shin",
+      "group": "far3kit",
+      "source_role_index": 1,
+      "actual_curated_source_pin": null,
+      "source_RGBA_canvas_px": null,
+      "source_alpha_bbox": null,
+      "author_marker_status": "UNMEASURED/UNAUTHORED, must remainnull until actualcomponent source/E/View and explicit2Dartist declaration; not recovered hidden anatomy.",
+      "artist_markers": {
+        "knee": null,
+        "ankle": null
+      },
+      "parent_socket": "far_thigh.knee",
+      "source_length_px": null,
+      "fixed_art_unit_conversion": null,
+      "overlap_seam_masks": null
+    },
+    {
+      "part": "far_foot",
+      "group": "far3kit",
+      "source_role_index": 2,
+      "actual_curated_source_pin": null,
+      "source_RGBA_canvas_px": null,
+      "source_alpha_bbox": null,
+      "author_marker_status": "UNMEASURED/UNAUTHORED, must remainnull until actualcomponent source/E/View and explicit2Dartist declaration; not recovered hidden anatomy.",
+      "artist_markers": {
+        "ankle": null,
+        "heel": null,
+        "toe": null
+      },
+      "parent_socket": "far_shin.ankle",
+      "source_length_px": null,
+      "fixed_art_unit_conversion": null,
+      "overlap_seam_masks": null
+    }
+  ],
+  "hierarchy": "Root; BodyRest fixedaxe; NearThigh→NearShin→NearFoot and FarThigh→FarShin→FarFoot, eachhip authored separately.",
+  "draw_order_far_to_near": [
+    "far_foot",
+    "far_shin",
+    "far_thigh",
+    "near_foot",
+    "near_shin",
+    "near_thigh",
+    "bodyrest_fixedaxe"
+  ],
+  "occlusion": "Far chain always recessed, Near chain always foreground evenwhen itsfoot trails. BodyRest pelvishem/arms/fixedaxe covers upperlegseams. Withinchain initial childfirst/parentlast order is a pilot proposal, actualrotatedjoint silhouettes/seams must be reviewed; addnoextras until needed.",
+  "standing_registration": {
+    "target_crown_to_ground_display_px": 100.8,
+    "reference_Ready209_standing_extent_px": 415,
+    "reference_artistic_root": [
+      235,
+      464
+    ],
+    "reference_not_component_registration": true,
+    "assembled_crown_to_sole_source_units": null,
+    "common_fixed_display_scale": null,
+    "near_fixed_thigh_length": null,
+    "near_fixed_shin_length": null,
+    "far_fixed_thigh_length": null,
+    "far_fixed_shin_length": null,
+    "Root_or_hips_from_hidden_bones": false,
+    "rule": "Measure actualcomponent sourcecap/pivot pairs. KeepONEfixedconversion per generatedkit (sameconversion for all3), plusoneassembleddisplay mapping; no perframe/perpartstretch or normalization. Crosskitconversionmustbeexplicitandfrozenafteridentity/capwidth/standing-equivalent review, never derivefromwholeaxealphaheight. Source3kitrelativepartproportionsmustsurvive extraction."
+  },
+  "standard_pipeline": "3actual prepareCLIs succeeded. Nativecomponentrows only atRootcall. Standardchroma/component extraction/sharedfit/inspect/compose/curate for staticparts. SGframes count staticroles, not a new playableMove timing. Bottomfit alignment only places source cells; limb bottoms are NOT actualfootfloors. SGcompose-layers has no rotation/IK; futuregenuineRig is separate.",
+  "first_milestone": {
+    "scope": "Isolated two opposite physical-leg contacts only before full6phase or Source integration.",
+    "contacts": [
+      {
+        "accepted_distance_phase_world": 0,
+        "front_contact": "NEAR physicalLEFTforegroundhip chain",
+        "back_push": "FAR physicalRIGHTrecessedhip chain"
+      },
+      {
+        "accepted_distance_phase_world": 64,
+        "front_contact": "FAR physicalRIGHTrecessedhip chain",
+        "back_push": "NEAR physicalLEFTforegroundhip chain"
+      }
+    ],
+    "cycle_distance_world": 128,
+    "clock": "AccumulateactualacceptedMovementreceiptpath lengths, no speed*time, plannedinputs, drawcounts or forged movement. Blockedmovement noadvance.",
+    "fixed_geometry": "Explicitartistpivotpairs definefixedlength; rigrotation/2boneIK canmovejoints, neverscale/warp/stretchbones or actorXYtohitfoot. Actualreachrequired at100.8display; markfailure ifunreachable.",
+    "foot_support": "InterpolateactualMovementFrom→To at64worldboundaries; stanceanchorworldfixedthenactualGroundprojection, includingY. No footlockclaimbeforeisolatedlive/rigderivedproof.",
+    "proof_required": [
+      "BothdifferentNear/Farhiplegchains actuallyreachoppositefrontcontactwithoutmirroringwholebody.",
+      "SamepartRGBA/sourcepins andsameauthoredfixedlengthsinbothposes.",
+      "Root/bodyregistration,crown/soleheight,seamcoverage,axe/pelvisocclusionat100.8display.",
+      "128actualacceptedDistance drivesphase; blocked receiptsproducezeroadvance, facing/turn policyexplicit."
+    ],
+    "pilot_status": "NOTBUILT/NOVISUAL/NORUNTIMEACCEPTANCE"
+  },
+  "preserved_contracts": {
+    "old_v1_v2_wholebody_contracts_and_tests": "Unchanged and preserved; pilotnewmode mustbeexplicit, nofakemultilayerwholebodyadmission.",
+    "full57_freeze_counts": "Unchanged; sevennewcomponentsarenot57stateframeentries.",
+    "NativeSourceId": "Noneassigned, no fabricated native source orwholebodyMove6 evidence.",
+    "non_Move_actions": "All existing wholebody attacks/wake/idle/stun/death sources retained.",
+    "independent_WU_to_Active_upperbody_join_risk_px": 29.6927,
+    "independent_Active_to_Recovery_downcompression_px": 10.4586,
+    "TrialAllowed": false
+  },
+  "generation_and_cost": "Threeproposedsourcebatches1+3+3, Rootserialnativeledger/callowner. Existingautomaticbudgetauthorization reportedbyRoot; nofreshspend/nativenetworkbyworker and no externalAPI. Theseareinitialrequests, not cost/callcount guarantee; retriesifneededrequireactualsourcefailure evidence andRootdecision.",
+  "worker_actions": {
+    "actualSource_Content_tools_ledger_UE_modifications": 0,
+    "native_API_calls": 0,
+    "final_character_pixels_drawn": 0,
+    "generated_components": 0,
+    "rig_implemented": false,
+    "new_guides_viewed": false
+  }
+}

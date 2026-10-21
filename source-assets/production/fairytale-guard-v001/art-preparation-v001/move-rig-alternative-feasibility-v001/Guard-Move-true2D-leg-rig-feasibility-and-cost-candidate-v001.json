@@ -1,0 +1,320 @@
+{
+  "schema": "Guard-Move-true2D-leg-rig-feasibility-candidate-v001",
+  "status": "PLAN ONLY, no generated rig art, no rig implementation, no runtime/source acceptance. Root decides adoption and all generation.",
+  "facts": {
+    "failed_source_attempts": [
+      {
+        "native": 221,
+        "evidence": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move221-rejection-stomp222-far-foot-review-v001/Move221-sixphase-leg-ownership-rejection-v001.json",
+          "bytes": 24015,
+          "sha256": "e9dc2c83f66898eaca24d2ecb0fb8e19e2d974242c8753655808f759450429dc"
+        }
+      },
+      {
+        "native": 223,
+        "evidence": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move223-extraction-v001/post-E397-all6-actual-leg-chain-rejection-v001.json",
+          "bytes": 24412,
+          "sha256": "0b25878fb1221c74552d785c92f4c9259b3bbe425d773ad2b9de9421ddb3db7b"
+        },
+        "additional_blocker": "Actual source right-edge axe cropping"
+      },
+      {
+        "native": 226,
+        "evidence": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move226-contact-pair-failed-diagnostics-v001/Move226-independent-raw-leg-chain-semantic-rejection-v001.json",
+          "bytes": 8368,
+          "sha256": "bedb6fd63e3994a53e6c167c4d6d3ccdc832778added5762ecddcce4ec206f2f"
+        }
+      }
+    ],
+    "scope_of_conclusion": "These actual whole-body attempts failed physical-leg exchange; this is not a claim that AI animation is universally impossible. Stop the same repeated strategy.",
+    "captured_code_and_skill_facts": [
+      {
+        "finding": "Current captured Guard presenter requires exactly one whole-body layer and uses one DrawTexture; live7-part leg rig needs an explicit separate render mode and receipt schema, not just a source texture substitution.",
+        "evidence_file": "DungeonFairytaleGuardPresentation.cpp",
+        "line": 48
+      },
+      {
+        "finding": "Current captured selector accumulates actual Movement receipt lengths and uses128world; retain that authoritative path, never speed*time or draw count.",
+        "evidence_file": "DungeonFairytaleGuardPose.h",
+        "line": 41
+      },
+      {
+        "finding": "Existing HUD already submits rotated textured quads with explicit source pivot and records rotation in ActorQuads for a weapon. This supports feasibility inference for rigid2D leg parts, but is not a Guard bone solver.",
+        "evidence_file": "DungeonHUD.cpp",
+        "line": 759
+      },
+      {
+        "finding": "Ground projection is640+(X-CameraX)*.65,490-Y*.38. Y alignment is part of real movement; foot support cannot be modeled as horizontalX speed only.",
+        "evidence_file": "DungeonHUD.cpp",
+        "line": 316
+      },
+      {
+        "finding": "sprite-gen compose-layers is integer pivot translation plus alpha masks, no rotation/resampling/scale; its rig profile is not a hierarchical skeletal animator or IK solver.",
+        "evidence_file": "SKILL.md (sprite-gen)",
+        "line": 195
+      },
+      {
+        "finding": "asset-gen rig/retarget documented route is3D GLB/Tripo biped. It is not this2D layered-art task and no external API is authorized here.",
+        "evidence_file": "SKILL.md (asset-gen)",
+        "line": 61
+      }
+    ],
+    "source_capture_limit": "Actual source captured read-only at report creation; Root/full-v003 may change files concurrently. Snapshot pins support these feasibility facts only, not a fullcode acceptance or assertion unchanged forever."
+  },
+  "inference_and_recommendation": "Technically feasible to preserve accepted Guard fixed-axe identity in one upperbody+axe rest sprite and author a genuine hierarchical2D leg rig. Prefer continuous rigidpart runtime with two-bone IK/support anchors if planted-foot behavior is required. This is a new animation/render/observer mode, not a free replacement of one wholebody sprite. Pilot the two opposite contacts before six-phase rollout.",
+  "canonical_identity": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/armed-ready4-extraction-v001/run-ready209-shared-HD-v001/curated/frame-0.png",
+    "bytes": 229229,
+    "sha256": "54df5fe718a98e1568513193dbde479aff6fd393d623755feb77813cacb4e804"
+  },
+  "identity_constraints": "Bodyrest keeps both closed fists and continuous fixed axe baked together; no new hand/weapon rig or hiddenGrip guessing. Bad221/223/226 never identity/motion pixel sources. All other attacks/wake/stun/death stay existing wholebody source rows.",
+  "art_asset_plan": [
+    {
+      "part": "bodyrest_fixedaxe",
+      "art_need": "Head/helmet/torso/pelvis foreground hem + both arms/fists + same entire fixed axe; no painted legs.",
+      "artist_declared_integer_source_pivots": "root,crown,near_hip_socket,far_hip_socket",
+      "layer_or_parent_role": "Draw last over thigh joints and heldaxe crossings.",
+      "source_status": "PROPOSED, not generated/not measured yet"
+    },
+    {
+      "part": "near_thigh",
+      "art_need": "Canonical foreground-side stone upperleg with opaque overlap caps.",
+      "artist_declared_integer_source_pivots": "hip,knee",
+      "layer_or_parent_role": "Parent root/nearhip; near always foreground at leg crossings.",
+      "source_status": "PROPOSED, not generated/not measured yet"
+    },
+    {
+      "part": "near_shin",
+      "art_need": "Canonical foreground-side lowerleg/knee-cap with enough overlap.",
+      "artist_declared_integer_source_pivots": "knee,ankle",
+      "layer_or_parent_role": "Parent near_thigh, fixed length.",
+      "source_status": "PROPOSED, not generated/not measured yet"
+    },
+    {
+      "part": "near_foot",
+      "art_need": "Foreground stone shoe/ankle cap, visible heel and toe.",
+      "artist_declared_integer_source_pivots": "ankle,heel,toe",
+      "layer_or_parent_role": "Parent near_shin; stance sole orientation controlled.",
+      "source_status": "PROPOSED, not generated/not measured yet"
+    },
+    {
+      "part": "far_thigh",
+      "art_need": "Recessed-side stone upperleg with own visible shading, not silently mirrorednear.",
+      "artist_declared_integer_source_pivots": "hip,knee",
+      "layer_or_parent_role": "Parent root/farhip; draw behind near.",
+      "source_status": "PROPOSED, not generated/not measured yet"
+    },
+    {
+      "part": "far_shin",
+      "art_need": "Recessed-side lowerleg/knee cap with overlap.",
+      "artist_declared_integer_source_pivots": "knee,ankle",
+      "layer_or_parent_role": "Parent far_thigh, fixed length.",
+      "source_status": "PROPOSED, not generated/not measured yet"
+    },
+    {
+      "part": "far_foot",
+      "art_need": "Recessed stone shoe with heel/toe and perspective.",
+      "artist_declared_integer_source_pivots": "ankle,heel,toe",
+      "layer_or_parent_role": "Parent far_shin; separate source/registration.",
+      "source_status": "PROPOSED, not generated/not measured yet"
+    }
+  ],
+  "minimum_asset_count": 7,
+  "minimum_explicit_artist_pivots_count": 18,
+  "optional_assets": "Two knee overlay caps only if actual rotations reveal seams; then9sprites/draws. Do not create these before a seam pilot shows need.",
+  "bodyrest_cost_and_occlusion_risk": "Existing fullReady has painted legs and foreground buttcap crossing nearhip. A simple rectangularcrop/transparenterase cannot guarantee a complete leglessrest or unseen joint continuation. Prefer new native sameidentity legless bodyrest/pelvichem source; keep wholeaxe/arms/fists. Native review must confirmidentity/grip/axe intact. No locally invented/fillpainted hidden pixels or claim newrest==oldReady pixels.",
+  "native_source_production_proposal": {
+    "least_risk_initial_batches": [
+      "1 bodyrest source",
+      "1 NEAR legpart kit: thigh/shin/foot",
+      "1 FAR legpart kit: thigh/shin/foot"
+    ],
+    "planned_initial_calls_if_Root_adopts": 3,
+    "call_count_is_not_guarantee_or_authorization": true,
+    "alternative_two_calls": "Bodyrest + one6-part kit theoretical2calls, but role/relative-scale confusion risk; not preferred after current spatial failures.",
+    "cost_money": "Unknown built-in actual price; Root ledger/window truth. Do not quote external asset-gen3D API price as native cost.",
+    "time_or_staff_commitment": "No measured team throughput for this pipeline. Do not promise hours/days. Work packages:7sourceparts+18pivots, rig/contact pilot, renderer/observer integration, actual multiactor/both-facing/path/transition review."
+  },
+  "standard_pipeline_boundary": "Each source part/kit must still pass standard component extraction/inspect/compose/curated. Use shared scale within a kit and preserve relative source sizes. Components are static art assets, not secretly labeledAI gaitframes. The future bone rig definition is separate from SG compose-layers; no fabricated crown landmark on a detached limb.",
+  "true_rig_definition": {
+    "nodes": "Root + BodyRest visual child + NThigh→NShin→NFoot and FThigh→FShin→FFoot (8transformnodes; twohip sockets are Root artistanchors).",
+    "bind_data": "For eachpart exact curatedsourcepin, parent, integer sourcepivot(s), fixed rest length/angle and fixed component scale. All derived from actual visible part caps/seams after RootE/View; deliberately authored2D pivots, not claimed recoveredanatomicalbones.",
+    "transforms": "Parent-child affine rigid transforms and consistent near/far draworder; thigh+shin two-bone IK to planted/swing foot targets, foot bone sole angle. Never perphase stretch/shrink bones or switch hip identities to force reach.",
+    "draw_order": "Far legchain → Near legchain → BodyRest/pelvishem/arms/fixedaxe; near foreground occlusion remains physicalnear even when its foot trails. Optionalcaps tied to samebones only ifneeded.",
+    "body_bob": "Small authored load bob allowed on BodyRest relative Root, not actorXY/Z movement; fixed fist/axe ownership stays baked."
+  },
+  "phase_and_world_contract": {
+    "cycle_distance_world": 128,
+    "step_interval_world_ART_PROPOSAL": 64,
+    "six_authored_pose_samples": [
+      {
+        "phase": 0,
+        "distance_world": 0,
+        "pose": "NEAR contact/front, FAR rear toe-off",
+        "contact": "near"
+      },
+      {
+        "phase": 1,
+        "distance_world": 21.333333333333332,
+        "pose": "NEAR stance/down, FAR swing rear",
+        "contact": null
+      },
+      {
+        "phase": 2,
+        "distance_world": 42.666666666666664,
+        "pose": "NEAR late stance, FAR passing forward",
+        "contact": null
+      },
+      {
+        "phase": 3,
+        "distance_world": 64,
+        "pose": "FAR contact/front, NEAR rear toe-off",
+        "contact": "far"
+      },
+      {
+        "phase": 4,
+        "distance_world": 85.33333333333333,
+        "pose": "FAR stance/down, NEAR swing rear",
+        "contact": null
+      },
+      {
+        "phase": 5,
+        "distance_world": 106.66666666666667,
+        "pose": "FAR late stance, NEAR passing forward",
+        "contact": null
+      }
+    ],
+    "phase_source": "Actual completed accepted Movement(E.From,E.To) receipts per entity; cumulative hypot(delta) only. No heldinput, speed*time, elapsedglobalclock or DrawId credit.",
+    "world_contact_reconstruction": "For a64world boundary crossed by a Movement segment, u=(boundaryDistance-priorAccumulatedDistance)/segmentLength; contact actor point=E.From+u*(E.To-E.From). Authored leglead/depth offset creates footanchor. Store that support foot world-ground anchor during stance and project it through actualGround(), while actual actor continues kernel path. No kernelposition or time changes.",
+    "projection": "At pure X motion,32world halfstep projects20.8screenpx fromhip reference; at pureY motion32world projects12.16screenpx. RealY alignment, collisionblocking, turns and facing changes must use actualvector/path and reach checks, not forceX-onlycycle.",
+    "reach_gate": "Actual part-derived thigh+shin length must reach every anchored target under100.8px body registration without stretching or actor movement. If not, re-author source limb proportions/hipheight and test; do not silently change128world or formal160speed.",
+    "blocked_and_priority": "No positive acceptedmovement freezesrig phase/support and adds no step credit. ActualWindup/Active/Recovery/Stunned/Dead replacesrig according nativepriority; clear/reset anchors by entity/room/restart identity, never fake receipts.",
+    "facing": "Mirror whole graph/sourceUV/angles once about authoredRoot usingactualFacing; physicalNear/Far/sourcepartownership anddraworder remain. Turn/replant policy requires pilot; no invisible teleport of plantedfoot claimed."
+  },
+  "runtime_integration_cost": {
+    "existing_primitive": "HUDrotatedTexture+explicitPivot+ActorQuad rotation exists, so no mandatory new thirdparty3D/rig service inferred. It does not implement bones/IK today.",
+    "required_mode_change": "Current capturedGuardPlan/presenter insists1wholebodylayer. Add explicitLegRig render mode forMove with component sourcepins+RigDefinitionSHA and evaluatedtransforms; do not foolTrialGate by setting a fakeNativeSourceId/sixPNGrow. Otherstates continue wholebodymode.",
+    "baseline_part_submissions": 7,
+    "current_wholebody_submissions": 1,
+    "draw_performance": "Bounded extraquads but unbenchmarked; verify actual scene enemybatch/occlusion and no double shadow/axe/body.",
+    "observer_change": "Record actualsubmitted componentstack, exact texture/sourcepins, parent transforms, contactanchors, phase actualdistance and sameentity/nativecallback. Planned stack is not a rendered receipt. Actual screenshots/videos must proveboth contactchains/footpass/ground/occlusion and fullphaseauthority.",
+    "audio": "Use existing once-per-accepted64world step consumer; draw/pivots/IK never create sounds/damage/windows or double countcontacts."
+  },
+  "offline_bake_alternative": {
+    "mode": "Authored actual2D hierarchy may export6derivedtransparentposes into a separate rig-rendered artifact, withcomponent+rig+posepins. Label RigDerived/rigged animation, never nativeAI-generated6frame strip or fabricated rawsource. SGframes/ remains extractor-owned, do notwrite rigcomposites there.",
+    "benefit": "Can reuse much of one-sprite presenter after explicitRigDerived profile/provenance support.",
+    "limits": "Six held rasters do not guarantee continuous planted-worldfoot support while actor moves between samples; no strictfootlockclaim. Live rig interpolation/IK preferred for that requirement. Distinct mode and acceptance gate still needed."
+  },
+  "risks_and_gates": [
+    "Newbodyrest/parts may driftfromacceptedidentity; actualsourceRootreview before rig.",
+    "Stoneknees/hip thickink overlap can show gaps/doubleoutlines orhinge look; pilotfront/backcontacts at target100.8px first.",
+    "Fixedaxe bodyrest mayhidehip too much; generation must providelegcapoverlap plusforehem, no inventedhiddenbones.",
+    "Rig mode does not resolve existing WU2225→A2240 ~29.7px upperbody jump orA2241→Rec2250 furtherdown10.46px; these remain separateattacksource/join issues.",
+    "Render7parts/rotation/occlusion/leftmirror/sourceproof is implementationwork; currentwholebodyTrialAllowedgates stayclosed untilRootexplicitadoptionandtrial."
+  ],
+  "next_concrete_step_if_Root_adopts": "Prepare ONLY the7part art/source plan and one isolatedrig contact pilot. Rootowns nativecalls/retention and actualSource/UE changes. Locktwoopposite physicalhip-leg contacts/reach/occlusion first, then authorcontinuous sixphase and actualnative movement proof.",
+  "worker_actions_this_task": {
+    "source_parts_generated": 0,
+    "visual_rig_preview_or_final_pixels_drawn": 0,
+    "rig_implementation_written": 0,
+    "native_or_external_API_calls": 0,
+    "actualSource_Content_tools_ledger_UE_modified": false,
+    "existing_freezes_preserved": true
+  },
+  "read_only_source_snapshots": [
+    {
+      "actual_at_read": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardPresentation.cpp",
+        "bytes": 5661,
+        "sha256": "c8317c7b642181a4aea982071876315bba36123e67fad06ce761707f2e028e05"
+      },
+      "read_only_snapshot": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-rig-alternative-feasibility-v001/read-only-source-snapshots/00-DungeonFairytaleGuardPresentation.cpp",
+        "bytes": 5661,
+        "sha256": "c8317c7b642181a4aea982071876315bba36123e67fad06ce761707f2e028e05"
+      },
+      "actual_Source_modified": false
+    },
+    {
+      "actual_at_read": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardProfile.h",
+        "bytes": 3534,
+        "sha256": "353b534fb0ca92b466f9cf45576107e254bc0d3a1571080f9abe7bd6da56aa42"
+      },
+      "read_only_snapshot": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-rig-alternative-feasibility-v001/read-only-source-snapshots/01-DungeonFairytaleGuardProfile.h",
+        "bytes": 3534,
+        "sha256": "353b534fb0ca92b466f9cf45576107e254bc0d3a1571080f9abe7bd6da56aa42"
+      },
+      "actual_Source_modified": false
+    },
+    {
+      "actual_at_read": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardPose.h",
+        "bytes": 6061,
+        "sha256": "e7932f688795c7eaf09213243f8cbfa3ce3e81967c7ee0bff5d9458e90e4a997"
+      },
+      "read_only_snapshot": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-rig-alternative-feasibility-v001/read-only-source-snapshots/02-DungeonFairytaleGuardPose.h",
+        "bytes": 6061,
+        "sha256": "e7932f688795c7eaf09213243f8cbfa3ce3e81967c7ee0bff5d9458e90e4a997"
+      },
+      "actual_Source_modified": false
+    },
+    {
+      "actual_at_read": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+        "bytes": 117078,
+        "sha256": "116ec997e8e13928977c3d6f7f7bacdd4efd9b74ca4244ffda8d0ca0526a0de0"
+      },
+      "read_only_snapshot": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-rig-alternative-feasibility-v001/read-only-source-snapshots/03-DungeonHUD.cpp",
+        "bytes": 117078,
+        "sha256": "116ec997e8e13928977c3d6f7f7bacdd4efd9b74ca4244ffda8d0ca0526a0de0"
+      },
+      "actual_Source_modified": false
+    },
+    {
+      "actual_at_read": {
+        "path": "C:/Users/22499/.codex/skills/sprite-gen/SKILL.md",
+        "bytes": 48216,
+        "sha256": "05bb91de54d85ad4c7b6f7939bc031f44505b3fa86a07a46a336540cfcf4afca"
+      },
+      "read_only_snapshot": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-rig-alternative-feasibility-v001/read-only-source-snapshots/04-SKILL.md",
+        "bytes": 48216,
+        "sha256": "05bb91de54d85ad4c7b6f7939bc031f44505b3fa86a07a46a336540cfcf4afca"
+      },
+      "actual_Source_modified": false
+    },
+    {
+      "actual_at_read": {
+        "path": "C:/Users/22499/.codex/skills/sprite-gen/docs/layer-tracks.md",
+        "bytes": 27312,
+        "sha256": "0e41830bf7bd9d12a2144f53fe008cd61d562c6a839dda70227b8064ef98fc54"
+      },
+      "read_only_snapshot": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-rig-alternative-feasibility-v001/read-only-source-snapshots/05-layer-tracks.md",
+        "bytes": 27312,
+        "sha256": "0e41830bf7bd9d12a2144f53fe008cd61d562c6a839dda70227b8064ef98fc54"
+      },
+      "actual_Source_modified": false
+    },
+    {
+      "actual_at_read": {
+        "path": "F:/Documents/游戏/.agents/skills/asset-gen/SKILL.md",
+        "bytes": 7721,
+        "sha256": "bd9000d482828a132ea10e8908a9f1563f3466944255ee469bbce3ab2b9f8219"
+      },
+      "read_only_snapshot": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-rig-alternative-feasibility-v001/read-only-source-snapshots/06-SKILL.md",
+        "bytes": 7721,
+        "sha256": "bd9000d482828a132ea10e8908a9f1563f3466944255ee469bbce3ab2b9f8219"
+      },
+      "actual_Source_modified": false
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "schema": "GuardArmedReady4-standard-generation-ready-v001",
+  "prompt": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/armed-ready4-generation-ready-v001/run-guard-right-armed-ready-v001/prompts/right/idle.txt",
+    "bytes": 7916,
+    "sha256": "212304c6073ceeb4c2dda984fb9e7478421dafe06871511f28dc51cdfff97f1f"
+  },
+  "references_json": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/armed-ready4-generation-ready-v001/native-helper-references-ready-v001.json",
+    "bytes": 1686,
+    "sha256": "08fd6aad4ae3d94dd7ef729e7032cc63387446ec767f3d4a0d7a253350b7f25a"
+  },
+  "request": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/armed-ready4-generation-ready-v001/run-guard-right-armed-ready-v001/sprite-request.json",
+    "bytes": 3303,
+    "sha256": "fb6b4ae51094be5963f9291f8b197ae7abc511dc51bfbea81dfecbdc7c60c434"
+  },
+  "run_dir": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/armed-ready4-generation-ready-v001/run-guard-right-armed-ready-v001",
+  "output": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/armed-ready4-generation-ready-v001/run-guard-right-armed-ready-v001/raw/right/idle.png",
+  "standard_state": "right_idle",
+  "semantic_state": "right_armed_ready",
+  "semantic_mapping_reason": "ArmedReady is the new equipment identity idle-row. Keeping right_idle avoids SG auto-synthesizing an unwanted neutralidle row. Runtimeprofile will explicitly map Idle to thisacceptedarmedrow.",
+  "frame_count": 4,
+  "durations_ms": [
+    250,
+    250,
+    250,
+    250
+  ],
+  "body_and_same_fixedaxe_whole_sprite": true,
+  "standard_prepare": {
+    "argv": [
+      "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\prepare_sprite_run.py",
+      "--out-dir",
+      "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\armed-ready4-generation-ready-v001\\run-guard-right-armed-ready-v001",
+      "--character-id",
+      "ENM-STN-003-fixed-heavyaxe-armed-v001",
+      "--base-image",
+      "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\armed-ready4-generation-ready-v001\\accepted207-anchor-readcopy\\references\\anchors\\right-anchor-x1.png",
+      "--chroma-key",
+      "#FF00FF",
+      "--request",
+      "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\armed-ready4-generation-ready-v001\\standard-request-input-v001.json"
+    ],
+    "actual_exit_code": 0,
+    "log": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/armed-ready4-generation-ready-v001/logs/standard-prepare-ready4.log",
+      "bytes": 249,
+      "sha256": "c9cc2f4f40a0f4083c39fb9826da691d84f631e7feb8bf1607f4908cb6d4a01f"
+    }
+  },
+  "camera_override": "Onlynativeprompt fixedautomaticpureprofile phrase. Preparedoriginal retained. InstalledSGunchanged.",
+  "lock": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/armed-ready4-generation-ready-v001/Root-accepted-body-and-axe-lock-v001.json",
+    "bytes": 2144,
+    "sha256": "8b22a094738fe5b48e22f72337436fcc9c6bf53240c2002bfdea24d0e067bdc2"
+  },
+  "new_guides_viewed": false,
+  "native_generation_calls": 0,
+  "retention_gate": "Canonical Readyinputmedia →RootEbeforeanynewguideView/generate. All references already_retainedtrue is the intended post-retention reserve input, not evidence that newguide is retained yet.",
+  "next_gate": "Rootnative209retain/View→sharedcomponentextract/inspect/compose/curated/motionreview→acceptedArmedReady0, thenWake/Axeactions."
+}

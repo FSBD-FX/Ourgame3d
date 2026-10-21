@@ -1,0 +1,19 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.h
+@@ -17,6 +17,7 @@
+ #include "DungeonHurtPresentation.h"
+ #include "DungeonDeathPresentation.h"
+ #include "DungeonDodgePresentation.h"
++#include "DungeonGuardMovePresentation.h"
+ #include "DungeonFighter.generated.h"
+ 
+ class ADungeonGameMode;
+@@ -45,6 +46,8 @@
+     bool QueryDeathPresentation(FDungeonDeathPresentationSample& Out) const;
+     // Actual same-owner/action Dodge clock; read-only and atomic, including paused published owners.
+     bool QueryDodgePresentation(FDungeonDodgePresentationSample& Out) const;
++    // Actual Guard-only completed Move facts; read-only and atomic.
++    bool QueryCompletedGuardMove(FDungeonGuardMoveSample& Out) const;
+ 
+     UPROPERTY(BlueprintReadOnly, Category="Dungeon") float Health = 100.f;
+     UPROPERTY(BlueprintReadOnly, Category="Dungeon") float MaxHealth = 100.f;

@@ -1,0 +1,125 @@
+{
+  "schema": "Generic-two-contact-dual-hip-role-guide-v001",
+  "guide": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-contact-pair-generation-ready-v001/run-guard-move-contact-pair-v001/references/layout-guides/right/two-contact-dual-hip-occlusion-PRODUCTION-GUIDE.png",
+    "bytes": 58621,
+    "sha256": "7f85c4520d5b33717d883d08768dd6624606fd7aa9ee1988c56a6cda72173d2c"
+  },
+  "guide_role": "Generic artist leg connection/occlusion diagram only, no Guard pixels copied or drawn, not actual measured skeleton/bone/rig.",
+  "canonical_physical_attachment": "Near left foreground hip under mossside, far right recessed hip; same bodyfacingRIGHT bothposes.",
+  "rows": [
+    {
+      "pose": 0,
+      "artist_NEAR_hip": [
+        476,
+        500
+      ],
+      "artist_FAR_hip": [
+        548,
+        486
+      ],
+      "NEAR_red_chain": [
+        [
+          476,
+          500
+        ],
+        [
+          590,
+          655
+        ],
+        [
+          665,
+          820
+        ],
+        [
+          710,
+          840
+        ]
+      ],
+      "FAR_blue_chain": [
+        [
+          548,
+          486
+        ],
+        [
+          440,
+          650
+        ],
+        [
+          350,
+          815
+        ],
+        [
+          372,
+          840
+        ]
+      ],
+      "front_contact_leg": "NEAR",
+      "foreground_draw_order": "FAR blue then NEAR red with white separation halo at crossing; physicalnearforeground identity fixed",
+      "inner_generation_footprint_xyxy": [
+        192,
+        128,
+        832,
+        896
+      ]
+    },
+    {
+      "pose": 1,
+      "artist_NEAR_hip": [
+        1500,
+        500
+      ],
+      "artist_FAR_hip": [
+        1572,
+        486
+      ],
+      "NEAR_red_chain": [
+        [
+          1500,
+          500
+        ],
+        [
+          1424,
+          655
+        ],
+        [
+          1374,
+          815
+        ],
+        [
+          1396,
+          840
+        ]
+      ],
+      "FAR_blue_chain": [
+        [
+          1572,
+          486
+        ],
+        [
+          1624,
+          650
+        ],
+        [
+          1689,
+          820
+        ],
+        [
+          1734,
+          840
+        ]
+      ],
+      "front_contact_leg": "FAR",
+      "foreground_draw_order": "FAR blue then NEAR red with white separation halo at crossing; physicalnearforeground identity fixed",
+      "inner_generation_footprint_xyxy": [
+        1216,
+        128,
+        1856,
+        896
+      ]
+    }
+  ],
+  "generation_spacing": "Two cells each1024px; inner footprint x192..832 gives62.5percent width and75percent height. Prompt stricter full silhouette <=60percent width/75percent height, >=20percent clear magenta each side and wide gutter.",
+  "standard_extraction_margin": "Retain standard512/margin48 request so carriedReady2094 can reextract exact. Broader native-generation whitespace is explicit production constraint, not altered SG QA tolerance.",
+  "new_guide_viewed": false
+}

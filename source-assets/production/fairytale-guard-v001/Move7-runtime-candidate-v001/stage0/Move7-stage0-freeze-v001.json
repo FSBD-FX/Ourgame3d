@@ -1,0 +1,235 @@
+{
+  "schema": "Guard-Move7-Stage0-stub-and-semantic-tests-freeze-v001",
+  "utc": "2026-10-18T14:07:59.743799+00:00",
+  "candidate_only": true,
+  "production_implementation_allowed": false,
+  "UE_build_run_performed": false,
+  "semantic_RED_observed": false,
+  "required_actual_result": {
+    "registered": 199,
+    "old_passes": 196,
+    "new_failures": 3,
+    "errors_per_new_group": 1,
+    "expected_error_prefix": "TARGET Stage0 RED:"
+  },
+  "baseline": {
+    "path": "F:/Ourgame/source-assets/production/backups/v140-Dodge196G/compiled-source-manifest.json",
+    "bytes": 506198,
+    "sha256": "c3bae7da14020ededd624bb2bc9469f322d60ff3189dda4b9e0f865eb1fa2778"
+  },
+  "baseline_sources": 273,
+  "added_sources": 5,
+  "expected_stage0_sources": 278,
+  "existing_source_mutations": 3,
+  "tests": [
+    "CodexDungeon.Content.FairytaleGuardMoveRigV001.RealCompletedGuardOwnerAndAcceptedPath",
+    "CodexDungeon.Content.FairytaleGuardMoveRigV001.FixedSurfaceRigSingleMirrorAndFiniteBounds",
+    "CodexDungeon.Content.FairytaleGuardMoveRigV001.AtomicSevenResourcesAndLegacyIsolation"
+  ],
+  "new_sources": [
+    {
+      "candidate": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/new/DungeonFairytaleGuardMoveDrawStateV001.h",
+        "bytes": 1076,
+        "sha256": "6f658026cb5baac13862aa72a4344f4dfae38564cbc08621e57f0bcf68a9d3b1"
+      },
+      "actual_path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardMoveDrawStateV001.h"
+    },
+    {
+      "candidate": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/new/DungeonFairytaleGuardMoveRigV001.cpp",
+        "bytes": 584,
+        "sha256": "0a805e745d395077ca105236e29f9d2073bee0943033b5e5b17dd064d3cabc5b"
+      },
+      "actual_path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardMoveRigV001.cpp"
+    },
+    {
+      "candidate": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/new/DungeonFairytaleGuardMoveRigV001.h",
+        "bytes": 3546,
+        "sha256": "f71459ba32b1b917c64f7574e82579b99272d9a355927a202c6cf68d771218c2"
+      },
+      "actual_path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardMoveRigV001.h"
+    },
+    {
+      "candidate": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/new/DungeonGuardMovePresentation.h",
+        "bytes": 769,
+        "sha256": "a945f5ee27359efe5801f92d6423940434382b1ee5d91d776652cfe4c8d9dfae"
+      },
+      "actual_path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGuardMovePresentation.h"
+    },
+    {
+      "candidate": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/new/Tests/DungeonFairytaleGuardMoveRigV001Tests.cpp",
+        "bytes": 28258,
+        "sha256": "74c08cf8a94cb2712e6274088b65abe2c2e24a6b66467a5e0769f413f1d0704f"
+      },
+      "actual_path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/Tests/DungeonFairytaleGuardMoveRigV001Tests.cpp"
+    }
+  ],
+  "existing_replacements": {
+    "DungeonFighter.h": {
+      "actual_path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.h",
+      "before": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/before/DungeonFighter.h",
+        "bytes": 12867,
+        "sha256": "9a07a2f1807ed005236782b1a0a3c21ada7dba8ae8b50bf9a539890d978cd678"
+      },
+      "after": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/replacements/DungeonFighter.h",
+        "bytes": 13051,
+        "sha256": "b04ef11882ef88d5f005802eec287a9f42f7868ef25f5395beb5b0272e78aa95"
+      },
+      "patch": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/patches/DungeonFighter.h.patch",
+        "bytes": 941,
+        "sha256": "89e42345e5602374fef77cc3ac529a49e76ef5e79e9af7b82064debb5d725ac7"
+      }
+    },
+    "DungeonFighter.cpp": {
+      "actual_path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "before": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/before/DungeonFighter.cpp",
+        "bytes": 124915,
+        "sha256": "11036eb54c6b1694d50efcd9c8139471dae050aff7d347fc3be5398a35073ad8"
+      },
+      "after": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/replacements/DungeonFighter.cpp",
+        "bytes": 125107,
+        "sha256": "7fc66e79e0be1d8187d1bebdc406efde21f46fddb65509b5e470e6399e9f21c2"
+      },
+      "patch": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/patches/DungeonFighter.cpp.patch",
+        "bytes": 528,
+        "sha256": "03481250307561d4dbdb8200577d8d0d4e990dcbd0d68bb99ac35ac40e53def1"
+      }
+    },
+    "DungeonHUD.h": {
+      "actual_path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.h",
+      "before": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/before/DungeonHUD.h",
+        "bytes": 15376,
+        "sha256": "01f4576e633acaea53c1b337dfa9c5cbe9e2f05c1c7e7a3fcf3d16f5fa536896"
+      },
+      "after": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/replacements/DungeonHUD.h",
+        "bytes": 15841,
+        "sha256": "3cf040ad12b1823a033fd109fe215f9b9876205315e3ba359de38ca83dce8369"
+      },
+      "patch": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/patches/DungeonHUD.h.patch",
+        "bytes": 1599,
+        "sha256": "8888a656550887c384088127e0a171e132a467b21d10bd53546ad5624e42e8d2"
+      }
+    }
+  },
+  "profile": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/move-leg-rig-generation-v001/Move7-profile-preparation-v001/GuardMove7-runtime-profile-candidate-v001.json",
+    "bytes": 22474,
+    "sha256": "03156e971171f597ca504e9c0176d5a2fdf3c31c09b3eddae2995e2245193b51"
+  },
+  "source_verification_passes": [
+    {
+      "pass_id": 1,
+      "source_count": 273,
+      "differences": 0
+    },
+    {
+      "pass_id": 2,
+      "source_count": 273,
+      "differences": 0
+    }
+  ],
+  "boundaries": [
+    "No actual Source/Content/tools/ledger/E mutation",
+    "No UE launch/build/commit",
+    "No HUD.cpp or gameplay implementation",
+    "No history sweep cause reconstruction; BlockKnown=false",
+    "No renderer or actual GPU-residency claim from pure metadata tests",
+    "Actual UE semantic RED is a required separate Root step",
+    "Original18 opaque markers are surface registrations, not bones or alpha-core sole points"
+  ],
+  "files": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/before/DungeonFighter.cpp",
+      "bytes": 124915,
+      "sha256": "11036eb54c6b1694d50efcd9c8139471dae050aff7d347fc3be5398a35073ad8"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/before/DungeonFighter.h",
+      "bytes": 12867,
+      "sha256": "9a07a2f1807ed005236782b1a0a3c21ada7dba8ae8b50bf9a539890d978cd678"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/before/DungeonHUD.h",
+      "bytes": 15376,
+      "sha256": "01f4576e633acaea53c1b337dfa9c5cbe9e2f05c1c7e7a3fcf3d16f5fa536896"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/exact-beforepins-v001.json",
+      "bytes": 57471,
+      "sha256": "a7af95781c18c5e6540d9f1892a749950372ddc590595898e67d4180542521cd"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/new/DungeonFairytaleGuardMoveDrawStateV001.h",
+      "bytes": 1076,
+      "sha256": "6f658026cb5baac13862aa72a4344f4dfae38564cbc08621e57f0bcf68a9d3b1"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/new/DungeonFairytaleGuardMoveRigV001.cpp",
+      "bytes": 584,
+      "sha256": "0a805e745d395077ca105236e29f9d2073bee0943033b5e5b17dd064d3cabc5b"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/new/DungeonFairytaleGuardMoveRigV001.h",
+      "bytes": 3546,
+      "sha256": "f71459ba32b1b917c64f7574e82579b99272d9a355927a202c6cf68d771218c2"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/new/DungeonGuardMovePresentation.h",
+      "bytes": 769,
+      "sha256": "a945f5ee27359efe5801f92d6423940434382b1ee5d91d776652cfe4c8d9dfae"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/new/Tests/DungeonFairytaleGuardMoveRigV001Tests.cpp",
+      "bytes": 28258,
+      "sha256": "74c08cf8a94cb2712e6274088b65abe2c2e24a6b66467a5e0769f413f1d0704f"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/patches/DungeonFighter.cpp.patch",
+      "bytes": 528,
+      "sha256": "03481250307561d4dbdb8200577d8d0d4e990dcbd0d68bb99ac35ac40e53def1"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/patches/DungeonFighter.h.patch",
+      "bytes": 941,
+      "sha256": "89e42345e5602374fef77cc3ac529a49e76ef5e79e9af7b82064debb5d725ac7"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/patches/DungeonHUD.h.patch",
+      "bytes": 1599,
+      "sha256": "8888a656550887c384088127e0a171e132a467b21d10bd53546ad5624e42e8d2"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/prepare-and-freeze-stage0-v001.py",
+      "bytes": 9055,
+      "sha256": "269119037f247884891242684ba5936471fbdc379f74a3d55a8a81790c4c1b11"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/replacements/DungeonFighter.cpp",
+      "bytes": 125107,
+      "sha256": "7fc66e79e0be1d8187d1bebdc406efde21f46fddb65509b5e470e6399e9f21c2"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/replacements/DungeonFighter.h",
+      "bytes": 13051,
+      "sha256": "b04ef11882ef88d5f005802eec287a9f42f7868ef25f5395beb5b0272e78aa95"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-runtime-candidate-v001/stage0/replacements/DungeonHUD.h",
+      "bytes": 15841,
+      "sha256": "3cf040ad12b1823a033fd109fe215f9b9876205315e3ba359de38ca83dce8369"
+    }
+  ]
+}

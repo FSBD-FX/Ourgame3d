@@ -1,0 +1,65 @@
+{
+  "before_prompt": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-leg-rig-seven-components-generation-ready-v001/far3kit/run-guard-move-leg-rig-far3kit-v001/prompts/right/move_far_kit.txt",
+    "bytes": 11407,
+    "sha256": "7dcbf0675b8b2977c180cddb0d5767f69444cf955eb3da82a632dd31c0f0572e"
+  },
+  "after_prompt": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/move-leg-rig-static-prompts-corrected-v002/far3kit/native-fullprompt-static-components-v002.txt",
+    "bytes": 10958,
+    "sha256": "5bb74b8b5fce8e2297a9c4837f0013572f571a23c41f375404dc70e54ba52843"
+  },
+  "text_only_replacements": [
+    {
+      "before": "If this is a pre-idle/simple run, the attached base image may be used as the canonical character design. In direction-anchor mode, do not use base images for final action rows; accepted idle/direction anchors own row identity. ",
+      "after": "This is a post-lock static component source run. The attached acceptedArmedReady209 is the ONLY identity; no oldbase is attached. ",
+      "count": 1
+    },
+    {
+      "before": "If a state anchor is attached for a non-locomotion state, treat it as approved state vocabulary only. ",
+      "after": "",
+      "count": 1
+    },
+    {
+      "before": "If an additional generated row strip is attached, use it only as a motion reference, never as a replacement identity source. ",
+      "after": "No motion row is attached or needed for static component source art. ",
+      "count": 1
+    },
+    {
+      "before": "Do not redesign or reinterpret identity details while animating.",
+      "after": "Do not redesign or reinterpret the visible identity while producing the specified static parts.",
+      "count": 1
+    },
+    {
+      "before": "- When generating a paired left/right row, use the paired row reference only for timing, scale, and animation intensity. Rotate the body, feet, shoulders, face angle, and gaze to the target facing, but keep identity details attached according to the accepted target-direction anchor.\n",
+      "after": "- Generate only the screen-right component perspective specified by acceptedReady209; no paired left-facing row or animation is requested.\n",
+      "count": 1
+    },
+    {
+      "before": "- For cyclic locomotion, do not let a single running/walking pose anchor determine every frame's leg phase. Use multi-pose motion references and the layout phase guide for foot contacts.\n",
+      "after": "- This strip contains static source component roles; no locomotion contacts or phase changes are requested here.\n",
+      "count": 1
+    },
+    {
+      "before": "- Prefer a subtler animation over any change that mutates the character identity.",
+      "after": "- Preserve identity and fixed static part construction; do not add animation to this kit.",
+      "count": 1
+    },
+    {
+      "before": "- Prefer pose, expression, and silhouette changes over decorative effects.",
+      "after": "- Produce only the specified static part silhouettes; no expression/pose variation or decorative effects.",
+      "count": 1
+    },
+    {
+      "before": "- Effects are allowed only when state-relevant, opaque, hard-edged, sprite-like, fully inside the same frame slot, and physically touching or overlapping the character silhouette.",
+      "after": "- No effects are requested for these static rig-source components.",
+      "count": 1
+    },
+    {
+      "before": "- Reject any pose that is cropped, overlaps another pose, crosses into a neighboring frame slot, or creates a separate disconnected component that is not attached to the character.",
+      "after": "- Reject cropped components, components crossing a neighboring slot, or unwanted loose fragments. The specified separate thigh/shin/shoe cells are intentionally independent static components and must NOT be attached to a character or to each other.",
+      "count": 1
+    }
+  ],
+  "standard_prepare_request_guides_extractor_SG_code_changed": false
+}

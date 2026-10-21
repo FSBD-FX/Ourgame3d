@@ -1,0 +1,11 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardFullPresentationV003.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardFullPresentationV003.cpp
+@@ -14,7 +14,7 @@
+ 
+ void ADungeonHUD::LoadFairytaleGuardFullTrial()
+ {
+- bUseFairytaleGuardStompPreview=FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleGuardStompPreview"));
++ bUseFairytaleGuardStompPreview=FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleGuardStompPreview"))||FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleGuardMoveRigPreview"));
+  bUseFairytaleGuardFullPreview=bUseFairytaleGuardStompPreview||FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleGuardFullPreview"));
+  if(!bUseFairytaleGuardFullPreview)return;
+  TArray<UTexture*> ApprovedTextures;

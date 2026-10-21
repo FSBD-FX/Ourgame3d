@@ -1,0 +1,23 @@
+{
+  "schema": "Move7-source-direction-qualification-fix-v002",
+  "before_source_freeze_pin": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/Move7-native-observer-candidate-v001/Move7-observer-source-freeze-v001.json",
+    "bytes": 1346,
+    "sha256": "2b97797022b0705bd1233e4b169895e2fb88d7434ba0ef56d4670f7744328e95"
+  },
+  "only_source_change": "Straight cycle qualification uses native From→To X sign / exact Y unchanged plus actual Facing; SAME actual Direction/Plan retained",
+  "actual_UE_Vector2D_header": {
+    "path": "G:/UE_5.5/Engine/Source/Runtime/Core/Public/Math/Vector2D.h",
+    "first_line": 871,
+    "last_line": 874,
+    "operator": "RScale=1.f/Scale;return {X*RScale,Y*RScale}"
+  },
+  "host_binary64_witness": {
+    "dx": 5.447344422340393,
+    "actual_reciprocal_product": 0.9999999999999999,
+    "old_predicate": false,
+    "new_endpoint_predicate": true
+  },
+  "runtime_report_schema_unchanged": "guard-Move7-native-observer-v001",
+  "UE_compile_run_performed": false
+}

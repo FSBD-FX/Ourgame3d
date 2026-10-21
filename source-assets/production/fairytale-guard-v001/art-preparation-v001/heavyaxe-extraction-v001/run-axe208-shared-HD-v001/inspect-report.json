@@ -1,0 +1,50 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\heavyaxe-extraction-v001\\run-axe208-shared-HD-v001",
+  "states": [
+    "idle"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "idle",
+      "source": "frames",
+      "expected_frames": 1,
+      "found_frames": 1,
+      "natural_pose_count": 1,
+      "frame_files": [
+        "frames/idle/frame-0.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 1.0,
+          "mean": 1.0
+        },
+        "dhash_similarity": {
+          "min": 1.0,
+          "mean": 1.0
+        },
+        "motion_presence": 0.0,
+        "centroid_sigma": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "idle: motion presence is too low (0.0000 < 0.0100)"
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "idle: motion presence is too low (0.0000 < 0.0100)"
+  ]
+}

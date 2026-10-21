@@ -1,0 +1,99 @@
+{
+  "schema": "Guard-next3-armed-action-text-drafts-v001",
+  "not_generation_ready": true,
+  "rows": [
+    {
+      "state": "right_wake",
+      "frames": 6,
+      "status": "Textdraft only; NOT standardprepared/generationready until actualacceptedArmedReady0 exists.",
+      "clock_authority": "S.Time-S.WakeStartedAt;clamp at WakeEnd-WakeStartedAt=1.0s",
+      "durations_ms_NATIVE_ART_MAPPING": [
+        167,
+        166,
+        167,
+        167,
+        166,
+        167
+      ],
+      "sample_start_ms": [
+        0,
+        167,
+        333,
+        500,
+        667,
+        833
+      ],
+      "action_prompt": "Fullbody plus SAME fixed208heavyaxe in each complete connected pose. Identity solelyacceptedArmedReady0; do not attach206base/207emptybody/standalone208again as competingidentity. Same shallow elevatedthreequarter side view facingright. Thickink, broadwarmgreystoneplanes, smallambereyes, sparseolivemoss; reducechips/speckles. Bothfists fullyclosed aroundONEstraightcontinuousshaft; samegriporder, axeheadshape/length/haftwidth atallframes, nofourhands, weaponstretch or localposepatch. No text/guide/grid/scenery/shadow/dust/sparks/arcs/blur. Puremagenta background. Artistposes sampleactualkerneltime, not gameplayretiming. Sixdistinct fullbodyposes, lefttoright. Frame0 sample0ms: Dormant statue, both hands already closed around same fixed axe, feet planted, head/shoulders lowered and ambereyes dark. Axe held quiet, no weapon swing. Frame1 sample167ms: First faint amberlight appears inside recessed eye window; heavyplate shoulders unlock a little. Same continuousshaft still throughbothclosedfists. Frame2 sample333ms: Chest and nearshoulder lift slowly under stoneweight; both hands keep their same relative places on the straightshaft. Frame3 sample500ms: Halfway rise, knees uncompress, eye window brighter; axe and bothclosedhands travel together gently asoneheldobject. Frame4 sample667ms: Head clears shoulders into quiet armedready stance, feet unchanged, no attack/lunge/swing. Frame5 sample833ms: Arrive close to acceptedArmedReady0; same body/axe identity and twohandgrip. No damage or movement before actual WakeCompleted.",
+      "reference_gate": [
+        "acceptedArmedReady0 standardmaterializedcuratedanchor",
+        "ownstandard6slotguide",
+        "AxeFollow additionally acceptedactualAxeWindup row asmotion/basis only, notidentity"
+      ],
+      "generation_owner": "Rootserialonly",
+      "future_standard_carry": "Preparefullnewrun includes right_idle4 carriedexactfromacceptedReady raw/frames, notregenerated/charged; targetstates onlyWake6/Windup6/Follow6. This obeysSGdirectionanchor synthesis without pretendingnewemptyidle needed. Sourcepins/identicalcarriedRGBA mustbeprovedafterextract.",
+      "preview_label": "SGuniform6fps (1002ms row) is independentpreview, not exactnativephase duration."
+    },
+    {
+      "state": "right_axe_windup",
+      "frames": 6,
+      "status": "Textdraft only; NOT standardprepared/generationready until actualacceptedArmedReady0 exists.",
+      "clock_authority": "S.Time-A.Start;A.LockAt=A.Start+.50;A.ActiveAt=A.Start+1.00",
+      "durations_ms_NATIVE_ART_MAPPING": [
+        167,
+        166,
+        167,
+        167,
+        166,
+        167
+      ],
+      "sample_start_ms": [
+        0,
+        167,
+        333,
+        500,
+        667,
+        833
+      ],
+      "action_prompt": "Fullbody plus SAME fixed208heavyaxe in each complete connected pose. Identity solelyacceptedArmedReady0; do not attach206base/207emptybody/standalone208again as competingidentity. Same shallow elevatedthreequarter side view facingright. Thickink, broadwarmgreystoneplanes, smallambereyes, sparseolivemoss; reducechips/speckles. Bothfists fullyclosed aroundONEstraightcontinuousshaft; samegriporder, axeheadshape/length/haftwidth atallframes, nofourhands, weaponstretch or localposepatch. No text/guide/grid/scenery/shadow/dust/sparks/arcs/blur. Puremagenta background. Artistposes sampleactualkerneltime, not gameplayretiming. Sixdistinct fullbodyposes, lefttoright. Frame0 sample0ms: Begin from acceptedArmedReady0, plantedfeet, quiet lowtwohandgrip. Allwindupframes are anticipation, no weaponcontact or impactFX. Frame1 sample167ms: Gather heavyaxe across torso and load weight backward; nearhand stays lower onshaft, farhand higher. Frame2 sample333ms: Bothclosedhands lift together, elbow/shoulderturn opens broad readable windup; do not stretchshaft or changeheadsize. Frame3 sample500ms: At500ms aimlock: fixedrightfacing, broadhighaxesilhouette, plantedsupport. No head/weapon retarget afterthissample. Frame4 sample667ms: Hold raisedlockedaxe and deepen smalltorso coil, samecontinuousshaftpassesbothfists, no forwardtranslation. Frame5 sample833ms: Maximum heavy anticipation justbeforeactive: highestloadpose with clearaxehead and eye window, no earlysweep ordamagecue.",
+      "reference_gate": [
+        "acceptedArmedReady0 standardmaterializedcuratedanchor",
+        "ownstandard6slotguide",
+        "AxeFollow additionally acceptedactualAxeWindup row asmotion/basis only, notidentity"
+      ],
+      "generation_owner": "Rootserialonly",
+      "future_standard_carry": "Preparefullnewrun includes right_idle4 carriedexactfromacceptedReady raw/frames, notregenerated/charged; targetstates onlyWake6/Windup6/Follow6. This obeysSGdirectionanchor synthesis without pretendingnewemptyidle needed. Sourcepins/identicalcarriedRGBA mustbeprovedafterextract.",
+      "preview_label": "SGuniform6fps (1002ms row) is independentpreview, not exactnativephase duration."
+    },
+    {
+      "state": "right_axe_follow",
+      "frames": 6,
+      "status": "Textdraft only; NOT standardprepared/generationready until actualacceptedArmedReady0 exists.",
+      "clock_authority": "S.Time-A.ActiveAt;Active[0,200ms),Recovery[200,1600ms). Never use nominal SGfps to extendActive.",
+      "durations_ms_NATIVE_ART_MAPPING": [
+        100,
+        100,
+        300,
+        350,
+        350,
+        400
+      ],
+      "sample_start_ms": [
+        0,
+        100,
+        200,
+        500,
+        850,
+        1200
+      ],
+      "action_prompt": "Fullbody plus SAME fixed208heavyaxe in each complete connected pose. Identity solelyacceptedArmedReady0; do not attach206base/207emptybody/standalone208again as competingidentity. Same shallow elevatedthreequarter side view facingright. Thickink, broadwarmgreystoneplanes, smallambereyes, sparseolivemoss; reducechips/speckles. Bothfists fullyclosed aroundONEstraightcontinuousshaft; samegriporder, axeheadshape/length/haftwidth atallframes, nofourhands, weaponstretch or localposepatch. No text/guide/grid/scenery/shadow/dust/sparks/arcs/blur. Puremagenta background. Artistposes sampleactualkerneltime, not gameplayretiming. Sixdistinct fullbodyposes, lefttoright. Frame0 sample0ms: ACTIVE start0ms: release the raisedheavyaxe into ONE broad rightward downward/horizontal sweep, bothclosedgrips move together; feet/actorXY remainplanted. Frame1 sample100ms: ACTIVE100ms: axe reaches full forward sweep silhouette, heavybodyturn but no rootadvance, sameaxehead/length. This is the same single sweep, not a second strike. Frame2 sample200ms: RECOVERY200ms exactActiveEnd: low forward followthrough, all attackwindowclosed; hands stillclosed onshaft, no second impact and no motionarcFX. Frame3 sample500ms: RECOVERY500ms: heavyaxe settles low, shouldersslump with visiblelongpunish opportunity; keepactorroot and footcontacts. Frame4 sample850ms: RECOVERY850ms: slowly retrieve sameaxe towardbody with bothgripscoherent, torso returns; noattack or chase. Frame5 sample1200ms: RECOVERY1200ms: regainnearacceptedArmedReady0 and hold until original1600msrowend. Stillno newattackwindow.",
+      "reference_gate": [
+        "acceptedArmedReady0 standardmaterializedcuratedanchor",
+        "ownstandard6slotguide",
+        "AxeFollow additionally acceptedactualAxeWindup row asmotion/basis only, notidentity"
+      ],
+      "generation_owner": "Rootserialonly",
+      "future_standard_carry": "Preparefullnewrun includes right_idle4 carriedexactfromacceptedReady raw/frames, notregenerated/charged; targetstates onlyWake6/Windup6/Follow6. This obeysSGdirectionanchor synthesis without pretendingnewemptyidle needed. Sourcepins/identicalcarriedRGBA mustbeprovedafterextract.",
+      "preview_label": "SGuniform6fps (1002ms row) is independentpreview, not exactnativephase duration."
+    }
+  ]
+}

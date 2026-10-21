@@ -1,0 +1,116 @@
+{
+  "schema": "Guard207-Idle4-standard-pipeline-proof-v001",
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\compose_sprite_atlas.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\idle4-extraction-v001\\run-idle207-shared-HD-v001",
+        "--min-used-pixels",
+        "512"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/idle4-extraction-v001/logs/compose-idle207-shared-HD-v001.log",
+        "bytes": 355,
+        "sha256": "9888f86b4f1bedd748fbd3a5a8cc36c3f0958c95beabcfcf37127d7d4f72d3f1"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\export_curated_pngs.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\idle4-extraction-v001\\run-idle207-shared-HD-v001",
+        "--state",
+        "right_idle",
+        "--selected-only"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/idle4-extraction-v001/logs/export-curated-idle207-v001.log",
+        "bytes": 965,
+        "sha256": "7be9f889286f4da2457e7da1362e04451f45a9601d05ee0863f1fbae1b32b259"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\idle4-extraction-v001\\shared-HD-fit-existing-exact.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\idle4-extraction-v001\\run-idle207-shared-HD-v001",
+        "--min-used-pixels",
+        "512"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/idle4-extraction-v001/logs/extract-idle207-shared-HD-v001.log",
+        "bytes": 2029,
+        "sha256": "0ce19ecd51e494da745cc97d92d32cd2d931f0c7832196bb5e7df22f446d9aa1"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\inspect_sprite_run.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\idle4-extraction-v001\\run-idle207-shared-HD-v001",
+        "--states",
+        "right_idle",
+        "--report",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\idle4-extraction-v001\\run-idle207-shared-HD-v001\\inspect-report.json"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/idle4-extraction-v001/logs/inspect-idle207-shared-HD-v001.log",
+        "bytes": 400,
+        "sha256": "c9e7489a6b0bc4bd8ce0349a156ff6073ecc168a093515727d84db1e12e6b927"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\preview_animation.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\art-preparation-v001\\idle4-extraction-v001\\run-idle207-shared-HD-v001"
+      ],
+      "actual_exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/idle4-extraction-v001/logs/preview-idle207-v001.log",
+        "bytes": 327,
+        "sha256": "5b4111077292a91b4834d37ecdf8ea342fd0694d99ad2ce4e10b6e1780d35d80"
+      }
+    }
+  ],
+  "standard_extract_and_inspect_ok": true,
+  "source_index": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/idle4-extraction-v001/idle207-four-curated-source-index-v001.json",
+    "bytes": 9095,
+    "sha256": "7a33a8772fd037c18af47c4f921899c27ed63e9ddd18b292247cc318c067c257"
+  },
+  "extra_diagnostic": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/idle4-extraction-v001/extra-postcheck-failure-and-stage-trace-v001.json",
+    "bytes": 2350,
+    "sha256": "3b773954334a8e1d9a46550676f44316bc20ce5a73094d67c005c81da73be112"
+  },
+  "native_generation_calls": 0,
+  "runtime_or_final_art_accepted": false,
+  "images_viewed": false,
+  "source_mismatches": 0
+}

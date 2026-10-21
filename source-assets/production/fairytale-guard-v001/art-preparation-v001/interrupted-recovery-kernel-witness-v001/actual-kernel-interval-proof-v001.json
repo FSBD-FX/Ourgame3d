@@ -1,0 +1,95 @@
+{
+  "schema": "Guard-interrupted-recovery-actual-readonly-kernel-witness-v001",
+  "source_actual_pins": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.h",
+      "bytes": 5894,
+      "sha256": "6c71de106f3d728aec593d1528331714442e6756878cf49af3d04f48e68eb9de"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.cpp",
+      "bytes": 42213,
+      "sha256": "6198551820b8e01ace25ce061169a671e342cc60bab6f6dc800df767d77b1d9f"
+    }
+  ],
+  "copies_source_exact": true,
+  "toolchain": "VS2022MSVC14.38nativepureC++17 only; no UE/UBT/import or gameplaySource/tools modifications.",
+  "compile_first_attempt": {
+    "exit": 2,
+    "reason": "My /Fo trailingbackslash escaped quote, soCLsawnoSource; fixednewv002batchusesforwardslashdir, originalfailedcommand/logpreserved.",
+    "log": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/interrupted-recovery-kernel-witness-v001/compile.log",
+      "bytes": 47,
+      "sha256": "6b91e8b1584260f025dd11ad2090f0bb82c2accadbd9d1a17ed1fafb51d2954e"
+    }
+  },
+  "compile_final_exit_code": 0,
+  "run_exit_code": 0,
+  "actual_result": {
+    "actual_same_kernel_witnesses": [
+      {
+        "entity": 7001,
+        "kind": "AxeSweep",
+        "attack_start": 1,
+        "break_at": 1.8,
+        "stun_until": 2.2,
+        "original_occupied_until": 3.6,
+        "phase_after_stun": "Recovery",
+        "actual_interrupted_recovery_interval": true,
+        "actual_interval_seconds": 1.4,
+        "RecoveryStarted_at": 2.2,
+        "consumed_midpoint_Recovery": true,
+        "AttackCompleted_at": 3.6,
+        "later_ActiveWindow_count": 0,
+        "passed": true
+      },
+      {
+        "entity": 7002,
+        "kind": "Stomp",
+        "attack_start": 1,
+        "break_at": 1.3,
+        "stun_until": 1.7000000000000002,
+        "original_occupied_until": 3.55,
+        "phase_after_stun": "Recovery",
+        "actual_interrupted_recovery_interval": true,
+        "actual_interval_seconds": 1.8499999999999996,
+        "RecoveryStarted_at": 1.7000000000000002,
+        "consumed_midpoint_Recovery": true,
+        "AttackCompleted_at": 3.55,
+        "later_ActiveWindow_count": 0,
+        "passed": true
+      },
+      {
+        "entity": 7003,
+        "kind": "AxeSweep",
+        "attack_start": 1,
+        "break_at": 3.5,
+        "stun_until": 3.9,
+        "original_occupied_until": 3.6,
+        "phase_after_stun": "Idle",
+        "actual_interrupted_recovery_interval": false,
+        "actual_interval_seconds": 0,
+        "RecoveryStarted_at": -1,
+        "consumed_midpoint_Recovery": false,
+        "AttackCompleted_at": 3.6,
+        "later_ActiveWindow_count": 0,
+        "passed": true
+      }
+    ],
+    "all_passed": true
+  },
+  "probe_source": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/interrupted-recovery-kernel-witness-v001/probe.cpp",
+    "bytes": 3813,
+    "sha256": "1a6a8d203d8f197059bd8ec63a636f714cd421af46bcc23f566a4c5bfbbe8a7a"
+  },
+  "probe_binary": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/art-preparation-v001/interrupted-recovery-kernel-witness-v001/probe.exe",
+    "bytes": 372736,
+    "sha256": "9ec412b9ec1f2b8445cdf9998bd3b94674e2557e1813217751db07c500581511"
+  },
+  "no_mocked_kernel_or_python_reimplementation": true,
+  "art_contract": "A safe4frame interruptedrecovery row has realconsumablevariableinterval max(0,OccupiedUntil-StunUntil), onlyRecovery+Interrupted. Normalizepresentationphase there, noActive replay. Latebreak can skip thisrow entirely; no synthetictimer.",
+  "runtime_integration_gate": "Rootprofile must explicitlyselect interruptedRecovery toconsume these4frames. Currentplaceholder genericrecovery is not a finishednewartconsumer. Witnessprovesactualkerneltime exists.",
+  "final_game_or_art_accepted": false
+}

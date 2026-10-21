@@ -1,0 +1,11 @@
+--- a/UnrealGame/Source/CodexDungeon/Tests/DungeonFairytaleGuardMoveRigV001Tests.cpp
++++ b/UnrealGame/Source/CodexDungeon/Tests/DungeonFairytaleGuardMoveRigV001Tests.cpp
+@@ -25,7 +25,7 @@
+  if(!W.Create())return false;
+  // Public native spawn and attack-permission control. No actor relocation,
+  // forged FState, injected event, owner-map write, or manually advanced clock.
+- W.Guard=W.Game->SpawnStoneGuard(W.Player->GetGroundPosition()-FVector2D(Side*210.,0.));
++ W.Guard=W.Game->SpawnStoneGuard(W.Player->GetGroundPosition()+FVector2D(Side*210.,0.));
+  if(!W.Guard||!W.Guard->GetStoneGuardDriver())return false;
+  W.Guard->bAIEnabled=false; // Existing native Move stays active; only attacks are disabled.
+  for(int32 N=0;N<400&&!W.Game->bGameOver;++N)

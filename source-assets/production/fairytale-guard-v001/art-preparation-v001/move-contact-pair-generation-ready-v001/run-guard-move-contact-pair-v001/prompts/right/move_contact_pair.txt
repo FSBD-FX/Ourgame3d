@@ -1,0 +1,56 @@
+Create a single horizontal sprite strip for the game character `ENM-STN-003-fixed-heavyaxe-armed-v001` in the state `right_move_contact_pair`.
+
+If this is a pre-idle/simple run, the attached base image may be used as the canonical character design. In direction-anchor mode, do not use base images for final action rows; accepted idle/direction anchors own row identity. Use the attached accepted idle/direction anchor as the canonical character design for this row. If a state anchor is attached for a non-locomotion state, treat it as approved state vocabulary only. Use the attached layout guide image only for frame count, slot spacing, centering, and safe padding. If an additional generated row strip is attached, use it only as a motion reference, never as a replacement identity source. Do not simply copy the still reference pose. Generate distinct animation poses that create a readable cycle or action.
+
+Character: ENM-STN-003-fixed-heavyaxe-armed-v001.
+Style contract: Only acceptedArmedReady209 wholeGuard+fixedaxe identity, same shallow elevated3/4camera and lowdetail broadstone/ink. Two opposite physical-leg CONTACT keyposes only; generous magenta blank canvas, no copiedbad221/223 poses..
+
+Use this prompt as an authoritative sprite-production spec. Do not expand it into a polished illustration, painterly character image, anime key art, 3D render, vector mascot, glossy app icon, realistic portrait, or marketing artwork.
+
+Animation action: Generate ONLY TWO large-clearance opposite CONTACT KEYPOSES, not a six-frame walk strip and not a playable two-frame walk. Attached accepted ArmedReady209 is the ONLY Guard body/camera/fixedaxe identity. Same shallow elevated three-quarter side view facing SCREEN RIGHT, same broad squat slabhelmet/smallamber eyes/sparseolive NEAR moss shoulder/coarseink/warm broad stoneplates. SAME singleheaded heavyaxe, continuous straight woodshaft and stonebuttcap, fixed body/axe ratio. Both fists fully closed on the SAME shaft: moss NEAR arm always BUTTward, FAR arm always HEADward. Axe quiet low infront, headRIGHT; no arm counterswing or grip exchange.
+CRITICAL TWO DISTINCT HIP-LEG CHAINS: physical NEAR leg originates at the LEFT/foreground side of pelvis below the moss-side torso. Physical FAR leg originates at the RIGHT/recessed side of pelvis. The production diagram has TWO SEPARATE hip anchors: RED=N/physical NEAR LEFT foreground hip; BLUE=F/physical FAR RIGHT recessed hip. Never relabel whichever right-front boot as NEAR. Follow the continuous thigh→knee→shin→ankle→boot belonging to each of the TWO fixed hip sides.
+KEYPOSE0 NEAR CONTACT: RED/NEAR chain from LEFT foreground hip crosses diagonally toward the leading RIGHT-FRONT boot, planted heel/full sole on floor. BLUE/FAR chain from RIGHT recessed hip trails BACK-LEFT to its rear toe pushing off. At the thigh/shin crossing the NEAR red chain is in the foreground and visibly occludes the far blue chain; keep natural stone-plate continuity so the real Guard leg ownership is unambiguous. This must not show the RIGHT-hip far leg leading as in a neutral stance.
+KEYPOSE1 FAR CONTACT: BLUE/FAR chain from RIGHT recessed hip now extends toward the leading RIGHT-FRONT boot, planted heel/full sole. RED/NEAR chain from LEFT foreground hip trails BACK-LEFT to rear pushing toe. Same torso facing/camera and SAME physical hip ownership; only actual lower-body leg phases exchange front/back. This must visibly be the OPPOSITE physical-leg contact to KEYPOSE0, not the same pose with slight knee changes. Do not mirror/turn the whole character or swap hip identities to fake the change.
+The production guide shows role/connection/occlusion only, not measured bones or stick-figure body proportions. Final stone Guard stays its accepted identity; no colored legs, N/F labels, arrows, guides, gray stick arms or text. Keep both leg chains readable; do not fuse into one boot or hide both hips behind a new prop.
+LARGER NATIVE WHITESPACE: two equal invisible horizontal cells. The COMPLETE Guard including the entire axe head and buttcap must occupy at most60 percent of EACH cell WIDTH and75 percent of EACH cell HEIGHT. Leave at least20 percent clear solid-magenta width on the left AND right of every silhouette; therefore leave a very broad clear-magenta gutter between the two figures and large blank outer borders. Use the extra guide INNER BLUE rectangle as the generous production footprint, not the canvas edge. Do not enlarge either figure to fill unused horizontal space or let the right axe touch/cross a source edge. Keep same figure density/height across both keyposes, not per-pose scaling. Entire crown, planted sole, rear toe, both hands and WHOLE axe head/haft/buttcap must be visible with clear magenta beyond.
+Short heavy grounded walk contacts, upright stocky torso, modest leg spread, no run/charge/jump/simultaneously airborne feet. No shadow, scene, dust, blur, arcs, extra figures, loose debris, photoreal grain or pixel dots. Solid #FF00FF magenta background. These two keyposes are production motion references ONLY after actual acceptance; final Move6 remains unaccepted until a later genuine six-phase row is generated from accepted contacts and actual path128world mapping is reviewed..
+
+Anchor lock:
+- Accepted idle/direction anchors own character identity, outfit details, colors, face design, asymmetric markings, and side-specific accessories for final action rows.
+- Base character images and original character sheets are pre-idle sources only. Do not reinterpret or reintroduce base-character details inside a direction-anchor action row.
+- This row owns motion only. Spend the variation budget on limb contacts, arm counter-swing, body height, torso lean, head bob, hair bounce, and loop continuity.
+- Do not redesign or reinterpret identity details while animating. Keep face, hair shape, markings, palette, outline weight, body proportions, outfit, props, and silhouette copied from the approved anchors.
+- Preserve side-specific features exactly as the approved anchors show them. Do not solve hairpin side, earring side, logos, handed props, scars, one-sided markings, asymmetric clothing, or lighting cues from scratch inside the row.
+- When generating a paired left/right row, use the paired row reference only for timing, scale, and animation intensity. Rotate the body, feet, shoulders, face angle, and gaze to the target facing, but keep identity details attached according to the accepted target-direction anchor.
+- For cyclic locomotion, do not let a single running/walking pose anchor determine every frame's leg phase. Use multi-pose motion references and the layout phase guide for foot contacts.
+- Prefer a subtler animation over any change that mutates the character identity.
+
+
+State-specific requirements:
+- Lock the whole row to same shallow elevated three-quarter side view as accepted ArmedReady209, facing screen-right; not pure90-degree profile. Do not average it into a different facing.
+- Derive identity from the attached accepted direction anchor for this facing, not from any base character image.
+
+
+Transparency and artifact rules:
+- Prefer pose, expression, and silhouette changes over decorative effects.
+- Effects are allowed only when state-relevant, opaque, hard-edged, sprite-like, fully inside the same frame slot, and physically touching or overlapping the character silhouette.
+- Do not draw detached effects: floating stars, loose sparkles, floating punctuation, floating icons, separated smoke clouds, loose dust, disconnected outline bits, or stray pixels.
+- Do not draw wave marks, motion arcs, speed lines, action streaks, afterimages, blur, smears, halos, glows, auras, floor patches, cast shadows, contact shadows, drop shadows, oval floor shadows, landing marks, or impact bursts.
+- Do not include text, labels, frame numbers, visible grids, guide marks, speech bubbles, thought bubbles, UI panels, code snippets, scenery, checkerboard transparency, white backgrounds, or black backgrounds.
+- Reject any pose that is cropped, overlaps another pose, crosses into a neighboring frame slot, or creates a separate disconnected component that is not attached to the character.
+
+Layout requirements:
+- Exactly 2 full-body frames, left to right, in one horizontal row.
+- The attached layout guide shows the 2 frame boxes, inner safe area, and optional motion phase hints for this row. Follow its slot count, spacing, centering, padding, and phase timing.
+- Do not reproduce the layout guide itself: no visible boxes, guide lines, center marks, labels, stick figures, guide colors, or guide background may appear in the output.
+- Treat the image as 2 equal-width invisible 512x512 frame slots. Fill every slot: each requested slot must contain exactly one complete full-body pose.
+- Spread the 2 poses evenly across the whole image width. Do not leave any requested slot blank or create large empty gaps between poses.
+- Center one complete pose in each slot. No pose may cross into the neighboring slot.
+- Use a perfectly flat pure magenta #FF00FF chroma-key background across the whole image.
+- Do not use #FF00FF, pure magenta, or chroma-adjacent colors in the character, highlights, props, shadows, or effects.
+- Keep the rendering faithful to the attached reference sprite: same outline weight, same palette, same detail level — do not restyle it.
+- Keep every frame self-contained with at least 48 px horizontal and 48 px vertical safe padding. No character body part should be clipped by the frame slot.
+- Avoid motion blur. Use clear pose changes readable at 512x512.
+- Preserve the same silhouette, face, proportions, palette, material, and props across every frame.
+
+Output only the sprite strip image.

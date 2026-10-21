@@ -1,0 +1,513 @@
+{
+  "schema": "native171-primary2-three-component-concise-prompt-draft-v2",
+  "created_local": "2026-10-16T17:14:21.262068+08:00",
+  "original_input_freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/input-freeze-v001.json",
+    "bytes": 15361,
+    "sha256": "2f02f4dafd67f6bf14b22ac18627e9c2dc1e9a93308df477f19331edadc1dbcc"
+  },
+  "original_handoff": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/primary2-macro-native-handoff-draft-v001.json",
+    "bytes": 52381,
+    "sha256": "db98cd842b856dce6cd7d58ba4ea88cf2f08805dfb28f4986996e38406bfa282"
+  },
+  "original40files_unchanged_before_after": true,
+  "original40file_count": 40,
+  "rows": [
+    {
+      "component": "Chest",
+      "state": "armor_chest_sword_primary2",
+      "existing_run_dir": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-chest-primary2-v001",
+      "raw_output_planned": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-chest-primary2-v001/raw/armor_chest_sword_primary2.png",
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/generation-prompts-v002/chest-canonical-v002.txt",
+        "bytes": 4426,
+        "sha256": "63b89eb70c28872ff2b5913fa4e200258f3af6cb849003ba3569f847ae5e952a"
+      },
+      "english_word_count_whitespace": 637,
+      "reference_images_in_order": [
+        {
+          "slot": 1,
+          "role": "Reference1: canonical131 hero is the sole grotesque ink/style identity. Use its outline character and material treatment; output none of its body, helmet or clothing.",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/curated/frame-0.png",
+            "bytes": 117257,
+            "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718"
+          }
+        },
+        {
+          "slot": 2,
+          "role": "Reference2: the six actual native171 body frames are the ONLY motion/depth reference, in phase0..5 order. Observe torso and upper-arm orientation; output none of the bodies or hands.",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/guides/native171-six-original512-contact-v001.png",
+            "bytes": 629982,
+            "sha256": "0462a3379dfedf159767a360bd573a86523376b3814ef9ea7ca2d0a6caaf36fb"
+          }
+        },
+        {
+          "slot": 3,
+          "role": "Reference3: the same-item Ready component defines its metal palette, rigid construction, straps/flanges and identifying feature; it is not an attack pose or pixels to copy/warp.",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/run-chest-ready-v003/curated/frame-0.png",
+            "bytes": 9386,
+            "sha256": "9e7ab35ca60c6fb38e7338ed968dd34585ebb21472f89b56111df0162e3a933c"
+          }
+        },
+        {
+          "slot": 4,
+          "role": "Reference4: the body-attachment technical guide supplies visible cloth DESIGN candidates and separately marked hidden Root TRIAL targets. These are not measured bones, joints or generated component anchors. Do not draw any guide marks.",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/guides/chest-native171-design-v001.png",
+            "bytes": 643328,
+            "sha256": "1674d8c190b067f37a04abcc42d186c4280e390b4ec7c0706eb8630c2b7b0066"
+          }
+        },
+        {
+          "slot": 5,
+          "role": "Reference5: the standard six-slot layout supplies count, spacing and safe padding only. Do not reproduce its boxes, colors, numbers or labels.",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-chest-primary2-v001/references/layout-guides/armor_chest_sword_primary2.png",
+            "bytes": 6111,
+            "sha256": "51e5032dad0182f0c454a41c45731569075aa78abc9d03d568dba66698623717"
+          }
+        }
+      ],
+      "frame_count": 6,
+      "durations_ms": [
+        75,
+        75,
+        60,
+        60,
+        135,
+        135
+      ],
+      "kernel_total_ms": 540,
+      "standard_preview_total_ms": 600,
+      "shared_row_scale": true,
+      "per_frame_fit": false,
+      "fit_window_design_px": [
+        70,
+        50
+      ],
+      "feature_contract": "actual central raised round chest boss",
+      "mounts": [
+        {
+          "frame": 0,
+          "visible_cloth_design_A": [
+            261,
+            268
+          ],
+          "visible_design_uncertainty_source_px": 3,
+          "hidden_Root_TRIAL_design": null,
+          "future_component_feature_A": null
+        },
+        {
+          "frame": 1,
+          "visible_cloth_design_A": [
+            261,
+            275
+          ],
+          "visible_design_uncertainty_source_px": 3,
+          "hidden_Root_TRIAL_design": null,
+          "future_component_feature_A": null
+        },
+        {
+          "frame": 2,
+          "visible_cloth_design_A": [
+            267,
+            266
+          ],
+          "visible_design_uncertainty_source_px": 3,
+          "hidden_Root_TRIAL_design": null,
+          "future_component_feature_A": null
+        },
+        {
+          "frame": 3,
+          "visible_cloth_design_A": null,
+          "visible_design_uncertainty_source_px": null,
+          "hidden_Root_TRIAL_design": {
+            "point": [
+              263,
+              268
+            ],
+            "uncertainty_source_px": 8,
+            "kind": "Root HIDDEN TRIAL DESIGN ONLY; not visible/measured cloth/bone/joint or generated feature"
+          },
+          "future_component_feature_A": null
+        },
+        {
+          "frame": 4,
+          "visible_cloth_design_A": null,
+          "visible_design_uncertainty_source_px": null,
+          "hidden_Root_TRIAL_design": {
+            "point": [
+              262,
+              269
+            ],
+            "uncertainty_source_px": 8,
+            "kind": "Root HIDDEN TRIAL DESIGN ONLY; not visible/measured cloth/bone/joint or generated feature"
+          },
+          "future_component_feature_A": null
+        },
+        {
+          "frame": 5,
+          "visible_cloth_design_A": [
+            261,
+            268
+          ],
+          "visible_design_uncertainty_source_px": 3,
+          "hidden_Root_TRIAL_design": null,
+          "future_component_feature_A": null
+        }
+      ],
+      "future_component_A": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "generation_ready": false,
+      "generation_approved_by_this_draft": false,
+      "native_request_number": null,
+      "native_generation_called": false,
+      "original_template": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-chest-primary2-v001/prompts/armor_chest_sword_primary2.txt",
+        "bytes": 14077,
+        "sha256": "035c7a91a94c89e0bc14ad4ddc1e20c1093f7ee427bde35aab72c8a63d37ee72"
+      },
+      "original_template_word_count": 1881
+    },
+    {
+      "component": "NearShoulder",
+      "state": "armor_shoulder_near_sword_primary2",
+      "existing_run_dir": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-nearshoulder-primary2-v001",
+      "raw_output_planned": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-nearshoulder-primary2-v001/raw/armor_shoulder_near_sword_primary2.png",
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/generation-prompts-v002/nearshoulder-canonical-v002.txt",
+        "bytes": 4450,
+        "sha256": "b92f67be3f7eb8aa6711222b7ee25bd07a2f41f278f3624a2ff351dfdbf60450"
+      },
+      "english_word_count_whitespace": 648,
+      "reference_images_in_order": [
+        {
+          "slot": 1,
+          "role": "Reference1: canonical131 hero is the sole grotesque ink/style identity. Use its outline character and material treatment; output none of its body, helmet or clothing.",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/curated/frame-0.png",
+            "bytes": 117257,
+            "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718"
+          }
+        },
+        {
+          "slot": 2,
+          "role": "Reference2: the six actual native171 body frames are the ONLY motion/depth reference, in phase0..5 order. Observe torso and upper-arm orientation; output none of the bodies or hands.",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/guides/native171-six-original512-contact-v001.png",
+            "bytes": 629982,
+            "sha256": "0462a3379dfedf159767a360bd573a86523376b3814ef9ea7ca2d0a6caaf36fb"
+          }
+        },
+        {
+          "slot": 3,
+          "role": "Reference3: the same-item Ready component defines its metal palette, rigid construction, straps/flanges and identifying feature; it is not an attack pose or pixels to copy/warp.",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/run-nearshoulder-ready-v002/curated/frame-0.png",
+            "bytes": 6736,
+            "sha256": "5a668c0eb81a0753591a5a9de8a152d33dc1e881fa696f55d82cc294efaba03a"
+          }
+        },
+        {
+          "slot": 4,
+          "role": "Reference4: the body-attachment technical guide supplies visible cloth DESIGN candidates and separately marked hidden Root TRIAL targets. These are not measured bones, joints or generated component anchors. Do not draw any guide marks.",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/guides/nearshoulder-native171-design-v001.png",
+            "bytes": 644432,
+            "sha256": "04cae4c2b15f9d15b3e198c4132e7928d5aa076b0f60a8cf4e7f5fe26ce799a3"
+          }
+        },
+        {
+          "slot": 5,
+          "role": "Reference5: the standard six-slot layout supplies count, spacing and safe padding only. Do not reproduce its boxes, colors, numbers or labels.",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-nearshoulder-primary2-v001/references/layout-guides/armor_shoulder_near_sword_primary2.png",
+            "bytes": 6109,
+            "sha256": "6b1505400deb2339b1cab5d3c151b91b46af71140d7fcf50f926436f3f87d626"
+          }
+        }
+      ],
+      "frame_count": 6,
+      "durations_ms": [
+        75,
+        75,
+        60,
+        60,
+        135,
+        135
+      ],
+      "kernel_total_ms": 540,
+      "standard_preview_total_ms": 600,
+      "shared_row_scale": true,
+      "per_frame_fit": false,
+      "fit_window_design_px": [
+        60,
+        44
+      ],
+      "feature_contract": "actual central near-cap washer dark-hole center",
+      "mounts": [
+        {
+          "frame": 0,
+          "visible_cloth_design_A": [
+            210,
+            246
+          ],
+          "visible_design_uncertainty_source_px": 3,
+          "hidden_Root_TRIAL_design": null,
+          "future_component_feature_A": null
+        },
+        {
+          "frame": 1,
+          "visible_cloth_design_A": [
+            211,
+            257
+          ],
+          "visible_design_uncertainty_source_px": 3,
+          "hidden_Root_TRIAL_design": null,
+          "future_component_feature_A": null
+        },
+        {
+          "frame": 2,
+          "visible_cloth_design_A": [
+            218,
+            248
+          ],
+          "visible_design_uncertainty_source_px": 3,
+          "hidden_Root_TRIAL_design": null,
+          "future_component_feature_A": null
+        },
+        {
+          "frame": 3,
+          "visible_cloth_design_A": [
+            221,
+            237
+          ],
+          "visible_design_uncertainty_source_px": 3,
+          "hidden_Root_TRIAL_design": null,
+          "future_component_feature_A": null
+        },
+        {
+          "frame": 4,
+          "visible_cloth_design_A": [
+            213,
+            246
+          ],
+          "visible_design_uncertainty_source_px": 3,
+          "hidden_Root_TRIAL_design": null,
+          "future_component_feature_A": null
+        },
+        {
+          "frame": 5,
+          "visible_cloth_design_A": [
+            210,
+            246
+          ],
+          "visible_design_uncertainty_source_px": 3,
+          "hidden_Root_TRIAL_design": null,
+          "future_component_feature_A": null
+        }
+      ],
+      "future_component_A": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "generation_ready": false,
+      "generation_approved_by_this_draft": false,
+      "native_request_number": null,
+      "native_generation_called": false,
+      "original_template": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-nearshoulder-primary2-v001/prompts/armor_shoulder_near_sword_primary2.txt",
+        "bytes": 14421,
+        "sha256": "2624962ce3120f91fd0d81dd0e2f2ac6aadc173f0ebeb97c9b736516256f5a65"
+      },
+      "original_template_word_count": 1947
+    },
+    {
+      "component": "FarShoulder",
+      "state": "armor_shoulder_far_sword_primary2",
+      "existing_run_dir": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-farshoulder-primary2-v001",
+      "raw_output_planned": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-farshoulder-primary2-v001/raw/armor_shoulder_far_sword_primary2.png",
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/generation-prompts-v002/farshoulder-canonical-v002.txt",
+        "bytes": 4578,
+        "sha256": "ec5256b0494ff7a92a475290e604a3f43c29ac222cd33a638ba0e1edd52e7053"
+      },
+      "english_word_count_whitespace": 664,
+      "reference_images_in_order": [
+        {
+          "slot": 1,
+          "role": "Reference1: canonical131 hero is the sole grotesque ink/style identity. Use its outline character and material treatment; output none of its body, helmet or clothing.",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/curated/frame-0.png",
+            "bytes": 117257,
+            "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718"
+          }
+        },
+        {
+          "slot": 2,
+          "role": "Reference2: the six actual native171 body frames are the ONLY motion/depth reference, in phase0..5 order. Observe torso and upper-arm orientation; output none of the bodies or hands.",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/guides/native171-six-original512-contact-v001.png",
+            "bytes": 629982,
+            "sha256": "0462a3379dfedf159767a360bd573a86523376b3814ef9ea7ca2d0a6caaf36fb"
+          }
+        },
+        {
+          "slot": 3,
+          "role": "Reference3: the same-item Ready component defines its metal palette, rigid construction, straps/flanges and identifying feature; it is not an attack pose or pixels to copy/warp.",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/run-farshoulder-ready-v002/curated/frame-0.png",
+            "bytes": 3587,
+            "sha256": "99420f60f5ded7eeddf74c348b0c2b9280a0f579201f23a8ed9198e400f0dc18"
+          }
+        },
+        {
+          "slot": 4,
+          "role": "Reference4: the body-attachment technical guide supplies visible cloth DESIGN candidates and separately marked hidden Root TRIAL targets. These are not measured bones, joints or generated component anchors. Do not draw any guide marks.",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/guides/farshoulder-native171-design-v001.png",
+            "bytes": 644102,
+            "sha256": "8c449a126cb065ce600504f05ab336abea35bcaff4a633b8a1b21a5666f930da"
+          }
+        },
+        {
+          "slot": 5,
+          "role": "Reference5: the standard six-slot layout supplies count, spacing and safe padding only. Do not reproduce its boxes, colors, numbers or labels.",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-farshoulder-primary2-v001/references/layout-guides/armor_shoulder_far_sword_primary2.png",
+            "bytes": 6109,
+            "sha256": "5ca82fa5c9328eaa9bf85953bd44461e352744e3d586fb6b64a234408fbb5a54"
+          }
+        }
+      ],
+      "frame_count": 6,
+      "durations_ms": [
+        75,
+        75,
+        60,
+        60,
+        135,
+        135
+      ],
+      "kernel_total_ms": 540,
+      "standard_preview_total_ms": 600,
+      "shared_row_scale": true,
+      "per_frame_fit": false,
+      "fit_window_design_px": [
+        32,
+        30
+      ],
+      "feature_contract": "actual small top-strap rivet center, NOT centralboss",
+      "mounts": [
+        {
+          "frame": 0,
+          "visible_cloth_design_A": [
+            305,
+            271
+          ],
+          "visible_design_uncertainty_source_px": 5,
+          "hidden_Root_TRIAL_design": null,
+          "future_component_feature_A": null
+        },
+        {
+          "frame": 1,
+          "visible_cloth_design_A": [
+            305,
+            275
+          ],
+          "visible_design_uncertainty_source_px": 5,
+          "hidden_Root_TRIAL_design": null,
+          "future_component_feature_A": null
+        },
+        {
+          "frame": 2,
+          "visible_cloth_design_A": [
+            305,
+            271
+          ],
+          "visible_design_uncertainty_source_px": 5,
+          "hidden_Root_TRIAL_design": null,
+          "future_component_feature_A": null
+        },
+        {
+          "frame": 3,
+          "visible_cloth_design_A": null,
+          "visible_design_uncertainty_source_px": null,
+          "hidden_Root_TRIAL_design": {
+            "point": [
+              307,
+              274
+            ],
+            "uncertainty_source_px": 10,
+            "kind": "Root HIDDEN TRIAL DESIGN ONLY; not visible/measured cloth/bone/joint or generated feature"
+          },
+          "future_component_feature_A": null
+        },
+        {
+          "frame": 4,
+          "visible_cloth_design_A": [
+            307,
+            275
+          ],
+          "visible_design_uncertainty_source_px": 5,
+          "hidden_Root_TRIAL_design": null,
+          "future_component_feature_A": null
+        },
+        {
+          "frame": 5,
+          "visible_cloth_design_A": [
+            305,
+            271
+          ],
+          "visible_design_uncertainty_source_px": 5,
+          "hidden_Root_TRIAL_design": null,
+          "future_component_feature_A": null
+        }
+      ],
+      "future_component_A": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "generation_ready": false,
+      "generation_approved_by_this_draft": false,
+      "native_request_number": null,
+      "native_generation_called": false,
+      "original_template": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-v001/run-farshoulder-primary2-v001/prompts/armor_shoulder_far_sword_primary2.txt",
+        "bytes": 14439,
+        "sha256": "8c4e537820fe38e0c5952e7433786c0feb5abb512a717d41d026645c3bf7f2e9"
+      },
+      "original_template_word_count": 1935
+    }
+  ],
+  "prior_reference_review": "Root reports E214 retained and all11references explicitly reviewed; this text draft does not itself approve or reserve generation.",
+  "prompt_change_reason": "Remove generic full-body/direction-anchor/face/outfit and disconnected-component contradictions. Keep only isolated piece, exactly five scoped refs, same rigid construction/native171sixphase and unchanged source/hiddenTRIAL contracts.",
+  "far163_centralboss_requirement_passed": false,
+  "far_topstrap_family_is_separate_explicit_design": true,
+  "generation_ready": false,
+  "native_called": false,
+  "native_request_numbers_assigned": false,
+  "future_generated_features_A_all_unknown": true,
+  "timing_contract_passed": false,
+  "UE_or_import_called": false,
+  "new_media_created_or_viewed": false,
+  "formal_complete_units": 0
+}

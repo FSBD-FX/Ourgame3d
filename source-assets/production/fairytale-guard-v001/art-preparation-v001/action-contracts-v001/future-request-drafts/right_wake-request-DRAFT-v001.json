@@ -1,0 +1,36 @@
+{
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48
+  },
+  "states": {
+    "right_wake": {
+      "frames": 6,
+      "fps": 6,
+      "loop": false,
+      "action": "frame0 at0ms: Dormant form first; shoulders remain low, eyes dark; frame1 at167ms: First faint amber eye-window light, plates begin unlock; frame2 at333ms: Chest and near shoulder lift slightly, feet planted; frame3 at500ms: Halfway weight up, both stone fists tighten but stayclosed; frame4 at667ms: Head clears shoulders, planted ready stance; frame5 at833ms: Arrive near acceptedIdle frame0, no attack beforeWakeCompleted. All frames preserve same acceptedidleidentity/camera. Fistsclosed unlessactualdeath; noaxe/shaft, dust, shadow, detachedFX, labels/grid."
+    }
+  },
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    }
+  },
+  "style": "Match accepted Guard RIGHT idle anchor exactly: shallow elevated three-quarter camera, wide short stone slabs, coarse black ink, small ambereye window, one sparse moss shoulder, few broad warmgreyplanes. BODY ONLY, closedtwofists, no weapon/FX. Do not turnpureprofile, addtinytexture, or resemble chargingStoneKnight.",
+  "motion_phase_guides": false,
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "ENM-STN-003-fixed-heavyaxe-armed-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "magenta",
+    "hex": "#FF00FF",
+    "rgb": [
+      255,
+      0,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "right_idle": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "Camera contract: same shallow elevated three-quarter side view as the accepted body reference, screen-right; not a pure90-degree profile. FOUR distinct HEAVYAXE-READY full-body poses, Guard AND the SAME fixed stone axe in each complete pose. Replace empty side fists by a natural two-handed grip around ONE continuous straight wood shaft. Both fists visibly fully CLOSED around the shaft, thumbs wrapping fingers; the shaft must enter and exit each fist along the same straight axis, never two disconnected sticks or shaft passing beside a hand. Near hand lower toward butt, far hand higher toward head, separated by the wrap as on the axe reference. Keep both hands low before abdomen, head lifted upper-right clear of eye window, knees and feet; butt lower-left above ground. Do not retain the neutral reference hand positions when they cannot grip this axe. SAME body size, same helmet/torso/limb proportions and one unchanged axe length/head shape/shaft thickness in all4 frames. Axe overall length is about one Guard crown-to-sole height, not a tiny toy or huge polearm. Feet planted at one common sole line, no steps, travel, attack, swing, dust or VFX. Frame0 quiet armed neutral. Frame1 modest knee/shoulder compression under weight with both grips moving coherently together. Frame2 shoulder/rib settle the other way, same shaft and grip order. Frame3 eases back near frame0 for smooth loop. Meaningful small pose variation in all4, not four duplicated static copies. No extra hands/fingers/weapons, no open palms. Keep broad stone planes, sparse moss and thick irregular ink; reduce tiny stone speckles.",
+      "durations_ms": [
+        250,
+        250,
+        250,
+        250
+      ]
+    }
+  },
+  "style": "Match accepted207 body identity exactly: broad squat slab helmet/stone torso, recessed small amber eyes, warm grey/tan slabs, sparse olive shoulder moss, short stocky stone limbs, coarse dark ink. Fixed single208stoneaxe identity, continuous wood haft/two bare wood grip zones/stone buttcap. Broad low-detail planes, no photoreal grain, no pixel grid, no vector gloss. Treat the separate axe reference as shape/material authority, not as its screen pixel scale relative to the body.",
+  "motion_phase_guides": false,
+  "directions": {
+    "set": [
+      "right"
+    ],
+    "mirror": {
+      "left": "right"
+    },
+    "anchor_suffix": "idle"
+  },
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

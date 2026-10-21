@@ -1,0 +1,89 @@
+diff --git a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp
+@@ -136,12 +136,29 @@
+         && F->GetDodgeState().Phase!=DungeonDodge::EPhase::Dodging
+         && F->GetArmorChangeRemaining()<=0.f
+         && FMath::IsFinite(F->AnimationTime) && F->AnimationTime>=0.f;
+     Record.Supported=Primary1 || Primary2 || Primary3 || StableIdle;
++    Record.ActionPoseSupported=Record.Supported;
++    const auto* PendingPickup=Game?&Game->GetEquipmentView().Action:nullptr;
++    const bool ActualPickup=PendingPickup && PendingPickup->Active && PendingPickup->ActionId
++        &&PendingPickup->OperationId && PendingPickup->SourceId && PendingPickup->InstanceId
++        &&((PendingPickup->Kind==EDungeonEquipmentActionKind::PickupArmor && PendingPickup->Slot==2)
++            ||(PendingPickup->Kind==EDungeonEquipmentActionKind::PickupWeapon && PendingPickup->Slot>=0 && PendingPickup->Slot<2))
++        &&FMath::IsFinite(PendingPickup->Start) && FMath::IsFinite(PendingPickup->Deadline)
++        &&PendingPickup->Start>=0. && PendingPickup->Start<=Record.SimulationTime && Record.SimulationTime<PendingPickup->Deadline;
++    // Reuse only this draw's successful committed binding. The pending target
++    // never selects a skin; unknown armor and all unrelated unsupported poses stay closed.
++    Record.GearPlaceholder=Record.EquipmentBoundMode && Record.EquipmentBindingValid && !Record.ActionPoseSupported
++        &&ActualPickup && !F->bDead && Melee.Grounded && F->JumpHeight==0.f && F->GetVerticalVelocity()==0.f
++        &&!Action.Active && !F->GetWeaponSkillAction().Active && F->GetDodgeState().Phase==DungeonDodge::EPhase::Idle
++        &&((PendingPickup->Kind==EDungeonEquipmentActionKind::PickupArmor && F->AnimationName==TEXT("equip_armor"))
++            ||(PendingPickup->Kind==EDungeonEquipmentActionKind::PickupWeapon && F->AnimationName==TEXT("equip_weapon")));
++    const bool DrawGear=Record.Supported || Record.GearPlaceholder;
+     Record.Clip=Primary3?TEXT("sword_primary_3"):Primary2?TEXT("sword_primary_2"):Primary1?TEXT("sword_primary_1"):TEXT("sword_ready_idle");
+     // The accepted kernel owns attack timing/speed. No independent attack clock.
+     Record.Frame=(Primary1||Primary2||Primary3)?F->GetPrimaryPoseFrame():StableIdle
+         ?FMath::FloorToInt(double(F->AnimationTime)/.167)%4:0;
++    if(Record.GearPlaceholder){Record.Clip=TEXT("sword_ready_idle");Record.Frame=0;}
+     const bool RisingAxisTrial=Primary2 && FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2ArcPreview"));
+     const bool Primary2BodyTrial=Primary2 && (FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2BodyPreview"))
+         ||DungeonFairytaleSwordPrimary2ArmorV001::Enabled() || DungeonFairytaleSwordPrimary3V001::Enabled()
+         ||bUseFairytaleSwordEquipmentBoundPreview);
+@@ -159,10 +176,10 @@
+     const bool PrimaryArmorPhase=Primary1 && (Record.EquipmentBoundMode?BoundLightArmor:bUseFairytaleSwordArmorPrimary1Preview);
+     const bool Primary2ArmorPhase=Primary2 && (Record.EquipmentBoundMode?BoundLightArmor
+         :(DungeonFairytaleSwordPrimary2ArmorV001::Enabled() || DungeonFairytaleSwordPrimary3V001::Enabled()));
+     const bool Primary3ArmorPhase=Primary3 && (Record.EquipmentBoundMode?BoundLightArmor:DungeonFairytaleSwordPrimary3V001::ArmorEnabled());
+-    const bool ArmorPhase=(!Record.EquipmentBoundMode || Record.Supported)
+-        &&((Record.ArmorPreview && StableIdle) || PrimaryArmorPhase || Primary2ArmorPhase || Primary3ArmorPhase);
++    const bool ArmorPhase=(!Record.EquipmentBoundMode || DrawGear)
++        &&((Record.ArmorPreview && (StableIdle || Record.GearPlaceholder)) || PrimaryArmorPhase || Primary2ArmorPhase || Primary3ArmorPhase);
+     // Source body partition is exclusive, and every part keeps its original UVs.
+     // Ready and each supported primary stage use their own source phase partition.
+     static const TCHAR* Components[]={TEXT("BodyRest"),TEXT("ShoulderFar"),TEXT("Chest"),
+         TEXT("NearArmWithoutHand"),TEXT("ShoulderNear"),TEXT("NearHand")};
+@@ -189,10 +206,10 @@
+         Record.TextureReady=Record.TextureReady && Record.ArmorReady;
+     }
+     // Validate the whole supported draw before emitting any body/armor quad.
+     // A non-null resource can still be waiting for render initialization.
+-    UTexture2D* SwordTexture=Record.Supported?GetCandidateSword():nullptr;
+-    if(Record.Supported)
++    UTexture2D* SwordTexture=DrawGear?GetCandidateSword():nullptr;
++    if(DrawGear)
+         Record.TextureReady=Record.TextureReady && SwordTexture && SwordTexture->GetResource()
+             && !SwordTexture->HasPendingRenderResourceInitialization();
+ 
+     // This branch owns player presentation even with missing textures or unsupported
+@@ -246,11 +263,11 @@
+         for(int32 I : {1,2,4})RenderedArmorLayerPaths.Add(ReadyLayers[I]->GetPathName());
+     }
+     else DrawBodyLayer(Body);
+ 
+-    // Unsupported walk/air/hurt/death/other stages/families use the new Ready0
+-    // placeholder with Supported=false and NO sword; this does not claim their art.
+-    if(!Record.Supported)return true;
++    // Other unsupported poses stay a bare Ready0. Only a legitimate pending
++    // pickup may retain committed gear while action-pose support remains false.
++    if(!DrawGear)return true;
+     // One uniform scale for the independent weapon across every supported phase.
+     // Keep the actor/body/armor scale and combat range unchanged at this art trial.
+     constexpr double WeaponScale=.50;
+     const FVector2D ComponentGrip(99.,256.); // Existing independent WEAPON only.
+diff --git a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordDrawState.h b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordDrawState.h
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordDrawState.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordDrawState.h
+@@ -9,8 +9,11 @@
+ // Thumb, axis sign, hand masks, foot drift and blade/helmet clearance are unaccepted.
+ struct FDungeonFairytaleSwordDraw
+ {
+     bool Active=false, Supported=false, TextureReady=false;
++    // Process-only: Supported keeps its existing action-pose meaning. A Ready0
++    // committed-gear placeholder does not claim a completed pickup animation.
++    bool ActionPoseSupported=false, GearPlaceholder=false;
+     // Same-draw read-only resolver result; failed results retain default identity.
+     // Valid skin authorization is not acceptance of motion, acquisition or full Profile.
+     bool EquipmentBoundMode=false, EquipmentBindingValid=false;
+     FString EquipmentBindingDiagnostic;
