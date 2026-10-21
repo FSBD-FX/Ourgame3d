@@ -1,0 +1,430 @@
+{
+  "schema": "XBW-neutral-walk-fixed-scale-feasibility-diagnostic-v1",
+  "diagnostic_only": true,
+  "existing_frozen_assets_modified": false,
+  "new_generation_calls": 0,
+  "UE_or_Source_writes": false,
+  "sources": [
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-XBW-walk-v001\\manifests\\import-XBW-common-walk-v001.json",
+      "sha256": "7185df2ad077ec92d020788f84f2f9b890dc7d042ceb7656d0a9576177d471a5"
+    },
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-components-v001\\manifests\\import-weapon-components-v001.json",
+      "sha256": "275794953add2f130f0b7912fa9e01a16c21e4e017957af4c4d9c7793c240d68"
+    },
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\manifests\\weapon-state-lifecycle-v001.json",
+      "sha256": "94f2d3b6163f620babe8d5d550cacbeb7204ca69f8b3942ebdc27f512e72fffe"
+    },
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-XBW-walk-v001\\manifests\\XBW-walk-neutral-state-minus1-extension-v002.json",
+      "sha256": "50905d2632020cbc475ff6e262c9074b40afc6b6bdf818d05aac0bd4df9f54c0"
+    }
+  ],
+  "component_scale_frozen": 0.48,
+  "support_error_gate_existing_px": 3.129,
+  "fit_assumptions": [
+    "Primary stock anchor is required to map exactly onto frozen body primary grip (zero primary error).",
+    "Each component may rotate according to its OWN measured stock-to-support vector to match the SAME body hand ray.",
+    "Only one rigid uniform component scale0.48; no arm stretch, per-axis scaling, marker move or primary/support error sharing.",
+    "Thus minimum support residual is abs(body hand distance-0.48*component grip-vector length)."
+  ],
+  "components": [
+    {
+      "component_state_index": -1,
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-components-v001\\components\\XBW001-neutral-component-v002.png",
+      "sha256": "4cc4386d51df9e4c12c8db23155c1ebb3c318a087fcc8c68e9c2ed72898e3109",
+      "canvas_px": [
+        512,
+        512
+      ],
+      "primary_stock_px": [
+        128,
+        253
+      ],
+      "support_px": [
+        337,
+        282
+      ],
+      "stock_rgba": [
+        123,
+        72,
+        41,
+        255
+      ],
+      "support_rgba": [
+        74,
+        42,
+        21,
+        255
+      ],
+      "stock_to_support_vector_px": [
+        209,
+        29
+      ],
+      "native_vector_length_px": 211.00236965494014,
+      "native_vector_angle_image_clockwise_deg": 7.8996916142652305,
+      "component_scale": 0.48,
+      "scaled_vector_length_body_px": 101.28113743437126,
+      "exact_stock_support_fit_feasible_body_distance_interval_px": [
+        98.15213743437126,
+        104.41013743437126
+      ],
+      "marker_role": "manual_intended_wood_contact_anchor_not_steel_rail_centerline_or_measured_hand_skeleton_joint"
+    },
+    {
+      "component_state_index": 0,
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\components\\XBW-reload-four-keyposes-v002\\weapon-0.png",
+      "sha256": "0b360c9015bbbdc82ce4bbd9e1eed6e0db04a249c5d7b7c6ce036c84288c8ab5",
+      "canvas_px": [
+        512,
+        512
+      ],
+      "primary_stock_px": [
+        138,
+        308
+      ],
+      "support_px": [
+        344,
+        320
+      ],
+      "stock_rgba": [
+        53,
+        25,
+        13,
+        255
+      ],
+      "support_rgba": [
+        170,
+        97,
+        47,
+        255
+      ],
+      "stock_to_support_vector_px": [
+        206,
+        12
+      ],
+      "native_vector_length_px": 206.3492185592182,
+      "native_vector_angle_image_clockwise_deg": 3.333850661536574,
+      "component_scale": 0.48,
+      "scaled_vector_length_body_px": 99.04762490842474,
+      "exact_stock_support_fit_feasible_body_distance_interval_px": [
+        95.91862490842473,
+        102.17662490842474
+      ],
+      "marker_role": "manual_intended_wood_contact_anchor_not_steel_rail_centerline_or_measured_hand_skeleton_joint"
+    },
+    {
+      "component_state_index": 3,
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\components\\XBW-reload-four-keyposes-v002\\weapon-3.png",
+      "sha256": "728fabd360d6dff1c6321e16a613ebdeff81831092748accbc4ccabf75dd8ba3",
+      "canvas_px": [
+        512,
+        512
+      ],
+      "primary_stock_px": [
+        138,
+        274
+      ],
+      "support_px": [
+        344,
+        286
+      ],
+      "stock_rgba": [
+        62,
+        36,
+        15,
+        255
+      ],
+      "support_rgba": [
+        174,
+        101,
+        51,
+        255
+      ],
+      "stock_to_support_vector_px": [
+        206,
+        12
+      ],
+      "native_vector_length_px": 206.3492185592182,
+      "native_vector_angle_image_clockwise_deg": 3.333850661536574,
+      "component_scale": 0.48,
+      "scaled_vector_length_body_px": 99.04762490842474,
+      "exact_stock_support_fit_feasible_body_distance_interval_px": [
+        95.91862490842473,
+        102.17662490842474
+      ],
+      "marker_role": "manual_intended_wood_contact_anchor_not_steel_rail_centerline_or_measured_hand_skeleton_joint"
+    }
+  ],
+  "independent_component_rotation_case": {
+    "common_feasible_body_grip_distance_interval_px": [
+      98.15213743437126,
+      102.17662490842474
+    ],
+    "interval_width_px": 4.024487474053487,
+    "nonempty": true,
+    "length_constraints_mutually_impossible": false,
+    "component_length_difference_scaled_px": 2.233512525946523,
+    "equal_error_common_distance_px": 100.16438117139799,
+    "equal_error_residual_px": 1.1167562629732615,
+    "current_frozen_walk_failed_frame_indices": [
+      2,
+      4,
+      5
+    ]
+  },
+  "same_art_rotation_angle_case": {
+    "same_stock_anchor_required": true,
+    "scaled_support_endpoint_difference_vector_px": [
+      1.44,
+      8.16
+    ],
+    "scaled_support_endpoint_separation_px": 8.286084720783393,
+    "maximum_two_error_disks_distance_for_intersection_px": 6.258,
+    "common_target_possible_at_gate": false,
+    "independent_rotation_difference_deg": 4.5658409527286565,
+    "meaning": "Same literal art angle for neutral and0/3 is incompatible at3.129 even though their LENGTH intervals overlap. Per-component native grip-ray orientation is part of each matrix."
+  },
+  "frames": [
+    {
+      "frame_index": 0,
+      "native_primary_grip_px": [
+        228,
+        294
+      ],
+      "native_support_grip_px": [
+        333,
+        299
+      ],
+      "native_body_grip_distance_px": 105.11898020814318,
+      "shared_body_scale": 0.94,
+      "frozen_body_primary_grip_px": [
+        229.68,
+        305.62
+      ],
+      "frozen_body_support_grip_px": [
+        328.38,
+        310.32000000000005
+      ],
+      "frozen_body_grip_distance_px": 98.8118413956546,
+      "minimum_support_residual_px_by_component": {
+        "-1": 2.4692960387166636,
+        "0": 0.23578351277014065,
+        "3": 0.23578351277014065
+      },
+      "inside_common_interval": true,
+      "distance_shortfall_to_common_lower_bound_px": 0,
+      "distance_excess_over_common_upper_bound_px": 0,
+      "support_gate_failed_components": [],
+      "body_grip_uncertainty_native_px": 3,
+      "body_grip_uncertainty_kind": "manual_estimate_per_point_not_statistical_bound_not_license_to_move_marker"
+    },
+    {
+      "frame_index": 1,
+      "native_primary_grip_px": [
+        230,
+        294
+      ],
+      "native_support_grip_px": [
+        336,
+        299
+      ],
+      "native_body_grip_distance_px": 106.1178590059185,
+      "shared_body_scale": 0.94,
+      "frozen_body_primary_grip_px": [
+        231.56,
+        301.85999999999996
+      ],
+      "frozen_body_support_grip_px": [
+        331.2,
+        306.56
+      ],
+      "frozen_body_grip_distance_px": 99.75078746556339,
+      "minimum_support_residual_px_by_component": {
+        "-1": 1.5303499688078688,
+        "0": 0.7031625571386542,
+        "3": 0.7031625571386542
+      },
+      "inside_common_interval": true,
+      "distance_shortfall_to_common_lower_bound_px": 0,
+      "distance_excess_over_common_upper_bound_px": 0,
+      "support_gate_failed_components": [],
+      "body_grip_uncertainty_native_px": 3,
+      "body_grip_uncertainty_kind": "manual_estimate_per_point_not_statistical_bound_not_license_to_move_marker"
+    },
+    {
+      "frame_index": 2,
+      "native_primary_grip_px": [
+        228,
+        294
+      ],
+      "native_support_grip_px": [
+        331,
+        300
+      ],
+      "native_body_grip_distance_px": 103.1746092796091,
+      "shared_body_scale": 0.94,
+      "frozen_body_primary_grip_px": [
+        229.68,
+        299.97999999999996
+      ],
+      "frozen_body_support_grip_px": [
+        326.5,
+        305.62
+      ],
+      "frozen_body_grip_distance_px": 96.98413272283256,
+      "minimum_support_residual_px_by_component": {
+        "-1": 4.297004711538705,
+        "0": 2.0634921855921817,
+        "3": 2.0634921855921817
+      },
+      "inside_common_interval": false,
+      "distance_shortfall_to_common_lower_bound_px": 1.1680047115386998,
+      "distance_excess_over_common_upper_bound_px": 0,
+      "support_gate_failed_components": [
+        -1
+      ],
+      "body_grip_uncertainty_native_px": 3,
+      "body_grip_uncertainty_kind": "manual_estimate_per_point_not_statistical_bound_not_license_to_move_marker"
+    },
+    {
+      "frame_index": 3,
+      "native_primary_grip_px": [
+        236,
+        262
+      ],
+      "native_support_grip_px": [
+        342,
+        267
+      ],
+      "native_body_grip_distance_px": 106.1178590059185,
+      "shared_body_scale": 0.94,
+      "frozen_body_primary_grip_px": [
+        237.2,
+        306.56
+      ],
+      "frozen_body_support_grip_px": [
+        336.84,
+        311.26
+      ],
+      "frozen_body_grip_distance_px": 99.75078746556339,
+      "minimum_support_residual_px_by_component": {
+        "-1": 1.5303499688078688,
+        "0": 0.7031625571386542,
+        "3": 0.7031625571386542
+      },
+      "inside_common_interval": true,
+      "distance_shortfall_to_common_lower_bound_px": 0,
+      "distance_excess_over_common_upper_bound_px": 0,
+      "support_gate_failed_components": [],
+      "body_grip_uncertainty_native_px": 3,
+      "body_grip_uncertainty_kind": "manual_estimate_per_point_not_statistical_bound_not_license_to_move_marker"
+    },
+    {
+      "frame_index": 4,
+      "native_primary_grip_px": [
+        239,
+        262
+      ],
+      "native_support_grip_px": [
+        342,
+        267
+      ],
+      "native_body_grip_distance_px": 103.12128781197411,
+      "shared_body_scale": 0.94,
+      "frozen_body_primary_grip_px": [
+        240.02,
+        300.92
+      ],
+      "frozen_body_support_grip_px": [
+        336.84,
+        305.62
+      ],
+      "frozen_body_grip_distance_px": 96.93401054325562,
+      "minimum_support_residual_px_by_component": {
+        "-1": 4.347126891115636,
+        "0": 2.113614365169113,
+        "3": 2.113614365169113
+      },
+      "inside_common_interval": false,
+      "distance_shortfall_to_common_lower_bound_px": 1.2181268911156309,
+      "distance_excess_over_common_upper_bound_px": 0,
+      "support_gate_failed_components": [
+        -1
+      ],
+      "body_grip_uncertainty_native_px": 3,
+      "body_grip_uncertainty_kind": "manual_estimate_per_point_not_statistical_bound_not_license_to_move_marker"
+    },
+    {
+      "frame_index": 5,
+      "native_primary_grip_px": [
+        224,
+        262
+      ],
+      "native_support_grip_px": [
+        328,
+        267
+      ],
+      "native_body_grip_distance_px": 104.12012293500234,
+      "shared_body_scale": 0.94,
+      "frozen_body_primary_grip_px": [
+        225.92000000000002,
+        306.56
+      ],
+      "frozen_body_support_grip_px": [
+        323.68,
+        311.26
+      ],
+      "frozen_body_grip_distance_px": 97.87291555890219,
+      "minimum_support_residual_px_by_component": {
+        "-1": 3.408221875469067,
+        "0": 1.1747093495225442,
+        "3": 1.1747093495225442
+      },
+      "inside_common_interval": false,
+      "distance_shortfall_to_common_lower_bound_px": 0.2792218754690623,
+      "distance_excess_over_common_upper_bound_px": 0,
+      "support_gate_failed_components": [
+        -1
+      ],
+      "body_grip_uncertainty_native_px": 3,
+      "body_grip_uncertainty_kind": "manual_estimate_per_point_not_statistical_bound_not_license_to_move_marker"
+    }
+  ],
+  "unapplied_global_body_scale_math": {
+    "relative_to_original_native117_body_scale_feasible_for_all6_frames": [
+      0.951812564766808,
+      0.9628598415534001
+    ],
+    "nonempty": true,
+    "current_frozen_scale": 0.94,
+    "current_scale_inside_interval": false,
+    "hypothetical_midpoint_scale": 0.957336203160104,
+    "not_applied": true,
+    "scope": "Pure algebra showing a possible NEW common body profile; this changes body size and all coupled armor/markers, and does not authorize changing7185or35b3."
+  },
+  "manual_visual_review": {
+    "neutral_marker_sampled_opaque": true,
+    "neutral_stock_semantics": "Point128253 is on the leather-wrapped stock neck, below the horizontal beam; support337282 is on the separate lower foregrip. Both are intended local contact anchors.",
+    "state0_3_marker_semantics": "Points138308/344320 and138274/344286 are on actual stock-wrap and lower vertical foregrip. State0 and3 sharevector20612 despite34pxcanvas offset.",
+    "body_marker_semantics": "Visible side-facing closed-fist centers were measured on117nativeart. They are grasp proxies; the actual palm-to-wood internal contact center is occluded and not recoverable from alpha alone.",
+    "neutral_markers_proven_wrong": false,
+    "weapon_rail_centerline_equals_grip_marker": false,
+    "legacy_neutral_marker_numeric_uncertainty_px": null,
+    "pixel_opaque_does_not_prove_palm_contact": true
+  },
+  "root_cause_evidence": [
+    "Neutral andstate0/3 are independently generated source designs, not byte-identical mechanical states of one exact component; their contact vectors differ in length AND native angle.",
+    "The current shared0.94body profile yields three hand distances below the joint feasible lower limit. This explains neutral2/4/5 failure without alleging corrupted marker coordinates.",
+    "Current state0/3 fits do not prove that original neutral will fit the same body. Reusing the neutral128253pivot on state0/3 would also be wrong."
+  ],
+  "recommended_next_step": "Keep existingbody/armor/component/ledger frozen. Independently audit actual intended wood-contact sites versus visible-fist center semantics across Ready/Primary/Walk before any marker correction. If exact sites remain, choose an explicitly NEW shared-profile or consistent-component revision with all downstream armor/socket/runtime checks; do not move markers merely to pass. No generation requested by this diagnostic.",
+  "production_acceptance_changed": false,
+  "neutral_grip_accepted": false,
+  "runtime_verified": false,
+  "footlock_certified": false,
+  "host_fee_usd": null,
+  "external_API_calls": 0
+}

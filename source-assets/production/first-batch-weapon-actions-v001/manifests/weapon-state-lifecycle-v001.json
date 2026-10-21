@@ -1,0 +1,2057 @@
+{
+  "schema": "XBW-weapon-state-lifecycle-source-v1",
+  "version": 1,
+  "frozen": true,
+  "status": "existing_native_states_and_socket_reuse_candidate_runtime_unfulfilled",
+  "weapon_id": "WPN-XBW-001",
+  "reload_contract_path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\manifests\\import-XBW-reload-four-keyposes-v001.json",
+  "reload_contract_sha256": "9a0f99a5b32a5b898b9fa98d4b40812daf5e532a73954f13df91a7c166297ee8",
+  "ready_primary_contracts": [
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\manifests\\import-XBW-ready-idle-v001.json",
+      "sha256": "21c8ff90c59c411bfdbcabcfee0292881d77e4e652cc2fde46cab35e99373813"
+    },
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\manifests\\import-XBW-primary-v001.json",
+      "sha256": "79fd2508eabfdab26f4dcb1cc21682d08b2518d37bbc0111fc38655869eeb11f"
+    }
+  ],
+  "states": [
+    {
+      "state_index": 0,
+      "visual_state": "empty_relaxed_string",
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\components\\XBW-reload-four-keyposes-v002\\weapon-0.png",
+      "sha256": "0b360c9015bbbdc82ce4bbd9e1eed6e0db04a249c5d7b7c6ce036c84288c8ab5",
+      "canvas_px": [
+        512,
+        512
+      ],
+      "stock_grip_px": [
+        138,
+        308
+      ],
+      "stock_grip_rgba": [
+        53,
+        25,
+        13,
+        255
+      ],
+      "stock_grip_measurement": "manual_visible_leather_grip_contact_center; 4sourcepx_uncertainty_not_skeletal_joint",
+      "support_grip_px": [
+        344,
+        320
+      ],
+      "support_grip_rgba": [
+        170,
+        97,
+        47,
+        255
+      ],
+      "support_grip_measurement": "inherited_manual_visible_underbarrel_handle; 4sourcepx_uncertainty",
+      "emit_px": [
+        506,
+        263
+      ],
+      "emit_kind": "inherited_virtual_rail_exit_not_required_to_be_opaque_not_loaded_arrow_tip",
+      "emit_rgba": [
+        17,
+        8,
+        15,
+        255
+      ],
+      "visible_front_rail_edge_px": [
+        507,
+        263
+      ],
+      "visible_front_rail_edge_rgba": [
+        29,
+        0,
+        25,
+        188
+      ],
+      "visible_front_rail_edge_uncertainty_source_px": 3,
+      "visible_bolt_tip_px": null,
+      "bolt_tip_measurement": "not_present",
+      "shared_stock_anchor_px": [
+        138,
+        274
+      ],
+      "native_canvas_offset_from_shared_anchor_px": [
+        0,
+        34
+      ],
+      "shared_offset_kind": "socket-coordinate_equivalence_not_byte_identical_native_art_translation",
+      "stock_to_support_px": [
+        206,
+        12
+      ],
+      "stock_to_emit_px": [
+        368,
+        -45
+      ],
+      "reload_frame_index": 0,
+      "reload_frozen_component_to_body_affine_2x3": [
+        [
+          0.4740265494402265,
+          0.07549059826092563,
+          133.77787554906587
+        ],
+        [
+          -0.07549059826092563,
+          0.4740265494402265,
+          195.28026998088598
+        ]
+      ],
+      "reload_stock_in_body_px": [
+        222.4446436361822,
+        330.862744648468
+      ],
+      "reload_stock_contact_certification": "only_frame3_is_handheld_primary_stock; frames0to2_near_hand_manipulates_elsewhere",
+      "diagnostic_path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\reviews\\XBW-weapon-state-0-stock-support-virtual-emit-v001.png",
+      "diagnostic_sha256": "8835299534f792290b7e2632a7a9252631c2182352867f7c19a001b3b6a2d856",
+      "runtime_verified": false
+    },
+    {
+      "state_index": 1,
+      "visual_state": "drawn_no_bolt",
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\components\\XBW-reload-four-keyposes-v002\\weapon-1.png",
+      "sha256": "9c7f9516ee4b24da71fe0afb27d32965bd54ecfed1ffed53837809098928ecbc",
+      "canvas_px": [
+        512,
+        512
+      ],
+      "stock_grip_px": [
+        138,
+        308
+      ],
+      "stock_grip_rgba": [
+        76,
+        37,
+        17,
+        255
+      ],
+      "stock_grip_measurement": "manual_visible_leather_grip_contact_center; 4sourcepx_uncertainty_not_skeletal_joint",
+      "support_grip_px": [
+        344,
+        320
+      ],
+      "support_grip_rgba": [
+        172,
+        99,
+        49,
+        255
+      ],
+      "support_grip_measurement": "inherited_manual_visible_underbarrel_handle; 4sourcepx_uncertainty",
+      "emit_px": [
+        506,
+        263
+      ],
+      "emit_kind": "inherited_virtual_rail_exit_not_required_to_be_opaque_not_loaded_arrow_tip",
+      "emit_rgba": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "visible_front_rail_edge_px": [
+        504,
+        263
+      ],
+      "visible_front_rail_edge_rgba": [
+        1,
+        0,
+        1,
+        251
+      ],
+      "visible_front_rail_edge_uncertainty_source_px": 3,
+      "visible_bolt_tip_px": null,
+      "bolt_tip_measurement": "not_present",
+      "shared_stock_anchor_px": [
+        138,
+        274
+      ],
+      "native_canvas_offset_from_shared_anchor_px": [
+        0,
+        34
+      ],
+      "shared_offset_kind": "socket-coordinate_equivalence_not_byte_identical_native_art_translation",
+      "stock_to_support_px": [
+        206,
+        12
+      ],
+      "stock_to_emit_px": [
+        368,
+        -45
+      ],
+      "reload_frame_index": 1,
+      "reload_frozen_component_to_body_affine_2x3": [
+        [
+          0.477681931630981,
+          0.04711658087440946,
+          141.60010963913152
+        ],
+        [
+          -0.04711658087440946,
+          0.477681931630981,
+          186.34988569888293
+        ]
+      ],
+      "reload_stock_in_body_px": [
+        222.03212311352502,
+        326.97383248055655
+      ],
+      "reload_stock_contact_certification": "only_frame3_is_handheld_primary_stock; frames0to2_near_hand_manipulates_elsewhere",
+      "diagnostic_path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\reviews\\XBW-weapon-state-1-stock-support-virtual-emit-v001.png",
+      "diagnostic_sha256": "9447d98c2e671475a86f184410485fc4650d86e105b410c0d5a16bb752bdbdea",
+      "runtime_verified": false
+    },
+    {
+      "state_index": 2,
+      "visual_state": "placing_bolt",
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\components\\XBW-reload-four-keyposes-v002\\weapon-2.png",
+      "sha256": "135020f61fdaf8be69268b86d2c802d2e40e3b3ad2a1f64b75b4849d02e9a37e",
+      "canvas_px": [
+        512,
+        512
+      ],
+      "stock_grip_px": [
+        138,
+        274
+      ],
+      "stock_grip_rgba": [
+        44,
+        18,
+        9,
+        255
+      ],
+      "stock_grip_measurement": "manual_visible_leather_grip_contact_center; 4sourcepx_uncertainty_not_skeletal_joint",
+      "support_grip_px": [
+        344,
+        286
+      ],
+      "support_grip_rgba": [
+        180,
+        105,
+        51,
+        255
+      ],
+      "support_grip_measurement": "inherited_manual_visible_underbarrel_handle; 4sourcepx_uncertainty",
+      "emit_px": [
+        506,
+        229
+      ],
+      "emit_kind": "inherited_virtual_rail_exit_not_required_to_be_opaque_not_loaded_arrow_tip",
+      "emit_rgba": [
+        0,
+        0,
+        0,
+        13
+      ],
+      "visible_front_rail_edge_px": [
+        505,
+        229
+      ],
+      "visible_front_rail_edge_rgba": [
+        6,
+        0,
+        6,
+        191
+      ],
+      "visible_front_rail_edge_uncertainty_source_px": 3,
+      "visible_bolt_tip_px": [
+        506,
+        172
+      ],
+      "bolt_tip_measurement": "manual_visible_tip_estimate_3sourcepx_uncertainty; placement_state2_not_seated",
+      "shared_stock_anchor_px": [
+        138,
+        274
+      ],
+      "native_canvas_offset_from_shared_anchor_px": [
+        0,
+        0
+      ],
+      "shared_offset_kind": "socket-coordinate_equivalence_not_byte_identical_native_art_translation",
+      "stock_to_support_px": [
+        206,
+        12
+      ],
+      "stock_to_emit_px": [
+        368,
+        -45
+      ],
+      "reload_frame_index": 2,
+      "reload_frozen_component_to_body_affine_2x3": [
+        [
+          0.45238564178224105,
+          0.16045943758243036,
+          119.48794007833399
+        ],
+        [
+          -0.16045943758243036,
+          0.45238564178224105,
+          250.8157529786351
+        ]
+      ],
+      "reload_stock_in_body_px": [
+        225.88304454186917,
+        352.62601644059373
+      ],
+      "reload_stock_contact_certification": "only_frame3_is_handheld_primary_stock; frames0to2_near_hand_manipulates_elsewhere",
+      "diagnostic_path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\reviews\\XBW-weapon-state-2-stock-support-virtual-emit-v001.png",
+      "diagnostic_sha256": "c3e66fdd310bc0b834f245625f23b82a30084d116785663989e591f2c351efd2",
+      "runtime_verified": false
+    },
+    {
+      "state_index": 3,
+      "visual_state": "loaded_seated_bolt",
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\components\\XBW-reload-four-keyposes-v002\\weapon-3.png",
+      "sha256": "728fabd360d6dff1c6321e16a613ebdeff81831092748accbc4ccabf75dd8ba3",
+      "canvas_px": [
+        512,
+        512
+      ],
+      "stock_grip_px": [
+        138,
+        274
+      ],
+      "stock_grip_rgba": [
+        62,
+        36,
+        15,
+        255
+      ],
+      "stock_grip_measurement": "manual_visible_leather_grip_contact_center; 4sourcepx_uncertainty_not_skeletal_joint",
+      "support_grip_px": [
+        344,
+        286
+      ],
+      "support_grip_rgba": [
+        174,
+        101,
+        51,
+        255
+      ],
+      "support_grip_measurement": "inherited_manual_visible_underbarrel_handle; 4sourcepx_uncertainty",
+      "emit_px": [
+        506,
+        229
+      ],
+      "emit_kind": "inherited_virtual_rail_exit_not_required_to_be_opaque_not_loaded_arrow_tip",
+      "emit_rgba": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "visible_front_rail_edge_px": [
+        504,
+        229
+      ],
+      "visible_front_rail_edge_rgba": [
+        14,
+        0,
+        15,
+        224
+      ],
+      "visible_front_rail_edge_uncertainty_source_px": 3,
+      "visible_bolt_tip_px": [
+        483,
+        205
+      ],
+      "bolt_tip_measurement": "manual_visible_tip_estimate_3sourcepx_uncertainty; placement_state2_not_seated",
+      "shared_stock_anchor_px": [
+        138,
+        274
+      ],
+      "native_canvas_offset_from_shared_anchor_px": [
+        0,
+        0
+      ],
+      "shared_offset_kind": "socket-coordinate_equivalence_not_byte_identical_native_art_translation",
+      "stock_to_support_px": [
+        206,
+        12
+      ],
+      "stock_to_emit_px": [
+        368,
+        -45
+      ],
+      "reload_frame_index": 3,
+      "reload_frozen_component_to_body_affine_2x3": [
+        [
+          0.47971714390993575,
+          -0.01647609901930594,
+          160.6894668145036
+        ],
+        [
+          0.01647609901930594,
+          0.47971714390993575,
+          182.13311877911713
+        ]
+      ],
+      "reload_stock_in_body_px": [
+        222.3759815427849,
+        315.8493178751038
+      ],
+      "reload_stock_contact_certification": "only_frame3_is_handheld_primary_stock; frames0to2_near_hand_manipulates_elsewhere",
+      "diagnostic_path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\reviews\\XBW-weapon-state-3-stock-support-virtual-emit-v001.png",
+      "diagnostic_sha256": "ed9ec3f127df53bf456a14ac545559ac0d9e4954a0e9501212278a03d3a076ad",
+      "runtime_verified": false
+    }
+  ],
+  "ready_primary_pose_state_transforms": [
+    {
+      "action": "ready-idle",
+      "frame_index": 0,
+      "root_px": [
+        256,
+        472
+      ],
+      "body_primary_grip_px": [
+        224,
+        316
+      ],
+      "body_support_grip_px": [
+        325,
+        321
+      ],
+      "fixed_weapon_uniform_scale": 0.48,
+      "weapon_angle_image_clockwise_deg": -0.4997396452300605,
+      "alignment_policy": "primary_stock_exact; direction_fitted_to_two_frozen_hands; support_length_residual_retained_no_body_or_weapon_stretch",
+      "state_transforms": [
+        {
+          "state_index": 0,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 1,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 2,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        },
+        {
+          "state_index": 3,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "action": "ready-idle",
+      "frame_index": 1,
+      "root_px": [
+        256,
+        472
+      ],
+      "body_primary_grip_px": [
+        224,
+        316
+      ],
+      "body_support_grip_px": [
+        325,
+        321
+      ],
+      "fixed_weapon_uniform_scale": 0.48,
+      "weapon_angle_image_clockwise_deg": -0.4997396452300605,
+      "alignment_policy": "primary_stock_exact; direction_fitted_to_two_frozen_hands; support_length_residual_retained_no_body_or_weapon_stretch",
+      "state_transforms": [
+        {
+          "state_index": 0,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 1,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 2,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        },
+        {
+          "state_index": 3,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "action": "ready-idle",
+      "frame_index": 2,
+      "root_px": [
+        256,
+        472
+      ],
+      "body_primary_grip_px": [
+        224,
+        316
+      ],
+      "body_support_grip_px": [
+        325,
+        321
+      ],
+      "fixed_weapon_uniform_scale": 0.48,
+      "weapon_angle_image_clockwise_deg": -0.4997396452300605,
+      "alignment_policy": "primary_stock_exact; direction_fitted_to_two_frozen_hands; support_length_residual_retained_no_body_or_weapon_stretch",
+      "state_transforms": [
+        {
+          "state_index": 0,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 1,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 2,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        },
+        {
+          "state_index": 3,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "action": "ready-idle",
+      "frame_index": 3,
+      "root_px": [
+        256,
+        472
+      ],
+      "body_primary_grip_px": [
+        224,
+        316
+      ],
+      "body_support_grip_px": [
+        325,
+        321
+      ],
+      "fixed_weapon_uniform_scale": 0.48,
+      "weapon_angle_image_clockwise_deg": -0.4997396452300605,
+      "alignment_policy": "primary_stock_exact; direction_fitted_to_two_frozen_hands; support_length_residual_retained_no_body_or_weapon_stretch",
+      "state_transforms": [
+        {
+          "state_index": 0,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 1,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 2,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        },
+        {
+          "state_index": 3,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "action": "ready-idle",
+      "frame_index": 4,
+      "root_px": [
+        256,
+        472
+      ],
+      "body_primary_grip_px": [
+        224,
+        316
+      ],
+      "body_support_grip_px": [
+        325,
+        321
+      ],
+      "fixed_weapon_uniform_scale": 0.48,
+      "weapon_angle_image_clockwise_deg": -0.4997396452300605,
+      "alignment_policy": "primary_stock_exact; direction_fitted_to_two_frozen_hands; support_length_residual_retained_no_body_or_weapon_stretch",
+      "state_transforms": [
+        {
+          "state_index": 0,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 1,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 2,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        },
+        {
+          "state_index": 3,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "action": "ready-idle",
+      "frame_index": 5,
+      "root_px": [
+        256,
+        472
+      ],
+      "body_primary_grip_px": [
+        224,
+        316
+      ],
+      "body_support_grip_px": [
+        325,
+        321
+      ],
+      "fixed_weapon_uniform_scale": 0.48,
+      "weapon_angle_image_clockwise_deg": -0.4997396452300605,
+      "alignment_policy": "primary_stock_exact; direction_fitted_to_two_frozen_hands; support_length_residual_retained_no_body_or_weapon_stretch",
+      "state_transforms": [
+        {
+          "state_index": 0,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 1,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 2,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        },
+        {
+          "state_index": 3,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "action": "primary",
+      "frame_index": 0,
+      "root_px": [
+        256,
+        472
+      ],
+      "body_primary_grip_px": [
+        224,
+        316
+      ],
+      "body_support_grip_px": [
+        325,
+        321
+      ],
+      "fixed_weapon_uniform_scale": 0.48,
+      "weapon_angle_image_clockwise_deg": -0.4997396452300605,
+      "alignment_policy": "primary_stock_exact; direction_fitted_to_two_frozen_hands; support_length_residual_retained_no_body_or_weapon_stretch",
+      "state_transforms": [
+        {
+          "state_index": 0,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 1,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 2,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        },
+        {
+          "state_index": 3,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "action": "primary",
+      "frame_index": 1,
+      "root_px": [
+        256,
+        472
+      ],
+      "body_primary_grip_px": [
+        250,
+        260
+      ],
+      "body_support_grip_px": [
+        352,
+        262
+      ],
+      "fixed_weapon_uniform_scale": 0.48,
+      "weapon_angle_image_clockwise_deg": -2.2105479474611447,
+      "alignment_policy": "primary_stock_exact; direction_fitted_to_two_frozen_hands; support_length_residual_retained_no_body_or_weapon_stretch",
+      "state_transforms": [
+        {
+          "state_index": 0,
+          "component_to_body_affine_2x3": [
+            [
+              0.47964279956134526,
+              0.018514449193944307,
+              178.1068433087995
+            ],
+            [
+              -0.018514449193944307,
+              0.47964279956134526,
+              114.82501172386998
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            250.0,
+            260.0
+          ],
+          "actual_support_body_px": [
+            349.02859009996445,
+            261.9417370607836
+          ],
+          "support_alignment_error_body_source_px": 2.9719810504300708,
+          "virtual_emit_body_px": [
+            425.6754000248476,
+            231.60275671636796
+          ]
+        },
+        {
+          "state_index": 1,
+          "component_to_body_affine_2x3": [
+            [
+              0.47964279956134526,
+              0.018514449193944307,
+              178.1068433087995
+            ],
+            [
+              -0.018514449193944307,
+              0.47964279956134526,
+              114.82501172386998
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            250.0,
+            260.0
+          ],
+          "actual_support_body_px": [
+            349.02859009996445,
+            261.9417370607836
+          ],
+          "support_alignment_error_body_source_px": 2.9719810504300708,
+          "virtual_emit_body_px": [
+            425.6754000248476,
+            231.60275671636796
+          ]
+        },
+        {
+          "state_index": 2,
+          "component_to_body_affine_2x3": [
+            [
+              0.47964279956134526,
+              0.018514449193944307,
+              178.7363345813936
+            ],
+            [
+              -0.018514449193944307,
+              0.47964279956134526,
+              131.13286690895572
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            250.0,
+            260.0
+          ],
+          "actual_support_body_px": [
+            349.0285900999644,
+            261.9417370607836
+          ],
+          "support_alignment_error_body_source_px": 2.9719810504301276,
+          "virtual_emit_body_px": [
+            425.67540002484753,
+            231.60275671636796
+          ]
+        },
+        {
+          "state_index": 3,
+          "component_to_body_affine_2x3": [
+            [
+              0.47964279956134526,
+              0.018514449193944307,
+              178.7363345813936
+            ],
+            [
+              -0.018514449193944307,
+              0.47964279956134526,
+              131.13286690895572
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            250.0,
+            260.0
+          ],
+          "actual_support_body_px": [
+            349.0285900999644,
+            261.9417370607836
+          ],
+          "support_alignment_error_body_source_px": 2.9719810504301276,
+          "virtual_emit_body_px": [
+            425.67540002484753,
+            231.60275671636796
+          ]
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "action": "primary",
+      "frame_index": 2,
+      "root_px": [
+        256,
+        472
+      ],
+      "body_primary_grip_px": [
+        255,
+        267
+      ],
+      "body_support_grip_px": [
+        356,
+        264
+      ],
+      "fixed_weapon_uniform_scale": 0.48,
+      "weapon_angle_image_clockwise_deg": -5.035205266862698,
+      "alignment_policy": "primary_stock_exact; direction_fitted_to_two_frozen_hands; support_length_residual_retained_no_body_or_weapon_stretch",
+      "state_transforms": [
+        {
+          "state_index": 0,
+          "component_to_body_affine_2x3": [
+            [
+              0.4781476595444141,
+              0.04212856124055262,
+              176.04002612078062
+            ],
+            [
+              -0.04212856124055262,
+              0.4781476595444141,
+              125.54426231151672
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            254.99999999999997,
+            267.0
+          ],
+          "actual_support_body_px": [
+            354.00396060103594,
+            264.05928829897914
+          ],
+          "support_alignment_error_body_source_px": 1.9969197241282979,
+          "virtual_emit_body_px": [
+            429.0625534565195,
+            229.98004478397803
+          ]
+        },
+        {
+          "state_index": 1,
+          "component_to_body_affine_2x3": [
+            [
+              0.4781476595444141,
+              0.04212856124055262,
+              176.04002612078062
+            ],
+            [
+              -0.04212856124055262,
+              0.4781476595444141,
+              125.54426231151672
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            254.99999999999997,
+            267.0
+          ],
+          "actual_support_body_px": [
+            354.00396060103594,
+            264.05928829897914
+          ],
+          "support_alignment_error_body_source_px": 1.9969197241282979,
+          "virtual_emit_body_px": [
+            429.0625534565195,
+            229.98004478397803
+          ]
+        },
+        {
+          "state_index": 2,
+          "component_to_body_affine_2x3": [
+            [
+              0.4781476595444141,
+              0.04212856124055262,
+              177.47239720295943
+            ],
+            [
+              -0.04212856124055262,
+              0.4781476595444141,
+              141.8012827360268
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            255.0,
+            267.0
+          ],
+          "actual_support_body_px": [
+            354.00396060103594,
+            264.05928829897914
+          ],
+          "support_alignment_error_body_source_px": 1.9969197241282979,
+          "virtual_emit_body_px": [
+            429.06255345651954,
+            229.980044783978
+          ]
+        },
+        {
+          "state_index": 3,
+          "component_to_body_affine_2x3": [
+            [
+              0.4781476595444141,
+              0.04212856124055262,
+              177.47239720295943
+            ],
+            [
+              -0.04212856124055262,
+              0.4781476595444141,
+              141.8012827360268
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            255.0,
+            267.0
+          ],
+          "actual_support_body_px": [
+            354.00396060103594,
+            264.05928829897914
+          ],
+          "support_alignment_error_body_source_px": 1.9969197241282979,
+          "virtual_emit_body_px": [
+            429.06255345651954,
+            229.980044783978
+          ]
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "action": "primary",
+      "frame_index": 3,
+      "root_px": [
+        256,
+        472
+      ],
+      "body_primary_grip_px": [
+        250,
+        267
+      ],
+      "body_support_grip_px": [
+        352,
+        261
+      ],
+      "fixed_weapon_uniform_scale": 0.48,
+      "weapon_angle_image_clockwise_deg": -6.700311324966375,
+      "alignment_policy": "primary_stock_exact; direction_fitted_to_two_frozen_hands; support_length_residual_retained_no_body_or_weapon_stretch",
+      "state_transforms": [
+        {
+          "state_index": 0,
+          "component_to_body_affine_2x3": [
+            [
+              0.4767216074766599,
+              0.05600454414482251,
+              166.9630185716156
+            ],
+            [
+              -0.05600454414482251,
+              0.4767216074766599,
+              127.89837198917425
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            250.0,
+            267.0
+          ],
+          "actual_support_body_px": [
+            348.87670566992983,
+            261.1837231958865
+          ],
+          "support_alignment_error_body_source_px": 3.1286932871336557,
+          "virtual_emit_body_px": [
+            422.91334706489386,
+            224.93785541825562
+          ]
+        },
+        {
+          "state_index": 1,
+          "component_to_body_affine_2x3": [
+            [
+              0.4767216074766599,
+              0.05600454414482251,
+              166.9630185716156
+            ],
+            [
+              -0.05600454414482251,
+              0.4767216074766599,
+              127.89837198917425
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            250.0,
+            267.0
+          ],
+          "actual_support_body_px": [
+            348.87670566992983,
+            261.1837231958865
+          ],
+          "support_alignment_error_body_source_px": 3.1286932871336557,
+          "virtual_emit_body_px": [
+            422.91334706489386,
+            224.93785541825562
+          ]
+        },
+        {
+          "state_index": 2,
+          "component_to_body_affine_2x3": [
+            [
+              0.4767216074766599,
+              0.05600454414482251,
+              168.86717307253957
+            ],
+            [
+              -0.05600454414482251,
+              0.4767216074766599,
+              144.10690664338068
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            250.0,
+            267.0
+          ],
+          "actual_support_body_px": [
+            348.87670566992983,
+            261.1837231958865
+          ],
+          "support_alignment_error_body_source_px": 3.1286932871336557,
+          "virtual_emit_body_px": [
+            422.91334706489386,
+            224.9378554182556
+          ]
+        },
+        {
+          "state_index": 3,
+          "component_to_body_affine_2x3": [
+            [
+              0.4767216074766599,
+              0.05600454414482251,
+              168.86717307253957
+            ],
+            [
+              -0.05600454414482251,
+              0.4767216074766599,
+              144.10690664338068
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            250.0,
+            267.0
+          ],
+          "actual_support_body_px": [
+            348.87670566992983,
+            261.1837231958865
+          ],
+          "support_alignment_error_body_source_px": 3.1286932871336557,
+          "virtual_emit_body_px": [
+            422.91334706489386,
+            224.9378554182556
+          ]
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "action": "primary",
+      "frame_index": 4,
+      "root_px": [
+        256,
+        472
+      ],
+      "body_primary_grip_px": [
+        240,
+        300
+      ],
+      "body_support_grip_px": [
+        341,
+        302
+      ],
+      "fixed_weapon_uniform_scale": 0.48,
+      "weapon_angle_image_clockwise_deg": -2.199429030559567,
+      "alignment_policy": "primary_stock_exact; direction_fitted_to_two_frozen_hands; support_length_residual_retained_no_body_or_weapon_stretch",
+      "state_transforms": [
+        {
+          "state_index": 0,
+          "component_to_body_affine_2x3": [
+            [
+              0.4796463834753168,
+              0.018421368544419274,
+              168.13501756872515
+            ],
+            [
+              -0.018421368544419274,
+              0.4796463834753168,
+              154.8110627487323
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            240.0,
+            300.0
+          ],
+          "actual_support_body_px": [
+            339.0282114184483,
+            301.9609546815534
+          ],
+          "support_alignment_error_body_source_px": 1.9721751309735003,
+          "virtual_emit_body_px": [
+            415.6809075344177,
+            271.63684911926447
+          ]
+        },
+        {
+          "state_index": 1,
+          "component_to_body_affine_2x3": [
+            [
+              0.4796463834753168,
+              0.018421368544419274,
+              168.13501756872515
+            ],
+            [
+              -0.018421368544419274,
+              0.4796463834753168,
+              154.8110627487323
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            240.0,
+            300.0
+          ],
+          "actual_support_body_px": [
+            339.0282114184483,
+            301.9609546815534
+          ],
+          "support_alignment_error_body_source_px": 1.9721751309735003,
+          "virtual_emit_body_px": [
+            415.6809075344177,
+            271.63684911926447
+          ]
+        },
+        {
+          "state_index": 2,
+          "component_to_body_affine_2x3": [
+            [
+              0.4796463834753168,
+              0.018421368544419274,
+              168.7613440992354
+            ],
+            [
+              -0.018421368544419274,
+              0.4796463834753168,
+              171.11903978689307
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            240.0,
+            300.0
+          ],
+          "actual_support_body_px": [
+            339.0282114184483,
+            301.9609546815534
+          ],
+          "support_alignment_error_body_source_px": 1.9721751309735003,
+          "virtual_emit_body_px": [
+            415.6809075344177,
+            271.63684911926447
+          ]
+        },
+        {
+          "state_index": 3,
+          "component_to_body_affine_2x3": [
+            [
+              0.4796463834753168,
+              0.018421368544419274,
+              168.7613440992354
+            ],
+            [
+              -0.018421368544419274,
+              0.4796463834753168,
+              171.11903978689307
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            240.0,
+            300.0
+          ],
+          "actual_support_body_px": [
+            339.0282114184483,
+            301.9609546815534
+          ],
+          "support_alignment_error_body_source_px": 1.9721751309735003,
+          "virtual_emit_body_px": [
+            415.6809075344177,
+            271.63684911926447
+          ]
+        }
+      ],
+      "runtime_verified": false
+    },
+    {
+      "action": "primary",
+      "frame_index": 5,
+      "root_px": [
+        256,
+        472
+      ],
+      "body_primary_grip_px": [
+        224,
+        316
+      ],
+      "body_support_grip_px": [
+        325,
+        321
+      ],
+      "fixed_weapon_uniform_scale": 0.48,
+      "weapon_angle_image_clockwise_deg": -0.4997396452300605,
+      "alignment_policy": "primary_stock_exact; direction_fitted_to_two_frozen_hands; support_length_residual_retained_no_body_or_weapon_stretch",
+      "state_transforms": [
+        {
+          "state_index": 0,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 1,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.47306034864985
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              168.74336815843262
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.4448860736138,
+            292.8601690051666
+          ]
+        },
+        {
+          "state_index": 2,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        },
+        {
+          "state_index": 3,
+          "component_to_body_affine_2x3": [
+            [
+              0.47998174209966876,
+              0.00418655597920731,
+              156.6154032519429
+            ],
+            [
+              -0.00418655597920731,
+              0.47998174209966876,
+              185.06274738982137
+            ]
+          ],
+          "actual_stock_grip_body_px": [
+            224.0,
+            316.0
+          ],
+          "actual_support_body_px": [
+            322.9264775442822,
+            320.8973503734793
+          ],
+          "support_alignment_error_body_source_px": 2.076061733232142,
+          "virtual_emit_body_px": [
+            400.44488607361376,
+            292.86016900516665
+          ]
+        }
+      ],
+      "runtime_verified": false
+    }
+  ],
+  "shared_anchor_contract": {
+    "coordinate_space": "512source_xright_ydown",
+    "canonical_stock_px": [
+      138,
+      274
+    ],
+    "stock_to_support_px": [
+      206,
+      12
+    ],
+    "stock_to_virtual_emit_px": [
+      368,
+      -45
+    ],
+    "uniform_scale": 0.48,
+    "neutral_component_pivot_reuse_forbidden": [
+      128,
+      253
+    ],
+    "body_transforms": "none",
+    "runtime_mirror": "parent_once_about_ground_root_for_component_and_all_sockets_together"
+  },
+  "lifecycle_visual_selection_proposal": {
+    "outside_reload": "actual_ammo_positive_select_state3_loaded_else_state0_empty",
+    "primary_windup": "keep_loaded_state3_until_actor_reports_real_projectile_emission",
+    "after_actual_emission": "select_empty_state0_after_real_actor_commit_not_according_to_image_frame_or_HUD_guess",
+    "reload": "render_4_existing_keyposes_by_actual_reload_elapsed_ratio; state3_last_keypose_is_visual_pending_commit",
+    "reload_complete": "only_actual_successful_kernel_ReloadComplete_updates_ammo_and_latches_loaded_state3",
+    "cancel_or_failure": "read_actual_actor_ammo/state; do_not_grant_loaded_ammo_or_undo_real_emission_from_image",
+    "authority": "proposal_to_runtime_owner_not_implemented_here; gameplay_actor/kernel_remains_sole_authority"
+  },
+  "socket_authority_contract": "renderer_and_producer_read_the_same_selected_native_weapon_state_and_same_component_to_body_matrix; imageY_is_not_direct_combatZ",
+  "new_generation_calls": 0,
+  "runtime_verified": false,
+  "producer_socket_verified": false,
+  "full_weapon_actions_complete": false,
+  "limitations": [
+    "Stock/support are actual visible contact-center measurements with ~4sourcepx uncertainty, not exact anatomical joints. Existing texture patches are not byte-identical translations; only numeric socket offsets are shared.",
+    "At fixed.48, support residual is~2.076body-sourcepx for ready and~1.972..3.129px for primary. Primary stock contact is exact; original hand anatomy and component size remain unchanged.",
+    "Inherited virtual Emit has alpha255/2/13/0 across states0..3. It is a numeric front-rail exit, not an opaque-pixel certificate or arrow-tip location.",
+    "Loaded state3 visible bolt tip~[483,205] is24sourcepx above inherited rail-exit y229. Native art does not certify a straight mechanical bolt-flight axis; runtime visual review remains necessary.",
+    "The old neutral128253 stock pivot belongs to a different component and is forbidden for these four states. Original frozen ready/primary/reload manifests remain untouched.",
+    "No runtime selection,ammo transaction,world Emit Height/ground-plane semantics or actual shot handoff is implemented or verified in this source task."
+  ]
+}

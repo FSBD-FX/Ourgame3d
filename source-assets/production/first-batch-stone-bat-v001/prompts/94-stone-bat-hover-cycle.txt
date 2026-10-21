@@ -1,0 +1,13 @@
+Create one real six-frame HOVER WINGBEAT LOOP for the SAME small grey stone bat in the references. Image1 is the exact accepted internal creature identity: preserve its stone head/ears/snouted right-facing face, amber eye sockets, sparse gold joint cracks, stone-slab wings/tail/claws and clean heavy dark handpainted outlines. Image2 repeats the accepted body at the numeric scale/pivot in all six cells; it is an ANCHOR GUIDE, not a request to duplicate a static pose six times. Change wing JOINT POSES across all six cells into a readable beat, keeping the compact head and chest the SAME scale and fixed camera/pivot. Never turn into a furry bat, bird, dragon, demon or a stone knight. No extra limb/wing.
+
+Output EXACT six frames in2rows3columns, reading order;1536x1024 preferred with512x512cells. Shared local chest/root[256,280], complete head, ears, claws and tail inside everycell. Body/head/feet stay in place, no baked flight rise/fall or left/right translation. Existing normalized head and chest scale must match the actual guide, not enlarged to fill wing poses. The whole wingbeat must remain within shared silhouette envelope roughlyx48..424/y80..416 in each512cell; wing tips tuck inward as needed, do not spread outside it. Body/shoulder pixel positions remain near the actual guide. No frame bboxfit, camera zoom, wholebody twist or background platform. The actual actorZ provides world hovering and ground shadow in game; do not paint either.
+
+Six distinct consecutive phases of ONE loop:
+0 half-up wing pose like reference; near wing large behind-left of chest, far wing smaller behind-right, claws hanging.
+1 lift both actual wings to upper beat: leading stone joints high, wings a little folded at elbows, chest/head unchanged.
+2 start powerful downstroke: extend wing facets diagonally outward/down, different silhouette from1, visible stone shoulders bending.
+3 lowest stroke: near wing tip sweeps down beside body toward lower-left, far wing down-right; claws/head/chest stay put, no wing crosses cell bounds or covers the whole face.
+4 recover upward: bend joints and fold wing tips partly inward during rising, anatomically connected, clearly different from2/3.
+5 return to half-up direction approaching0, small wing-angle offset for loop closure, not literal copy of0.
+
+Use clear small-game shapes, no detached dust/rubble/speed trails/FX, no dramatic glow change in ordinary idle. Solid exact#FF00FF background in everycell and natural gaps, no magenta stone, no shadow/ground/ceiling/perch, no text/gridlines/borders/checkerboard. Full creature never clipped. All cells show the same small flying actor seen3/4-side facing RIGHT. This is pure in-place body wing articulation, not an attack or global height trajectory.

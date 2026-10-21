@@ -1,0 +1,128 @@
+{
+  "schema": "visible_source_decomposition_trial_v1",
+  "source": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\processed\\call86-single-keypose-v001\\keypose-canonical512.png",
+  "source_sha256": "472417c9dff85ff13c2ab6ed36625542b338b09f6d31317cd63274fb0c56d6e2",
+  "parts": [
+    {
+      "track": "body_far",
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\decomposition-trials\\keypose86-v003\\body_far.png",
+      "sha256": "77b29c1611c64101939ca8c911ea327870841fc2dfd0e2dd8aeb07d92a71a269",
+      "canvas_px": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "bbox": [
+        157,
+        121,
+        339,
+        486
+      ]
+    },
+    {
+      "track": "weapon_core",
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\decomposition-trials\\keypose86-v003\\weapon_core.png",
+      "sha256": "bb0fcfb0b09139a0c07519d5edb82af55de089e4cf3d4c0635dbed2c7d685209",
+      "canvas_px": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "bbox": [
+        170,
+        244,
+        405,
+        351
+      ]
+    },
+    {
+      "track": "body_support",
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\decomposition-trials\\keypose86-v003\\body_support.png",
+      "sha256": "8cd71a824d77e9304bb9dea945f1e7a1e296579874bbe13676b9a5e762ad0730",
+      "canvas_px": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "bbox": [
+        299,
+        306,
+        343,
+        344
+      ]
+    },
+    {
+      "track": "body_near",
+      "path": "F:\\Ourgame\\source-assets\\production\\first-batch-weapon-actions-v001\\decomposition-trials\\keypose86-v003\\body_near.png",
+      "sha256": "34a713bec7529c8dac0d38ea5c57d6c0c198f9e11b1410b430dfb32cd9b1d1ba",
+      "canvas_px": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "bbox": [
+        288,
+        259,
+        348,
+        295
+      ]
+    }
+  ],
+  "draw_order": [
+    "body_far",
+    "weapon_core",
+    "body_support",
+    "body_near"
+  ],
+  "source_exact_RGBA_reconstruction": true,
+  "semantic_masks_manually_reviewed": false,
+  "hidden_body_regions_inferred_or_painted": false,
+  "occluded_body_unknown": true,
+  "body_generic_swap_compatible": false,
+  "part_geometry_transform": "none",
+  "weapon_to_body_affine": [
+    1,
+    0,
+    0,
+    0,
+    1,
+    0
+  ],
+  "near_hand_role": "string_manipulation_not_rear_primary_stock_grip",
+  "support_grip_body_px": [
+    323,
+    323
+  ],
+  "near_string_contact_body_px": [
+    342,
+    282
+  ],
+  "outlet_body_px": [
+    404,
+    289
+  ],
+  "marker_status": "manual_visual_candidate_not_skeleton_or_worldZ_authority",
+  "runtime_import_allowed": false,
+  "full_reload_accepted": false,
+  "limitations": [
+    "Exact reconstruction proves partition only, not semantic selection correctness.",
+    "Polygon borders may still include cloth or miss weapon contours; inspect and revise in a new version.",
+    "Body under stock/bow/cord is missing in the integrated native source. These coupled tracks cannot silently stand in for a universal clean body."
+  ]
+}

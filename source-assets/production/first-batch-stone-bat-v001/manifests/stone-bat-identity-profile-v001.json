@@ -1,0 +1,110 @@
+{
+  "schema": "stone_bat_visual_identity_profile_v1",
+  "actor_id": "ENM-STN-002",
+  "status": "internal_style_anchor_not_user_or_runtime_approved",
+  "canvas_px": [
+    512,
+    512
+  ],
+  "pivot_px": [
+    256,
+    280
+  ],
+  "pivot_kind": "manually_estimated_chest_center_attached_to_actual_actorXYZ_not_ground_feet",
+  "source": "F:\\Ourgame\\source-assets\\production\\first-batch-stone-bat-v001\\raw\\93-stone-bat-awake-anchor-v001.png",
+  "source_sha256": "041ec17f8f314abfb3d930dbfcb1101df7a04474fb3b41f7e2b6fe54f3be160f",
+  "native_canvas": [
+    1254,
+    1254
+  ],
+  "matte_native": {
+    "path": "F:\\Ourgame\\source-assets\\production\\first-batch-stone-bat-v001\\processed\\call93-anchor-v001\\anchor-native1254.png",
+    "sha256": "e743d5f4753cd7fad24865144cd213acdb88a97fbf376d26dd691daccdc3b5fd",
+    "canvas_px": [
+      1254,
+      1254
+    ],
+    "bbox_px": [
+      83,
+      192,
+      1170,
+      1026
+    ]
+  },
+  "normalized_whole_canvas": {
+    "path": "F:\\Ourgame\\source-assets\\production\\first-batch-stone-bat-v001\\processed\\call93-anchor-v001\\anchor-whole-canvas512.png",
+    "sha256": "7613f259183c865670d08465624ace23c802e5a52ac98a91148cfb767e47a50d",
+    "canvas_px": [
+      512,
+      512
+    ],
+    "bbox_px": [
+      31,
+      76,
+      480,
+      422
+    ]
+  },
+  "anchor": {
+    "path": "F:\\Ourgame\\source-assets\\production\\first-batch-stone-bat-v001\\processed\\call93-anchor-v001\\stone-bat-identity-anchor512.png",
+    "sha256": "454f4a630e1b81512249e5016914b61731be84f75581134db6dbd082ba8f1f68",
+    "canvas_px": [
+      512,
+      512
+    ],
+    "bbox_px": [
+      50,
+      99,
+      410,
+      375
+    ]
+  },
+  "one_reference_transform": {
+    "scale": 0.8,
+    "from_chest_estimate_px": [
+      288,
+      302
+    ],
+    "to_pivot_px": [
+      256,
+      280
+    ],
+    "translation_px": [
+      25.599999999999994,
+      38.39999999999998
+    ],
+    "bboxfit": false
+  },
+  "action_processing": "new_action_native_cells_must_match_this_guide; exact_grid_wholecell512_only; do_not_apply_anchor0.8_again_or_fit_each_pose",
+  "safe_silhouette_envelope_px": [
+    48,
+    80,
+    424,
+    416
+  ],
+  "guide": "F:\\Ourgame\\source-assets\\production\\first-batch-stone-bat-v001\\references\\stone-bat-six-cell-anchor-guide-v001.png",
+  "guide_sha256": "e3c91a0d209339a188f53c3fb1b904845c9370107fac16a4590273dbd00139bb",
+  "recommended_trial_display_canvas_px": 128,
+  "actual_reference_alpha_extrema": [
+    0,
+    255
+  ],
+  "erased_non_chroma_native_pixels": 0,
+  "no_baked_shadow_or_world_height": true,
+  "design_sources": [
+    {
+      "path": "F:\\Ourgame\\docs\\design\\enemies-v1\\stone-forest.json",
+      "sha256": "5757ef0e4da5830546dff944d1e717c22fbf92e7692229bbadd5b9397aeea0c5"
+    },
+    {
+      "path": "F:\\Ourgame\\docs\\design\\presentation-v1\\02-敌人场景与特效规范.md",
+      "sha256": "cde977eaab7894a445a1849cfcc5f49d20bf74dc4cf1fd460265dcb719c81331"
+    }
+  ],
+  "limits": [
+    "Actual actorZ90/high or20/low must be projected outside sprite; no pose sheet may fake a worldZ transition.",
+    "Ground shadow belongs to groundXY; wing silhouette never resizes body16x12cm or hurtbox.",
+    "This1anchor is not hover/wake/attacks/recovery/hurt/death completion."
+  ],
+  "runtime_verified": false
+}
