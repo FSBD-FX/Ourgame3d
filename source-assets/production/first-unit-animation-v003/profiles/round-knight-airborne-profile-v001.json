@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "name": "round-knight-airborne-derived-same-uniform-scale",
+  "processing": {
+    "cell_size": 512,
+    "fit_scale": 0.84,
+    "trim_border": 4,
+    "edge_clean_depth": 3,
+    "align": "center",
+    "shared_scale": true,
+    "scale_strategy": "preserve",
+    "component_mode": "largest",
+    "component_padding": 0,
+    "min_component_area": 1,
+    "edge_touch_margin": 0
+  },
+  "output_origin": [
+    256.0,
+    472
+  ],
+  "reference": {
+    "target": "player",
+    "mode": "idle",
+    "rows": 2,
+    "cols": 3,
+    "body_scale_mean": 0.4996729054917899,
+    "body_scale_cv": 0.0018907588027340454,
+    "anchor_y_mean": 0.8958333333333334
+  },
+  "qc": {
+    "max_body_scale_drift": 0.1
+  },
+  "derived_from": {
+    "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\profiles\\round-knight-body-profile.json",
+    "sha256": "ec9edfa56b5f820bf31d95c3f08b2597da5a774f97685e84f6a5084c7f63a26c",
+    "only_processing_change": "alignmentfeet_to_center_for_airborne_pose_family",
+    "runtime_origin_rule": "manual_virtual_root_from_belt_proxy_plus_accepted_idle_belt_to_ground_offset; actorZ_external"
+  }
+}

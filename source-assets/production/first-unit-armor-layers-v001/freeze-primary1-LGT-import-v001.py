@@ -1,0 +1,30 @@
+from pathlib import Path
+import importlib.util
+from PIL import Image
+P=Path(__file__).resolve().parent;O=P.parent/'first-unit-animation-v003'
+s=importlib.util.spec_from_file_location('record',P/'production-record.py');r=importlib.util.module_from_spec(s);s.loader.exec_module(r)
+c=r.read(P/'manifests/primary1-LGT-selection-candidate-v005.json')
+old=next(a for a in r.read(O/'import-subset-v005.json')['actions'] if a['action']=='primary_1')
+def record(v):
+    p=Path(v['path']);assert r.sha(p)==v['sha256'];im=Image.open(p);assert im.mode=='RGBA' and im.size==(512,512);a=im.getchannel('A');assert a.getextrema()==(0,255)
+    corners=[im.getpixel(pt) for pt in [(0,0),(511,0),(0,511),(511,511)]];assert all(v[3]==0 for v in corners)
+    copies=r.archive(p,p.relative_to(P),'frozen_P1_LGT_actual_layer_candidate_not_formal_acceptance');assert all(r.sha(Path(q))==r.sha(p) for q in copies)
+    return {'path':str(p),'sha256':r.sha(p),'canvas_px':[512,512],'mode':'RGBA','alpha_extrema':list(a.getextrema()),'corner_rgba':corners,'bbox_px':list(a.getbbox()),'four_archive_hashes_match':True}
+bodies=[];armors=[];files=[]
+for row,t in zip(c['frames'],old['frames']):
+    p=row['parts'];far=record(p['body_far']);near=record(p['body_near']);armor=record(p['armor_front']);files.extend([far,near,armor])
+    # Every retained armor RGBA is a native53 pixel at exactly the same coordinate.
+    source=Image.open(P/f'processed/call53-fixed-canvas-v002/frame-{row["index"]}.png').convert('RGBA');selected=Image.open(armor['path']).convert('RGBA')
+    assert all(a==b for a,b in zip(selected.get_flattened_data(),source.get_flattened_data()) if a[3]>0)
+    bodies.append({'index':row['index'],'body_far':far,'body_near':near,'root_px':row['root_px'],'grip_px':row['grip_px'],'weapon_angle_image_clockwise_deg':row['weapon_angle_image_clockwise_deg'],'weapon_scale':.4,'phase':t['phase'],'time_start_s':t['time_start_s'],'time_end_s':t['time_end_s'],'head_hands_original':True,'lowerlegs_boots_original_y410_onwards':True,'body_far_near_exact_reconstruction':True})
+    armors.append({'index':row['index'],'armor_back':None,'armor_back_visibility':'not_separately_visible_no_invented_hidden_back','armor_front':armor,'root_px':row['root_px'],'grip_px':row['grip_px'],'every_visible_pixel_equals_native53_source':True})
+assert len(files)==18 and len({v['path'] for v in files})==18
+scripts=['extract-primary1-LGT-v005.py','process-fixed-canvas-v001.py'];sources=[]
+for n in [52,53]:
+    e=next(e for e in r.read(r.LEDGER)['requests'] if e['request_number']==n);raw=Path(e['raw_path']);prompt=Path(e['prompt_path']);assert r.sha(raw)==e['sha256'];r.archive(prompt,prompt.relative_to(P),'frozen_native_P1_source_prompt')
+    sources.append({'request_number':n,'raw_path':str(raw),'raw_sha256':r.sha(raw),'prompt_path':str(prompt),'prompt_sha256':r.sha(prompt),'references':e['references'],'backend':'image_gen.imagegen','host_fee_usd':None})
+for name in scripts:r.archive(P/name,Path('scripts')/name,'frozen_processing_and_selection_implementation')
+manifest={'schema':'frozen-visible-armor-action-import-v1','version':1,'frozen':True,'status':'candidate_for_runtime_P1_LGT_layer_switch_not_formal_acceptance','actor_identity':'EV042_round_enclosed_helmet_knight','clip':'primary_1','frame_count':6,'phase_seconds':[.17,.12,.31],'phase_frames':[2,2,2],'phase_time_source':'unchanged_frozen_primary1_actual_metadata','common_body':bodies,'armors':{'ARM-LGT-001':armors},'unfulfilled_armors':['ARM-MED-001','ARM-HVY-001','ARM-ROB-001'],'draw_order':['body_far','armor_front','independent_weapon','body_near'],'no_armor_variant':'omit armor_front use same common body','weapon':r.read(P/'manifests/import-armor-idle-v001.json')['weapon'],'mirror_policy':'assemble_right_facing_once_then_one_runtime_mirror_about_common_root','runtime_texture_count_new':18,'unique_common_pose_count':6,'armor_pose_samples':6,'source_provenance':sources,'selection_manifest':str(P/'manifests/primary1-LGT-selection-candidate-v005.json'),'selection_manifest_sha256':r.sha(P/'manifests/primary1-LGT-selection-candidate-v005.json'),'processing_sources':[{'path':str(P/name),'sha256':r.sha(P/name)} for name in scripts],'pixel_checks':{'rgba512_real_alpha_corners_and_F_E_hashes':True,'original_head_hands_and_lowerlegs_preserved':True,'body_exact_reconstruction':True,'armor_visible_RGBA_equals_native_source':True,'no_body_scale_or_translation':True},'manual_visual_review':{'six_isolated_armor_and_six_sword_assemblies_viewed':True,'result':'visible_body_leaks_removed_readable_LGT_action_overlay_candidate','limitations':['Actual visible surfaces only, no hidden back/sleeve reconstruction.','A few native under-sleeve seam/outline pixels remain in the wearable region; not semantic-perfect segmentation.','Manual limb-zone and sampled-color selection is specific to LGT material, not a universal skin classifier.','P1 common body is native52 with frozen head/forearms/hands/waist/lowerlegs restored, not the idle-only clothing replacement method.','Melee continuity/readability, weapon intersections, runtime mirror and full-state four-armor compatibility await actual game review.']},'prior_failed_selection_versions':['v001_old_pauldron_body_leaks','v002_residual_pauldron_and_skin_pants','v003_excessive_forearm_erosion','v004_gray_wrist_and_trouser_leaks'],'old_v2_four_layer_validator_pass_claimed':False,'runtime_verified':False,'complete_armor':False,'external_api_calls':0,'host_fee_usd':None}
+f=P/'manifests/import-armor-primary1-LGT-v001.json';assert not f.exists();r.write(f,manifest);r.archive(f,f.relative_to(P),'frozen_P1_LGT_visible_layer_import_candidate')
+q=P/'reviews/import-armor-primary1-LGT-v001-verification.json';r.write(q,{'manifest':str(f),'manifest_sha256':r.sha(f),'real_files':files,'new_runtime_PNGs':18,'F_E_archive_copies_verified':72,'errors':[],'runtime_executed':False});r.archive(q,q.relative_to(P),'actual_pixel_and_retention_verification')
+print({'manifest':str(f),'sha256':r.sha(f),'new_runtime_PNGs':18,'errors':0})
