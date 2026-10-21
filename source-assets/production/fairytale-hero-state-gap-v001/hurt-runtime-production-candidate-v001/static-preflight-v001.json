@@ -1,0 +1,121 @@
+{
+  "schema": "Hurt-production-candidate-static-preflight-v001",
+  "actual_source_modified": false,
+  "actual_tests_executed_by_worker": false,
+  "UE_compiled_by_worker": false,
+  "Canvas_rendered_by_worker": false,
+  "native_runtime_verified": false,
+  "final_accepted": false,
+  "before_checks": [
+    {
+      "actual": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+        "bytes": 121695,
+        "sha256": "43ffd04956f39d9277131f54d618cc5f2c1eeaa3bd92a67c9fbf8ad9ae5197aa"
+      },
+      "actual_matches_exact_before": true,
+      "candidate_before_copy_matches": true
+    },
+    {
+      "actual": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordHurtPlan.cpp",
+        "bytes": 664,
+        "sha256": "ff40433b5e2b8456883e94485b7738e1844f683c63404111387909b313ef9dff"
+      },
+      "actual_matches_exact_before": true,
+      "candidate_before_copy_matches": true
+    },
+    {
+      "actual": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.h",
+        "bytes": 13808,
+        "sha256": "a87953f74753c61fef97b3fd74c6b974122981fd7a9e7fbb5fbfea41d891643f"
+      },
+      "actual_matches_exact_before": true,
+      "candidate_before_copy_matches": true
+    },
+    {
+      "actual": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+        "bytes": 117819,
+        "sha256": "7f609ab3e54f59f07f615a69f86eb002610aefde0f8d87e1ac15915fc65348ab"
+      },
+      "actual_matches_exact_before": true,
+      "candidate_before_copy_matches": true
+    },
+    {
+      "actual": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+        "bytes": 21881,
+        "sha256": "3acf17c11275c62a693309e5eef9546d977fbbace021839d7c76b0112cb38143"
+      },
+      "actual_matches_exact_before": true,
+      "candidate_before_copy_matches": true
+    },
+    {
+      "actual": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordDrawState.h",
+        "bytes": 1798,
+        "sha256": "99204ea0f28970719125623698a801be56d88637b3606c8db782942f0f2fc004"
+      },
+      "actual_matches_exact_before": true,
+      "candidate_before_copy_matches": true
+    }
+  ],
+  "new_source_count": 3,
+  "existing_source_changes": 6,
+  "no_test_changes": true,
+  "Hurt_test_sha256": "046d7e632d48673ac9c68ba6f20b281f82478b49d7c839f616afb5b852c63ed1",
+  "Stage0_freeze_members_checked_two_passes": 13,
+  "actual_Stage0_six_new_sources_byte_identical": true,
+  "Root_retained_actual_Stage0_report": [
+    {
+      "test": "CodexDungeon.Content.FairytaleSwordHurtV001.ActualPoiseBreakFourPhasesAndExclusions",
+      "state": "Fail",
+      "errors": [
+        "Expected 'TARGET Stage0 RED: genuine Fighter exposes read-only active Hurt sample' to be true."
+      ],
+      "warning_count": 0
+    },
+    {
+      "test": "CodexDungeon.Content.FairytaleSwordHurtV001.RealBindingSource32MirrorAndAtomicRejection",
+      "state": "Fail",
+      "errors": [
+        "Expected 'TARGET Stage0 RED: actual committed SWD/LGT Hurt admits the complete source32 plan' to be true."
+      ],
+      "warning_count": 0
+    },
+    {
+      "test": "CodexDungeon.Content.FairytaleSwordHurtV001.RealCodecPauseContinueKeepsAgeAndEquipment",
+      "state": "Fail",
+      "errors": [
+        "Expected 'TARGET Stage0 RED: already-published paused real Hurt draws its saved phase and committed gear without advancing' to be true."
+      ],
+      "warning_count": 0
+    }
+  ],
+  "retained_profile_actual_native_import_path_source_RGBA_policy_agrees_count": 32,
+  "known_empty_FarHand_count": 3,
+  "current32_saved_assets_match_native_receipt_pins": true,
+  "git_apply_check_exit": 0,
+  "git_apply_check_stdout": "",
+  "git_apply_check_stderr": "",
+  "patch": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hurt-runtime-production-candidate-v001/patches/Hurt-production-shared-plan-HUD-v001.patch",
+    "bytes": 23873,
+    "sha256": "696f06b40b4d0feffe57d8345fb7cf723c4f8437c3b490460d97e418650ed01c"
+  },
+  "scope_static_checks": {
+    "Fighter_only_one_query_hunk": true,
+    "consumer_has_no_LoadObject": true,
+    "whole32_and_sword_cache_gate_precedes_any_quad": true,
+    "known_empty_skip_precedes_DrawTexture": true,
+    "NoCanvas_never_increments_or_claims_draw": true,
+    "all32_plus_sword_preload_before_existing_EDITOR_finish_before_existing_global_flush": true
+  },
+  "limitations": [
+    "Static audit only, not UE compilation, same3GREEN or full registry result.",
+    "Actual Canvas pixels, hilt/armor contact and Ready/Walk transition require independent native observer and retained media.",
+    "The original frozen source timeline metadata remains nominal400ms; real native query owns eligibility and end."
+  ]
+}

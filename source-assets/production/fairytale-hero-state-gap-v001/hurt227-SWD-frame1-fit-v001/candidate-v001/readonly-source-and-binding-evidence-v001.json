@@ -1,0 +1,74 @@
+{
+  "schema": "Hurt227-SWD-readonly-source-and-binding-evidence-v001",
+  "body": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero227-hurt4-extraction-v001/runs/run-hurt227-shared-HD-v001/curated/frame-1.png",
+    "bytes": 146685,
+    "sha256": "21b759173e6e2b4644a0a0eeb9ca374d48689a7e46adb6309f6a04cd12e48621"
+  },
+  "standing_reference": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero227-hurt4-extraction-v001/runs/run-hurt227-shared-HD-v001/curated/frame-3.png",
+    "bytes": 129575,
+    "sha256": "4010ef27cf43c43af2d113dfce99fbc74c808842c6a7c3685536dfeff4fc1b22"
+  },
+  "source_frame_retention": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero227-hurt4-extraction-v001/E415-before-curated-View-check-v001.json",
+    "bytes": 3378,
+    "sha256": "536f729983a151b158041239f44302d754bb315b85733f55965ee2c736a78b6d"
+  },
+  "body_exact_E_copy": {
+    "path": "E:/OurGame/Knight/过程图稿与视频/2026-10-18-OurgameUE-hero-hurt227-curated-v415/F盘原批次副本/2026-10-18_钟盔Hurt4原生227标准提取_v001/原件/runs/run-hurt227-shared-HD-v001/curated/frame-1.png",
+    "bytes": 146685,
+    "sha256": "21b759173e6e2b4644a0a0eeb9ca374d48689a7e46adb6309f6a04cd12e48621"
+  },
+  "newhand_proposal_reference": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero227-hurt4-extraction-v001/visible-hands-review-v001/visible-hand-proposals-v001.json",
+    "bytes": 11390,
+    "sha256": "51ed9a3e02213d95cf7d94b74671038351645b5418ebda456808cbc1c28f9671"
+  },
+  "independent_SWD_source": {
+    "path": "F:/Ourgame/source-assets/production/first-unit-animation-v002/components/military-sword-clean-v001.png",
+    "bytes": 31902,
+    "sha256": "2efb5519fb3c7ed5a63e58d00c84e39aa02355274af36b43c1775570badded5a"
+  },
+  "SWD_retained_E_original": {
+    "path": "E:/OurGame/Knight/过程图稿与视频/2026-10-15_圆盔骑士新基准_v003/原件/components/military-sword-clean-v001.png",
+    "bytes": 31902,
+    "sha256": "2efb5519fb3c7ed5a63e58d00c84e39aa02355274af36b43c1775570badded5a"
+  },
+  "source_E_exact": true,
+  "read_only_actual_code_pins": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": 117078,
+      "sha256": "116ec997e8e13928977c3d6f7f7bacdd4efd9b74ca4244ffda8d0ca0526a0de0"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+      "bytes": 21881,
+      "sha256": "3acf17c11275c62a693309e5eef9546d977fbbace021839d7c76b0112cb38143"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordBodyV001.inl",
+      "bytes": 7363,
+      "sha256": "022d0cff100f3323f6b40c64d929ad6077ae351a5a47a1c5a7a1cd2fc6ad35dd"
+    }
+  ],
+  "actual_code_facts": [
+    {
+      "file": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "line": 649,
+      "fact": "GetCandidateSword loads /Game/Production/FirstBatch/v002/CandidateComponents/T_military_sword_v002.T_military_sword_v002."
+    },
+    {
+      "file": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+      "line": 308,
+      "fact": "UniformWeaponScale.50, independentweaponComponentGrip[99,256], positivebladeaxis controlled by authoredMarkerAxis; texture rotated aboutGrip."
+    },
+    {
+      "file": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordBodyV001.inl",
+      "line": 18,
+      "fact": "BodyCanvas72*512/416. Root/Grip fromstate markers, not perframebbox normalization."
+    }
+  ],
+  "scope_limit": "Existing texture asset/source identity and .50 binding are reused; no claim current native presenter consumes Hurt source or this offline candidate. Source snapshots not rewritten."
+}

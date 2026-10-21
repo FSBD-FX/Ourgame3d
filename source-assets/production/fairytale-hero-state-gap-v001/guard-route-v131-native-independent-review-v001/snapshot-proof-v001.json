@@ -1,0 +1,50 @@
+{
+  "schema": "guard-route-v131-independent-snapshot-proof-v001",
+  "manifest": {
+    "path": "F:/Ourgame/source-assets/production/backups/v131-guard-partial-181G/compiled-source-manifest.json",
+    "bytes": 461885,
+    "sha256": "b586177469aa95a9f2396ab713b6e7614d857444019fa15d0f88dd5da11b5a3f"
+  },
+  "checks": [
+    {
+      "pass": 1,
+      "actual_pins": 1919,
+      "snapshot_copies": 344,
+      "mismatches": 0
+    },
+    {
+      "pass": 2,
+      "actual_pins": 1919,
+      "snapshot_copies": 344,
+      "mismatches": 0
+    }
+  ],
+  "source_exact_file_set": 223,
+  "production_exact_file_set": 1226,
+  "full_suite": {
+    "pin": {
+      "path": "F:/Ourgame/UnrealGame/Saved/Automation/FirstRoom-20261018-122354/index.json",
+      "bytes": 396006,
+      "sha256": "648b13b7ddb3236aae2be9ea4bb210d7bdd47192df6c47952211a10e40a409b1"
+    },
+    "Success": 181,
+    "warnings": 0,
+    "failed": 0,
+    "notRun": 0,
+    "inProcess": 0
+  },
+  "root_prereg": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/root-trial-registration-v001/v131-partial-art-root-prereg-v001.json",
+    "bytes": 16775,
+    "sha256": "716b88328197e81338bf3186c70821aa9249909cfd6878c20a765dbc5a7f535e"
+  },
+  "pre_registered_before_capture": true,
+  "actual_probe": {
+    "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGuardArtPartialProbe.cpp",
+    "bytes": 35573,
+    "sha256": "b635e212606ac77b3728c6dc8efdd2ed49ef108ffd5d2234fac2775d580e849f"
+  },
+  "normalized_equal_frozen_v009": true,
+  "source_mutation_scope": "Prior frozen independent six-hunk v009 review applies. No new Guard/HP/time writes or Guard damage route. Actual normal Key input and explicit Knight/Bat public damage clear retained. ADungeonGuardArtPartialProbe::Tick forwards only its own observer Proof->Tick(*this), not a gameplay actor/kernel Tick.",
+  "no_visual_or_full_clear_claim": true
+}

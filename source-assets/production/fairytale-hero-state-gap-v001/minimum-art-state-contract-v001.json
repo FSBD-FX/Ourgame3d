@@ -1,0 +1,47 @@
+{
+  "schema": "hero-state-gap-art-proposal-v001",
+  "status": "UNCONFIGURED_PROPOSAL_NO_GENERATION_NO_IMPORT_NO_RUNTIME_CHANGE",
+  "first_slice": "SWD with None/LGT; true Dodge/Hurt/Death on the current squat clock-helmet hero",
+  "source_canvas": [512, 512],
+  "current_display_canvas": "72*512/416 = 88.61538461538461 before UIScale; 72 is nominal 416-source-pixel standing body height, not every pose bbox",
+  "root_policy": "Use authored common display root; per-pose foot/body landmarks must be supplied and measured, never guessed from Ready0",
+  "image_sources": null,
+  "source_sha256": null,
+  "landmarks_and_root_grip_axis": null,
+  "runtime_label_and_profile_version": null,
+  "rows": [
+    {
+      "state": "Dodge",
+      "proposed_keyframes": 6,
+      "frame_count_role": "Proposal aligned with current native .40s/legacy6 slots, not existing new art",
+      "required_visual_change": "real brace, lowering/lean, travel-body deformation, recovery; no translating or rotating a full Ready0 sprite",
+      "authority": "GetDodgeState().Phase and original accepted record Start/End/Time/interrupt; native .40s/185 world travel/iframes untouched",
+      "gear": "Committed SWD and LGT continue to follow authored grips/attachments; no pending target skin"
+    },
+    {
+      "state": "Hurt",
+      "proposed_keyframes": 6,
+      "frame_count_role": "Proposal aligned with real .40s poise-break response and legacy6 sampling",
+      "required_visual_change": "actual impact compression/recoil and recovery retaining clock helmet/armor identity",
+      "authority": "Actual native AnimationName=hurt after poise break; ordinary positive HP loss/HitFlash is not automatically a hurt-action interrupt",
+      "gear": "Weapon retention or authored brief occlusion must be explicit; no unarmored Ready0 substitution"
+    },
+    {
+      "state": "Death",
+      "proposed_keyframes": 6,
+      "frame_count_role": "Proposal aligned with existing .8s legacy display sampling; new death timing must be explicit",
+      "required_visual_change": "actual loss of support, collapse and readable stable corpse, keeping recognizable clock helmet and equipped armor",
+      "authority": "bDead and AnimationTime/AdvanceTerminalPresentation; master SimulationTime freezes on game-over and must not become a new death animation clock",
+      "gear": "Weapon final disposition/occlusion is art data; no gameplay drop or wallet side effect"
+    }
+  ],
+  "layer_contract": ["BodyRest", "FarShoulder", "Chest", "NearArmWithoutHand", "NearShoulder", "HelmetForegroundWhenNeeded", "IndependentWeapon", "NearHand"],
+  "layer_rules": "Keep original512 UV registration and exclusive visible ownership; near/far anatomical roles do not swap when facing mirrors. Mirror all root/grip/axis/weapon/armor once. Reuse unchanged pixels only where actual pose and occlusion agree.",
+  "not_a_request_to_generate_18_whole_combinations": true,
+  "subsequent_required_rows": ["jump4/fall2/land2 proposed from old sampling", "SWD airPrimary6", "SWD skill6", "actual PickupWeapon and PickupArmor gestures4 each", "distinct standing Q switch gesture4", "GSW/SPR/XBW/STF actual weapon-family poses and XBW reload", "MED/HVY/ROB pose-specific attachments and robe cloth/sleeve silhouette"],
+  "equipment20_boundary": "Five weapon families x four armors. Only SWD+LGT currently has some new-style ground poses; none of the20 has all-state art acceptance. NoArmor is outside20.",
+  "acceptance_order": ["retain and inspect real current unsupported pose before source edits", "Root chooses first-slice art route and exact poses/weapon disposition", "freeze actual PNGs and measured markers, with unconfigured fields filled only from real inputs", "Root runs a minimal real native-input RED for missing state/resource before implementation", "implement state-specific sampling and fail visibly on missing sources, never Ready0 or old-human substitution", "actual hidden-HUD native J/Shift/poise-break/death/cancel/restore captures with same committed instances", "extend weapon/armor profiles and20 matrix only after their real sources exist"],
+  "all_state_72_pass": false,
+  "visual_accepted": false,
+  "Source_changed": false
+}

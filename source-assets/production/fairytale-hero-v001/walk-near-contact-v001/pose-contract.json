@@ -1,0 +1,145 @@
+{
+  "schema": "fairytale-hero-near-contact-technical-contract-v1",
+  "status": "prepared_only_not_generated_not_accepted",
+  "native_facing": 1,
+  "phase": "near_contact",
+  "frame_count": 1,
+  "loop": false,
+  "target_canvas_px": [
+    512,
+    512
+  ],
+  "safe_margin_px": [
+    48,
+    48
+  ],
+  "identity": {
+    "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-idle-v002\\curated\\frame-0.png",
+    "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718",
+    "source_request": 131,
+    "copied_path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-near-contact-v001\\references\\identity\\canonical-idle-frame-0.png",
+    "single_curated_idle": true,
+    "final_user_art_or_motion_approval": false
+  },
+  "limb_roles": {
+    "near_arm": "camera-near larger visible arm swings BACK toward screen-left, hand rear/left",
+    "far_arm": "camera-far arm swings FORWARD toward screen-right, separate hand front/right",
+    "near_leg": "camera-near leg reaches FORWARD to screen-right; front HEEL down, toe slightly raised",
+    "far_leg": "camera-far leg trails BACK to screen-left; rear TOE down, heel raised",
+    "counter_swing": "forward far arm opposes forward near leg; backward near arm opposes backward far leg",
+    "near_far_meaning": "camera depth, never relabel by current screen side"
+  },
+  "guide": {
+    "svg": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-near-contact-v001\\references\\technical\\near-contact-role-guide-v001.svg",
+    "png": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-near-contact-v001\\references\\technical\\near-contact-role-guide-v001.png",
+    "png_sha256": "629c7c11a090c1e19ec32df6e84bcd2dc506f3e0deb04c5a890a78a0b07036e0",
+    "role": "original technical motion-role diagram only, not style or actual root measurement",
+    "colors_for_guide_only": {
+      "camera_near": "#cf3f41",
+      "camera_far": "#356ec5"
+    },
+    "schematic_joints_px": {
+      "near_arm": [
+        [
+          233,
+          255
+        ],
+        [
+          205,
+          284
+        ],
+        [
+          168,
+          312
+        ]
+      ],
+      "far_arm": [
+        [
+          267,
+          255
+        ],
+        [
+          302,
+          283
+        ],
+        [
+          347,
+          302
+        ]
+      ],
+      "near_leg": [
+        [
+          245,
+          328
+        ],
+        [
+          293,
+          387
+        ],
+        [
+          329,
+          443
+        ]
+      ],
+      "far_leg": [
+        [
+          266,
+          328
+        ],
+        [
+          227,
+          384
+        ],
+        [
+          195,
+          434
+        ]
+      ]
+    },
+    "sole_contacts_design_px": {
+      "near_front_heel": [
+        314,
+        464
+      ],
+      "far_rear_toe": [
+        225,
+        464
+      ]
+    },
+    "ground_baseline_y_design_only": 464,
+    "pixels_from_existing_art_used": false
+  },
+  "137_comparison_only": {
+    "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-opposite-anchor-v001\\raw\\far-contact-anchor.png",
+    "sha256": "85d48ab699751302364ece823f3a56b57ab863009ab815a5d147609c9baeb88b",
+    "role": "opposite static pose / proportion comparison only, never identity",
+    "attached_to_primary_generation": false,
+    "static_roles_independently_reviewed": true,
+    "motion_accepted": false
+  },
+  "observed_output_measurements": {
+    "alpha_bbox": null,
+    "body_height_px": null,
+    "helmet_bbox": null,
+    "foot_rois": null,
+    "root_px": null,
+    "sha256": null
+  },
+  "acceptance_needed": [
+    "actual generated full-body view",
+    "canonical helmet/identity comparison",
+    "continuous near/far shoulder/hip chains",
+    "near-front-heel/far-rear-toe grounding",
+    "independent static review"
+  ],
+  "does_not_establish": [
+    "six-phase gait",
+    "loop seam",
+    "foot sliding",
+    "left mirror",
+    "runtime",
+    "armor or weapon adaptation"
+  ],
+  "future_complete_row_rule": "After independent static acceptance, combine BOTH opposite contact poses into a multi-pose motion reference plus complete six-phase guide. Neither single pose is a sole final walk anchor. Canonical131 alone continues to own identity.",
+  "formal_complete_units": 0
+}

@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-hero-common-walk-dual-contact-v001",
+    "description": "Accepted single curated idle identity only: closed rigid bell helmet, amber visor eyes, charcoal plain underclothes, brown gloves and boots, empty hands; same right-facing three-quarter camera.",
+    "base_image": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-idle-v002\\curated\\frame-0.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "walk": {
+      "frames": 6,
+      "fps": 12,
+      "loop": true,
+      "action": "Exactly SIX distinct poses of ONE complete alternating humanoid walk cycle, all facing RIGHT in the same three-quarter camera. Empty hands; compact grounded walking, not running or high-knee marching. The canonical single idle image alone owns identity. The TWO-CONTACT image owns opposite limb-role examples: its LEFT character is phase0, its RIGHT character is phase3. The six-phase technical guide owns pose order only; RED means camera-near and BLUE means camera-far, never paint these colors. Near/far are fixed anatomical sides, not current screen-left/right. Keep a rigid unchanged bell helmet and stable body/glove/boot volumes. Natural opposing arm and leg swing. 0 NEAR CONTACT: near leg forward/right with heel down; far leg rear/left with toe down. LARGE NEAR ARM BACK/LEFT, far arm forward/right, like the LEFT contact example. 1 NEAR SUPPORT / FAR PASSING: near foot flat beneath pelvis, near knee supports weight; far knee swings forward passing the supporting leg, its boot clears ground slightly. Arms pass neutral. 2 NEAR PUSH / FAR REACH: near rear toe pushes; far heel reaches front/right just before landing. Near arm swings forward across the torso; far arm goes back. 3 FAR CONTACT: far leg front/right heel down; NEAR leg rear/left toe down. LARGE NEAR ARM FORWARD/RIGHT ACROSS TORSO, far arm back/left, like the RIGHT contact example. This is the OPPOSITE contact to0; never reset to the phase0 arm or leg layering. 4 FAR SUPPORT / NEAR PASSING: far foot flat beneath pelvis supports weight; near knee swings forward passing the far support leg, near boot clears ground slightly. Arms pass neutral in the opposite direction to1. Do not make a backward kick or a high knee. 5 FAR PUSH / NEAR REACH: far rear toe pushes; near heel reaches front/right before landing. LARGE NEAR ARM BACK/LEFT, far arm forward/right; continue smoothly back into0. Near-hand swing across0..5 is BACK, NEUTRAL, FRONT, FRONT, NEUTRAL, BACK. 0/3,1/4,2/5 must swap the anatomical supporting/reaching leg and counter-swinging arm. Keep the pelvis centered within each cell and one real foot/toe grounded per pose. No full-character mirroring, repeated three-pose half-cycle, duplicate stills, drifting scale, extra limbs, detached pieces, shadows, motion trails, scenery, labels or technical guide marks."
+    }
+  },
+  "style": "Follow the single accepted curated idle anchor exactly: hand-drawn dark-fairytale cartoon, bold uneven ink outlines, two or three broad painted tones per material, bell helmet with amber visor eyes and charcoal plain undergarment. NOT pixel art, no realistic texture, PBR, new costume or tone redesign.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

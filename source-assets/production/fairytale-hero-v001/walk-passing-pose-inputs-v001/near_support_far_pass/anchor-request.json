@@ -1,0 +1,60 @@
+{
+  "schema": "fairytale-hero-passing-pose-generation-input-v1",
+  "status": "prepared_only_root_generation_pending",
+  "phase_name": "near_support_far_pass",
+  "output_pose_count": 1,
+  "native_facing": 1,
+  "target_canvas_px": [
+    512,
+    512
+  ],
+  "chroma_key": {
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "hex": "#00FF00"
+  },
+  "prompt_file": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-passing-pose-inputs-v001\\near_support_far_pass\\prompts\\passing-pose.txt",
+  "attachments_in_order": [
+    {
+      "order": 1,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-passing-pose-inputs-v001\\near_support_far_pass\\references\\identity\\canonical-idle-frame-0.png",
+      "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718",
+      "role": "sole identity: canonical131 single curated idle"
+    },
+    {
+      "order": 2,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-passing-pose-inputs-v001\\near_support_far_pass\\references\\technical\\passing-role-guide-v001.png",
+      "sha256": "033c0c44765a522330b769d9a3576798ace4c05acc04b5fed728f236add66bc1",
+      "role": "original single passing-pose technical guide only"
+    }
+  ],
+  "excluded_default_attachments": [
+    "137 contact",
+    "138 contact",
+    "139 failed walk",
+    "135/136 failed walks",
+    "129 base",
+    "whole idle strip"
+  ],
+  "137_138_role": "known static role comparisons only, not default generation inputs or identity",
+  "imagegen_parameters_for_root_only": {
+    "referenced_image_paths": [
+      "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-passing-pose-inputs-v001\\near_support_far_pass\\references\\identity\\canonical-idle-frame-0.png",
+      "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-passing-pose-inputs-v001\\near_support_far_pass\\references\\technical\\passing-role-guide-v001.png"
+    ],
+    "transparent_background": false,
+    "num_last_images_to_include": "omit",
+    "prompt": "read exact prompt_file"
+  },
+  "generation_authority": "root only; preparer has no generation/UE permission",
+  "generation_completed": false,
+  "expected_future_raw_path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-passing-pose-inputs-v001\\near_support_far_pass\\raw\\passing-pose.png",
+  "generated_output_sha256": null,
+  "automatic_extract_or_import": false,
+  "retention_before_view": "root F/E v074 input retention, then actual new guide review; future raw must also be retained before view",
+  "no_speed_or_root_lock": true,
+  "future_complete_row_policy": "Only after both opposite passing roles pass static review, combine accepted multi-pose motion references with both contacts and six-phase guidance. Canonical131 alone remains identity. Do not splice/relabel/reorder/retime failed139 into acceptance or use a single peak pose as sole walk anchor."
+}

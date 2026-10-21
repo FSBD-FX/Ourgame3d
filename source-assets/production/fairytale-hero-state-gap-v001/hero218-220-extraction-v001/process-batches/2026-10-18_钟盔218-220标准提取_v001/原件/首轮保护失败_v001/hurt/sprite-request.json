@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-clock-hero-body-states-v001",
+    "description": "The exact currently accepted body-only SwordReady v002 frame0 identity, fixed native right three-quarter view; common bare grey/charcoal cloth body and original brown gloves/boots",
+    "base_image": null
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual_measured_against_current_opaque_anchor"
+  },
+  "states": {
+    "hurt": {
+      "frames": 4,
+      "fps": 10,
+      "loop": false,
+      "action": "Fixed native RIGHT-facing three-quarter camera from the attached accepted SwordReady v002 frame0. The row owns motion only. Bare charcoal/grey cloth shirt and trousers, original belt, brown gloves and boots; rigid squat crooked bell/clock helmet, original knob and face opening with two contained amber eyes. Preserve the accepted anchor's actual shapes, proportions, palette and hand-ink weight. Same common drawing scale through the complete row: 416-source-pixel standing-equivalent body is a design target on 512 cells, not a demand that crouched/lying bboxes be 416 high. Never normalize, lengthen limbs, stretch the helmet or enlarge a small pose. The future weapon and armor are modular; paint only genuine connected body/glove/boot pixels. No sword/handle/rod/shield/staff/crossbow, no chest or shoulder armor, bracer or shin plate. Hands must be genuinely drawn with connected short upper arm, elbow, forearm, wrist and believable thumb/fingers. Near/far arms stay distinct; no fixed copied grip coordinate, no invented identical socket, no technical dots/axes. Near glove may naturally close around an invisible later handle, but never force it to an old socket or copy an old hand. Actual grip/axis, body contacts, crown and module occlusion are unknown until generated pixels are measured. Native actor translation is external; do not draw floor, trails, shadows, displaced duplicates, dust, glow or speed effects. Do not attach old v006 body art, canonical131 original sheet or any alternate identity. This is actual nonlethal player poise-break Hurt, not every hit. Native Hurt is .40 seconds and must not loop. A normal accepted HP-loss HitFlash is separate and does not authorize this action. Exact ordered pose progression: Pose 0: Immediate actual impact compression: shoulders fold and knees flex, rigid helmet tilts as one solid shape; connected hands react naturally. Pose 1: Peak recoil: real torso/hip offset and elbow/wrist response, two distinct separate arms, no new anatomy or stretched helmet. Pose 2: Rebalance: leg/hip support and shoulder positions move back, hands remain anatomically attached with a distinct new wrist angle. Pose 3: Recovery toward the accepted Ready silhouette: smaller residual knee/torso displacement; not a copied Ready0 frame."
+    }
+  },
+  "style": "EXACT accepted current SwordReady v002 hand-inked grotesque dark-fairytale squat clock/bell-helmet identity; body-only no weapons/armor, not pixel art, no style redesign",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": false,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

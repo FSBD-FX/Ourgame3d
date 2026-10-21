@@ -1,0 +1,20 @@
+--- extract-retained-rows-v001.py
++++ extract-retained-rows-v002.py
+@@ -40,7 +40,7 @@
+ def validate_plan():
+     if Path(sys.executable).resolve() != (SKILL / ".venv/Scripts/python.exe").resolve():
+         raise ValueError("Use the pinned sprite-gen venv; never global Python")
+-    plan = json.loads((HERE / "extraction-plan-v001.json").read_text(encoding="utf-8"))
++    plan = json.loads((HERE / "extraction-plan-v002.json").read_text(encoding="utf-8"))
+     for record in plan["pinned_tools_and_inputs"]:
+         if pin(Path(record["path"])) != record:
+             raise ValueError("Pinned text/tool input changed: " + record["path"])
+@@ -96,6 +96,8 @@
+     try:
+         one = copy.deepcopy(request)
+         one["states"] = {state: copy.deepcopy(request["states"][state])}
++        # Pin the SDK defaults before extraction so its documented chroma write is byte-stable.
++        one["chroma"] = copy.deepcopy(plan["explicit_sdk_chroma_defaults"])
+         write_new(run / "sprite-request.json", one)
+         request_bytes = (run / "sprite-request.json").read_bytes()
+         raw_copy = run / "raw" / (state + ".png")

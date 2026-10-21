@@ -1,0 +1,230 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-hero-walk-source-trial-v005",
+    "base_image": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-assembled-inputs-v001\\references\\identity131.png",
+    "description": "Canonical131 identity, six existing native static phases, source-only motion trial"
+  },
+  "cell": {
+    "shape": "square",
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ]
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  },
+  "states": {
+    "walk": {
+      "frames": 6,
+      "fps": 12,
+      "loop": true,
+      "durations_ms": [
+        83,
+        83,
+        83,
+        83,
+        83,
+        83
+      ],
+      "action": "Original six-phase walk, existing source roles preserved; not yet motion approved"
+    }
+  },
+  "style": "Canonical131 dark-fairytale hand-drawn cartoon, not pixel art",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "project_phase_contract": {
+    "original": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\numeric-walk-request-v002.json",
+    "sha256": "7267a6e1fbf8422bc3433ff2fb916100bad19ebab765be1d1c0caed745c09fc3",
+    "phase_contract": [
+      {
+        "frame": 0,
+        "phase": "near_contact",
+        "support": "near heel accepts weight; far toe is ending rear support",
+        "near_foot": "forward toward screen-right, heel down, toe slightly lifted",
+        "far_foot": "behind toward screen-left, rear toe down, heel raised",
+        "arms": "near arm back; far arm forward; empty gloves open/relaxed",
+        "body": "soft contact compression through knees; rigid helmet keeps shape"
+      },
+      {
+        "frame": 1,
+        "phase": "near_support_far_pass",
+        "support": "near sole flat under body; far foot clearly off ground",
+        "near_foot": "weight-bearing stance foot moves backward relative to hips",
+        "far_foot": "bent knee swings forward passing beneath pelvis, boot clears floor",
+        "arms": "arms pass through neutral; elbows remain recognizable",
+        "body": "pelvis rises slightly on near support; helmet translates as one rigid unit"
+      },
+      {
+        "frame": 2,
+        "phase": "near_push_far_reach",
+        "support": "near rear toe still contacts; far leading heel is about to land",
+        "near_foot": "behind pelvis, heel lifts for push-off",
+        "far_foot": "extends forward with raised toe, not yet a second planted sole",
+        "arms": "near arm continues toward front as near leg travels back; far arm back",
+        "body": "small controlled weight transfer, no airborne run phase"
+      },
+      {
+        "frame": 3,
+        "phase": "far_contact",
+        "support": "far heel accepts weight; near toe ends rear support",
+        "near_foot": "behind toward screen-left, rear toe down, heel raised",
+        "far_foot": "forward toward screen-right, heel down, toe slightly lifted",
+        "arms": "near arm forward; far arm back; opposite contact to frame0",
+        "body": "opposite contact compression; do not duplicate or flip the whole sprite"
+      },
+      {
+        "frame": 4,
+        "phase": "far_support_near_pass",
+        "support": "far sole flat under body; near foot clearly off ground",
+        "near_foot": "bent knee swings forward passing beneath pelvis, boot clears floor",
+        "far_foot": "weight-bearing stance foot moves backward relative to hips",
+        "arms": "opposite passing phase to frame1; two hands remain distinct",
+        "body": "pelvis rises slightly on far support; same rigid helmet scale"
+      },
+      {
+        "frame": 5,
+        "phase": "far_push_near_reach",
+        "support": "far rear toe still contacts; near leading heel is about to land",
+        "near_foot": "extends forward to prepare the next frame0 heel contact",
+        "far_foot": "behind pelvis, heel lifts for push-off",
+        "arms": "near arm heads back; far arm forward, preparing frame0",
+        "body": "flows into frame0 with no reset, body teleport or repeated contact pose"
+      }
+    ],
+    "actual_stride": null,
+    "actual_body_foot_roots": null
+  },
+  "project_packing": {
+    "source_plan": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-six-phase-source-plan-v001\\source-plan.json",
+    "sha256": "a20838742e3c7df5e08d0753dfa38e6bd490edc2d4de300efd80fe3f3bbb1681",
+    "row": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-assembled-inputs-v001\\walk-source-row.png",
+    "row_sha256": "c85246148f129734d327a2cc331dfd3a9ee9e725aff3c374d0e57110c6a6a3b3",
+    "native_calls_added": 0,
+    "artwork_redrawn": false,
+    "packing_only": true,
+    "frames": [
+      {
+        "frame": 0,
+        "phase": "near_contact",
+        "native_request": 138,
+        "source": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-near-contact-v001\\raw\\near-contact-anchor.png",
+        "source_sha256": "02ada12e2fa8fa253e7d19fcd8c75dc3e686bdc0d79b68bc333f95cbc200ac2e",
+        "copied_reference": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-assembled-inputs-v001\\references\\phase-0-request138.png",
+        "packing_xy": [
+          0,
+          0
+        ],
+        "source_pixel_size": [
+          1254,
+          1254
+        ],
+        "packed_pixels_equal_source": true
+      },
+      {
+        "frame": 1,
+        "phase": "near_support_far_pass",
+        "native_request": 142,
+        "source": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\passing-far-leg-edit-inputs-v001\\raw\\passing-far-leg-edit.png",
+        "source_sha256": "7bcec84667e8d4be54696af9da8c33c9ecf81a4c5ccc47aadae2e76bd56113d0",
+        "copied_reference": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-assembled-inputs-v001\\references\\phase-1-request142.png",
+        "packing_xy": [
+          1254,
+          0
+        ],
+        "source_pixel_size": [
+          1254,
+          1254
+        ],
+        "packed_pixels_equal_source": true
+      },
+      {
+        "frame": 2,
+        "phase": "near_push_far_reach",
+        "native_request": 143,
+        "source": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-precontact-pose-inputs-v001\\near_push_far_reach\\raw\\precontact.png",
+        "source_sha256": "3fee1b0c51c9cbad33684997d6ca92ef832961729cde571f20e6d1c2af19ff8a",
+        "copied_reference": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-assembled-inputs-v001\\references\\phase-2-request143.png",
+        "packing_xy": [
+          2508,
+          0
+        ],
+        "source_pixel_size": [
+          1254,
+          1254
+        ],
+        "packed_pixels_equal_source": true
+      },
+      {
+        "frame": 3,
+        "phase": "far_contact",
+        "native_request": 137,
+        "source": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-opposite-anchor-v001\\raw\\far-contact-anchor.png",
+        "source_sha256": "85d48ab699751302364ece823f3a56b57ab863009ab815a5d147609c9baeb88b",
+        "copied_reference": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-assembled-inputs-v001\\references\\phase-3-request137.png",
+        "packing_xy": [
+          3762,
+          0
+        ],
+        "source_pixel_size": [
+          1254,
+          1254
+        ],
+        "packed_pixels_equal_source": true
+      },
+      {
+        "frame": 4,
+        "phase": "far_support_near_pass",
+        "native_request": 141,
+        "source": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-passing-pose-inputs-v001\\far_support_near_pass\\raw\\passing-pose.png",
+        "source_sha256": "333090236b72f262aaea9ff58310ab0f3fb975a3864bd317d57855c3c4058d66",
+        "copied_reference": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-assembled-inputs-v001\\references\\phase-4-request141.png",
+        "packing_xy": [
+          5016,
+          0
+        ],
+        "source_pixel_size": [
+          1254,
+          1254
+        ],
+        "packed_pixels_equal_source": true
+      },
+      {
+        "frame": 5,
+        "phase": "far_push_near_reach",
+        "native_request": 145,
+        "source": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-precontact-heel-edit-inputs-v001\\raw\\heel-corrected.png",
+        "source_sha256": "ff0cac8f31163e32f07832422e612545ed7a9b3734b539e2dfb51cc58a1422f7",
+        "copied_reference": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-assembled-inputs-v001\\references\\phase-5-request145.png",
+        "packing_xy": [
+          6270,
+          0
+        ],
+        "source_pixel_size": [
+          1254,
+          1254
+        ],
+        "packed_pixels_equal_source": true
+      }
+    ]
+  }
+}

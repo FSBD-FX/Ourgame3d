@@ -1,0 +1,1229 @@
+{
+  "schema": "hero-state-source-rule-evidence-v001",
+  "sections": [
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonDodge.h",
+        "bytes": 14663,
+        "sha256": "375ee1aa3d83612a3c686f0b1a6a6d322c97e247ea957c3d7380dcd431fd9ec2"
+      },
+      "first_line": 11,
+      "last_line": 15,
+      "meaning": "Native duration, travel, iframe and cooldown constants",
+      "exact_lines": [
+        {
+          "line": 11,
+          "text": "inline constexpr double Duration = .40;"
+        },
+        {
+          "line": 12,
+          "text": "inline constexpr double Distance = 185.;"
+        },
+        {
+          "line": 13,
+          "text": "inline constexpr double Speed = 462.5;"
+        },
+        {
+          "line": 14,
+          "text": "inline constexpr double IFrameStart = .06;"
+        },
+        {
+          "line": 15,
+          "text": "inline constexpr double IFrameEnd = .20;"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonDodge.h",
+        "bytes": 14663,
+        "sha256": "375ee1aa3d83612a3c686f0b1a6a6d322c97e247ea957c3d7380dcd431fd9ec2"
+      },
+      "first_line": 58,
+      "last_line": 61,
+      "meaning": "Protected uses absolute Start+ boundaries and clips at actual interruption",
+      "exact_lines": [
+        {
+          "line": 58,
+          "text": " static bool Protected(const FRecord& R,double T) {"
+        },
+        {
+          "line": 59,
+          "text": "  const double End=R.Finish==EFinish::None?R.Start+IFrameEnd:std::min(R.Start+IFrameEnd,R.FinishedAt);"
+        },
+        {
+          "line": 60,
+          "text": "  return T>=R.Start+IFrameStart&&T<End;"
+        },
+        {
+          "line": 61,
+          "text": " }"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonDodge.h",
+        "bytes": 14663,
+        "sha256": "375ee1aa3d83612a3c686f0b1a6a6d322c97e247ea957c3d7380dcd431fd9ec2"
+      },
+      "first_line": 138,
+      "last_line": 148,
+      "meaning": "Normalized MoveIntent or zero-intent Facing fallback; no facing mutation",
+      "exact_lines": [
+        {
+          "line": 138,
+          "text": " FResult TryStart(double Now,const FContext& C) {"
+        },
+        {
+          "line": 139,
+          "text": "  if(!ValidState(S)||!Finite(Now)||Now!=S.Time||S.Phase!=EPhase::Idle||Now<S.ReadyAt||!C.FreshPress||!C.Grounded||!C.CanStart||(C.Facing!=1&&C.Facing!=-1)||!ValidPoint(C.MoveIntent))return {};"
+        },
+        {
+          "line": 140,
+          "text": "  FRecord R;R.ActionId=S.NextActionId;R.StartEventId=S.NextEventId;R.Origin=S.Position;R.Start=Now;R.End=Now+Duration;R.ReadyAt=Now+Cooldown;"
+        },
+        {
+          "line": 141,
+          "text": "  if(S.LastPositionReceipt.Id&&S.LastPositionReceipt.AfterActionId==S.NextActionId-1)R.OriginReceipt=S.LastPositionReceipt;"
+        },
+        {
+          "line": 142,
+          "text": "  const double Scale=std::max(std::abs(C.MoveIntent.X),std::abs(C.MoveIntent.Y));"
+        },
+        {
+          "line": 143,
+          "text": "  if(Scale>0) { const FPoint Small{C.MoveIntent.X/Scale,C.MoveIntent.Y/Scale};const double Norm=std::hypot(Small.X,Small.Y);R.Direction={Small.X/Norm,Small.Y/Norm}; }"
+        },
+        {
+          "line": 144,
+          "text": "  else R.Direction={static_cast<double>(C.Facing),0};"
+        },
+        {
+          "line": 145,
+          "text": "  if(!TimingsValid(R)||!ValidPoint(PositionAt(R,Distance)))return {};"
+        },
+        {
+          "line": 146,
+          "text": "  auto Next=S;FResult Out;Next.Records.push_back(R);++Next.NextActionId;Next.ReadyAt=R.ReadyAt;Next.Phase=EPhase::Dodging;Emit(Next,Out,EEventKind::Started,Now);"
+        },
+        {
+          "line": 147,
+          "text": "  if(!ValidState(Next))return {};S=std::move(Next);Out.Accepted=true;return Out;"
+        },
+        {
+          "line": 148,
+          "text": " }"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonDodge.h",
+        "bytes": 14663,
+        "sha256": "375ee1aa3d83612a3c686f0b1a6a6d322c97e247ea957c3d7380dcd431fd9ec2"
+      },
+      "first_line": 149,
+      "last_line": 167,
+      "meaning": "Blocked travel freezes, completion only at unchanged native End",
+      "exact_lines": [
+        {
+          "line": 149,
+          "text": " FResult StepTo(double Now,const FSweep& Sweep={}) {"
+        },
+        {
+          "line": 150,
+          "text": "  if(!ValidState(S)||!Finite(Now)||Now<S.Time)return {};"
+        },
+        {
+          "line": 151,
+          "text": "  auto Next=S;FResult Out;"
+        },
+        {
+          "line": 152,
+          "text": "  if(Next.Phase==EPhase::Dodging) {"
+        },
+        {
+          "line": 153,
+          "text": "   auto& R=Next.Records.back();const double MoveEnd=std::min(Now,R.End);"
+        },
+        {
+          "line": 154,
+          "text": "   if(MoveEnd>Next.Time&&R.Block==EBlock::None) {"
+        },
+        {
+          "line": 155,
+          "text": "    const double TargetTravel=TravelAt(R,MoveEnd);FSweepRequest Q;Q.From=Next.Position;Q.To=PositionAt(R,TargetTravel);Q.FromTime=Next.Time;Q.ToTime=MoveEnd;Q.ActionId=R.ActionId;FSweepResult Hit;"
+        },
+        {
+          "line": 156,
+          "text": "    if(!ValidPoint(Q.To)||!ReadSweep(Sweep,Q,Hit))return {};"
+        },
+        {
+          "line": 157,
+          "text": "    if(Hit.HitWall||Hit.HitBody) {"
+        },
+        {
+          "line": 158,
+          "text": "     const bool Wall=Hit.HitWall&&(!Hit.HitBody||Hit.WallFraction<=Hit.BodyFraction);const double Fraction=Wall?Hit.WallFraction:Hit.BodyFraction;"
+        },
+        {
+          "line": 159,
+          "text": "     R.Block=Wall?EBlock::Wall:EBlock::Body;R.BlockedAt=Fraction==1?MoveEnd:Next.Time+(MoveEnd-Next.Time)*Fraction;"
+        },
+        {
+          "line": 160,
+          "text": "     R.Travelled=Fraction==1?TargetTravel:R.Travelled+(TargetTravel-R.Travelled)*Fraction;Next.Position=PositionAt(R,R.Travelled);R.BlockEventId=Next.NextEventId;Emit(Next,Out,EEventKind::Blocked,R.BlockedAt,R.Block);"
+        },
+        {
+          "line": 161,
+          "text": "    } else { R.Travelled=TargetTravel;Next.Position=Q.To; }"
+        },
+        {
+          "line": 162,
+          "text": "   }"
+        },
+        {
+          "line": 163,
+          "text": "   Next.Time=MoveEnd;"
+        },
+        {
+          "line": 164,
+          "text": "   if(MoveEnd==R.End) { R.Finish=EFinish::Completed;R.FinishedAt=R.End;R.FinishEventId=Next.NextEventId;Next.Phase=EPhase::Idle;Emit(Next,Out,EEventKind::Completed,R.End,R.Block,R.Finish); }"
+        },
+        {
+          "line": 165,
+          "text": "  }"
+        },
+        {
+          "line": 166,
+          "text": "  Next.Time=Now;if(!ValidState(Next))return {};S=std::move(Next);Out.Accepted=true;return Out;"
+        },
+        {
+          "line": 167,
+          "text": " }"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonDodge.h",
+        "bytes": 14663,
+        "sha256": "375ee1aa3d83612a3c686f0b1a6a6d322c97e247ea957c3d7380dcd431fd9ec2"
+      },
+      "first_line": 172,
+      "last_line": 183,
+      "meaning": "Poise/death interruptions and protected direct contact restriction",
+      "exact_lines": [
+        {
+          "line": 172,
+          "text": "  if(!ValidState(S)||!Finite(Now)||Now!=S.Time||S.Phase==EPhase::Dead||(Reason!=EFinish::PoiseBreak&&Reason!=EFinish::Death))return {};"
+        },
+        {
+          "line": 173,
+          "text": "  if(Reason==EFinish::PoiseBreak&&(S.Phase!=EPhase::Dodging||Protected(S.Records.back(),Now)))return {};"
+        },
+        {
+          "line": 174,
+          "text": "  auto Next=S;FResult Out;"
+        },
+        {
+          "line": 175,
+          "text": "  if(Next.Phase==EPhase::Dodging) { auto& R=Next.Records.back();R.Finish=Reason;R.FinishedAt=Now;R.FinishEventId=Next.NextEventId;Next.Phase=EPhase::Idle;Emit(Next,Out,EEventKind::Interrupted,Now,R.Block,Reason); }"
+        },
+        {
+          "line": 176,
+          "text": "  if(Reason==EFinish::Death) { Next.Phase=EPhase::Dead;Next.DeadAt=Now;Next.DeathEventId=Next.NextEventId;Emit(Next,Out,EEventKind::Died,Now,EBlock::None,Reason); }"
+        },
+        {
+          "line": 177,
+          "text": "  if(!ValidState(Next))return {};S=std::move(Next);Out.Accepted=true;return Out;"
+        },
+        {
+          "line": 178,
+          "text": " }"
+        },
+        {
+          "line": 179,
+          "text": " // While active, future scheduled intervals are promises subject to subsequent"
+        },
+        {
+          "line": 180,
+          "text": " // real interruption. Refresh intervals after each interruption before contacts."
+        },
+        {
+          "line": 181,
+          "text": " // Historical intervals remain available for continuous caller damage queries."
+        },
+        {
+          "line": 182,
+          "text": " bool IsDirectInvulnerableAt(double HitTime) const { if(!Finite(HitTime))return false;for(const auto& R:S.Records)if(Protected(R,HitTime))return true;return false; }"
+        },
+        {
+          "line": 183,
+          "text": " std::vector<FInterval> DirectInvulnerabilityIntervals() const { std::vector<FInterval> Out;for(const auto& R:S.Records){const double End=R.Finish==EFinish::None?R.Start+IFrameEnd:std::min(R.Start+IFrameEnd,R.FinishedAt);if(End>R.Start+IFrameStart)Out.push_back({R.ActionId,R.Start+IFrameStart,End});}return Out; }"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+        "bytes": 121495,
+        "sha256": "c31ae4c10a52707ba555864012a1ef920c855328e83a6d8d478a8ba3fd36cebb"
+      },
+      "first_line": 766,
+      "last_line": 790,
+      "meaning": "Real dodge admission, shared equipment/attack gates and successful action interrupts",
+      "exact_lines": [
+        {
+          "line": 766,
+          "text": "bool ADungeonFighter::TryBeginDodge(FVector2D MoveIntent, bool FreshPress)"
+        },
+        {
+          "line": 767,
+          "text": "{"
+        },
+        {
+          "line": 768,
+          "text": "    if(RunInstallBlocksFighter(*this))return false;"
+        },
+        {
+          "line": 769,
+          "text": "    auto Game=GetWorld()->GetAuthGameMode<ADungeonGameMode>();"
+        },
+        {
+          "line": 770,
+          "text": "    if (!Game || Game->bGameOver || Game->bWaitingForStart || bEnemy || bDead || HurtTime>0.f"
+        },
+        {
+          "line": 771,
+          "text": "        || Combat.State().Action.Active || AttackCooldown>0.f"
+        },
+        {
+          "line": 772,
+          "text": "        || (AttackTime>0.f&&!(WeaponSkills.State().Action.Active&&WeaponSkills.State().Action.Type==DungeonWeaponActions::EAction::Reload))"
+        },
+        {
+          "line": 773,
+          "text": "        || (WeaponSkills.State().Action.Active && WeaponSkills.State().Action.Type!=DungeonWeaponActions::EAction::Reload)"
+        },
+        {
+          "line": 774,
+          "text": "        || Game->GetSimulationTime()!=Dodge.State().Time) return false;"
+        },
+        {
+          "line": 775,
+          "text": "    if (IsEquipmentBound() && Game->GetEquipmentView().Action.Active"
+        },
+        {
+          "line": 776,
+          "text": "        && Game->GetEquipmentView().Action.Kind==EDungeonEquipmentActionKind::SwitchWeapon) return false;"
+        },
+        {
+          "line": 777,
+          "text": "    DungeonDodge::FContext C;"
+        },
+        {
+          "line": 778,
+          "text": "    C.FreshPress=FreshPress; C.Grounded=JumpHeight<=KINDA_SMALL_NUMBER && JumpVelocity<=0.f;"
+        },
+        {
+          "line": 779,
+          "text": "    C.CanStart=true; C.Facing=Facing<0.f?-1:1; C.MoveIntent={MoveIntent.X,MoveIntent.Y};"
+        },
+        {
+          "line": 780,
+          "text": "    // A failed request has no cancellation, receipt or resource side effects."
+        },
+        {
+          "line": 781,
+          "text": "    const auto R=Dodge.TryStart(Dodge.State().Time,C);"
+        },
+        {
+          "line": 782,
+          "text": "    if (!R.Accepted) return false;"
+        },
+        {
+          "line": 783,
+          "text": "    if (IsEquipmentBound()) Game->CancelEquipmentAction();"
+        },
+        {
+          "line": 784,
+          "text": "    ArmorChangeRemaining=0.f; PendingArmorId.Reset();"
+        },
+        {
+          "line": 785,
+          "text": "    Combat.Interrupt(DungeonContentCombat::EInterruptReason::ExclusiveAction);"
+        },
+        {
+          "line": 786,
+          "text": "    WeaponSkills.Interrupt(DungeonWeaponActions::EInterrupt::ExclusiveAction);"
+        },
+        {
+          "line": 787,
+          "text": "    if(IsEquipmentBound())Game->ObservePendingActionAudio(this);"
+        },
+        {
+          "line": 788,
+          "text": "    ClearPendingAttackInput();"
+        },
+        {
+          "line": 789,
+          "text": "    SyncDodgeAction();"
+        },
+        {
+          "line": 790,
+          "text": "    return true;"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+        "bytes": 121495,
+        "sha256": "c31ae4c10a52707ba555864012a1ef920c855328e83a6d8d478a8ba3fd36cebb"
+      },
+      "first_line": 795,
+      "last_line": 803,
+      "meaning": "Public native Dodge state drives position and presentation age",
+      "exact_lines": [
+        {
+          "line": 795,
+          "text": "void ADungeonFighter::SyncDodgeAction()"
+        },
+        {
+          "line": 796,
+          "text": "{"
+        },
+        {
+          "line": 797,
+          "text": "    const auto& S=Dodge.State();"
+        },
+        {
+          "line": 798,
+          "text": "    if (S.Phase!=DungeonDodge::EPhase::Dodging || S.Records.empty()) return;"
+        },
+        {
+          "line": 799,
+          "text": "    SetActorLocation(FVector(S.Position.X,S.Position.Y,0.0));"
+        },
+        {
+          "line": 800,
+          "text": "    const auto& R=S.Records.back();"
+        },
+        {
+          "line": 801,
+          "text": "    AttackTime=0.f; ComboStage=0; AttackPhase=TEXT(\"dodge\");"
+        },
+        {
+          "line": 802,
+          "text": "    AnimationName=TEXT(\"dodge\"); AnimationTime=float(S.Time-R.Start);"
+        },
+        {
+          "line": 803,
+          "text": "    bMoving=R.Block==DungeonDodge::EBlock::None;"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+        "bytes": 121495,
+        "sha256": "c31ae4c10a52707ba555864012a1ef920c855328e83a6d8d478a8ba3fd36cebb"
+      },
+      "first_line": 1325,
+      "last_line": 1330,
+      "meaning": "Dead/dodge/hurt/exclusive actions reject new attack admission",
+      "exact_lines": [
+        {
+          "line": 1325,
+          "text": "bool ADungeonFighter::CanStartAttack() const"
+        },
+        {
+          "line": 1326,
+          "text": "{"
+        },
+        {
+          "line": 1327,
+          "text": "    if(RunInstallBlocksFighter(*this))return false;"
+        },
+        {
+          "line": 1328,
+          "text": "    return !StoneKnight && !StoneBat && !StoneGuard && GetEquipmentActionDeadline()<=0 && Dodge.State().Phase!=DungeonDodge::EPhase::Dodging && !WeaponSkills.State().Action.Active && !bDead && AttackTime <= 0.f && AttackCooldown <= 0.f && HurtTime <= 0.f && ArmorChangeRemaining <= 0.f"
+        },
+        {
+          "line": 1329,
+          "text": "        && !(JumpHeight > 0.f && bAirPrimarySpent);"
+        },
+        {
+          "line": 1330,
+          "text": "}"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+        "bytes": 121495,
+        "sha256": "c31ae4c10a52707ba555864012a1ef920c855328e83a6d8d478a8ba3fd36cebb"
+      },
+      "first_line": 1435,
+      "last_line": 1441,
+      "meaning": "Dead or unaccepted protected direct contacts do not newly apply hit",
+      "exact_lines": [
+        {
+          "line": 1435,
+          "text": "void ADungeonFighter::ApplyCombatHitInternal(float Damage, ADungeonFighter* Attacker, float Stagger, bool PreviouslyAccepted,"
+        },
+        {
+          "line": 1436,
+          "text": "    bool Magic, bool DamageOverTime, bool PreserveHurtProtection)"
+        },
+        {
+          "line": 1437,
+          "text": "{"
+        },
+        {
+          "line": 1438,
+          "text": "    if (bDead || (!DamageOverTime&&!PreviouslyAccepted && !CanReceiveDirectHit()) || !FMath::IsFinite(Damage) || Damage <= 0.f)"
+        },
+        {
+          "line": 1439,
+          "text": "    {"
+        },
+        {
+          "line": 1440,
+          "text": "        return;"
+        },
+        {
+          "line": 1441,
+          "text": "    }"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+        "bytes": 121495,
+        "sha256": "c31ae4c10a52707ba555864012a1ef920c855328e83a6d8d478a8ba3fd36cebb"
+      },
+      "first_line": 1486,
+      "last_line": 1529,
+      "meaning": "DoT vs direct hit, poise break/Hurt, lethal interrupts",
+      "exact_lines": [
+        {
+          "line": 1486,
+          "text": "    Health = FMath::Max(0.f, Health - ActualDamage);"
+        },
+        {
+          "line": 1487,
+          "text": "    ArmorChangeRemaining = 0.f; PendingArmorId.Reset();"
+        },
+        {
+          "line": 1488,
+          "text": "    if (DamageOverTime)"
+        },
+        {
+          "line": 1489,
+          "text": "    {"
+        },
+        {
+          "line": 1490,
+          "text": "        // Status ticks bypass direct protection and never create hurt/poise/push."
+        },
+        {
+          "line": 1491,
+          "text": "        if (Health<=0.f)"
+        },
+        {
+          "line": 1492,
+          "text": "        {"
+        },
+        {
+          "line": 1493,
+          "text": "            bDead=true;AttackTime=0.f;Combat.Interrupt(DungeonContentCombat::EInterruptReason::Death);"
+        },
+        {
+          "line": 1494,
+          "text": "            InterruptWeaponActionForHit(DungeonWeaponActions::EInterrupt::Death);"
+        },
+        {
+          "line": 1495,
+          "text": "            if (!bEnemy) Dodge.Interrupt(Dodge.State().Time,DungeonDodge::EFinish::Death);"
+        },
+        {
+          "line": 1496,
+          "text": "            AnimationName=TEXT(\"death\");AnimationTime=0;"
+        },
+        {
+          "line": 1497,
+          "text": "            if (auto Game=GetWorld()->GetAuthGameMode<ADungeonGameMode>()) Game->OnFighterDied(this);"
+        },
+        {
+          "line": 1498,
+          "text": "        }"
+        },
+        {
+          "line": 1499,
+          "text": "        return;"
+        },
+        {
+          "line": 1500,
+          "text": "    }"
+        },
+        {
+          "line": 1501,
+          "text": "    if (USoundBase* Impact = LoadObject<USoundBase>(nullptr,TEXT(\"/Game/ThirdParty/Kenney/ImpactSounds/ImpactLight/SW_ImpactLight.SW_ImpactLight\")))"
+        },
+        {
+          "line": 1502,
+          "text": "        UGameplayStatics::PlaySound2D(this,Impact,0.45f,bEnemy?1.15f:0.9f);"
+        },
+        {
+          "line": 1503,
+          "text": "    HitFlash = 0.22f;"
+        },
+        {
+          "line": 1504,
+          "text": "    if (!PreserveHurtProtection)"
+        },
+        {
+          "line": 1505,
+          "text": "    {InvulnerableTime = bEnemy ? 0.18f : 0.65f;HurtProtectionSource={};}"
+        },
+        {
+          "line": 1506,
+          "text": "    bool Broken = bEnemy; // Historical generic enemies remain prototype adapters."
+        },
+        {
+          "line": 1507,
+          "text": "    if (!bEnemy && PoiseProtection <= 0.f)"
+        },
+        {
+          "line": 1508,
+          "text": "    {"
+        },
+        {
+          "line": 1509,
+          "text": "        PoiseAccumulation += Stagger >= 0.f ? Stagger : Attacker ? Attacker->GetAttackStagger() : 13.f;"
+        },
+        {
+          "line": 1510,
+          "text": "        PoiseDecayDelay = 1.f;"
+        },
+        {
+          "line": 1511,
+          "text": "        if (PoiseAccumulation >= GetPoiseThreshold())"
+        },
+        {
+          "line": 1512,
+          "text": "        {"
+        },
+        {
+          "line": 1513,
+          "text": "            Broken = true; PoiseAccumulation = 0.f; PoiseProtection = 1.f;"
+        },
+        {
+          "line": 1514,
+          "text": "        }"
+        },
+        {
+          "line": 1515,
+          "text": "    }"
+        },
+        {
+          "line": 1516,
+          "text": "    if (Broken || Health <= 0.f)"
+        },
+        {
+          "line": 1517,
+          "text": "    {"
+        },
+        {
+          "line": 1518,
+          "text": "        HurtTime = bEnemy ? .2f : .4f;"
+        },
+        {
+          "line": 1519,
+          "text": "        AttackTime = 0.f;"
+        },
+        {
+          "line": 1520,
+          "text": "        Combat.Interrupt(Health <= 0.f ? DungeonContentCombat::EInterruptReason::Death"
+        },
+        {
+          "line": 1521,
+          "text": "            : DungeonContentCombat::EInterruptReason::PoiseBreak);"
+        },
+        {
+          "line": 1522,
+          "text": "        InterruptWeaponActionForHit(Health <= 0.f ? DungeonWeaponActions::EInterrupt::Death"
+        },
+        {
+          "line": 1523,
+          "text": "            : DungeonWeaponActions::EInterrupt::PoiseBreak);"
+        },
+        {
+          "line": 1524,
+          "text": "        if (!bEnemy) Dodge.Interrupt(Dodge.State().Time,Health<=0.f?DungeonDodge::EFinish::Death:DungeonDodge::EFinish::PoiseBreak);"
+        },
+        {
+          "line": 1525,
+          "text": "        SkillWindows.clear();"
+        },
+        {
+          "line": 1526,
+          "text": "        if (auto Game=GetWorld()->GetAuthGameMode<ADungeonGameMode>()) Game->CancelWorldWeaponWindows(GetRuntimeEntityId());"
+        },
+        {
+          "line": 1527,
+          "text": "        AnimationTime = 0.f;"
+        },
+        {
+          "line": 1528,
+          "text": "        AnimationName = Health > 0.f ? TEXT(\"hurt\") : TEXT(\"death\");"
+        },
+        {
+          "line": 1529,
+          "text": "    }"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+        "bytes": 121495,
+        "sha256": "c31ae4c10a52707ba555864012a1ef920c855328e83a6d8d478a8ba3fd36cebb"
+      },
+      "first_line": 1799,
+      "last_line": 1805,
+      "meaning": "Terminal display clock continues without gameplay tick",
+      "exact_lines": [
+        {
+          "line": 1799,
+          "text": "void ADungeonFighter::AdvanceTerminalPresentation(float DeltaSeconds)"
+        },
+        {
+          "line": 1800,
+          "text": "{"
+        },
+        {
+          "line": 1801,
+          "text": "    if(RunInstallBlocksFighter(*this))return;"
+        },
+        {
+          "line": 1802,
+          "text": "    if (!bDead || !FMath::IsFinite(DeltaSeconds) || DeltaSeconds <= 0.f) return;"
+        },
+        {
+          "line": 1803,
+          "text": "    // Terminal display only: no kernel/driver clock, movement, input, damage or resource tick."
+        },
+        {
+          "line": 1804,
+          "text": "    AnimationTime += DeltaSeconds;"
+        },
+        {
+          "line": 1805,
+          "text": "    JumpHeight = FMath::Max(0.f, JumpHeight-360.f*DeltaSeconds);"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+        "bytes": 121495,
+        "sha256": "c31ae4c10a52707ba555864012a1ef920c855328e83a6d8d478a8ba3fd36cebb"
+      },
+      "first_line": 1815,
+      "last_line": 1829,
+      "meaning": "Hurt countdown; dead branch advances only death presentation and height",
+      "exact_lines": [
+        {
+          "line": 1815,
+          "text": "    }"
+        },
+        {
+          "line": 1816,
+          "text": "    HitFlash = FMath::Max(0.f, HitFlash - DeltaSeconds);"
+        },
+        {
+          "line": 1817,
+          "text": "    InvulnerableTime = FMath::Max(0.f, InvulnerableTime - DeltaSeconds);"
+        },
+        {
+          "line": 1818,
+          "text": "    HurtTime = FMath::Max(0.f, HurtTime - DeltaSeconds);"
+        },
+        {
+          "line": 1819,
+          "text": "    AttackCooldown = FMath::Max(0.f, AttackCooldown - DeltaSeconds);"
+        },
+        {
+          "line": 1820,
+          "text": "    PoiseProtection = FMath::Max(0.f, PoiseProtection - DeltaSeconds);"
+        },
+        {
+          "line": 1821,
+          "text": "    const float DecayTime = FMath::Max(0.f, DeltaSeconds - PoiseDecayDelay);"
+        },
+        {
+          "line": 1822,
+          "text": "    PoiseDecayDelay = FMath::Max(0.f, PoiseDecayDelay - DeltaSeconds);"
+        },
+        {
+          "line": 1823,
+          "text": "    PoiseAccumulation = FMath::Max(0.f, PoiseAccumulation - 20.f * DecayTime);"
+        },
+        {
+          "line": 1824,
+          "text": "    if (bDead)"
+        },
+        {
+          "line": 1825,
+          "text": "    {"
+        },
+        {
+          "line": 1826,
+          "text": "        JumpHeight = FMath::Max(0.f, JumpHeight - 360.f * DeltaSeconds);"
+        },
+        {
+          "line": 1827,
+          "text": "        SetAnimation(TEXT(\"death\"), DeltaSeconds);"
+        },
+        {
+          "line": 1828,
+          "text": "        return;"
+        },
+        {
+          "line": 1829,
+          "text": "    }"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+        "bytes": 121495,
+        "sha256": "c31ae4c10a52707ba555864012a1ef920c855328e83a6d8d478a8ba3fd36cebb"
+      },
+      "first_line": 1897,
+      "last_line": 1904,
+      "meaning": "State selection after authority transitions",
+      "exact_lines": [
+        {
+          "line": 1897,
+          "text": "    if (Dodge.State().Phase==DungeonDodge::EPhase::Dodging) SyncDodgeAction();"
+        },
+        {
+          "line": 1898,
+          "text": "    else if (WeaponSkills.State().Action.Active) SyncWeaponSkillAction();"
+        },
+        {
+          "line": 1899,
+          "text": "    else if (!(IsContentMelee() && AttackTime > 0.f))"
+        },
+        {
+          "line": 1900,
+          "text": "    {"
+        },
+        {
+          "line": 1901,
+          "text": "        const FString Next=AttackTime > 0.f ? TEXT(\"attack\") : HurtTime > 0.f ? TEXT(\"hurt\")"
+        },
+        {
+          "line": 1902,
+          "text": "            : ArmorChangeRemaining > 0.f ? TEXT(\"equip\") : bMoving ? TEXT(\"walk\") : TEXT(\"idle\");"
+        },
+        {
+          "line": 1903,
+          "text": "        const bool DistanceRequested=IsEquipmentBound()"
+        },
+        {
+          "line": 1904,
+          "text": "            &&(FParse::Param(FCommandLine::Get(),TEXT(\"DungeonFairytaleSwordWalkPreview\"))"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+        "bytes": 151572,
+        "sha256": "55066ff73a6dd594db4c0631f76656d8166f43a3b4d3512b53df01021038cc6c"
+      },
+      "first_line": 1205,
+      "last_line": 1228,
+      "meaning": "Actual body capture carries bAlive=false after death",
+      "exact_lines": [
+        {
+          "line": 1205,
+          "text": "TArray<FDungeonKnightBody> ADungeonGameMode::CaptureKnightBodies() const"
+        },
+        {
+          "line": 1206,
+          "text": "{"
+        },
+        {
+          "line": 1207,
+          "text": "    TArray<FDungeonKnightBody> Bodies;"
+        },
+        {
+          "line": 1208,
+          "text": "    const auto Capture = [this,&Bodies](ADungeonFighter* Fighter)"
+        },
+        {
+          "line": 1209,
+          "text": "    {"
+        },
+        {
+          "line": 1210,
+          "text": "        if (!IsValid(Fighter)||!Fighter->GetRuntimeEntityId()) return;"
+        },
+        {
+          "line": 1211,
+          "text": "        FDungeonKnightBody B;"
+        },
+        {
+          "line": 1212,
+          "text": "        B.Fighter = Fighter; B.EntityId = Fighter->GetRuntimeEntityId();"
+        },
+        {
+          "line": 1213,
+          "text": "        B.Start = B.End = Fighter->GetGroundPosition();"
+        },
+        {
+          "line": 1214,
+          "text": "        B.StartHeight = B.EndHeight = Fighter->GetCombatHeight();"
+        },
+        {
+          "line": 1215,
+          "text": "        B.BodyHalfExtent = Fighter->GetCombatBodyHalfExtent();"
+        },
+        {
+          "line": 1216,
+          "text": "        B.bBlocksBody = !Fighter->StoneBat || B.StartHeight<=40.;"
+        },
+        {
+          "line": 1217,
+          "text": "        B.bAlive = !Fighter->bDead;"
+        },
+        {
+          "line": 1218,
+          "text": "        B.bCanTakeDamage = Fighter->CanReceiveDirectHit();"
+        },
+        {
+          "line": 1219,
+          "text": "        B.bUseTimedDamageAdmission=true;"
+        },
+        {
+          "line": 1220,
+          "text": "        if (Fighter->InvulnerableTime>0.f)"
+        },
+        {
+          "line": 1221,
+          "text": "            B.DirectInvulnerabilityIntervals.Add({SimulationTime,SimulationTime+double(Fighter->InvulnerableTime)});"
+        },
+        {
+          "line": 1222,
+          "text": "        for (const auto& I:Fighter->Dodge.DirectInvulnerabilityIntervals())"
+        },
+        {
+          "line": 1223,
+          "text": "            B.DirectInvulnerabilityIntervals.Add({I.Start,I.EndExclusive});"
+        },
+        {
+          "line": 1224,
+          "text": "        Bodies.Add(B);"
+        },
+        {
+          "line": 1225,
+          "text": "    };"
+        },
+        {
+          "line": 1226,
+          "text": "    Capture(PlayerFighter);"
+        },
+        {
+          "line": 1227,
+          "text": "    for (ADungeonFighter* Enemy : Enemies) Capture(Enemy);"
+        },
+        {
+          "line": 1228,
+          "text": "    return Bodies;"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+        "bytes": 151572,
+        "sha256": "55066ff73a6dd594db4c0631f76656d8166f43a3b4d3512b53df01021038cc6c"
+      },
+      "first_line": 1328,
+      "last_line": 1336,
+      "meaning": "Shared resolved movement/dodge sweep skips nonliving bodies",
+      "exact_lines": [
+        {
+          "line": 1328,
+          "text": "    }"
+        },
+        {
+          "line": 1329,
+          "text": "    double FirstBodyRawFraction=1.0;"
+        },
+        {
+          "line": 1330,
+          "text": "    for (const auto& B:Bodies)"
+        },
+        {
+          "line": 1331,
+          "text": "    {"
+        },
+        {
+          "line": 1332,
+          "text": "        if (!B.bAlive||!B.bBlocksBody||!B.Fighter.IsValid()||B.Fighter.Get()==Fighter) continue;"
+        },
+        {
+          "line": 1333,
+          "text": "        const auto Extent=B.BodyHalfExtent+FVector2D(18,16);"
+        },
+        {
+          "line": 1334,
+          "text": "        const auto P0=ObservedPosition(B,FromTime,ToTime,FromTime)-From;"
+        },
+        {
+          "line": 1335,
+          "text": "        const auto P1=ObservedPosition(B,FromTime,ToTime,ToTime)-To;"
+        },
+        {
+          "line": 1336,
+          "text": "        double Entry=0,Exit=1;"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+        "bytes": 151572,
+        "sha256": "55066ff73a6dd594db4c0631f76656d8166f43a3b4d3512b53df01021038cc6c"
+      },
+      "first_line": 1660,
+      "last_line": 1668,
+      "meaning": "Weapon skill forward sweep skips nonliving bodies",
+      "exact_lines": [
+        {
+          "line": 1660,
+          "text": "        if (Wall.bBlockingHit && FMath::Abs(Wall.ImpactNormal.Z) < .5) Fraction = FMath::Min(Fraction,double(Wall.Time));"
+        },
+        {
+          "line": 1661,
+          "text": "    for (const auto& B : SkillBatchBodies)"
+        },
+        {
+          "line": 1662,
+          "text": "    {"
+        },
+        {
+          "line": 1663,
+          "text": "        if (!B.bAlive || !B.bBlocksBody || !B.Fighter.IsValid() || B.Fighter.Get() == Fighter) continue;"
+        },
+        {
+          "line": 1664,
+          "text": "        if(B.Fighter->StoneBat&&BatObservedBodyHeight(B,SkillBatchFrom,SkillBatchTo,AtTime)>40.)continue;"
+        },
+        {
+          "line": 1665,
+          "text": "        const FVector2D Relative = SkillPositionAt(B.Fighter.Get(),AtTime)-From;"
+        },
+        {
+          "line": 1666,
+          "text": "        const FVector2D Extent = B.BodyHalfExtent+FVector2D(18.0,16.0);"
+        },
+        {
+          "line": 1667,
+          "text": "        double Entry = 0.0, Exit = 1.0;"
+        },
+        {
+          "line": 1668,
+          "text": "        if (!SkillClip(Relative.X,Relative.X-Delta.X,-Extent.X,Extent.X,Entry,Exit)"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+        "bytes": 151572,
+        "sha256": "55066ff73a6dd594db4c0631f76656d8166f43a3b4d3512b53df01021038cc6c"
+      },
+      "first_line": 1888,
+      "last_line": 1896,
+      "meaning": "Game-over uses terminal animation, does not advance SimulationTime",
+      "exact_lines": [
+        {
+          "line": 1888,
+          "text": "    if (!PlayerFighter || !FMath::IsFinite(DeltaSeconds) || DeltaSeconds <= 0.f) return;"
+        },
+        {
+          "line": 1889,
+          "text": "    if (bGameOver)"
+        },
+        {
+          "line": 1890,
+          "text": "    {"
+        },
+        {
+          "line": 1891,
+          "text": "        PlayerFighter->AdvanceTerminalPresentation(DeltaSeconds);"
+        },
+        {
+          "line": 1892,
+          "text": "        for (ADungeonFighter* Enemy : Enemies)"
+        },
+        {
+          "line": 1893,
+          "text": "            if (IsValid(Enemy)) Enemy->AdvanceTerminalPresentation(DeltaSeconds);"
+        },
+        {
+          "line": 1894,
+          "text": "        return;"
+        },
+        {
+          "line": 1895,
+          "text": "    }"
+        },
+        {
+          "line": 1896,
+          "text": "    if (bWaitingForStart) {ObserveRunExploration();return;}"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+        "bytes": 151572,
+        "sha256": "55066ff73a6dd594db4c0631f76656d8166f43a3b4d3512b53df01021038cc6c"
+      },
+      "first_line": 2329,
+      "last_line": 2339,
+      "meaning": "Player death sets game-over once; restart is separate input route",
+      "exact_lines": [
+        {
+          "line": 2329,
+          "text": "    if (Fighter->StoneKnight && !Fighter->StoneKnight->ClaimDeathReward()) return;"
+        },
+        {
+          "line": 2330,
+          "text": "    if (Fighter->StoneBat && !Fighter->StoneBat->ClaimDeathReward()) return;"
+        },
+        {
+          "line": 2331,
+          "text": "    Fighter->bDeathReported = true;"
+        },
+        {
+          "line": 2332,
+          "text": "    if(RewardCandidate)RunRewards=MoveTemp(RewardCandidate);"
+        },
+        {
+          "line": 2333,
+          "text": "    if (!Fighter->bEnemy)"
+        },
+        {
+          "line": 2334,
+          "text": "    {"
+        },
+        {
+          "line": 2335,
+          "text": "        bGameOver = true;"
+        },
+        {
+          "line": 2336,
+          "text": "        LastMessage = TEXT(\"本次探索结束。按 R 重新开始。\");"
+        },
+        {
+          "line": 2337,
+          "text": "        return;"
+        },
+        {
+          "line": 2338,
+          "text": "    }"
+        },
+        {
+          "line": 2339,
+          "text": "    const FVector2D GroundPosition = Fighter->GetGroundPosition();"
+        }
+      ]
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+        "bytes": 116786,
+        "sha256": "fd4067d02d0b6452c39176400b90692a578fa980cebb38bb26847a20e31ceead"
+      },
+      "first_line": 1118,
+      "last_line": 1132,
+      "meaning": "Old6 sampling is legacy display reference only; no new-body authority",
+      "exact_lines": [
+        {
+          "line": 1118,
+          "text": "            }"
+        },
+        {
+          "line": 1119,
+          "text": "        if(Clip==TEXT(\"dodge\")) CandidateIndex=FMath::Clamp(FMath::FloorToInt(F->AnimationTime/.40f*6.f),0,5);"
+        },
+        {
+          "line": 1120,
+          "text": "        if (Clip!=TEXT(\"attack\") && Clip!=TEXT(\"hurt\") && Clip!=TEXT(\"secondary\") && Clip!=TEXT(\"dodge\") && Clip!=TEXT(\"equip\") && Clip!=TEXT(\"equip_weapon\") && Clip!=TEXT(\"equip_armor\") && !F->bDead)"
+        },
+        {
+          "line": 1121,
+          "text": "        {"
+        },
+        {
+          "line": 1122,
+          "text": "            if (F->JumpHeight>0.f)"
+        },
+        {
+          "line": 1123,
+          "text": "            {"
+        },
+        {
+          "line": 1124,
+          "text": "                const float V=F->GetVerticalVelocity(); CandidateClip=V>=0.f?TEXT(\"jump\"):TEXT(\"fall\");"
+        },
+        {
+          "line": 1125,
+          "text": "                CandidateIndex=V>=0.f?FMath::Clamp(FMath::FloorToInt((630.f-V)/630.f*4.f),0,3)"
+        },
+        {
+          "line": 1126,
+          "text": "                    :FMath::Clamp(FMath::FloorToInt(-V/630.f*2.f),0,1);"
+        },
+        {
+          "line": 1127,
+          "text": "            }"
+        },
+        {
+          "line": 1128,
+          "text": "            else if (F->GetLandingVisualAge()<.12f)"
+        },
+        {
+          "line": 1129,
+          "text": "            { CandidateClip=TEXT(\"land\"); CandidateIndex=FMath::Clamp(FMath::FloorToInt(F->GetLandingVisualAge()/.12f*2.f),0,1); }"
+        },
+        {
+          "line": 1130,
+          "text": "        }"
+        },
+        {
+          "line": 1131,
+          "text": "        if (Clip==TEXT(\"hurt\")) CandidateIndex=FMath::Clamp(FMath::FloorToInt(F->AnimationTime/.4f*6.f),0,5);"
+        },
+        {
+          "line": 1132,
+          "text": "        if (F->bDead) { CandidateClip=TEXT(\"death\"); CandidateIndex=FMath::Clamp(FMath::FloorToInt(F->AnimationTime/.8f*6.f),0,5); }"
+        }
+      ]
+    }
+  ]
+}

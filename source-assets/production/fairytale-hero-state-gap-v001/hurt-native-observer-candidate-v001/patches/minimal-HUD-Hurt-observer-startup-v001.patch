@@ -1,0 +1,16 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+@@ -15,4 +15,5 @@
+ #include "DungeonGuardArtKnown44Probe.h"
+ #include "DungeonGuardArtCombatProbeV003.h"
++#include "DungeonHeroHurtProbeV001.h"
+ #include "DungeonGuardArtDeathProbeV005.h"
+ #include "DungeonRunContinueProbe.h"
+@@ -246,5 +247,6 @@
+     {
+         InstallFastLosslessProofScreenshots();
+-        if(FParse::Param(FCommandLine::Get(),TEXT("DungeonGuardArtDeathProofV005")))GetWorld()->SpawnActor<ADungeonGuardArtDeathProbeV005>();
++        if(FParse::Param(FCommandLine::Get(),TEXT("DungeonHeroHurtProofV001")))GetWorld()->SpawnActor<ADungeonHeroHurtProbeV001>();
++        else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonGuardArtDeathProofV005")))GetWorld()->SpawnActor<ADungeonGuardArtDeathProbeV005>();
+         else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonGuardArtCombatProofV003")))GetWorld()->SpawnActor<ADungeonGuardArtCombatProbeV003>();
+         else if(FParse::Param(FCommandLine::Get(),TEXT("DungeonGuardArtKnown44Proof")))GetWorld()->SpawnActor<ADungeonGuardArtKnown44Probe>();

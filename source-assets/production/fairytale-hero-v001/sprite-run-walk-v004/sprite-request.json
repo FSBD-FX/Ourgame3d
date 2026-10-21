@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-hero-common-walk-dual-contact-v001",
+    "description": "Accepted single curated idle identity only: closed rigid bell helmet, amber visor eyes, charcoal plain underclothes, brown gloves and boots, empty hands; same right-facing three-quarter camera.",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "walk": {
+      "frames": 6,
+      "fps": 12,
+      "loop": true,
+      "action": "Exactly SIX distinct poses of ONE complete alternating humanoid walk cycle, all facing RIGHT in the same three-quarter camera. Empty hands; compact grounded walking, not running or high-knee marching. The canonical single idle image alone owns identity. The TWO-CONTACT image owns opposite limb-role examples: its LEFT character is phase0, its RIGHT character is phase3. The six-phase technical guide owns pose order only; RED means camera-near and BLUE means camera-far, never paint these colors. Near/far are fixed anatomical sides, not current screen-left/right. Keep a rigid unchanged bell helmet and stable body/glove/boot volumes. Natural opposing arm and leg swing. 0 NEAR CONTACT: near leg forward/right with heel down; far leg rear/left with toe down. LARGE NEAR ARM BACK/LEFT, far arm forward/right, like the LEFT contact example. 1 NEAR SUPPORT / FAR PASSING: near foot flat beneath pelvis, near knee supports weight; far knee swings forward passing the supporting leg, its boot clears ground slightly. Arms pass neutral. 2 NEAR PUSH / FAR REACH: near rear toe pushes; far heel reaches front/right just before landing. Near arm swings forward across the torso; far arm goes back. 3 FAR CONTACT: far leg front/right heel down; NEAR leg rear/left toe down. LARGE NEAR ARM FORWARD/RIGHT ACROSS TORSO, far arm back/left, like the RIGHT contact example. This is the OPPOSITE contact to0; never reset to the phase0 arm or leg layering. 4 FAR SUPPORT / NEAR PASSING: far foot flat beneath pelvis supports weight; near knee swings forward passing the far support leg, near boot clears ground slightly. Arms pass neutral in the opposite direction to1. Do not make a backward kick or a high knee. 5 FAR PUSH / NEAR REACH: far rear toe pushes; near heel reaches front/right before landing. LARGE NEAR ARM BACK/LEFT, far arm forward/right; continue smoothly back into0. Near-hand swing across0..5 is BACK, NEUTRAL, FRONT, FRONT, NEUTRAL, BACK. 0/3,1/4,2/5 must swap the anatomical supporting/reaching leg and counter-swinging arm. Keep the pelvis centered within each cell and one real foot/toe grounded per pose. No full-character mirroring, repeated three-pose half-cycle, duplicate stills, drifting scale, extra limbs, detached pieces, shadows, motion trails, scenery, labels or technical guide marks."
+    }
+  },
+  "style": "Follow the single accepted curated idle anchor exactly: hand-drawn dark-fairytale cartoon, bold uneven ink outlines, two or three broad painted tones per material, bell helmet with amber visor eyes and charcoal plain undergarment. NOT pixel art, no realistic texture, PBR, new costume or tone redesign.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  },
+  "project_motion_references": [
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-walk-v004\\base-source.png",
+      "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718",
+      "role": "sole identity: canonical131 single curated idle"
+    },
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-walk-v004\\references\\motion\\both-opposite-contacts-137-138-v001.png",
+      "sha256": "aaac7177485028b4a3c8cae3a2999996ad9fce84bdf61219136aae136bc11a9a",
+      "role": "two opposite contacts: near138 left=phase0; far137 right=phase3; motion only"
+    },
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-walk-v004\\references\\motion\\six-phase-near-far-technical-v001.png",
+      "sha256": "fda53c3ea9f203dc71fd5ca7b4d43beea5cf6a249c598098fc9eb9a15cd231ea",
+      "role": "six-phase original technical guide only; no character art authority"
+    },
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-walk-v004\\references\\layout-guides\\walk.png",
+      "sha256": "852ff8fe8751dc9331b83497982aea0ee6759b1e86d42a5cadaaef039b624d04",
+      "role": "six slots and padding only"
+    }
+  ],
+  "project_runtime_design": {
+    "frames": 6,
+    "durations_ms": [
+      83,
+      83,
+      83,
+      83,
+      83,
+      83
+    ],
+    "loop_ms": 498,
+    "native_facing": 1,
+    "future_clock": "actual resolved ground displacement",
+    "stride_design_world_units": 132,
+    "runtime_imported": false,
+    "motion_accepted": false
+  }
+}

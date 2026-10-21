@@ -1,0 +1,135 @@
+{
+  "schema": "fairytale-hero-single-passing-pose-contract-v1",
+  "status": "prepared_only_not_generated_not_accepted",
+  "prepared_local_date": "2026-10-16",
+  "phase_name": "near_support_far_pass",
+  "future_six_phase_index": 1,
+  "output_pose_count": 1,
+  "loop": false,
+  "native_facing": 1,
+  "target_canvas_px": [
+    512,
+    512
+  ],
+  "safe_margin_px": [
+    48,
+    48
+  ],
+  "identity": {
+    "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-idle-v002\\curated\\frame-0.png",
+    "copy": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-passing-pose-inputs-v001\\near_support_far_pass\\references\\identity\\canonical-idle-frame-0.png",
+    "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718",
+    "source_request": 131,
+    "sole_identity": true,
+    "final_user_art_or_motion_approval": false
+  },
+  "roles": {
+    "support_leg": "near",
+    "support_foot": "full sole flat directly beneath pelvis; only ground contact",
+    "swing_leg": "far",
+    "swing_knee": "forward/right of support knee, well below hip/belt",
+    "swing_boot": "under or just in front of pelvis, slightly above ground, never left/rear kick",
+    "occlusion": "Near stance upper thigh is the visible front layer descending from the near hip; far passing thigh starts behind the near hip and moves forward on the far side, its knee emerging ahead/right of the supporting thigh. Do not turn that far boot into a rear kick.",
+    "arms": "neutral can share angle; camera-depth identities and shoulder chains stay fixed"
+  },
+  "guide": {
+    "png": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-passing-pose-inputs-v001\\near_support_far_pass\\references\\technical\\passing-role-guide-v001.png",
+    "png_sha256": "033c0c44765a522330b769d9a3576798ace4c05acc04b5fed728f236add66bc1",
+    "svg": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-passing-pose-inputs-v001\\near_support_far_pass\\references\\technical\\passing-role-guide-v001.svg",
+    "role": "original technical geometry only, not style or measurement from art",
+    "colors_for_guide_only": {
+      "near": "#cf3f41",
+      "far": "#356ec5"
+    },
+    "joints_design_px": {
+      "near_arm": [
+        [
+          233,
+          255
+        ],
+        [
+          229,
+          288
+        ],
+        [
+          235,
+          322
+        ]
+      ],
+      "far_arm": [
+        [
+          267,
+          255
+        ],
+        [
+          279,
+          286
+        ],
+        [
+          283,
+          320
+        ]
+      ],
+      "near_leg": [
+        [
+          245,
+          328
+        ],
+        [
+          250,
+          385
+        ],
+        [
+          255,
+          438
+        ]
+      ],
+      "far_leg": [
+        [
+          267,
+          328
+        ],
+        [
+          300,
+          376
+        ],
+        [
+          286,
+          423
+        ]
+      ]
+    },
+    "ground_baseline_y_design_only": 464,
+    "swing_sole_y_design_only": 442,
+    "low_clearance_design_only": 22,
+    "existing_art_pixels_used": false
+  },
+  "actual_output_measurements": {
+    "raw_sha256": null,
+    "alpha_bbox": null,
+    "helmet_bbox": null,
+    "body_height_px": null,
+    "support_boot_roi": null,
+    "swing_boot_roi": null,
+    "clearance_px": null,
+    "root_px": null
+  },
+  "acceptance_needed": [
+    "root retention and actual guide review before generation",
+    "actual output identity/rigid helmet comparison",
+    "unambiguous opposite support/swing hip-knee-boot chains",
+    "low forward passing boot with only support foot grounded",
+    "independent static review"
+  ],
+  "does_not_establish": [
+    "six-phase gait",
+    "motion direction or speed",
+    "loop seam",
+    "foot slide",
+    "left mirror",
+    "runtime or equipment adaptation"
+  ],
+  "future_complete_row_policy": "Only after both opposite passing roles pass static review, combine accepted multi-pose motion references with both contacts and six-phase guidance. Canonical131 alone remains identity. Do not splice/relabel/reorder/retime failed139 into acceptance or use a single peak pose as sole walk anchor.",
+  "formal_complete_units": 0,
+  "prepared_at_system_local": "2026-10-16T00:06:34+08:00"
+}

@@ -1,0 +1,79 @@
+{
+  "schema": "guard-presentation-independent-review-freeze-v001",
+  "created_local": "2026-10-18T10:57:25.991185+08:00",
+  "conclusion": "ONE_P2_TERMINAL_MATERIAL_CLOCK; NO_P1_FOUND; NOT_UE_BUILD_OR_VISUAL_ACCEPTANCE",
+  "P2_current_v001_partial_scope": "Death unregistered, 16 current trial textures unaffected; latent renderer bug must be repaired before Death opens",
+  "findings": [
+    {
+      "priority": "P2",
+      "title": "Terminal death visual age advances while MaterialHit uses frozen kernel time",
+      "source_candidate": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-candidate-v001/production-source/DungeonFairytaleGuardPose.h",
+        "bytes": 5723,
+        "sha256": "58a0ddda3df318b608ffa18b3afe85ff0ce6aea5535a4241749d6357b2b2da62"
+      },
+      "line": 37,
+      "dead_age_line": 49,
+      "minimal_patch": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/guard-presentation-review-v001/production-repair-v002/terminal-material-only-v002.patch",
+        "bytes": 722,
+        "sha256": "c4cfee45b99fc89559e842879b67b5d5c8d0bc5e1f71b0297077b8487b57e741"
+      },
+      "native_regression": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/guard-presentation-review-v001/tests/DungeonFairytaleGuardTerminalMaterialReviewTests.cpp",
+        "bytes": 4333,
+        "sha256": "e5dfbde86a58b4c8d8064c2cb3036170b5dc8dccdc959d1dd606f69fc00d34a6"
+      },
+      "actual_new_regression_run": false
+    }
+  ],
+  "Root_stage0_actual_3semanticRED_report": {
+    "path": "F:/Ourgame/UnrealGame/Saved/Automation/FirstRoom-20261018-105235/index.json",
+    "bytes": 3302,
+    "sha256": "c92ccc499019e5c68ff63b0e8634911628cbba40f9762dff3d056a54f4dacfe9"
+  },
+  "original_three_tests_unchanged": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-candidate-v001/tests/DungeonFairytaleGuardPresentationTests.cpp",
+    "bytes": 8290,
+    "sha256": "d28c85e175e3cf0141d20a23637d8c0f56ca95619edfab422742b9a6f9b362a4"
+  },
+  "reviewer_native_tests": 0,
+  "reviewer_UE_UBT_calls": 0,
+  "reviewer_Source_changes": 0,
+  "reviewer_tools_ledger_changes": 0,
+  "reviewer_media_View": 0,
+  "candidate_v001_freeze_untouched": true,
+  "file_count": 6,
+  "files": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/guard-presentation-review-v001/production-repair-v002/DungeonFairytaleGuardPose.h",
+      "bytes": 5887,
+      "sha256": "6f93a4e79d6e91f047436147e56247df93771a1b68aa00c588d97b0ba6e2fa2f"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/guard-presentation-review-v001/production-repair-v002/terminal-material-only-v002.patch",
+      "bytes": 722,
+      "sha256": "c4cfee45b99fc89559e842879b67b5d5c8d0bc5e1f71b0297077b8487b57e741"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/guard-presentation-review-v001/review-input-pins-v001.json",
+      "bytes": 18107,
+      "sha256": "42a7c1bc7cebc98f3f52d3225dd14fe9226f9a5faf09275233d9d594d6e783e5"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/guard-presentation-review-v001/review-v001.md",
+      "bytes": 7943,
+      "sha256": "8f1f84da09f648e242b0879f993347261e631923c3f49973321b7eae28c710b9"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/guard-presentation-review-v001/terminal-regression-and-repair-freeze-v001.json",
+      "bytes": 1540,
+      "sha256": "7a236df6a8b1b600f951382b1124034724e189871b8cf9c70141f577fd29f0ab"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/guard-presentation-review-v001/tests/DungeonFairytaleGuardTerminalMaterialReviewTests.cpp",
+      "bytes": 4333,
+      "sha256": "e5dfbde86a58b4c8d8064c2cb3036170b5dc8dccdc959d1dd606f69fc00d34a6"
+    }
+  ]
+}

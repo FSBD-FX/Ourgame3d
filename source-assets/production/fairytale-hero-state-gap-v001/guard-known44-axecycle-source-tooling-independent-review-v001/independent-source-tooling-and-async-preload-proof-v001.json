@@ -1,0 +1,120 @@
+{
+  "schema": "guard-known44-source-tooling-preload-fix-independent-review-v001",
+  "scope": "Read-only source and NEW tooling interfaces. No UE/UBT/native execution, no production/candidate/report/tool modifications.",
+  "freeze_checks": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-full-known44-observer-candidate-v001/source-AxeCycle-freeze-v001.json",
+      "bytes": 987,
+      "sha256": "fcbb9ce6bcb3d1e8f6fc3e32e8cbff4720abdc211782a5f5cdad8d3d35fa10aa",
+      "checked_members": 4,
+      "mismatches": 0
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-full-known44-observer-tooling-candidate-v002/known44-AxeCycle-tooling-freeze-v002.json",
+      "bytes": 3512,
+      "sha256": "2a5579483e4e5f0eab1da02a3492909e4f8d7d38a9f64d6472498dfed84e5b1d",
+      "checked_members": 14,
+      "mismatches": 0
+    }
+  ],
+  "v002_source_protocol_four_files_exact_v001": true,
+  "actual_actor_h_cpp_normalized_exact_frozen_v001": true,
+  "source_review": {
+    "first_original_Axe_only": true,
+    "pins_current_Aid_in_original_WU0_window": true,
+    "WU_A_R_masks_fixed_same_Aid": true,
+    "failfast_at_original_ActiveAt_ActiveEnd_RecoveryEnd": true,
+    "Ready_independent_original_IdleClock": true,
+    "actual_signed_dx120_180_strict_dy12_radius180_early_gate": true,
+    "real_locked_same_Aid_late_Y_evade_Active_Recovery": true,
+    "known44_preload_FindObject_only_no_firstuse_LoadObject": true,
+    "HUD_preload_then_render_Flush_then_new_observer_spawn": true,
+    "no_Guard_state_HP_clock_or_teleport_writes": true,
+    "only_normal_keys_and_explicit_Knight_Bat_public_damage": true,
+    "no_clear_compile_interface_blocker_found": true,
+    "limits": "Static source review did not prove texture async compilation was finished. Actual v132 startup failed beforeEnter; Root current sync fix and fresh native gate must be evaluated separately."
+  },
+  "minimal_HUD_patch_check": {
+    "command": "git apply --check -- <candidate>/patches/minimal-HUD-known44-observer-startup-v001.patch",
+    "cwd": "F:/Ourgame",
+    "exit_code": 0,
+    "when": "Before Root admitted new Actor; current actual HUD now contains that source delta."
+  },
+  "v002_test_gate": {
+    "checker": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-full-known44-observer-tooling-candidate-v002/tooling/verify-known44-axecycle-v002.py",
+      "bytes": 35560,
+      "sha256": "daa3fa23ca84bf695a0cb348e3dc3e90c240fd5abf14b7200504183107be5b86"
+    },
+    "exact_six_names": [
+      "CodexDungeon.Content.FairytaleGuardPresentation.NativeClockMaterialAndDeath",
+      "CodexDungeon.Content.FairytaleGuardPresentation.Accepted128DistanceAndBlocked",
+      "CodexDungeon.Content.FairytaleGuardPresentation.InterruptedDeadlineAndPartialRows",
+      "CodexDungeon.Content.FairytaleGuardFullV003.NativeAxe4Recovery4AndStomp6_2_4",
+      "CodexDungeon.Content.FairytaleGuardFullV003.AcceptedPath128AndOriginalInterruptedInterval",
+      "CodexDungeon.Content.FairytaleGuardFullV003.RealTerminalClockAndVersionedProfileIsolation"
+    ],
+    "actual_registration_source_strings_equal": true,
+    "actual_preserved_full_suite": {
+      "path": "F:/Ourgame/UnrealGame/Saved/Automation/FirstRoom-20261018-130609/index.json",
+      "bytes": 397292,
+      "sha256": "6e710fd2849a46aa0c644ca7e84c9ce61a277f98993de4747720287676a87e09"
+    },
+    "full_registry_success": 184,
+    "legal_fourth_TerminalDeathMaterialClockReview_state": "Success",
+    "actual_suite_accepted": true,
+    "negative_fixtures_rejected": [
+      "missing",
+      "duplicate",
+      "failure",
+      "error",
+      "warning"
+    ],
+    "pure_function_AST_isolation_only": true,
+    "native_protocol_v001_session_v001_main_pixel_launcher_v002_paths_consistent": true
+  },
+  "Root_preload_fix": {
+    "prior_v132": {
+      "path": "F:/Ourgame/source-assets/production/backups/v132-guard-known44-184G/files/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardFullPresentationV003.cpp",
+      "bytes": 6282,
+      "sha256": "09fe1401a501c15ea8092e74813e6abc80933d45e42dfed0b70c082736fd3d5d"
+    },
+    "current_actual_Source": {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardFullPresentationV003.cpp",
+      "bytes": 6724,
+      "sha256": "3b246215b652628c6ebd070948e369c492a17a6b6fe0f73b651f6fef65e0a35e"
+    },
+    "minimal_diff": "--- v132 frozen before\n+++ Root current compile-sync fix\n@@ -7,11 +7,15 @@\n #include \"Kismet/GameplayStatics.h\"\n #include \"Misc/CommandLine.h\"\n #include \"Misc/Parse.h\"\n+#if WITH_EDITOR\n+#include \"TextureCompiler.h\"\n+#endif\n \n void ADungeonHUD::LoadFairytaleGuardFullTrial()\n {\n  bUseFairytaleGuardFullPreview=FParse::Param(FCommandLine::Get(),TEXT(\"DungeonFairytaleGuardFullPreview\"));\n  if(!bUseFairytaleGuardFullPreview)return;\n+ TArray<UTexture*> ApprovedTextures;\n  for(const auto& Row:DungeonFairytaleGuardFullV003::ProfileFull())\n  {\n   if(Row.IsAlias())continue; // Target row owns the only Texture2D; alias has its own explicit trial gate.\n@@ -20,9 +24,17 @@\n   {UE_LOG(LogTemp,Display,TEXT(\"Guard full-v003 trial: %s unavailable: %s\"),UTF8_TO_TCHAR(DungeonFairytaleGuardFullV003::ClipName(Row.Clip)),*Gate);continue;}\n   // Preload the complete approved row. Draw requires every frame resident with exact dimensions.\n   for(const auto& Frame:Row.Frames)\n+  {\n    if(!Frames.Contains(Frame.TexturePath))\n     Frames.Add(Frame.TexturePath,LoadObject<UTexture2D>(nullptr,*Frame.TexturePath));\n+   if(auto Texture=Frames.FindRef(Frame.TexturePath))ApprovedTextures.Add(Texture);\n+  }\n  }\n+#if WITH_EDITOR\n+ // Loading may enqueue editor texture compilation. Finish it before the HUD's\n+ // existing render flush and before any observer or normal gameplay begins.\n+ FTextureCompilingManager::Get().FinishCompilation(ApprovedTextures);\n+#endif\n }\n \n bool ADungeonHUD::DrawFairytaleGuardFullBody(ADungeonFighter* F)\n",
+    "DrawFullBody_renderer_unchanged": true,
+    "Root_reported_first_native_failure": {
+      "PID": 7812,
+      "phase": "beforeEnter known44 startup first Wake0 composite residency/dimension/path gate",
+      "startup_texture_rows": 0,
+      "not_AxeCycle_semantic_RED": true,
+      "subpredicate_not_discriminated": true
+    },
+    "primary_hypothesis": "Editor asynchronous texture platform-data compilation can expose placeholder GetSizeX/Y or resource state even after LoadObject and render Flush. FinishCompilation is required before the existing render flush.",
+    "API": "FinishCompilation(TArrayView<UTexture* const>) matches TArray<UTexture*>; UTexture2D* upcasts to UTexture*; header and call WITH_EDITOR gated; called in ordinary game-thread HUD BeginPlay, outside PostCompilation callbacks.",
+    "SDK_pins": [
+      {
+        "path": "G:/UE_5.5/Engine/Source/Runtime/Engine/Public/TextureCompiler.h",
+        "bytes": 4213,
+        "sha256": "47d32a303e548eaca08f695f0c3fd5d546b9909942cff983590e48ddcb2e356f"
+      },
+      {
+        "path": "G:/UE_5.5/Engine/Source/Runtime/Engine/Private/TextureCompiler.cpp",
+        "bytes": 27056,
+        "sha256": "183983c5e1c5d6dbedf53fc89a60a191635c16604e7b83b3e63a19ef6bec5150"
+      },
+      {
+        "path": "G:/UE_5.5/Engine/Source/Runtime/Engine/Private/Texture2D.cpp",
+        "bytes": 68202,
+        "sha256": "02c06fa4870b385162124cb6dddf82882ccab97a03d7262a16703be2f543a7a1"
+      }
+    ],
+    "SDK_evidence": "Texture2D.cpp explicitly documents placeholder size queries during async compile and FinishCompilation prerequisite; CreateResource registers incomplete textures and may create placeholder resources. TextureCompiler.cpp waits pending texture compilation, calls PostCompilation which completes platform cache and UpdateResource, then existing HUD Flush consumes resource commands.",
+    "alternatives": "Frames null entry is not repaired by this patch and would remain rejected. Full object paths and UPROPERTY Frames strong reference show no static discrepancy; no runtime subpredicate evidence yet excludes path/null alternatives. No second fix suggested.",
+    "fresh_native_after_fix_pass_claimed": false
+  },
+  "final_native_art_acceptance": false
+}

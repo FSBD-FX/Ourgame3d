@@ -1,0 +1,31 @@
+# Hurt4 integration Stage0 candidate
+
+Only Root integrates, compiles and executes. This bundle is Stage0 only: Fighter query and both shared-plan entry points explicitly return unsupported; no production selector, renderer, timer, gameplay, Content import or opt-in activation is implemented. Tests were written before stubs. Do not call this native RED until Root observes three semantic failures.
+
+## Admission
+
+Apply `patches/Fighter-readonly-Hurt-query-stage0-v001.patch` to the two exact Fighter before pins, and add all six files under `new-source/` at the same paths beneath `UnrealGame/Source/CodexDungeon/`. Before source copies remain in `before/`. The patch has passed read-only git apply --check; no UHT/UBT/test run was performed here. It only adds the sample include, public const query declaration and an atomic unsupported implementation. If Root's Fighter baseline changed meanwhile, apply these narrow additions to the newer file; do not overwrite unrelated work.
+
+The six additions are `DungeonHurtPresentation.h`, `DungeonFairytaleSwordHurtProfile.{h,cpp}`, `DungeonFairytaleSwordHurtPlan.{h,cpp}`, and `Tests/DungeonFairytaleSwordHurtV001Tests.cpp`. The profile CPP is exact retained author/source metadata, not production functionality. All32 source PNG bytes, actual RGBA hashes, dimensions and alpha counts were independently read and matched; exactly FarHandForeground1/2/3 are documented zero-alpha sources. Source closure verified refers only to that retained preparation; no native or final-art approval is implied.
+
+Three groups each stop at one intended missing-feature assertion after independently verified real positive preconditions:
+
+1. ActualPoiseBreakFourPhasesAndExclusions: actual legal LGT pickup/.5 commit, real J, positive nonlethal current-threshold poise hit; completed native snapshot proves true Hurt before query assertion. Before the target failure, an independent real unbound Fighter receives a positive hit and four actual .1f Actor Ticks; public hurt label/age/CanStartAttack prove the float-tail counterexample while main Run time stays unchanged. Later assertions cover actual four100ms samples, exact positive residual through the new read-only query/shared selector, original float countdown end, no-break/death exclusions and read-only whole Run equality.
+2. RealBindingSource32MirrorAndAtomicRejection: existing real Binding already accepts actual LGT/SWD and normal A/D establishes facing; the shared World BuildDrawPlan must admit the true Hurt. Later checks cover all nine ordered slots,9/8/8/8 nonempty draw counts, source markers, one72/416 scale, actual reflection/UV/pivot/.50 sword, atomic bad source/value rejections and truly acquired MED rejection.
+3. RealCodecPauseContinueKeepsAgeAndEquipment: actual mid-Hurt snapshot/unchanged Encode+Decode/Prepare+Install and paused exact whole Run equality must first succeed. Only then the missing shared plan assertion fails. Later real Enter resumes original age/remaining and retained item identities.
+
+The process command-line scope adds actual Bound+Hurt opt-ins before world/HUD construction and restores the original string on all returns. No global Walk opt-in is added, so historical Walk tests retain their own flags.
+
+## Runtime contract after Root retains semantic RED
+
+The const Fighter query reports actual non-enemy non-native-stone, non-dead `AnimationName==hurt`, finite AnimationTime and positive native HurtTime. It is a facts query and may observe a real unbound legacy Fighter; only World BuildDrawPlan may authorize the main player through existing Binding::Resolve. Rejection preserves every Out field. No private HurtTime read is exposed outside the Fighter method.
+
+The shared World BuildDrawPlan must call the same pure committed-value planner tested here, using actual query and Binding. Future actual HUD Hurt rendering MUST consume this returned complete plan instead of independently recomputing selection, layer order or transforms. A no-Canvas test proves admission/plan only; native rendered pixels remain a later Root gate. Actual rendering must preload and validate every32 source texture, including the documented transparent ones, plus the existing sword before any quad, then skip drawing only the known-empty sources.
+
+32 imports are FIVE owners BodyRest/NearArmWithoutHand/HelmetForeground/FarHandForeground/NearHand and THREE armor layers per frame. There is no Body/WholeBody. Nine slots are BodyRest,ShoulderFar,Chest,NearArmWithoutHand,ShoulderNear,HelmetForeground,FarHandForeground,IndependentSword,NearHand. FarHand0 is mandatory/nonempty; FarHand1..3 exist, load and validate, then skip and never count rendered. Do not replace missing textures with an empty-policy flag or BodyRest as a whole body.
+
+Timing follows Root's clarified runtime authority: real positive HurtTime + actual hurt label + living actor; four phases from actual AnimationTime/.1, clamped3 during a genuinely still-active float tail. No independent timer, early Ready0, nominal-.4double forced end, gameplay extension or hold across the real Hurt end. Frozen offline400ms metadata remains untouched. Formal GameMode outer100ms frames are internally subdivided<=5ms and by actual Hurt boundary (GameMode.cpp1438-1442,1917); the test records their real outcome rather than presuming four direct subtractions. A separate actual unbound Fighter receives a true hit then real Actor.Tick(.1f) four times to demonstrate .4f residual; its genuine sample exercises the pure phase3 planner but World authorization still rejects that non-main actor. The bound main player is never manually ticked. A following actual Tick ends that residual. This is a query/selector counterexample, not a forged clock or legacy actor's equipment claim.
+
+Root should retain first three actual semantic RED reports and exact Source/DLL first. Then authorize production candidates that implement these same APIs and renderer consumption. Do not interpret a fixture/precondition or compile failure as semantic RED, and do not weaken assertions to force three failures.
+
+Scope remains SWD+LGT Hurt4 only. No Death/Dodge/all20 combinations/full-state/final art/audio/no-pop/physical footlock acceptance.

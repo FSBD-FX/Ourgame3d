@@ -1,0 +1,61 @@
+{
+  "schema": "fairytale-hero-single-opposite-contact-input-v1",
+  "status": "prepared_only_root_generation_pending",
+  "purpose": "static correction trial; not a complete sprite-gen animation run",
+  "output_pose_count": 1,
+  "phase": "far_contact",
+  "native_facing": 1,
+  "target_canvas_px": [
+    512,
+    512
+  ],
+  "safe_margin_px": [
+    48,
+    48
+  ],
+  "chroma_key": {
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "hex": "#00FF00"
+  },
+  "prompt_file": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-opposite-anchor-v001\\prompts\\far-contact-anchor.txt",
+  "attachments_in_order": [
+    {
+      "order": 1,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-opposite-anchor-v001\\references\\identity\\canonical-idle-frame-0.png",
+      "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718",
+      "role": "sole character identity; request131 single curated idle"
+    },
+    {
+      "order": 2,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-opposite-anchor-v001\\references\\technical\\far-contact-role-guide-v001.png",
+      "sha256": "19c4b746cafb0168b624325e022ff864d111755345f9d24a7b9bf0f1cbe8a7da",
+      "role": "original technical near/far limb roles only"
+    }
+  ],
+  "excluded_image_references": [
+    "request129 original base",
+    "request135 failed walk",
+    "request136 failed walk",
+    "multi-frame idle strip"
+  ],
+  "imagegen_parameters_for_root_only": {
+    "referenced_image_paths": [
+      "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-opposite-anchor-v001\\references\\identity\\canonical-idle-frame-0.png",
+      "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-opposite-anchor-v001\\references\\technical\\far-contact-role-guide-v001.png"
+    ],
+    "transparent_background": false,
+    "num_last_images_to_include": "omit",
+    "prompt": "read exact prompt_file"
+  },
+  "generation_authority": "root only; this preparer made no provider call",
+  "generation_completed": false,
+  "expected_future_raw_path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-opposite-anchor-v001\\raw\\far-contact-anchor.png",
+  "generated_output_sha256": null,
+  "automatic_import_or_extraction": false,
+  "retention_before_view": "root must preserve newly prepared guide and future generation in F/E before presenting/reviewing those new images",
+  "future_row_reference_policy": "An accepted single far-contact trial may join a MULTI-POSE reference containing BOTH opposite contacts and six-phase motion guidance. It must not become the sole peak-pose walk anchor or replace canonical idle identity."
+}

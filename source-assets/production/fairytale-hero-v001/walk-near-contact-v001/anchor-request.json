@@ -1,0 +1,69 @@
+{
+  "schema": "fairytale-hero-single-near-contact-input-v1",
+  "status": "prepared_only_root_generation_pending",
+  "purpose": "single static opposite-contact correction, not complete walk",
+  "output_pose_count": 1,
+  "phase": "near_contact",
+  "native_facing": 1,
+  "target_canvas_px": [
+    512,
+    512
+  ],
+  "safe_margin_px": [
+    48,
+    48
+  ],
+  "chroma_key": {
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "hex": "#00FF00"
+  },
+  "prompt_file": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-near-contact-v001\\prompts\\near-contact-anchor.txt",
+  "attachments_in_order": [
+    {
+      "order": 1,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-near-contact-v001\\references\\identity\\canonical-idle-frame-0.png",
+      "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718",
+      "role": "sole identity: canonical131 single curated idle"
+    },
+    {
+      "order": 2,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-near-contact-v001\\references\\technical\\near-contact-role-guide-v001.png",
+      "sha256": "629c7c11a090c1e19ec32df6e84bcd2dc506f3e0deb04c5a890a78a0b07036e0",
+      "role": "original near-contact limb-role guide only"
+    }
+  ],
+  "137_comparison": {
+    "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-opposite-anchor-v001\\raw\\far-contact-anchor.png",
+    "sha256": "85d48ab699751302364ece823f3a56b57ab863009ab815a5d147609c9baeb88b",
+    "role": "opposite static pose / proportion comparison only, never identity",
+    "attached_to_primary_generation": false,
+    "static_roles_independently_reviewed": true,
+    "motion_accepted": false
+  },
+  "excluded_image_references": [
+    "129 original base",
+    "135 failed whole walk",
+    "136 failed whole walk",
+    "multi-frame idle strip"
+  ],
+  "imagegen_parameters_for_root_only": {
+    "referenced_image_paths": [
+      "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-near-contact-v001\\references\\identity\\canonical-idle-frame-0.png",
+      "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-near-contact-v001\\references\\technical\\near-contact-role-guide-v001.png"
+    ],
+    "transparent_background": false,
+    "num_last_images_to_include": "omit",
+    "prompt": "read exact prompt_file"
+  },
+  "generation_authority": "root only; preparer must not call generator",
+  "generation_completed": false,
+  "expected_future_raw_path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-near-contact-v001\\raw\\near-contact-anchor.png",
+  "generated_output_sha256": null,
+  "automatic_import_or_extraction": false,
+  "retention_before_view": "root F/E preserve new guide and future output before new image view/presentation",
+  "future_complete_row_rule": "After independent static acceptance, combine BOTH opposite contact poses into a multi-pose motion reference plus complete six-phase guide. Neither single pose is a sole final walk anchor. Canonical131 alone continues to own identity."
+}

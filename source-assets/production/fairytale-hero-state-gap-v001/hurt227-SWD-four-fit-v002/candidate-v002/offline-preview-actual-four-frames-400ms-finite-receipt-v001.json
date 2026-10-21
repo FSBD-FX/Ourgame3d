@@ -1,0 +1,89 @@
+{
+  "schema": "Hurt4-offline-preview-finite400ms-v001",
+  "GIF": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hurt227-SWD-four-fit-v002/candidate-v002/presentation/Hurt4-actual400ms-NO-LOOP-offline.gif",
+    "bytes": 59611,
+    "sha256": "72a6bfc5b5e5b9c887f756269a62de7f480a8cbe1d43155a8408f0533630226c"
+  },
+  "GIF_actual_frame_count": 4,
+  "GIF_actual_durations_ms": [
+    100,
+    100,
+    100,
+    100
+  ],
+  "GIF_loop_extension_present": false,
+  "MP4": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hurt227-SWD-four-fit-v002/candidate-v002/presentation/Hurt4-actual400ms-finite-offline.mp4",
+    "bytes": 19415,
+    "sha256": "65b1ab3d030e1413529de5db8e24821646cf587809d5d5c66da423b77b153210"
+  },
+  "actual_encode_command": [
+    "F:\\Ourgame\\tools\\runtime\\asset-gen\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+    "-hide_banner",
+    "-loglevel",
+    "info",
+    "-framerate",
+    "10",
+    "-i",
+    "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\hurt227-SWD-four-fit-v002\\candidate-v002\\preview-frames\\actual-scale-%03d.png",
+    "-frames:v",
+    "4",
+    "-c:v",
+    "libx264",
+    "-crf",
+    "18",
+    "-pix_fmt",
+    "yuv420p",
+    "-movflags",
+    "+faststart",
+    "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\hurt227-SWD-four-fit-v002\\candidate-v002\\presentation\\Hurt4-actual400ms-finite-offline.mp4"
+  ],
+  "encode_exit_code": 0,
+  "encode_log": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hurt227-SWD-four-fit-v002/candidate-v002/logs/ffmpeg-four-frame-finite-encode.log",
+    "bytes": 3318,
+    "sha256": "8cd0eff630352c8fd2d10e36e49b505ed7178f3806a3611d77bd02608d2a3d7f"
+  },
+  "actual_decode_command": [
+    "F:\\Ourgame\\tools\\runtime\\asset-gen\\Lib\\site-packages\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+    "-hide_banner",
+    "-i",
+    "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\hurt227-SWD-four-fit-v002\\candidate-v002\\presentation\\Hurt4-actual400ms-finite-offline.mp4",
+    "-map",
+    "0:v:0",
+    "-f",
+    "null",
+    "-"
+  ],
+  "decode_exit_code": 0,
+  "decode_log": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hurt227-SWD-four-fit-v002/candidate-v002/logs/ffmpeg-actual-video-decode-inspection.log",
+    "bytes": 1451,
+    "sha256": "ac1c36482238d76adcff11acad6584928a52048e4ae162c4c07fd23366f73cc3"
+  },
+  "decoded_frames": 4,
+  "container_duration_ms": 400,
+  "fps": 10,
+  "body_canvas_px": 88.61538461538461,
+  "each_frame_actual_pairedshoe_root": [
+    [
+      259.9182682987829,
+      463
+    ],
+    [
+      283.3389315213614,
+      464
+    ],
+    [
+      247.06828334586936,
+      464
+    ],
+    [
+      252.4471254026009,
+      464
+    ]
+  ],
+  "movement": "Fixedsampleground[640490] offlineonly, noUE/actor/movementreceiptinvention.",
+  "not_native": "This isa finite source-pose playbackcandidate, not trueHurt event/timing/statepriority/gearbinding proof. No animationviewedbeforeE."
+}

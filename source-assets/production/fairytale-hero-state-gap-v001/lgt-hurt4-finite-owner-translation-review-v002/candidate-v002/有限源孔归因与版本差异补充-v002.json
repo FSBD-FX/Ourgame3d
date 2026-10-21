@@ -1,0 +1,260 @@
+{
+  "schema": "Hurt4-LGT-finite-owner-translation-review-amendment-v002",
+  "version": "v002",
+  "original_v001_retained_E439_not_modified": true,
+  "v002_legacy_leaf_filenames": "Reused deterministicbuilder emits leaf-v001 filenames, but this independentparentfolder/canonicalbatch/schema arev002. Do not confuse oldE439freeze withnewcandidate. Originalindex/freeze remainpreserved andthisaddendumisappend-only.",
+  "original_builder": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-integer-SWD-assembly-v001/build-Hurt-own-partition-three-LGT-and-SWD-v001.py",
+    "bytes": 21709,
+    "sha256": "f1a2d013c23966207f0823cdcdeace1301fd61206edc5c073dfde65ba6cf97ac"
+  },
+  "v002_adapter": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-finite-owner-translation-review-v002/make-and-run-finite-review-v002.py",
+    "bytes": 3965,
+    "sha256": "219904f2c1f0f83c76a000fea9cae6a1345a914f620a1b7c7e8b000bc6d31efb"
+  },
+  "v001_actual_Viewed_after_E439": [
+    "full4plate",
+    "torso2xplate",
+    "Readyjoin",
+    "HelmetForeground0/1/2/3",
+    "NearArm1",
+    "FarHand0"
+  ],
+  "actual_findings": [
+    "Chest228 nearapertures containopaque[0,0,0,255], nottransparentholes. Frame1 maps source[225240] onto originalgray[241245] andrequires87pxwaistmisalignmentifmovedtoneararm.",
+    "v001Helmet1 maskwronglyincludesgraycollar/band andsmallfarwrist; sourceownerassignmentfailure, pixelsnotlost. NEWv002 clipsownactualhelmetbottominklandmarks.",
+    "v001Helmet2 sourceownership omittedlowerjaw; NEWv002 sourceROIenlarged, nohelmetpixelsdrawn orchanged.",
+    "NEWv002 ownNearArm1/2 captureactualvisibleuppersleeve; NearHand2 includesactualsourceglovetop previouslyoutsideoldhandpolygon. OriginalE422handpixelsretained, SWDlayerunchanged.",
+    "Chest2/3 tryonly8/14pxleftintegertranslations; Far0/2/3 trycloseractualsurfaceB. Thesearefinitecandidatefixes, notacceptedsemanticcoverage."
+  ],
+  "opaque_black_analysis": [
+    {
+      "frame": 0,
+      "versions": [
+        {
+          "version": "v001_E439_actual_View",
+          "Chest_delta": [
+            12,
+            37
+          ],
+          "source_opaque_black_ROI": [
+            226,
+            225,
+            247,
+            258
+          ],
+          "source_opaque_black_core_count": 455,
+          "not_full_blackoutline_or_neck_metric": true,
+          "remaining_not_core_occluded_count": 236,
+          "remaining_bbox": [
+            238,
+            262,
+            258,
+            284
+          ],
+          "remaining_over_body_alpha128": 236,
+          "remaining_over_actual_warm_glove_candidate": 0,
+          "count_is_not_semantic_pass": true
+        },
+        {
+          "version": "v002_UNVIEWED_finite_candidate",
+          "Chest_delta": [
+            12,
+            37
+          ],
+          "source_opaque_black_ROI": [
+            226,
+            225,
+            247,
+            258
+          ],
+          "source_opaque_black_core_count": 455,
+          "not_full_blackoutline_or_neck_metric": true,
+          "remaining_not_core_occluded_count": 236,
+          "remaining_bbox": [
+            238,
+            262,
+            258,
+            284
+          ],
+          "remaining_over_body_alpha128": 236,
+          "remaining_over_actual_warm_glove_candidate": 0,
+          "count_is_not_semantic_pass": true
+        }
+      ]
+    },
+    {
+      "frame": 1,
+      "versions": [
+        {
+          "version": "v001_E439_actual_View",
+          "Chest_delta": [
+            16,
+            5
+          ],
+          "source_opaque_black_ROI": [
+            213,
+            225,
+            240,
+            263
+          ],
+          "source_opaque_black_core_count": 509,
+          "not_full_blackoutline_or_neck_metric": true,
+          "remaining_not_core_occluded_count": 509,
+          "remaining_bbox": [
+            229,
+            230,
+            251,
+            268
+          ],
+          "remaining_over_body_alpha128": 509,
+          "remaining_over_actual_warm_glove_candidate": 0,
+          "count_is_not_semantic_pass": true
+        },
+        {
+          "version": "v002_UNVIEWED_finite_candidate",
+          "Chest_delta": [
+            16,
+            5
+          ],
+          "source_opaque_black_ROI": [
+            213,
+            225,
+            240,
+            263
+          ],
+          "source_opaque_black_core_count": 509,
+          "not_full_blackoutline_or_neck_metric": true,
+          "remaining_not_core_occluded_count": 509,
+          "remaining_bbox": [
+            229,
+            230,
+            251,
+            268
+          ],
+          "remaining_over_body_alpha128": 509,
+          "remaining_over_actual_warm_glove_candidate": 0,
+          "count_is_not_semantic_pass": true
+        }
+      ]
+    },
+    {
+      "frame": 2,
+      "versions": [
+        {
+          "version": "v001_E439_actual_View",
+          "Chest_delta": [
+            -21,
+            26
+          ],
+          "source_opaque_black_ROI": [
+            226,
+            225,
+            249,
+            259
+          ],
+          "source_opaque_black_core_count": 457,
+          "not_full_blackoutline_or_neck_metric": true,
+          "remaining_not_core_occluded_count": 249,
+          "remaining_bbox": [
+            205,
+            251,
+            225,
+            270
+          ],
+          "remaining_over_body_alpha128": 249,
+          "remaining_over_actual_warm_glove_candidate": 6,
+          "count_is_not_semantic_pass": true
+        },
+        {
+          "version": "v002_UNVIEWED_finite_candidate",
+          "Chest_delta": [
+            -29,
+            26
+          ],
+          "source_opaque_black_ROI": [
+            226,
+            225,
+            249,
+            259
+          ],
+          "source_opaque_black_core_count": 457,
+          "not_full_blackoutline_or_neck_metric": true,
+          "remaining_not_core_occluded_count": 50,
+          "remaining_bbox": [
+            208,
+            253,
+            217,
+            263
+          ],
+          "remaining_over_body_alpha128": 50,
+          "remaining_over_actual_warm_glove_candidate": 0,
+          "count_is_not_semantic_pass": true
+        }
+      ]
+    },
+    {
+      "frame": 3,
+      "versions": [
+        {
+          "version": "v001_E439_actual_View",
+          "Chest_delta": [
+            -1,
+            21
+          ],
+          "source_opaque_black_ROI": [
+            226,
+            224,
+            245,
+            260
+          ],
+          "source_opaque_black_core_count": 392,
+          "not_full_blackoutline_or_neck_metric": true,
+          "remaining_not_core_occluded_count": 270,
+          "remaining_bbox": [
+            225,
+            248,
+            240,
+            281
+          ],
+          "remaining_over_body_alpha128": 270,
+          "remaining_over_actual_warm_glove_candidate": 0,
+          "count_is_not_semantic_pass": true
+        },
+        {
+          "version": "v002_UNVIEWED_finite_candidate",
+          "Chest_delta": [
+            -15,
+            21
+          ],
+          "source_opaque_black_ROI": [
+            226,
+            224,
+            245,
+            260
+          ],
+          "source_opaque_black_core_count": 392,
+          "not_full_blackoutline_or_neck_metric": true,
+          "remaining_not_core_occluded_count": 166,
+          "remaining_bbox": [
+            211,
+            261,
+            226,
+            280
+          ],
+          "remaining_over_body_alpha128": 166,
+          "remaining_over_actual_warm_glove_candidate": 0,
+          "count_is_not_semantic_pass": true
+        }
+      ]
+    }
+  ],
+  "Hurt1_Chest_source_rejection_still_blocks_full4": true,
+  "minimum_current_admission": "AlreadyRootreviewedE422SWD4 sourcefit mayproceedseparately; thisnewLGTfull4 remainsclosed. Near/Faroriginalsourcesneednotregenerate, buttheirregistration/depthstillawaitreview.",
+  "new_v002_media_Viewed": false,
+  "new_v002_media_E_retained": false,
+  "TrialAllowed": false,
+  "no_opaque_black_erasure_or_gray_lining_drawn": true,
+  "no_armor_resample_rotate_mirror": true
+}

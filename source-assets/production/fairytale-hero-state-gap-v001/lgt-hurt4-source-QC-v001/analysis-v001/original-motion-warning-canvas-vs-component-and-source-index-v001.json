@@ -1,0 +1,853 @@
+{
+  "schema": "Hurt-LGT228229230-original-QA-warning-and-actual-source-index-v001",
+  "purpose": "Explainoriginalsmallcomponentmotionwarningwithoutwaiving/replacingQA, preserveallfailures andsourceidentityrejection.",
+  "installed_inspector": {
+    "path": "C:/Users/22499/.codex/skills/sprite-gen/sprite_gen/qa/inspect.py",
+    "bytes": 17423,
+    "sha256": "4f0869d7c6589f444db4d3b537ae744ce23433d206ee7286d70e2f9635fc8329"
+  },
+  "actual_metric_source_lines": [
+    209,
+    214,
+    219,
+    221,
+    367
+  ],
+  "metric_fact": "Adjacentfull512RGBAframesarebilinearresizedto64x64. MeanabsoluteRGBAchannel difference is dividedby64*64*4*255 andthenaveragedover3pairs. Emptycanvasparticipatesindenominator. Thisisimagechangemetric, not physicalmovement, bodypose orfootlock.",
+  "components": [
+    {
+      "component": "Chest",
+      "native": 228,
+      "receipt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-chest-native228-shared-HD-v001/extraction-receipt-v001.json",
+        "bytes": 6622,
+        "sha256": "ed2080c9b862a819991e10fb67620d7703aa13df7bd5ea92bbc90eb23fc3bac6"
+      },
+      "original_gate_status_preserved": "FAILED_PRESERVED_NO_ACCEPTANCE",
+      "actual_tool_exit_codes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stages_not_executed_after_failure": 0,
+      "original_extract_errors": [],
+      "original_extract_warnings": [],
+      "original_inspect_report": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-chest-native228-shared-HD-v001/sprite-inspect.report.json",
+        "bytes": 1561,
+        "sha256": "9ef5a702a7c9051117ad7ae1e26f78892f9dc106b39c8f3261179c1f031a7ed0"
+      },
+      "original_inspect_errors": [],
+      "original_inspect_warnings": [
+        "leather_chest_hero_hurt: motion presence is too low (0.0033 < 0.0100)"
+      ],
+      "original_inspect_motion_min": 0.01,
+      "actual_shared_row_scale": 0.26011560693641617,
+      "shared_row_policy": "one_raw_component_max_extent_scale_for_entire_row",
+      "perframe_normalization": false,
+      "fit_window_px": [
+        90,
+        90
+      ],
+      "fit_window_source_area_upper_bound_px": 8100,
+      "fit_window_area_fraction_of512canvas": 0.0308990478515625,
+      "area_bound_scope": "Designsourcefitwindowareaonly, notfilledsilhouetteareaandnotreplacementQA. Resize64bilinearbleedsedges, so do not callsourcewindowfraction ahardexact64motioncap.",
+      "frames": [
+        {
+          "frame": 0,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-chest-native228-shared-HD-v001/curated/frame-0.png",
+            "bytes": 15381,
+            "sha256": "51463da139d1e3a49e7ee9df54187921ef14efa2b4f3c4f752ec775e2a42b5b8"
+          },
+          "kind": "officialcurated",
+          "decoded_RGBA_sha": "fe6f396c26f661c543e81961160e5942ef891aaa63a701e4d3d064653dc19fc8",
+          "nonzero_alpha_bbox": [
+            217,
+            218,
+            294,
+            301
+          ],
+          "alpha128_bbox": [
+            217,
+            218,
+            294,
+            301
+          ],
+          "nonzero_alpha_pixels": 5277,
+          "alpha128_pixels": 4910,
+          "A_visiblefeature": null,
+          "B_authored_bodysurface": null,
+          "integer_delta": null,
+          "coverage": null
+        },
+        {
+          "frame": 1,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-chest-native228-shared-HD-v001/curated/frame-1.png",
+            "bytes": 16006,
+            "sha256": "4393a98b6dabf40bb21b042479e23bb3a71a5be78b8c99170feee0bd0f83c8d2"
+          },
+          "kind": "officialcurated",
+          "decoded_RGBA_sha": "e8aee2f9389f9a75e9ef47e3adc8ffe3e44db58e855eb89f1b220ac242c404c6",
+          "nonzero_alpha_bbox": [
+            211,
+            214,
+            301,
+            301
+          ],
+          "alpha128_bbox": [
+            211,
+            214,
+            301,
+            301
+          ],
+          "nonzero_alpha_pixels": 5512,
+          "alpha128_pixels": 5109,
+          "A_visiblefeature": null,
+          "B_authored_bodysurface": null,
+          "integer_delta": null,
+          "coverage": null
+        },
+        {
+          "frame": 2,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-chest-native228-shared-HD-v001/curated/frame-2.png",
+            "bytes": 15798,
+            "sha256": "5ebcb7d5879b1b39ac37d0a8063e252699a73d073097bdad0e00550dcb6fc45c"
+          },
+          "kind": "officialcurated",
+          "decoded_RGBA_sha": "7453d55f6550fc8620d4392f0a8aa3b9c6472591f39d1e3d7fd47f6fa5e9dd5c",
+          "nonzero_alpha_bbox": [
+            216,
+            217,
+            296,
+            301
+          ],
+          "alpha128_bbox": [
+            216,
+            217,
+            296,
+            301
+          ],
+          "nonzero_alpha_pixels": 5482,
+          "alpha128_pixels": 5117,
+          "A_visiblefeature": null,
+          "B_authored_bodysurface": null,
+          "integer_delta": null,
+          "coverage": null
+        },
+        {
+          "frame": 3,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-chest-native228-shared-HD-v001/curated/frame-3.png",
+            "bytes": 15386,
+            "sha256": "df76904514e06084030f6c1715275f99d167661d14a6d84cd9f6de7fa9ce4f72"
+          },
+          "kind": "officialcurated",
+          "decoded_RGBA_sha": "6aacf7d2553d364dbd768ac00983f9c6fd06f4a8555079350bdbcdc77b6ccbba",
+          "nonzero_alpha_bbox": [
+            221,
+            215,
+            291,
+            301
+          ],
+          "alpha128_bbox": [
+            221,
+            215,
+            291,
+            301
+          ],
+          "nonzero_alpha_pixels": 5381,
+          "alpha128_pixels": 5049,
+          "A_visiblefeature": null,
+          "B_authored_bodysurface": null,
+          "integer_delta": null,
+          "coverage": null
+        }
+      ],
+      "decoded_RGBA_distinct_count": 4,
+      "identical_RGBA_pairs": [],
+      "actual_adjacent_differences": [
+        {
+          "from": 0,
+          "to": 1,
+          "RGBA_changed_pixel_count": 6244,
+          "RGBA_changed_fraction_of_full512_canvas": 0.0238189697265625,
+          "nonzero_alpha_union512_pixels": 6328,
+          "RGBA_changed_fraction_inside_nonzero_union": 0.9867256637168141,
+          "core128_union512_pixels": 5949,
+          "RGBA_changed_fraction_inside_core128_union": 0.9858799798285426,
+          "geometry_before_after_bbox": [
+            [
+              217,
+              218,
+              294,
+              301
+            ],
+            [
+              211,
+              214,
+              301,
+              301
+            ]
+          ],
+          "SG_motion_presence_exact_factorization": {
+            "resize_for_metric": [
+              64,
+              64
+            ],
+            "absolute_RGBA_difference_sum": 17597,
+            "full_canvas_RGBA_denominator": 4177920,
+            "full_canvas_metric": 0.004211904488357844,
+            "actual_alpha_nonzero_union64_pixels": 136,
+            "actual_union64_area_fraction": 0.033203125,
+            "same_numerator_divided_by_union64_RGBA_denominator": 0.12685265282583622,
+            "metric_factorization_verified": true,
+            "not_alternative_pass_gate": "Thisfactorizationonlyexplainsdenominator. Originalmotion_min.0100andwarningremainunchanged; no waiver."
+          }
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "RGBA_changed_pixel_count": 6316,
+          "RGBA_changed_fraction_of_full512_canvas": 0.0240936279296875,
+          "nonzero_alpha_union512_pixels": 6437,
+          "RGBA_changed_fraction_inside_nonzero_union": 0.9812024234892031,
+          "core128_union512_pixels": 6055,
+          "RGBA_changed_fraction_inside_core128_union": 0.9803468208092485,
+          "geometry_before_after_bbox": [
+            [
+              211,
+              214,
+              301,
+              301
+            ],
+            [
+              216,
+              217,
+              296,
+              301
+            ]
+          ],
+          "SG_motion_presence_exact_factorization": {
+            "resize_for_metric": [
+              64,
+              64
+            ],
+            "absolute_RGBA_difference_sum": 17936,
+            "full_canvas_RGBA_denominator": 4177920,
+            "full_canvas_metric": 0.004293045343137255,
+            "actual_alpha_nonzero_union64_pixels": 138,
+            "actual_union64_area_fraction": 0.03369140625,
+            "same_numerator_divided_by_union64_RGBA_denominator": 0.12742256322818982,
+            "metric_factorization_verified": true,
+            "not_alternative_pass_gate": "Thisfactorizationonlyexplainsdenominator. Originalmotion_min.0100andwarningremainunchanged; no waiver."
+          }
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "RGBA_changed_pixel_count": 5441,
+          "RGBA_changed_fraction_of_full512_canvas": 0.020755767822265625,
+          "nonzero_alpha_union512_pixels": 5780,
+          "RGBA_changed_fraction_inside_nonzero_union": 0.9413494809688582,
+          "core128_union512_pixels": 5378,
+          "RGBA_changed_fraction_inside_core128_union": 0.9390107846783191,
+          "geometry_before_after_bbox": [
+            [
+              216,
+              217,
+              296,
+              301
+            ],
+            [
+              221,
+              215,
+              291,
+              301
+            ]
+          ],
+          "SG_motion_presence_exact_factorization": {
+            "resize_for_metric": [
+              64,
+              64
+            ],
+            "absolute_RGBA_difference_sum": 6277,
+            "full_canvas_RGBA_denominator": 4177920,
+            "full_canvas_metric": 0.0015024222579656864,
+            "actual_alpha_nonzero_union64_pixels": 123,
+            "actual_union64_area_fraction": 0.030029296875,
+            "same_numerator_divided_by_union64_RGBA_denominator": 0.05003188267176789,
+            "metric_factorization_verified": true,
+            "not_alternative_pass_gate": "Thisfactorizationonlyexplainsdenominator. Originalmotion_min.0100andwarningremainunchanged; no waiver."
+          }
+        }
+      ],
+      "recomputed_original_motion_presence": 0.0033357906964869284,
+      "metric_reexpressed_per_max_fitwindow_area_equivalent": 0.10795771806665054,
+      "window_equivalent_is_not_original_or_alternative_pass_metric": true,
+      "curated_worker_actually_Viewed_after_E": true,
+      "source_semantic_status": "Chest228visible4sourceperspectivescandidate;Rootdecisionpendingwithwarning",
+      "QA0_or_native_pass_claimed": false
+    },
+    {
+      "component": "ShoulderNear",
+      "native": 229,
+      "receipt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-nearshoulder-native229-shared-HD-v001/extraction-receipt-v001.json",
+        "bytes": 13838,
+        "sha256": "55831887c5c2fa84cf38cf9e62beb21a1130ee5af4c67b991484afde3ad6b84a"
+      },
+      "original_gate_status_preserved": "FAILED_PRESERVED_NO_ACCEPTANCE",
+      "actual_tool_exit_codes": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stages_not_executed_after_failure": 0,
+      "original_extract_errors": [],
+      "original_extract_warnings": [],
+      "original_inspect_report": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-nearshoulder-native229-shared-HD-v001/sprite-inspect.report.json",
+        "bytes": 1606,
+        "sha256": "94333efa5bec7b870fe4c9c0ea5cb71c2c0c3305237a4c1c4de88f0fcdcdfeb3"
+      },
+      "original_inspect_errors": [],
+      "original_inspect_warnings": [
+        "leather_nearshoulder_hero_hurt: motion presence is too low (0.0005 < 0.0100)"
+      ],
+      "original_inspect_motion_min": 0.01,
+      "actual_shared_row_scale": 0.17341040462427745,
+      "shared_row_policy": "one_raw_component_max_extent_scale_for_entire_row",
+      "perframe_normalization": false,
+      "fit_window_px": [
+        60,
+        44
+      ],
+      "fit_window_source_area_upper_bound_px": 2640,
+      "fit_window_area_fraction_of512canvas": 0.01007080078125,
+      "area_bound_scope": "Designsourcefitwindowareaonly, notfilledsilhouetteareaandnotreplacementQA. Resize64bilinearbleedsedges, so do not callsourcewindowfraction ahardexact64motioncap.",
+      "frames": [
+        {
+          "frame": 0,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-nearshoulder-native229-shared-HD-v001/curated/frame-0.png",
+            "bytes": 6574,
+            "sha256": "8d50c70490f2de371f85c450259c00cf950914fa5760ed9427acfea15dec2bdf"
+          },
+          "kind": "officialcurated",
+          "decoded_RGBA_sha": "0289abf06a96004e699b65a26e64c96fe9c560f4d119e36c34b712e7cc967e48",
+          "nonzero_alpha_bbox": [
+            226,
+            237,
+            285,
+            278
+          ],
+          "alpha128_bbox": [
+            226,
+            237,
+            285,
+            278
+          ],
+          "nonzero_alpha_pixels": 1680,
+          "alpha128_pixels": 1478,
+          "A_visiblefeature": null,
+          "B_authored_bodysurface": null,
+          "integer_delta": null,
+          "coverage": null
+        },
+        {
+          "frame": 1,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-nearshoulder-native229-shared-HD-v001/curated/frame-1.png",
+            "bytes": 6154,
+            "sha256": "6f90a89db30fa3f6f636c6fbd0f5d44c3f2b4b6839d02986f52445e53f2d6bc5"
+          },
+          "kind": "officialcurated",
+          "decoded_RGBA_sha": "4d0b39b9ea060ac657871efb65575b7bb05dc5bd01535edef5079c4cfcf86cc8",
+          "nonzero_alpha_bbox": [
+            226,
+            241,
+            286,
+            278
+          ],
+          "alpha128_bbox": [
+            226,
+            241,
+            286,
+            278
+          ],
+          "nonzero_alpha_pixels": 1515,
+          "alpha128_pixels": 1335,
+          "A_visiblefeature": null,
+          "B_authored_bodysurface": null,
+          "integer_delta": null,
+          "coverage": null
+        },
+        {
+          "frame": 2,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-nearshoulder-native229-shared-HD-v001/curated/frame-2.png",
+            "bytes": 6766,
+            "sha256": "2b75ec76d82ecf50f925e8c8344768bb78a6a17263dad15dbb388ce46a406365"
+          },
+          "kind": "officialcurated",
+          "decoded_RGBA_sha": "c384cf8fb3f702d8e63f87d1035fb6b047570edce0dff0648bf8ca6b586ddf03",
+          "nonzero_alpha_bbox": [
+            226,
+            236,
+            286,
+            278
+          ],
+          "alpha128_bbox": [
+            226,
+            236,
+            286,
+            278
+          ],
+          "nonzero_alpha_pixels": 1717,
+          "alpha128_pixels": 1522,
+          "A_visiblefeature": null,
+          "B_authored_bodysurface": null,
+          "integer_delta": null,
+          "coverage": null
+        },
+        {
+          "frame": 3,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-nearshoulder-native229-shared-HD-v001/curated/frame-3.png",
+            "bytes": 6557,
+            "sha256": "6ddccd062af26a9b7bfd056c0ecb8c67aa0cb8930d48d06c164124d7bc0f896a"
+          },
+          "kind": "officialcurated",
+          "decoded_RGBA_sha": "90a427142f090b5d238222def2c154e46e4ed89428a72c74f070bc89052af702",
+          "nonzero_alpha_bbox": [
+            226,
+            237,
+            285,
+            278
+          ],
+          "alpha128_bbox": [
+            226,
+            237,
+            285,
+            278
+          ],
+          "nonzero_alpha_pixels": 1667,
+          "alpha128_pixels": 1475,
+          "A_visiblefeature": null,
+          "B_authored_bodysurface": null,
+          "integer_delta": null,
+          "coverage": null
+        }
+      ],
+      "decoded_RGBA_distinct_count": 4,
+      "identical_RGBA_pairs": [],
+      "actual_adjacent_differences": [
+        {
+          "from": 0,
+          "to": 1,
+          "RGBA_changed_pixel_count": 1759,
+          "RGBA_changed_fraction_of_full512_canvas": 0.006710052490234375,
+          "nonzero_alpha_union512_pixels": 1761,
+          "RGBA_changed_fraction_inside_nonzero_union": 0.9988642816581488,
+          "core128_union512_pixels": 1548,
+          "RGBA_changed_fraction_inside_core128_union": 1.0,
+          "geometry_before_after_bbox": [
+            [
+              226,
+              237,
+              285,
+              278
+            ],
+            [
+              226,
+              241,
+              286,
+              278
+            ]
+          ],
+          "SG_motion_presence_exact_factorization": {
+            "resize_for_metric": [
+              64,
+              64
+            ],
+            "absolute_RGBA_difference_sum": 2586,
+            "full_canvas_RGBA_denominator": 4177920,
+            "full_canvas_metric": 0.0006189682904411764,
+            "actual_alpha_nonzero_union64_pixels": 49,
+            "actual_union64_area_fraction": 0.011962890625,
+            "same_numerator_divided_by_union64_RGBA_denominator": 0.051740696278511404,
+            "metric_factorization_verified": true,
+            "not_alternative_pass_gate": "Thisfactorizationonlyexplainsdenominator. Originalmotion_min.0100andwarningremainunchanged; no waiver."
+          }
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "RGBA_changed_pixel_count": 1800,
+          "RGBA_changed_fraction_of_full512_canvas": 0.006866455078125,
+          "nonzero_alpha_union512_pixels": 1801,
+          "RGBA_changed_fraction_inside_nonzero_union": 0.9994447529150472,
+          "core128_union512_pixels": 1604,
+          "RGBA_changed_fraction_inside_core128_union": 0.9993765586034913,
+          "geometry_before_after_bbox": [
+            [
+              226,
+              241,
+              286,
+              278
+            ],
+            [
+              226,
+              236,
+              286,
+              278
+            ]
+          ],
+          "SG_motion_presence_exact_factorization": {
+            "resize_for_metric": [
+              64,
+              64
+            ],
+            "absolute_RGBA_difference_sum": 2855,
+            "full_canvas_RGBA_denominator": 4177920,
+            "full_canvas_metric": 0.0006833543964460784,
+            "actual_alpha_nonzero_union64_pixels": 49,
+            "actual_union64_area_fraction": 0.011962890625,
+            "same_numerator_divided_by_union64_RGBA_denominator": 0.05712284913965586,
+            "metric_factorization_verified": true,
+            "not_alternative_pass_gate": "Thisfactorizationonlyexplainsdenominator. Originalmotion_min.0100andwarningremainunchanged; no waiver."
+          }
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "RGBA_changed_pixel_count": 1802,
+          "RGBA_changed_fraction_of_full512_canvas": 0.00687408447265625,
+          "nonzero_alpha_union512_pixels": 1810,
+          "RGBA_changed_fraction_inside_nonzero_union": 0.9955801104972376,
+          "core128_union512_pixels": 1586,
+          "RGBA_changed_fraction_inside_core128_union": 0.998108448928121,
+          "geometry_before_after_bbox": [
+            [
+              226,
+              236,
+              286,
+              278
+            ],
+            [
+              226,
+              237,
+              285,
+              278
+            ]
+          ],
+          "SG_motion_presence_exact_factorization": {
+            "resize_for_metric": [
+              64,
+              64
+            ],
+            "absolute_RGBA_difference_sum": 1137,
+            "full_canvas_RGBA_denominator": 4177920,
+            "full_canvas_metric": 0.00027214499080882354,
+            "actual_alpha_nonzero_union64_pixels": 49,
+            "actual_union64_area_fraction": 0.011962890625,
+            "same_numerator_divided_by_union64_RGBA_denominator": 0.02274909963985594,
+            "metric_factorization_verified": true,
+            "not_alternative_pass_gate": "Thisfactorizationonlyexplainsdenominator. Originalmotion_min.0100andwarningremainunchanged; no waiver."
+          }
+        }
+      ],
+      "recomputed_original_motion_presence": 0.0005248225592320261,
+      "metric_reexpressed_per_max_fitwindow_area_equivalent": 0.05211328976034858,
+      "window_equivalent_is_not_original_or_alternative_pass_metric": true,
+      "curated_worker_actually_Viewed_after_E": false,
+      "source_semantic_status": "Near229rawsourcecandidate;curatedE/Viewpending",
+      "QA0_or_native_pass_claimed": false
+    },
+    {
+      "component": "ShoulderFar",
+      "native": 230,
+      "receipt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-farshoulder-native230-shared-HD-v001/extraction-receipt-v001.json",
+        "bytes": 4016,
+        "sha256": "8a37ca20b0035adacc7da20acf90853fdbe0df5b16dfcaba33123ea894114dcc"
+      },
+      "original_gate_status_preserved": "FAILED_PRESERVED_NO_ACCEPTANCE",
+      "actual_tool_exit_codes": [
+        0,
+        1
+      ],
+      "stages_not_executed_after_failure": 3,
+      "original_extract_errors": [],
+      "original_extract_warnings": [],
+      "original_inspect_report": null,
+      "original_inspect_errors": null,
+      "original_inspect_warnings": null,
+      "original_inspect_motion_min": null,
+      "actual_shared_row_scale": 0.11895910780669144,
+      "shared_row_policy": "one_raw_component_max_extent_scale_for_entire_row",
+      "perframe_normalization": false,
+      "fit_window_px": [
+        32,
+        30
+      ],
+      "fit_window_source_area_upper_bound_px": 960,
+      "fit_window_area_fraction_of512canvas": 0.003662109375,
+      "area_bound_scope": "Designsourcefitwindowareaonly, notfilledsilhouetteareaandnotreplacementQA. Resize64bilinearbleedsedges, so do not callsourcewindowfraction ahardexact64motioncap.",
+      "frames": [
+        {
+          "frame": 0,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-farshoulder-native230-shared-HD-v001/frames/leather_farshoulder_hero_hurt/frame-0.png",
+            "bytes": 3033,
+            "sha256": "0d13cd9198cbae3d1f04ece9b015dd0e84ff7b4ef35a5015fa94f5f44180f84a"
+          },
+          "kind": "officialextractframe_only_NOcurated",
+          "decoded_RGBA_sha": "bef7ffd0b6ad329ccb8fc6c458a84f6da433acfae1d4e9da8064d570c4ffa45c",
+          "nonzero_alpha_bbox": [
+            242,
+            249,
+            269,
+            271
+          ],
+          "alpha128_bbox": [
+            242,
+            249,
+            269,
+            271
+          ],
+          "nonzero_alpha_pixels": 478,
+          "alpha128_pixels": 396,
+          "A_visiblefeature": null,
+          "B_authored_bodysurface": null,
+          "integer_delta": null,
+          "coverage": null
+        },
+        {
+          "frame": 1,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-farshoulder-native230-shared-HD-v001/frames/leather_farshoulder_hero_hurt/frame-1.png",
+            "bytes": 3180,
+            "sha256": "a822ca88d79ab7f51ff602e3a18bbeb22681aed2b2766f423e845b6f3081ac61"
+          },
+          "kind": "officialextractframe_only_NOcurated",
+          "decoded_RGBA_sha": "72cf6d3d4087b45ffce8821c33799659a63c0d1d1dfb441ff5499fc9bf2e7f70",
+          "nonzero_alpha_bbox": [
+            240,
+            250,
+            272,
+            271
+          ],
+          "alpha128_bbox": [
+            240,
+            250,
+            272,
+            271
+          ],
+          "nonzero_alpha_pixels": 511,
+          "alpha128_pixels": 418,
+          "A_visiblefeature": null,
+          "B_authored_bodysurface": null,
+          "integer_delta": null,
+          "coverage": null
+        },
+        {
+          "frame": 2,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-farshoulder-native230-shared-HD-v001/frames/leather_farshoulder_hero_hurt/frame-2.png",
+            "bytes": 3205,
+            "sha256": "eba4899b7eefcbda538d573cb19c0d347925ff2e3f02df5175a30e5c496d8282"
+          },
+          "kind": "officialextractframe_only_NOcurated",
+          "decoded_RGBA_sha": "f15df536ea8f13e8ead278d356ace91ba008084b7fd50a3483dca4da7a8fba7d",
+          "nonzero_alpha_bbox": [
+            241,
+            248,
+            270,
+            271
+          ],
+          "alpha128_bbox": [
+            241,
+            248,
+            270,
+            271
+          ],
+          "nonzero_alpha_pixels": 528,
+          "alpha128_pixels": 440,
+          "A_visiblefeature": null,
+          "B_authored_bodysurface": null,
+          "integer_delta": null,
+          "coverage": null
+        },
+        {
+          "frame": 3,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-farshoulder-native230-shared-HD-v001/frames/leather_farshoulder_hero_hurt/frame-3.png",
+            "bytes": 3141,
+            "sha256": "3c4d722a4fd782c831d1b3013612f8b2cffc0af397a8a7973ef3b91a811f2d24"
+          },
+          "kind": "officialextractframe_only_NOcurated",
+          "decoded_RGBA_sha": "9f2c0b6aa127b88814b3313463bb1ef975374a98fda303322fcc64296968ba83",
+          "nonzero_alpha_bbox": [
+            242,
+            248,
+            269,
+            271
+          ],
+          "alpha128_bbox": [
+            242,
+            248,
+            269,
+            271
+          ],
+          "nonzero_alpha_pixels": 511,
+          "alpha128_pixels": 426,
+          "A_visiblefeature": null,
+          "B_authored_bodysurface": null,
+          "integer_delta": null,
+          "coverage": null
+        }
+      ],
+      "decoded_RGBA_distinct_count": 4,
+      "identical_RGBA_pairs": [],
+      "actual_adjacent_differences": [
+        {
+          "from": 0,
+          "to": 1,
+          "RGBA_changed_pixel_count": 584,
+          "RGBA_changed_fraction_of_full512_canvas": 0.002227783203125,
+          "nonzero_alpha_union512_pixels": 585,
+          "RGBA_changed_fraction_inside_nonzero_union": 0.9982905982905983,
+          "core128_union512_pixels": 491,
+          "RGBA_changed_fraction_inside_core128_union": 1.0,
+          "geometry_before_after_bbox": [
+            [
+              242,
+              249,
+              269,
+              271
+            ],
+            [
+              240,
+              250,
+              272,
+              271
+            ]
+          ],
+          "SG_motion_presence_exact_factorization": {
+            "resize_for_metric": [
+              64,
+              64
+            ],
+            "absolute_RGBA_difference_sum": 1973,
+            "full_canvas_RGBA_denominator": 4177920,
+            "full_canvas_metric": 0.0004722445618872549,
+            "actual_alpha_nonzero_union64_pixels": 24,
+            "actual_union64_area_fraction": 0.005859375,
+            "same_numerator_divided_by_union64_RGBA_denominator": 0.08059640522875818,
+            "metric_factorization_verified": true,
+            "not_alternative_pass_gate": "Thisfactorizationonlyexplainsdenominator. Originalmotion_min.0100andwarningremainunchanged; no waiver."
+          }
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "RGBA_changed_pixel_count": 607,
+          "RGBA_changed_fraction_of_full512_canvas": 0.002315521240234375,
+          "nonzero_alpha_union512_pixels": 608,
+          "RGBA_changed_fraction_inside_nonzero_union": 0.9983552631578947,
+          "core128_union512_pixels": 512,
+          "RGBA_changed_fraction_inside_core128_union": 1.0,
+          "geometry_before_after_bbox": [
+            [
+              240,
+              250,
+              272,
+              271
+            ],
+            [
+              241,
+              248,
+              270,
+              271
+            ]
+          ],
+          "SG_motion_presence_exact_factorization": {
+            "resize_for_metric": [
+              64,
+              64
+            ],
+            "absolute_RGBA_difference_sum": 1669,
+            "full_canvas_RGBA_denominator": 4177920,
+            "full_canvas_metric": 0.00039948108149509803,
+            "actual_alpha_nonzero_union64_pixels": 25,
+            "actual_union64_area_fraction": 0.006103515625,
+            "same_numerator_divided_by_union64_RGBA_denominator": 0.06545098039215687,
+            "metric_factorization_verified": true,
+            "not_alternative_pass_gate": "Thisfactorizationonlyexplainsdenominator. Originalmotion_min.0100andwarningremainunchanged; no waiver."
+          }
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "RGBA_changed_pixel_count": 564,
+          "RGBA_changed_fraction_of_full512_canvas": 0.0021514892578125,
+          "nonzero_alpha_union512_pixels": 568,
+          "RGBA_changed_fraction_inside_nonzero_union": 0.9929577464788732,
+          "core128_union512_pixels": 465,
+          "RGBA_changed_fraction_inside_core128_union": 0.9956989247311828,
+          "geometry_before_after_bbox": [
+            [
+              241,
+              248,
+              270,
+              271
+            ],
+            [
+              242,
+              248,
+              269,
+              271
+            ]
+          ],
+          "SG_motion_presence_exact_factorization": {
+            "resize_for_metric": [
+              64,
+              64
+            ],
+            "absolute_RGBA_difference_sum": 750,
+            "full_canvas_RGBA_denominator": 4177920,
+            "full_canvas_metric": 0.00017951516544117648,
+            "actual_alpha_nonzero_union64_pixels": 24,
+            "actual_union64_area_fraction": 0.005859375,
+            "same_numerator_divided_by_union64_RGBA_denominator": 0.030637254901960783,
+            "metric_factorization_verified": true,
+            "not_alternative_pass_gate": "Thisfactorizationonlyexplainsdenominator. Originalmotion_min.0100andwarningremainunchanged; no waiver."
+          }
+        }
+      ],
+      "recomputed_original_motion_presence": 0.00035041360294117647,
+      "metric_reexpressed_per_max_fitwindow_area_equivalent": 0.09568627450980392,
+      "window_equivalent_is_not_original_or_alternative_pass_metric": true,
+      "curated_worker_actually_Viewed_after_E": false,
+      "source_semantic_status": "FAR230RAW_IDENTITY_REJECT_PROPOSAL_broadcup/rivet/strap_vsacceptednarrowtab, independentofwarningorcomposefloor",
+      "QA0_or_native_pass_claimed": false
+    }
+  ],
+  "inference": "Chest/Nearsmallfitoccupancy constrainswholecanvasdifference. Conditionalunion/window equivalents explainrelativechanges andactualdistinctness, but neither proves4correctHurtperspectivesnor grantsautomaticexemption. Rootcaninspectactualsource/geometryandoriginalwarning, noprematureAIretry.",
+  "far230_independent_actual_raw_View_finding": "CurrentFar187source20x28isnarrowcurvedrecessedtab. Native230actualrawfourbroadshouldercupswithprominentroundgoldrivetandlowerstrap violateonlytinyFARtab/nofrontcap/ring request. Compressinginto32x30cannotproveidentity; nopartcrop/paint/rescalefixperformed.",
+  "far230_compose_failure": "Extractexplicit256exit0, defaultcompose512exit1:frames0=478,1=511,3=511too sparse. Originalerrorandrunpreserved. Composehadnotforwardedexplicit256recipe; evenanexplicit256compositionwouldnotrepairtherawidentityrejection. Noautomaticreexecutionorrelaxationdonehere.",
+  "all_source_images_new_View_scope": "Chest4onlyafterRootE431. Near229curated/Far230extractframesNOTviewed; theirrawsviewedonlyafterE428/E430 respectively.",
+  "Hurt0_farhand_depth": "RootexplicitpermitsnewFarHandForegroundbodypartitionifactualChestoccludesfarfist; allbodyRGBAownersmust beexclusive andexactoriginal, noReadyreuse/newarmorcomponent.",
+  "art_or_native_admission": false,
+  "new_images_created": 0,
+  "reports_thresholds_tools_rewritten": false,
+  "Source_Content_Roottools_ledger_UE_modified": false
+}

@@ -1,0 +1,330 @@
+{
+  "schema": "Hurt-fourphase-rawsource-profile-prepared-v001",
+  "profile_id": "EV048-v017-HeroLeatherHurt-v001",
+  "state": "Hurt",
+  "scope": "SWD+LGT Hurt4 only",
+  "namespace": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt",
+  "import_manifest": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hurt-runtime-prepared-v001/prepared-v001/import-Hurt32-v001.json",
+    "bytes": 50202,
+    "sha256": "bca13780eec91568e53609e366aa06b201efeeed9256c53ef83d6a6d2ad9eb1f"
+  },
+  "source_review_lock": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hurt-runtime-prepared-v001/prepared-v001/Hurt-source-review-lock-and-32-source-proof-v001.json",
+    "bytes": 3246,
+    "sha256": "e8ae64a02e443becbfafb4f10594cdd284ef9ba4345b6522c4647a29ab209a92"
+  },
+  "source_closure_digest": "38e3a3c90eeda66842a2f2d5c53260832c226d18ca58640ee0720dc9271a1f28",
+  "canvas_source_px": [
+    512,
+    512
+  ],
+  "standing_height_source_px": 416,
+  "standing_display_height_px": 72.0,
+  "body_canvas_display_px": 88.61538461538461,
+  "source_to_display_scale": 0.17307692307692307,
+  "body_scale_constant_all_frames": true,
+  "source_body_heights_not_perframe_normalized": true,
+  "native_facing": 1,
+  "durations_ms": [
+    100,
+    100,
+    100,
+    100
+  ],
+  "duration_ms": 400,
+  "loop": false,
+  "timeline": "UseactualkernelHurtstate/eventage. [0,100),[100,200),[200,300),[300,400) sample0..3. At400ms followexistingstatepriority/transition; profilemustnotdelaygameplayorloop/hold. Death/interruptpriorityownedbykernel/HUDagent.",
+  "stack_back_to_front": [
+    "BodyRest",
+    "ShoulderFar",
+    "Chest",
+    "NearArmWithoutHand",
+    "ShoulderNear",
+    "HelmetForeground",
+    "FarHandForeground",
+    "IndependentSword",
+    "NearHand"
+  ],
+  "body_and_armor_texture_slots_per_frame": 8,
+  "declared_total_slots_including_independent_sword": 9,
+  "known_optional_empty_policy": {
+    "component": "FarHandForeground",
+    "frames": [
+      1,
+      2,
+      3
+    ],
+    "texture_source_exists_and_imported": true,
+    "load_validate_source_empty_then_skip_draw": true,
+    "never_count_empty_as_rendered": true,
+    "never_treat_missing_texture_as_known_empty": true
+  },
+  "whole_body_fallback": "No WholeBody texture imported. BodyRest isapartition, neveraWholeBody surrogate. Missingmandatorylayer/profilemustclose thiscandidatepath, notfakecompletion.",
+  "independent_sword": {
+    "source": {
+      "path": "F:/Ourgame/source-assets/production/first-unit-animation-v002/components/military-sword-clean-v001.png",
+      "bytes": 31902,
+      "sha256": "2efb5519fb3c7ed5a63e58d00c84e39aa02355274af36b43c1775570badded5a"
+    },
+    "object_path": "/Game/Production/FirstBatch/v002/CandidateComponents/T_military_sword_v002.T_military_sword_v002",
+    "source_grip_xy": [
+      99,
+      256
+    ],
+    "native_blade_axis": [
+      1,
+      0
+    ],
+    "weapon_scale": 0.5,
+    "new_sword_raster_imported": false
+  },
+  "facing_and_geometry": {
+    "body_all_layers_mirrored_together": true,
+    "NearFar_semantic_layer_order_not_swapped": true,
+    "right_world_point": "Ground + (72/416) * (HeroSourcePoint - GroundRootSource)",
+    "left_world_point": "Ground + (72/416) * (-(HeroSourcePoint.x-GroundRoot.x), HeroSourcePoint.y-GroundRoot.y)",
+    "sword_HeroSourcePoint": "Grip + .50 * R(atan2(artistAxis.y,artistAxis.x)) * (SwordSourcePoint-[99,256])",
+    "facing_sword_transform": "ApplysameactorXreflectiontocompleteweaponmatrix/texture; mirroredaxis alonewithouttexturereflection isnotassumed equivalent. Displayaxis=(Facing*UnitAxis.x,UnitAxis.y).",
+    "ground_root_role": "Pairedvisible-soleartistregistrationfromE422; notbone/COM/footlock ormovementposition."
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "duration_ms": 100,
+      "sample_interval_ms": [
+        0,
+        100
+      ],
+      "textures": {
+        "BodyRest": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_BodyRest_000_v001.T_Fairytale_Hurt_BodyRest_000_v001",
+        "NearArmWithoutHand": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_NearArmWithoutHand_000_v001.T_Fairytale_Hurt_NearArmWithoutHand_000_v001",
+        "HelmetForeground": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_HelmetForeground_000_v001.T_Fairytale_Hurt_HelmetForeground_000_v001",
+        "FarHandForeground": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_FarHandForeground_000_v001.T_Fairytale_Hurt_FarHandForeground_000_v001",
+        "NearHand": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_NearHand_000_v001.T_Fairytale_Hurt_NearHand_000_v001",
+        "ShoulderFar": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_ShoulderFar_000_v001.T_Fairytale_Hurt_ShoulderFar_000_v001",
+        "Chest": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_Chest_000_v001.T_Fairytale_Hurt_Chest_000_v001",
+        "ShoulderNear": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_ShoulderNear_000_v001.T_Fairytale_Hurt_ShoulderNear_000_v001"
+      },
+      "ground_root_source_xy": [
+        259.9182682987829,
+        463
+      ],
+      "Grip_source_xy": [
+        236,
+        303
+      ],
+      "Axis_artist_raw_xy": [
+        0.7,
+        0.714142842854285
+      ],
+      "Axis_artist_unit_xy": [
+        0.7,
+        0.714142842854285
+      ],
+      "Axis_clockwise_y_down_degrees": 45.5729959991943,
+      "axis_role": "Authoredbladeholdangle; no hiddenbone/shaftaxis measuredfrombarebody. Normalizeangle/axis; neveruse rawaxislengthasweaponscale.",
+      "weapon_scale": 0.5,
+      "optional_empty": {
+        "FarHandForeground": false
+      },
+      "declared_stack_slots": 9,
+      "expected_nonempty_render_layers": [
+        "BodyRest",
+        "ShoulderFar",
+        "Chest",
+        "NearArmWithoutHand",
+        "ShoulderNear",
+        "HelmetForeground",
+        "FarHandForeground",
+        "IndependentSword",
+        "NearHand"
+      ],
+      "expected_nonempty_draw_count_including_sword": 9,
+      "source_body": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero227-hurt4-extraction-v001/runs/run-hurt227-shared-HD-v001/curated/frame-0.png",
+        "bytes": 121003,
+        "sha256": "13a557d006ca8aead984aac611cf3fd799aad193f5d7e5ab3ddaf43c7d4bdb72"
+      },
+      "source_body_RGBA_sha256": "1dd7701be082b876951d95fee5df150db4fe24f931ce0768dae37f22868dec6f"
+    },
+    {
+      "frame": 1,
+      "duration_ms": 100,
+      "sample_interval_ms": [
+        100,
+        200
+      ],
+      "textures": {
+        "BodyRest": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_BodyRest_001_v001.T_Fairytale_Hurt_BodyRest_001_v001",
+        "NearArmWithoutHand": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_NearArmWithoutHand_001_v001.T_Fairytale_Hurt_NearArmWithoutHand_001_v001",
+        "HelmetForeground": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_HelmetForeground_001_v001.T_Fairytale_Hurt_HelmetForeground_001_v001",
+        "FarHandForeground": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_FarHandForeground_001_v001.T_Fairytale_Hurt_FarHandForeground_001_v001",
+        "NearHand": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_NearHand_001_v001.T_Fairytale_Hurt_NearHand_001_v001",
+        "ShoulderFar": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_ShoulderFar_001_v001.T_Fairytale_Hurt_ShoulderFar_001_v001",
+        "Chest": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_Chest_001_v001.T_Fairytale_Hurt_Chest_001_v001",
+        "ShoulderNear": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_ShoulderNear_001_v001.T_Fairytale_Hurt_ShoulderNear_001_v001"
+      },
+      "ground_root_source_xy": [
+        283.3389315213614,
+        464
+      ],
+      "Grip_source_xy": [
+        194,
+        289
+      ],
+      "Axis_artist_raw_xy": [
+        0.8,
+        0.6
+      ],
+      "Axis_artist_unit_xy": [
+        0.8,
+        0.6
+      ],
+      "Axis_clockwise_y_down_degrees": 36.86989764584402,
+      "axis_role": "Authoredbladeholdangle; no hiddenbone/shaftaxis measuredfrombarebody. Normalizeangle/axis; neveruse rawaxislengthasweaponscale.",
+      "weapon_scale": 0.5,
+      "optional_empty": {
+        "FarHandForeground": true
+      },
+      "declared_stack_slots": 9,
+      "expected_nonempty_render_layers": [
+        "BodyRest",
+        "ShoulderFar",
+        "Chest",
+        "NearArmWithoutHand",
+        "ShoulderNear",
+        "HelmetForeground",
+        "IndependentSword",
+        "NearHand"
+      ],
+      "expected_nonempty_draw_count_including_sword": 8,
+      "source_body": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero227-hurt4-extraction-v001/runs/run-hurt227-shared-HD-v001/curated/frame-1.png",
+        "bytes": 146685,
+        "sha256": "21b759173e6e2b4644a0a0eeb9ca374d48689a7e46adb6309f6a04cd12e48621"
+      },
+      "source_body_RGBA_sha256": "e6a31ef7cccc494eda1247ac197abdbae859b3e4a7870282fd0d380da2448514"
+    },
+    {
+      "frame": 2,
+      "duration_ms": 100,
+      "sample_interval_ms": [
+        200,
+        300
+      ],
+      "textures": {
+        "BodyRest": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_BodyRest_002_v001.T_Fairytale_Hurt_BodyRest_002_v001",
+        "NearArmWithoutHand": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_NearArmWithoutHand_002_v001.T_Fairytale_Hurt_NearArmWithoutHand_002_v001",
+        "HelmetForeground": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_HelmetForeground_002_v001.T_Fairytale_Hurt_HelmetForeground_002_v001",
+        "FarHandForeground": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_FarHandForeground_002_v001.T_Fairytale_Hurt_FarHandForeground_002_v001",
+        "NearHand": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_NearHand_002_v001.T_Fairytale_Hurt_NearHand_002_v001",
+        "ShoulderFar": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_ShoulderFar_002_v001.T_Fairytale_Hurt_ShoulderFar_002_v001",
+        "Chest": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_Chest_002_v001.T_Fairytale_Hurt_Chest_002_v001",
+        "ShoulderNear": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_ShoulderNear_002_v001.T_Fairytale_Hurt_ShoulderNear_002_v001"
+      },
+      "ground_root_source_xy": [
+        247.06828334586936,
+        464
+      ],
+      "Grip_source_xy": [
+        205,
+        289
+      ],
+      "Axis_artist_raw_xy": [
+        0.96,
+        0.28
+      ],
+      "Axis_artist_unit_xy": [
+        0.96,
+        0.28
+      ],
+      "Axis_clockwise_y_down_degrees": 16.26020470831196,
+      "axis_role": "Authoredbladeholdangle; no hiddenbone/shaftaxis measuredfrombarebody. Normalizeangle/axis; neveruse rawaxislengthasweaponscale.",
+      "weapon_scale": 0.5,
+      "optional_empty": {
+        "FarHandForeground": true
+      },
+      "declared_stack_slots": 9,
+      "expected_nonempty_render_layers": [
+        "BodyRest",
+        "ShoulderFar",
+        "Chest",
+        "NearArmWithoutHand",
+        "ShoulderNear",
+        "HelmetForeground",
+        "IndependentSword",
+        "NearHand"
+      ],
+      "expected_nonempty_draw_count_including_sword": 8,
+      "source_body": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero227-hurt4-extraction-v001/runs/run-hurt227-shared-HD-v001/curated/frame-2.png",
+        "bytes": 135185,
+        "sha256": "ada11fea68e3d3e47a615c858256ff6ce80b9d68b78029c31560db6fffea70d9"
+      },
+      "source_body_RGBA_sha256": "950e6a7ef5b90e956f72182bcdc9387fc2ec93431aced8c405148480e4005b33"
+    },
+    {
+      "frame": 3,
+      "duration_ms": 100,
+      "sample_interval_ms": [
+        300,
+        400
+      ],
+      "textures": {
+        "BodyRest": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_BodyRest_003_v001.T_Fairytale_Hurt_BodyRest_003_v001",
+        "NearArmWithoutHand": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_NearArmWithoutHand_003_v001.T_Fairytale_Hurt_NearArmWithoutHand_003_v001",
+        "HelmetForeground": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_HelmetForeground_003_v001.T_Fairytale_Hurt_HelmetForeground_003_v001",
+        "FarHandForeground": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_FarHandForeground_003_v001.T_Fairytale_Hurt_FarHandForeground_003_v001",
+        "NearHand": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_NearHand_003_v001.T_Fairytale_Hurt_NearHand_003_v001",
+        "ShoulderFar": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_ShoulderFar_003_v001.T_Fairytale_Hurt_ShoulderFar_003_v001",
+        "Chest": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_Chest_003_v001.T_Fairytale_Hurt_Chest_003_v001",
+        "ShoulderNear": "/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/T_Fairytale_Hurt_ShoulderNear_003_v001.T_Fairytale_Hurt_ShoulderNear_003_v001"
+      },
+      "ground_root_source_xy": [
+        252.4471254026009,
+        464
+      ],
+      "Grip_source_xy": [
+        218,
+        303
+      ],
+      "Axis_artist_raw_xy": [
+        0.94,
+        -0.341
+      ],
+      "Axis_artist_unit_xy": [
+        0.9400559349922476,
+        -0.34102029131101746
+      ],
+      "Axis_clockwise_y_down_degrees": -19.939047916809514,
+      "axis_role": "Authoredbladeholdangle; no hiddenbone/shaftaxis measuredfrombarebody. Normalizeangle/axis; neveruse rawaxislengthasweaponscale.",
+      "weapon_scale": 0.5,
+      "optional_empty": {
+        "FarHandForeground": true
+      },
+      "declared_stack_slots": 9,
+      "expected_nonempty_render_layers": [
+        "BodyRest",
+        "ShoulderFar",
+        "Chest",
+        "NearArmWithoutHand",
+        "ShoulderNear",
+        "HelmetForeground",
+        "IndependentSword",
+        "NearHand"
+      ],
+      "expected_nonempty_draw_count_including_sword": 8,
+      "source_body": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero227-hurt4-extraction-v001/runs/run-hurt227-shared-HD-v001/curated/frame-3.png",
+        "bytes": 129575,
+        "sha256": "4010ef27cf43c43af2d113dfce99fbc74c808842c6a7c3685536dfeff4fc1b22"
+      },
+      "source_body_RGBA_sha256": "41045b62fb8cce0885355b5e46cc487e730511dfa45320db897cf6b3893286a5"
+    }
+  ],
+  "native_receipt": null,
+  "compiled_profile_receipt": null,
+  "actual_runtime_trial_activated": false,
+  "FinalAccepted": false
+}

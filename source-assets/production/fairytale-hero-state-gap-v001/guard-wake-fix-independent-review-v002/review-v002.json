@@ -1,0 +1,92 @@
+{
+  "schema": "guard-wake-open-slice-independent-review-v002",
+  "decision": "No new static P1/P2 blocker for Root native validation of v007 after real v005 semantic RED. Not actual UE compile/test/runtime GREEN or visual acceptance.",
+  "scope": "Only this NEW text/JSON review directory written. No production patch, candidate/Source/tools edits, compilation, UE/UBT/native tests or media operations.",
+  "native_red": {
+    "report": {
+      "path": "F:/Ourgame/UnrealGame/Saved/Automation/FirstRoom-20261018-114243/index.json",
+      "bytes": 3525,
+      "sha256": "eb03df9029c9880cde0770ca0205ceaf84fa7590f69e8bb40f56075af1a2806a"
+    },
+    "result": "0success1fail1error0warning; actual kernel positive and wider driverAccepted precede targetN.Acceptedfalse",
+    "line": 121,
+    "witness": "construction0/initialXulps-2/endUlps3 Begin9.605689999759198 End9.6074908696274122; endpoint(-1034.952811961065,-162.2042858545901); diagnosticR2.99999999999998423 actualNativeInside1; checked4",
+    "v003_old_failure": "113329 remains a separate fixture-premise failure; not reclassified"
+  },
+  "blocking_findings": [],
+  "checks": [
+    {
+      "id": "open_slice",
+      "source": "Actual Driver.cpp:106-123 before / reconstructed:162-179; helper:1-3,48-55",
+      "result": "Every MotionSegment.From/To is bounded before search. Inside open interval reverse lookup selects one fixed covering segment or original Frame fallback. Gaps/overlapping valid records do not change lookup without a bounded endpoint; isolated zero-duration endpoints are queried separately."
+    },
+    {
+      "id": "cursor",
+      "source": "helper:15; reconstructed:327,345,350,402",
+      "result": "Original Cursor Pump occurs first. Inside(Begin) returns no new partition, but original kernel owns geometry/LOS/alive/gate. No state or clock override."
+    },
+    {
+      "id": "nextafter",
+      "source": "helper:48-55",
+      "result": "Adjacent Begin/End have no interior; single interior double is checked atAfterBegin. AfterBegin excludes exact Begin isolated segment and BeforeEnd excludes exact End new segment. No across-jump analytic chord."
+    },
+    {
+      "id": "endpoint_bracket",
+      "source": "helper:16-32,57",
+      "result": "True Inside(Limit) is bracket independently of analytic discriminant. Actual End checked separately after open search and admitted only at itself. This closes thev003 endpoint-veto limitation without epsilon."
+    },
+    {
+      "id": "binary_search",
+      "source": "helper:34-44",
+      "result": "SearchBegin was actually outside; high certified inside. Max2102 with midpoint-equality exit and return range/Inside recheck. Scope is bounded observed bracket/local adjacent crossing, not all-float global earliest proof."
+    },
+    {
+      "id": "unchanged_kernel",
+      "source": "Guard.cpp:494-497,528-533,548-550; reconstructed:327,355,399,402",
+      "result": "HasTarget/TargetAlive/LOS/CanBeginWake, original WakeAt+1, HP/receipts and Next>Cursor rejection remain unchanged. Geometry helper does not change or search continuous LOS."
+    },
+    {
+      "id": "patch_grammar",
+      "source": "read-pins-and-reconstruction-v002.json; candidate syntax-check/result.json",
+      "result": "Independent exact-context2hunk in-memory apply matches reconstructed419lines. Complete helperembedded; candidate actual-admitted text also matches after newline normalization. v007shimsyntax0 candidlynonUE; v006notused."
+    },
+    {
+      "id": "native_test_authority",
+      "source": "v005test:53-55,78-83,104-123,134-136,156; actual114243report",
+      "result": "Uses actual FMath mapping and fresh real kernel geometry for each endpoint; outside candidates diagnostic only. Per mapping checks point/prior, oneWake/fullsecond/noHP/receipts;10wide/min160legals prevents empty search. No wide/narrow bitwise equality premise."
+    }
+  ],
+  "remaining_limits": [
+    {
+      "id": "native_admission",
+      "value": "Root alone actual UE compile, unchanged v005 targeted/full registry and NEW true game capture remain required; reviewer ran none."
+    },
+    {
+      "id": "global_math",
+      "value": "No universal proof over every tangent, subnormal/extreme finite input or nonmonotonic floating predicate holes. v007HANDOFF explicitly states this scope; no new native regression established."
+    },
+    {
+      "id": "fast_math",
+      "value": "Duplicate native235x110 source under/fp:fast is not bitwise equivalence proof; same native point/prior regression remains authority. Specific FMA cause not established."
+    },
+    {
+      "id": "LOS",
+      "value": "Begin geometryinside with blocked LOS still follows existing later boundary Pump, not new continuousLOSsearch; this is unchangedpolicy."
+    },
+    {
+      "id": "performance",
+      "value": "Extra scalar AfterBegin/BeforeEnd/End queries, no allocation/worldLOS/kernelstep in refinement. Max2102, each PositionAt scans supplied motionsegments. No native timing/benchmark claim."
+    },
+    {
+      "id": "capture",
+      "value": "Targeted/fullnativeGREEN would not guarantee all once-only Wakeframes under arbitrary system stalls; original coverage63 capture remains separate."
+    }
+  ],
+  "verification": {
+    "candidate_frozen_pin_count": 10,
+    "candidate_pin_differences": 0,
+    "input_two_pass_differences": 0,
+    "reviewer_native_runs": 0,
+    "reviewer_production_patches": 0
+  }
+}

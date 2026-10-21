@@ -1,0 +1,46 @@
+Create a single horizontal sprite strip for the game character `fairytale-clock-hero-body-states-v001` in the state `dodge`.
+
+Use the attached accepted idle/direction anchor as the canonical character design for this row. If a state anchor is attached for a non-locomotion state, treat it as approved state vocabulary only. Use the attached layout guide image only for frame count, slot spacing, centering, and safe padding. If an additional generated row strip is attached, use it only as a motion reference, never as a replacement identity source. Do not simply copy the still reference pose. Generate distinct animation poses that create a readable cycle or action.
+
+Character: The exact currently accepted body-only SwordReady v002 frame0 identity, fixed native right three-quarter view; common bare grey/charcoal cloth body and original brown gloves/boots.
+Style contract: EXACT accepted current SwordReady v002 hand-inked grotesque dark-fairytale squat clock/bell-helmet identity; body-only no weapons/armor, not pixel art, no style redesign.
+
+Use this prompt as an authoritative sprite-production spec. Do not expand it into a polished illustration, painterly character image, anime key art, 3D render, vector mascot, glossy app icon, realistic portrait, or marketing artwork.
+
+Animation action: Fixed native RIGHT-facing three-quarter camera from the attached accepted SwordReady v002 frame0. The row owns motion only. Bare charcoal/grey cloth shirt and trousers, original belt, brown gloves and boots; rigid squat crooked bell/clock helmet, original knob and face opening with two contained amber eyes. Preserve the accepted anchor's actual shapes, proportions, palette and hand-ink weight. Same common drawing scale through the complete row: 416-source-pixel standing-equivalent body is a design target on 512 cells, not a demand that crouched/lying bboxes be 416 high. Never normalize, lengthen limbs, stretch the helmet or enlarge a small pose. The future weapon and armor are modular; paint only genuine connected body/glove/boot pixels. No sword/handle/rod/shield/staff/crossbow, no chest or shoulder armor, bracer or shin plate. Hands must be genuinely drawn with connected short upper arm, elbow, forearm, wrist and believable thumb/fingers. Near/far arms stay distinct; no fixed copied grip coordinate, no invented identical socket, no technical dots/axes. Near glove may naturally close around an invisible later handle, but never force it to an old socket or copy an old hand. Actual grip/axis, body contacts, crown and module occlusion are unknown until generated pixels are measured. Native actor translation is external; do not draw floor, trails, shadows, displaced duplicates, dust, glow or speed effects. Do not attach old v006 body art, canonical131 original sheet or any alternate identity. This is one guarded evasive slip, not a somersault. Facing stays fixed while native MoveIntent may move forward, backward or along depth; keep horizontal lean modest and do not bake a single world travel vector. No art easing changes native 462.5 world speed. Blocked native dodge still lasts its original .40 seconds; art does not fake movement past a wall. Exact ordered pose progression: Pose 0: Immediate distinct compact brace: real slight knee bend, pelvis lowers, connected elbows/wrists draw close; preserve the helmet volume and facing. Pose 1: Lowest guarded travel pose: knees and ankle angles change, short limbs tuck under the body, balanced torso; no rolling whole sprite or fixed copied hands. Pose 2: Second visibly different travel pose: one knee begins to open, hips and elbows change while the body remains compact; do not imply native translation has stopped. Pose 3: Recover support readiness: legs reopen and torso rises partway toward Ready; hand and wrist orientation changes naturally, no freeze/paste of Ready0..
+
+Anchor lock:
+- Accepted idle/direction anchors own character identity, outfit details, colors, face design, asymmetric markings, and side-specific accessories for final action rows.
+- Base character images and original character sheets are pre-idle sources only. Do not reinterpret or reintroduce base-character details inside a direction-anchor action row.
+- This row owns motion only. Spend the variation budget on limb contacts, arm counter-swing, body height, torso lean, head bob, hair bounce, and loop continuity.
+- Do not redesign or reinterpret identity details while animating. Keep face, hair shape, markings, palette, outline weight, body proportions, outfit, props, and silhouette copied from the approved anchors.
+- Preserve side-specific features exactly as the approved anchors show them. Do not solve hairpin side, earring side, logos, handed props, scars, one-sided markings, asymmetric clothing, or lighting cues from scratch inside the row.
+- When generating a paired left/right row, use the paired row reference only for timing, scale, and animation intensity. Rotate the body, feet, shoulders, face angle, and gaze to the target facing, but keep identity details attached according to the accepted target-direction anchor.
+- For cyclic locomotion, do not let a single running/walking pose anchor determine every frame's leg phase. Use multi-pose motion references and the layout phase guide for foot contacts.
+- Prefer a subtler animation over any change that mutates the character identity.
+
+
+
+Transparency and artifact rules:
+- Prefer pose, expression, and silhouette changes over decorative effects.
+- Effects are allowed only when state-relevant, opaque, hard-edged, sprite-like, fully inside the same frame slot, and physically touching or overlapping the character silhouette.
+- Do not draw detached effects: floating stars, loose sparkles, floating punctuation, floating icons, separated smoke clouds, loose dust, disconnected outline bits, or stray pixels.
+- Do not draw wave marks, motion arcs, speed lines, action streaks, afterimages, blur, smears, halos, glows, auras, floor patches, cast shadows, contact shadows, drop shadows, oval floor shadows, landing marks, or impact bursts.
+- Do not include text, labels, frame numbers, visible grids, guide marks, speech bubbles, thought bubbles, UI panels, code snippets, scenery, checkerboard transparency, white backgrounds, or black backgrounds.
+- Reject any pose that is cropped, overlaps another pose, crosses into a neighboring frame slot, or creates a separate disconnected component that is not attached to the character.
+
+Layout requirements:
+- Exactly 4 full-body frames, left to right, in one horizontal row.
+- The attached layout guide shows the 4 frame boxes, inner safe area, and optional motion phase hints for this row. Follow its slot count, spacing, centering, padding, and phase timing.
+- Do not reproduce the layout guide itself: no visible boxes, guide lines, center marks, labels, stick figures, guide colors, or guide background may appear in the output.
+- Treat the image as 4 equal-width invisible 512x512 frame slots. Fill every slot: each requested slot must contain exactly one complete full-body pose.
+- Spread the 4 poses evenly across the whole image width. Do not leave any requested slot blank or create large empty gaps between poses.
+- Center one complete pose in each slot. No pose may cross into the neighboring slot.
+- Use a perfectly flat pure green #00FF00 chroma-key background across the whole image.
+- Do not use #00FF00, pure green, or chroma-adjacent colors in the character, highlights, props, shadows, or effects.
+- Keep the rendering faithful to the attached reference sprite: same outline weight, same palette, same detail level — do not restyle it.
+- Keep every frame self-contained with at least 48 px horizontal and 48 px vertical safe padding. No character body part should be clipped by the frame slot.
+- Avoid motion blur. Use clear pose changes readable at 512x512.
+- Preserve the same silhouette, face, proportions, palette, material, and props across every frame.
+
+Output only the sprite strip image.

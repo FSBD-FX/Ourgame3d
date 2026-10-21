@@ -1,0 +1,985 @@
+{
+  "schema": "hero-held-equipment-state-contract-proposal-v001",
+  "status": "TEXT_ONLY_UNCONFIGURED_NO_GENERATION_NO_RUNTIME_ADMISSION",
+  "authority": "Root latest choice: true nearhand retention onDodge/Hurt; purely visual release onDeath allowed, inventory and gameplay unchanged",
+  "first_slice": "SWD+None/LGT;Noneoutside20matrix",
+  "identity": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/curated/frame-0.png",
+    "bytes": 121133,
+    "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+  },
+  "pose_evidence": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/visible-registration-proposal-v001/visible-crown-shoe-support-glove-proposals-v001.json",
+    "bytes": 100255,
+    "sha256": "e74f1ed99539aded83ff32acc941b722b997d32c47c923619ce056d83a1646e5"
+  },
+  "states": [
+    {
+      "state": "Dodge",
+      "frames": 4,
+      "fps": 10,
+      "duration_s": 0.4,
+      "holding": "Allfourphases realnearhandgrip, no automaticrelease/reload",
+      "clock": "Actual acceptedDodgeRecordStart/Time/Phase; currentFighter.cpp:801-802. Native motion/iframes/cancel unaffected.",
+      "interrupted": "Immediately follow actualaccepted interruption/newstate, no queuedrecoveryframe hold"
+    },
+    {
+      "state": "Hurt",
+      "frames": 4,
+      "fps": 10,
+      "duration_s": 0.4,
+      "holding": "Equipment retained allphases;Hurt1nearhand sourcecorrectionrequired",
+      "clock": "ActualAnimationName/AnimationTime after realnonlethalpoisebreak;Fighter.cpp:1503-1528. OrdinaryHPHitFlash orDoT must not createHurt.",
+      "interrupted": "AuthoritativeDeath overrides; no fakeequipmentdrop"
+    },
+    {
+      "state": "Death",
+      "frames": 5,
+      "fps": 5,
+      "samples_s": [
+        0,
+        0.2,
+        0.4,
+        0.6,
+        0.8
+      ],
+      "last_frame_hold": true,
+      "gameplay_deadline": null,
+      "holding": "Visualrelease startsage0 because realsourceDeath0handrelaxed;nearhandis not grip",
+      "clock": "ActualbDead/AnimationTime terminalpresentation;Fighter.cpp:1799-1805. Do not read frozenSimulationTime to drive terminalart."
+    }
+  ],
+  "scale": {
+    "canvas_px": [
+      512,
+      512
+    ],
+    "display_canvas_before_UIScale": 88.61538461538461,
+    "per_frame_bbox_normalize": false,
+    "Death_bbox_height_px": [
+      416,
+      360,
+      267,
+      165,
+      156
+    ],
+    "nominal_display_height_px": [
+      72,
+      62.30769230769231,
+      46.21153846153846,
+      28.557692307692307,
+      27.0
+    ],
+    "cross_row_density_and_switching_native_accepted": false
+  },
+  "weapons": [
+    {
+      "id": "WPN-SWD-001",
+      "existing_prop": {
+        "path": "F:/Ourgame/source-assets/production/first-unit-animation-v002/components/military-sword-clean-v001.png",
+        "bytes": 31902,
+        "sha256": "2efb5519fb3c7ed5a63e58d00c84e39aa02355274af36b43c1775570badded5a"
+      },
+      "old_prop_primary_grip_px": [
+        99,
+        256
+      ],
+      "old_prop_support_grip_px": null,
+      "old_prop_grips_role": "Already recorded old prop-only contacts, not current hero grips. Not newly viewed or anatomically measured this round.",
+      "canonical_axis": [
+        1,
+        0
+      ],
+      "current_hero_grip_px": null,
+      "current_hero_support_px": null,
+      "current_hero_axis": null,
+      "held_scale": null,
+      "ground_pose_reuse": "Existing rigid prop is candidate only. Ground perspective/contact must be reviewed; if it fails draw one family ground prop, never20wholebodies.",
+      "death_reuse": "Released from visualage0 lets allfive use same articulatedDeath5 barebody candidate, with independent prop transforms and each actual armor profile.",
+      "holding": "one_near_hand_short_handle_far_hand_balance",
+      "reuse": "Current13 bare poses are the first candidate. Dodge4/Hurt0,2,3 still need actual grip/axis/contact proof; Hurt1 open hand requires source correction. No complete held row already certified.",
+      "new_upper": "One NEW Hurt4 standard row priority; conditional NEW Dodge4 row only if actual contact fails."
+    },
+    {
+      "id": "WPN-GSW-001",
+      "existing_prop": {
+        "path": "F:/Ourgame/source-assets/production/first-batch-weapon-components-v001/components/GSW001-neutral-component-v002.png",
+        "bytes": 42560,
+        "sha256": "da475f3d9f00542b1eb960be1affe16b76d61924c394e8391d1100d595bfdc09"
+      },
+      "old_prop_primary_grip_px": [
+        169,
+        256
+      ],
+      "old_prop_support_grip_px": [
+        101,
+        256
+      ],
+      "old_prop_grips_role": "Already recorded old prop-only contacts, not current hero grips. Not newly viewed or anatomically measured this round.",
+      "canonical_axis": [
+        1,
+        0
+      ],
+      "current_hero_grip_px": null,
+      "current_hero_support_px": null,
+      "current_hero_axis": null,
+      "held_scale": null,
+      "ground_pose_reuse": "Existing rigid prop is candidate only. Ground perspective/contact must be reviewed; if it fails draw one family ground prop, never20wholebodies.",
+      "death_reuse": "Released from visualage0 lets allfive use same articulatedDeath5 barebody candidate, with independent prop transforms and each actual armor profile.",
+      "holding": "two_hands_close_along_same_long_handle_secondary_behind_primary",
+      "reuse": "Lower-body/torso timing and detachedDeath5 candidate only; SWD one-hand upper body cannot be asserted compatible.",
+      "new_upper": "Family-specific Dodge4/Hurt4 upper-body holds after measured handle scale/hand separation; not a scaledSWD."
+    },
+    {
+      "id": "WPN-SPR-001",
+      "existing_prop": {
+        "path": "F:/Ourgame/source-assets/production/first-batch-weapon-components-v001/components/SPR001-neutral-component-v002.png",
+        "bytes": 24298,
+        "sha256": "7372452b5f5fd8f55900365ce8c96e78291c301ea7ce6c9bdc73ed347630c34b"
+      },
+      "old_prop_primary_grip_px": [
+        137,
+        253
+      ],
+      "old_prop_support_grip_px": [
+        326,
+        253
+      ],
+      "old_prop_grips_role": "Already recorded old prop-only contacts, not current hero grips. Not newly viewed or anatomically measured this round.",
+      "canonical_axis": [
+        1,
+        0
+      ],
+      "current_hero_grip_px": null,
+      "current_hero_support_px": null,
+      "current_hero_axis": null,
+      "held_scale": null,
+      "ground_pose_reuse": "Existing rigid prop is candidate only. Ground perspective/contact must be reviewed; if it fails draw one family ground prop, never20wholebodies.",
+      "death_reuse": "Released from visualage0 lets allfive use same articulatedDeath5 barebody candidate, with independent prop transforms and each actual armor profile.",
+      "holding": "two_hands_wide_along_straight_shaft_support_ahead_of_primary",
+      "reuse": "Lower-body/torso timing and detachedDeath5 candidate only. GSW tight handle spacing does not fit this wide shaft.",
+      "new_upper": "Family-specific Dodge4/Hurt4 guide/upper pose; shaft remains straight and tip clearance is visible, not combat range change."
+    },
+    {
+      "id": "WPN-XBW-001",
+      "existing_prop": {
+        "path": "F:/Ourgame/source-assets/production/first-batch-weapon-components-v001/components/XBW001-neutral-component-v002.png",
+        "bytes": 91957,
+        "sha256": "4cc4386d51df9e4c12c8db23155c1ebb3c318a087fcc8c68e9c2ed72898e3109"
+      },
+      "old_prop_primary_grip_px": [
+        128,
+        253
+      ],
+      "old_prop_support_grip_px": [
+        337,
+        282
+      ],
+      "old_prop_grips_role": "Already recorded old prop-only contacts, not current hero grips. Not newly viewed or anatomically measured this round.",
+      "canonical_axis": [
+        1,
+        0
+      ],
+      "current_hero_grip_px": null,
+      "current_hero_support_px": null,
+      "current_hero_axis": null,
+      "held_scale": null,
+      "ground_pose_reuse": "Existing rigid prop is candidate only. Ground perspective/contact must be reviewed; if it fails draw one family ground prop, never20wholebodies.",
+      "death_reuse": "Released from visualage0 lets allfive use same articulatedDeath5 barebody candidate, with independent prop transforms and each actual armor profile.",
+      "holding": "rear_stock_trigger_grip_plus_front_vertical_support",
+      "reuse": "Lower-body/torso timing and detachedDeath5 candidate only. Legacy XBW body/hand pixels have old identity; component and lifecycle structure may be referenced.",
+      "new_upper": "Own Dodge4/Hurt4 paired hold, preserve actual item ammo/history component state; never fake shot/reload/string change."
+    },
+    {
+      "id": "WPN-STF-001",
+      "existing_prop": {
+        "path": "F:/Ourgame/source-assets/production/first-batch-weapon-components-v001/components/STF001-neutral-component-v002.png",
+        "bytes": 50554,
+        "sha256": "57a5504a2f69de2611b4262f54c233805b3b718abcb81d4798ee7edc439dbd2a"
+      },
+      "old_prop_primary_grip_px": [
+        181,
+        251
+      ],
+      "old_prop_support_grip_px": [
+        282,
+        251
+      ],
+      "old_prop_grips_role": "Already recorded old prop-only contacts, not current hero grips. Not newly viewed or anatomically measured this round.",
+      "canonical_axis": [
+        1,
+        0
+      ],
+      "current_hero_grip_px": null,
+      "current_hero_support_px": null,
+      "current_hero_axis": null,
+      "held_scale": null,
+      "ground_pose_reuse": "Existing rigid prop is candidate only. Ground perspective/contact must be reviewed; if it fails draw one family ground prop, never20wholebodies.",
+      "death_reuse": "Released from visualage0 lets allfive use same articulatedDeath5 barebody candidate, with independent prop transforms and each actual armor profile.",
+      "holding": "primary_wrapped_shaft_grip_optional_support",
+      "reuse": "A one-near-hand noncastingDodge/Hurt candidate may reuseSWD lower/upper posture only if measured shaft/wrist/head clearance and weight read acceptably. Not certified now, and not inherently compulsorytwohand.",
+      "new_upper": "First one-phase real contact comparison; if unacceptable own familyDodge/Hurt upper poses. No casting pose/glow/emission introduced by damage/dodge/death."
+    }
+  ],
+  "armors": [
+    {
+      "id": "ARM-LGT-001",
+      "actual_scope": "Current accepted new-style compact Chest/ShoulderNear/ShoulderFar modules; this contract does not expand to absentbracer/shinguard surfaces or redesign from olddesignonlyleathertext.",
+      "layer_requirement": "NEW pose-specific chest/farcap/nearcap forDodge4,Hurt4,Death5; farcap visible-or-explicitlyfullyoccluded authored status perphase.",
+      "reuse": "Existing ready/walk/combo material/design only; no oldpose attachment/handmask reuse."
+    },
+    {
+      "id": "ARM-MED-001",
+      "actual_scope": "Legacy distinct ringmail/short surcoat, medium rounded shoulder segments, split front/back hem. No newclockhelmetDodge/Hurt/Death modules.",
+      "layer_requirement": "Separate torso/frontback hem and shoulders/sleeves where visible. Arm crossing and collapse require own front/back occlusion; not scaleLGT.",
+      "reuse": "Legacy actual layering/source construction reference only, no oldidentitybodypixels."
+    },
+    {
+      "id": "ARM-HVY-001",
+      "actual_scope": "Legacy broad doorbar chest, squared large shoulders, short plate skirt and thick shins. No newclockhelmetDodge/Hurt/Death modules.",
+      "layer_requirement": "Rigid plate volumes articulate at exposed joints; independent shoulders/chest/skirt/shins as required. Keep actualbody/hurtbox unchanged; do not squash metal with torso.",
+      "reuse": "Construction/reference only. Need lowDodge clearance and corpse plate support review."
+    },
+    {
+      "id": "ARM-ROB-001",
+      "actual_scope": "Legacy long gray robe/orange inner fold, separate front/back hangingcloth, narrow sleeves; actual P2/P3 requires near sleeve layer.",
+      "layer_requirement": "Far/back cloth plus front torso/hem and real near sleeve/foreground cloth. Death cloth settles around articulatedbody; never opaque blanket to conceal failed hands.",
+      "reuse": "Layering lessons only. New body source and actual visible sleeve/hem required; no oldpixel transfer."
+    }
+  ],
+  "frames": [
+    {
+      "state": "dodge",
+      "frame": 0,
+      "time_offset_s": 0.0,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-dodge218-shared-HD-v002/curated/frame-0.png",
+        "bytes": 151903,
+        "sha256": "7d53c004b690e3227d08157e275beeb132555abb3ac4774e2280155dadb48ce9"
+      },
+      "body_pose_status": "Root source-pose candidate accepted; registration/equipment/native notaccepted",
+      "visible_glove_surface_candidate_px": [
+        183,
+        298
+      ],
+      "visible_glove_surface_role": "Actual glove leather surface only, NEVER Grip/Axis/bone",
+      "visible_glove_pose": "closed visible foreground glove",
+      "registration_root_proposal_px": [
+        234,
+        464
+      ],
+      "registration_root_role": "Visible shoe support proposal only; Death1to4null until explicit authored continuousstandingroot",
+      "near_grip_px": null,
+      "far_support_grip_px": null,
+      "handle_axis_xy": null,
+      "weapon_transform": null,
+      "near_hand_replay_mask": null,
+      "far_hand_replay_mask": null,
+      "body_exclusive_partitions": null,
+      "helmet_foreground_mask": null,
+      "armor_attachments": null,
+      "armor_visibility": null,
+      "weapon_depth_ownership": null,
+      "held_grip_requirement": "REQUIRED_ACTUAL_CONTACT",
+      "source_correction": "Onlyifactualcontactfails"
+    },
+    {
+      "state": "dodge",
+      "frame": 1,
+      "time_offset_s": 0.1,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-dodge218-shared-HD-v002/curated/frame-1.png",
+        "bytes": 142648,
+        "sha256": "1ab1a4de65f81374aeaa70a648cfce899b5b36a104c294ed740fd6b0483e8e24"
+      },
+      "body_pose_status": "Root source-pose candidate accepted; registration/equipment/native notaccepted",
+      "visible_glove_surface_candidate_px": [
+        143,
+        309
+      ],
+      "visible_glove_surface_role": "Actual glove leather surface only, NEVER Grip/Axis/bone",
+      "visible_glove_pose": "closed visible foreground glove",
+      "registration_root_proposal_px": [
+        216,
+        464
+      ],
+      "registration_root_role": "Visible shoe support proposal only; Death1to4null until explicit authored continuousstandingroot",
+      "near_grip_px": null,
+      "far_support_grip_px": null,
+      "handle_axis_xy": null,
+      "weapon_transform": null,
+      "near_hand_replay_mask": null,
+      "far_hand_replay_mask": null,
+      "body_exclusive_partitions": null,
+      "helmet_foreground_mask": null,
+      "armor_attachments": null,
+      "armor_visibility": null,
+      "weapon_depth_ownership": null,
+      "held_grip_requirement": "REQUIRED_ACTUAL_CONTACT",
+      "source_correction": "Onlyifactualcontactfails"
+    },
+    {
+      "state": "dodge",
+      "frame": 2,
+      "time_offset_s": 0.2,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-dodge218-shared-HD-v002/curated/frame-2.png",
+        "bytes": 149855,
+        "sha256": "35c4c64ad3797b67b144356a3a4762895bcb6d9ee2681f4e8581794db8bcae31"
+      },
+      "body_pose_status": "Root source-pose candidate accepted; registration/equipment/native notaccepted",
+      "visible_glove_surface_candidate_px": [
+        139,
+        292
+      ],
+      "visible_glove_surface_role": "Actual glove leather surface only, NEVER Grip/Axis/bone",
+      "visible_glove_pose": "closed visible foreground glove",
+      "registration_root_proposal_px": [
+        227,
+        464
+      ],
+      "registration_root_role": "Visible shoe support proposal only; Death1to4null until explicit authored continuousstandingroot",
+      "near_grip_px": null,
+      "far_support_grip_px": null,
+      "handle_axis_xy": null,
+      "weapon_transform": null,
+      "near_hand_replay_mask": null,
+      "far_hand_replay_mask": null,
+      "body_exclusive_partitions": null,
+      "helmet_foreground_mask": null,
+      "armor_attachments": null,
+      "armor_visibility": null,
+      "weapon_depth_ownership": null,
+      "held_grip_requirement": "REQUIRED_ACTUAL_CONTACT",
+      "source_correction": "Onlyifactualcontactfails"
+    },
+    {
+      "state": "dodge",
+      "frame": 3,
+      "time_offset_s": 0.30000000000000004,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-dodge218-shared-HD-v002/curated/frame-3.png",
+        "bytes": 149472,
+        "sha256": "2669603d8b565c1c08b611792131bdcf3de9b0b9f974279ee1a5c71ed6e5e672"
+      },
+      "body_pose_status": "Root source-pose candidate accepted; registration/equipment/native notaccepted",
+      "visible_glove_surface_candidate_px": [
+        162,
+        312
+      ],
+      "visible_glove_surface_role": "Actual glove leather surface only, NEVER Grip/Axis/bone",
+      "visible_glove_pose": "closed visible foreground glove",
+      "registration_root_proposal_px": [
+        247,
+        464
+      ],
+      "registration_root_role": "Visible shoe support proposal only; Death1to4null until explicit authored continuousstandingroot",
+      "near_grip_px": null,
+      "far_support_grip_px": null,
+      "handle_axis_xy": null,
+      "weapon_transform": null,
+      "near_hand_replay_mask": null,
+      "far_hand_replay_mask": null,
+      "body_exclusive_partitions": null,
+      "helmet_foreground_mask": null,
+      "armor_attachments": null,
+      "armor_visibility": null,
+      "weapon_depth_ownership": null,
+      "held_grip_requirement": "REQUIRED_ACTUAL_CONTACT",
+      "source_correction": "Onlyifactualcontactfails"
+    },
+    {
+      "state": "hurt",
+      "frame": 0,
+      "time_offset_s": 0.0,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/curated/frame-0.png",
+        "bytes": 121075,
+        "sha256": "d4a2256b743b418c907123345d147ef77072eb42bdc6a8e91ed41e7e3342b1ce"
+      },
+      "body_pose_status": "Root source-pose candidate accepted; registration/equipment/native notaccepted",
+      "visible_glove_surface_candidate_px": [
+        236,
+        296
+      ],
+      "visible_glove_surface_role": "Actual glove leather surface only, NEVER Grip/Axis/bone",
+      "visible_glove_pose": "foreground glove curled; both hands close to abdomen, depth mask needs review",
+      "registration_root_proposal_px": [
+        261,
+        464
+      ],
+      "registration_root_role": "Visible shoe support proposal only; Death1to4null until explicit authored continuousstandingroot",
+      "near_grip_px": null,
+      "far_support_grip_px": null,
+      "handle_axis_xy": null,
+      "weapon_transform": null,
+      "near_hand_replay_mask": null,
+      "far_hand_replay_mask": null,
+      "body_exclusive_partitions": null,
+      "helmet_foreground_mask": null,
+      "armor_attachments": null,
+      "armor_visibility": null,
+      "weapon_depth_ownership": null,
+      "held_grip_requirement": "REQUIRED_ACTUAL_CONTACT",
+      "source_correction": "Onlyifactualcontactfails"
+    },
+    {
+      "state": "hurt",
+      "frame": 1,
+      "time_offset_s": 0.1,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/curated/frame-1.png",
+        "bytes": 146078,
+        "sha256": "81cd626e089654a0476068d03b9593a5495113659ee77fc21dd2fe7435316f4e"
+      },
+      "body_pose_status": "Root source-pose candidate accepted; registration/equipment/native notaccepted",
+      "visible_glove_surface_candidate_px": [
+        163,
+        301
+      ],
+      "visible_glove_surface_role": "Actual glove leather surface only, NEVER Grip/Axis/bone",
+      "visible_glove_pose": "foreground glove opened during recoil; no retained cylindrical grip proven",
+      "registration_root_proposal_px": [
+        277,
+        464
+      ],
+      "registration_root_role": "Visible shoe support proposal only; Death1to4null until explicit authored continuousstandingroot",
+      "near_grip_px": null,
+      "far_support_grip_px": null,
+      "handle_axis_xy": null,
+      "weapon_transform": null,
+      "near_hand_replay_mask": null,
+      "far_hand_replay_mask": null,
+      "body_exclusive_partitions": null,
+      "helmet_foreground_mask": null,
+      "armor_attachments": null,
+      "armor_visibility": null,
+      "weapon_depth_ownership": null,
+      "held_grip_requirement": "REQUIRED_ACTUAL_CONTACT",
+      "source_correction": "REQUIRED_OPEN_NEAR_HAND_KEEPING_HURT_RECOIL"
+    },
+    {
+      "state": "hurt",
+      "frame": 2,
+      "time_offset_s": 0.2,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/curated/frame-2.png",
+        "bytes": 136582,
+        "sha256": "51ca0482923bef00f387f7eb03cac26c02bd95830b36deebb0a20a5b85cb60c9"
+      },
+      "body_pose_status": "Root source-pose candidate accepted; registration/equipment/native notaccepted",
+      "visible_glove_surface_candidate_px": [
+        169,
+        294
+      ],
+      "visible_glove_surface_role": "Actual glove leather surface only, NEVER Grip/Axis/bone",
+      "visible_glove_pose": "closed visible foreground glove",
+      "registration_root_proposal_px": [
+        249,
+        464
+      ],
+      "registration_root_role": "Visible shoe support proposal only; Death1to4null until explicit authored continuousstandingroot",
+      "near_grip_px": null,
+      "far_support_grip_px": null,
+      "handle_axis_xy": null,
+      "weapon_transform": null,
+      "near_hand_replay_mask": null,
+      "far_hand_replay_mask": null,
+      "body_exclusive_partitions": null,
+      "helmet_foreground_mask": null,
+      "armor_attachments": null,
+      "armor_visibility": null,
+      "weapon_depth_ownership": null,
+      "held_grip_requirement": "REQUIRED_ACTUAL_CONTACT",
+      "source_correction": "Onlyifactualcontactfails"
+    },
+    {
+      "state": "hurt",
+      "frame": 3,
+      "time_offset_s": 0.30000000000000004,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/curated/frame-3.png",
+        "bytes": 131341,
+        "sha256": "042c20bc3b21ee02ce6a5960575c45be01a523c92dbda83244a0b5554f6ec116"
+      },
+      "body_pose_status": "Root source-pose candidate accepted; registration/equipment/native notaccepted",
+      "visible_glove_surface_candidate_px": [
+        207,
+        310
+      ],
+      "visible_glove_surface_role": "Actual glove leather surface only, NEVER Grip/Axis/bone",
+      "visible_glove_pose": "closed visible foreground glove",
+      "registration_root_proposal_px": [
+        258,
+        464
+      ],
+      "registration_root_role": "Visible shoe support proposal only; Death1to4null until explicit authored continuousstandingroot",
+      "near_grip_px": null,
+      "far_support_grip_px": null,
+      "handle_axis_xy": null,
+      "weapon_transform": null,
+      "near_hand_replay_mask": null,
+      "far_hand_replay_mask": null,
+      "body_exclusive_partitions": null,
+      "helmet_foreground_mask": null,
+      "armor_attachments": null,
+      "armor_visibility": null,
+      "weapon_depth_ownership": null,
+      "held_grip_requirement": "REQUIRED_ACTUAL_CONTACT",
+      "source_correction": "Onlyifactualcontactfails"
+    },
+    {
+      "state": "death",
+      "frame": 0,
+      "time_offset_s": 0.0,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-death220-shared-HD-v002/curated/frame-0.png",
+        "bytes": 135338,
+        "sha256": "23f7e3e6280715bc361a085f256c63b4c6940b4b4b88e970c4ae6f50fe5ecd11"
+      },
+      "body_pose_status": "Root source-pose candidate accepted; registration/equipment/native notaccepted",
+      "visible_glove_surface_candidate_px": [
+        183,
+        311
+      ],
+      "visible_glove_surface_role": "Actual glove leather surface only, NEVER Grip/Axis/bone",
+      "visible_glove_pose": "foreground fingers relaxed/open; no retained cylindrical grip proven",
+      "registration_root_proposal_px": [
+        242,
+        464
+      ],
+      "registration_root_role": "Visible shoe support proposal only; Death1to4null until explicit authored continuousstandingroot",
+      "near_grip_px": null,
+      "far_support_grip_px": null,
+      "handle_axis_xy": null,
+      "weapon_transform": null,
+      "near_hand_replay_mask": null,
+      "far_hand_replay_mask": null,
+      "body_exclusive_partitions": null,
+      "helmet_foreground_mask": null,
+      "armor_attachments": null,
+      "armor_visibility": null,
+      "weapon_depth_ownership": null,
+      "held_grip_requirement": "NOT_APPLICABLE_VISUALLY_RELEASED_AT_DEATHAGE0",
+      "source_correction": "NoDeathbodyredrawproposed"
+    },
+    {
+      "state": "death",
+      "frame": 1,
+      "time_offset_s": 0.2,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-death220-shared-HD-v002/curated/frame-1.png",
+        "bytes": 133433,
+        "sha256": "e2cfcfb13842dd829c791ab0c099e9c44ea12db67676ceba1b73180c1c7ac2d4"
+      },
+      "body_pose_status": "Root source-pose candidate accepted; registration/equipment/native notaccepted",
+      "visible_glove_surface_candidate_px": [
+        237,
+        335
+      ],
+      "visible_glove_surface_role": "Actual glove leather surface only, NEVER Grip/Axis/bone",
+      "visible_glove_pose": "foreground glove curled during weakening; handle axis remains unknown",
+      "registration_root_proposal_px": null,
+      "registration_root_role": "Visible shoe support proposal only; Death1to4null until explicit authored continuousstandingroot",
+      "near_grip_px": null,
+      "far_support_grip_px": null,
+      "handle_axis_xy": null,
+      "weapon_transform": null,
+      "near_hand_replay_mask": null,
+      "far_hand_replay_mask": null,
+      "body_exclusive_partitions": null,
+      "helmet_foreground_mask": null,
+      "armor_attachments": null,
+      "armor_visibility": null,
+      "weapon_depth_ownership": null,
+      "held_grip_requirement": "NOT_APPLICABLE_VISUALLY_RELEASED_AT_DEATHAGE0",
+      "source_correction": "NoDeathbodyredrawproposed"
+    },
+    {
+      "state": "death",
+      "frame": 2,
+      "time_offset_s": 0.4,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-death220-shared-HD-v002/curated/frame-2.png",
+        "bytes": 119671,
+        "sha256": "04e587b6b23207ea6ef8937be0bf6198dab847ee5b16607405588c0c3d4c97e9"
+      },
+      "body_pose_status": "Root source-pose candidate accepted; registration/equipment/native notaccepted",
+      "visible_glove_surface_candidate_px": [
+        300,
+        439
+      ],
+      "visible_glove_surface_role": "Actual glove leather surface only, NEVER Grip/Axis/bone",
+      "visible_glove_pose": "foreground palm/fingers supporting body on ground",
+      "registration_root_proposal_px": null,
+      "registration_root_role": "Visible shoe support proposal only; Death1to4null until explicit authored continuousstandingroot",
+      "near_grip_px": null,
+      "far_support_grip_px": null,
+      "handle_axis_xy": null,
+      "weapon_transform": null,
+      "near_hand_replay_mask": null,
+      "far_hand_replay_mask": null,
+      "body_exclusive_partitions": null,
+      "helmet_foreground_mask": null,
+      "armor_attachments": null,
+      "armor_visibility": null,
+      "weapon_depth_ownership": null,
+      "held_grip_requirement": "NOT_APPLICABLE_VISUALLY_RELEASED_AT_DEATHAGE0",
+      "source_correction": "NoDeathbodyredrawproposed"
+    },
+    {
+      "state": "death",
+      "frame": 3,
+      "time_offset_s": 0.6000000000000001,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-death220-shared-HD-v002/curated/frame-3.png",
+        "bytes": 96884,
+        "sha256": "54b5a7eecb3870e4122505b943a7ee78e6ec56c0a7e9deb5cf59eda9dab6d9b6"
+      },
+      "body_pose_status": "Root source-pose candidate accepted; registration/equipment/native notaccepted",
+      "visible_glove_surface_candidate_px": [
+        266,
+        441
+      ],
+      "visible_glove_surface_role": "Actual glove leather surface only, NEVER Grip/Axis/bone",
+      "visible_glove_pose": "foreground palm/fingers resting against ground",
+      "registration_root_proposal_px": null,
+      "registration_root_role": "Visible shoe support proposal only; Death1to4null until explicit authored continuousstandingroot",
+      "near_grip_px": null,
+      "far_support_grip_px": null,
+      "handle_axis_xy": null,
+      "weapon_transform": null,
+      "near_hand_replay_mask": null,
+      "far_hand_replay_mask": null,
+      "body_exclusive_partitions": null,
+      "helmet_foreground_mask": null,
+      "armor_attachments": null,
+      "armor_visibility": null,
+      "weapon_depth_ownership": null,
+      "held_grip_requirement": "NOT_APPLICABLE_VISUALLY_RELEASED_AT_DEATHAGE0",
+      "source_correction": "NoDeathbodyredrawproposed"
+    },
+    {
+      "state": "death",
+      "frame": 4,
+      "time_offset_s": 0.8,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-death220-shared-HD-v002/curated/frame-4.png",
+        "bytes": 84028,
+        "sha256": "7ba4203d679c68f49b7800bd785d7f4f3001581fe5c588c51f3a1e0b9ff6c8fc"
+      },
+      "body_pose_status": "Root source-pose candidate accepted; registration/equipment/native notaccepted",
+      "visible_glove_surface_candidate_px": [
+        260,
+        444
+      ],
+      "visible_glove_surface_role": "Actual glove leather surface only, NEVER Grip/Axis/bone",
+      "visible_glove_pose": "foreground palm/fingers resting against ground",
+      "registration_root_proposal_px": null,
+      "registration_root_role": "Visible shoe support proposal only; Death1to4null until explicit authored continuousstandingroot",
+      "near_grip_px": null,
+      "far_support_grip_px": null,
+      "handle_axis_xy": null,
+      "weapon_transform": null,
+      "near_hand_replay_mask": null,
+      "far_hand_replay_mask": null,
+      "body_exclusive_partitions": null,
+      "helmet_foreground_mask": null,
+      "armor_attachments": null,
+      "armor_visibility": null,
+      "weapon_depth_ownership": null,
+      "held_grip_requirement": "NOT_APPLICABLE_VISUALLY_RELEASED_AT_DEATHAGE0",
+      "source_correction": "NoDeathbodyredrawproposed"
+    }
+  ],
+  "equipment20": [
+    {
+      "weapon": "WPN-SWD-001",
+      "armor": "ARM-LGT-001",
+      "first_slice": true,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-SWD-001",
+      "armor": "ARM-MED-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-SWD-001",
+      "armor": "ARM-HVY-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-SWD-001",
+      "armor": "ARM-ROB-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-GSW-001",
+      "armor": "ARM-LGT-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-GSW-001",
+      "armor": "ARM-MED-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-GSW-001",
+      "armor": "ARM-HVY-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-GSW-001",
+      "armor": "ARM-ROB-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-SPR-001",
+      "armor": "ARM-LGT-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-SPR-001",
+      "armor": "ARM-MED-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-SPR-001",
+      "armor": "ARM-HVY-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-SPR-001",
+      "armor": "ARM-ROB-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-XBW-001",
+      "armor": "ARM-LGT-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-XBW-001",
+      "armor": "ARM-MED-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-XBW-001",
+      "armor": "ARM-HVY-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-XBW-001",
+      "armor": "ARM-ROB-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-STF-001",
+      "armor": "ARM-LGT-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-STF-001",
+      "armor": "ARM-MED-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-STF-001",
+      "armor": "ARM-HVY-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    },
+    {
+      "weapon": "WPN-STF-001",
+      "armor": "ARM-ROB-001",
+      "first_slice": false,
+      "Dodge_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Hurt_status": "UNCONFIGURED_REQUIRES_HELD_CONTACT_AND_POSE_ARMOR",
+      "Death_status": "UNCONFIGURED_REQUIRES_CONTINUOUS_ROOT_RELEASED_PROP_AND_POSE_ARMOR",
+      "art_or_runtime_accepted": false,
+      "shared_body_is_not_combination_acceptance": true
+    }
+  ],
+  "occlusion": {
+    "no_global_depth_order_assumption": true,
+    "required": "Perphase exclusive originalRGBA body partitions; only actualvisibleNearHand/FarHand/arms/HelmetForeground may replay. Armor own actualdepth; optionalweaponfront/back splitting must preservewholepropRGBAexactlywithoutdoublepixels.",
+    "singlehand": "Use samephase NearHand after actualhilt only after contact verified. CorrectedHurt1mask fromNEWsource,neverReady mask.",
+    "twohand": "Require both actualhandcontacts at one rigidprop similaritytransform. GSW/SPR opposite support direction and spacing;XBWstock+foregrip. FarHand may need own replaypartition; never invent hiddenfarhand.",
+    "mirror": "One whole actorlocal reflection at W-x/negativeUV;body,roots,axes,weapon,armor,masks together. Anatomicalnear/farlabels stay owned;no doublemirror."
+  },
+  "death_visual_track": {
+    "proposed_policy": "release_from_age0; actorlocal authored deterministic curve; no lastalivevisualcache needed",
+    "phase_proposal": [
+      {
+        "age_s": 0,
+        "role": "alreadyreleased beside relaxedNearHand",
+        "transform": null
+      },
+      {
+        "age_s": 0.2,
+        "role": "fallingoutboard awayfrombody/hand",
+        "transform": null
+      },
+      {
+        "age_s": 0.4,
+        "role": "proposed floorsettle visual key only",
+        "transform": null
+      },
+      {
+        "age_s": 0.6,
+        "role": "same settledpose",
+        "transform": null
+      },
+      {
+        "age_s": 0.8,
+        "role": "same settledpose indefinitely",
+        "transform": null
+      }
+    ],
+    "settle_time_role": "Explicit artproposal only, not gameplaydeadline/physicalcollision;Root may revise afteractualcomposite",
+    "release_transform": null,
+    "settled_transform": null,
+    "ground_contact_source_px": null,
+    "standing_root_per_frame": [
+      [
+        242,
+        464
+      ],
+      null,
+      null,
+      null,
+      null
+    ],
+    "separation_and_occlusion": null,
+    "offset_domain": "same realactor groundY, cosmetic outboardX only in actorlocal;no entity/actor/physics/wallsweep",
+    "render_order": "Perphase authoredweapondepth on release;settledweapon generally behindbody but visiblyoutsidecorpse; neverdraw onewholeweapontwice",
+    "state_source": "Committed activeweaponinstance/content/version;armor remains equipped. XBW visualstate reflects existingammo/history, no mutation.",
+    "reset": "Discard derivedvisual on realstate/run/owner/roomchange; no late replay",
+    "persistence": "Derive from existing savedDead/AnimationName/AnimationTime/Facing/Ground/equipmentprofile when that snapshot is legallyadmitted. No newRootV2acceptance bypass or dropmetadata.",
+    "inventory_mutations": 0,
+    "spawned_actors": 0,
+    "source_or_entity_allocations": 0,
+    "new_pickups": 0,
+    "damage_events": 0,
+    "projectiles": 0,
+    "ammo_or_focus_changes": 0,
+    "new_audio_events": 0,
+    "collision_changes": 0,
+    "HP_changes": 0
+  },
+  "configuration_gates": [
+    "Actualsource andRGBApins match;newHurt4candidate accepted before replacement",
+    "Dodge/Hurt every requiredgrip/axis/rigidproptransform actualmeasured/authored with uncertainty, noNULL",
+    "Samephasebodypartitions preserveoriginalRGBAexactly;exclusiveoverlap andlayersemantics verified",
+    "Armorvisibility explicitlyVISIBLEwithactualcomponent ORFULLY_OCCLUDEDauthorrecord; unknownNULL cannotcountready",
+    "Death1to4standingroot explicitauthorcontract supplied andnativechecked;neverpilecentroid",
+    "AllDeathrelease/groundtransforms/depths supplied;sourcepropgroundperspective accepted",
+    "All textures andprofileversion beforedraw; missingprofile remains unsupporteddiagnostic anddoesnotclearBindingwhitelist",
+    "No20matrixacceptance from sharedbody or oldgameplayGREEN"
+  ],
+  "validation_later": [
+    "Static heldcomposition every4Dodge/4Hurt +Death5 beforeRootruntimeadmission;Eretainbeforedisplay",
+    "RootnormalShift forward/back/depth pluspoisebreak capture samecommittedweaponarmorinstances;ordinaryHP/DoTnotHurt",
+    "RootdeathduringReady/combo/Dodge/Hurt andairborneboundary: noweaponteleportclaimuntilobserved;bodyfixedscale, realpropvisibility, noextraeffects",
+    "Legalpause/save/restore seek preservesphase andDeathderivedtransform; exactinventoryrevision/instances/ammo/sourcecount/collision/HP unchanged bypresentation",
+    "Every20cell independentlynative/visualreview;Noneextra2baseline routesnotcounted20"
+  ],
+  "actual_Source_changes": 0,
+  "native_runs": 0,
+  "generation_calls": 0,
+  "new_media": 0
+}

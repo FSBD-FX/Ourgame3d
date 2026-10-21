@@ -1,0 +1,197 @@
+{
+  "schema": "fairytale-common-hero-six-frame-walk-design-v1",
+  "status": "prepared_numeric_design_only_not_generated",
+  "identity": {
+    "canonical": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-idle-v002\\curated\\frame-0.png",
+    "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718",
+    "bytes": 117257,
+    "canvas": [
+      512,
+      512
+    ],
+    "alpha_bbox_measured": [
+      146,
+      48,
+      367,
+      464
+    ],
+    "anchor_lock": "technical identity anchor only; not final user art/motion acceptance",
+    "source_native_facing": 1,
+    "original129_base_references_forbidden": true,
+    "full_idle_strip_as_identity_forbidden": true
+  },
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-walk-v002",
+  "pipeline_request_source": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-request-spec-v002.json",
+  "state": "walk",
+  "frame_count": 6,
+  "nominal_fps": 12,
+  "expected_runtime_durations_ms": [
+    83,
+    83,
+    83,
+    83,
+    83,
+    83
+  ],
+  "expected_cycle_ms": 498,
+  "preview_gif_quantization_note": "GIF centiseconds may quantize83ms to80ms; use the actual runtime manifest for engine timing, not inferred GIF FPS",
+  "camera": "same right-facing three-quarter view as accepted single idle",
+  "phase_contract": [
+    {
+      "frame": 0,
+      "phase": "near_contact",
+      "support": "near heel accepts weight; far toe is ending rear support",
+      "near_foot": "forward toward screen-right, heel down, toe slightly lifted",
+      "far_foot": "behind toward screen-left, rear toe down, heel raised",
+      "arms": "near arm back; far arm forward; empty gloves open/relaxed",
+      "body": "soft contact compression through knees; rigid helmet keeps shape"
+    },
+    {
+      "frame": 1,
+      "phase": "near_support_far_pass",
+      "support": "near sole flat under body; far foot clearly off ground",
+      "near_foot": "weight-bearing stance foot moves backward relative to hips",
+      "far_foot": "bent knee swings forward passing beneath pelvis, boot clears floor",
+      "arms": "arms pass through neutral; elbows remain recognizable",
+      "body": "pelvis rises slightly on near support; helmet translates as one rigid unit"
+    },
+    {
+      "frame": 2,
+      "phase": "near_push_far_reach",
+      "support": "near rear toe still contacts; far leading heel is about to land",
+      "near_foot": "behind pelvis, heel lifts for push-off",
+      "far_foot": "extends forward with raised toe, not yet a second planted sole",
+      "arms": "near arm continues toward front as near leg travels back; far arm back",
+      "body": "small controlled weight transfer, no airborne run phase"
+    },
+    {
+      "frame": 3,
+      "phase": "far_contact",
+      "support": "far heel accepts weight; near toe ends rear support",
+      "near_foot": "behind toward screen-left, rear toe down, heel raised",
+      "far_foot": "forward toward screen-right, heel down, toe slightly lifted",
+      "arms": "near arm forward; far arm back; opposite contact to frame0",
+      "body": "opposite contact compression; do not duplicate or flip the whole sprite"
+    },
+    {
+      "frame": 4,
+      "phase": "far_support_near_pass",
+      "support": "far sole flat under body; near foot clearly off ground",
+      "near_foot": "bent knee swings forward passing beneath pelvis, boot clears floor",
+      "far_foot": "weight-bearing stance foot moves backward relative to hips",
+      "arms": "opposite passing phase to frame1; two hands remain distinct",
+      "body": "pelvis rises slightly on far support; same rigid helmet scale"
+    },
+    {
+      "frame": 5,
+      "phase": "far_push_near_reach",
+      "support": "far rear toe still contacts; near leading heel is about to land",
+      "near_foot": "extends forward to prepare the next frame0 heel contact",
+      "far_foot": "behind pelvis, heel lifts for push-off",
+      "arms": "near arm heads back; far arm forward, preparing frame0",
+      "body": "flows into frame0 with no reset, body teleport or repeated contact pose"
+    }
+  ],
+  "layout_targets_not_measurements": {
+    "canvas": [
+      512,
+      512
+    ],
+    "safe_margin": [
+      48,
+      48
+    ],
+    "nominal_pelvis_projection_root": [
+      256,
+      464
+    ],
+    "baseline_y": 464,
+    "max_rigid_helmet_bob_range_source_px": 6,
+    "fixed_engine_canvas_size_from_idle": 88.61538461538461,
+    "visible_idle_body_height_target_px": 72,
+    "walk_actual_roots": null,
+    "walk_actual_body_heights": null,
+    "walk_actual_helmet_bboxes": null
+  },
+  "pacing_design_not_actual_runtime_result": {
+    "unarmored_base_groundspeed_world_per_s": 265,
+    "horizontal_ground_projection": 0.65,
+    "vertical_ground_projection": -0.38,
+    "nominal_stride_world_per_cycle": 132,
+    "world_per_phase": 22,
+    "nominal_cycle_s_for_stride": 0.4981132075471698,
+    "nominal_fps_for_distance_clock": 12.045454545454545,
+    "nominal_horizontal_speed_px_per_s": 172.25,
+    "nominal_horizontal_stride_px": 85.8,
+    "future_clock": "accumulate actual resolved planar ground distance / measured stride; do not use camera travel, input-held time, requested but blocked movement or lookdev wallclock as gameplay foot phase",
+    "stride_lock": "initial132 design proposal only; final stance-contact travel must be measured from generated poses before runtime lock"
+  },
+  "source_code_facts": {
+    "fighter": {
+      "path": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\DungeonFighter.cpp",
+      "sha256": "39be063761b088dfea8c14da5f2791a03a5ebd17c09c7cc7968f91edd2362754",
+      "move_speed_lines": [
+        573,
+        578
+      ],
+      "resolved_movement_lines": [
+        624,
+        635
+      ]
+    },
+    "stats": {
+      "path": "F:\\Ourgame\\UnrealGame\\Source\\CodexDungeon\\DungeonEquipmentStats.h",
+      "sha256": "c33671c5a4fd6cf0c68ede77c473d649692dc9718f7fbd3fb9a1896a26dcb9e7",
+      "speed_lines": [
+        355,
+        361
+      ]
+    }
+  },
+  "future_generated_assets": {
+    "raw_walk_png": {
+      "expected": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-walk-v002\\raw\\walk.png",
+      "exists": false,
+      "sha256": null
+    },
+    "extracted_frames": {
+      "expected_count": 6,
+      "exist": false,
+      "sha256": null
+    },
+    "atlas_manifest": {
+      "exists": false,
+      "sha256": null
+    }
+  },
+  "qa_status": {
+    "extraction": "not_run_no_raw",
+    "identity": "not_reviewed_no_walk_frames",
+    "locomotion": "experimental_pending_real_generation_and_motion_review",
+    "loop_seam": "not_reviewed",
+    "native_left_mirror": "not_reviewed",
+    "foot_roots": "pending_real_measurement",
+    "runtime_integration": "not_implemented",
+    "formal_complete_units": 0
+  },
+  "generation_authority": "root only; this preparer must not call any image generation provider or alter old images/Source/ledger",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "extraction_extension": {
+    "path": "F:\\Ourgame\\tools\\scripts\\extract-sprite-shared-row-scale.py",
+    "sha256": "31a4e3f10f4b0bbf3e9dd51c591e860c5c23f0cfa342cc0a86a498cd7de2b3bb",
+    "policy": "one fixed geometric scale for all native keyed component frames in the row",
+    "native_extractor_sha256": "f2a7902f01069668340d14217bd05c777f5c01853284102e211aba1013a45539",
+    "installed_skill_modified": false,
+    "caller": "root only; preparer must not execute extraction",
+    "placement_is_not_body_root": true
+  },
+  "version_note": "v002 preserves v001 canonical identity, six phase action and nominal cadence; adds explicit project shared-row-scale extraction contract only."
+}

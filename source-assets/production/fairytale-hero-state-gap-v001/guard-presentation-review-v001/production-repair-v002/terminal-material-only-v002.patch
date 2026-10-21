@@ -1,0 +1,11 @@
+--- UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardPose.h
++++ UnrealGame/Source/CodexDungeon/DungeonFairytaleGuardPose.h
+@@ -47,6 +47,8 @@
+  {
+   if(!Died)return R;double Age=S.Time-Died->AtTime;
+   if(std::isfinite(TerminalDeathAge)&&TerminalDeathAge>=0){Age=std::max(Age,TerminalDeathAge);R.TerminalPresentation=true;}
++  // Lethal positive Damaged and Died share AtTime; terminal display age must expire the same finite tint.
++  if(Age>=.22){R.MaterialHit=false;R.MaterialEventId=0;}
+   const double Starts[]={0,.1,.2,.35,.55,.75};int F=0;for(int I=1;I<6;++I)if(Age>=Starts[I])F=I;
+   return Finish(EClip::Death,F,Died->AtTime,Died->AtTime+1.,Died->EventId); // Last frame holds; no gameplay delay.
+  }

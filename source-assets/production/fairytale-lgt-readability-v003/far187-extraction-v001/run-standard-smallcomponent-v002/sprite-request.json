@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-lgt-far-tiny-tab-edit-v004",
+    "description": "Selective edit of original182: retain only the four original tiny image-RIGHT far leather tabs at recorded locator ROIs; remove every other garment pixel without changing their compressed perspective or scale.",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 241,
+    "safe_margin_y": 242
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "leather_farshoulder_sword_ready": {
+      "frames": 4,
+      "fps": 6,
+      "loop": true,
+      "action": "Selective edit of original182: retain only the four original tiny image-RIGHT far leather tabs at recorded locator ROIs; remove every other garment pixel without changing their compressed perspective or scale.",
+      "durations_ms": [
+        167,
+        167,
+        167,
+        167
+      ]
+    }
+  },
+  "style": "Preserve original182 tiny compressed far tabs, their own brown leather, ink edges and exact four perspectives; never reuse near caps.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": false,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

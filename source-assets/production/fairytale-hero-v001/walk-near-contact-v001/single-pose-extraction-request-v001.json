@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-hero-single-near-contact-trial",
+    "description": "Accepted single curated idle identity only: closed rigid bell helmet, amber visor eyes, charcoal plain underclothes, brown gloves and boots, empty hands; same right-facing three-quarter camera.",
+    "base_image": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-near-contact-v001\\references\\identity\\canonical-idle-frame-0.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "near_contact": {
+      "frames": 1,
+      "fps": 1,
+      "loop": false,
+      "action": "One static near-leg-forward contact trial: near arm rear, near leg front, far arm front, far leg rear. Not a walk cycle or sole locomotion state anchor."
+    }
+  },
+  "style": "Follow the single accepted curated idle anchor exactly: hand-drawn dark-fairytale cartoon, bold uneven ink outlines, two or three broad painted tones per material, bell helmet with amber visor eyes and charcoal plain undergarment. NOT pixel art, no realistic texture, PBR, new costume or tone redesign.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  },
+  "project_source_contract": {
+    "generation_request": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-near-contact-v001\\anchor-request.json",
+    "native_request": 138,
+    "state": "post-generation deterministic single-pose extraction adapter; one-pose truth existed before generation",
+    "native_prompt": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-near-contact-v001\\prompts\\near-contact-anchor.txt"
+  }
+}

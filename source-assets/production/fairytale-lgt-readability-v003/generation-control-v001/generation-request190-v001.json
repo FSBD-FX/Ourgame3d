@@ -1,0 +1,46 @@
+{
+  "request_number": 190,
+  "asset": "fairytale-FarShoulder-run-farshoulder-primary1-v001",
+  "component": "FarShoulder",
+  "status": "requested_pending",
+  "source_event": "EV-048",
+  "authorization_events": [
+    "EV-040",
+    "EV-041"
+  ],
+  "window_number": 8,
+  "requested_utc": "2026-10-16T17:19:59.050143+00:00",
+  "prompt_path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-leather-approved-v002/FarShoulder-edit-v002.txt",
+  "prompt": "EDIT the FIRST image (six separated old armor components, motion/view basis only). The SECOND image is the sole new leather appearance anchor. Replace the old broad plates with ONLY the SECOND image's TINY NARROW curved leather far-side tab. Keep six distinct compressed far-side action views; remove the broad near-shoulder silhouette, strap boss, collar, torso seam and grey lining. Never mirror or substitute a broad near cap.\n\nKeep the original six left-to-right phases, distinct action angles and row positions; do not clone the idle pose. Keep all components separated with generous GREEN #00FF00 between and around them, on one opaque green row. Match the second image's simple ink outline, warm brown/tan planes and soft leather construction. Output only this one component type in six views. No person, helmet, eyes, hands, arms, weapons, detached parts, floor, shadows, text or grid.\n",
+  "prompt_file_sha256": "9fa7947990e2c95a0ac3ddfdf3e77cc1cbbfb253406be8a799fc60f685e50620",
+  "reference_images": [
+    {
+      "role": "FIRST_exact_old_same_component_primary1_edit_target_motion_geometry_only",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-leather-input-v001/run-farshoulder-primary1-v001/references/edit-target-old-primary1.png",
+        "bytes": 1309984,
+        "sha256": "c51acdb26481672b9022882ab8ead56f09c3b8b6ce10526b75f09b1a7141d3a9"
+      }
+    },
+    {
+      "role": "SECOND_actual_new_same_component_Ready_appearance_anchor_ONLY",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-leather-input-v001/run-farshoulder-primary1-v001/base-source.png",
+        "bytes": 2588,
+        "sha256": "032e2bf4e4e2537191531ace4c90076aed3d899ac931db9be3c3b99aaaf267f0"
+      }
+    }
+  ],
+  "transparent_background": false,
+  "backend": "image_gen.imagegen",
+  "external_api_calls": 0,
+  "host_fee_usd": null,
+  "raw_destination_planned": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-leather-input-v001/run-farshoulder-primary1-v001/raw/leather_farshoulder_sword_primary1.png",
+  "source_handoff": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-leather-approved-v002/primary1-leather-approved-v002.json",
+    "bytes": 17797,
+    "sha256": "b4baec8a4a8109bbf6f80c4c399640da04621e742ea5d6be946d2721f4cdeb04"
+  },
+  "scope": "NewReady184/186/187 component identity; prior accepted same-component Primary1 row is motion/geometry basis only. Six grounded Primary1 component poses; actual new component A/B/fit/runtime/full equipment states remain unaccepted",
+  "formal_complete_units": 0
+}

@@ -1,0 +1,79 @@
+{
+  "schema": "Hero-Hurt4-real-Guard-hit-feasibility-v001",
+  "actual_readonly_sources": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.cpp",
+      "bytes": 42213,
+      "sha256": "6198551820b8e01ace25ce061169a671e342cc60bab6f6dc800df767d77b1d9f"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuard.h",
+      "bytes": 5894,
+      "sha256": "6c71de106f3d728aec593d1528331714442e6756878cf49af3d04f48e68eb9de"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuardDriver.cpp",
+      "bytes": 24571,
+      "sha256": "ef1bc7872975fc7d2928364daa88fb9199441061aadd316810dc8230d4898bdd"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonStoneGuardFeedback.h",
+      "bytes": 7029,
+      "sha256": "509d352d083f004c1c1d41fc30f500605f253c685e385b01b5c3e28e53129866"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 121695,
+      "sha256": "43ffd04956f39d9277131f54d618cc5f2c1eeaa3bd92a67c9fbf8ad9ae5197aa"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.h",
+      "bytes": 12443,
+      "sha256": "cf84e3781b269e090d9b17544fe85e91726e465f35b7324b561ab98a23f9dbac"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonEquipmentStats.h",
+      "bytes": 25329,
+      "sha256": "c33671c5a4fd6cf0c68ede77c473d649692dc9718f7fbd3fb9a1896a26dcb9e7"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "bytes": 151572,
+      "sha256": "55066ff73a6dd594db4c0631f76656d8166f43a3b4d3512b53df01021038cc6c"
+    }
+  ],
+  "facts": {
+    "Axe_damage": 24,
+    "Axe_stagger": 30,
+    "Axe_WU_Active_Recovery_seconds": [
+      1,
+      0.2,
+      1.4
+    ],
+    "Axe_eligible_abs_dx_max": 180,
+    "Axe_eligible_abs_dy_max": 65,
+    "extremely_close_Stomp_policy_radius": 70,
+    "base_LGT_armor": 14,
+    "base_LGT_poise": 30,
+    "player_nonlethal_Hurt_seconds": 0.4,
+    "player_direct_iframe_seconds": 0.65,
+    "player_poise_protection_seconds": 1,
+    "poise_decay_per_second_after_delay1": 20,
+    "explicit_push_target_condition": "Attacker && bEnemy; this player is not pushed by that24px branch"
+  },
+  "inference": {
+    "one_actual_Axe_breaks_base_LGT": true,
+    "expected_nonlethal_HP_loss": 21.05263157894737,
+    "only_normal_route_and_inward_facing": "WASD outside140 route to side±140, one real inwardA/D if needed, then no held movement until native Hurt exits",
+    "causality_witness": "Original Guard Hit event + HitReceipt + ConfirmHit journal actualHPLoss, player actualHP and active read-only Hurt query; no separate clock"
+  },
+  "risk": [
+    "Affixes may alter stats; observer requires actual committed baseLGT poise30/armor14/vulnerability1 and never writes them.",
+    "Missing any100ms original draw fails; no replay/second-hit substitution.",
+    "HurtTime float tail remains frame3 while original Query is active; inactive Query returnsfalse.",
+    "GPU completion is separately observed/resident; import bytes are not GPU proof.",
+    "Optical gate is predeclared but not calibrated against new native output; preserve any failed case for Root diagnosis."
+  ],
+  "native_proof_receipt": null,
+  "FinalAccepted": false
+}

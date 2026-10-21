@@ -1,0 +1,46 @@
+{
+  "request_number": 202,
+  "asset": "fairytale-NearHand-run-nearhand-walk-v001",
+  "component": "NearHand",
+  "status": "requested_pending",
+  "source_event": "EV-048",
+  "authorization_events": [
+    "EV-040",
+    "EV-041"
+  ],
+  "window_number": 9,
+  "requested_utc": "2026-10-16T21:06:28.160688+00:00",
+  "prompt_path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-nearhand-input-v001/run-nearhand-walk-v001/prompts/sword_walk_nearhand.txt",
+  "prompt": "Image1 is the isolated closed Ready158 near glove: the SOLE brown-glove appearance and closed-grip construction. Image2 is six actual walking NEAR hands in phase order, used ONLY for corresponding cuff/wrist orientation and foreshortening.\n\nDraw exactly SIX isolated brown near-glove components in ONE horizontal row. Change the dangling/open fingers in each phase into a compact, convincingly CLOSED sword-grip fist: four fingers curled around an implied thin handle, thumb crossing them, same brown cuff and black ink edges. Keep the six actual cuff/wrist orientations from image2: back/low/front/front/low/back. The two front phases still show the same physical near hand, not a mirrored opposite hand. Each cuff has a clean sleeve-attachment opening. Closed fist and cuff only; no forearm sleeve. Do not repeat one identical fist six times or reverse a cuff.\n\nNo visible sword, handle, pole, object, arm, body, head, shoulder, boots, extra hand, text, numbers, panel boxes, shadows or scenery. The handle will be supplied independently by the game; leave natural knuckle/thumb overlap for that grip, not a big empty ring.\n\nFlat OPAQUE GREEN #00FF00 background. Separate all six components with clear green gaps. Preserve the warm brown glove, coarse cartoon ink and simple readable silhouette of image1. Numeric recipe: six phases [83,83,83,83,83,83]ms preview loop; later ONE shared row scale into90x90 fit windows in512 cells. Actual new grip/mount points and motion fit are not yet accepted.\n",
+  "prompt_file_sha256": "427e053553f0f0b35c098a11115f4df96834986c24a675ac4e7c5526dc19de8e",
+  "reference_images": [
+    {
+      "role": "FIRST_actual_Ready158_isolated_closed_glove_sole_appearance",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-nearhand-input-v001/run-nearhand-walk-v001/base-source.png",
+        "bytes": 10127,
+        "sha256": "cde1e43d76bcd8ac9790c739e6fe9559b8bfa4b4ffd3e258f4197e5f066efa75"
+      }
+    },
+    {
+      "role": "SECOND_actual_Walk6_nearhand_cuff_direction_only",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-nearhand-input-v001/run-nearhand-walk-v001/references/actual-Walk6-open-nearhand-motion-guide.png",
+        "bytes": 46860,
+        "sha256": "bb833b25925df4be01ee123a9a423dcf06bdd8ca77e5af82c187e75ae49759d8"
+      }
+    }
+  ],
+  "transparent_background": false,
+  "backend": "image_gen.imagegen",
+  "external_api_calls": 0,
+  "host_fee_usd": null,
+  "raw_destination_planned": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-nearhand-input-v001/run-nearhand-walk-v001/raw/sword_walk_nearhand.png",
+  "source_handoff": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-nearhand-input-v001/walk-nearhand-native-input-approved-v001.json",
+    "bytes": 3153,
+    "sha256": "73fdad7988b207bd385152b3b13b64cd8ab0ec255c585d1b248d58646640fe9d"
+  },
+  "scope": "Ready158 isolated NearHand closed-grip appearance; actual Walk6 open near hands supply cuff orientation and motion only. Six new closed NearHand components, no body or sword; actual new component A/B/fit/runtime/full equipment states remain unaccepted",
+  "formal_complete_units": 0
+}

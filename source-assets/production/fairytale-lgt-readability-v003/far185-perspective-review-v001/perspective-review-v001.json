@@ -1,0 +1,194 @@
+{
+  "schema": "far185-source-perspective-review-v001",
+  "recorded_utc": "2026-10-16T15:57:08.210240+00:00",
+  "actual_review": {
+    "tool": "view_image",
+    "detail": "original",
+    "source_images_viewed": [
+      182,
+      185
+    ],
+    "retention_authority": "Root reported E257 and E269 retained and explicitly allowed viewing these two originals.",
+    "new_chest_frames_near_frames_or_guides_viewed": false
+  },
+  "sources": [
+    {
+      "native_request": 182,
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-preparation-v001/run-farshoulder-ready-v001/raw/leather_farshoulder_sword_ready.png",
+        "bytes": 1358565,
+        "sha256": "eaa352de4a9eba6386985d48c5c7a07e59a70f1bc969f63ca2b1667ac5e9e4d1"
+      },
+      "canvas_px": [
+        2172,
+        724
+      ],
+      "root_reported_retention": "E257",
+      "actual_view_image_called": true,
+      "view_detail": "original",
+      "coarse_foreground_bbox_by_four_x_regions": [
+        [
+          176,
+          193,
+          477,
+          468
+        ],
+        [
+          678,
+          185,
+          976,
+          468
+        ],
+        [
+          1199,
+          194,
+          1496,
+          468
+        ],
+        [
+          1709,
+          189,
+          2004,
+          468
+        ]
+      ],
+      "bbox_method": "Read-only NumPy RGB distance from #00FF00 >96; canvas split into four x regions only for numeric grouping. No crop/image output. Bboxes are whole-source contents, not semantic far-cap masks."
+    },
+    {
+      "native_request": 185,
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v002/run-farshoulder-ready-v002/raw/leather_farshoulder_sword_ready.png",
+        "bytes": 1227671,
+        "sha256": "3d682d944ee70da2ccb27a090ea1aa5c4586c75cdae9347fbd4efdf7755a5edf"
+      },
+      "canvas_px": [
+        2172,
+        724
+      ],
+      "root_reported_retention": "E269",
+      "actual_view_image_called": true,
+      "view_detail": "original",
+      "coarse_foreground_bbox_by_four_x_regions": [
+        [
+          176,
+          201,
+          334,
+          341
+        ],
+        [
+          689,
+          183,
+          878,
+          346
+        ],
+        [
+          1199,
+          192,
+          1379,
+          351
+        ],
+        [
+          1738,
+          186,
+          1940,
+          366
+        ]
+      ],
+      "bbox_method": "Read-only NumPy RGB distance from #00FF00 >96; canvas split into four x regions only for numeric grouping. No crop/image output. Bboxes are whole-source contents, not semantic far-cap masks."
+    }
+  ],
+  "verdict185": "FAIL_SOURCE_FAR_PERSPECTIVE",
+  "observations": [
+    "Native182 has a broad image-LEFT foreground shoulder cap and a separate very narrow, compressed curved tab at the extreme image-RIGHT vest edge.",
+    "Native185 instead shows broad frontal/near-style caps with long downward curved oval/ring forms. Their positions remain near each original vest's image-LEFT cap area, not the original tiny image-RIGHT tabs.",
+    "Four isolated components do not establish the requested far view. Source geometry and perspective were not preserved."
+  ],
+  "inference_boundary": "Visual near-style substitution is clear; exact pixel copying, model internal decisions and whether each low ring was newly generated versus altered source geometry are not provable from two images alone.",
+  "next_edit_target_native": 182,
+  "next_edit_target_sha256": "eaa352de4a9eba6386985d48c5c7a07e59a70f1bc969f63ca2b1667ac5e9e4d1",
+  "locator_roi_candidates": [
+    {
+      "frame": 0,
+      "source_canvas_px": [
+        2172,
+        724
+      ],
+      "roi_ltrb_exclusive": [
+        419,
+        219,
+        480,
+        310
+      ],
+      "boundary_uncertainty_source_px": 8,
+      "basis": "Actual full-resolution view of the narrow image-RIGHT tab, cross-checked with the whole vest's exact rightmost foreground bound.",
+      "confidence": "medium locator; adjoining chest/black seam remains ambiguous",
+      "semantic_mask": false,
+      "actual_attachment_A": null
+    },
+    {
+      "frame": 1,
+      "source_canvas_px": [
+        2172,
+        724
+      ],
+      "roi_ltrb_exclusive": [
+        918,
+        211,
+        979,
+        303
+      ],
+      "boundary_uncertainty_source_px": 8,
+      "basis": "Actual full-resolution view of the narrow image-RIGHT tab, cross-checked with the whole vest's exact rightmost foreground bound.",
+      "confidence": "medium locator; adjoining chest/black seam remains ambiguous",
+      "semantic_mask": false,
+      "actual_attachment_A": null
+    },
+    {
+      "frame": 2,
+      "source_canvas_px": [
+        2172,
+        724
+      ],
+      "roi_ltrb_exclusive": [
+        1438,
+        220,
+        1499,
+        311
+      ],
+      "boundary_uncertainty_source_px": 8,
+      "basis": "Actual full-resolution view of the narrow image-RIGHT tab, cross-checked with the whole vest's exact rightmost foreground bound.",
+      "confidence": "medium locator; adjoining chest/black seam remains ambiguous",
+      "semantic_mask": false,
+      "actual_attachment_A": null
+    },
+    {
+      "frame": 3,
+      "source_canvas_px": [
+        2172,
+        724
+      ],
+      "roi_ltrb_exclusive": [
+        1946,
+        215,
+        2007,
+        311
+      ],
+      "boundary_uncertainty_source_px": 8,
+      "basis": "Actual full-resolution view of the narrow image-RIGHT tab, cross-checked with the whole vest's exact rightmost foreground bound.",
+      "confidence": "medium locator; adjoining chest/black seam remains ambiguous",
+      "semantic_mask": false,
+      "actual_attachment_A": null
+    }
+  ],
+  "roi_limits": "Conservative locator rectangles intentionally include margin and may include adjoining chest pixels. They are not pixel-perfect part boundaries and must not be locally cropped into final caps. The chest/far seam needs semantic editing and later visual/mask review.",
+  "prompt_instruction_candidate": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/far185-perspective-review-v001/next-far-edit-visual-instruction-candidate-v001.txt",
+    "bytes": 984,
+    "sha256": "3b9777c8486644463d4b07f195aaefbf344fbde70b2ef789bad9e43a0ebbe337"
+  },
+  "generation_ready": false,
+  "far185_extracted_or_imported": false,
+  "source_images_modified": false,
+  "final_cap_or_mask_image_written": false,
+  "engine_or_generation_called": false
+}

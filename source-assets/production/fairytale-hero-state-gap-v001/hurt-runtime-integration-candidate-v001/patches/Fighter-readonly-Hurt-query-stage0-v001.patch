@@ -1,0 +1,34 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.h
+@@ -14,6 +14,7 @@
+ #include "DungeonWorldProjectiles.h"
+ #include "DungeonFighterSnapshot.h"
+ #include "DungeonCompletedGroundMotion.h"
++#include "DungeonHurtPresentation.h"
+ #include "DungeonFighter.generated.h"
+ 
+ class ADungeonGameMode;
+@@ -36,6 +37,8 @@
+     // Native completed-commit witness, never a saved owner field or HUD estimate.
+     bool QueryCompletedGroundMotion(FDungeonCompletedGroundMotion& Out) const;
+     bool IsOrdinaryGroundWalkPose() const;
++    // Read-only actual non-dead Hurt facts; reject atomically. No new timer or gameplay gate.
++    bool QueryHurtPresentation(FDungeonHurtPresentationSample& Out) const;
+ 
+     UPROPERTY(BlueprintReadOnly, Category="Dungeon") float Health = 100.f;
+     UPROPERTY(BlueprintReadOnly, Category="Dungeon") float MaxHealth = 100.f;
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -1322,6 +1322,12 @@
+     }
+ }
+ 
++bool ADungeonFighter::QueryHurtPresentation(FDungeonHurtPresentationSample&) const
++{
++    // Stage0 deliberately unsupported; actual gameplay hurt state/timing is unchanged.
++    return false;
++}
++
+ bool ADungeonFighter::CanStartAttack() const
+ {
+     if(RunInstallBlocksFighter(*this))return false;

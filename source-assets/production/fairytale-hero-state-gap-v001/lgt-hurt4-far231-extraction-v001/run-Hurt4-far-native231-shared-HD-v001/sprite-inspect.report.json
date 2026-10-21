@@ -1,0 +1,53 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\lgt-hurt4-far231-extraction-v001\\run-Hurt4-far-native231-shared-HD-v001",
+  "states": [
+    "leather_farshoulder_hero_hurt"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "leather_farshoulder_hero_hurt",
+      "source": "frames",
+      "expected_frames": 4,
+      "found_frames": 4,
+      "natural_pose_count": 4,
+      "frame_files": [
+        "frames/leather_farshoulder_hero_hurt/frame-0.png",
+        "frames/leather_farshoulder_hero_hurt/frame-1.png",
+        "frames/leather_farshoulder_hero_hurt/frame-2.png",
+        "frames/leather_farshoulder_hero_hurt/frame-3.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.9283574754873283,
+          "mean": 0.9481884636441587
+        },
+        "dhash_similarity": {
+          "min": 1.0,
+          "mean": 1.0
+        },
+        "motion_presence": 0.000243582133374183,
+        "centroid_sigma": {
+          "x": 0.628014156073972,
+          "y": 0.8501068161552147
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "leather_farshoulder_hero_hurt: motion presence is too low (0.0002 < 0.0100)"
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "leather_farshoulder_hero_hurt: motion presence is too low (0.0002 < 0.0100)"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "request_number": 187,
+  "asset": "fairytale-FarShoulder-run-far-tiny-tab-ready-v004",
+  "component": "FarShoulder",
+  "status": "requested_pending",
+  "source_event": "EV-048",
+  "authorization_events": [
+    "EV-040",
+    "EV-041"
+  ],
+  "window_number": 8,
+  "requested_utc": "2026-10-16T16:13:46.722352+00:00",
+  "prompt_path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v004/run-far-tiny-tab-ready-v004/prompts/leather_farshoulder_sword_ready.txt",
+  "prompt": "EDIT ONLY the attached original182 image, canvas 2172 x 724. Keep ONLY each vest's tiny, narrow, curved BROWN leather tab at its far IMAGE-RIGHT edge, outside the chest-side seam. Preserve all 4 original tabs' compressed perspective, own black edge ink, position, scale and left-to-right order.\n\nZero-based [left,top,right,bottom) locator ROIs: [419,219,480,310], [918,211,979,303], [1438,220,1499,311], [1946,215,2007,311]. Boundaries have about +/-8px uncertainty. These are locating windows, NOT crop masks, not attachment points. Retain only the actual thin far tab inside each window. Remove adjoining torso pixels and the torso's side seam; retain only the tab's own edge ink. Do not expand the region into a rectangle.\n\nReplace EVERY other foreground pixel with flat opaque GREEN #00FF00: remove all chest, collar, pouch, grey undercloth and the broad IMAGE-LEFT near caps. Do not redraw or mirror a near shoulder, enlarge a tab into a broad front cover, add any long hanging oval/ring, change the canvas, or rearrange/rescale components. Keep four tiny original RIGHT tabs only, fully opaque, with no text or boxes.\n\nMetadata: [167, 167, 167, 167] ms; later 30 x 28 shared extraction fit in512 cells. Future A remains null; no sizing change during editing.\n",
+  "prompt_file_sha256": "24f82208150f5f876ccdba452c8a93448a42847dd265109f5fb9a9bc038b16e6",
+  "reference_images": [
+    {
+      "role": "single_exact_original_native182_edit_target_only",
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v004/run-far-tiny-tab-ready-v004/base-source.png",
+        "bytes": 1358565,
+        "sha256": "eaa352de4a9eba6386985d48c5c7a07e59a70f1bc969f63ca2b1667ac5e9e4d1"
+      }
+    }
+  ],
+  "transparent_background": false,
+  "backend": "image_gen.imagegen",
+  "external_api_calls": 0,
+  "host_fee_usd": null,
+  "raw_destination_planned": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v004/run-far-tiny-tab-ready-v004/raw/leather_farshoulder_sword_ready.png",
+  "source_handoff": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v004/lgt-far-tiny-tab-approved187-v005.json",
+    "bytes": 6568,
+    "sha256": "53c0132ea0f06c6ba7134c63ac9eaa674ae428f693fe1a1449bda0022b67cd43"
+  },
+  "scope": "Canonical131 identity and actual158 pose; native179 soft leather independent component Ready4 only. Actual component mount/fit/runtime/full equipment states remain unaccepted",
+  "formal_complete_units": 0
+}

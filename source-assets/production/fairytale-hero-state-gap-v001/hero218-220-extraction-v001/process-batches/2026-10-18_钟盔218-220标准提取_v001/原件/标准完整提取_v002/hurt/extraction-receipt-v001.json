@@ -1,0 +1,419 @@
+{
+  "schema": "hero218-220-standard-extraction-receipt-v001",
+  "state": "hurt",
+  "native_request_number": 219,
+  "raw_admission": {
+    "state": "hurt",
+    "native_request_number": 219,
+    "F_raw": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/standard-input-candidate-v001/process-batches/2026-10-18-right-body-states-v001/raw/hurt.png",
+      "bytes": 1587873,
+      "sha256": "20875657a4a3235886074986af7e6593f127423122ce9795e5cbdffb9716b2f2"
+    },
+    "E_original": {
+      "path": "E:/OurGame/Knight/过程图稿与视频/2026-10-18-OurgameUE-hero218-220-native-v385/F盘原批次副本/2026-10-18_钟盔受挫四帧原图_v001/原件/001-hurt.png",
+      "bytes": 1587873,
+      "sha256": "20875657a4a3235886074986af7e6593f127423122ce9795e5cbdffb9716b2f2"
+    }
+  },
+  "started_local": "2026-10-18T11:22:34.006999+08:00",
+  "commands": [
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "F:\\Ourgame\\tools\\scripts\\extract-sprite-shared-row-scale.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\hero218-220-extraction-v001\\runs\\run-hurt219-shared-HD-v002"
+      ],
+      "tool": {
+        "path": "F:/Ourgame/tools/scripts/extract-sprite-shared-row-scale.py",
+        "bytes": 8626,
+        "sha256": "2d7464dc2e8dd962a7d4dc170c0a7401d09cf1a626415309b4921b7d89d88aa3"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/pipeline-logs/extract-shared-row-v001.log",
+        "bytes": 2070,
+        "sha256": "d1770f12609905696c5295fd9990fc82ba7e72187e38fabcfb9329764831b623"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\compose_sprite_atlas.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\hero218-220-extraction-v001\\runs\\run-hurt219-shared-HD-v002"
+      ],
+      "tool": {
+        "path": "C:/Users/22499/.codex/skills/sprite-gen/scripts/compose_sprite_atlas.py",
+        "bytes": 481,
+        "sha256": "a7475830b99720b69bc645423a2f9aee40d03dad0e7d589ad4756526648a61aa"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/pipeline-logs/compose-atlas-v001.log",
+        "bytes": 358,
+        "sha256": "ae22e4afb60a97e193875815771469e41844facdd9f800437113746e57dcb688"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\export_curated_pngs.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\hero218-220-extraction-v001\\runs\\run-hurt219-shared-HD-v002",
+        "--state",
+        "hurt"
+      ],
+      "tool": {
+        "path": "C:/Users/22499/.codex/skills/sprite-gen/scripts/export_curated_pngs.py",
+        "bytes": 477,
+        "sha256": "dcf7910f44a3f43006a43379c0464c88ed7cc3213e3a8062edd59b9009960e1e"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/pipeline-logs/export-curated-v001.log",
+        "bytes": 973,
+        "sha256": "c5320a7b0575d7d37e3c27dca0f1aa45a8dbf7659d907af83cac9faa717ff709"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\preview_animation.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\hero218-220-extraction-v001\\runs\\run-hurt219-shared-HD-v002"
+      ],
+      "tool": {
+        "path": "C:/Users/22499/.codex/skills/sprite-gen/scripts/preview_animation.py",
+        "bytes": 459,
+        "sha256": "ff4aa5d1bcfae4731a09732da96d24f540707b834df5cba85b910f88df016496"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/pipeline-logs/preview-standard-QA-v001.log",
+        "bytes": 336,
+        "sha256": "235ba2eb088303f32cf3033c698a7c5ed0b3f90e769dc5f6002c4583fdecf270"
+      }
+    },
+    {
+      "argv": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\inspect_sprite_run.py",
+        "--run-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\hero218-220-extraction-v001\\runs\\run-hurt219-shared-HD-v002"
+      ],
+      "tool": {
+        "path": "C:/Users/22499/.codex/skills/sprite-gen/scripts/inspect_sprite_run.py",
+        "bytes": 459,
+        "sha256": "d32b40a03b5f79c051f4b932545b783597e8bdc0edc6e96647829417a04d605a"
+      },
+      "exit_code": 0,
+      "log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/pipeline-logs/inspect-standard-v001.log",
+        "bytes": 409,
+        "sha256": "e00b1876b5137ab396b313fd09fc7fe96d1b5c59ff21bdad2120897bb0e5c35f"
+      }
+    }
+  ],
+  "status": "STANDARD_EXTRACTED_PENDING_ROOT_E_RETENTION_AND_VISUAL_REVIEW",
+  "art_accepted": false,
+  "source_pixels_locally_redrawn": false,
+  "View_called": false,
+  "UE_called": false,
+  "physical_floor_root_grip_axis": null,
+  "E_retention_pending_for_all_new_media": true,
+  "actual_raw": {
+    "file": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/raw/hurt.png",
+      "bytes": 1587873,
+      "sha256": "20875657a4a3235886074986af7e6593f127423122ce9795e5cbdffb9716b2f2"
+    },
+    "mode": "RGB",
+    "size": [
+      2172,
+      724
+    ],
+    "actual_native_dimensions_not_assumed_from_layout": true
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/curated/frame-0.png",
+        "bytes": 121075,
+        "sha256": "d4a2256b743b418c907123345d147ef77072eb42bdc6a8e91ed41e7e3342b1ce"
+      },
+      "actual_RGBA_sha256": "1c22e6013e473cffcf70758b4f68c207497562607c6e38d4b6d4bf93528e288f",
+      "actual_alpha_bbox": [
+        138,
+        88,
+        374,
+        464
+      ],
+      "actual_alpha128_bbox": [
+        138,
+        88,
+        374,
+        464
+      ],
+      "nonzero_alpha_pixels": 52959,
+      "alpha128_pixels": 50594,
+      "alpha255_pixels": 48033,
+      "partial_alpha_pixels": 4926,
+      "coverage_of_512_cell": 0.20202255249023438,
+      "physical_floor_support_contacts": null,
+      "actual_root_px": null,
+      "actual_crown_px": null,
+      "actual_near_grip_px": null,
+      "actual_handle_axis_xy": null,
+      "actual_hand_replay_mask": null,
+      "semantic_body_density_or_anatomy_accepted": false
+    },
+    {
+      "frame": 1,
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/curated/frame-1.png",
+        "bytes": 146078,
+        "sha256": "81cd626e089654a0476068d03b9593a5495113659ee77fc21dd2fe7435316f4e"
+      },
+      "actual_RGBA_sha256": "f15b1972cc0faecd09dcffa912bf436850866ce240d72e7c2ea314b336769d41",
+      "actual_alpha_bbox": [
+        111,
+        67,
+        400,
+        464
+      ],
+      "actual_alpha128_bbox": [
+        111,
+        67,
+        400,
+        464
+      ],
+      "nonzero_alpha_pixels": 65606,
+      "alpha128_pixels": 62315,
+      "alpha255_pixels": 58769,
+      "partial_alpha_pixels": 6837,
+      "coverage_of_512_cell": 0.25026702880859375,
+      "physical_floor_support_contacts": null,
+      "actual_root_px": null,
+      "actual_crown_px": null,
+      "actual_near_grip_px": null,
+      "actual_handle_axis_xy": null,
+      "actual_hand_replay_mask": null,
+      "semantic_body_density_or_anatomy_accepted": false
+    },
+    {
+      "frame": 2,
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/curated/frame-2.png",
+        "bytes": 136582,
+        "sha256": "51ca0482923bef00f387f7eb03cac26c02bd95830b36deebb0a20a5b85cb60c9"
+      },
+      "actual_RGBA_sha256": "c92bfb6f63ee18cf5ae1ed323ce55fac8cc24eda5caf5588061e5918a8b58d7d",
+      "actual_alpha_bbox": [
+        118,
+        81,
+        394,
+        464
+      ],
+      "actual_alpha128_bbox": [
+        118,
+        81,
+        394,
+        464
+      ],
+      "nonzero_alpha_pixels": 60184,
+      "alpha128_pixels": 57326,
+      "alpha255_pixels": 54281,
+      "partial_alpha_pixels": 5903,
+      "coverage_of_512_cell": 0.229583740234375,
+      "physical_floor_support_contacts": null,
+      "actual_root_px": null,
+      "actual_crown_px": null,
+      "actual_near_grip_px": null,
+      "actual_handle_axis_xy": null,
+      "actual_hand_replay_mask": null,
+      "semantic_body_density_or_anatomy_accepted": false
+    },
+    {
+      "frame": 3,
+      "file": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/curated/frame-3.png",
+        "bytes": 131341,
+        "sha256": "042c20bc3b21ee02ce6a5960575c45be01a523c92dbda83244a0b5554f6ec116"
+      },
+      "actual_RGBA_sha256": "289a32a7abf60e008c5433ca86a0cac430b5b684dc69c2922214e5e119610be8",
+      "actual_alpha_bbox": [
+        137,
+        48,
+        375,
+        464
+      ],
+      "actual_alpha128_bbox": [
+        137,
+        48,
+        375,
+        464
+      ],
+      "nonzero_alpha_pixels": 58195,
+      "alpha128_pixels": 55332,
+      "alpha255_pixels": 52194,
+      "partial_alpha_pixels": 6001,
+      "coverage_of_512_cell": 0.22199630737304688,
+      "physical_floor_support_contacts": null,
+      "actual_root_px": null,
+      "actual_crown_px": null,
+      "actual_near_grip_px": null,
+      "actual_handle_axis_xy": null,
+      "actual_hand_replay_mask": null,
+      "semantic_body_density_or_anatomy_accepted": false
+    }
+  ],
+  "unique_RGBA_frames": 4,
+  "shared_row_fit": {
+    "policy": "one_raw_component_max_extent_scale_for_entire_row",
+    "scale": 0.7135506003430532,
+    "source_max_extent": [
+      405,
+      583
+    ],
+    "horizontal_registration": "bbox_center",
+    "per_frame_scale_normalization": false,
+    "frame_records": [
+      {
+        "frame": 0,
+        "source_component_size": [
+          331,
+          527
+        ],
+        "shared_scale": 0.7135506003430532,
+        "resampled_size": [
+          236,
+          376
+        ],
+        "placement_xy": [
+          138,
+          88
+        ],
+        "alpha_bbox_px": [
+          138,
+          88,
+          374,
+          464
+        ]
+      },
+      {
+        "frame": 1,
+        "source_component_size": [
+          405,
+          556
+        ],
+        "shared_scale": 0.7135506003430532,
+        "resampled_size": [
+          289,
+          397
+        ],
+        "placement_xy": [
+          111,
+          67
+        ],
+        "alpha_bbox_px": [
+          111,
+          67,
+          400,
+          464
+        ]
+      },
+      {
+        "frame": 2,
+        "source_component_size": [
+          387,
+          537
+        ],
+        "shared_scale": 0.7135506003430532,
+        "resampled_size": [
+          276,
+          383
+        ],
+        "placement_xy": [
+          118,
+          81
+        ],
+        "alpha_bbox_px": [
+          118,
+          81,
+          394,
+          464
+        ]
+      },
+      {
+        "frame": 3,
+        "source_component_size": [
+          334,
+          583
+        ],
+        "shared_scale": 0.7135506003430532,
+        "resampled_size": [
+          238,
+          416
+        ],
+        "placement_xy": [
+          137,
+          48
+        ],
+        "alpha_bbox_px": [
+          137,
+          48,
+          375,
+          464
+        ]
+      }
+    ],
+    "raw_component_RGBA_sha256": [
+      "e9e2d9a1811a78fc56d838bf471b61cc3644d442f8fa229fae9d463c043622c2",
+      "1fa4a3be7301e00819d806da265cc1177791eb3665eaf61307a251d13cff5486",
+      "76e33e2933c68ba2e0ff2faab1f090e054402ed35783864489d6f7da2c819283",
+      "4fb3452a3fe0a060de8b8b536e719544c14d6ba449536e64e269b8f7106a9b61"
+    ]
+  },
+  "frames_manifest": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/frames/frames-manifest.json",
+    "bytes": 5199,
+    "sha256": "df464f146bbacee7fbe2df4295a0edcfd4d11f5770baa45ce9a96cb838b8ae6b"
+  },
+  "composed_manifest": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/manifest.json",
+    "bytes": 1684,
+    "sha256": "3753ea45e46022070841bcfa76a14e93637106e1ed47f32ebce604feb8f12032"
+  },
+  "inspect_report": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hero218-220-extraction-v001/runs/run-hurt219-shared-HD-v002/sprite-inspect.report.json",
+    "bytes": 1232,
+    "sha256": "af0f17e8a811f2cf78b1bad3f5d23cc55c39bf54bd4ebfc68aab5e5bc1ff3999"
+  },
+  "inspect_errors": [],
+  "inspect_warnings": [],
+  "QA_gif": {
+    "actual_frame_count": 4,
+    "encoded_loop_count": 1,
+    "scope": "Standard QA convenience GIF; not runtime nonloop/terminal corpse hold proof"
+  },
+  "cross_row_scale_against_identity": "UNMEASURED: common row ratio alone does not prove equal anatomy/helmet scale across rows",
+  "all_actual_foot_floor_grip_axis_markers": null
+}

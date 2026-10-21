@@ -1,0 +1,280 @@
+{
+  "schema": "fairytale-six-phase-motion-trial-numeric-plan-v1",
+  "submission_ready": false,
+  "status": "proposal_metadata_only_not_a_generated_sprite_gen_run",
+  "identity": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-idle-v002/curated/frame-0.png",
+    "bytes": 117257,
+    "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718",
+    "native_size_px": [
+      512,
+      512
+    ],
+    "native_mode": "RGBA",
+    "alpha_bbox_exclusive": [
+      146,
+      48,
+      367,
+      464
+    ]
+  },
+  "original_contract": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/numeric-walk-request-v002.json",
+    "bytes": 8043,
+    "sha256": "7267a6e1fbf8422bc3433ff2fb916100bad19ebab765be1d1c0caed745c09fc3"
+  },
+  "state": "walk",
+  "frame_count": 6,
+  "native_facing": 1,
+  "camera": "canonical131 right-facing three-quarter; stable near/far anatomical roles",
+  "phase_contract": [
+    {
+      "frame": 0,
+      "phase": "near_contact",
+      "support": "near heel accepts weight; far toe is ending rear support",
+      "near_foot": "forward toward screen-right, heel down, toe slightly lifted",
+      "far_foot": "behind toward screen-left, rear toe down, heel raised",
+      "arms": "near arm back; far arm forward; empty gloves open/relaxed",
+      "body": "soft contact compression through knees; rigid helmet keeps shape"
+    },
+    {
+      "frame": 1,
+      "phase": "near_support_far_pass",
+      "support": "near sole flat under body; far foot clearly off ground",
+      "near_foot": "weight-bearing stance foot moves backward relative to hips",
+      "far_foot": "bent knee swings forward passing beneath pelvis, boot clears floor",
+      "arms": "arms pass through neutral; elbows remain recognizable",
+      "body": "pelvis rises slightly on near support; helmet translates as one rigid unit"
+    },
+    {
+      "frame": 2,
+      "phase": "near_push_far_reach",
+      "support": "near rear toe still contacts; far leading heel is about to land",
+      "near_foot": "behind pelvis, heel lifts for push-off",
+      "far_foot": "extends forward with raised toe, not yet a second planted sole",
+      "arms": "near arm continues toward front as near leg travels back; far arm back",
+      "body": "small controlled weight transfer, no airborne run phase"
+    },
+    {
+      "frame": 3,
+      "phase": "far_contact",
+      "support": "far heel accepts weight; near toe ends rear support",
+      "near_foot": "behind toward screen-left, rear toe down, heel raised",
+      "far_foot": "forward toward screen-right, heel down, toe slightly lifted",
+      "arms": "near arm forward; far arm back; opposite contact to frame0",
+      "body": "opposite contact compression; do not duplicate or flip the whole sprite"
+    },
+    {
+      "frame": 4,
+      "phase": "far_support_near_pass",
+      "support": "far sole flat under body; near foot clearly off ground",
+      "near_foot": "bent knee swings forward passing beneath pelvis, boot clears floor",
+      "far_foot": "weight-bearing stance foot moves backward relative to hips",
+      "arms": "opposite passing phase to frame1; two hands remain distinct",
+      "body": "pelvis rises slightly on far support; same rigid helmet scale"
+    },
+    {
+      "frame": 5,
+      "phase": "far_push_near_reach",
+      "support": "far rear toe still contacts; near leading heel is about to land",
+      "near_foot": "extends forward to prepare the next frame0 heel contact",
+      "far_foot": "behind pelvis, heel lifts for push-off",
+      "arms": "near arm heads back; far arm forward, preparing frame0",
+      "body": "flows into frame0 with no reset, body teleport or repeated contact pose"
+    }
+  ],
+  "source_mapping": [
+    {
+      "frame": 0,
+      "phase": "near_contact",
+      "source_request": 138,
+      "curated": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-contact-near-v001/curated/frame-0.png",
+        "bytes": 121971,
+        "sha256": "4a5ce99b450f12dc72195108a3d6928a8f71c407d551f5d447d723f10d77d554",
+        "native_size_px": [
+          512,
+          512
+        ],
+        "native_mode": "RGBA",
+        "alpha_bbox_exclusive": [
+          125,
+          48,
+          387,
+          464
+        ]
+      }
+    },
+    {
+      "frame": 1,
+      "phase": "near_support_far_pass",
+      "source_request": 142,
+      "curated": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-passing-far-leg-edit-v002/curated/frame-0.png",
+        "bytes": 108030,
+        "sha256": "26e9893f25319c993fc20cbe8f6e69bb992d1edeaa6e3edd135af16dcb274480",
+        "native_size_px": [
+          512,
+          512
+        ],
+        "native_mode": "RGBA",
+        "alpha_bbox_exclusive": [
+          147,
+          48,
+          364,
+          464
+        ]
+      }
+    },
+    {
+      "frame": 2,
+      "phase": "near_push_far_reach",
+      "source_request": 143,
+      "curated": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-precontact-near-push-v001/curated/frame-0.png",
+        "bytes": 114064,
+        "sha256": "d7fd0e1b2b14004023a26bc8f77a4360d75cea626f916068d7649471266c2ea4",
+        "native_size_px": [
+          512,
+          512
+        ],
+        "native_mode": "RGBA",
+        "alpha_bbox_exclusive": [
+          126,
+          48,
+          385,
+          464
+        ]
+      }
+    },
+    {
+      "frame": 3,
+      "phase": "far_contact",
+      "source_request": 137,
+      "curated": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-contact-far-v001/curated/frame-0.png",
+        "bytes": 116699,
+        "sha256": "6a1276cc5e833318dfa490efff52f18949bb8f10d1db533e4850d485672a44e9",
+        "native_size_px": [
+          512,
+          512
+        ],
+        "native_mode": "RGBA",
+        "alpha_bbox_exclusive": [
+          131,
+          48,
+          381,
+          464
+        ]
+      }
+    },
+    {
+      "frame": 4,
+      "phase": "far_support_near_pass",
+      "source_request": 141,
+      "curated": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-passing-far-support-v001/curated/frame-0.png",
+        "bytes": 111725,
+        "sha256": "3f9703c2d856e40b0199d1db0d295084a34c4c9a281c5f74dc2531556756b9b2",
+        "native_size_px": [
+          512,
+          512
+        ],
+        "native_mode": "RGBA",
+        "alpha_bbox_exclusive": [
+          150,
+          48,
+          362,
+          464
+        ]
+      }
+    },
+    {
+      "frame": 5,
+      "phase": "far_push_near_reach",
+      "source_request": 145,
+      "curated": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-precontact-far-push-v002/curated/frame-0.png",
+        "bytes": 119324,
+        "sha256": "724c1808a60764ce2c97d7cd77e8bada72f71f2a8e554f3f045f12c5fb379dcd",
+        "native_size_px": [
+          512,
+          512
+        ],
+        "native_mode": "RGBA",
+        "alpha_bbox_exclusive": [
+          129,
+          48,
+          383,
+          464
+        ]
+      }
+    }
+  ],
+  "runtime_duration_ms_proposal": [
+    83,
+    83,
+    83,
+    83,
+    83,
+    83
+  ],
+  "cycle_ms_proposal": 498,
+  "phase_order_reorder_allowed": false,
+  "retiming_to_hide_bad_phase_allowed": false,
+  "add_or_duplicate_phase_allowed": false,
+  "cell": {
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48
+  },
+  "fit_if_root_later_builds_a_component_row": {
+    "shared_row_scale": true,
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "segmentation": "components",
+    "resample": "lanczos",
+    "placement_is_not_measured_body_root": true,
+    "scope": "one common source row only; six separately fitted single-pose runs do not share a measured transform"
+  },
+  "display_design_only": {
+    "fixed_canvas_from_idle": 88.61538461538461,
+    "target_idle_visible_height_px_at_1280x720": 72,
+    "nominal_layout_target_root_px": [
+      256,
+      464
+    ],
+    "actual_per_frame_roots_px": null,
+    "actual_stride": null,
+    "motion_distance_clock_implemented": false,
+    "note": "Loop preview is separate from actual-resolved-ground-distance gameplay clock."
+  },
+  "next_step_root_decides": [
+    "F/E retain this plan before showing new composed media.",
+    "Decide whether an unchanged-source six-frame trial is warranted; keep originals immutable and save composition/transforms in a new run.",
+    "Check identity, leg depth, stance continuity, rigid helmet scale and every transition0-1-2-3-4-5-0.",
+    "Review real playback/capture at inherited83ms x6, both facings and small display scale; file count or QA0 is insufficient.",
+    "Retain failed experiment rather than reorder, retime or label-swap to pass."
+  ],
+  "gates": {
+    "source_metadata": "verified_current_files",
+    "assembled_row": "not_created",
+    "phase_static_sources": "candidate_only",
+    "motion_playback": "not_run",
+    "loop_seam": "not_reviewed",
+    "left_facing": "not_reviewed",
+    "feet_roots_and_stride": "unlocked",
+    "UE_import": "not_run",
+    "gameplay_walk": "not_implemented",
+    "formal_complete_units": 0
+  },
+  "future_outputs": {
+    "row_path": null,
+    "row_sha256": null,
+    "atlas_path": null,
+    "atlas_sha256": null,
+    "capture_path": null,
+    "capture_sha256": null
+  }
+}

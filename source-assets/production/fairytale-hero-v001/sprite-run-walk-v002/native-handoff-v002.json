@@ -1,0 +1,34 @@
+{
+  "schema": "fairytale-common-walk-native-handoff-v2",
+  "status": "frozen_preparation_only_no_generation",
+  "native_generation_owner": "root",
+  "prompt_file": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-walk-v002\\prompts\\walk.txt",
+  "reference_images": [
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-walk-v002\\base-source.png",
+      "role": "only_identity_accepted_curated_idle_frame0_byte_copy",
+      "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718"
+    },
+    {
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-walk-v002\\references\\layout-guides\\walk.png",
+      "role": "only_technical_six_slot_layout_not_character_or_final_art",
+      "sha256": "852ff8fe8751dc9331b83497982aea0ee6759b1e86d42a5cadaaef039b624d04"
+    }
+  ],
+  "original129_or_idle_strip_or_single_peak_walk_anchor_attached": false,
+  "expected_raw_output": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-walk-v002\\raw\\walk.png",
+  "raw_output_exists": false,
+  "raw_output_sha256": null,
+  "read_prompt_without_extra_frame_count_rewrite": true,
+  "post_generation": "root retain F/E original first; explicit RGB/native components via pinned project shared-row-scale wrapper only; independent per-frame roots and whole6 pose/anatomy/rigidhelmet/actual-motion QA; no static/slot fallback",
+  "formal_complete_units": 0,
+  "extraction_extension": {
+    "path": "F:\\Ourgame\\tools\\scripts\\extract-sprite-shared-row-scale.py",
+    "sha256": "31a4e3f10f4b0bbf3e9dd51c591e860c5c23f0cfa342cc0a86a498cd7de2b3bb",
+    "policy": "one fixed geometric scale for all native keyed component frames in the row",
+    "native_extractor_sha256": "f2a7902f01069668340d14217bd05c777f5c01853284102e211aba1013a45539",
+    "installed_skill_modified": false,
+    "caller": "root only; preparer must not execute extraction",
+    "placement_is_not_body_root": true
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-hero-near-support-far-passing-local-edit142",
+    "description": "Accepted single curated idle identity only: closed rigid bell helmet, amber visor eyes, charcoal plain underclothes, brown gloves and boots, empty hands; same right-facing three-quarter camera.",
+    "base_image": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\passing-far-leg-edit-inputs-v001\\references\\identity\\canonical131-idle-frame-0.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "near_support_far_pass_edit": {
+      "frames": 1,
+      "fps": 1,
+      "loop": false,
+      "action": "Single static local hip/thigh occlusion correction of140; near stands in front, far passes behind. No full-cycle or footlock claim."
+    }
+  },
+  "style": "Follow the single accepted curated idle anchor exactly: hand-drawn dark-fairytale cartoon, bold uneven ink outlines, two or three broad painted tones per material, bell helmet with amber visor eyes and charcoal plain undergarment. NOT pixel art, no realistic texture, PBR, new costume or tone redesign.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  },
+  "project_source_contract": {
+    "generation_request": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\passing-far-leg-edit-inputs-v001\\edit-request.json",
+    "native_request": 142,
+    "actual_prompt": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\passing-far-leg-edit-inputs-v001\\prompts\\edit-passing-far-leg.txt",
+    "adapter": "post-generation deterministic extraction; one-pose geometry/role truth existed before generation in role-contract.json",
+    "role_gate": "root static far passing compatible; independent review pending; no motion/runtime acceptance"
+  }
+}

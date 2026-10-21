@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-hero-single-far-contact-trial",
+    "description": "Accepted single curated idle identity only: closed rigid bell helmet, amber visor eyes, charcoal plain underclothes, brown gloves and boots, empty hands; same right-facing three-quarter camera.",
+    "base_image": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-opposite-anchor-v001\\references\\identity\\canonical-idle-frame-0.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "far_contact": {
+      "frames": 1,
+      "fps": 1,
+      "loop": false,
+      "action": "Exactly one static far-leg-forward contact trial; near arm front and near leg rear, far arm rear and far leg front. Not a walk cycle or locomotion state anchor."
+    }
+  },
+  "style": "Follow the single accepted curated idle anchor exactly: hand-drawn dark-fairytale cartoon, bold uneven ink outlines, two or three broad painted tones per material, bell helmet with amber visor eyes and charcoal plain undergarment. NOT pixel art, no realistic texture, PBR, new costume or tone redesign.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  },
+  "project_source_contract": {
+    "generation_request": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-opposite-anchor-v001\\anchor-request.json",
+    "native_request": 137,
+    "state": "post-generation deterministic single-pose extraction adapter; generation numeric truth was one pose in anchor-request.json",
+    "native_prompt": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-opposite-anchor-v001\\prompts\\far-contact-anchor.txt"
+  }
+}

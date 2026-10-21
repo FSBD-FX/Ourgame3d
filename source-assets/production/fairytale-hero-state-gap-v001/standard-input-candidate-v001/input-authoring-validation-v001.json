@@ -1,0 +1,182 @@
+{
+  "schema": "hero-state-text-authoring-validation-v001",
+  "scope": "AUTHORING_SANITY_ONLY_SYNTHETIC_INPUTS_NO_NATIVE_TEST_RUN",
+  "original_audit_files_unchanged": 29,
+  "reference_pins_verified": 42,
+  "python_AST_files": 4,
+  "numeric_rows_and_unknown_marker_fields_verified": true,
+  "guide_rasters_written": 0,
+  "native_or_UE_tests_run": 0,
+  "image_generation_calls": 0,
+  "synthetic_contract_examples": [
+    {
+      "role": "synthetic absolute-time boundary example",
+      "age": 0.059,
+      "result": {
+        "state": "dodge",
+        "frame": 0,
+        "active": true,
+        "direct_contact_protected_at_observation": false,
+        "travel_world": 27.287499999999998,
+        "travel_role": "Native unobstructed scalar travel formula, not a commanded actor position",
+        "facing_does_not_determine_move_vector": true,
+        "world_speed_is_not_an_art_easing_curve": true
+      }
+    },
+    {
+      "role": "synthetic absolute-time boundary example",
+      "age": 0.06,
+      "result": {
+        "state": "dodge",
+        "frame": 0,
+        "active": true,
+        "direct_contact_protected_at_observation": true,
+        "travel_world": 27.75,
+        "travel_role": "Native unobstructed scalar travel formula, not a commanded actor position",
+        "facing_does_not_determine_move_vector": true,
+        "world_speed_is_not_an_art_easing_curve": true
+      }
+    },
+    {
+      "role": "synthetic absolute-time boundary example",
+      "age": 0.199,
+      "result": {
+        "state": "dodge",
+        "frame": 1,
+        "active": true,
+        "direct_contact_protected_at_observation": true,
+        "travel_world": 92.03750000000001,
+        "travel_role": "Native unobstructed scalar travel formula, not a commanded actor position",
+        "facing_does_not_determine_move_vector": true,
+        "world_speed_is_not_an_art_easing_curve": true
+      }
+    },
+    {
+      "role": "synthetic absolute-time boundary example",
+      "age": 0.2,
+      "result": {
+        "state": "dodge",
+        "frame": 2,
+        "active": true,
+        "direct_contact_protected_at_observation": false,
+        "travel_world": 92.5,
+        "travel_role": "Native unobstructed scalar travel formula, not a commanded actor position",
+        "facing_does_not_determine_move_vector": true,
+        "world_speed_is_not_an_art_easing_curve": true
+      }
+    },
+    {
+      "role": "absolute Start+iframe boundary example; no cancellation epsilon",
+      "result": {
+        "state": "dodge",
+        "frame": 0,
+        "active": true,
+        "direct_contact_protected_at_observation": true,
+        "travel_world": 27.74999999892316,
+        "travel_role": "Native unobstructed scalar travel formula, not a commanded actor position",
+        "facing_does_not_determine_move_vector": true,
+        "world_speed_is_not_an_art_easing_curve": true
+      }
+    },
+    {
+      "role": "completed native endpoint example; no last dodge frame after Idle",
+      "result": {
+        "state": "dodge",
+        "frame": null,
+        "active": false,
+        "direct_contact_protected_at_observation": false,
+        "travel_world": 185.0,
+        "travel_role": "Native unobstructed scalar travel formula, not a commanded actor position",
+        "facing_does_not_determine_move_vector": true,
+        "world_speed_is_not_an_art_easing_curve": true
+      }
+    },
+    {
+      "role": "synthetic blocked example, never a real travel measurement",
+      "result": {
+        "state": "dodge",
+        "frame": 3,
+        "active": true,
+        "direct_contact_protected_at_observation": false,
+        "travel_world": 12.0,
+        "travel_role": "Actual native record Travelled; block does not shorten the .40 action",
+        "facing_does_not_determine_move_vector": true,
+        "world_speed_is_not_an_art_easing_curve": true
+      }
+    },
+    {
+      "role": "synthetic death art sampling example, not gameplay duration",
+      "age": 0.0,
+      "result": {
+        "state": "death",
+        "frame": 0,
+        "active": true,
+        "settled_visual_hold": false,
+        "clock": "Actual AnimationTime / AdvanceTerminalPresentation; not frozen SimulationTime",
+        "gameplay_deadline_seconds": null
+      }
+    },
+    {
+      "role": "synthetic death art sampling example, not gameplay duration",
+      "age": 0.2,
+      "result": {
+        "state": "death",
+        "frame": 1,
+        "active": true,
+        "settled_visual_hold": false,
+        "clock": "Actual AnimationTime / AdvanceTerminalPresentation; not frozen SimulationTime",
+        "gameplay_deadline_seconds": null
+      }
+    },
+    {
+      "role": "synthetic death art sampling example, not gameplay duration",
+      "age": 0.4,
+      "result": {
+        "state": "death",
+        "frame": 2,
+        "active": true,
+        "settled_visual_hold": false,
+        "clock": "Actual AnimationTime / AdvanceTerminalPresentation; not frozen SimulationTime",
+        "gameplay_deadline_seconds": null
+      }
+    },
+    {
+      "role": "synthetic death art sampling example, not gameplay duration",
+      "age": 0.6,
+      "result": {
+        "state": "death",
+        "frame": 3,
+        "active": true,
+        "settled_visual_hold": false,
+        "clock": "Actual AnimationTime / AdvanceTerminalPresentation; not frozen SimulationTime",
+        "gameplay_deadline_seconds": null
+      }
+    },
+    {
+      "role": "synthetic death art sampling example, not gameplay duration",
+      "age": 0.8,
+      "result": {
+        "state": "death",
+        "frame": 4,
+        "active": true,
+        "settled_visual_hold": true,
+        "clock": "Actual AnimationTime / AdvanceTerminalPresentation; not frozen SimulationTime",
+        "gameplay_deadline_seconds": null
+      }
+    },
+    {
+      "role": "synthetic death art sampling example, not gameplay duration",
+      "age": 30.0,
+      "result": {
+        "state": "death",
+        "frame": 4,
+        "active": true,
+        "settled_visual_hold": true,
+        "clock": "Actual AnimationTime / AdvanceTerminalPresentation; not frozen SimulationTime",
+        "gameplay_deadline_seconds": null
+      }
+    }
+  ],
+  "art_accepted": false,
+  "runtime_implemented": false
+}

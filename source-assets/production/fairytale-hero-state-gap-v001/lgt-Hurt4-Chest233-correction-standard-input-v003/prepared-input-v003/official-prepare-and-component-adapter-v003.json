@@ -1,0 +1,83 @@
+{
+  "argv": [
+    "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\prepare_sprite_run.py",
+    "--out-dir",
+    "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\lgt-Hurt4-Chest233-correction-standard-input-v003\\prepared-input-v003\\run-leather-Chest-Hurt4-unified-correction-v003",
+    "--character-id",
+    "current-brown-LGT-Chest-Hurt4-unified-correction-v003",
+    "--base-image",
+    "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\ready-integer-assembly-v001\\armor-layers\\Chest\\frame-0.png",
+    "--chroma-key",
+    "#00FF00",
+    "--request",
+    "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\lgt-Hurt4-Chest233-correction-standard-input-v003\\prepared-input-v003\\standard-request-input-v003.json"
+  ],
+  "actual_exit_code": 0,
+  "log": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-Hurt4-Chest233-correction-standard-input-v003/prepared-input-v003/logs/official-prepare-v003.log",
+    "bytes": 320,
+    "sha256": "ee7936f3ac9324094a824dd7fc4b12f453f022d3f574a89b96a5f4a876639c9c"
+  },
+  "prompt_adapter": [
+    {
+      "before": "Create a single horizontal sprite strip for the game character",
+      "after": "Create a single horizontal ISOLATED CHEST COMPONENT strip for the game character",
+      "count": 1
+    },
+    {
+      "before": "Do not simply copy the still reference pose. Generate distinct animation poses that create a readable cycle or action.",
+      "after": "Generate only four Chest component perspectives matching exactHurt227, including the strongly diagonal recoil geometry.",
+      "count": 1
+    },
+    {
+      "before": "Animation action:",
+      "after": "Chest component action:",
+      "count": 1
+    },
+    {
+      "before": "This row owns motion only. Spend the variation budget on limb contacts, arm counter-swing, body height, torso lean, head bob, hair bounce, and loop continuity.",
+      "after": "This row owns ONLY four garment perspectives. No wholebody/limb/head/sword generation.",
+      "count": 1
+    },
+    {
+      "before": "Exactly 4 full-body frames, left to right, in one horizontal row.",
+      "after": "Exactly FOUR complete isolated Chest component views, lefttoright; nofullbodyframes.",
+      "count": 1
+    },
+    {
+      "before": "each requested slot must contain exactly one complete full-body pose.",
+      "after": "each requested slot contains exactly one complete vest+belt+originalpouch component.",
+      "count": 1
+    },
+    {
+      "before": "- Prefer pose, expression, and silhouette changes over decorative effects.",
+      "after": "- Only required Chest perspective and actual emptyapertures; no facialexpression/decorativeeffects.",
+      "count": 1
+    },
+    {
+      "before": "- Effects are allowed only when state-relevant, opaque, hard-edged, sprite-like, fully inside the same frame slot, and physically touching or overlapping the character silhouette.",
+      "after": "- No effects orcharacter silhouette inthis isolatedcomponentrow.",
+      "count": 1
+    },
+    {
+      "before": "- Reject any pose that is cropped, overlaps another pose, crosses into a neighboring frame slot, or creates a separate disconnected component that is not attached to the character.",
+      "after": "- Reject croppedarmor andloosepieces. EachcompleteisolatedChest isintentionallyindependent ofthecharacter.",
+      "count": 1
+    },
+    {
+      "before": "Preserve the same silhouette, face, proportions, palette, material, and props across every frame.",
+      "after": "Preserve acceptedChest construction,physicalpouchside,palette,material andcoarseink. Match actualtorso geometry; truearm/neckaperturesareflatgreennegative space, notopaqueblackbacking.",
+      "count": 1
+    }
+  ],
+  "SG_tools_changed": false,
+  "minimum_used_pixels_both_extract_compose": 512,
+  "window": [
+    128,
+    100
+  ]
+}

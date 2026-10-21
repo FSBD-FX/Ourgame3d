@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-hero-common-walk-v001",
+    "description": "Accepted single curated idle identity only: closed rigid bell helmet, amber visor eyes, charcoal plain underclothes, brown gloves and boots, empty hands; same right-facing three-quarter camera.",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "walk": {
+      "frames": 6,
+      "fps": 12,
+      "loop": true,
+      "action": "A genuine in-place six-phase humanoid walk cycle in the accepted right-facing three-quarter camera. The attached single curated idle frame is the ONLY identity source: retain its bell helmet, amber eyes, charcoal plain underclothes, brown gloves and boots. Empty hands, no armor, no weapon, no cape. Keep the pelvis centered in each slot; ground progression belongs to the future engine, not shifting identical cutouts across slots. Near means camera-near leg/arm and far means camera-far leg/arm; keep each limb role throughout the cycle. Natural opposite arm/leg swing. At least one real stance foot or toe touches the same ground baseline in every pose, no airborne running. All six poses must have distinct knee/ankle/foot-contact relationships. Pose 1 (near_contact): support near heel accepts weight; far toe is ending rear support; near foot forward toward screen-right, heel down, toe slightly lifted; far foot behind toward screen-left, rear toe down, heel raised; arms near arm back; far arm forward; empty gloves open/relaxed; body soft contact compression through knees; rigid helmet keeps shape. Pose 2 (near_support_far_pass): support near sole flat under body; far foot clearly off ground; near foot weight-bearing stance foot moves backward relative to hips; far foot bent knee swings forward passing beneath pelvis, boot clears floor; arms arms pass through neutral; elbows remain recognizable; body pelvis rises slightly on near support; helmet translates as one rigid unit. Pose 3 (near_push_far_reach): support near rear toe still contacts; far leading heel is about to land; near foot behind pelvis, heel lifts for push-off; far foot extends forward with raised toe, not yet a second planted sole; arms near arm continues toward front as near leg travels back; far arm back; body small controlled weight transfer, no airborne run phase. Pose 4 (far_contact): support far heel accepts weight; near toe ends rear support; near foot behind toward screen-left, rear toe down, heel raised; far foot forward toward screen-right, heel down, toe slightly lifted; arms near arm forward; far arm back; opposite contact to frame0; body opposite contact compression; do not duplicate or flip the whole sprite. Pose 5 (far_support_near_pass): support far sole flat under body; near foot clearly off ground; near foot bent knee swings forward passing beneath pelvis, boot clears floor; far foot weight-bearing stance foot moves backward relative to hips; arms opposite passing phase to frame1; two hands remain distinct; body pelvis rises slightly on far support; same rigid helmet scale. Pose 6 (far_push_near_reach): support far rear toe still contacts; near leading heel is about to land; near foot extends forward to prepare the next frame0 heel contact; far foot behind pelvis, heel lifts for push-off; arms near arm heads back; far arm forward, preparing frame0; body flows into frame0 with no reset, body teleport or repeated contact pose. The bell helmet is rigid metal: keep its exact width, height, visor opening, two eye shapes, hinge/rivet and top knob across all poses. No helmet squash, shortening, perspective drift, blinking or changing eye count. Permit only a small coherent rigid head translation (at most about 6 source-pixel vertical range); knee/hip motion must carry the gait. Keep limb lengths, hand size, glove shape and boot identity stable. Preserve a visible separation of swing and stance feet, and near/far arm silhouettes where possible. Close the sixth-to-first seam through near heel contact; do not append a seventh pose or duplicate an idle pose. Same illustration scale, stable in-slot pelvis and complete head-to-toe silhouette within all safe margins. No dust, shadows, trails, FX, scenery, text, slot borders or labels in the art."
+    }
+  },
+  "style": "Follow the single accepted curated idle anchor exactly: hand-drawn dark-fairytale cartoon, bold uneven ink outlines, two or three broad painted tones per material, bell helmet with amber visor eyes and charcoal plain undergarment. NOT pixel art, no realistic texture, PBR, new costume or tone redesign.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

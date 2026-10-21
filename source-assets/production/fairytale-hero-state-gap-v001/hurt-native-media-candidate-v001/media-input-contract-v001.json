@@ -1,0 +1,45 @@
+{
+  "schema": "Hero-Hurt4-media-input-contract-v001",
+  "native_report_schema": "hero-SWD-LGT-Hurt4-native-observer-v001",
+  "native_session_schema": "hero-Hurt4-native-session-v001",
+  "scenario": "GuardAxeToHeroHurt4",
+  "independent_receipt": "Hurt-independent-native-verification-v001.json",
+  "exact_observer_checker_freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hurt-native-observer-candidate-v001/Hurt-native-observer-freeze-v001.json",
+    "bytes": 4696,
+    "sha256": "8100c1bd3022cdbcb4bf84e8162b4aa21198e6731fcb4c72ec120909ff37eb97"
+  },
+  "official_checker": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hurt-native-observer-candidate-v001/tooling/verify-Hurt-native-v001.py",
+    "bytes": 19758,
+    "sha256": "f61e3bd3947955e4dc1e41590e70d47a9c4773f11b956078a59843a59e23a8c3"
+  },
+  "VFR_reference_freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-full-known44-Death-media-candidate-v001/Death-media-freeze-v001.json",
+    "bytes": 2306,
+    "sha256": "d07dd113235b88e51f5612ff10c3c8feff872e04dcccb2e64a074698d8153fcb"
+  },
+  "VFR_reference_helper": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-full-known44-Death-media-candidate-v001/tooling/prepare-Death-native-media-v001.py",
+    "bytes": 17452,
+    "sha256": "9ccb6547348f8487cf960118c3317b6f1fc7de6063557a31d88a75b11155f5e8"
+  },
+  "source_samples": 4,
+  "source_texture_count": 32,
+  "reused_sword_count": 1,
+  "resident_texture_count": 33,
+  "source_phase_authority": "Actual Query elapsed/remaining and same actual Hurt draw, matched to independent optical native PNG witness; no fake400ms state end.",
+  "required_original_adjacent_joins": [
+    "Hurt3-to-first-Ready",
+    "Ready-to-first-Walk"
+  ],
+  "join_authority": "Earliest actual qualified post-Hurt Ready / Walk renderer and exactly consecutive callbacks; phase10/11 is not a transition oracle. Missing pair => exit3 with actual adjacent renderer changes, no fabricated replacement.",
+  "timing_authority": "Native monotonic stop minus start plus one real callback offset per PNG. Independent lossless CRC/FIFO contract is rerun unchanged.",
+  "write_policy": "Native archive read-only; --output separate absolute unused leaf, outside archive. Failed output retained.",
+  "Root_execution_gate": "After BOTH native captures terminate; avoid heavy PNG validation/encoding IO during another capture.",
+  "UE_started": false,
+  "ffmpeg_started": false,
+  "View_used": false,
+  "native_input_validated_by_worker": false,
+  "FinalAccepted": false
+}

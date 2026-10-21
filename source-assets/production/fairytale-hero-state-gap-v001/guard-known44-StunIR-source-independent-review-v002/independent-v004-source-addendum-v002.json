@@ -1,0 +1,121 @@
+{
+  "schema": "guard-known44-StunIR-source-v004-independent-addendum-v002",
+  "candidate_freeze": {
+    "path": "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\presentation-full-known44-combat-observer-candidate-v004\\source-StunIR-freeze-v004.json",
+    "bytes": 1003,
+    "sha256": "2c820bfbcd6aadcf600ca7decf5e18c58d1edb275175149dceac68fae0c120ea"
+  },
+  "four_members_two_pin_passes": [
+    {
+      "pass": 1,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\presentation-full-known44-combat-observer-candidate-v004\\new-source\\DungeonGuardArtCombatProbeV003.h",
+      "bytes": 869,
+      "sha256": "6609004b697895ccafdd81aa30f989af4f9fa98a9000e78c9ea884c3c4625f94"
+    },
+    {
+      "pass": 1,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\presentation-full-known44-combat-observer-candidate-v004\\new-source\\DungeonGuardArtCombatProbeV003.cpp",
+      "bytes": 46806,
+      "sha256": "569539aed0966cf47cba330983cf3507b5695935621b659b8bf299cb17c1d735"
+    },
+    {
+      "pass": 1,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\presentation-full-known44-combat-observer-candidate-v004\\patches\\minimal-HUD-combat-startup-v003.patch",
+      "bytes": 1424,
+      "sha256": "f2292273694794a41bf7405134d7a873cd7bfc6febb8d7eaf3f87e63d3810d2b"
+    },
+    {
+      "pass": 1,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\presentation-full-known44-combat-observer-candidate-v004\\proof-protocol-v003.json",
+      "bytes": 1473,
+      "sha256": "57e2ebbf270ca6a29da4343824990ae3145259192aad7f140e650dec16727cf4"
+    },
+    {
+      "pass": 2,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\presentation-full-known44-combat-observer-candidate-v004\\new-source\\DungeonGuardArtCombatProbeV003.h",
+      "bytes": 869,
+      "sha256": "6609004b697895ccafdd81aa30f989af4f9fa98a9000e78c9ea884c3c4625f94"
+    },
+    {
+      "pass": 2,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\presentation-full-known44-combat-observer-candidate-v004\\new-source\\DungeonGuardArtCombatProbeV003.cpp",
+      "bytes": 46806,
+      "sha256": "569539aed0966cf47cba330983cf3507b5695935621b659b8bf299cb17c1d735"
+    },
+    {
+      "pass": 2,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\presentation-full-known44-combat-observer-candidate-v004\\patches\\minimal-HUD-combat-startup-v003.patch",
+      "bytes": 1424,
+      "sha256": "f2292273694794a41bf7405134d7a873cd7bfc6febb8d7eaf3f87e63d3810d2b"
+    },
+    {
+      "pass": 2,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-guard-v001\\presentation-full-known44-combat-observer-candidate-v004\\proof-protocol-v003.json",
+      "bytes": 1473,
+      "sha256": "57e2ebbf270ca6a29da4343824990ae3145259192aad7f140e650dec16727cf4"
+    }
+  ],
+  "pin_differences": 0,
+  "reviewed_diff": {
+    "bytes_utf8": 8771,
+    "sha256": "833c11b81f0a7ae2a333ab925c2a7144bbb03530be1b74e7c95da525d087f14d",
+    "hunks": 7,
+    "stored": "source-v003-to-v004-reviewed.diff"
+  },
+  "unchanged": {
+    "header": true,
+    "minimal_HUD_patch": true,
+    "PinActualBreak": true,
+    "MayRequestJ": true,
+    "SpatialCredit": true,
+    "Observe_original_window_failfast": true
+  },
+  "resolved_v003_findings": [
+    "P2_right_facing_not_established",
+    "P2_rectangular_waypoint_not_ellipse_guarantee"
+  ],
+  "facts": [
+    {
+      "candidate_lines": [
+        122,
+        132,
+        398,
+        405
+      ],
+      "finding": "ReachNormalStrikePoint uses actual observed position and actor Facing. Staging140; only real inward A/D moves/faces the player. J gate requires toward-Guard Facing and signedDX110..132/absDY<=6."
+    },
+    {
+      "geometry": {
+        "max_abs_dx": 132,
+        "max_abs_dy": 6,
+        "SWD_stage0_range": 135,
+        "SWD_depth": 46,
+        "max_squared_ellipse_radius": 0.9730626152302271,
+        "strictly_inside": true
+      },
+      "finding": "Entire permitted default SWD rectangle is within actual forward ellipse, provided native facing stays toward Guard. No jitter/scale/stat change."
+    },
+    {
+      "candidate_lines": [
+        128,
+        256
+      ],
+      "finding": "The MoveTo && recursive Reach expression is bounded: MoveTo only returns true within per-axis6 of staging140/0, so next same-state invocation lies inside initial110..150/dy6 band. Depth at most2 for finite authoritative state. Actual input is not synchronous movement."
+    },
+    {
+      "finding": "No new compile/private API blocker or Actor facing/position/HP/time write found. Existing Stun85 identity binding, original deadlines, SourceEventID0 oracle, mask/draw qualification and original-boundary failfast were byte-equal across reviewed helper blocks."
+    }
+  ],
+  "line_reference_addendum_to_v001": {
+    "original_machine_JSON_finding": "P2_right_facing_not_established/source_evidence/DungeonFighter.cpp/631",
+    "correct_line": 630,
+    "reason": "Context.Facing=Facing is line630;631 is Grounded. Other cited motion/ContentCombat/hit-shape evidence is unchanged. Preserve old freeze."
+  },
+  "limitations": [
+    "Static review only; no UHT/UBT/UE/native run or fresh media View.",
+    "Native30FPS hitches, hero hurt/J queue admission/contact/poise decay/RNG remain genuine reachability risks.",
+    "Runtime report/schema remainsv003 while source candidate versionv004; new launcher/prereg/checker must bind exactv004 Source freeze, not v003. Tooling whole freeze not audited here.",
+    "No arbitrary-side native success, Death/full57/full room clear or art/audio acceptance."
+  ],
+  "recommendation": "The two reported source geometry gaps are resolved by v004 normal-input approach. No remaining static source blocker identified in this narrow scope; Root can integrate/build and verify real native Stun4+IR4 once new frozen tooling/prereg binds v004."
+}

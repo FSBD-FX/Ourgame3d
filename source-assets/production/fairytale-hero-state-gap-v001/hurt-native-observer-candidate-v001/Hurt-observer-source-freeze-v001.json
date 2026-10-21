@@ -1,0 +1,35 @@
+{
+  "schema": "Hero-Hurt4-independent-native-observer-source-freeze-v001",
+  "files": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hurt-native-observer-candidate-v001/new-source/DungeonHeroHurtProbeV001.cpp",
+      "bytes": 34018,
+      "sha256": "c7114a7866d0fd25a77cb8b80bf68474d20faa4680d7a2f1386d6c87d64934c9"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hurt-native-observer-candidate-v001/new-source/DungeonHeroHurtProbeV001.h",
+      "bytes": 687,
+      "sha256": "e3c67f22566c883e11d1eac3fdbb6125bf36bbbb2789e936243459e890c18891"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hurt-native-observer-candidate-v001/patches/minimal-HUD-Hurt-observer-startup-v001.patch",
+      "bytes": 1123,
+      "sha256": "fadf7ae90fd5e4a2e624c5dbe9a968f5b0c43348a06439a3eb53778f539cafea"
+    }
+  ],
+  "agreed_HUD_trace_header_at_source_freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/hurt-runtime-production-candidate-v001/new-source/DungeonFairytaleSwordHurtDrawState.h",
+    "bytes": 1293,
+    "sha256": "a3e002dc70af322fffe85aa0f9b1cf71fa4b96a9a5871583f56f1e7ac08969e3"
+  },
+  "HUD_trace_api": "const FDungeonFairytaleSwordHurtDraw& GetFairytaleSwordHurtDraw() const; exact same sharedPlan and actual float quad parameters; no second planner",
+  "host_static_no_player_Guard_damage_or_HP_poise_clock_actor_writes": true,
+  "diagnostic_public_damage": "Exactly two explicit predecessor Knight/Bat only; actual Guard/player never called",
+  "kernel_feasibility": "Base LGT poise30 and armor14 + actual Guard Axe24damage/30stagger => one nonlethal break; real HP loss/journal/window proves it",
+  "inactive_query_contract": "Query returns false after actual native Hurt exits; no nominal400ms forced exit",
+  "source_count_policy": "Dynamic compiled pins, no hardcoded future Source count",
+  "native_build_receipt": null,
+  "full_semantic_GREEN_receipt": null,
+  "actual_native_observer_receipt": null,
+  "FinalAccepted": false
+}

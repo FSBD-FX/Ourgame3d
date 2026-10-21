@@ -1,0 +1,145 @@
+{
+  "schema": "fairytale-hero-local-far-passing-edit-contract-v1",
+  "prepared_at_system_local": "2026-10-16T00:51:05+08:00",
+  "status": "prepared_only_root_retention_and_review_required",
+  "output_pose_count": 1,
+  "loop": false,
+  "native_facing": 1,
+  "target_raw_dimensions_px": [
+    1254,
+    1254
+  ],
+  "reference_roles": [
+    {
+      "order": 1,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\passing-far-leg-edit-inputs-v001\\references\\edit-target\\request140-passing-pose.png",
+      "sha256": "33b3792646b9d53e08a3ebc7ad9f9ae2f9cac307ae7c082fc8f48989888750da",
+      "source": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-passing-pose-inputs-v001\\near_support_far_pass\\raw\\passing-pose.png",
+      "source_request": 140,
+      "role": "EDIT TARGET only; not identity truth"
+    },
+    {
+      "order": 2,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\passing-far-leg-edit-inputs-v001\\references\\identity\\canonical131-idle-frame-0.png",
+      "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718",
+      "source": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-idle-v002\\curated\\frame-0.png",
+      "source_request": 131,
+      "role": "sole identity/style; does not prescribe idle stance"
+    },
+    {
+      "order": 3,
+      "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\passing-far-leg-edit-inputs-v001\\references\\technical\\thick-occlusion-guide-v001.png",
+      "sha256": "1840eccbb056e377895958f245c81091e4a10d8ce5bcdc417e7e0ab6b73195da",
+      "role": "original filled-volume depth geometry only; not art or mask"
+    }
+  ],
+  "editable": [
+    "trouser hip attachment",
+    "thigh contour and depth overlap",
+    "knee contour/shading",
+    "minimal adjoining trouser seam"
+  ],
+  "preserve": [
+    "upper body artwork",
+    "helmet silhouette and identity",
+    "two amber eyes",
+    "arms and gloves",
+    "belt",
+    "both existing boots and low-lift geometry",
+    "camera",
+    "whole-body placement",
+    "flat green background"
+  ],
+  "review_roi_hint_target_px": [
+    490,
+    755,
+    775,
+    1020
+  ],
+  "roi_semantics": "rough human review area only; not a measured segmentation mask and not permission to repaint boots or belt",
+  "fixed_depth_roles": {
+    "near": "foreground vertical stance; root at visible near pelvis; occludes far thigh root",
+    "far": "rear-depth low forward passing; root behind near thigh; emerges at right edge toward forward knee/raised boot"
+  },
+  "guide": {
+    "canvas_px": [
+      512,
+      512
+    ],
+    "near_rgb_hex": "#CF3F41",
+    "far_rgb_hex": "#356EC5",
+    "gray_upper_body": "schematic only; never output identity",
+    "layer_order": [
+      "gray schematic upper body",
+      "far blue thigh/shin/boot",
+      "near red thigh/shin/boot in front"
+    ],
+    "near_chain_design_px": [
+      [
+        238,
+        328
+      ],
+      [
+        236,
+        392
+      ],
+      [
+        229,
+        439
+      ]
+    ],
+    "far_chain_design_px": [
+      [
+        257,
+        329
+      ],
+      [
+        298,
+        382
+      ],
+      [
+        290,
+        424
+      ]
+    ],
+    "ground_sole_y_design_only": 464,
+    "swing_sole_y_design_only": 442,
+    "actual_art_pixels_used_to_draw_guide": false,
+    "svg": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\passing-far-leg-edit-inputs-v001\\references\\technical\\thick-occlusion-guide-v001.svg",
+    "svg_sha256": "84eb8236d5216ca30f48fac1727d719d0a47e7d07672e7cd14cea06f9f5be825"
+  },
+  "prohibitions": [
+    "whole image mirror",
+    "relabel140 as correct without changing anatomy",
+    "local drawing on existing art",
+    "copy failed139 whole row",
+    "attach135/136 as identity",
+    "normalize motion by reordering or retiming"
+  ],
+  "actual_output_measurements": {
+    "raw_sha256": null,
+    "alpha_bbox": null,
+    "support_boot_roi": null,
+    "swing_boot_roi": null,
+    "ground_root_px": null,
+    "clearance_px": null
+  },
+  "gates_pending": [
+    "root F/E input retention",
+    "actual new guide view by root",
+    "root sole native edit generation",
+    "raw F/E retention before viewing",
+    "actual upper-body preservation and hip-knee-boot static review",
+    "independent opposite-role comparison"
+  ],
+  "does_not_establish": [
+    "complete walk cycle",
+    "motion or seam pass",
+    "foot root or speed",
+    "runtime playback",
+    "UE import",
+    "final user art acceptance"
+  ],
+  "future_walk_policy": "One corrected static passing pose is only a motion-role candidate. A future cycle needs both opposite contacts and passing roles plus six-phase guidance; canonical131 remains sole identity. No single-pose-only final locomotion input.",
+  "formal_complete_units": 0
+}

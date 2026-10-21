@@ -1,0 +1,617 @@
+{
+  "schema": "guard-observer-route-independent-review-v001",
+  "scope": "Read-only exact candidate/current Source and retained media review. No UE/UBT/native launch; no original report or production edits.",
+  "freeze_checks": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-observer-route-candidate-v009/source-route-freeze-v009.json",
+      "bytes": 1089,
+      "sha256": "6d8b7a84cd8697b530c9321f089047b9df64a0a478fb5415be31e74eaf25d1ce",
+      "members_checked": 4,
+      "mismatches": 0
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-observer-route-candidate-v009/observer-route-freeze-v009.json",
+      "bytes": 3428,
+      "sha256": "ddbc99dcae3853a00d6ccf386606d4b8eeb3b8473dec5f103ef6a706997f69ec",
+      "members_checked": 16,
+      "mismatches": 0
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-observer-route-tooling-candidate-v010/observer-route-tooling-freeze-v010.json",
+      "bytes": 1962,
+      "sha256": "00bd8e387cb3bb19766025c7b37b149a8eb0ef262ec033631111eb2b0c85142e",
+      "members_checked": 9,
+      "mismatches": 0
+    }
+  ],
+  "exact_source_diff": {
+    "reconstructed_before": {
+      "bytes": 29131,
+      "sha256": "ee9706ff2b0dd6f4608862507d62e2c5950ac706dfaf2044f76b82a3a5ed87e8"
+    },
+    "before_pin_matches": true,
+    "six_hunks_reverse_and_forward_apply_exact": true,
+    "hunks": [
+      {
+        "old_start": 54,
+        "old_count": 7,
+        "new_start": 54,
+        "new_count": 9
+      },
+      {
+        "old_start": 68,
+        "old_count": 16,
+        "new_start": 70,
+        "new_count": 79
+      },
+      {
+        "old_start": 108,
+        "old_count": 7,
+        "new_start": 173,
+        "new_count": 16
+      },
+      {
+        "old_start": 156,
+        "old_count": 16,
+        "new_start": 230,
+        "new_count": 16
+      },
+      {
+        "old_start": 177,
+        "old_count": 8,
+        "new_start": 251,
+        "new_count": 8
+      },
+      {
+        "old_start": 254,
+        "old_count": 6,
+        "new_start": 328,
+        "new_count": 8
+      }
+    ],
+    "added_lines": 85,
+    "removed_lines": 9,
+    "actual_after_pin": {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGuardArtPartialProbe.cpp",
+      "bytes": 35573,
+      "sha256": "b635e212606ac77b3728c6dc8efdd2ed49ef108ffd5d2234fac2775d580e849f"
+    },
+    "actual_cpp_candidate_equivalence": "373 CRLF conversions only; LF normalized exact match",
+    "header_normalized_equal": true
+  },
+  "source_geometry": {
+    "player_half": [
+      18.0,
+      16.0
+    ],
+    "guard_half": [
+      40.0,
+      28.0
+    ],
+    "clearance": 8.0,
+    "expanded_barrier": [
+      -1126.0,
+      36.0,
+      -674.0,
+      184.0
+    ],
+    "expanded_guard": [
+      -866.0,
+      -212.0,
+      -734.0,
+      -108.0
+    ],
+    "routes": [
+      {
+        "side": -1,
+        "points": [
+          [
+            -1180.0,
+            0.0
+          ],
+          [
+            -1180.0,
+            -20.0
+          ],
+          [
+            -950.0,
+            -20.0
+          ],
+          [
+            -950.0,
+            -160.0
+          ]
+        ],
+        "all_three_axis_aligned_body_expanded_legs_clear": true,
+        "endpoint_signed_dx": 150.0,
+        "endpoint_abs_dy": 0.0,
+        "endpoint_distance": 150.0
+      },
+      {
+        "side": 1,
+        "points": [
+          [
+            -1180.0,
+            0.0
+          ],
+          [
+            -1180.0,
+            -20.0
+          ],
+          [
+            -650.0,
+            -20.0
+          ],
+          [
+            -650.0,
+            -160.0
+          ]
+        ],
+        "all_three_axis_aligned_body_expanded_legs_clear": true,
+        "endpoint_signed_dx": 150.0,
+        "endpoint_abs_dy": 0.0,
+        "endpoint_distance": 150.0
+      }
+    ],
+    "actual_definition_pins": [
+      {
+        "path": "UnrealGame/Source/CodexDungeon/DungeonRoomLayout.h",
+        "bytes": 1026,
+        "sha256": "ee588bb4944224b57027da359e4f6c4bd884baa97eba9bdf9c6badcbcdbdf29c"
+      },
+      {
+        "path": "UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+        "bytes": 121495,
+        "sha256": "c31ae4c10a52707ba555864012a1ef920c855328e83a6d8d478a8ba3fd36cebb"
+      },
+      {
+        "path": "UnrealGame/Source/CodexDungeon/DungeonStoneGuard.h",
+        "bytes": 5894,
+        "sha256": "6c71de106f3d728aec593d1528331714442e6756878cf49af3d04f48e68eb9de"
+      }
+    ]
+  },
+  "source_review_conclusion": "No clear P1/P2 C++ route or spatial-credit blocker found in reviewed v009 diff. Actual normal input remains authoritative; no native success inferred.",
+  "v009_tooling_P2": {
+    "helper_line": 47,
+    "main_caller_line": 196,
+    "helper_expected": "guard-art-partial-native-observer-v002",
+    "main_and_native_emit": "guard-art-partial-native-observer-v009",
+    "deterministic_new_report_rejection": true,
+    "old_freeze_preserved": true
+  },
+  "v010_narrow_recheck": {
+    "freeze_sha256": "00bd8e387cb3bb19766025c7b37b149a8eb0ef262ec033631111eb2b0c85142e",
+    "nine_pinned_members_mismatches": 0,
+    "source_dependency_exact_v009_source_freeze": true,
+    "native_schema_exact_v009": true,
+    "helper_schema_unconditional_before_decode": true,
+    "session_schema_exact_v010": true,
+    "launcher_main_helper_paths_exist_and_match": true,
+    "helper_assert_AST_multiset_unchanged_except_expected_schema": true,
+    "new_UE_or_media_execution": false,
+    "conclusion": "The identified schema contradiction is resolved in frozen NEW v010 tooling; this is static validation only."
+  },
+  "independent_original_spatial_recount": [
+    {
+      "report": {
+        "path": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/原件/runtime-report.json",
+        "bytes": 2530905,
+        "sha256": "7593bc88609b5c5e16307364ae890ce94065ee00f01e20806f5ed1e5a91f94d2"
+      },
+      "requested_side": -1,
+      "actual_side": -1,
+      "strict_observations": 247,
+      "strict_unique_Ready_draws": 29,
+      "strict_unique_early_AxeWindup_draws": 30,
+      "max_signed_dx": 380,
+      "final_dx": -151.03835876860694,
+      "final_dy": -2.2095527745469212,
+      "final_HP": 100,
+      "strict_position_frame_bitmasks": {
+        "Ready": 15,
+        "AxeWindupEarly": 7
+      }
+    },
+    {
+      "report": {
+        "path": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v003/原件/runtime-report.json",
+        "bytes": 2571017,
+        "sha256": "4323f51a464c198849378771c7f0f86d8514eb8687b74f76905ed185198caf69"
+      },
+      "requested_side": 1,
+      "actual_side": 1,
+      "strict_observations": 0,
+      "strict_unique_Ready_draws": 0,
+      "strict_unique_early_AxeWindup_draws": 0,
+      "max_signed_dx": 1.6022676888578644,
+      "final_dx": 1.6022676888578644,
+      "final_dy": 44.000000000000014,
+      "final_HP": 26.31578826904297,
+      "strict_position_frame_bitmasks": {
+        "Ready": 0,
+        "AxeWindupEarly": 0
+      }
+    }
+  ],
+  "retention_checks": [
+    {
+      "E_index": {
+        "path": "E:/OurGame/Knight/过程图稿与视频/2026-10-18-OurgameUE-guard-partial-left-native-ZIP-v411/E-retention-index-v001.json",
+        "bytes": 208919,
+        "sha256": "420023386f39f84143d9d2dbe10417353800b6eb8cb818dbd54cb67a2fc4df00"
+      },
+      "members": [
+        {
+          "source": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/原件/MovieFrame00654.png",
+          "member": "原件/MovieFrame00654.png",
+          "bytes": 3693103,
+          "sha256": "4e55e17e147c12dbb09c4ed16f8d6869cd7c9b605844c9ca92e10476b2ed3a13"
+        },
+        {
+          "source": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/原件/MovieFrame00655.png",
+          "member": "原件/MovieFrame00655.png",
+          "bytes": 3693103,
+          "sha256": "f754c5349b11189f434a099b3e255c7ad48a2eebd3d3f0d5318477d02dda037a"
+        },
+        {
+          "source": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/原件/MovieFrame00656.png",
+          "member": "原件/MovieFrame00656.png",
+          "bytes": 3693103,
+          "sha256": "e5bb62ff30bc105537f7b440dfad6da39d01d1ba69648e1d350520e056a4abb6"
+        },
+        {
+          "source": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/原件/native-frame-pixels.jsonl",
+          "member": "原件/native-frame-pixels.jsonl",
+          "bytes": 362960,
+          "sha256": "5eea813590dbb0478878bb8bc306e01ea2266464cccf4350b28094181e9667a9"
+        },
+        {
+          "source": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/原件/runtime-report.json",
+          "member": "原件/runtime-report.json",
+          "bytes": 2530905,
+          "sha256": "7593bc88609b5c5e16307364ae890ce94065ee00f01e20806f5ed1e5a91f94d2"
+        }
+      ],
+      "independent_comparison_passes": 2,
+      "mismatches": 0
+    },
+    {
+      "E_index": {
+        "path": "E:/OurGame/Knight/过程图稿与视频/2026-10-18-OurgameUE-guard-partial-right-native-ZIP-v412/E-retention-index-v001.json",
+        "bytes": 212833,
+        "sha256": "15ccf7c8210c761ac15c9746775edba6a3c56ccf71381536ac7d6c005220fdd8"
+      },
+      "members": [
+        {
+          "source": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v003/原件/runtime-report.json",
+          "member": "原件/runtime-report.json",
+          "bytes": 2571017,
+          "sha256": "4323f51a464c198849378771c7f0f86d8514eb8687b74f76905ed185198caf69"
+        }
+      ],
+      "independent_comparison_passes": 2,
+      "mismatches": 0
+    }
+  ],
+  "native_tail": [
+    {
+      "movie_index": 654,
+      "PNG": {
+        "path": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/原件/MovieFrame00654.png",
+        "bytes": 3693103,
+        "sha256": "4e55e17e147c12dbb09c4ed16f8d6869cd7c9b605844c9ca92e10476b2ed3a13"
+      },
+      "observation_index": 654,
+      "sim": 21.80116070061922,
+      "phase": "normal_guard_approach_and_cycles",
+      "draws": [
+        {
+          "DrawId": "414",
+          "EntityId": "4",
+          "Selection": {
+            "Valid": true,
+            "MaterialHit": false,
+            "TerminalPresentation": false,
+            "Clip": "StompFollow",
+            "Frame": 5,
+            "Facing": -1,
+            "EntityId": "4",
+            "AttackId": "4",
+            "SourceEventId": "0",
+            "MaterialEventId": "0",
+            "Phase": 5,
+            "SampleTime": 21.80116070061922,
+            "IntervalStart": 20.157343492817763,
+            "IntervalEnd": 21.80734349281776,
+            "AcceptedDistance": 0,
+            "DistancePhase": 0
+          },
+          "OptIn": true,
+          "TrialAllowed": false,
+          "FinalAccepted": false,
+          "RegistrationReady": false,
+          "TextureReady": false,
+          "Drawn": false,
+          "ProceduralFallback": true,
+          "WholebodyIncludesAxe": true,
+          "NativeSourceId": 0,
+          "AssetFrame": 5,
+          "AssetClip": "StompFollow",
+          "TexturePath": "",
+          "SourceSHA256": "",
+          "TrialApprovalRecord": "",
+          "RegistrationEvidenceSHA256": "",
+          "MissingReason": "Requested native frame absent",
+          "StandingExtent": 0,
+          "TargetBodyHeight": 100.8,
+          "RowScale": 0,
+          "CanvasSize": 0,
+          "SourceFloorPivot": [
+            0,
+            0
+          ],
+          "GroundScreen": [
+            0,
+            0
+          ],
+          "TopScreen": [
+            0,
+            0
+          ],
+          "DrawStack": []
+        }
+      ],
+      "pixel_receipt": {
+        "file": "MovieFrame00654.png",
+        "width": 1280,
+        "height": 720,
+        "native_BGRA8_crc32": 1158424988,
+        "saved": true,
+        "save_wall_s": 0.009655301,
+        "async_writer": true,
+        "writer_sequence": 655,
+        "filename_reserved": true,
+        "filename_reservation_mode": "Windows_CreateFileW_CREATE_NEW",
+        "copied_BGRA8_crc32": 1158424988,
+        "copy_crc_matches": true,
+        "capture_callback_monotonic_s": 17015496.0474777,
+        "reservation_completed_monotonic_s": 17015496.0481233,
+        "enqueued_monotonic_s": 17015496.0500157,
+        "save_started_monotonic_s": 17015496.0500659,
+        "save_completed_monotonic_s": 17015496.0597212
+      },
+      "processed_observation_monotonic_s": 17015496.0500309,
+      "processed_after_capture_callback_s": 0.0025531984865665436,
+      "visible_guard": "gray procedural block figure"
+    },
+    {
+      "movie_index": 655,
+      "PNG": {
+        "path": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/原件/MovieFrame00655.png",
+        "bytes": 3693103,
+        "sha256": "f754c5349b11189f434a099b3e255c7ad48a2eebd3d3f0d5318477d02dda037a"
+      },
+      "observation_index": 655,
+      "sim": 21.83449410274625,
+      "phase": "normal_guard_approach_and_cycles",
+      "draws": [
+        {
+          "DrawId": "415",
+          "EntityId": "4",
+          "Selection": {
+            "Valid": true,
+            "MaterialHit": false,
+            "TerminalPresentation": false,
+            "Clip": "Ready",
+            "Frame": 0,
+            "Facing": -1,
+            "EntityId": "4",
+            "AttackId": "4",
+            "SourceEventId": "0",
+            "MaterialEventId": "0",
+            "Phase": 2,
+            "SampleTime": 21.83449410274625,
+            "IntervalStart": 10.607343492817764,
+            "IntervalEnd": 21.83449410274625,
+            "AcceptedDistance": 0,
+            "DistancePhase": 0
+          },
+          "OptIn": true,
+          "TrialAllowed": true,
+          "FinalAccepted": false,
+          "RegistrationReady": true,
+          "TextureReady": true,
+          "Drawn": true,
+          "ProceduralFallback": false,
+          "WholebodyIncludesAxe": true,
+          "NativeSourceId": 209,
+          "AssetFrame": 0,
+          "AssetClip": "Ready",
+          "TexturePath": "/Game/Production/FirstBatch/GuardWhole_v001/Ready/T_Guard209_Ready_00.T_Guard209_Ready_00",
+          "SourceSHA256": "54df5fe718a98e1568513193dbde479aff6fd393d623755feb77813cacb4e804",
+          "TrialApprovalRecord": "source-assets/production/fairytale-guard-v001/root-trial-registration-v001/approval.json",
+          "RegistrationEvidenceSHA256": "32162f683dcccdd52f90dd94c5be667ca73d2b60be9e486dca4007809b730dfe",
+          "MissingReason": "",
+          "StandingExtent": 415,
+          "TargetBodyHeight": 100.8,
+          "RowScale": 0.24289156626506023,
+          "CanvasSize": 124.36048192771084,
+          "SourceFloorPivot": [
+            235,
+            464
+          ],
+          "GroundScreen": [
+            417.4999694824219,
+            550.7999877929688
+          ],
+          "TopScreen": [
+            350.2190246582031,
+            438.09832763671875
+          ],
+          "DrawStack": [
+            "/Game/Production/FirstBatch/GuardWhole_v001/Ready/T_Guard209_Ready_00.T_Guard209_Ready_00"
+          ]
+        }
+      ],
+      "pixel_receipt": {
+        "file": "MovieFrame00655.png",
+        "width": 1280,
+        "height": 720,
+        "native_BGRA8_crc32": 1995932219,
+        "saved": true,
+        "save_wall_s": 0.0093356,
+        "async_writer": true,
+        "writer_sequence": 656,
+        "filename_reserved": true,
+        "filename_reservation_mode": "Windows_CreateFileW_CREATE_NEW",
+        "copied_BGRA8_crc32": 1995932219,
+        "copy_crc_matches": true,
+        "capture_callback_monotonic_s": 17015496.0808237,
+        "reservation_completed_monotonic_s": 17015496.0813207,
+        "enqueued_monotonic_s": 17015496.0831838,
+        "save_started_monotonic_s": 17015496.0831995,
+        "save_completed_monotonic_s": 17015496.0925351
+      },
+      "processed_observation_monotonic_s": 17015496.0831986,
+      "processed_after_capture_callback_s": 0.0023748986423015594,
+      "visible_guard": "wholebody stone Guard Ready pose0"
+    },
+    {
+      "movie_index": 656,
+      "PNG": {
+        "path": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/原件/MovieFrame00656.png",
+        "bytes": 3693103,
+        "sha256": "e5bb62ff30bc105537f7b440dfad6da39d01d1ba69648e1d350520e056a4abb6"
+      },
+      "observation_index": 656,
+      "sim": 21.86782770231366,
+      "phase": "complete",
+      "draws": [
+        {
+          "DrawId": "416",
+          "EntityId": "4",
+          "Selection": {
+            "Valid": true,
+            "MaterialHit": false,
+            "TerminalPresentation": false,
+            "Clip": "Ready",
+            "Frame": 1,
+            "Facing": -1,
+            "EntityId": "4",
+            "AttackId": "4",
+            "SourceEventId": "0",
+            "MaterialEventId": "0",
+            "Phase": 2,
+            "SampleTime": 21.86782770231366,
+            "IntervalStart": 10.607343492817764,
+            "IntervalEnd": 21.86782770231366,
+            "AcceptedDistance": 0,
+            "DistancePhase": 0
+          },
+          "OptIn": true,
+          "TrialAllowed": true,
+          "FinalAccepted": false,
+          "RegistrationReady": true,
+          "TextureReady": true,
+          "Drawn": true,
+          "ProceduralFallback": false,
+          "WholebodyIncludesAxe": true,
+          "NativeSourceId": 209,
+          "AssetFrame": 1,
+          "AssetClip": "Ready",
+          "TexturePath": "/Game/Production/FirstBatch/GuardWhole_v001/Ready/T_Guard209_Ready_01.T_Guard209_Ready_01",
+          "SourceSHA256": "3fe3841442c48497d583f4c2622ef9c0bea3c1dc5082cf3b3d373760d547b0e7",
+          "TrialApprovalRecord": "source-assets/production/fairytale-guard-v001/root-trial-registration-v001/approval.json",
+          "RegistrationEvidenceSHA256": "32162f683dcccdd52f90dd94c5be667ca73d2b60be9e486dca4007809b730dfe",
+          "MissingReason": "",
+          "StandingExtent": 415,
+          "TargetBodyHeight": 100.8,
+          "RowScale": 0.24289156626506023,
+          "CanvasSize": 124.36048192771084,
+          "SourceFloorPivot": [
+            234,
+            464
+          ],
+          "GroundScreen": [
+            417.4999694824219,
+            550.7999877929688
+          ],
+          "TopScreen": [
+            349.97613525390625,
+            438.09832763671875
+          ],
+          "DrawStack": [
+            "/Game/Production/FirstBatch/GuardWhole_v001/Ready/T_Guard209_Ready_01.T_Guard209_Ready_01"
+          ]
+        }
+      ],
+      "pixel_receipt": {
+        "file": "MovieFrame00656.png",
+        "width": 1280,
+        "height": 720,
+        "native_BGRA8_crc32": 1614396704,
+        "saved": true,
+        "save_wall_s": 0.010792498,
+        "async_writer": true,
+        "writer_sequence": 657,
+        "filename_reserved": true,
+        "filename_reservation_mode": "Windows_CreateFileW_CREATE_NEW",
+        "copied_BGRA8_crc32": 1614396704,
+        "copy_crc_matches": true,
+        "capture_callback_monotonic_s": 17015496.1144733,
+        "reservation_completed_monotonic_s": 17015496.1152854,
+        "enqueued_monotonic_s": 17015496.1170536,
+        "save_started_monotonic_s": 17015496.1171047,
+        "save_completed_monotonic_s": 17015496.1278972
+      },
+      "processed_observation_monotonic_s": 17015496.1170692,
+      "processed_after_capture_callback_s": 0.0025959014892578125,
+      "visible_guard": "wholebody stone Guard Ready pose1"
+    }
+  ],
+  "browser_tail": {
+    "manifest": {
+      "path": "E:/OurGame/Knight/过程图稿与视频/2026-10-18-OurgameUE-left-native-playback-v418/source-size-SHA256.json",
+      "bytes": 3076,
+      "sha256": "bb3545eb0e22fe9c2d5d722372f82bce4142d360ccd5f39f2aeb843e889a6a25"
+    },
+    "retained_originals": [
+      {
+        "source": "F:\\Ourgame\\过程图稿与视频\\2026-10-18_守卫苏醒边界修复播放核验_v001\\原件\\left-ended.png",
+        "retained_relative": "F盘原批次副本\\2026-10-18_守卫苏醒边界修复播放核验_v001\\原件\\left-ended.png",
+        "bytes": 59909,
+        "sha256": "b5515653b276a428cc89e45710579a70270536587a005a3a1a0b5dd751161109",
+        "source_version": "2026-10-18_守卫苏醒边界修复播放核验_v001",
+        "status": "exact_copy; source status and acceptance limits retained"
+      },
+      {
+        "source": "F:\\Ourgame\\过程图稿与视频\\2026-10-18_守卫苏醒边界修复播放核验_v001\\原件\\left-playback.json",
+        "retained_relative": "F盘原批次副本\\2026-10-18_守卫苏醒边界修复播放核验_v001\\原件\\left-playback.json",
+        "bytes": 431,
+        "sha256": "c27cebdb8ebc7bb6723a301399ce69046e6b26c2be95ba59c471aa105d595736",
+        "source_version": "2026-10-18_守卫苏醒边界修复播放核验_v001",
+        "status": "exact_copy; source status and acceptance limits retained"
+      }
+    ],
+    "independent_comparison_passes": 2,
+    "mismatches": 0,
+    "playback_metadata": {
+      "playback": {
+        "currentTime": 21.88,
+        "duration": 21.88,
+        "ended": true,
+        "error": null,
+        "paused": true,
+        "videoHeight": 720,
+        "videoWidth": 1280
+      },
+      "source": "F:/Ourgame/过程图稿与视频/2026-10-18_石守卫三行整身原生试样_v002/展示副本/guard-partial-native-DIAGNOSTIC-silent-v001.mp4",
+      "audio_recorded": false,
+      "all_frames_human_reviewed": false,
+      "formal_complete_units": 0
+    },
+    "visible_guard": "gray procedural block figure; visually different from native original last MovieFrame00656"
+  },
+  "association_limit": "Native tail654/655/656 pixels visually match observed StompFollow5 procedural/Ready0/Ready1 respectively. CRC and FIFO receipts prove original pixel preservation and capture order, but contain no presenter DrawId. These three inspected pairs do not prove every draw/callback association. Browser ended screenshot does not establish which original native frame its displayed pixels represent. No fixed one-frame native callback lag or encoding/player root cause inferred."
+}

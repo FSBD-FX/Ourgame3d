@@ -1,0 +1,12 @@
+{
+  "schema": "Hero-Hurt4-pending-prereg-host-rejection-v001",
+  "success": true,
+  "expected_failure": "Actual Root Hurt prereg required",
+  "actual_exit_code": 1,
+  "actual_stdout": "",
+  "actual_stderr": "Traceback (most recent call last):\n  File \"F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\hurt-native-observer-candidate-v001\\tooling\\verify-Hurt-native-v001.py\", line 141, in <module>\n    if __name__=='__main__':main()\n                            ^^^^^^\n  File \"F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\hurt-native-observer-candidate-v001\\tooling\\verify-Hurt-native-v001.py\", line 135, in main\n    p=argparse.ArgumentParser();p.add_argument('--snapshot',required=True);p.add_argument('--root-prereg',required=True);p.add_argument('--archive');p.add_argument('--source-only',action='store_true');p.add_argument('--write-receipt',action='store_true');a=p.parse_args();snapshot=path(a.snapshot);prereg=path(a.root_prereg);m,root,profile,manifest=preflight(snapshot,prereg)\n                                                                                                                                                                                                                                                                                                                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\hurt-native-observer-candidate-v001\\tooling\\verify-Hurt-native-v001.py\", line 29, in preflight\n    p=read(prereg_path);need(p['schema']=='hero-Hurt4-Root-prereg-v001'and p['is_template']is False and p['RootApproved']is True and p['pre_registered_before_capture']is True,'Actual Root Hurt prereg required')\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\hurt-native-observer-candidate-v001\\tooling\\verify-Hurt-native-v001.py\", line 9, in need\n    if not v:raise ValueError(why)\n             ^^^^^^^^^^^^^^^^^^^^^\nValueError: Actual Root Hurt prereg required\n",
+  "UE_started": false,
+  "actual_full_native_source_preflight_passed": false,
+  "actual_native_Hurt_receipt": null,
+  "FinalAccepted": false
+}

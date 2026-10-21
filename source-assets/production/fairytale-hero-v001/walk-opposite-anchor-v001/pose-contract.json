@@ -1,0 +1,140 @@
+{
+  "schema": "fairytale-hero-opposite-contact-technical-contract-v1",
+  "status": "prepared_only_not_generated_not_accepted",
+  "purpose": "Isolate one far-contact role correction before attempting another complete walk row.",
+  "native_facing": 1,
+  "phase": "far_contact",
+  "frame_count": 1,
+  "loop": false,
+  "target_canvas_px": [
+    512,
+    512
+  ],
+  "safe_margin_px": [
+    48,
+    48
+  ],
+  "identity": {
+    "path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\sprite-run-idle-v002\\curated\\frame-0.png",
+    "sha256": "f931dec698967ae497daf85d8bfd2a9c49d59ca34fd56a96a6167e677c3de718",
+    "source_request": 131,
+    "copied_path": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-opposite-anchor-v001\\references\\identity\\canonical-idle-frame-0.png",
+    "is_single_curated_idle": true,
+    "final_user_art_or_motion_approval": false
+  },
+  "limb_roles": {
+    "near_arm": "camera-near visible larger arm swings FORWARD to screen-right, crossing in front of torso",
+    "far_arm": "camera-far arm swings BACK to screen-left behind torso, hand still separately visible",
+    "near_leg": "camera-near leg trails BACK toward screen-left; rear TOE contacts baseline, heel lifted",
+    "far_leg": "camera-far leg extends FORWARD toward screen-right; front HEEL contacts baseline, toe slightly lifted",
+    "counter_swing": "forward near arm opposes forward far leg; backward far arm opposes backward near leg",
+    "near_far_meaning": "camera depth, never relabel by current screen-left/right position"
+  },
+  "guide": {
+    "svg": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-opposite-anchor-v001\\references\\technical\\far-contact-role-guide-v001.svg",
+    "png": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-v001\\walk-opposite-anchor-v001\\references\\technical\\far-contact-role-guide-v001.png",
+    "png_sha256": "19c4b746cafb0168b624325e022ff864d111755345f9d24a7b9bf0f1cbe8a7da",
+    "role": "original technical limb-role illustration only, not style or body-root measurement",
+    "colors_for_guide_only": {
+      "camera_near": "#cf3f41",
+      "camera_far": "#356ec5"
+    },
+    "schematic_joints_px": {
+      "near_arm": [
+        [
+          233,
+          255
+        ],
+        [
+          285,
+          283
+        ],
+        [
+          346,
+          302
+        ]
+      ],
+      "far_arm": [
+        [
+          267,
+          255
+        ],
+        [
+          218,
+          284
+        ],
+        [
+          169,
+          312
+        ]
+      ],
+      "near_leg": [
+        [
+          245,
+          328
+        ],
+        [
+          211,
+          384
+        ],
+        [
+          180,
+          434
+        ]
+      ],
+      "far_leg": [
+        [
+          266,
+          328
+        ],
+        [
+          301,
+          387
+        ],
+        [
+          338,
+          443
+        ]
+      ]
+    },
+    "schematic_sole_contacts_px": {
+      "near_rear_toe": [
+        210,
+        464
+      ],
+      "far_front_heel": [
+        323,
+        464
+      ]
+    },
+    "ground_baseline_y_design_only": 464,
+    "pixels_from_existing_art_used": false
+  },
+  "observed_output_measurements": {
+    "alpha_bbox": null,
+    "body_height_px": null,
+    "helmet_bbox": null,
+    "feet_rois": null,
+    "root_px": null,
+    "source_sha256": null
+  },
+  "acceptance_needed": [
+    "actual generated full-body view",
+    "canonical identity/rigid helmet comparison",
+    "track both arm chains and both leg chains with camera-near/far roles",
+    "front heel and rear toe contact inspection",
+    "independent static review"
+  ],
+  "does_not_establish": [
+    "six-frame gait",
+    "loop seam",
+    "foot sliding",
+    "left mirror",
+    "runtime integration",
+    "armor adaptation",
+    "weapon sockets",
+    "complete content unit"
+  ],
+  "future_complete_row_rule": "An accepted single far-contact trial may join a MULTI-POSE reference containing BOTH opposite contacts and six-phase motion guidance. It must not become the sole peak-pose walk anchor or replace canonical idle identity.",
+  "formal_complete_units": 0
+}

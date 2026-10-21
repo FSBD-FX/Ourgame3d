@@ -1,0 +1,53 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-hero-state-gap-v001\\lgt-hurt4-process-runs-v001\\process-inputs-v001\\runs\\run-Hurt4-chest-native228-shared-HD-v001",
+  "states": [
+    "leather_chest_hero_hurt"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "leather_chest_hero_hurt",
+      "source": "frames",
+      "expected_frames": 4,
+      "found_frames": 4,
+      "natural_pose_count": 4,
+      "frame_files": [
+        "frames/leather_chest_hero_hurt/frame-0.png",
+        "frames/leather_chest_hero_hurt/frame-1.png",
+        "frames/leather_chest_hero_hurt/frame-2.png",
+        "frames/leather_chest_hero_hurt/frame-3.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.9498832565808,
+          "mean": 0.9675289099499254
+        },
+        "dhash_similarity": {
+          "min": 0.984375,
+          "mean": 0.9895833333333334
+        },
+        "motion_presence": 0.0033357906964869284,
+        "centroid_sigma": {
+          "x": 0.6119970129043669,
+          "y": 2.3537168755817173
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "leather_chest_hero_hurt: motion presence is too low (0.0033 < 0.0100)"
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "leather_chest_hero_hurt: motion presence is too low (0.0033 < 0.0100)"
+  ]
+}

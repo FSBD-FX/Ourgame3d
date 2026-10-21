@@ -1,0 +1,28 @@
+{
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 192,
+    "safe_margin_y": 206
+  },
+  "states": {
+    "leather_chest_hero_hurt_correction": {
+      "frames": 4,
+      "fps": 10,
+      "loop": false,
+      "action": "Generate exactly FOUR isolated CHEST/JERKIN component views matching the FOUR exact Hurt227 body poses, left to right in that original order. Reference1 is the ONLY appearance identity: accepted current brown LGT Ready Chest184, preserving supple warm-brown leather, coarse dark contour, small round gold front clasp, original belt and attached physical imageLEFT pouch. Reference2 is the exact four original Hurt227 body cells, ONLY camera, torso lean, visible upper-arm surface, waist and phase geometry; do NOT draw the hero. Reference3 is the official four-cell guide, ONLY count, spacing and safe padding. No rejected228/232 armor is attached.\nSame shallow elevated three-quarter side camera facing SCREEN RIGHT; no pure90degreeprofile and no mirroring. These are four actual matching garment perspectives, not four ordinary front-facing vests slightly tilted.\nPhase0: forward impact compression; torso sits under the strongly tipped helmet, near forearm/fist crosses in front and far fist crosses lower front. Garment must follow that compressed body, with some chest/armhole naturally occluded later by the unchanged real limbs and helmet; do not paint opaque holes over its chest.\nPhase1 is the main pose correction: the recoil torso is strongly DIAGONAL toward the LOWER-RIGHT, not near-vertical. In the actual512body, visible gray neck-cloth proposal[230,217] to real waist buckle[290,273] moves[+60,+56]; visible near-upperarm cloth proposal[200,251] to buckle moves[+90,+22]. These are author-visible surface guides, NOT bones. The near-side sleeve aperture must be at the lateral IMAGELEFT edge near that real sleeve while the front fastening and belt follow the SAME long diagonal body toward lower-right. Do not simply draw a regular compact front vest then tilt it. Do not put the arm opening in the chest-front center. The projected span is much broader than the old wrongly compact armor; keep this relative geometry without moving either real hand or body.\nPhase2: settle forward, close near fist in front-left, far arm lowered and extended imageRIGHT. Match actual torso/shoulder roll. No front black oval or oversized black neckline trough visible across the gray chest.\nPhase3: upright return toward Ready, matching actual unchanged neck, near shoulder and waist. Preserve the same garment identity and physical density, not a new larger costume.\nALL true empty arm and neck apertures must show the SAME perfectly flat puregreen #00FF00 background through them. Use dark ink only as the actual leather-edge contour. No opaque black backing ellipse, black void painted into the front, big solid-black neck interior, grey lining, invented sleeve, skin or undercloth. The real unchanged gray body and actual foreground near arm/helmet/hands will be composed later. Do not bake those body parts into the garment, and do not use artificial armor cutouts to cover a wrongly posed solid front. Garment opening, neckline/front panel and waist/pouch must be compatible with ONE integer translation onto each corresponding actual body pose.\nUse one consistent illustration/physical scale across all four views; phase1 may naturally have a wider horizontal silhouette and other phases narrower because of the actual torso projection. The officialcommonmaximumwindow is128x100; it is not a demand to fill every slot to the same width or height. Never normalize each garment separately to its cell. The entire NEW four-component row will receive ONE shared maximum-extent extraction scale afterward. No old228/232 frame substitution and no per-frame resize.\nExactly one complete connected vest+belt+originalpouch per invisiblecell, all four intact, generous flatgreen surround. No body/head/helmet/arm/glove/hand/leg/shoe, shoulder cap, FARtab, sword, extra outfit part, label, guide colors, texture backdrop, light effect, shadow, smear or loose fragment. Preserve the pouch on its same physical imageLEFT belt side. No locally painted patch or guessed skeleton/pivot. Actual Hurt remains four100ms samples of400ms; no gameplay timing, damage or movement change. Output ONLY the four isolated matching Chest components."
+    }
+  },
+  "style": "Only currentacceptedbrownLGTChest184 garmentappearance; actual227four solelytorso/camera/motion geometry. Coarsedarkink, broadbrownleather, originalsmallgoldclasp andphysicalpouchside. Alltrueaperturesgreennegative, noopaqueinteriorbacking/greylining.",
+  "motion_phase_guides": false,
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": false,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

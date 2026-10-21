@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "current-brown-LGT-farshoulder-Hurt4-overlay-candidate",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 240,
+    "safe_margin_y": 241
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "leather_farshoulder_hero_hurt": {
+      "frames": 4,
+      "fps": 10,
+      "loop": false,
+      "action": "Generate FOUR isolated views of ONLY the specified brownleather armor component, in exactHurt227phase order. The first reference is the acceptedCURRENT LGT Ready component and is the SOLE armor identity: preserve warm brown suppleleather, darkcoarseink, smallgold fastening/details and construction. Nooldgreyplatemetal identity is attached. The second reference is the exactfour nativeHurt227 barebody sources concatenatedwithoutpixelchanges; it supplies ONLY bodymotion/camera/torso and shoulder perspective for overlay, not a replacementarmor identity. Thirdreference is theofficialfourcell layoutguide forcount/spacing/safearea only.\nSame shallow elevated three-quarter sideview facingSCREEN RIGHT asactualHero227 and currentReady; do not usepure90degreeprofile or turnthebacktowardcamera. Fourmatchingperspectives:0compressedforwardimpact,1leanedbackrecoil,2forwardsettle,3standingreturntowardReady. Keep physicalnear/far attachments and pouchside fixed; donotmirrorbodyorcomponent tofakepose. Followactualsourceforeshorteningbutretainbodydensity/garmentconstruction acrossrow; no4copiesofReady andnofullbody redraw. Thereisnoacceptedbone/skeletonattachmenttruth inreferences. Do notdrawgrip/axes/pivots or guessinternalbones.\nOnecompleteconnected component in each equal invisiblecell, naturallyselfcontained with generous flat #00FF00 green surround. Nocharacter/head/helmet/arms/gloves/hands/legs/shoes/sword, wholeoutfit, extraarmorparts, coloredguide, text, labels, grid, scene, shadows, loosefragments, effect, glow ormotionblur. Do notusegreen/keyadjacentmaterial. Same illustrationdensity acrossall4views; perspective changes may changebounds, nevernormalize eachpart tofillitscell. Keep broadreadablelow-detail planes andexactreferenceink/style.\nThe4body/Hurtpositions are overlayreferenceonly; final bodypixels andclosedfistsmuststayunchanged. Do not drawthebodybehindcomponent or addfingersaspartofarmor. Finalchroma/componentsharedrow extraction, actualvisibleAandB/integertranslation/depth/coverage review happenlater; originalReadyoffsets ormasksmustNOTbecopied. ActualHurtkernel remains400ms with4samples0/100/200/300ms. No clocks, collision, damagetiming orweaponbindingchanges. OutputONLY4componentimages inonehorizontalrow onflatgreen.\n\nDraw ONLY the tiny narrow curved FAR/recessed warm brown leather tab of acceptedReadyFarShoulder, same compressed perspective. Follow physicalFAR/imageRIGHTrecessed shoulder ofactualHurt227, not whichevercapappearslarger. Foreshortenforbodytilt but do not mirror the nearcap or broaden it into a front shoulder. No nearcap, completevest/chest/belt/pouch, arm/hand, head, sword, longovalring, greyinnerlining or adjacenttorso seam. Completeconnected tinytab eachslot; later unchangedbody may naturally occlude it, whichdoesnotauthorizea fullgreyarmor silhouette."
+    }
+  },
+  "style": "ONLY currentacceptedReady brownleather samecomponent identity. Hero227 exactfour is motion/perspective ONLY. Thickdarkink, broadsoftleather planes, samegold/stitchedconstruction. Nooldgreyarmor/fullhero identity.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": false,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

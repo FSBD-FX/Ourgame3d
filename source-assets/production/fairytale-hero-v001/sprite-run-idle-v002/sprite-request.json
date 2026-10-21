@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-hero-common-v001",
+    "description": "Closed bell helmet, amber visor eyes, charcoal plain full undergarment, brown gloves and boots; empty hands, no armor or cape; right-facing three-quarter side view.",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "idle": {
+      "frames": 4,
+      "fps": 6,
+      "loop": true,
+      "action": "One extremely subtle breathing cycle: frame1 neutral, frame2 slight chest inhale, frame3 exhale, frame4 return near frame1. ONLY charcoal chest/shoulder contours may change slightly. Helmet is a RIGID METAL OBJECT: preserve exactly the same helmet height, width, visor opening, eye placement and knob shape in all four frames, no shortening, narrowing, squash, stretch, redraw or changing perspective. Keep helmet vertically at the same position; neck and feet remain stable. Keep both feet flat on the same baseline and hands empty, no arm swing. No blink, equipment, cape or walking. Four distinct hand-drawn breathing poses with a seamless fourth-to-first loop."
+    }
+  },
+  "style": "Hand-drawn dark-fairytale cartoon, bold uneven ink outlines, two or three broad painted tones per material. NOT pixel art, no realistic texture or PBR.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "foot-centroid",
+    "align_y": "bottom",
+    "ground_frames": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

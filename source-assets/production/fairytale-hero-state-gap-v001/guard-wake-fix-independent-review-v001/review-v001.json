@@ -1,0 +1,92 @@
+{
+  "schema": "guard-wake-fix-independent-review-v001",
+  "reviewed_patch": "F:/Ourgame/source-assets/production/fairytale-guard-v001/presentation-observer-fix-candidate-v003/patches/driver-representable-wake-entry-v003.patch",
+  "scope": "Read-only v003 patch/baseline/native-report review; only this NEW text/JSON directory written. No candidate/Source/tools changes, production patch, UE/UBT/native test, capture, or media View.",
+  "decision": "Native admission remains pending: 113329 is a fixture-premise failure, not a driver semantic RED. v003 provides a bounded, non-epsilon repair strategy for a bracketed ordinary entry but does not establish a universal earliest-representable-entry guarantee.",
+  "facts": [
+    {
+      "id": "F1",
+      "evidence": "113329 index.json tests[0].entries[0], actual test cpp:70",
+      "value": "0 success/1 fail/1 error/0 warning. endpoint-inside premise returns before either driver StepTo."
+    },
+    {
+      "id": "F2",
+      "evidence": "actual Driver.cpp:13-23; Guard.cpp:17-21,494-497; patch:17-21",
+      "value": "Helper calls actual absolute PositionAt and repeats unchanged normalized235x110 ellipse without epsilon. Kernel remains owner of HasTarget/alive/LOS/gate/one-second warning."
+    },
+    {
+      "id": "F3",
+      "evidence": "UE5.5 UnrealMathUtility.h:1187-1189; Vector2D.h:823-825,853-867; MathFwd.h:48; three actual rsp:39",
+      "value": "FVector2D is TVector2<double>; local Lerp is A+Alpha*(B-A). No TVector2 custom Lerp specialization found in Core/Public/Math. Driver/kernel/test all use /fp:fast."
+    },
+    {
+      "id": "F4",
+      "evidence": "actual GM.cpp:1376,1507-1517,1923-1925; Fighter.cpp:1629; test cpp:68-69,91-93",
+      "value": "EarliestContact shortens then recomputes prediction endpoints; independently rounded wide/narrow endpoints define different floating affine mappings. Current test additionally asserts bitwise equal Wake times."
+    },
+    {
+      "id": "F5",
+      "evidence": "patch:40-47 and actual Driver.cpp:15-22",
+      "value": "Binary search is capped at2102 refinements and has endpoint-equality exit. Each predicate reads/scans supplied motion segments, no world LOS query, allocation, actor mutation or native kernel step inside refinement."
+    }
+  ],
+  "findings": [
+    {
+      "id": "P2-FIXTURE",
+      "priority": 2,
+      "status": "actual failure confirmed; Root/other worker preparing NEW test revision",
+      "evidence": "actual test cpp:70 and cpp:91-93; actual113329 index.json",
+      "impact": "Original report cannot justify production admission; fixed equal-time assertion can fail a correct driver because replanning changes rounded trajectories.",
+      "minimum_next_step": "Retain failed report/source. NEW test must witness actual compiled positive kernel geometry, test each absolute mapping separately for acceptance/one wake/one second/no receipts, and require baseline driver semantic failure only after all real legal prerequisites pass. Compare exact WakeAt only for truly identical PositionAt mappings."
+    },
+    {
+      "id": "P2-BRACKET-COMPLETENESS",
+      "priority": 2,
+      "status": "static limitation plus independent binary64 witness; native reproduction pending; not shown to cause original refusal",
+      "evidence": "patch:25-26 and32-36; independent-binary64-analysis-v001.json",
+      "impact": "EllipseContact remains an early gate. An endpoint can satisfy the exact ellipse while the analytic discriminant rounds negative; then no bisection occurs and wake may be delayed to End. Three failed samples do not prove that no representable legal entry exists, especially near tangency.",
+      "minimum_next_step": "Do not claim universal first-entry/tangency certification. Before broadening that contract, a NEW native witness should compare the actual kernel predicate at both endpoint and preceding legal samples. Endpoint truth must be considered independently of a failing analytic root if the stronger guarantee is required. No production patch supplied."
+    },
+    {
+      "id": "R-MONOTONIC",
+      "priority": null,
+      "status": "scope requirement, not native-confirmed regression",
+      "evidence": "patch:39-47; actual Driver.cpp:15-23,106-123,292",
+      "impact": "On one continuous straight affine segment with monotone outside-to-inside predicate, adjacency bisection is sound. With floating predicate holes or a discontinuous segment endpoint, it proves a local adjacent outside/inside crossing only; not earliest point over all earlier representable times.",
+      "minimum_next_step": "State continuous-segment and monotonic-entry scope; test both motion-segment joins/end-exclusive behavior and tangent/short crossings before extending completeness claims."
+    }
+  ],
+  "performance": {
+    "ordinary_no_contact": "Three PositionAt calls plus scalar analytic geometry; Begin is evaluated twice. No bisection for misses.",
+    "ordinary_crossing": "Independent original scalar model used40 refinements; not a native benchmark. Only a narrow one-time entry generally needs this work.",
+    "worst_case": "2102 refinements, each PositionAt can scan up to65536 admitted motion segments; outer driver still has its own65536-iteration guard. Termination is bounded, but worst-case segment-heavy input cost is materially larger. Existing NextBoundary also scans segment lists.",
+    "conclusion": "No evidence that ordinary scalar refinement approaches the2.297s ensure cost. No measured native timing or general performance clearance is claimed."
+  },
+  "discrete_time": {
+    "sound_for_bracket": "Begin is known outside, accepted high is checked inside, midpoint reduces bracket until representable equality; candidate At is checked >Begin and <=End. Therefore helper does not deliberately force Next, insert epsilon, replay Wake, or move native clock backward.",
+    "native_gate": "Next loop pumps actual InputAt at returned cursor; kernel can still reject geometry/LOS/liveness or queue rather than wake. Kernel owns deadline WakeAt+1.",
+    "time_domain": "Actual ValidFrame admits finite nonnegative times and exact endpoints; midpoint uses a difference to avoid normal positive-time addition overflow. /fp:fast and subnormal/extreme values are not covered by the normal scalar proof.",
+    "not_guaranteed": "Duplicating the ellipse source expression in separately optimized TUs does not establish bitwise predicate equivalence under /fp:fast. Native kernel witness is authoritative."
+  },
+  "fma_and_mapping": {
+    "fma_possible": "Actual /fp:fast supports compiler contraction/reassociation differences. No machine-code trace has been examined; do not attribute the report to FMA.",
+    "fma_checked": "Independent correctly rounded FMA simulation did not change this fixture endpoint or Lerp sample. Reassociation/constant rounding/actual runtime float speed remain alternative hypotheses.",
+    "position_at": "Within this simple fixture, the self At and FMath::Lerp have equivalent nominal scalar algebra apart from clamp and expression ordering; equivalence of source algebra is not a compiled-value proof. Motion-segment fixtures must use the actual absolute segment selection too.",
+    "wide_narrow": "Recomputing B.End changes the stored slope after rounding, even if both describe the same real-valued intended speed; earliest representable legal times need not match bitwise.",
+    "recommended_test_authority": "Observe actual compiled kernel NearWake for each queried position and real FMath absolute mapping; avoid Python values as admission prerequisites or equality contracts."
+  },
+  "validation": {
+    "native_tests_run_by_reviewer": 0,
+    "engine_builds_run_by_reviewer": 0,
+    "production_changes": 0,
+    "media_views": 0,
+    "candidate_freeze_checks": 8,
+    "candidate_freeze_difference_count": 0,
+    "input_two_pass_difference_count": 0
+  },
+  "dependencies": [
+    "Root/guard_two_process NEW test math repair and true baseline driver semantic RED preservation",
+    "Root alone native patch admission, native targeted/full test and new game capture after legal evidence",
+    "Actual native ordinary-motion capture still required to show Wake frame coverage; a driver GREEN alone does not guarantee arbitrary-stall visual coverage"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "schema": "guard-wake-independent-binary64-analysis-v001",
+  "scope": "Read-only Python scalar model, not native UE execution, benchmark, instruction-selection evidence, or approval. Decimal simulates one correctly rounded FMA.",
+  "native_fma_instruction_observed": false,
+  "original_fixture": {
+    "begin": 9.605689999759198,
+    "wide_end": 9.610689999759199,
+    "replanned_end": 9.607490869337335,
+    "from_xy": [
+      -1035.4682208563124,
+      -162.2042858545901
+    ],
+    "speed_float": 286.20001220703125,
+    "mappings": {
+      "wide": {
+        "dt": 0.005000000000000782,
+        "endpoint_separate": -1034.037220795277,
+        "endpoint_single_rounded_fma": -1034.037220795277,
+        "endpoint_fma_ulp_difference": 0.0,
+        "endpoint_r2": 0.9922244792967839,
+        "position_at_narrow_end_separate": -1034.9528119610663,
+        "position_at_narrow_end_fma": -1034.9528119610663
+      },
+      "narrow": {
+        "dt": 0.0018008695781368544,
+        "endpoint_separate": -1034.9528119610663,
+        "endpoint_single_rounded_fma": -1034.9528119610663,
+        "endpoint_fma_ulp_difference": 0.0,
+        "endpoint_r2": 0.9999999999999964,
+        "position_at_narrow_end_separate": -1034.9528119610663,
+        "position_at_narrow_end_fma": -1034.9528119610663
+      }
+    },
+    "expression_variants": [
+      {
+        "speed": 286.2,
+        "expression": "x+s*(end-begin)",
+        "endpoint": -1034.9528119830497,
+        "r2": 1.0000000001870515
+      },
+      {
+        "speed": 286.2,
+        "expression": "(x+s*end)-s*begin",
+        "endpoint": -1034.9528119830495,
+        "r2": 1.0000000001870495
+      },
+      {
+        "speed": 286.20001220703125,
+        "expression": "x+s*(end-begin)",
+        "endpoint": -1034.9528119610663,
+        "r2": 0.9999999999999964
+      },
+      {
+        "speed": 286.20001220703125,
+        "expression": "(x+s*end)-s*begin",
+        "endpoint": -1034.9528119610661,
+        "r2": 0.9999999999999944
+      }
+    ]
+  },
+  "fma_result": "Plain endpoint and interpolation FMA simulations do not change the supplied original fixture values. FMA specifically is not established as cause of the native premise failure.",
+  "analytic_false_negative_witness": {
+    "center": [
+      -800.0,
+      -160.0
+    ],
+    "start": [
+      -918.1300909769152,
+      -64.90809692502127
+    ],
+    "end": [
+      -918.1300940936361,
+      -64.9080977733508
+    ],
+    "start_r2": 1.0000000000000009,
+    "end_r2": 1.0,
+    "a": 2.3537395764572375e-16,
+    "b": -8.646122922026732e-16,
+    "c": 8.881784197001252e-16,
+    "discriminant": -8.866186313341173e-32,
+    "scope": "Deterministic binary64 algebra witness only. Driver would still sample End and may wake there; this is not evidence of native interval rejection."
+  },
+  "binary_search": {
+    "conservative_limit": 2102,
+    "original_normal_scalar_iterations": 40,
+    "outside": 9.607490869337333,
+    "inside": 9.607490869337335,
+    "adjacent": true
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "schema": "hero-state-standard-text-input-handoff-v001",
+  "status": "TEXT_READY_STANDARD_GUIDE_RASTERS_PENDING_ROOT_PREPARE_AND_E_RETENTION",
+  "generation_calls": 0,
+  "Source_changes": 0,
+  "UE_calls": 0,
+  "new_media_viewed": false,
+  "numeric_SSoT": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/standard-input-candidate-v001/sprite-request.json",
+  "timing_contract": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/standard-input-candidate-v001/timing-contract-v001.py",
+  "rows": [
+    {
+      "state": "dodge",
+      "frame_count": 4,
+      "fps": 10,
+      "loop": false,
+      "prompt": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/standard-input-candidate-v001/prompts/dodge.txt",
+      "guide_recipe": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/standard-input-candidate-v001/references/layout-guides/dodge.guide.json",
+      "model_refs_in_order_after_Root_prepare": [
+        "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/curated/frame-0.png",
+        "NEW_BATCH/references/layout-guides/dodge.png"
+      ],
+      "raw_output_after_Root_generation": "NEW_BATCH/raw/dodge.png",
+      "all_actual_source_floor_grip_markers": null
+    },
+    {
+      "state": "hurt",
+      "frame_count": 4,
+      "fps": 10,
+      "loop": false,
+      "prompt": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/standard-input-candidate-v001/prompts/hurt.txt",
+      "guide_recipe": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/standard-input-candidate-v001/references/layout-guides/hurt.guide.json",
+      "model_refs_in_order_after_Root_prepare": [
+        "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/curated/frame-0.png",
+        "NEW_BATCH/references/layout-guides/hurt.png"
+      ],
+      "raw_output_after_Root_generation": "NEW_BATCH/raw/hurt.png",
+      "all_actual_source_floor_grip_markers": null
+    },
+    {
+      "state": "death",
+      "frame_count": 5,
+      "fps": 5,
+      "loop": false,
+      "prompt": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/standard-input-candidate-v001/prompts/death.txt",
+      "guide_recipe": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/standard-input-candidate-v001/references/layout-guides/death.guide.json",
+      "model_refs_in_order_after_Root_prepare": [
+        "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/curated/frame-0.png",
+        "NEW_BATCH/references/layout-guides/death.png"
+      ],
+      "raw_output_after_Root_generation": "NEW_BATCH/raw/death.png",
+      "all_actual_source_floor_grip_markers": null
+    }
+  ],
+  "next_order": [
+    "Root verifies text/pins in sprite-gen venv",
+    "Root chooses NEW candidate process-batch path and runs deferred standard layout writer",
+    "Root E-retains guide originals and presentation/index before any View or generation attachment",
+    "Root generates each requested component row using exactly anchor + row guide and generated standard prompt; preserve original raw",
+    "Root uses pinned existing shared-row-scale extractor; never default per-frame fitting, slot fallback, cloned Ready or local redraw",
+    "Measure actual per-frame body contacts/Root/Grip/Axis/masks and rigid helmet/body scale against accepted anchor; reject identity drift/cropping",
+    "Root E-retains actual extracted/preview media before View; review right, mirrored left and native opposite-facing Shift",
+    "Only then plan modular armor/weapon adaptation + minimal real native RED/Source implementation; no import or runtime profile is configured here"
+  ],
+  "E_retention_root": "E:/OurGame/Knight/过程图稿与视频",
+  "F_process_batch_parent": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/standard-input-candidate-v001/process-batches",
+  "unconfigured": [
+    "new PNGs and SHA",
+    "real source floor/support",
+    "Root/Grip/Axis/masks",
+    "pose-specific LGT/new armor modules",
+    "texture object paths/runtime label/profile version"
+  ],
+  "not_complete": "No new visual generation, native actual playback, all-state72 acceptance or 20-combination art acceptance"
+}

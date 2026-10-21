@@ -1,0 +1,419 @@
+{
+  "schema": "lgt-Hurt228229-motion-warning-independent-review-v001",
+  "interpreter": "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+  "official_sources": [
+    {
+      "path": "C:/Users/22499/.codex/skills/sprite-gen/SKILL.md",
+      "bytes": 48216,
+      "sha256": "05bb91de54d85ad4c7b6f7939bc031f44505b3fa86a07a46a336540cfcf4afca"
+    },
+    {
+      "path": "C:/Users/22499/.codex/skills/sprite-gen/docs/qa-motion.md",
+      "bytes": 3056,
+      "sha256": "2075db0795b966c8c5d26c8508ad7c49b52c5388b2e99b7c8357d0c631f8d342"
+    },
+    {
+      "path": "C:/Users/22499/.codex/skills/sprite-gen/sprite_gen/qa/inspect.py",
+      "bytes": 17423,
+      "sha256": "4f0869d7c6589f444db4d3b537ae744ce23433d206ee7286d70e2f9635fc8329"
+    },
+    {
+      "path": "C:/Users/22499/.codex/skills/sprite-gen/sprite_gen/qa/score.py",
+      "bytes": 7232,
+      "sha256": "feb8b492184ea758cb918b6d12117429bb61f24c77937b4aa29d84bcf1ab337b"
+    }
+  ],
+  "existing_source_QC_read_only": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-source-QC-v001/analysis-v001/original-motion-warning-canvas-vs-component-and-source-index-v001.json",
+    "bytes": 34198,
+    "sha256": "c7fafef22a62e9974ccf396d037bf24cbb549b40bc343c723c920873e1404f6a"
+  },
+  "official_semantics": {
+    "motion_definition_lines": [
+      209,
+      221
+    ],
+    "default_min_line": 30,
+    "warning_append_lines": [
+      367,
+      371
+    ],
+    "row_ok_line": 378,
+    "report_ok_line": 388,
+    "CLI_return_line": 423,
+    "definition": "Mean across adjacent pairs of sum absolute RGBA-channel differences after full-cell bilinear resize to64x64, divided by64*64*4*255. Empty full-cell area participates. It is neither physical displacement nor contact/registration/pose semantic validation.",
+    "warning_is_error": false,
+    "row_and_report_ok_depend_only_on_errors": true,
+    "skill_requires_warning_count_zero": false,
+    "skill_motion_continuity_remains_BLOCKING": true,
+    "score_keeps_motion_warning_penalty_and_hint": true,
+    "code_line_claims": "See exact source link and immutable checker pin; function209–222, warning367–371, row/report ok and CLI lines verified in REVIEW.md."
+  },
+  "components": [
+    {
+      "component": "Chest",
+      "native_request": 228,
+      "original_inspect_report": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-chest-native228-shared-HD-v001/sprite-inspect.report.json",
+        "bytes": 1561,
+        "sha256": "9ef5a702a7c9051117ad7ae1e26f78892f9dc106b39c8f3261179c1f031a7ed0"
+      },
+      "original_receipt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-chest-native228-shared-HD-v001/extraction-receipt-v001.json",
+        "bytes": 6622,
+        "sha256": "ed2080c9b862a819991e10fb67620d7703aa13df7bd5ea92bbc90eb23fc3bac6"
+      },
+      "original_receipt_status": "FAILED_PRESERVED_NO_ACCEPTANCE",
+      "official_report_ok": true,
+      "official_row_ok": true,
+      "official_errors": [],
+      "official_warnings": [
+        "leather_chest_hero_hurt: motion presence is too low (0.0033 < 0.0100)"
+      ],
+      "official_motion_min_unchanged": 0.01,
+      "official_motion_function_recomputed": 0.0033357906964869284,
+      "frame_source_geometry": [
+        {
+          "frame": 0,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-chest-native228-shared-HD-v001/curated/frame-0.png",
+            "bytes": 15381,
+            "sha256": "51463da139d1e3a49e7ee9df54187921ef14efa2b4f3c4f752ec775e2a42b5b8"
+          },
+          "visible_silhouette_bbox": [
+            217,
+            218,
+            294,
+            301
+          ],
+          "visible_silhouette_pixels": 4910,
+          "RGBA_sha256": "fe6f396c26f661c543e81961160e5942ef891aaa63a701e4d3d064653dc19fc8",
+          "actually_viewed_after_E": true
+        },
+        {
+          "frame": 1,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-chest-native228-shared-HD-v001/curated/frame-1.png",
+            "bytes": 16006,
+            "sha256": "4393a98b6dabf40bb21b042479e23bb3a71a5be78b8c99170feee0bd0f83c8d2"
+          },
+          "visible_silhouette_bbox": [
+            211,
+            214,
+            301,
+            301
+          ],
+          "visible_silhouette_pixels": 5109,
+          "RGBA_sha256": "e8aee2f9389f9a75e9ef47e3adc8ffe3e44db58e855eb89f1b220ac242c404c6",
+          "actually_viewed_after_E": true
+        },
+        {
+          "frame": 2,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-chest-native228-shared-HD-v001/curated/frame-2.png",
+            "bytes": 15798,
+            "sha256": "5ebcb7d5879b1b39ac37d0a8063e252699a73d073097bdad0e00550dcb6fc45c"
+          },
+          "visible_silhouette_bbox": [
+            216,
+            217,
+            296,
+            301
+          ],
+          "visible_silhouette_pixels": 5117,
+          "RGBA_sha256": "7453d55f6550fc8620d4392f0a8aa3b9c6472591f39d1e3d7fd47f6fa5e9dd5c",
+          "actually_viewed_after_E": true
+        },
+        {
+          "frame": 3,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-chest-native228-shared-HD-v001/curated/frame-3.png",
+            "bytes": 15386,
+            "sha256": "df76904514e06084030f6c1715275f99d167661d14a6d84cd9f6de7fa9ce4f72"
+          },
+          "visible_silhouette_bbox": [
+            221,
+            215,
+            291,
+            301
+          ],
+          "visible_silhouette_pixels": 5049,
+          "RGBA_sha256": "6aacf7d2553d364dbd768ac00983f9c6fd06f4a8555079350bdbcdc77b6ccbba",
+          "actually_viewed_after_E": true
+        }
+      ],
+      "pairs": [
+        {
+          "from": 0,
+          "to": 1,
+          "alpha128_silhouette_IoU": 0.6841485964027567,
+          "alpha128_silhouette_XOR_pixels": 1879,
+          "alpha128_silhouette_XOR_fraction_inside_union": 0.31585140359724323,
+          "official_full_cell64_RGBA_mean_abs_diff": 0.004211904488357844,
+          "64_alpha_nonzero_union_pixels": 136,
+          "64_alpha_union_cell_area_fraction": 0.033203125,
+          "same_numerator_conditional_union_RGBA_mean_abs_diff": 0.12685265282583622,
+          "factorization_only_not_new_QA_gate": true
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "alpha128_silhouette_IoU": 0.6888521882741536,
+          "alpha128_silhouette_XOR_pixels": 1884,
+          "alpha128_silhouette_XOR_fraction_inside_union": 0.31114781172584643,
+          "official_full_cell64_RGBA_mean_abs_diff": 0.004293045343137255,
+          "64_alpha_nonzero_union_pixels": 138,
+          "64_alpha_union_cell_area_fraction": 0.03369140625,
+          "same_numerator_conditional_union_RGBA_mean_abs_diff": 0.12742256322818982,
+          "factorization_only_not_new_QA_gate": true
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "alpha128_silhouette_IoU": 0.89029378951283,
+          "alpha128_silhouette_XOR_pixels": 590,
+          "alpha128_silhouette_XOR_fraction_inside_union": 0.10970621048716996,
+          "official_full_cell64_RGBA_mean_abs_diff": 0.0015024222579656864,
+          "64_alpha_nonzero_union_pixels": 123,
+          "64_alpha_union_cell_area_fraction": 0.030029296875,
+          "same_numerator_conditional_union_RGBA_mean_abs_diff": 0.05003188267176789,
+          "factorization_only_not_new_QA_gate": true
+        }
+      ],
+      "qualitative_view": "Chest1 visibly leans back / broadens with different armhole and collar perspective;0/2/3 return toward a similar upright component. Distinct contour/orientation cues are visible, but correspondence to Hurt227 body is not proven.",
+      "sourcefit_pass": false,
+      "assembled_motion_pass": false,
+      "final_art_or_native_acceptance": false
+    },
+    {
+      "component": "ShoulderNear",
+      "native_request": 229,
+      "original_inspect_report": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-nearshoulder-native229-shared-HD-v001/sprite-inspect.report.json",
+        "bytes": 1606,
+        "sha256": "94333efa5bec7b870fe4c9c0ea5cb71c2c0c3305237a4c1c4de88f0fcdcdfeb3"
+      },
+      "original_receipt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-nearshoulder-native229-shared-HD-v001/extraction-receipt-v001.json",
+        "bytes": 13838,
+        "sha256": "55831887c5c2fa84cf38cf9e62beb21a1130ee5af4c67b991484afde3ad6b84a"
+      },
+      "original_receipt_status": "FAILED_PRESERVED_NO_ACCEPTANCE",
+      "official_report_ok": true,
+      "official_row_ok": true,
+      "official_errors": [],
+      "official_warnings": [
+        "leather_nearshoulder_hero_hurt: motion presence is too low (0.0005 < 0.0100)"
+      ],
+      "official_motion_min_unchanged": 0.01,
+      "official_motion_function_recomputed": 0.0005248225592320261,
+      "frame_source_geometry": [
+        {
+          "frame": 0,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-nearshoulder-native229-shared-HD-v001/curated/frame-0.png",
+            "bytes": 6574,
+            "sha256": "8d50c70490f2de371f85c450259c00cf950914fa5760ed9427acfea15dec2bdf"
+          },
+          "visible_silhouette_bbox": [
+            226,
+            237,
+            285,
+            278
+          ],
+          "visible_silhouette_pixels": 1478,
+          "RGBA_sha256": "0289abf06a96004e699b65a26e64c96fe9c560f4d119e36c34b712e7cc967e48",
+          "actually_viewed_after_E": true
+        },
+        {
+          "frame": 1,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-nearshoulder-native229-shared-HD-v001/curated/frame-1.png",
+            "bytes": 6154,
+            "sha256": "6f90a89db30fa3f6f636c6fbd0f5d44c3f2b4b6839d02986f52445e53f2d6bc5"
+          },
+          "visible_silhouette_bbox": [
+            226,
+            241,
+            286,
+            278
+          ],
+          "visible_silhouette_pixels": 1335,
+          "RGBA_sha256": "4d0b39b9ea060ac657871efb65575b7bb05dc5bd01535edef5079c4cfcf86cc8",
+          "actually_viewed_after_E": true
+        },
+        {
+          "frame": 2,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-nearshoulder-native229-shared-HD-v001/curated/frame-2.png",
+            "bytes": 6766,
+            "sha256": "2b75ec76d82ecf50f925e8c8344768bb78a6a17263dad15dbb388ce46a406365"
+          },
+          "visible_silhouette_bbox": [
+            226,
+            236,
+            286,
+            278
+          ],
+          "visible_silhouette_pixels": 1522,
+          "RGBA_sha256": "c384cf8fb3f702d8e63f87d1035fb6b047570edce0dff0648bf8ca6b586ddf03",
+          "actually_viewed_after_E": true
+        },
+        {
+          "frame": 3,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-hero-state-gap-v001/lgt-hurt4-process-runs-v001/process-inputs-v001/runs/run-Hurt4-nearshoulder-native229-shared-HD-v001/curated/frame-3.png",
+            "bytes": 6557,
+            "sha256": "6ddccd062af26a9b7bfd056c0ecb8c67aa0cb8930d48d06c164124d7bc0f896a"
+          },
+          "visible_silhouette_bbox": [
+            226,
+            237,
+            285,
+            278
+          ],
+          "visible_silhouette_pixels": 1475,
+          "RGBA_sha256": "90a427142f090b5d238222def2c154e46e4ed89428a72c74f070bc89052af702",
+          "actually_viewed_after_E": true
+        }
+      ],
+      "pairs": [
+        {
+          "from": 0,
+          "to": 1,
+          "alpha128_silhouette_IoU": 0.8171834625322998,
+          "alpha128_silhouette_XOR_pixels": 283,
+          "alpha128_silhouette_XOR_fraction_inside_union": 0.18281653746770027,
+          "official_full_cell64_RGBA_mean_abs_diff": 0.0006189682904411764,
+          "64_alpha_nonzero_union_pixels": 49,
+          "64_alpha_union_cell_area_fraction": 0.011962890625,
+          "same_numerator_conditional_union_RGBA_mean_abs_diff": 0.051740696278511404,
+          "factorization_only_not_new_QA_gate": true
+        },
+        {
+          "from": 1,
+          "to": 2,
+          "alpha128_silhouette_IoU": 0.7811720698254364,
+          "alpha128_silhouette_XOR_pixels": 351,
+          "alpha128_silhouette_XOR_fraction_inside_union": 0.2188279301745636,
+          "official_full_cell64_RGBA_mean_abs_diff": 0.0006833543964460784,
+          "64_alpha_nonzero_union_pixels": 49,
+          "64_alpha_union_cell_area_fraction": 0.011962890625,
+          "same_numerator_conditional_union_RGBA_mean_abs_diff": 0.05712284913965586,
+          "factorization_only_not_new_QA_gate": true
+        },
+        {
+          "from": 2,
+          "to": 3,
+          "alpha128_silhouette_IoU": 0.8896595208070618,
+          "alpha128_silhouette_XOR_pixels": 175,
+          "alpha128_silhouette_XOR_fraction_inside_union": 0.11034047919293821,
+          "official_full_cell64_RGBA_mean_abs_diff": 0.00027214499080882354,
+          "64_alpha_nonzero_union_pixels": 49,
+          "64_alpha_union_cell_area_fraction": 0.011962890625,
+          "same_numerator_conditional_union_RGBA_mean_abs_diff": 0.02274909963985594,
+          "factorization_only_not_new_QA_gate": true
+        }
+      ],
+      "qualitative_view": "Near1 visibly flattens by a few source pixels;0/2/3 are visually close rounded caps. A subtle contour change exists, but sufficient per-pose shoulder fit and body-following motion are not established.",
+      "sourcefit_pass": false,
+      "assembled_motion_pass": false,
+      "final_art_or_native_acceptance": false
+    }
+  ],
+  "media_retention": [
+    {
+      "E_manifest": {
+        "path": "E:/OurGame/Knight/过程图稿与视频/2026-10-18-OurgameUE-LGT-Hurt-chest228-curated-warning-v431/source-size-SHA256.json",
+        "bytes": 25142,
+        "sha256": "01148eafb963694d070f9bbe75f1e795332c7467729c90e834e32789e924109a"
+      },
+      "selected_curated_files": [
+        {
+          "source": "F:\\Ourgame\\过程图稿与视频\\2026-10-18_钟盔Hurt轻甲chest228共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-0.png",
+          "retained_relative": "F盘原批次副本\\2026-10-18_钟盔Hurt轻甲chest228共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-0.png",
+          "bytes": 15381,
+          "sha256": "51463da139d1e3a49e7ee9df54187921ef14efa2b4f3c4f752ec775e2a42b5b8",
+          "source_version": "2026-10-18_钟盔Hurt轻甲chest228共享四相标准提取_v001",
+          "status": "exact_copy; source status and acceptance limits retained"
+        },
+        {
+          "source": "F:\\Ourgame\\过程图稿与视频\\2026-10-18_钟盔Hurt轻甲chest228共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-1.png",
+          "retained_relative": "F盘原批次副本\\2026-10-18_钟盔Hurt轻甲chest228共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-1.png",
+          "bytes": 16006,
+          "sha256": "4393a98b6dabf40bb21b042479e23bb3a71a5be78b8c99170feee0bd0f83c8d2",
+          "source_version": "2026-10-18_钟盔Hurt轻甲chest228共享四相标准提取_v001",
+          "status": "exact_copy; source status and acceptance limits retained"
+        },
+        {
+          "source": "F:\\Ourgame\\过程图稿与视频\\2026-10-18_钟盔Hurt轻甲chest228共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-2.png",
+          "retained_relative": "F盘原批次副本\\2026-10-18_钟盔Hurt轻甲chest228共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-2.png",
+          "bytes": 15798,
+          "sha256": "5ebcb7d5879b1b39ac37d0a8063e252699a73d073097bdad0e00550dcb6fc45c",
+          "source_version": "2026-10-18_钟盔Hurt轻甲chest228共享四相标准提取_v001",
+          "status": "exact_copy; source status and acceptance limits retained"
+        },
+        {
+          "source": "F:\\Ourgame\\过程图稿与视频\\2026-10-18_钟盔Hurt轻甲chest228共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-3.png",
+          "retained_relative": "F盘原批次副本\\2026-10-18_钟盔Hurt轻甲chest228共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-3.png",
+          "bytes": 15386,
+          "sha256": "df76904514e06084030f6c1715275f99d167661d14a6d84cd9f6de7fa9ce4f72",
+          "source_version": "2026-10-18_钟盔Hurt轻甲chest228共享四相标准提取_v001",
+          "status": "exact_copy; source status and acceptance limits retained"
+        }
+      ],
+      "passes": 2,
+      "mismatches": 0,
+      "actual_working_curated_equals_retained_canonical": true
+    },
+    {
+      "E_manifest": {
+        "path": "E:/OurGame/Knight/过程图稿与视频/2026-10-18-OurgameUE-LGT-Hurt-near229-curated-warning-v432/source-size-SHA256.json",
+        "bytes": 26080,
+        "sha256": "5dd05f8f3ae52ef8eae56a25dab26fa098029f78dc420aa140194dacc75d1aa3"
+      },
+      "selected_curated_files": [
+        {
+          "source": "F:\\Ourgame\\过程图稿与视频\\2026-10-18_钟盔Hurt轻甲nearshoulder229共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-0.png",
+          "retained_relative": "F盘原批次副本\\2026-10-18_钟盔Hurt轻甲nearshoulder229共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-0.png",
+          "bytes": 6574,
+          "sha256": "8d50c70490f2de371f85c450259c00cf950914fa5760ed9427acfea15dec2bdf",
+          "source_version": "2026-10-18_钟盔Hurt轻甲nearshoulder229共享四相标准提取_v001",
+          "status": "exact_copy; source status and acceptance limits retained"
+        },
+        {
+          "source": "F:\\Ourgame\\过程图稿与视频\\2026-10-18_钟盔Hurt轻甲nearshoulder229共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-1.png",
+          "retained_relative": "F盘原批次副本\\2026-10-18_钟盔Hurt轻甲nearshoulder229共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-1.png",
+          "bytes": 6154,
+          "sha256": "6f90a89db30fa3f6f636c6fbd0f5d44c3f2b4b6839d02986f52445e53f2d6bc5",
+          "source_version": "2026-10-18_钟盔Hurt轻甲nearshoulder229共享四相标准提取_v001",
+          "status": "exact_copy; source status and acceptance limits retained"
+        },
+        {
+          "source": "F:\\Ourgame\\过程图稿与视频\\2026-10-18_钟盔Hurt轻甲nearshoulder229共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-2.png",
+          "retained_relative": "F盘原批次副本\\2026-10-18_钟盔Hurt轻甲nearshoulder229共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-2.png",
+          "bytes": 6766,
+          "sha256": "2b75ec76d82ecf50f925e8c8344768bb78a6a17263dad15dbb388ce46a406365",
+          "source_version": "2026-10-18_钟盔Hurt轻甲nearshoulder229共享四相标准提取_v001",
+          "status": "exact_copy; source status and acceptance limits retained"
+        },
+        {
+          "source": "F:\\Ourgame\\过程图稿与视频\\2026-10-18_钟盔Hurt轻甲nearshoulder229共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-3.png",
+          "retained_relative": "F盘原批次副本\\2026-10-18_钟盔Hurt轻甲nearshoulder229共享四相标准提取_v001\\原件\\独立标准process-run\\curated\\frame-3.png",
+          "bytes": 6557,
+          "sha256": "6ddccd062af26a9b7bfd056c0ecb8c67aa0cb8930d48d06c164124d7bc0f896a",
+          "source_version": "2026-10-18_钟盔Hurt轻甲nearshoulder229共享四相标准提取_v001",
+          "status": "exact_copy; source status and acceptance limits retained"
+        }
+      ],
+      "passes": 2,
+      "mismatches": 0,
+      "actual_working_curated_equals_retained_canonical": true
+    }
+  ],
+  "judgment": "The low whole-cell difference is a real measured warning. Full-cell support occupancy/downsampling make this global threshold insufficient as a standalone failure or acceptance criterion for these small separately registered armor components. Keep original0E1W/FAILED_PRESERVED_NO_ACCEPTANCE artifacts unchanged; permit only NEW sourcefit/assembled-motion investigation. Do not replace QA with a union-normalized gate, and do not infer motion correctness from four distinct RGBA hashes.",
+  "remaining_proof": "Visible per-phase two-feature component/body correspondences, measured integer registration and residuals, exact source pixel ownership/occlusion, and actual4x100ms nonloop assembled Hurt body+armor motion at target72 are still needed. Final actor/import/gameplay acceptance is separate.",
+  "reports_assets_thresholds_actualSource_or_ledger_changed": false,
+  "new_images_created": false,
+  "AI_or_native_called": false
+}

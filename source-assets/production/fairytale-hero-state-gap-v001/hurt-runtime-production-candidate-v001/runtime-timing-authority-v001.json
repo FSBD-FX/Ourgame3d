@@ -1,0 +1,43 @@
+{
+  "schema": "Hurt4-native-authority-production-contract-v001",
+  "status": "candidate_not_native_verified",
+  "scope": "Existing authoritative player, committed SWD001+LGT001 only; explicit Bound and Hurt presentation flags",
+  "frozen_offline_source_metadata_modified": false,
+  "nominal_source_sampling": {
+    "duration_ms": 400,
+    "sample_bands_ms": [
+      [
+        0,
+        100
+      ],
+      [
+        100,
+        200
+      ],
+      [
+        200,
+        300
+      ],
+      [
+        300,
+        400
+      ]
+    ],
+    "role": "nominal author preview sampling; not gameplay termination authority"
+  },
+  "actual_eligibility": [
+    "not enemy",
+    "not dead",
+    "no native Stone driver",
+    "AnimationName == hurt",
+    "finite AnimationTime >= 0",
+    "finite actual HurtTime > 0"
+  ],
+  "frame_selector": "Actual float AnimationTime promoted to double: <.1 =>0, <.2 =>1, <.3 =>2, otherwise3 while actual eligibility remains true.",
+  "positive_float_tail": "Real positive native remaining remains eligible and selects phase3 even if actual age is at/after nominal400ms. Plan records the unchanged native age/remaining.",
+  "end": "Actual native HurtTime/label/death determine the end. No presentation hold across the actual end, no added timer, no early Ready0, no gameplay extension.",
+  "pause_continue": "Already published valid owner remains observable during AwaitExplicitContinue. Query/plan cannot advance time, open the gate, or change committed equipment.",
+  "geometry": "All phases share 512 canvas and416 standing extent to72 display; UIScale is applied once. No per-frame alpha-height normalization.",
+  "runtime_verification_required": true,
+  "final_accepted": false
+}

@@ -1,0 +1,376 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordDrawState.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordDrawState.h
+@@ -5,7 +5,8 @@
+ 
+ // EV048 ordinary-input presentation trial only. Active means this opt-in
+ // presenter was called, not that the combat kernel currently has an action.
+-// Supported covers only the opted-in current Ready and grounded SWD primary sources.
++// Supported covers opted-in Ready/Walk/grounded SWD primaries and explicit SWD+LGT Hurt4.
++// Hurt has no whole Body texture; its separate same-plan/actual-slot draw record owns layers.
+ // Thumb, axis sign, hand masks, foot drift and blade/helmet clearance are unaccepted.
+ struct FDungeonFairytaleSwordDraw
+ {
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordHurtPlan.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordHurtPlan.cpp
+@@ -1,16 +1,104 @@
+ #include "DungeonFairytaleSwordHurtPlan.h"
++#include "DungeonFighter.h"
++#include "DungeonGameMode.h"
++#include "Misc/CommandLine.h"
++#include "Misc/Parse.h"
+ 
+ namespace DungeonFairytaleSwordHurtV001
+ {
+-bool BuildDrawPlan(const ADungeonGameMode&,const ADungeonFighter&,const FDrawContext&,FDrawPlan&,FString& Diagnostic)
++namespace
+ {
+- Diagnostic=TEXT("Stage0 unsupported: actual SWD+LGT Hurt4 shared draw plan is not implemented");
+- return false;
++bool Reject(FString& Diagnostic,const TCHAR* Why){Diagnostic=Why;return false;}
++bool FinitePoint(FVector2D P){return FMath::IsFinite(P.X)&&FMath::IsFinite(P.Y);}
++bool InCanvas(FVector2D P){return FinitePoint(P)&&P.X>=0.&&P.X<=512.&&P.Y>=0.&&P.Y<=512.;}
++bool SHA256(const FString& S)
++{
++ if(S.Len()!=64)return false;
++ for(int32 I=0;I<S.Len();++I)if(!((S[I]>=TEXT('0')&&S[I]<=TEXT('9'))||(S[I]>=TEXT('a')&&S[I]<=TEXT('f'))))return false;
++ return true;
+ }
+-bool BuildDrawPlanFromCommitted(const DungeonFairytaleSwordEquipmentBinding::FBinding&,const FDungeonHurtPresentationSample&,
+- double,const FProfile&,const FDrawContext&,FDrawPlan&,FString& Diagnostic)
++bool ValidBinding(const DungeonFairytaleSwordEquipmentBinding::FBinding& B)
+ {
+- Diagnostic=TEXT("Stage0 unsupported: committed Hurt4 admission/selector/geometry is not implemented");
+- return false;
++ using A=DungeonFairytaleSwordEquipmentBinding::EArmor;
++ return B.RunGuid.IsValid()&&B.RunAlias&&B.OwnerId&&B.Revision&&B.Revision!=TNumericLimits<uint64>::Max()
++  &&B.ActiveSlot>=0&&B.ActiveSlot<=1&&B.WeaponInstanceId&&B.WeaponVersion&&B.WeaponVersion!=TNumericLimits<uint64>::Max()
++  &&B.WeaponContentId==TEXT("WPN-SWD-001")&&B.Armor==A::LightArmor&&B.ArmorInstanceId&&B.ArmorVersion
++  &&B.ArmorVersion!=TNumericLimits<uint64>::Max()&&B.ArmorInstanceId!=B.WeaponInstanceId&&B.ArmorContentId==TEXT("ARM-LGT-001");
++}
++bool ValidProfile(const FProfile& P)
++{
++ const auto& Approved=Profile();
++ if(!P.SourceClosureVerified||P.ProfileId!=Approved.ProfileId||P.SourceClosureSHA256!=Approved.SourceClosureSHA256
++  ||!SHA256(P.SourceClosureSHA256)||P.CanvasSource!=512||P.StandingExtent!=416.||P.StandingDisplay!=72.
++  ||P.WeaponScale!=.5||P.ComponentGrip!=FVector2D(99.,256.)||P.SwordTexturePath!=Approved.SwordTexturePath)return false;
++ const EComponent Order[]={EComponent::BodyRest,EComponent::ShoulderFar,EComponent::Chest,EComponent::NearArmWithoutHand,
++  EComponent::ShoulderNear,EComponent::HelmetForeground,EComponent::FarHandForeground,EComponent::NearHand};
++ TSet<FString> Paths;
++ for(int32 I=0;I<4;++I)
++ {
++  const auto& F=P.Frames[I];const auto& Ref=Approved.Frames[I];
++  if(F.Frame!=I||F.ExpectedNonemptyDrawCount!=(I==0?9:8)||!InCanvas(F.Root)||!InCanvas(F.Grip)
++   ||!FinitePoint(F.AxisArtist)||F.AxisArtist==FVector2D::ZeroVector||F.Root!=Ref.Root||F.Grip!=Ref.Grip||F.AxisArtist!=Ref.AxisArtist)return false;
++  for(int32 J=0;J<8;++J)
++  {
++   const auto& L=F.Layers[J];const auto& A=Ref.Layers[J];const bool Empty=I>0&&Order[J]==EComponent::FarHandForeground;
++   if(L.Component!=Order[J]||L.KnownOptionalEmpty!=Empty||(Empty?L.SourceAlphaNonzero!=0:L.SourceAlphaNonzero==0)
++    ||L.SourceAlphaNonzero>512u*512u||!L.TexturePath.StartsWith(TEXT("/Game/Production/ArtTrials/EV048/v017/HeroLeatherHurt/"))
++    ||!L.TexturePath.Contains(TEXT("."))||Paths.Contains(L.TexturePath)||!SHA256(L.SourceSHA256)||!SHA256(L.SourceRGBASHA256)
++    ||L.TexturePath!=A.TexturePath||L.SourceSHA256!=A.SourceSHA256||L.SourceRGBASHA256!=A.SourceRGBASHA256||L.SourceAlphaNonzero!=A.SourceAlphaNonzero)return false;
++   Paths.Add(L.TexturePath);
++  }
++ }
++ return Paths.Num()==32&&!Paths.Contains(P.SwordTexturePath);
+ }
+ }
++bool BuildDrawPlanFromCommitted(const DungeonFairytaleSwordEquipmentBinding::FBinding& Binding,const FDungeonHurtPresentationSample& Hurt,
++ double Facing,const FProfile& Source,const FDrawContext& Context,FDrawPlan& Out,FString& Diagnostic)
++{
++ if(!ValidBinding(Binding))return Reject(Diagnostic,TEXT("Hurt4 requires actual committed SWD001 and LGT001 identity"));
++ if(!Hurt.Active||!FMath::IsFinite(Hurt.Elapsed)||Hurt.Elapsed<0.f||!FMath::IsFinite(Hurt.Remaining)||Hurt.Remaining<=0.f
++  ||(Facing!=-1.&&Facing!=1.))return Reject(Diagnostic,TEXT("No valid actual living Hurt sample/facing"));
++ if(!ValidProfile(Source))return Reject(Diagnostic,TEXT("Hurt4 complete32 retained source profile is missing, changed or invalid"));
++ if(!FinitePoint(Context.GroundScreen)||!FMath::IsFinite(Context.UIScale)||Context.UIScale<=0.
++  ||!FMath::IsFinite(Context.JumpHeight)||Context.JumpHeight<0.)return Reject(Diagnostic,TEXT("Hurt4 actual HUD projection context is invalid"));
++ // Native positive remaining owns the end. Do not force nominal400ms, create a
++ // second timer or turn a genuinely active tiny float tail into bare Ready0.
++ const double Age=double(Hurt.Elapsed);const int32 Index=Age>=.3?3:Age>=.2?2:Age>=.1?1:0;
++ const auto& F=Source.Frames[Index];FDrawPlan P;P.Supported=true;P.Frame=Index;P.Facing=Facing<0.?-1:1;P.ProfileId=Source.ProfileId;
++ P.Hurt=Hurt;P.Binding=Binding;P.RootSource=F.Root;P.GripSource=F.Grip;P.AxisArtist=F.AxisArtist;
++ P.CanvasSize=Source.StandingDisplay*double(Source.CanvasSource)/Source.StandingExtent;
++ P.SourceToScreenScale=Source.StandingDisplay/Source.StandingExtent*Context.UIScale;
++ P.WeaponScale=Source.WeaponScale;P.WeaponWidth=P.CanvasSize*P.WeaponScale*Context.UIScale;
++ const double Scale=P.SourceToScreenScale,Height=Context.JumpHeight*.70*Context.UIScale;
++ P.GripScreen=Context.GroundScreen+FVector2D(P.Facing*(F.Grip.X-F.Root.X)*Scale,(F.Grip.Y-F.Root.Y)*Scale-Height);
++ P.BodyTop=Context.GroundScreen-FVector2D((P.Facing<0?512.-F.Root.X:F.Root.X)*Scale,F.Root.Y*Scale+Height);
++ P.WeaponAngle=FMath::RadiansToDegrees(FMath::Atan2(F.AxisArtist.Y,F.AxisArtist.X))*(P.Facing<0?-1.:1.);
++ P.SwordPivotUV=FVector2D(P.Facing<0?1.-Source.ComponentGrip.X/512.:Source.ComponentGrip.X/512.,Source.ComponentGrip.Y/512.);
++ P.SwordTop=P.GripScreen-P.SwordPivotUV*P.WeaponWidth;P.TextureU=P.Facing<0?1.:0.;P.TextureDU=P.Facing<0?-1.:1.;
++ if(!FMath::IsFinite(P.SourceToScreenScale)||P.SourceToScreenScale<=0.||!FMath::IsFinite(P.WeaponWidth)||P.WeaponWidth<=0.
++  ||!FinitePoint(P.GripScreen)||!FinitePoint(P.BodyTop)||!FinitePoint(P.SwordTop))
++  return Reject(Diagnostic,TEXT("Hurt4 screen geometry is not finitely representable"));
++ const EComponent Stack[]={EComponent::BodyRest,EComponent::ShoulderFar,EComponent::Chest,EComponent::NearArmWithoutHand,
++  EComponent::ShoulderNear,EComponent::HelmetForeground,EComponent::FarHandForeground,EComponent::IndependentSword,EComponent::NearHand};
++ for(int32 I=0;I<9;++I)
++ {
++  auto& Slot=P.Slots[I];Slot.Component=Stack[I];
++  if(Stack[I]==EComponent::IndependentSword)Slot.TexturePath=Source.SwordTexturePath;
++  else{const auto& L=F.Layers[I<7?I:7];Slot.TexturePath=L.TexturePath;Slot.KnownOptionalEmpty=L.KnownOptionalEmpty;}
++  if(!Slot.KnownOptionalEmpty)++P.NonemptyDrawCount;
++ }
++ if(P.NonemptyDrawCount!=F.ExpectedNonemptyDrawCount)return Reject(Diagnostic,TEXT("Hurt4 known-empty policy changed its complete draw count"));
++ Out=MoveTemp(P);Diagnostic.Reset();return true;
++}
++bool BuildDrawPlan(const ADungeonGameMode& Game,const ADungeonFighter& Fighter,const FDrawContext& Context,FDrawPlan& Out,FString& Diagnostic)
++{
++ if(!FParse::Param(FCommandLine::Get(),CommandLineFlag)||!FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordEquipmentBinding::CommandLineFlag))
++  return Reject(Diagnostic,TEXT("Hurt4 requires explicit Hurt and committed Bound presentation opt-ins"));
++ DungeonFairytaleSwordEquipmentBinding::FBinding Binding;
++ if(!DungeonFairytaleSwordEquipmentBinding::Resolve(Game,Fighter,Binding,Diagnostic))return false;
++ FDungeonHurtPresentationSample Hurt;
++ if(!Fighter.QueryHurtPresentation(Hurt))return Reject(Diagnostic,TEXT("Actual player is not in living active native Hurt"));
++ if(Context.JumpHeight!=double(Fighter.JumpHeight))return Reject(Diagnostic,TEXT("HUD Hurt projection height differs from actual player"));
++ return BuildDrawPlanFromCommitted(Binding,Hurt,double(Fighter.Facing),Profile(),Context,Out,Diagnostic);
++}
++}
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp
+@@ -97,6 +97,12 @@
+ bool ADungeonHUD::DrawFairytaleSwordBody(ADungeonFighter* F)
+ {
+     if(!F || F->bEnemy)return false;
++    const uint64 PreviousHurtDrawId=FairytaleSwordHurtDraw.DrawId;
++    FairytaleSwordHurtDraw=FDungeonFairytaleSwordHurtDraw();
++    FairytaleSwordHurtDraw.DrawId=PreviousHurtDrawId;
++    FairytaleSwordHurtDraw.OptIn=bUseFairytaleSwordHurtPreview;
++    if(bUseFairytaleSwordHurtPreview && !F->bDead && F->AnimationName==TEXT("hurt"))
++        return DrawFairytaleSwordHurtBody(F);
+     using namespace DungeonFairytaleSwordBodyV001;
+     const uint64 PreviousDrawId=FairytaleSwordDraw.DrawId;
+     FairytaleSwordDraw=FDungeonFairytaleSwordDraw();
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -1322,10 +1322,17 @@
+     }
+ }
+ 
+-bool ADungeonFighter::QueryHurtPresentation(FDungeonHurtPresentationSample&) const
+-{
+-    // Stage0 deliberately unsupported; actual gameplay hurt state/timing is unchanged.
+-    return false;
++bool ADungeonFighter::QueryHurtPresentation(FDungeonHurtPresentationSample& Out) const
++{
++    // Actual native facts only. A published paused owner remains observable; the
++    // query cannot open Continue or advance a timer. Legacy player facts also do
++    // not grant committed equipment authority, which belongs to Binding::Resolve.
++    if (bEnemy || bDead || StoneKnight || StoneBat || StoneGuard || AnimationName!=TEXT("hurt")
++        || !FMath::IsFinite(AnimationTime) || AnimationTime<0.f
++        || !FMath::IsFinite(HurtTime) || HurtTime<=0.f) return false;
++    FDungeonHurtPresentationSample Candidate;
++    Candidate.Active=true;Candidate.Elapsed=AnimationTime;Candidate.Remaining=HurtTime;
++    Out=Candidate;return true;
+ }
+ 
+ bool ADungeonFighter::CanStartAttack() const
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+@@ -1,5 +1,6 @@
+ #include "DungeonHUD.h"
+ #include "DungeonFairytaleSwordWalkTextures.inl"
++#include "DungeonFairytaleSwordHurtTextures.inl"
+ #include "DungeonFairytaleSwordEquipmentBinding.h"
+ #include "DungeonPresentationScale.h"
+ #include "DungeonFighter.h"
+@@ -62,6 +63,8 @@
+ {
+     Super::BeginPlay();
+     bUseFairytaleSwordEquipmentBoundPreview=FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordEquipmentBinding::CommandLineFlag);
++    bUseFairytaleSwordHurtPreview=bUseFairytaleSwordEquipmentBoundPreview
++        &&FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordHurtV001::CommandLineFlag);
+     bUseFairytaleSwordWalkPreview=bUseFairytaleSwordEquipmentBoundPreview
+         &&FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordWalkPreview"));
+     bUseFairytaleLookdevPreview=!bUseFairytaleSwordEquipmentBoundPreview
+@@ -129,6 +132,16 @@
+                 TEXT("NearHand"),TEXT("ShoulderFar"),TEXT("Chest"),TEXT("ShoulderNear")})
+                 for(int32 I=0;I<6;++I)
+                     if(auto Texture=DungeonFairytaleSwordWalkV001::GetTexture(Component,I,Frames))ReadyArmorTextures.Add(Texture);
++        if(bUseFairytaleSwordHurtPreview)
++        {
++            // Complete32 sources include transparent FarHand1/2/3. Compile them
++            // and the existing independent sword before the existing render flush.
++            const auto& HurtProfile=DungeonFairytaleSwordHurtV001::Profile();
++            for(const auto& Phase:HurtProfile.Frames)
++                for(const auto& Layer:Phase.Layers)
++                    if(auto Texture=DungeonFairytaleSwordHurtV001::PreloadTexture(Layer.TexturePath,Frames))ReadyArmorTextures.Add(Texture);
++            if(auto Texture=DungeonFairytaleSwordHurtV001::PreloadTexture(HurtProfile.SwordTexturePath,Frames))ReadyArmorTextures.Add(Texture);
++        }
+ #if WITH_EDITOR
+         FTextureCompilingManager::Get().FinishCompilation(ReadyArmorTextures);
+ #endif
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.h
+@@ -9,6 +9,7 @@
+ #include "DungeonActionAudioFeedback.h"
+ #include "DungeonFairytaleLookdevState.h"
+ #include "DungeonFairytaleSwordDrawState.h"
++#include "DungeonFairytaleSwordHurtDrawState.h"
+ #include "DungeonFairytaleGuardDrawState.h"
+ #include "DungeonFairytaleGuardFullDrawStateV003.h"
+ #include "DungeonHUD.generated.h"
+@@ -78,6 +79,7 @@
+     const TArray<FDungeonActionAudioPlayRequest>& GetActionAudioPlayReceipts() const { return ActionAudioPlayReceipts; }
+     const FFairytaleLookdevDraw& GetFairytaleLookdevDraw() const { return FairytaleLookdevDraw; }
+     const FDungeonFairytaleSwordDraw& GetFairytaleSwordDraw() const { return FairytaleSwordDraw; }
++    const FDungeonFairytaleSwordHurtDraw& GetFairytaleSwordHurtDraw() const { return FairytaleSwordHurtDraw; }
+     const TArray<FDungeonFairytaleGuardDraw>& GetFairytaleGuardDraws() const { return FairytaleGuardDraws; }
+     const TArray<FDungeonFairytaleGuardFullDrawV003>& GetFairytaleGuardFullDraws() const { return FairytaleGuardFullDraws; }
+ private:
+@@ -140,6 +142,9 @@
+     bool bUseFairytaleSwordArmorPrimary1Preview=false;
+     UTexture2D* GetFairytaleSwordArmorPrimary1Texture(const FString& Component,int32 Frame);
+     FDungeonFairytaleSwordDraw FairytaleSwordDraw;
++    bool bUseFairytaleSwordHurtPreview=false;
++    FDungeonFairytaleSwordHurtDraw FairytaleSwordHurtDraw;
++    bool DrawFairytaleSwordHurtBody(ADungeonFighter* Fighter);
+     UTexture2D* GetFairytaleSwordTexture(const FString& Clip,int32 Index);
+     bool DrawFairytaleSwordBody(ADungeonFighter* Fighter);
+     bool bActionAudioAttached = false;
+--- /dev/null
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordHurtDrawState.h
+@@ -0,0 +1,31 @@
++#pragma once
++#include "CoreMinimal.h"
++#include "DungeonFairytaleSwordHurtPlan.h"
++
++// Process-only exact actual HUD submissions. This does not enter saves/gameplay.
++struct FDungeonFairytaleSwordHurtSlotDraw
++{
++ int32 SlotIndex=-1;
++ DungeonFairytaleSwordHurtV001::EComponent Component=DungeonFairytaleSwordHurtV001::EComponent::BodyRest;
++ FString TexturePath;
++ bool KnownOptionalEmpty=false,TextureReady=false,Drawn=false;
++ FVector2D Top=FVector2D::ZeroVector,Size=FVector2D::ZeroVector,UV=FVector2D::ZeroVector,UVSize=FVector2D::ZeroVector;
++ double RotationDegrees=0.;
++ FVector2D RotationPivot=FVector2D::ZeroVector;
++ double DrawScale=1.;
++ bool ScalePosition=false;
++};
++struct FDungeonFairytaleSwordHurtDraw
++{
++ uint64 DrawId=0,PlayerEntityId=0;
++ double SimulationTime=0.;
++ bool OptIn=false,Drawn=false,AtomicPreflightReady=false;
++ FString MissingReason;
++ DungeonFairytaleSwordHurtV001::FDrawContext Context;
++ // The SAME complete plan used by renderer. Observer must not substitute a second planner.
++ DungeonFairytaleSwordHurtV001::FDrawPlan Plan;
++ TArray<FString> ActualRenderedStack;
++ FLinearColor Tint=FLinearColor::White;
++ // Nine declared slots including known-transparent FarHand1/2/3; Drawn=false there.
++ TArray<FDungeonFairytaleSwordHurtSlotDraw> Slots;
++};
+--- /dev/null
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordHurtPresentation.cpp
+@@ -0,0 +1,92 @@
++#include "DungeonHUD.h"
++#include "DungeonFighter.h"
++#include "DungeonGameMode.h"
++#include "DungeonFairytaleSwordHurtPlan.h"
++#include "Engine/Texture2D.h"
++#include "Engine/World.h"
++#include "TextureResource.h"
++#include "UnrealClient.h"
++
++bool ADungeonHUD::DrawFairytaleSwordHurtBody(ADungeonFighter* F)
++{
++ using namespace DungeonFairytaleSwordHurtV001;
++ auto& Trace=FairytaleSwordHurtDraw;
++ const uint64 PreviousDrawId=FairytaleSwordDraw.DrawId;FairytaleSwordDraw=FDungeonFairytaleSwordDraw();auto& Record=FairytaleSwordDraw;
++ Record.Active=true;Record.DrawId=PreviousDrawId;Record.EquipmentBoundMode=bUseFairytaleSwordEquipmentBoundPreview;
++ Record.Clip=TEXT("sword_hurt");Record.Facing=F->Facing<0?-1:1;
++ Record.NativeScreenshotPath=FScreenshotRequest::IsScreenshotRequested()?FScreenshotRequest::GetFilename():FString();
++ const auto Game=GetWorld()?GetWorld()->GetAuthGameMode<ADungeonGameMode>():nullptr;
++ Record.SimulationTime=Trace.SimulationTime=Game?Game->GetSimulationTime():F->GetMeleeCombatState().Time;
++ Trace.PlayerEntityId=F->GetRuntimeEntityId();Trace.OptIn=bUseFairytaleSwordHurtPreview;
++ const auto G=Ground(F->GetGroundPosition());Trace.Context.GroundScreen=Screen(float(G.X),float(G.Y));
++ Trace.Context.UIScale=double(UIScale);Trace.Context.JumpHeight=double(F->JumpHeight);
++ Trace.Tint=F->HitFlash>0.f?FLinearColor(1.7f,.6f,.4f,1.f):FLinearColor::White;
++ // Close the whole candidate path on any failure. No earlier body/armor quad or
++ // fallback can hide a missing slot. This source has NO whole Body texture.
++ bRenderedArmorLayersUsed=false;RenderedArmorLayerPaths.Reset();RenderedPlayerDrawStack.Reset();RenderedPlayerTexturePath.Reset();
++ bRenderedWeaponBodyUsed=false;RenderedWeaponBodyFrame=-1;RenderedWeaponBodyFacing=0;RenderedWeaponBodyClip.Reset();
++ RenderedWeaponBodyActionId=0;RenderedWeaponBodySampleTime=0.;RenderedWeaponBodyInstanceId=0;RenderedWeaponStateIndex=-1;
++ RenderedWeaponBodyEmitScreen=FVector2D::ZeroVector;
++ if(!Game){Trace.MissingReason=TEXT("Hurt4 actual world GameMode is absent");Record.EquipmentBindingDiagnostic=Trace.MissingReason;return true;}
++ if(!BuildDrawPlan(*Game,*F,Trace.Context,Trace.Plan,Trace.MissingReason))
++ {Record.EquipmentBindingDiagnostic=Trace.MissingReason;return true;}
++ const auto& P=Trace.Plan;
++ Record.Supported=Record.ActionPoseSupported=true;Record.EquipmentBindingValid=true;Record.EquipmentBinding=P.Binding;
++ Record.InstanceId=P.Binding.WeaponInstanceId;Record.Frame=P.Frame;Record.Facing=P.Facing;Record.CanvasSize=P.CanvasSize;
++ Record.Root=P.RootSource;Record.Grip=P.GripSource;Record.GripScreen=P.GripScreen;Record.WeaponAngle=P.WeaponAngle;
++ Record.WeaponScale=P.WeaponScale;Record.WeaponWidth=P.WeaponWidth;Record.ArmorPreview=true;
++ RenderedPlayerSpriteSize=float(P.CanvasSize);RenderedActorSpriteSizes.Add(F,float(P.CanvasSize));
++ UTexture2D* Textures[9]={};Trace.AtomicPreflightReady=true;Trace.Slots.Reserve(9);
++ const auto CacheReady=[this](const FString& Path)
++ {
++  UTexture2D* T=Frames.FindRef(Path);
++  return T&&T->GetResource()&&!T->HasPendingRenderResourceInitialization()&&T->GetPathName()==Path&&T->GetSizeX()==512&&T->GetSizeY()==512;
++ };
++ // Admission remains atomic across the whole source row, including the three
++ // declared transparent textures and phases that are not selected this draw.
++ // A valid current phase must not conceal a missing later phase. Cache only.
++ for(const auto& Phase:Profile().Frames)
++  for(const auto& Layer:Phase.Layers)
++   Trace.AtomicPreflightReady=CacheReady(Layer.TexturePath)&&Trace.AtomicPreflightReady;
++ Trace.AtomicPreflightReady=CacheReady(Profile().SwordTexturePath)&&Trace.AtomicPreflightReady;
++ for(int32 I=0;I<9;++I)
++ {
++  const auto& S=P.Slots[I];UTexture2D* T=Frames.FindRef(S.TexturePath);Textures[I]=T;
++  FDungeonFairytaleSwordHurtSlotDraw Q;Q.SlotIndex=I;Q.Component=S.Component;Q.TexturePath=T?T->GetPathName():S.TexturePath;
++  Q.KnownOptionalEmpty=S.KnownOptionalEmpty;
++  Q.TextureReady=CacheReady(S.TexturePath);
++  const bool Sword=S.Component==EComponent::IndependentSword;
++  const auto Top=Sword?P.SwordTop:P.BodyTop;const double Width=Sword?P.WeaponWidth:P.CanvasSize*Trace.Context.UIScale;
++  // Trace the exact float arguments submitted to AHUD::DrawTexture, including
++  // the one UV reflection and signed rotation; retain the source plan separately.
++  Q.Top=FVector2D(float(Top.X),float(Top.Y));Q.Size=FVector2D(float(Width),float(Width));
++  Q.UV=FVector2D(float(P.TextureU),0.f);Q.UVSize=FVector2D(float(P.TextureDU),1.f);
++  Q.RotationDegrees=Sword?double(float(P.WeaponAngle)):0.;Q.RotationPivot=Sword?P.SwordPivotUV:FVector2D::ZeroVector;
++  Q.DrawScale=1.;Q.ScalePosition=false;
++  Trace.AtomicPreflightReady=Trace.AtomicPreflightReady&&Q.TextureReady;Trace.Slots.Add(MoveTemp(Q));
++ }
++ Record.TextureReady=Record.ArmorReady=Trace.AtomicPreflightReady;
++ if(!Trace.AtomicPreflightReady){Trace.MissingReason=TEXT("Hurt4 complete32/sword cache resource is not ready; no partial draw");return true;}
++ if(!Canvas){Trace.MissingReason=TEXT("Hurt4 plan/resources ready but actual Canvas is absent; no rendered claim");return true;}
++ // The renderer consumes exactly this validated shared plan and slot order.
++ ++Record.DrawId;Trace.DrawId=Record.DrawId;
++ for(int32 I=0;I<9;++I)
++ {
++  auto& Q=Trace.Slots[I];if(Q.KnownOptionalEmpty)continue;
++  DrawTexture(Textures[I],float(Q.Top.X),float(Q.Top.Y),float(Q.Size.X),float(Q.Size.Y),float(Q.UV.X),float(Q.UV.Y),
++   float(Q.UVSize.X),float(Q.UVSize.Y),Trace.Tint,BLEND_Translucent,float(Q.DrawScale),Q.ScalePosition,float(Q.RotationDegrees),Q.RotationPivot);
++  Q.Drawn=true;Trace.ActualRenderedStack.Add(Textures[I]->GetPathName());
++  Record.DrawStack.Add(Textures[I]->GetPathName());RenderedPlayerDrawStack.Add(Textures[I]->GetPathName());
++  FActorQuad Quad;Quad.Owner=F;Quad.Texture=Textures[I];Quad.Top=Q.Top;Quad.Size=float(Q.Size.X);Quad.Tint=Trace.Tint;
++  Quad.Rotation=float(Q.RotationDegrees);Quad.Pivot=Q.RotationPivot;Quad.Weapon=Q.Component==EComponent::IndependentSword;ActorQuads.Add(Quad);
++  if(Q.Component==EComponent::ShoulderFar||Q.Component==EComponent::Chest||Q.Component==EComponent::ShoulderNear)
++   RenderedArmorLayerPaths.Add(Textures[I]->GetPathName());
++  if(Q.Component==EComponent::IndependentSword)Record.WeaponPath=Textures[I]->GetPathName();
++ }
++ Trace.Drawn=Trace.ActualRenderedStack.Num()==P.NonemptyDrawCount;
++ if(!Trace.Drawn)Trace.MissingReason=TEXT("Hurt4 actual submission count differs from shared complete plan");
++ Record.ArmorDrawn=bRenderedArmorLayersUsed=Trace.Drawn;
++ bRenderedWeaponBodyUsed=Trace.Drawn;RenderedWeaponBodyClip=Record.Clip;RenderedWeaponBodyFrame=P.Frame;RenderedWeaponBodyFacing=P.Facing;
++ RenderedWeaponBodyActionId=0;RenderedWeaponBodySampleTime=Record.SimulationTime;RenderedWeaponBodyInstanceId=P.Binding.WeaponInstanceId;RenderedWeaponStateIndex=P.Frame;
++ return true;
++}
+--- /dev/null
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordHurtTextures.inl
+@@ -0,0 +1,16 @@
++#pragma once
++#include "DungeonFairytaleSwordHurtProfile.h"
++#include "Engine/Texture2D.h"
++#include "Misc/PackageName.h"
++
++namespace DungeonFairytaleSwordHurtV001
++{
++// Startup-only loader. Actual Draw reads the preloaded exact path cache, never first-use repairs.
++inline UTexture2D* PreloadTexture(const FString& Path,TMap<FString,TObjectPtr<UTexture2D>>& Cache)
++{
++ if(const auto Found=Cache.Find(Path))return Found->Get();
++ const FString Package=FPackageName::ObjectPathToPackageName(Path);
++ UTexture2D* T=FPackageName::DoesPackageExist(Package)?LoadObject<UTexture2D>(nullptr,*Path):nullptr;
++ Cache.Add(Path,T);return T;
++}
++}
