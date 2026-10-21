@@ -1,0 +1,20 @@
+--- a/post-v001/prepare-walk-proof-post-v001.py
++++ b/post-v002/prepare-walk-proof-post-v001.py
+@@ -22,7 +22,7 @@
+     need(out.is_relative_to(show.resolve()) and not out.exists(),"Use a new crop version; never overwrite originals or prior review")
+     verification_path=original/"independent-walk-proof-verification-v001.json";verification=read(verification_path)
+     need(verification["schema"]=="independent-walk-native-proof-verification-v1" and verification["passed"] is True and verification["masks_left_right"]==[63,63] and verification["actual_unique_attacks"]==6 and verification["actual_primary_phase_facing_pairs"]==36 and verification["pixel_verification"]["every_source_viewport_pixel_crc_matches"],"Independent actual native motion/gear/frame/CRC proof required first")
+-    frozen=read(CANDIDATE/"tooling-freeze-v001.json")
++    frozen=read(CANDIDATE/"tooling-freeze-v002.json")
+     project=Path("F:/Ourgame").resolve()
+     for row in frozen["files"]:
+         path=project/row["path"];actual=fact(path);need(actual["bytes"]==row["bytes"] and actual["sha256"]==row["sha256"],"Frozen proof tooling changed")
+@@ -63,7 +63,7 @@
+     result={"schema":"walk-native-unscaled-review-crops-v1","status":"derived_pending_E_retention_and_actual_visual_review","crop_count":48,"walk_phase_facing_pairs":12,"primary_phase_facing_pairs":36,"crop_pixels_roundtrip_verified":True,"crop_resampled":False,"native_report":report_pin,"independent_verification":verification_pin,"maps":maps,"actually_viewed":False,"wall_stop_visually_recorded":False,"art_accepted":False,"formal_complete_units":0}
+     new(out/"crop-source-map-v001.json",result)
+     if a.encode_video:
+-        render=subprocess.run([sys.executable,"-B","-X","utf8",str(CANDIDATE/"tooling/render-walk-proof-review-v001.py"),"--archive",str(archive)],capture_output=True,text=True,encoding="utf-8",errors="replace")
++        render=subprocess.run([sys.executable,"-B","-X","utf8",str(CANDIDATE/"tooling-v002/render-walk-proof-review-v001.py"),"--archive",str(archive)],capture_output=True,text=True,encoding="utf-8",errors="replace")
+         new(out/"video-helper-output-v001.log",render.stdout+render.stderr);need(render.returncode==0,"Frozen silent VFR encode/decode helper failed; outputs preserved")
+     print(json.dumps({k:v for k,v in result.items() if k!="maps"},ensure_ascii=False))
+ if __name__=="__main__":main()

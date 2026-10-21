@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-closed-nearhand-walk-v001",
+    "description": "Six isolated closed-grip near glove components; Ready158 nearhand is sole closed-grip appearance, old actual Walk nearhand guide only wrist direction/motion."
+  },
+  "cell": {
+    "shape": "square",
+    "size": 512,
+    "width": 512,
+    "height": 512,
+    "safe_margin": 211
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "sword_walk_nearhand": {
+      "frames": 6,
+      "fps": 12.048192771084338,
+      "loop": true,
+      "action": "Close each actual walking near hand into a plausible sword grip while preserving the corresponding cuff/wrist orientation.",
+      "durations_ms": [
+        83,
+        83,
+        83,
+        83,
+        83,
+        83
+      ]
+    }
+  },
+  "style": "Same coarse ink brown glove as the isolated Ready158 NearHand. No full body or sword.",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": false,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

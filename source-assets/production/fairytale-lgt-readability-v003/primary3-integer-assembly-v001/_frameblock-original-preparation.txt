@@ -1,0 +1,64 @@
+    registrations=[];frames=[];assets=[]
+    for frame in range(6):
+        original_body_pin=partition["frames"][frame]["source"]
+        original_body=rgba(require_pin(original_body_pin))
+        layers={};masks={};body_copies=[]
+        source_partition=partition["frames"][frame]
+        for name in BODY_NAMES:
+            source=require_pin(current_body[frame,name])
+            original=require_pin(next(x["file"] for x in source_partition["layers"] if x["owner"]==name))
+            mask_path=require_pin(next(x["file"] for x in source_partition["masks"] if x["owner"]==name))
+            if source.read_bytes()!=original.read_bytes():
+                raise RuntimeError("Current body layer is not exact partition bytes")
+            output=copy_exact(source,f"body-layers/{name}/frame-{frame}.png")
+            layers[name]=rgba(output)
+            with Image.open(mask_path) as image:
+                values=np.asarray(image).copy()
+                if image.mode!='L' or image.size!=(512,512) or not set(np.unique(values)).issubset({0,255}):
+                    raise RuntimeError("Invalid ownership mask")
+                masks[name]=values>0
+            body_copies.append({"owner":name,"source":pin(source),"copy":pin(output),"original_partition":pin(original),
+                "ownership_mask":pin(mask_path),"byte_exact":True,"semantic_protection_inference":False})
+        count=np.sum(np.stack(list(masks.values())),axis=0)
+        reconstructed=np.sum(np.stack(list(layers.values())),axis=0,dtype=np.uint16)
+        if not np.all(count==1) or not np.array_equal(reconstructed,original_body.astype(np.uint16)):
+            raise RuntimeError("Original four layers fail exhaustive source ownership/full RGBA reconstruction")
+        for name in ARMOR_NAMES:
+            row=keyed[frame,name];selection=export_records[name][frame]
+            source=require_pin(selection["curated_export"]);array=rgba(source)
+            a,b,delta=row["A_source_px"],row["B_body_design_source_px"],row["integer_delta_xy"]
+            placed=translate(array,*delta);inverse=translate(placed,-delta[0],-delta[1])
+            output=save_rgba(placed,f"armor-layers/{name}/frame-{frame}.png");layers[name]=placed
+            intersections=[{"source_owner":owner,"ownership_coordinates_any_alpha":int(np.count_nonzero((placed[:,:,3]>0)&masks[owner])),
+                "visible_source_both_any_alpha":int(np.count_nonzero((placed[:,:,3]>0)&(layers[owner][:,:,3]>0))),
+                "visible_source_both_core128":int(np.count_nonzero((placed[:,:,3]>=128)&(layers[owner][:,:,3]>=128))),
+                "semantic_protection_inference":False} for owner in BODY_NAMES]
+            registration={"frame":frame,"component":name,"selection_export_provenance":selection,"translated":pin(output),
+                "A_source_px":a,"A_observed_rgba":array[a[1],a[0]].tolist(),"A_feature":row["A_feature"],
+                "A_visual_uncertainty_px":row["A_manual_visual_uncertainty_px"],"B_body_design_source_px":b,"B_role":row["B_role"],
+                "B_design_uncertainty_px":row["B_design_uncertainty_px"],"B_is_HIDDEN_TRIAL":"HIDDEN TRIAL" in row["B_role"],"actual_runtime_body":original_body_pin,
+                "B_original_body_RGBA_diagnostic_only":original_body[b[1],b[0]].tolist(),"integer_delta_xy":delta,
+                "A_maps_exactly_to_B":placed[b[1],b[0]].tolist()==array[a[1],a[0]].tolist(),
+                "source_nonzero_RGBA_bbox":pixel_bbox(array),"translated_nonzero_RGBA_bbox":pixel_bbox(placed),
+                "clipped_nonzero_RGBA_pixels":0,"inverse_full_RGBA_equal":bool(np.array_equal(array,inverse)),
+                "source_RGBA_sha256":hashlib.sha256(array.tobytes()).hexdigest(),"inverse_RGBA_sha256":hashlib.sha256(inverse.tobytes()).hexdigest(),
+                "rescaled_rotated_recolored_drawn":False,"intersections":intersections,"fit_accepted":False}
+            registrations.append(registration)
+            runtime=RUNTIME_NAMES[name];asset=f"T_Fairytale_LeatherPrimary{CLIP}{runtime}_{frame:03d}_v001"
+            package=NAMESPACE+'/'+asset
+            assets.append({"component":runtime,"source_component":name,"frame":frame,"name":asset,"source":pin(output),
+                "package_path":package,"object_path":package+'.'+asset,"registration":registration})
+        composite=compose(layers)
+        right=save_rgba(composite,f"diagnostics/static-no-sword/right/frame-{frame}.png")
+        left=save_rgba(np.flip(composite,axis=1).copy(),f"diagnostics/static-no-sword/left-whole-image-mirror/frame-{frame}.png")
+        if not np.array_equal(np.flip(rgba(left),axis=1),composite):raise RuntimeError("Whole image mirror not reversible")
+        pairwise=[{"first":a,"second":b,"both_any_alpha":int(np.count_nonzero((layers[a][:,:,3]>0)&(layers[b][:,:,3]>0))),
+            "both_core128":int(np.count_nonzero((layers[a][:,:,3]>=128)&(layers[b][:,:,3]>=128)))}
+            for n,a in enumerate(ARMOR_NAMES) for b in ARMOR_NAMES[n+1:]]
+        contributions=[{"component":name,"final_RGBA_difference_pixels_when_omitted":int(np.count_nonzero(np.any(compose(layers,name)!=composite,axis=2))),
+            "semantic_acceptance_inferred":False} for name in ARMOR_NAMES]
+        frames.append({"frame":frame,"duration_ms":DURATIONS[frame],"actual_runtime_body":original_body_pin,"body_layers":body_copies,
+            "four_layers_reconstruct_original_full_RGBA_exact":True,"ownership_exclusive_exhaustive":True,
+            "static_right":pin(right),"static_left_whole_image_mirror":pin(left),"whole_mirror_inverse_equal":True,
+            "pairwise_armor_intersections":pairwise,"omit_one_numeric_contributions":contributions,
+            "semantic_regions_pending_Root_actual_review":{k:None for k in ['helmet','eyes','neck','near_hand','far_hand','belt_and_waist']},"fit_accepted":False})

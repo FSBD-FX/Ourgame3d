@@ -1,0 +1,55 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\walk-leather-extraction-v001\\run-chest-GREEN-shared-HD-v001",
+  "states": [
+    "leather_chest_sword_walk"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "leather_chest_sword_walk",
+      "source": "frames",
+      "expected_frames": 6,
+      "found_frames": 6,
+      "natural_pose_count": 6,
+      "frame_files": [
+        "frames/leather_chest_sword_walk/frame-0.png",
+        "frames/leather_chest_sword_walk/frame-1.png",
+        "frames/leather_chest_sword_walk/frame-2.png",
+        "frames/leather_chest_sword_walk/frame-3.png",
+        "frames/leather_chest_sword_walk/frame-4.png",
+        "frames/leather_chest_sword_walk/frame-5.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.9380181953171488,
+          "mean": 0.9636865830457656
+        },
+        "dhash_similarity": {
+          "min": 0.96875,
+          "mean": 0.9854166666666667
+        },
+        "motion_presence": 0.0008459233302696078,
+        "centroid_sigma": {
+          "x": 0.44087415224653165,
+          "y": 0.329410227799626
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "leather_chest_sword_walk: motion presence is too low (0.0008 < 0.0100)"
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "leather_chest_sword_walk: motion presence is too low (0.0008 < 0.0100)"
+  ]
+}

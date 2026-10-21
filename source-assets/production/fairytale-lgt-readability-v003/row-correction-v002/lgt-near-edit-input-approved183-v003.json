@@ -1,0 +1,253 @@
+{
+  "schema": "lgt-ready-single-target-semantic-correction-input-v002",
+  "created_utc": "2026-10-16T15:22:24.352550+00:00",
+  "source_event": "EV-048",
+  "preparation_toolchain": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v002/toolchain-provenance-v002.json",
+    "bytes": 1271,
+    "sha256": "d2e471fbc3317ed616f3e79f13e9d733d3138d69185ea8ef7ad989149d531237"
+  },
+  "root_reported_failed_targets": [
+    180,
+    181,
+    182
+  ],
+  "parent_reported_retention_batches": [
+    "E255",
+    "E256",
+    "E257"
+  ],
+  "producer_visually_reviewed_targets": false,
+  "producer_viewed_new_guides": false,
+  "rows": [
+    {
+      "component": "NearShoulder",
+      "runtime_component": "ShoulderNear",
+      "state": "leather_nearshoulder_sword_ready",
+      "draft_label": "184-NearShoulder",
+      "suggested_native_number_if_original_order": 184,
+      "native_request_number": 183,
+      "failed_raw_native_number": 181,
+      "failed_target": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-preparation-v001/run-nearshoulder-ready-v001/raw/leather_nearshoulder_sword_ready.png",
+        "bytes": 1413086,
+        "sha256": "4bd66b64404ee030a58d9bba2e335f74b1a005d984533273b2964bfc7b93ecf7"
+      },
+      "target_mode": "RGB",
+      "target_canvas_px": [
+        2172,
+        724
+      ],
+      "target_semantic_verdict": "FAIL: whole vest instead of isolated component (reported by Root; not visually reviewed by this producer)",
+      "run_dir": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v002/run-nearshoulder-ready-v002",
+      "raw_output_path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v002/run-nearshoulder-ready-v002/raw/leather_nearshoulder_sword_ready.png",
+      "request": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v002/run-nearshoulder-ready-v002/sprite-request.json",
+        "bytes": 1665,
+        "sha256": "48b12c43230d056d7a64507c541359493e3692aba33df7751432b7a730d8e384"
+      },
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v002/run-nearshoulder-ready-v002/prompts/leather_nearshoulder_sword_ready.txt",
+        "bytes": 3050,
+        "sha256": "afb306f995028a4d9a5027ab90e4aed4b9edf41bf33fffb1015326c0d91716b7"
+      },
+      "reference_images_in_order": [
+        {
+          "role": "single_exact_failed_raw_edit_target_only",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v002/run-nearshoulder-ready-v002/base-source.png",
+            "bytes": 1413086,
+            "sha256": "4bd66b64404ee030a58d9bba2e335f74b1a005d984533273b2964bfc7b93ecf7"
+          }
+        }
+      ],
+      "reference_count": 1,
+      "transparent_background": false,
+      "background_hex": "#00FF00",
+      "frame_count": 4,
+      "durations_ms": [
+        167,
+        167,
+        167,
+        167
+      ],
+      "fit_window_design_px": [
+        60,
+        44
+      ],
+      "shared_row_scale": true,
+      "per_frame_scale_normalization": false,
+      "future_component_A": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "mount_candidates": [
+        {
+          "frame": 0,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/curated/frame-0.png",
+            "bytes": 121133,
+            "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5"
+          },
+          "visible_cloth_site_design": {
+            "point": [
+              207,
+              248
+            ],
+            "uncertainty_source_px": 3,
+            "measured_bone": false
+          },
+          "window_center_design": [
+            207,
+            248
+          ],
+          "window_size_design": [
+            60,
+            44
+          ],
+          "window_is_semantic_mask_or_certified_fit": false,
+          "future_generated_component_A": null,
+          "hidden_joint": null
+        },
+        {
+          "frame": 1,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/curated/frame-1.png",
+            "bytes": 120836,
+            "sha256": "edc706a89da26ab56613f8925c44c9984ddd1abc3ed655f5e92cd9d69a30d5b1"
+          },
+          "visible_cloth_site_design": {
+            "point": [
+              205,
+              244
+            ],
+            "uncertainty_source_px": 3,
+            "measured_bone": false
+          },
+          "window_center_design": [
+            205,
+            244
+          ],
+          "window_size_design": [
+            60,
+            44
+          ],
+          "window_is_semantic_mask_or_certified_fit": false,
+          "future_generated_component_A": null,
+          "hidden_joint": null
+        },
+        {
+          "frame": 2,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/curated/frame-2.png",
+            "bytes": 121596,
+            "sha256": "048d606c8ea449a2c9b23890e98c5332f3e84bd986a8b765c909495097dd113e"
+          },
+          "visible_cloth_site_design": {
+            "point": [
+              205,
+              249
+            ],
+            "uncertainty_source_px": 3,
+            "measured_bone": false
+          },
+          "window_center_design": [
+            205,
+            249
+          ],
+          "window_size_design": [
+            60,
+            44
+          ],
+          "window_is_semantic_mask_or_certified_fit": false,
+          "future_generated_component_A": null,
+          "hidden_joint": null
+        },
+        {
+          "frame": 3,
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/curated/frame-3.png",
+            "bytes": 120109,
+            "sha256": "cbff38cc538db16d8f58c89dc1a94f5cd35f6756976d8fe8baa02ec5dcadd960"
+          },
+          "visible_cloth_site_design": {
+            "point": [
+              204,
+              244
+            ],
+            "uncertainty_source_px": 3,
+            "measured_bone": false
+          },
+          "window_center_design": [
+            204,
+            244
+          ],
+          "window_size_design": [
+            60,
+            44
+          ],
+          "window_is_semantic_mask_or_certified_fit": false,
+          "future_generated_component_A": null,
+          "hidden_joint": null
+        }
+      ],
+      "target_mounts_are_measured": false,
+      "standard_prepare_command": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-B",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\prepare_sprite_run.py",
+        "--out-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\row-correction-v002\\run-nearshoulder-ready-v002",
+        "--character-id",
+        "fairytale-lgt-nearshoulder-ready-correction-v002",
+        "--base-image",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\row-preparation-v001\\run-nearshoulder-ready-v001\\raw\\leather_nearshoulder_sword_ready.png",
+        "--description",
+        "Edit the four existing native181 views; retain ONLY the NearShoulder leather component, removing every other garment/body component. Preserve the corresponding four actual perspectives.",
+        "--style",
+        "Preserve the exact supplied editing target's coarse hand-ink and warm soft-leather material; isolate the requested existing component only.",
+        "--cell-size",
+        "512",
+        "--chroma-key",
+        "#00FF00",
+        "--request",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\row-correction-v002\\requests\\nearshoulder-correction-numeric-input-v002.json"
+      ],
+      "standard_prepare_exit_code": 0,
+      "prepare_command_record": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v002/logs/prepare-nearshoulder-ready-command-v002.json",
+        "bytes": 1264,
+        "sha256": "b54369ec1f7a881917d465182924bb19e5a207e92233f92c668c3bcdf2215013"
+      },
+      "prepare_log": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v002/logs/prepare-nearshoulder-ready-v002.log",
+        "bytes": 883,
+        "sha256": "0086fbcc2ecfa413cb17e07dec88ec2960b566ba1ac11827ee2f0277584ba564"
+      },
+      "standard_layout_guide_not_attached_to_edit": true,
+      "base_source_role_override": "Exact failed multi-view editing target. Mechanical prepare copy only; not a newly accepted canonical base/anchor.",
+      "generation_ready": true
+    }
+  ],
+  "generation_ready": false,
+  "root_review_required_before_generation": true,
+  "suggested_first_trial": "NearShoulder draft184 OR Chest draft183, only one first; no automatic three-row batch",
+  "suggested_numbers_are_not_ledger_reservations": true,
+  "numbering_note": "Root assigns the next real ledger number when reserving a call. Choosing Near first may change real numbering; draft labels are not evidence of a generation.",
+  "input_role_exception": "Root explicitly requested one exact failed raw as the sole editing target. This mechanical prepare is a correction draft, not a base-lock or identity acceptance. Do not attach old131,179, body contact, old metal rows or the generated layout guide to the editor call.",
+  "preparation_only": true,
+  "native_called": false,
+  "ue_or_import_called": false,
+  "local_art_repair_or_component_crop_called": false,
+  "no_final_asset_or_animation_pass_claimed": true,
+  "formal_complete_units": 0,
+  "root_input_review": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v002/root-near-edit-input-review183-v001.json",
+    "bytes": 967,
+    "sha256": "1fd11fa93c9a87d6ab30bdadf19087ef9ee05e85ed03c7399e0a4593ce1294f0"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "fairytale-ground-walk-test-header-repair-v002",
+  "purpose": "Compile-only prerequisite repair after actual Stage0 failed to compile. This is not a semantic RED or GREEN.",
+  "original_frozen_test": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/new-tests/DungeonFairytaleGroundWalkTests.cpp",
+    "bytes": 10389,
+    "sha256": "5324b45a5c5a2a7ce20d4253f0845ab7f3418c1d97d0fecd98b6b22039dd7007"
+  },
+  "candidate": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/review-20261018-v001/test-header-repair-v002/DungeonFairytaleGroundWalkTests.cpp",
+    "bytes": 10425,
+    "sha256": "3a9c6ca5958b58511e3050dd5345a968f8c942136990168eb547a3e72f72a9c1"
+  },
+  "patch": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/review-20261018-v001/test-header-repair-v002/test-header-repair-v002.patch",
+    "bytes": 375,
+    "sha256": "1722fa33857ecc51a8bf5e12e8637ed68e4bc4b2fc22dc234276f8ec6cfd23f1"
+  },
+  "change": "Exactly one include line added: ../DungeonRunInstaller.h",
+  "removing_one_added_include_restores_original_bytes": true,
+  "assertions_and_test_logic_byte_identical": true,
+  "declarations_reviewed": [
+    "FDungeonPreparedRun",
+    "FDungeonRunInstaller",
+    "EDungeonRunInstallGate"
+  ],
+  "declaration_header": {
+    "path": "UnrealGame/Source/CodexDungeon/DungeonRunInstaller.h",
+    "bytes": 3499,
+    "sha256": "d5776524c91d1e7b7acbf11c027e8819c56b0d7097fc0d782cebe486f7744252"
+  },
+  "UE_UBT_native_tests_run_by_reviewer": false,
+  "original_candidate_mutated": false,
+  "actual_source_mutated": false,
+  "status": "CANDIDATE_REQUIRES_ROOT_ADMISSION_AND_ACTUAL_COMPILE"
+}

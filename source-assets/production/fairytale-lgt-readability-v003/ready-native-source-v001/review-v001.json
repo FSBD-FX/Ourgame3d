@@ -1,0 +1,133 @@
+{
+  "schema": "ready-native-source-independent-review-v001",
+  "reviewer": "/root/run_codec_stage0",
+  "created_local": "2026-10-17T00:46:03",
+  "mode": "read-only candidate source review; only this new JSON written",
+  "actual_source_written": false,
+  "UE_UBT_run": false,
+  "new_images_or_media": false,
+  "candidate_freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-native-source-v001/source-freeze-v001.json",
+    "bytes": 2128,
+    "sha256": "9f128ff19b5fb1f2d8dc26f8b0ab6104b28e228b6f0580b2fad7b48c873bce93"
+  },
+  "frozen_inputs_verified": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+      "matches_frozen_descriptor": true
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.h",
+      "matches_frozen_descriptor": true
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.cpp",
+      "matches_frozen_descriptor": true
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-native-source-v001/DungeonFairytaleSwordPresentation.cpp",
+      "matches_frozen_descriptor": true
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-native-source-v001/DungeonFairytaleEquipmentBoundProbe.h",
+      "matches_frozen_descriptor": true
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-native-source-v001/DungeonFairytaleEquipmentBoundProbe.cpp",
+      "matches_frozen_descriptor": true
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-native-source-v001/ready-trial-v001.patch",
+      "matches_frozen_descriptor": true
+    }
+  ],
+  "git_apply_check": {
+    "exit": 0,
+    "actual_apply": false
+  },
+  "verdict": "NEEDS narrow Printf compile correction before Root actual build; candidate itself untouched",
+  "findings": [
+    {
+      "severity": "compile-blocking",
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/ready-native-source-v001/DungeonFairytaleSwordPresentation.cpp",
+      "lines": [
+        29,
+        30
+      ],
+      "problem": "The first FString::Printf argument is a conditional of two TEXT arrays with unequal lengths. The conditional result is const TCHAR* rather than a literal array. Local UE5.5 FString::Printf requires the array type with a static_assert.",
+      "local_engine_evidence": {
+        "path": "G:/UE_5.5/Engine/Source/Runtime/Core/Public/Containers/UnrealString.h.inl",
+        "lines": [
+          1573,
+          1574,
+          1576,
+          1577
+        ],
+        "contract": "TIsArrayOrRefOfTypeByPredicate<FmtType,TIsCharEncodingCompatibleWithPrintfFmt>::Value"
+      },
+      "narrow_fix": "const FString Name=LeatherReady ? FString::Printf(TEXT(\"T_Fairytale_LeatherReady%s_%03d_v001\"),*Component,Frame) : FString::Printf(TEXT(\"T_Fairytale_SwordReady%s_%03d_v001\"),*Component,Frame);",
+      "basis": "local engine header and C++ conditional type rule; not an observed UBT run"
+    }
+  ],
+  "checked_without_other_definite_findings": [
+    {
+      "path": "DungeonFairytaleSwordPresentation.cpp",
+      "lines": [
+        23,
+        37,
+        115,
+        128,
+        180,
+        211,
+        264,
+        301
+      ],
+      "result": "New flag requires Bound mode and changes only Chest/ShoulderFar/ShoulderNear Ready4 texture names/package. BodyRest/near arm/hand and P1/P2/P3 getters retain old paths. Same Resolve result selects actual LightArmor; NoArmor/invalid/unsupported still do not authorize armor draw. Unique LeatherReady cache keys cannot collide with old SwordReady keys. Missing resource remains fail-closed without old armor fallback."
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "lines": [
+        56,
+        73,
+        82,
+        90,
+        108
+      ],
+      "result": "Bound alone enables existing Ready source/prewarm branch. Existing six-component x4 loop invokes new getter and therefore prewarms selected12new armor textures while retaining old body partition components. Existing synchronization/strong Frames cache remains unchanged."
+    },
+    {
+      "path": "DungeonFairytaleEquipmentBoundProbe.h",
+      "lines": [
+        22,
+        27
+      ],
+      "result": "New booleans/masks are in-class initialized, private native state; FKey D and int32 bit masks require no new type/include."
+    },
+    {
+      "path": "DungeonFairytaleEquipmentBoundProbe.cpp",
+      "lines": [
+        63,
+        65,
+        181,
+        190,
+        194,
+        270
+      ],
+      "result": "Only explicit ReadyOnlyProof selects new case5. Existing normal Enter/E/A cancellation/E commit and authoritative inventory/instance checks remain. Four supported idle frame bits are collected separately by rendered facing; each counted observation also requires3actual v012 paths or records a persistent mismatch. Normal opposite A/D pulse is released by existing pulse logic; actual MoveOnGround changes facing and returns to idle. Both masks15 are required before completion. No J or medium path is executed in ReadyOnly mode. Existing5s phase/30s total timeouts remain fail-closed."
+    },
+    {
+      "path": "DungeonFairytaleEquipmentBoundProbe.cpp",
+      "lines": [
+        327,
+        354
+      ],
+      "result": "Default full flow unchanged except no-op D release and additive false/zero trial fields. ReadyOnly scope accurately excludes attacks/fullmotion/loot/save/audio. Passed still requires no reason, complete flow, zero mismatches, native async flush and nonempty observations. Old independent checker expecting default MED/3J flow must not be represented as validating this shorter trial."
+    }
+  ],
+  "boundaries": [
+    "Source-only review does not prove compilation, native tick ordering, texture import or visual fit; Root still owns actual build/capture and retained review.",
+    "Masks prove four sampled frame indices each side, not continuous animation or visual material readability.",
+    "ReadyOnly without its required art flag calls Finish before Directory parsing and therefore cannot write runtime-report; it exits fail-closed. Intended launcher must pass both flags plus Bound/ContentProof/BoundProof. This is diagnostic coverage boundary, not a blocker for the correctly flagged trial.",
+    "No thresholds, actual canvas scale, input deadlines, equipment authority or renderer eligibility were weakened by this candidate."
+  ]
+}

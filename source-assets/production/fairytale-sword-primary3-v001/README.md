@@ -1,0 +1,1 @@
+Primary3六相输入草稿。真实Stage2=110/110/60/60/160/160ms，总660。canonical131唯一身份，实际171六相仅paired运动/低guard入口；新掌点、轴、骨、甲A全null。SG专用venv prepare成功，原请求/提示词保留，显式补真实时轴。3参考含新标准layout尚未view，须Root先E保全再审阅。generation_ready=false且Rootreviewrequired，不预留/生成/提取/导入，不等动作、握柄或完整内容验收。

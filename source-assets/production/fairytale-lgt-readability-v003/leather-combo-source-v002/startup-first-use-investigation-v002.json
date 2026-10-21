@@ -1,0 +1,568 @@
+{
+  "schema": "actual-native-leather-startup-first-use-investigation-v002",
+  "created_local": "2026-10-17T04:10:10.786427+08:00",
+  "actual_report": {
+    "path": "F:/Ourgame/过程图稿与视频/2026-10-17_NONRELEASE软皮连招美术诊断_diag_v001/原件/runtime-report.json",
+    "bytes": 531089,
+    "sha256": "628071646f917b0647add4046c81f3d016b781621da9675c746b0e14d7add631"
+  },
+  "actual_capture_index": {
+    "path": "F:/Ourgame/过程图稿与视频/2026-10-17_NONRELEASE软皮连招美术诊断_diag_v001/index.json",
+    "bytes": 577,
+    "sha256": "0e8b3a0c09d5a78e11b84fe68bbe1bda8e25665f6b80da19a0c92e1dafcb3a02"
+  },
+  "actual_runtime_log": {
+    "path": "F:/Ourgame/过程图稿与视频/2026-10-17_NONRELEASE软皮连招美术诊断_diag_v001/runtime.log",
+    "bytes": 131333,
+    "sha256": "7be6b4586986e0e4d8dfe14ab28b11165fe109b81772baf3bdffe3a0920760d3"
+  },
+  "actual_root_diagnostic_inputs": {
+    "path": "F:/Ourgame/source-assets/production/leather-combo-diagnostic-root-input-v001/diagnostic-compiled-inputs-v001.json",
+    "bytes": 325546,
+    "sha256": "048d1399f5985c68203f13cb9fa4fffad4a400a97e2150d368347256e10e5c50"
+  },
+  "native_passed": false,
+  "flow_complete": true,
+  "observations": 168,
+  "deduplicated_mismatches": [
+    {
+      "phase": "light_three_stage",
+      "reason": "draw_inactive_or_resource_not_ready",
+      "first_observation": 59
+    },
+    {
+      "phase": "light_three_stage",
+      "reason": "actual_light_missing_current_matching_stack",
+      "first_observation": 59
+    },
+    {
+      "phase": "light_three_stage",
+      "reason": "supported_actual_sword_missing_or_wrong_instance",
+      "first_observation": 59
+    },
+    {
+      "phase": "light_three_stage",
+      "reason": "leather_combo_exact_three_new_armor_old_body_stack_mismatch",
+      "first_observation": 59
+    }
+  ],
+  "actual_bad_observation_count": 11,
+  "bad_observations": [
+    {
+      "observation": 59,
+      "wall_offset_s": 1.9829724989831448,
+      "actual_clip": "sword_primary_2",
+      "actual_frame": 1,
+      "actual_stage": 1,
+      "actual_action_id": "2",
+      "actual_facing": -1,
+      "actual_body_texture": "/Game/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_001_v002.T_Fairytale_SwordPrimary2_001_v002",
+      "actual_texture_ready": false,
+      "actual_armor_ready": false,
+      "actual_armor_drawn": false,
+      "actual_draw_stack": [],
+      "actual_weapon_path": "",
+      "actual_draw_id": "90",
+      "first_observation_of_clip_frame": 59,
+      "is_first_use": true,
+      "next_observation_same_clip_frame_ready": 60,
+      "next_ready_wall_offset_s": 2.0160470008850098,
+      "next_ready_body_matches": true,
+      "expected_new_armor_paths_derived_from_unchanged_renderer_NOT_observed_failed_paths": [
+        "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2/T_Fairytale_LeatherPrimary2ShoulderFar_001_v001.T_Fairytale_LeatherPrimary2ShoulderFar_001_v001",
+        "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2/T_Fairytale_LeatherPrimary2Chest_001_v001.T_Fairytale_LeatherPrimary2Chest_001_v001",
+        "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2/T_Fairytale_LeatherPrimary2ShoulderNear_001_v001.T_Fairytale_LeatherPrimary2ShoulderNear_001_v001"
+      ],
+      "individual_failed_texture_or_GetResource_vs_pending_reason": "UNKNOWN: native report stores aggregate armor_ready only."
+    },
+    {
+      "observation": 61,
+      "wall_offset_s": 2.05064469948411,
+      "actual_clip": "sword_primary_2",
+      "actual_frame": 2,
+      "actual_stage": 1,
+      "actual_action_id": "2",
+      "actual_facing": -1,
+      "actual_body_texture": "/Game/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_002_v002.T_Fairytale_SwordPrimary2_002_v002",
+      "actual_texture_ready": false,
+      "actual_armor_ready": false,
+      "actual_armor_drawn": false,
+      "actual_draw_stack": [],
+      "actual_weapon_path": "",
+      "actual_draw_id": "91",
+      "first_observation_of_clip_frame": 61,
+      "is_first_use": true,
+      "next_observation_same_clip_frame_ready": 62,
+      "next_ready_wall_offset_s": 2.083417199552059,
+      "next_ready_body_matches": true,
+      "expected_new_armor_paths_derived_from_unchanged_renderer_NOT_observed_failed_paths": [
+        "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2/T_Fairytale_LeatherPrimary2ShoulderFar_002_v001.T_Fairytale_LeatherPrimary2ShoulderFar_002_v001",
+        "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2/T_Fairytale_LeatherPrimary2Chest_002_v001.T_Fairytale_LeatherPrimary2Chest_002_v001",
+        "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2/T_Fairytale_LeatherPrimary2ShoulderNear_002_v001.T_Fairytale_LeatherPrimary2ShoulderNear_002_v001"
+      ],
+      "individual_failed_texture_or_GetResource_vs_pending_reason": "UNKNOWN: native report stores aggregate armor_ready only."
+    },
+    {
+      "observation": 63,
+      "wall_offset_s": 2.1164263002574444,
+      "actual_clip": "sword_primary_2",
+      "actual_frame": 3,
+      "actual_stage": 1,
+      "actual_action_id": "2",
+      "actual_facing": -1,
+      "actual_body_texture": "/Game/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_003_v002.T_Fairytale_SwordPrimary2_003_v002",
+      "actual_texture_ready": false,
+      "actual_armor_ready": false,
+      "actual_armor_drawn": false,
+      "actual_draw_stack": [],
+      "actual_weapon_path": "",
+      "actual_draw_id": "92",
+      "first_observation_of_clip_frame": 63,
+      "is_first_use": true,
+      "next_observation_same_clip_frame_ready": 64,
+      "next_ready_wall_offset_s": 2.1511087007820606,
+      "next_ready_body_matches": true,
+      "expected_new_armor_paths_derived_from_unchanged_renderer_NOT_observed_failed_paths": [
+        "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2/T_Fairytale_LeatherPrimary2ShoulderFar_003_v001.T_Fairytale_LeatherPrimary2ShoulderFar_003_v001",
+        "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2/T_Fairytale_LeatherPrimary2Chest_003_v001.T_Fairytale_LeatherPrimary2Chest_003_v001",
+        "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2/T_Fairytale_LeatherPrimary2ShoulderNear_003_v001.T_Fairytale_LeatherPrimary2ShoulderNear_003_v001"
+      ],
+      "individual_failed_texture_or_GetResource_vs_pending_reason": "UNKNOWN: native report stores aggregate armor_ready only."
+    },
+    {
+      "observation": 65,
+      "wall_offset_s": 2.1844647005200386,
+      "actual_clip": "sword_primary_2",
+      "actual_frame": 4,
+      "actual_stage": 1,
+      "actual_action_id": "2",
+      "actual_facing": -1,
+      "actual_body_texture": "/Game/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_004_v002.T_Fairytale_SwordPrimary2_004_v002",
+      "actual_texture_ready": false,
+      "actual_armor_ready": false,
+      "actual_armor_drawn": false,
+      "actual_draw_stack": [],
+      "actual_weapon_path": "",
+      "actual_draw_id": "93",
+      "first_observation_of_clip_frame": 65,
+      "is_first_use": true,
+      "next_observation_same_clip_frame_ready": 66,
+      "next_ready_wall_offset_s": 2.2162311002612114,
+      "next_ready_body_matches": true,
+      "expected_new_armor_paths_derived_from_unchanged_renderer_NOT_observed_failed_paths": [
+        "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2/T_Fairytale_LeatherPrimary2ShoulderFar_004_v001.T_Fairytale_LeatherPrimary2ShoulderFar_004_v001",
+        "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2/T_Fairytale_LeatherPrimary2Chest_004_v001.T_Fairytale_LeatherPrimary2Chest_004_v001",
+        "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2/T_Fairytale_LeatherPrimary2ShoulderNear_004_v001.T_Fairytale_LeatherPrimary2ShoulderNear_004_v001"
+      ],
+      "individual_failed_texture_or_GetResource_vs_pending_reason": "UNKNOWN: native report stores aggregate armor_ready only."
+    },
+    {
+      "observation": 69,
+      "wall_offset_s": 2.3179895989596844,
+      "actual_clip": "sword_primary_2",
+      "actual_frame": 5,
+      "actual_stage": 1,
+      "actual_action_id": "2",
+      "actual_facing": -1,
+      "actual_body_texture": "/Game/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_005_v002.T_Fairytale_SwordPrimary2_005_v002",
+      "actual_texture_ready": false,
+      "actual_armor_ready": false,
+      "actual_armor_drawn": false,
+      "actual_draw_stack": [],
+      "actual_weapon_path": "",
+      "actual_draw_id": "96",
+      "first_observation_of_clip_frame": 69,
+      "is_first_use": true,
+      "next_observation_same_clip_frame_ready": 70,
+      "next_ready_wall_offset_s": 2.3495877981185913,
+      "next_ready_body_matches": true,
+      "expected_new_armor_paths_derived_from_unchanged_renderer_NOT_observed_failed_paths": [
+        "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2/T_Fairytale_LeatherPrimary2ShoulderFar_005_v001.T_Fairytale_LeatherPrimary2ShoulderFar_005_v001",
+        "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2/T_Fairytale_LeatherPrimary2Chest_005_v001.T_Fairytale_LeatherPrimary2Chest_005_v001",
+        "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2/T_Fairytale_LeatherPrimary2ShoulderNear_005_v001.T_Fairytale_LeatherPrimary2ShoulderNear_005_v001"
+      ],
+      "individual_failed_texture_or_GetResource_vs_pending_reason": "UNKNOWN: native report stores aggregate armor_ready only."
+    },
+    {
+      "observation": 73,
+      "wall_offset_s": 2.4512862004339695,
+      "actual_clip": "sword_primary_3",
+      "actual_frame": 0,
+      "actual_stage": 2,
+      "actual_action_id": "3",
+      "actual_facing": -1,
+      "actual_body_texture": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_000_v001.T_Fairytale_SwordPrimary3Body_000_v001",
+      "actual_texture_ready": false,
+      "actual_armor_ready": false,
+      "actual_armor_drawn": false,
+      "actual_draw_stack": [],
+      "actual_weapon_path": "",
+      "actual_draw_id": "99",
+      "first_observation_of_clip_frame": 73,
+      "is_first_use": true,
+      "next_observation_same_clip_frame_ready": 74,
+      "next_ready_wall_offset_s": 2.4827312007546425,
+      "next_ready_body_matches": true,
+      "expected_new_armor_paths_derived_from_unchanged_renderer_NOT_observed_failed_paths": [
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3ShoulderFar_000_v001.T_Fairytale_LeatherPrimary3ShoulderFar_000_v001",
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3Chest_000_v001.T_Fairytale_LeatherPrimary3Chest_000_v001",
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3ShoulderNear_000_v001.T_Fairytale_LeatherPrimary3ShoulderNear_000_v001"
+      ],
+      "individual_failed_texture_or_GetResource_vs_pending_reason": "UNKNOWN: native report stores aggregate armor_ready only."
+    },
+    {
+      "observation": 76,
+      "wall_offset_s": 2.551263000816107,
+      "actual_clip": "sword_primary_3",
+      "actual_frame": 1,
+      "actual_stage": 2,
+      "actual_action_id": "3",
+      "actual_facing": -1,
+      "actual_body_texture": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_001_v001.T_Fairytale_SwordPrimary3Body_001_v001",
+      "actual_texture_ready": false,
+      "actual_armor_ready": false,
+      "actual_armor_drawn": false,
+      "actual_draw_stack": [],
+      "actual_weapon_path": "",
+      "actual_draw_id": "101",
+      "first_observation_of_clip_frame": 76,
+      "is_first_use": true,
+      "next_observation_same_clip_frame_ready": 77,
+      "next_ready_wall_offset_s": 2.5850777998566628,
+      "next_ready_body_matches": true,
+      "expected_new_armor_paths_derived_from_unchanged_renderer_NOT_observed_failed_paths": [
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3ShoulderFar_001_v001.T_Fairytale_LeatherPrimary3ShoulderFar_001_v001",
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3Chest_001_v001.T_Fairytale_LeatherPrimary3Chest_001_v001",
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3ShoulderNear_001_v001.T_Fairytale_LeatherPrimary3ShoulderNear_001_v001"
+      ],
+      "individual_failed_texture_or_GetResource_vs_pending_reason": "UNKNOWN: native report stores aggregate armor_ready only."
+    },
+    {
+      "observation": 79,
+      "wall_offset_s": 2.6505885012447834,
+      "actual_clip": "sword_primary_3",
+      "actual_frame": 2,
+      "actual_stage": 2,
+      "actual_action_id": "3",
+      "actual_facing": -1,
+      "actual_body_texture": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_002_v001.T_Fairytale_SwordPrimary3Body_002_v001",
+      "actual_texture_ready": false,
+      "actual_armor_ready": false,
+      "actual_armor_drawn": false,
+      "actual_draw_stack": [],
+      "actual_weapon_path": "",
+      "actual_draw_id": "103",
+      "first_observation_of_clip_frame": 79,
+      "is_first_use": true,
+      "next_observation_same_clip_frame_ready": 80,
+      "next_ready_wall_offset_s": 2.6852462999522686,
+      "next_ready_body_matches": true,
+      "expected_new_armor_paths_derived_from_unchanged_renderer_NOT_observed_failed_paths": [
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3ShoulderFar_002_v001.T_Fairytale_LeatherPrimary3ShoulderFar_002_v001",
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3Chest_002_v001.T_Fairytale_LeatherPrimary3Chest_002_v001",
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3ShoulderNear_002_v001.T_Fairytale_LeatherPrimary3ShoulderNear_002_v001"
+      ],
+      "individual_failed_texture_or_GetResource_vs_pending_reason": "UNKNOWN: native report stores aggregate armor_ready only."
+    },
+    {
+      "observation": 81,
+      "wall_offset_s": 2.7177295982837677,
+      "actual_clip": "sword_primary_3",
+      "actual_frame": 3,
+      "actual_stage": 2,
+      "actual_action_id": "3",
+      "actual_facing": -1,
+      "actual_body_texture": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_003_v001.T_Fairytale_SwordPrimary3Body_003_v001",
+      "actual_texture_ready": false,
+      "actual_armor_ready": false,
+      "actual_armor_drawn": false,
+      "actual_draw_stack": [],
+      "actual_weapon_path": "",
+      "actual_draw_id": "104",
+      "first_observation_of_clip_frame": 81,
+      "is_first_use": true,
+      "next_observation_same_clip_frame_ready": 82,
+      "next_ready_wall_offset_s": 2.7499592006206512,
+      "next_ready_body_matches": true,
+      "expected_new_armor_paths_derived_from_unchanged_renderer_NOT_observed_failed_paths": [
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3ShoulderFar_003_v001.T_Fairytale_LeatherPrimary3ShoulderFar_003_v001",
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3Chest_003_v001.T_Fairytale_LeatherPrimary3Chest_003_v001",
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3ShoulderNear_003_v001.T_Fairytale_LeatherPrimary3ShoulderNear_003_v001"
+      ],
+      "individual_failed_texture_or_GetResource_vs_pending_reason": "UNKNOWN: native report stores aggregate armor_ready only."
+    },
+    {
+      "observation": 83,
+      "wall_offset_s": 2.782989900559187,
+      "actual_clip": "sword_primary_3",
+      "actual_frame": 4,
+      "actual_stage": 2,
+      "actual_action_id": "3",
+      "actual_facing": -1,
+      "actual_body_texture": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_004_v001.T_Fairytale_SwordPrimary3Body_004_v001",
+      "actual_texture_ready": false,
+      "actual_armor_ready": false,
+      "actual_armor_drawn": false,
+      "actual_draw_stack": [],
+      "actual_weapon_path": "",
+      "actual_draw_id": "105",
+      "first_observation_of_clip_frame": 83,
+      "is_first_use": true,
+      "next_observation_same_clip_frame_ready": 84,
+      "next_ready_wall_offset_s": 2.8178640007972717,
+      "next_ready_body_matches": true,
+      "expected_new_armor_paths_derived_from_unchanged_renderer_NOT_observed_failed_paths": [
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3ShoulderFar_004_v001.T_Fairytale_LeatherPrimary3ShoulderFar_004_v001",
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3Chest_004_v001.T_Fairytale_LeatherPrimary3Chest_004_v001",
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3ShoulderNear_004_v001.T_Fairytale_LeatherPrimary3ShoulderNear_004_v001"
+      ],
+      "individual_failed_texture_or_GetResource_vs_pending_reason": "UNKNOWN: native report stores aggregate armor_ready only."
+    },
+    {
+      "observation": 88,
+      "wall_offset_s": 2.9501730985939503,
+      "actual_clip": "sword_primary_3",
+      "actual_frame": 5,
+      "actual_stage": 2,
+      "actual_action_id": "3",
+      "actual_facing": -1,
+      "actual_body_texture": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_005_v001.T_Fairytale_SwordPrimary3Body_005_v001",
+      "actual_texture_ready": false,
+      "actual_armor_ready": false,
+      "actual_armor_drawn": false,
+      "actual_draw_stack": [],
+      "actual_weapon_path": "",
+      "actual_draw_id": "109",
+      "first_observation_of_clip_frame": 88,
+      "is_first_use": true,
+      "next_observation_same_clip_frame_ready": 89,
+      "next_ready_wall_offset_s": 2.9841310009360313,
+      "next_ready_body_matches": true,
+      "expected_new_armor_paths_derived_from_unchanged_renderer_NOT_observed_failed_paths": [
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3ShoulderFar_005_v001.T_Fairytale_LeatherPrimary3ShoulderFar_005_v001",
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3Chest_005_v001.T_Fairytale_LeatherPrimary3Chest_005_v001",
+        "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3/T_Fairytale_LeatherPrimary3ShoulderNear_005_v001.T_Fairytale_LeatherPrimary3ShoulderNear_005_v001"
+      ],
+      "individual_failed_texture_or_GetResource_vs_pending_reason": "UNKNOWN: native report stores aggregate armor_ready only."
+    }
+  ],
+  "all_clip_frame_first_observations": [
+    {
+      "observation": 0,
+      "clip": "sword_ready_idle",
+      "frame": 2,
+      "ready": true,
+      "armor_ready": false,
+      "facing": 1,
+      "action_id": "0"
+    },
+    {
+      "observation": 4,
+      "clip": "sword_ready_idle",
+      "frame": 3,
+      "ready": true,
+      "armor_ready": false,
+      "facing": 1,
+      "action_id": "0"
+    },
+    {
+      "observation": 5,
+      "clip": "sword_ready_idle",
+      "frame": 0,
+      "ready": true,
+      "armor_ready": false,
+      "facing": 1,
+      "action_id": "0"
+    },
+    {
+      "observation": 18,
+      "clip": "sword_ready_idle",
+      "frame": 1,
+      "ready": true,
+      "armor_ready": false,
+      "facing": -1,
+      "action_id": "0"
+    },
+    {
+      "observation": 39,
+      "clip": "sword_primary_1",
+      "frame": 0,
+      "ready": true,
+      "armor_ready": true,
+      "facing": -1,
+      "action_id": "1"
+    },
+    {
+      "observation": 41,
+      "clip": "sword_primary_1",
+      "frame": 1,
+      "ready": true,
+      "armor_ready": true,
+      "facing": -1,
+      "action_id": "1"
+    },
+    {
+      "observation": 44,
+      "clip": "sword_primary_1",
+      "frame": 2,
+      "ready": true,
+      "armor_ready": true,
+      "facing": -1,
+      "action_id": "1"
+    },
+    {
+      "observation": 45,
+      "clip": "sword_primary_1",
+      "frame": 3,
+      "ready": true,
+      "armor_ready": true,
+      "facing": -1,
+      "action_id": "1"
+    },
+    {
+      "observation": 47,
+      "clip": "sword_primary_1",
+      "frame": 4,
+      "ready": true,
+      "armor_ready": true,
+      "facing": -1,
+      "action_id": "1"
+    },
+    {
+      "observation": 52,
+      "clip": "sword_primary_1",
+      "frame": 5,
+      "ready": true,
+      "armor_ready": true,
+      "facing": -1,
+      "action_id": "1"
+    },
+    {
+      "observation": 56,
+      "clip": "sword_primary_2",
+      "frame": 0,
+      "ready": true,
+      "armor_ready": true,
+      "facing": -1,
+      "action_id": "2"
+    },
+    {
+      "observation": 59,
+      "clip": "sword_primary_2",
+      "frame": 1,
+      "ready": false,
+      "armor_ready": false,
+      "facing": -1,
+      "action_id": "2"
+    },
+    {
+      "observation": 61,
+      "clip": "sword_primary_2",
+      "frame": 2,
+      "ready": false,
+      "armor_ready": false,
+      "facing": -1,
+      "action_id": "2"
+    },
+    {
+      "observation": 63,
+      "clip": "sword_primary_2",
+      "frame": 3,
+      "ready": false,
+      "armor_ready": false,
+      "facing": -1,
+      "action_id": "2"
+    },
+    {
+      "observation": 65,
+      "clip": "sword_primary_2",
+      "frame": 4,
+      "ready": false,
+      "armor_ready": false,
+      "facing": -1,
+      "action_id": "2"
+    },
+    {
+      "observation": 69,
+      "clip": "sword_primary_2",
+      "frame": 5,
+      "ready": false,
+      "armor_ready": false,
+      "facing": -1,
+      "action_id": "2"
+    },
+    {
+      "observation": 73,
+      "clip": "sword_primary_3",
+      "frame": 0,
+      "ready": false,
+      "armor_ready": false,
+      "facing": -1,
+      "action_id": "3"
+    },
+    {
+      "observation": 76,
+      "clip": "sword_primary_3",
+      "frame": 1,
+      "ready": false,
+      "armor_ready": false,
+      "facing": -1,
+      "action_id": "3"
+    },
+    {
+      "observation": 79,
+      "clip": "sword_primary_3",
+      "frame": 2,
+      "ready": false,
+      "armor_ready": false,
+      "facing": -1,
+      "action_id": "3"
+    },
+    {
+      "observation": 81,
+      "clip": "sword_primary_3",
+      "frame": 3,
+      "ready": false,
+      "armor_ready": false,
+      "facing": -1,
+      "action_id": "3"
+    },
+    {
+      "observation": 83,
+      "clip": "sword_primary_3",
+      "frame": 4,
+      "ready": false,
+      "armor_ready": false,
+      "facing": -1,
+      "action_id": "3"
+    },
+    {
+      "observation": 88,
+      "clip": "sword_primary_3",
+      "frame": 5,
+      "ready": false,
+      "armor_ready": false,
+      "facing": -1,
+      "action_id": "3"
+    }
+  ],
+  "later_right_facing_bad_observations": 0,
+  "facts": [
+    "Ready/P1 GetTexture helpers select leather by the art flags internally, including during startup.",
+    "P2/P3 startup calls omit UseLeather and therefore select old armor via the default false argument.",
+    "The actual renderer passes committed BoundLightArmor AND explicit leather flag, selecting the new v014/v015 components.",
+    "All 11 failed observations are first use of the corresponding P2/P3 clip-frame; the next observed same phase is ready and later right-facing sequence has no failure.",
+    "P2 frame0 first observed use is already ready. First-use asynchronous resource initialization does not fail deterministically for every phase.",
+    "Each failed observation has armor_ready=false, an empty actual draw_stack and empty weapon path, because the unchanged whole-draw resource gate returns before emitting either armor/body or sword.",
+    "The native four mismatch reasons are deduplicated per step, not four distinct failed observations."
+  ],
+  "inference": "The startup source-selection defect leaves 36 new selected P2/P3 armor textures out of FinishCompilation/startup render flush; drawing then first-loads them. The first-use-only aggregate armor failures are consistent with asynchronous texture/render initialization.",
+  "uncertainty": [
+    "No individual per-layer resource state was recorded, so this evidence cannot name which of the three layers had a null resource, was pending, or was still compiling.",
+    "A minimal preload correction is a hypothesis to verify in a new cold native capture, not proof that every resource timing issue is solved."
+  ],
+  "working_reference": "The existing Ready/P1 startup helpers select their new leather textures before the existing FinishCompilation and FlushRenderingCommands, unlike P2/P3 omitted argument.",
+  "correction_scope": "Only the two HUD BeginPlay P2/P3 calls receive selected bound-mode plus their art flag. Existing FinishCompilation, startup FlushRenderingCommands, rendering readiness gate, draw order, normal input, actual clock/frame/IDs, observation capture and verification remain byte-identical.",
+  "risk_and_cost": "Same number of selected startup armor textures; replace old armor selection with new selection under explicit Bound plus per-stage flag. Preloading a possible asset does not authorize drawing it; committed equipment resolver remains unchanged. Default/no-flag calls remain old selection.",
+  "required_native_test": "Root must recompile and run a new process/cold native combo capture; all 168-style observations, all 36 phase-facing samples, six true attack IDs, Ready counts, CRC/FIFO/flush, and mismatch==0 checks stay intact. Do not postprocess the old RED as passing."
+}

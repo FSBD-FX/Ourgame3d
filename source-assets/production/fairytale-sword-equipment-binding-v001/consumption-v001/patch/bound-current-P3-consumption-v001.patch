@@ -1,0 +1,238 @@
+diff --git a/UnrealGame/Source/CodexDungeon/DungeonHUD.h b/UnrealGame/Source/CodexDungeon/DungeonHUD.h
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.h
+@@ -99,8 +99,9 @@
+     UPROPERTY() TMap<FString,TObjectPtr<USoundBase>> ActionAudioSounds;
+     FGuid ActionAudioRun;
+     uint64 ActionAudioCursor = 0;
+     uint64 RestoredRunPresentationEpoch=0;
++    bool bUseFairytaleSwordEquipmentBoundPreview=false;
+     bool bUseFairytaleSwordBodyPreview=false;
+     bool bUseFairytaleSwordBodyV002Preview=false;
+     bool bUseFairytaleSwordPrimary2Preview=false; // Bounded native169 independent-sword fit; no stage2 armor yet.
+     bool bUseFairytaleSwordArmorReadyPreview=false;
+diff --git a/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp b/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+@@ -1,5 +1,6 @@
+ #include "DungeonHUD.h"
++#include "DungeonFairytaleSwordEquipmentBinding.h"
+ #include "DungeonPresentationScale.h"
+ #include "DungeonFighter.h"
+ #include "DungeonGameMode.h"
+ #include "DungeonProbe.h"
+@@ -50,15 +51,19 @@
+ 
+ void ADungeonHUD::BeginPlay()
+ {
+     Super::BeginPlay();
+-    bUseFairytaleLookdevPreview=FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleLookdevPreview"));
++    bUseFairytaleSwordEquipmentBoundPreview=FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordEquipmentBinding::CommandLineFlag);
++    bUseFairytaleLookdevPreview=!bUseFairytaleSwordEquipmentBoundPreview
++        &&FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleLookdevPreview"));
+     if(bUseFairytaleLookdevPreview){BeginFairytaleLookdev();return;}
+     bShowInterface = FParse::Param(FCommandLine::Get(),TEXT("DungeonShowInterface"));
+     ChineseFont = LoadObject<UFont>(nullptr,TEXT("/Game/ThirdParty/Fonts/NotoSansCJKsc/F_NotoSansCJKsc_Regular.F_NotoSansCJKsc_Regular"));
+     if(ChineseFont) { ChineseFont->LegacyFontSize=24; ChineseFont->LegacyFontName=TEXT("Regular"); }
+     bUseCandidateSprites = FParse::Param(FCommandLine::Get(),TEXT("DungeonCandidateSprites"));
+-    bUseFairytaleSwordPrimary2Preview=FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2Preview"))
++    // Bound mode enables current source/preload selection; only the resolver may authorize armor drawing.
++    bUseFairytaleSwordPrimary2Preview=bUseFairytaleSwordEquipmentBoundPreview
++        ||FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2Preview"))
+         ||FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2BodyPreview"))
+         ||DungeonFairytaleSwordPrimary2ArmorV001::Enabled()
+         ||DungeonFairytaleSwordPrimary3V001::Enabled();
+     bUseFairytaleSwordArmorPrimary1Preview=bUseFairytaleSwordPrimary2Preview||FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordArmorPrimary1Preview"));
+@@ -86,14 +91,14 @@
+             for(const FString Component:{TEXT("BodyRest"),TEXT("ShoulderFar"),TEXT("Chest"),
+                 TEXT("NearArmWithoutHand"),TEXT("ShoulderNear"),TEXT("HelmetForeground"),TEXT("NearHand")})
+                 for(int32 I=0;I<6;++I)
+                     if(auto Texture=GetFairytaleSwordArmorPrimary1Texture(Component,I))ReadyArmorTextures.Add(Texture);
+-        if(DungeonFairytaleSwordPrimary2ArmorV001::Enabled() || DungeonFairytaleSwordPrimary3V001::Enabled())
++        if(bUseFairytaleSwordEquipmentBoundPreview || DungeonFairytaleSwordPrimary2ArmorV001::Enabled() || DungeonFairytaleSwordPrimary3V001::Enabled())
+             for(const FString Component:{TEXT("BodyRest"),TEXT("ShoulderFar"),TEXT("Chest"),
+                 TEXT("NearArmWithoutHand"),TEXT("ShoulderNear"),TEXT("HelmetForeground"),TEXT("NearHand")})
+                 for(int32 I=0;I<6;++I)
+                     if(auto Texture=DungeonFairytaleSwordPrimary2ArmorV001::GetTexture(Component,I,Frames))ReadyArmorTextures.Add(Texture);
+-        if(DungeonFairytaleSwordPrimary3V001::Enabled())
++        if(bUseFairytaleSwordEquipmentBoundPreview || DungeonFairytaleSwordPrimary3V001::Enabled())
+             for(const FString Component:{TEXT("Body"),TEXT("BodyRest"),TEXT("ShoulderFar"),TEXT("Chest"),
+                 TEXT("NearArmWithoutHand"),TEXT("ShoulderNear"),TEXT("HelmetForeground"),TEXT("NearHand")})
+                 for(int32 I=0;I<6;++I)
+                     if(auto Texture=DungeonFairytaleSwordPrimary3V001::GetTexture(Component,I,Frames))ReadyArmorTextures.Add(Texture);
+diff --git a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp
+@@ -1,5 +1,6 @@
+ #include "DungeonHUD.h"
++#include "DungeonFairytaleSwordEquipmentBinding.h"
+ #include "DungeonFighter.h"
+ #include "DungeonGameMode.h"
+ #include "DungeonFairytaleSwordBodyV001.inl"
+ #include "DungeonFairytaleSwordBodyV002.inl"
+@@ -44,16 +45,17 @@
+ 
+ UTexture2D* ADungeonHUD::GetFairytaleSwordTexture(const FString& Clip,int32 Index)
+ {
+     using namespace DungeonFairytaleSwordBodyV001;
+-    if(DungeonFairytaleSwordPrimary3V001::Enabled() && Clip==TEXT("sword_primary_3"))
++    if((bUseFairytaleSwordEquipmentBoundPreview || DungeonFairytaleSwordPrimary3V001::Enabled()) && Clip==TEXT("sword_primary_3"))
+     {
+         if(Index<0 || Index>=DungeonFairytaleSwordPrimary3V001::Count(Clip))return nullptr;
+         return DungeonFairytaleSwordPrimary3V001::GetTexture(TEXT("Body"),Index,Frames);
+     }
+     const bool Second=bUseFairytaleSwordPrimary2Preview && Clip==TEXT("sword_primary_2");
+     const bool SecondBodyTrial=Second && (FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2BodyPreview"))
+-        ||DungeonFairytaleSwordPrimary2ArmorV001::Enabled() || DungeonFairytaleSwordPrimary3V001::Enabled());
++        ||DungeonFairytaleSwordPrimary2ArmorV001::Enabled() || DungeonFairytaleSwordPrimary3V001::Enabled()
++        ||bUseFairytaleSwordEquipmentBoundPreview);
+     const int32 FrameCount=Second?(SecondBodyTrial?DungeonFairytaleSwordPrimary2V003::Count(Clip):DungeonFairytaleSwordPrimary2V001::Count(Clip))
+         :bUseFairytaleSwordBodyV002Preview?DungeonFairytaleSwordBodyV002::Count(Clip):Count(Clip);
+     if(Index<0 || Index>=FrameCount)return nullptr;
+     const int32 Version=Second?(SecondBodyTrial?2:1):bUseFairytaleSwordBodyV002Preview?2:1;
+@@ -103,17 +105,29 @@
+         Record.ActiveEnd=Action.ActiveEnd;
+         Record.ActionEnd=Action.End;
+     }
+ 
+-    const bool Sword=(F->WeaponId==TEXT("sword") || F->WeaponId==TEXT("WPN-SWD-001"))
+-        && Melee.Weapon==DungeonContentCombat::EWeapon::SWD001;
++    Record.EquipmentBoundMode=bUseFairytaleSwordEquipmentBoundPreview;
++    if(Record.EquipmentBoundMode)
++    {
++        if(Game)Record.EquipmentBindingValid=DungeonFairytaleSwordEquipmentBinding::Resolve(
++            *Game,*F,Record.EquipmentBinding,Record.EquipmentBindingDiagnostic);
++        else Record.EquipmentBindingDiagnostic=TEXT("No actual authoritative GameMode for equipment-bound draw");
++    }
++    // One resolver call controls both weapon and all armor phases. Old art flags
++    // cannot override missing/unsupported committed gear in explicit Bound mode.
++    const bool BoundLightArmor=Record.EquipmentBoundMode && Record.EquipmentBindingValid
++        &&Record.EquipmentBinding.Armor==DungeonFairytaleSwordEquipmentBinding::EArmor::LightArmor;
++    const bool Sword=Record.EquipmentBoundMode?Record.EquipmentBindingValid
++        :((F->WeaponId==TEXT("sword") || F->WeaponId==TEXT("WPN-SWD-001"))
++            &&Melee.Weapon==DungeonContentCombat::EWeapon::SWD001);
+     const bool Primary1=Sword && !F->bDead && Action.Active
+         && Action.Weapon==DungeonContentCombat::EWeapon::SWD001
+         && Action.Stage==0 && !Action.StartedAirborne;
+     const bool Primary2=bUseFairytaleSwordPrimary2Preview && Sword && !F->bDead && Action.Active
+         && Action.Weapon==DungeonContentCombat::EWeapon::SWD001
+         && Action.Stage==1 && !Action.StartedAirborne;
+-    const bool Primary3=DungeonFairytaleSwordPrimary3V001::Enabled() && Sword && !F->bDead && Action.Active && Melee.Grounded
++    const bool Primary3=(Record.EquipmentBoundMode || DungeonFairytaleSwordPrimary3V001::Enabled()) && Sword && !F->bDead && Action.Active && Melee.Grounded
+         && Action.Weapon==DungeonContentCombat::EWeapon::SWD001
+         && Action.Stage==2 && !Action.StartedAirborne;
+     const bool StableIdle=Sword && !F->bDead && !Action.Active && Melee.Grounded
+         && F->AnimationName==TEXT("idle") && F->JumpHeight==0.f
+@@ -127,9 +141,10 @@
+     Record.Frame=(Primary1||Primary2||Primary3)?F->GetPrimaryPoseFrame():StableIdle
+         ?FMath::FloorToInt(double(F->AnimationTime)/.167)%4:0;
+     const bool RisingAxisTrial=Primary2 && FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2ArcPreview"));
+     const bool Primary2BodyTrial=Primary2 && (FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2BodyPreview"))
+-        ||DungeonFairytaleSwordPrimary2ArmorV001::Enabled() || DungeonFairytaleSwordPrimary3V001::Enabled());
++        ||DungeonFairytaleSwordPrimary2ArmorV001::Enabled() || DungeonFairytaleSwordPrimary3V001::Enabled()
++        ||bUseFairytaleSwordEquipmentBoundPreview);
+     const FMarker* Marker=Primary3?DungeonFairytaleSwordPrimary3V001::Find(Record.Clip,Record.Frame)
+         :Primary2BodyTrial?DungeonFairytaleSwordPrimary2V003::Find(Record.Clip,Record.Frame)
+         :RisingAxisTrial?DungeonFairytaleSwordPrimary2V002::Find(Record.Clip,Record.Frame)
+         :Primary2?DungeonFairytaleSwordPrimary2V001::Find(Record.Clip,Record.Frame):bUseFairytaleSwordBodyV002Preview
+@@ -137,14 +152,15 @@
+     UTexture2D* Body=GetFairytaleSwordTexture(Record.Clip,Record.Frame);
+     Record.TexturePath=Body?Body->GetPathName():FString();
+     Record.TextureReady=Body && Body->GetResource()
+         && !Body->HasPendingRenderResourceInitialization() && Marker;
+-    Record.ArmorPreview=bUseFairytaleSwordArmorReadyPreview;
+-    const bool PrimaryArmorPhase=bUseFairytaleSwordArmorPrimary1Preview && Primary1;
+-    const bool Primary2ArmorPhase=Primary2 && (DungeonFairytaleSwordPrimary2ArmorV001::Enabled()
+-        ||DungeonFairytaleSwordPrimary3V001::Enabled());
+-    const bool Primary3ArmorPhase=Primary3 && DungeonFairytaleSwordPrimary3V001::ArmorEnabled();
+-    const bool ArmorPhase=(Record.ArmorPreview && StableIdle) || PrimaryArmorPhase || Primary2ArmorPhase || Primary3ArmorPhase;
++    Record.ArmorPreview=Record.EquipmentBoundMode?BoundLightArmor:bUseFairytaleSwordArmorReadyPreview;
++    const bool PrimaryArmorPhase=Primary1 && (Record.EquipmentBoundMode?BoundLightArmor:bUseFairytaleSwordArmorPrimary1Preview);
++    const bool Primary2ArmorPhase=Primary2 && (Record.EquipmentBoundMode?BoundLightArmor
++        :(DungeonFairytaleSwordPrimary2ArmorV001::Enabled() || DungeonFairytaleSwordPrimary3V001::Enabled()));
++    const bool Primary3ArmorPhase=Primary3 && (Record.EquipmentBoundMode?BoundLightArmor:DungeonFairytaleSwordPrimary3V001::ArmorEnabled());
++    const bool ArmorPhase=(!Record.EquipmentBoundMode || Record.Supported)
++        &&((Record.ArmorPreview && StableIdle) || PrimaryArmorPhase || Primary2ArmorPhase || Primary3ArmorPhase);
+     // Source body partition is exclusive, and every part keeps its original UVs.
+     // Ready and each supported primary stage use their own source phase partition.
+     static const TCHAR* Components[]={TEXT("BodyRest"),TEXT("ShoulderFar"),TEXT("Chest"),
+         TEXT("NearArmWithoutHand"),TEXT("ShoulderNear"),TEXT("NearHand")};
+diff --git a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordDrawState.h b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordDrawState.h
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordDrawState.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordDrawState.h
+@@ -1,16 +1,22 @@
+ #pragma once
+ 
+ #include "CoreMinimal.h"
++#include "DungeonFairytaleSwordEquipmentBinding.h"
+ 
+ // EV048 ordinary-input presentation trial only. Active means this opt-in
+ // presenter was called, not that the combat kernel currently has an action.
+-// Supported covers only new Ready idle and grounded SWD primary stage0 sources.
++// Supported covers only the opted-in current Ready and grounded SWD primary sources.
+ // Thumb, axis sign, hand masks, foot drift and blade/helmet clearance are unaccepted.
+ struct FDungeonFairytaleSwordDraw
+ {
+     bool Active=false, Supported=false, TextureReady=false;
+-    // Opt-in candidates: Ready4 and six grounded Primary1 source phases only.
++    // Same-draw read-only resolver result; failed results retain default identity.
++    // Valid skin authorization is not acceptance of motion, acquisition or full Profile.
++    bool EquipmentBoundMode=false, EquipmentBindingValid=false;
++    FString EquipmentBindingDiagnostic;
++    DungeonFairytaleSwordEquipmentBinding::FBinding EquipmentBinding;
++    // Opt-in candidates; actual armor drawing is recorded separately from preloading.
+     bool ArmorPreview=false, ArmorReady=false, ArmorDrawn=false;
+     uint64 DrawId=0, ActionId=0, InstanceId=0;
+     double SimulationTime=0., ActionStart=0., ActiveAt=0., ActiveEnd=0., ActionEnd=0.;
+     double CanvasSize=0., WeaponAngle=0., WeaponScale=0., WeaponWidth=0.;
+diff --git a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordProbe.cpp b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordProbe.cpp
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordProbe.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordProbe.cpp
+@@ -1,5 +1,6 @@
+ #include "DungeonFairytaleSwordProbe.h"
++#include "DungeonFairytaleSwordEquipmentBinding.h"
+ #include "DungeonHUD.h"
+ #include "DungeonGameMode.h"
+ #include "DungeonFighter.h"
+ #include "DungeonProofScreenshots.h"
+@@ -71,8 +72,25 @@
+     {
+         const auto& D=H->GetFairytaleSwordDraw();R->SetBoolField(TEXT("active"),D.Active);
+         R->SetBoolField(TEXT("supported"),D.Supported);R->SetBoolField(TEXT("texture_ready"),D.TextureReady);
+         R->SetBoolField(TEXT("armor_preview"),D.ArmorPreview);R->SetBoolField(TEXT("armor_ready"),D.ArmorReady);R->SetBoolField(TEXT("armor_drawn"),D.ArmorDrawn);
++        R->SetBoolField(TEXT("equipment_bound_mode"),D.EquipmentBoundMode);
++        R->SetBoolField(TEXT("equipment_binding_valid"),D.EquipmentBindingValid);
++        R->SetStringField(TEXT("equipment_binding_reason"),D.EquipmentBindingDiagnostic);
++        auto BindingRecord=MakeShared<FJsonObject>();
++        const auto& Skin=D.EquipmentBinding;
++        BindingRecord->SetStringField(TEXT("run_guid"),Skin.RunGuid.ToString(EGuidFormats::Digits).ToLower());
++        const auto BoundId=[&](const TCHAR* Field,uint64 Value)
++        {BindingRecord->SetStringField(Field,FString::Printf(TEXT("%llu"),(unsigned long long)Value));};
++        BoundId(TEXT("run_alias"),Skin.RunAlias);BoundId(TEXT("owner_id"),Skin.OwnerId);BoundId(TEXT("revision"),Skin.Revision);
++        BindingRecord->SetNumberField(TEXT("active_slot"),Skin.ActiveSlot);
++        BoundId(TEXT("weapon_instance_id"),Skin.WeaponInstanceId);BoundId(TEXT("weapon_version"),Skin.WeaponVersion);
++        BoundId(TEXT("armor_instance_id"),Skin.ArmorInstanceId);BoundId(TEXT("armor_version"),Skin.ArmorVersion);
++        BindingRecord->SetStringField(TEXT("weapon_content_id"),Skin.WeaponContentId);
++        BindingRecord->SetStringField(TEXT("armor_content_id"),Skin.ArmorContentId);
++        BindingRecord->SetStringField(TEXT("armor_kind"),D.EquipmentBindingValid
++            ?(Skin.Armor==DungeonFairytaleSwordEquipmentBinding::EArmor::LightArmor?TEXT("light_armor"):TEXT("no_armor")):TEXT("invalid"));
++        R->SetObjectField(TEXT("equipment_binding"),BindingRecord);
+         R->SetStringField(TEXT("draw_id"),FString::Printf(TEXT("%llu"),(unsigned long long)D.DrawId));
+         R->SetStringField(TEXT("action_id"),FString::Printf(TEXT("%llu"),(unsigned long long)D.ActionId));
+         R->SetStringField(TEXT("instance_id"),FString::Printf(TEXT("%llu"),(unsigned long long)D.InstanceId));
+         R->SetNumberField(TEXT("sim"),D.SimulationTime);R->SetNumberField(TEXT("start"),D.ActionStart);
+@@ -145,9 +163,13 @@
+     const bool ThirdArmor=DungeonFairytaleSwordPrimary3V001::ArmorEnabled();
+     R->SetBoolField(TEXT("primary3_fit_trial"),Third);
+     R->SetBoolField(TEXT("primary3_armor_trial"),ThirdArmor);
+     R->SetBoolField(TEXT("primary2_fit_trial"),Second || Third);
+-    if(Third)
++    const bool BoundMode=FParse::Param(FCommandLine::Get(),DungeonFairytaleSwordEquipmentBinding::CommandLineFlag);
++    R->SetBoolField(TEXT("equipment_bound_rendering_candidate"),BoundMode);
++    if(BoundMode)
++        R->SetStringField(TEXT("scope"),TEXT("Same-draw read-only committed equipment resolver controls current sword and matching armor rendering candidates; Bound mode takes priority over art flags. Valid no-armor and actual LGT identity remain distinct; unsupported gear uses an explicit new-bell placeholder without sword or LGT substitution. This does not claim a normal acquisition/swap-flow native proof, automatic full three-stage coverage, visual/grasp/fullmotion/audio acceptance, full units or full Profile persistence; input schedule is unchanged and depends on the existing explicit trial flags"));
++    else if(Third)
+         R->SetStringField(TEXT("scope"),ThirdArmor
+             ?TEXT("Native175 body with opt-in48 Primary3 source/body/armor textures, including integer-registered native176/177/178 armor; real six J requests traverse grounded kernelStages0/1/2, with Stage2 660ms. Existing Ready/Primary1 and native171 V003 Primary2 armor trials retained. No hit target, equipment identity, thumb/grasp, footlock, fullmotion or audio acceptance")
+             :TEXT("Native175 six-body independent-sword fit under real six J requests traversing grounded kernelStages0/1/2, with Stage2 660ms. Existing Ready/Primary1 and native171 V003 Primary2 armor trials retained; Primary3 armor absent. No hit target, equipment identity, thumb/grasp, footlock, fullmotion or audio acceptance"));
+     else

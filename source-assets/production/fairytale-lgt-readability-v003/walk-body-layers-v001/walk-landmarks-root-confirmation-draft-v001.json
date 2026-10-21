@@ -1,0 +1,428 @@
+{
+  "schema": "Walk6-visible-feature-root-confirmation-DRAFT-v001",
+  "created_local": "2026-10-17T04:55:38.334427+08:00",
+  "purpose": "Not a rig/layer pipeline request; missing actual points deliberately null. Root must retain/view originals and confirm per-frame contours.",
+  "source_selection": "actual imported CommonWalk v008 only; not rejected old walk rows or Sword Ready/P1 masks.",
+  "layer_plan": [
+    "BodyRest",
+    "NearArmWithoutHand",
+    "HelmetForeground",
+    "NearHand"
+  ],
+  "assignment_policy_candidate": "NearHand > HelmetForeground > NearArmWithoutHand > BodyRest, exact source-coordinate ownership only. Needs actual per-frame contours; no P2/P3 mask reuse.",
+  "required_per_frame_root_inputs": [
+    "helmet_outer_polygon",
+    "helmet_lower_rim_polyline",
+    "near_arm_polygon",
+    "near_hand_full_cuff_glove_polygon"
+  ],
+  "null_is_not_an_inferred_joint": true,
+  "display_pivot_is_not_foot_root": true,
+  "frames": [
+    {
+      "frame": 0,
+      "native_request": 138,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-walk-v008/curated/frame-0.png",
+        "bytes": 121979,
+        "sha256": "90eb027ee05e289a08aefd613df908c81c450a1f6dd5c14d580ca6e089d415e5"
+      },
+      "byte_exact_copy": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-body-layers-v001/source-body/frame-0.png",
+        "bytes": 121979,
+        "sha256": "90eb027ee05e289a08aefd613df908c81c450a1f6dd5c14d580ca6e089d415e5"
+      },
+      "RGBA_sha256": "efaedc94d03784bfaa54a3a3a4b53a661a19a8d5c247fa99ebcf8ae4c91ba5c6",
+      "canvas": [
+        512,
+        512
+      ],
+      "nonzero_alpha_pixels": 54330,
+      "core_alpha_ge128_pixels": 51138,
+      "alpha_nonzero_bbox_DIAGNOSTIC_NOT_LANDMARK": [
+        122,
+        48,
+        384,
+        464
+      ],
+      "core_bbox_DIAGNOSTIC_NOT_LANDMARK": [
+        122,
+        48,
+        384,
+        464
+      ],
+      "display_pivot_NOT_MEASURED_ROOT": [
+        256,
+        464
+      ],
+      "timing_ms": 83,
+      "actual_landmarks": {
+        "root": null,
+        "crown": null,
+        "helmet_lower_rim_polyline": null,
+        "helmet_outer_polygon": null,
+        "near_shoulder": null,
+        "far_shoulder": null,
+        "near_arm_polygon": null,
+        "near_sleeve_cuff_polyline": null,
+        "near_hand_full_cuff_glove_polygon": null,
+        "near_palm": null,
+        "far_hand_visible_polygon": null,
+        "chest_mount_B_artist_design": null,
+        "near_shoulder_mount_B_artist_design": null,
+        "far_shoulder_mount_B_artist_design": null,
+        "near_hip": null,
+        "near_knee": null,
+        "near_ankle": null,
+        "near_heel": null,
+        "near_toe": null,
+        "far_hip": null,
+        "far_knee": null,
+        "far_ankle": null,
+        "far_heel": null,
+        "far_toe": null,
+        "weapon_axis_artist_design": null
+      },
+      "root_confirmed": false,
+      "semantic_ownership_accepted": false
+    },
+    {
+      "frame": 1,
+      "native_request": 142,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-walk-v008/curated/frame-1.png",
+        "bytes": 104942,
+        "sha256": "a13aaea3963abc6d4973805524be39710c8ef9395290c3e0d7d844ed7d37594e"
+      },
+      "byte_exact_copy": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-body-layers-v001/source-body/frame-1.png",
+        "bytes": 104942,
+        "sha256": "a13aaea3963abc6d4973805524be39710c8ef9395290c3e0d7d844ed7d37594e"
+      },
+      "RGBA_sha256": "8d7a5f084c1ef8dfc174e227514811f304bf17cca5d38432204a5e76249b0d3a",
+      "canvas": [
+        512,
+        512
+      ],
+      "nonzero_alpha_pixels": 49688,
+      "core_alpha_ge128_pixels": 46780,
+      "alpha_nonzero_bbox_DIAGNOSTIC_NOT_LANDMARK": [
+        149,
+        57,
+        362,
+        464
+      ],
+      "core_bbox_DIAGNOSTIC_NOT_LANDMARK": [
+        149,
+        57,
+        362,
+        464
+      ],
+      "display_pivot_NOT_MEASURED_ROOT": [
+        256,
+        464
+      ],
+      "timing_ms": 83,
+      "actual_landmarks": {
+        "root": null,
+        "crown": null,
+        "helmet_lower_rim_polyline": null,
+        "helmet_outer_polygon": null,
+        "near_shoulder": null,
+        "far_shoulder": null,
+        "near_arm_polygon": null,
+        "near_sleeve_cuff_polyline": null,
+        "near_hand_full_cuff_glove_polygon": null,
+        "near_palm": null,
+        "far_hand_visible_polygon": null,
+        "chest_mount_B_artist_design": null,
+        "near_shoulder_mount_B_artist_design": null,
+        "far_shoulder_mount_B_artist_design": null,
+        "near_hip": null,
+        "near_knee": null,
+        "near_ankle": null,
+        "near_heel": null,
+        "near_toe": null,
+        "far_hip": null,
+        "far_knee": null,
+        "far_ankle": null,
+        "far_heel": null,
+        "far_toe": null,
+        "weapon_axis_artist_design": null
+      },
+      "root_confirmed": false,
+      "semantic_ownership_accepted": false
+    },
+    {
+      "frame": 2,
+      "native_request": 143,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-walk-v008/curated/frame-2.png",
+        "bytes": 112370,
+        "sha256": "016dea34e0a1d858dd2b229ec8b360683633a5679ce5bf293410ec22921ac21b"
+      },
+      "byte_exact_copy": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-body-layers-v001/source-body/frame-2.png",
+        "bytes": 112370,
+        "sha256": "016dea34e0a1d858dd2b229ec8b360683633a5679ce5bf293410ec22921ac21b"
+      },
+      "RGBA_sha256": "3a17daaebf0184654ad77e00b2563d4cd1bf68131c2f8f493c8a3ec40f902882",
+      "canvas": [
+        512,
+        512
+      ],
+      "nonzero_alpha_pixels": 51915,
+      "core_alpha_ge128_pixels": 48901,
+      "alpha_nonzero_bbox_DIAGNOSTIC_NOT_LANDMARK": [
+        137,
+        53,
+        393,
+        464
+      ],
+      "core_bbox_DIAGNOSTIC_NOT_LANDMARK": [
+        137,
+        53,
+        393,
+        464
+      ],
+      "display_pivot_NOT_MEASURED_ROOT": [
+        256,
+        464
+      ],
+      "timing_ms": 83,
+      "actual_landmarks": {
+        "root": null,
+        "crown": null,
+        "helmet_lower_rim_polyline": null,
+        "helmet_outer_polygon": null,
+        "near_shoulder": null,
+        "far_shoulder": null,
+        "near_arm_polygon": null,
+        "near_sleeve_cuff_polyline": null,
+        "near_hand_full_cuff_glove_polygon": null,
+        "near_palm": null,
+        "far_hand_visible_polygon": null,
+        "chest_mount_B_artist_design": null,
+        "near_shoulder_mount_B_artist_design": null,
+        "far_shoulder_mount_B_artist_design": null,
+        "near_hip": null,
+        "near_knee": null,
+        "near_ankle": null,
+        "near_heel": null,
+        "near_toe": null,
+        "far_hip": null,
+        "far_knee": null,
+        "far_ankle": null,
+        "far_heel": null,
+        "far_toe": null,
+        "weapon_axis_artist_design": null
+      },
+      "root_confirmed": false,
+      "semantic_ownership_accepted": false
+    },
+    {
+      "frame": 3,
+      "native_request": 137,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-walk-v008/curated/frame-3.png",
+        "bytes": 114035,
+        "sha256": "7ba795bc8876a657b3a9a2adb6843790d52137b43c2b3f4faa1d14e086d51544"
+      },
+      "byte_exact_copy": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-body-layers-v001/source-body/frame-3.png",
+        "bytes": 114035,
+        "sha256": "7ba795bc8876a657b3a9a2adb6843790d52137b43c2b3f4faa1d14e086d51544"
+      },
+      "RGBA_sha256": "7a9e815c8aba0b5ffa4d46d6b58d3df9d099c6a089338fc7d04ccb7bfae7553a",
+      "canvas": [
+        512,
+        512
+      ],
+      "nonzero_alpha_pixels": 53233,
+      "core_alpha_ge128_pixels": 50237,
+      "alpha_nonzero_bbox_DIAGNOSTIC_NOT_LANDMARK": [
+        138,
+        54,
+        384,
+        464
+      ],
+      "core_bbox_DIAGNOSTIC_NOT_LANDMARK": [
+        138,
+        54,
+        384,
+        464
+      ],
+      "display_pivot_NOT_MEASURED_ROOT": [
+        256,
+        464
+      ],
+      "timing_ms": 83,
+      "actual_landmarks": {
+        "root": null,
+        "crown": null,
+        "helmet_lower_rim_polyline": null,
+        "helmet_outer_polygon": null,
+        "near_shoulder": null,
+        "far_shoulder": null,
+        "near_arm_polygon": null,
+        "near_sleeve_cuff_polyline": null,
+        "near_hand_full_cuff_glove_polygon": null,
+        "near_palm": null,
+        "far_hand_visible_polygon": null,
+        "chest_mount_B_artist_design": null,
+        "near_shoulder_mount_B_artist_design": null,
+        "far_shoulder_mount_B_artist_design": null,
+        "near_hip": null,
+        "near_knee": null,
+        "near_ankle": null,
+        "near_heel": null,
+        "near_toe": null,
+        "far_hip": null,
+        "far_knee": null,
+        "far_ankle": null,
+        "far_heel": null,
+        "far_toe": null,
+        "weapon_axis_artist_design": null
+      },
+      "root_confirmed": false,
+      "semantic_ownership_accepted": false
+    },
+    {
+      "frame": 4,
+      "native_request": 141,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-walk-v008/curated/frame-4.png",
+        "bytes": 107900,
+        "sha256": "f884e69c9653a2a037b9cf366f98fe9b81b2f59a4d8dabeca59217947ac835fd"
+      },
+      "byte_exact_copy": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-body-layers-v001/source-body/frame-4.png",
+        "bytes": 107900,
+        "sha256": "f884e69c9653a2a037b9cf366f98fe9b81b2f59a4d8dabeca59217947ac835fd"
+      },
+      "RGBA_sha256": "100bb4be3ab39ac2c9f4fd11917c056659f221d7d57db594aa4f283afe586e73",
+      "canvas": [
+        512,
+        512
+      ],
+      "nonzero_alpha_pixels": 50349,
+      "core_alpha_ge128_pixels": 47341,
+      "alpha_nonzero_bbox_DIAGNOSTIC_NOT_LANDMARK": [
+        157,
+        56,
+        364,
+        464
+      ],
+      "core_bbox_DIAGNOSTIC_NOT_LANDMARK": [
+        157,
+        56,
+        364,
+        464
+      ],
+      "display_pivot_NOT_MEASURED_ROOT": [
+        256,
+        464
+      ],
+      "timing_ms": 83,
+      "actual_landmarks": {
+        "root": null,
+        "crown": null,
+        "helmet_lower_rim_polyline": null,
+        "helmet_outer_polygon": null,
+        "near_shoulder": null,
+        "far_shoulder": null,
+        "near_arm_polygon": null,
+        "near_sleeve_cuff_polyline": null,
+        "near_hand_full_cuff_glove_polygon": null,
+        "near_palm": null,
+        "far_hand_visible_polygon": null,
+        "chest_mount_B_artist_design": null,
+        "near_shoulder_mount_B_artist_design": null,
+        "far_shoulder_mount_B_artist_design": null,
+        "near_hip": null,
+        "near_knee": null,
+        "near_ankle": null,
+        "near_heel": null,
+        "near_toe": null,
+        "far_hip": null,
+        "far_knee": null,
+        "far_ankle": null,
+        "far_heel": null,
+        "far_toe": null,
+        "weapon_axis_artist_design": null
+      },
+      "root_confirmed": false,
+      "semantic_ownership_accepted": false
+    },
+    {
+      "frame": 5,
+      "native_request": 145,
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-hero-v001/sprite-run-walk-v008/curated/frame-5.png",
+        "bytes": 118064,
+        "sha256": "18364d7b5ea06a1940c91cb204e1e59196194d69d972a123bcbaa956718d2566"
+      },
+      "byte_exact_copy": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-body-layers-v001/source-body/frame-5.png",
+        "bytes": 118064,
+        "sha256": "18364d7b5ea06a1940c91cb204e1e59196194d69d972a123bcbaa956718d2566"
+      },
+      "RGBA_sha256": "abab5303a5edbb8dec989077a9469000784cd3e83053f17c0d5a190d3f9d134f",
+      "canvas": [
+        512,
+        512
+      ],
+      "nonzero_alpha_pixels": 53649,
+      "core_alpha_ge128_pixels": 50562,
+      "alpha_nonzero_bbox_DIAGNOSTIC_NOT_LANDMARK": [
+        134,
+        51,
+        386,
+        464
+      ],
+      "core_bbox_DIAGNOSTIC_NOT_LANDMARK": [
+        134,
+        51,
+        386,
+        464
+      ],
+      "display_pivot_NOT_MEASURED_ROOT": [
+        256,
+        464
+      ],
+      "timing_ms": 83,
+      "actual_landmarks": {
+        "root": null,
+        "crown": null,
+        "helmet_lower_rim_polyline": null,
+        "helmet_outer_polygon": null,
+        "near_shoulder": null,
+        "far_shoulder": null,
+        "near_arm_polygon": null,
+        "near_sleeve_cuff_polyline": null,
+        "near_hand_full_cuff_glove_polygon": null,
+        "near_palm": null,
+        "far_hand_visible_polygon": null,
+        "chest_mount_B_artist_design": null,
+        "near_shoulder_mount_B_artist_design": null,
+        "far_shoulder_mount_B_artist_design": null,
+        "near_hip": null,
+        "near_knee": null,
+        "near_ankle": null,
+        "near_heel": null,
+        "near_toe": null,
+        "far_hip": null,
+        "far_knee": null,
+        "far_ankle": null,
+        "far_heel": null,
+        "far_toe": null,
+        "weapon_axis_artist_design": null
+      },
+      "root_confirmed": false,
+      "semantic_ownership_accepted": false
+    }
+  ],
+  "generation_or_import_ready": false,
+  "semantic_accepted": false,
+  "new_outputs_viewed": false
+}

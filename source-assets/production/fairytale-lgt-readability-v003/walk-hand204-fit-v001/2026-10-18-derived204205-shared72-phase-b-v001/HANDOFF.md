@@ -1,0 +1,1 @@
+Exact rawRGB six-cell curation2040..4+2055; all6 RGB mismatch0. ONE native shared-row component extraction, shared72 fit, inspect/compose/curated exit0. No per-frame scale. All source art/old90 unchanged; new A/B/Grip pending actual512 review. Not imported or accepted. Root must retain canonical media E before view.

@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-common-hero-sword-primary2-v001",
+    "description": "Compact single-handed body-only reverse horizontal second slash: low guard, short inward below-chest load, two forward +X outward cuts below the eye window, compact elbow return, low guard exit. This is not the first high-load diagonal slash.",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "sword_primary_2": {
+      "frames": 6,
+      "fps": 10,
+      "loop": false,
+      "action": "Compact single-handed body-only reverse horizontal second slash: low guard, short inward below-chest load, two forward +X outward cuts below the eye window, compact elbow return, low guard exit. This is not the first high-load diagonal slash.",
+      "durations_ms": [
+        75,
+        75,
+        60,
+        60,
+        135,
+        135
+      ]
+    }
+  },
+  "style": "EXACT accepted canonical131 grotesque squat bell helmet, charcoal cloth, brown gloves/boots. One native3/4right direction, body-only, no added armor or weapon.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": false,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\primary1-chest192-extraction-v001\\run-chest-shared-HD-v001",
+  "states": [
+    "leather_chest_sword_primary1"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "leather_chest_sword_primary1",
+      "source": "frames",
+      "expected_frames": 6,
+      "found_frames": 6,
+      "natural_pose_count": 6,
+      "frame_files": [
+        "frames/leather_chest_sword_primary1/frame-0.png",
+        "frames/leather_chest_sword_primary1/frame-1.png",
+        "frames/leather_chest_sword_primary1/frame-2.png",
+        "frames/leather_chest_sword_primary1/frame-3.png",
+        "frames/leather_chest_sword_primary1/frame-4.png",
+        "frames/leather_chest_sword_primary1/frame-5.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.894989100873109,
+          "mean": 0.9414723112039982
+        },
+        "dhash_similarity": {
+          "min": 0.96875,
+          "mean": 0.9864583333333333
+        },
+        "motion_presence": 0.0018383310355392156,
+        "centroid_sigma": {
+          "x": 0.5300278690591081,
+          "y": 0.7447099057163744
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "leather_chest_sword_primary1: motion presence is too low (0.0018 < 0.0100)"
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "leather_chest_sword_primary1: motion presence is too low (0.0018 < 0.0100)"
+  ]
+}

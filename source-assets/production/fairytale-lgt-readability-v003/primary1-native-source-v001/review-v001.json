@@ -1,0 +1,126 @@
+{
+  "schema": "leather-primary1-native-source-independent-review-v001",
+  "created_local": "2026-10-17T01:32:43",
+  "reviewer": "/root/run_codec_stage0",
+  "scope": "small opt-in P1 getter and process-only probe delta against current source; no project-wide review",
+  "candidate": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-native-source-v001/source-freeze-v001.json",
+    "bytes": 2077,
+    "sha256": "32ecbee65bbcdf011bc93d3e00ed03cc2df653ec983656ee0c97e481afc83f85"
+  },
+  "frozen_descriptors": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+      "matches": true
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.h",
+      "matches": true
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.cpp",
+      "matches": true
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-native-source-v001/DungeonFairytaleSwordPresentation.cpp",
+      "matches": true
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-native-source-v001/DungeonFairytaleEquipmentBoundProbe.h",
+      "matches": true
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-native-source-v001/DungeonFairytaleEquipmentBoundProbe.cpp",
+      "matches": true
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-native-source-v001/primary1-trial-v001.patch",
+      "matches": true
+    }
+  ],
+  "actual_source_written": false,
+  "UE_UBT_run": false,
+  "candidate_mutated": false,
+  "media_viewed_or_created": false,
+  "git_apply_check": {
+    "exit": 0,
+    "applied": false
+  },
+  "verdict": "one narrow final-Ready proof gap to fix; no definite runtime/compile blocker otherwise",
+  "findings": [
+    {
+      "severity": "proof-coverage gap",
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-native-source-v001/DungeonFairytaleEquipmentBoundProbe.cpp",
+      "lines": [
+        186,
+        297,
+        302,
+        305,
+        309
+      ],
+      "problem": "ReadySeen[6] already accumulated at least3idle screenshots after the first attack while waiting for its .45s chain expiry. It is never reset before the second attack. When the second action first becomes inactive, both six-frame masks plus the stale ReadySeen value allow Finish immediately. A successful report therefore does not require a screenshot of actual Ready after the second attack, although the trial scope claims then actual Ready.",
+      "minimal_fix": "When issuing the normal second J in the LeatherPrimary1Only branch, reset ReadySeen[6] to0, or use a separate finalReady counter incremented only by fresh post-second-attack supported Ready observations. Require3fresh observations before Finish. Keep existing .46 wait, masks63/63, distinct actual attack IDs, normal input pulses and default flow unchanged.",
+      "basis": "direct data/control flow from candidate; no actual native execution claimed"
+    }
+  ],
+  "checked_without_other_definite_findings": [
+    {
+      "path": "DungeonFairytaleSwordPresentation.cpp",
+      "lines": [
+        41,
+        61
+      ],
+      "result": "Getter only switches Chest/ShoulderFar/ShoulderNear frames0..5 to v013 when Bound plus explicit LeatherPrimary1Preview. Both FString::Printf branches use TEXT arrays, respecting local UE5.5 literal-array constraint. Other body/hand/helmet/P2/P3 getters remain unchanged, cache names are disjoint, resources retain existing fail-closed checks."
+    },
+    {
+      "path": "DungeonFairytaleSwordPresentation.cpp",
+      "lines": [
+        121,
+        135,
+        187,
+        215,
+        270,
+        307
+      ],
+      "result": "Same existing actual committed binding/BoundLightArmor gate chooses all armor. New art flag cannot grant light armor to NoArmor or unsupported equipment. Existing startup Getter loop prewarms selected18P1armor textures while retaining body partition/helmet/hand."
+    },
+    {
+      "path": "DungeonFairytaleEquipmentBoundProbe.cpp",
+      "lines": [
+        64,
+        70,
+        232,
+        286,
+        290,
+        311
+      ],
+      "result": "Only explicit Primary1Only flag selects new case6. Mutually excludes ReadyOnly and requires both art flags. Existing real Enter/E/A cancel/E commit setup and actual weapon/light identities remain; no private gear, clock or pose/frame writes added. First J is existing case5. While active, actual Stage must remain0. After action.End+.46 and existing idle evidence, normal A/D turns once; then a separate normal J may begin after neutral pulse release. No queue-three-combo branch executes for the new trial."
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonContentCombat.h",
+      "lines": [
+        137,
+        150
+      ],
+      "result": "Kernel retains last Action.End after completion and expires its chain after completion time+.45. Waiting for End+.46 therefore uses the existing authority and selects a fresh Stage0 through ordinary PressPrimary; it does not Reset or alter clock."
+    },
+    {
+      "path": "DungeonFairytaleEquipmentBoundProbe.cpp",
+      "lines": [
+        197,
+        206,
+        297,
+        301,
+        375,
+        397
+      ],
+      "result": "Six supported P1 frames tracked separately by actual facing, with one actual nonzero/different attack ID per side checked before pass. Every counted sample checks3actual new v013paths and retains mismatches. Default complete flow and original timeouts remain unchanged. Reports explicitly exclude P2/P3/fullmotion/audio/save/unit acceptance."
+    }
+  ],
+  "boundaries": [
+    "This is source-only review. Root must run UBT and real native capture after correction; phase sampling and visual/material fit are not proven by source.",
+    "Both masks require six observed indices rather than a guaranteed capture at arbitrary low framerate; missed phases should remain failed, not lower the masks or threshold.",
+    "Malformed Primary1Only CLI is rejected before directory parsing, so it may not emit runtime-report; correctly flagged launcher is required. This mirrors the explicit Ready trial diagnostic boundary.",
+    "No Source, frozen candidates, patch, README, ledger or media was changed; only this new review JSON is written."
+  ]
+}

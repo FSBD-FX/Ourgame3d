@@ -1,0 +1,55 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\walk-hand204-extraction-v001\\run-hand204-shared-HD-v001",
+  "states": [
+    "sword_walk_nearhand"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "sword_walk_nearhand",
+      "source": "frames",
+      "expected_frames": 6,
+      "found_frames": 6,
+      "natural_pose_count": 6,
+      "frame_files": [
+        "frames/sword_walk_nearhand/frame-0.png",
+        "frames/sword_walk_nearhand/frame-1.png",
+        "frames/sword_walk_nearhand/frame-2.png",
+        "frames/sword_walk_nearhand/frame-3.png",
+        "frames/sword_walk_nearhand/frame-4.png",
+        "frames/sword_walk_nearhand/frame-5.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.9030901495527845,
+          "mean": 0.9431933063921398
+        },
+        "dhash_similarity": {
+          "min": 1.0,
+          "mean": 1.0
+        },
+        "motion_presence": 0.0023479147518382353,
+        "centroid_sigma": {
+          "x": 1.5639238554233106,
+          "y": 0.8953211750106889
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "sword_walk_nearhand: motion presence is too low (0.0023 < 0.0100)"
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "sword_walk_nearhand: motion presence is too low (0.0023 < 0.0100)"
+  ]
+}

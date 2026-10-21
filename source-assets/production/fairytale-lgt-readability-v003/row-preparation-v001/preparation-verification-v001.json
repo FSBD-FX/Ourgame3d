@@ -1,0 +1,85 @@
+{
+  "schema": "lgt-ready-three-row-preparation-actual-verification-v1",
+  "created_local": "2026-10-16T22:55:38.374335+08:00",
+  "standard_prepare_runs": 3,
+  "prepare_exit_codes": [
+    0,
+    0,
+    0
+  ],
+  "rows": [
+    {
+      "component": "Chest",
+      "standard_prepare_exit": 0,
+      "prompt_words": 513,
+      "window_design_px": [
+        90,
+        90
+      ],
+      "durations_ms": [
+        167,
+        167,
+        167,
+        167
+      ],
+      "future_A_all_null": true,
+      "raw_files": 0,
+      "references_count": 5
+    },
+    {
+      "component": "NearShoulder",
+      "standard_prepare_exit": 0,
+      "prompt_words": 498,
+      "window_design_px": [
+        60,
+        44
+      ],
+      "durations_ms": [
+        167,
+        167,
+        167,
+        167
+      ],
+      "future_A_all_null": true,
+      "raw_files": 0,
+      "references_count": 5
+    },
+    {
+      "component": "FarShoulder",
+      "standard_prepare_exit": 0,
+      "prompt_words": 490,
+      "window_design_px": [
+        30,
+        28
+      ],
+      "durations_ms": [
+        167,
+        167,
+        167,
+        167
+      ],
+      "future_A_all_null": true,
+      "raw_files": 0,
+      "references_count": 5
+    }
+  ],
+  "pinned_files_reread": 210,
+  "file_descriptor_mismatches": [],
+  "existing_row_count": 12,
+  "new_prepared_row_count": 3,
+  "other_nine_runs_created": false,
+  "new_guides_explicitly_viewed": false,
+  "generation_ready": false,
+  "native_called": false,
+  "ue_or_import_called": false,
+  "preparation_wrapper_diagnostics": [
+    "first toolchain inventory used nonexistent extract_sprite_frames.py; corrected to actual extract_sprite_row_frames.py before any SG run",
+    "SG prepare omits durations_ms: preserved standard request then explicitly added 4x167 and chroma field as documented",
+    "watcher alias falsely compared enriched PNG metadata dict to file-only descriptor after all three exit0; corrected dict copy and independently reread every pinned file"
+  ],
+  "handoff": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-preparation-v001/lgt-ready-native-input-draft-v001.json",
+    "bytes": 26444,
+    "sha256": "6d437440d6e3d5fcee19f296283d13565f4fd63b4df621e1efc340d06d4f857a"
+  }
+}

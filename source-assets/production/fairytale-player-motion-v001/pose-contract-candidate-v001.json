@@ -1,0 +1,140 @@
+{
+  "schema": "fairytale-motion-candidate-contract-v1",
+  "status": "proposal_not_sprite_request_not_importable",
+  "existing_style": "canonical hand-inked squat2.5D hero; no new style accepted",
+  "source_canvas_px": [
+    512,
+    512
+  ],
+  "landmarks_required": [
+    "root",
+    "crown",
+    "hip_near",
+    "hip_far",
+    "knee_near",
+    "knee_far",
+    "ankle_near",
+    "ankle_far",
+    "heel_near",
+    "heel_far",
+    "toe_near",
+    "toe_far",
+    "shoulder_near",
+    "shoulder_far",
+    "elbow_near",
+    "elbow_far",
+    "wrist_near",
+    "wrist_far",
+    "grip_main",
+    "grip_support"
+  ],
+  "landmarks_px": null,
+  "source_paths": null,
+  "source_sha256": null,
+  "measured_stride_cm": null,
+  "foot_plant_windows": null,
+  "rows": [
+    {
+      "clip": "ground_locomotion",
+      "positions": [
+        "near_contact",
+        "near_down_far_pass",
+        "near_lift_far_forward",
+        "far_contact",
+        "far_down_near_pass",
+        "far_lift_near_forward"
+      ],
+      "loop": true,
+      "runtime_phase": "accepted_ground_distance/measured_stride; not intent-only walk AnimationTime",
+      "preview_ms_per_key_candidate": 100,
+      "preview_timing_not_runtime_authority": true
+    },
+    {
+      "clip": "pickup_weapon",
+      "positions": [
+        "brace_old_held_weapon",
+        "bend_knees_free_hand_reaches",
+        "recover_balance_old_gear",
+        "return_to_guard"
+      ],
+      "loop": false,
+      "runtime_phase": "(Now-Action.Start)/(Action.Deadline-Action.Start), actual Kind PickupWeapon and valid source/instance/action",
+      "normalized_key_starts": [
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "nominal_duration_seconds": 0.35
+    },
+    {
+      "clip": "equip_armor",
+      "positions": [
+        "touch_old_chest_or_shoulder",
+        "free_hand_work_strap_elbow_moves",
+        "shoulder_settle_knees_recover",
+        "return_to_guard"
+      ],
+      "loop": false,
+      "runtime_phase": "actual Kind PickupArmor, slot2, Start/Deadline",
+      "normalized_key_starts": [
+        0,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "nominal_duration_seconds": 0.5
+    }
+  ],
+  "switch_weapon": "Different Kind/SourceId0; do not use ground reach row just because equip_weapon matches",
+  "motion_context_proposal_not_existing_api": {
+    "name": "FCompletedGroundMotion",
+    "fields": [
+      "OwnerId",
+      "RunGuid",
+      "RoomInstanceId",
+      "FromTime",
+      "ToTime",
+      "FromXY",
+      "ToXY",
+      "AcceptedDeltaXY",
+      "Grounded"
+    ],
+    "publish_after": "actual collision-resolved actor position commit",
+    "seed_on": [
+      "newRun",
+      "roomPlacement",
+      "restore/install",
+      "explicitTeleport"
+    ],
+    "do_not_count_placement_as_walk": true
+  },
+  "pose_readback_proposal_not_existing_api": {
+    "name": "FPlayerMotionPose",
+    "fields": [
+      "Clip",
+      "FrameOrKeyPair",
+      "Blend",
+      "ClockDomain",
+      "ActionId",
+      "OperationId",
+      "CommittedWeaponInstance",
+      "CommittedArmorInstance",
+      "SourceMarkerSet",
+      "OrderedPartTransforms"
+    ],
+    "pure_read_only": true
+  },
+  "first_slice": "SWD+none/newLGT;one real locomotion cycle+one armor equip gesture;choose native-row/cutout after tiny playable comparison",
+  "armor_rule": "only successful committed old binding before real commit;pending target never skins actor;cancel stops pose without old-deadline commit",
+  "socket_rule": "main weapon rigid child of measured main-hand grip;support hand reaches authored support;mirror once;keep XBW current/custom/immutable emission/65combatHeight/Actor420 contracts",
+  "not_claimed": [
+    "sprint mechanic",
+    "newStyle air/hurt/death/skills",
+    "all5weapon complete states",
+    "all4armors",
+    "full20mixes",
+    "D13rig continuity",
+    "animation acceptance"
+  ]
+}

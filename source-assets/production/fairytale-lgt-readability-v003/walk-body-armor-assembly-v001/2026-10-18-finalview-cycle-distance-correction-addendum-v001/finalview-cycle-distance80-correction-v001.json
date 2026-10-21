@@ -1,0 +1,105 @@
+{
+  "schema": "Walk72-final-independent-view-and-profile-wording-correction-addendum-v001",
+  "created_local": "2026-10-18T09:05:07.309395+08:00",
+  "retention_before_view": "Root E342 both SHA passes0; explicit permission before worker viewed5 actual source media at original detail.",
+  "actually_viewed": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-body-armor-assembly-v001/2026-10-18-closed72-final48-candidate-v002/原件/noSword-armor-six-UNSCALED-v001.png",
+      "bytes": 702819,
+      "sha256": "7d8ddead914affe9071207755778c63e4c12e06e7116690f2ce49c96cd181d6c"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-body-armor-assembly-v001/2026-10-18-closed72-final48-candidate-v002/原件/revised-whole-six-UNSCALED-v001.png",
+      "bytes": 674776,
+      "sha256": "2358e9f53363c3c95c3e3c1f1f15b16a78e7e37c51a312dced456a1c73ea1039"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-body-armor-assembly-v001/2026-10-18-closed72-final48-candidate-v002/原件/closed72-cuff-fit-0-UNSCALED-v001.png",
+      "bytes": 40466,
+      "sha256": "08867defb192e2b807bbda134b4d93f417cd08432da6136741bac043e9f15dce"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-body-armor-assembly-v001/2026-10-18-closed72-final48-candidate-v002/原件/closed72-cuff-fit-2-UNSCALED-v001.png",
+      "bytes": 35212,
+      "sha256": "f1f6f9defbfe5a13dc51bf3bdf95de5f3c0bcdda8a090459830181d2b1234444"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-body-armor-assembly-v001/2026-10-18-closed72-final48-candidate-v002/原件/closed72-cuff-fit-5-UNSCALED-v001.png",
+      "bytes": 45678,
+      "sha256": "b20187b310a3a15fd975a4252b503016b67ae5af46b32e30739679b96fe9517b"
+    }
+  ],
+  "visual_findings": [
+    "All6 closed near fists follow actual arm phases:0/5 down-left-back,2/3 forward-down-right,1/4 down; native205 last hand direction correction holds.",
+    "Native shared72 proportions look consistent with old glove width; measured ratios1.036/1/.931/1.074/1.037/1.070.",
+    "Original brown cuffs meet new fists without detached wrist gap in reviewed native1x crops0/2/5. Split edge artist uncertainty remains +/-2px; actual sword occlusion still needs runtime review.",
+    "Armor chest pouch stays the same physical side; near cap follows actual foreground shoulder chain as arm swings forward; no mirror used.",
+    "New bodies retain old body/helmet/feet outside explicitly permitted hand replacement region; independent numeric proof accompanies visual observations."
+  ],
+  "verdict": "Suitable to IMPORT AS CANDIDATE for Root native-runtime sword.50 and bidirectional Walk review; not final game, sword grasp, foot-lock or motion acceptance.",
+  "profile_wording_correction": {
+    "historical_frozen_sources": [
+      {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-body-armor-assembly-v001/2026-10-18-closed72-final48-candidate-v002/HANDOFF.md",
+        "bytes": 954,
+        "sha256": "07afe738400d549c10b824b848054a9135dc920c7658bc6103c66adec333c3df"
+      },
+      {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-body-armor-assembly-v001/2026-10-18-closed72-final48-candidate-v002/walk-six-Grip-Axis-ground-display-markers-v001.json",
+        "bytes": 12422,
+        "sha256": "9447b9731a0407ecd5c3a58e034325756d678a7f7323e55e4a2cba8b10791260"
+      }
+    ],
+    "incorrect_old_wording": [
+      "speed80",
+      "locomotion_world_speed_design=80"
+    ],
+    "correct_field": "CycleDistanceWorld",
+    "correct_value": 80,
+    "cycle_seconds_design": 0.498,
+    "character_movement_speed": "UNCHANGED; this art task does not set movement speed.",
+    "scope": "Explicit per-cycle distance/timing design tuning only, not measured stride, velocity or foot-lock proof. This addendum corrects historical wording without overwriting frozen markers or48 files."
+  },
+  "rendering_handoff": {
+    "Root_selected_method": "StableWalk draws actual NearHand RGBA layer over Sword.",
+    "FistPolygon_status": "Large traced visible-alpha polygons remain diagnostic/source evidence; do not paste hundreds of contour points into C++ or use triangle fan for hand occlusion.",
+    "Grip_canvas_px": [
+      [
+        143,
+        325
+      ],
+      [
+        176,
+        344
+      ],
+      [
+        320,
+        317
+      ],
+      [
+        337,
+        318
+      ],
+      [
+        184,
+        351
+      ],
+      [
+        151,
+        327
+      ]
+    ],
+    "Axis_artist_design_screen_xy": [
+      0.8,
+      -0.6
+    ],
+    "ground_display_pivot_px": [
+      256,
+      464
+    ],
+    "hidden_wrist_bones_or_actual_held_sword_axis": null
+  },
+  "frozen48_source_or_markers_modified": false,
+  "Source_UE_tools_ledger_README_edited": false,
+  "no_additional_checks_without_new_changes": true
+}

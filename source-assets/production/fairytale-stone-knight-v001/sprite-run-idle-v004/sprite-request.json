@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-stone-knight-v001",
+    "description": "Compact living stone knight facing LEFT, crooked rigid bell helmet, amber eyes and block tooth, short mace, broad shield, olive moss and exactly two plum shoulder mushrooms. Fixed rigid head/shoulders/body/legs, articulated elbows and wrists only.",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 48,
+    "safe_margin_y": 48,
+    "size": 512,
+    "safe_margin": 48
+  },
+  "chroma_key": {
+    "name": "cyan",
+    "hex": "#00FFFF",
+    "rgb": [
+      0,
+      255,
+      255
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "idle": {
+      "frames": 4,
+      "fps": 6,
+      "loop": true,
+      "action": "Four distinct restrained GUARD idle poses facing LEFT. The helmet, amber eyes, visor, tooth, neck, shoulders, torso, hips, legs and both planted feet MUST have IDENTICAL rigid shape, proportions, perspective and height in all four frames; no head bob, shoulder lift, breathing, squashing, stretching or elastic stone. Keep shield and mace rigid too. Motion exists ONLY by small rotations at the elbow and wrist joints: pose1 original balanced neutral from the attached canonical idle anchor; pose2 mace forearm pivots up 3 degrees, shield remains neutral; pose3 mace forearm returns neutral and shield forearm pivots inward 2 degrees; pose4 both forearms return almost neutral for a smooth fourth-to-first seam. Keep head/shoulder silhouette exactly fixed to the reference; do not redraw a taller helmet in pose3. No stepping, no blinking, no gaze change, no weapons morphing, no attack. Keep exactly two plum shoulder mushrooms and original olive moss clusters, both amber eyes and block tooth. Every full figure with helmet knob, mushrooms, mace, shield and soles entirely inside its separated frame. Avoid new tiny cracks or texture."
+    }
+  },
+  "style": "Original hand-drawn quirky dark-fairytale cartoon matching the reference, thick uneven ink outer contour, two or three broad painted tones; violet-gray chunky stone, three olive moss groups and two plum mushrooms. No realistic texture, tiny cracks, PBR or pixel art.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": true,
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

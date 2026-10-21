@@ -1,0 +1,25 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleWalkProbe.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleWalkProbe.cpp
+@@ -127,6 +127,12 @@
+         R->SetBoolField(TEXT("melee_active"),A.Active);R->SetBoolField(TEXT("melee_pending"),P->GetMeleeCombatState().PendingPrimary);Id(R,TEXT("melee_attack_id"),A.AttackId);Id(R,TEXT("melee_weapon_id"),A.WeaponInstanceId);R->SetNumberField(TEXT("melee_stage"),A.Stage);R->SetNumberField(TEXT("melee_facing"),A.Facing);R->SetNumberField(TEXT("action_start"),A.Start);R->SetNumberField(TEXT("active_end"),A.ActiveEnd);R->SetNumberField(TEXT("action_end"),A.End);R->SetNumberField(TEXT("owner_pose_frame"),P->GetPrimaryPoseFrame());
+         R->SetBoolField(TEXT("held_A"),Controller->IsInputKeyDown(EKeys::A));R->SetBoolField(TEXT("held_D"),Controller->IsInputKeyDown(EKeys::D));R->SetBoolField(TEXT("interface_visible"),H->GetInterfaceVisible());R->SetNumberField(TEXT("text_calls"),H->GetRenderedTextDrawCalls());
+         TArray<TSharedPtr<FJsonValue>> Stack;for(const auto& Path:D.DrawStack)Stack.Add(MakeShared<FJsonValueString>(Path));R->SetArrayField(TEXT("draw_stack"),Stack);
++        TArray<TSharedPtr<FJsonValue>> Rendered,ArmorPaths;
++        for(const auto& Path:H->GetRenderedPlayerDrawStack())Rendered.Add(MakeShared<FJsonValueString>(Path));
++        for(const auto& Path:H->GetRenderedArmorLayerPaths())ArmorPaths.Add(MakeShared<FJsonValueString>(Path));
++        R->SetArrayField(TEXT("rendered_player_stack"),Rendered);R->SetArrayField(TEXT("rendered_armor_paths"),ArmorPaths);
++        R->SetBoolField(TEXT("rendered_armor_used"),H->GetRenderedArmorLayersUsed());
++        if(!Need(H->GetRenderedPlayerDrawStack()==D.DrawStack,TEXT("Actual rendered player stack differs from same-draw record")))return;
+         auto Q=MakeShared<FJsonObject>();Q->SetBoolField(TEXT("query_ok"),Motion);Q->SetBoolField(TEXT("published"),M.Published);Q->SetBoolField(TEXT("grounded"),M.Grounded);Q->SetBoolField(TEXT("ordinary_eligible"),M.OrdinaryEligible);Q->SetBoolField(TEXT("had_move_intent"),M.HadMoveIntent);
+         Q->SetNumberField(TEXT("from_time"),M.FromTime);Q->SetNumberField(TEXT("to_time"),M.ToTime);Q->SetNumberField(TEXT("accepted_distance"),M.AcceptedDistance);Q->SetNumberField(TEXT("walk_distance"),M.WalkDistance);Q->SetArrayField(TEXT("from"),XY(M.From));Q->SetArrayField(TEXT("to"),XY(M.To));Id(Q,TEXT("owner_id"),M.OwnerId);R->SetObjectField(TEXT("motion"),Q);
+         if(!Need(D.Active&&D.TextureReady&&D.EquipmentBindingValid&&!H->GetInterfaceVisible()&&H->GetRenderedTextDrawCalls()==0&&D.SimulationTime==G->GetSimulationTime(),TEXT("Native draw resources/binding/UI/clock failed")))return;
+@@ -138,7 +144,8 @@
+         {
+             if(!Need(Light&&D.WalkPose&&P->IsOrdinaryGroundWalkPose()&&Motion&&M.Grounded&&M.OrdinaryEligible&&M.HadMoveIntent&&M.WalkDistance>0.&&M.ToTime==G->GetSimulationTime()&&D.Frame>=0&&D.Frame<6&&D.Stage==-1&&!A.Active,TEXT("Walk not corroborated by completed native motion")))return;
+             const auto* F=Walk::Find(D.Frame);TArray<FString> Expected={F->BodyRest,F->ShoulderFar,F->Chest,F->NearArmWithoutHand,F->ShoulderNear,F->HelmetForeground,D.WeaponPath,F->NearHand};
+-            if(!Need(D.DrawStack==Expected&&D.TexturePath==F->Body,TEXT("Walk exact seven body/armor layers plus sword differ")))return;
++            if(!Need(D.DrawStack==Expected&&D.TexturePath==F->Body&&H->GetRenderedPlayerDrawStack()==Expected
++                &&H->GetRenderedArmorLayersUsed()&&H->GetRenderedArmorLayerPaths()==TArray<FString>{F->ShoulderFar,F->Chest,F->ShoulderNear},TEXT("Walk exact seven body/armor layers plus sword differ")))return;
+             const int32 Side=D.Facing<0?0:1;
+             if(Step==4||Step==9){Masks[Side]|=1<<D.Frame;Distances[Side]+=M.WalkDistance;}
+             if(Step==7||Step==12){++PostWalkSeen[Side];PostDistances[Side]+=M.WalkDistance;}

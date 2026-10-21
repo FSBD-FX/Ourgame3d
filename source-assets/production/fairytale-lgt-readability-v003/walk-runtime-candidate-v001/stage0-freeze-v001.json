@@ -1,0 +1,52 @@
+{
+  "schema": "fairytale-ground-walk-stage0-freeze-v001",
+  "baseline": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/baseline-pins-v001.json",
+    "bytes": 1804,
+    "sha256": "aa946937269a54c0a904a8dd7510116bfdbf106826a748f15ac622d5e47b654d"
+  },
+  "files": [
+    {
+      "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/stage0-source/DungeonCompletedGroundMotion.h",
+      "bytes": 525,
+      "sha256": "307f162b130aa26d1224ee765eb47d11d9da057fc8668f62548497b2d8a6018c"
+    },
+    {
+      "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/stage0-source/DungeonFighter.cpp",
+      "bytes": 109989,
+      "sha256": "06d9ccf29223967d13645c74cba3068a674c7a44e8c978435ce8080c1c692d8b"
+    },
+    {
+      "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/stage0-source/DungeonFighter.h",
+      "bytes": 11154,
+      "sha256": "f70457322b2e07de4f5244c474b4623f6096f67728fd0b47c80dcc08669cd256"
+    },
+    {
+      "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/stage0-source/DungeonGroundWalkPhase.h",
+      "bytes": 522,
+      "sha256": "69faa1b42c40787ac4dca1513b897ac28b0de77bb533457ce7dc68fb9d3409d2"
+    },
+    {
+      "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/new-tests/DungeonFairytaleGroundWalkTests.cpp",
+      "bytes": 10389,
+      "sha256": "5324b45a5c5a2a7ce20d4253f0845ab7f3418c1d97d0fecd98b6b22039dd7007"
+    },
+    {
+      "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/stage0-existing-source.patch",
+      "bytes": 1182,
+      "sha256": "2311814197b0682090092397dd4d6c150ede2f296abf4d74e7f541ae8356b257"
+    }
+  ],
+  "new_test_groups": [
+    "CodexDungeon.Content.FairytaleGroundWalk.CompletedNormalMovementAndDistancePhase",
+    "CodexDungeon.Content.FairytaleGroundWalk.RealWallBlockedAndClippedMovement",
+    "CodexDungeon.Content.FairytaleGroundWalk.ActionsTransactionsAndSavedContinuity"
+  ],
+  "expected_clean_RED_assertion_per_group": "Expected production completed-ground-motion witness after actual normal-input Tick",
+  "expected_RED_failures": 3,
+  "test_bytes_must_remain_unchanged_in_production": true,
+  "UE_UBT_compiled_or_run": false,
+  "actual_Source_mutated": false,
+  "art_profile_configured": false,
+  "formal_complete_units": 0
+}

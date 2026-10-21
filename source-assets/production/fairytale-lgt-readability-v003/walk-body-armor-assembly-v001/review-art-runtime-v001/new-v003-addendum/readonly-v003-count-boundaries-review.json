@@ -1,0 +1,107 @@
+{
+  "schema": "walk-native-proof-count-boundaries-v003-readonly-review-addendum-v001",
+  "created_local": "2026-10-18T09:10:03.180279+08:00",
+  "reviewed_freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-native-proof-candidate-v001/native-code-freeze-v003.json",
+    "bytes": 2726,
+    "sha256": "7de7b8f4018458a9e59760a90f12cc56e621769576e8d5af6759b43d6fd2004e"
+  },
+  "frozen_candidate_pins": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-native-proof-candidate-v001/candidate-source/DungeonFairytaleWalkProbe.h",
+      "bytes": 833,
+      "sha256": "468216d15d3edefe00dc3377fc55ba331e0a681d458f1b92c7f1b1e94db8bfff"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-native-proof-candidate-v001/count-boundaries-v003/DungeonFairytaleWalkProbe.cpp",
+      "bytes": 25662,
+      "sha256": "191eaa900bc94316cb6fafb2700c16bbc0f08c7c17d97326e8a77e2dc41c28b0"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-native-proof-candidate-v001/patches/hud-walk-probe-startup-v001.patch",
+      "bytes": 1501,
+      "sha256": "516018ce026a3e66c36960959a4c72d8742af28d6a203990f192f5c27e875f75"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-native-proof-candidate-v001/count-boundaries-v003/count-boundaries-v003.patch",
+      "bytes": 5346,
+      "sha256": "6fa9e4c001e1eab757ef1232838ec9531c623ef5953bb9e70ca8296b9ebee260"
+    }
+  ],
+  "frozen_candidate_mismatch_count": 0,
+  "independent_verifier_inspected": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-native-proof-candidate-v001/tooling/verify-walk-native-proof-v001.py",
+    "bytes": 15263,
+    "sha256": "fe92632303094c8b58c7f42c12fbca1cc2498e46500f59d1f7f64b6d175646f6"
+  },
+  "closed_findings": [
+    {
+      "previous": "WALK-P1-phase-counter-ownership",
+      "new_evidence_lines": [
+        85,
+        86,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        172,
+        173
+      ],
+      "closure": "Each main/post phase has its own reset and simulation window; ExpectedSide comes from Step, not metadata Facing; requires expected native facing, actual held A XOR D, fresh FromTime window, and signed X motion with Y fixed. No earlier-phase credit can satisfy later phase counters."
+    },
+    {
+      "previous": "WALK-P2-duplicate-motion-witness",
+      "new_evidence_lines": [
+        120,
+        121,
+        160,
+        161
+      ],
+      "closure": "Strict increasing native DrawId rejects duplicate render boundary before evidence counters. Strict increasing completed Walk ToTime rejects same pure-query motion witness. Captures are not resampled/merged or substituted; failure does not declare counts passed."
+    },
+    {
+      "previous": "WALK-N1-owner-clock-frame-crosscheck",
+      "new_evidence_lines": [
+        155,
+        156,
+        157,
+        158,
+        159
+      ],
+      "closure": "Expected frame independently derived from authoritative P.AnimationTime and immutable Gait; D.Frame, WalkPhase and CycleDistance must match."
+    },
+    {
+      "previous": "WALK-N2-enter-scope",
+      "new_evidence": "Independent verifier normal_input_requests exact order includes Enter,E,A,J,J,J,A,D,J,J,J,D with paired release edges.",
+      "closure": "Candidate alone may skip Enter in already-started fixture, but independent acceptance fails that scope; no admission blocker remains when mandatory independent verifier is used."
+    }
+  ],
+  "retained_contracts": [
+    "Actual InputKey route only; no direct actor/animation frame/clock forcing or manual Game Tick.",
+    "Real public LGT source registration and native E transaction; fixed actual LightId/version, activeSwordID, run/owner/restart and exactly one operation commit.",
+    "Both actual facing/main cycles require all6 Walk frames and compiledCycleDistance; after each actual3-stage J chain, fresh native ordinary-motion Walk must satisfy separate side/window post distance count.",
+    "Walk exact source7body/armor+Sword ordered8 rendered paths and actual3 armor paths match same-draw HUD lists.",
+    "Missing/unconfigured compiled source profile remains fail-closed before capture/flow."
+  ],
+  "independent_verifier_boundaries": [
+    "Strict draw/wall ordering, native motion owner/time/position correspondence and unique ToTime.",
+    "Walk frame derived from profile phase; accepted distance independently advances phase (bounded native float substeps).",
+    "Phase-owned expected side, held keys, X direction/Y/window and separately derived main/post counts.",
+    "Actual six unique melee AttackIds, each six frame mask, contiguous native stage End→Start and real release Idle/postWalk.",
+    "Same actual LGT/SWD plus one operation commit; exact frozen candidate code/compiled snapshot and native CRC/FIFO/stop-flush verifier."
+  ],
+  "new_blocking_findings": [],
+  "recommendation": "No remaining static blocker in the reviewed v003 count boundaries. Root may continue admission preparation for exact-source compile and real native run; this is NOT compile/runtime/art/weapon-grasp/foot-lock acceptance.",
+  "scope_limits": {
+    "UE_started": false,
+    "UBT_executed": false,
+    "import_executed": false,
+    "tests_executed": false,
+    "runtime_counts_generated_or_observed": null,
+    "existing_art_images_re_reviewed": false,
+    "actual_Source_candidate_or_tools_modified": false
+  },
+  "writes_only": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-body-armor-assembly-v001/review-art-runtime-v001/new-v003-addendum"
+}

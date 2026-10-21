@@ -1,0 +1,32 @@
+{
+  "schema": "fairytale-ground-walk-configured-label-test-v002",
+  "candidate": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/review-20261018-v001/configured-label-test-v002/DungeonFairytaleGroundWalkConfiguredTests.cpp",
+    "bytes": 8352,
+    "sha256": "37296072e3c81ef734cb0a87b17f7b62433b03e8864afe23163bb2d8c61c195a"
+  },
+  "v001_preserved": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/review-20261018-v001/configured-label-test-v001/DungeonFairytaleGroundWalkConfiguredTests.cpp",
+    "bytes": 7961,
+    "sha256": "3b81f66929ca7d606f71ebce771ab831b76865a7a0640e3126471b0dfb3e96c8"
+  },
+  "patch": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/review-20261018-v001/configured-label-test-v002/configured-label-test-v002.patch",
+    "bytes": 1889,
+    "sha256": "0fadf5e2040b6bd28d462fe7f228859fdbb2fb90b247b064bb0376c11e7979d2"
+  },
+  "test_group": "CodexDungeon.Content.FairytaleGroundWalk.Configured.LabelSaveAndOptOutContinuity",
+  "run_mode": "Default full registry, NO global -DungeonFairytaleSwordWalkPreview required. Admit only v002 TU, not duplicate v001 TU.",
+  "actual_command_line_scope": "After actual Profile prerequisite passes, RAII saves original command line and adds real Walk flag before Source world/HUD construction. Removes flag before new Target world/HUD construction. RAII restores exact original on every exit.",
+  "other_test_logic_identical_to_v001": true,
+  "profile_mutated_or_mocked": false,
+  "pending_profile_behavior": "Still explicit failing prerequisite assertion before command-line change.",
+  "original_three_tests_unchanged": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/new-tests/DungeonFairytaleGroundWalkTests.cpp",
+    "bytes": 10389,
+    "sha256": "5324b45a5c5a2a7ce20d4253f0845ab7f3418c1d97d0fecd98b6b22039dd7007"
+  },
+  "UE_UBT_native_tests_run": false,
+  "actual_source_mutated": false,
+  "status": "NEW_UNCOMPILED_CANDIDATE_ROOT_ADMISSION_REQUIRED"
+}

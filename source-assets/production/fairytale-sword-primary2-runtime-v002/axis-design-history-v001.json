@@ -1,0 +1,139 @@
+{
+  "schema": "native171-independent-sword-axis-design-history-v1",
+  "created_local": "2026-10-16T16:50:17.288800+08:00",
+  "source_body_unchanged": true,
+  "original_candidate_freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary2-runtime-v002/ready-for-root-import-freeze-v002.json",
+    "bytes": 3542,
+    "sha256": "2ee7363d17bc07f7419e495dbc52fe6bd0705c72dd7d9dbeacaa9f72e3889a75"
+  },
+  "original_candidate_manifest": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary2-runtime-v002/manifests/import-sword-primary2-v002.json",
+    "bytes": 12083,
+    "sha256": "4ceacd847914e8c112f7a5cef36779daad14c5cdc86d2c6b054c9e00023e362d"
+  },
+  "original_marker": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary2-runtime-v002/data/primary2-marker-candidate-v002.json",
+    "bytes": 21788,
+    "sha256": "0b14858bff16be273655c17c2d21b769c4ab90e62687b727f4f2314ad9cffcd0"
+  },
+  "native_or_frozen_input_contracts_modified": false,
+  "design_revisions": [
+    {
+      "revision": 1,
+      "status": "Initial Root explicit design, locally frozen before correction arrived; preserved, not imported/current",
+      "axes": [
+        [
+          0.94,
+          -0.341
+        ],
+        [
+          0.35,
+          0.937
+        ],
+        [
+          0.8,
+          0.6
+        ],
+        [
+          0.9,
+          -0.436
+        ],
+        [
+          0.95,
+          -0.312
+        ],
+        [
+          0.94,
+          -0.341
+        ]
+      ],
+      "reason": "Original low-palm171 rising-fit design",
+      "phase1_estimate": {
+        "axis_design": [
+          0.35,
+          0.937
+        ],
+        "angle_degrees": 69.51770311022986,
+        "estimated_tip_source_px": [
+          234.00928816392238,
+          512.3934371702723
+        ],
+        "tip_minus_display_root_y_source_px": 48.39343717027225,
+        "tip_minus_display_root_y_planned_screen_px": 8.37578720254712
+      }
+    },
+    {
+      "revision": 2,
+      "status": "Root approved final candidate design, still untested",
+      "axes": [
+        [
+          0.94,
+          -0.341
+        ],
+        [
+          0.85,
+          0.526
+        ],
+        [
+          0.8,
+          0.6
+        ],
+        [
+          0.9,
+          -0.436
+        ],
+        [
+          0.95,
+          -0.312
+        ],
+        [
+          0.94,
+          -0.341
+        ]
+      ],
+      "reason": "Palm1 actual visible candidate167,333; original near-vertical downward design estimated tip below display sole. Root replaced axis1 with shallower forward/down31.8deg; all other axes unchanged.",
+      "phase1_estimate": {
+        "axis_design": [
+          0.85,
+          0.526
+        ],
+        "angle_degrees": 31.75019690610059,
+        "estimated_tip_source_px": [
+          329.8421047735989,
+          433.77052601283884
+        ],
+        "tip_minus_display_root_y_source_px": -30.229473987161157,
+        "tip_minus_display_root_y_planned_screen_px": -5.232024343931739
+      }
+    }
+  ],
+  "estimate_basis": {
+    "actual_visible_palm_candidate": [
+      167,
+      333
+    ],
+    "palm_uncertainty_px": 3,
+    "sword_source_grip": [
+      99,
+      256
+    ],
+    "front_blade_length_source_px_approx": 383,
+    "independent_sword_scale": 0.5,
+    "display_root": [
+      256,
+      464
+    ],
+    "source_to_screen_planned": 0.17307692307692307,
+    "method": "Use atan2 design orientation and prior approximate front blade length, not a new source-tip measurement or observed render. Axis values are preserved, not normalized in data.",
+    "existing_native_body_or_input_contracts_changed": false
+  },
+  "remaining_design_risks": [
+    "New p1 tip estimate around330,434 avoids former floor crossing in this approximation but may overlap legs/boots; actual runtime must judge.",
+    "Axis3(.9,-.436) is a shallower forward/up design intended to avoid helmet lower rim; no measured tip/head clearance asserted.",
+    "Actual hand grasp, thumb, full blade silhouette, motion and P1 boundary fit remain unaccepted."
+  ],
+  "unreal_called": false,
+  "source_pixels_modified": false,
+  "motion_accepted": false
+}

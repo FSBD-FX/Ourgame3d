@@ -1,0 +1,108 @@
+{
+  "schema": "equipment-binding-fixture-correction-v001",
+  "actual_previous_run": {
+    "report": "F:/Ourgame/UnrealGame/Saved/Automation/FirstRoom-20261016-190734/index.json",
+    "tests": [
+      {
+        "fullTestPath": "CodexDungeon.Content.FairytaleEquipmentBinding.CommittedNoArmorLightCancelReplaceAndRetake",
+        "state": "Fail",
+        "errors": 5,
+        "warnings": 0,
+        "error_messages": [
+          "Expected 'Initial actual no-armor SWD actual binding is implemented' to be true.",
+          "Expected 'Pending target does not dress the player before commit actual binding is implemented' to be true.",
+          "Expected 'Canceled target cannot become armor actual binding is implemented' to be true.",
+          "Expected 'Only actual committed LGT authorizes light layers actual binding is implemented' to be true.",
+          "Expected 'Normal replacement with a different armor begins without early appearance change' to be true."
+        ]
+      },
+      {
+        "fullTestPath": "CodexDungeon.Content.FairytaleEquipmentBinding.InstalledAwaitExplicitContinueRetainsCommittedSkin",
+        "state": "Fail",
+        "errors": 3,
+        "warnings": 0,
+        "error_messages": [
+          "Expected 'Already-published paused light armor remains drawable without opening Continue actual binding is implemented' to be true.",
+          "Expected 'Paused redraw does not need BeginRun, reset or new equipment IDs actual binding is implemented' to be true.",
+          "Expected 'Normal explicit Continue preserves the same committed identities actual binding is implemented' to be true."
+        ]
+      },
+      {
+        "fullTestPath": "CodexDungeon.Content.FairytaleEquipmentBinding.RealGradedCursedOwnershipAndAtomicBadReadbacks",
+        "state": "Fail",
+        "errors": 2,
+        "warnings": 0,
+        "error_messages": [
+          "Expected 'Legal grade and negative affix still use their actual base skins actual binding is implemented' to be true.",
+          "Expected 'Pure seam must first accept complete values really acquired and attacking in native owners' to be true."
+        ]
+      }
+    ],
+    "success": 0,
+    "fail": 3,
+    "errors": 10,
+    "warnings": 0,
+    "stub_errors": 9,
+    "unrelated_fixture_errors": 1,
+    "old_run_is_not_clean_semantic_RED": true
+  },
+  "source_reason": {
+    "inventory": "DungeonEquipmentInventory.h173: default Slot==-1 and Kind Armor with existing S.Armor returns SelectionRequired",
+    "native_GM": "DungeonGameMode.cpp950-954: TryInteractEquipment sets NeedsSlotSelection, SelectionSlot2 and returns false; ConfirmEquipmentSlot962-964 calls unchanged StartEquipmentPickup",
+    "test_helper": "Stage0 test43-46: NeedsSlotSelection with default Slot -1 returns false before ConfirmEquipmentSlot",
+    "actual_premise": "Previous completed-light assertion and four binding positives were reached before MED fixture failed; committed Armor is A.InstanceId",
+    "deduction": "MED replacement requires explicit Slot2. The later dropped-LGT retake while MED still equipped has the same requirement. Both must call existing public explicit-confirm route, not add neutral time or clear state."
+  },
+  "changes": {
+    "test_call_sites": 2,
+    "delta": "append ,2 to MED replacement and old LGT retake StartActualPickup calls",
+    "helper_changed": false,
+    "assertions_changed": false,
+    "production_stub_changed": false,
+    "native_state_written_directly": false,
+    "timing_changed": false,
+    "registration_names_or_count_changed": false
+  },
+  "candidate_test_bytes": 19798,
+  "candidate_test_sha256": "174593b8f156cf0e78c7b031c375d5a7234875cf2a6b92ba020cb78f61fa8877",
+  "inputs": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-equipment-binding-v001/candidate-source/Tests/DungeonFairytaleSwordEquipmentBindingTests.cpp",
+      "bytes": 19794,
+      "sha256": "00ee8da24589d6ba121d85136290711eb59914167ed473a93dec93aea68e5cfa"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonEquipmentInventory.h",
+      "bytes": 21413,
+      "sha256": "235284ad0fc7ff955a8814def82b9468f42df514564c97d96e48f3366e55b147"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "bytes": 141426,
+      "sha256": "a6e69f0b03d4ea343748e31d610a8912e2efd9d92b4c15708dddb7ddb59751a1"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Saved/Automation/FirstRoom-20261016-190734/index.json",
+      "bytes": 10063,
+      "sha256": "6c83cde749766ee7a2dd8f8381228c14d4633d6fb8e72a3daa4917fdeb8f531c"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-equipment-binding-v001/stage0-freeze-v001.json",
+      "bytes": 1907,
+      "sha256": "11176294207c76c2a42c561ed7d12488211e8c1dc0ebec01f452adacffcad45f"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-equipment-binding-v001/candidate-source/DungeonFairytaleSwordEquipmentBinding.h",
+      "bytes": 1833,
+      "sha256": "c7d93683646d31917be7a2710fd404cd788c3a8974ac77026b021fa74d29b116"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-equipment-binding-v001/candidate-source/DungeonFairytaleSwordEquipmentBinding.cpp",
+      "bytes": 618,
+      "sha256": "c3811e611520638083f60e3391cc220549e01b8ab038eb6a38fbcccd712ba651"
+    }
+  ],
+  "actual_retest": null,
+  "CXX_compile_run_by_this_agent": false,
+  "UE_or_UBT_run_by_this_agent": false
+}

@@ -1,0 +1,94 @@
+{
+  "schema": "walk-normal-startup-restart-oracle-diagnosis-v2",
+  "created_utc": "2026-10-18T01:17:01.420522+00:00",
+  "facts": {
+    "actual_report": {
+      "path": "过程图稿与视频/2026-10-18_棕皮军剑双向行走与三连斩实录_v001/原件/runtime-report.json",
+      "bytes": 1001182,
+      "sha256": "d3723e0889fd1308a04031e0171b56716188494696e728b117a79d8e6b6482ba"
+    },
+    "native_pid": "53212",
+    "native_reported_passed": true,
+    "flow_complete": true,
+    "restart_serial": "1",
+    "observations": 196,
+    "input_down_order": [
+      "Enter",
+      "E",
+      "A",
+      "J",
+      "J",
+      "J",
+      "A",
+      "D",
+      "J",
+      "J",
+      "J",
+      "D"
+    ],
+    "unique_Run_guids": 1,
+    "unique_owner_ids": 1,
+    "unique_sword_ids": 1,
+    "initial_failed_verifier_log": {
+      "path": "过程图稿与视频/2026-10-18_棕皮军剑双向行走与三连斩实录_v001/independent-verification-output.txt",
+      "bytes": 1408,
+      "sha256": "7aaefba18eee926af703cebe532e4646866bef01c8cc0ab1921e03c391e7f6df"
+    },
+    "failed_capture_index_preserved": {
+      "path": "过程图稿与视频/2026-10-18_棕皮军剑双向行走与三连斩实录_v001/index.json",
+      "bytes": 2296,
+      "sha256": "c262c17b3807438a94ad5d612e5d36919150c9aaae96b57c290159c45e6b1ab4"
+    },
+    "actual_GameMode_cpp": {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "bytes": 146692,
+      "sha256": "de4baa5c19eb886b167c71861e47bda55a4cc370c3cbdb25fea24a676bdc26fd"
+    },
+    "actual_GameMode_h": {
+      "path": "UnrealGame/Source/CodexDungeon/DungeonGameMode.h",
+      "bytes": 12551,
+      "sha256": "c8fefc2af65829812b94d3b283979144b600710cb1fbd043875b5229c8968b2a"
+    }
+  },
+  "source_chain": [
+    {
+      "file": "DungeonGameMode.h",
+      "line": 146,
+      "fact": "RunRestartSerial starts at0"
+    },
+    {
+      "file": "DungeonGameMode.cpp",
+      "line": 1168,
+      "fact": "Non-pristine StartPlay calls RestartRun once"
+    },
+    {
+      "file": "DungeonGameMode.cpp",
+      "line": 2061,
+      "fact": "Scene preview RestartRun branch2061 invokes SetupSceneExplorationPreviewRun at2068 and returns before generic increment"
+    },
+    {
+      "file": "DungeonGameMode.cpp",
+      "line": 654,
+      "fact": "Scene setup calls BeginEquipmentRun"
+    },
+    {
+      "file": "DungeonGameMode.cpp",
+      "line": 508,
+      "fact": "BeginEquipmentRun increments serial exactly once,0to1"
+    },
+    {
+      "file": "DungeonGameMode.cpp",
+      "line": 1861,
+      "fact": "Enter releases waiting flag without rebuilding a Run"
+    },
+    {
+      "file": "DungeonFairytaleWalkProbe.cpp",
+      "line": 203,
+      "fact": "Probe202 captures startup serial then203 requires it unchanged together with Run/owner/sword every tick"
+    }
+  ],
+  "inference": "Normal ScenePreview Walk proof legally begins already bound at serial1. The prior checker imported pristine Guard origin0 incorrectly. Correct exact oracle is1, not allow0or1. Input has noR and native Probe pins initial serial/identities throughout.",
+  "risk": "This repairs one independent verifier assertion; it does not establish remaining native checks, pixel equality, visual acceptance or wall-stop footage. Root must recheck the same untouched originals and preserve first verifier failure.",
+  "mutation_scope": "Only copied checker restart comparison numeric0to1. All other scope/motion/gear/frame/CRC assertions identical; no Source/report/PNG/media changes.",
+  "full_native_recheck_run_by_this_agent": false
+}

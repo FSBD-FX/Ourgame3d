@@ -1,0 +1,112 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp
+@@ -41,9 +41,15 @@
+ UTexture2D* ADungeonHUD::GetFairytaleSwordArmorPrimary1Texture(const FString& Component,int32 Frame)
+ {
+     if(Frame<0 || Frame>=6)return nullptr;
+-    const FString Name=FString::Printf(TEXT("T_Fairytale_SwordPrimary1%s_%03d_v001"),*Component,Frame);
++    const bool LeatherPrimary1=bUseFairytaleSwordEquipmentBoundPreview
++        &&FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleLeatherPrimary1Preview"))
++        &&(Component==TEXT("Chest")||Component==TEXT("ShoulderFar")||Component==TEXT("ShoulderNear"));
++    const FString Name=LeatherPrimary1
++        ?FString::Printf(TEXT("T_Fairytale_LeatherPrimary1%s_%03d_v001"),*Component,Frame)
++        :FString::Printf(TEXT("T_Fairytale_SwordPrimary1%s_%03d_v001"),*Component,Frame);
+     if(const auto Found=Frames.Find(Name))return Found->Get();
+-    const FString Package=TEXT("/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/")+Name;
++    const FString Package=FString(LeatherPrimary1?TEXT("/Game/Production/ArtTrials/EV048/v013/HeroLeatherPrimary1/")
++        :TEXT("/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/"))+Name;
+     UTexture2D* Texture=FPackageName::DoesPackageExist(Package)
+         ?LoadObject<UTexture2D>(nullptr,*(Package+TEXT(".")+Name)):nullptr;
+     Frames.Add(Name,Texture);
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.h
+@@ -24,6 +24,9 @@
+     bool Prewarm=false,Started=false,Stopped=false,FlowComplete=false;
+     bool LeatherReadyOnly=false,LeatherTurnRequested=false;
+     int32 LeatherReadyMasks[2]={};
++    bool LeatherPrimary1Only=false,LeatherPrimaryTurnRequested=false;
++    int32 LeatherPrimary1Masks[2]={};
++    uint64 LeatherPrimary1AttackIds[2]={};
+     FKey PulseKey;TMap<FKey,bool> Keys;
+     TArray<TSharedPtr<FJsonValue>> Observations,Offsets,Inputs,PhaseChecks,Mismatches;
+     TSet<FString> MismatchKeys;
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.cpp
+@@ -61,6 +61,11 @@
+ {
+     Super::BeginPlay();GIsDumpingMovie=0;WarmStart=FPlatformTime::Seconds();
+     LeatherReadyOnly=FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleLeatherReadyOnlyProof"));
++    LeatherPrimary1Only=FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleLeatherPrimary1OnlyProof"));
++    if(LeatherPrimary1Only&&(LeatherReadyOnly
++        ||!FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleLeatherReadyPreview"))
++        ||!FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleLeatherPrimary1Preview"))))
++    {Finish(TEXT("primary1_trial_requires_both_art_flags_and_excludes_ready_only"));return;}
+     if(LeatherReadyOnly&&!FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleLeatherReadyPreview")))
+     {Finish(TEXT("leather_ready_only_requires_explicit_leather_art_flag"));return;}
+     if(!FParse::Value(FCommandLine::Get(),TEXT("DungeonContentProofDir="),Directory)||Directory.IsEmpty())
+@@ -189,6 +194,17 @@
+         for(const auto& Path:D.DrawStack)if(Path.Contains(TEXT("/EV048/v012/HeroLeatherReady/")))++NewArmorPaths;
+         if(NewArmorPaths!=3)Mismatch(TEXT("leather_ready_requires_three_actual_new_armor_layers"),Observation);
+     }
++    if(LeatherPrimary1Only&&Step==6&&Light&&D.Supported&&D.Clip==TEXT("sword_primary_1")
++        &&D.Stage==0&&D.Frame>=0&&D.Frame<6)
++    {
++        const int32 Side=D.Facing<0?0:1;
++        LeatherPrimary1Masks[Side]|=1<<D.Frame;
++        if(!LeatherPrimary1AttackIds[Side])LeatherPrimary1AttackIds[Side]=D.ActionId;
++        else if(LeatherPrimary1AttackIds[Side]!=D.ActionId)Mismatch(TEXT("primary1_facing_reuses_multiple_attacks"),Observation);
++        int32 NewArmorPaths=0;
++        for(const auto& Path:D.DrawStack)if(Path.Contains(TEXT("/EV048/v013/HeroLeatherPrimary1/")))++NewArmorPaths;
++        if(NewArmorPaths!=3)Mismatch(TEXT("primary1_requires_three_actual_new_armor_layers"),Observation);
++    }
+     Observations.Add(MakeShared<FJsonValueObject>(R));
+ }
+ void ADungeonFairytaleEquipmentBoundProbe::Tick(float Dt)
+@@ -271,6 +287,29 @@
+     case 6:
+     {
+         const auto& Action=P->GetMeleeCombatState().Action;
++        if(LeatherPrimary1Only)
++        {
++            if(Action.Active)
++            {
++                if(Action.WeaponInstanceId!=SwordId||Action.Stage!=0)
++                {Finish(TEXT("primary1_trial_must_remain_fresh_stage0"));return;}
++            }
++            else if(LeatherPrimary1Masks[0]==63&&LeatherPrimary1Masks[1]==63&&ReadySeen[6]>=3)
++            {
++                if(!LeatherPrimary1AttackIds[0]||!LeatherPrimary1AttackIds[1]
++                    ||LeatherPrimary1AttackIds[0]==LeatherPrimary1AttackIds[1])
++                {Finish(TEXT("primary1_trial_requires_two_distinct_actual_attack_ids"));return;}
++                FlowComplete=true;Next(13);Finish();
++            }
++            // Existing kernel expires its .45s chain; never reset or forge it.
++            else if(G->GetSimulationTime()>=Action.End+.46&&ReadySeen[6]>=3&&CanPulse())
++            {
++                if(!LeatherPrimaryTurnRequested)
++                {Pulse(P->Facing<0?EKeys::D:EKeys::A);LeatherPrimaryTurnRequested=true;}
++                else Pulse(EKeys::J);
++            }
++            break;
++        }
+         if(Action.Active)
+         {
+             if(Action.WeaponInstanceId!=SwordId||Action.Stage>=3){Finish(TEXT("normal_J_action_owner_or_stage_wrong"));return;}
+@@ -336,10 +375,17 @@
+     Report->SetBoolField(TEXT("native_async_capture_writes_flushed"),Flushed);Report->SetNumberField(TEXT("formal_complete_units"),0);
+     Report->SetStringField(TEXT("scope"),TEXT("Process-only QA registered-source real Enter/E/A/J/Enter flow: committed no armor, movement-canceled light, genuine light commit, one-facing current three-stage sword, explicit Slot2 medium replacement and original-light drop/retake. Expectations use actual inventory/receipts and existing draw fields, compatible with pre-consumer DrawState. RED mismatches are preserved without stopping flow. Not lawful loot/shop, audio, complete equip animation/grasp/fullmotion, full unit or full Profile acceptance"));
+     Report->SetBoolField(TEXT("leather_ready_only_trial"),LeatherReadyOnly);
++    Report->SetBoolField(TEXT("leather_primary1_only_trial"),LeatherPrimary1Only);
++    TArray<TSharedPtr<FJsonValue>> Primary1Masks,Primary1Ids;
++    for(int32 Mask:LeatherPrimary1Masks)Primary1Masks.Add(MakeShared<FJsonValueNumber>(Mask));
++    for(uint64 Id:LeatherPrimary1AttackIds)Primary1Ids.Add(MakeShared<FJsonValueString>(FString::Printf(TEXT("%llu"),(unsigned long long)Id)));
++    Report->SetArrayField(TEXT("leather_primary1_masks_left_right"),Primary1Masks);
++    Report->SetArrayField(TEXT("leather_primary1_attack_ids_left_right"),Primary1Ids);
+     TArray<TSharedPtr<FJsonValue>> LeatherMasks;
+     for(int32 Mask:LeatherReadyMasks)LeatherMasks.Add(MakeShared<FJsonValueNumber>(Mask));
+     Report->SetArrayField(TEXT("leather_ready_phase_masks_left_right"),LeatherMasks);
+     if(LeatherReadyOnly)Report->SetStringField(TEXT("scope"),TEXT("Opt-in leather Ready4 fit trial only: genuine normal Enter/E/A cancel and E light-armor commit from QA registered source, then normal direction input and all4idle phases both facings; same actual committed light instance. New3armor layers only. No attack, full equip/walk/hurt/death, loot/shop/reward/save or audio acceptance. Default complete bound proof remains separate."));
++    if(LeatherPrimary1Only)Report->SetStringField(TEXT("scope"),TEXT("Opt-in new leather Primary1 trial only: same real light commit and weapon instance, two fresh normal J attacks with existing .45s combo expiry and normal direction input; six phases each facing, then actual Ready. No forced pose/frame/clock/gear, no Primary2/3 acceptance, no full locomotion/equip/hurt/death/audio/Save or full unit acceptance."));
+     Report->SetArrayField(TEXT("observations"),Observations);Report->SetArrayField(TEXT("normal_input_requests"),Inputs);Report->SetArrayField(TEXT("inputevents"),Inputs);
+     Report->SetArrayField(TEXT("phasechecks"),PhaseChecks);Report->SetArrayField(TEXT("mismatches"),Mismatches);
+     Report->SetNumberField(TEXT("duration_s"),Started?CaptureStop-CaptureStart:0.);

@@ -1,0 +1,11 @@
+--- a/tooling/verify-walk-native-proof-v001.py
++++ b/tooling-v002/verify-walk-native-proof-v001.py
+@@ -64,7 +64,7 @@
+     r=read(original/"runtime-report.json")
+     need(r["schema"]=="fairytale-walk-native-input-flow-v1" and r["passed"] and r["flow_complete"] and r["failure"]=="","Native Walk failed")
+     need(r["compiled_walk_profile"]==profile,"Native compiled profile differs from independent measured expected profile")
+-    need(uint(r["restart_serial"])==0 and r["game_tick_called_manually"] is False and r["wall_stop_visually_recorded"] is False and r["art_accepted"] is False and r["formal_complete_units"]==0,"Scope/restart claim differs")
++    need(uint(r["restart_serial"])==1 and r["game_tick_called_manually"] is False and r["wall_stop_visually_recorded"] is False and r["art_accepted"] is False and r["formal_complete_units"]==0,"Scope/restart claim differs")
+     spec=importlib.util.spec_from_file_location("legacy_combo_geometry",ROOT/"tools/scripts/postprocess-leather-combo-trial-v001.py")
+     legacy=importlib.util.module_from_spec(spec);spec.loader.exec_module(legacy)
+     sword=str(uint(r["sword_id"]));light=str(uint(r["light_id"]));version=str(uint(r["light_version"]))

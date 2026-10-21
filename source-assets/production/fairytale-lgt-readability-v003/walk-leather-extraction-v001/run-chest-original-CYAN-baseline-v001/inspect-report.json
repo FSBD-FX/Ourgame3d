@@ -1,0 +1,54 @@
+{
+  "ok": false,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\walk-leather-extraction-v001\\run-chest-original-CYAN-baseline-v001",
+  "states": [
+    "leather_chest_sword_walk"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "leather_chest_sword_walk",
+      "source": "raw-projection",
+      "expected_frames": 6,
+      "found_frames": 1,
+      "natural_pose_count": 1,
+      "frame_files": [],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.9839506172839507,
+          "mean": 0.990567901234568
+        },
+        "dhash_similarity": {
+          "min": 1.0,
+          "mean": 1.0
+        },
+        "motion_presence": 6.69711243872549e-05,
+        "centroid_sigma": {
+          "x": 0.0,
+          "y": 0.0
+        }
+      },
+      "ok": false,
+      "errors": [
+        "leather_chest_sword_walk: expected 6 frame(s), inspect found 1",
+        "leather_chest_sword_walk: could not extract 6 sprite components"
+      ],
+      "warnings": [
+        "leather_chest_sword_walk: motion presence is too low (0.0001 < 0.0100)"
+      ]
+    }
+  ],
+  "errors": [
+    "leather_chest_sword_walk: expected 6 frame(s), inspect found 1",
+    "leather_chest_sword_walk: could not extract 6 sprite components"
+  ],
+  "warnings": [
+    "leather_chest_sword_walk: motion presence is too low (0.0001 < 0.0100)"
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "schema": "near183-lining-selective-edit-input-draft-v003",
+  "created_utc": "2026-10-16T15:51:45.685174+00:00",
+  "source_event": "EV-048",
+  "rows": [
+    {
+      "component": "NearShoulder",
+      "runtime_component": "ShoulderNear",
+      "state": "leather_nearshoulder_sword_ready",
+      "run_dir": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v003/run-nearshoulder-lining-ready-v003",
+      "raw_output_path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v003/run-nearshoulder-lining-ready-v003/raw/leather_nearshoulder_sword_ready.png",
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v003/run-nearshoulder-lining-ready-v003/prompts/leather_nearshoulder_sword_ready.txt",
+        "bytes": 1370,
+        "sha256": "b8a8672b2b5ff86a21290d9b759ae0d43433398a415a52d1bdd1c8efcd7a7281"
+      },
+      "request": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v003/run-nearshoulder-lining-ready-v003/sprite-request.json",
+        "bytes": 1616,
+        "sha256": "92eac90582015a155e49efdb3b9beeb15ffceac215d14bab6a933f14d5a7ff69"
+      },
+      "reference_images_in_order": [
+        {
+          "role": "single_exact_native183_edit_target_only",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v003/run-nearshoulder-lining-ready-v003/base-source.png",
+            "bytes": 1272679,
+            "sha256": "a3c9a4ea3b5d4be00fc489807c0c61d086081b7d757e219894e3b30c319c9d27"
+          }
+        }
+      ],
+      "reference_count": 1,
+      "transparent_background": false,
+      "background_hex": "#00FF00",
+      "frame_count": 4,
+      "durations_ms": [
+        167,
+        167,
+        167,
+        167
+      ],
+      "fit_window_design_px": [
+        60,
+        44
+      ],
+      "shared_row_scale": true,
+      "per_frame_scale_normalization": false,
+      "future_component_A": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "native_request_number": 186,
+      "planned_native_number_if_next": 186,
+      "generation_ready": true,
+      "failed_raw_native_number": 183,
+      "failed_target": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v002/run-nearshoulder-ready-v002/raw/leather_nearshoulder_sword_ready.png",
+        "bytes": 1272679,
+        "sha256": "a3c9a4ea3b5d4be00fc489807c0c61d086081b7d757e219894e3b30c319c9d27"
+      },
+      "target_mode": "RGB",
+      "target_canvas_px": [
+        2171,
+        724
+      ],
+      "standard_prepare_exit_code": 0,
+      "standard_prepare_command": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\prepare_sprite_run.py",
+        "--out-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\row-correction-v003\\run-nearshoulder-lining-ready-v003",
+        "--character-id",
+        "fairytale-lgt-near-lining-edit-v003",
+        "--base-image",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\row-correction-v002\\run-nearshoulder-ready-v002\\raw\\leather_nearshoulder_sword_ready.png",
+        "--description",
+        "Selective edit of the four existing Near183 shoulder caps: remove only grey/charcoal under-cap lining and the low hanging oval ring; preserve the brown leather cap and ink outline.",
+        "--style",
+        "Preserve this exact target's warm brown soft-leather cap, coarse dark ink outline and existing four perspectives.",
+        "--cell-size",
+        "512",
+        "--chroma-key",
+        "#00FF00",
+        "--request",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\row-correction-v003\\requests\\near-lining-numeric-input-v003.json"
+      ],
+      "target_mounts_are_measured": false
+    }
+  ],
+  "generation_ready": true,
+  "root_review_required_before_generation": true,
+  "planned_186_is_not_a_ledger_reservation": true,
+  "source_root_review_report": "Native183 was retained in E261 and viewed by Root. Isolated caps are present but grey-charcoal under-cap lining/low oval ring remains unaccepted. This producer did not view it.",
+  "layout_guide_not_attached_to_editor": true,
+  "base_source_role_override": "Exact multi-view selective-edit target, not a newly accepted canonical base or mother-body lock.",
+  "producer_viewed_or_screenshot": false,
+  "generation_called": false,
+  "ue_or_import_called": false,
+  "semantic_mask_fit_A_or_motion_accepted": false,
+  "formal_complete_units": 0,
+  "standard_prompt_before_override": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v003/standard-output-before-explicit/standard-prompt.txt",
+    "bytes": 5868,
+    "sha256": "2b4a5a7ce63b7aa7df5b4eb5a47c45fcaff027bb02ac264a6e0ac949577da66a"
+  },
+  "prompt_word_count": 224,
+  "toolchain": {
+    "python_executable": "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+    "python_version": "3.14.6",
+    "pillow_version": "12.3.0",
+    "numpy_version": "2.5.2",
+    "prepare": {
+      "path": "C:/Users/22499/.codex/skills/sprite-gen/scripts/prepare_sprite_run.py",
+      "bytes": 461,
+      "sha256": "980be651f67a88bbd38666f70e56b7bdffc89e50cac53f81f2b0ae0c1b028836"
+    },
+    "prepare_implementation": {
+      "path": "C:/Users/22499/.codex/skills/sprite-gen/sprite_gen/gen/prepare.py",
+      "bytes": 62923,
+      "sha256": "05d9e8d8de7fbdb75aa2f2e9f88d54a6ef45dee431aee7d85eddddffd5ee67dd"
+    },
+    "installed_tools_modified": false
+  },
+  "prepare_command_record": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v003/logs/prepare-near-lining-command-v003.json",
+    "bytes": 1465,
+    "sha256": "740497270c9d928ee05a9b68cd548285c7a14e8cfe73ed826876d777962b45ae"
+  },
+  "root_input_review": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/row-correction-v003/root-near-lining-review186-v001.json",
+    "bytes": 570,
+    "sha256": "b03a417b086f896a57105fc8aa6feb373a365a35e9c8c63967d0ee9c675cb28c"
+  }
+}

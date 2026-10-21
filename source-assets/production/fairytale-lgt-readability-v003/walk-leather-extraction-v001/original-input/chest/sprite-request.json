@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-leather-chest-walk-v001",
+    "description": "",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 211,
+    "safe_margin_y": 211,
+    "size": 512,
+    "safe_margin": 211
+  },
+  "chroma_key": {
+    "name": "cyan",
+    "hex": "#00FFFF",
+    "rgb": [
+      0,
+      255,
+      255
+    ],
+    "selection": "auto",
+    "score": 317.34,
+    "min_subject_distance": 314.85,
+    "background": {
+      "mode": "transparent",
+      "opaque_border_fraction": 0.0,
+      "subject_pixels": 729
+    },
+    "candidates": [
+      {
+        "name": "magenta",
+        "hex": "#FF00FF",
+        "score": 225.76,
+        "min_subject_distance": 221.93,
+        "clears_erase_radius": true
+      },
+      {
+        "name": "green",
+        "hex": "#00FF00",
+        "score": 233.21,
+        "min_subject_distance": 222.34,
+        "clears_erase_radius": true
+      },
+      {
+        "name": "cyan",
+        "hex": "#00FFFF",
+        "score": 317.34,
+        "min_subject_distance": 314.85,
+        "clears_erase_radius": true
+      },
+      {
+        "name": "blue",
+        "hex": "#004DFF",
+        "score": 252.23,
+        "min_subject_distance": 250.81,
+        "clears_erase_radius": true
+      }
+    ],
+    "selection_reason": "highest 1st-percentile subject distance among the 4 candidate(s) clearing the 96 erase radius"
+  },
+  "states": {
+    "leather_chest_sword_walk": {
+      "frames": 6,
+      "fps": 12,
+      "loop": true,
+      "action": "Six cyclic walk component perspectives matching actual body motion, not repeated idle parts."
+    }
+  },
+  "style": "Only Ready184 component is appearance identity. Walk source torso strip is geometry/motion only.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": false,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

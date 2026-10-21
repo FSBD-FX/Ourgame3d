@@ -1,0 +1,19 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+@@ -97,12 +97,14 @@
+             for(const FString Component:{TEXT("BodyRest"),TEXT("ShoulderFar"),TEXT("Chest"),
+                 TEXT("NearArmWithoutHand"),TEXT("ShoulderNear"),TEXT("HelmetForeground"),TEXT("NearHand")})
+                 for(int32 I=0;I<6;++I)
+-                    if(auto Texture=DungeonFairytaleSwordPrimary2ArmorV001::GetTexture(Component,I,Frames))ReadyArmorTextures.Add(Texture);
++                    if(auto Texture=DungeonFairytaleSwordPrimary2ArmorV001::GetTexture(Component,I,Frames,
++                        bUseFairytaleSwordEquipmentBoundPreview&&FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleLeatherPrimary2Preview"))))ReadyArmorTextures.Add(Texture);
+         if(bUseFairytaleSwordEquipmentBoundPreview || DungeonFairytaleSwordPrimary3V001::Enabled())
+             for(const FString Component:{TEXT("Body"),TEXT("BodyRest"),TEXT("ShoulderFar"),TEXT("Chest"),
+                 TEXT("NearArmWithoutHand"),TEXT("ShoulderNear"),TEXT("HelmetForeground"),TEXT("NearHand")})
+                 for(int32 I=0;I<6;++I)
+-                    if(auto Texture=DungeonFairytaleSwordPrimary3V001::GetTexture(Component,I,Frames))ReadyArmorTextures.Add(Texture);
++                    if(auto Texture=DungeonFairytaleSwordPrimary3V001::GetTexture(Component,I,Frames,
++                        bUseFairytaleSwordEquipmentBoundPreview&&FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleLeatherPrimary3Preview"))))ReadyArmorTextures.Add(Texture);
+         // The complete selected draw also needs the independent sword and the
+         // source body used by the explicitly unsupported-state placeholder.
+         for(const FString Clip:{TEXT("sword_ready_idle"),TEXT("sword_primary_1")})

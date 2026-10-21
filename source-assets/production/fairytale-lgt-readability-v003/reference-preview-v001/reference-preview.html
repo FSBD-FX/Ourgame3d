@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>轻甲可读性 · 小比例参考 v001</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#ede9df;color:#292c2b;font-family:system-ui,"Microsoft YaHei",sans-serif;line-height:1.6}main{max-width:1060px;margin:auto;padding:32px 24px 48px}.eyebrow{font-size:12px;letter-spacing:.16em;color:#6b6e63;margin:0 0 8px}h1{font-size:25px;line-height:1.3;margin:0 0 14px}h2{font-size:17px;line-height:1.4;margin:0}.lead{max-width:780px;margin:0 0 24px;color:#555a53}.controls{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;padding:14px 18px;margin-bottom:20px;border:1px solid #c6c7bc;border-radius:8px;background:#f7f4eb}fieldset{display:flex;gap:12px;margin:0;padding:0;border:0}legend{float:left;margin-right:12px;font-size:13px;color:#5e635b}label{font-size:14px;cursor:pointer}input{accent-color:#835c2e;vertical-align:middle;margin-right:5px}.zoom-note{font-size:12px;color:#666c63}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;--zoom:1}.reference-card{overflow:hidden;border:1px solid #c6c7bc;border-radius:10px;background:#f7f4eb}.reference-card header{padding:20px 22px 14px}.reference-card header p{margin:5px 0 0;color:#676d61;font-size:13px}.stage{position:relative;height:calc(124px * var(--zoom));overflow:hidden;background:#dcded2;transition:background-color .15s}.grid.dark .stage{background:#292f31}.stage img{position:absolute;display:block;max-width:none;width:calc(var(--image-w) * var(--zoom));height:calc(var(--image-h) * var(--zoom));left:calc(50% + var(--left) * var(--zoom));top:calc(var(--top) * var(--zoom));image-rendering:auto}.baseline{position:absolute;left:12%;right:12%;top:calc(96px * var(--zoom));height:1px;background:#a6ad9d66}.dark .baseline{background:#8f9d9f44}.facts{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;padding:13px 22px;font-size:12px;color:#61665d;border-top:1px solid #c6c7bc}strong{font-weight:600;color:#2f382e}details{padding:0 22px 17px;font-size:12px;color:#62675d}summary{cursor:pointer}details p{margin:9px 0 0}.hash{overflow-wrap:anywhere;font-family:ui-monospace,monospace;font-size:11px}.note{font-size:13px;color:#5c6258;margin:22px 0 0;max-width:850px}.status{display:inline-block;border:1px solid #b6b9ac;border-radius:4px;padding:3px 9px;font-size:12px;margin-bottom:12px;background:#e5e7dc}a{color:#4b654a}footer{font-size:12px;color:#74796f;margin-top:22px}@media(max-width:680px){main{padding:24px 16px}.grid{grid-template-columns:1fr}.controls{gap:12px}h1{font-size:22px}}
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">OURGAME / EV048 / REFERENCE V001</p>
+  <span class="status">参考图 · 尚未替换进游戏 · 非完整动画</span>
+  <h1>同一小比例，观察盔甲与轮廓</h1>
+  <p class="lead">将两张原图的 alpha 核心高度统一为 72 CSS 像素，便于观察钟盔、肩部与腰部层次。新图尝试棕色软皮轻甲；这里只比较参考图在小比例下的呈现。</p>
+  <div class="controls">
+    <fieldset><legend>背景</legend><label><input type="radio" name="background" value="light" checked>浅色</label><label><input type="radio" name="background" value="dark">深色</label></fieldset>
+    <label><input type="checkbox" id="zoom">400% 检查</label>
+    <span class="zoom-note" id="zoom-note">核心高度 72 px · 实际屏幕尺寸随浏览器缩放变化</span>
+  </div>
+  <section class="grid" id="comparison" aria-label="两张角色参考图比较">
+<article class="reference-card">
+      <header><h2>158 · 现有 Ready0</h2><p>现有角色姿态参考</p></header>
+      <div class="stage" role="img" aria-label="158 · 现有 Ready0，alpha 核心高度按 72 像素等比展示">
+        <span class="baseline" aria-hidden="true"></span>
+        <img src="158-ready0-original.png" alt="158 · 现有 Ready0原始透明 PNG 参考图" draggable="false"
+          style="--image-w:88.828915662651px;--image-h:88.828915662651px;--left:-44.327710843373px;--top:15.498795180723px">
+      </div>
+      <div class="facts"><span>核心高度 <strong class="core-height">72 px</strong></span><span>原图 512 × 512</span></div>
+      <details><summary>比例依据</summary><p>alpha ≥ 128 核心边界（右、下边界不含）：[149, 49, 362, 464]；高度 415 px。CSS 缩放比例为 72 ÷ 415 = 0.173493975904。两张图只对齐核心高度与底边。</p><p class="hash">原图与副本 SHA-256：d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5</p></details>
+    </article>
+<article class="reference-card">
+      <header><h2>179 · 软皮轻甲试样</h2><p>棕色短衣、软肩片与腰部层次参考</p></header>
+      <div class="stage" role="img" aria-label="179 · 软皮轻甲试样，alpha 核心高度按 72 像素等比展示">
+        <span class="baseline" aria-hidden="true"></span>
+        <img src="179-soft-leather-original.png" alt="179 · 软皮轻甲试样原始透明 PNG 参考图" draggable="false"
+          style="--image-w:88.517647058824px;--image-h:88.517647058824px;--left:-44.117647058824px;--top:15.741176470588px">
+      </div>
+      <div class="facts"><span>核心高度 <strong class="core-height">72 px</strong></span><span>原图 1254 × 1254</span></div>
+      <details><summary>比例依据</summary><p>alpha ≥ 128 核心边界（右、下边界不含）：[363, 117, 887, 1137]；高度 1020 px。CSS 缩放比例为 72 ÷ 1020 = 0.070588235294。两张图只对齐核心高度与底边。</p><p class="hash">原图与副本 SHA-256：f29ccca00cfb1095dc263240b3f554c780e421cfebf531099e2e92f5281c3c38</p></details>
+    </article>
+  </section>
+  <p class="note">PNG 副本保持原始字节，页面只通过 CSS 等比缩放；没有重绘、抠图或修改颜色。400% 开关放大这份布局以检查边缘。alpha 核心仅用于测量显示尺寸，不代表骨架或身体边界；两张参考图的姿态、原图尺寸也不同，不能据此认定母体已锁定或动画已完成。</p>
+  <footer>测量与文件校验：<a href="reference-measurements-v001.json">JSON</a> · 候选参考页面，待 Root 归档后查看。</footer>
+</main>
+<script>
+const comparison=document.getElementById('comparison');
+for(const option of document.querySelectorAll('input[name="background"]')){
+  option.addEventListener('change',()=>comparison.classList.toggle('dark',option.value==='dark'&&option.checked));
+}
+document.getElementById('zoom').addEventListener('change',event=>{
+  const enlarged=event.target.checked;
+  comparison.style.setProperty('--zoom',enlarged?'4':'1');
+  for(const label of document.querySelectorAll('.core-height'))label.textContent=enlarged?'288 px':'72 px';
+  document.getElementById('zoom-note').textContent=enlarged?'400% 检查 · 核心高度 288 px · 未生成新图片':'核心高度 72 px · 实际屏幕尺寸随浏览器缩放变化';
+});
+</script>
+</body>
+</html>

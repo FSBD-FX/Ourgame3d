@@ -1,0 +1,217 @@
+#if WITH_DEV_AUTOMATION_TESTS
+#include "Misc/AutomationTest.h"
+#include "../DungeonFairytaleSwordEquipmentBinding.h"
+#include "../DungeonRunInstaller.h"
+#include "RunCodecFixture_v001.h"
+
+namespace
+{
+namespace Binding=DungeonFairytaleSwordEquipmentBinding;
+Binding::FBinding SentinelBinding()
+{
+    Binding::FBinding Out;Out.RunGuid=FGuid(1,2,3,4);Out.RunAlias=91;Out.OwnerId=92;Out.Revision=93;
+    Out.ActiveSlot=1;Out.WeaponInstanceId=94;Out.WeaponVersion=95;Out.ArmorInstanceId=96;Out.ArmorVersion=97;
+    Out.WeaponContentId=TEXT("sentinel.weapon");Out.ArmorContentId=TEXT("sentinel.armor");Out.Armor=Binding::EArmor::LightArmor;
+    return Out;
+}
+TArray<uint8> BindingSignature(const Binding::FBinding& B)
+{
+    FSignature S;S.V(B.RunGuid.A,B.RunGuid.B,B.RunGuid.C,B.RunGuid.D,B.RunAlias,B.OwnerId,B.Revision,B.ActiveSlot,
+        B.WeaponInstanceId,B.WeaponVersion,B.ArmorInstanceId,B.ArmorVersion,B.Armor);
+    S.String(B.WeaponContentId);S.String(B.ArmorContentId);return S.Bytes;
+}
+// Explicitly named bounded read-only domains, not a claim to cover full Profile.
+TArray<uint8> BindingReadDomains(const FCodecWorld& W)
+{
+    FSignature S;const auto& V=W.Game->GetEquipmentView();const auto* I=W.Game->GetEquipmentInventoryState();
+    S.V(W.Game->GetSimulationTime(),W.Game->GetRunRestartSerial(),W.Game->GetRunInstallGate(),V.RunGuid.A,V.RunGuid.B,V.RunGuid.C,V.RunGuid.D,
+        V.Bound,V.RunAlias,V.OwnerId,V.Revision,V.ActiveSlot,V.CombatSeed,V.NextCritDraw,V.NextInstanceId,V.NextSourceId,V.NextOperationId,
+        V.NextEquipmentActionId,V.NextRuntimeReceiptId,V.NextImportReceiptId,V.NextFocusReceiptId,V.SelectedSourceId,V.Action.Active,V.Action.InstanceId,V.Action.Deadline);
+    for(const auto& Slot:V.Slots){S.V(Slot.InstanceId,Slot.Version,Slot.Grade,Slot.Tier,Slot.Package,Slot.Ammo,Slot.CooldownDeadline);S.String(Slot.ContentId);}
+    S.V(I!=nullptr);if(I){S.V(I->RunId,I->OwnerId,I->Revision,I->ActiveSlot,I->Weapons[0],I->Weapons[1],I->Armor,uint64(I->Items.size()),uint64(I->Operations.size()));
+        for(const auto& Item:I->Items){S.V(Item.InstanceId,Item.Version,Item.Grade,Item.Tier,Item.Package,Item.Ammo,Item.SkillCooldownDeadline);S.String(UTF8_TO_TCHAR(Item.ContentId.c_str()));}}
+    S.String(W.Player->WeaponId);S.String(W.Player->ArmorId);S.Combat(W.Player->GetMeleeCombatState(),true);
+    return S.Bytes;
+}
+const IV::FItem* ActualItem(const FCodecWorld& W,uint64 Id)
+{const auto* I=W.Game->GetEquipmentInventoryState();if(I)for(const auto& Item:I->Items)if(Item.InstanceId==Id)return &Item;return nullptr;}
+uint64 ActualGroundSource(const FCodecWorld& W,uint64 Id)
+{for(const auto& Source:W.Game->GetEquipmentSources())if(!Source.Consumed&&Source.InstanceId==Id)return Source.SourceId;return 0;}
+bool StartActualPickup(FCodecWorld& W,uint64 SourceId,int32 Slot=-1)
+{
+    if(!W.Game->SelectEquipmentSource(SourceId))return false;
+    W.Game->TryInteractEquipment();
+    if(W.Game->GetEquipmentView().NeedsSlotSelection)
+    {
+        if(Slot<0||!W.Game->ConfirmEquipmentSlot(Slot,true))return false;
+    }
+    return W.Game->GetEquipmentView().Action.Active;
+}
+bool CheckActualBinding(FCodecWorld& W,const TCHAR* Label,Binding::EArmor Armor,uint64 Weapon,uint64 ArmorId)
+{
+    const auto Before=BindingReadDomains(W);auto Out=SentinelBinding();const auto Original=BindingSignature(Out);FString Why;
+    const bool Ok=Binding::Resolve(*W.Game,*W.Player,Out,Why);
+    W.Test.TestTrue(*(FString(Label)+TEXT(" actual binding is implemented")),Ok);
+    if(!Ok)W.Test.AddInfo(FString(Label)+TEXT(" diagnosis: ")+Why);
+    if(Ok)
+    {
+        const auto& V=W.Game->GetEquipmentView();const auto* WeaponItem=ActualItem(W,Weapon);const auto* ArmorItem=ActualItem(W,ArmorId);
+        W.Test.TestTrue(*(FString(Label)+TEXT(" exposes exact committed identity and only the expected armor")),
+            WeaponItem&&Out.RunGuid==V.RunGuid&&Out.RunAlias==V.RunAlias&&Out.OwnerId==V.OwnerId&&Out.Revision==V.Revision&&Out.ActiveSlot==V.ActiveSlot
+            &&Out.WeaponInstanceId==Weapon&&Out.WeaponVersion==WeaponItem->Version&&Out.WeaponContentId==TEXT("WPN-SWD-001")
+            &&Out.Armor==Armor&&Out.ArmorInstanceId==ArmorId&&Out.ArmorVersion==(ArmorItem?ArmorItem->Version:0)
+            &&Out.ArmorContentId==(Armor==Binding::EArmor::LightArmor?TEXT("ARM-LGT-001"):TEXT(""))&&Why.IsEmpty());
+    }
+    else W.Test.TestTrue(TEXT("Honest positive failure does not partially publish Out"),BindingSignature(Out)==Original);
+    W.Test.TestTrue(TEXT("Resolver cannot change measured committed equipment, mirrors, combat, IDs, gate or clock"),BindingReadDomains(W)==Before);
+    return Ok;
+}
+bool EquipActualLight(FCodecWorld& W,const TCHAR* Key,bool Cursed=false)
+{
+    IV::FItem Light;Light.ContentId="ARM-LGT-001";
+    if(Cursed){Light.Tier=5;Light.Package=DungeonEquipmentStats::EPackage::Cursed;Light.Affixes={{"AFF-N-011",20,{9,10}}};}
+    const auto R=W.Game->RegisterEquipmentSource(Key,Light,W.Player->GetGroundPosition()+FVector2D(30,0),true);
+    if(!W.Test.TestTrue(TEXT("Real registered light armor passes existing admission and starts existing pickup transaction"),R.Ok()&&StartActualPickup(W,R.SourceId)))return false;
+    const double End=W.Player->GetEquipmentActionDeadline();
+    if(!W.Test.TestTrue(TEXT("Real absolute .50s transaction commits light armor once"),End==W.Game->GetSimulationTime()+.5&&W.AdvanceTo(End)))return false;
+    const auto* I=W.Game->GetEquipmentInventoryState();
+    return W.Test.TestTrue(TEXT("Committed native inventory, slot view and player mirror really own the light instance"),I&&I->Armor==R.InstanceId
+        &&W.Game->GetEquipmentView().Slots[2].InstanceId==R.InstanceId&&W.Player->ArmorId==TEXT("ARM-LGT-001")&&!W.Game->GetEquipmentView().Action.Active);
+}
+}
+
+// Mutation caught: using pending Action.InstanceId or any art flag as equipped
+// armor, or never authorizing the genuine no-armor starter / committed LGT.
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FFairytaleEquipmentCommittedTransactions,
+    "CodexDungeon.Content.FairytaleEquipmentBinding.CommittedNoArmorLightCancelReplaceAndRetake",
+    EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FFairytaleEquipmentCommittedTransactions::RunTest(const FString&)
+{
+    FCodecWorld W(*this);if(!TestTrue(TEXT("Positive control is an actual ordinary bound Scene Run through normal Enter"),W.Create()))return false;
+    const auto* Initial=W.Game->GetEquipmentInventoryState();
+    if(!TestTrue(TEXT("Actual starter owns one SWD instance and no armor; no private state was invented"),Initial&&Initial->Armor==0
+        &&Initial->Weapons[Initial->ActiveSlot]!=0&&W.Player->WeaponId==TEXT("WPN-SWD-001")&&W.Player->ArmorId.IsEmpty()))return false;
+    const uint64 Sword=Initial->Weapons[Initial->ActiveSlot];
+    CheckActualBinding(W,TEXT("Initial actual no-armor SWD"),Binding::EArmor::NoArmor,Sword,0);
+    IV::FItem Light;Light.ContentId="ARM-LGT-001";
+    const auto A=W.Game->RegisterEquipmentSource(TEXT("binding.transaction.light"),Light,W.Player->GetGroundPosition()+FVector2D(30,0),true);
+    if(!TestTrue(TEXT("Actual light source starts normal public select/interact transaction"),A.Ok()&&StartActualPickup(W,A.SourceId)))return false;
+    const double FirstEnd=W.Player->GetEquipmentActionDeadline();
+    if(!TestTrue(TEXT("Actual pending light has a future .50s deadline while committed armor is still absent"),FirstEnd==W.Game->GetSimulationTime()+.5
+        &&W.Game->GetEquipmentView().Action.InstanceId==A.InstanceId&&W.Game->GetEquipmentInventoryState()->Armor==0&&W.AdvanceTo(FirstEnd-.001)))return false;
+    CheckActualBinding(W,TEXT("Pending target does not dress the player before commit"),Binding::EArmor::NoArmor,Sword,0);
+    W.Player->MoveOnGround({1,0},.1f);W.Frame(.01f);
+    if(!TestTrue(TEXT("Real movement cancels pending light; source stays available and no delayed commit occurs"),!W.Game->GetEquipmentView().Action.Active
+        &&W.Game->GetEquipmentInventoryState()->Armor==0&&ActualGroundSource(W,A.InstanceId)==A.SourceId&&W.AdvanceTo(FirstEnd+.02)))return false;
+    CheckActualBinding(W,TEXT("Canceled target cannot become armor"),Binding::EArmor::NoArmor,Sword,0);
+    if(!TestTrue(TEXT("Same unconsumed light can normally be restarted and committed"),StartActualPickup(W,A.SourceId)&&W.AdvanceTo(W.Player->GetEquipmentActionDeadline())
+        &&W.Game->GetEquipmentInventoryState()->Armor==A.InstanceId&&W.Player->ArmorId==TEXT("ARM-LGT-001")))return false;
+    CheckActualBinding(W,TEXT("Only actual committed LGT authorizes light layers"),Binding::EArmor::LightArmor,Sword,A.InstanceId);
+    IV::FItem Medium;Medium.ContentId="ARM-MED-001";
+    const auto M=W.Game->RegisterEquipmentSource(TEXT("binding.transaction.medium"),Medium,W.Player->GetGroundPosition()+FVector2D(30,0),true);
+    if(!TestTrue(TEXT("Normal replacement with a different armor begins without early appearance change"),M.Ok()&&StartActualPickup(W,M.SourceId,2)
+        &&W.Game->GetEquipmentInventoryState()->Armor==A.InstanceId))return false;
+    CheckActualBinding(W,TEXT("Pending medium still owns old light"),Binding::EArmor::LightArmor,Sword,A.InstanceId);
+    if(!TestTrue(TEXT("Actual medium commits and creates the old exact light ground instance"),W.AdvanceTo(W.Player->GetEquipmentActionDeadline())
+        &&W.Game->GetEquipmentInventoryState()->Armor==M.InstanceId&&W.Player->ArmorId==TEXT("ARM-MED-001")&&ActualGroundSource(W,A.InstanceId)!=0))return false;
+    auto Out=SentinelBinding();const auto Bytes=BindingSignature(Out);FString Why;const auto Before=BindingReadDomains(W);
+    TestFalse(TEXT("A legitimately committed non-LGT cannot masquerade as current light armor"),Binding::Resolve(*W.Game,*W.Player,Out,Why));
+    TestTrue(TEXT("Unsupported actual medium is diagnosed, atomic and read-only"),!Why.IsEmpty()&&BindingSignature(Out)==Bytes&&BindingReadDomains(W)==Before);
+    if(!TestTrue(TEXT("The actual dropped light is normally reselected and repicked without creating a new instance"),StartActualPickup(W,ActualGroundSource(W,A.InstanceId),2)
+        &&W.AdvanceTo(W.Player->GetEquipmentActionDeadline())&&W.Game->GetEquipmentInventoryState()->Armor==A.InstanceId))return false;
+    CheckActualBinding(W,TEXT("Reacquired original light reads its current committed version"),Binding::EArmor::LightArmor,Sword,A.InstanceId);
+    return true;
+}
+
+// Mutation caught: accepting only template names, ignoring owner/slot/revision/
+// version/action instance, or rejecting legal graded/cursed base equipment.
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FFairytaleEquipmentReadbackRejections,
+    "CodexDungeon.Content.FairytaleEquipmentBinding.RealGradedCursedOwnershipAndAtomicBadReadbacks",
+    EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FFairytaleEquipmentReadbackRejections::RunTest(const FString&)
+{
+    FCodecWorld W(*this);if(!TestTrue(TEXT("Bad-readback controls start with a genuine Run"),W.Create()))return false;
+    IV::FItem Graded;Graded.ContentId="WPN-SWD-001";Graded.Grade=3;Graded.Package=DungeonEquipmentStats::EPackage::Beneficial;Graded.Tier=5;Graded.Affixes={{"AFF-P-001",25,{9,10}}};
+    const auto S=W.Game->RegisterEquipmentSource(TEXT("binding.graded.sword"),Graded,W.Player->GetGroundPosition()+FVector2D(30,0),true);
+    if(!TestTrue(TEXT("Real legal graded/enchanted sword starts and commits through existing inventory"),S.Ok()&&StartActualPickup(W,S.SourceId)
+        &&W.AdvanceTo(W.Player->GetEquipmentActionDeadline())&&W.Player->GetMeleeCombatState().WeaponInstanceId==S.InstanceId))return false;
+    if(!EquipActualLight(W,TEXT("binding.cursed.light"),true))return false;
+    const auto* Actual=W.Game->GetEquipmentInventoryState();const uint64 Armor=Actual->Armor;
+    const auto* SwordItem=ActualItem(W,S.InstanceId);const auto* ArmorItem=ActualItem(W,Armor);
+    if(!TestTrue(TEXT("Source inventory proves the legitimate grade and curse instead of bypassing stats admission"),SwordItem&&ArmorItem&&SwordItem->Grade==3
+        &&ArmorItem->Package==DungeonEquipmentStats::EPackage::Cursed))return false;
+    W.Player->BeginAttack();const auto Melee=W.Player->GetMeleeCombatState();
+    if(!TestTrue(TEXT("Real current SWD action is active and owns that committed graded instance"),Melee.Action.Active&&Melee.Action.WeaponInstanceId==S.InstanceId))return false;
+    CheckActualBinding(W,TEXT("Legal grade and negative affix still use their actual base skins"),Binding::EArmor::LightArmor,S.InstanceId,Armor);
+    const auto V=W.Game->GetEquipmentView();const auto I=*Actual;const FString Weapon=W.Player->WeaponId,ArmorMirror=W.Player->ArmorId;
+    auto Out=SentinelBinding();FString Why;const bool Control=Binding::ValidateCommitted(V,I,Melee,Weapon,ArmorMirror,Out,Why);
+    TestTrue(TEXT("Pure seam must first accept complete values really acquired and attacking in native owners"),Control);
+    if(Control)TestTrue(TEXT("Pure seam returns independently known committed graded/cursed identities"),Out.WeaponInstanceId==S.InstanceId&&Out.ArmorInstanceId==Armor
+        &&Out.Armor==Binding::EArmor::LightArmor&&Out.WeaponVersion==ActualItem(W,S.InstanceId)->Version&&Why.IsEmpty());
+    const auto Reject=[&](const TCHAR* Label,auto Change)
+    {
+        auto BadView=V;auto BadInventory=I;auto BadMelee=Melee;auto BadWeapon=Weapon;auto BadArmor=ArmorMirror;
+        Change(BadView,BadInventory,BadMelee,BadWeapon,BadArmor);
+        auto Rejected=SentinelBinding();const auto BeforeOut=BindingSignature(Rejected),BeforeLive=BindingReadDomains(W);FString Invalid;
+        TestFalse(*(FString(Label)+TEXT(" cannot authorize a skin")),Binding::ValidateCommitted(BadView,BadInventory,BadMelee,BadWeapon,BadArmor,Rejected,Invalid));
+        TestTrue(*(FString(Label)+TEXT(" rejects with diagnostic, leaves all Out values and real live owners intact")),!Invalid.IsEmpty()
+            &&BindingSignature(Rejected)==BeforeOut&&BindingReadDomains(W)==BeforeLive);
+    };
+    Reject(TEXT("Unbound view"),[](auto& B,auto&,auto&,auto&,auto&){B.Bound=false;});
+    Reject(TEXT("Invalid RunGuid"),[](auto& B,auto&,auto&,auto&,auto&){B.RunGuid=FGuid();});
+    Reject(TEXT("Run alias mismatch"),[](auto& B,auto&,auto&,auto&,auto&){++B.RunAlias;});
+    Reject(TEXT("Owner mismatch"),[](auto& B,auto&,auto&,auto&,auto&){++B.OwnerId;});
+    Reject(TEXT("Revision mismatch"),[](auto& B,auto&,auto&,auto&,auto&){++B.Revision;});
+    Reject(TEXT("Out-of-range active slot"),[](auto& B,auto& J,auto&,auto&,auto&){B.ActiveSlot=J.ActiveSlot=2;});
+    Reject(TEXT("Wrong weapon instance"),[](auto& B,auto&,auto&,auto&,auto&){++B.Slots[B.ActiveSlot].InstanceId;});
+    Reject(TEXT("Wrong armor instance"),[](auto& B,auto&,auto&,auto&,auto&){++B.Slots[2].InstanceId;});
+    Reject(TEXT("Stale weapon version"),[](auto& B,auto&,auto&,auto&,auto&){++B.Slots[B.ActiveSlot].Version;});
+    Reject(TEXT("Stale armor version"),[](auto& B,auto&,auto&,auto&,auto&){++B.Slots[2].Version;});
+    Reject(TEXT("Missing owned item"),[](auto&,auto& J,auto&,auto&,auto&){const auto Id=J.Weapons[J.ActiveSlot];J.Items.erase(std::remove_if(J.Items.begin(),J.Items.end(),[Id](const auto& Item){return Item.InstanceId==Id;}),J.Items.end());});
+    Reject(TEXT("Duplicate owned item"),[](auto&,auto& J,auto&,auto&,auto&){const auto Id=J.Weapons[J.ActiveSlot];const auto Found=std::find_if(J.Items.begin(),J.Items.end(),[Id](const auto& Item){return Item.InstanceId==Id;});if(Found!=J.Items.end()){const auto Copy=*Found;J.Items.push_back(Copy);}});
+    Reject(TEXT("False weapon mirror"),[](auto&,auto&,auto&,auto& B,auto&){B=TEXT("WPN-GSW-001");});
+    Reject(TEXT("False armor mirror"),[](auto&,auto&,auto&,auto&,auto& B){B=TEXT("ARM-HVY-001");});
+    Reject(TEXT("Wrong Melee instance"),[](auto&,auto&,auto& B,auto&,auto&){++B.WeaponInstanceId;});
+    Reject(TEXT("Wrong active action instance"),[](auto&,auto&,auto& B,auto&,auto&){++B.Action.WeaponInstanceId;});
+    Reject(TEXT("Wrong committed content"),[](auto& B,auto&,auto&,auto&,auto&){B.Slots[2].ContentId=TEXT("ARM-MED-001");});
+    auto Stranger=W.World->SpawnActor<ADungeonFighter>();if(!TestNotNull(TEXT("Actual different Fighter exists in the same World"),Stranger))return false;
+    Out=SentinelBinding();const auto BeforeOut=BindingSignature(Out),BeforeLive=BindingReadDomains(W);
+    TestFalse(TEXT("A same-World Fighter that is not actual Game.PlayerFighter has no equipment presentation authority"),Binding::Resolve(*W.Game,*Stranger,Out,Why));
+    TestTrue(TEXT("Wrong-actor authority rejection is atomic and does not mutate actual owners"),!Why.IsEmpty()&&BindingSignature(Out)==BeforeOut&&BindingReadDomains(W)==BeforeLive);
+    return true;
+}
+
+// Mutation caught: treating every closed install gate as absence of committed
+// gear; restoring a new starter or changing Run/RNG just to draw paused actors.
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FFairytaleEquipmentPausedInstall,
+    "CodexDungeon.Content.FairytaleEquipmentBinding.InstalledAwaitExplicitContinueRetainsCommittedSkin",
+    EAutomationTestFlags::EditorContext|EAutomationTestFlags::EngineFilter)
+bool FFairytaleEquipmentPausedInstall::RunTest(const FString&)
+{
+    FCodecWorld Source(*this);if(!TestTrue(TEXT("Paused source follows normal complete scene Run"),Source.Create())
+        ||!EquipActualLight(Source,TEXT("binding.paused.source.light")))return false;
+    FDungeonRunSnapshot Saved;FDungeonValidatedRun Sealed;
+    if(!CodecSeal(Source,Saved,Sealed,TEXT("Real light-armored source seals through unchanged Aggregate before binding tests")))return false;
+    const auto Exact=CodecSignature(Saved);const uint64 Sword=Saved.Equipment.View.Slots[Saved.Equipment.View.ActiveSlot].InstanceId,Armor=Saved.Equipment.View.Slots[2].InstanceId;
+    FCodecWorld Target(*this);if(!TestTrue(TEXT("Ordinary Prepare target is an independently existing legal Run, not fake pristine"),Target.Create()))return false;
+    FDungeonPreparedRun Prepared;FString Why;
+    if(!TestTrue(TEXT("Existing Installer really stages and installs this complete sealed Run"),FDungeonRunInstaller::Prepare(*Target.Game,Sealed,Prepared,Why)
+        &&Prepared.IsReady()&&FDungeonRunInstaller::Install(*Target.Game,Prepared,Why)))
+    {AddInfo(Why);return false;}
+    Target.Player=Target.Game->PlayerFighter;
+    if(!TestTrue(TEXT("Real installed player is possessed but technical Continue gate remains closed"),Target.Player&&Target.Controller->GetPawn()==Target.Player
+        &&Target.Game->GetRunInstallGate()==EDungeonRunInstallGate::AwaitExplicitContinue&&Target.Game->IsRunInstallGated()))return false;
+    FDungeonRunSnapshot Before;
+    if(!TestTrue(TEXT("Paused installed whole source already equals saved values before resolver"),Target.Game->CaptureRunSnapshot(Before,Why)&&CodecSignature(Before)==Exact))return false;
+    CheckActualBinding(Target,TEXT("Already-published paused light armor remains drawable without opening Continue"),Binding::EArmor::LightArmor,Sword,Armor);
+    Target.Frame(.25f);FDungeonRunSnapshot After;
+    if(!TestTrue(TEXT("Actual paused tick still preserves every saved value and old Run clock after resolver"),Target.Game->CaptureRunSnapshot(After,Why)
+        &&CodecSignature(After)==Exact&&Target.Game->GetRunInstallGate()==EDungeonRunInstallGate::AwaitExplicitContinue))return false;
+    CheckActualBinding(Target,TEXT("Paused redraw does not need BeginRun, reset or new equipment IDs"),Binding::EArmor::LightArmor,Sword,Armor);
+    Target.Frame(.005f);
+    if(!TestTrue(TEXT("Only existing real neutral observation and fresh Enter opens Continue"),Target.Pulse(EKeys::Enter)
+        &&Target.Game->GetRunInstallGate()==EDungeonRunInstallGate::Open))return false;
+    CheckActualBinding(Target,TEXT("Normal explicit Continue preserves the same committed identities"),Binding::EArmor::LightArmor,Sword,Armor);
+    return true;
+}
+#endif

@@ -1,0 +1,3447 @@
+{
+  "schema": "fairytale-player-motion-readonly-audit-v1",
+  "utc": "2026-10-16T14:55:59.920846+00:00",
+  "status": "candidate_analysis_only_no_source_or_engine_execution",
+  "source_baseline": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.h",
+      "bytes": 10313,
+      "sha256": "1eda7e2969c2c7ece103219266d4a9e62140cff222dd91ba827eb1f2cd6c9270"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 102920,
+      "sha256": "189ff7b5e5f5f7a6fed2b794a029e782ac6413028236aff59044e197ff825486"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighterSnapshot.h",
+      "bytes": 3680,
+      "sha256": "4668cc12f6091729b6aecc54a1c738e1f867b1c63f6eb2afd90375d0797ccf3e"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp",
+      "bytes": 141426,
+      "sha256": "a6e69f0b03d4ea343748e31d610a8912e2efd9d92b4c15708dddb7ddb59751a1"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.h",
+      "bytes": 11275,
+      "sha256": "992b2b5cb2befc5437c8f8671040d32cad0fa2bc4f64e02508f3db37a0beff99"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp",
+      "bytes": 109655,
+      "sha256": "698ec48262e8a1dc2cae6cca0d789f9637f7f559a9c2ab800ca58356dfb9a297"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+      "bytes": 19520,
+      "sha256": "53327e1c2a9123efa3fd05d0bbe4a5ed35110a68d4f115fab139a02a19631c5e"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordDrawState.h",
+      "bytes": 1710,
+      "sha256": "69d2c59652cbb1e82eadd08791f9b4b766a411d847dd5675607b5716e634a777"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordEquipmentBinding.h",
+      "bytes": 1833,
+      "sha256": "c7d93683646d31917be7a2710fd404cd788c3a8974ac77026b021fa74d29b116"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordEquipmentBinding.cpp",
+      "bytes": 9554,
+      "sha256": "6c167a9da61040ce58333c6824e5c3992de856ba9ceb6f6ed900898c855dfc3a"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordBodyV002.inl",
+      "bytes": 9284,
+      "sha256": "eaea2ee52c87bcc7da355d9a398e0f2e737e937b641a98b052f5611f3135d594"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPrimary2V003.inl",
+      "bytes": 5584,
+      "sha256": "b2f769bcd7c92d8531a8faa9a10b9a6345e077b44f3f019f0c7de8639c34dc44"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPrimary3V001.inl",
+      "bytes": 4467,
+      "sha256": "6749343b607b21ae5d7d1b8d1bf959b67324d13b85c7f6b37f70097088116054"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPrimary3V002.inl",
+      "bytes": 1683,
+      "sha256": "27eb40a9672d47d55b720f93e00277d4ddd34e8d416199283dc7d209ed2762e6"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonContentCombat.h",
+      "bytes": 21593,
+      "sha256": "0becdef858554b311a1bd284585f6b16bc64a420cf7ec49dce30616a9e53d6a5"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonEquipmentRuntime.h",
+      "bytes": 5215,
+      "sha256": "36f01b68e26404a599c76df6ac7726a45f275403bf9c820a0338b8a66e95a88c"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonWeaponPoseSocket.h",
+      "bytes": 5187,
+      "sha256": "722d6fae382704b36e6c0e105fb63cdb25d66eacc53cd5722b0431bf41ba6848"
+    }
+  ],
+  "verified_fighter_public_api": {
+    "AnimationName": {
+      "visibility": "public",
+      "line": 43,
+      "declaration": "UPROPERTY(BlueprintReadOnly, Category=\"Dungeon\") FString AnimationName = TEXT(\"idle\");"
+    },
+    "AnimationTime": {
+      "visibility": "public",
+      "line": 44,
+      "declaration": "UPROPERTY(BlueprintReadOnly, Category=\"Dungeon\") float AnimationTime = 0.f;"
+    },
+    "Facing": {
+      "visibility": "public",
+      "line": 37,
+      "declaration": "UPROPERTY(BlueprintReadOnly, Category=\"Dungeon\") float Facing = 1.f;"
+    },
+    "JumpHeight": {
+      "visibility": "public",
+      "line": 36,
+      "declaration": "UPROPERTY(BlueprintReadOnly, Category=\"Dungeon\") float JumpHeight = 0.f;"
+    },
+    "bDead": {
+      "visibility": "public",
+      "line": 42,
+      "declaration": "UPROPERTY(BlueprintReadOnly, Category=\"Dungeon\") bool bDead = false;"
+    },
+    "ArmorId": {
+      "visibility": "public",
+      "line": 50,
+      "declaration": "UPROPERTY(BlueprintReadOnly, Category=\"Dungeon\") FString ArmorId;"
+    },
+    "GetGroundPosition": {
+      "visibility": "public",
+      "line": 54,
+      "declaration": "UFUNCTION(BlueprintPure, Category=\"Dungeon\") FVector2D GetGroundPosition() const;"
+    },
+    "GetMoveSpeed": {
+      "visibility": "public",
+      "line": 102,
+      "declaration": "float GetMoveSpeed() const;"
+    },
+    "GetVerticalVelocity": {
+      "visibility": "public",
+      "line": 105,
+      "declaration": "float GetVerticalVelocity() const { return JumpVelocity; }"
+    },
+    "GetCombatHeight": {
+      "visibility": "public",
+      "line": 106,
+      "declaration": "double GetCombatHeight() const { return StoneBat ? BatObservedHeight : double(JumpHeight); }"
+    },
+    "GetLandingVisualAge": {
+      "visibility": "public",
+      "line": 108,
+      "declaration": "float GetLandingVisualAge() const { return LandingVisualAge; }"
+    },
+    "GetMeleeCombatState": {
+      "visibility": "public",
+      "line": 88,
+      "declaration": "const DungeonContentCombat::FCombatState& GetMeleeCombatState() const { return Combat.State(); }"
+    },
+    "GetWeaponActionsState": {
+      "visibility": "public",
+      "line": 89,
+      "declaration": "const DungeonWeaponActions::FState& GetWeaponActionsState() const { return WeaponSkills.State(); }"
+    },
+    "GetDodgeState": {
+      "visibility": "public",
+      "line": 93,
+      "declaration": "const DungeonDodge::FState& GetDodgeState() const { return Dodge.State(); }"
+    },
+    "GetEquipmentActionDeadline": {
+      "visibility": "public",
+      "line": 91,
+      "declaration": "double GetEquipmentActionDeadline() const;"
+    },
+    "GetWeaponPoseSocket": {
+      "visibility": "public",
+      "line": 82,
+      "declaration": "DungeonWeaponPoseSocket::FResolved GetWeaponPoseSocket() const;"
+    },
+    "FindWeaponEmissionPoseSocket": {
+      "visibility": "public",
+      "line": 83,
+      "declaration": "const DungeonWeaponPoseSocket::FResolved* FindWeaponEmissionPoseSocket(uint64 ActionId,uint32 SubhitId=0) const;"
+    },
+    "UseAuthoredWeaponPoseSocket": {
+      "visibility": "public",
+      "line": 84,
+      "declaration": "void UseAuthoredWeaponPoseSocket();"
+    },
+    "GetPrimaryPoseFrame": {
+      "visibility": "public",
+      "line": 76,
+      "declaration": "int32 GetPrimaryPoseFrame() const;"
+    }
+  },
+  "private_api_do_not_read_from_tests": {
+    "bMoving": {
+      "visibility": "private",
+      "declarations": [
+        {
+          "line": 147,
+          "text": "bool bMoving = false;"
+        }
+      ]
+    },
+    "HurtTime": {
+      "visibility": "private",
+      "declarations": [
+        {
+          "line": 145,
+          "text": "float HurtTime = 0.f;"
+        }
+      ]
+    },
+    "JumpVelocity": {
+      "visibility": "private",
+      "declarations": [
+        {
+          "line": 140,
+          "text": "float JumpVelocity = 0.f;"
+        }
+      ]
+    },
+    "AdvanceTerminalPresentation": {
+      "visibility": "private",
+      "declarations": [
+        {
+          "line": 139,
+          "text": "void AdvanceTerminalPresentation(float DeltaSeconds);"
+        }
+      ]
+    }
+  },
+  "current_support": {
+    "equipment_bound_weapon": "WPN-SWD-001",
+    "equipment_bound_armors": [
+      "none",
+      "ARM-LGT-001"
+    ],
+    "clips": [
+      "sword_ready_idle",
+      "sword_primary_1",
+      "sword_primary_2",
+      "sword_primary_3"
+    ],
+    "pickup_action_pose_supported": false,
+    "pickup_gear_placeholder": "Ready frame0 with committed old skin",
+    "new_style_walk_jump_hurt_death_complete": false,
+    "separate_run_state": false
+  },
+  "clock_evidence": {
+    "primary_frame": "DungeonFighter.cpp:677-685;2 samples per actual windup/active/recovery half-open phase",
+    "pickup": "DungeonGameMode.cpp:992-997;real .35 weapon/.50 armor, Start/Deadline",
+    "switch": "DungeonGameMode.cpp:1009-1014;.35, Kind SwitchWeapon, SourceId0, same equip_weapon name",
+    "animation": "DungeonFighter.cpp:1607-1617 and1726-1737",
+    "air": "real JumpHeight/GetVerticalVelocity/GetLandingVisualAge; no literal run/jump/fall/land player animation assignment in this branch",
+    "movement": "DungeonFighter.cpp1126 bMoving before collision;QueryResolvedMovement1152-1155;actor commit1157",
+    "terminal": "DungeonFighter.cpp1628-1635 private presentation-only advance;GameMode1825-1829 calls after gameover"
+  },
+  "source_scale": {
+    "source_canvas_px": [
+      512,
+      512
+    ],
+    "display_pivot_px": [
+      256,
+      464
+    ],
+    "nominal_body_max_canvas_px": 72,
+    "draw_canvas_size": 88.61538461538461,
+    "source_px_to_canvas_px_at_ui1": 0.17307692307692307,
+    "physical_foot_joint_measured": false
+  },
+  "sprite_gen_requests": [
+    {
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/sprite-request.json",
+        "bytes": 1826,
+        "sha256": "d5e04d0fd52b00f2d2aff7200d6b8d2de362a75aa24f7f472dcc29040ce00cb1"
+      },
+      "engine": "component-row",
+      "cell": {
+        "shape": "square",
+        "width": 512,
+        "height": 512,
+        "safe_margin_x": 48,
+        "safe_margin_y": 48,
+        "size": 512,
+        "safe_margin": 48
+      },
+      "states": {
+        "sword_ready_idle": {
+          "frames": 4,
+          "fps": 6,
+          "loop": true,
+          "action": "Exactly four distinct canonical131 BODY-ONLY low-outward single-hand Ready breaths. Short near arm bends continuously through a visible elbow/wrist into a closed brown fist below/right of chest; far relaxed hand visibly separate beside far thigh.",
+          "durations_ms": [
+            167,
+            167,
+            167,
+            167
+          ]
+        }
+      },
+      "fit": {
+        "pixel_unfake": false,
+        "resample": "lanczos",
+        "align_x": "bbox-center",
+        "align_y": "bottom",
+        "ground_frames": false,
+        "segmentation": "components",
+        "shared_row_scale": true
+      },
+      "has_rig": false,
+      "has_layers": false
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v003/sprite-request.json",
+        "bytes": 1854,
+        "sha256": "70d86d0ed5a462f1d87208600aa1ca0346331faf1f74bb35da76e9f58a42da33"
+      },
+      "engine": "component-row",
+      "cell": {
+        "shape": "square",
+        "width": 512,
+        "height": 512,
+        "safe_margin_x": 48,
+        "safe_margin_y": 48,
+        "size": 512,
+        "safe_margin": 48
+      },
+      "states": {
+        "sword_primary_1": {
+          "frames": 6,
+          "fps": 10,
+          "loop": false,
+          "action": "Six connected short-arm ONE-HANDED sword BODY-ONLY poses from actual158 low-left-waist guard: lowReady, left-of-helmet load, below-face forward diagonal cut, compact low followthrough, compact return, exact lowReady. Far hand stays separate at far waist.",
+          "durations_ms": [
+            85,
+            85,
+            60,
+            60,
+            155,
+            155
+          ]
+        }
+      },
+      "fit": {
+        "pixel_unfake": false,
+        "resample": "lanczos",
+        "align_x": "bbox-center",
+        "align_y": "bottom",
+        "ground_frames": false,
+        "segmentation": "components",
+        "shared_row_scale": true
+      },
+      "has_rig": false,
+      "has_layers": false
+    },
+    {
+      "source": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-v001/run-primary3-v001/sprite-request.json",
+        "bytes": 1847,
+        "sha256": "0fed989a4a36591d1ad27cbd58d41ef1800ca91a9474673ebf4c413428dec03e"
+      },
+      "engine": "component-row",
+      "cell": {
+        "shape": "square",
+        "width": 512,
+        "height": 512,
+        "safe_margin_x": 48,
+        "safe_margin_y": 48,
+        "size": 512,
+        "safe_margin": 48
+      },
+      "states": {
+        "sword_primary_3": {
+          "frames": 6,
+          "fps": 10,
+          "loop": false,
+          "action": "Six distinct one-handed short-elbow finishing DOWN-CUT body poses: low guard with inward load, visible shoulder-outside bent-arm load and compressed knees, two different-height downward wrist arc strikes, low brake, low guard return. Never a spin, punch, lunge or two unchanged Ready poses.",
+          "durations_ms": [
+            110,
+            110,
+            60,
+            60,
+            160,
+            160
+          ]
+        }
+      },
+      "fit": {
+        "pixel_unfake": false,
+        "resample": "lanczos",
+        "align_x": "bbox-center",
+        "align_y": "bottom",
+        "ground_frames": false,
+        "segmentation": "components",
+        "shared_row_scale": true
+      },
+      "has_rig": false,
+      "has_layers": false
+    }
+  ],
+  "imports": [
+    {
+      "receipt": {
+        "path": "F:/Ourgame/UnrealGame/Saved/Bootstrap/fairytale-sword-body-v002-import-20261016-022601-010853.json",
+        "bytes": 11054,
+        "sha256": "e329711920c556f97e42bb5e2c33f3645511b0db8b4ada26ebd2c6d11b663a3a"
+      },
+      "manifest": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-runtime-v002/manifests/import-sword-body-v002.json",
+        "bytes": 8916,
+        "sha256": "42ec0f7474810e50747d68bee587c3caa3187e7a5a34a39a5510642b9baccfd5"
+      },
+      "manifest_matches_receipt": true,
+      "actual_count": 10,
+      "saved_count": 10,
+      "success": true,
+      "receipt_runtime_verified": false,
+      "assets": [
+        {
+          "clip": "Ready",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordReady_000_v002.T_Fairytale_SwordReady_000_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/curated/frame-0.png",
+            "bytes": 121133,
+            "sha256": "d3f766506a9cc623c38787836a9c23c0126d185d1bdf7e8946181efd554338c5",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordReady_000_v002.uasset",
+            "bytes": 142795,
+            "sha256": "1239c2c1e854f33e8639ec2d819915f137bb79d04c45005899985451cee38a34",
+            "matches_receipt": true
+          }
+        },
+        {
+          "clip": "Ready",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordReady_001_v002.T_Fairytale_SwordReady_001_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/curated/frame-1.png",
+            "bytes": 120836,
+            "sha256": "edc706a89da26ab56613f8925c44c9984ddd1abc3ed655f5e92cd9d69a30d5b1",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordReady_001_v002.uasset",
+            "bytes": 141885,
+            "sha256": "548d315ae38fe69b6d947400aca31a53f6334ada038b39f703e22ae7d49297bd",
+            "matches_receipt": true
+          }
+        },
+        {
+          "clip": "Ready",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordReady_002_v002.T_Fairytale_SwordReady_002_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/curated/frame-2.png",
+            "bytes": 121596,
+            "sha256": "048d606c8ea449a2c9b23890e98c5332f3e84bd986a8b765c909495097dd113e",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordReady_002_v002.uasset",
+            "bytes": 143401,
+            "sha256": "43b7ecc2519d223f4d1b96929042c5e9c38c68d13ce6c466c5298e296300d4d4",
+            "matches_receipt": true
+          }
+        },
+        {
+          "clip": "Ready",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordReady_003_v002.T_Fairytale_SwordReady_003_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-ready-v002/curated/frame-3.png",
+            "bytes": 120109,
+            "sha256": "cbff38cc538db16d8f58c89dc1a94f5cd35f6756976d8fe8baa02ec5dcadd960",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordReady_003_v002.uasset",
+            "bytes": 141552,
+            "sha256": "eee78a56b06ae4097ce271ba324506911fb84861563fdab87b44a9b5edec8198",
+            "matches_receipt": true
+          }
+        },
+        {
+          "clip": "Primary1",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordPrimary1_000_v002.T_Fairytale_SwordPrimary1_000_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v003/curated/frame-0.png",
+            "bytes": 120204,
+            "sha256": "31fba4718be787b98fd92c551a6515a429c29385cb0e67365fc0b8533fd8b5c3",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordPrimary1_000_v002.uasset",
+            "bytes": 142951,
+            "sha256": "dfdf6fc4d5a19bd51a1a136deaf89081febdc619bfbc902617030cd283c87071",
+            "matches_receipt": true
+          }
+        },
+        {
+          "clip": "Primary1",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordPrimary1_001_v002.T_Fairytale_SwordPrimary1_001_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v003/curated/frame-1.png",
+            "bytes": 120255,
+            "sha256": "9c1db7c10a2805a51c82d9a33ccab83627a084d5e5f536dd81df425642b0a7c2",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordPrimary1_001_v002.uasset",
+            "bytes": 144005,
+            "sha256": "0d177328d3cc75580d3885e1a39b2bef4021516cd780c07bc7022af8ef245821",
+            "matches_receipt": true
+          }
+        },
+        {
+          "clip": "Primary1",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordPrimary1_002_v002.T_Fairytale_SwordPrimary1_002_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v003/curated/frame-2.png",
+            "bytes": 115093,
+            "sha256": "d8a5cfcc350530a4973ab955ec7d5f36819213e17ba5de99d5498a59a6322425",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordPrimary1_002_v002.uasset",
+            "bytes": 137782,
+            "sha256": "af04c1e4f1cd58bfd0565155b5442418aa2cb7e97100552170fe6785982b0928",
+            "matches_receipt": true
+          }
+        },
+        {
+          "clip": "Primary1",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordPrimary1_003_v002.T_Fairytale_SwordPrimary1_003_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v003/curated/frame-3.png",
+            "bytes": 113826,
+            "sha256": "1de81c7193ca228ca058afa63f26e3aac8fe369f3ed6b3ba8eea27e77157b227",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordPrimary1_003_v002.uasset",
+            "bytes": 135866,
+            "sha256": "84ec1003d783a38c68a0e8363fd9bc444245b35dbe7c2c1a9838954c8cd7357f",
+            "matches_receipt": true
+          }
+        },
+        {
+          "clip": "Primary1",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordPrimary1_004_v002.T_Fairytale_SwordPrimary1_004_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v003/curated/frame-4.png",
+            "bytes": 119799,
+            "sha256": "1e4256ba0e064c87e3aa075836f3005a68da5c4a044a77600ea63bc519d5d89b",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordPrimary1_004_v002.uasset",
+            "bytes": 142778,
+            "sha256": "ebd06ef8ab03902a7f7cdaf420c83f0e1d7304c6a6d22d45b9b2dc1de64260a1",
+            "matches_receipt": true
+          }
+        },
+        {
+          "clip": "Primary1",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordPrimary1_005_v002.T_Fairytale_SwordPrimary1_005_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v003/curated/frame-5.png",
+            "bytes": 120013,
+            "sha256": "050ca4103fc3ef6a1f3724b16bd0ebf42dc55353b799d5d92a6e4c2707e11bd0",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v005/HeroSwordBody/T_Fairytale_SwordPrimary1_005_v002.uasset",
+            "bytes": 142880,
+            "sha256": "185a6dd5b85c8f4eef9d4e2efbd21da793f7b2033b387faa24cc3ca60365567a",
+            "matches_receipt": true
+          }
+        }
+      ]
+    },
+    {
+      "receipt": {
+        "path": "F:/Ourgame/UnrealGame/Saved/Bootstrap/sword-armor-ready-v001-import-20261016-030507-646521.json",
+        "bytes": 25699,
+        "sha256": "d2fd2e275a0601be654d2ee4b0b53c35e5a39a1d9da638955531ac5fbef4b5fe"
+      },
+      "manifest": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-armor-ready-runtime-v001/manifests/import-sword-armor-ready-v001.json",
+        "bytes": 18240,
+        "sha256": "337947c6995e81cd9114b95367970a72e9f443b47468298c45aca48897da2a7e"
+      },
+      "manifest_matches_receipt": true,
+      "actual_count": 24,
+      "saved_count": 24,
+      "success": true,
+      "receipt_runtime_verified": false,
+      "assets": [
+        {
+          "component": "BodyRest",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyBodyRest_000_v001.T_Fairytale_SwordReadyBodyRest_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/BodyRest/frame-0.png",
+            "bytes": 110490,
+            "sha256": "2637c16b660e21fae7ac4dade44e6204727b415e8dc197836e11d9335a8be0e6",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyBodyRest_000_v001.uasset",
+            "bytes": 132304,
+            "sha256": "e437630d4f59ec06f075af256d1c8a080108461e53f7070f9d8a50dbff3e716e",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyBodyRest_001_v001.T_Fairytale_SwordReadyBodyRest_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/BodyRest/frame-1.png",
+            "bytes": 110476,
+            "sha256": "f739020917b00d4b10a569777cd21f0fc0f48bdac4a813379def148e61c0cacd",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyBodyRest_001_v001.uasset",
+            "bytes": 131780,
+            "sha256": "f8dfa5fe56887c3d3462ea1632cb117be1f40c631bbdf21fe82c1ea474389f78",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyBodyRest_002_v001.T_Fairytale_SwordReadyBodyRest_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/BodyRest/frame-2.png",
+            "bytes": 110749,
+            "sha256": "edab6c78993acba60ffe9d8009ab0870e7e5c68a66f0aa2ac4dcaeb445963da2",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyBodyRest_002_v001.uasset",
+            "bytes": 132765,
+            "sha256": "1dbdd3464b46024b77eaacf3cab16945a62c033f5203b15a89efe9a2ace39771",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyBodyRest_003_v001.T_Fairytale_SwordReadyBodyRest_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/BodyRest/frame-3.png",
+            "bytes": 110107,
+            "sha256": "8d10f8271cc08e1fc9cc1311d3981d87cf52842986f4194e5d54f320b065ac6c",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyBodyRest_003_v001.uasset",
+            "bytes": 131531,
+            "sha256": "55fd550e5f2d40b58d72d970f244ddca5a66a4baf269592b9a7c5a57d85b1d70",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyChest_000_v001.T_Fairytale_SwordReadyChest_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/Chest/frame-0.png",
+            "bytes": 9396,
+            "sha256": "2143e039148fb0c33efc1d086a52175ca9fe87d3b159ef8d4b4de94f731fd535",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyChest_000_v001.uasset",
+            "bytes": 21798,
+            "sha256": "7eafdb1348e8cccbbfc9e4678e82b38859ddbc7d92895a5da260d49effe84afe",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyChest_001_v001.T_Fairytale_SwordReadyChest_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/Chest/frame-1.png",
+            "bytes": 9469,
+            "sha256": "86ce6978ceb00da4a10f3617b25058d38ddfadec837b0a7a141d7342dd990a7c",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyChest_001_v001.uasset",
+            "bytes": 21901,
+            "sha256": "3856ffb0a401f5ee80e4b6eede5b600e1c0e97f94be14c7234dac421d0e88c18",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyChest_002_v001.T_Fairytale_SwordReadyChest_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/Chest/frame-2.png",
+            "bytes": 9775,
+            "sha256": "4a7cf4d4af35d455ba51924faaad5edf7bfcc1a5cf8e1b5773c6a9f838a3893c",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyChest_002_v001.uasset",
+            "bytes": 22208,
+            "sha256": "a9a02c62f92fb3aa3c119a184be842b0b375d2913ff6039f577a91198b3db30c",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyChest_003_v001.T_Fairytale_SwordReadyChest_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/Chest/frame-3.png",
+            "bytes": 9591,
+            "sha256": "d213f2e511a4980a4c68901d098e9eacafe8e525497ba661c784e8237eb2a83e",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyChest_003_v001.uasset",
+            "bytes": 22090,
+            "sha256": "90ad17df85de240b2cb6df238e2e75b9f5cbb0c94da8d1495939d8ae58434eb3",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearArmWithoutHand_000_v001.T_Fairytale_SwordReadyNearArmWithoutHand_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/NearArmWithoutHand/frame-0.png",
+            "bytes": 6410,
+            "sha256": "8f2ea3cee1d7e7ecd1b71c14eb187993c1af5136eab919988c85f79362b48ec7",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearArmWithoutHand_000_v001.uasset",
+            "bytes": 18987,
+            "sha256": "cca37003a83d117a333127bd718598dc8d2b9209aaa7669cec49931df4b39211",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearArmWithoutHand_001_v001.T_Fairytale_SwordReadyNearArmWithoutHand_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/NearArmWithoutHand/frame-1.png",
+            "bytes": 6255,
+            "sha256": "3967af92b857925758c0b09838975bcf9bd55fec6f1c5002680b873b7de78c41",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearArmWithoutHand_001_v001.uasset",
+            "bytes": 18794,
+            "sha256": "1ac32bbe7080115598aa1d113e1cbd577d4e6ac027f9f4f6feaba7087f31cc35",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearArmWithoutHand_002_v001.T_Fairytale_SwordReadyNearArmWithoutHand_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/NearArmWithoutHand/frame-2.png",
+            "bytes": 6244,
+            "sha256": "402dd9e4a1c8cbb89709357febabc8e60d62586b5a28c70dac80954d047b0fee",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearArmWithoutHand_002_v001.uasset",
+            "bytes": 18864,
+            "sha256": "46094336188f3d0f91860635174e644da293d7e108e37dfcc19d13a3279092a7",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearArmWithoutHand_003_v001.T_Fairytale_SwordReadyNearArmWithoutHand_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/NearArmWithoutHand/frame-3.png",
+            "bytes": 6050,
+            "sha256": "92b06cd7f023caa3bbceeafd76fd066c715ba6b43e1640841fe6f60c07284175",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearArmWithoutHand_003_v001.uasset",
+            "bytes": 18604,
+            "sha256": "3ca6aa29bd9e58f02adc7364c74db2a86cb8544c206b03ce9ad84b9f999f8985",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearHand_000_v001.T_Fairytale_SwordReadyNearHand_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/NearHand/frame-0.png",
+            "bytes": 10127,
+            "sha256": "cde1e43d76bcd8ac9790c739e6fe9559b8bfa4b4ffd3e258f4197e5f066efa75",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearHand_000_v001.uasset",
+            "bytes": 22206,
+            "sha256": "3354c7f64d1b4a0a8d913534bf3446fa3f81596bced1d2f026a334bdf52f6901",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearHand_001_v001.T_Fairytale_SwordReadyNearHand_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/NearHand/frame-1.png",
+            "bytes": 10325,
+            "sha256": "42fb54d4acf57f6941efbf82f30fa459209e4fa411cb8f57ea76ab11702b0125",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearHand_001_v001.uasset",
+            "bytes": 22552,
+            "sha256": "1ddc4078dcd0f9b4dfa54e4fb7a18c0f577e815a88ab8648c6550c0696435359",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearHand_002_v001.T_Fairytale_SwordReadyNearHand_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/NearHand/frame-2.png",
+            "bytes": 10699,
+            "sha256": "814b15d8f85a75e07122a010ffabf9910693f27884031951ecff47e4d52e1d87",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearHand_002_v001.uasset",
+            "bytes": 22858,
+            "sha256": "9f4d9f103d0749727204ea7b88512a57d0857814129be02f832823e0a5fb5fd8",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearHand_003_v001.T_Fairytale_SwordReadyNearHand_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/NearHand/frame-3.png",
+            "bytes": 10274,
+            "sha256": "ab739e32120446bff3f6c197b6650ba47673cc1f2411932705ef998592201061",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyNearHand_003_v001.uasset",
+            "bytes": 22472,
+            "sha256": "65898774b0a80a35b6bf2fb29de258be751e7189d9c2415a263743aa1467597d",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderFar_000_v001.T_Fairytale_SwordReadyShoulderFar_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/FarShoulder/frame-0.png",
+            "bytes": 3577,
+            "sha256": "985342edb15b0a1fc96ecef44e662adea3eb37dbf7a4d5f8efe1f944abef4c54",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderFar_000_v001.uasset",
+            "bytes": 15906,
+            "sha256": "d0fafc5f3e08f13aacde2d152a40dca8e3e9ce795278ccd707d6b50ce3e5be70",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderFar_001_v001.T_Fairytale_SwordReadyShoulderFar_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/FarShoulder/frame-1.png",
+            "bytes": 3738,
+            "sha256": "08329677c7dbd3d158754760f54d71f569af84534fff7a9e46818cb7869a640e",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderFar_001_v001.uasset",
+            "bytes": 16028,
+            "sha256": "eff12ad1fbbbdeb68b7a5dc3bd6b6994c9fc93dc1334bb3be9e2bf327059f6ad",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderFar_002_v001.T_Fairytale_SwordReadyShoulderFar_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/FarShoulder/frame-2.png",
+            "bytes": 3554,
+            "sha256": "47bbd06fbf734cd6ac35bb03bfbdef6b12386fbd5ea38a1ab86fabdeeb911c07",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderFar_002_v001.uasset",
+            "bytes": 15910,
+            "sha256": "19b28ec46a1fa52692ea4587d02dc8ae1d5f0f82b00dff98b53ac4166d7e7bab",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderFar_003_v001.T_Fairytale_SwordReadyShoulderFar_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/FarShoulder/frame-3.png",
+            "bytes": 3477,
+            "sha256": "01032819db247aacd2053d21cfc6851f5b7be80813eee0664bb3e3bf1ebbeed7",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderFar_003_v001.uasset",
+            "bytes": 15855,
+            "sha256": "e9d8942c4a4a7ae9cbe252d2ba03ca6fbb42bb39696908946dd40b4b0553c9e9",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderNear_000_v001.T_Fairytale_SwordReadyShoulderNear_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/NearShoulder/frame-0.png",
+            "bytes": 6731,
+            "sha256": "5fc8e42b58a7a155029d7e6f4633224ade082658bfd7b95a10dd2c1322ec7034",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderNear_000_v001.uasset",
+            "bytes": 19206,
+            "sha256": "03c49fa368fe2feb61446ed2068ca1e387c072eb8aee3b290c2a34356649d480",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderNear_001_v001.T_Fairytale_SwordReadyShoulderNear_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/NearShoulder/frame-1.png",
+            "bytes": 6476,
+            "sha256": "12178c419ef0b55463d4db452e7842cb201e1d8ae230a89094a89e6f06d68476",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderNear_001_v001.uasset",
+            "bytes": 18905,
+            "sha256": "f05e190427bd50b71c00606c2d21126c0c92cf0fc1c350735cf305dbc0c9fc4f",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderNear_002_v001.T_Fairytale_SwordReadyShoulderNear_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/NearShoulder/frame-2.png",
+            "bytes": 6491,
+            "sha256": "d31144d56a8c26ab1da258e88f5bee89b5eb1a3ad38039463d293399a2799483",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderNear_002_v001.uasset",
+            "bytes": 19014,
+            "sha256": "268f21b6aaf0fbf3863b4b9d40fbcc1a06669fc9b5c3129fd0d4b3c5444d1732",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderNear_003_v001.T_Fairytale_SwordReadyShoulderNear_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-ready-v002/macro-registration-proposed-v001/textures/NearShoulder/frame-3.png",
+            "bytes": 6433,
+            "sha256": "b82c291462e39e9facbddcfef753d6ba0f5f6d283641c0be93e58d6dfe7b8a61",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v006/HeroSwordArmorReady/T_Fairytale_SwordReadyShoulderNear_003_v001.uasset",
+            "bytes": 18815,
+            "sha256": "27af514cf7489d60899c254367c3f48a1e3fae79e43c764175a83a27d2befd31",
+            "matches_receipt": true
+          }
+        }
+      ]
+    },
+    {
+      "receipt": {
+        "path": "F:/Ourgame/UnrealGame/Saved/Bootstrap/sword-armor-primary1-v001-import-20261016-044956-227837.json",
+        "bytes": 45649,
+        "sha256": "289aa2c59fabb362d824ead7e8204eec5abd875f0013858ffe3aab8e2332ad00"
+      },
+      "manifest": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-armor-primary1-runtime-v001/manifests/import-sword-armor-primary1-v001.json",
+        "bytes": 32075,
+        "sha256": "ff258c94241cb44c3f74eb4416bba61cd268b7011c4ee587c9a0bfc506b61233"
+      },
+      "manifest_matches_receipt": true,
+      "actual_count": 42,
+      "saved_count": 42,
+      "success": true,
+      "receipt_runtime_verified": false,
+      "assets": [
+        {
+          "component": "BodyRest",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1BodyRest_000_v001.T_Fairytale_SwordPrimary1BodyRest_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/BodyRest/frame-0.png",
+            "bytes": 63612,
+            "sha256": "2447b9c27e8cbbf449f7aee93c3f7153a1e5590c522450abde615b650966988d",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1BodyRest_000_v001.uasset",
+            "bytes": 80764,
+            "sha256": "9a68405dc4b8c0859a9e8e63c58bd96c405ecda595fdadf2ae41a50af6ae1e8b",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1BodyRest_001_v001.T_Fairytale_SwordPrimary1BodyRest_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/BodyRest/frame-1.png",
+            "bytes": 64321,
+            "sha256": "6f6aab5d5aa471eab158a8e8640eac724a62e8b1edb238456532dabc42eb9055",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1BodyRest_001_v001.uasset",
+            "bytes": 81910,
+            "sha256": "f5a45ef7a296fa207c6fca96fa3d0d6e581430028406d7380dffe7cd368e6879",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1BodyRest_002_v001.T_Fairytale_SwordPrimary1BodyRest_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/BodyRest/frame-2.png",
+            "bytes": 57692,
+            "sha256": "16dcae3c1555e0802ca3ca15799702800cb2eac60a222e7cc171686562433e43",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1BodyRest_002_v001.uasset",
+            "bytes": 74687,
+            "sha256": "4ca581799564d3d66d6a8af9d8c4cf2b1bb0e9859bf05fe9d46a903453fdda77",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1BodyRest_003_v001.T_Fairytale_SwordPrimary1BodyRest_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/BodyRest/frame-3.png",
+            "bytes": 57951,
+            "sha256": "8b1639cc38cf66c447fa1ff9a5609e609b640f200bf0314b9cb26c587a7c3ee1",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1BodyRest_003_v001.uasset",
+            "bytes": 74536,
+            "sha256": "9c130deeb8624cd4045e0e013c7d2a7147855bfe49245d8d57365e7121ebbe93",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1BodyRest_004_v001.T_Fairytale_SwordPrimary1BodyRest_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/BodyRest/frame-4.png",
+            "bytes": 63344,
+            "sha256": "2bff301386ca4aba61f129544be050b37a40e8a0924ebfb3e77ad62878e170c1",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1BodyRest_004_v001.uasset",
+            "bytes": 80584,
+            "sha256": "2dc0fd150ce368714e1cc8ee32b07b1f0eb3670a1dc7513e17e0b85e20bdd001",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1BodyRest_005_v001.T_Fairytale_SwordPrimary1BodyRest_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/BodyRest/frame-5.png",
+            "bytes": 63786,
+            "sha256": "950e104d50164c02fe1fbf3d0b0369b3a85c3997fa41e7d4ab4095e9ad8dc476",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1BodyRest_005_v001.uasset",
+            "bytes": 80926,
+            "sha256": "337cc3ae61ccd878f3a258d82f21ccce52a20d138ecf6cf6b8db48dd05db94af",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1Chest_000_v001.T_Fairytale_SwordPrimary1Chest_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/Chest/frame-0.png",
+            "bytes": 9133,
+            "sha256": "c3efabae83f87ee8699fd7e96dc1f88e1c4f004caa9e6f299957b39ca532d771",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1Chest_000_v001.uasset",
+            "bytes": 21672,
+            "sha256": "c56eca493c13e914bcfe9fdbf1d164673d1ee5a1378b654e3431e773098090ca",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1Chest_001_v001.T_Fairytale_SwordPrimary1Chest_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/Chest/frame-1.png",
+            "bytes": 8801,
+            "sha256": "a4af20d7eaebae5b08cf9e8174ee03b8df2aa64f04bb770ba876eb2c2f9d5df7",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1Chest_001_v001.uasset",
+            "bytes": 21117,
+            "sha256": "b6159ea2a0758fb2669c3d24096ff07f7c87b539ec01140236560a02b6bb55da",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1Chest_002_v001.T_Fairytale_SwordPrimary1Chest_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/Chest/frame-2.png",
+            "bytes": 7883,
+            "sha256": "57567403c4197ce71c71341162053cab525080112a90a9fb399a1f62a865d191",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1Chest_002_v001.uasset",
+            "bytes": 20221,
+            "sha256": "dfb14c482f2ddbac3c643bc91e36cf52e4362150d385da554e6ad577bec6d515",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1Chest_003_v001.T_Fairytale_SwordPrimary1Chest_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/Chest/frame-3.png",
+            "bytes": 7353,
+            "sha256": "e6f7141f8bed7a4d8410bea54484c62f10dcfc2c0e2c86642fb21f0814c02b56",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1Chest_003_v001.uasset",
+            "bytes": 19698,
+            "sha256": "32e9e3d405fbd2ac0b2c67028eb15832723b2642cbb808d19ff40214d565cf09",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1Chest_004_v001.T_Fairytale_SwordPrimary1Chest_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/Chest/frame-4.png",
+            "bytes": 8966,
+            "sha256": "f8b98704cd0584939a0153616afcccdcd6b48b49a52a379e458f055c4b9b50e1",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1Chest_004_v001.uasset",
+            "bytes": 21437,
+            "sha256": "c3d09d7cca65d1c6f4150f478c7a86cbcde50225521858a7384206ada774d7cf",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1Chest_005_v001.T_Fairytale_SwordPrimary1Chest_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/Chest/frame-5.png",
+            "bytes": 9018,
+            "sha256": "1cf767e3bc0ca9317b0d8ce2767279d85ad00d124ea042dc4c396e9fafcae8ea",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1Chest_005_v001.uasset",
+            "bytes": 21553,
+            "sha256": "77f3437c1ad9e6f8a45fe3e895bb1e6fc2fdfd0367aec9197b916c669b141374",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1HelmetForeground_000_v001.T_Fairytale_SwordPrimary1HelmetForeground_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/HelmetForeground/frame-0.png",
+            "bytes": 47979,
+            "sha256": "daa16ba4cd7e792c2c166e8f3794bf69220f02e5befac248f0c8cd616dc8f1dd",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1HelmetForeground_000_v001.uasset",
+            "bytes": 64671,
+            "sha256": "0bcc8be86db5501571e245c4ff187a7a9dfd43e14928fd530a76dcc0a5e5aedb",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1HelmetForeground_001_v001.T_Fairytale_SwordPrimary1HelmetForeground_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/HelmetForeground/frame-1.png",
+            "bytes": 46590,
+            "sha256": "f0e36f16e0a1cc586a57dc3d41d66759dda5a613a05c9560fcabb11bd60e8c5b",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1HelmetForeground_001_v001.uasset",
+            "bytes": 63343,
+            "sha256": "30cde6ec56b0fd2cb704adf2270a30746d8a0c611235a51b8ca141631a11f96b",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1HelmetForeground_002_v001.T_Fairytale_SwordPrimary1HelmetForeground_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/HelmetForeground/frame-2.png",
+            "bytes": 47622,
+            "sha256": "990cadb8e7b6a117c29d56ff4534be6affc7ea6661028342ce446b5d0d51beef",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1HelmetForeground_002_v001.uasset",
+            "bytes": 64516,
+            "sha256": "c6142662d8b9a7e934073c72e3ede42ffcea0fdda79b728a9f41b2124dabbde6",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1HelmetForeground_003_v001.T_Fairytale_SwordPrimary1HelmetForeground_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/HelmetForeground/frame-3.png",
+            "bytes": 47555,
+            "sha256": "3732921b03061c70c6dfbeecd6a62ad36d95a093254e9735fd937485174c34a5",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1HelmetForeground_003_v001.uasset",
+            "bytes": 64604,
+            "sha256": "f6b111ba021d12bbd377fd173a647b41c0e4024efd2d8718daac0a006800bd31",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1HelmetForeground_004_v001.T_Fairytale_SwordPrimary1HelmetForeground_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/HelmetForeground/frame-4.png",
+            "bytes": 47671,
+            "sha256": "04b639b2253a97dec83028482b33572a0958388d9d3255f26caed119c1096706",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1HelmetForeground_004_v001.uasset",
+            "bytes": 64566,
+            "sha256": "bea3159da8cbc9ffd6830cd814d4dbc7db955e3eeadb6d04a1ac800ccff9d066",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1HelmetForeground_005_v001.T_Fairytale_SwordPrimary1HelmetForeground_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/HelmetForeground/frame-5.png",
+            "bytes": 47513,
+            "sha256": "a8a4b6a428a113861c35f9bb6628abbd5cd113f78dbc7bede27bce9dee5d0838",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1HelmetForeground_005_v001.uasset",
+            "bytes": 64402,
+            "sha256": "c0259c877c5e21845117f9af47531b3d4149b3f778b181fe1e65851c69dde1f8",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearArmWithoutHand_000_v001.T_Fairytale_SwordPrimary1NearArmWithoutHand_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/NearArmWithoutHand/frame-0.png",
+            "bytes": 6137,
+            "sha256": "4860b0afd3c0bd1af1be8b1091488dd746821a64ba2c04bb9ef974f702caee2c",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearArmWithoutHand_000_v001.uasset",
+            "bytes": 18890,
+            "sha256": "807e24c014854534ce3447c73db19226ab5157f23f101e7fcb6137c68afe524f",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearArmWithoutHand_001_v001.T_Fairytale_SwordPrimary1NearArmWithoutHand_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/NearArmWithoutHand/frame-1.png",
+            "bytes": 7328,
+            "sha256": "7f36076bc149ba1ae4aea7f322b9a71cd5374e189c320de652ed0c8cf842e907",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearArmWithoutHand_001_v001.uasset",
+            "bytes": 20138,
+            "sha256": "a16195bf933beefa621f365de599351c7d236a30cc9cadc39f4468ccf95fd689",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearArmWithoutHand_002_v001.T_Fairytale_SwordPrimary1NearArmWithoutHand_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/NearArmWithoutHand/frame-2.png",
+            "bytes": 8812,
+            "sha256": "e52b50185e48c009f1dad1182eb191c5877a5c2aa9bd9c6eec450dde12842379",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearArmWithoutHand_002_v001.uasset",
+            "bytes": 21718,
+            "sha256": "462d3b53c34f0451f6c215f8cddd4098be145b1e8715031cbabbe2cf9b69079b",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearArmWithoutHand_003_v001.T_Fairytale_SwordPrimary1NearArmWithoutHand_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/NearArmWithoutHand/frame-3.png",
+            "bytes": 8318,
+            "sha256": "1a6e382359e4b4dd80421e5fdc6488c17347d91fea549ba6de7d439c9200e903",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearArmWithoutHand_003_v001.uasset",
+            "bytes": 20857,
+            "sha256": "ce2e4cfd965cffbb9e416527f419084e249d27a84ceaf3e049ed7e8993e17dda",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearArmWithoutHand_004_v001.T_Fairytale_SwordPrimary1NearArmWithoutHand_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/NearArmWithoutHand/frame-4.png",
+            "bytes": 6282,
+            "sha256": "f4a02018b8c0e58f5cd0fc2e2674afe85bd6c43e7825e8ae1d0bbf83bdc732d8",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearArmWithoutHand_004_v001.uasset",
+            "bytes": 18961,
+            "sha256": "f0396095774f1b95b4846fd9a2428f0bff41679bed4d25773e255f616429c0bc",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearArmWithoutHand_005_v001.T_Fairytale_SwordPrimary1NearArmWithoutHand_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/NearArmWithoutHand/frame-5.png",
+            "bytes": 6080,
+            "sha256": "8080885e8b2eb5868cd6f97459d879c3a3a155d46b697b2ffc9910b82cc48983",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearArmWithoutHand_005_v001.uasset",
+            "bytes": 18895,
+            "sha256": "9bea0e824617e09e4f3c66e56411852498ce518ab0b3fbd966c498e4c8f40662",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearHand_000_v001.T_Fairytale_SwordPrimary1NearHand_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/NearHand/frame-0.png",
+            "bytes": 11467,
+            "sha256": "7e4111627912cff34c56f194df23c5f405c1f44109d548267d85700c268f6337",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearHand_000_v001.uasset",
+            "bytes": 23849,
+            "sha256": "9591752041a1f4cd85772077163f58efa73377d05c5bc55f88a411e98fbbb847",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearHand_001_v001.T_Fairytale_SwordPrimary1NearHand_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/NearHand/frame-1.png",
+            "bytes": 10530,
+            "sha256": "923e3b48d1b1fc39ed2e79821033916408e5e32e145580d7903a3afb47bdd11a",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearHand_001_v001.uasset",
+            "bytes": 23230,
+            "sha256": "897cb775b7787f384d43c38abe2cba5b36b6441435492cc6e05fe4d8edd05d8f",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearHand_002_v001.T_Fairytale_SwordPrimary1NearHand_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/NearHand/frame-2.png",
+            "bytes": 10409,
+            "sha256": "a1abed40aa05a6c5d9e9a9e6e1b3743a8f57e37687f975ea83a6f6d25dd735c7",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearHand_002_v001.uasset",
+            "bytes": 22656,
+            "sha256": "f0d6d6ff22a7be993b96cc99d120015ed66dd2b36f18f6c53caf361930e9c0cd",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearHand_003_v001.T_Fairytale_SwordPrimary1NearHand_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/NearHand/frame-3.png",
+            "bytes": 9939,
+            "sha256": "f107821f1837a908c076ef2582e18f74429ab896f7d9893924f484f492d23112",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearHand_003_v001.uasset",
+            "bytes": 22260,
+            "sha256": "2b1ab0f425714f1df265c0a2df370a63b0fc9980d5868457de8f9a999519d5db",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearHand_004_v001.T_Fairytale_SwordPrimary1NearHand_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/NearHand/frame-4.png",
+            "bytes": 11566,
+            "sha256": "94d3d783c0d1d3465853d864e2a177d0d8c46b82fda387d1db6e21d7a4178e91",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearHand_004_v001.uasset",
+            "bytes": 23844,
+            "sha256": "5e5e3dfd47e7e67f1c6e3bf9b3632b1b7bb7469bd9a32615ca39d978b4eac7b0",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearHand_005_v001.T_Fairytale_SwordPrimary1NearHand_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/NearHand/frame-5.png",
+            "bytes": 11787,
+            "sha256": "7ed35cccf77bf5a21c8779ad71f0e33a1a663befa57f33931eb93c3ac335c4ed",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1NearHand_005_v001.uasset",
+            "bytes": 24168,
+            "sha256": "a205e776e55c19b7f0618d4f729955bb8428d55fa21bd11357bd2321b0695603",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderFar_000_v001.T_Fairytale_SwordPrimary1ShoulderFar_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/ShoulderFar/frame-0.png",
+            "bytes": 3557,
+            "sha256": "777695e5eb906bcbdd9be98100a4acd961ec1119b871c357a36f47a1b370260e",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderFar_000_v001.uasset",
+            "bytes": 16009,
+            "sha256": "e78c0c7f1ac41ff18c9a05392d8f7e61e2ced605d0ba3591858d2f425b382f30",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderFar_001_v001.T_Fairytale_SwordPrimary1ShoulderFar_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/ShoulderFar/frame-1.png",
+            "bytes": 3677,
+            "sha256": "324c84cb02b0739fbda9177f00e09b390f193b4a11bab2a9042fa4e12567e45f",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderFar_001_v001.uasset",
+            "bytes": 16083,
+            "sha256": "f1952d1469e496e92a9fba0a08898bcf48630f2c382d46c4ef191e4b4e511719",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderFar_002_v001.T_Fairytale_SwordPrimary1ShoulderFar_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/ShoulderFar/frame-2.png",
+            "bytes": 3240,
+            "sha256": "fa3a752370570bffe1d30f80907243684cc2fe128251f38e7ad4d5a666c32bc0",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderFar_002_v001.uasset",
+            "bytes": 15654,
+            "sha256": "b51d6cbb74b23f62be66e5aa58da16ebf48c0f09a3ce7db8754045cfc1871ba2",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderFar_003_v001.T_Fairytale_SwordPrimary1ShoulderFar_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/ShoulderFar/frame-3.png",
+            "bytes": 3454,
+            "sha256": "3d0bc74c0809793793e23598a5b96f0d3cfb78fe6ab541f31f1b5a895fbbbd7b",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderFar_003_v001.uasset",
+            "bytes": 15918,
+            "sha256": "7a09d9649bd62d680d98266460c9d59b50691d2de5bcf7c48b706f78c0a651b0",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderFar_004_v001.T_Fairytale_SwordPrimary1ShoulderFar_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/ShoulderFar/frame-4.png",
+            "bytes": 3539,
+            "sha256": "67c83d0e7c0abf49f9a935701f0bc8ceb7706647eb320bd0ca5d3a8e36388c62",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderFar_004_v001.uasset",
+            "bytes": 15983,
+            "sha256": "9c0e88ed3aee95caf60f222f9275457004b191006549b3a4bf44122c276c0f62",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderFar_005_v001.T_Fairytale_SwordPrimary1ShoulderFar_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/ShoulderFar/frame-5.png",
+            "bytes": 3551,
+            "sha256": "969bd82d9346737b92f67f83558967b3c5bd17546cac7bec95b55bb9ce6a6314",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderFar_005_v001.uasset",
+            "bytes": 15995,
+            "sha256": "5a60f29c45a0c9cb90cb404b5387051fbd29eb256ae751d1a9aeba55a922d6eb",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderNear_000_v001.T_Fairytale_SwordPrimary1ShoulderNear_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/ShoulderNear/frame-0.png",
+            "bytes": 5846,
+            "sha256": "0bb7e51e4ab6da0c7d3c783954dbc376fbdd8375d2169fd19801afdd574d6864",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderNear_000_v001.uasset",
+            "bytes": 18413,
+            "sha256": "0db38ef4ad734d85921cf71b638435338016c4d29ad46515e3431842b145a60e",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderNear_001_v001.T_Fairytale_SwordPrimary1ShoulderNear_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/ShoulderNear/frame-1.png",
+            "bytes": 6153,
+            "sha256": "870d7987207a9cd26d0683a4802b5b0407f273e013bd3a5fd146d9c75aeac30b",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderNear_001_v001.uasset",
+            "bytes": 18644,
+            "sha256": "63f037ddcb7623492ca05235ccc3d06b4419b537f6eeb9f68124819035245e9e",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderNear_002_v001.T_Fairytale_SwordPrimary1ShoulderNear_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/ShoulderNear/frame-2.png",
+            "bytes": 5425,
+            "sha256": "e80b72e5409206aa098b7018f2d3134849251a39dcd42c156973237215c8f6ee",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderNear_002_v001.uasset",
+            "bytes": 17872,
+            "sha256": "05db340c8cbdba5ade309f776388e41f26ef8fd748e57b468713951449d5dcf2",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderNear_003_v001.T_Fairytale_SwordPrimary1ShoulderNear_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/ShoulderNear/frame-3.png",
+            "bytes": 5524,
+            "sha256": "2e1f0b2d60a0ead51c5604e9005f228ea86d10ccebae187204c86ec46af1572a",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderNear_003_v001.uasset",
+            "bytes": 18048,
+            "sha256": "ea3d81cf75cc8c066f2937eff9ab50c029eb815b29104f26eeab3c5f8614d11e",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderNear_004_v001.T_Fairytale_SwordPrimary1ShoulderNear_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/ShoulderNear/frame-4.png",
+            "bytes": 5937,
+            "sha256": "45492cfc6802cfba91a05e31e403452064701b2d33033176f1e0c29e507d93cf",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderNear_004_v001.uasset",
+            "bytes": 18546,
+            "sha256": "8636cca8e5c08ef75b3d6cf027b11f5f98c1f1c496f3b1a5285f68ce6e71c53e",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderNear_005_v001.T_Fairytale_SwordPrimary1ShoulderNear_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary1-v001/macro-registration-primary1-v001/textures/ShoulderNear/frame-5.png",
+            "bytes": 5920,
+            "sha256": "aeb0f99c6607151d5c82610388923af2f48c7a5eb3deba05c1ebd4fdb0e25f58",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v007/HeroSwordArmorPrimary1/T_Fairytale_SwordPrimary1ShoulderNear_005_v001.uasset",
+            "bytes": 18464,
+            "sha256": "cf3f6d2ef7eb0c37d439419f8e802a305cd02735ca5dd1ee8f50f40e9a8f0b95",
+            "matches_receipt": true
+          }
+        }
+      ]
+    },
+    {
+      "receipt": {
+        "path": "F:/Ourgame/UnrealGame/Saved/Bootstrap/sword-primary2-v002-import-20261016-085358-730896.json",
+        "bytes": 8860,
+        "sha256": "e3481e1ab0541a1d5b5006ba207682888db3cceed69ebf429cc7e4ddec368d20"
+      },
+      "manifest": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary2-runtime-v002/axis1-correction-v001/manifests/import-sword-primary2-v002.json",
+        "bytes": 12532,
+        "sha256": "c5d56440af211145b548ad778edf024321edbe141731daf0b071b8591b15c529"
+      },
+      "manifest_matches_receipt": true,
+      "actual_count": 6,
+      "saved_count": 6,
+      "success": true,
+      "receipt_runtime_verified": false,
+      "assets": [
+        {
+          "clip": "Primary2",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_000_v002.T_Fairytale_SwordPrimary2_000_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary2-runtime-v002/curated/frame-0.png",
+            "bytes": 122776,
+            "sha256": "1dd5a9f21d56ed52d8e3142c2f9c42a28037b824e606147c06920142e9a7999e",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_000_v002.uasset",
+            "bytes": 146288,
+            "sha256": "9363ed6920a390d0e18b5af80c21d4e721c1211c6acd7358d351226776aed178",
+            "matches_receipt": true
+          }
+        },
+        {
+          "clip": "Primary2",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_001_v002.T_Fairytale_SwordPrimary2_001_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary2-runtime-v002/curated/frame-1.png",
+            "bytes": 125128,
+            "sha256": "b7d98a14749e1e8b24f191a9119cb379ef70abb64717fd353303c7a2b05e14e0",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_001_v002.uasset",
+            "bytes": 149026,
+            "sha256": "4ec5705deac86d4d895b36ef8e16224c7d76da08c5e901f14eba833ff055d83f",
+            "matches_receipt": true
+          }
+        },
+        {
+          "clip": "Primary2",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_002_v002.T_Fairytale_SwordPrimary2_002_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary2-runtime-v002/curated/frame-2.png",
+            "bytes": 116713,
+            "sha256": "99a080b206c346e7bac24719085197e2b8faffc48765683a0c566a9659d851d4",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_002_v002.uasset",
+            "bytes": 138468,
+            "sha256": "eefabed46fdddb6be93f6bd752a03c4b38f9b16eef78064678cad37a7925844d",
+            "matches_receipt": true
+          }
+        },
+        {
+          "clip": "Primary2",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_003_v002.T_Fairytale_SwordPrimary2_003_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary2-runtime-v002/curated/frame-3.png",
+            "bytes": 117833,
+            "sha256": "f0c10731650aac7f8b06b30c63da4548a95e8a7aa48ad38c0621b1c9ab202c85",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_003_v002.uasset",
+            "bytes": 141746,
+            "sha256": "b76be089dfe1f339192a770c0ee35c7eaeac228ae54dc56915a2343484fd8c7a",
+            "matches_receipt": true
+          }
+        },
+        {
+          "clip": "Primary2",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_004_v002.T_Fairytale_SwordPrimary2_004_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary2-runtime-v002/curated/frame-4.png",
+            "bytes": 118105,
+            "sha256": "cacb7d9eb5cff2a38c54acf50f96915fa859f8fac5278939f1184bc97e650a84",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_004_v002.uasset",
+            "bytes": 140613,
+            "sha256": "5a8081128ac317ba31f5f3fcaf5b281d52986e1bf168516ccae9e9d06e67f25b",
+            "matches_receipt": true
+          }
+        },
+        {
+          "clip": "Primary2",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_005_v002.T_Fairytale_SwordPrimary2_005_v002",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary2-runtime-v002/curated/frame-5.png",
+            "bytes": 123014,
+            "sha256": "b8546838bd72dde4ce72c4c4055d18f916a94e6c3b3b54f5feeb1d5c2cc59dab",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v009/HeroSwordPrimary2/T_Fairytale_SwordPrimary2_005_v002.uasset",
+            "bytes": 146418,
+            "sha256": "97da2d4ecb65ac22ba89ae8064885e684ba69e631733bc6f38bb74e77fef416c",
+            "matches_receipt": true
+          }
+        }
+      ]
+    },
+    {
+      "receipt": {
+        "path": "F:/Ourgame/UnrealGame/Saved/Bootstrap/sword-armor-primary2-v001-import-20261016-095757-471989.json",
+        "bytes": 44582,
+        "sha256": "6ff9c8ccf430f96be3480e083228dd405c4766f7844b51f05292ed8655b3d3e9"
+      },
+      "manifest": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/manifests/import-sword-armor-primary2-v001.json",
+        "bytes": 31230,
+        "sha256": "4ea48b08c66506a5c762cfc2dcd3beaf5b9540bfc108afc1f80888dcb0dbaaba"
+      },
+      "manifest_matches_receipt": true,
+      "actual_count": 42,
+      "saved_count": 42,
+      "success": true,
+      "receipt_runtime_verified": false,
+      "assets": [
+        {
+          "component": "BodyRest",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2BodyRest_000_v001.T_Fairytale_SwordPrimary2BodyRest_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/BodyRest/frame-0.png",
+            "bytes": 66951,
+            "sha256": "85cca97deda38e59864855c6502fd06a29a9c1cef2674cda8272ad065d28691e",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2BodyRest_000_v001.uasset",
+            "bytes": 84277,
+            "sha256": "4d4af5b75bb2af650ffd15ddf613062974de6fb23d35d745d18b7d132caf7557",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2BodyRest_001_v001.T_Fairytale_SwordPrimary2BodyRest_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/BodyRest/frame-1.png",
+            "bytes": 70139,
+            "sha256": "f97548c798bb8c23e243c2d5dc6ce618551220145b7b80b01a021b21bffd852d",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2BodyRest_001_v001.uasset",
+            "bytes": 87538,
+            "sha256": "4f494752b94e364caabd5515eaf1f98e3f105bcb87eb6b90dadabb3829c231b8",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2BodyRest_002_v001.T_Fairytale_SwordPrimary2BodyRest_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/BodyRest/frame-2.png",
+            "bytes": 61019,
+            "sha256": "1b3204a5d37e7f80b905316bf77afc6e038bf228282d65a91d1009a001f68853",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2BodyRest_002_v001.uasset",
+            "bytes": 77037,
+            "sha256": "ca25fed61f7c32bae970eb5ccb571286f8fc74a5e62bc1bec6b69ca92a07765c",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2BodyRest_003_v001.T_Fairytale_SwordPrimary2BodyRest_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/BodyRest/frame-3.png",
+            "bytes": 62369,
+            "sha256": "73f1f556de94882227542e7e1d11daab3bd791b31de10fdada6182d17b406e42",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2BodyRest_003_v001.uasset",
+            "bytes": 79873,
+            "sha256": "62efaacd7d99b0e6fc80057c34d308c6869e3ae419a12c062dc1effc2e0a8f9e",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2BodyRest_004_v001.T_Fairytale_SwordPrimary2BodyRest_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/BodyRest/frame-4.png",
+            "bytes": 61842,
+            "sha256": "60a74c53287e4ab40f099da8c5d776a0bf9111957e25e484c2d9c5e77feccb79",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2BodyRest_004_v001.uasset",
+            "bytes": 78331,
+            "sha256": "1e021690e483f262e6329b4618ffba731a6fb2c0bb2f05f19d5d111255e4fe18",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2BodyRest_005_v001.T_Fairytale_SwordPrimary2BodyRest_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/BodyRest/frame-5.png",
+            "bytes": 66892,
+            "sha256": "e5e2b6130f6724599004c318e9b5dcc843a0d003b968cbbcca008fb574daf78f",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2BodyRest_005_v001.uasset",
+            "bytes": 84248,
+            "sha256": "78d5d3f46e301be0c5d7046455f1b4af19f172070bc45c64cd8228ac09f60624",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2Chest_000_v001.T_Fairytale_SwordPrimary2Chest_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/Chest/frame-0.png",
+            "bytes": 9567,
+            "sha256": "9a8dfa211ea8ac30d30012c7dbf2b45fcfbd47df98eb46f56ff64232fdcafb33",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2Chest_000_v001.uasset",
+            "bytes": 21852,
+            "sha256": "41d87e9fe0f237f36ea7c71f3099a787c8fae09f766fb49ae447447d7d545724",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2Chest_001_v001.T_Fairytale_SwordPrimary2Chest_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/Chest/frame-1.png",
+            "bytes": 9445,
+            "sha256": "175f01aff98c41467a02f2fd386676b29d7b7bf156b24f0e03934b6e381012d2",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2Chest_001_v001.uasset",
+            "bytes": 21580,
+            "sha256": "6bd9d4a6458ef12ad4b1cfd704f8cd86b9281b1814a476ab9f45d19871ecda1d",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2Chest_002_v001.T_Fairytale_SwordPrimary2Chest_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/Chest/frame-2.png",
+            "bytes": 9351,
+            "sha256": "460bb7364f0bd8e265f8cc1726395f67d9a66e8477bcb55ca3620bb95fd4a70d",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2Chest_002_v001.uasset",
+            "bytes": 21641,
+            "sha256": "99442e409560b47252db84d0fcc985cbeff22eb439c341f1e55b160e5ff5a2c8",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2Chest_003_v001.T_Fairytale_SwordPrimary2Chest_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/Chest/frame-3.png",
+            "bytes": 8883,
+            "sha256": "67ae2756b3253446e7a1d5a8967b0ffdf941989ca10a84727bbbf6ff0e300adb",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2Chest_003_v001.uasset",
+            "bytes": 20977,
+            "sha256": "da06103c5491b56bb06abd2e566fe9689484fc5fd62ff05469eb08845ae51d1e",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2Chest_004_v001.T_Fairytale_SwordPrimary2Chest_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/Chest/frame-4.png",
+            "bytes": 9515,
+            "sha256": "87713ba0e63cd11e67b7c48b52caac5d5c8de613dbc0ef5ebe0b215031522642",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2Chest_004_v001.uasset",
+            "bytes": 21737,
+            "sha256": "17db5d1de39ed0dcae2293d8281354cb23f674f98f3e19b60b10e5e2a6f2e09a",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2Chest_005_v001.T_Fairytale_SwordPrimary2Chest_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/Chest/frame-5.png",
+            "bytes": 9582,
+            "sha256": "41a71eca31cbfd68d597b716852f35be3cb95653222b788112b133984e93cf58",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2Chest_005_v001.uasset",
+            "bytes": 21835,
+            "sha256": "537fe935a18af4d985b430a6d2a2a4fd1ab0430ab040ed09ffc1699bf25c0bfa",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2HelmetForeground_000_v001.T_Fairytale_SwordPrimary2HelmetForeground_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/HelmetForeground/frame-0.png",
+            "bytes": 47452,
+            "sha256": "4fa9de1e46812cf3a60a3c578f17de74455e80b9e409dac2f01807b12c2eea00",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2HelmetForeground_000_v001.uasset",
+            "bytes": 64449,
+            "sha256": "b58ffcd167676fa3e76de9fe504208394ea6857ce13ce4518f8f7c339027ec21",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2HelmetForeground_001_v001.T_Fairytale_SwordPrimary2HelmetForeground_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/HelmetForeground/frame-1.png",
+            "bytes": 48127,
+            "sha256": "b92d7e5b8b0dc63143d2fc274a1f5c007682176802c2ccf4357fb9d7e279fb29",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2HelmetForeground_001_v001.uasset",
+            "bytes": 65020,
+            "sha256": "91e9f99b9f74b8e8710933641d966522bd52081f31df00d5ab9537c2bfe87cd8",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2HelmetForeground_002_v001.T_Fairytale_SwordPrimary2HelmetForeground_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/HelmetForeground/frame-2.png",
+            "bytes": 47956,
+            "sha256": "6c3f3e2faf6c69e95f442a30075446ccdb45391b9b05569d30752822d3696f2d",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2HelmetForeground_002_v001.uasset",
+            "bytes": 64557,
+            "sha256": "3e2b2629b27b72c5dfdcaed1f5b7fd29c08e55d26e0b67a9e7e0951dceaff5be",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2HelmetForeground_003_v001.T_Fairytale_SwordPrimary2HelmetForeground_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/HelmetForeground/frame-3.png",
+            "bytes": 46861,
+            "sha256": "ff56149d29f3cf5266f4da3748a54dacce63a2f36046fd63c3827cf70e833d92",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2HelmetForeground_003_v001.uasset",
+            "bytes": 64001,
+            "sha256": "5d5962dd9732edb18e716373fe1372610ed9eb6a5bfad15d5af107db4501577a",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2HelmetForeground_004_v001.T_Fairytale_SwordPrimary2HelmetForeground_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/HelmetForeground/frame-4.png",
+            "bytes": 47542,
+            "sha256": "8082b4db91fb575de2ef77562dbd5d0123d9f1d69ae19a983e72bd2a678177b1",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2HelmetForeground_004_v001.uasset",
+            "bytes": 64653,
+            "sha256": "65e535b20b5e00de95e5dc0484a77b9de4a5eaa0c83f2f9ef5b699df49d50b37",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2HelmetForeground_005_v001.T_Fairytale_SwordPrimary2HelmetForeground_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/HelmetForeground/frame-5.png",
+            "bytes": 47597,
+            "sha256": "6461f2a021b56355bf9db46dc254536410656d32428040a903f5ca012a6fab63",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2HelmetForeground_005_v001.uasset",
+            "bytes": 64457,
+            "sha256": "3f1627797f46f6e5a1da455645630efeb64c7d5df11099f74c4f66c44101f1bb",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearArmWithoutHand_000_v001.T_Fairytale_SwordPrimary2NearArmWithoutHand_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/NearArmWithoutHand/frame-0.png",
+            "bytes": 7319,
+            "sha256": "c0e9e911f383b30f8434047af04cc0f94a9f632df9f0f99dc295576966f78a4d",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearArmWithoutHand_000_v001.uasset",
+            "bytes": 19686,
+            "sha256": "96c4f0c3f52180af81ecca195ef28f001d02b8f2b339bbcbc9c9ccb9e26e13ad",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearArmWithoutHand_001_v001.T_Fairytale_SwordPrimary2NearArmWithoutHand_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/NearArmWithoutHand/frame-1.png",
+            "bytes": 6774,
+            "sha256": "113302274279ba912718d2ad44eee8d61012df1f6662efa57f260d3048edb85b",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearArmWithoutHand_001_v001.uasset",
+            "bytes": 19636,
+            "sha256": "dc8327135555083f3b5f7e4f3dc338358a11df8ed58b111097aa4da735c96646",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearArmWithoutHand_002_v001.T_Fairytale_SwordPrimary2NearArmWithoutHand_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/NearArmWithoutHand/frame-2.png",
+            "bytes": 7055,
+            "sha256": "f7971320c060638cb276746c6d11944c1fbe98fed19d5337068abebc73002ce9",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearArmWithoutHand_002_v001.uasset",
+            "bytes": 19460,
+            "sha256": "76b4d410e49533ed99486e5de29922b1448f9b9d81b23226be23997c827fe317",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearArmWithoutHand_003_v001.T_Fairytale_SwordPrimary2NearArmWithoutHand_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/NearArmWithoutHand/frame-3.png",
+            "bytes": 7093,
+            "sha256": "c86e8bfa0e9cd3ebd75f1df04c70a9b92fccc7d3f8576f87bc6bf9aba989433c",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearArmWithoutHand_003_v001.uasset",
+            "bytes": 19536,
+            "sha256": "1b678bd97882030e521427b56466cd65acb5e34dab41e0cc5273e50ada8afee2",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearArmWithoutHand_004_v001.T_Fairytale_SwordPrimary2NearArmWithoutHand_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/NearArmWithoutHand/frame-4.png",
+            "bytes": 7551,
+            "sha256": "209ed57a7e7f9f1b498764a21240efe86164d8c14cb0e6113f28697f2bbfe68f",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearArmWithoutHand_004_v001.uasset",
+            "bytes": 20085,
+            "sha256": "513e1e93f4bb7ad339b399d6245d96fc8912ab8b201eb8ee7f5fde709abe6779",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearArmWithoutHand_005_v001.T_Fairytale_SwordPrimary2NearArmWithoutHand_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/NearArmWithoutHand/frame-5.png",
+            "bytes": 7274,
+            "sha256": "a242756d6685e45c1bcc5c47e5f7d603848d96a61fe7aaecffafd5e0ba2777cf",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearArmWithoutHand_005_v001.uasset",
+            "bytes": 19721,
+            "sha256": "8a97349a3dc6f43066ffb7fee1d9ffd74aee2597d827da43fa5bd0378752b5a7",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearHand_000_v001.T_Fairytale_SwordPrimary2NearHand_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/NearHand/frame-0.png",
+            "bytes": 10754,
+            "sha256": "857b54a265ce9ce39150e4e4b639c6cb5182b80f32136d539bba82b2ee3ab4fb",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearHand_000_v001.uasset",
+            "bytes": 22778,
+            "sha256": "8822a2469d9bfd1815b8e8a1bab8d5790958298062bf3a2950ab38450931581e",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearHand_001_v001.T_Fairytale_SwordPrimary2NearHand_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/NearHand/frame-1.png",
+            "bytes": 9784,
+            "sha256": "5c130262f4c793e588769766e90707e3da6de40f40adae22d82d09df920d7b29",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearHand_001_v001.uasset",
+            "bytes": 21946,
+            "sha256": "58423c02f80b2150acc5e6a446484db37ebc5b57402d8f7d8e06b269496ed5a4",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearHand_002_v001.T_Fairytale_SwordPrimary2NearHand_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/NearHand/frame-2.png",
+            "bytes": 10523,
+            "sha256": "1eeedefbbd94aa27a5eebe6cfd68eecb49c46e7c7850995bbbad403cb095af69",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearHand_002_v001.uasset",
+            "bytes": 22690,
+            "sha256": "546127d65dad5211d281a473c2661c659f5be8668ca151b4780539413a7bf82a",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearHand_003_v001.T_Fairytale_SwordPrimary2NearHand_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/NearHand/frame-3.png",
+            "bytes": 10631,
+            "sha256": "413fe687a33ac39fe46b8982a143726f3bec206f4df1ec3d77764ab47260c514",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearHand_003_v001.uasset",
+            "bytes": 22722,
+            "sha256": "1ace1abd9016986dee4c404f3bcbeb4e1b860cd58d4e91b9d236eef25255c52a",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearHand_004_v001.T_Fairytale_SwordPrimary2NearHand_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/NearHand/frame-4.png",
+            "bytes": 10574,
+            "sha256": "de16cda61f747038a8bc9d2201a49946092443d338923bd2cce6abb79b112dee",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearHand_004_v001.uasset",
+            "bytes": 22533,
+            "sha256": "cb0564e201a6527c038e8e1947dd6067f22ec3c2d078d77065316f4d7bcf017b",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearHand_005_v001.T_Fairytale_SwordPrimary2NearHand_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/NearHand/frame-5.png",
+            "bytes": 10848,
+            "sha256": "52f7330f5bc0b56876546ed2f4c3a3a860fbe31e9aac299d0bbc0206337d08d2",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2NearHand_005_v001.uasset",
+            "bytes": 22904,
+            "sha256": "79756c3e4c02ad81d7638db1b93652d0dad7c44cad171f14b58a20f632478d15",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderFar_000_v001.T_Fairytale_SwordPrimary2ShoulderFar_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/ShoulderFar/frame-0.png",
+            "bytes": 3535,
+            "sha256": "133a4ad5f563e46611a1d40aba62954532c4842af3ed55627b8beaef80a5c3fb",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderFar_000_v001.uasset",
+            "bytes": 15787,
+            "sha256": "b8a82a203341675f629321283c367eb38af7e10ab061f8359c74559864580bb4",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderFar_001_v001.T_Fairytale_SwordPrimary2ShoulderFar_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/ShoulderFar/frame-1.png",
+            "bytes": 3625,
+            "sha256": "d03e731e87dd54b472cf3c56d6f98ea805077c440e1a89d748e6ef816bb28d1e",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderFar_001_v001.uasset",
+            "bytes": 15855,
+            "sha256": "8bdef5455349a7394fcc082c755fdf78a1236b0579fa7962fc85172ae7da7740",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderFar_002_v001.T_Fairytale_SwordPrimary2ShoulderFar_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/ShoulderFar/frame-2.png",
+            "bytes": 3575,
+            "sha256": "bfef9c994ff0841891dfad9c82658ab3c8451a7e16bb5f10735dd399f538f3ab",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderFar_002_v001.uasset",
+            "bytes": 15832,
+            "sha256": "6234361fbbca500c87bf95b1d9dc67495d686a3c81dc2396ee00b9ce5f1b84bb",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderFar_003_v001.T_Fairytale_SwordPrimary2ShoulderFar_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/ShoulderFar/frame-3.png",
+            "bytes": 3625,
+            "sha256": "1a0278bba5724f0c5cbeda25f98976c921c22b84064ee23466f9b9d97b74ee33",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderFar_003_v001.uasset",
+            "bytes": 15891,
+            "sha256": "45c7d0f98238b25794353651d3e3c47dfb7350cff2404557e143cc19913a4f29",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderFar_004_v001.T_Fairytale_SwordPrimary2ShoulderFar_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/ShoulderFar/frame-4.png",
+            "bytes": 3574,
+            "sha256": "d19bbf434e5939f88b31fb51efd119ad862dbf0a3dc8ef07f3b8c33755b9c832",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderFar_004_v001.uasset",
+            "bytes": 15800,
+            "sha256": "fcc779faebaef24bd966155bd91216fb70929213da1144fe6a180f134cb5e00a",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderFar_005_v001.T_Fairytale_SwordPrimary2ShoulderFar_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/ShoulderFar/frame-5.png",
+            "bytes": 3527,
+            "sha256": "3f1ff8a2600ff8c7654c6b26c2335cd5c90785f5d945ab53a84bafd4e01cf34b",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderFar_005_v001.uasset",
+            "bytes": 15806,
+            "sha256": "ceaf35f8f0662c7a4ba712f6f1a610ae3e77a698eda6f0984e0e225589829827",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderNear_000_v001.T_Fairytale_SwordPrimary2ShoulderNear_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/ShoulderNear/frame-0.png",
+            "bytes": 6445,
+            "sha256": "83beff181b1b6cac63154538bd5807a548abfdd268df4f6faad090765ee7f267",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderNear_000_v001.uasset",
+            "bytes": 18772,
+            "sha256": "f4f2661eb384a2a68e1ac051e6f30a23afe33d114e02e4937187379a39c9bf53",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderNear_001_v001.T_Fairytale_SwordPrimary2ShoulderNear_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/ShoulderNear/frame-1.png",
+            "bytes": 6075,
+            "sha256": "ba2092401dd2752bddd76ec7b2a77546ffab4df5b1c0fcb4b9f918858a2fcd8b",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderNear_001_v001.uasset",
+            "bytes": 18458,
+            "sha256": "59df86fa4580968fc606d535e7a662ba46c17a5ec35c6f902cfa972f5f3c325b",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderNear_002_v001.T_Fairytale_SwordPrimary2ShoulderNear_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/ShoulderNear/frame-2.png",
+            "bytes": 6348,
+            "sha256": "05c7ee5be9fb9fb16cec2828d019ed09bbea67dc7479949aba2d48e7976aaa53",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderNear_002_v001.uasset",
+            "bytes": 18771,
+            "sha256": "5e8d2985ea06c1ef53150efac90ed67fdd6b392358910e9663090620ee25fe98",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderNear_003_v001.T_Fairytale_SwordPrimary2ShoulderNear_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/ShoulderNear/frame-3.png",
+            "bytes": 6318,
+            "sha256": "8b53754a818e84e8b60c0fe3dc3f0c42fa5ea538af677d350c7df7077cb97152",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderNear_003_v001.uasset",
+            "bytes": 18612,
+            "sha256": "3b12362beb6afed9d4211e22f68a9276f498475917e25c370177859a0ff5cdc7",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderNear_004_v001.T_Fairytale_SwordPrimary2ShoulderNear_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/ShoulderNear/frame-4.png",
+            "bytes": 6229,
+            "sha256": "5652b012ac6364aa79095ee3be6e3905134674d87034640c6a37a171c53408ec",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderNear_004_v001.uasset",
+            "bytes": 18645,
+            "sha256": "ea86b1b885390128d41e57a77f937ef7b0016e789a080a6e132258cda7c159a4",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderNear_005_v001.T_Fairytale_SwordPrimary2ShoulderNear_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-armor-sword-primary2-runtime-v001/textures/ShoulderNear/frame-5.png",
+            "bytes": 6435,
+            "sha256": "63b33c66106e58f5a817d5ee76c77c218a70a492802e596b8fad64534f93ce71",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor/T_Fairytale_SwordPrimary2ShoulderNear_005_v001.uasset",
+            "bytes": 18739,
+            "sha256": "e2a6c06cf8574740a8a3f6d2164b27e2ca80be55bb945d8ef4b1ad10cf783b04",
+            "matches_receipt": true
+          }
+        }
+      ]
+    },
+    {
+      "receipt": {
+        "path": "F:/Ourgame/UnrealGame/Saved/Bootstrap/sword-armor-primary3-v001-import-20261016-112045-451279.json",
+        "bytes": 49537,
+        "sha256": "625462c6cb3fed51371fd62fca43db5214401e5577f7b68c897c103143f1dc5c"
+      },
+      "manifest": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/manifests/import-sword-armor-primary3-v001.json",
+        "bytes": 34438,
+        "sha256": "3283b9ae23fa4f37533afc22fd7db564ad8ba7a7c6fc3725f241e7246fbb3b5c"
+      },
+      "manifest_matches_receipt": true,
+      "actual_count": 48,
+      "saved_count": 48,
+      "success": true,
+      "receipt_runtime_verified": false,
+      "assets": [
+        {
+          "component": "Body",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_000_v001.T_Fairytale_SwordPrimary3Body_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/Body/frame-0.png",
+            "bytes": 111826,
+            "sha256": "0cf3057aadded713b71ef61895d6c1088a468e8be9e52e3ead5e5956ee2d72b6",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_000_v001.uasset",
+            "bytes": 133674,
+            "sha256": "0b2930cefe90c8b06ba3e7c04ff642ba23dc4e9f304f9d470173859f8777c572",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Body",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_001_v001.T_Fairytale_SwordPrimary3Body_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/Body/frame-1.png",
+            "bytes": 117953,
+            "sha256": "d072fc4f7fabe2c511470382245426173d645001083d5f7dd0df66125eb66482",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_001_v001.uasset",
+            "bytes": 139990,
+            "sha256": "220427550e61fe506b314a1f3d84d65e53c745acbccc3435185f3653960274b6",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Body",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_002_v001.T_Fairytale_SwordPrimary3Body_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/Body/frame-2.png",
+            "bytes": 114651,
+            "sha256": "6d551d28d7e3e274468e8b30da53192d9d2f39387f3f1e20948899aacb5eb318",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_002_v001.uasset",
+            "bytes": 136957,
+            "sha256": "fff70c6a09db2b903ba07c5a4d4b5c8f03ec2854dd53f3c0b71d46a1e03e6d91",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Body",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_003_v001.T_Fairytale_SwordPrimary3Body_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/Body/frame-3.png",
+            "bytes": 113766,
+            "sha256": "4996fed4a7a1639c11d1d8c8ac8b4b8aac9d12d7168adf7adcd40f7b8c08e92c",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_003_v001.uasset",
+            "bytes": 134394,
+            "sha256": "4fdaf632155f39f020e849beb6ae39f5778e278934ede00e83085401117e8518",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Body",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_004_v001.T_Fairytale_SwordPrimary3Body_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/Body/frame-4.png",
+            "bytes": 113050,
+            "sha256": "db7b0b174f023daa50e13061565c51a996feeafa26baa92843b3ff6de444be17",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_004_v001.uasset",
+            "bytes": 133362,
+            "sha256": "b7f2529967175655bfced97cab0cf624ac1eb5b93105bb67d8395a9c58676345",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Body",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_005_v001.T_Fairytale_SwordPrimary3Body_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/Body/frame-5.png",
+            "bytes": 113159,
+            "sha256": "6745af979b49ae86f9e6da6c33cca8048b997902177ef5e6fde6fda1543c5523",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Body_005_v001.uasset",
+            "bytes": 135276,
+            "sha256": "15358051129dcd9b85dcbbf56e4262ffb82add2ba5ddb3518628720d2595e3a6",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3BodyRest_000_v001.T_Fairytale_SwordPrimary3BodyRest_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/BodyRest/frame-0.png",
+            "bytes": 59978,
+            "sha256": "6b10262dad27bb5d0044d4ba017c6ca2ef67b5c628ef94288f713900c3bd80e8",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3BodyRest_000_v001.uasset",
+            "bytes": 76673,
+            "sha256": "9d9a94299d09c984fe2ece691ceff0349cd5fb3ca45f04322d1b595f5014bfdf",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3BodyRest_001_v001.T_Fairytale_SwordPrimary3BodyRest_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/BodyRest/frame-1.png",
+            "bytes": 68785,
+            "sha256": "88127b0f1c4ecbe4ea71ef1d1356973bd222c24bf3bf87a9c18ac45b7d5a97c6",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3BodyRest_001_v001.uasset",
+            "bytes": 86303,
+            "sha256": "871e4b260eaefc14f12b0c7fe9eea9d7016686d46c4f7fadc633e138a5f79e7b",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3BodyRest_002_v001.T_Fairytale_SwordPrimary3BodyRest_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/BodyRest/frame-2.png",
+            "bytes": 61801,
+            "sha256": "752f62d1a2b4dd363241d64dc4c4d66ddb582b57cb34c342c1a9e9b5b90ef130",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3BodyRest_002_v001.uasset",
+            "bytes": 79384,
+            "sha256": "e9ec756ff344e7d9adba6502e0b207366cdd225e4f67272f0f2cb31992a16cc3",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3BodyRest_003_v001.T_Fairytale_SwordPrimary3BodyRest_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/BodyRest/frame-3.png",
+            "bytes": 59798,
+            "sha256": "a7ce35becce9d908442dbf441d915d3f401808854593320e4725f284e28998d4",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3BodyRest_003_v001.uasset",
+            "bytes": 76210,
+            "sha256": "c6e9d5547bed57490c86f045a3c9ccb078ef482f01e2e470b1ddac608985cc3c",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3BodyRest_004_v001.T_Fairytale_SwordPrimary3BodyRest_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/BodyRest/frame-4.png",
+            "bytes": 57903,
+            "sha256": "3c24969e76eceed0d9d150328dc9f7db46faf08120ba399c882ba7a120a8af1f",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3BodyRest_004_v001.uasset",
+            "bytes": 73967,
+            "sha256": "317043973dbf71a8424b597bf2f92a5234a84140b665e2cf2708e8702bbaaa81",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "BodyRest",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3BodyRest_005_v001.T_Fairytale_SwordPrimary3BodyRest_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/BodyRest/frame-5.png",
+            "bytes": 63643,
+            "sha256": "7613f9e569a2fa051cdf9c0757874304549a410861de6b35eb9c09460ce95ea5",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3BodyRest_005_v001.uasset",
+            "bytes": 81091,
+            "sha256": "75c57e6a7ff1226f44653eb74fe4e276cea534a75d0a4734dd6365c5b0cb6f3d",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Chest_000_v001.T_Fairytale_SwordPrimary3Chest_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/Chest/frame-0.png",
+            "bytes": 7674,
+            "sha256": "da09aa751209f0d7e99465b7193512619244e4757f4abc9ae860677c1ae620dd",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Chest_000_v001.uasset",
+            "bytes": 19906,
+            "sha256": "f4d4ea2d3f313e0a91451b778e35fb19c5e60d33250adbc49f019759ee2788be",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Chest_001_v001.T_Fairytale_SwordPrimary3Chest_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/Chest/frame-1.png",
+            "bytes": 8237,
+            "sha256": "5af4980b7923563f5fb66bd72f3415709c4b15ab0c8ba7b95ad82371320e33a5",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Chest_001_v001.uasset",
+            "bytes": 20201,
+            "sha256": "5a8001f063cada415ab05274b18f9f4819f4294a6e6ecb35bd0a961e9a3f9dd5",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Chest_002_v001.T_Fairytale_SwordPrimary3Chest_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/Chest/frame-2.png",
+            "bytes": 8228,
+            "sha256": "3d7d731b87bfe63656e735a3bec2cec30ce21afa6c8aca0db27f36549527c8ee",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Chest_002_v001.uasset",
+            "bytes": 20207,
+            "sha256": "99f939ad3076126b5e2e0043fc0a54ddc4bc46a24e600479010787d0104045c3",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Chest_003_v001.T_Fairytale_SwordPrimary3Chest_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/Chest/frame-3.png",
+            "bytes": 8205,
+            "sha256": "4485ab2675b29b9a3f9c592c866a39daff0c4939523ec19a25c79e95c08ca272",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Chest_003_v001.uasset",
+            "bytes": 20376,
+            "sha256": "e2531c4e3447106dfbef92974e1717626bbeccb70e2871242cbb62386497018d",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Chest_004_v001.T_Fairytale_SwordPrimary3Chest_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/Chest/frame-4.png",
+            "bytes": 7955,
+            "sha256": "44b93d7b2bf1734cbcb79905d6fcddef656bf9f81c09c3195540b93057d19caa",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Chest_004_v001.uasset",
+            "bytes": 20044,
+            "sha256": "c43a0160565457e9e23e381084a4c3450136dbf9ce8b9786457aa9f5d3653557",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "Chest",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Chest_005_v001.T_Fairytale_SwordPrimary3Chest_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/Chest/frame-5.png",
+            "bytes": 8025,
+            "sha256": "4e47460e7737d70003230b322cac9599e6300983c7fffd030dfcd0f9368cf972",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3Chest_005_v001.uasset",
+            "bytes": 20133,
+            "sha256": "9753cdcfa5b3551659c4e8ccbc6d8a5625f03680bae47f67342b1ba5364acd39",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3HelmetForeground_000_v001.T_Fairytale_SwordPrimary3HelmetForeground_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/HelmetForeground/frame-0.png",
+            "bytes": 42779,
+            "sha256": "ba4b127683b41ce716f7e5f3765c3c58749c0f4e8f99718669c5cd632d212ff5",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3HelmetForeground_000_v001.uasset",
+            "bytes": 58811,
+            "sha256": "d5c9773cbd39ca9158a16c9c0ad90f5703f9f8ec50701d48dde83985b8d75f55",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3HelmetForeground_001_v001.T_Fairytale_SwordPrimary3HelmetForeground_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/HelmetForeground/frame-1.png",
+            "bytes": 40363,
+            "sha256": "19b96cef16941dbc6d47f9cb32b48019fdd8ec7702d68d9769cc4dea42f48e24",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3HelmetForeground_001_v001.uasset",
+            "bytes": 55730,
+            "sha256": "4f24cbf7732dedcedd23b737cddad987a0e9097995495900024ac0f3189c20a7",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3HelmetForeground_002_v001.T_Fairytale_SwordPrimary3HelmetForeground_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/HelmetForeground/frame-2.png",
+            "bytes": 43169,
+            "sha256": "d35d176c7ad694ac64cf901e32efed2e8d5b7dcc0127c4b192eae6dd6c82097a",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3HelmetForeground_002_v001.uasset",
+            "bytes": 58923,
+            "sha256": "fd5afc06092352a9807c883332724a358bdbb2948b0fad7f0d47b5f8c6c7dde1",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3HelmetForeground_003_v001.T_Fairytale_SwordPrimary3HelmetForeground_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/HelmetForeground/frame-3.png",
+            "bytes": 43773,
+            "sha256": "e07de8d6d0c6656b37c3a692c5fbcf71cac8c7ef95a8c877a4d9c45f51e9d7e1",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3HelmetForeground_003_v001.uasset",
+            "bytes": 59208,
+            "sha256": "38e46f1db848539de5fe91cd8161e1c4b94ec4f2b85de3f6e1feb89d098a9055",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3HelmetForeground_004_v001.T_Fairytale_SwordPrimary3HelmetForeground_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/HelmetForeground/frame-4.png",
+            "bytes": 44112,
+            "sha256": "5cd8f886214229e6fe85b4a93d1392833e1716d1665927e58be9afbd3b9fc6c1",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3HelmetForeground_004_v001.uasset",
+            "bytes": 59214,
+            "sha256": "df111372a97bea7deef4032d531a690f252ade2037dfe111fff6739a66f56bd7",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "HelmetForeground",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3HelmetForeground_005_v001.T_Fairytale_SwordPrimary3HelmetForeground_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/HelmetForeground/frame-5.png",
+            "bytes": 41080,
+            "sha256": "ec9703ba92838fc9e01fcb05002af8d0346468f26d14bb52edba7faa8e11be9d",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3HelmetForeground_005_v001.uasset",
+            "bytes": 56637,
+            "sha256": "44183eda08a78a8f9404a9f969c41d323fe8c5d75ccc997e95e9bbb334cc8aa5",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearArmWithoutHand_000_v001.T_Fairytale_SwordPrimary3NearArmWithoutHand_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/NearArmWithoutHand/frame-0.png",
+            "bytes": 6607,
+            "sha256": "1b47414b6f2a7e92fdf9e769ccd447119b07a1b50c2bd2334418243794947f78",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearArmWithoutHand_000_v001.uasset",
+            "bytes": 19020,
+            "sha256": "83f77308f70b0de11daca0c1cabc2c01091e9edeab89966c0fea422812e3d8ef",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearArmWithoutHand_001_v001.T_Fairytale_SwordPrimary3NearArmWithoutHand_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/NearArmWithoutHand/frame-1.png",
+            "bytes": 5745,
+            "sha256": "4e90f2f4d3d3cc420509f7bbce2dc1d99116a2c452b76f2bac09458e07ffd51b",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearArmWithoutHand_001_v001.uasset",
+            "bytes": 18513,
+            "sha256": "6019bc7d324583ecd274774c70c5f5c4e04f2b016bfb9429b631a4139502f74c",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearArmWithoutHand_002_v001.T_Fairytale_SwordPrimary3NearArmWithoutHand_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/NearArmWithoutHand/frame-2.png",
+            "bytes": 8574,
+            "sha256": "1aa41040986a94862edb666bf547f402369b6bf1714adf4a5c765c61e9fd67cf",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearArmWithoutHand_002_v001.uasset",
+            "bytes": 21164,
+            "sha256": "0e45719d3133a00e8f83ddd66be9acde4f6bef171704adbbb4ea57d456e47769",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearArmWithoutHand_003_v001.T_Fairytale_SwordPrimary3NearArmWithoutHand_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/NearArmWithoutHand/frame-3.png",
+            "bytes": 10223,
+            "sha256": "2b1ded015d1ba7993d205be2b869c2056542c02e01d334890f5becfc41f0c27a",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearArmWithoutHand_003_v001.uasset",
+            "bytes": 22217,
+            "sha256": "c31c01dcbad5de01e3b3a11406e02202828b567048f71552129403d708beb789",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearArmWithoutHand_004_v001.T_Fairytale_SwordPrimary3NearArmWithoutHand_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/NearArmWithoutHand/frame-4.png",
+            "bytes": 10048,
+            "sha256": "1f43d36c17b48db3ec8136fcb86ebdf958d005f6abca3ffb565abd318e26e579",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearArmWithoutHand_004_v001.uasset",
+            "bytes": 21883,
+            "sha256": "be66410258dc566423bac9795b805315b4228d5eaef4eef8a16365dc1d928664",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearArmWithoutHand",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearArmWithoutHand_005_v001.T_Fairytale_SwordPrimary3NearArmWithoutHand_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/NearArmWithoutHand/frame-5.png",
+            "bytes": 7225,
+            "sha256": "51b5400c5536f6d3f9562700e59b62c4d9b94925273d9a59d0204900f76ab7f0",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearArmWithoutHand_005_v001.uasset",
+            "bytes": 19553,
+            "sha256": "e531d43d22e48756f0a9287a76fa05b8e70fea2c402f25f834f10f2f83015f68",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearHand_000_v001.T_Fairytale_SwordPrimary3NearHand_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/NearHand/frame-0.png",
+            "bytes": 11306,
+            "sha256": "2700f6ee340e72424e3825f758b17a0eb05f3f35e6f6e5298b161e85a715b2b4",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearHand_000_v001.uasset",
+            "bytes": 23375,
+            "sha256": "67e360e3fa2584616acfbedc00d5f6f355b9ef05f2eef24b296435c6651b4e48",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearHand_001_v001.T_Fairytale_SwordPrimary3NearHand_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/NearHand/frame-1.png",
+            "bytes": 12002,
+            "sha256": "d8cb031e10a398db01d8bf4ef9883bde1bf5dca1ff041e2bc640b6f6138636bf",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearHand_001_v001.uasset",
+            "bytes": 24235,
+            "sha256": "36bd9ad7fdcfd414803f130ab62411984e4c27d4316dfa4bc1c333f521e32e1c",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearHand_002_v001.T_Fairytale_SwordPrimary3NearHand_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/NearHand/frame-2.png",
+            "bytes": 11313,
+            "sha256": "607cb24b1ab60476f388e3588c981ba423ad968f17eba097fecfec1b124db46f",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearHand_002_v001.uasset",
+            "bytes": 23030,
+            "sha256": "9ed20131f2d8ce2d832fbc585bfb9ea1478b6ce9a4b23310461d0a654e7ea0d6",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearHand_003_v001.T_Fairytale_SwordPrimary3NearHand_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/NearHand/frame-3.png",
+            "bytes": 11929,
+            "sha256": "8f7ee70699468a4308bcbcdbf9652837bbf8ef0da8dac61ecd14d79b5c131ab0",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearHand_003_v001.uasset",
+            "bytes": 23647,
+            "sha256": "dc5a53c9be338b6a16bb7a0a74f4d277083e2eca6cac43b178e1bb5c60cb253a",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearHand_004_v001.T_Fairytale_SwordPrimary3NearHand_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/NearHand/frame-4.png",
+            "bytes": 12855,
+            "sha256": "e05fffb032c92ce8c9a13f6a92d6a89f97902a8aa818dfe4c3f45de8d1bb9087",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearHand_004_v001.uasset",
+            "bytes": 24701,
+            "sha256": "92c688a6c1e1128010ab064759b06fa6a49a5fc773aadd88c6a436770ba3584a",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "NearHand",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearHand_005_v001.T_Fairytale_SwordPrimary3NearHand_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/NearHand/frame-5.png",
+            "bytes": 11437,
+            "sha256": "82df02717f3269820457df3cbd3d70b3d504ef2db758e13ddf53c921f6dcdef7",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3NearHand_005_v001.uasset",
+            "bytes": 23501,
+            "sha256": "69f5c28b46a7d0e39b3426a07027dab9e8b36d08c082fd90ba92dc62bcf09bad",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderFar_000_v001.T_Fairytale_SwordPrimary3ShoulderFar_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/ShoulderFar/frame-0.png",
+            "bytes": 3222,
+            "sha256": "b86946d2b917b4c1b94cac8fd728afaa793e005400440b4ca7ae9a0eb60693a9",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderFar_000_v001.uasset",
+            "bytes": 15462,
+            "sha256": "fee1ed1f8d8df2f47c5af9a392c9132d8656bd521895093473ffe5c7a91f5bdf",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderFar_001_v001.T_Fairytale_SwordPrimary3ShoulderFar_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/ShoulderFar/frame-1.png",
+            "bytes": 3429,
+            "sha256": "d79386c23e6e9b276290baf7c94702ea6636e63973a9adc29e15b4e65b92484b",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderFar_001_v001.uasset",
+            "bytes": 15553,
+            "sha256": "49ae0d546fc72d45f1dba3eee5a0ab9cc42d95d36a529eea7501c7c5309ca764",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderFar_002_v001.T_Fairytale_SwordPrimary3ShoulderFar_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/ShoulderFar/frame-2.png",
+            "bytes": 3458,
+            "sha256": "44ec4c61d57c86f82463aaacce0b64b649ceeeb3db91bf51fed78eea1b6dbaf4",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderFar_002_v001.uasset",
+            "bytes": 15588,
+            "sha256": "1886f3f40203531e83912305683fc763709e7f717ed8880c0218c7b291db44fa",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderFar_003_v001.T_Fairytale_SwordPrimary3ShoulderFar_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/ShoulderFar/frame-3.png",
+            "bytes": 3214,
+            "sha256": "d7752e4ef49d93f077b5f540924cc093fd5a8a5386792b73a25dd38c72338668",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderFar_003_v001.uasset",
+            "bytes": 15369,
+            "sha256": "df8b97e69b26195d177a2f2dbe1db5046c0712c71b9c4b0606d37ec202fe590f",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderFar_004_v001.T_Fairytale_SwordPrimary3ShoulderFar_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/ShoulderFar/frame-4.png",
+            "bytes": 3371,
+            "sha256": "9436ac850b610b62d0d1d7f414f3a9f0d97cb4deac10fcbf163e33f629bfea7b",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderFar_004_v001.uasset",
+            "bytes": 15582,
+            "sha256": "4422fc55923936146d3a6a999020237e9871881a0e19954ff03633f5dff066f2",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderFar",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderFar_005_v001.T_Fairytale_SwordPrimary3ShoulderFar_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/ShoulderFar/frame-5.png",
+            "bytes": 3221,
+            "sha256": "4dea18aa525cbc7ebdc5a55a51bbc6df460c3f8561cd3ba0908efe4c6d9619c1",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderFar_005_v001.uasset",
+            "bytes": 15437,
+            "sha256": "da232411dff1d5789ac214e053ed901b9b77ad887984f28fdeaa88adc8f0240e",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 0,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderNear_000_v001.T_Fairytale_SwordPrimary3ShoulderNear_000_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/ShoulderNear/frame-0.png",
+            "bytes": 5240,
+            "sha256": "6735b4f015a71694309b3b07bd98696db5cb528b9158762e77f6e1e353a80ed5",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderNear_000_v001.uasset",
+            "bytes": 17489,
+            "sha256": "0deadbb896e9db15ca0574162889984c8de5d1a9e455faa0adbb1428f741567b",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 1,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderNear_001_v001.T_Fairytale_SwordPrimary3ShoulderNear_001_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/ShoulderNear/frame-1.png",
+            "bytes": 5367,
+            "sha256": "ca8bfb62b4d58b18e42e0a3931a92a563b318b8266f18a5251576c39a458ff81",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderNear_001_v001.uasset",
+            "bytes": 17457,
+            "sha256": "baf8f12501c00535826dcfb52ee6b9d30b7197d574adddb5a767e5fc67284795",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 2,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderNear_002_v001.T_Fairytale_SwordPrimary3ShoulderNear_002_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/ShoulderNear/frame-2.png",
+            "bytes": 5011,
+            "sha256": "13f17caacc05ffd9630de0e2705f4addd60b2782c92b2077a8dabddf1a030a80",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderNear_002_v001.uasset",
+            "bytes": 17243,
+            "sha256": "44c4b1f1142779feb37792551e09f5da0e0584f6a1a25ae03c70d739a2afd1e2",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 3,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderNear_003_v001.T_Fairytale_SwordPrimary3ShoulderNear_003_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/ShoulderNear/frame-3.png",
+            "bytes": 5119,
+            "sha256": "b448d9e5b4966011b2d8cfbc01b87ab85f72ce511b76f2623b5510bc777d53f0",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderNear_003_v001.uasset",
+            "bytes": 17326,
+            "sha256": "a440e336d3f6d0d40451082001aae7a2de07342dd61d1cd993b83758916a456f",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 4,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderNear_004_v001.T_Fairytale_SwordPrimary3ShoulderNear_004_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/ShoulderNear/frame-4.png",
+            "bytes": 5010,
+            "sha256": "8a512109c07acc9106c0e32dbc69080de986605a3d9c68216dbc481e0fc983a0",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderNear_004_v001.uasset",
+            "bytes": 17281,
+            "sha256": "6d96d4b3056c86bd88415105e8657084c890a387d1c6176736a1025071bd6710",
+            "matches_receipt": true
+          }
+        },
+        {
+          "component": "ShoulderNear",
+          "frame": 5,
+          "object_path": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderNear_005_v001.T_Fairytale_SwordPrimary3ShoulderNear_005_v001",
+          "source": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary3-runtime-v001/textures/ShoulderNear/frame-5.png",
+            "bytes": 5269,
+            "sha256": "e7f422a45ac4cb0545220a78a1dd014e34a977b595bc55a10a785dbe69cb87f3",
+            "matches_receipt": true
+          },
+          "package": {
+            "path": "F:/Ourgame/UnrealGame/Content/Production/ArtTrials/EV048/v011/HeroSwordPrimary3/T_Fairytale_SwordPrimary3ShoulderNear_005_v001.uasset",
+            "bytes": 17560,
+            "sha256": "93207b3e403a9d44bb7af25a7ba7cdbe3aab4a5dec379868766789258e72ed7b",
+            "matches_receipt": true
+          }
+        }
+      ]
+    }
+  ],
+  "import_asset_total": 172,
+  "hash_mismatches": [],
+  "limit": "172 imported/saved textures is not proof of walk/equip, all20 combinations, visual acceptance or cutout bones",
+  "visual_inspection": [
+    "Ready0 BodyRest merges head/torso/pelvis/both legs/far arm",
+    "Ready0 NearArmWithoutHand is visible near sleeve fragment, not complete measured upper+forearm rig",
+    "Ready0 NearHand is clenched glove candidate; hidden wrist/joint fill not established"
+  ]
+}

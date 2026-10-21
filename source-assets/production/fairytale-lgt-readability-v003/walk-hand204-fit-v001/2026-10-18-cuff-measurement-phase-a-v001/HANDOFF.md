@@ -1,0 +1,1 @@
+Five TRIALs only: 204 0..4 integer shift, source cuff split, original cuff retained. Source5 measured but rejected and not exported. Visible seam A/B and artist Grip are not wrist bones or a proven sword grip. Wide fist ratios require visual taste review. Original and presentation images are unviewed; Root must retain to E with two SHA checks before any View.

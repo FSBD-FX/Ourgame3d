@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-lgt-chest-ready-correction-v002",
+    "description": "Edit the four existing native180 views; retain ONLY the Chest leather component, removing every other garment/body component. Preserve the corresponding four actual perspectives.",
+    "base_image": "base-source.png"
+  },
+  "cell": {
+    "shape": "square",
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 211,
+    "safe_margin_y": 211,
+    "size": 512,
+    "safe_margin": 211
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "leather_chest_sword_ready": {
+      "frames": 4,
+      "fps": 6,
+      "loop": true,
+      "action": "Edit the four existing native180 views; retain ONLY the Chest leather component, removing every other garment/body component. Preserve the corresponding four actual perspectives."
+    }
+  },
+  "style": "Preserve the exact supplied editing target's coarse hand-ink and warm soft-leather material; isolate the requested existing component only.",
+  "motion_phase_guides": false,
+  "layout": "taxonomy/v1",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": false,
+    "segmentation": "components",
+    "shared_row_scale": true
+  }
+}

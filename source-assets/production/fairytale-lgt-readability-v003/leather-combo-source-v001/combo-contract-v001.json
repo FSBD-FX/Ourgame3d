@@ -1,0 +1,128 @@
+{
+  "schema": "leather-two-facing-three-stage-combo-source-contract-v001",
+  "created_local": "2026-10-17T03:05:37.020956+08:00",
+  "base_current_source": "Root v125 actual source; exact hashes in inputs, no inferred checkpoint state",
+  "inputs": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp",
+      "bytes": 20146,
+      "sha256": "d7b06d5809b0c47c2460ba42e37855ab65a44ce534931ce494d29584a478decc"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPrimary2ArmorV001.inl",
+      "bytes": 1555,
+      "sha256": "a58ad7a34a836566d956e481bee146b4961ba222192da9b87fe1e623bddc3982"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPrimary3V001.inl",
+      "bytes": 4467,
+      "sha256": "6749343b607b21ae5d7d1b8d1bf959b67324d13b85c7f6b37f70097088116054"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.h",
+      "bytes": 1992,
+      "sha256": "dcbfb6ac54995b361dd8e7ad0578e04bfb92ef995d45d0d905a4e8061f1e7f80"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleEquipmentBoundProbe.cpp",
+      "bytes": 31228,
+      "sha256": "446e0b6b9e83fb528e17fe3f99a3a607355ec881d81261540c0c0c9cf1e11c93"
+    }
+  ],
+  "body_source_versions": [
+    {
+      "stage": 2,
+      "mapping": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary2-leather-input-v001/actual-runtime-source-version-mapping-v001.json",
+        "bytes": 104637,
+        "sha256": "45a5f27b19625a81a73754e02b93d3e2a73ec3b32330cf86896684303e01fa44"
+      },
+      "actual_body_native_request": 171,
+      "canonical_run": "run-primary2-v004",
+      "body_texture_namespace": "/Game/Production/ArtTrials/EV048/v010/HeroSwordPrimary2Armor",
+      "whole_body_namespace": "/Game/Production/ArtTrials/EV048/v009/HeroSwordPrimary2",
+      "body_layers_remain_the_existing_imported_24_PNGs": true,
+      "old_body_pixels_or_marker_modified": false
+    },
+    {
+      "stage": 3,
+      "mapping": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary3-leather-input-v001/actual-runtime-source-version-mapping-v001.json",
+        "bytes": 143281,
+        "sha256": "231f3e1c0300dc6744280f7583db9bd084263a9457909c0f62cec334a39a5d5c"
+      },
+      "actual_body_native_request": 175,
+      "canonical_run": "run-primary3-v001",
+      "body_texture_namespace": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3",
+      "whole_body_namespace": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3",
+      "body_layers_remain_the_existing_imported_24_PNGs": true,
+      "old_body_pixels_or_marker_modified": false
+    }
+  ],
+  "new_optional_art_flags": [
+    "DungeonFairytaleLeatherPrimary2Preview",
+    "DungeonFairytaleLeatherPrimary3Preview"
+  ],
+  "new_proof_flag": "DungeonFairytaleLeatherComboOnlyProof",
+  "required_art_flags": [
+    "DungeonFairytaleLeatherReadyPreview",
+    "DungeonFairytaleLeatherPrimary1Preview",
+    "DungeonFairytaleLeatherPrimary2Preview",
+    "DungeonFairytaleLeatherPrimary3Preview"
+  ],
+  "required_actual_Bound_renderer_flag": "DungeonFairytaleSwordEquipmentBoundPreview",
+  "renderer_new_armor_gate": "Already successfully resolved committed BoundLightArmor AND explicit per-stage leather flag; only Chest/ShoulderNear/ShoulderFar. All other components use old namespaces.",
+  "new_namespaces": {
+    "Primary2": "/Game/Production/ArtTrials/EV048/v014/HeroLeatherPrimary2",
+    "Primary3": "/Game/Production/ArtTrials/EV048/v015/HeroLeatherPrimary3"
+  },
+  "name_patterns": {
+    "Primary2": "T_Fairytale_LeatherPrimary2{Chest|ShoulderNear|ShoulderFar}_{frame:03d}_v001",
+    "Primary3": "T_Fairytale_LeatherPrimary3{Chest|ShoulderNear|ShoulderFar}_{frame:03d}_v001"
+  },
+  "phase_durations_ms": {
+    "Primary1": [
+      85,
+      85,
+      60,
+      60,
+      155,
+      155
+    ],
+    "Primary2": [
+      75,
+      75,
+      60,
+      60,
+      135,
+      135
+    ],
+    "Primary3": [
+      110,
+      110,
+      60,
+      60,
+      160,
+      160
+    ]
+  },
+  "normal_inputs": "Existing Enter/E/A movement cancel/E one LGT commit; J plus 2 native recovery-window buffered J requests, actual Ready>=3 and expired .45s chain, normal opposite A/D, then same J3 and final actual Ready>=3.",
+  "observation_masks": "Independent [left,right][stage0,1,2], each63; OR bits only from real screenshot observed Frame corroborated by active native melee action/Stage/Clip/WeaponInstanceId/AttackId.",
+  "attack_ids": "Six nonzero globally distinct actual native AttackIds, one per facing/stage and increasing by stage; recorded only on actual screenshot observation, not when J is requested.",
+  "fresh_Ready_rule": "Clear side Ready on first observation of every new actual attack; count only inactive native melee + no pending primary/action/selection + idle and all three actual side masks63. Second J request also clears its side counter; request is not action proof.",
+  "finish_rule": "Both sides all3mask63, freshReady>=3 per side, six actual unique IDs, same Sword/Light/run/owner, exactly one actual equipment operation. FinalReady cannot come from between J request and actual processing.",
+  "default_mode_preserved": true,
+  "other_only_modes_mutually_exclusive": true,
+  "case6_wall_timeout_s_if_combo": 12,
+  "other_case_wall_timeout_s": 5,
+  "whole_capture_wall_timeout_s": 30,
+  "fixed_clock_or_gameplay_timing_changed": false,
+  "forced_pose_frame_gear_or_counter_fakes": false,
+  "Source_or_tools_applied": false,
+  "compiled": false,
+  "native_run": false,
+  "new_art_assets_and_fit_review_required_before_admission": true,
+  "source_patch_is_not_build_or_runtime_proof": true,
+  "first_observed_attack_facing_and_grounded_corroborated": true,
+  "full_unit_or_all_actions_accepted": false
+}

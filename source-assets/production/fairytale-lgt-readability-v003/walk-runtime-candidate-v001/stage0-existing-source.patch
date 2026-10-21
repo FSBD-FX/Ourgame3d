@@ -1,0 +1,29 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.h
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.h
+@@ -12,6 +12,7 @@
+ #include "DungeonDodge.h"
+ #include "DungeonWorldProjectiles.h"
+ #include "DungeonFighterSnapshot.h"
++#include "DungeonCompletedGroundMotion.h"
+ #include "DungeonFighter.generated.h"
+ 
+ class ADungeonGameMode;
+@@ -24,6 +25,7 @@
+ 
+ public:
+     ADungeonFighter();
++    bool QueryCompletedGroundMotion(FDungeonCompletedGroundMotion& Out) const;
+     bool CaptureOwnerSnapshot(FDungeonFighterOwnerSnapshot& Out, FString& Diagnostic,
+         const FDungeonFighterRestoreContext* ExplicitStaging = nullptr) const;
+     bool RestoreOwnerSnapshot(const FDungeonFighterOwnerSnapshot& Snapshot,
+--- a/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp
+@@ -1141,6 +1141,8 @@
+     return 30.f + float(DungeonContentCombat::GetArmorDefinition(ContentArmor())->PoiseBonus);
+ }
+ 
++bool ADungeonFighter::QueryCompletedGroundMotion(FDungeonCompletedGroundMotion&) const {return false;}
++
+ void ADungeonFighter::MoveOnGround(FVector2D Direction, float DeltaSeconds)
+ {
+     if(RunInstallBlocksFighter(*this))return;

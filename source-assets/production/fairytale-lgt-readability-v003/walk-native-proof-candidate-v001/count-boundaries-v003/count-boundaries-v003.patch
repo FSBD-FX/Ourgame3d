@@ -1,0 +1,63 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleWalkProbe.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleWalkProbe.cpp
+@@ -60,7 +60,8 @@
+     TMap<FKey,bool> Keys;FKey PulseKey;
+     uint64 OwnerId=0,RestartSerial=0,SwordId=0,LightId=0,SourceId=0,InitialOperation=0,InitialOperations=0,LightVersion=0,QueuedAttack=0;
+     int32 Step=0,IdleSeen[15]={},Masks[2]={},ComboMasks[2][3]={},PostWalkSeen[2]={};
+-    uint64 AttackIds[2][3]={};double Distances[2]={},PostDistances[2]={};
++    uint64 AttackIds[2][3]={};double Distances[2]={},PostDistances[2]={},WalkWindowStart[2]={},PostWindowStart[2]={},LastCountedWalkTo=-1.;
++    uint64 LastObservedDrawId=0;
+     bool Stopped=false,Prewarm=false,Started=false,FinishOnFrame=false,Complete=false;
+     double Warm=0.,Start=0.,Stop=0.,StepStart=0.,ReleaseAt=0.,NeutralUntil=0.;
+     TSharedPtr<FJsonObject> Report=MakeShared<FJsonObject>();
+@@ -80,7 +81,10 @@
+     bool Pulse(FKey K){if(!CanPulse())return false;Key(K,true);PulseKey=K;ReleaseAt=FPlatformTime::Seconds()+.08;return true;}
+     void Next(int32 S)
+     {
+-        Step=S;StepStart=FPlatformTime::Seconds();auto R=MakeShared<FJsonObject>();R->SetNumberField(TEXT("step"),S);R->SetStringField(TEXT("phase"),Phase(S));
++        Step=S;StepStart=FPlatformTime::Seconds();
++        if(S==4||S==9){const int32 Side=S==4?0:1;Masks[Side]=0;Distances[Side]=0.;WalkWindowStart[Side]=Game->GetSimulationTime();}
++        if(S==7||S==12){const int32 Side=S==7?0:1;PostWalkSeen[Side]=0;PostDistances[Side]=0.;PostWindowStart[Side]=Game->GetSimulationTime();}
++        auto R=MakeShared<FJsonObject>();R->SetNumberField(TEXT("step"),S);R->SetStringField(TEXT("phase"),Phase(S));
+         R->SetNumberField(TEXT("wall_offset_s"),StepStart-Start);R->SetNumberField(TEXT("sim"),Game->GetSimulationTime());Steps.Add(MakeShared<FJsonValueObject>(R));
+     }
+     void Finish(const FString& Why=FString())
+@@ -113,6 +117,8 @@
+         if(!Need(G&&H&&P,TEXT("Native player/GameMode/HUD absent")))return;
+         const auto& V=G->GetEquipmentView();if(!Need(V.Bound&&V.ActiveSlot>=0&&V.ActiveSlot<2,TEXT("Native draw has no valid bound active slot")))return;const auto& D=H->GetFairytaleSwordDraw();const auto& A=P->GetMeleeCombatState().Action;
+         FDungeonCompletedGroundMotion M;const bool Motion=P->QueryCompletedGroundMotion(M);
++        if(!Need(D.DrawId>LastObservedDrawId,TEXT("Native capture callback reused one rendered draw boundary")))return;
++        LastObservedDrawId=D.DrawId;
+         auto R=MakeShared<FJsonObject>();const double Offset=FPlatformTime::Seconds()-Start;Offsets.Add(MakeShared<FJsonValueNumber>(Offset));
+         R->SetNumberField(TEXT("wall_offset_s"),Offset);R->SetNumberField(TEXT("flow_step"),Step);R->SetStringField(TEXT("flow_phase"),Phase(Step));
+         R->SetNumberField(TEXT("sim"),G->GetSimulationTime());R->SetStringField(TEXT("simulation_bits"),Bits(G->GetSimulationTime()));Id(R,TEXT("draw_id"),D.DrawId);
+@@ -146,9 +152,26 @@
+             const auto* F=Walk::Find(D.Frame);TArray<FString> Expected={F->BodyRest,F->ShoulderFar,F->Chest,F->NearArmWithoutHand,F->ShoulderNear,F->HelmetForeground,D.WeaponPath,F->NearHand};
+             if(!Need(D.DrawStack==Expected&&D.TexturePath==F->Body&&H->GetRenderedPlayerDrawStack()==Expected
+                 &&H->GetRenderedArmorLayersUsed()&&H->GetRenderedArmorLayerPaths()==TArray<FString>{F->ShoulderFar,F->Chest,F->ShoulderNear},TEXT("Walk exact seven body/armor layers plus sword differ")))return;
+-            const int32 Side=D.Facing<0?0:1;
+-            if(Step==4||Step==9){Masks[Side]|=1<<D.Frame;Distances[Side]+=M.WalkDistance;}
+-            if(Step==7||Step==12){++PostWalkSeen[Side];PostDistances[Side]+=M.WalkDistance;}
++            int32 NativeFrame=-1;
++            if(!Need(DungeonGroundWalk::Frame(double(P->AnimationTime),Walk::Profile().Gait,NativeFrame)
++                &&D.Frame==NativeFrame&&D.WalkPhase==double(P->AnimationTime)
++                &&D.WalkCycleDistance==Walk::Profile().Gait.CycleDistance,
++                TEXT("Walk rendered phase/frame differs from native phase and compiled profile")))return;
++            if(!Need(M.ToTime>LastCountedWalkTo,TEXT("Walk callback reused one completed motion witness")))return;
++            LastCountedWalkTo=M.ToTime;
++            if(Step==4||Step==9||Step==7||Step==12)
++            {
++                const bool Main=Step==4||Step==9;
++                const int32 ExpectedSide=(Step==4||Step==7)?0:1;
++                const bool Left=ExpectedSide==0;
++                const double WindowStart=Main?WalkWindowStart[ExpectedSide]:PostWindowStart[ExpectedSide];
++                if(!Need(D.Facing==(Left?-1:1)&&Controller->IsInputKeyDown(EKeys::A)==Left
++                    &&Controller->IsInputKeyDown(EKeys::D)==!Left&&M.FromTime>=WindowStart
++                    &&M.From.Y==M.To.Y&&(Left?M.To.X<M.From.X:M.To.X>M.From.X),
++                    TEXT("Walk phase credit requires its own fresh window, facing and unique held direction")))return;
++                if(Main){Masks[ExpectedSide]|=1<<D.Frame;Distances[ExpectedSide]+=M.WalkDistance;}
++                else{++PostWalkSeen[ExpectedSide];PostDistances[ExpectedSide]+=M.WalkDistance;}
++            }
+         }
+         if(Step==6||Step==11)
+         {

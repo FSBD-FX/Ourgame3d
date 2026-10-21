@@ -1,0 +1,175 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonHUD.cpp
+@@ -28,6 +28,7 @@
+ #include "DungeonCandidateAssemblyTuningV002.h"
+ #include "TextureResource.h"
+ #include "DungeonFairytaleSwordPrimary2ArmorV001.inl"
++#include "DungeonFairytaleSwordPrimary3V001.inl"
+ #include "HAL/PlatformTime.h"
+ #include "Materials/MaterialInterface.h"
+ #include "Materials/MaterialInstanceDynamic.h"
+@@ -58,7 +59,8 @@
+     bUseCandidateSprites = FParse::Param(FCommandLine::Get(),TEXT("DungeonCandidateSprites"));
+     bUseFairytaleSwordPrimary2Preview=FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2Preview"))
+         ||FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2BodyPreview"))
+-        ||DungeonFairytaleSwordPrimary2ArmorV001::Enabled();
++        ||DungeonFairytaleSwordPrimary2ArmorV001::Enabled()
++        ||DungeonFairytaleSwordPrimary3V001::Enabled();
+     bUseFairytaleSwordArmorPrimary1Preview=bUseFairytaleSwordPrimary2Preview||FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordArmorPrimary1Preview"));
+     bUseFairytaleSwordArmorReadyPreview=bUseFairytaleSwordArmorPrimary1Preview||FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordArmorReadyPreview"));
+     bUseFairytaleSwordBodyV002Preview=bUseFairytaleSwordArmorReadyPreview||FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordBodyV002Preview"));
+@@ -85,11 +87,16 @@
+                 TEXT("NearArmWithoutHand"),TEXT("ShoulderNear"),TEXT("HelmetForeground"),TEXT("NearHand")})
+                 for(int32 I=0;I<6;++I)
+                     if(auto Texture=GetFairytaleSwordArmorPrimary1Texture(Component,I))ReadyArmorTextures.Add(Texture);
+-        if(DungeonFairytaleSwordPrimary2ArmorV001::Enabled())
++        if(DungeonFairytaleSwordPrimary2ArmorV001::Enabled() || DungeonFairytaleSwordPrimary3V001::Enabled())
+             for(const FString Component:{TEXT("BodyRest"),TEXT("ShoulderFar"),TEXT("Chest"),
+                 TEXT("NearArmWithoutHand"),TEXT("ShoulderNear"),TEXT("HelmetForeground"),TEXT("NearHand")})
+                 for(int32 I=0;I<6;++I)
+                     if(auto Texture=DungeonFairytaleSwordPrimary2ArmorV001::GetTexture(Component,I,Frames))ReadyArmorTextures.Add(Texture);
++        if(DungeonFairytaleSwordPrimary3V001::Enabled())
++            for(const FString Component:{TEXT("Body"),TEXT("BodyRest"),TEXT("ShoulderFar"),TEXT("Chest"),
++                TEXT("NearArmWithoutHand"),TEXT("ShoulderNear"),TEXT("HelmetForeground"),TEXT("NearHand")})
++                for(int32 I=0;I<6;++I)
++                    if(auto Texture=DungeonFairytaleSwordPrimary3V001::GetTexture(Component,I,Frames))ReadyArmorTextures.Add(Texture);
+         // The complete selected draw also needs the independent sword and the
+         // source body used by the explicitly unsupported-state placeholder.
+         for(const FString Clip:{TEXT("sword_ready_idle"),TEXT("sword_primary_1")})
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordPresentation.cpp
+@@ -15,6 +15,7 @@
+ #include "Misc/Parse.h"
+ #include "TextureResource.h"
+ #include "DungeonFairytaleSwordPrimary2ArmorV001.inl"
++#include "DungeonFairytaleSwordPrimary3V001.inl"
+ #include "UnrealClient.h"
+ 
+ UTexture2D* ADungeonHUD::GetFairytaleSwordArmorReadyTexture(const FString& Component,int32 Frame)
+@@ -44,9 +45,14 @@
+ UTexture2D* ADungeonHUD::GetFairytaleSwordTexture(const FString& Clip,int32 Index)
+ {
+     using namespace DungeonFairytaleSwordBodyV001;
++    if(DungeonFairytaleSwordPrimary3V001::Enabled() && Clip==TEXT("sword_primary_3"))
++    {
++        if(Index<0 || Index>=DungeonFairytaleSwordPrimary3V001::Count(Clip))return nullptr;
++        return DungeonFairytaleSwordPrimary3V001::GetTexture(TEXT("Body"),Index,Frames);
++    }
+     const bool Second=bUseFairytaleSwordPrimary2Preview && Clip==TEXT("sword_primary_2");
+     const bool SecondBodyTrial=Second && (FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2BodyPreview"))
+-        ||DungeonFairytaleSwordPrimary2ArmorV001::Enabled());
++        ||DungeonFairytaleSwordPrimary2ArmorV001::Enabled() || DungeonFairytaleSwordPrimary3V001::Enabled());
+     const int32 FrameCount=Second?(SecondBodyTrial?DungeonFairytaleSwordPrimary2V003::Count(Clip):DungeonFairytaleSwordPrimary2V001::Count(Clip))
+         :bUseFairytaleSwordBodyV002Preview?DungeonFairytaleSwordBodyV002::Count(Clip):Count(Clip);
+     if(Index<0 || Index>=FrameCount)return nullptr;
+@@ -106,21 +112,25 @@
+     const bool Primary2=bUseFairytaleSwordPrimary2Preview && Sword && !F->bDead && Action.Active
+         && Action.Weapon==DungeonContentCombat::EWeapon::SWD001
+         && Action.Stage==1 && !Action.StartedAirborne;
++    const bool Primary3=DungeonFairytaleSwordPrimary3V001::Enabled() && Sword && !F->bDead && Action.Active && Melee.Grounded
++        && Action.Weapon==DungeonContentCombat::EWeapon::SWD001
++        && Action.Stage==2 && !Action.StartedAirborne;
+     const bool StableIdle=Sword && !F->bDead && !Action.Active && Melee.Grounded
+         && F->AnimationName==TEXT("idle") && F->JumpHeight==0.f
+         && !F->GetWeaponSkillAction().Active
+         && F->GetDodgeState().Phase!=DungeonDodge::EPhase::Dodging
+         && F->GetArmorChangeRemaining()<=0.f
+         && FMath::IsFinite(F->AnimationTime) && F->AnimationTime>=0.f;
+-    Record.Supported=Primary1 || Primary2 || StableIdle;
+-    Record.Clip=Primary2?TEXT("sword_primary_2"):Primary1?TEXT("sword_primary_1"):TEXT("sword_ready_idle");
++    Record.Supported=Primary1 || Primary2 || Primary3 || StableIdle;
++    Record.Clip=Primary3?TEXT("sword_primary_3"):Primary2?TEXT("sword_primary_2"):Primary1?TEXT("sword_primary_1"):TEXT("sword_ready_idle");
+     // The accepted kernel owns attack timing/speed. No independent attack clock.
+-    Record.Frame=(Primary1||Primary2)?F->GetPrimaryPoseFrame():StableIdle
++    Record.Frame=(Primary1||Primary2||Primary3)?F->GetPrimaryPoseFrame():StableIdle
+         ?FMath::FloorToInt(double(F->AnimationTime)/.167)%4:0;
+     const bool RisingAxisTrial=Primary2 && FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2ArcPreview"));
+     const bool Primary2BodyTrial=Primary2 && (FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2BodyPreview"))
+-        ||DungeonFairytaleSwordPrimary2ArmorV001::Enabled());
+-    const FMarker* Marker=Primary2BodyTrial?DungeonFairytaleSwordPrimary2V003::Find(Record.Clip,Record.Frame)
++        ||DungeonFairytaleSwordPrimary2ArmorV001::Enabled() || DungeonFairytaleSwordPrimary3V001::Enabled());
++    const FMarker* Marker=Primary3?DungeonFairytaleSwordPrimary3V001::Find(Record.Clip,Record.Frame)
++        :Primary2BodyTrial?DungeonFairytaleSwordPrimary2V003::Find(Record.Clip,Record.Frame)
+         :RisingAxisTrial?DungeonFairytaleSwordPrimary2V002::Find(Record.Clip,Record.Frame)
+         :Primary2?DungeonFairytaleSwordPrimary2V001::Find(Record.Clip,Record.Frame):bUseFairytaleSwordBodyV002Preview
+         ?DungeonFairytaleSwordBodyV002::Find(Record.Clip,Record.Frame):Find(Record.Clip,Record.Frame);
+@@ -130,22 +140,26 @@
+         && !Body->HasPendingRenderResourceInitialization() && Marker;
+     Record.ArmorPreview=bUseFairytaleSwordArmorReadyPreview;
+     const bool PrimaryArmorPhase=bUseFairytaleSwordArmorPrimary1Preview && Primary1;
+-    const bool Primary2ArmorPhase=Primary2 && DungeonFairytaleSwordPrimary2ArmorV001::Enabled();
+-    const bool ArmorPhase=(Record.ArmorPreview && StableIdle) || PrimaryArmorPhase || Primary2ArmorPhase;
++    const bool Primary2ArmorPhase=Primary2 && (DungeonFairytaleSwordPrimary2ArmorV001::Enabled()
++        ||DungeonFairytaleSwordPrimary3V001::Enabled());
++    const bool Primary3ArmorPhase=Primary3 && DungeonFairytaleSwordPrimary3V001::ArmorEnabled();
++    const bool ArmorPhase=(Record.ArmorPreview && StableIdle) || PrimaryArmorPhase || Primary2ArmorPhase || Primary3ArmorPhase;
+     // Source body partition is exclusive, and every part keeps its original UVs.
+-    // Ready, Primary1 and opt-in Primary2 each use their own source phase partition.
++    // Ready and each supported primary stage use their own source phase partition.
+     static const TCHAR* Components[]={TEXT("BodyRest"),TEXT("ShoulderFar"),TEXT("Chest"),
+         TEXT("NearArmWithoutHand"),TEXT("ShoulderNear"),TEXT("NearHand")};
+     static const TCHAR* PrimaryComponents[]={TEXT("BodyRest"),TEXT("ShoulderFar"),TEXT("Chest"),
+         TEXT("NearArmWithoutHand"),TEXT("ShoulderNear"),TEXT("HelmetForeground"),TEXT("NearHand")};
+-    const int32 LayerCount=(PrimaryArmorPhase||Primary2ArmorPhase)?7:6;
++    const int32 LayerCount=(PrimaryArmorPhase||Primary2ArmorPhase||Primary3ArmorPhase)?7:6;
+     UTexture2D* ReadyLayers[7]={};
+     if(ArmorPhase)
+     {
+         Record.ArmorReady=true;
+         for(int32 I=0;I<LayerCount;++I)
+         {
+-            ReadyLayers[I]=Primary2ArmorPhase
++            ReadyLayers[I]=Primary3ArmorPhase
++                ?DungeonFairytaleSwordPrimary3V001::GetTexture(PrimaryComponents[I],Record.Frame,Frames)
++                :Primary2ArmorPhase
+                 ?DungeonFairytaleSwordPrimary2ArmorV001::GetTexture(PrimaryComponents[I],Record.Frame,Frames)
+                 :PrimaryArmorPhase?GetFairytaleSwordArmorPrimary1Texture(PrimaryComponents[I],Record.Frame)
+                 :GetFairytaleSwordArmorReadyTexture(Components[I],Record.Frame);
+--- a/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordProbe.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordProbe.cpp
+@@ -3,6 +3,7 @@
+ #include "DungeonGameMode.h"
+ #include "DungeonFighter.h"
+ #include "DungeonProofScreenshots.h"
++#include "DungeonFairytaleSwordPrimary3V001.inl"
+ #include "Engine/Engine.h"
+ #include "Engine/World.h"
+ #include "GameFramework/PlayerController.h"
+@@ -101,10 +102,18 @@
+         else if(Wall-WarmStart>17.)Finish(TEXT("prewarm_timeout"));return;
+     }
+     const double T=Wall-CaptureStart;
++    const bool Third=DungeonFairytaleSwordPrimary3V001::Enabled();
+     const bool Second=FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2Preview"))
+         ||FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2ArmorPreview"));
+     Key(EKeys::Enter,T<.12);
+-    if(Second)
++    if(Third)
++    {
++        Key(EKeys::J,(T>=1.10&&T<1.18)||(T>=1.60&&T<1.68)||(T>=2.16&&T<2.24)
++            ||(T>=4.30&&T<4.38)||(T>=4.80&&T<4.88)||(T>=5.36&&T<5.44));
++        Key(EKeys::A,T>=3.40&&T<3.48);
++        if(T>=6.60)Finish();
++    }
++    else if(Second)
+     {
+         const bool Arc=FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2ArcPreview"));
+         // Arc trial presses .50s after the first request: safely inside the
+@@ -132,7 +141,16 @@
+     R->SetBoolField(TEXT("native_async_capture_writes_flushed"),Flushed);R->SetNumberField(TEXT("formal_complete_units"),0);
+     const bool Primary2ArmorTrial=FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2ArmorPreview"));
+     const bool Second=FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordPrimary2Preview")) || Primary2ArmorTrial;
+-    R->SetBoolField(TEXT("primary2_fit_trial"),Second);
++    const bool Third=DungeonFairytaleSwordPrimary3V001::Enabled();
++    const bool ThirdArmor=DungeonFairytaleSwordPrimary3V001::ArmorEnabled();
++    R->SetBoolField(TEXT("primary3_fit_trial"),Third);
++    R->SetBoolField(TEXT("primary3_armor_trial"),ThirdArmor);
++    R->SetBoolField(TEXT("primary2_fit_trial"),Second || Third);
++    if(Third)
++        R->SetStringField(TEXT("scope"),ThirdArmor
++            ?TEXT("Native175 body with opt-in48 Primary3 source/body/armor textures, including integer-registered native176/177/178 armor; real six J requests traverse grounded kernelStages0/1/2, with Stage2 660ms. Existing Ready/Primary1 and native171 V003 Primary2 armor trials retained. No hit target, equipment identity, thumb/grasp, footlock, fullmotion or audio acceptance")
++            :TEXT("Native175 six-body independent-sword fit under real six J requests traversing grounded kernelStages0/1/2, with Stage2 660ms. Existing Ready/Primary1 and native171 V003 Primary2 armor trials retained; Primary3 armor absent. No hit target, equipment identity, thumb/grasp, footlock, fullmotion or audio acceptance"));
++    else
+     R->SetStringField(TEXT("scope"),Primary2ArmorTrial
+         ?TEXT("Native171 body with opt-in42 Primary2 body/armor-layer textures (7x6), including integer-registered native172/173/174 armor, and currentV003 independent-sword markers under real paired J/kernelStage1. Existing Ready/Primary1 trial retained. No hit target, complete armor states/equipment identity, three-stage/fullmotion, thumb/footlock or audio acceptance")
+         :Second

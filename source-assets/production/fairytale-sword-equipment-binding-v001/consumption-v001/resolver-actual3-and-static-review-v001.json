@@ -1,0 +1,62 @@
+{
+  "schema": "bound-consumption-static-review-v001",
+  "resolver_actual_prior_targeted_result": {
+    "report": "F:/Ourgame/UnrealGame/Saved/Automation/FirstRoom-20261016-192455/index.json",
+    "bytes": 2075,
+    "sha256": "af36db37a74611b07173754d015904271e583dee3a39813a9d7e716095fe3f0f",
+    "tests": [
+      {
+        "name": "CodexDungeon.Content.FairytaleEquipmentBinding.CommittedNoArmorLightCancelReplaceAndRetake",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "CodexDungeon.Content.FairytaleEquipmentBinding.InstalledAwaitExplicitContinueRetainsCommittedSkin",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "name": "CodexDungeon.Content.FairytaleEquipmentBinding.RealGradedCursedOwnershipAndAtomicBadReadbacks",
+        "state": "Success",
+        "errors": 0,
+        "warnings": 0
+      }
+    ],
+    "success": 3,
+    "errors": 0,
+    "warnings": 0,
+    "scope": "resolver/transaction/atomic rejection/pause tests; does not prove this consumption candidate draws correctly"
+  },
+  "candidate_compiled": false,
+  "candidate_run": false,
+  "local_readonly_patch_check": {
+    "command": "git apply --check --ignore-space-change <candidate.patch>",
+    "cwd": "F:/Ourgame",
+    "exit_code": 0,
+    "actual_Source_modified": false
+  },
+  "static_checks": {
+    "current_baseline_source_pins_unchanged": true,
+    "P3_inl_sha256": "6749343b607b21ae5d7d1b8d1bf959b67324d13b85c7f6b37f70097088116054",
+    "P3_inl_modified": false,
+    "one_authoritative_resolver_call_per_draw": true,
+    "same_resolver_result_controls_Sword_and_ArmorPhase": true,
+    "drawing_suffix_resource_gates_actual_layer_order_UV_scale_unchanged": true,
+    "Probe_Tick_input_schedule_identical": true,
+    "all5_old_Probe_scope_literals_unchanged": true,
+    "HUD_showInterface_input_kernel_audio_clocks_untouched": true,
+    "all5_candidate_local_delimiter_counts_balanced": true,
+    "static_checks_are_not_CXX_or_native_results": true
+  },
+  "future_native_checks": {
+    "Bound_only_current_material_selection": null,
+    "Bound_plus_old_art_flags_no_armor_has_no_armor_quads": null,
+    "actual_LGT_current_matching_ready_P1_P2_P3_quads": null,
+    "pending_cancel_commit_correspondence": null,
+    "actual_non_LGT_or_invalid_no_sword_no_LGT_placeholder": null,
+    "AwaitExplicitContinue_same_static_identity": null,
+    "old_trial_alone_runtime_comparison": null
+  }
+}

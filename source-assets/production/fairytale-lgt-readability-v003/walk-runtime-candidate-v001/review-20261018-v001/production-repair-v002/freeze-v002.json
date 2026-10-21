@@ -1,0 +1,44 @@
+{
+  "schema": "fairytale-ground-walk-production-repair-v002",
+  "reason": "Exclude final dodge displacement using interval-start eligibility before Dodge.StepTo can transition to Idle.",
+  "original_production": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/production-source/DungeonGameMode.cpp",
+    "bytes": 146348,
+    "sha256": "67cae19042e5ced5f1c5e58946f643d0dd0020a89803d4e2464eadaed016527c"
+  },
+  "candidate": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/review-20261018-v001/production-repair-v002/DungeonGameMode.cpp",
+    "bytes": 146692,
+    "sha256": "de4baa5c19eb886b167c71861e47bda55a4cc370c3cbdb25fea24a676bdc26fd"
+  },
+  "patch": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/review-20261018-v001/production-repair-v002/production-repair-v002.patch",
+    "bytes": 1702,
+    "sha256": "9cc48ac6addfbf499ed821871c370d2733e14493e86888c65dd1fef365c78f02"
+  },
+  "new_test": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/review-20261018-v001/production-repair-v002/DungeonFairytaleGroundWalkBoundaryTests.cpp",
+    "bytes": 3092,
+    "sha256": "8d85e2a6968268c8e743827332c882e4db3dc3363da31533a97d36ee5e75a49f"
+  },
+  "original_three_tests": {
+    "path": "source-assets/production/fairytale-lgt-readability-v003/walk-runtime-candidate-v001/new-tests/DungeonFairytaleGroundWalkTests.cpp",
+    "bytes": 10389,
+    "sha256": "5324b45a5c5a2a7ce20d4253f0845ab7f3418c1d97d0fecd98b6b22039dd7007"
+  },
+  "original_three_assertions_unchanged": true,
+  "profile_configured": false,
+  "UE_UBT_native_tests_run": false,
+  "actual_source_mutated": false,
+  "original_candidate_mutated": false,
+  "new_test_group": "CodexDungeon.Content.FairytaleGroundWalk.Boundaries.DodgeCompletionExcludesFinalSegment",
+  "other_interval_boundaries_reviewed": {
+    "airborne_landing": "Eligibility now samples prior to motion; JumpHeight/Velocity/Grounded exclude start-airborne interval, and Record also requires P.StartHeight==P.EndHeight==0.",
+    "hurt_expiry": "Eligibility samples HurtTime before SimulateMotion decays timer; endpoint expiry cannot count the hurt interval.",
+    "legacy_armor_expiry": "Eligibility samples ArmorChangeRemaining before SimulateMotion decrements it.",
+    "equipment_cancel": "Fresh/held input cancellation occurs at start boundary in UpdatePlayerInput before this eligibility sample, so subsequent normal movement is allowed; active uncancelled transaction remains excluded.",
+    "primary_skill_completion": "Combat/WA actions advance after CommitMotion; active interval-start action remains excluded.",
+    "endpoint_skill_step": "Separate skill placement occurs after motion/action consumption; witness discontinuity checks reject publication if endpoint changes."
+  },
+  "status": "CANDIDATE_REQUIRES_ROOT_ADMISSION_REAL_COMPILE_AND_TEST"
+}

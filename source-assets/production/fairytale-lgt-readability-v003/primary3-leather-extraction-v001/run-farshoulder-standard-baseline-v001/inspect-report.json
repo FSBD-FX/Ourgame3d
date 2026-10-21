@@ -1,0 +1,54 @@
+{
+  "ok": false,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\primary3-leather-extraction-v001\\run-farshoulder-standard-baseline-v001",
+  "states": [
+    "leather_farshoulder_sword_primary3"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "leather_farshoulder_sword_primary3",
+      "source": "raw-projection",
+      "expected_frames": 6,
+      "found_frames": 6,
+      "natural_pose_count": 6,
+      "frame_files": [],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.8440874952031139,
+          "mean": 0.8998122233286373
+        },
+        "dhash_similarity": {
+          "min": 0.96875,
+          "mean": 0.9854166666666667
+        },
+        "motion_presence": 0.00027788947610294116,
+        "centroid_sigma": {
+          "x": 0.351015481733239,
+          "y": 0.7272517802761341
+        }
+      },
+      "ok": false,
+      "errors": [
+        "leather_farshoulder_sword_primary3: frame 02 is empty or too sparse (428 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)",
+        "leather_farshoulder_sword_primary3: frame 03 is empty or too sparse (438 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)"
+      ],
+      "warnings": [
+        "leather_farshoulder_sword_primary3: motion presence is too low (0.0003 < 0.0100)"
+      ]
+    }
+  ],
+  "errors": [
+    "leather_farshoulder_sword_primary3: frame 02 is empty or too sparse (428 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)",
+    "leather_farshoulder_sword_primary3: frame 03 is empty or too sparse (438 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)"
+  ],
+  "warnings": [
+    "leather_farshoulder_sword_primary3: motion presence is too low (0.0003 < 0.0100)"
+  ]
+}

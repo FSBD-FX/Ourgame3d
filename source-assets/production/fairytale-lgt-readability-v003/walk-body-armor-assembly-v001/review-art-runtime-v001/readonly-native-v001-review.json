@@ -1,0 +1,131 @@
+{
+  "schema": "walk-native-proof-readonly-art-runtime-review-v001",
+  "created_local": "2026-10-18T09:08:53.171989+08:00",
+  "scope": "Frozen native-code-freeze-v001 .h/.cpp/HUD startup patch; targeted actual source APIs only. No images re-reviewed, runtime counts generated, UE/UBT/import/tests executed.",
+  "freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-native-proof-candidate-v001/native-code-freeze-v001.json",
+    "bytes": 2324,
+    "sha256": "3314c23e2b77856037af56ee01431678ff1359f9452c71d00adad8e154c675e3"
+  },
+  "candidate_pins": [
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-native-proof-candidate-v001/candidate-source/DungeonFairytaleWalkProbe.h",
+      "bytes": 833,
+      "sha256": "468216d15d3edefe00dc3377fc55ba331e0a681d458f1b92c7f1b1e94db8bfff"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-native-proof-candidate-v001/candidate-source/DungeonFairytaleWalkProbe.cpp",
+      "bytes": 23054,
+      "sha256": "3ed3bcf6c239ca6d3603ab9c27ad6df1c5c0bbead092198adb861206adb95def"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-native-proof-candidate-v001/patches/hud-walk-probe-startup-v001.patch",
+      "bytes": 1501,
+      "sha256": "516018ce026a3e66c36960959a4c72d8742af28d6a203990f192f5c27e875f75"
+    }
+  ],
+  "candidate_freeze_mismatches": [],
+  "findings": [
+    {
+      "id": "WALK-P1-phase-counter-ownership",
+      "priority": 1,
+      "blocking_for_v001_admission": true,
+      "file": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-native-proof-candidate-v001/candidate-source/DungeonFairytaleWalkProbe.cpp",
+      "lines": [
+        142,
+        144,
+        184,
+        194,
+        196,
+        198
+      ],
+      "title": "Phase counters can receive evidence from the other movement phase",
+      "fact": "Step4 or9 writes Masks/Distances indexed only by D.Facing. Step7 or12 writes PostWalkSeen/PostDistances the same way. Counters are not reset at phase entry. Phase exit reads fixed side0/1, without checking counted observations belong to that expected held-input phase.",
+      "inference": "Unexpected mixed facing in one earlier phase can pre-credit the later phase; later right/postcombo exit may use earlier evidence without its own full native D cycle or resumed Walk. This is a source control-flow finding, not a claimed runtime reproduction.",
+      "required_change": "Map counted Step to ExpectedSide; require exact D.Facing and held expected A XOR D plus compatible signed completed X movement; use reset/phase-owned counters. Independent verifier must derive each phase separately.",
+      "status": "Root forwarded to guard_two_process for NEWv003; v001/v002 explicitly not admitted."
+    },
+    {
+      "id": "WALK-P2-duplicate-motion-witness",
+      "priority": 2,
+      "blocking_for_v001_admission": true,
+      "file": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-native-proof-candidate-v001/candidate-source/DungeonFairytaleWalkProbe.cpp",
+      "lines": [
+        136,
+        143,
+        144,
+        157
+      ],
+      "title": "Screenshot observations add the same completed motion without uniqueness guard",
+      "fact": "Observe queries CompletedGroundMotion without consuming it and unconditionally increments IdleSeen/PostWalkSeen and adds M.WalkDistance on every processed screenshot. No uniqueness check uses D.DrawId or completed FromTime/ToTime. DungeonFighter.cpp1228-1236 confirms QueryCompletedGroundMotion is a pure getter.",
+      "inference": "Ordinary capture is normally once per rendered frame, but duplicate draw/callback sampling of the same completed motion can inflate actual-distance evidence or the minimum observation count. Source currently cannot reject this boundary; no duplicate runtime callbacks were claimed or generated.",
+      "required_change": "Retain every original capture Observation/Offset. Count draw evidence only for a new draw; add physical distance only for a unique completed-motion identity (run/owner/room/fromtime/totime), or explicitly fail duplicate evidence. Do not fabricate or drop capture rows.",
+      "status": "Specific source/API concern sent directly to guard_two_process forv003."
+    },
+    {
+      "id": "WALK-N1-owner-clock-frame-crosscheck",
+      "priority": 2,
+      "blocking_for_v001_admission": false,
+      "file": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-native-proof-candidate-v001/candidate-source/DungeonFairytaleWalkProbe.cpp",
+      "lines": [
+        139,
+        141
+      ],
+      "title": "Walk frame range/path stack is checked, but owner clock to frame is not independently derived",
+      "fact": "Observer requires D.Frame0..5 and expected profile paths, ordinary ground owner, native motion and matching simulation time. It does not derive DungeonGroundWalk::Frame(P.AnimationTime,Profile.Gait) and compare to D.Frame/WalkPhase. The inspected presenter does derive its frame from that clock.",
+      "inference": "The current presenter source corroborates ownership, so this is not a direct-forcing defect in the probe. Adding the independent derivation makes the acceptance boundary detect later presenter regressions.",
+      "required_change": "In counted Walk observations derive the expected frame from authoritative AnimationTime and the immutable Gait; compare D.Frame and logged WalkPhase to owner clock.",
+      "status": "Sent to guard_two_process as tightening suggestion."
+    },
+    {
+      "id": "WALK-N2-enter-scope",
+      "priority": 3,
+      "blocking_for_v001_admission": false,
+      "file": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-native-proof-candidate-v001/candidate-source/DungeonFairytaleWalkProbe.cpp",
+      "lines": [
+        178
+      ],
+      "title": "Already-started fixtures can skip Enter although report scope mentions actual Enter",
+      "fact": "Case0 pulses Enter only while bWaitingForStart; an already-running fixture progresses tobaseline without an Enter request.",
+      "inference": "Known waiting fixture can satisfy the scope normally. If this probe is reused with a started fixture, report scope should be narrowed or an initial-wait/actual Enter receipt asserted.",
+      "required_change": "Keep actual input requests truthful; for an actual-Enter claim verify an Enter press/release was observed in the fixture.",
+      "status": "Nonblocking scope caution, not a runtime failure claim."
+    }
+  ],
+  "positive_contracts": [
+    {
+      "contract": "ordinary_input_ownership",
+      "result": "holds in inspected source",
+      "evidence": "Key() calls APlayerController::InputKey; Actor Tick adjusts probe state only. No SetActorLocation, direct AnimationName/AnimationTime/frame write, manual Game Tick, clock stepping, or equipment Commit call exists in this candidate. Normal game ReadMoveIntent/WasInputKeyJustPressed owns A/D/E/J resolution."
+    },
+    {
+      "contract": "actual_single_LGT_instance",
+      "result": "holds in inspected source",
+      "evidence": "Source registration uses public RegisterEquipmentSource with ARM-LGT-001 and saves returned SourceId/LightId; nearest selected source required; E is actual InputKey; Step2 waits inactive action and Inventory.Armor==LightId. Step>=3 requires same LightId, armor version and operation/NextOperation exactly+1; run/owner/restart and activeSwordID remain fixed. GameMode CommitEquipmentAction uses real inventory PreparePickup/Commit."
+    },
+    {
+      "contract": "two_native_three_stage_chains_and_real_postWalk",
+      "result": "native owner checks hold; phase-counter findings above must be fixed",
+      "evidence": "J pulses use native input queue; actual A.Stage0..2/AttackId/WeaponInstanceId/facing and GetPrimaryPoseFrame are compared; all6 phase bits per stage required, all6 distinct attack IDs across both chains; later Walk requires ordinary owner, positive published completed motion, grounded/intent, no melee action and profile source stack. PostWalk credit needs phase isolation/uniqueness fixes."
+    },
+    {
+      "contract": "missing_source_profile_fails",
+      "result": "holds in inspected source",
+      "evidence": "BeginPlay Need(Walk::Valid()) fails unconfigured source closure/measurements/48 paths before normal capture/flow. Inspected actual WalkDataV001.inl is Pending{} and therefore fails Valid. No runtime fallback policy or fabricated default count supplied."
+    },
+    {
+      "contract": "same_draw_source_paths",
+      "result": "v001 checks Walk exact ordered stack and Body path; Root reports v002 added actual rendered8/armor3 checks",
+      "evidence": "Observer Walk block compares ordered source profile body/armor/sword/hand paths and Body metadata; source presenter draws actual body layers with records. v002 changes are outside this frozenv001 review; will reviewv003 if requested."
+    },
+    {
+      "contract": "scope_and_capture",
+      "result": "truthful technical boundary; no runtime execution done",
+      "evidence": "Required native capture/Walk/Bound flags, fixed timestep prohibited, prewarm and original screenshots/stop/flush checked. Report explicitly leaves art/audio/fullunits/wallstop false/0. Old native verifier is bound-flow-schema-specific and cannot be reused unchanged for Walk report; guard owns NEW Walk verifier."
+    }
+  ],
+  "recommendation": "Do not admit frozenv001/v002. Root is waiting for guard_two_process NEWv003 phase ownership and count witness corrections; this report is not runtime acceptance.",
+  "writes_only": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-body-armor-assembly-v001/review-art-runtime-v001",
+  "actual_Source_tools_candidate_files_modified": false,
+  "runtime_frames_attacks_operations_observed": null
+}

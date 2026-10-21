@@ -1,0 +1,25 @@
+--- a/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp
++++ b/UnrealGame/Source/CodexDungeon/DungeonGameMode.cpp
+@@ -1910,6 +1910,9 @@
+         const float Step=float(ToTime-FromTime);
+         const auto BeforeMotion=CaptureKnightBodies();
+         MotionBatchBodies=Predicted;bSimulatingMotion=true;
++        // Interval-start eligibility must precede Dodge.StepTo: its final segment
++        // still belongs to dodge even when the endpoint changes Dodging to Idle.
++        const bool PlayerOrdinaryEligibleAtStart=PlayerFighter->CanAccumulateGroundWalk();
+         if (PlayerFighter->Dodge.State().Phase!=DungeonDodge::EPhase::Dead)
+         {
+             const auto R=PlayerFighter->Dodge.StepTo(ToTime,[this,&Predicted](const DungeonDodge::FSweepRequest& Q)
+@@ -1921,10 +1924,10 @@
+                 const auto& D=PlayerFighter->Dodge.State();PlayerFighter->SetActorLocation(FVector(D.Position.X,D.Position.Y,0));
+             }
+         }
+-        const auto CommitMotion=[Step,FromTime,ToTime,&Predicted](ADungeonFighter* Fighter)
++        const auto CommitMotion=[this,Step,FromTime,ToTime,&Predicted,PlayerOrdinaryEligibleAtStart](ADungeonFighter* Fighter)
+         {
+             if (!IsValid(Fighter)) return;
+-            const bool OrdinaryEligible=Fighter->CanAccumulateGroundWalk();
++            const bool OrdinaryEligible=Fighter==PlayerFighter?PlayerOrdinaryEligibleAtStart:Fighter->CanAccumulateGroundWalk();
+             const bool HadIntent=!Fighter->bEnemy&&!Fighter->ReadMoveIntent().IsNearlyZero();
+             // Timers, existing resources and ballistic velocity advance exactly once.
+             // XY is the already resolved query result, not a second movement attempt.

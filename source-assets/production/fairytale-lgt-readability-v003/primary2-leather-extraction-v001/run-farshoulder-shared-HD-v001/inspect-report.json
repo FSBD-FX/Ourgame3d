@@ -1,0 +1,52 @@
+{
+  "ok": false,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\primary2-leather-extraction-v001\\run-farshoulder-shared-HD-v001",
+  "states": [
+    "leather_farshoulder_sword_primary2"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "leather_farshoulder_sword_primary2",
+      "source": "raw-projection",
+      "expected_frames": 6,
+      "found_frames": 6,
+      "natural_pose_count": 6,
+      "frame_files": [],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.7262931034482759,
+          "mean": 0.8759924055167163
+        },
+        "dhash_similarity": {
+          "min": 1.0,
+          "mean": 1.0
+        },
+        "motion_presence": 0.00015055338541666667,
+        "centroid_sigma": {
+          "x": 0.22573950865814904,
+          "y": 0.18320446804615684
+        }
+      },
+      "ok": false,
+      "errors": [
+        "leather_farshoulder_sword_primary2: frame 02 is empty or too sparse (191 pixels < 256, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)"
+      ],
+      "warnings": [
+        "leather_farshoulder_sword_primary2: motion presence is too low (0.0002 < 0.0100)"
+      ]
+    }
+  ],
+  "errors": [
+    "leather_farshoulder_sword_primary2: frame 02 is empty or too sparse (191 pixels < 256, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)"
+  ],
+  "warnings": [
+    "leather_farshoulder_sword_primary2: motion presence is too low (0.0002 < 0.0100)"
+  ]
+}

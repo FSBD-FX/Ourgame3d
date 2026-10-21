@@ -1,0 +1,30 @@
+--- a/configured-label-test-v001/DungeonFairytaleGroundWalkConfiguredTests.cpp
++++ b/configured-label-test-v002/DungeonFairytaleGroundWalkConfiguredTests.cpp
+@@ -13,6 +13,12 @@
+ {
+  const FString Original=FCommandLine::Get();
+  ~FWalkCommandLineScope(){FCommandLine::Set(*Original);}
++ bool AddWalkOptIn()
++ {
++  if(!FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordWalkPreview")))
++   FCommandLine::Set(*(FString(FCommandLine::Get())+TEXT(" -DungeonFairytaleSwordWalkPreview")));
++  return FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordWalkPreview"));
++ }
+  bool RemoveWalkOptIn()
+  {
+   FString Without=Original;
+@@ -40,9 +46,11 @@
+  // Pending art data is an explicit prerequisite failure, never a skipped PASS
+  // or a synthetic/runtime profile override. Root must freeze the table first.
+  if(!TestTrue(TEXT("REQUIRES configured retained actual Walk profile; pending table cannot certify new label"),DungeonFairytaleSwordWalkV001::Valid()))return false;
+- if(!TestTrue(TEXT("REQUIRES real initial DungeonFairytaleSwordWalkPreview command-line opt-in"),
+-  FParse::Param(FCommandLine::Get(),TEXT("DungeonFairytaleSwordWalkPreview"))))return false;
+- FWalkCommandLineScope CommandLine;const auto& P=DungeonFairytaleSwordWalkV001::Profile().Gait;
++ // A default full registry keeps legacy groups unopted. Add the real flag
++ // only within this test scope before Source world/HUD construction.
++ FWalkCommandLineScope CommandLine;
++ if(!TestTrue(TEXT("Scoped actual command line enables Walk before Source world/HUD construction"),CommandLine.AddWalkOptIn()))return false;
++ const auto& P=DungeonFairytaleSwordWalkV001::Profile().Gait;
+  const double FloatTolerance=2.e-6*FMath::Max(1.,P.CycleSeconds);
+  FCodecWorld Source(*this);if(!Source.Create()||!Source.Key(EKeys::D,true))return false;Source.Frame(.02f);
+  if(!Source.Key(EKeys::D,false))return false;

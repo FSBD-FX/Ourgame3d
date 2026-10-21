@@ -1,0 +1,104 @@
+{
+  "schema": "primary3-unapplied-source-draft-audit-v001",
+  "applied": false,
+  "compiled": false,
+  "baseline_manifest": {
+    "path": "source-assets/production/backups/2026-10-16_Primary2Armor42-fit-full138GREEN-v115/compiled-source-manifest.json",
+    "bytes": 401419,
+    "sha256": "dbe28573bd7cd0fbde6275582343590c2d0dff08cc3680e9645b1037d56abedb"
+  },
+  "root_inline_dependency": {
+    "path": "source-assets/production/fairytale-sword-primary3-runtime-v001/data/DungeonFairytaleSwordPrimary3V001.inl",
+    "bytes": 4467,
+    "sha256": "6749343b607b21ae5d7d1b8d1bf959b67324d13b85c7f6b37f70097088116054"
+  },
+  "expected_namespace": "/Game/Production/ArtTrials/EV048/v011/HeroSwordPrimary3",
+  "new_flags": [
+    "DungeonFairytaleSwordPrimary3Preview",
+    "DungeonFairytaleSwordPrimary3ArmorPreview"
+  ],
+  "root_inline_Enabled_includes_both_flags": true,
+  "P3_armor_only_on_ArmorEnabled": true,
+  "P2_V003_and_P2_armor_inherited_under_either_P3_flag": true,
+  "requested_J_wall_offsets_s": [
+    1.1,
+    1.6,
+    2.16,
+    4.3,
+    4.8,
+    5.36
+  ],
+  "requested_A_wall_offset_s": 3.4,
+  "requested_stop_wall_offset_s": 6.6,
+  "staging_not_applied": true,
+  "checks": [
+    {
+      "check": "HUD original full suffix from weapon flags onward unchanged",
+      "passed": true
+    },
+    {
+      "check": "RunContinueProof include and spawn preserved",
+      "passed": true
+    },
+    {
+      "check": "Presentation whole-resource gate + transform + draw suffix unchanged",
+      "passed": true
+    },
+    {
+      "check": "Original second/first input blocks byte-identical",
+      "passed": true
+    },
+    {
+      "check": "Original first/second scope strings unchanged",
+      "passed": true
+    },
+    {
+      "check": "Original capture/flush/report suffix unchanged",
+      "passed": true
+    },
+    {
+      "check": "P3 actual Stage2 + grounded/nonair/kernel frame",
+      "passed": true
+    },
+    {
+      "check": "Selected P2 uses V003 under either P3 flag",
+      "passed": true
+    },
+    {
+      "check": "All48 P3 textures use existing GC-owned Frames and targeted compilation",
+      "passed": true
+    },
+    {
+      "check": "Independent weapon scale remains .50 and same UV layer draw unchanged",
+      "passed": true
+    },
+    {
+      "check": "Root inline is consumed, never generated or edited",
+      "passed": true
+    },
+    {
+      "check": "Actual Source remains untouched: DungeonHUD.cpp",
+      "passed": true
+    },
+    {
+      "check": "Actual Source remains untouched: DungeonFairytaleSwordPresentation.cpp",
+      "passed": true
+    },
+    {
+      "check": "Actual Source remains untouched: DungeonFairytaleSwordProbe.cpp",
+      "passed": true
+    }
+  ],
+  "source_newlines_preserved": {
+    "DungeonHUD.cpp": "CRLF",
+    "DungeonFairytaleSwordPresentation.cpp": "LF",
+    "DungeonFairytaleSwordProbe.cpp": "LF"
+  },
+  "local_preflight_correction": "Initial uniform-CRLF assertion stopped before outputs; actual v115 HUD is CRLF and Presentation/Probe are LF. Preserve each file native newlines.",
+  "limitations": [
+    "Candidate files only; no UBT/UE/import/visual execution.",
+    "Requires Root-admitted pinned P3 inline and all intended texture imports.",
+    "Manual rebase required if actual HUD/Presentation/Probe change after baseline.",
+    "Candidate markers/axes, semantic partitioning, grip, clearance, continuous motion, hit/audio and full equipment are not accepted."
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "schema": "binding-implementation-input-v001",
+  "actual_RED": {
+    "report": "F:/Ourgame/UnrealGame/Saved/Automation/FirstRoom-20261016-191319/index.json",
+    "author": "Root UE execution, independently read report here",
+    "registered": 3,
+    "success": 0,
+    "fail": 3,
+    "errors": 11,
+    "warnings": 0,
+    "tests": [
+      {
+        "test": "CodexDungeon.Content.FairytaleEquipmentBinding.CommittedNoArmorLightCancelReplaceAndRetake",
+        "state": "Fail",
+        "errors": 6,
+        "warnings": 0,
+        "messages": [
+          "Expected 'Initial actual no-armor SWD actual binding is implemented' to be true.",
+          "Expected 'Pending target does not dress the player before commit actual binding is implemented' to be true.",
+          "Expected 'Canceled target cannot become armor actual binding is implemented' to be true.",
+          "Expected 'Only actual committed LGT authorizes light layers actual binding is implemented' to be true.",
+          "Expected 'Pending medium still owns old light actual binding is implemented' to be true.",
+          "Expected 'Reacquired original light reads its current committed version actual binding is implemented' to be true."
+        ]
+      },
+      {
+        "test": "CodexDungeon.Content.FairytaleEquipmentBinding.InstalledAwaitExplicitContinueRetainsCommittedSkin",
+        "state": "Fail",
+        "errors": 3,
+        "warnings": 0,
+        "messages": [
+          "Expected 'Already-published paused light armor remains drawable without opening Continue actual binding is implemented' to be true.",
+          "Expected 'Paused redraw does not need BeginRun, reset or new equipment IDs actual binding is implemented' to be true.",
+          "Expected 'Normal explicit Continue preserves the same committed identities actual binding is implemented' to be true."
+        ]
+      },
+      {
+        "test": "CodexDungeon.Content.FairytaleEquipmentBinding.RealGradedCursedOwnershipAndAtomicBadReadbacks",
+        "state": "Fail",
+        "errors": 2,
+        "warnings": 0,
+        "messages": [
+          "Expected 'Legal grade and negative affix still use their actual base skins actual binding is implemented' to be true.",
+          "Expected 'Pure seam must first accept complete values really acquired and attacking in native owners' to be true."
+        ]
+      }
+    ],
+    "all_errors_are_positive_honest_stub_calls": true,
+    "fixture_error_count": 0
+  },
+  "corrected_tests_unmodified": true,
+  "candidate_not_run": true,
+  "inputs": [
+    {
+      "path": "F:/Ourgame/UnrealGame/Saved/Automation/FirstRoom-20261016-191319/index.json",
+      "bytes": 11259,
+      "sha256": "6bd0b3769ba3c299440c19329e0381fe312f8ce92b393720371afe0c1c9bc5b7"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Saved/Bootstrap/build-editor-20261016-191250.log",
+      "bytes": 5015,
+      "sha256": "f2e39a7d872a992f4dcab7a96a8167c5757169dc3ce93e2ab3258adc3fa7901e"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-equipment-binding-v001/fixture-correction-v001/fixture-correction-freeze-v001.json",
+      "bytes": 1192,
+      "sha256": "f68389ddf7d38b6d952ff095c003dfec862437c2c75937492568de7147e2f981"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-equipment-binding-v001/fixture-correction-v001/candidate-source/Tests/DungeonFairytaleSwordEquipmentBindingTests.cpp",
+      "bytes": 19798,
+      "sha256": "174593b8f156cf0e78c7b031c375d5a7234875cf2a6b92ba020cb78f61fa8877"
+    },
+    {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-equipment-binding-v001/stage0-freeze-v001.json",
+      "bytes": 1907,
+      "sha256": "11176294207c76c2a42c561ed7d12488211e8c1dc0ebec01f452adacffcad45f"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordEquipmentBinding.h",
+      "bytes": 1833,
+      "sha256": "c7d93683646d31917be7a2710fd404cd788c3a8974ac77026b021fa74d29b116"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFairytaleSwordEquipmentBinding.cpp",
+      "bytes": 618,
+      "sha256": "c3811e611520638083f60e3391cc220549e01b8ab038eb6a38fbcccd712ba651"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/Tests/DungeonFairytaleSwordEquipmentBindingTests.cpp",
+      "bytes": 19798,
+      "sha256": "174593b8f156cf0e78c7b031c375d5a7234875cf2a6b92ba020cb78f61fa8877"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonEquipmentRuntime.h",
+      "bytes": 5215,
+      "sha256": "36f01b68e26404a599c76df6ac7726a45f275403bf9c820a0338b8a66e95a88c"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonEquipmentInventory.h",
+      "bytes": 21413,
+      "sha256": "235284ad0fc7ff955a8814def82b9468f42df514564c97d96e48f3366e55b147"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonEquipmentStats.h",
+      "bytes": 25329,
+      "sha256": "c33671c5a4fd6cf0c68ede77c473d649692dc9718f7fbd3fb9a1896a26dcb9e7"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonContentCombat.h",
+      "bytes": 21593,
+      "sha256": "0becdef858554b311a1bd284585f6b16bc64a420cf7ec49dce30616a9e53d6a5"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.h",
+      "bytes": 10313,
+      "sha256": "1eda7e2969c2c7ece103219266d4a9e62140cff222dd91ba827eb1f2cd6c9270"
+    },
+    {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonGameMode.h",
+      "bytes": 12148,
+      "sha256": "e874f2baf024bc5431010469ac497ad34f315bbcc8ad597066961901fc4ec97d"
+    }
+  ]
+}

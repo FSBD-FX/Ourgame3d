@@ -1,0 +1,801 @@
+{
+  "schema": "Walk204-hand-extraction-proof-v001",
+  "runs": [
+    {
+      "mode": "standard-baseline",
+      "extract": {
+        "argv": [
+          "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\extract_sprite_row_frames.py",
+          "--run-dir",
+          "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\walk-hand204-extraction-v001\\run-hand204-standard-baseline-v001"
+        ],
+        "actual_exit_code": 0,
+        "log": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/logs/extract-hand204-standard-baseline-v001.log",
+          "bytes": 601,
+          "sha256": "a4fb8efc0850c83289cbf6c09556fba582808cd9c9fbac4acdb355c3e720e805"
+        },
+        "command_record": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/logs/extract-hand204-standard-baseline-v001-command.json",
+          "bytes": 682,
+          "sha256": "ac1cdcb4663ec7633e898cd547e5104f952e8d5d3ac506f72f81f6d5359941a8"
+        }
+      },
+      "inspect": {
+        "argv": [
+          "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\inspect_sprite_run.py",
+          "--run-dir",
+          "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\walk-hand204-extraction-v001\\run-hand204-standard-baseline-v001",
+          "--states",
+          "sword_walk_nearhand",
+          "--report",
+          "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\walk-hand204-extraction-v001\\run-hand204-standard-baseline-v001\\inspect-report.json"
+        ],
+        "actual_exit_code": 0,
+        "log": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/logs/inspect-hand204-standard-baseline-v001.log",
+          "bytes": 487,
+          "sha256": "5808b31a7f4e49bb672c442c6b3cce6d07b9e7cd8fb8ed257f4236b76201c06c"
+        },
+        "command_record": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/logs/inspect-hand204-standard-baseline-v001-command.json",
+          "bytes": 899,
+          "sha256": "6ea1d942fff700e7018119e7dfe2e17568edeaa39560d6ffb970ff9f14e5a203"
+        }
+      },
+      "frames_manifest": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-standard-baseline-v001/frames/frames-manifest.json",
+        "bytes": 2752,
+        "sha256": "5de18d88d029ac1ed7494de702bde1d54e7b8ad16f041691be86315cc7eeffd4"
+      },
+      "shared_row_fit": null,
+      "inspect_warnings": [
+        "sword_walk_nearhand: motion presence is too low (0.0032 < 0.0100)"
+      ]
+    },
+    {
+      "mode": "shared-HD",
+      "extract": {
+        "argv": [
+          "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\walk-hand204-extraction-v001\\shared-HD-fit-existing-exact.py",
+          "--run-dir",
+          "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\walk-hand204-extraction-v001\\run-hand204-shared-HD-v001",
+          "--min-used-pixels",
+          "512"
+        ],
+        "actual_exit_code": 0,
+        "log": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/logs/extract-hand204-shared-HD-v001.log",
+          "bytes": 2524,
+          "sha256": "61820756dbe6fffcc4c3464168fc762c5b10d01d86ecd5160af7b4db688366e7"
+        },
+        "command_record": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/logs/extract-hand204-shared-HD-v001-command.json",
+          "bytes": 753,
+          "sha256": "fee12cb7325d7941d1c3a1ace4f2c7b87463c185e1436af5e19785e1db0597ce"
+        }
+      },
+      "inspect": {
+        "argv": [
+          "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\inspect_sprite_run.py",
+          "--run-dir",
+          "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\walk-hand204-extraction-v001\\run-hand204-shared-HD-v001",
+          "--states",
+          "sword_walk_nearhand",
+          "--report",
+          "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\walk-hand204-extraction-v001\\run-hand204-shared-HD-v001\\inspect-report.json"
+        ],
+        "actual_exit_code": 0,
+        "log": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/logs/inspect-hand204-shared-HD-v001.log",
+          "bytes": 479,
+          "sha256": "de3f5ebe40b788d00800d196c95554beee4e9bdab5677082ce3e85a1615a6379"
+        },
+        "command_record": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/logs/inspect-hand204-shared-HD-v001-command.json",
+          "bytes": 875,
+          "sha256": "2570483c13444d680cff1845b46d863984f8cbb82ba84857488e0c3eb92306cb"
+        }
+      },
+      "frames_manifest": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/frames/frames-manifest.json",
+        "bytes": 7101,
+        "sha256": "40db822326aa0d03825610132f0f7e5d8e446321bacc643484f44f9dacf5d30b"
+      },
+      "shared_row_fit": {
+        "policy": "one_raw_component_max_extent_scale_for_entire_row",
+        "scale": 0.379746835443038,
+        "source_max_extent": [
+          237,
+          209
+        ],
+        "horizontal_registration": "bbox_center",
+        "per_frame_scale_normalization": false,
+        "frame_records": [
+          {
+            "frame": 0,
+            "source_component_size": [
+              233,
+              208
+            ],
+            "shared_scale": 0.379746835443038,
+            "resampled_size": [
+              88,
+              79
+            ],
+            "placement_xy": [
+              212,
+              222
+            ],
+            "alpha_bbox_px": [
+              212,
+              222,
+              300,
+              301
+            ]
+          },
+          {
+            "frame": 1,
+            "source_component_size": [
+              196,
+              207
+            ],
+            "shared_scale": 0.379746835443038,
+            "resampled_size": [
+              74,
+              79
+            ],
+            "placement_xy": [
+              219,
+              222
+            ],
+            "alpha_bbox_px": [
+              219,
+              222,
+              293,
+              301
+            ]
+          },
+          {
+            "frame": 2,
+            "source_component_size": [
+              237,
+              209
+            ],
+            "shared_scale": 0.379746835443038,
+            "resampled_size": [
+              90,
+              79
+            ],
+            "placement_xy": [
+              211,
+              222
+            ],
+            "alpha_bbox_px": [
+              211,
+              222,
+              301,
+              301
+            ]
+          },
+          {
+            "frame": 3,
+            "source_component_size": [
+              218,
+              209
+            ],
+            "shared_scale": 0.379746835443038,
+            "resampled_size": [
+              83,
+              79
+            ],
+            "placement_xy": [
+              214,
+              222
+            ],
+            "alpha_bbox_px": [
+              214,
+              222,
+              297,
+              301
+            ]
+          },
+          {
+            "frame": 4,
+            "source_component_size": [
+              194,
+              208
+            ],
+            "shared_scale": 0.379746835443038,
+            "resampled_size": [
+              74,
+              79
+            ],
+            "placement_xy": [
+              219,
+              222
+            ],
+            "alpha_bbox_px": [
+              219,
+              222,
+              293,
+              301
+            ]
+          },
+          {
+            "frame": 5,
+            "source_component_size": [
+              228,
+              209
+            ],
+            "shared_scale": 0.379746835443038,
+            "resampled_size": [
+              87,
+              79
+            ],
+            "placement_xy": [
+              212,
+              222
+            ],
+            "alpha_bbox_px": [
+              212,
+              222,
+              299,
+              301
+            ]
+          }
+        ],
+        "raw_component_RGBA_sha256": [
+          "d5bdbe0f12777855507ffddb92f20fdf77987175e5e35243d9a378bd6ef6f8e5",
+          "566d631a9a96665bc8733f907b9f83436c7047b704cbd9425f8a812cfd52e7b5",
+          "bf7f3d5f8a55d01943ac128632b8611717af0f4bc35913c957c8352f6e4a56a0",
+          "d81feb9c5c7978ce3f895d088379e60f850ce5f197dacb316b8a739f06c30f2c",
+          "f51408fa9e5c86e7246570cd6c8f5efe5acf2163260e95b73fb062dfd51a02a9",
+          "a5491cf8b65933a7e8a3f8e285c6d14504ae4ae0bf251fa79dfd830944e05bc6"
+        ]
+      },
+      "inspect_warnings": [
+        "sword_walk_nearhand: motion presence is too low (0.0023 < 0.0100)"
+      ],
+      "compose": {
+        "argv": [
+          "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\compose_sprite_atlas.py",
+          "--run-dir",
+          "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\walk-hand204-extraction-v001\\run-hand204-shared-HD-v001",
+          "--min-used-pixels",
+          "512"
+        ],
+        "actual_exit_code": 0,
+        "log": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/logs/compose-hand204-shared-HD-v001.log",
+          "bytes": 345,
+          "sha256": "d43dc5598db7b6018d6a2e24fe9f51064ec0943bae8713a66fd4fea648416f52"
+        },
+        "command_record": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/logs/compose-hand204-shared-HD-v001-command.json",
+          "bytes": 697,
+          "sha256": "bd8a19fd01a09ec35b4580e23b7a84b5aba38120935271178e3bc40cd188c337"
+        }
+      },
+      "curated_export": {
+        "command": {
+          "argv": [
+            "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+            "-B",
+            "-X",
+            "utf8",
+            "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\export_curated_pngs.py",
+            "--run-dir",
+            "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\walk-hand204-extraction-v001\\run-hand204-shared-HD-v001",
+            "--state",
+            "sword_walk_nearhand",
+            "--selected-only"
+          ],
+          "actual_exit_code": 0,
+          "log": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/logs/export-curated-sword_walk_nearhand-v001.log",
+            "bytes": 1256,
+            "sha256": "02965bb83c23f927b243cce94d256157bec6a0b06ceb7c5cbd65f67e2b5b7c9c"
+          },
+          "command_record": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/logs/export-curated-sword_walk_nearhand-v001-command.json",
+            "bytes": 735,
+            "sha256": "9d2463791ea3f192830a7176d3c2639a949cba4a98ebdb6b9f1a4496424fc7dd"
+          }
+        },
+        "sidecar": {
+          "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curation.json",
+          "bytes": 313,
+          "sha256": "8caf3ecd8c3f42e9c04027e360ec6733c9a956ee6cd22f6a77cf4accbeef29d9"
+        },
+        "provenance": [
+          {
+            "frame": 0,
+            "pre_curation_source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/frames/sword_walk_nearhand/frame-0.png",
+              "bytes": 13578,
+              "sha256": "20156e84f16fb2e17f30b683a389ea10a8e84c78fdc835b24d45f2ba6f40d3b0"
+            },
+            "curated_export": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curated/frame-0.png",
+              "bytes": 13578,
+              "sha256": "20156e84f16fb2e17f30b683a389ea10a8e84c78fdc835b24d45f2ba6f40d3b0"
+            },
+            "curation": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curation.json",
+              "bytes": 313,
+              "sha256": "8caf3ecd8c3f42e9c04027e360ec6733c9a956ee6cd22f6a77cf4accbeef29d9"
+            },
+            "RGBA_equal": true,
+            "selected_index": 0,
+            "pixel_snap_scale": null,
+            "canonical_variant_filename_label": "pixel",
+            "fit_pixel_unfake": false,
+            "A_B_delta_measured": false
+          },
+          {
+            "frame": 1,
+            "pre_curation_source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/frames/sword_walk_nearhand/frame-1.png",
+              "bytes": 12727,
+              "sha256": "445fb63ffa5a6ac76a1831078f4687168711a97e7413109ba3709a2d0c2aaf34"
+            },
+            "curated_export": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curated/frame-1.png",
+              "bytes": 12727,
+              "sha256": "445fb63ffa5a6ac76a1831078f4687168711a97e7413109ba3709a2d0c2aaf34"
+            },
+            "curation": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curation.json",
+              "bytes": 313,
+              "sha256": "8caf3ecd8c3f42e9c04027e360ec6733c9a956ee6cd22f6a77cf4accbeef29d9"
+            },
+            "RGBA_equal": true,
+            "selected_index": 1,
+            "pixel_snap_scale": null,
+            "canonical_variant_filename_label": "pixel",
+            "fit_pixel_unfake": false,
+            "A_B_delta_measured": false
+          },
+          {
+            "frame": 2,
+            "pre_curation_source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/frames/sword_walk_nearhand/frame-2.png",
+              "bytes": 13947,
+              "sha256": "d93cf3165f4dc25c86ad66ce70d585b042be1e1a274f7243e10a5fa3f8c2b48e"
+            },
+            "curated_export": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curated/frame-2.png",
+              "bytes": 13947,
+              "sha256": "d93cf3165f4dc25c86ad66ce70d585b042be1e1a274f7243e10a5fa3f8c2b48e"
+            },
+            "curation": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curation.json",
+              "bytes": 313,
+              "sha256": "8caf3ecd8c3f42e9c04027e360ec6733c9a956ee6cd22f6a77cf4accbeef29d9"
+            },
+            "RGBA_equal": true,
+            "selected_index": 2,
+            "pixel_snap_scale": null,
+            "canonical_variant_filename_label": "pixel",
+            "fit_pixel_unfake": false,
+            "A_B_delta_measured": false
+          },
+          {
+            "frame": 3,
+            "pre_curation_source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/frames/sword_walk_nearhand/frame-3.png",
+              "bytes": 13672,
+              "sha256": "3e4483865223a2051de191c2bdd90bd569f6c427c194066c60c3301a3a866c6c"
+            },
+            "curated_export": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curated/frame-3.png",
+              "bytes": 13672,
+              "sha256": "3e4483865223a2051de191c2bdd90bd569f6c427c194066c60c3301a3a866c6c"
+            },
+            "curation": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curation.json",
+              "bytes": 313,
+              "sha256": "8caf3ecd8c3f42e9c04027e360ec6733c9a956ee6cd22f6a77cf4accbeef29d9"
+            },
+            "RGBA_equal": true,
+            "selected_index": 3,
+            "pixel_snap_scale": null,
+            "canonical_variant_filename_label": "pixel",
+            "fit_pixel_unfake": false,
+            "A_B_delta_measured": false
+          },
+          {
+            "frame": 4,
+            "pre_curation_source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/frames/sword_walk_nearhand/frame-4.png",
+              "bytes": 12963,
+              "sha256": "e925e02f63ba6cd99e0a898435207d9c26d262afa7e3873ffdcb0a41cdacd630"
+            },
+            "curated_export": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curated/frame-4.png",
+              "bytes": 12963,
+              "sha256": "e925e02f63ba6cd99e0a898435207d9c26d262afa7e3873ffdcb0a41cdacd630"
+            },
+            "curation": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curation.json",
+              "bytes": 313,
+              "sha256": "8caf3ecd8c3f42e9c04027e360ec6733c9a956ee6cd22f6a77cf4accbeef29d9"
+            },
+            "RGBA_equal": true,
+            "selected_index": 4,
+            "pixel_snap_scale": null,
+            "canonical_variant_filename_label": "pixel",
+            "fit_pixel_unfake": false,
+            "A_B_delta_measured": false
+          },
+          {
+            "frame": 5,
+            "pre_curation_source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/frames/sword_walk_nearhand/frame-5.png",
+              "bytes": 13635,
+              "sha256": "63c51a929693026e7b7e2c9105446505bb45ab85d5db2be4fd31cf168b9692a8"
+            },
+            "curated_export": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curated/frame-5.png",
+              "bytes": 13635,
+              "sha256": "63c51a929693026e7b7e2c9105446505bb45ab85d5db2be4fd31cf168b9692a8"
+            },
+            "curation": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curation.json",
+              "bytes": 313,
+              "sha256": "8caf3ecd8c3f42e9c04027e360ec6733c9a956ee6cd22f6a77cf4accbeef29d9"
+            },
+            "RGBA_equal": true,
+            "selected_index": 5,
+            "pixel_snap_scale": null,
+            "canonical_variant_filename_label": "pixel",
+            "fit_pixel_unfake": false,
+            "A_B_delta_measured": false
+          }
+        ],
+        "metrics": [
+          {
+            "source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curated/frame-0.png",
+              "bytes": 13578,
+              "sha256": "20156e84f16fb2e17f30b683a389ea10a8e84c78fdc835b24d45f2ba6f40d3b0"
+            },
+            "mode": "RGBA",
+            "canvas_px": [
+              512,
+              512
+            ],
+            "RGBA_pixels_sha256": "cf4e1ced89959148219dfa910da0c12a0bec7e0b2f4bdc4684f991c8a141fcfa",
+            "alpha_nonzero_bbox_ltrb_exclusive": [
+              212,
+              222,
+              300,
+              301
+            ],
+            "core128_bbox_ltrb_exclusive": [
+              212,
+              222,
+              300,
+              301
+            ],
+            "nonzero_alpha_pixels": 4721,
+            "core128_RGBA_pixels": 4365,
+            "core128_RGBA_row_major_sha256": "ef4e1164940e1e44ee9c7823cfdb9921ce15dbc1b6e33876257a1436ddc61bf5",
+            "partial_alpha_pixels": 760,
+            "distinct_core_RGB_colors": 2067,
+            "pure_green_core128_pixels": 0,
+            "pure_green_nonzero_alpha_pixels": 0,
+            "edge_nonzero_alpha_pixels_margin4": 0,
+            "bodyfreecount": null,
+            "bodyfreecount_measured": false,
+            "bodyfree_semantic_note": "RGBA/chroma/edge counts cannot count anatomical bodies, hands or helmets. No semantic mask or detector was supplied; do not turn six connected components into a claim of body-free art.",
+            "new_component_A": null,
+            "matching_body_B": null,
+            "integer_delta_xy": null,
+            "pre_curation_source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/frames/sword_walk_nearhand/frame-0.png",
+              "bytes": 13578,
+              "sha256": "20156e84f16fb2e17f30b683a389ea10a8e84c78fdc835b24d45f2ba6f40d3b0"
+            },
+            "curated_export_RGBA_equal": true,
+            "curation_sidecar": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curation.json",
+              "bytes": 313,
+              "sha256": "8caf3ecd8c3f42e9c04027e360ec6733c9a956ee6cd22f6a77cf4accbeef29d9"
+            }
+          },
+          {
+            "source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curated/frame-1.png",
+              "bytes": 12727,
+              "sha256": "445fb63ffa5a6ac76a1831078f4687168711a97e7413109ba3709a2d0c2aaf34"
+            },
+            "mode": "RGBA",
+            "canvas_px": [
+              512,
+              512
+            ],
+            "RGBA_pixels_sha256": "e5dcf57b8107ae087a185355334f62454d1172f38192ad9a0f09d51afde43831",
+            "alpha_nonzero_bbox_ltrb_exclusive": [
+              219,
+              222,
+              293,
+              301
+            ],
+            "core128_bbox_ltrb_exclusive": [
+              219,
+              222,
+              293,
+              301
+            ],
+            "nonzero_alpha_pixels": 4678,
+            "core128_RGBA_pixels": 4347,
+            "core128_RGBA_row_major_sha256": "6a860420b223c1f11c248661fb32f086549089f82f996bf9e0f928aa6609fdaa",
+            "partial_alpha_pixels": 744,
+            "distinct_core_RGB_colors": 2113,
+            "pure_green_core128_pixels": 0,
+            "pure_green_nonzero_alpha_pixels": 0,
+            "edge_nonzero_alpha_pixels_margin4": 0,
+            "bodyfreecount": null,
+            "bodyfreecount_measured": false,
+            "bodyfree_semantic_note": "RGBA/chroma/edge counts cannot count anatomical bodies, hands or helmets. No semantic mask or detector was supplied; do not turn six connected components into a claim of body-free art.",
+            "new_component_A": null,
+            "matching_body_B": null,
+            "integer_delta_xy": null,
+            "pre_curation_source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/frames/sword_walk_nearhand/frame-1.png",
+              "bytes": 12727,
+              "sha256": "445fb63ffa5a6ac76a1831078f4687168711a97e7413109ba3709a2d0c2aaf34"
+            },
+            "curated_export_RGBA_equal": true,
+            "curation_sidecar": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curation.json",
+              "bytes": 313,
+              "sha256": "8caf3ecd8c3f42e9c04027e360ec6733c9a956ee6cd22f6a77cf4accbeef29d9"
+            }
+          },
+          {
+            "source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curated/frame-2.png",
+              "bytes": 13947,
+              "sha256": "d93cf3165f4dc25c86ad66ce70d585b042be1e1a274f7243e10a5fa3f8c2b48e"
+            },
+            "mode": "RGBA",
+            "canvas_px": [
+              512,
+              512
+            ],
+            "RGBA_pixels_sha256": "92eb68858a233cce359e79c23a7cfe62a75b899f587ac6d25e1758315d3c5268",
+            "alpha_nonzero_bbox_ltrb_exclusive": [
+              211,
+              222,
+              301,
+              301
+            ],
+            "core128_bbox_ltrb_exclusive": [
+              211,
+              222,
+              301,
+              301
+            ],
+            "nonzero_alpha_pixels": 4845,
+            "core128_RGBA_pixels": 4503,
+            "core128_RGBA_row_major_sha256": "858376d7ee2205fa527af657250775ef7a88d8e1c7f7eb971eab9eab55c7c533",
+            "partial_alpha_pixels": 738,
+            "distinct_core_RGB_colors": 2193,
+            "pure_green_core128_pixels": 0,
+            "pure_green_nonzero_alpha_pixels": 0,
+            "edge_nonzero_alpha_pixels_margin4": 0,
+            "bodyfreecount": null,
+            "bodyfreecount_measured": false,
+            "bodyfree_semantic_note": "RGBA/chroma/edge counts cannot count anatomical bodies, hands or helmets. No semantic mask or detector was supplied; do not turn six connected components into a claim of body-free art.",
+            "new_component_A": null,
+            "matching_body_B": null,
+            "integer_delta_xy": null,
+            "pre_curation_source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/frames/sword_walk_nearhand/frame-2.png",
+              "bytes": 13947,
+              "sha256": "d93cf3165f4dc25c86ad66ce70d585b042be1e1a274f7243e10a5fa3f8c2b48e"
+            },
+            "curated_export_RGBA_equal": true,
+            "curation_sidecar": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curation.json",
+              "bytes": 313,
+              "sha256": "8caf3ecd8c3f42e9c04027e360ec6733c9a956ee6cd22f6a77cf4accbeef29d9"
+            }
+          },
+          {
+            "source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curated/frame-3.png",
+              "bytes": 13672,
+              "sha256": "3e4483865223a2051de191c2bdd90bd569f6c427c194066c60c3301a3a866c6c"
+            },
+            "mode": "RGBA",
+            "canvas_px": [
+              512,
+              512
+            ],
+            "RGBA_pixels_sha256": "b42e3c2b0b548ba4107a3067ee34f3bb39de847cd7498a96f4ab7698680ff2ba",
+            "alpha_nonzero_bbox_ltrb_exclusive": [
+              214,
+              222,
+              297,
+              301
+            ],
+            "core128_bbox_ltrb_exclusive": [
+              214,
+              222,
+              297,
+              301
+            ],
+            "nonzero_alpha_pixels": 4663,
+            "core128_RGBA_pixels": 4325,
+            "core128_RGBA_row_major_sha256": "33d980b2f9e09fc0777850c695e69e7ed7d0f87e468e040007e1978d7a9412e4",
+            "partial_alpha_pixels": 735,
+            "distinct_core_RGB_colors": 2151,
+            "pure_green_core128_pixels": 0,
+            "pure_green_nonzero_alpha_pixels": 0,
+            "edge_nonzero_alpha_pixels_margin4": 0,
+            "bodyfreecount": null,
+            "bodyfreecount_measured": false,
+            "bodyfree_semantic_note": "RGBA/chroma/edge counts cannot count anatomical bodies, hands or helmets. No semantic mask or detector was supplied; do not turn six connected components into a claim of body-free art.",
+            "new_component_A": null,
+            "matching_body_B": null,
+            "integer_delta_xy": null,
+            "pre_curation_source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/frames/sword_walk_nearhand/frame-3.png",
+              "bytes": 13672,
+              "sha256": "3e4483865223a2051de191c2bdd90bd569f6c427c194066c60c3301a3a866c6c"
+            },
+            "curated_export_RGBA_equal": true,
+            "curation_sidecar": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curation.json",
+              "bytes": 313,
+              "sha256": "8caf3ecd8c3f42e9c04027e360ec6733c9a956ee6cd22f6a77cf4accbeef29d9"
+            }
+          },
+          {
+            "source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curated/frame-4.png",
+              "bytes": 12963,
+              "sha256": "e925e02f63ba6cd99e0a898435207d9c26d262afa7e3873ffdcb0a41cdacd630"
+            },
+            "mode": "RGBA",
+            "canvas_px": [
+              512,
+              512
+            ],
+            "RGBA_pixels_sha256": "e1d3dccce05f1f5ae55d3b7444e0109ea070b0e2f7bec30702f386700ad587c3",
+            "alpha_nonzero_bbox_ltrb_exclusive": [
+              219,
+              222,
+              293,
+              301
+            ],
+            "core128_bbox_ltrb_exclusive": [
+              219,
+              222,
+              293,
+              301
+            ],
+            "nonzero_alpha_pixels": 4705,
+            "core128_RGBA_pixels": 4394,
+            "core128_RGBA_row_major_sha256": "e07602fdc830867fa1e62f779dcad51eea783403991470e2d53830b75b919f10",
+            "partial_alpha_pixels": 715,
+            "distinct_core_RGB_colors": 2168,
+            "pure_green_core128_pixels": 0,
+            "pure_green_nonzero_alpha_pixels": 0,
+            "edge_nonzero_alpha_pixels_margin4": 0,
+            "bodyfreecount": null,
+            "bodyfreecount_measured": false,
+            "bodyfree_semantic_note": "RGBA/chroma/edge counts cannot count anatomical bodies, hands or helmets. No semantic mask or detector was supplied; do not turn six connected components into a claim of body-free art.",
+            "new_component_A": null,
+            "matching_body_B": null,
+            "integer_delta_xy": null,
+            "pre_curation_source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/frames/sword_walk_nearhand/frame-4.png",
+              "bytes": 12963,
+              "sha256": "e925e02f63ba6cd99e0a898435207d9c26d262afa7e3873ffdcb0a41cdacd630"
+            },
+            "curated_export_RGBA_equal": true,
+            "curation_sidecar": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curation.json",
+              "bytes": 313,
+              "sha256": "8caf3ecd8c3f42e9c04027e360ec6733c9a956ee6cd22f6a77cf4accbeef29d9"
+            }
+          },
+          {
+            "source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curated/frame-5.png",
+              "bytes": 13635,
+              "sha256": "63c51a929693026e7b7e2c9105446505bb45ab85d5db2be4fd31cf168b9692a8"
+            },
+            "mode": "RGBA",
+            "canvas_px": [
+              512,
+              512
+            ],
+            "RGBA_pixels_sha256": "c10b0a4aad733e120794fe8ea468aa82e9b1ebe2f037c65582102e8ee1135dd2",
+            "alpha_nonzero_bbox_ltrb_exclusive": [
+              212,
+              222,
+              299,
+              301
+            ],
+            "core128_bbox_ltrb_exclusive": [
+              212,
+              222,
+              299,
+              301
+            ],
+            "nonzero_alpha_pixels": 4712,
+            "core128_RGBA_pixels": 4344,
+            "core128_RGBA_row_major_sha256": "2563196cd34d3bc867a81c77c7ad785cc126246ceeca5d990fbdf00767063736",
+            "partial_alpha_pixels": 762,
+            "distinct_core_RGB_colors": 2111,
+            "pure_green_core128_pixels": 0,
+            "pure_green_nonzero_alpha_pixels": 0,
+            "edge_nonzero_alpha_pixels_margin4": 0,
+            "bodyfreecount": null,
+            "bodyfreecount_measured": false,
+            "bodyfree_semantic_note": "RGBA/chroma/edge counts cannot count anatomical bodies, hands or helmets. No semantic mask or detector was supplied; do not turn six connected components into a claim of body-free art.",
+            "new_component_A": null,
+            "matching_body_B": null,
+            "integer_delta_xy": null,
+            "pre_curation_source": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/frames/sword_walk_nearhand/frame-5.png",
+              "bytes": 13635,
+              "sha256": "63c51a929693026e7b7e2c9105446505bb45ab85d5db2be4fd31cf168b9692a8"
+            },
+            "curated_export_RGBA_equal": true,
+            "curation_sidecar": {
+              "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/run-hand204-shared-HD-v001/curation.json",
+              "bytes": 313,
+              "sha256": "8caf3ecd8c3f42e9c04027e360ec6733c9a956ee6cd22f6a77cf4accbeef29d9"
+            }
+          }
+        ],
+        "selection_role": "Root authorized all six for extraction/feature trial; not fit, full animation or final install acceptance"
+      }
+    }
+  ],
+  "source_index": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/walk-hand204-extraction-v001/hand204-six-source-index-v001.json",
+    "bytes": 22715,
+    "sha256": "272c0f7d7f44c25ccccde262a5f67e22e53b50051bafe4e8bcb79299e9baf541"
+  },
+  "standard_compose_durations_ms": [
+    83,
+    83,
+    83,
+    83,
+    83,
+    83
+  ],
+  "timing_note": "498ms sequence metadata vs nominalfps12 period500ms; no runtime sync claim.",
+  "old_body_source_modified": false,
+  "new_body_composite_assembled": false,
+  "new_outputs_viewed": false,
+  "all_source_AB_null_pending_actual_feature_review": true
+}

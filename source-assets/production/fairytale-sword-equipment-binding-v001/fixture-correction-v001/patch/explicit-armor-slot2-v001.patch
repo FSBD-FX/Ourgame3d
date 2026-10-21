@@ -1,0 +1,22 @@
+--- a/UnrealGame/Source/CodexDungeon/Tests/DungeonFairytaleSwordEquipmentBindingTests.cpp
++++ b/UnrealGame/Source/CodexDungeon/Tests/DungeonFairytaleSwordEquipmentBindingTests.cpp
+@@ -108,17 +108,17 @@
+         &&W.Game->GetEquipmentInventoryState()->Armor==A.InstanceId&&W.Player->ArmorId==TEXT("ARM-LGT-001")))return false;
+     CheckActualBinding(W,TEXT("Only actual committed LGT authorizes light layers"),Binding::EArmor::LightArmor,Sword,A.InstanceId);
+     IV::FItem Medium;Medium.ContentId="ARM-MED-001";
+     const auto M=W.Game->RegisterEquipmentSource(TEXT("binding.transaction.medium"),Medium,W.Player->GetGroundPosition()+FVector2D(30,0),true);
+-    if(!TestTrue(TEXT("Normal replacement with a different armor begins without early appearance change"),M.Ok()&&StartActualPickup(W,M.SourceId)
++    if(!TestTrue(TEXT("Normal replacement with a different armor begins without early appearance change"),M.Ok()&&StartActualPickup(W,M.SourceId,2)
+         &&W.Game->GetEquipmentInventoryState()->Armor==A.InstanceId))return false;
+     CheckActualBinding(W,TEXT("Pending medium still owns old light"),Binding::EArmor::LightArmor,Sword,A.InstanceId);
+     if(!TestTrue(TEXT("Actual medium commits and creates the old exact light ground instance"),W.AdvanceTo(W.Player->GetEquipmentActionDeadline())
+         &&W.Game->GetEquipmentInventoryState()->Armor==M.InstanceId&&W.Player->ArmorId==TEXT("ARM-MED-001")&&ActualGroundSource(W,A.InstanceId)!=0))return false;
+     auto Out=SentinelBinding();const auto Bytes=BindingSignature(Out);FString Why;const auto Before=BindingReadDomains(W);
+     TestFalse(TEXT("A legitimately committed non-LGT cannot masquerade as current light armor"),Binding::Resolve(*W.Game,*W.Player,Out,Why));
+     TestTrue(TEXT("Unsupported actual medium is diagnosed, atomic and read-only"),!Why.IsEmpty()&&BindingSignature(Out)==Bytes&&BindingReadDomains(W)==Before);
+-    if(!TestTrue(TEXT("The actual dropped light is normally reselected and repicked without creating a new instance"),StartActualPickup(W,ActualGroundSource(W,A.InstanceId))
++    if(!TestTrue(TEXT("The actual dropped light is normally reselected and repicked without creating a new instance"),StartActualPickup(W,ActualGroundSource(W,A.InstanceId),2)
+         &&W.AdvanceTo(W.Player->GetEquipmentActionDeadline())&&W.Game->GetEquipmentInventoryState()->Armor==A.InstanceId))return false;
+     CheckActualBinding(W,TEXT("Reacquired original light reads its current committed version"),Binding::EArmor::LightArmor,Sword,A.InstanceId);
+     return true;
+ }

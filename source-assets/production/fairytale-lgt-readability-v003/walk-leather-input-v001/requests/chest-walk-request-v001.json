@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "kind": "sprite-gen-request",
+  "engine": "component-row",
+  "character": {
+    "id": "fairytale-leather-chest-walk-v001",
+    "description": "Only isolated Chest of the locked Ready184 leather identity during the actual six Walk poses."
+  },
+  "cell": {
+    "shape": "square",
+    "size": 512,
+    "width": 512,
+    "height": 512,
+    "safe_margin_x": 211,
+    "safe_margin_y": 211
+  },
+  "chroma_key": {
+    "name": "green",
+    "hex": "#00FF00",
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "selection": "manual"
+  },
+  "states": {
+    "leather_chest_sword_walk": {
+      "frames": 6,
+      "fps": 12.048192771084338,
+      "loop": true,
+      "action": "Six cyclic walk component perspectives matching actual body motion, not repeated idle parts.",
+      "durations_ms": [
+        83,
+        83,
+        83,
+        83,
+        83,
+        83
+      ]
+    }
+  },
+  "style": "Only Ready184 component is appearance identity. Walk source torso strip is geometry/motion only.",
+  "fit": {
+    "pixel_unfake": false,
+    "resample": "lanczos",
+    "align_x": "bbox-center",
+    "align_y": "bottom",
+    "ground_frames": false,
+    "segmentation": "components",
+    "shared_row_scale": true
+  },
+  "chroma": {
+    "mode": "rgb",
+    "unmix_reach": 4,
+    "spill_max_fraction": 0.005
+  }
+}

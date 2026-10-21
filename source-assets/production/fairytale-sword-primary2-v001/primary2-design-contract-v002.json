@@ -1,0 +1,443 @@
+{
+  "schema": "fairytale-shortarm-primary2-design-v2",
+  "state": "sword_primary_2",
+  "frame_count": 6,
+  "timing": {
+    "weapon": "WPN-SWD-001",
+    "stage_zero_based": 1,
+    "windup_ms": 150,
+    "lock_ms": 60,
+    "active_ms": 120,
+    "recovery_ms": 270,
+    "total_ms": 540,
+    "frame_boundaries_ms": [
+      0,
+      75,
+      150,
+      210,
+      270,
+      405,
+      540
+    ],
+    "durations_ms": [
+      75,
+      75,
+      60,
+      60,
+      135,
+      135
+    ],
+    "damage": 24,
+    "stagger": 14,
+    "range_cm": 135,
+    "depth_halfwidth_cm": 46,
+    "source_kernel": {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonContentCombat.h",
+      "bytes": 21593,
+      "sha256": "0becdef858554b311a1bd284585f6b16bc64a420cf7ec49dce30616a9e53d6a5"
+    },
+    "source_sampler": {
+      "path": "F:/Ourgame/UnrealGame/Source/CodexDungeon/DungeonFighter.cpp",
+      "bytes": 102391,
+      "sha256": "df0f34023a3535b9e1f0d71fc73c4115af56294fd59bc2f0d0a109f2dad77fed"
+    },
+    "runtime_sampler": "Actual accepted Action Start/ActiveStart/ActiveEnd/End via GetPrimaryPoseFrame. No independent clock, input, damage, root movement or speed override.",
+    "action_speed_pct_clamp": [
+      -20,
+      20
+    ],
+    "speed_examples": [
+      {
+        "action_speed_pct": -20,
+        "frame_durations_ms": [
+          93.75,
+          93.75,
+          75.0,
+          75.0,
+          168.75,
+          168.75
+        ],
+        "total_ms": 675.0
+      },
+      {
+        "action_speed_pct": 0,
+        "frame_durations_ms": [
+          75.0,
+          75.0,
+          60.0,
+          60.0,
+          135.0,
+          135.0
+        ],
+        "total_ms": 540.0
+      },
+      {
+        "action_speed_pct": 20,
+        "frame_durations_ms": [
+          62.5,
+          62.5,
+          50.0,
+          50.0,
+          112.5,
+          112.5
+        ],
+        "total_ms": 450.0
+      }
+    ],
+    "old_v1_equipment_text_is_superseded": "Old no-combo/no-random-crit wording is not the authority for the subsequently requested three-stage kernel.",
+    "nominal_fps_only": 10,
+    "standard_fps_preview_is_not_timing_proof": true
+  },
+  "source_canvas_px": [
+    512,
+    512
+  ],
+  "source_native_facing": 1,
+  "source_root_display_design_px": [
+    256,
+    464
+  ],
+  "standing_equivalent_design_height_px": 416,
+  "fixed_display_canvas": 88.61538461538461,
+  "visible_body_height_upper_bound_px": 72,
+  "poses": [
+    {
+      "frame": 0,
+      "phase": "handoff from actual159 final low guard",
+      "duration_ms": 75,
+      "source_root_design_px": [
+        256,
+        464
+      ],
+      "near_shoulder_design_px": [
+        205,
+        248
+      ],
+      "near_elbow_design_px": [
+        181,
+        275
+      ],
+      "near_wrist_design_px": [
+        194,
+        297
+      ],
+      "near_grip_design_px": [
+        212,
+        313
+      ],
+      "invisible_blade_axis_design_xy": [
+        0.94,
+        -0.341
+      ],
+      "far_hand_design_px": [
+        340,
+        342
+      ],
+      "torso_weight_offset_design_px": [
+        0,
+        0
+      ],
+      "upper_arm_projected_design_length": 36.124783736376884,
+      "forearm_projected_design_length": 25.553864678361276,
+      "palm_offset_design_length": 24.08318915758459,
+      "all_coordinates_are_design_not_measurement": true,
+      "near_elbow_internal_angle_degrees_design": 107.7872337909408,
+      "near_hand_shape_design": "upright narrow side gripping fist in active2/3; not front-facing punching fist",
+      "near_hand_front_limit_design_x": null,
+      "actual_grip_px": null,
+      "actual_axis_xy": null,
+      "actual_foot_roots_px": null,
+      "actual_thumb_contour": null,
+      "actual_helmet_hand_blade_clearance": null
+    },
+    {
+      "frame": 1,
+      "phase": "folded below-chest inward load; upright side grip",
+      "duration_ms": 75,
+      "source_root_design_px": [
+        256,
+        464
+      ],
+      "near_shoulder_design_px": [
+        205,
+        248
+      ],
+      "near_elbow_design_px": [
+        184,
+        282
+      ],
+      "near_wrist_design_px": [
+        200,
+        289
+      ],
+      "near_grip_design_px": [
+        218,
+        281
+      ],
+      "invisible_blade_axis_design_xy": [
+        0.98,
+        0.15
+      ],
+      "far_hand_design_px": [
+        341,
+        341
+      ],
+      "torso_weight_offset_design_px": [
+        -2,
+        0
+      ],
+      "upper_arm_projected_design_length": 39.96248240537617,
+      "forearm_projected_design_length": 17.46424919657298,
+      "palm_offset_design_length": 19.697715603592208,
+      "all_coordinates_are_design_not_measurement": true,
+      "near_elbow_internal_angle_degrees_design": 81.9279480611511,
+      "near_hand_shape_design": "upright narrow side gripping fist in active2/3; not front-facing punching fist",
+      "near_hand_front_limit_design_x": null,
+      "actual_grip_px": null,
+      "actual_axis_xy": null,
+      "actual_foot_roots_px": null,
+      "actual_thumb_contour": null,
+      "actual_helmet_hand_blade_clearance": null
+    },
+    {
+      "frame": 2,
+      "phase": "active1 bent elbow compact transverse start",
+      "duration_ms": 60,
+      "source_root_design_px": [
+        256,
+        464
+      ],
+      "near_shoulder_design_px": [
+        206,
+        248
+      ],
+      "near_elbow_design_px": [
+        201,
+        286
+      ],
+      "near_wrist_design_px": [
+        241,
+        296
+      ],
+      "near_grip_design_px": [
+        259,
+        292
+      ],
+      "invisible_blade_axis_design_xy": [
+        0.98,
+        0.2
+      ],
+      "far_hand_design_px": [
+        342,
+        339
+      ],
+      "torso_weight_offset_design_px": [
+        2,
+        1
+      ],
+      "upper_arm_projected_design_length": 38.3275357934736,
+      "forearm_projected_design_length": 41.23105625617661,
+      "palm_offset_design_length": 18.439088914585774,
+      "all_coordinates_are_design_not_measurement": true,
+      "near_elbow_internal_angle_degrees_design": 96.54038582819662,
+      "near_hand_shape_design": "upright narrow side gripping fist in active2/3; not front-facing punching fist",
+      "near_hand_front_limit_design_x": 300,
+      "actual_grip_px": null,
+      "actual_axis_xy": null,
+      "actual_foot_roots_px": null,
+      "actual_thumb_contour": null,
+      "actual_helmet_hand_blade_clearance": null
+    },
+    {
+      "frame": 3,
+      "phase": "active2 bent elbow chest-front transverse finish",
+      "duration_ms": 60,
+      "source_root_design_px": [
+        256,
+        464
+      ],
+      "near_shoulder_design_px": [
+        208,
+        249
+      ],
+      "near_elbow_design_px": [
+        208,
+        291
+      ],
+      "near_wrist_design_px": [
+        248,
+        302
+      ],
+      "near_grip_design_px": [
+        266,
+        296
+      ],
+      "invisible_blade_axis_design_xy": [
+        0.995,
+        -0.1
+      ],
+      "far_hand_design_px": [
+        342,
+        338
+      ],
+      "torso_weight_offset_design_px": [
+        3,
+        1
+      ],
+      "upper_arm_projected_design_length": 42.0,
+      "forearm_projected_design_length": 41.48493702538308,
+      "palm_offset_design_length": 18.973665961010276,
+      "all_coordinates_are_design_not_measurement": true,
+      "near_elbow_internal_angle_degrees_design": 105.3762512488262,
+      "near_hand_shape_design": "upright narrow side gripping fist in active2/3; not front-facing punching fist",
+      "near_hand_front_limit_design_x": 300,
+      "actual_grip_px": null,
+      "actual_axis_xy": null,
+      "actual_foot_roots_px": null,
+      "actual_thumb_contour": null,
+      "actual_helmet_hand_blade_clearance": null
+    },
+    {
+      "frame": 4,
+      "phase": "compact elbow return below chest",
+      "duration_ms": 135,
+      "source_root_design_px": [
+        256,
+        464
+      ],
+      "near_shoulder_design_px": [
+        206,
+        248
+      ],
+      "near_elbow_design_px": [
+        190,
+        285
+      ],
+      "near_wrist_design_px": [
+        214,
+        309
+      ],
+      "near_grip_design_px": [
+        235,
+        317
+      ],
+      "invisible_blade_axis_design_xy": [
+        0.99,
+        0.1
+      ],
+      "far_hand_design_px": [
+        341,
+        341
+      ],
+      "torso_weight_offset_design_px": [
+        1,
+        0
+      ],
+      "upper_arm_projected_design_length": 40.311288741492746,
+      "forearm_projected_design_length": 33.94112549695428,
+      "palm_offset_design_length": 22.47220505424423,
+      "all_coordinates_are_design_not_measurement": true,
+      "near_elbow_internal_angle_degrees_design": 111.61477894278626,
+      "near_hand_shape_design": "upright narrow side gripping fist in active2/3; not front-facing punching fist",
+      "near_hand_front_limit_design_x": null,
+      "actual_grip_px": null,
+      "actual_axis_xy": null,
+      "actual_foot_roots_px": null,
+      "actual_thumb_contour": null,
+      "actual_helmet_hand_blade_clearance": null
+    },
+    {
+      "frame": 5,
+      "phase": "low guard exit for stop or future third action",
+      "duration_ms": 135,
+      "source_root_design_px": [
+        256,
+        464
+      ],
+      "near_shoulder_design_px": [
+        205,
+        248
+      ],
+      "near_elbow_design_px": [
+        181,
+        275
+      ],
+      "near_wrist_design_px": [
+        194,
+        297
+      ],
+      "near_grip_design_px": [
+        212,
+        313
+      ],
+      "invisible_blade_axis_design_xy": [
+        0.94,
+        -0.341
+      ],
+      "far_hand_design_px": [
+        340,
+        342
+      ],
+      "torso_weight_offset_design_px": [
+        0,
+        0
+      ],
+      "upper_arm_projected_design_length": 36.124783736376884,
+      "forearm_projected_design_length": 25.553864678361276,
+      "palm_offset_design_length": 24.08318915758459,
+      "all_coordinates_are_design_not_measurement": true,
+      "near_elbow_internal_angle_degrees_design": 107.7872337909408,
+      "near_hand_shape_design": "upright narrow side gripping fist in active2/3; not front-facing punching fist",
+      "near_hand_front_limit_design_x": null,
+      "actual_grip_px": null,
+      "actual_axis_xy": null,
+      "actual_foot_roots_px": null,
+      "actual_thumb_contour": null,
+      "actual_helmet_hand_blade_clearance": null
+    }
+  ],
+  "corrective_scope": {
+    "rejected_native_request": 168,
+    "straight_arm_and_thrust_look_rejected": true,
+    "rejected_raw_source": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary2-v001/run-primary2-v001/raw/sword_primary_2.png",
+      "bytes": 1526043,
+      "sha256": "5571d5fec466c5e52ff3b42edc43f6a64ad43b4a3f0b450370e8d5549ee7555d"
+    },
+    "rejected_phase2_source": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary2-v001/run-primary2-v001/curated/frame-2.png",
+      "bytes": 119254,
+      "sha256": "7075f3af490de42f26af572c88575f40ad374a692089534d449224c538f6fe54"
+    },
+    "rejected_phase3_source": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-primary2-v001/run-primary2-v001/curated/frame-3.png",
+      "bytes": 117545,
+      "sha256": "c1fbac274a6afaff51880747340ffacc88f9f5c8699a4eb8ead09fe0784557d6"
+    },
+    "rejected_images_not_attached": true,
+    "active_elbow_internal_angle_design_range_degrees": [
+      90,
+      110
+    ],
+    "angle_is_projected_design_not_true_skeleton_measurement": true,
+    "active_projected_segment_design_max_px": 44,
+    "near_hand_front_limit_design_x": 300,
+    "helmet_front_envelope_design_x": 338,
+    "active_hand_top_design_min_y": 248,
+    "all_limits_are_design_not_measured": true,
+    "actual_native169_features": null
+  },
+  "continuity": {
+    "previous_actual_source": {
+      "path": "F:/Ourgame/source-assets/production/fairytale-sword-v001/run-primary1-v003/curated/frame-5.png",
+      "bytes": 120013,
+      "sha256": "050ca4103fc3ef6a1f3724b16bd0ebf42dc55353b799d5d92a6e4c2707e11bd0"
+    },
+    "entry_design": "Source159 final guard is posture reference; new pose0 must be measured and reviewed after generation.",
+    "exit_design": "Return to actual158 low guard posture; no claim future Primary3 is designed/accepted.",
+    "source_or_runtime_motion_accepted": false
+  },
+  "generation_ready": false,
+  "generated": false,
+  "formal_complete_units": 0
+}

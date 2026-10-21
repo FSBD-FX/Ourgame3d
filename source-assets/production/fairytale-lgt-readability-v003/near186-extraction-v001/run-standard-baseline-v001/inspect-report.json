@@ -1,0 +1,53 @@
+{
+  "ok": true,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\near186-extraction-v001\\run-standard-baseline-v001",
+  "states": [
+    "leather_nearshoulder_sword_ready"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "leather_nearshoulder_sword_ready",
+      "source": "frames",
+      "expected_frames": 4,
+      "found_frames": 4,
+      "natural_pose_count": 4,
+      "frame_files": [
+        "frames/leather_nearshoulder_sword_ready/frame-0.png",
+        "frames/leather_nearshoulder_sword_ready/frame-1.png",
+        "frames/leather_nearshoulder_sword_ready/frame-2.png",
+        "frames/leather_nearshoulder_sword_ready/frame-3.png"
+      ],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.9558912580739871,
+          "mean": 0.9718604251650568
+        },
+        "dhash_similarity": {
+          "min": 1.0,
+          "mean": 1.0
+        },
+        "motion_presence": 0.00010403901143790849,
+        "centroid_sigma": {
+          "x": 0.04729919947612074,
+          "y": 0.23966299265240493
+        }
+      },
+      "ok": true,
+      "errors": [],
+      "warnings": [
+        "leather_nearshoulder_sword_ready: motion presence is too low (0.0001 < 0.0100)"
+      ]
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "leather_nearshoulder_sword_ready: motion presence is too low (0.0001 < 0.0100)"
+  ]
+}

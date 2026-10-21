@@ -1,0 +1,56 @@
+{
+  "ok": false,
+  "engine": "component-row",
+  "kind": "sprite-gen-inspect-report",
+  "run_dir": "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\primary1-leather-extraction-v001\\run-farshoulder-standard-baseline-v001",
+  "states": [
+    "leather_farshoulder_sword_primary1"
+  ],
+  "thresholds": {
+    "histogram_min": 0.0,
+    "dhash_min": 0.55,
+    "motion_min": 0.01
+  },
+  "rows": [
+    {
+      "state": "leather_farshoulder_sword_primary1",
+      "source": "raw-projection",
+      "expected_frames": 6,
+      "found_frames": 6,
+      "natural_pose_count": 6,
+      "frame_files": [],
+      "metrics": {
+        "histogram_intersection": {
+          "min": 0.9524771029640774,
+          "mean": 0.9673459025033424
+        },
+        "dhash_similarity": {
+          "min": 0.96875,
+          "mean": 0.9854166666666667
+        },
+        "motion_presence": 0.00017812691482843137,
+        "centroid_sigma": {
+          "x": 0.2537930662330978,
+          "y": 0.8118195837770745
+        }
+      },
+      "ok": false,
+      "errors": [
+        "leather_farshoulder_sword_primary1: frame 01 is empty or too sparse (487 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)",
+        "leather_farshoulder_sword_primary1: frame 02 is empty or too sparse (506 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)",
+        "leather_farshoulder_sword_primary1: frame 05 is empty or too sparse (496 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)"
+      ],
+      "warnings": [
+        "leather_farshoulder_sword_primary1: motion presence is too low (0.0002 < 0.0100)"
+      ]
+    }
+  ],
+  "errors": [
+    "leather_farshoulder_sword_primary1: frame 01 is empty or too sparse (487 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)",
+    "leather_farshoulder_sword_primary1: frame 02 is empty or too sparse (506 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)",
+    "leather_farshoulder_sword_primary1: frame 05 is empty or too sparse (496 pixels < 512, character profile floor — small-subject run? declare \"subject\": \"effect\" in sprite-request.json, or pass --min-used-pixels)"
+  ],
+  "warnings": [
+    "leather_farshoulder_sword_primary1: motion presence is too low (0.0002 < 0.0100)"
+  ]
+}

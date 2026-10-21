@@ -1,0 +1,134 @@
+{
+  "schema": "primary1-chest-six-phase-same-facing-redraw-input-v003",
+  "created_local": "2026-10-17T01:46:46.650127+08:00",
+  "source_event": "EV-048",
+  "rows": [
+    {
+      "component": "Chest",
+      "runtime_component": "Chest",
+      "state": "leather_chest_sword_primary1",
+      "clip": "sword_primary_1",
+      "run_dir": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-chest-view4-input-v003/run-chest-primary1-facing-v003",
+      "raw_output_path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-chest-view4-input-v003/run-chest-primary1-facing-v003/raw/leather_chest_sword_primary1.png",
+      "prompt": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-chest-view4-input-v003/run-chest-primary1-facing-v003/prompts/leather_chest_sword_primary1.txt",
+        "bytes": 1101,
+        "sha256": "26b0b8a0f05b279d8e127c36943d5162f7d6fd92fdadd217649d9ea557f90841"
+      },
+      "prompt_word_count": 159,
+      "request": {
+        "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-chest-view4-input-v003/run-chest-primary1-facing-v003/sprite-request.json",
+        "bytes": 1801,
+        "sha256": "fefdeeae4036288d64604e390bfd1a783209ae14ef4ace3cae28acc7fecf7b7a"
+      },
+      "reference_images_in_order": [
+        {
+          "role": "FIRST_actual188_six_action_motion_basis_all_six_may_redraw",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-chest-view4-input-v003/run-chest-primary1-facing-v003/references/actual188-edit-target.png",
+            "bytes": 1318135,
+            "sha256": "7b07f7c624e7c9bd930fbecb6db7e77051a9f9447f9af59686388e710ed5f46f"
+          }
+        },
+        {
+          "role": "SECOND_actualReady184_Chest_appearance_only",
+          "file": {
+            "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-chest-view4-input-v003/run-chest-primary1-facing-v003/base-source.png",
+            "bytes": 16700,
+            "sha256": "9c1f63e4f710223c567a9e1fd9795490513aa88ee2ee4cd05425833a33af1312"
+          }
+        }
+      ],
+      "reference_count": 2,
+      "frame_count": 6,
+      "durations_ms": [
+        85,
+        85,
+        60,
+        60,
+        155,
+        155
+      ],
+      "fit_window_design_px": [
+        90,
+        90
+      ],
+      "shared_row_scale": true,
+      "future_extraction_min_used_pixels": 512,
+      "future_component_A": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "future_body_target_B": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "future_integer_delta": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "target_mounts_are_measured": false,
+      "standard_prepare_exit_code": 0,
+      "standard_prepare_command": [
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\.venv\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\22499\\.codex\\skills\\sprite-gen\\scripts\\prepare_sprite_run.py",
+        "--out-dir",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\primary1-chest-view4-input-v003\\run-chest-primary1-facing-v003",
+        "--character-id",
+        "fairytale-leather-chest-primary1-facing-v003",
+        "--base-image",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\chest184-extraction-v001\\run-shared-diagnostic-v001\\frames\\leather_chest_sword_ready\\frame-0.png",
+        "--description",
+        "Redraw all six actual188 Chest action views with one consistent right-facing construction: large armhole IMAGE-LEFT, pouch IMAGE-LEFT, front gold clasp IMAGE-RIGHT. Phase4 keeps recovery lean without torso rotation or mirroring.",
+        "--style",
+        "Actual Ready184 brown leather jerkin appearance; six same-right-facing action views, never a torso mirror or complete character.",
+        "--cell-size",
+        "512",
+        "--chroma-key",
+        "#00FF00",
+        "--request",
+        "F:\\Ourgame\\source-assets\\production\\fairytale-lgt-readability-v003\\primary1-chest-view4-input-v003\\requests\\chest-view4-numeric-input-v003.json"
+      ],
+      "transparent_background": false,
+      "background_hex": "#00FF00",
+      "generation_ready": true,
+      "planned_native_number_if_next": 192,
+      "native_request_number": null,
+      "root_edit_target_and_anchor_view_required_before_generation": false
+    }
+  ],
+  "generation_ready": true,
+  "root_review_required_before_generation": false,
+  "planned192_is_not_ledger_reservation": true,
+  "root_review_basis": "Root viewed Body159 and components after E289, then retained and viewed native191 at E292.191 still has reversed phase4(large armholeRIGHT, pouchRIGHT, claspLEFT), so191 is rejected without extraction.192 must redraw the six-phase row from188 motion plus Ready184 appearance, all same right-facing torso; no guarantee or requirement of preserving exact other-five pixels.",
+  "old_fullBody_or179_reference_attached": false,
+  "standard_guide_not_attached": true,
+  "all_six_must_be_remeasured_after_generation": true,
+  "exact_preserve_other_five_promised": false,
+  "generator_called": false,
+  "UE_or_import_called": false,
+  "new_guide_or_media_viewed": false,
+  "fit_or_full_animation_accepted": false,
+  "formal_complete_units": 0,
+  "root_review": "191 remains wrong perspective and rejected after E292; this request allows all six redraw and requires fresh measurement. Actual188 and Ready184 references already viewed.",
+  "root_input_freeze": {
+    "path": "F:/Ourgame/source-assets/production/fairytale-lgt-readability-v003/primary1-chest-view4-input-v003/input-freeze-v003.json",
+    "bytes": 2777,
+    "sha256": "c3f63ff1c3a14548b9a5c7264c91dd34c3af10ad68f209202c5e2b9f93482bd2"
+  }
+}
