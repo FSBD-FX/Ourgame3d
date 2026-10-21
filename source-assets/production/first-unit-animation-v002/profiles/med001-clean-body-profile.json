@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "name": "med001-clean-body-v002",
+  "processing": {
+    "cell_size": 512,
+    "fit_scale": 0.84,
+    "trim_border": 4,
+    "edge_clean_depth": 3,
+    "align": "feet",
+    "shared_scale": true,
+    "scale_strategy": "preserve",
+    "component_mode": "largest",
+    "component_padding": 0,
+    "min_component_area": 1,
+    "edge_touch_margin": 0
+  },
+  "output_origin": [
+    256.0,
+    472
+  ],
+  "reference": {
+    "target": "player",
+    "mode": "idle",
+    "rows": 2,
+    "cols": 3,
+    "body_scale_mean": 0.4565895731157395,
+    "body_scale_cv": 0.00418021581161432,
+    "anchor_y_mean": 0.8998015873015873
+  },
+  "qc": {
+    "max_body_scale_drift": 0.1
+  }
+}

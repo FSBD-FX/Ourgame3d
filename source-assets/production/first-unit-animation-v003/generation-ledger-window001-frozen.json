@@ -1,0 +1,935 @@
+{
+  "schema_version": 1,
+  "authorization_events": [
+    "EV-039",
+    "EV-040",
+    "EV-041",
+    "EV-042"
+  ],
+  "authorization_scope": "Current UE2.5D game production; host-native image generation and routine work automatically authorized by user. No repetitive confirmation for the same authorized work.",
+  "batch_request_limit": 24,
+  "requested_count": 24,
+  "remaining_batch_requests": 0,
+  "automatic_follow_on_batches_authorized": true,
+  "backend": "image_gen.imagegen",
+  "host_fee_usd": null,
+  "host_billing_status": "unknown_not_asserted_free",
+  "external_api_calls": 0,
+  "previous_batch": "first-unit-animation-v001",
+  "previous_batch_requests": 24,
+  "previous_batch_frozen": true,
+  "single_visual_writer": "/root/assets_prepare",
+  "started": "2026-10-15T01:12:07.430809+08:00",
+  "accounting_window_id": "EV039-24-request-window-v002-carried-into-v003",
+  "carried_prior_requests": 18,
+  "carried_prior_ledger": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\generation-ledger.json",
+  "requests": [
+    {
+      "request_number": 1,
+      "asset": "hero-sword-primary1-body",
+      "status": "candidate_body_and_pixel_qc_pass_root_internal_review_accepted_pending_runtime",
+      "requested_utc": "2026-10-14T17:23:23.767964+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\01-hero-sword-primary1.txt",
+      "prompt": "Create one production-oriented animation sheet for the SAME three-head-tall hand-painted 2D adventurer, grounded sword attack number 1. Image 1 is the exact identity/style reference. Image 2 is a measured scale-and-ground-root template of this same accepted character. Preserve the same tousled dark-brown hair, large brown eye, face proportions, skin tone, warm ochre tunic, brown leather shoulder and belt, blue-gray wrapped wrists, short charcoal trousers, brown boots, thick dark ink outlines and restrained cel shading. Keep the fixed 3/4-facing-right side-scroller camera seen in the references in every frame. No new costume, no front-facing face, no changing head size, no pixel art.\n\nOutput a wide 1536x1024 sheet with exactly TWO ROWS and THREE COLUMNS of equal invisible 512x512 cells. Six full-body poses in reading order, one continuous sword-slash action only. Solid flat #FF00FF magenta background everywhere outside the character, no gradients, no floor, no baked shadow, no text, no labels, no grid lines, no borders, no separated motion effects. Keep a fixed standing-equivalent anatomical height about414px per source cell, matching Image2 rather than resizing each pose. Feet rest on the same local y466 ground line; body/pelvis centered around x256. Keep all limbs in the central70% width, retain magenta padding on all four sides. This established height is intentional to match the current game. Bend knees/rotate torso naturally without translating or zooming the whole body. All hair, hands and boots fully visible; no crossing cell boundaries.\n\nBODY ONLY: absolutely no sword, blade, hilt, shield, slash trail or detached effect drawn into these frames. A separate sword sprite will be attached later. Nevertheless the near/right hand must unmistakably GRIP an imaginary cylindrical sword handle: thumb wraps across the curled fingers, knuckles curve around the cylinder, wrist forms the correct sword-grasp axis. Use the same closed sword grip throughout, never an open reaching palm. Do not make a punch or straight forward jab. The shoulder, torso, elbow and wrist must trace a large curved diagonal CUT, not push the fist forward along a horizontal line. The nonweapon hand balances behind/near the torso and never overlaps or replaces the grip hand.\n\nSix poses, two anticipation + two cutting + two recovery:\n1 top-left: right sword-grip hand drawn behind and beside the head at shoulder/head height, elbow bent, chest coiled slightly away, eyes still toward screen-right; balanced grounded stance.\n2 top-middle: stronger backswing, right grip behind the upper head, elbow raised, shoulders visibly rotate back, knees compress slightly. The hand is holding a handle, not winding up a boxing jab.\n3 top-right: begin the downward diagonal slash by rotating the chest toward screen-right; bent elbow leads the gripping wrist across the upper front of the body near face/chest height. Wrist angle implies a blade sweeping forward-down from overhead, not a straight arm thrust.\n4 bottom-left: decisive low-front diagonal follow-through; right grip travels in an arc to low screen-right near the waist/thigh, torso rotates through, elbow is softly bent, right wrist pivots downward. Both boots remain in the same rooted ground area.\n5 bottom-middle: finish the cut low across the front, elbow folding back toward body, body unwinds with grounded weight and visible shoulder rotation.\n6 bottom-right: return to compact low sword guard with the same closed right grip and stable footing, ready to transition to an opposite-direction second slash.\n\nMake the anticipation, cutting and recovery visibly different poses with real torso twist and wrist rotation. No motion blur, no smear limbs, no duplicate arms, no boxing pose, no forward-punch series. Preserve the character's standing-equivalent head/torso/limb dimensions and fixed camera exactly. Do not reproduce the neutral template poses; it is only the numeric scale/root guide.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\references\\hero-master-v001.png",
+          "sha256": "0127891cccf2c2ce00f9009cdf843acb26974eb1fd2fdc6b2666ebd4c6a44621"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\references\\hero-anchor-measured-2x3.png",
+          "sha256": "43765c8512dd4389fea7734c9fa891edcbfde4df0f3e7a6e423227df8a9ddae1"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T17:29:17.365455+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-6d435e50-6752-4373-8c25-2c20fb374ad3.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\01-hero-sword-primary1-body-v002.png",
+      "sha256": "d06ce14e292aa644fba6dcb04bf096b9331dc6b46db1d14ef56f2c1545d13d65",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\01-hero-sword-primary1-body-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\01-hero-sword-primary1-body-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\01-hero-sword-primary1-body-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\01-hero-sword-primary1-body-v002.png"
+      ],
+      "review_notes": "Root independently reviewed assembled six poses: high windup to downward arc and low rotating recovery improves old punch sequence; candidate import allowed, no runtime acceptance. Shared .853333 scale, meanheight355.5px, groundroot256472. Manual grips all alpha255 skin pixels; independent weapon .40.",
+      "reviewed_utc": "2026-10-14T17:35:35.573807+00:00"
+    },
+    {
+      "request_number": 2,
+      "asset": "hero-sword-primary2-body",
+      "status": "candidate_rejected_body_only_hilt_artifact",
+      "requested_utc": "2026-10-14T17:35:35.694141+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\02-hero-sword-primary2.txt",
+      "prompt": "Make a six-pose BODY-ONLY animation sheet for sword combo attack2, a rising reverse cut by the exact same three-head-tall hero in Image1. Image2 is the measured scale and ground-root template. Preserve face, dark tousled hair, brown eye, warm ochre tunic, brown leather shoulder and belt, blue-gray wrist wraps, trousers and boots, bold dark outlines and clean hand-painted cel shading. Keep the same fixed 3/4-facing-right side-scroller camera, never a front or rear face. No pixel art or new costume.\n\nExactly two rows and three columns, six equal invisible512x512 slots on a1536x1024 magenta sheet. All empty space is flat solid #FF00FF. No labels, text, borders, grids, floor, shadow, trails, particles or detached effects. Keep standing-equivalent anatomical height414px, same head and limb thickness in every slot. Fixed local ground line y466 and pelvis/root around x256; central70% width envelope, generous padding, full head/hands/boots visible. Never zoom/resize a pose or translate the whole character to convey motion. Feet stay rooted in the same compact stance area while knees and torso rotate naturally.\n\nNo visible weapon or hilt of any kind: the sword will be a separate component. The near/right hand must have a clear CLOSED CYLINDRICAL SWORD GRASP, thumb opposing the curled fingers and a readable handle axis through the palm. Preserve this gripping shape in every pose. The far/left hand balances naturally and is kept separate. Animate a curved low-to-high slicing motion through the wrist, elbow and shoulder, with torso twist; the whole sequence must read as an upward backhand sword cut, not a forward-reaching hand.\n\nReading order, one continuous attack:\nFrame1 top-left: low compact guard following a previous downward cut, near/right grip just ahead of the waist, elbow folded, both feet rooted.\nFrame2 top-middle: draw the closed right grip down and back beside the rear hip, coil shoulders slightly away and compress the knees, preparing a reverse rising slash. Grip and forearm are low, not already extended in front.\nFrame3 top-right: chest rotates through toward screen-right and the bent elbow carries the right grip diagonally upward across the front of the torso to chest height. The wrist pronates as if lifting a blade on a rising arc. Maintain a visibly bent arm, not a straight horizontal jab.\nFrame4 bottom-left: complete the rising cut with the near/right grip high in front and beside the forehead, elbow still softly bent; chest and hips rotate through. Hands/head remain fully inside the slot. Eyes remain facing-right on the same camera.\nFrame5 bottom-middle: high follow-through, gripping wrist settles inward toward the near shoulder while the torso unwinds and knees return to neutral. Do not repeat frame4 unchanged.\nFrame6 bottom-right: compact high sword guard near shoulder/chest height, same closed grip, ready to load an overhead finishing cut. Ground contact and anatomy match frame1.\n\nTwo anticipation frames, two active rising-cut frames, two recovery frames. Distinct physical poses, coherent identity and strong shoulder/wrist rotation. No motion blur, smear, duplicate limbs, open grasp, sword drawn into body, screen-space slash arc or scale drift. Image2 supplies the exact slot/scale/root geometry, not poses to copy.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\references\\hero-master-v001.png",
+          "sha256": "0127891cccf2c2ce00f9009cdf843acb26974eb1fd2fdc6b2666ebd4c6a44621"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\references\\hero-anchor-measured-2x3.png",
+          "sha256": "43765c8512dd4389fea7734c9fa891edcbfde4df0f3e7a6e423227df8a9ddae1"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T17:36:20.899097+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-9c2690ab-e4e7-4996-bfe9-19a17ed66e4a.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\02-hero-sword-primary2-body-v002.png",
+      "sha256": "6a35bbeb7c55d2a9231cca56183cef7ed38e2628a587db9e0929a98e390e69ba",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\02-hero-sword-primary2-body-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\02-hero-sword-primary2-body-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\02-hero-sword-primary2-body-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\02-hero-sword-primary2-body-v002.png"
+      ],
+      "review_notes": "Strict processor QC passed but source frames1/2 contain small brown-black grip/hilt stumps. Preserve failed source and processed output; do not call body-only accepted. One targeted built-in edit will remove held-object pixels without changing poses.",
+      "reviewed_utc": "2026-10-14T17:37:33.166330+00:00"
+    },
+    {
+      "request_number": 3,
+      "asset": "hero-primary2-hilt-cleanup",
+      "status": "candidate_body_only_correction_and_processor_qc_pass",
+      "requested_utc": "2026-10-14T17:37:33.282249+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\03-primary2-remove-hilt-artifact.txt",
+      "prompt": "Edit this exact six-frame, two-row three-column hero sprite sheet. Preserve all six existing body poses, precise head/face/costume identity, camera, anatomy scale, foot placement, colors, outlines, magenta background, frame spacing and1536x1024 composition.\n\nOnly correct the tiny unwanted held objects: in the top-left and top-middle frames there is a small brown/black cylindrical handle stump peeking from the near/right closed fist. Remove every visible wooden/metal/black/brown handle stump from the gripping hands in ALL six frames. Keep the original curled fingers, thumb and closed sword-grasp shape intact, with skin and ink lines only at the gripping hand; it must be an EMPTY closed grip ready for a separately composited sword. No sword blade, handle, hilt, pommel, stick, pen, cylinder or any visible held object anywhere. Do not replace the stump with an open hand and do not change the attack poses.\n\nThe sheet is BODY ONLY. The background remains pure solid #FF00FF. Do not change any other part of the image, add text, borders, grid lines, floor, shadow, motion effects or resize/recenter individual frames. This is a surgical object-removal edit, not a new animation design.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\02-hero-sword-primary2-body-v002.png",
+          "sha256": "6a35bbeb7c55d2a9231cca56183cef7ed38e2628a587db9e0929a98e390e69ba"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T17:38:29.834090+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-7091decf-ef67-45d8-bd18-365aae66ac40.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\03-hero-primary2-hilt-cleanup-v002.png",
+      "sha256": "1cac7e73412eae4e6b899549a8ec29044f27e5ea0b31f509bdd06a4cd0c7f575",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\03-hero-primary2-hilt-cleanup-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\03-hero-primary2-hilt-cleanup-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\03-hero-primary2-hilt-cleanup-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\03-hero-primary2-hilt-cleanup-v002.png"
+      ],
+      "review_notes": "Viewed original edit: tiny hilt stumps removed, grip/pose/identity retained. Strict same-scale QC passes: height352.5px CV.0139 drift.0428; weapon assembly/phase review pending.",
+      "reviewed_utc": "2026-10-14T17:40:37.428020+00:00"
+    },
+    {
+      "request_number": 4,
+      "asset": "hero-sword-primary3-body",
+      "status": "candidate_body_qc_and_assembly_review_pass_pending_runtime",
+      "requested_utc": "2026-10-14T17:40:37.582220+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\04-hero-sword-primary3.txt",
+      "prompt": "Produce sword-combo attack3, a committed overhead finishing cut, for the exact same three-head-tall adventurer from Image1. Image2 is the accepted measured scale/root template. Match the same hair, eye/face, clothing, leather shoulder and belt, wrapped wrists, trousers, boots, dark ink outlines and warm clean hand-painted cel shading. Camera stays the same fixed 3/4-facing-right side-scroller view throughout. No new costume or face view.\n\nSix full-body frames in exactly two rows by three columns,1536x1024 total with equal invisible512x512 slots. Solid flat #FF00FF background, no lines, labels, borders, floor, shadow, particles, trail or other effects. Fixed standing-equivalent height414px and head/torso/limb thickness, feet on localy466 with pelvis/root aroundx256. Central70% width envelope with fully visible hair/hands/boots and clean margins. Natural torso compression is allowed; no per-pose zoom/scale change or whole-body sliding.\n\nEvery pose is BODY ONLY. No drawn sword, blade, hilt, handle stump, pommel, stick, black cylinder or other held object. The near/right hand is an EMPTY CLOSED SWORD GRIP with curled fingers and an opposing thumb, ready to attach a separate weapon sprite. Keep this grasp readable; no open fist or stretched reaching fingers. The other hand is open for balance, never a second weapon hand. Motion must be generated by shoulder/torso rotation and an overhead-to-low diagonal wrist arc.\n\nReading order, a continuous finishing attack with2 anticipation,2 active,2 recovery:\n1 top-left: compact high guard near the right shoulder following an upward cut, right elbow bent, grounded balanced feet, eyes toward screen-right.\n2 top-middle: pronounced overhead backswing, empty right grip above and behind the head, shoulders coiled and knees compressed. Keep the entire raised hand inside the slot; use joint rotation, not bigger anatomy.\n3 top-right: heavy downward cut begins; torso rotates strongly toward screen-right and leans slightly forward, bent right elbow drives the gripping wrist diagonally across the upper front of the body. It is a slicing arc, not a straight horizontal extension.\n4 bottom-left: decisive low cross-body follow-through, right grip near the forward hip/thigh and both knees bent, chest rotating through. Plant both boots in the original stance area, no jumping, thrust or forward body translation.\n5 bottom-middle: low finishing recoil, elbow folds the gripping hand inward while the back straightens slightly. Keep momentum in shoulder/cloth movement, no repeated static pose.\n6 bottom-right: recover to compact low ready guard with closed right grip, stable grounded footing, same anatomical scale and face, ready for the next idle or first attack.\n\nMake the third cut heavier than the previous rising cut through visibly stronger torso coil/compression, while keeping normal proportions. Clean distinct frames, no smear or duplicate limbs, no baked weapon or screen-space slash effect. Do not reproduce neutral template poses; Image2 supplies only exact scale/root/layout.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\references\\hero-master-v001.png",
+          "sha256": "0127891cccf2c2ce00f9009cdf843acb26974eb1fd2fdc6b2666ebd4c6a44621"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\references\\hero-anchor-measured-2x3.png",
+          "sha256": "43765c8512dd4389fea7734c9fa891edcbfde4df0f3e7a6e423227df8a9ddae1"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T17:41:27.299387+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-0f65becc-379e-4cc4-9906-6f552f684791.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\04-hero-sword-primary3-body-v002.png",
+      "sha256": "e354589bb0a5ea2a54bdc83ac434e333bb39d2003b0ed7e9acb4c89f2da7ec9c",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\04-hero-sword-primary3-body-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\04-hero-sword-primary3-body-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\04-hero-sword-primary3-body-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\04-hero-sword-primary3-body-v002.png"
+      ],
+      "review_notes": "Distinct committed high backswing to low diagonal finish. Source-to-output .853333, bbox height330.3 from natural crouching rather than perframe resize; CV.0234 drift.0263. Actual fists measured and patch/angles frozen in import subset v002. No baked weapon.",
+      "reviewed_utc": "2026-10-14T17:51:47.717067+00:00"
+    },
+    {
+      "request_number": 5,
+      "asset": "lgt001-idle-body-variant",
+      "status": "lgt001_idle_anchor_candidate_visual_and_strict_qc_pass",
+      "requested_utc": "2026-10-14T17:51:47.855088+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\05-lgt001-idle-anchor.txt",
+      "prompt": "Create a six-frame subtle idle animation for an ARM-LGT-001 light-leather armor BODY-ATLAS VARIANT of the EXACT SAME three-head-tall adventurer in Image1. Image2 is the measured geometry/root guide. Preserve his identical face, brown eye, tousled dark-brown hair, skin, three-head proportions, short legs, brown boots, compact belt pouch, bold dark outlines and clean hand-painted cel shading. Same fixed3/4-facing-right side-scroller camera; no new person, no helmet or hair change, no pixel art.\n\nOnly change the outfit to the specified light armor: a waist-length warm brown SOFT LEATHER short coat with modest flexible shoulders, simple seams and brass fasteners, a small belt pouch, warm ochre cloth peeking at collar/rolled inner cuffs, visible knees/charcoal short trousers and the same brown boots. The silhouette stays compact and flexible, clearly leather rather than metal, chainmail or a long robe. Keep blue-gray wrist wraps; bare hands fully readable. This is the whole dressed body, not an isolated armor overlay.\n\nExactly TWO ROWS and THREE COLUMNS of six equal invisible512x512 slots,1536x1024 total. Background pure flat solid #FF00FF. No text, labels, borders, floor, shadow, grid lines, particles, weapons or detached objects. Standing-equivalent anatomy414px high per cell, same head size and limb thickness as Image2. Feet on localy466 and stable pelvis/root aroundx256, full body inside slots, central70% width, clean magenta margins. Do not resize or recenter poses independently.\n\nSix consecutive small breathing poses in reading order: neutral low guard; slight inhale; relaxed apex; gentle exhale; shoulders settle; return seamlessly to the initial stance. Boots and pelvis stay fixed, no side sway or walking. The near/right hand stays in a compact EMPTY CLOSED sword-grasp by the forward waist/hip, elbow bent; thumb opposes the fingers as though gripping a separately attached handle. Other hand relaxed for balance. No blade, handle, hilt stump, black/brown cylinder, stick or visible held object in any fist. Avoid open grasp or a boxing extension.\n\nSubtle chest, shoulders and leather hem motion distinguish the frames without changing identity, anatomical scale, camera, armor construction or stance. No smear, blur, duplicate limbs, aura or large motion. This sheet is the light-armor idle geometry/identity anchor for subsequent full animation variants.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\references\\hero-master-v001.png",
+          "sha256": "0127891cccf2c2ce00f9009cdf843acb26974eb1fd2fdc6b2666ebd4c6a44621"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\references\\hero-anchor-measured-2x3.png",
+          "sha256": "43765c8512dd4389fea7734c9fa891edcbfde4df0f3e7a6e423227df8a9ddae1"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T17:52:27.540492+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-f1ebeae1-eaa0-4cdb-9124-2269503bcce3.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\05-lgt001-idle-body-variant-v002.png",
+      "sha256": "f8e05ce11ce4932cbb57069d774c58c925aeee7f0732aadfdc800804555625ef",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\05-lgt001-idle-body-variant-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\05-lgt001-idle-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\05-lgt001-idle-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\05-lgt001-idle-body-variant-v002.png"
+      ],
+      "review_notes": "Same hero/3-head proportions; brown waist-length soft leather coat matches LGT001 source, closed right grip no hilt; subtle breathing6. Uniform preserve scale/feet; full dressed body variant not armor overlay. Attack/walk states still required.",
+      "reviewed_utc": "2026-10-14T17:53:53.633393+00:00"
+    },
+    {
+      "request_number": 6,
+      "asset": "med001-idle-body-variant",
+      "status": "rejected_baked_small_hilt_stumps_despite_strict_pixel_qc_pass",
+      "requested_utc": "2026-10-14T17:53:53.764123+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\06-med001-idle-anchor.txt",
+      "prompt": "Create the ARM-MED-001 medium-chainmail BODY-ATLAS VARIANT of the identical three-head-tall hero in Image1. Image2 fixes numeric scale/root geometry. Preserve exact face, tousled dark-brown hair, brown eye, skin, short-legged proportions, belt pouch, boots, strong dark outlines and clean warm hand-painted cel shading. Same fixed3/4-facing-right side camera, no new character/helmet/hat, no pixel art.\n\nArmor changes only: a SHORT WARM-OCHRE TABARD over clearly visible steel CHAINMAIL at the torso sides, upper arms and split lower hem, medium-sized ROUNDED STEEL SHOULDER PLATES and modest brown leather straps. Simple readable ring texture, restrained cool-gray metal highlights, no glowing magic. The short coat is split ABOVE the knees so both charcoal-trouser legs and brown boots remain readable. Medium armor has a fuller silhouette than soft leather but much narrower than huge square heavy pauldrons. Retain blue-gray wrist wraps and bare empty hands. This is a whole dressed character, not an isolated overlay.\n\nOne subtle six-frame IDLE action, exactly2rows×3columns,1536x1024 total, invisible512px slots, all background pure flat #FF00FF. No text, borders, lines, floor, shadow, weapon, hilt stump, stick, cylinder, particles or detached objects. Same anatomical height414px and head/limb dimensions as Image2, rooted feet at localy466/pelvisx256, full body and safe margins in every cell, no independent zoom or recenter.\n\nReading order: neutral low guard; slight chest inhale; soft breathing apex; exhale; shoulder/chainmail settle; return to neutral. All feet and pelvis stay fixed, no walking or side sway. Near/right hand remains an EMPTY CLOSED cylindrical sword-grasp at the forward waist/hip, elbow bent, thumb opposing curled fingers; no visible handle or held item. Far hand balances loosely. Preserve the same chainmail construction, rounded pauldron size, camera and face in all six small breathing poses. No duplicate limbs, smear, blur, aura, effects or animation-scale drift.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\references\\hero-master-v001.png",
+          "sha256": "0127891cccf2c2ce00f9009cdf843acb26974eb1fd2fdc6b2666ebd4c6a44621"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\references\\hero-anchor-measured-2x3.png",
+          "sha256": "43765c8512dd4389fea7734c9fa891edcbfde4df0f3e7a6e423227df8a9ddae1"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T17:56:40.999580+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-b4253c57-171f-4596-a08b-012b9033f10e.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\06-med001-idle-body-variant-v002.png",
+      "sha256": "3f1640a268d5c1f7a03551b158de5329f8d46f0e4d595cf6404d17e17abb1c53",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\06-med001-idle-body-variant-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\06-med001-idle-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\06-med001-idle-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\06-med001-idle-body-variant-v002.png"
+      ],
+      "review_notes": "Native fullsheet and archived nearest-neighbor grip closeup confirm gray cylindrical hilt cap in all near grips. Cannot count body-only accepted. Preserve raw/processed/profile; targeted native image edit removes only stumps.",
+      "reviewed_utc": "2026-10-14T17:58:34.217546+00:00"
+    },
+    {
+      "request_number": 7,
+      "asset": "med001-idle-grip-cleanup",
+      "status": "failed_targeted_edit_gray_stumps_still_visible",
+      "requested_utc": "2026-10-14T17:58:34.348802+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\07-med001-remove-grip-stumps.txt",
+      "prompt": "Edit this exact medium-chainmail hero idle sheet. Keep ALL six existing poses, face/hair, costume, rounded metal shoulders, chainmail, boots, wrist wraps, anatomy,1536x1024 two-row three-column geometry, feet positions and #FF00FF magenta background unchanged.\n\nIn EVERY frame, remove the small gray/black cylindrical metal handle end visibly sticking out from the near/right hand beside the hip. It is an unwanted weapon/hilt stump. This is a BODY-ONLY atlas: no blade, handle, hilt, pommel, cylinder or held object may remain. Replace only the visible gray/black object area with the naturally CLOSED EMPTY hand/fingers and, where appropriate, the already-existing ochre coat behind it. Keep a clear curled-finger grasp and opposing thumb, not an open palm. The fist must contain skin and dark finger contour lines only, ready for a separate sword sprite.\n\nThis is a surgical removal of six tiny object stumps, not a redesign or new pose generation. Preserve the rest of the image precisely. No new belt buckle at the grip location, no different hand position, no scale/layout/camera change, no floor, shadow, text, border or effects. Background stays pure flat magenta.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\06-med001-idle-body-variant-v002.png",
+          "sha256": "3f1640a268d5c1f7a03551b158de5329f8d46f0e4d595cf6404d17e17abb1c53"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T17:59:23.240872+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-1f129508-d1bb-4e42-9d4a-3bf237e11f29.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\07-med001-idle-grip-cleanup-v002.png",
+      "sha256": "e9b66f240b9ea01f41077bc9b5911b032118554fee839046e9a58505f08d9d2c",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\07-med001-idle-grip-cleanup-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\07-med001-idle-grip-cleanup-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\07-med001-idle-grip-cleanup-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\07-med001-idle-grip-cleanup-v002.png"
+      ],
+      "review_notes": "Viewed all6 frames: edit did not remove gray hilt caps; preserve failure. One bounded localized correction with archived magnified offending grip is next; no blind retry chain.",
+      "reviewed_utc": "2026-10-14T18:01:04.865723+00:00"
+    },
+    {
+      "request_number": 8,
+      "asset": "med001-localized-bare-fist-fix",
+      "status": "failed_localized_edit_gray_caps_unchanged",
+      "requested_utc": "2026-10-14T18:01:05.044496+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\08-med001-localized-bare-fist-correction.txt",
+      "prompt": "Image1 is the exact full1536x1024 medium-armor six-frame sheet to edit. Image2 is a magnified pixel closeup identifying the UNWANTED GRAY HANDLE END. The target is the VIEWER-LEFT hand directly below the large round silver shoulder plate, beside the character's left edge/hip in every frame. It has a small round gray metal cylinder cap between thumb and curled fingers. Remove that gray object in ALL SIX viewer-left fists.\n\nRedraw only those six small hands as completely CLOSED BARE SKIN FISTS with naturally curved finger/knuckle ink lines and an opposed thumb. No C-shaped opening containing a gray object. NO gray/black metal oval, wood, handle, cylinder, hilt stump, stick, pen or weapon fragment between the fingers. The existing coat and background behind the hand stay intact. The fist's position, size and wrist stay exactly where they are. It is acceptable to close the finger gap slightly to remove the object, because an independent weapon layer will be attached later.\n\nThe VIEWER-RIGHT hand on the opposite side is not the target. Preserve all other pixels and design: identical head/hair/face, skin tone, chainmail, rounded steel shoulders, tabard, belt, boots, frame poses, camera, size and foot locations. Keep Image1's exact two-row three-column fullsheet composition and flat #FF00FF background; do not output the closeup, crop the sheet, add labels, floor, shadows or effects. Image2 only identifies the tiny offending object. This must be a visibly corrected EMPTY fist, not an unchanged copy retaining the gray cap.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\07-med001-idle-grip-cleanup-v002.png",
+          "sha256": "e9b66f240b9ea01f41077bc9b5911b032118554fee839046e9a58505f08d9d2c"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\reviews\\med001-grip-pixel-closeup-v001.png",
+          "sha256": "fca7f261f68f193b2f7919138eaf695e75859cf92717b120f4ddacfda6e2a501"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:02:00.293393+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-9e171f76-e72c-46ae-869d-640ccb13955e.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\08-med001-localized-bare-fist-fix-v002.png",
+      "sha256": "b0194d0839166a10c29f917b004adf648c1abb7a45e2c1edbfa3ebfb4ea56c96",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\08-med001-localized-bare-fist-fix-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\08-med001-localized-bare-fist-fix-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\08-med001-localized-bare-fist-fix-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\08-med001-localized-bare-fist-fix-v002.png"
+      ],
+      "review_notes": "All six fists still contain gray caps after the bounded second localized correction. Stop this edit chain; preserve original and failure. Future MED anchor must use clean empty-hand pose reference rather than copy this artifact.",
+      "reviewed_utc": "2026-10-14T18:06:06.129643+00:00"
+    },
+    {
+      "request_number": 9,
+      "asset": "hvy001-idle-body-variant",
+      "status": "hvy001_idle_anchor_candidate_visual_and_strict_qc_pass",
+      "requested_utc": "2026-10-14T18:06:15.226882+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\09-hvy001-idle-anchor.txt",
+      "prompt": "Create the ARM-HVY-001 heavy plate armor whole-body idle variant of the EXACT same three-head-tall adventurer in Image1. Image2 locks scale and grounded layout. Preserve the same tousled dark-brown hair, uncovered face, brown eye, skin, compact three-head anatomy, short legs and bold hand-painted cel-shaded outline. Fixed 3/4 facing screen-right side-scroller camera. This is the same person wearing different clothes, never a taller adult, new face or knight helmet.\n\nHeavy outfit: dark weathered gunmetal breastplate formed like a gate bolt, with two broad horizontal reinforcing bars across the chest, large unmistakably SQUARE block-shaped shoulder plates, thick matching shin greaves, small brass rivets, leather straps and ochre cloth in the joints. Broader armor silhouette than chainmail, but same anatomical head/torso/limb size. No cape, no helmet, no massive spikes. Hair and face stay fully visible. Warm brown boot soles visible below shin armor. Hands BARE and entirely empty, naturally CLOSED fists with skin knuckles and thumb over curled fingers, clearly separated from the belt/hip by a little magenta space. Wrists short blue-gray wraps. No object inside the hands.\n\nExactly two rows and three columns of six equal invisible512x512 cells, total1536x1024. Solid flat #FF00FF background. Six small consecutive breathing idle poses only: neutral; inhale; gentle high chest; exhale; shoulders settle; return to neutral. Boots/pelvis fixed, only subtle chest/shoulder motion, no side sway. Standing-equivalent anatomy414px per cell matching Image2, fixed feet localy466, body root x256. Full body visible and central70% width, generous magenta padding. No per-frame zoom, crop, pose normalization or translation. Heavier armor changes thickness not height.\n\nThis is a whole dressed body atlas, not a detached armor overlay. No sword, shield, rod, gray oval, handle, hilt stump or other held object; no motion trails, detached effects, floor, baked shadow, labels, gridlines or borders. Do not reproduce the template costume. Keep construction, face, hand shapes and scale consistent across all six slots.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\references\\hero-master-v001.png",
+          "sha256": "0127891cccf2c2ce00f9009cdf843acb26974eb1fd2fdc6b2666ebd4c6a44621"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\references\\hero-anchor-measured-2x3.png",
+          "sha256": "43765c8512dd4389fea7734c9fa891edcbfde4df0f3e7a6e423227df8a9ddae1"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:07:00.047945+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-e221de00-67e3-4429-a374-12e390f2c941.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\09-hvy001-idle-body-variant-v002.png",
+      "sha256": "df78edabad9c57ef8f94d8839430aca3d31ab375c3bdde3b55580c1060b8f6ad",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\09-hvy001-idle-body-variant-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\09-hvy001-idle-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\09-hvy001-idle-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\09-hvy001-idle-body-variant-v002.png"
+      ],
+      "review_notes": "Same barehead3-head hero with heavy horizontal gatebolt chest bars, broad square shoulders and greaves; no held objects observed. Whole-body clothing composite. Empty relaxed curled near hand needs actual grip marker; no separated armor claim. Uniform preserve scale and root; six subtle idle frames, no runtime acceptance.",
+      "reviewed_utc": "2026-10-14T18:07:50.002889+00:00"
+    },
+    {
+      "request_number": 10,
+      "asset": "rob001-idle-body-variant",
+      "status": "rob001_idle_anchor_candidate_visual_and_strict_qc_pass",
+      "requested_utc": "2026-10-14T18:07:50.559024+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\10-rob001-idle-anchor.txt",
+      "prompt": "Make the ARM-ROB-001 gray-candle robe whole-body idle variant for the exact same three-head-tall adventurer in Image1. Image2 locks grounded layout and414px anatomical scale. Preserve the same uncovered face, large brown eye, tousled dark-brown hair, skin, compact short-legged proportions, brown boots and thick hand-painted dark outlines with clean cel shading. Same fixed3/4-facing-right side-scroller camera. No hood, helmet, facial redesign, taller adult or pixel art.\n\nChange only the clothes: straight long ash-gray cloth robe with narrow sleeves, simple waist belt, a SINGLE thin warm-orange inner lining visible at the small front split and collar. Cloth hem reaches below knees but above boot soles, with two legs and both boots readable. Long, quiet vertical silhouette; not metal armor, not chainmail, no cape, no magic ornaments. Hands bare, fully visible beyond the narrow cuffs, naturally CLOSED EMPTY fists with thumb folded across skin fingers. Place near fist slightly forward of the hip with a small clear gap from the robe. No object held in either hand.\n\nSix consecutive small breathing idle poses in TWO ROWS and THREE COLUMNS of equal invisible512x512 cells,1536x1024 total. Pure flat #FF00FF background. Stablefeet at localy466, rootaroundx256, same head size and anatomical standing height414px eachslot. Subtle inhale/highchest/exhale/settle/return; feet/pelvis fixed, only chest and cloth edge move slightly. Fullbody inside central70% width with magenta margins, no per-pose zoom/resize/translation. Preserve face/camera and robe construction consistently.\n\nThis is a complete dressed body atlas variant, not a separated clothing layer. No sword, staff, wand, shield, handle fragment, gray oval or visible held item. No spell, aura, trail, floatingeffect, floor, shadow, labels, gridlines or border. Keep orange trim thin so the garment unmistakably reads ash-gray with one restrained warm lining.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\references\\hero-master-v001.png",
+          "sha256": "0127891cccf2c2ce00f9009cdf843acb26974eb1fd2fdc6b2666ebd4c6a44621"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\references\\hero-anchor-measured-2x3.png",
+          "sha256": "43765c8512dd4389fea7734c9fa891edcbfde4df0f3e7a6e423227df8a9ddae1"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:08:22.597436+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-e255fee7-8c38-47e6-85e5-1d7702bd5f3a.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\10-rob001-idle-body-variant-v002.png",
+      "sha256": "f58b614590ece596f90ef033cb3a034f509ee9f1444ec07cc2dbecf727ba5cd4",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\10-rob001-idle-body-variant-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\10-rob001-idle-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\10-rob001-idle-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\10-rob001-idle-body-variant-v002.png"
+      ],
+      "review_notes": "Same identity, gray long robe, thin orange lining, boots visible, bare empty hands. Whole-body clothing composite, no isolated layer claim. Six subtle idle frames; scale/alpha QC does not mean complete action/runtime acceptance.",
+      "reviewed_utc": "2026-10-14T18:10:00.100240+00:00"
+    },
+    {
+      "request_number": 11,
+      "asset": "med001-clean-pose-body-variant",
+      "status": "med001_clean_idle_anchor_candidate_visual_and_strict_qc_pass",
+      "requested_utc": "2026-10-14T18:08:57.304033+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\11-med001-from-clean-empty-hands.txt",
+      "prompt": "Edit Image1's six-frame light-leather idle sheet to wear medium chainmail armor. Preserve the EXACT existing character, face/hair, three-head anatomy, pose geometry, empty skin hand shapes, boots, feet coordinates and all six 512x512 slots. Change only the outfit. In particular, leave BOTH empty bare hands exactly as Image1: skin fingers and thumb, no added held object or new grasp opening.\n\nReplace the brown leather short coat and shoulders with ARM-MED-001: short muted ochre tabard over clearly visible gray chainmail at upperarms and lower split hem, medium ROUND steel shoulder pauldrons, chainmail sleeves, simple leather belt with small pouch, visible charcoal knees/trousers and same boots. Rounded shoulder silhouette sits between soft light leather and large square heavy plate. No breastplate bars, no helmet, no cape. Keep uncovered face and brown tousled hair. Keep short blue-gray wraps at wrists and bare hands. Do not convert the small belt buckle or fingers into metal objects.\n\nRetain Image1's complete1536x1024 TWO-ROW THREE-COLUMN composition, pure #FF00FF background, fullbody scale about414px per sourcecell, fixedfeet localy466 and rootx256. This is the same six small idle breathing poses with stablefeet/pelvis; no new animation, zoom, crop, resizing or recentering. Bold dark outline and clean handpainted cel shading match Image1. No text, labels, borders, floor, shadow or effects.\n\nWhole dressed body atlas variant only. Both hands remain empty as in Image1. No weapons, sticks, handles, dark caps or metal ovals added between the fingers. Every small object belongs on the clothing, never in the fist. Preserve every visible finger contour and bare skin hand color from Image1.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\05-lgt001-idle-body-variant-v002.png",
+          "sha256": "f8e05ce11ce4932cbb57069d774c58c925aeee7f0732aadfdc800804555625ef"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:09:41.368967+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-4d3a9813-b357-4aec-a411-8f1cc0ccb6fa.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\11-med001-clean-pose-body-variant-v002.png",
+      "sha256": "16ac38702202eb56105fad24780d0ea06882bfbd43be992da50120196f028665",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\11-med001-clean-pose-body-variant-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\11-med001-clean-pose-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\11-med001-clean-pose-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\11-med001-clean-pose-body-variant-v002.png"
+      ],
+      "review_notes": "Fresh outfit edit from clean LGT pose succeeded: all six near fists are empty skin, no gray cap. Rounded shoulders, visible chainmail sleeves/hem, short ochre tabard; same3-head hero. Replaces rejected6/7/8 as candidate anchor only. Whole-body armor variant; no layers/runtime claim.",
+      "reviewed_utc": "2026-10-14T18:10:50.208259+00:00"
+    },
+    {
+      "request_number": 12,
+      "asset": "lgt001-primary1-body-variant",
+      "status": "lgt001_primary1_body_candidate_visual_and_pixel_qc_pass",
+      "requested_utc": "2026-10-14T18:10:50.826314+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\12-lgt001-primary1.txt",
+      "prompt": "Change ONLY the outfit of Image1's exact six-frame downward sword-cut body sheet to the light leather outfit in Image2. Image1 is the immutable pose/geometry/empty-hand target; Image2 is clothing construction reference only. Preserve Image1's face, hair, anatomy, hands and their exact coordinates/angles, stance and six-pose continuity. Same three-head-tall adventurer, fixed3/4 facing-right camera, bold cel-shaded dark outline.\n\nUse ARM-LGT-001 waist-length warm brown soft-leather short coat, flexible small leather shoulders, brass fasteners, small belt pouch, ochre collar/cuffs, charcoal short trousers and original brown boots. Match Image2's outfit consistently in all six poses. This is a complete dressed body atlas VARIANT, not a detached armor layer.\n\nKeep Image1's1536x1024 two-row three-column equal512cell layout, standing-equivalent414px anatomical scale, fixed localgroundy466/rootx256, all padding. No perframe fit/resize/translation. Keep all six empty BARE fists exactly as Image1 with skin/thumb contours only. No weapons, handles, hilt ends, shields, trailFX, floor, shadow, text or grids. Pure flat #FF00FF outsidebody.\n\nPreserve the exact action: frames1/2 high rear windup;3/4 forward-down diagonal cut driven by torso and wrist rotation;5/6 low recovering guard. Do not turn it into a straight punch, idle, or recolor with missing poses. Clothes bend naturally with the existing torso/elbow/knee poses. No added hand objects or changed grip location.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\01-hero-sword-primary1-body-v002.png",
+          "sha256": "d06ce14e292aa644fba6dcb04bf096b9331dc6b46db1d14ef56f2c1545d13d65"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\05-lgt001-idle-body-variant-v002.png",
+          "sha256": "f8e05ce11ce4932cbb57069d774c58c925aeee7f0732aadfdc800804555625ef"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:11:45.525659+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-a334ef6b-24f6-412d-9713-fc10c3919cf3.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\12-lgt001-primary1-body-variant-v002.png",
+      "sha256": "c265aaf71009a546e6c04c44ecd9edc9f29758889b365b3e0588e224f3949340",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\12-lgt001-primary1-body-variant-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\12-lgt001-primary1-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\12-lgt001-primary1-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\12-lgt001-primary1-body-variant-v002.png"
+      ],
+      "review_notes": "Six pose geometry preserves original downward cut; leather outfit consistent; all fists bare, no integrated weapon. Profile drift .04994/CV .03082, same uniform .853333. Needs new measured grip/mask and engine assembly; not formal runtime acceptance.",
+      "reviewed_utc": "2026-10-14T18:13:06.830775+00:00"
+    },
+    {
+      "request_number": 13,
+      "asset": "lgt001-primary2-body-variant",
+      "status": "lgt001_primary2_body_candidate_visual_and_pixel_qc_pass",
+      "requested_utc": "2026-10-14T18:13:07.386616+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\13-lgt001-primary2.txt",
+      "prompt": "Image1 is the exact six-frame rising reverse sword-cut BODY-ONLY pose target. Image2 supplies the light-leather outfit. Change only Image1's clothes to Image2's ARM-LGT-001 warm brown soft-leather waist-length coat, small flexible shoulders, brass fasteners, ochre inner collar/cuffs, belt pouch, charcoal trousers and original boots. Preserve the SAME three-head hero face, tousled brown hair, camera, anatomy, hand skin shapes and every pose/foot/grip coordinate. Whole dressed body variant, not armor overlay.\n\nKeep exact1536x1024 two-row three-column512cells, pure #FF00FF,414px standing-equivalent anatomy, fixedfootline localy466/rootx256. No zoom, perframe fit, crop or translation. Keep all six fists EMPTY and bare exactly as Image1; skin/finger/thumb lines only. No sword, handle, hilt cap, shield, staff, trails, floor, shadow, grid or labels.\n\nRetain Image1's complete continuous action:1/2 low reverse windup,3/4 rising diagonal cut with torso/wrist rotation,5/6 high recoil and compact guard. No straight punch, duplicate idle poses, new pose layout or face direction. Clothing folds naturally around existing elbows/torso; hands and boots stay in their exact established locations. Match Image2's coat construction across all six slots with the same bold dark outlines/cel shading.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\03-hero-primary2-hilt-cleanup-v002.png",
+          "sha256": "1cac7e73412eae4e6b899549a8ec29044f27e5ea0b31f509bdd06a4cd0c7f575"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\05-lgt001-idle-body-variant-v002.png",
+          "sha256": "f8e05ce11ce4932cbb57069d774c58c925aeee7f0732aadfdc800804555625ef"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:13:44.494223+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-bd2ace59-29c8-4696-baff-efe23c824c53.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\13-lgt001-primary2-body-variant-v002.png",
+      "sha256": "debee2c589d50b4f1567714abd66e0f48df7b91b29be84fbc0566f5ac7230edb",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\13-lgt001-primary2-body-variant-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\13-lgt001-primary2-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\13-lgt001-primary2-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\13-lgt001-primary2-body-variant-v002.png"
+      ],
+      "review_notes": "Rising reverse cut follows original six hand/torso poses; empty fists, consistent lightleather coat. Profile drift .02533/CV .01336, alpha/canvas passes. Grip/mask remeasurement and engine review pending.",
+      "reviewed_utc": "2026-10-14T18:14:36.494350+00:00"
+    },
+    {
+      "request_number": 14,
+      "asset": "lgt001-primary3-body-variant",
+      "status": "lgt001_primary3_body_candidate_visual_and_pixel_qc_pass",
+      "requested_utc": "2026-10-14T18:14:37.039527+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\14-lgt001-primary3.txt",
+      "prompt": "Use Image1 as the exact immutable six-frame overhead-finisher pose sheet. Change only the outfit to Image2's ARM-LGT-001 warm brown waist-length soft-leather short coat, flexible small shoulderpads, brass buttons, ochre collar/cuffs and belt pouch. Same charcoal trousers and brownboots. Keep Image1's three-head-tall hero identity, brown hair/eye, bareface, anatomy, six empty fists/hand locations, camera and all knee/torso/foot geometry. Whole dressed body atlas variant, not isolated armor overlay.\n\nPreserve all six poses:1/2 overhead windup;3/4 powerful descending cut and compressed knees;5/6 torso/arm recovery. Retain actual crouch height; do not stretch crouched poses to standing. Do not turn this into idle or boxing. Clothing bends around the established elbows and torso, same construction acrossframes.\n\n1536x1024 two-row three-column512cells exactly as Image1, pure solid #FF00FF background, same414px standing-equivalent anatomy and fixedgroundy466/rootx256. No crop, zoom, recenter, individual bboxfit or wholebodytranslation. Fullbody padding preserved. All hands remain empty bare skin with existing thumb/finger contours, no visible weapon/handle/hilt/stick. No trails, floor, shadows, gridlines, labels or effects. Same thick outlines and restrained handpainted celshade.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\04-hero-sword-primary3-body-v002.png",
+          "sha256": "e354589bb0a5ea2a54bdc83ac434e333bb39d2003b0ed7e9acb4c89f2da7ec9c"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\05-lgt001-idle-body-variant-v002.png",
+          "sha256": "f8e05ce11ce4932cbb57069d774c58c925aeee7f0732aadfdc800804555625ef"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:15:12.798280+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-4d217211-13cb-4fb1-b33b-b763f6aa61c9.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\14-lgt001-primary3-body-variant-v002.png",
+      "sha256": "530e127d0d9c15ae4fc1ccb201289c24e68404094e6bc412e22c389f484aae60",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\14-lgt001-primary3-body-variant-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\14-lgt001-primary3-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\14-lgt001-primary3-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\14-lgt001-primary3-body-variant-v002.png"
+      ],
+      "review_notes": "Overhead finisher and lowcrouch preserved, leather consistent, no handobjects. Profile drift .00990/CV .02412, same uniformscale. Natural crouch329px not resized to standing. Assembly/markers/runtime pending.",
+      "reviewed_utc": "2026-10-14T18:16:00.435730+00:00"
+    },
+    {
+      "request_number": 15,
+      "asset": "med001-primary1-body-variant",
+      "status": "med001_primary1_body_candidate_visual_and_pixel_qc_pass",
+      "requested_utc": "2026-10-14T18:16:00.977896+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\15-med001-primary1.txt",
+      "prompt": "Change ONLY Image1's costume to Image2's ARM-MED-001 medium chainmail outfit. Image1 is the immutable six-pose downward sword-cut geometry/emptyhand target. Image2 supplies clothing only: short ochre tabard, visible gray chainmail sleeves and split hem, medium ROUND steel pauldrons, simple leather belt/pouch, short bluegray wraps, charcoal knees and original brownboots. Match this design in all sixframes. Whole dressed body atlas VARIANT, not isolatedarmor.\n\nPreserve exact same three-head hero face/hair/skin/anatomy, fixed3/4 rightcamera, Image1's hands and their coordinates, feet and every torso/elbow/knee pose. Keep1/2 highrearwindup,3/4 forward-downcut,5/6 lowrecoveringguard. Armor bends around existing movement; no idle replacement or boxingjab. Fingers remain EMPTY BARE skin exactly as Image1, no graymetalcap or object inserted betweenthumb/fingers.\n\nKeep exact1536x1024 two-row three-column512cells, same414px anatomical height, groundlocaly466/rootx256 and padding. No posezoom, bboxfit, recenter, resizing, crop or wholebodytranslation. Pureflat #FF00FF background. No weapon/handle/shield/trail, floor, shadow, labels, borders or gridlines. Same bold handpainted outlines/celshading; medium shoulders must stay rounded, not heavy squareplate.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\01-hero-sword-primary1-body-v002.png",
+          "sha256": "d06ce14e292aa644fba6dcb04bf096b9331dc6b46db1d14ef56f2c1545d13d65"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\11-med001-clean-pose-body-variant-v002.png",
+          "sha256": "16ac38702202eb56105fad24780d0ea06882bfbd43be992da50120196f028665"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:16:42.762116+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-66a71da9-af5b-4688-85fc-5ba565a1423c.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\15-med001-primary1-body-variant-v002.png",
+      "sha256": "f5090d21803bb7a8390d6ba0b72ca37d6eb1ec8e54a635fe817f24fe2faffc57",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\15-med001-primary1-body-variant-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\15-med001-primary1-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\15-med001-primary1-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\15-med001-primary1-body-variant-v002.png"
+      ],
+      "review_notes": "Rounded shoulder/chainmail/shorttabard construction consistent, no integrated hilt. Original six downward-cut poses and grip geometry preserved visually; same uniformscale profile drift .04364. New markers and assembly pending.",
+      "reviewed_utc": "2026-10-14T18:17:31.752201+00:00"
+    },
+    {
+      "request_number": 16,
+      "asset": "med001-primary2-body-variant",
+      "status": "med001_primary2_body_candidate_visual_and_pixel_qc_pass",
+      "requested_utc": "2026-10-14T18:17:32.283532+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\16-med001-primary2.txt",
+      "prompt": "Image1 is the exact six-frame rising reverse swordcut body pose target. Edit ONLY clothes to match Image2's ARM-MED-001 medium chainmail outfit: short ochre tabard over visible gray chainmail upperarms and split hem, medium rounded steel pauldrons, simple brown belt/pouch, short bluegray wristwraps, charcoal knees and originalbrownboots. Same complete dressed body atlas variant; never detached armorlayer.\n\nPreserve Image1's exact three-head hero face/hair/skin, fixed3/4 rightcamera, anatomical proportions, empty bare finger/thumb shapes and all grip/foot/torso locations. Sixposes remain1/2 lowreversewindup,3/4 rising diagonalcut,5/6 highrecoil and compactguard. Do not replace with idle or straightpunch. Keep rounded shoulders and chainmail design consistent while following existing elbows/torso. Hands contain skin only, not anygraycap or heldobject.\n\nRetain exact1536x1024 two-row three-column512cells, pureflat #FF00FF and generousmargins. Same414px standing-equivalent anatomy, localgroundy466/rootx256; no independentzoom, bboxfit, resizing, translation or cropping. No weapons, handles, hiltstumps, shield, FX, floor, shadow, text, gridlines or borders. Thick dark outline and restrainedhandpaintedcelshade unchanged.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\03-hero-primary2-hilt-cleanup-v002.png",
+          "sha256": "1cac7e73412eae4e6b899549a8ec29044f27e5ea0b31f509bdd06a4cd0c7f575"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\11-med001-clean-pose-body-variant-v002.png",
+          "sha256": "16ac38702202eb56105fad24780d0ea06882bfbd43be992da50120196f028665"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:18:01.009649+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-ed60bb1d-e009-4f49-a9ce-3aa2806657a2.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\16-med001-primary2-body-variant-v002.png",
+      "sha256": "ce8a11d4f082dac4f211b0f256d54b17fbf11653f92dc461ca254fe873e112af",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\16-med001-primary2-body-variant-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\16-med001-primary2-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\16-med001-primary2-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\16-med001-primary2-body-variant-v002.png"
+      ],
+      "review_notes": "Six rising-cut poses maintained, medium roundedshoulders/chainmail consistent, barefists no hilt. Scale drift .02351/CV .01346; needs measured newmarkers/runtimeassembly.",
+      "reviewed_utc": "2026-10-14T18:18:46.293587+00:00"
+    },
+    {
+      "request_number": 17,
+      "asset": "med001-primary3-body-variant",
+      "status": "med001_primary3_body_candidate_visual_and_pixel_qc_pass",
+      "requested_utc": "2026-10-14T18:18:46.848965+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\17-med001-primary3.txt",
+      "prompt": "Edit ONLY Image1's clothing into Image2's ARM-MED-001 mediumchainmail outfit: short ochre tabard, visible graychainmail sleeves and splithem, ROUND medium steelpauldrons, leatherbelt/pouch, bluegray wristwraps, charcoal knees, originalbrownboots. This is a whole dressed body atlas variant; no detachedarmorlayer.\n\nImage1 locks every aspect of the six-frame overheadfinisher: exact same three-head hero face/hair/skin, fixed3/4 rightcamera, anatomy and all hand/grip/foot positions. Preserve frames1/2 raisedwindup,3/4 powerful descendingcut with compressedknees,5/6 recovery. Natural crouchheight stays lower; never normalize it to standing. Chainmail folds follow the existing limbs and torsotwist. Both hands stay bare EMPTY skin with existingthumb/finger contours, no insertedmetalcap.\n\nRetain1536x1024 two-row three-column512cell grid and pureflat #FF00FF background. Same414px standing-equivalentanatomy, localgroundy466/rootx256 and fullbodypadding. No perframefit, zoom, recenter, resizing, crop or translation. No sword, handle, hiltstump, shield, detachedFX, floor, shadow, labels or visiblegrid. Preserve boldcelshaded handpaintedstyle and consistentrounded armorconstruction.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\04-hero-sword-primary3-body-v002.png",
+          "sha256": "e354589bb0a5ea2a54bdc83ac434e333bb39d2003b0ed7e9acb4c89f2da7ec9c"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\11-med001-clean-pose-body-variant-v002.png",
+          "sha256": "16ac38702202eb56105fad24780d0ea06882bfbd43be992da50120196f028665"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:19:17.073818+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-78998a74-627a-45ba-a0d4-6c8580c25f7e.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\17-med001-primary3-body-variant-v002.png",
+      "sha256": "53c5393ff758b63176b2fad33944ad4227cc84f831bef79f6e3f1d2fca3ba32a",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\17-med001-primary3-body-variant-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\17-med001-primary3-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\17-med001-primary3-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\17-med001-primary3-body-variant-v002.png"
+      ],
+      "review_notes": "Overhead/crouch cut retained, chainmail consistent, no heldobject. Profile drift .00071/CV .02595, naturalcrouch330px sameuniformscale. New gripROI/assembly pending.",
+      "reviewed_utc": "2026-10-14T18:20:19.270799+00:00"
+    },
+    {
+      "request_number": 18,
+      "asset": "hvy001-primary1-body-variant",
+      "status": "superseded_EV042_technical_reference_static_pixel_pass",
+      "requested_utc": "2026-10-14T18:20:19.802469+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\prompts\\18-hvy001-primary1.txt",
+      "prompt": "Image1 fixes the exact six-frame downward swordcut poses. Change ONLY the costume to Image2's ARM-HVY-001 heavy gatebolt platearmor. Match its darkgunmetal chest with two wide horizontal gatebolt bars, big SQUARE blockshoulders, brassrivets, brownstraps, thickgreaves, ochrejoints and visiblebrownboot soles. Same bareheaded brownhaired three-head hero, unchangedface/skin/anatomy and fixed3/4 rightcamera. Whole dressed body atlas VARIANT, not isolatedoverlay.\n\nKeep Image1's hands EMPTY BARE skin with every thumb/finger shape and all gripcoordinates unchanged. The six existingposes are1/2 highrearwindup,3/4 forwarddowncut,5/6 lowrecoveringguard. Heavyplates rotate with the actualupperarms and torso; do not convert poses toidle or a straightpunch. Preserve allfeet and elbow/knee geometry. Armor increases thickness only, never lengthens anatomy. Nohelmet orcape.\n\nExact1536x1024 two-row three-column512cells,414px standing-equivalent anatomy, fixedgroundlocaly466/rootx256. Pureflat #FF00FF, fullbodypadding; no perframezoom, bboxfit, crop, recenter, resize or translation. No sword, shield, handlefragment, darkcap, detachedFX, trail, floor, shadow, grids orlabels. Bold darkoutlines/handpaintedcelshading consistent across allframes.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\01-hero-sword-primary1-body-v002.png",
+          "sha256": "d06ce14e292aa644fba6dcb04bf096b9331dc6b46db1d14ef56f2c1545d13d65"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\09-hvy001-idle-body-variant-v002.png",
+          "sha256": "df78edabad9c57ef8f94d8839430aca3d31ab375c3bdde3b55580c1060b8f6ad"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:26:10.960165+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-b65b9942-4c6d-444a-b0da-3e7d211ff9c6.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v002\\raw\\18-hvy001-primary1-body-variant-v002.png",
+      "sha256": "8d9ed4e68d8050257476ab94b6993623398083a3d681712239c29a4f0c7878d6",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\18-hvy001-primary1-body-variant-v002.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\18-hvy001-primary1-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\原件\\raw\\18-hvy001-primary1-body-variant-v002.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_军剑纠错与四甲动作_v002\\展示副本\\raw\\18-hvy001-primary1-body-variant-v002.png"
+      ],
+      "review_notes": "Last in-flight old bareface direction call completed and archived. HeavyP1 six poses pass alpha/scale .01401drift, but visualidentity is superseded by EV042 enclosedroundhelmet direction. No more bareface armor expansion. Not newbaseline acceptance.",
+      "reviewed_utc": "2026-10-14T18:29:31.218855+00:00"
+    },
+    {
+      "request_number": 19,
+      "asset": "round-knight-master",
+      "status": "enclosed_roundhelmet_master_candidate_visual_pass",
+      "requested_utc": "2026-10-14T18:29:31.769806+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\prompts\\19-round-knight-master.txt",
+      "prompt": "Create ONE original fullbody master reference for a small, lovable hand-painted2D dungeon adventurer: an enclosed ROUND-HELMET little knight. The character must NOT show a bare human face or hair. A simple squat rounded steel helmet completely encloses the head, with a dark recessed faceplate and a single narrow eye slit showing two tiny warm amber eye glints. No mouth, nose, human eyes or brown hair visible. Large round helmet and thick short body, about2.8 heads tall, friendly sturdy silhouette. Original design, not a copy of any existing game character.\n\nFixed3/4-facing-screen-right side-scroller camera, eyes looking right, fullbody at a small rightward angle. Soft weathered warm-gray steel helmet with a modest brass browstrip and two small side rivets. No horns, spikes, plume or tall crest. Light armor starter outfit: short warm-ochre padded tunic under modest brown softleather chest straps and small rounded leather shoulderpads, darkshort trousers, short bluegray wrist wraps, stout warmbrown boots. Short simple cloth hem, compactpouch atbelt, bare skin hands allowed but no exposed human face. Thick dark brown ink outlines, restrained warm earth palette, clean chunky handpainted celshading, no pixelart, no realistic rendering.\n\nNeutral ready standing pose, bothboots flat on the same groundline, knees soft, head/body centered. The near/right hand is a completely CLOSED EMPTY fist slightly forward of the waist and clear of the belt, thumb across curled fingers, wrist angled to attach a separate sword later. The far hand is a small relaxed empty fist. No sword, shield, hilt, handle, graycap, cylinder or any held object; weapons will be independent components. Hands fully visible, not hidden behind armor. Make the hand grasp anatomically clear without drawing a handle.\n\nSingle1024x1024 square illustration on PURE SOLID #FF00FF background. Standing subject about828px high, helmettop aroundy104, soles aroundy932, centeredrootx512. Fullbody includinghelmet, bothfists and boots visible with safe blank magenta margins; no crop, ground, baked shadow, labels, text, border, scene or effects. This is a compact readable master pose for subsequent grounded512cell animation, same silhouette dimensions in futureactions.\n",
+      "references": [],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:29:55.944917+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-8c08fb2d-df34-48cc-a5f3-eeef10cc5f4f.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\raw\\19-round-knight-master-v003.png",
+      "sha256": "f1e8b21837d9bf450c2c1a9170144ea840fd57d6ce42a75c96aac323142a05d8",
+      "image_size": [
+        1254,
+        1254
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\原件\\raw\\19-round-knight-master-v003.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\展示副本\\raw\\19-round-knight-master-v003.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\原件\\raw\\19-round-knight-master-v003.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\展示副本\\raw\\19-round-knight-master-v003.png"
+      ],
+      "review_notes": "EV042 identity: round closedsteelhelm and darkfaceplate/tinyamber eyes, no nakedface/hair; squat about2.6heads, ochre/leather starter body, empty fists. Raw1254 bboxapprox[325,80,928,1174] height1094.414px guide derived from actualimage rather than assumed prompt. Parent review pending, no runninggame or completeaction claim.",
+      "reviewed_utc": "2026-10-14T18:31:22.382585+00:00"
+    },
+    {
+      "request_number": 20,
+      "asset": "round-knight-idle-body",
+      "status": "frozen_idle_candidate_static_and_manual_sword_assembly_pass_pending_runtime",
+      "requested_utc": "2026-10-14T18:31:43.025545+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\prompts\\20-round-knight-idle.txt",
+      "prompt": "Create a six-frame very subtle idle BODY-ONLY animation of the EXACT enclosed-round-helmet little knight in Image1. Image1 is the strict new identity/style anchor; Image2 fixes measured414px standing height, feet466, rootx256 in512cells. Keep identical rounded graysteel helmet, modestbrass browband and rivets, dark faceplate with two smallamber eye glints, no visible face or hair. Same squat2.6-head proportions, short thick limbs, ochre shortpadded tunic, smallbrown leather shoulders/straps, brownpouch, bluegraywrists and stoutbrownboots. Thick darkoutline and warmhandpaintedcelshading. Fixed3/4 screen-right sidecamera in everyframe, never turnfront/back or grow tall.\n\nExactly TWO ROWS and THREE COLUMNS, six invisible512x512 slots on1536x1024. Pureflat #FF00FF background, fullbody central70%width with padding, helmet/hands/boots never clipped. Same414px anatomical standingheight everycell. Boots on localy466 and pelvis/root aroundx256; do not translate, side-sway, zoom, resize or normalize eachpose. Subtle breathing only:1 neutralready,2 inhale,3 gentle chestpeak,4 exhale,5 shoulder/clothsettle,6 returnneutral. Keep helmetdimensions/eye slit and bootspacing unchanged, no blink that eraseseyes.\n\nIndependent sword will attach later: near/right hand remains an unmistakably CLOSED EMPTY bare fist slightly forwardofwaist and clear ofpouch, thumb acrosscurledfingers, wrist inclined for lowreadyguard. Use exactly Image1's compact emptyfist throughout, not an openpalm or boxingjab. Farhand is relaxedemptyfist. NO weapon, hilt, handle, rod, cylinder, darkcap, shield or visibleheldobject. Hands remain fullyreadable and anatomicallyconsistent.\n\nThis is the whole starter-clothing body atlas; do not claim isolatedarmor. No detachedFX, trail, floor, bakedshadow, text, gridlines, labels orborder. Six tiny chest/shoulder changes form one smoothidle, not six differing outfit designs. Preserve the reference's anonymous armored personality and complete face enclosure precisely.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\raw\\19-round-knight-master-v003.png",
+          "sha256": "f1e8b21837d9bf450c2c1a9170144ea840fd57d6ce42a75c96aac323142a05d8"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\references\\round-knight-measured-2x3.png",
+          "sha256": "54311f6e0fb866c34676d6b295a2e02b5b9b8ad43f51e16ab17abfdbc60204f3"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:32:10.267270+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-d7dd010c-6b5e-430b-8cb8-b054ceb55659.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\raw\\20-round-knight-idle-body-v003.png",
+      "sha256": "25f9c23796d30857f57b7c7a2cdf64dd6656a7e6daa9a9ad5bdd44c129e58ee9",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\原件\\raw\\20-round-knight-idle-body-v003.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\展示副本\\raw\\20-round-knight-idle-body-v003.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\原件\\raw\\20-round-knight-idle-body-v003.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\展示副本\\raw\\20-round-knight-idle-body-v003.png"
+      ],
+      "review_notes": "Root reviewed new master and accepted EV042 direction internally only, no formal userstyleapproval.6 real idle frames358px/.853333, CV.00189; realpixelRGBA/alpha/corners/grips/ROIs frozen. Independent sword35deg/.40 visibly held; no tipgroundpenetration in assembledpreview. Root[256,472] processor anchor; actualsolebottom482..484. Engine and fullactions pending. Frozenimport-v001 must not change.",
+      "reviewed_utc": "2026-10-14T18:46:28.626740+00:00"
+    },
+    {
+      "request_number": 21,
+      "asset": "round-knight-walk-body",
+      "status": "walk_static_qc_candidate_visual_cycle_needs_review",
+      "requested_utc": "2026-10-14T18:46:48.586550+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\prompts\\21-round-knight-walk.txt",
+      "prompt": "Create a six-frame IN-PLACE WALK cycle for the exact enclosed-round-helmet littleknight in Image1. Image2 fixes measured scale/root. Preserve identicalgrayroundhelmet/brassbrow/darkfaceplate/twoambereyes, no face/hair, same2.6-head thickshort anatomy, ochretunic, smallbrownleathershoulders/straps/pouch, bluegraywrists and stoutbrownboots. Same fixed3/4 screen-right side-scrollercamera and handpaintedboldcelshading. No newhelmet/outfit, no frontface, no realisticadult.\n\nExactly TWO ROWS THREE COLUMNS, six invisible512cells on1536x1024. All emptyspace pureflat #FF00FF. Standing-equivalent anatomy414px like Image2; fixedpelvis/rootx256, contactgroundlocaly466, fullbody within central70%width and safe margins. This is a stationary cycle: never translate or zoom the wholefigure. Pelvis stays centered, mild naturalverticalbob only; boots alternatelylift/plant around samecompactstance.1 nearbootforwardcontact/farbootback;2 nearlegbearingweight/farbootpasseslifted;3 farbootadvances;4 oppositecontact;5 farlegbearingweight/nearbootpasseslifted;6 nearbootadvancesreadytoloop. Different legposes must reallyshow walking, not sixduplicated idles.\n\nNear/right swordhand stays a compact CLOSED EMPTY barefist slightlyforwardwaist in lowcarryguard, thumbacrosscurledfingers; shoulder/elbow allowed smallnaturalbounce but no hugeboxingarmswing. Farhandempty with smallbalance motion. No sword, hilt, handle, graycap, shield or heldobject. Keep allfingers/handsbootsfullyvisible. No detachedFX/dust/trails/floor/shadow/text/labels/grid/borders. Onlyone continuouswalkcycle, exactsameidentity/proportionsinallframes. This is complete starter-clothed body, not isolatedarmorlayer.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\raw\\19-round-knight-master-v003.png",
+          "sha256": "f1e8b21837d9bf450c2c1a9170144ea840fd57d6ce42a75c96aac323142a05d8"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\references\\round-knight-measured-2x3.png",
+          "sha256": "54311f6e0fb866c34676d6b295a2e02b5b9b8ad43f51e16ab17abfdbc60204f3"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:47:14.076882+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-e00eaa32-f0d2-4b5f-969a-ba315c67da51.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\raw\\21-round-knight-walk-body-v003.png",
+      "sha256": "7e6f71f4884172f8d9a1e365d3b0b5396d09f00d2c15b87d596056a9ab130941",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\原件\\raw\\21-round-knight-walk-body-v003.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\展示副本\\raw\\21-round-knight-walk-body-v003.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\原件\\raw\\21-round-knight-walk-body-v003.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\展示副本\\raw\\21-round-knight-walk-body-v003.png"
+      ],
+      "review_notes": "Six realPNGs/emptyfists/sameidentity, but row2 legposes closely repeat row1 while arms differ; opposite legcontact sequence not confidently established. Do not certify a complete6phasewalk from pixelQC. Preserve, assemble for runtime review; next reviewedwindow can correct if gait remains one-sided.",
+      "reviewed_utc": "2026-10-14T18:48:27.882503+00:00"
+    },
+    {
+      "request_number": 22,
+      "asset": "round-knight-primary1-body",
+      "status": "primary1_static_qc_body_candidate_pending_sword_assembly",
+      "requested_utc": "2026-10-14T18:48:49.362436+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\prompts\\22-round-knight-primary1.txt",
+      "prompt": "Make a six-pose downward diagonal swordcut BODY-ONLY animation for the exact enclosed-roundhelmet littleknight of Image1. Image2 is the measured414px/feet466/rootx256 geometry template. Strictsameidentity: roundgraysteelhelm/brassbrow/twoamberglints in darkfaceslit, no bareface orhair, squat2.6-head thickshortanatomy, ochrepaddedtunic, smallbrownleathershoulders/straps/pouch, bluegraywrists, stoutbrownboots, bold handpaintedcelshading. Fixed3/4-facing-screen-right sidecamera inallframes.\n\nExactly1536x1024, TWO ROWS THREE COLUMNS, equal invisible512cells, pureflat #FF00FF. Standing-equivalent anatomicalheight414px, rootx256 and groundlocaly466; fullbody within central70%width withpadding, no clipping/cellcrossing/zoom/individualfit/wholebodytranslation. Knees/torso maycompressnaturally, neverresizeheadorlimbs. Bothbootsremainincompactgroundarea.\n\nNO sword, blade, handle, hiltstump, shield, trails orheldobjects. Independentweapon attacheslater. Near/right hand must be a CLOSED EMPTY fist with thumb acrosscurledfingers in real sword-grip orientation, no metal/woodinside. Wrist/elbow/torso must draw a CUTTING ARC, never a straightforward punch. Farhandbalances, never substitutesforweaponhand.\n\nSix continuousposes,2windup/2cut/2recovery:1 rightgrip behind/besidehelmet atshoulderheight, elbowbent, chestcoiled;2 strongerhighbackswing abovebackofhelmet, shouldersrotatedback/kneescompressed;3 chestrotatesright, bentelbow/wrist sweepsfromhighbackacrossfront atupperchestheight;4 decisive lowfrontdiagonalfollowthrough, griparcsdown toforwardwaist/thigh, wristturnsdown, torsofollows;5 cutfinisheslowacrossfront, elbowfoldsback, shouldersunwind;6 compactlowguardreadyforreversecut. Anticipation/cut/recoveryvisiblydifferent, no idleduplicates. Helmet staysenclosed and rigidshape, bothambereyesremain. No floor/shadow/text/border/grid/detachedFX. Complete dressedstarterbody, not separatedarmor.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\raw\\19-round-knight-master-v003.png",
+          "sha256": "f1e8b21837d9bf450c2c1a9170144ea840fd57d6ce42a75c96aac323142a05d8"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\references\\round-knight-measured-2x3.png",
+          "sha256": "54311f6e0fb866c34676d6b295a2e02b5b9b8ad43f51e16ab17abfdbc60204f3"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:49:15.366885+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-772e7aa7-78f8-4fcf-a271-268c66e58856.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\raw\\22-round-knight-primary1-body-v003.png",
+      "sha256": "08eb81368e26e86628c4e95f1a1d214c0c8f82caa6874b16b8205b8f85ab0388",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\原件\\raw\\22-round-knight-primary1-body-v003.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\展示副本\\raw\\22-round-knight-primary1-body-v003.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\原件\\raw\\22-round-knight-primary1-body-v003.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\展示副本\\raw\\22-round-knight-primary1-body-v003.png"
+      ],
+      "review_notes": "Same enclosedroundhelmet identity,6 distinct highwindup/downcut/lowrecovery poses, barefists no weapons. Staticuniformscale/alpha pass. Thirdframe forearm still forward; assess swordangle and full assembledarc before actionacceptance. CV.02715/drift.00470. No runtime claim.",
+      "reviewed_utc": "2026-10-14T18:50:25.061779+00:00"
+    },
+    {
+      "request_number": 23,
+      "asset": "round-knight-primary2-body",
+      "status": "rejected_baked_handle_fragments_despite_static_pixel_qc_pass",
+      "requested_utc": "2026-10-14T18:50:25.759683+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\prompts\\23-round-knight-primary2.txt",
+      "prompt": "Animate the exact enclosed-roundhelmet littleknight of Image1 in a six-frame BODY-ONLY rising reverse swordcut. Image2 locks414px standing-equivalent anatomy/feet466/rootx256. Preserve same grayroundhelm/brassbrow/darkfaceslit/twoambereyes, no facehair, squat2.6-head shortthickbody, ochretunic/leatherstraps/smallbrownshoulders/pouch/bluegraywrists/brownboots. Same fixed3/4-facing-right sidecamera and handpaintedboldcelshade, no newperson orcostume.\n\nExactly1536x1024, TWO ROWS THREE COLUMNS, invisible512cells; pureflat #FF00FF. Fullbody safe in central70%width, same head/limbdimensions, no clipping, cellcrossing, zoom, individualfit or wholebodytranslation. Rootx256 stable, groundedbootslocaly466; kneesbend/torso rotatesnaturally without changinganatomicalscale.\n\nNo visibleweapon/hilt/handle/rod/shield/trails. Near/right hand is a clear CLOSED EMPTY sword-grasp fist: thumb acrosscurledskin fingers, wristrotates for a reversecut, no object inside. Farhandbalances. Not a punch/jab/openreachingpalm.\n\nSixconsecutiveposes,2windup/2cut/2recovery:1 compactlowguard afterdowncut, rightgriplowforwardwaist, elbowfolded;2 coillow toback-sidehip, shouldersrotateaway andkneescompress;3 chestuncoilsright andrightgrip sweeps UP diagonallyacrossfront aroundchestheight withbentelbow;4 gripcontinueshighaboveleftsideofhelmet, wristrotates to implyrisingblade, torso turns through;5 highcut finishes andelbowfoldsbacktowardupperchest;6 returncompactshoulderheightguard readyforoverheadfinisher. Distinct torso/wristcurve, not straightforwardpushingfist. Boots stayincompactgroundarea. Keephelmshape rigidandenclosed, bothambereyes. No floor/shadow/labels/borders/grids/effects. Whole starterclothing body, not armoroverlay.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\raw\\19-round-knight-master-v003.png",
+          "sha256": "f1e8b21837d9bf450c2c1a9170144ea840fd57d6ce42a75c96aac323142a05d8"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\references\\round-knight-measured-2x3.png",
+          "sha256": "54311f6e0fb866c34676d6b295a2e02b5b9b8ad43f51e16ab17abfdbc60204f3"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:50:52.202405+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-0ba7ab4c-9f21-4ab4-ae92-4ad393c063fc.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\raw\\23-round-knight-primary2-body-v003.png",
+      "sha256": "746af12107ba9790e614cdc41075d4cdd06696b737818f00de9405d0f5c31631",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\原件\\raw\\23-round-knight-primary2-body-v003.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\展示副本\\raw\\23-round-knight-primary2-body-v003.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\原件\\raw\\23-round-knight-primary2-body-v003.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\展示副本\\raw\\23-round-knight-primary2-body-v003.png"
+      ],
+      "review_notes": "Rawvisual audit shows small gold/brown hiltcaps at raisednear fistframe4 and rearfistframe2, possiblyframe6. Realalpha/scaleQC pass does not certify bodyonly. Preserve all raw/process; do not freeze as usable. Next reviewed24window boundedcorrection or cleanposeidentityedit required.",
+      "reviewed_utc": "2026-10-14T18:52:27.109900+00:00"
+    },
+    {
+      "request_number": 24,
+      "asset": "round-knight-primary3-body",
+      "status": "primary3_static_and_manual_sword_assembly_candidate_pass_pending_runtime",
+      "requested_utc": "2026-10-14T18:52:27.634662+00:00",
+      "prompt_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\prompts\\24-round-knight-primary3.txt",
+      "prompt": "Make a six-frame overhead-finisher swordcut BODY-ONLY animation of Image1's exact enclosed-roundhelmet littleknight. Image2 fixes414px standing-equivalent anatomy, feet466/rootx256 and slotlayout. Same grayroundsteelhelm/brassbrow/twoamberglints in darkfaceslit, no bareface orhair, squat2.6-head shortthickanatomy, ochretunic/smallbrownleathershoulders/straps/pouch/bluegraywrists/brownboots. Fixed3/4-facing-screen-right sidecamera, bold handpaintedcelshade, no realisticadult/newoutfit.\n\nTWO ROWS THREE COLUMNS, equal invisible512cells on1536x1024, pureflat #FF00FF. Fullhelmet/hands/boots inside central70%width/padding; no clipping/slotcrossing, zoom, perframebboxfit or translation. Same head/limbsize everypose; groundedbootsremaincompact withlocalcontacty466/rootx256. Natural kneecompression/crouch maylowerbbox, neverstretchcrouchedposebacktostanding.\n\nNo visibleweapon/handle/hilt/shield/trails. Near/right hand clearly CLOSED EMPTY swordgripfist, thumbwrappedacrosscurledskin fingers, no graycap orobject inside. Wristrotates alongcut; farhandbalances. Sixposes2windup/2active/2recovery:1 coilcompactgripbesidehelmet, elbowbent;2 raisegriphighoverbackofhelmet, torsoandkneesready;3 powerfuldescendingdiagonalcut, chestrotatesthrough, gripmovesforwarddownpastchest, kneecompresses;4 lowdecisivefollowthrough nearfrontthigh/knee, torsoleans/kneesdeeplybent, rightwristturnsdown;5 recoilfromlowcut, elbowdrawsbackwaist, kneesbeginrise;6 settlecompactlowreadyguard. Do notmake straightpunch/duplicateidle. Keephelmetrigidandenclosed, eyeslitvisible, no facehair. No floor/shadow/grid/text/borders/detachedFX. Whole dressedstarterbody, not armoroverlay.\n",
+      "references": [
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\raw\\19-round-knight-master-v003.png",
+          "sha256": "f1e8b21837d9bf450c2c1a9170144ea840fd57d6ce42a75c96aac323142a05d8"
+        },
+        {
+          "path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\references\\round-knight-measured-2x3.png",
+          "sha256": "54311f6e0fb866c34676d6b295a2e02b5b9b8ad43f51e16ab17abfdbc60204f3"
+        }
+      ],
+      "transparent_background": false,
+      "backend": "image_gen.imagegen",
+      "host_fee_usd": null,
+      "completed_utc": "2026-10-14T18:52:53.945313+00:00",
+      "tool_original_path": "C:\\Users\\22499\\.codex\\generated_images\\01a12364-b891-7333-a045-8ae61ee76d79\\exec-dea1da8c-e173-454e-b7e4-95a4ccae757f.png",
+      "raw_path": "F:\\Ourgame\\source-assets\\production\\first-unit-animation-v003\\raw\\24-round-knight-primary3-body-v003.png",
+      "sha256": "a8489abe750539bd5b5eb8913bc145daab3573ee96acd2fa316123bea5f7d8f2",
+      "image_size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "archive_paths": [
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\原件\\raw\\24-round-knight-primary3-body-v003.png",
+        "F:\\Ourgame\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\展示副本\\raw\\24-round-knight-primary3-body-v003.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\原件\\raw\\24-round-knight-primary3-body-v003.png",
+        "E:\\OurGame\\Knight\\过程图稿与视频\\2026-10-15_圆盔骑士新基准_v003\\展示副本\\raw\\24-round-knight-primary3-body-v003.png"
+      ],
+      "review_notes": "No heldobjects; six overhead/downcut/crouch/recovery poses. RealRGBA/uniformscale QC and manually measured independent swordarc pass; rootgeometry/imagebounds checked. Not engine/actionacceptance.",
+      "reviewed_utc": "2026-10-14T18:58:22.891999+00:00"
+    }
+  ],
+  "phase": "window001_review_complete_partial_candidates",
+  "visual_version": "first-unit-animation-v003",
+  "supersedes_visual_identity": "bareface_brownhair_adventurer_v001_v002",
+  "records_1_through_18_copied_from_frozen_prior_ledger": true,
+  "records_1_through_18_source_sha256": "5964218e5cf5a6f7c6331fa6fc3f89f6fa6a1fc105cd57f1703627fca3692011",
+  "batch_requested_count": 24,
+  "current_window": {
+    "number": 1,
+    "first_request_number": 1,
+    "last_request_number": 24,
+    "request_limit": 24,
+    "requested_count": 24,
+    "status": "reviewed_closed"
+  },
+  "lifetime_prior_EV038_requests": 24,
+  "lifetime_requested_count": 48
+}
