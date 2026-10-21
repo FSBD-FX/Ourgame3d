@@ -1,0 +1,7085 @@
+{
+  "blender_version": "5.2.2 LTS",
+  "inspections": [
+    {
+      "path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\kenney-mini-dungeon\\extracted\\Models\\FBX format\\character-human.fbx",
+      "source_written": false,
+      "render_performed": false,
+      "objects": [
+        {
+          "name": "body-mesh",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "dimensions": [
+            0.7805641293525696,
+            0.3682500123977661,
+            0.27616140246391296
+          ],
+          "parent": "root",
+          "vertices": 118,
+          "polygons": 214,
+          "vertex_groups": [
+            "leg-left",
+            "leg-right",
+            "torso",
+            "arm-left",
+            "arm-right"
+          ],
+          "materials": [
+            "colormap"
+          ],
+          "modifiers": [
+            {
+              "type": "ARMATURE",
+              "name": "root"
+            }
+          ]
+        },
+        {
+          "name": "character-human",
+          "type": "EMPTY",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_euler": [
+            1.570796251296997,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.009999999776482582,
+            0.009999999776482582,
+            0.009999999776482582
+          ],
+          "dimensions": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "parent": null
+        },
+        {
+          "name": "head-mesh",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "dimensions": [
+            0.45350173115730286,
+            0.4120749533176422,
+            0.3600078523159027
+          ],
+          "parent": "root",
+          "vertices": 179,
+          "polygons": 251,
+          "vertex_groups": [
+            "head"
+          ],
+          "materials": [
+            "colormap"
+          ],
+          "modifiers": [
+            {
+              "type": "ARMATURE",
+              "name": "root"
+            }
+          ]
+        },
+        {
+          "name": "root",
+          "type": "ARMATURE",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "dimensions": [
+            0.19979354739189148,
+            0.32345476746559143,
+            0.026388777419924736
+          ],
+          "parent": "character-human",
+          "bones": [
+            {
+              "name": "leg-left",
+              "parent": null,
+              "use_deform": true
+            },
+            {
+              "name": "leg-right",
+              "parent": null,
+              "use_deform": true
+            },
+            {
+              "name": "torso",
+              "parent": null,
+              "use_deform": true
+            },
+            {
+              "name": "arm-left",
+              "parent": "torso",
+              "use_deform": true
+            },
+            {
+              "name": "arm-right",
+              "parent": "torso",
+              "use_deform": true
+            },
+            {
+              "name": "head",
+              "parent": "torso",
+              "use_deform": true
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "name": "root|attack-kick-left|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            34.0
+          ]
+        },
+        {
+          "name": "root|attack-kick-right|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            34.0
+          ]
+        },
+        {
+          "name": "root|attack-melee-left|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            26.0
+          ]
+        },
+        {
+          "name": "root|attack-melee-right|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            26.0
+          ]
+        },
+        {
+          "name": "root|crouch|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            12.0
+          ]
+        },
+        {
+          "name": "root|die|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            22.0
+          ]
+        },
+        {
+          "name": "root|drive|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            12.0
+          ]
+        },
+        {
+          "name": "root|emote-no|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            42.0
+          ]
+        },
+        {
+          "name": "root|emote-yes|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            42.0
+          ]
+        },
+        {
+          "name": "root|fall|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            22.0
+          ]
+        },
+        {
+          "name": "root|holding-both-shoot|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            14.0
+          ]
+        },
+        {
+          "name": "root|holding-both|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            12.0
+          ]
+        },
+        {
+          "name": "root|holding-left-shoot|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            14.0
+          ]
+        },
+        {
+          "name": "root|holding-left|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            12.0
+          ]
+        },
+        {
+          "name": "root|holding-right-shoot|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            14.0
+          ]
+        },
+        {
+          "name": "root|holding-right|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            12.0
+          ]
+        },
+        {
+          "name": "root|idle|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            82.0
+          ]
+        },
+        {
+          "name": "root|interact-left|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            42.0
+          ]
+        },
+        {
+          "name": "root|interact-right|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            42.0
+          ]
+        },
+        {
+          "name": "root|jump|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            31.0
+          ]
+        },
+        {
+          "name": "root|pick-up|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            22.0
+          ]
+        },
+        {
+          "name": "root|sit|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            12.0
+          ]
+        },
+        {
+          "name": "root|sprint|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            31.0
+          ]
+        },
+        {
+          "name": "root|static|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            7.0
+          ]
+        },
+        {
+          "name": "root|walk|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            42.0
+          ]
+        },
+        {
+          "name": "root|wheelchair-look-left|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            22.0
+          ]
+        },
+        {
+          "name": "root|wheelchair-look-right|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            22.0
+          ]
+        },
+        {
+          "name": "root|wheelchair-move-back|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            31.0
+          ]
+        },
+        {
+          "name": "root|wheelchair-move-forward|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            31.0
+          ]
+        },
+        {
+          "name": "root|wheelchair-move-left|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            31.0
+          ]
+        },
+        {
+          "name": "root|wheelchair-move-right|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            31.0
+          ]
+        },
+        {
+          "name": "root|wheelchair-sit|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            12.0
+          ]
+        }
+      ],
+      "scene_fps": 60,
+      "unit_settings": {
+        "system": "METRIC",
+        "scale_length": 1.0
+      },
+      "status": "loaded_by_Blender_no_render_no_save"
+    },
+    {
+      "path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\kenney-mini-dungeon\\extracted\\Models\\FBX format\\character-orc.fbx",
+      "source_written": false,
+      "render_performed": false,
+      "objects": [
+        {
+          "name": "body-mesh",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "dimensions": [
+            0.7805641889572144,
+            0.3682500123977661,
+            0.27616140246391296
+          ],
+          "parent": "root",
+          "vertices": 114,
+          "polygons": 198,
+          "vertex_groups": [
+            "leg-left",
+            "leg-right",
+            "torso",
+            "arm-left",
+            "arm-right"
+          ],
+          "materials": [
+            "colormap"
+          ],
+          "modifiers": [
+            {
+              "type": "ARMATURE",
+              "name": "root"
+            }
+          ]
+        },
+        {
+          "name": "character-orc",
+          "type": "EMPTY",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_euler": [
+            1.570796251296997,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.009999999776482582,
+            0.009999999776482582,
+            0.009999999776482582
+          ],
+          "dimensions": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "parent": null
+        },
+        {
+          "name": "head-mesh",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "dimensions": [
+            0.5202525854110718,
+            0.43707501888275146,
+            0.33196642994880676
+          ],
+          "parent": "root",
+          "vertices": 136,
+          "polygons": 176,
+          "vertex_groups": [
+            "head"
+          ],
+          "materials": [
+            "colormap"
+          ],
+          "modifiers": [
+            {
+              "type": "ARMATURE",
+              "name": "root"
+            }
+          ]
+        },
+        {
+          "name": "root",
+          "type": "ARMATURE",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "dimensions": [
+            0.19979354739189148,
+            0.32345473766326904,
+            0.026388777419924736
+          ],
+          "parent": "character-orc",
+          "bones": [
+            {
+              "name": "leg-left",
+              "parent": null,
+              "use_deform": true
+            },
+            {
+              "name": "leg-right",
+              "parent": null,
+              "use_deform": true
+            },
+            {
+              "name": "torso",
+              "parent": null,
+              "use_deform": true
+            },
+            {
+              "name": "arm-left",
+              "parent": "torso",
+              "use_deform": true
+            },
+            {
+              "name": "arm-right",
+              "parent": "torso",
+              "use_deform": true
+            },
+            {
+              "name": "head",
+              "parent": "torso",
+              "use_deform": true
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "name": "root|attack-kick-left|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            34.0
+          ]
+        },
+        {
+          "name": "root|attack-kick-right|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            34.0
+          ]
+        },
+        {
+          "name": "root|attack-melee-left|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            26.0
+          ]
+        },
+        {
+          "name": "root|attack-melee-right|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            26.0
+          ]
+        },
+        {
+          "name": "root|crouch|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            12.0
+          ]
+        },
+        {
+          "name": "root|die|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            22.0
+          ]
+        },
+        {
+          "name": "root|drive|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            12.0
+          ]
+        },
+        {
+          "name": "root|emote-no|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            42.0
+          ]
+        },
+        {
+          "name": "root|emote-yes|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            42.0
+          ]
+        },
+        {
+          "name": "root|fall|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            22.0
+          ]
+        },
+        {
+          "name": "root|holding-both-shoot|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            14.0
+          ]
+        },
+        {
+          "name": "root|holding-both|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            12.0
+          ]
+        },
+        {
+          "name": "root|holding-left-shoot|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            14.0
+          ]
+        },
+        {
+          "name": "root|holding-left|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            12.0
+          ]
+        },
+        {
+          "name": "root|holding-right-shoot|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            14.0
+          ]
+        },
+        {
+          "name": "root|holding-right|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            12.0
+          ]
+        },
+        {
+          "name": "root|idle|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            82.0
+          ]
+        },
+        {
+          "name": "root|interact-left|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            42.0
+          ]
+        },
+        {
+          "name": "root|interact-right|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            42.0
+          ]
+        },
+        {
+          "name": "root|jump|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            31.0
+          ]
+        },
+        {
+          "name": "root|pick-up|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            22.0
+          ]
+        },
+        {
+          "name": "root|sit|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            12.0
+          ]
+        },
+        {
+          "name": "root|sprint|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            31.0
+          ]
+        },
+        {
+          "name": "root|static|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            7.0
+          ]
+        },
+        {
+          "name": "root|walk|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            42.0
+          ]
+        },
+        {
+          "name": "root|wheelchair-look-left|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            22.0
+          ]
+        },
+        {
+          "name": "root|wheelchair-look-right|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            22.0
+          ]
+        },
+        {
+          "name": "root|wheelchair-move-back|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            31.0
+          ]
+        },
+        {
+          "name": "root|wheelchair-move-forward|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            31.0
+          ]
+        },
+        {
+          "name": "root|wheelchair-move-left|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            31.0
+          ]
+        },
+        {
+          "name": "root|wheelchair-move-right|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            31.0
+          ]
+        },
+        {
+          "name": "root|wheelchair-sit|Animation Base Layer",
+          "frame_range": [
+            1.0,
+            12.0
+          ]
+        }
+      ],
+      "scene_fps": 60,
+      "unit_settings": {
+        "system": "METRIC",
+        "scale_length": 1.0
+      },
+      "status": "loaded_by_Blender_no_render_no_save"
+    },
+    {
+      "path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\kenney-mini-dungeon\\extracted\\Models\\FBX format\\weapon-sword.fbx",
+      "source_written": false,
+      "render_performed": false,
+      "objects": [
+        {
+          "name": "weapon-sword",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_euler": [
+            1.570796251296997,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.009999999776482582,
+            0.009999999776482582,
+            0.009999999776482582
+          ],
+          "dimensions": [
+            0.23295998573303223,
+            0.4480459988117218,
+            0.10819200426340103
+          ],
+          "parent": null,
+          "vertices": 51,
+          "polygons": 80,
+          "vertex_groups": [],
+          "materials": [
+            "colormap"
+          ],
+          "modifiers": []
+        }
+      ],
+      "actions": [],
+      "scene_fps": 25,
+      "unit_settings": {
+        "system": "METRIC",
+        "scale_length": 1.0
+      },
+      "status": "loaded_by_Blender_no_render_no_save"
+    },
+    {
+      "path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\kenney-modular-dungeon-kit\\extracted\\Models\\FBX format\\room-small.fbx",
+      "source_written": false,
+      "render_performed": false,
+      "objects": [
+        {
+          "name": "room-small",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_euler": [
+            1.570796251296997,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.009999999776482582,
+            0.009999999776482582,
+            0.009999999776482582
+          ],
+          "dimensions": [
+            12.0,
+            4.233285903930664,
+            12.0
+          ],
+          "parent": null,
+          "vertices": 1479,
+          "polygons": 2194,
+          "vertex_groups": [],
+          "materials": [
+            "colormap"
+          ],
+          "modifiers": []
+        }
+      ],
+      "actions": [],
+      "scene_fps": 25,
+      "unit_settings": {
+        "system": "METRIC",
+        "scale_length": 1.0
+      },
+      "status": "loaded_by_Blender_no_render_no_save"
+    },
+    {
+      "path": "E:\\codex_game\\source-assets\\third-party\\preparation-2026-10-10-v1\\quaternius-universal-animation-library-2-standard\\extracted\\Universal Animation Library 2[Standard]\\Female Mannequin\\Mannequin_F.blend",
+      "source_written": false,
+      "render_performed": false,
+      "objects": [
+        {
+          "name": "Armature",
+          "type": "ARMATURE",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "dimensions": [
+            2.678478240966797,
+            2.6784777641296387,
+            1.8224600553512573
+          ],
+          "parent": null,
+          "bones": [
+            {
+              "name": "root",
+              "parent": null,
+              "use_deform": true
+            },
+            {
+              "name": "pelvis",
+              "parent": "root",
+              "use_deform": true
+            },
+            {
+              "name": "spine_01",
+              "parent": "pelvis",
+              "use_deform": true
+            },
+            {
+              "name": "spine_02",
+              "parent": "spine_01",
+              "use_deform": true
+            },
+            {
+              "name": "spine_03",
+              "parent": "spine_02",
+              "use_deform": true
+            },
+            {
+              "name": "neck_01",
+              "parent": "spine_03",
+              "use_deform": true
+            },
+            {
+              "name": "Head",
+              "parent": "neck_01",
+              "use_deform": true
+            },
+            {
+              "name": "clavicle_l",
+              "parent": "spine_03",
+              "use_deform": true
+            },
+            {
+              "name": "upperarm_l",
+              "parent": "clavicle_l",
+              "use_deform": true
+            },
+            {
+              "name": "lowerarm_l",
+              "parent": "upperarm_l",
+              "use_deform": true
+            },
+            {
+              "name": "hand_l",
+              "parent": "lowerarm_l",
+              "use_deform": true
+            },
+            {
+              "name": "index_01_l",
+              "parent": "hand_l",
+              "use_deform": true
+            },
+            {
+              "name": "index_02_l",
+              "parent": "index_01_l",
+              "use_deform": true
+            },
+            {
+              "name": "index_03_l",
+              "parent": "index_02_l",
+              "use_deform": true
+            },
+            {
+              "name": "index_04_leaf_l",
+              "parent": "index_03_l",
+              "use_deform": true
+            },
+            {
+              "name": "middle_01_l",
+              "parent": "hand_l",
+              "use_deform": true
+            },
+            {
+              "name": "middle_02_l",
+              "parent": "middle_01_l",
+              "use_deform": true
+            },
+            {
+              "name": "middle_03_l",
+              "parent": "middle_02_l",
+              "use_deform": true
+            },
+            {
+              "name": "middle_04_leaf_l",
+              "parent": "middle_03_l",
+              "use_deform": true
+            },
+            {
+              "name": "pinky_01_l",
+              "parent": "hand_l",
+              "use_deform": true
+            },
+            {
+              "name": "pinky_02_l",
+              "parent": "pinky_01_l",
+              "use_deform": true
+            },
+            {
+              "name": "pinky_03_l",
+              "parent": "pinky_02_l",
+              "use_deform": true
+            },
+            {
+              "name": "pinky_04_leaf_l",
+              "parent": "pinky_03_l",
+              "use_deform": true
+            },
+            {
+              "name": "ring_01_l",
+              "parent": "hand_l",
+              "use_deform": true
+            },
+            {
+              "name": "ring_02_l",
+              "parent": "ring_01_l",
+              "use_deform": true
+            },
+            {
+              "name": "ring_03_l",
+              "parent": "ring_02_l",
+              "use_deform": true
+            },
+            {
+              "name": "ring_04_leaf_l",
+              "parent": "ring_03_l",
+              "use_deform": true
+            },
+            {
+              "name": "thumb_01_l",
+              "parent": "hand_l",
+              "use_deform": true
+            },
+            {
+              "name": "thumb_02_l",
+              "parent": "thumb_01_l",
+              "use_deform": true
+            },
+            {
+              "name": "thumb_03_l",
+              "parent": "thumb_02_l",
+              "use_deform": true
+            },
+            {
+              "name": "thumb_04_leaf_l",
+              "parent": "thumb_03_l",
+              "use_deform": true
+            },
+            {
+              "name": "clavicle_r",
+              "parent": "spine_03",
+              "use_deform": true
+            },
+            {
+              "name": "upperarm_r",
+              "parent": "clavicle_r",
+              "use_deform": true
+            },
+            {
+              "name": "lowerarm_r",
+              "parent": "upperarm_r",
+              "use_deform": true
+            },
+            {
+              "name": "hand_r",
+              "parent": "lowerarm_r",
+              "use_deform": true
+            },
+            {
+              "name": "index_01_r",
+              "parent": "hand_r",
+              "use_deform": true
+            },
+            {
+              "name": "index_02_r",
+              "parent": "index_01_r",
+              "use_deform": true
+            },
+            {
+              "name": "index_03_r",
+              "parent": "index_02_r",
+              "use_deform": true
+            },
+            {
+              "name": "index_04_leaf_r",
+              "parent": "index_03_r",
+              "use_deform": true
+            },
+            {
+              "name": "middle_01_r",
+              "parent": "hand_r",
+              "use_deform": true
+            },
+            {
+              "name": "middle_02_r",
+              "parent": "middle_01_r",
+              "use_deform": true
+            },
+            {
+              "name": "middle_03_r",
+              "parent": "middle_02_r",
+              "use_deform": true
+            },
+            {
+              "name": "middle_04_leaf_r",
+              "parent": "middle_03_r",
+              "use_deform": true
+            },
+            {
+              "name": "pinky_01_r",
+              "parent": "hand_r",
+              "use_deform": true
+            },
+            {
+              "name": "pinky_02_r",
+              "parent": "pinky_01_r",
+              "use_deform": true
+            },
+            {
+              "name": "pinky_03_r",
+              "parent": "pinky_02_r",
+              "use_deform": true
+            },
+            {
+              "name": "pinky_04_leaf_r",
+              "parent": "pinky_03_r",
+              "use_deform": true
+            },
+            {
+              "name": "ring_01_r",
+              "parent": "hand_r",
+              "use_deform": true
+            },
+            {
+              "name": "ring_02_r",
+              "parent": "ring_01_r",
+              "use_deform": true
+            },
+            {
+              "name": "ring_03_r",
+              "parent": "ring_02_r",
+              "use_deform": true
+            },
+            {
+              "name": "ring_04_leaf_r",
+              "parent": "ring_03_r",
+              "use_deform": true
+            },
+            {
+              "name": "thumb_01_r",
+              "parent": "hand_r",
+              "use_deform": true
+            },
+            {
+              "name": "thumb_02_r",
+              "parent": "thumb_01_r",
+              "use_deform": true
+            },
+            {
+              "name": "thumb_03_r",
+              "parent": "thumb_02_r",
+              "use_deform": true
+            },
+            {
+              "name": "thumb_04_leaf_r",
+              "parent": "thumb_03_r",
+              "use_deform": true
+            },
+            {
+              "name": "thigh_l",
+              "parent": "pelvis",
+              "use_deform": true
+            },
+            {
+              "name": "calf_l",
+              "parent": "thigh_l",
+              "use_deform": true
+            },
+            {
+              "name": "foot_l",
+              "parent": "calf_l",
+              "use_deform": true
+            },
+            {
+              "name": "ball_l",
+              "parent": "foot_l",
+              "use_deform": true
+            },
+            {
+              "name": "ball_leaf_l",
+              "parent": "ball_l",
+              "use_deform": true
+            },
+            {
+              "name": "thigh_r",
+              "parent": "pelvis",
+              "use_deform": true
+            },
+            {
+              "name": "calf_r",
+              "parent": "thigh_r",
+              "use_deform": true
+            },
+            {
+              "name": "foot_r",
+              "parent": "calf_r",
+              "use_deform": true
+            },
+            {
+              "name": "ball_r",
+              "parent": "foot_r",
+              "use_deform": true
+            },
+            {
+              "name": "ball_leaf_r",
+              "parent": "ball_r",
+              "use_deform": true
+            },
+            {
+              "name": "VIS_upper_arm_ik_pole.L",
+              "parent": "root",
+              "use_deform": false
+            },
+            {
+              "name": "VIS_upper_arm_ik_pole.R",
+              "parent": "root",
+              "use_deform": false
+            },
+            {
+              "name": "VIS_thigh_ik_pole.L",
+              "parent": "root",
+              "use_deform": false
+            },
+            {
+              "name": "VIS_thigh_ik_pole.R",
+              "parent": "root",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-torso.parent",
+              "parent": null,
+              "use_deform": false
+            },
+            {
+              "name": "torso",
+              "parent": "MCH-torso.parent",
+              "use_deform": false
+            },
+            {
+              "name": "hips",
+              "parent": "torso",
+              "use_deform": false
+            },
+            {
+              "name": "chest",
+              "parent": "torso",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-spine.001",
+              "parent": "torso",
+              "use_deform": false
+            },
+            {
+              "name": "spine_fk.001",
+              "parent": "MCH-spine.001",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-spine",
+              "parent": "spine_fk.001",
+              "use_deform": false
+            },
+            {
+              "name": "spine_fk",
+              "parent": "MCH-spine",
+              "use_deform": false
+            },
+            {
+              "name": "tweak_spine",
+              "parent": "spine_fk",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-spine",
+              "parent": "tweak_spine",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-thigh.L",
+              "parent": "ORG-spine",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-shin.L",
+              "parent": "ORG-thigh.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-foot.L",
+              "parent": "ORG-shin.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-toe.L",
+              "parent": "ORG-foot.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-heel.02.L",
+              "parent": "ORG-foot.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-foot_tweak.L",
+              "parent": "ORG-foot.L",
+              "use_deform": false
+            },
+            {
+              "name": "foot_tweak.L",
+              "parent": "MCH-foot_tweak.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-shin_tweak.L",
+              "parent": "ORG-shin.L",
+              "use_deform": false
+            },
+            {
+              "name": "shin_tweak.L",
+              "parent": "MCH-shin_tweak.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-shin_tweak.L.001",
+              "parent": "ORG-shin.L",
+              "use_deform": false
+            },
+            {
+              "name": "shin_tweak.L.001",
+              "parent": "MCH-shin_tweak.L.001",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thigh_parent_widget.L",
+              "parent": "ORG-thigh.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thigh_tweak.L.001",
+              "parent": "ORG-thigh.L",
+              "use_deform": false
+            },
+            {
+              "name": "thigh_tweak.L.001",
+              "parent": "MCH-thigh_tweak.L.001",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-thigh.R",
+              "parent": "ORG-spine",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-shin.R",
+              "parent": "ORG-thigh.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-foot.R",
+              "parent": "ORG-shin.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-toe.R",
+              "parent": "ORG-foot.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-heel.02.R",
+              "parent": "ORG-foot.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-foot_tweak.R",
+              "parent": "ORG-foot.R",
+              "use_deform": false
+            },
+            {
+              "name": "foot_tweak.R",
+              "parent": "MCH-foot_tweak.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-shin_tweak.R",
+              "parent": "ORG-shin.R",
+              "use_deform": false
+            },
+            {
+              "name": "shin_tweak.R",
+              "parent": "MCH-shin_tweak.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-shin_tweak.R.001",
+              "parent": "ORG-shin.R",
+              "use_deform": false
+            },
+            {
+              "name": "shin_tweak.R.001",
+              "parent": "MCH-shin_tweak.R.001",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thigh_parent_widget.R",
+              "parent": "ORG-thigh.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thigh_tweak.R.001",
+              "parent": "ORG-thigh.R",
+              "use_deform": false
+            },
+            {
+              "name": "thigh_tweak.R.001",
+              "parent": "MCH-thigh_tweak.R.001",
+              "use_deform": false
+            },
+            {
+              "name": "thigh_parent.L",
+              "parent": "ORG-spine",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thigh_parent.L",
+              "parent": "ORG-spine",
+              "use_deform": false
+            },
+            {
+              "name": "thigh_fk.L",
+              "parent": "MCH-thigh_parent.L",
+              "use_deform": false
+            },
+            {
+              "name": "shin_fk.L",
+              "parent": "thigh_fk.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-foot_fk.L",
+              "parent": "shin_fk.L",
+              "use_deform": false
+            },
+            {
+              "name": "foot_fk.L",
+              "parent": "MCH-foot_fk.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-toe_fk.L",
+              "parent": "foot_fk.L",
+              "use_deform": false
+            },
+            {
+              "name": "toe_fk.L",
+              "parent": "MCH-toe_fk.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thigh_ik_swing.L",
+              "parent": "MCH-thigh_parent.L",
+              "use_deform": false
+            },
+            {
+              "name": "thigh_ik.L",
+              "parent": "MCH-thigh_ik_swing.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-shin_ik.L",
+              "parent": "thigh_ik.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thigh_tweak.L",
+              "parent": "ORG-spine",
+              "use_deform": false
+            },
+            {
+              "name": "thigh_tweak.L",
+              "parent": "MCH-thigh_tweak.L",
+              "use_deform": false
+            },
+            {
+              "name": "thigh_parent.R",
+              "parent": "ORG-spine",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thigh_parent.R",
+              "parent": "ORG-spine",
+              "use_deform": false
+            },
+            {
+              "name": "thigh_fk.R",
+              "parent": "MCH-thigh_parent.R",
+              "use_deform": false
+            },
+            {
+              "name": "shin_fk.R",
+              "parent": "thigh_fk.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-foot_fk.R",
+              "parent": "shin_fk.R",
+              "use_deform": false
+            },
+            {
+              "name": "foot_fk.R",
+              "parent": "MCH-foot_fk.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-toe_fk.R",
+              "parent": "foot_fk.R",
+              "use_deform": false
+            },
+            {
+              "name": "toe_fk.R",
+              "parent": "MCH-toe_fk.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thigh_ik_swing.R",
+              "parent": "MCH-thigh_parent.R",
+              "use_deform": false
+            },
+            {
+              "name": "thigh_ik.R",
+              "parent": "MCH-thigh_ik_swing.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-shin_ik.R",
+              "parent": "thigh_ik.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thigh_tweak.R",
+              "parent": "ORG-spine",
+              "use_deform": false
+            },
+            {
+              "name": "thigh_tweak.R",
+              "parent": "MCH-thigh_tweak.R",
+              "use_deform": false
+            },
+            {
+              "name": "tweak_spine.001",
+              "parent": "spine_fk",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-spine.001",
+              "parent": "tweak_spine.001",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-WGT-hips",
+              "parent": "spine_fk",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-spine.002",
+              "parent": "torso",
+              "use_deform": false
+            },
+            {
+              "name": "spine_fk.002",
+              "parent": "MCH-spine.002",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-pivot",
+              "parent": "spine_fk.002",
+              "use_deform": false
+            },
+            {
+              "name": "tweak_spine.002",
+              "parent": "MCH-pivot",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-spine.002",
+              "parent": "tweak_spine.002",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-spine.003",
+              "parent": "spine_fk.002",
+              "use_deform": false
+            },
+            {
+              "name": "spine_fk.003",
+              "parent": "MCH-spine.003",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-spine.004",
+              "parent": "spine_fk.003",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-spine.005",
+              "parent": "ORG-spine.004",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-ROT-neck",
+              "parent": "spine_fk.003",
+              "use_deform": false
+            },
+            {
+              "name": "neck",
+              "parent": "MCH-ROT-neck",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-ROT-head",
+              "parent": "neck",
+              "use_deform": false
+            },
+            {
+              "name": "head",
+              "parent": "MCH-ROT-head",
+              "use_deform": false
+            },
+            {
+              "name": "tweak_spine.004",
+              "parent": "neck",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-STR-neck",
+              "parent": "neck",
+              "use_deform": false
+            },
+            {
+              "name": "tweak_spine.003",
+              "parent": "spine_fk.003",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-spine.003",
+              "parent": "tweak_spine.003",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-shoulder.L",
+              "parent": "ORG-spine.003",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-upper_arm.L",
+              "parent": "ORG-shoulder.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-forearm.L",
+              "parent": "ORG-upper_arm.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-hand.L",
+              "parent": "ORG-forearm.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_index.01.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_index.02.L",
+              "parent": "ORG-f_index.01.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_index.03.L",
+              "parent": "ORG-f_index.02.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-thumb.01.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-thumb.02.L",
+              "parent": "ORG-thumb.01.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-thumb.03.L",
+              "parent": "ORG-thumb.02.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_middle.01.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_middle.02.L",
+              "parent": "ORG-f_middle.01.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_middle.03.L",
+              "parent": "ORG-f_middle.02.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_ring.01.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_ring.02.L",
+              "parent": "ORG-f_ring.01.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_ring.03.L",
+              "parent": "ORG-f_ring.02.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_pinky.01.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_pinky.02.L",
+              "parent": "ORG-f_pinky.01.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_pinky.03.L",
+              "parent": "ORG-f_pinky.02.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_index.01_master.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_middle.01_master.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_pinky.01_master.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_ring.01_master.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "thumb.01_master.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-hand_tweak.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "hand_tweak.L",
+              "parent": "MCH-hand_tweak.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_index.01_drv.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_index.01.L",
+              "parent": "MCH-f_index.01_drv.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_index.02_drv.L",
+              "parent": "f_index.01.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_index.02.L",
+              "parent": "MCH-f_index.02_drv.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_index.03_drv.L",
+              "parent": "f_index.02.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_index.03.L",
+              "parent": "MCH-f_index.03_drv.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_index.01.L.001",
+              "parent": "f_index.03.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_index.03.L",
+              "parent": "f_index.03.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_index.02.L",
+              "parent": "f_index.02.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_index.01.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_middle.01_drv.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_middle.01.L",
+              "parent": "MCH-f_middle.01_drv.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_middle.02_drv.L",
+              "parent": "f_middle.01.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_middle.02.L",
+              "parent": "MCH-f_middle.02_drv.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_middle.03_drv.L",
+              "parent": "f_middle.02.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_middle.03.L",
+              "parent": "MCH-f_middle.03_drv.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_middle.01.L.001",
+              "parent": "f_middle.03.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_middle.03.L",
+              "parent": "f_middle.03.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_middle.02.L",
+              "parent": "f_middle.02.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_middle.01.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_pinky.01_drv.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_pinky.01.L",
+              "parent": "MCH-f_pinky.01_drv.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_pinky.02_drv.L",
+              "parent": "f_pinky.01.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_pinky.02.L",
+              "parent": "MCH-f_pinky.02_drv.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_pinky.03_drv.L",
+              "parent": "f_pinky.02.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_pinky.03.L",
+              "parent": "MCH-f_pinky.03_drv.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_pinky.01.L.001",
+              "parent": "f_pinky.03.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_pinky.03.L",
+              "parent": "f_pinky.03.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_pinky.02.L",
+              "parent": "f_pinky.02.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_pinky.01.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_ring.01_drv.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_ring.01.L",
+              "parent": "MCH-f_ring.01_drv.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_ring.02_drv.L",
+              "parent": "f_ring.01.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_ring.02.L",
+              "parent": "MCH-f_ring.02_drv.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_ring.03_drv.L",
+              "parent": "f_ring.02.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_ring.03.L",
+              "parent": "MCH-f_ring.03_drv.L",
+              "use_deform": false
+            },
+            {
+              "name": "f_ring.01.L.001",
+              "parent": "f_ring.03.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_ring.03.L",
+              "parent": "f_ring.03.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_ring.02.L",
+              "parent": "f_ring.02.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_ring.01.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thumb.01_drv.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "thumb.01.L",
+              "parent": "MCH-thumb.01_drv.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thumb.02_drv.L",
+              "parent": "thumb.01.L",
+              "use_deform": false
+            },
+            {
+              "name": "thumb.02.L",
+              "parent": "MCH-thumb.02_drv.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thumb.03_drv.L",
+              "parent": "thumb.02.L",
+              "use_deform": false
+            },
+            {
+              "name": "thumb.03.L",
+              "parent": "MCH-thumb.03_drv.L",
+              "use_deform": false
+            },
+            {
+              "name": "thumb.01.L.001",
+              "parent": "thumb.03.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thumb.03.L",
+              "parent": "thumb.03.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thumb.02.L",
+              "parent": "thumb.02.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thumb.01.L",
+              "parent": "ORG-hand.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-forearm_tweak.L",
+              "parent": "ORG-forearm.L",
+              "use_deform": false
+            },
+            {
+              "name": "forearm_tweak.L",
+              "parent": "MCH-forearm_tweak.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-forearm_tweak.L.001",
+              "parent": "ORG-forearm.L",
+              "use_deform": false
+            },
+            {
+              "name": "forearm_tweak.L.001",
+              "parent": "MCH-forearm_tweak.L.001",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-upper_arm_parent_widget.L",
+              "parent": "ORG-upper_arm.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-upper_arm_tweak.L.001",
+              "parent": "ORG-upper_arm.L",
+              "use_deform": false
+            },
+            {
+              "name": "upper_arm_tweak.L.001",
+              "parent": "MCH-upper_arm_tweak.L.001",
+              "use_deform": false
+            },
+            {
+              "name": "upper_arm_parent.L",
+              "parent": "ORG-shoulder.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-upper_arm_parent.L",
+              "parent": "ORG-shoulder.L",
+              "use_deform": false
+            },
+            {
+              "name": "upper_arm_fk.L",
+              "parent": "MCH-upper_arm_parent.L",
+              "use_deform": false
+            },
+            {
+              "name": "forearm_fk.L",
+              "parent": "upper_arm_fk.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-hand_fk.L",
+              "parent": "forearm_fk.L",
+              "use_deform": false
+            },
+            {
+              "name": "hand_fk.L",
+              "parent": "MCH-hand_fk.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-upper_arm_ik_swing.L",
+              "parent": "MCH-upper_arm_parent.L",
+              "use_deform": false
+            },
+            {
+              "name": "upper_arm_ik.L",
+              "parent": "MCH-upper_arm_ik_swing.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-forearm_ik.L",
+              "parent": "upper_arm_ik.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-upper_arm_tweak.L",
+              "parent": "ORG-shoulder.L",
+              "use_deform": false
+            },
+            {
+              "name": "upper_arm_tweak.L",
+              "parent": "MCH-upper_arm_tweak.L",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-shoulder.R",
+              "parent": "ORG-spine.003",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-upper_arm.R",
+              "parent": "ORG-shoulder.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-forearm.R",
+              "parent": "ORG-upper_arm.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-hand.R",
+              "parent": "ORG-forearm.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_index.01.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_index.02.R",
+              "parent": "ORG-f_index.01.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_index.03.R",
+              "parent": "ORG-f_index.02.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-thumb.01.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-thumb.02.R",
+              "parent": "ORG-thumb.01.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-thumb.03.R",
+              "parent": "ORG-thumb.02.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_middle.01.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_middle.02.R",
+              "parent": "ORG-f_middle.01.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_middle.03.R",
+              "parent": "ORG-f_middle.02.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_ring.01.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_ring.02.R",
+              "parent": "ORG-f_ring.01.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_ring.03.R",
+              "parent": "ORG-f_ring.02.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_pinky.01.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_pinky.02.R",
+              "parent": "ORG-f_pinky.01.R",
+              "use_deform": false
+            },
+            {
+              "name": "ORG-f_pinky.03.R",
+              "parent": "ORG-f_pinky.02.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_index.01_master.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_middle.01_master.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_pinky.01_master.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_ring.01_master.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "thumb.01_master.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-hand_tweak.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "hand_tweak.R",
+              "parent": "MCH-hand_tweak.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_index.01_drv.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_index.01.R",
+              "parent": "MCH-f_index.01_drv.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_index.02_drv.R",
+              "parent": "f_index.01.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_index.02.R",
+              "parent": "MCH-f_index.02_drv.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_index.03_drv.R",
+              "parent": "f_index.02.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_index.03.R",
+              "parent": "MCH-f_index.03_drv.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_index.01.R.001",
+              "parent": "f_index.03.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_index.03.R",
+              "parent": "f_index.03.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_index.02.R",
+              "parent": "f_index.02.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_index.01.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_middle.01_drv.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_middle.01.R",
+              "parent": "MCH-f_middle.01_drv.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_middle.02_drv.R",
+              "parent": "f_middle.01.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_middle.02.R",
+              "parent": "MCH-f_middle.02_drv.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_middle.03_drv.R",
+              "parent": "f_middle.02.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_middle.03.R",
+              "parent": "MCH-f_middle.03_drv.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_middle.01.R.001",
+              "parent": "f_middle.03.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_middle.03.R",
+              "parent": "f_middle.03.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_middle.02.R",
+              "parent": "f_middle.02.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_middle.01.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_pinky.01_drv.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_pinky.01.R",
+              "parent": "MCH-f_pinky.01_drv.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_pinky.02_drv.R",
+              "parent": "f_pinky.01.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_pinky.02.R",
+              "parent": "MCH-f_pinky.02_drv.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_pinky.03_drv.R",
+              "parent": "f_pinky.02.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_pinky.03.R",
+              "parent": "MCH-f_pinky.03_drv.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_pinky.01.R.001",
+              "parent": "f_pinky.03.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_pinky.03.R",
+              "parent": "f_pinky.03.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_pinky.02.R",
+              "parent": "f_pinky.02.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_pinky.01.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_ring.01_drv.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_ring.01.R",
+              "parent": "MCH-f_ring.01_drv.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_ring.02_drv.R",
+              "parent": "f_ring.01.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_ring.02.R",
+              "parent": "MCH-f_ring.02_drv.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_ring.03_drv.R",
+              "parent": "f_ring.02.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_ring.03.R",
+              "parent": "MCH-f_ring.03_drv.R",
+              "use_deform": false
+            },
+            {
+              "name": "f_ring.01.R.001",
+              "parent": "f_ring.03.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_ring.03.R",
+              "parent": "f_ring.03.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_ring.02.R",
+              "parent": "f_ring.02.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-f_ring.01.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thumb.01_drv.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "thumb.01.R",
+              "parent": "MCH-thumb.01_drv.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thumb.02_drv.R",
+              "parent": "thumb.01.R",
+              "use_deform": false
+            },
+            {
+              "name": "thumb.02.R",
+              "parent": "MCH-thumb.02_drv.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thumb.03_drv.R",
+              "parent": "thumb.02.R",
+              "use_deform": false
+            },
+            {
+              "name": "thumb.03.R",
+              "parent": "MCH-thumb.03_drv.R",
+              "use_deform": false
+            },
+            {
+              "name": "thumb.01.R.001",
+              "parent": "thumb.03.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thumb.03.R",
+              "parent": "thumb.03.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thumb.02.R",
+              "parent": "thumb.02.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thumb.01.R",
+              "parent": "ORG-hand.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-forearm_tweak.R",
+              "parent": "ORG-forearm.R",
+              "use_deform": false
+            },
+            {
+              "name": "forearm_tweak.R",
+              "parent": "MCH-forearm_tweak.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-forearm_tweak.R.001",
+              "parent": "ORG-forearm.R",
+              "use_deform": false
+            },
+            {
+              "name": "forearm_tweak.R.001",
+              "parent": "MCH-forearm_tweak.R.001",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-upper_arm_parent_widget.R",
+              "parent": "ORG-upper_arm.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-upper_arm_tweak.R.001",
+              "parent": "ORG-upper_arm.R",
+              "use_deform": false
+            },
+            {
+              "name": "upper_arm_tweak.R.001",
+              "parent": "MCH-upper_arm_tweak.R.001",
+              "use_deform": false
+            },
+            {
+              "name": "upper_arm_parent.R",
+              "parent": "ORG-shoulder.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-upper_arm_parent.R",
+              "parent": "ORG-shoulder.R",
+              "use_deform": false
+            },
+            {
+              "name": "upper_arm_fk.R",
+              "parent": "MCH-upper_arm_parent.R",
+              "use_deform": false
+            },
+            {
+              "name": "forearm_fk.R",
+              "parent": "upper_arm_fk.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-hand_fk.R",
+              "parent": "forearm_fk.R",
+              "use_deform": false
+            },
+            {
+              "name": "hand_fk.R",
+              "parent": "MCH-hand_fk.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-upper_arm_ik_swing.R",
+              "parent": "MCH-upper_arm_parent.R",
+              "use_deform": false
+            },
+            {
+              "name": "upper_arm_ik.R",
+              "parent": "MCH-upper_arm_ik_swing.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-forearm_ik.R",
+              "parent": "upper_arm_ik.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-upper_arm_tweak.R",
+              "parent": "ORG-shoulder.R",
+              "use_deform": false
+            },
+            {
+              "name": "upper_arm_tweak.R",
+              "parent": "MCH-upper_arm_tweak.R",
+              "use_deform": false
+            },
+            {
+              "name": "shoulder.L",
+              "parent": "ORG-spine.003",
+              "use_deform": false
+            },
+            {
+              "name": "shoulder.R",
+              "parent": "ORG-spine.003",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-WGT-chest",
+              "parent": "spine_fk.003",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-hand_ik.parent.L",
+              "parent": null,
+              "use_deform": false
+            },
+            {
+              "name": "hand_ik.L",
+              "parent": "MCH-hand_ik.parent.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-upper_arm_ik_target.L",
+              "parent": "hand_ik.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-upper_arm_ik_target.parent.L",
+              "parent": null,
+              "use_deform": false
+            },
+            {
+              "name": "upper_arm_ik_target.L",
+              "parent": "MCH-upper_arm_ik_target.parent.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-hand_ik.parent.R",
+              "parent": null,
+              "use_deform": false
+            },
+            {
+              "name": "hand_ik.R",
+              "parent": "MCH-hand_ik.parent.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-upper_arm_ik_target.R",
+              "parent": "hand_ik.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-upper_arm_ik_target.parent.R",
+              "parent": null,
+              "use_deform": false
+            },
+            {
+              "name": "upper_arm_ik_target.R",
+              "parent": "MCH-upper_arm_ik_target.parent.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-foot_ik.parent.L",
+              "parent": null,
+              "use_deform": false
+            },
+            {
+              "name": "foot_ik.L",
+              "parent": "MCH-foot_ik.parent.L",
+              "use_deform": false
+            },
+            {
+              "name": "foot_spin_ik.L",
+              "parent": "foot_ik.L",
+              "use_deform": false
+            },
+            {
+              "name": "foot_heel_ik.L",
+              "parent": "foot_spin_ik.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-heel.02_rock2.L",
+              "parent": "foot_spin_ik.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-heel.02_rock1.L",
+              "parent": "MCH-heel.02_rock2.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-heel.02_roll2.L",
+              "parent": "MCH-heel.02_rock1.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-heel.02_roll1.L",
+              "parent": "MCH-heel.02_roll2.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-foot_roll.L",
+              "parent": "MCH-heel.02_roll1.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thigh_ik_target.L",
+              "parent": "MCH-foot_roll.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-toe_ik_parent.L",
+              "parent": "MCH-thigh_ik_target.L",
+              "use_deform": false
+            },
+            {
+              "name": "toe_ik.L",
+              "parent": "MCH-toe_ik_parent.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thigh_ik_target.parent.L",
+              "parent": null,
+              "use_deform": false
+            },
+            {
+              "name": "thigh_ik_target.L",
+              "parent": "MCH-thigh_ik_target.parent.L",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-foot_ik.parent.R",
+              "parent": null,
+              "use_deform": false
+            },
+            {
+              "name": "foot_ik.R",
+              "parent": "MCH-foot_ik.parent.R",
+              "use_deform": false
+            },
+            {
+              "name": "foot_spin_ik.R",
+              "parent": "foot_ik.R",
+              "use_deform": false
+            },
+            {
+              "name": "foot_heel_ik.R",
+              "parent": "foot_spin_ik.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-heel.02_rock2.R",
+              "parent": "foot_spin_ik.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-heel.02_rock1.R",
+              "parent": "MCH-heel.02_rock2.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-heel.02_roll2.R",
+              "parent": "MCH-heel.02_rock1.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-heel.02_roll1.R",
+              "parent": "MCH-heel.02_roll2.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-foot_roll.R",
+              "parent": "MCH-heel.02_roll1.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thigh_ik_target.R",
+              "parent": "MCH-foot_roll.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-toe_ik_parent.R",
+              "parent": "MCH-thigh_ik_target.R",
+              "use_deform": false
+            },
+            {
+              "name": "toe_ik.R",
+              "parent": "MCH-toe_ik_parent.R",
+              "use_deform": false
+            },
+            {
+              "name": "MCH-thigh_ik_target.parent.R",
+              "parent": null,
+              "use_deform": false
+            },
+            {
+              "name": "thigh_ik_target.R",
+              "parent": "MCH-thigh_ik_target.parent.R",
+              "use_deform": false
+            }
+          ]
+        },
+        {
+          "name": "Mannequin_F",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_euler": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "dimensions": [
+            1.762059211730957,
+            0.30903342366218567,
+            1.8061814308166504
+          ],
+          "parent": "Armature",
+          "vertices": 7424,
+          "polygons": 7654,
+          "vertex_groups": [
+            "root",
+            "pelvis",
+            "spine_01",
+            "spine_02",
+            "spine_03",
+            "neck_01",
+            "Head",
+            "clavicle_l",
+            "upperarm_l",
+            "lowerarm_l",
+            "hand_l",
+            "index_01_l",
+            "index_02_l",
+            "index_03_l",
+            "index_04_leaf_l",
+            "middle_01_l",
+            "middle_02_l",
+            "middle_03_l",
+            "middle_04_leaf_l",
+            "pinky_01_l",
+            "pinky_02_l",
+            "pinky_03_l",
+            "pinky_04_leaf_l",
+            "ring_01_l",
+            "ring_02_l",
+            "ring_03_l",
+            "ring_04_leaf_l",
+            "thumb_01_l",
+            "thumb_02_l",
+            "thumb_03_l",
+            "thumb_04_leaf_l",
+            "clavicle_r",
+            "upperarm_r",
+            "lowerarm_r",
+            "hand_r",
+            "index_01_r",
+            "index_02_r",
+            "index_03_r",
+            "index_04_leaf_r",
+            "middle_01_r",
+            "middle_02_r",
+            "middle_03_r",
+            "middle_04_leaf_r",
+            "pinky_01_r",
+            "pinky_02_r",
+            "pinky_03_r",
+            "pinky_04_leaf_r",
+            "ring_01_r",
+            "ring_02_r",
+            "ring_03_r",
+            "ring_04_leaf_r",
+            "thumb_01_r",
+            "thumb_02_r",
+            "thumb_03_r",
+            "thumb_04_leaf_r",
+            "thigh_l",
+            "calf_l",
+            "foot_l",
+            "ball_l",
+            "ball_leaf_l",
+            "thigh_r",
+            "calf_r",
+            "foot_r",
+            "ball_r",
+            "ball_leaf_r"
+          ],
+          "materials": [
+            "M_Main",
+            "M_Joints"
+          ],
+          "modifiers": [
+            {
+              "type": "ARMATURE",
+              "name": "Armature"
+            }
+          ]
+        },
+        {
+          "name": "metarig",
+          "type": "ARMATURE",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_euler": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "dimensions": [
+            1.7553253173828125,
+            0.30479997396469116,
+            1.802299976348877
+          ],
+          "parent": null,
+          "bones": [
+            {
+              "name": "spine",
+              "parent": null,
+              "use_deform": true
+            },
+            {
+              "name": "spine.001",
+              "parent": "spine",
+              "use_deform": true
+            },
+            {
+              "name": "spine.002",
+              "parent": "spine.001",
+              "use_deform": true
+            },
+            {
+              "name": "spine.003",
+              "parent": "spine.002",
+              "use_deform": true
+            },
+            {
+              "name": "spine.004",
+              "parent": "spine.003",
+              "use_deform": true
+            },
+            {
+              "name": "spine.005",
+              "parent": "spine.004",
+              "use_deform": true
+            },
+            {
+              "name": "shoulder.L",
+              "parent": "spine.003",
+              "use_deform": true
+            },
+            {
+              "name": "upper_arm.L",
+              "parent": "shoulder.L",
+              "use_deform": true
+            },
+            {
+              "name": "forearm.L",
+              "parent": "upper_arm.L",
+              "use_deform": true
+            },
+            {
+              "name": "hand.L",
+              "parent": "forearm.L",
+              "use_deform": true
+            },
+            {
+              "name": "f_index.01.L",
+              "parent": "hand.L",
+              "use_deform": true
+            },
+            {
+              "name": "f_index.02.L",
+              "parent": "f_index.01.L",
+              "use_deform": true
+            },
+            {
+              "name": "f_index.03.L",
+              "parent": "f_index.02.L",
+              "use_deform": true
+            },
+            {
+              "name": "thumb.01.L",
+              "parent": "hand.L",
+              "use_deform": true
+            },
+            {
+              "name": "thumb.02.L",
+              "parent": "thumb.01.L",
+              "use_deform": true
+            },
+            {
+              "name": "thumb.03.L",
+              "parent": "thumb.02.L",
+              "use_deform": true
+            },
+            {
+              "name": "f_middle.01.L",
+              "parent": "hand.L",
+              "use_deform": true
+            },
+            {
+              "name": "f_middle.02.L",
+              "parent": "f_middle.01.L",
+              "use_deform": true
+            },
+            {
+              "name": "f_middle.03.L",
+              "parent": "f_middle.02.L",
+              "use_deform": true
+            },
+            {
+              "name": "f_ring.01.L",
+              "parent": "hand.L",
+              "use_deform": true
+            },
+            {
+              "name": "f_ring.02.L",
+              "parent": "f_ring.01.L",
+              "use_deform": true
+            },
+            {
+              "name": "f_ring.03.L",
+              "parent": "f_ring.02.L",
+              "use_deform": true
+            },
+            {
+              "name": "f_pinky.01.L",
+              "parent": "hand.L",
+              "use_deform": true
+            },
+            {
+              "name": "f_pinky.02.L",
+              "parent": "f_pinky.01.L",
+              "use_deform": true
+            },
+            {
+              "name": "f_pinky.03.L",
+              "parent": "f_pinky.02.L",
+              "use_deform": true
+            },
+            {
+              "name": "shoulder.R",
+              "parent": "spine.003",
+              "use_deform": true
+            },
+            {
+              "name": "upper_arm.R",
+              "parent": "shoulder.R",
+              "use_deform": true
+            },
+            {
+              "name": "forearm.R",
+              "parent": "upper_arm.R",
+              "use_deform": true
+            },
+            {
+              "name": "hand.R",
+              "parent": "forearm.R",
+              "use_deform": true
+            },
+            {
+              "name": "f_index.01.R",
+              "parent": "hand.R",
+              "use_deform": true
+            },
+            {
+              "name": "f_index.02.R",
+              "parent": "f_index.01.R",
+              "use_deform": true
+            },
+            {
+              "name": "f_index.03.R",
+              "parent": "f_index.02.R",
+              "use_deform": true
+            },
+            {
+              "name": "thumb.01.R",
+              "parent": "hand.R",
+              "use_deform": true
+            },
+            {
+              "name": "thumb.02.R",
+              "parent": "thumb.01.R",
+              "use_deform": true
+            },
+            {
+              "name": "thumb.03.R",
+              "parent": "thumb.02.R",
+              "use_deform": true
+            },
+            {
+              "name": "f_middle.01.R",
+              "parent": "hand.R",
+              "use_deform": true
+            },
+            {
+              "name": "f_middle.02.R",
+              "parent": "f_middle.01.R",
+              "use_deform": true
+            },
+            {
+              "name": "f_middle.03.R",
+              "parent": "f_middle.02.R",
+              "use_deform": true
+            },
+            {
+              "name": "f_ring.01.R",
+              "parent": "hand.R",
+              "use_deform": true
+            },
+            {
+              "name": "f_ring.02.R",
+              "parent": "f_ring.01.R",
+              "use_deform": true
+            },
+            {
+              "name": "f_ring.03.R",
+              "parent": "f_ring.02.R",
+              "use_deform": true
+            },
+            {
+              "name": "f_pinky.01.R",
+              "parent": "hand.R",
+              "use_deform": true
+            },
+            {
+              "name": "f_pinky.02.R",
+              "parent": "f_pinky.01.R",
+              "use_deform": true
+            },
+            {
+              "name": "f_pinky.03.R",
+              "parent": "f_pinky.02.R",
+              "use_deform": true
+            },
+            {
+              "name": "thigh.L",
+              "parent": "spine",
+              "use_deform": true
+            },
+            {
+              "name": "shin.L",
+              "parent": "thigh.L",
+              "use_deform": true
+            },
+            {
+              "name": "foot.L",
+              "parent": "shin.L",
+              "use_deform": true
+            },
+            {
+              "name": "toe.L",
+              "parent": "foot.L",
+              "use_deform": true
+            },
+            {
+              "name": "heel.02.L",
+              "parent": "foot.L",
+              "use_deform": true
+            },
+            {
+              "name": "thigh.R",
+              "parent": "spine",
+              "use_deform": true
+            },
+            {
+              "name": "shin.R",
+              "parent": "thigh.R",
+              "use_deform": true
+            },
+            {
+              "name": "foot.R",
+              "parent": "shin.R",
+              "use_deform": true
+            },
+            {
+              "name": "toe.R",
+              "parent": "foot.R",
+              "use_deform": true
+            },
+            {
+              "name": "heel.02.R",
+              "parent": "foot.R",
+              "use_deform": true
+            }
+          ]
+        },
+        {
+          "name": "WGT-rig_chest",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.00490001542493701,
+            1.3148000240325928
+          ],
+          "rotation_euler": [
+            1.5384001731872559,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.19212451577186584,
+            0.19212450087070465,
+            0.19212450087070465
+          ],
+          "dimensions": [
+            0.42267394065856934,
+            0.19212450087070465,
+            0.42267391085624695
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_index.01.L",
+          "type": "MESH",
+          "location": [
+            0.7653626799583435,
+            0.034500010311603546,
+            1.4387999773025513
+          ],
+          "rotation_euler": [
+            7.201029461612052e-08,
+            -3.141585350036621,
+            -1.5707964897155762
+          ],
+          "scale": [
+            0.04070001468062401,
+            0.04070001468062401,
+            0.04070001468062401
+          ],
+          "dimensions": [
+            0.024420009925961494,
+            0.0,
+            0.024420009925961494
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_index.01.L.001",
+          "type": "MESH",
+          "location": [
+            0.8709626793861389,
+            0.034500010311603546,
+            1.4387999773025513
+          ],
+          "rotation_euler": [
+            -7.200901563919615e-08,
+            -3.141585350036621,
+            1.5707963705062866
+          ],
+          "scale": [
+            0.015049993991851807,
+            0.015049993060529232,
+            0.015049993060529232
+          ],
+          "dimensions": [
+            0.009029996581375599,
+            0.0,
+            0.009029996581375599
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_index.01.R",
+          "type": "MESH",
+          "location": [
+            -0.7653626799583435,
+            0.034500010311603546,
+            1.4387999773025513
+          ],
+          "rotation_euler": [
+            7.403221502499946e-08,
+            7.305808594537666e-06,
+            -1.5707961320877075
+          ],
+          "scale": [
+            -0.04070001468062401,
+            -0.04070001468062401,
+            -0.04070001468062401
+          ],
+          "dimensions": [
+            0.024420009925961494,
+            0.0,
+            0.024420009925961494
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_index.01.R.001",
+          "type": "MESH",
+          "location": [
+            -0.8709626793861389,
+            0.034500010311603546,
+            1.4387999773025513
+          ],
+          "rotation_euler": [
+            -7.40312700031609e-08,
+            7.314012236747658e-06,
+            1.570796251296997
+          ],
+          "scale": [
+            -0.015049993991851807,
+            -0.015049993060529232,
+            -0.015049993060529232
+          ],
+          "dimensions": [
+            0.009029996581375599,
+            0.0,
+            0.009029996581375599
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_index.01_master.L",
+          "type": "MESH",
+          "location": [
+            0.7653626799583435,
+            0.034500010311603546,
+            1.4387999773025513
+          ],
+          "rotation_euler": [
+            7.200998197731678e-08,
+            -3.141585350036621,
+            -1.5707963705062866
+          ],
+          "scale": [
+            0.1726999282836914,
+            0.1726999282836914,
+            0.1726999133825302
+          ],
+          "dimensions": [
+            0.01726999320089817,
+            0.18996992707252502,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 6,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_index.01_master.R",
+          "type": "MESH",
+          "location": [
+            -0.7653626799583435,
+            0.034500010311603546,
+            1.4387999773025513
+          ],
+          "rotation_euler": [
+            7.403223634128153e-08,
+            7.305809049285017e-06,
+            -1.570796251296997
+          ],
+          "scale": [
+            -0.1726999282836914,
+            -0.1726999282836914,
+            -0.1726999133825302
+          ],
+          "dimensions": [
+            0.01726999320089817,
+            0.18996992707252502,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 6,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_index.02.L",
+          "type": "MESH",
+          "location": [
+            0.8060626983642578,
+            0.034500010311603546,
+            1.4387999773025513
+          ],
+          "rotation_euler": [
+            7.200998197731678e-08,
+            -3.1415855884552,
+            -1.5707963705062866
+          ],
+          "scale": [
+            0.03479998931288719,
+            0.03479998931288719,
+            0.03479998931288719
+          ],
+          "dimensions": [
+            0.020879995077848434,
+            0.0,
+            0.020879995077848434
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_index.02.R",
+          "type": "MESH",
+          "location": [
+            -0.8060626983642578,
+            0.034500010311603546,
+            1.4387999773025513
+          ],
+          "rotation_euler": [
+            7.403223634128153e-08,
+            7.165948318288429e-06,
+            -1.570796251296997
+          ],
+          "scale": [
+            -0.03479998931288719,
+            -0.03479998931288719,
+            -0.03479998931288719
+          ],
+          "dimensions": [
+            0.020879995077848434,
+            0.0,
+            0.020879995077848434
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_index.03.L",
+          "type": "MESH",
+          "location": [
+            0.8408626914024353,
+            0.034500010311603546,
+            1.4387999773025513
+          ],
+          "rotation_euler": [
+            7.201030172154788e-08,
+            -3.1415855884552,
+            -1.5707963705062866
+          ],
+          "scale": [
+            0.030099986121058464,
+            0.030099982395768166,
+            0.030099984258413315
+          ],
+          "dimensions": [
+            0.018059993162751198,
+            0.0,
+            0.01805999130010605
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_index.03.R",
+          "type": "MESH",
+          "location": [
+            -0.8408626914024353,
+            0.034500010311603546,
+            1.4387999773025513
+          ],
+          "rotation_euler": [
+            7.403255608551262e-08,
+            7.165948318288429e-06,
+            -1.570796251296997
+          ],
+          "scale": [
+            -0.030099986121058464,
+            -0.030099982395768166,
+            -0.030099984258413315
+          ],
+          "dimensions": [
+            0.018059993162751198,
+            0.0,
+            0.01805999130010605
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_middle.01.L",
+          "type": "MESH",
+          "location": [
+            0.7670626640319824,
+            0.060200005769729614,
+            1.4412000179290771
+          ],
+          "rotation_euler": [
+            -5.65486395487369e-08,
+            -3.141585350036621,
+            -1.523550271987915
+          ],
+          "scale": [
+            0.04234730079770088,
+            0.04234730079770088,
+            0.042347297072410583
+          ],
+          "dimensions": [
+            0.02540838159620762,
+            0.0,
+            0.02540837973356247
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_middle.01.L.001",
+          "type": "MESH",
+          "location": [
+            0.8776626586914062,
+            0.06530001014471054,
+            1.4412000179290771
+          ],
+          "rotation_euler": [
+            -3.141592502593994,
+            -7.296199328266084e-06,
+            -1.524317979812622
+          ],
+          "scale": [
+            0.017218587920069695,
+            0.017218587920069695,
+            0.017218586057424545
+          ],
+          "dimensions": [
+            0.010331152938306332,
+            0.0,
+            0.010331152006983757
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_middle.01.R",
+          "type": "MESH",
+          "location": [
+            -0.7670626640319824,
+            0.060200005769729614,
+            1.4412000179290771
+          ],
+          "rotation_euler": [
+            -6.661892371084832e-08,
+            7.312106845347444e-06,
+            -1.6180424690246582
+          ],
+          "scale": [
+            -0.04234730079770088,
+            -0.04234730079770088,
+            -0.042347297072410583
+          ],
+          "dimensions": [
+            0.02540838159620762,
+            0.0,
+            0.02540837973356247
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_middle.01.R.001",
+          "type": "MESH",
+          "location": [
+            -0.8776626586914062,
+            0.06530001014471054,
+            1.4412000179290771
+          ],
+          "rotation_euler": [
+            6.29916883099213e-08,
+            7.306342922674958e-06,
+            1.524317979812622
+          ],
+          "scale": [
+            -0.017218587920069695,
+            -0.017218587920069695,
+            -0.017218586057424545
+          ],
+          "dimensions": [
+            0.010331152938306332,
+            0.0,
+            0.010331152006983757
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_middle.01_master.L",
+          "type": "MESH",
+          "location": [
+            0.7670626640319824,
+            0.060200005769729614,
+            1.4412000179290771
+          ],
+          "rotation_euler": [
+            -6.009850750388068e-08,
+            -3.141585350036621,
+            -1.523550271987915
+          ],
+          "scale": [
+            0.18074415624141693,
+            0.18074418604373932,
+            0.18074414134025574
+          ],
+          "dimensions": [
+            0.018074415624141693,
+            0.1988186091184616,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 6,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_middle.01_master.R",
+          "type": "MESH",
+          "location": [
+            -0.7670626640319824,
+            0.060200005769729614,
+            1.4412000179290771
+          ],
+          "rotation_euler": [
+            -7.01688094295605e-08,
+            7.3083861025224905e-06,
+            -1.6180424690246582
+          ],
+          "scale": [
+            -0.18074415624141693,
+            -0.18074418604373932,
+            -0.18074414134025574
+          ],
+          "dimensions": [
+            0.018074413761496544,
+            0.19881859421730042,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 6,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_middle.02.L",
+          "type": "MESH",
+          "location": [
+            0.8093627095222473,
+            0.06220000609755516,
+            1.4412000179290771
+          ],
+          "rotation_euler": [
+            -5.479401821162355e-08,
+            -3.1415855884552,
+            -1.5265772342681885
+          ],
+          "scale": [
+            0.0339331328868866,
+            0.0339331328868866,
+            0.0339331291615963
+          ],
+          "dimensions": [
+            0.020359881222248077,
+            0.0,
+            0.02035987749695778
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_middle.02.R",
+          "type": "MESH",
+          "location": [
+            -0.8093627095222473,
+            0.06220000609755516,
+            1.4412000179290771
+          ],
+          "rotation_euler": [
+            -6.487633896767875e-08,
+            7.171969627961516e-06,
+            -1.6150153875350952
+          ],
+          "scale": [
+            -0.0339331328868866,
+            -0.0339331328868866,
+            -0.0339331291615963
+          ],
+          "dimensions": [
+            0.020359881222248077,
+            0.0,
+            0.02035987749695778
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_middle.03.L",
+          "type": "MESH",
+          "location": [
+            0.8432626724243164,
+            0.06370000541210175,
+            1.4412000179290771
+          ],
+          "rotation_euler": [
+            -5.481504672388837e-08,
+            -3.1415855884552,
+            -1.524317979812622
+          ],
+          "scale": [
+            0.03443717584013939,
+            0.03443717956542969,
+            0.03443717211484909
+          ],
+          "dimensions": [
+            0.020662305876612663,
+            0.0,
+            0.020662304013967514
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_middle.03.R",
+          "type": "MESH",
+          "location": [
+            -0.8432626724243164,
+            0.06370000541210175,
+            1.4412000179290771
+          ],
+          "rotation_euler": [
+            -6.488823345307537e-08,
+            7.1718086473993026e-06,
+            -1.6172746419906616
+          ],
+          "scale": [
+            -0.03443717584013939,
+            -0.03443717956542969,
+            -0.03443717211484909
+          ],
+          "dimensions": [
+            0.020662305876612663,
+            0.0,
+            0.020662304013967514
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_pinky.01.L",
+          "type": "MESH",
+          "location": [
+            0.753162682056427,
+            0.10620000958442688,
+            1.4392000436782837
+          ],
+          "rotation_euler": [
+            -5.2826553798013265e-08,
+            -3.141585350036621,
+            -1.5037328004837036
+          ],
+          "scale": [
+            0.04029056429862976,
+            0.04029057174921036,
+            0.04029056057333946
+          ],
+          "dimensions": [
+            0.024174340069293976,
+            0.0,
+            0.024174338206648827
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_pinky.01.L.001",
+          "type": "MESH",
+          "location": [
+            0.8490626811981201,
+            0.11270000785589218,
+            1.4392000436782837
+          ],
+          "rotation_euler": [
+            -3.141592502593994,
+            -7.298303899005987e-06,
+            -1.5032835006713867
+          ],
+          "scale": [
+            0.014082087203860283,
+            0.014082086272537708,
+            0.014082085341215134
+          ],
+          "dimensions": [
+            0.008449251763522625,
+            0.0,
+            0.008449251763522625
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_pinky.01.R",
+          "type": "MESH",
+          "location": [
+            -0.753162682056427,
+            0.10620000958442688,
+            1.4392000436782837
+          ],
+          "rotation_euler": [
+            -6.28187919460288e-08,
+            7.312569323403295e-06,
+            -1.6378599405288696
+          ],
+          "scale": [
+            -0.04029056429862976,
+            -0.04029057174921036,
+            -0.04029056057333946
+          ],
+          "dimensions": [
+            0.024174340069293976,
+            0.0,
+            0.024174338206648827
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_pinky.01.R.001",
+          "type": "MESH",
+          "location": [
+            -0.8490626811981201,
+            0.11270000785589218,
+            1.4392000436782837
+          ],
+          "rotation_euler": [
+            6.368296823211494e-08,
+            7.3083820097963326e-06,
+            1.5032835006713867
+          ],
+          "scale": [
+            -0.014082087203860283,
+            -0.014082086272537708,
+            -0.014082085341215134
+          ],
+          "dimensions": [
+            0.008449251763522625,
+            0.0,
+            0.008449251763522625
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_pinky.01_master.L",
+          "type": "MESH",
+          "location": [
+            0.753162682056427,
+            0.10620000958442688,
+            1.4392000436782837
+          ],
+          "rotation_euler": [
+            -5.283057191718399e-08,
+            -3.141585350036621,
+            -1.5037328004837036
+          ],
+          "scale": [
+            0.16044054925441742,
+            0.1604405790567398,
+            0.16044053435325623
+          ],
+          "dimensions": [
+            0.01604405604302883,
+            0.17648464441299438,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 6,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_pinky.01_master.R",
+          "type": "MESH",
+          "location": [
+            -0.753162682056427,
+            0.10620000958442688,
+            1.4392000436782837
+          ],
+          "rotation_euler": [
+            -6.282377995603383e-08,
+            7.312564775929786e-06,
+            -1.6378599405288696
+          ],
+          "scale": [
+            -0.16044054925441742,
+            -0.1604405790567398,
+            -0.16044053435325623
+          ],
+          "dimensions": [
+            0.01604405604302883,
+            0.17648464441299438,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 6,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_pinky.02.L",
+          "type": "MESH",
+          "location": [
+            0.7933626770973206,
+            0.10890001058578491,
+            1.4392000436782837
+          ],
+          "rotation_euler": [
+            -5.4217579759097134e-08,
+            -3.1415855884552,
+            -1.5020643472671509
+          ],
+          "scale": [
+            0.027665313333272934,
+            0.027665317058563232,
+            0.027665309607982635
+          ],
+          "dimensions": [
+            0.01659918949007988,
+            0.0,
+            0.01659918576478958
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_pinky.02.R",
+          "type": "MESH",
+          "location": [
+            -0.7933626770973206,
+            0.10890001058578491,
+            1.4392000436782837
+          ],
+          "rotation_euler": [
+            -6.420442133503457e-08,
+            7.170949629653478e-06,
+            -1.6395283937454224
+          ],
+          "scale": [
+            -0.027665313333272934,
+            -0.027665317058563232,
+            -0.027665309607982635
+          ],
+          "dimensions": [
+            0.01659918949007988,
+            0.0,
+            0.01659918576478958
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_pinky.03.L",
+          "type": "MESH",
+          "location": [
+            0.82096266746521,
+            0.11080000549554825,
+            1.4392000436782837
+          ],
+          "rotation_euler": [
+            -5.420575277526041e-08,
+            -3.1415855884552,
+            -1.5032832622528076
+          ],
+          "scale": [
+            0.028164178133010864,
+            0.028164178133010864,
+            0.028164172545075417
+          ],
+          "dimensions": [
+            0.01689850725233555,
+            0.0,
+            0.01689850352704525
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_pinky.03.R",
+          "type": "MESH",
+          "location": [
+            -0.82096266746521,
+            0.11080000549554825,
+            1.4392000436782837
+          ],
+          "rotation_euler": [
+            -6.419710274485624e-08,
+            7.1710360316501465e-06,
+            -1.638309359550476
+          ],
+          "scale": [
+            -0.028164178133010864,
+            -0.028164178133010864,
+            -0.028164172545075417
+          ],
+          "dimensions": [
+            0.01689850725233555,
+            0.0,
+            0.01689850352704525
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_ring.01.L",
+          "type": "MESH",
+          "location": [
+            0.7645626664161682,
+            0.08250001072883606,
+            1.4408999681472778
+          ],
+          "rotation_euler": [
+            -5.669993896617598e-08,
+            -3.141585350036621,
+            -1.53518807888031
+          ],
+          "scale": [
+            0.03932495415210724,
+            0.03932495042681694,
+            0.03932495042681694
+          ],
+          "dimensions": [
+            0.023594973608851433,
+            0.0,
+            0.023594971746206284
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_ring.01.L.001",
+          "type": "MESH",
+          "location": [
+            0.8665626645088196,
+            0.08620000630617142,
+            1.4408999681472778
+          ],
+          "rotation_euler": [
+            -3.141592502593994,
+            -7.299937806237722e-06,
+            -1.5330780744552612
+          ],
+          "scale": [
+            0.015911275520920753,
+            0.015911275520920753,
+            0.015911271795630455
+          ],
+          "dimensions": [
+            0.009546766057610512,
+            0.0,
+            0.009546763263642788
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_ring.01.R",
+          "type": "MESH",
+          "location": [
+            -0.7645626664161682,
+            0.08250001072883606,
+            1.4408999681472778
+          ],
+          "rotation_euler": [
+            -6.681639774797077e-08,
+            7.311700755963102e-06,
+            -1.6064045429229736
+          ],
+          "scale": [
+            -0.03932495415210724,
+            -0.03932495042681694,
+            -0.03932495042681694
+          ],
+          "dimensions": [
+            0.023594973608851433,
+            0.0,
+            0.023594971746206284
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_ring.01.R.001",
+          "type": "MESH",
+          "location": [
+            -0.8665626645088196,
+            0.08620000630617142,
+            1.4408999681472778
+          ],
+          "rotation_euler": [
+            6.753695203087773e-08,
+            7.310105047508841e-06,
+            1.5330780744552612
+          ],
+          "scale": [
+            -0.015911275520920753,
+            -0.015911275520920753,
+            -0.015911271795630455
+          ],
+          "dimensions": [
+            0.009546766057610512,
+            0.0,
+            0.009546763263642788
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_ring.01_master.L",
+          "type": "MESH",
+          "location": [
+            0.7645626664161682,
+            0.08250001072883606,
+            1.4408999681472778
+          ],
+          "rotation_euler": [
+            -5.849799578072634e-08,
+            -3.141585350036621,
+            -1.53518807888031
+          ],
+          "scale": [
+            0.16690874099731445,
+            0.16690874099731445,
+            0.16690872609615326
+          ],
+          "dimensions": [
+            0.016690874472260475,
+            0.18359962105751038,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 6,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_ring.01_master.R",
+          "type": "MESH",
+          "location": [
+            -0.7645626664161682,
+            0.08250001072883606,
+            1.4408999681472778
+          ],
+          "rotation_euler": [
+            -6.861414902914476e-08,
+            7.30983765606652e-06,
+            -1.6064045429229736
+          ],
+          "scale": [
+            -0.16690874099731445,
+            -0.16690874099731445,
+            -0.16690872609615326
+          ],
+          "dimensions": [
+            0.016690874472260475,
+            0.18359962105751038,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 6,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_ring.02.L",
+          "type": "MESH",
+          "location": [
+            0.8038626909255981,
+            0.08390000462532043,
+            1.4408999681472778
+          ],
+          "rotation_euler": [
+            -5.5567817014434695e-08,
+            -3.1415855884552,
+            -1.535212516784668
+          ],
+          "scale": [
+            0.030919576063752174,
+            0.030919574201107025,
+            0.030919574201107025
+          ],
+          "dimensions": [
+            0.018551746383309364,
+            0.0,
+            0.018551744520664215
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_ring.02.R",
+          "type": "MESH",
+          "location": [
+            -0.8038626909255981,
+            0.08390000462532043,
+            1.4408999681472778
+          ],
+          "rotation_euler": [
+            -6.568394184114368e-08,
+            7.171786364779109e-06,
+            -1.6063801050186157
+          ],
+          "scale": [
+            -0.030919576063752174,
+            -0.030919574201107025,
+            -0.030919574201107025
+          ],
+          "dimensions": [
+            0.018551746383309364,
+            0.0,
+            0.018551744520664215
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_ring.03.L",
+          "type": "MESH",
+          "location": [
+            0.834762692451477,
+            0.08500000834465027,
+            1.4408999681472778
+          ],
+          "rotation_euler": [
+            -5.5584109759365674e-08,
+            -3.1415855884552,
+            -1.5330783128738403
+          ],
+          "scale": [
+            0.03182259947061539,
+            0.03182259574532509,
+            0.03182259947061539
+          ],
+          "dimensions": [
+            0.019093560054898262,
+            0.0,
+            0.019093560054898262
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_f_ring.03.R",
+          "type": "MESH",
+          "location": [
+            -0.834762692451477,
+            0.08500000834465027,
+            1.4408999681472778
+          ],
+          "rotation_euler": [
+            -6.569197807948512e-08,
+            7.171635843405966e-06,
+            -1.6085143089294434
+          ],
+          "scale": [
+            -0.03182259947061539,
+            -0.03182259574532509,
+            -0.03182259947061539
+          ],
+          "dimensions": [
+            0.019093558192253113,
+            0.0,
+            0.019093560054898262
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_foot_fk.L",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            0.0358000323176384,
+            0.10369989275932312
+          ],
+          "rotation_euler": [
+            -2.605626106262207,
+            0.0008905561408028007,
+            0.0005289546097628772
+          ],
+          "scale": [
+            0.17330104112625122,
+            0.17330104112625122,
+            0.17330102622509003
+          ],
+          "dimensions": [
+            0.13864083588123322,
+            0.0,
+            0.13864082098007202
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_foot_fk.R",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            0.0358000323176384,
+            0.10369989275932312
+          ],
+          "rotation_euler": [
+            0.5359663963317871,
+            0.0008905561408028007,
+            0.0005289546097628772
+          ],
+          "scale": [
+            -0.17330104112625122,
+            -0.17330104112625122,
+            -0.17330102622509003
+          ],
+          "dimensions": [
+            0.13864083588123322,
+            0.0,
+            0.13864083588123322
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_foot_heel_ik.L",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            0.03579999506473541,
+            0.10369999706745148
+          ],
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.08665052056312561,
+            0.08665051311254501,
+            0.08665052056312561
+          ],
+          "dimensions": [
+            0.08469302952289581,
+            0.020394738763570786,
+            0.08469303697347641
+          ],
+          "parent": null,
+          "vertices": 52,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_foot_heel_ik.R",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            0.03579999506473541,
+            0.10369999706745148
+          ],
+          "rotation_euler": [
+            3.1415927410125732,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            -0.08665052056312561,
+            -0.08665051311254501,
+            -0.08665052056312561
+          ],
+          "dimensions": [
+            0.08469302952289581,
+            0.020394738763570786,
+            0.08469303697347641
+          ],
+          "parent": null,
+          "vertices": 52,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_foot_ik.L",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            0.03579999879002571,
+            0.10369999706745148
+          ],
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.17330104112625122,
+            0.17330104112625122,
+            0.17330104112625122
+          ],
+          "dimensions": [
+            0.2426214963197708,
+            0.30327683687210083,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 8,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": [
+            {
+              "type": "SUBSURF",
+              "name": "subsurf"
+            }
+          ]
+        },
+        {
+          "name": "WGT-rig_foot_ik.R",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            0.03579999879002571,
+            0.10369999706745148
+          ],
+          "rotation_euler": [
+            3.1415927410125732,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            -0.17330104112625122,
+            -0.17330104112625122,
+            -0.17330104112625122
+          ],
+          "dimensions": [
+            0.2426214963197708,
+            0.30327683687210083,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 8,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": [
+            {
+              "type": "SUBSURF",
+              "name": "subsurf"
+            }
+          ]
+        },
+        {
+          "name": "WGT-rig_foot_spin_ik.L",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            -0.11319999396800995,
+            0.015200003981590271
+          ],
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.08665049821138382,
+            0.08665049076080322,
+            0.08665049821138382
+          ],
+          "dimensions": [
+            0.06351975351572037,
+            0.06351975351572037,
+            0.015296045690774918
+          ],
+          "parent": null,
+          "vertices": 52,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_foot_spin_ik.R",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            -0.11319999396800995,
+            0.015200003981590271
+          ],
+          "rotation_euler": [
+            3.1415927410125732,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            -0.08665049821138382,
+            -0.08665049076080322,
+            -0.08665049821138382
+          ],
+          "dimensions": [
+            0.06351975351572037,
+            0.06351975351572037,
+            0.015296045690774918
+          ],
+          "parent": null,
+          "vertices": 52,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_foot_tweak.L",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            0.0358000285923481,
+            0.10369988530874252
+          ],
+          "rotation_euler": [
+            -2.6056251525878906,
+            0.0008905556169338524,
+            0.000528956123162061
+          ],
+          "scale": [
+            0.04332515597343445,
+            0.04332524910569191,
+            0.04332517459988594
+          ],
+          "dimensions": [
+            0.04332515969872475,
+            0.04332524910569191,
+            0.04332517459988594
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_foot_tweak.R",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            0.0358000285923481,
+            0.10369988530874252
+          ],
+          "rotation_euler": [
+            0.5359672904014587,
+            0.0008905556169338524,
+            0.000528956123162061
+          ],
+          "scale": [
+            -0.04332515597343445,
+            -0.04332524910569191,
+            -0.04332517459988594
+          ],
+          "dimensions": [
+            0.04332515969872475,
+            0.04332525283098221,
+            0.04332517459988594
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_forearm_fk.L",
+          "type": "MESH",
+          "location": [
+            0.37286269664764404,
+            0.07010000944137573,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            1.5880359411239624,
+            1.5707939863204956,
+            0.0
+          ],
+          "scale": [
+            0.2726404666900635,
+            0.27264052629470825,
+            0.27264049649238586
+          ],
+          "dimensions": [
+            0.13632023334503174,
+            0.272640585899353,
+            0.13632024824619293
+          ],
+          "parent": null,
+          "vertices": 34,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_forearm_fk.R",
+          "type": "MESH",
+          "location": [
+            -0.37286269664764404,
+            0.07010000944137573,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            -1.5535569190979004,
+            -1.5707939863204956,
+            0.0
+          ],
+          "scale": [
+            -0.2726404666900635,
+            -0.27264052629470825,
+            -0.27264049649238586
+          ],
+          "dimensions": [
+            0.13632023334503174,
+            0.272640585899353,
+            0.13632024824619293
+          ],
+          "parent": null,
+          "vertices": 34,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_forearm_tweak.L",
+          "type": "MESH",
+          "location": [
+            0.37286266684532166,
+            0.07009999454021454,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            1.588036060333252,
+            1.5707939863204956,
+            0.0
+          ],
+          "scale": [
+            0.06816010922193527,
+            0.06816012412309647,
+            0.06816012412309647
+          ],
+          "dimensions": [
+            0.06816010922193527,
+            0.06816012412309647,
+            0.06816012412309647
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_forearm_tweak.L.001",
+          "type": "MESH",
+          "location": [
+            0.5091626644134521,
+            0.0677499920129776,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            1.588036060333252,
+            1.5707941055297852,
+            0.0
+          ],
+          "scale": [
+            0.06815885007381439,
+            0.06815886497497559,
+            0.06815885752439499
+          ],
+          "dimensions": [
+            0.06815885007381439,
+            0.06815886497497559,
+            0.06815885752439499
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_forearm_tweak.R",
+          "type": "MESH",
+          "location": [
+            -0.37286266684532166,
+            0.07009999454021454,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            -1.5535569190979004,
+            -1.5707939863204956,
+            0.0
+          ],
+          "scale": [
+            -0.06816010922193527,
+            -0.06816012412309647,
+            -0.06816012412309647
+          ],
+          "dimensions": [
+            0.06816010922193527,
+            0.06816012412309647,
+            0.06816012412309647
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_forearm_tweak.R.001",
+          "type": "MESH",
+          "location": [
+            -0.5091626644134521,
+            0.0677499920129776,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            -1.5535569190979004,
+            -1.5707941055297852,
+            0.0
+          ],
+          "scale": [
+            -0.06815885007381439,
+            -0.06815886497497559,
+            -0.06815885752439499
+          ],
+          "dimensions": [
+            0.06815885007381439,
+            0.06815886497497559,
+            0.06815885752439499
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_hand_fk.L",
+          "type": "MESH",
+          "location": [
+            0.6454627513885498,
+            0.06540000438690186,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            1.5707961320877075,
+            1.5707955360412598,
+            0.0
+          ],
+          "scale": [
+            0.10930000990629196,
+            0.10930003225803375,
+            0.10930000245571136
+          ],
+          "dimensions": [
+            0.08744000643491745,
+            0.0,
+            0.08744000643491745
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_hand_fk.R",
+          "type": "MESH",
+          "location": [
+            -0.6454627513885498,
+            0.06540000438690186,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            -1.5707964897155762,
+            -1.5707955360412598,
+            0.0
+          ],
+          "scale": [
+            -0.10930000990629196,
+            -0.10930003225803375,
+            -0.10930000245571136
+          ],
+          "dimensions": [
+            0.08744000643491745,
+            0.0,
+            0.08744000643491745
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_hand_ik.L",
+          "type": "MESH",
+          "location": [
+            0.645462691783905,
+            0.06539999693632126,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            1.570796251296997,
+            1.5707954168319702,
+            0.0
+          ],
+          "scale": [
+            0.10930000245571136,
+            0.10929999500513077,
+            0.10930000990629196
+          ],
+          "dimensions": [
+            2.6059151281287996e-08,
+            0.1912749856710434,
+            0.15302002429962158
+          ],
+          "parent": null,
+          "vertices": 8,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": [
+            {
+              "type": "SUBSURF",
+              "name": "subsurf"
+            }
+          ]
+        },
+        {
+          "name": "WGT-rig_hand_ik.R",
+          "type": "MESH",
+          "location": [
+            -0.645462691783905,
+            0.06539999693632126,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            -1.5707963705062866,
+            -1.5707954168319702,
+            0.0
+          ],
+          "scale": [
+            -0.10930000245571136,
+            -0.10929999500513077,
+            -0.10930000990629196
+          ],
+          "dimensions": [
+            2.6059151281287996e-08,
+            0.1912749856710434,
+            0.15302002429962158
+          ],
+          "parent": null,
+          "vertices": 8,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": [
+            {
+              "type": "SUBSURF",
+              "name": "subsurf"
+            }
+          ]
+        },
+        {
+          "name": "WGT-rig_hand_tweak.L",
+          "type": "MESH",
+          "location": [
+            0.6454626321792603,
+            0.06539998203516006,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            1.5707963705062866,
+            1.5707954168319702,
+            0.0
+          ],
+          "scale": [
+            0.027324972674250603,
+            0.02732497826218605,
+            0.027324974536895752
+          ],
+          "dimensions": [
+            0.027324972674250603,
+            0.02732497826218605,
+            0.027324974536895752
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_hand_tweak.R",
+          "type": "MESH",
+          "location": [
+            -0.6454626321792603,
+            0.06539998203516006,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            -1.5707961320877075,
+            -1.5707955360412598,
+            0.0
+          ],
+          "scale": [
+            -0.027324972674250603,
+            -0.02732497826218605,
+            -0.027324974536895752
+          ],
+          "dimensions": [
+            0.027324972674250603,
+            0.02732497826218605,
+            0.027324974536895752
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_head",
+          "type": "MESH",
+          "location": [
+            0.0,
+            -0.005099957808852196,
+            1.5686999559402466
+          ],
+          "rotation_euler": [
+            1.6033192873001099,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.23372361063957214,
+            0.23372364044189453,
+            0.23372364044189453
+          ],
+          "dimensions": [
+            0.23372361063957214,
+            0.0,
+            0.23372365534305573
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_hips",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.050100017338991165,
+            0.916700005531311
+          ],
+          "rotation_euler": [
+            1.8231470584869385,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.14409339427947998,
+            0.14409339427947998,
+            0.14409339427947998
+          ],
+          "dimensions": [
+            0.3170054852962494,
+            0.14409339427947998,
+            0.3170054852962494
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_neck",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.010500023141503334,
+            1.4875999689102173
+          ],
+          "rotation_euler": [
+            1.7608306407928467,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.08258672803640366,
+            0.08258672803640366,
+            0.08258672803640366
+          ],
+          "dimensions": [
+            0.1651734560728073,
+            0.0,
+            0.1651734560728073
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_root",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.8471986651420593,
+            0.8471986651420593,
+            0.8471986651420593
+          ],
+          "dimensions": [
+            2.678478240966797,
+            2.6784777641296387,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_shin_fk.L",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            0.0014000262599438429,
+            0.5317999124526978
+          ],
+          "rotation_euler": [
+            -1.4906136989593506,
+            -2.1027215552749112e-05,
+            0.0002616786805447191
+          ],
+          "scale": [
+            0.4294799566268921,
+            0.4294799268245697,
+            0.4294799268245697
+          ],
+          "dimensions": [
+            0.21473997831344604,
+            0.42948001623153687,
+            0.21473997831344604
+          ],
+          "parent": null,
+          "vertices": 34,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_shin_fk.R",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            0.0014000262599438429,
+            0.5317999124526978
+          ],
+          "rotation_euler": [
+            1.6509790420532227,
+            -2.1027215552749112e-05,
+            0.0002616786805447191
+          ],
+          "scale": [
+            -0.4294799566268921,
+            -0.4294799268245697,
+            -0.4294799268245697
+          ],
+          "dimensions": [
+            0.21473997831344604,
+            0.42948001623153687,
+            0.21473997831344604
+          ],
+          "parent": null,
+          "vertices": 34,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_shin_tweak.L",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            0.001400031498633325,
+            0.5317999124526978
+          ],
+          "rotation_euler": [
+            -1.4906134605407715,
+            -2.102669168380089e-05,
+            0.00026167946634814143
+          ],
+          "scale": [
+            0.10736996680498123,
+            0.10736996680498123,
+            0.10737024992704391
+          ],
+          "dimensions": [
+            0.10736996680498123,
+            0.10736996680498123,
+            0.10737024992704391
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_shin_tweak.L.001",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            0.01860002987086773,
+            0.31774988770484924
+          ],
+          "rotation_euler": [
+            -1.4906134605407715,
+            -2.1026749891461805e-05,
+            0.0002616804267745465
+          ],
+          "scale": [
+            0.10736996680498123,
+            0.10736995935440063,
+            0.10737024992704391
+          ],
+          "dimensions": [
+            0.10736996680498123,
+            0.10736995935440063,
+            0.10737024992704391
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_shin_tweak.R",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            0.001400031498633325,
+            0.5317999124526978
+          ],
+          "rotation_euler": [
+            1.6509791612625122,
+            -2.102669168380089e-05,
+            0.00026167946634814143
+          ],
+          "scale": [
+            -0.10736996680498123,
+            -0.10736996680498123,
+            -0.10737024992704391
+          ],
+          "dimensions": [
+            0.10736996680498123,
+            0.10736996680498123,
+            0.10737025737762451
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_shin_tweak.R.001",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            0.01860002987086773,
+            0.31774988770484924
+          ],
+          "rotation_euler": [
+            1.6509791612625122,
+            -2.1026749891461805e-05,
+            0.0002616804267745465
+          ],
+          "scale": [
+            -0.10736996680498123,
+            -0.10736995935440063,
+            -0.10737024992704391
+          ],
+          "dimensions": [
+            0.10736996680498123,
+            0.10736995935440063,
+            0.10737025737762451
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_shoulder.L",
+          "type": "MESH",
+          "location": [
+            0.018799999728798866,
+            -0.071399986743927,
+            1.457900047302246
+          ],
+          "rotation_euler": [
+            -0.0007633550558239222,
+            0.0001597268710611388,
+            -0.8816549777984619
+          ],
+          "scale": [
+            0.13100071251392365,
+            0.13100069761276245,
+            0.13100069761276245
+          ],
+          "dimensions": [
+            0.13100071251392365,
+            0.13100069761276245,
+            0.06550034880638123
+          ],
+          "parent": null,
+          "vertices": 34,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_shoulder.R",
+          "type": "MESH",
+          "location": [
+            -0.018799999728798866,
+            -0.071399986743927,
+            1.457900047302246
+          ],
+          "rotation_euler": [
+            3.14082932472229,
+            -0.0001597268710611388,
+            0.8816549777984619
+          ],
+          "scale": [
+            -0.13100071251392365,
+            -0.13100069761276245,
+            -0.13100069761276245
+          ],
+          "dimensions": [
+            0.13100071251392365,
+            0.13100069761276245,
+            0.06550034880638123
+          ],
+          "parent": null,
+          "vertices": 34,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_spine_fk",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.015600009821355343,
+            1.0505000352859497
+          ],
+          "rotation_euler": [
+            1.8231470584869385,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.1381763368844986,
+            0.1381763517856598,
+            0.1381763517856598
+          ],
+          "dimensions": [
+            0.2763526737689972,
+            0.0,
+            0.27635273337364197
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_spine_fk.001",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.0004000142216682434,
+            1.1735999584197998
+          ],
+          "rotation_euler": [
+            1.693651556968689,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.12403479963541031,
+            0.12403479963541031,
+            0.12403479963541031
+          ],
+          "dimensions": [
+            0.24806959927082062,
+            0.0,
+            0.24806958436965942
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_spine_fk.002",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.0004000142216682434,
+            1.1735999584197998
+          ],
+          "rotation_euler": [
+            1.5389373302459717,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.14127175509929657,
+            0.14127175509929657,
+            0.14127175509929657
+          ],
+          "dimensions": [
+            0.28254351019859314,
+            0.0,
+            0.28254351019859314
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_spine_fk.003",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.004900019615888596,
+            1.3148000240325928
+          ],
+          "rotation_euler": [
+            1.5384001731872559,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.17289066314697266,
+            0.17289064824581146,
+            0.17289064824581146
+          ],
+          "dimensions": [
+            0.3457813262939453,
+            0.0,
+            0.3457812964916229
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thigh_fk.L",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            -0.0013999794609844685,
+            0.9320999383926392
+          ],
+          "rotation_euler": [
+            -1.5638015270233154,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.40030983090400696,
+            0.40030983090400696,
+            0.40030983090400696
+          ],
+          "dimensions": [
+            0.20015491545200348,
+            0.4003099203109741,
+            0.20015491545200348
+          ],
+          "parent": null,
+          "vertices": 34,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thigh_fk.R",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            -0.0013999794609844685,
+            0.9320999383926392
+          ],
+          "rotation_euler": [
+            1.5777909755706787,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            -0.40030983090400696,
+            -0.40030983090400696,
+            -0.40030983090400696
+          ],
+          "dimensions": [
+            0.20015491545200348,
+            0.4003099203109741,
+            0.20015491545200348
+          ],
+          "parent": null,
+          "vertices": 34,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thigh_ik.L",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            -0.0013999762013554573,
+            0.9320999383926392
+          ],
+          "rotation_euler": [
+            -1.563801646232605,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.40030983090400696,
+            0.40030983090400696,
+            0.40030983090400696
+          ],
+          "dimensions": [
+            0.16012392938137054,
+            0.40030983090400696,
+            0.2401859015226364
+          ],
+          "parent": null,
+          "vertices": 14,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thigh_ik.R",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            -0.0013999762013554573,
+            0.9320999383926392
+          ],
+          "rotation_euler": [
+            1.5777909755706787,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            -0.40030983090400696,
+            -0.40030983090400696,
+            -0.40030983090400696
+          ],
+          "dimensions": [
+            0.16012392938137054,
+            0.40030983090400696,
+            0.2401859015226364
+          ],
+          "parent": null,
+          "vertices": 14,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thigh_ik_target.L",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            -0.8269999623298645,
+            0.4945995509624481
+          ],
+          "rotation_euler": [
+            0.044876229017972946,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.10365437716245651,
+            0.10365437716245651,
+            0.10365437716245651
+          ],
+          "dimensions": [
+            0.10365437716245651,
+            0.10365437716245651,
+            0.10365437716245651
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thigh_ik_target.R",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            -0.8269999623298645,
+            0.4945995509624481
+          ],
+          "rotation_euler": [
+            -3.0967164039611816,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            -0.10365437716245651,
+            -0.10365437716245651,
+            -0.10365437716245651
+          ],
+          "dimensions": [
+            0.10365437716245651,
+            0.10365437716245651,
+            0.10365437716245651
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thigh_parent.L",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            -0.0013999701477587223,
+            0.9320999383926392
+          ],
+          "rotation_euler": [
+            -1.5638012886047363,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.10007745772600174,
+            0.10007746517658234,
+            0.10007771849632263
+          ],
+          "dimensions": [
+            0.2252037525177002,
+            9.84397363623657e-09,
+            0.22520440816879272
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thigh_parent.R",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            -0.0013999701477587223,
+            0.9320999383926392
+          ],
+          "rotation_euler": [
+            1.577791452407837,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            -0.10007745772600174,
+            -0.10007746517658234,
+            -0.10007771849632263
+          ],
+          "dimensions": [
+            0.2252037525177002,
+            9.84397363623657e-09,
+            0.22520440816879272
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thigh_tweak.L",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            -0.0013999781804159284,
+            0.9320999383926392
+          ],
+          "rotation_euler": [
+            -1.5638012886047363,
+            0.0,
+            0.0
+          ],
+          "scale": [
+            0.10007745772600174,
+            0.10007746517658234,
+            0.10007771849632263
+          ],
+          "dimensions": [
+            0.10007745772600174,
+            0.10007746517658234,
+            0.10007771849632263
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thigh_tweak.L.001",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            3.035529516637325e-08,
+            0.7319499254226685
+          ],
+          "rotation_euler": [
+            -1.5638012886047363,
+            -2.4078638388713713e-12,
+            3.4921635028162257e-10
+          ],
+          "scale": [
+            0.10007745772600174,
+            0.10007746517658234,
+            0.10007771849632263
+          ],
+          "dimensions": [
+            0.10007745772600174,
+            0.10007746517658234,
+            0.10007771849632263
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thigh_tweak.R",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            -0.0013999781804159284,
+            0.9320999383926392
+          ],
+          "rotation_euler": [
+            1.577791452407837,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            -0.10007745772600174,
+            -0.10007746517658234,
+            -0.10007771849632263
+          ],
+          "dimensions": [
+            0.10007745772600174,
+            0.10007746517658234,
+            0.10007771849632263
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thigh_tweak.R.001",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            3.035529516637325e-08,
+            0.7319499254226685
+          ],
+          "rotation_euler": [
+            1.577791452407837,
+            -2.4078638388713713e-12,
+            3.4921635028162257e-10
+          ],
+          "scale": [
+            -0.10007745772600174,
+            -0.10007746517658234,
+            -0.10007771849632263
+          ],
+          "dimensions": [
+            0.10007745772600174,
+            0.10007746517658234,
+            0.10007771849632263
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thumb.01.L",
+          "type": "MESH",
+          "location": [
+            0.6727626919746399,
+            0.031800009310245514,
+            1.4179999828338623
+          ],
+          "rotation_euler": [
+            -1.9959535598754883,
+            -1.0589282512664795,
+            0.0014120134292170405
+          ],
+          "scale": [
+            0.043029870837926865,
+            0.04302987456321716,
+            0.04302987456321716
+          ],
+          "dimensions": [
+            0.025817925110459328,
+            0.0,
+            0.025817925110459328
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thumb.01.L.001",
+          "type": "MESH",
+          "location": [
+            0.7784627079963684,
+            -0.022899989038705826,
+            1.3587000370025635
+          ],
+          "rotation_euler": [
+            1.1490262746810913,
+            -1.0607962608337402,
+            -0.0022126534022390842
+          ],
+          "scale": [
+            0.0204311553388834,
+            0.0204311516135931,
+            0.020431160926818848
+          ],
+          "dimensions": [
+            0.01225869357585907,
+            0.0,
+            0.012258697301149368
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thumb.01.R",
+          "type": "MESH",
+          "location": [
+            -0.6727626919746399,
+            0.031800009310245514,
+            1.4179999828338623
+          ],
+          "rotation_euler": [
+            1.1456388235092163,
+            1.0589282512664795,
+            -0.0014120134292170405
+          ],
+          "scale": [
+            -0.043029870837926865,
+            -0.04302987456321716,
+            -0.04302987456321716
+          ],
+          "dimensions": [
+            0.025817925110459328,
+            0.0,
+            0.025817925110459328
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thumb.01.R.001",
+          "type": "MESH",
+          "location": [
+            -0.7784627079963684,
+            -0.022899989038705826,
+            1.3587000370025635
+          ],
+          "rotation_euler": [
+            -1.9925669431686401,
+            1.0607960224151611,
+            0.002211961429566145
+          ],
+          "scale": [
+            -0.02043115720152855,
+            -0.0204311516135931,
+            -0.020431160926818848
+          ],
+          "dimensions": [
+            0.012258696369826794,
+            0.0,
+            0.012258696369826794
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thumb.01_master.L",
+          "type": "MESH",
+          "location": [
+            0.6727626919746399,
+            0.031800009310245514,
+            1.4179999828338623
+          ],
+          "rotation_euler": [
+            -1.995953917503357,
+            -1.05892813205719,
+            0.001412390498444438
+          ],
+          "scale": [
+            0.20924259722232819,
+            0.20924265682697296,
+            0.20924259722232819
+          ],
+          "dimensions": [
+            0.020924260839819908,
+            0.23016692698001862,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 6,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thumb.01_master.R",
+          "type": "MESH",
+          "location": [
+            -0.6727626919746399,
+            0.031800009310245514,
+            1.4179999828338623
+          ],
+          "rotation_euler": [
+            1.1456384658813477,
+            1.05892813205719,
+            -0.001412390498444438
+          ],
+          "scale": [
+            -0.20924259722232819,
+            -0.20924265682697296,
+            -0.20924259722232819
+          ],
+          "dimensions": [
+            0.020924260839819908,
+            0.23016692698001862,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 6,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thumb.02.L",
+          "type": "MESH",
+          "location": [
+            0.7069627046585083,
+            0.014100009575486183,
+            1.398800015449524
+          ],
+          "rotation_euler": [
+            -1.9963948726654053,
+            -1.0587800741195679,
+            0.001606697915121913
+          ],
+          "scale": [
+            0.04907800257205963,
+            0.04907800257205963,
+            0.04907800629734993
+          ],
+          "dimensions": [
+            0.029446804895997047,
+            0.0,
+            0.029446804895997047
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thumb.02.R",
+          "type": "MESH",
+          "location": [
+            -0.7069627046585083,
+            0.014100009575486183,
+            1.398800015449524
+          ],
+          "rotation_euler": [
+            1.1451977491378784,
+            1.0587800741195679,
+            -0.001606697915121913
+          ],
+          "scale": [
+            -0.04907800257205963,
+            -0.04907800257205963,
+            -0.04907800629734993
+          ],
+          "dimensions": [
+            0.029446804895997047,
+            0.0,
+            0.029446804895997047
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thumb.03.L",
+          "type": "MESH",
+          "location": [
+            0.7459626793861389,
+            -0.006099987775087357,
+            1.3768999576568604
+          ],
+          "rotation_euler": [
+            -1.9964239597320557,
+            -1.0598219633102417,
+            0.002208746736869216
+          ],
+          "scale": [
+            0.0408623181283474,
+            0.0408623144030571,
+            0.0408623181283474
+          ],
+          "dimensions": [
+            0.024517392739653587,
+            0.0,
+            0.024517392739653587
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_thumb.03.R",
+          "type": "MESH",
+          "location": [
+            -0.7459626793861389,
+            -0.006099987775087357,
+            1.3768999576568604
+          ],
+          "rotation_euler": [
+            1.1451687812805176,
+            1.0598220825195312,
+            -0.002208369318395853
+          ],
+          "scale": [
+            -0.0408623144030571,
+            -0.0408623106777668,
+            -0.0408623181283474
+          ],
+          "dimensions": [
+            0.024517392739653587,
+            0.0,
+            0.024517392739653587
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_toe_fk.L",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            -0.11319997906684875,
+            0.015199893154203892
+          ],
+          "rotation_euler": [
+            1.4901156752955558e-08,
+            -6.505121528057763e-19,
+            -3.1415927410125732
+          ],
+          "scale": [
+            0.07890000939369202,
+            0.0789000391960144,
+            0.07890000939369202
+          ],
+          "dimensions": [
+            0.06312000751495361,
+            0.0,
+            0.06312000751495361
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_toe_fk.R",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            -0.11319997906684875,
+            0.015199893154203892
+          ],
+          "rotation_euler": [
+            1.4901156752955558e-08,
+            -3.1415927410125732,
+            8.731029094155573e-11
+          ],
+          "scale": [
+            -0.07890000939369202,
+            -0.0789000391960144,
+            -0.07890000939369202
+          ],
+          "dimensions": [
+            0.06312000751495361,
+            0.0,
+            0.06312000751495361
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_toe_ik.L",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            -0.11320000886917114,
+            0.015200004912912846
+          ],
+          "rotation_euler": [
+            -1.4901154088420299e-07,
+            4.365573180731275e-10,
+            3.1415927410125732
+          ],
+          "scale": [
+            0.07889999449253082,
+            0.07889999449253082,
+            0.07890003174543381
+          ],
+          "dimensions": [
+            0.06312000006437302,
+            0.0,
+            0.0631200298666954
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_toe_ik.R",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            -0.11320000886917114,
+            0.015200004912912846
+          ],
+          "rotation_euler": [
+            -1.4901154088420299e-07,
+            3.1415927410125732,
+            -5.820776499687597e-11
+          ],
+          "scale": [
+            -0.07889999449253082,
+            -0.07889999449253082,
+            -0.07890003174543381
+          ],
+          "dimensions": [
+            0.06312000006437302,
+            0.0,
+            0.0631200298666954
+          ],
+          "parent": null,
+          "vertices": 32,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_torso",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.0328499972820282,
+            0.9836000204086304
+          ],
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.34582412242889404,
+            0.34582412242889404,
+            0.34582412242889404
+          ],
+          "dimensions": [
+            0.34582412242889404,
+            0.34582412242889404,
+            0.34582412242889404
+          ],
+          "parent": null,
+          "vertices": 8,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_tweak_spine",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.050100017338991165,
+            0.916700005531311
+          ],
+          "rotation_euler": [
+            1.8231470584869385,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.0690881684422493,
+            0.0690881758928299,
+            0.0690881758928299
+          ],
+          "dimensions": [
+            0.0690881684422493,
+            0.06908818334341049,
+            0.06908818334341049
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_tweak_spine.001",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.015600013546645641,
+            1.0505000352859497
+          ],
+          "rotation_euler": [
+            1.6936513185501099,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.06201745942234993,
+            0.06201746314764023,
+            0.06201746314764023
+          ],
+          "dimensions": [
+            0.06201745942234993,
+            0.06201746314764023,
+            0.06201746314764023
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_tweak_spine.002",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.00040001649176701903,
+            1.1735999584197998
+          ],
+          "rotation_euler": [
+            1.5389373302459717,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.07063587754964828,
+            0.07063587009906769,
+            0.07063587754964828
+          ],
+          "dimensions": [
+            0.07063587754964828,
+            0.07063587009906769,
+            0.07063587754964828
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_tweak_spine.003",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.00490001542493701,
+            1.3148000240325928
+          ],
+          "rotation_euler": [
+            1.5384001731872559,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.0864453911781311,
+            0.0864453837275505,
+            0.0864453837275505
+          ],
+          "dimensions": [
+            0.0864453911781311,
+            0.0864453837275505,
+            0.0864453837275505
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_tweak_spine.004",
+          "type": "MESH",
+          "location": [
+            0.0,
+            0.010500025004148483,
+            1.4875999689102173
+          ],
+          "rotation_euler": [
+            1.7608306407928467,
+            -0.0,
+            0.0
+          ],
+          "scale": [
+            0.04129336401820183,
+            0.04129336401820183,
+            0.041293367743492126
+          ],
+          "dimensions": [
+            0.04129336401820183,
+            0.04129336401820183,
+            0.041293367743492126
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_upper_arm_fk.L",
+          "type": "MESH",
+          "location": [
+            0.15150529146194458,
+            0.06540000438690186,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            1.5495672225952148,
+            1.570791244506836,
+            0.0
+          ],
+          "scale": [
+            0.22140727937221527,
+            0.22140729427337646,
+            0.22140727937221527
+          ],
+          "dimensions": [
+            0.11070363968610764,
+            0.22140735387802124,
+            0.11070363968610764
+          ],
+          "parent": null,
+          "vertices": 34,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_upper_arm_fk.R",
+          "type": "MESH",
+          "location": [
+            -0.15150529146194458,
+            0.06540000438690186,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            -1.592025876045227,
+            -1.570791244506836,
+            0.0
+          ],
+          "scale": [
+            -0.22140727937221527,
+            -0.22140729427337646,
+            -0.22140727937221527
+          ],
+          "dimensions": [
+            0.11070363968610764,
+            0.22140733897686005,
+            0.11070363223552704
+          ],
+          "parent": null,
+          "vertices": 34,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_upper_arm_ik.L",
+          "type": "MESH",
+          "location": [
+            0.15150529146194458,
+            0.06540000438690186,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            1.5495672225952148,
+            1.5707908868789673,
+            0.0
+          ],
+          "scale": [
+            0.22140735387802124,
+            0.22140735387802124,
+            0.22140733897686005
+          ],
+          "dimensions": [
+            0.08856294304132462,
+            0.22140735387802124,
+            0.13284440338611603
+          ],
+          "parent": null,
+          "vertices": 14,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_upper_arm_ik.R",
+          "type": "MESH",
+          "location": [
+            -0.15150529146194458,
+            0.06540000438690186,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            -1.592025876045227,
+            -1.5707910060882568,
+            0.0
+          ],
+          "scale": [
+            -0.22140735387802124,
+            -0.22140735387802124,
+            -0.22140733897686005
+          ],
+          "dimensions": [
+            0.08856294304132462,
+            0.22140733897686005,
+            0.13284440338611603
+          ],
+          "parent": null,
+          "vertices": 14,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_upper_arm_ik_target.L",
+          "type": "MESH",
+          "location": [
+            0.37286269664764404,
+            0.5640574097633362,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            0.0,
+            -0.0,
+            3.1415927410125732
+          ],
+          "scale": [
+            0.06174468994140625,
+            0.06174468621611595,
+            0.06174468994140625
+          ],
+          "dimensions": [
+            0.06174468994140625,
+            0.06174468621611595,
+            0.06174468994140625
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_upper_arm_ik_target.R",
+          "type": "MESH",
+          "location": [
+            -0.37286269664764404,
+            0.5640574097633362,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            -0.0,
+            3.1415927410125732,
+            -0.0
+          ],
+          "scale": [
+            -0.06174468994140625,
+            -0.06174468621611595,
+            -0.06174468994140625
+          ],
+          "dimensions": [
+            0.06174468994140625,
+            0.06174468621611595,
+            0.06174468994140625
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_upper_arm_parent.L",
+          "type": "MESH",
+          "location": [
+            0.15150530636310577,
+            0.06540000438690186,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            1.5495669841766357,
+            1.5707907676696777,
+            0.0
+          ],
+          "scale": [
+            0.05535181984305382,
+            0.055351827293634415,
+            0.055351823568344116
+          ],
+          "dimensions": [
+            0.12455788999795914,
+            5.444601658410875e-09,
+            0.12455794215202332
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_upper_arm_parent.R",
+          "type": "MESH",
+          "location": [
+            -0.15150530636310577,
+            0.06540000438690186,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            -1.592025876045227,
+            -1.5707908868789673,
+            0.0
+          ],
+          "scale": [
+            -0.05535181984305382,
+            -0.055351827293634415,
+            -0.055351823568344116
+          ],
+          "dimensions": [
+            0.12455788999795914,
+            5.444601214321665e-09,
+            0.12455793470144272
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_upper_arm_tweak.L",
+          "type": "MESH",
+          "location": [
+            0.1515052616596222,
+            0.06540002673864365,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            1.5495672225952148,
+            1.5707908868789673,
+            0.0
+          ],
+          "scale": [
+            0.055351801216602325,
+            0.05535181611776352,
+            0.055351801216602325
+          ],
+          "dimensions": [
+            0.055351801216602325,
+            0.05535181611776352,
+            0.055351801216602325
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_upper_arm_tweak.L.001",
+          "type": "MESH",
+          "location": [
+            0.2621839642524719,
+            0.0677499994635582,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            1.5495672225952148,
+            1.5707908868789673,
+            0.0
+          ],
+          "scale": [
+            0.055351804941892624,
+            0.05535180866718292,
+            0.05535180866718292
+          ],
+          "dimensions": [
+            0.055351804941892624,
+            0.05535180866718292,
+            0.05535180866718292
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_upper_arm_tweak.R",
+          "type": "MESH",
+          "location": [
+            -0.1515052616596222,
+            0.06540002673864365,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            -1.5920257568359375,
+            -1.5707910060882568,
+            0.0
+          ],
+          "scale": [
+            -0.055351801216602325,
+            -0.05535181611776352,
+            -0.055351801216602325
+          ],
+          "dimensions": [
+            0.055351801216602325,
+            0.05535181239247322,
+            0.055351801216602325
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_upper_arm_tweak.R.001",
+          "type": "MESH",
+          "location": [
+            -0.2621839642524719,
+            0.0677499994635582,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            -1.5920257568359375,
+            -1.5707910060882568,
+            0.0
+          ],
+          "scale": [
+            -0.055351804941892624,
+            -0.05535180866718292,
+            -0.05535180866718292
+          ],
+          "dimensions": [
+            0.055351804941892624,
+            0.055351804941892624,
+            0.055351804941892624
+          ],
+          "parent": null,
+          "vertices": 48,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_VIS_thigh_ik_pole.L",
+          "type": "MESH",
+          "location": [
+            0.08900000154972076,
+            0.001399993896484375,
+            0.5317999720573425
+          ],
+          "rotation_euler": [
+            1.5707961320877075,
+            -1.1064481796052572e-11,
+            -0.0002625221386551857
+          ],
+          "scale": [
+            0.8292346000671387,
+            0.8292346000671387,
+            0.8292346000671387
+          ],
+          "dimensions": [
+            0.0,
+            0.8292346000671387,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 2,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_VIS_thigh_ik_pole.R",
+          "type": "MESH",
+          "location": [
+            -0.08900000154972076,
+            0.001399993896484375,
+            0.5317999720573425
+          ],
+          "rotation_euler": [
+            -1.5707961320877075,
+            1.1064481796052572e-11,
+            -0.0002625221386551857
+          ],
+          "scale": [
+            -0.8292346000671387,
+            -0.8292346000671387,
+            -0.8292346000671387
+          ],
+          "dimensions": [
+            0.0,
+            0.8292346000671387,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 2,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_VIS_upper_arm_ik_pole.L",
+          "type": "MESH",
+          "location": [
+            0.37286269664764404,
+            0.07010000944137573,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            1.5707963705062866,
+            -0.0,
+            1.5707985162734985
+          ],
+          "scale": [
+            0.49395740032196045,
+            0.49395737051963806,
+            0.49395740032196045
+          ],
+          "dimensions": [
+            0.0,
+            0.49395737051963806,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 2,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        },
+        {
+          "name": "WGT-rig_VIS_upper_arm_ik_pole.R",
+          "type": "MESH",
+          "location": [
+            -0.37286269664764404,
+            0.07010000944137573,
+            1.4407999515533447
+          ],
+          "rotation_euler": [
+            -1.5707963705062866,
+            -0.0,
+            -1.5707985162734985
+          ],
+          "scale": [
+            -0.49395740032196045,
+            -0.49395737051963806,
+            -0.49395740032196045
+          ],
+          "dimensions": [
+            0.0,
+            0.49395737051963806,
+            0.0
+          ],
+          "parent": null,
+          "vertices": 2,
+          "polygons": 0,
+          "vertex_groups": [],
+          "materials": [],
+          "modifiers": []
+        }
+      ],
+      "actions": [],
+      "scene_fps": 24,
+      "unit_settings": {
+        "system": "METRIC",
+        "scale_length": 1.0
+      },
+      "status": "loaded_by_Blender_no_render_no_save"
+    }
+  ]
+}
